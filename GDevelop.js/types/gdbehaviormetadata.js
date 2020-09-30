@@ -15,6 +15,7 @@ declare class gdBehaviorMetadata {
   addStrExpression(name: string, fullname: string, description: string, group: string, smallicon: string): gdExpressionMetadata;
   setIncludeFile(includeFile: string): gdBehaviorMetadata;
   addIncludeFile(includeFile: string): gdBehaviorMetadata;
+  getIncludeFiles(): gdVectorString;
   setObjectType(objectType: string): gdBehaviorMetadata;
   getObjectType(): string;
   get(): gdBehavior;

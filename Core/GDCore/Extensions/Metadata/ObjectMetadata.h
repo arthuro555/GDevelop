@@ -149,6 +149,8 @@ class GD_CORE_API ObjectMetadata {
    * \brief Add a file to the already existing include files.
    */
   ObjectMetadata& AddIncludeFile(const gd::String& includeFile);
+  
+  const std::vector<gd::String> GetIncludeFiles() {return includeFiles;};
 
 #if defined(GD_IDE_ONLY)
   std::map<gd::String, gd::InstructionMetadata> conditionsInfos;

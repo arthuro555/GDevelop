@@ -959,6 +959,7 @@ interface ExtraInformation {
     [Ref] ExtraInformation SetMutators([Const, Ref] MapStringString mutators);
     [Ref] ExtraInformation SetIncludeFile([Const] DOMString includeFile);
     [Ref] ExtraInformation AddIncludeFile([Const] DOMString includeFile);
+    [Const, Value] VectorString GetIncludeFiles();
 };
 
 interface ExpressionCodeGenerationInformation {
@@ -966,6 +967,7 @@ interface ExpressionCodeGenerationInformation {
     [Ref] ExpressionCodeGenerationInformation SetStatic();
     [Ref] ExpressionCodeGenerationInformation SetIncludeFile([Const] DOMString includeFile);
     [Ref] ExpressionCodeGenerationInformation AddIncludeFile([Const] DOMString includeFile);
+    [Const, Value] VectorString GetIncludeFiles();
 };
 
 interface InstructionMetadata {
@@ -1143,6 +1145,7 @@ interface ObjectMetadata {
 
     [Ref] ObjectMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] ObjectMetadata AddIncludeFile([Const] DOMString includeFile);
+    [Const, Value] VectorString GetIncludeFiles();
 };
 
 interface BehaviorMetadata {
@@ -1202,6 +1205,7 @@ interface BehaviorMetadata {
 
     [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
+    [Const, Value] VectorString GetIncludeFiles();
 
     [Ref] BehaviorMetadata SetObjectType([Const] DOMString objectType);
     [Const, Ref] DOMString GetObjectType();
@@ -1216,6 +1220,7 @@ interface EffectMetadata {
     [Ref] EffectMetadata SetHelpPath([Const] DOMString helpPath);
     [Ref] EffectMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] EffectMetadata AddIncludeFile([Const] DOMString includeFile);
+    [Const, Value] VectorString GetIncludeFiles();
 
     [Const, Ref] DOMString GetType();
     [Const, Ref] DOMString GetFullName();

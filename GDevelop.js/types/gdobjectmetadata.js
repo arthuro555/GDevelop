@@ -11,6 +11,7 @@ declare class gdObjectMetadata {
   addStrExpression(name: string, fullname: string, description: string, group: string, smallicon: string): gdExpressionMetadata;
   setIncludeFile(includeFile: string): gdObjectMetadata;
   addIncludeFile(includeFile: string): gdObjectMetadata;
+  getIncludeFiles(): gdVectorString;
   delete(): void;
   ptr: number;
 };

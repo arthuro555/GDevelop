@@ -5,6 +5,7 @@ declare class gdEffectMetadata {
   setHelpPath(helpPath: string): gdEffectMetadata;
   setIncludeFile(includeFile: string): gdEffectMetadata;
   addIncludeFile(includeFile: string): gdEffectMetadata;
+  getIncludeFiles(): gdVectorString;
   getType(): string;
   getFullName(): string;
   getDescription(): string;

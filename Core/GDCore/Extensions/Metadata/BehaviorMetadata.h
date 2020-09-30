@@ -118,6 +118,8 @@ class GD_CORE_API BehaviorMetadata {
    * \brief Add a file to the already existing include files.
    */
   BehaviorMetadata& AddIncludeFile(const gd::String& includeFile);
+  
+  const std::vector<gd::String> GetIncludeFiles() {return includeFiles;};
 
   /**
    * Get the help path of the behavior, relative to the documentation root.
