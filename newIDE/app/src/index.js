@@ -82,6 +82,15 @@ class Bootstrapper extends Component<{}, State> {
               })
             )
             .catch(this.handleEditorLoadError);
+        } else if (window.cordova) {
+          import(/* webpackChunkName: "browser-app" */ './MobileApp')
+            .then(module =>
+              this.setState({
+                App: module.create(this.authentification),
+                loadingMessage: '',
+              })
+            )
+            .catch(this.handleEditorLoadError);
         } else {
           import(/* webpackChunkName: "browser-app" */ './BrowserApp')
             .then(module =>
@@ -125,11 +134,19 @@ class Bootstrapper extends Component<{}, State> {
   }
 }
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  GD_STARTUP_TIMES.push(['reactDOMRenderCall', performance.now()]);
-  ReactDOM.render(<Bootstrapper />, rootElement);
-} else console.error('No root element defined in index.html');
+function startApp() {
+  const rootElement = document.getElementById('root');
+  if (rootElement) {
+    GD_STARTUP_TIMES.push(['reactDOMRenderCall', performance.now()]);
+    ReactDOM.render(<Bootstrapper />, rootElement);
+  } else console.error('No root element defined in index.html');
+}
+
+if (!window.cordova) {
+  startApp();
+} else {
+  document.addEventListener('deviceready', startApp, false);
+}
 
 // registerServiceWorker();
 register();
