@@ -20,6 +20,8 @@ const throttle = require('lodash.throttle');
 const { findLocalIp } = require('./Utils/LocalNetworkIpFinder');
 const setUpDiscordRichPresence = require('./DiscordRichPresence');
 const { downloadLocalFile } = require('./LocalFileDownloader');
+const npmi = require('npmi');
+const { symlink } = require('fs').promises;
 
 log.info('GDevelop Electron app starting...');
 
@@ -220,6 +222,46 @@ app.on('ready', function() {
     mainWindow.webContents.send('yarn-changes-saved', newFilePath);
   });
 
+  const librariesPath = path.join(
+    app.getPath('cache'),
+    'gdevelop-preview-libraries'
+  );
+  const librariesNodeModules = path.join(librariesPath, 'node_modules');
+  module.paths.push(librariesNodeModules);
+
+  ipcMain.handle('install-node-modules', (event, outputDir) => {
+    return Promise.all(
+      Object.entries(require(path.join(outputDir, 'package.json')).dependencies)
+        .map(([name, version]) => ({
+          name,
+          version,
+          path: librariesPath,
+        }))
+        .filter(library => {
+          try {
+            require.resolve(library.name);
+            return false;
+          } catch (e) {
+            return true;
+          }
+        })
+        .map(options => {
+          return new Promise((resolve, reject) =>
+            npmi(options, err => {
+              if (err) reject(err.message);
+              resolve();
+            })
+          );
+        })
+    ).then(() =>
+      symlink(
+        librariesNodeModules,
+        path.join(outputDir, 'node_modules'),
+        'junction'
+      )
+    );
+  });
+
   // LocalFileUploader events:
   ipcMain.on('local-file-upload', (event, localFilePath, uploadOptions) => {
     log.info(
@@ -249,7 +291,7 @@ app.on('ready', function() {
   ipcMain.handle('local-file-download', async (event, url, outputPath) => {
     const result = await downloadLocalFile(url, outputPath);
     return result;
-  })
+  });
 
   // ServeFolder events:
   ipcMain.on('serve-folder', (event, options) => {

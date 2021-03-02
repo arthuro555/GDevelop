@@ -286,9 +286,12 @@ class ExporterHelper {
                           bool debugMode,
                           const std::vector<gd::String> &includesFiles);
 
+  bool GenerateElectronPackageJSON(const gd::Project &project,
+                                   gd::String exportDir);
+
   /**
-   * \brief Generate the Electron files for packaging and save it to the export
-   * directory.
+   * \brief Generate the Electron files for packaging and save it to the
+   * export directory.
    *
    * \param project The project to be used to generate the files.
    * \param exportDir The directory where the files must be created.

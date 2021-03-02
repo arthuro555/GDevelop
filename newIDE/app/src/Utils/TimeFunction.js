@@ -1,8 +1,18 @@
 // @flow
 
-export const timeFunction = (fn: Function, onResult: number => void) => {
+export const timeFunction = (fn: () => void, onResult: number => void) => {
   var t0 = performance.now();
   fn();
+  var t1 = performance.now();
+  onResult(t1 - t0);
+};
+
+export const timeAsyncFunction = async (
+  fn: () => Promise<void>,
+  onResult: number => void
+) => {
+  var t0 = performance.now();
+  await fn();
   var t1 = performance.now();
   onResult(t1 - t0);
 };

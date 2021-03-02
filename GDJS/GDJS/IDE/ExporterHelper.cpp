@@ -142,6 +142,9 @@ bool ExporterHelper::ExportProjectForPixiPreview(
   // Copy all the dependencies and their source maps
   ExportIncludesAndLibs(includesFiles, options.exportPath, true);
 
+  // Generate a package.json to install the dependencies
+  GenerateElectronPackageJSON(exportedProject, options.exportPath);
+
   // Create the index file
   if (!ExportPixiIndexFile(exportedProject,
                            gdjsRoot + "/Runtime/index.html",
@@ -423,8 +426,8 @@ bool ExporterHelper::ExportFacebookInstantGamesFiles(const gd::Project &project,
   return true;
 }
 
-bool ExporterHelper::ExportElectronFiles(const gd::Project &project,
-                                         gd::String exportDir) {
+bool ExporterHelper::GenerateElectronPackageJSON(const gd::Project &project,
+                                                 gd::String exportDir) {
   gd::String jsonName =
       gd::Serializer::ToJSON(gd::SerializerElement(project.GetName()));
   gd::String jsonPackageName =
@@ -438,66 +441,68 @@ bool ExporterHelper::ExportElectronFiles(const gd::Project &project,
                                 ->GetMangledSceneName(project.GetName())
                                 .LowerCase()
                                 .FindAndReplace(" ", "-")));
+  gd::String str =
+      fs.ReadFile(gdjsRoot + "/Runtime/Electron/package.json")
+          .FindAndReplace("\"GDJS_GAME_NAME\"", jsonName)
+          .FindAndReplace("\"GDJS_GAME_PACKAGE_NAME\"", jsonPackageName)
+          .FindAndReplace("\"GDJS_GAME_AUTHOR\"", jsonAuthor)
+          .FindAndReplace("\"GDJS_GAME_VERSION\"", jsonVersion)
+          .FindAndReplace("\"GDJS_GAME_MANGLED_NAME\"", jsonMangledName);
 
-  {
-    gd::String str =
-        fs.ReadFile(gdjsRoot + "/Runtime/Electron/package.json")
-            .FindAndReplace("\"GDJS_GAME_NAME\"", jsonName)
-            .FindAndReplace("\"GDJS_GAME_PACKAGE_NAME\"", jsonPackageName)
-            .FindAndReplace("\"GDJS_GAME_AUTHOR\"", jsonAuthor)
-            .FindAndReplace("\"GDJS_GAME_VERSION\"", jsonVersion)
-            .FindAndReplace("\"GDJS_GAME_MANGLED_NAME\"", jsonMangledName);
+  gd::String packages = "";
 
-    gd::String packages = "";
-
-    auto dependenciesAndExtensions =
-        gd::ExportedDependencyResolver::GetDependenciesFor(project, "npm");
-    for (auto &dependencyAndExtension : dependenciesAndExtensions) {
-      const auto &dependency = dependencyAndExtension.GetDependency();
-      if (dependency.GetVersion() == "") {
-        gd::LogError(
-            "Latest Version not available for NPM dependencies, "
-            "dependency " +
-            dependency.GetName() +
-            " is not exported. Please specify a version when calling "
-            "addDependency.");
-        continue;
-      }
-
-      // For Electron, extra settings of dependencies are ignored.
-      packages += "\n\t\"" + dependency.GetExportName() + "\": \"" +
-                  dependency.GetVersion() + "\",";
+  auto dependenciesAndExtensions =
+      gd::ExportedDependencyResolver::GetDependenciesFor(project, "npm");
+  for (auto &dependencyAndExtension : dependenciesAndExtensions) {
+    const auto &dependency = dependencyAndExtension.GetDependency();
+    if (dependency.GetVersion() == "") {
+      gd::LogError(
+          "Latest Version not available for NPM dependencies, "
+          "dependency " +
+          dependency.GetName() +
+          " is not exported. Please specify a version when calling "
+          "addDependency.");
+      continue;
     }
 
-    if (!packages.empty()) {
-      // Remove the , at the end as last item cannot have , in JSON.
-      packages = packages.substr(0, packages.size() - 1);
-    }
-
-    str = str.FindAndReplace("\"GDJS_EXTENSION_NPM_DEPENDENCY\": \"0\"",
-                             packages);
-
-    if (!fs.WriteToFile(exportDir + "/package.json", str)) {
-      lastError = "Unable to write Electron package.json file.";
-      return false;
-    }
+    // For Electron, extra settings of dependencies are ignored.
+    packages += "\n\t\"" + dependency.GetExportName() + "\": \"" +
+                dependency.GetVersion() + "\",";
   }
 
-  {
-    gd::String str =
-        fs.ReadFile(gdjsRoot + "/Runtime/Electron/main.js")
-            .FindAndReplace(
-                "800 /*GDJS_WINDOW_WIDTH*/",
-                gd::String::From<int>(project.GetGameResolutionWidth()))
-            .FindAndReplace(
-                "600 /*GDJS_WINDOW_HEIGHT*/",
-                gd::String::From<int>(project.GetGameResolutionHeight()))
-            .FindAndReplace("\"GDJS_GAME_NAME\"", jsonName);
+  if (!packages.empty()) {
+    // Remove the , at the end as last item cannot have , in JSON.
+    packages = packages.substr(0, packages.size() - 1);
+  }
 
-    if (!fs.WriteToFile(exportDir + "/main.js", str)) {
-      lastError = "Unable to write Electron main.js file.";
-      return false;
-    }
+  str =
+      str.FindAndReplace("\"GDJS_EXTENSION_NPM_DEPENDENCY\": \"0\"", packages);
+
+  if (!fs.WriteToFile(exportDir + "/package.json", str)) {
+    lastError = "Unable to write Electron package.json file.";
+    return false;
+  }
+}
+
+bool ExporterHelper::ExportElectronFiles(const gd::Project &project,
+                                         gd::String exportDir) {
+  if (!GenerateElectronPackageJSON(project, exportDir)) return false;
+
+  gd::String str =
+      fs.ReadFile(gdjsRoot + "/Runtime/Electron/main.js")
+          .FindAndReplace(
+              "800 /*GDJS_WINDOW_WIDTH*/",
+              gd::String::From<int>(project.GetGameResolutionWidth()))
+          .FindAndReplace(
+              "600 /*GDJS_WINDOW_HEIGHT*/",
+              gd::String::From<int>(project.GetGameResolutionHeight()))
+          .FindAndReplace(
+              "\"GDJS_GAME_NAME\"",
+              gd::Serializer::ToJSON(gd::SerializerElement(project.GetName())));
+
+  if (!fs.WriteToFile(exportDir + "/main.js", str)) {
+    lastError = "Unable to write Electron main.js file.";
+    return false;
   }
 
   auto &platformSpecificAssets = project.GetPlatformSpecificAssets();

@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro';
 import * as React from 'react';
 import localFileSystem from '../LocalFileSystem';
 import optionalRequire from '../../../Utils/OptionalRequire';
-import { timeFunction } from '../../../Utils/TimeFunction';
+import { timeAsyncFunction } from '../../../Utils/TimeFunction';
 import { findGDJS } from '../../../GameEngineFinder/LocalGDJSFinder';
 import LocalNetworkPreviewDialog from './LocalNetworkPreviewDialog';
 import assignIn from 'lodash/assignIn';
@@ -15,6 +15,16 @@ const electron = optionalRequire('electron');
 const path = optionalRequire('path');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 const BrowserWindow = electron ? electron.remote.BrowserWindow : null;
+const librariesPath =
+  electron && path
+    ? path
+        .join(
+          electron.remote.app.getPath('cache'),
+          'gdevelop-preview-libraries',
+          'node_modules'
+        )
+        .replace(/\\/g, '\\\\')
+    : '';
 const gd: libGDevelop = global.gd;
 
 type Props = {|
@@ -73,6 +83,8 @@ export default class LocalPreviewLauncher extends React.Component<
     const win = new BrowserWindow(this.state.previewBrowserWindowConfig);
     win.loadURL(`file://${this.state.previewGamePath}/index.html`);
     win.setMenuBarVisibility(this.state.hideMenuBar);
+    // Inject the path with all npm modules to the require paths
+    win.webContents.executeJavaScript(`module.paths.push('${librariesPath}')`);
     win.webContents.on('devtools-opened', () => {
       this.setState({ devToolsOpen: true });
     });
@@ -177,8 +189,8 @@ export default class LocalPreviewLauncher extends React.Component<
       })
       .then(() => this._prepareExporter())
       .then(({ outputDir, exporter }) => {
-        timeFunction(
-          () => {
+        timeAsyncFunction(
+          async () => {
             const previewExportOptions = new gd.PreviewExportOptions(
               project,
               outputDir
@@ -216,6 +228,8 @@ export default class LocalPreviewLauncher extends React.Component<
             exporter.exportProjectForPixiPreview(previewExportOptions);
             previewExportOptions.delete();
             exporter.delete();
+
+            await ipcRenderer.invoke('install-node-modules', outputDir);
 
             if (shouldHotReload) {
               debuggerIds.forEach(debuggerId => {
