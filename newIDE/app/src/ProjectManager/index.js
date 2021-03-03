@@ -24,13 +24,13 @@ import {
   filterProjectItemsList,
 } from './EnumerateProjectItems';
 import newNameGenerator from '../Utils/NewNameGenerator';
-import Clipboard from '../Utils/Clipboard';
+import Clipboard, { SafeExtractor } from '../Utils/Clipboard';
 import {
   serializeToJSObject,
   unserializeFromJSObject,
 } from '../Utils/Serializer';
 import ThemeConsumer from '../UI/Theme/ThemeConsumer';
-import ExtensionsSearchDialog from '../ExtensionsSearch/ExtensionsSearchDialog';
+import ExtensionsSearchDialog from '../AssetStore/ExtensionStore/ExtensionsSearchDialog';
 import Close from '@material-ui/icons/Close';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import PhotoLibrary from '@material-ui/icons/PhotoLibrary';
@@ -39,9 +39,9 @@ import Save from '@material-ui/icons/Save';
 import VariableTree from '../UI/CustomSvgIcons/VariableTree';
 import ArtTrack from '@material-ui/icons/ArtTrack';
 import AddToHomeScreen from '@material-ui/icons/AddToHomeScreen';
-import Fullscreen from '@material-ui/icons/Fullscreen';
 import FileCopy from '@material-ui/icons/FileCopy';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import TimelineIcon from '@material-ui/icons/Timeline';
 import ScenePropertiesDialog from '../SceneEditor/ScenePropertiesDialog';
 import SceneVariablesDialog from '../SceneEditor/SceneVariablesDialog';
 import { isExtensionNameTaken } from './EventFunctionExtensionNameVerifier';
@@ -49,6 +49,8 @@ import { type UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
 import { type MenuItemTemplate } from '../UI/Menu/Menu.flow';
 import ProjectManagerCommands from './ProjectManagerCommands';
 import { type HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
+import { shouldValidate } from '../UI/KeyboardShortcuts/InteractionKeys';
+import { type ExtensionShortHeader } from '../Utils/GDevelopServices/Extension';
 
 const LAYOUT_CLIPBOARD_KIND = 'Layout';
 const EXTERNAL_LAYOUT_CLIPBOARD_KIND = 'External layout';
@@ -164,8 +166,7 @@ class Item extends React.Component<ItemProps, {||}> {
         defaultValue={this.props.primaryText}
         onBlur={e => this.props.onRename(e.currentTarget.value)}
         onKeyPress={event => {
-          if (event.charCode === 13) {
-            // enter key pressed
+          if (shouldValidate(event)) {
             if (this.textField) this.textField.blur();
           }
         }}
@@ -276,6 +277,7 @@ type Props = {|
   onExportProject: () => void,
   onOpenPreferences: () => void,
   onOpenProfile: () => void,
+  onOpenGamesDashboard: () => void,
   onOpenResources: () => void,
   onAddLayout: () => void,
   onAddExternalEvents: () => void,
@@ -288,6 +290,7 @@ type Props = {|
   freezeUpdate: boolean,
   unsavedChanges?: UnsavedChanges,
   hotReloadPreviewButtonProps: HotReloadPreviewButtonProps,
+  onInstallExtension: ExtensionShortHeader => void,
 |};
 
 type State = {|
@@ -379,7 +382,14 @@ export default class ProjectManager extends React.Component<Props, State> {
   _pasteLayout = (index: number) => {
     if (!Clipboard.has(LAYOUT_CLIPBOARD_KIND)) return;
 
-    const { layout: copiedLayout, name } = Clipboard.get(LAYOUT_CLIPBOARD_KIND);
+    const clipboardContent = Clipboard.get(LAYOUT_CLIPBOARD_KIND);
+    const copiedLayout = SafeExtractor.extractObjectProperty(
+      clipboardContent,
+      'layout'
+    );
+    const name = SafeExtractor.extractStringProperty(clipboardContent, 'name');
+    if (!name || !copiedLayout) return;
+
     const { project } = this.props;
 
     const newName = newNameGenerator(name, name =>
@@ -488,9 +498,14 @@ export default class ProjectManager extends React.Component<Props, State> {
   _pasteExternalEvents = (index: number) => {
     if (!Clipboard.has(EXTERNAL_EVENTS_CLIPBOARD_KIND)) return;
 
-    const { externalEvents: copiedExternalEvents, name } = Clipboard.get(
-      EXTERNAL_EVENTS_CLIPBOARD_KIND
+    const clipboardContent = Clipboard.get(EXTERNAL_EVENTS_CLIPBOARD_KIND);
+    const copiedExternalEvents = SafeExtractor.extractObjectProperty(
+      clipboardContent,
+      'externalEvents'
     );
+    const name = SafeExtractor.extractStringProperty(clipboardContent, 'name');
+    if (!name || !copiedExternalEvents) return;
+
     const { project } = this.props;
 
     const newName = newNameGenerator(name, name =>
@@ -549,9 +564,14 @@ export default class ProjectManager extends React.Component<Props, State> {
   _pasteExternalLayout = (index: number) => {
     if (!Clipboard.has(EXTERNAL_LAYOUT_CLIPBOARD_KIND)) return;
 
-    const { externalLayout: copiedExternalLayout, name } = Clipboard.get(
-      EXTERNAL_LAYOUT_CLIPBOARD_KIND
+    const clipboardContent = Clipboard.get(EXTERNAL_LAYOUT_CLIPBOARD_KIND);
+    const copiedExternalLayout = SafeExtractor.extractObjectProperty(
+      clipboardContent,
+      'externalLayout'
     );
+    const name = SafeExtractor.extractStringProperty(clipboardContent, 'name');
+    if (!name || !copiedExternalLayout) return;
+
     const { project } = this.props;
 
     const newName = newNameGenerator(name, name =>
@@ -616,10 +636,16 @@ export default class ProjectManager extends React.Component<Props, State> {
   _pasteEventsFunctionsExtension = (index: number) => {
     if (!Clipboard.has(EVENTS_FUNCTIONS_EXTENSION_CLIPBOARD_KIND)) return;
 
-    const {
-      eventsFunctionsExtension: copiedEventsFunctionsExtension,
-      name,
-    } = Clipboard.get(EVENTS_FUNCTIONS_EXTENSION_CLIPBOARD_KIND);
+    const clipboardContent = Clipboard.get(
+      EVENTS_FUNCTIONS_EXTENSION_CLIPBOARD_KIND
+    );
+    const copiedEventsFunctionsExtension = SafeExtractor.extractObjectProperty(
+      clipboardContent,
+      'eventsFunctionsExtension'
+    );
+    const name = SafeExtractor.extractStringProperty(clipboardContent, 'name');
+    if (!name || !copiedEventsFunctionsExtension) return;
+
     const { project } = this.props;
 
     const newName = newNameGenerator(name, name =>
@@ -702,14 +728,12 @@ export default class ProjectManager extends React.Component<Props, State> {
           leftIcon={<AccountCircle />}
           onClick={() => this.props.onOpenProfile()}
         />
-        {!Window.isFullscreen() && (
-          <ListItem
-            key="fullscreen"
-            primaryText={<Trans>Turn on Fullscreen</Trans>}
-            leftIcon={<Fullscreen />}
-            onClick={() => Window.requestFullscreen()}
-          />
-        )}
+        <ListItem
+          key="games-dashboard"
+          primaryText={<Trans>Published Games Dashboard</Trans>}
+          leftIcon={<TimelineIcon />}
+          onClick={() => this.props.onOpenGamesDashboard()}
+        />
       </React.Fragment>
     );
   }
@@ -734,6 +758,7 @@ export default class ProjectManager extends React.Component<Props, State> {
       project,
       eventsFunctionsExtensionsError,
       onReloadEventsFunctionsExtensions,
+      onInstallExtension,
     } = this.props;
     const { renamedItemKind, renamedItemName, searchText } = this.state;
 
@@ -1174,6 +1199,7 @@ export default class ProjectManager extends React.Component<Props, State> {
           <ExtensionsSearchDialog
             project={project}
             onClose={() => this.setState({ extensionsSearchDialogOpen: false })}
+            onInstallExtension={onInstallExtension}
           />
         )}
       </div>
