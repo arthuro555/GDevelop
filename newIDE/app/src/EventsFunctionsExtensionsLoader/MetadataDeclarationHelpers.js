@@ -94,7 +94,11 @@ export const declareBehaviorMetadata = (
     const element = behaviorContent.addChild(propertyName);
     const propertyType: string = enumeratedProperty.type;
 
-    if (propertyType === 'String' || propertyType === 'Choice') {
+    if (
+      propertyType === 'String' ||
+      propertyType === 'Color' ||
+      propertyType === 'Choice'
+    ) {
       element.setStringValue(newValue);
     } else if (propertyType === 'Number') {
       element.setDoubleValue(parseFloat(newValue));
@@ -118,7 +122,11 @@ export const declareBehaviorMetadata = (
       );
 
       if (behaviorContent.hasChild(propertyName)) {
-        if (propertyType === 'String' || propertyType === 'Choice') {
+        if (
+          propertyType === 'String' ||
+          propertyType === 'Color' ||
+          propertyType === 'Choice'
+        ) {
           newProperty.setValue(
             behaviorContent.getChild(propertyName).getStringValue()
           );
@@ -148,7 +156,11 @@ export const declareBehaviorMetadata = (
       const element = behaviorContent.addChild(enumeratedProperty.name);
       const propertyType: string = enumeratedProperty.type;
 
-      if (propertyType === 'String' || propertyType === 'Choice') {
+      if (
+        propertyType === 'String' ||
+        propertyType === 'Color' ||
+        propertyType === 'Choice'
+      ) {
         element.setStringValue(enumeratedProperty.value);
       } else if (propertyType === 'Number') {
         element.setDoubleValue(parseFloat(enumeratedProperty.value) || 0);
@@ -416,6 +428,50 @@ export const declareBehaviorPropertiesInstructionAndExpressions = (
         .getCodeExtraInformation()
         .setFunctionName(setterName)
         .setManipulatedType('string')
+        .setGetter(getterName);
+    } else if (propertyType === 'Color') {
+      addObjectAndBehaviorParameters(
+        behaviorMetadata.addStrExpression(
+          gd.EventsBasedBehavior.getPropertyExpressionName(propertyName),
+          propertyLabel,
+          propertyLabel,
+          eventsBasedBehavior.getFullName() || eventsBasedBehavior.getName(),
+          getExtensionIconUrl(extension)
+        )
+      )
+        .getCodeExtraInformation()
+        .setFunctionName(getterName);
+
+      addObjectAndBehaviorParameters(
+        behaviorMetadata.addScopedCondition(
+          gd.EventsBasedBehavior.getPropertyConditionName(propertyName),
+          propertyLabel,
+          i18n._(t`Compare the content of ${propertyLabel}`),
+          i18n._(t`the property ${propertyName}`),
+          eventsBasedBehavior.getFullName() || eventsBasedBehavior.getName(),
+          getExtensionIconUrl(extension),
+          getExtensionIconUrl(extension)
+        )
+      )
+        .useStandardRelationalOperatorParameters('color')
+        .getCodeExtraInformation()
+        .setFunctionName(getterName);
+
+      addObjectAndBehaviorParameters(
+        behaviorMetadata.addScopedAction(
+          gd.EventsBasedBehavior.getPropertyActionName(propertyName),
+          propertyLabel,
+          i18n._(t`Change the content of ${propertyLabel}`),
+          i18n._(t`the property ${propertyName}`),
+          eventsBasedBehavior.getFullName() || eventsBasedBehavior.getName(),
+          getExtensionIconUrl(extension),
+          getExtensionIconUrl(extension)
+        )
+      )
+        .useStandardOperatorParameters('color')
+        .getCodeExtraInformation()
+        .setFunctionName(setterName)
+        .setManipulatedType('color')
         .setGetter(getterName);
     } else if (propertyType === 'Number') {
       addObjectAndBehaviorParameters(

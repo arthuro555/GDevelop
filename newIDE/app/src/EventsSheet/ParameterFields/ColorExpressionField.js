@@ -4,7 +4,7 @@ import { type ParameterFieldProps } from './ParameterFieldCommons';
 import GenericExpressionField from './GenericExpressionField';
 import ColorPicker from '../../UI/ColorField/ColorPicker';
 
-const parseColor = (rgbColor: string) => {
+export const parseColor = (rgbColor: string) => {
   const colors = rgbColor.replace(/"/g, '').split(';');
   if (colors.length !== 3) {
     return null;

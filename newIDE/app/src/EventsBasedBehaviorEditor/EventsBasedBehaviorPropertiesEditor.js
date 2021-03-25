@@ -22,6 +22,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Add from '@material-ui/icons/Add';
 import { ResponsiveLineStackLayout, ColumnStackLayout } from '../UI/Layout';
+import ColorField from '../UI/ColorField';
+import { parseColor } from '../EventsSheet/ParameterFields/ColorExpressionField';
 
 const gd: libGDevelop = global.gd;
 
@@ -215,12 +217,16 @@ export default class EventsBasedBehaviorPropertiesEditor extends React.Component
                                 primaryText={t`Number`}
                               />
                               <SelectOption
+                                value="Boolean"
+                                primaryText={t`Boolean (checkbox)`}
+                              />
+                              <SelectOption
                                 value="String"
                                 primaryText={t`String`}
                               />
                               <SelectOption
-                                value="Boolean"
-                                primaryText={t`Boolean (checkbox)`}
+                                value="Color"
+                                primaryText={t`Color (string)`}
                               />
                             </SelectField>
                             {(property.getType() === 'String' ||
@@ -240,6 +246,18 @@ export default class EventsBasedBehaviorPropertiesEditor extends React.Component
                                   this.props.onPropertiesUpdated();
                                 }}
                                 fullWidth
+                              />
+                            )}
+                            {property.getType() === 'Color' && (
+                              <ColorField
+                                floatingLabelText={<Trans>Default value</Trans>}
+                                fullWidth
+                                color={parseColor(property.getValue())}
+                                onChangeComplete={({ rgb: { r, g, b } }) => {
+                                  property.setValue(`${r};${g};${b}`);
+                                  this.forceUpdate();
+                                  this.props.onPropertiesUpdated();
+                                }}
                               />
                             )}
                             {property.getType() === 'Boolean' && (
