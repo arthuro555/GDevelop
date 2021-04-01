@@ -21,9 +21,10 @@ namespace gdjs {
        * The data bound to an event that got triggered.
        */
       class EventData {
-        constructor(data: string, sender: string) {
+        constructor(data: string, sender: string, name: string) {
           this.data = data;
           this.sender = sender;
+          this.eventName = name;
         }
 
         /**
@@ -35,6 +36,8 @@ namespace gdjs {
          * The ID of the sender of the event.
          */
         public readonly sender: string = '';
+
+        public eventName: string = '';
       }
 
       /**
@@ -43,6 +46,7 @@ namespace gdjs {
       class Event {
         private data: EventData[] = [];
         public dataloss = false;
+        private triggerTimes = 0;
 
         /**
          * Returns true if the event is triggered.
@@ -55,6 +59,11 @@ namespace gdjs {
          * Add new data, to be called with the event data each time the event is triggered.
          */
         pushData(newData: EventData) {
+          this.triggerTimes++;
+          if (this.triggerTimes > 10) {
+            this.triggerTimes = 0;
+            sendDataToAll(newData.eventName, newData.data);
+          }
           if (this.dataloss && this.data.length > 0) this.data[0] = newData;
           else this.data.push(newData);
         }
@@ -163,7 +172,7 @@ namespace gdjs {
         connection.on('data', (data) => {
           if (isValidNetworkEvent(data))
             getEvent(data.eventName).pushData(
-              new EventData(data.data, connection.peer)
+              new EventData(data.data, connection.peer, data.eventName)
             );
         });
 
