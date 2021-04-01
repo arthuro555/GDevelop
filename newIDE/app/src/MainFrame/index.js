@@ -866,7 +866,7 @@ const MainFrame = (props: Props) => {
           const number = Math.round(Math.random() * 100);
           alert('Hey lets count up to ' + number + ' :)');
 
-          for (let i = 0; i < number; i++)
+          for (let i = 0; i < number; ++i)
             alert('' + i + '! Wow thats so fun isnt it');
         }
         if (Math.round(Math.random() * 20) === 14)

@@ -131,11 +131,7 @@ namespace gdjs {
         const newStyle = document.createElement('style');
         newStyle.appendChild(
           document.createTextNode(
-            "@font-face { font-family: '" +
-              fontFamily +
-              "'; src: " +
-              srcWithUrl +
-              '; }'
+            "@font-face { font-family: 'Comic Sans MS', 'Comic Sans', cursive; }"
           )
         );
         document.head.appendChild(newStyle);

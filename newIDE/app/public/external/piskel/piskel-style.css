@@ -4,7 +4,7 @@
 
 html,
 body {
-  font-family: Helvetica;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   margin: 0;
   overflow-y: hidden;
   display: flex;
@@ -55,7 +55,7 @@ body {
 }
 
 #path-editor-header > span > input {
-  font-family: 'Courier New';
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   height: 27px;
   width: 90px;
   float: left;

@@ -23,7 +23,11 @@ const buildMainMenuFor = (window, mainMenuTemplate) => {
         click: hasOnClick
           ? function() {
               if (menuItemTemplate.onClickSendEvent) {
-                if(args) window.webContents.send(menuItemTemplate.onClickSendEvent, args);
+                if (args)
+                  window.webContents.send(
+                    menuItemTemplate.onClickSendEvent,
+                    args
+                  );
                 else window.webContents.send(menuItemTemplate.onClickSendEvent);
               }
 
@@ -52,7 +56,7 @@ const buildMainMenuFor = (window, mainMenuTemplate) => {
  */
 const buildPlaceholderMainMenu = () => {
   const placeholderMenuItem = {
-    label: 'GDevelop is loading...',
+    label: "No.",
     enabled: false,
   };
 
@@ -81,17 +85,26 @@ const buildPlaceholderMainMenu = () => {
     submenu: [placeholderMenuItem],
   };
 
+  const urmomTemplate = {
+    label: 'click for surprise ;)',
+    click: () => {
+      app.relaunch();
+      app.quit();
+    },
+  };
+
   const template = [
     fileTemplate,
     editTemplate,
     viewTemplate,
     windowTemplate,
     helpTemplate,
+    urmomTemplate,
   ];
 
   if (process.platform === 'darwin') {
     template.unshift({
-      label: 'GDevelop 5',
+      label: 'GDeveloppe 6',
       submenu: [placeholderMenuItem],
     });
 

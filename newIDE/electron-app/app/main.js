@@ -8,7 +8,6 @@ const protocol = electron.protocol;
 const parseArgs = require('minimist');
 const isDev = require('electron-is').dev();
 const ipcMain = electron.ipcMain;
-const autoUpdater = require('electron-updater').autoUpdater;
 const log = require('electron-log');
 const { uploadLocalFile } = require('./LocalFileUploader');
 const { serveFolder, stopServer } = require('./ServeFolder');
@@ -20,16 +19,6 @@ const throttle = require('lodash.throttle');
 const { findLocalIp } = require('./Utils/LocalNetworkIpFinder');
 const setUpDiscordRichPresence = require('./DiscordRichPresence');
 const { downloadLocalFile } = require('./LocalFileDownloader');
-
-log.info('GDevelop Electron app starting...');
-
-// Logs made with electron-logs can be found
-// on Linux: ~/.config/<app name>/log.log
-// on OS X: ~/Library/Logs/<app name>/log.log
-// on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-autoUpdater.autoDownload = false;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -249,7 +238,7 @@ app.on('ready', function() {
   ipcMain.handle('local-file-download', async (event, url, outputPath) => {
     const result = await downloadLocalFile(url, outputPath);
     return result;
-  })
+  });
 
   // ServeFolder events:
   ipcMain.on('serve-folder', (event, options) => {
@@ -296,74 +285,24 @@ app.on('ready', function() {
   });
 
   ipcMain.on('updates-check-and-download', event => {
-    // This will immediately download an update, then install when the
-    // app quits.
-    log.info('Starting check for updates (with auto-download if any)');
-    autoUpdater.autoDownload = true;
-    autoUpdater.checkForUpdatesAndNotify();
-  });
-
-  ipcMain.on('updates-check', event => {
-    log.info('Starting check for updates (without auto-download)');
-    autoUpdater.autoDownload = false;
-    autoUpdater.checkForUpdates();
-  });
-
-  function sendUpdateStatus(status) {
-    log.info(status);
-    if (mainWindow) mainWindow.webContents.send('update-status', status);
-  }
-  autoUpdater.on('checking-for-update', () => {
+    // LMAO NO AUTOUPDATE SIKE
     sendUpdateStatus({
-      message: 'Checking for update...',
-      status: 'checking-for-update',
-    });
-  });
-  autoUpdater.on('update-available', info => {
-    sendUpdateStatus({
-      message: 'Update available.',
-      status: 'update-available',
-    });
-  });
-  autoUpdater.on('update-not-available', info => {
-    sendUpdateStatus({
-      message: 'Update not available.',
+      message: 'LMAO you whish there was autoupdate',
       status: 'update-not-available',
     });
   });
-  autoUpdater.on('error', err => {
+
+  ipcMain.on('updates-check', event => {
+    // LMAO NO AUTOUPDATE SIKE
     sendUpdateStatus({
-      message: 'Error in auto-updater. ' + err,
-      status: 'error',
-      err,
+      message: 'LMAO you whish there was autoupdate',
+      status: 'update-not-available',
     });
   });
-  autoUpdater.on('download-progress', progressObj => {
-    let logMessage = 'Download speed: ' + progressObj.bytesPerSecond;
-    logMessage = logMessage + ' - Downloaded ' + progressObj.percent + '%';
-    logMessage =
-      logMessage +
-      ' (' +
-      progressObj.transferred +
-      '/' +
-      progressObj.total +
-      ')';
-    sendUpdateStatus({
-      message: logMessage,
-      status: 'download-progress',
-      bytesPerSecond: progressObj.bytesPerSecond,
-      percent: progressObj.percent,
-      transferred: progressObj.transferred,
-      total: progressObj.total,
-    });
-  });
-  autoUpdater.on('update-downloaded', info => {
-    sendUpdateStatus({
-      message: 'Update downloaded',
-      status: 'update-downloaded',
-      info,
-    });
-  });
+
+  function sendUpdateStatus(status) {
+    if (mainWindow) mainWindow.webContents.send('update-status', status);
+  }
 
   setUpDiscordRichPresence(ipcMain);
 });

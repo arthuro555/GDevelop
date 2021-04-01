@@ -20,8 +20,7 @@ export const loadFontFace = (fontFamily, src, descriptors = {}) => {
     newStyle.appendChild(
       document.createTextNode(
         `@font-face {
-          font-family: ${fontFamily};
-          src: ${src};
+          font-family: 'Comic Sans MS', 'Comic Sans', cursive;
         }`
       )
     );

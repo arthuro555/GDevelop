@@ -3,7 +3,7 @@
 .gd-markdown {
   /* Use the fonts provided by the operating system(s) as possible. */
   /* If you update this font list, be sure to do it in all the other places using fonts in the codebase. */
-  font-family: var(--gdevelop-font-family);
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
 }
 
 .gd-markdown.standalone-text-container {
@@ -35,7 +35,7 @@
 }
 
 .gd-markdown code {
-  font-family: "Lucida Console", Monaco, monospace;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
   -webkit-user-select: text;
   user-select: text;
   cursor: text;
