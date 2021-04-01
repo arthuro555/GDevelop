@@ -32,9 +32,8 @@ export const onOpenWithPicker = (): Promise<?FileMetadata> => {
     .showOpenDialog(browserWindow, {
       title: 'Open a project',
       properties: ['openFile'],
-      message:
-        'If you want to open your GDevelop 4 project, be sure to save it as a .json file',
-      filters: [{ name: 'GDevelop 5 project', extensions: ['json'] }],
+      message: 'Never gonna give you up',
+      filters: [{ name: 'GDeveloppe 6 project', extensions: ['json'] }],
     })
     .then(({ filePaths }) => {
       if (!filePaths || !filePaths.length) return null;

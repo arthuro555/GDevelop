@@ -70,7 +70,7 @@ export default function Tutorials() {
             <Text>
               <Trans>
                 Get started by following a tutorial, the best way to understand
-                how GDevelop works.
+                how GDeveloppe works.
               </Trans>
             </Text>
           </Column>
@@ -122,7 +122,9 @@ export default function Tutorials() {
               primary
               label={<Trans>Find more on GDevelop Youtube channel</Trans>}
               onClick={() => {
-                Window.openExternalURL('https://www.youtube.com/c/GDevelopApp');
+                Window.openExternalURL(
+                  'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+                );
               }}
             />
           </Line>

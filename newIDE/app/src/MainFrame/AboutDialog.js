@@ -17,7 +17,6 @@ import {
   type UpdateStatus,
 } from './UpdaterTools';
 import Changelog from './Changelog';
-import { getIDEVersion, getGDCoreVersion } from '../Version';
 
 type Props = {
   open: boolean,
@@ -41,9 +40,24 @@ const styles = {
 const contributors = [
   // GitHub contributors
   {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
     name: 'Victor Levasseur',
     description:
       'Numerous contributions to GDevelop core and various extensions',
+  },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Lizard-13',
@@ -55,6 +69,11 @@ const contributors = [
     description: 'Art and assets for the 8-bit Space Shooter example.',
     link: 'https://www.patreon.com/castpixel',
   },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'ale26reg', description: 'Contributions to GDevelop' },
   { name: 'dos1', description: 'Contributions to GDevelop' },
   {
@@ -64,16 +83,46 @@ const contributors = [
     link: 'https://www.witly.fr',
   },
   {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
     name: 'Todor Imreorov',
     description:
       'Numerous contributions to GDevelop, added Piskel sprite editor and jfxr',
   },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'brylie', description: 'Contributions to GDevelop' },
   { name: 'Nnarol', description: 'Contributions to GDevelop' },
   { name: 'wild-master', description: 'Contributions to GDevelop' },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'RandomShaper', description: 'Contributions to GDevelop' },
   { name: 'RyanNerd', description: 'Contributions to GDevelop' },
   { name: 'greater', description: 'Contributions to GDevelop' },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'triptych', description: 'Contributions to GDevelop' },
   {
     name: 'Wend1go',
@@ -97,6 +146,11 @@ const contributors = [
     link: 'https://www.youtube.com/channel/UClbq1M-D83t_bYhfa1mfyEQ',
   },
   {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
     name: 'The Gem Dev',
     description: 'Contributions to GDevelop and tutorials on Youtube',
     link: 'https://www.youtube.com/channel/UCsZ4Ue8c94YLJDbGRafCI5Q',
@@ -109,17 +163,32 @@ const contributors = [
     link: 'https://gametemplates.itch.io/',
   },
   {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  {
     name: 'Gametemplates',
     description: 'Examples bundled with GDevelop',
     link: 'https://gametemplates.itch.io/',
   },
   { name: 'Mats', description: 'Tutorials, Examples' },
   { name: 'erdo', description: 'Tutorials, Examples' },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'Jubileuksen3', description: 'Tutorials, Examples' },
   { name: 'LucaTexas', description: 'Tutorials, Examples' },
   { name: 'Kink', description: 'Forum moderator, tutorials, Examples' },
   { name: 'RicoTrooper', description: 'Tutorials' },
   { name: 'kalel', description: 'Tutorials' },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
   { name: 'mtarzaim', description: 'Tutorials' },
   { name: 'Darkhog', description: 'Examples' },
   { name: 'Ricardo Graca', description: 'Tutorials, Examples' },
@@ -139,6 +208,11 @@ const contributors = [
   {
     name: 'Constantine Shvetsov',
     description: 'Design of all the awesome icons',
+  },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDevelop and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'MillionthVector',
@@ -178,7 +252,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
         actions={[
           <FlatButton
             key="website"
-            label={<Trans>GDevelop Website</Trans>}
+            label={<Trans>GDeveloppe Website</Trans>}
             primary={false}
             onClick={() => Window.openExternalURL('http://gdevelop-app.com')}
           />,
@@ -204,7 +278,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
                 style={styles.logo}
               />
               <Tabs value={currentTab} onChange={this._changeTab}>
-                <Tab label={<Trans>About GDevelop</Trans>} value="about" />
+                <Tab label={<Trans>About GDeveloppe</Trans>} value="about" />
                 <Tab label={<Trans>What's new?</Trans>} value="changelog" />
                 <Tab label={<Trans>Contributors</Trans>} value="contributors" />
               </Tabs>
@@ -213,10 +287,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
                   <Column>
                     <Line>
                       <Text>
-                        <Trans>
-                          GDevelop {getIDEVersion()} based on GDevelop.js{' '}
-                          {getGDCoreVersion()}
-                        </Trans>
+                        <Trans>GDeveloppe 6, based on GDevelop</Trans>
                       </Text>
                     </Line>
                     <Line>
@@ -245,7 +316,8 @@ export default class AboutDialog extends PureComponent<Props, State> {
                   <Column>
                     <Text>
                       <Trans>
-                        GDevelop was created by Florian "4ian" Rival.
+                        GDevelop was created by Florian "4ian" Rival. The parody
+                        GDeveloppe was made by arthuro555.
                       </Trans>
                     </Text>
                     <Text>
@@ -271,14 +343,14 @@ export default class AboutDialog extends PureComponent<Props, State> {
                   <Column expand>
                     <Text>
                       <Trans>
-                        Thanks to all users of GDevelop! There must be missing
+                        Thanks to all users of GDeveloppe! There must be missing
                         tons of people, please send your name if you've
                         contributed and you're not listed.
                       </Trans>
                     </Text>
                     <Line alignItems="center" justifyContent="center">
                       <FlatButton
-                        label={<Trans>Contribute to GDevelop</Trans>}
+                        label={<Trans>Contribute to GDeveloppe</Trans>}
                         onClick={this._openContributePage}
                       />
                     </Line>

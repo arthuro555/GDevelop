@@ -110,10 +110,10 @@ class Bootstrapper extends Component<{}, State> {
       : 'Please restart the application or reinstall the latest version if the problem persists.';
 
     this.setState({
-      loadingMessage: `Unable to load GDevelop. ${message}`,
+      loadingMessage: `Unable to load GDeveloppe. ${message}`,
     });
     showErrorBox({
-      message: `Unable to load GDevelop. ${message}`,
+      message: `Unable to load GDeveloppe. ${message}`,
       rawError,
       errorId: 'editor-load-error',
     });

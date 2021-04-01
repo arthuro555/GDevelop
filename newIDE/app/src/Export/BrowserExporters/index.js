@@ -24,8 +24,8 @@ export const getBrowserExporters = (): Array<Exporter> => [
     helpPage: '/publishing/android_and_ios',
     description: (
       <Trans>
-        Package your game for Android directly from GDevelop. iOS support is
-        coming soon!
+        Package your game for Android directly from GDeveloppe. iOS support is
+        nver comming lmao
       </Trans>
     ),
     key: 'browseronlinecordovaexport',
@@ -37,9 +37,8 @@ export const getBrowserExporters = (): Array<Exporter> => [
     helpPage: '/publishing/web',
     description: (
       <Trans>
-        Upload your game online directly from GDevelop and share the link to
-        players. Play to your game using your browser on computers and mobile
-        phones.
+        Upload your game online directly from GDeveloppe and share the link to
+        players. Play to your game using your browser on smart fridgee.
       </Trans>
     ),
     key: 'browsers3export',
@@ -94,7 +93,7 @@ export const getBrowserExporters = (): Array<Exporter> => [
     description: (
       <Trans>
         Package your game as an app for Windows, macOS or Linux directly from
-        GDevelop.
+        GDeveloppe.
       </Trans>
     ),
     key: 'browseronlineelectronexport',

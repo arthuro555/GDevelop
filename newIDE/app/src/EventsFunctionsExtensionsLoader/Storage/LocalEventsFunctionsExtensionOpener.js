@@ -33,7 +33,7 @@ export default class LocalEventsFunctionsExtensionOpener {
         message: 'Choose an extension file to import (.json file)',
         filters: [
           {
-            name: 'GDevelop 5 "events based" extension',
+            name: 'GDeveloppe 6 "events based" extension',
             extensions: ['json'],
           },
         ],

@@ -10,7 +10,13 @@ const styles = {
 
 const GDevelopLogo = () => (
   <ThemeConsumer>
-    {muiTheme => <img src={muiTheme.logo.src} alt="" style={styles.logo} />}
+    {muiTheme => (
+      <img
+        src="beautiful.png"
+        alt="yes that is a handsome person"
+        style={styles.logo}
+      />
+    )}
   </ThemeConsumer>
 );
 

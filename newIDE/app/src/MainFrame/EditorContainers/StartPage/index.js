@@ -114,8 +114,7 @@ export class StartPage extends React.Component<Props, {||}> {
                     <GDevelopLogo />
                     <Text>
                       <Trans>
-                        GDevelop is an easy-to-use game creator with no
-                        programming language to learn.
+                        GDeveloppe is a very good game engoine enjoy
                       </Trans>
                     </Text>
                   </Paper>
@@ -129,7 +128,7 @@ export class StartPage extends React.Component<Props, {||}> {
                     }
                     {!project && (
                       <RaisedButton
-                        label={<Trans>Create a new project</Trans>}
+                        label={<Trans>Open a project</Trans>}
                         fullWidth
                         onClick={onCreate}
                         primary
@@ -137,7 +136,7 @@ export class StartPage extends React.Component<Props, {||}> {
                     )}
                     {!project && canOpen && (
                       <RaisedButton
-                        label={<Trans>Open a project</Trans>}
+                        label={<Trans>Create a new project</Trans>}
                         fullWidth
                         onClick={onOpen}
                         primary
@@ -145,7 +144,7 @@ export class StartPage extends React.Component<Props, {||}> {
                     )}
                     {!!project && (
                       <RaisedButton
-                        label={<Trans>Open Project Manager</Trans>}
+                        label={<Trans>Close project</Trans>}
                         fullWidth
                         onClick={onOpenProjectManager}
                         primary
@@ -153,7 +152,7 @@ export class StartPage extends React.Component<Props, {||}> {
                     )}
                     {!!project && (
                       <FlatButton
-                        label={<Trans>Close project</Trans>}
+                        label={<Trans>Open Project Manager</Trans>}
                         fullWidth
                         onClick={() => {
                           onCloseProject();

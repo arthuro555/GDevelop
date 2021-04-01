@@ -38,7 +38,7 @@ export default class LocalEventsFunctionsExtensionWriter {
         title: 'Export an extension of the project',
         filters: [
           {
-            name: 'GDevelop 5 "events based" extension',
+            name: 'GDeveloppe 6 "events based" extension',
             extensions: ['json'],
           },
         ],

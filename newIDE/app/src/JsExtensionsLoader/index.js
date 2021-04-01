@@ -84,7 +84,7 @@ const loadExtension = (
     }
   } catch (ex) {
     return {
-      message: `🚨 Exception caught while running createExtension. 💣 Please fix this error as this will make GDevelop crash at some point.`,
+      message: `🚨 Exception caught while running createExtension. 💣 Please fix this error as this will make GDeveloppe mad.`,
       error: true,
       dangerous: true,
       rawError: ex,
@@ -103,7 +103,7 @@ const loadExtension = (
     }
   } catch (ex) {
     return {
-      message: `🚨 Exception caught while running runExtensionSanityTests. 💣 Please fix this error as this will make GDevelop crash at some point.`,
+      message: `🚨 Exception caught while running runExtensionSanityTests. 💣 Please fix this error as this will make GDevelopper crash at some point.`,
       error: true,
       dangerous: true,
       rawError: ex,

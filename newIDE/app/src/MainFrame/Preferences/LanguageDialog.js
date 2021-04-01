@@ -114,16 +114,15 @@ export default class LanguageDialog extends Component<Props, State> {
                     <Line>
                       <AlertMessage kind="info">
                         <Trans>
-                          Support for translations is still new and in beta.
-                          GDevelop needs your help to be translated in your
-                          language!
+                          Languages support is bad I am broke I canno buy
+                          translator
                         </Trans>
                       </AlertMessage>
                     </Line>
                     <Line expand>
                       <SelectField
                         floatingLabelText={
-                          <Trans>Choose GDevelop language</Trans>
+                          <Trans>Choose GDevelopppes language</Trans>
                         }
                         value={values.language}
                         onChange={(e, i, value: string) => {
@@ -134,10 +133,7 @@ export default class LanguageDialog extends Component<Props, State> {
                         }}
                         fullWidth
                       >
-                        <SelectOption
-                          value="en"
-                          primaryText="English (default)"
-                        />
+                        <SelectOption value="en" primaryText="German" />
                         {goodProgressLocales.map(localeMetadata =>
                           renderLanguageSelectOption(localeMetadata)
                         )}

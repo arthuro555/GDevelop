@@ -42,7 +42,7 @@ export default ({
     onAutoSaveProject,
     onGetAutoSave,
     getOpenErrorMessage: (error: Error): MessageDescriptor => {
-      return t`Check that the file exists, that this file is a proper game created with GDevelop and that you have the authorizations to open it.`;
+      return t`No this is illegal to do sorry.`;
     },
   }),
 }: StorageProvider);

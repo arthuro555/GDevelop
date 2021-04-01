@@ -73,7 +73,7 @@ export default class DownloadSaveAsDialog extends React.Component<Props> {
             <Text>
               <Trans>
                 You can download the file of your game to continue working on it
-                using the full GDevelop version:
+                using the full GDeveloppe version:
               </Trans>
             </Text>
           </Line>

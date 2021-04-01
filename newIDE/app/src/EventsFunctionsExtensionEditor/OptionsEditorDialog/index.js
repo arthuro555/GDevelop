@@ -55,7 +55,7 @@ A clear and concise description of what the extension is, how useful it is.
 Finally, attach the .json file of your extension here.
 
 You also may have to create an account on GitHub before posting.
-If your extension is high quality and useful, it will be added to the list of GDevelop community extensions.
+If your extension is high quality and useful, it will be added to the list of GDeveloppe community extensions.
 When you're ready, remove this last paragraph and click on "Submit new issue". Thanks 🙌`;
   Window.openExternalURL(
     `https://github.com/4ian/GDevelop-extensions/issues/new?body=${encodeURIComponent(
@@ -163,7 +163,7 @@ export default function OptionsEditorDialog({
                   You can export the extension to a file to easily import it in
                   another project. If your extension is providing useful and
                   reusable functions or behaviors, consider sharing it with the
-                  GDevelop community!
+                  GDeveloppe community!
                 </Trans>
               </Text>
             </Line>

@@ -88,7 +88,7 @@ const buildAndSendMenuTemplate = (
   shortcutMap
 ) => {
   const fileTemplate = {
-    label: i18n._(t`File`),
+    label: i18n._(t`Edit`),
     submenu: [
       {
         label: i18n._(t`Create a New Project...`),
@@ -159,15 +159,13 @@ const buildAndSendMenuTemplate = (
       },
       { type: 'separator' },
       {
-        label: i18n._(t`Exit GDevelop`),
-        accelerator: getElectronAccelerator(shortcutMap['QUIT_APP']),
-        onClickSendEvent: 'main-menu-close-app',
+        label: i18n._(t`Exit GDeveloppe`),
       }
     );
   }
 
   const editTemplate = {
-    label: i18n._(t`Edit`),
+    label: i18n._(t`File`),
     submenu: [
       { role: 'undo' },
       { role: 'redo' },
@@ -182,7 +180,7 @@ const buildAndSendMenuTemplate = (
   };
 
   const viewTemplate = {
-    label: i18n._(t`View`),
+    label: i18n._(t`Help`),
     submenu: [
       {
         label: i18n._(t`Show Project Manager`),
@@ -209,46 +207,17 @@ const buildAndSendMenuTemplate = (
   };
 
   const windowTemplate = {
-    label: i18n._(t`Window`),
+    label: i18n._(t`View`),
     role: 'window',
     submenu: [{ label: i18n._(t`Minimize`), role: 'minimize' }],
   };
 
   const helpTemplate = {
-    label: i18n._(t`Help`),
+    label: i18n._(t`Window`),
     role: 'help',
     submenu: [
       {
-        label: i18n._(t`GDevelop website`),
-        onClickOpenLink: 'http://gdevelop-app.com',
-      },
-      { type: 'separator' },
-      {
-        label: i18n._(t`Community Forums`),
-        onClickOpenLink: 'https://forum.gdevelop-app.com',
-      },
-      {
-        label: i18n._(t`Community Discord Chat`),
-        onClickOpenLink: 'https://discord.gg/rjdYHvj',
-      },
-      { type: 'separator' },
-      {
-        label: i18n._(t`Contribute to GDevelop`),
-        onClickOpenLink: 'https://gdevelop-app.com/contribute/',
-      },
-      {
-        label: i18n._(t`Create Extensions for GDevelop`),
-        onClickOpenLink:
-          'https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md',
-      },
-      { type: 'separator' },
-      {
-        label: i18n._(t`Help to Translate GDevelop`),
-        onClickOpenLink: 'https://crowdin.com/project/gdevelop',
-      },
-      {
-        label: i18n._(t`Report a wrong translation`),
-        onClickOpenLink: 'https://github.com/4ian/GDevelop/issues/969',
+        label: i18n._(`🐢 Turtles are nice 🐢`),
       },
     ],
   };
@@ -256,26 +225,26 @@ const buildAndSendMenuTemplate = (
     helpTemplate.submenu.push(
       { type: 'separator' },
       {
-        label: i18n._(t`About GDevelop`),
+        label: i18n._(t`About GDevelopppe 6`),
         onClickSendEvent: 'main-menu-open-about',
       }
     );
   }
 
   const template: Array<RootMenuTemplate> = [
-    fileTemplate,
     editTemplate,
-    viewTemplate,
-    windowTemplate,
+    fileTemplate,
     helpTemplate,
+    windowTemplate,
+    viewTemplate,
   ];
 
   if (isMacLike()) {
     template.unshift({
-      label: i18n._(t`GDevelop 5`),
+      label: i18n._(t`GDeveloppe 6`),
       submenu: [
         {
-          label: i18n._(t`About GDevelop`),
+          label: i18n._(t`About GDeveloppe`),
           onClickSendEvent: 'main-menu-open-about',
         },
         { type: 'separator' },

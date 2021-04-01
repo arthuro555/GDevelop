@@ -651,7 +651,7 @@ const MainFrame = (props: Props) => {
 
             const answer = Window.showConfirmDialog(
               i18n._(
-                t`An autosave file (backup made automatically by GDevelop) that is newer than the project file exists. Would you like to load it instead?`
+                t`An autosave file (backup made automatically by black magic) that is newer than the project file exists. Would you like to load it instead?`
               )
             );
             if (!answer) return fileMetadata;
@@ -670,7 +670,7 @@ const MainFrame = (props: Props) => {
 
             const answer = Window.showConfirmDialog(
               i18n._(
-                t`The project file appears to be malformed, but an autosave file exists (backup made automatically by GDevelop). Would you like to try to load it instead?`
+                t`The project file appears to be malformed, but an autosave file exists (backup made automatically by a gnome). Would you like to try to load it instead?`
               )
             );
             if (!answer) return null;
@@ -723,10 +723,10 @@ const MainFrame = (props: Props) => {
           .catch(error => {
             const errorMessage = getOpenErrorMessage
               ? getOpenErrorMessage(error)
-              : t`Check that the path/URL is correct, that you selected a file that is a game file created with GDevelop and that is was not removed.`;
+              : t`Sorry dude I don't feel like it today.`;
             showErrorBox({
               message: [
-                i18n._(t`Unable to open the project.`),
+                i18n._(t`Not today, thanks.`),
                 i18n._(errorMessage),
               ].join('\n'),
               errorId: 'project-open-error',
@@ -841,13 +841,54 @@ const MainFrame = (props: Props) => {
     }
   };
 
+  // Give new users the nice new theme
+  React.useEffect(
+    () => {
+      if (!localStorage.getItem('wasChanged')) {
+        alert('Hello! Since you are new here use the default theme');
+        preferences.setThemeName('GDevelop default');
+      }
+      localStorage.setItem('wasChanged', true);
+    },
+    [preferences]
+  );
+
+  // Randomized cool events
+  React.useEffect(
+    () => {
+      const interval = setInterval(() => {
+        console.log('evemt time baby');
+        if (Math.round(Math.random() * 100) === 69) {
+          alert('Hey try the new default theme it is cool :)');
+          preferences.setThemeName('GDevelop default');
+        }
+        if (Math.round(Math.random() * 20) === 14) {
+          const number = Math.round(Math.random() * 100);
+          alert('Hey lets count up to ' + number + ' :)');
+
+          for (let i = 0; i < number; i++)
+            alert('' + i + '! Wow thats so fun isnt it');
+        }
+        if (Math.round(Math.random() * 20) === 14)
+          window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+
+        if (Math.round(Math.random() * 1000) === 69) {
+          alert('Congratulation, you got the super rare random crash event!');
+          document.body.innerHTML = '';
+        }
+      }, 10000);
+      return () => clearInterval(interval);
+    },
+    [preferences]
+  );
+
   const deleteLayout = (layout: gdLayout) => {
     const { i18n } = props;
     if (!state.currentProject) return;
 
     const answer = Window.showConfirmDialog(
       i18n._(
-        t`Are you sure you want to remove this scene? This can't be undone.`
+        t`Are you sure you want to remove this scene? Your tacos might get cold.`
       )
     );
     if (!answer) return;
@@ -869,7 +910,7 @@ const MainFrame = (props: Props) => {
 
     const answer = Window.showConfirmDialog(
       i18n._(
-        t`Are you sure you want to remove this external layout? This can't be undone.`
+        t`Are you sure you want to remove this external layout? This can hurt a unicorn.`
       )
     );
     if (!answer) return;
@@ -890,7 +931,7 @@ const MainFrame = (props: Props) => {
 
     const answer = Window.showConfirmDialog(
       i18n._(
-        t`Are you sure you want to remove these external events? This can't be undone.`
+        t`Are you sure you want to remove these external events? This can make bees take over the world.`
       )
     );
     if (!answer) return;
@@ -914,7 +955,7 @@ const MainFrame = (props: Props) => {
 
     const answer = Window.showConfirmDialog(
       i18n._(
-        t`Are you sure you want to remove this extension? This can't be undone.`
+        t`Are you sure you want to remove this extension? This can't make you president.`
       )
     );
     if (!answer) return;
@@ -954,16 +995,21 @@ const MainFrame = (props: Props) => {
 
     if (newName === '') {
       showWarningBox(
-        i18n._(t`This name cannot be empty, please enter a new name.`),
+        i18n._(t`This name cannot be empty, please enter an old name.`),
         { delayToNextTick: true }
       );
       return;
     }
 
     if (currentProject.hasLayoutNamed(newName)) {
-      showWarningBox(i18n._(t`Another scene with this name already exists.`), {
-        delayToNextTick: true,
-      });
+      showWarningBox(
+        i18n._(
+          t`Another scene with this name already exists in a prallel universe.`
+        ),
+        {
+          delayToNextTick: true,
+        }
+      );
       return;
     }
 
@@ -987,17 +1033,14 @@ const MainFrame = (props: Props) => {
 
     if (newName === '') {
       showWarningBox(
-        i18n._(t`This name cannot be empty, please enter a new name.`),
+        i18n._(t`This name can be empty, but please enter a new name anyways.`),
         { delayToNextTick: true }
       );
       return;
     }
 
     if (currentProject.hasExternalLayoutNamed(newName)) {
-      showWarningBox(
-        i18n._(t`Another external layout with this name already exists.`),
-        { delayToNextTick: true }
-      );
+      showWarningBox(i18n._(t`Banana.`), { delayToNextTick: true });
       return;
     }
 

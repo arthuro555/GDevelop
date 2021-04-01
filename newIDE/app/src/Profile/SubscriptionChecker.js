@@ -77,7 +77,7 @@ export class SubscriptionCheckDialog extends React.Component<
         actions={[
           onChangeSubscription && (
             <RaisedButton
-              label={<Trans>Get a subscription or login</Trans>}
+              label={<Trans>Get a submission</Trans>}
               key="subscribe"
               primary
               onClick={() => {
@@ -91,9 +91,9 @@ export class SubscriptionCheckDialog extends React.Component<
           <FlatButton
             label={
               mode === 'try' ? (
-                <Trans>Continue anyway</Trans>
+                <Trans>Deal!</Trans>
               ) : (
-                <Trans>Not now, thanks!</Trans>
+                <Trans>I'll buy that yes!</Trans>
               )
             }
             key="close"
@@ -112,14 +112,14 @@ export class SubscriptionCheckDialog extends React.Component<
               <Text>
                 <Trans>
                   You can try this feature, but if you're using it regularly, we
-                  ask you to get a subscription to GDevelop.
+                  ask you to get a submission to GDeveloppe.
                 </Trans>
               </Text>
             ) : (
               <Text>
                 <Trans>
-                  To use this feature, we ask you to get a subscription to
-                  GDevelop.
+                  To use this feature, we ask you to get a submission to
+                  GDeveloppe.
                 </Trans>
               </Text>
             )}
@@ -128,9 +128,8 @@ export class SubscriptionCheckDialog extends React.Component<
             <Star style={styles.icon} />
             <Text style={styles.iconText}>
               <Trans>
-                Having a subscription allows you to use the one-click export for
-                Android, Windows, macOS and Linux, launch live previews over
-                wifi, disable the GDevelop splashscreen during loading and more!
+                Having a submission allows you to use any other engine! stay
+                with us pls
               </Trans>
             </Text>
           </Line>
@@ -138,9 +137,9 @@ export class SubscriptionCheckDialog extends React.Component<
             <Favorite style={styles.icon} />
             <Text style={styles.iconText}>
               <Trans>
-                You're also supporting the development of GDevelop, an
-                open-source software! In the future, more online services will
-                be available for users with a subscription.
+                You're also engagin yourself in free labor for the development
+                of GDeveloppe, an open-source software! In the future, we may
+                sell your soul.
               </Trans>
             </Text>
           </Line>
@@ -148,9 +147,15 @@ export class SubscriptionCheckDialog extends React.Component<
           <Spacer />
           <Spacer />
           <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
+          <Spacer />
           <Text align="right">
             <b>
-              <Trans>Thanks!</Trans>
+              <Trans>Lol!</Trans>
             </b>
           </Text>
         </Column>

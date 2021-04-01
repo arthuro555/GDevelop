@@ -20,11 +20,11 @@ export default class BetaIntroDialog extends Component {
       <ResponsiveWindowMeasurer>
         {windowWidth => (
           <Dialog
-            title={<Trans>Welcome to GDevelop</Trans>}
+            title={<Trans>Welcome to GDevelopppe!!!1!</Trans>}
             actions={[
               <FlatButton
                 key="download"
-                label={<Trans>Download GDevelop desktop app</Trans>}
+                label={<Trans>Download GDevelopppe desktop app</Trans>}
                 primary={false}
                 onClick={this._onOpenWebsite}
               />,

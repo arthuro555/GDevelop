@@ -20,9 +20,12 @@ export default function ProjectTitlebar({ fileMetadata }: Props) {
   React.useEffect(
     () => {
       const title = [
-        'GDevelop 5',
+        'GDeveloppe 6',
         fileMetadata
-          ? fileMetadata.fileIdentifier + (hasUnsavedChanges ? ' *' : '')
+          ? fileMetadata.fileIdentifier +
+            (hasUnsavedChanges
+              ? ' whoa dude you got some unsaved changes right here'
+              : '')
           : '',
       ]
         .filter(Boolean)

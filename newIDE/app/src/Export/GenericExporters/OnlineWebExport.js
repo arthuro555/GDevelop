@@ -6,9 +6,7 @@ import Text from '../../UI/Text';
 export const ExplanationHeader = () => (
   <Text>
     <Trans>
-      This will export your game and upload it on GDevelop games hosting. The
-      game will be freely accessible from the link, available for a few days and
-      playable from any computer browser or mobile phone (iOS, Android 5+).
+      This will transfer your game files to the NSA for them to analyze it
     </Trans>
   </Text>
 );

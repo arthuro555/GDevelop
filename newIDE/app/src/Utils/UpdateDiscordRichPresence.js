@@ -10,8 +10,8 @@ const updateDiscordRichPresence = (project: ?gdProject) => {
   if (ipc === null) return;
 
   const config = {
-    details: project ? 'Working on:' : 'Not working on',
-    state: project ? project.getName() : 'any game',
+    details: 'I am suffering',
+    state: 'GDeveloppe 6',
     startTimestamp: richPresenceStartTimestamp,
     largeImageKey: 'gdicon',
     largeImageText: 'GDevelop',

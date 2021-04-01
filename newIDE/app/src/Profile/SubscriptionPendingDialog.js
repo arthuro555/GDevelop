@@ -76,20 +76,7 @@ export default function SubscriptionPendingDialog({
     >
       {!hasPlan && (
         <Column>
-          <Line>
-            <Text>
-              <Trans>
-                Thanks for getting a subscription and supporting GDevelop!
-              </Trans>{' '}
-              {'❤️'}
-              <b>
-                <Trans>
-                  Your browser will now open to enter your payment details
-                  (handled securely by Stripe.com).
-                </Trans>
-              </b>
-            </Text>
-          </Line>
+          <Line>e</Line>
           <Line justifyContent="center" alignItems="center">
             <CircularProgress size={20} />
             <Spacer />
@@ -98,11 +85,7 @@ export default function SubscriptionPendingDialog({
           <Spacer />
           <Line justifyContent="center">
             <BackgroundText>
-              <Trans>
-                Once you're done, come back to GDevelop and your account will be
-                upgraded automatically, unlocking the extra exports and online
-                services.
-              </Trans>
+              <Trans>agÄOSRGB</Trans>
             </BackgroundText>
           </Line>
         </Column>
@@ -112,7 +95,7 @@ export default function SubscriptionPendingDialog({
           <Line>
             <Text>
               <Trans>
-                Thanks for getting a subscription and supporting GDevelop!
+                Thanks for getting a subscription and supporting GDevelopSEC!
               </Trans>{' '}
               {'❤️'}
             </Text>

@@ -37,7 +37,7 @@ export const getLocalExporters = (): Array<Exporter> => [
     helpPage: '/publishing/web',
     description: (
       <Trans>
-        Upload your game online directly from GDevelop and share the link to
+        Upload your game online directly from GDeveloppe and share the link to
         players. Play to your game using your browser on computers and mobile
         phones.
       </Trans>
@@ -93,8 +93,8 @@ export const getLocalExporters = (): Array<Exporter> => [
     helpPage: '/publishing/windows-macos-linux',
     description: (
       <Trans>
-        Package your game as an app for Windows, macOS or Linux directly from
-        GDevelop.
+        Package your game as an app for Windows, macOS, lunch or Linux directly
+        from GDeveloppe.
       </Trans>
     ),
     key: 'localonlineelectronexport',

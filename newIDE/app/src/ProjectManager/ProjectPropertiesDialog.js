@@ -498,7 +498,7 @@ function ProjectPropertiesDialog(props: Props) {
         }}
         mode="mandatory"
         id="Disable GDevelop splash at startup"
-        title={<Trans>Disable GDevelop splash at startup</Trans>}
+        title={<Trans>Disable GDeveloppe splash at startup</Trans>}
       />
     </React.Fragment>
   );

@@ -67,7 +67,7 @@ export default class CreateAccountDialog extends Component<Props, State> {
 
     return (
       <Dialog
-        title={<Trans>Create a new GDevelop account</Trans>}
+        title={<Trans>Create a new GDeveloppe account</Trans>}
         actions={[
           <FlatButton
             label={<Trans>Back</Trans>}
@@ -103,10 +103,8 @@ export default class CreateAccountDialog extends Component<Props, State> {
         <ColumnStackLayout noMargin>
           <BackgroundText>
             <Trans>
-              By creating an account and using GDevelop, you agree to the Terms
-              and Conditions. Having an account allows to export your game on
-              Android, as a desktop app and unlock other services for your
-              project!
+              By creating an account and using GDeveloppe, you agree to become
+              my slave and do whatever I want :) project!
             </Trans>
           </BackgroundText>
           <TextField

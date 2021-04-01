@@ -2,64 +2,64 @@
   "theme": {
     "primary": {
       "color": {
-        "value": "{gdevelop.color.light-blue.value}"
+        "value": "#ffff11"
       },
       "text-contrast-color": {
-        "value": "#fff"
+        "value": "#bbef22"
       }
     },
     "secondary": {
       "color": {
-        "value": "{gdevelop.color.purple.value}"
+        "value": "#69420f"
       },
       "text-contrast-color": {
-        "value": "#fff"
+        "value": "#694200"
       }
     },
     "surface": {
       "window": {
         "background-color": {
-          "value": "#f7f7f7"
+          "value": "#4f4ccf"
         }
       },
       "canvas": {
         "background-color": {
-          "value": "#f0f0f0"
+          "value": "#2faf2f"
         }
       },
       "alternate-canvas": {
         "background-color": {
-          "value": "#ffffff"
+          "value": "#cf3f3a"
         }
       }
     },
     "selection": {
       "background-color": {
-        "value": "{gdevelop.color.selection.value}"
+        "value": "#11ff11"
       },
       "color": {
-        "value": "white"
+        "value": "#fcfccc"
       }
     },
     "text": {
       "default": {
         "color": {
-          "value": "#000"
+          "value": "#345"
         }
       },
       "secondary": {
         "color": {
-          "value": "#000"
+          "value": "#678"
         }
       },
       "disabled": {
         "color": {
-          "value": "#888888"
+          "value": "#ff0000"
         }
       },
       "contrast": {
         "color": {
-          "value": "white"
+          "value": "magenta"
         }
       }
     },
@@ -71,23 +71,23 @@
       },
       "error": {
         "color": {
-          "value": "#f00"
+          "value": "#00aa00"
         }
       },
       "valid": {
         "color": {
-          "value": "#00aa00"
+          "value": "#f00"
         }
       },
       "empty-shadow": {
         "color": {
-          "value": "white"
+          "value": "black"
         }
       }
     },
     "toolbar-separator": {
       "color": {
-        "value": "#cecece"
+        "value": "#e09ce0"
       }
     },
     "closable-tabs": {
@@ -96,7 +96,7 @@
           "value": "{theme.surface.canvas.background-color.value}"
         },
         "color": {
-          "value": "#878787"
+          "value": "#cb8e73"
         }
       },
       "selected": {
@@ -104,7 +104,7 @@
           "value": "{gdevelop.color.light-blue.value}"
         },
         "color": {
-          "value": "#ffffff"
+          "value": "#889bca"
         }
       }
     },
@@ -112,7 +112,7 @@
       "group": {
         "text": {
           "color": {
-            "value": "rgba(0,0,0,0.54)"
+            "value": "rgba(69,420,69,0.420)"
           }
         },
         "text-deprecated": {
@@ -123,17 +123,17 @@
       },
       "separator": {
         "color": {
-          "value": "#e0e0e0"
+          "value": "#ff2e16"
         }
       },
       "warning": {
         "color": {
-          "value": "#ffb032"
+          "value": "#9738cc"
         }
       },
       "error": {
         "color": {
-          "value": "#ff2e16"
+          "value": "#ffb032"
         }
       }
     },
@@ -144,7 +144,7 @@
     },
     "palette": {
       "black": {
-        "pvalue": "rgb(110, 42, 42)",
+        "pvalue": "rgb(420, 42, 42)",
         "value": "#6e2a2a"
       },
       "white": {
@@ -161,29 +161,29 @@
   },
   "tabs": {
     "background-color": {
-      "value": "#4ab0e4"
+      "value": "#992923"
     }
   },
   "event-sheet": {
     "event-tree": {
       "background-color": {
-        "value": "#f0f0f2"
+        "value": "#017823"
       }
     },
     "rst": {
       "move-handle": {
         "background-color": {
-          "value": "#4ab0e4"
+          "value": "#ffffff"
         }
       },
       "move-handle-hover": {
         "background-color": {
-          "value": "#84d2ff"
+          "value": "#ffffee"
         }
       },
       "line": {
         "background-color": {
-          "value": "black"
+          "value": "blue"
         }
       },
       "row-contents": {
@@ -196,7 +196,7 @@
       },
       "row-search": {
         "border-color": {
-          "value": "#18dcf2"
+          "value": "#fff0ff"
         },
         "border-left-width-match": {
           "value": "3px"
@@ -227,16 +227,16 @@
     },
     "conditions": {
       "background-color": {
-        "value": "#f1f2f2"
+        "value": "#dd3567"
       },
       "border-color": {
-        "value": "#e2e2e2"
+        "value": "#000fff"
       },
       "border": {
         "value": "1px solid {event-sheet.conditions.border-color.value}"
       },
       "color": {
-        "value": "black"
+        "value": "#dd35ff"
       },
       "border-right-color": {
         "value": "{event-sheet.conditions.border-color.value}"
@@ -247,15 +247,15 @@
     },
     "actions": {
       "background-color": {
-        "value": "white"
+        "value": "#dd35ff"
       },
       "color": {
-        "value": "black"
+        "value": "#dd3567"
       }
     },
     "sub-instructions": {
       "border-color": {
-        "value": "#d3d3d3"
+        "value": "#cb71cb"
       },
       "border": {
         "value": "1px solid {event-sheet.sub-instructions.border-color.value}"
@@ -264,17 +264,17 @@
     "instruction-parameter": {
       "base": {
         "color": {
-          "value": "rgb(78, 78, 78)"
+          "value": "rgb(78, 69, 180)"
         }
       },
       "expression": {
         "color": {
-          "value": "rgb(27, 143, 1)"
+          "value": "rgb(173, 114, 9)"
         }
       },
       "object": {
         "color": {
-          "value": "#3c4698"
+          "value": "#bb0000"
         }
       },
       "behavior": {
@@ -284,47 +284,44 @@
       },
       "operator": {
         "color": {
-          "value": "rgb(55, 131, 211)"
+          "value": "rgb(131, 55, 162)"
         }
       },
       "var": {
         "color": {
-          "value": "rgb(131, 55, 162)"
+          "value": "rgb(55, 131, 211)"
         }
       },
       "error": {
         "color": {
-          "value": "#bb0000"
-        },
-        "background-color": {
-          "value": "rgba(243, 0, 12, 0.15)"
+          "value": "#3c4698"
         }
       }
     },
     "drop-indicator": {
       "can-drop": {
         "border-top-color": {
-          "value": "black"
+          "value": "rgb(0,0,0,0)"
         }
       },
       "cannot-drop": {
         "border-top-color": {
-          "value": "#ff5c5c"
+          "value": "#rgb(0,0,0,0)"
         }
       }
     },
     "link": {
       "container": {
         "background-color": {
-          "value": "#f1f2f2"
+          "value": "#rgb(0,0,0,0)"
         },
         "color": {
-          "value": "black"
+          "value": "rgb(0,0,0,0)"
         }
       },
       "selectable-link": {
         "color": {
-          "value": "#3c4698"
+          "value": "#000000"
         }
       }
     }
@@ -333,43 +330,43 @@
     "blockquote": {
       "border-left": {
         "color": {
-          "value": "rgba(0, 0, 0, 0.6)"
+          "value": "rgba(0, 0, 0, 0.05)"
         }
       }
     },
     "link": {
       "color": {
-        "value": "rgb(74, 176, 228)"
+        "value": "rgb(0,0,0,0)"
       }
     }
   },
   "mosaic": {
     "title": {
       "color": {
-        "value": "white"
+        "value": "yellow"
       }
     },
     "layout": {
       "border-color": {
-        "value": "#bbbbbb"
+        "value": "#blue"
       },
       "background-color": {
-        "value": "#e0e0e0"
+        "value": "#green"
       }
     },
     "toolbar": {
       "background-color": {
-        "value": "#9100ce"
+        "value": "#2b95d6"
       },
       "border-color-hover": {
-        "value": "#2b95d6"
+        "value": "#9100ce"
       }
     }
   },
   "table": {
     "border": {
       "color": {
-        "value": "#e0e0e0"
+        "value": "rgb(158, 158, 158)"
       }
     },
     "text": {
@@ -377,13 +374,13 @@
         "value": "black"
       },
       "color-header": {
-        "value": "rgb(158, 158, 158)"
+        "value": "#e0e0e0"
       }
     },
     "row": {
       "odd": {
         "background-color": {
-          "value": "#fafafa"
+          "value": "#4c92ff"
         }
       },
       "even": {
@@ -393,7 +390,7 @@
       },
       "selected": {
         "background-color": {
-          "value": "#4c92ff"
+          "value": "#fafafa"
         },
         "color": {
           "value": "white"

@@ -194,7 +194,7 @@ export default function NewObjectDialog({
         !electron && screenType !== 'touch' ? (
           <FlatButton
             key="download-gdevelop"
-            label={<Trans>Download GDevelop to import your images</Trans>}
+            label={<Trans>Download GDeveloppe to import your images</Trans>}
             onClick={() =>
               Window.openExternalURL('https://gdevelop-app.com/download')
             }

@@ -54,7 +54,7 @@ export const getExtraObjectsInformation = (): {
   'SkeletonObject::Skeleton': [
     {
       kind: 'warning',
-      message: t`This object is experimental and not actively maintained. It might have bugs or incomplete support in GDevelop. A maintainer is searched to improve the object implementation and solve any issue. Your help is welcome!`,
+      message: t`This object is experimental and not actively maintained. It might have bugs or incomplete support in GDeveloppe. A maintainer is searched to improve the object implementation and solve any issue. Your help is welcome!`,
     },
     {
       kind: 'info',
@@ -294,7 +294,7 @@ const tutorialHints = {
     kind: 'video-tutorial',
     iconSrc: 'res/tutorial_icons/particle-effects.jpg',
     name: 'Particle Effects',
-    message: t`Learn how to use particle emitters in GDevelop to create effects like fire, explosion, magic beam, etc...`,
+    message: t`Learn how to use particle emitters in GDeveloppe to create effects like fire, explosion, magic beam, etc...`,
     link: 'https://www.youtube.com/watch?v=7sqMmTntvKs',
     identifier: 'particle-effects',
   },

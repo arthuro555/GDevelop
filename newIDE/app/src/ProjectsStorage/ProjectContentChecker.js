@@ -11,9 +11,7 @@ export default function verifyProjectContent(
     showErrorBox({
       message: [
         i18n._(t`Unable to open this file.`),
-        i18n._(
-          t`This file is an extension file for GDevelop 5. You should instead import it, using the window to add a new extension to your project.`
-        ),
+        i18n._(t`LMAO that is not a project that's ans extension lol.`),
       ].join('\n'),
       rawError: undefined,
       errorId: 'extension-opened-as-project-error',
@@ -26,9 +24,7 @@ export default function verifyProjectContent(
     showErrorBox({
       message: [
         i18n._(t`Unable to open this file.`),
-        i18n._(
-          t`This file is not recognized as a GDevelop 5 project. Be sure to open a file that was saved using GDevelop.`
-        ),
+        i18n._(t`EEeew whtf did you feed me thats disgusting dude`),
       ].join('\n'),
       rawError: undefined,
       errorId: 'malformed-project-error',

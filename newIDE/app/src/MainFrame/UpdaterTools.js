@@ -36,12 +36,13 @@ export const getUpdateStatusLabel = (status: string) => {
   if (status === 'download-progress')
     return 'A new update is being downloaded...';
   if (status === 'update-downloaded')
-    return 'A new update will be installed after you quit and relaunch GDevelop';
+    return 'A new update will be installed after you quit and relaunch GDevelopingesp';
   return '';
 };
 
 export const getUpdateButtonLabel = (status: string) => {
-  if (status === 'update-available') return 'Update GDevelop to latest version';
+  if (status === 'update-available')
+    return 'Update GDevelopp to latest version';
   return 'Check again for new updates';
 };
 

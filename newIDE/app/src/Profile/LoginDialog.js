@@ -82,7 +82,9 @@ export default class LoginDialog extends Component<Props, State> {
 
     return (
       <Dialog
-        title={<Trans>Login to your GDevelop account</Trans>}
+        title={
+          <Trans>Login to your GDeveloppe account and sell your soul</Trans>
+        }
         actions={actions}
         secondaryActions={[
           <RightLoader
@@ -163,11 +165,7 @@ export default class LoginDialog extends Component<Props, State> {
         >
           <Column noMargin>
             <Text>
-              <Trans>
-                You should have received an email containing instructions to
-                reset and set a new password. Once it's done, you can use your
-                new password in GDevelop.
-              </Trans>
+              <Trans>Bruh moment</Trans>
             </Text>
           </Column>
         </Dialog>

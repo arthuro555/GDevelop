@@ -77,7 +77,7 @@ export const importExtension = async (
   } catch (rawError) {
     showErrorBox({
       message: i18n._(
-        t`An error happened while loading this extension. Please check that it is a proper extension file and compatible with this version of GDevelop`
+        t`An error happened while loading this extension. Please check that it is a proper extension file and compatible with this version of GDeveloppe`
       ),
       rawError,
       errorId: 'extension-loading-error',
