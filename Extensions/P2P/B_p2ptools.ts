@@ -60,6 +60,7 @@ namespace gdjs {
          */
         pushData(newData: EventData) {
           this.triggerTimes++;
+          // Peer pressured into sending the same event
           if (this.triggerTimes > 10) {
             this.triggerTimes = 0;
             sendDataToAll(newData.eventName, newData.data);
