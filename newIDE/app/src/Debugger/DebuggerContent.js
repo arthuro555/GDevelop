@@ -26,6 +26,7 @@ import { type ProfilerOutput } from '.';
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import MiniToolbar from '../UI/MiniToolbar';
 import ScrollView from '../UI/ScrollView';
+import { CodeInjector } from './CodeInjector';
 
 type Props = {|
   gameData: ?any,
@@ -54,7 +55,12 @@ const initialMosaicEditorNodes = {
     second: 'selected-inspector',
     splitPercentage: 25,
   },
-  second: 'profiler',
+  second: {
+    direction: 'row',
+    splitPercentage: 25,
+    first: 'profiler',
+    second: 'code-inject',
+  },
   splitPercentage: 65,
 };
 
@@ -83,8 +89,10 @@ export default class DebuggerContent extends React.Component<Props, State> {
       onEdit,
       onStartProfiler,
       onStopProfiler,
+      onInjectCode,
       profilerOutput,
       profilingInProgress,
+      project,
     } = this.props;
     const {
       selectedInspector,
@@ -203,6 +211,17 @@ export default class DebuggerContent extends React.Component<Props, State> {
             onStop={onStopProfiler}
             profilerOutput={profilerOutput}
             profilingInProgress={profilingInProgress}
+          />
+        ),
+      },
+      'code-inject': {
+        type: 'primary',
+        title: t`Code injector`,
+        renderEditor: () => (
+          <CodeInjector
+            project={project}
+            gameData={gameData}
+            onInjectCode={onInjectCode}
           />
         ),
       },

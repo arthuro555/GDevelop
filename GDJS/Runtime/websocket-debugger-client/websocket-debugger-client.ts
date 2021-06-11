@@ -145,6 +145,10 @@ namespace gdjs {
             that._hotReloader.hotReload().then((logs) => {
               that.sendHotReloaderLogs(logs);
             });
+          } else if (data.command === 'injectCode') {
+            const func = window.eval(data.code) as (rs: RuntimeScene) => void;
+            console.log(func);
+            func(that._runtimegame.getSceneStack().getCurrentScene()!);
           } else {
             console.info(
               'Unknown command "' + data.command + '" received by the debugger.'

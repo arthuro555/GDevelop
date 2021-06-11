@@ -235,6 +235,11 @@ export default class Debugger extends React.Component<Props, State> {
     return true;
   };
 
+  _injectCode = (id: DebuggerId, code: string) => {
+    const { previewDebuggerServer } = this.props;
+    previewDebuggerServer.sendMessage(id, { command: 'injectCode', code });
+  };
+
   _startProfiler = (id: DebuggerId) => {
     const { previewDebuggerServer } = this.props;
     previewDebuggerServer.sendMessage(id, { command: 'profiler.start' });
@@ -300,6 +305,7 @@ export default class Debugger extends React.Component<Props, State> {
                 ref={debuggerContent =>
                   (this._debuggerContents[selectedId] = debuggerContent)
                 }
+                project={this.props.project}
                 gameData={debuggerGameData[selectedId]}
                 onPlay={() => this._play(selectedId)}
                 onPause={() => this._pause(selectedId)}
@@ -308,6 +314,9 @@ export default class Debugger extends React.Component<Props, State> {
                 onCall={(path, args) => this._call(selectedId, path, args)}
                 onStartProfiler={() => this._startProfiler(selectedId)}
                 onStopProfiler={() => this._stopProfiler(selectedId)}
+                onInjectCode={(code: string) =>
+                  this._injectCode(selectedId, code)
+                }
                 profilerOutput={profilerOutputs[selectedId]}
                 profilingInProgress={profilingInProgress[selectedId]}
               />
