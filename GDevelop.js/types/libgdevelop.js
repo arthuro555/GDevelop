@@ -48,6 +48,7 @@ declare class libGDevelop {
   MapExtensionProperties: Class<gdMapExtensionProperties>;
   SetString: Class<gdSetString>;
   ProjectHelper: Class<gdProjectHelper>;
+  EventsVariablesFinder: Class<gdEventsVariablesFinder>;
   VersionWrapper: Class<gdVersionWrapper>;
   Platform: Class<gdPlatform>;
   JsPlatform: Class<gdJsPlatform>;
@@ -74,6 +75,7 @@ declare class libGDevelop {
   ExternalEvents: Class<gdExternalEvents>;
   ExternalLayout: Class<gdExternalLayout>;
   Effect: Class<gdEffect>;
+  EffectsContainer: Class<gdEffectsContainer>;
   Layer: Class<gdLayer>;
   PropertyDescriptor: Class<gdPropertyDescriptor>;
   NamedPropertyDescriptor: Class<gdNamedPropertyDescriptor>;
@@ -85,6 +87,7 @@ declare class libGDevelop {
   ImageResource: Class<gdImageResource>;
   AudioResource: Class<gdAudioResource>;
   FontResource: Class<gdFontResource>;
+  BitmapFontResource: Class<gdBitmapFontResource>;
   VideoResource: Class<gdVideoResource>;
   JsonResource: Class<gdJsonResource>;
   InitialInstance: Class<gdInitialInstance>;
@@ -133,6 +136,7 @@ declare class libGDevelop {
   VectorEventsSearchResult: Class<gdVectorEventsSearchResult>;
   EventsRefactorer: Class<gdEventsRefactorer>;
   WholeProjectRefactorer: Class<gdWholeProjectRefactorer>;
+  UsedExtensionsFinder: Class<gdUsedExtensionsFinder>;
   ExtensionAndBehaviorMetadata: Class<gdExtensionAndBehaviorMetadata>;
   ExtensionAndObjectMetadata: Class<gdExtensionAndObjectMetadata>;
   ExtensionAndEffectMetadata: Class<gdExtensionAndEffectMetadata>;
@@ -188,7 +192,6 @@ declare class libGDevelop {
   PanelSpriteObject: Class<gdPanelSpriteObject>;
   ShapePainterObject: Class<gdShapePainterObject>;
   TextEntryObject: Class<gdTextEntryObject>;
-  SkeletonObject: Class<gdSkeletonObject>;
   ParticleEmitterObject_RendererType: Class<ParticleEmitterObject_RendererType>;
   ParticleEmitterObject: Class<gdParticleEmitterObject>;
   LayoutCodeGenerator: Class<gdLayoutCodeGenerator>;

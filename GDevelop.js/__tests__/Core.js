@@ -1,5 +1,8 @@
 const initializeGDevelopJs = require('../../Binaries/embuild/GDevelop.js/libGD.js');
 const path = require('path');
+const {
+  makeFakeAbstractFileSystem,
+} = require('../TestUtils/FakeAbstractFileSystem');
 const extend = require('extend');
 
 describe('libGD.js', function () {
@@ -99,9 +102,19 @@ describe('libGD.js', function () {
     });
 
     it('should have a list of extensions', function () {
-      expect(typeof project.getUsedExtensions().size()).toBe('number');
-      project.getUsedExtensions().clear();
-      expect(project.getUsedExtensions().size()).toBe(0);
+      expect(
+        gd.UsedExtensionsFinder.scanProject(project)
+          .toNewVectorString()
+          .toJSArray()
+      ).toEqual([]);
+
+      project.insertNewObject(project, 'Sprite', 'MyObject', 0);
+
+      expect(
+        gd.UsedExtensionsFinder.scanProject(project)
+          .toNewVectorString()
+          .toJSArray()
+      ).toEqual(['Sprite']);
     });
 
     it('handles events functions extensions', function () {
@@ -185,27 +198,33 @@ describe('libGD.js', function () {
     it('can have effects', function () {
       const layer = new gd.Layer();
 
-      expect(layer.hasEffectNamed('EffectThatDoesNotExist')).toBe(false);
-      expect(layer.getEffectsCount()).toBe(0);
+      const effects = layer.getEffects();
 
-      layer.insertNewEffect('MyEffect', 0);
-      expect(layer.hasEffectNamed('EffectThatDoesNotExist')).toBe(false);
-      expect(layer.hasEffectNamed('MyEffect')).toBe(true);
-      expect(layer.getEffectsCount()).toBe(1);
-      expect(layer.getEffectPosition('MyEffect')).toBe(0);
+      expect(effects.hasEffectNamed('EffectThatDoesNotExist')).toBe(false);
+      expect(effects.getEffectsCount()).toBe(0);
+
+      expect(effects.hasEffectNamed('EffectThatDoesNotExist')).toBe(false);
+      expect(effects.getEffectsCount()).toBe(0);
+
+      effects.insertNewEffect('MyEffect', 0);
+      expect(effects.hasEffectNamed('EffectThatDoesNotExist')).toBe(false);
+      expect(effects.hasEffectNamed('MyEffect')).toBe(true);
+      expect(effects.getEffectsCount()).toBe(1);
+      expect(effects.getEffectPosition('MyEffect')).toBe(0);
 
       const effect2 = new gd.Effect();
       effect2.setName('MyEffect2');
 
-      layer.insertEffect(effect2, 1);
-      expect(layer.hasEffectNamed('MyEffect2')).toBe(true);
-      expect(layer.getEffectsCount()).toBe(2);
-      expect(layer.getEffectPosition('MyEffect')).toBe(0);
-      expect(layer.getEffectPosition('MyEffect2')).toBe(1);
+      effects.insertEffect(effect2, 1);
+      expect(effects.hasEffectNamed('MyEffect2')).toBe(true);
+      expect(effects.getEffectsCount()).toBe(2);
+      expect(effects.getEffectPosition('MyEffect')).toBe(0);
 
-      layer.swapEffects(0, 1);
-      expect(layer.getEffectPosition('MyEffect2')).toBe(0);
-      expect(layer.getEffectPosition('MyEffect')).toBe(1);
+      expect(effects.getEffectPosition('MyEffect2')).toBe(1);
+
+      effects.swapEffects(0, 1);
+      expect(effects.getEffectPosition('MyEffect2')).toBe(0);
+      expect(effects.getEffectPosition('MyEffect')).toBe(1);
 
       layer.delete();
     });
@@ -215,7 +234,7 @@ describe('libGD.js', function () {
 
       layer.setName('GUI');
       layer.setVisibility(false);
-      layer.insertNewEffect('MyEffect', 0);
+      layer.getEffects().insertNewEffect('MyEffect', 0);
 
       const element = new gd.SerializerElement();
       layer.serializeTo(element);
@@ -223,8 +242,8 @@ describe('libGD.js', function () {
 
       expect(layer2.getName()).toBe('GUI');
       expect(layer2.getVisibility()).toBe(false);
-      expect(layer2.getEffectsCount()).toBe(1);
-      expect(layer2.getEffectAt(0).getName()).toBe('MyEffect');
+      expect(layer2.getEffects().getEffectsCount()).toBe(1);
+      expect(layer2.getEffects().getEffectAt(0).getName()).toBe('MyEffect');
 
       layer.delete();
       layer2.delete();
@@ -787,7 +806,9 @@ describe('libGD.js', function () {
 
       var child1 = parentVariable.getChild('Child1');
       var child2 = parentVariable.getChild('Child2');
-      var grandChild1 = parentVariable.getChild('Child1').getChild('GrandChild');
+      var grandChild1 = parentVariable
+        .getChild('Child1')
+        .getChild('GrandChild');
       var grandChild2 = parentVariable.getChild('Child2').getAtIndex(0);
 
       expect(parentVariable.contains(grandChild1, true)).toBe(true);
@@ -930,8 +951,26 @@ describe('libGD.js', function () {
     });
   });
 
-  describe('gd.VideoResource', function () {
-    it('should have name and file', function () {
+  describe('gd.BitmapFontResource', function() {
+    it('should have name and file', function() {
+      const resource = new gd.BitmapFontResource();
+      resource.setName('MyBitmapFontResource');
+      resource.setFile('MyBitmapFontFile');
+      expect(resource.getName()).toBe('MyBitmapFontResource');
+      expect(resource.getFile()).toBe('MyBitmapFontFile');
+      resource.delete();
+    });
+    it('can have metadata', function() {
+      const resource = new gd.BitmapFontResource();
+      expect(resource.getMetadata()).toBe('');
+      resource.setMetadata(JSON.stringify({ hello: 'world' }));
+      expect(resource.getMetadata()).toBe('{"hello":"world"}');
+      resource.delete();
+    });
+  });
+
+  describe('gd.VideoResource', function() {
+    it('should have name and file', function() {
       const resource = new gd.VideoResource();
       resource.setName('MyVideoResource');
       resource.setFile('MyVideoFile');
@@ -2374,24 +2413,7 @@ describe('libGD.js', function () {
       project.getResourcesManager().addResource(resource4);
       project.getResourcesManager().addResource(resource5);
 
-      // Create a fake file system
-      const fs = new gd.AbstractFileSystemJS();
-      fs.mkDir = fs.clearDir = function () {};
-      fs.getTempDir = function (path) {
-        return '/tmp/';
-      };
-      fs.fileNameFrom = function (fullpath) {
-        return path.posix.basename(fullpath);
-      };
-      fs.dirNameFrom = function (fullpath) {
-        return path.posix.dirname(fullpath);
-      };
-      fs.makeAbsolute = function (relativePath, baseDirectory) {
-        return path.posix.resolve(baseDirectory, relativePath);
-      };
-      fs.makeRelative = function (absolutePath, baseDirectory) {
-        return path.posix.relative(baseDirectory, absolutePath);
-      };
+      const fs = makeFakeAbstractFileSystem(gd, {});
 
       // Check that ResourcesMergingHelper can update the filenames
       const resourcesMergingHelper = new gd.ResourcesMergingHelper(fs);
@@ -2449,37 +2471,7 @@ describe('libGD.js', function () {
       project.getResourcesManager().addResource(resource4);
       project.getResourcesManager().addResource(resource5);
 
-      // Create a fake file system
-      const fs = new gd.AbstractFileSystemJS();
-      fs.mkDir = fs.clearDir = function () {};
-      fs.getTempDir = function (path) {
-        return '/tmp/';
-      };
-      fs.fileNameFrom = function (fullPath) {
-        return path.posix.basename(fullPath);
-      };
-      fs.dirNameFrom = function (fullPath) {
-        return path.posix.dirname(fullPath);
-      };
-      fs.makeAbsolute = function (relativePath, baseDirectory) {
-        return path.posix.resolve(baseDirectory, relativePath);
-      };
-      fs.makeRelative = function (absolutePath, baseDirectory) {
-        return path.posix.relative(baseDirectory, absolutePath);
-      };
-      fs.isAbsolute = function (fullPath) {
-        return path.posix.isAbsolute(fullPath);
-      };
-      fs.dirExists = function (directoryPath) {
-        return true; // Fake that all directory required exist.
-      };
-
-      // In particular, create a mock copyFile, that we can track to verify
-      // files are properly copied.
-      fs.copyFile = jest.fn();
-      fs.copyFile.mockImplementation(function (srcPath, destPath) {
-        return true;
-      });
+      const fs = makeFakeAbstractFileSystem(gd, {});
 
       // Check that resources can be copied to another folder:
       // * including absolute files.

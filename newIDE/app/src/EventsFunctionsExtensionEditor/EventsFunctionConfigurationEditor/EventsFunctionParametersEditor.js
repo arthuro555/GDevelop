@@ -111,7 +111,7 @@ const StringSelectorEditor = ({
     <ResponsiveLineStackLayout>
       <Column justifyContent="flex-end" expand>
         {array.map((item, index) => (
-          <Line key={index} justifyContent="flex-end" expand marginSize="5px">
+          <Line key={index} justifyContent="flex-end" expand>
             <SemiControlledTextField
               commitOnBlur
               value={item}
@@ -453,6 +453,14 @@ export default class EventsFunctionParametersEditor extends React.Component<
                                 <SelectOption
                                   value="trueorfalse"
                                   primaryText={t`True or False (boolean)`}
+                                />
+                                <SelectOption
+                                  value="objectPointName"
+                                  primaryText={t`Object point (text)`}
+                                />
+                                <SelectOption
+                                  value="objectAnimationName"
+                                  primaryText={t`Object animation (text)`}
                                 />
                               </SelectField>
                             )}

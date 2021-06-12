@@ -39,7 +39,7 @@ import ImageThumbnail from '../ResourcesList/ResourceThumbnail/ImageThumbnail';
 import ResourceSelector from '../ResourcesList/ResourceSelector';
 import ResourceSelectorWithThumbnail from '../ResourcesList/ResourceSelectorWithThumbnail';
 import ShapePainterEditor from '../ObjectEditor/Editors/ShapePainterEditor';
-import ExternalEventsField from '../EventsSheet/ParameterFields/ExternalEventsField';
+import ExternalEventsAutoComplete from '../EventsSheet/EventsTree/Renderers/LinkEvent/ExternalEventsAutoComplete';
 import LayerField from '../EventsSheet/ParameterFields/LayerField';
 import MouseField from '../EventsSheet/ParameterFields/MouseField';
 import SceneVariableField from '../EventsSheet/ParameterFields/SceneVariableField';
@@ -105,6 +105,7 @@ import {
   gameRollingMetrics1,
   gameRollingMetricsWithoutPlayersAndRetention1,
   showcasedGame1,
+  exampleFromFutureVersion,
 } from '../fixtures/GDevelopServicesTestData';
 import {
   GDevelopAnalyticsApi,
@@ -185,6 +186,7 @@ import ElementWithMenu from '../UI/Menu/ElementWithMenu';
 import IconButton from '../UI/IconButton';
 import FilterList from '@material-ui/icons/FilterList';
 import Brush from '@material-ui/icons/Brush';
+import Delete from '@material-ui/icons/Delete';
 import RaisedButtonWithMenu from '../UI/RaisedButtonWithMenu';
 import RaisedButtonWithSplitMenu from '../UI/RaisedButtonWithSplitMenu';
 import fakeResourceExternalEditors from './FakeResourceExternalEditors';
@@ -220,6 +222,9 @@ import { AssetCard } from '../AssetStore/AssetCard';
 import { AssetDetails } from '../AssetStore/AssetDetails';
 import { ResourceStoreStateProvider } from '../AssetStore/ResourceStore/ResourceStoreContext';
 import { ResourceStore } from '../AssetStore/ResourceStore';
+import { ExampleStoreStateProvider } from '../AssetStore/ExampleStore/ExampleStoreContext';
+import { ExampleStore } from '../AssetStore/ExampleStore';
+import { ExampleDialog } from '../AssetStore/ExampleStore/ExampleDialog';
 import { ExtensionStoreStateProvider } from '../AssetStore/ExtensionStore/ExtensionStoreContext';
 import { ExtensionStore } from '../AssetStore/ExtensionStore';
 import { ResourceFetcherDialog } from '../ProjectsStorage/ResourceFetcher';
@@ -231,6 +236,12 @@ import MockAdapter from 'axios-mock-adapter';
 import { GamesShowcase } from '../GamesShowcase';
 import { GamesShowcaseStateProvider } from '../GamesShowcase/GamesShowcaseContext';
 import { ShowcasedGameListItem } from '../GamesShowcase/ShowcasedGameListItem';
+import {
+  Accordion,
+  AccordionActions,
+  AccordionHeader,
+  AccordionBody,
+} from '../UI/Accordion';
 
 configureActions({
   depth: 2,
@@ -1100,6 +1111,61 @@ storiesOf('UI Building Blocks/Checkbox', module)
     </div>
   ));
 
+storiesOf('UI Building Blocks/Accordion', module)
+  .addDecorator(paperDecorator)
+  .addDecorator(muiDecorator)
+  .add('default', () => (
+    <React.Fragment>
+      {[0, 1, 2].map(idx => (
+        <Accordion key={idx}>
+          <AccordionHeader
+            actions={[
+              <IconButton
+                key="delete"
+                size="small"
+                onClick={ev => {
+                  ev.stopPropagation();
+                  action('Header action')();
+                }}
+              >
+                <Delete />
+              </IconButton>,
+            ]}
+          >
+            <Text>
+              {idx === 0 ? 'Simple accordion' : null}
+              {idx === 1 ? 'Accordion with no body padding' : null}
+              {idx === 2 ? 'Accordion with actions' : null}
+            </Text>
+          </AccordionHeader>
+          <AccordionBody disableGutters={idx === 1}>
+            <Text>
+              This is a quadrilateral. A quadrilateral has four points. If yours
+              has more, count again - you may be misled.
+            </Text>
+          </AccordionBody>
+          {idx === 2 && (
+            <AccordionActions
+              actions={[
+                <FlatButton
+                  primary
+                  label="Count"
+                  onClick={action('Primary action')}
+                />,
+              ]}
+              secondaryActions={[
+                <FlatButton
+                  label="Ignore"
+                  onClick={action('Secondary action')}
+                />,
+              ]}
+            />
+          )}
+        </Accordion>
+      ))}
+    </React.Fragment>
+  ));
+
 storiesOf('UI Building Blocks/PlaceholderMessage', module)
   .addDecorator(paperDecorator)
   .addDecorator(muiDecorator)
@@ -1939,32 +2005,23 @@ storiesOf('ParameterFields', module)
       )}
     />
   ))
-  .add('ExternalEventsField', () => (
+  .add('ExternalEventsAutoComplete', () => (
     <ValueStateHolder
       initialValue={'Test'}
       render={(value, onChange) => (
-        <ExternalEventsField
+        <ExternalEventsAutoComplete
           project={testProject.project}
-          scope={{}}
-          globalObjectsContainer={testProject.project}
-          objectsContainer={testProject.testLayout}
           value={value}
           onChange={onChange}
         />
       )}
     />
   ))
-  .add('ExternalEventsField (without project)', () => (
+  .add('ExternalEventsAutoComplete (without project)', () => (
     <ValueStateHolder
       initialValue={'Test'}
       render={(value, onChange) => (
-        <ExternalEventsField
-          scope={{}}
-          value={value}
-          onChange={onChange}
-          globalObjectsContainer={testProject.project}
-          objectsContainer={testProject.testLayout}
-        />
+        <ExternalEventsAutoComplete value={value} onChange={onChange} />
       )}
     />
   ))
@@ -2653,26 +2710,30 @@ storiesOf('AboutDialog', module)
 storiesOf('CreateProjectDialog', module)
   .addDecorator(muiDecorator)
   .add('default', () => (
-    <CreateProjectDialog
-      open
-      examplesComponent={Placeholder}
-      startersComponent={Placeholder}
-      onClose={action('onClose')}
-      onCreate={action('onCreate')}
-      onOpen={action('onOpen')}
-      initialTab="starters"
-    />
+    <ExampleStoreStateProvider>
+      <CreateProjectDialog
+        open
+        examplesComponent={Placeholder}
+        startersComponent={Placeholder}
+        onClose={action('onClose')}
+        onCreate={action('onCreate')}
+        onOpen={action('onOpen')}
+        initialTab="starters"
+      />
+    </ExampleStoreStateProvider>
   ))
   .add('Games showcase as initial tab', () => (
-    <CreateProjectDialog
-      open
-      examplesComponent={Placeholder}
-      startersComponent={Placeholder}
-      onClose={action('onClose')}
-      onCreate={action('onCreate')}
-      onOpen={action('onOpen')}
-      initialTab="games-showcase"
-    />
+    <ExampleStoreStateProvider>
+      <CreateProjectDialog
+        open
+        examplesComponent={Placeholder}
+        startersComponent={Placeholder}
+        onClose={action('onClose')}
+        onCreate={action('onCreate')}
+        onOpen={action('onOpen')}
+        initialTab="games-showcase"
+      />
+    </ExampleStoreStateProvider>
   ));
 
 storiesOf('OpenFromStorageProviderDialog', module)
@@ -3265,6 +3326,8 @@ storiesOf('TextEditor', module)
           action('Choose resource from source', source)
         }
         resourceExternalEditors={fakeResourceExternalEditors}
+        onSizeUpdated={() => {}}
+        objectName="FakeObjectName"
       />
     </SerializedObjectDisplay>
   ));
@@ -3282,6 +3345,8 @@ storiesOf('TiledSpriteEditor', module)
           action('Choose resource from source', source)
         }
         resourceExternalEditors={fakeResourceExternalEditors}
+        onSizeUpdated={() => {}}
+        objectName="FakeObjectName"
       />
     </SerializedObjectDisplay>
   ));
@@ -3299,6 +3364,8 @@ storiesOf('PanelSpriteEditor', module)
           action('Choose resource from source', source)
         }
         resourceExternalEditors={fakeResourceExternalEditors}
+        onSizeUpdated={() => {}}
+        objectName="FakeObjectName"
       />
     </SerializedObjectDisplay>
   ));
@@ -3308,33 +3375,45 @@ storiesOf('SpriteEditor and related editors', module)
   .addDecorator(muiDecorator)
   .add('SpriteEditor', () => (
     <SerializedObjectDisplay object={testProject.spriteObject}>
-      <SpriteEditor
-        object={testProject.spriteObject}
-        project={testProject.project}
-        resourceSources={[]}
-        onChooseResource={source =>
-          action('Choose resource from source', source)
-        }
-        resourceExternalEditors={fakeResourceExternalEditors}
-      />
+      <DragAndDropContextProvider>
+        <SpriteEditor
+          object={testProject.spriteObject}
+          project={testProject.project}
+          resourceSources={[]}
+          onChooseResource={source =>
+            action('Choose resource from source', source)
+          }
+          resourceExternalEditors={fakeResourceExternalEditors}
+          onSizeUpdated={() => {}}
+          objectName="FakeObjectName"
+        />
+      </DragAndDropContextProvider>
     </SerializedObjectDisplay>
   ))
   .add('PointsEditor', () => (
     <SerializedObjectDisplay object={testProject.spriteObject}>
-      <PointsEditor
-        object={testProject.spriteObject}
-        project={testProject.project}
-        resourcesLoader={ResourcesLoader}
-      />
+      <DragAndDropContextProvider>
+        <FixedHeightFlexContainer height={500}>
+          <PointsEditor
+            object={testProject.spriteObject}
+            project={testProject.project}
+            resourcesLoader={ResourcesLoader}
+          />
+        </FixedHeightFlexContainer>
+      </DragAndDropContextProvider>
     </SerializedObjectDisplay>
   ))
   .add('CollisionMasksEditor', () => (
     <SerializedObjectDisplay object={testProject.spriteObject}>
-      <CollisionMasksEditor
-        object={testProject.spriteObject}
-        project={testProject.project}
-        resourcesLoader={ResourcesLoader}
-      />
+      <DragAndDropContextProvider>
+        <FixedHeightFlexContainer height={500}>
+          <CollisionMasksEditor
+            object={testProject.spriteObject}
+            project={testProject.project}
+            resourcesLoader={ResourcesLoader}
+          />
+        </FixedHeightFlexContainer>
+      </DragAndDropContextProvider>
     </SerializedObjectDisplay>
   ));
 
@@ -3346,6 +3425,13 @@ storiesOf('ShapePainterEditor', module)
       <ShapePainterEditor
         object={testProject.shapePainterObject}
         project={testProject.project}
+        resourceSources={[]}
+        onChooseResource={source =>
+          action('Choose resource from source', source)
+        }
+        resourceExternalEditors={fakeResourceExternalEditors}
+        onSizeUpdated={() => {}}
+        objectName="FakeObjectName"
       />
     </SerializedObjectDisplay>
   ));
@@ -3556,6 +3642,7 @@ storiesOf('VariablesList', module)
     <SerializedObjectDisplay object={testProject.testLayout}>
       <VariablesList
         variablesContainer={testProject.testLayout.getVariables()}
+        onComputeAllVariableNames={() => []}
       />
     </SerializedObjectDisplay>
   ));
@@ -4430,7 +4517,7 @@ storiesOf('EffectsList', module)
         return Promise.reject();
       }}
       resourceSources={[]}
-      effectsContainer={testProject.layerWithEffects}
+      effectsContainer={testProject.layerWithEffects.getEffects()}
       onEffectsUpdated={action('effects updated')}
     />
   ))
@@ -4443,7 +4530,7 @@ storiesOf('EffectsList', module)
         return Promise.reject();
       }}
       resourceSources={[]}
-      effectsContainer={testProject.layerWithEffectWithoutEffectType}
+      effectsContainer={testProject.layerWithEffectWithoutEffectType.getEffects()}
       onEffectsUpdated={action('effects updated')}
     />
   ))
@@ -4456,7 +4543,7 @@ storiesOf('EffectsList', module)
         return Promise.reject();
       }}
       resourceSources={[]}
-      effectsContainer={testProject.layerWithoutEffects}
+      effectsContainer={testProject.layerWithoutEffects.getEffects()}
       onEffectsUpdated={action('effects updated')}
     />
   ));
@@ -4600,6 +4687,26 @@ storiesOf('AssetStore', module)
         />
       </AssetStoreStateProvider>
     </FixedHeightFlexContainer>
+  ));
+
+storiesOf('AssetStore/ExampleStore', module)
+  .addDecorator(muiDecorator)
+  .add('default', () => (
+    <FixedHeightFlexContainer height={400}>
+      <ExampleStoreStateProvider>
+        <ExampleStore onOpen={action('onOpen')} isOpening={false} />
+      </ExampleStoreStateProvider>
+    </FixedHeightFlexContainer>
+  ));
+storiesOf('AssetStore/ExampleStore/ExampleDialog', module)
+  .addDecorator(muiDecorator)
+  .add('non existing example, from a future version', () => (
+    <ExampleDialog
+      exampleShortHeader={exampleFromFutureVersion}
+      onOpen={action('onOpen')}
+      isOpening={false}
+      onClose={action('onClose')}
+    />
   ));
 
 storiesOf('AssetStore/ResourceStore', module)

@@ -1,5 +1,5 @@
 // @flow
-import { Trans } from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import { type I18n } from '@lingui/core';
 
 import React from 'react';
@@ -12,6 +12,7 @@ import { Column, Line, Spacer } from '../../UI/Grid';
 import { themes } from '../../UI/Theme';
 import { getAllThemes } from '../../CodeEditor/Theme';
 import Window from '../../Utils/Window';
+import optionalRequire from '../../Utils/OptionalRequire';
 import PreferencesContext, { allAlertMessages } from './PreferencesContext';
 import Text from '../../UI/Text';
 import { ResponsiveLineStackLayout } from '../../UI/Layout';
@@ -19,6 +20,7 @@ import { Tabs, Tab } from '../../UI/Tabs';
 import { getAllTutorialHints } from '../../Hints';
 import RaisedButton from '../../UI/RaisedButton';
 import ShortcutsList from '../../KeyboardShortcuts/ShortcutsList';
+const electron = optionalRequire('electron');
 
 type Props = {|
   i18n: I18n,
@@ -38,6 +40,7 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
     setEventsSheetShowObjectThumbnails,
     setAutosaveOnPreview,
     setUseNewInstructionEditorDialog,
+    setUseUndefinedVariablesInAutocompletion,
     setUseGDJSDevelopmentWatcher,
     setEventsSheetUseAssignmentOperators,
     getDefaultEditorMosaicNode,
@@ -46,6 +49,8 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
     resetShortcutsToDefault,
     setShortcutForCommand,
     setIsMenuBarHiddenInPreview,
+    setBackdropClickBehavior,
+    setIsAlwaysOnTopInPreview,
   } = React.useContext(PreferencesContext);
 
   return (
@@ -168,6 +173,23 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             </Column>
           </Line>
           <Text size="title">
+            <Trans>Dialogs</Trans>
+          </Text>
+          <Line>
+            <SelectField
+              floatingLabelText={<Trans>Dialog backdrop click behavior</Trans>}
+              value={values.backdropClickBehavior}
+              onChange={(e, i, value: string) =>
+                setBackdropClickBehavior(value)
+              }
+              fullWidth
+            >
+              <SelectOption value="cancel" primaryText={t`Cancel changes`} />
+              <SelectOption value="apply" primaryText={t`Apply changes`} />
+              <SelectOption value="nothing" primaryText={t`Do nothing`} />
+            </SelectField>
+          </Line>
+          <Text size="title">
             <Trans>Updates</Trans>
           </Text>
           <Line>
@@ -224,6 +246,21 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
               label={<Trans>Use the new action/condition editor</Trans>}
             />
           </Line>
+          <Line>
+            <Toggle
+              onToggle={(e, check) =>
+                setUseUndefinedVariablesInAutocompletion(check)
+              }
+              toggled={values.useUndefinedVariablesInAutocompletion}
+              labelPosition="right"
+              label={
+                <Trans>
+                  Suggest names of variables used in events but not declared in
+                  the list of variables
+                </Trans>
+              }
+            />
+          </Line>
           <Text size="title">
             <Trans>Advanced</Trans>
           </Text>
@@ -247,14 +284,30 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
               }
             />
           </Line>
-          <Line>
-            <Toggle
-              onToggle={(e, check) => setIsMenuBarHiddenInPreview(check)}
-              toggled={values.isMenuBarHiddenInPreview}
-              labelPosition="right"
-              label={<Trans>Hide the menu bar in the preview window</Trans>}
-            />
-          </Line>
+          {electron && (
+            <>
+              <Line>
+                <Toggle
+                  onToggle={(e, check) => setIsMenuBarHiddenInPreview(check)}
+                  toggled={values.isMenuBarHiddenInPreview}
+                  labelPosition="right"
+                  label={<Trans>Hide the menu bar in the preview window</Trans>}
+                />
+              </Line>
+              <Line>
+                <Toggle
+                  onToggle={(e, check) => setIsAlwaysOnTopInPreview(check)}
+                  toggled={values.isAlwaysOnTopInPreview}
+                  labelPosition="right"
+                  label={
+                    <Trans>
+                      Always display the preview window on top of others
+                    </Trans>
+                  }
+                />
+              </Line>
+            </>
+          )}
           {Window.isDev() && (
             <Line>
               <Toggle

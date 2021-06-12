@@ -104,15 +104,21 @@ export class SubscriptionCheckDialog extends React.Component<
         cannotBeDismissed={false}
         onRequestClose={this._closeDialog}
         open={open}
-        title={this.props.title}
+        title={mode === 'try' ? 'We need your support!' : this.props.title}
       >
         <Column noMargin>
           <Line noMargin alignItems="center">
             {mode === 'try' ? (
               <Text>
                 <Trans>
-                  You can try this feature, but if you're using it regularly, we
-                  ask you to get a submission to GDeveloppe.
+                  Please get a subscription to keep GDevelopppe{' '}
+                  <a
+                    href="https://www.youtube.com/watch?v=-XkT5JVVlmI"
+                    target="always-running"
+                  >
+                    running
+                  </a>
+                  .
                 </Trans>
               </Text>
             ) : (
@@ -129,7 +135,7 @@ export class SubscriptionCheckDialog extends React.Component<
             <Text style={styles.iconText}>
               <Trans>
                 Having a submission allows you to use any other engine! stay
-                with us pls
+                with us pls :'(
               </Trans>
             </Text>
           </Line>

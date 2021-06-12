@@ -49,6 +49,9 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     setUseNewInstructionEditorDialog: this._setUseNewInstructionEditorDialog.bind(
       this
     ),
+    setUseUndefinedVariablesInAutocompletion: this._setUseUndefinedVariablesInAutocompletion.bind(
+      this
+    ),
     setUseGDJSDevelopmentWatcher: this._setUseGDJSDevelopmentWatcher.bind(this),
     setEventsSheetUseAssignmentOperators: this._setEventsSheetUseAssignmentOperators.bind(
       this
@@ -73,6 +76,9 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     setNewObjectDialogDefaultTab: this._setNewObjectDialogDefaultTab.bind(this),
     getIsMenuBarHiddenInPreview: this._getIsMenuBarHiddenInPreview.bind(this),
     setIsMenuBarHiddenInPreview: this._setIsMenuBarHiddenInPreview.bind(this),
+    setBackdropClickBehavior: this._setBackdropClickBehavior.bind(this),
+    getIsAlwaysOnTopInPreview: this._getIsAlwaysOnTopInPreview.bind(this),
+    setIsAlwaysOnTopInPreview: this._setIsAlwaysOnTopInPreview.bind(this),
   };
 
   componentDidMount() {
@@ -123,6 +129,20 @@ export default class PreferencesProvider extends React.Component<Props, State> {
         values: {
           ...state.values,
           useNewInstructionEditorDialog,
+        },
+      }),
+      () => this._persistValuesToLocalStorage(this.state)
+    );
+  }
+
+  _setUseUndefinedVariablesInAutocompletion(
+    useUndefinedVariablesInAutocompletion: boolean
+  ) {
+    this.setState(
+      state => ({
+        values: {
+          ...state.values,
+          useUndefinedVariablesInAutocompletion,
         },
       }),
       () => this._persistValuesToLocalStorage(this.state)
@@ -499,6 +519,33 @@ export default class PreferencesProvider extends React.Component<Props, State> {
         values: {
           ...state.values,
           isMenuBarHiddenInPreview: enabled,
+        },
+      }),
+      () => this._persistValuesToLocalStorage(this.state)
+    );
+  }
+
+  _setBackdropClickBehavior(
+    backdropClickBehavior: 'nothing' | 'apply' | 'cancel'
+  ) {
+    this.setState(
+      state => ({
+        values: { ...state.values, backdropClickBehavior },
+      }),
+      () => this._persistValuesToLocalStorage(this.state)
+    );
+  }
+
+  _getIsAlwaysOnTopInPreview() {
+    return this.state.values.isAlwaysOnTopInPreview;
+  }
+
+  _setIsAlwaysOnTopInPreview(enabled: boolean) {
+    this.setState(
+      state => ({
+        values: {
+          ...state.values,
+          isAlwaysOnTopInPreview: enabled,
         },
       }),
       () => this._persistValuesToLocalStorage(this.state)

@@ -71,6 +71,7 @@ const LayerEditorDialog = (props: Props) => {
 
   return (
     <Dialog
+      onApply={onClose}
       noMargin
       open
       title={<Trans>Edit Layer Properties</Trans>}
@@ -186,7 +187,7 @@ const LayerEditorDialog = (props: Props) => {
           resourceSources={props.resourceSources}
           onChooseResource={props.onChooseResource}
           resourceExternalEditors={props.resourceExternalEditors}
-          effectsContainer={layer}
+          effectsContainer={layer.getEffects()}
           onEffectsUpdated={
             forceUpdate /*Force update to ensure dialog is properly positioned*/
           }

@@ -217,7 +217,40 @@ const buildAndSendMenuTemplate = (
     role: 'help',
     submenu: [
       {
-        label: i18n._(`🐢 Turtles are nice 🐢`),
+        label: i18n._(t`🐢 Turtles are nice 🐢`),
+        onClickOpenLink: 'https://secret.arthuro555.com',
+      },
+      {
+        label: i18n._(t`GDevelop website`),
+        onClickOpenLink: 'http://gdevelop-app.com',
+      },
+      { type: 'separator' },
+      {
+        label: i18n._(t`Community Forums`),
+        onClickOpenLink: 'https://forum.gdevelop-app.com',
+      },
+      {
+        label: i18n._(t`Community Discord Chat`),
+        onClickOpenLink: 'https://discord.gg/gdevelop',
+      },
+      { type: 'separator' },
+      {
+        label: i18n._(t`Contribute to GDevelop`),
+        onClickOpenLink: 'https://gdevelop-app.com/contribute/',
+      },
+      {
+        label: i18n._(t`Create Extensions for GDevelop`),
+        onClickOpenLink:
+          'https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md',
+      },
+      { type: 'separator' },
+      {
+        label: i18n._(t`Help to Translate GDevelop`),
+        onClickOpenLink: 'https://crowdin.com/project/gdevelop',
+      },
+      {
+        label: i18n._(t`Report a wrong translation`),
+        onClickOpenLink: 'https://github.com/4ian/GDevelop/issues/969',
       },
     ],
   };

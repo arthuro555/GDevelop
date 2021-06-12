@@ -40,11 +40,14 @@ import LayerField from './ParameterFields/LayerField';
 import AudioResourceField from './ParameterFields/AudioResourceField';
 import VideoResourceField from './ParameterFields/VideoResourceField';
 import JsonResourceField from './ParameterFields/JsonResourceField';
+import BitmapFontResourceField from './ParameterFields/BitmapFontResourceField';
 import ColorExpressionField from './ParameterFields/ColorExpressionField';
 import ForceMultiplierField, {
   renderInlineForceMultiplier,
 } from './ParameterFields/ForceMultiplierField';
 import SceneNameField from './ParameterFields/SceneNameField';
+import ObjectPointNameField from './ParameterFields/ObjectPointNameField';
+import ObjectAnimationNameField from './ParameterFields/ObjectAnimationNameField';
 import { type MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
 const gd: libGDevelop = global.gd;
 
@@ -70,11 +73,14 @@ const components = {
   soundfile: AudioResourceField,
   videoResource: VideoResourceField,
   jsonResource: JsonResourceField,
+  bitmapFontResource: BitmapFontResourceField,
   color: ColorExpressionField,
   police: DefaultField, //TODO
   joyaxis: DefaultField, //TODO
   forceMultiplier: ForceMultiplierField,
   sceneName: SceneNameField,
+  objectPointName: ObjectPointNameField,
+  objectAnimationName: ObjectAnimationNameField,
 };
 const inlineRenderers: { [string]: ParameterInlineRenderer } = {
   default: renderInlineDefaultField,
@@ -109,10 +115,13 @@ const userFriendlyTypeName: { [string]: MessageDescriptor } = {
   musicfile: t`Audio resource`,
   soundfile: t`Audio resource`,
   videoResource: t`Video resource`,
+  bitmapFontResource: t`Bitmap font resource`,
   jsonResource: t`JSON resource`,
   color: t`Color`,
   forceMultiplier: t`Instant or permanent force`,
   sceneName: t`Scene name`,
+  objectPointName: t`Object point name`,
+  objectAnimationName: t`Object animation name`,
 };
 
 export default {
