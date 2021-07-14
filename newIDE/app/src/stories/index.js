@@ -4447,7 +4447,7 @@ storiesOf('ObjectTypeSelector', module)
 storiesOf('NewBehaviorDialog', module)
   .addDecorator(muiDecorator)
   .add('default, for a Sprite object', () => (
-    <ExtensionStoreStateProvider>
+    <ExtensionStoreStateProvider installedExtensions={[]}>
       <NewBehaviorDialog
         open
         project={testProject.project}
@@ -5026,7 +5026,7 @@ storiesOf('AssetStore/ExtensionStore', module)
   .addDecorator(muiDecorator)
   .add('default', () => (
     <FixedHeightFlexContainer height={400}>
-      <ExtensionStoreStateProvider>
+      <ExtensionStoreStateProvider installedExtensions={[]}>
         <ExtensionStore
           project={testProject.project}
           isInstalling={false}
@@ -5038,7 +5038,7 @@ storiesOf('AssetStore/ExtensionStore', module)
   ))
   .add('is installing', () => (
     <FixedHeightFlexContainer height={400}>
-      <ExtensionStoreStateProvider>
+      <ExtensionStoreStateProvider installedExtensions={[]}>
         <ExtensionStore
           project={testProject.project}
           isInstalling={true}
@@ -5050,7 +5050,7 @@ storiesOf('AssetStore/ExtensionStore', module)
   ))
   .add('showOnlyWithBehaviors', () => (
     <FixedHeightFlexContainer height={400}>
-      <ExtensionStoreStateProvider>
+      <ExtensionStoreStateProvider installedExtensions={[]}>
         <ExtensionStore
           project={testProject.project}
           isInstalling={false}
@@ -5072,7 +5072,7 @@ storiesOf('AssetStore/ExtensionsSearchDialog', module)
           eventsFunctionsExtensionWriter={null}
           eventsFunctionsExtensionOpener={null}
         >
-          <ExtensionStoreStateProvider>
+          <ExtensionStoreStateProvider installedExtensions={[]}>
             <ExtensionsSearchDialog
               project={testProject.project}
               onClose={action('on close')}

@@ -49,6 +49,7 @@ export const ExtensionStore = ({
     filtersState,
     searchText,
     setSearchText,
+    updateableExtensions,
   } = React.useContext(ExtensionStoreContext);
 
   React.useEffect(
@@ -126,6 +127,7 @@ export const ExtensionStore = ({
           alreadyInstalled={project.hasEventsFunctionsExtensionNamed(
             selectedExtensionShortHeader.name
           )}
+          updateable={updateableExtensions.includes(selectedExtensionShortHeader.name)}
           onInstall={() => {
             onInstall(selectedExtensionShortHeader);
           }}

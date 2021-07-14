@@ -19,6 +19,7 @@ type ExtensionStoreState = {|
   searchText: string,
   setSearchText: string => void,
   filtersState: FiltersState,
+  updateableExtensions: Array<string>,
 |};
 
 export const ExtensionStoreContext = React.createContext<ExtensionStoreState>({
@@ -35,9 +36,11 @@ export const ExtensionStoreContext = React.createContext<ExtensionStoreState>({
     chosenCategory: null,
     setChosenCategory: () => {},
   },
+  updateableExtensions: [],
 });
 
 type ExtensionStoreStateProviderProps = {|
+  installedExtensions: Array<gdEventsFunctionsExtension>,
   children: React.Node,
 |};
 
@@ -52,6 +55,7 @@ const getExtensionSearchTerms = (extension: ExtensionShortHeader) => {
 };
 
 export const ExtensionStoreStateProvider = ({
+  installedExtensions,
   children,
 }: ExtensionStoreStateProviderProps) => {
   const [
@@ -66,6 +70,7 @@ export const ExtensionStoreStateProvider = ({
 
   const [searchText, setSearchText] = React.useState(defaultSearchText);
   const filtersState = useFilters();
+  const [updateableExtensions, setUpdateableExtensions] = React.useState([]);
 
   const fetchExtensionsAndFilters = React.useCallback(
     () => {
@@ -119,6 +124,29 @@ export const ExtensionStoreStateProvider = ({
 
   React.useEffect(
     () => {
+      if (extensionShortHeadersByName)
+        setUpdateableExtensions(
+          installedExtensions
+            .map(extension => {
+              const extName = extension.getName();
+              // If the extension is in the registery and the registery version is different, an update is available.
+              if (
+                !extensionShortHeadersByName[extName] ||
+                extensionShortHeadersByName[extName].version ===
+                  extension.getVersion()
+              )
+                return null;
+              else return extName;
+            })
+            // Remove the null values
+            .filter(Boolean)
+        );
+    },
+    [extensionShortHeadersByName, installedExtensions]
+  );
+
+  React.useEffect(
+    () => {
       // Don't attempt to load again extensions and filters if they
       // were loaded already.
       if (extensionShortHeadersByName || isLoading.current) return;
@@ -150,6 +178,7 @@ export const ExtensionStoreStateProvider = ({
       searchText,
       setSearchText,
       filtersState,
+      updateableExtensions,
     }),
     [
       searchResults,
@@ -158,6 +187,7 @@ export const ExtensionStoreStateProvider = ({
       searchText,
       filtersState,
       fetchExtensionsAndFilters,
+      updateableExtensions,
     ]
   );
 

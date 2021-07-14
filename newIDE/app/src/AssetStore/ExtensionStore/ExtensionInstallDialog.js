@@ -27,6 +27,7 @@ type Props = {|
   onClose: () => void,
   onInstall: () => void,
   alreadyInstalled: boolean,
+  updateable: boolean,
 |};
 type State = {|
   extensionHeader: ?ExtensionHeader,
@@ -83,6 +84,7 @@ export default class ExtensionInstallDialog extends Component<Props, State> {
       onClose,
       onInstall,
       alreadyInstalled,
+      updateable,
     } = this.props;
     const { extensionHeader, error } = this.state;
 
@@ -107,7 +109,11 @@ export default class ExtensionInstallDialog extends Component<Props, State> {
                 !isCompatible ? (
                   <Trans>Not compatible</Trans>
                 ) : alreadyInstalled ? (
-                  <Trans>Re-install/update</Trans>
+                  updateable ? (
+                    <Trans>Update</Trans>
+                  ) : (
+                    <Trans>Re-install</Trans>
+                  )
                 ) : (
                   <Trans>Install in project</Trans>
                 )
