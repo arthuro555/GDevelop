@@ -151,7 +151,7 @@ std::set<gd::String> EventsVariablesFinder::FindArgumentsInInstructions(
 
   for (std::size_t aId = 0; aId < instructions.size(); ++aId) {
     gd::String lastObjectParameter = "";
-    gd::InstructionMetadata instrInfos =
+    const gd::InstructionMetadata& instrInfos =
         instructionsAreConditions ? MetadataProvider::GetConditionMetadata(
                                         platform, instructions[aId].GetType())
                                   : MetadataProvider::GetActionMetadata(
@@ -226,13 +226,13 @@ std::set<gd::String> EventsVariablesFinder::FindArgumentsInEventsAndDependencies
         platform, project, layout, externalEvents.GetEvents(), parameterType, objectName);
     results.insert(results3.begin(), results3.end());
   }
-  for (const gd::String& externalEventName : dependenciesAnalyzer.GetScenesDependencies()) {
-    const gd::ExternalEvents& externalEvents = project.GetExternalEvents(externalEventName);
+  for (const gd::String& sceneName : dependenciesAnalyzer.GetScenesDependencies()) {
+    const gd::Layout& dependencyLayout = project.GetLayout(sceneName);
 
     std::set<gd::String> results3 = FindArgumentsInEvents(
-        platform, project, layout, externalEvents.GetEvents(), parameterType, objectName);
+        platform, project, dependencyLayout, dependencyLayout.GetEvents(), parameterType, objectName);
     results.insert(results3.begin(), results3.end());
-  } 
+  }
 
   return results;
 }

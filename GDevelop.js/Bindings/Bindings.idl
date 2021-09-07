@@ -126,7 +126,7 @@ interface EventsVariablesFinder {
     [Const, Value] SetString STATIC_FindAllGlobalVariables([Const, Ref] Platform platform, [Const, Ref] Project project);
     [Const, Value] SetString STATIC_FindAllLayoutVariables([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout);
     [Const, Value] SetString STATIC_FindAllObjectVariables([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout, [Const, Ref] gdObject obj);
-    
+
     //Inherited from ExpressionParser2NodeWorker:
 };
 
@@ -167,9 +167,6 @@ interface JsPlatform {
     boolean IsExtensionLoaded([Const] DOMString name);
     void RemoveExtension([Const] DOMString name);
     void ReloadBuiltinExtensions();
-
-    Behavior GetBehavior([Const] DOMString type);
-    BehaviorsSharedData GetBehaviorSharedDatas([Const] DOMString type);
 
     [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
 };
@@ -296,8 +293,35 @@ interface PlatformSpecificAssets {
 interface LoadingScreen {
     void LoadingScreen();
 
-    void ShowGDevelopSplash(boolean show);
     boolean IsGDevelopSplashShown();
+    void ShowGDevelopSplash(boolean show);
+    [Const, Ref] DOMString GetGDevelopLogoStyle();
+    [Ref] LoadingScreen SetGDevelopLogoStyle([Const] DOMString value);
+    [Const, Ref] DOMString GetBackgroundImageResourceName();
+    [Ref] LoadingScreen SetBackgroundImageResourceName([Const] DOMString value);
+    long GetBackgroundColor();
+    [Ref] LoadingScreen SetBackgroundColor(long value);
+    double GetBackgroundFadeInDuration();
+    [Ref] LoadingScreen SetBackgroundFadeInDuration(double value);
+    double GetMinDuration();
+    [Ref] LoadingScreen SetMinDuration(double value);
+    double GetLogoAndProgressFadeInDuration();
+    [Ref] LoadingScreen SetLogoAndProgressFadeInDuration(double value);
+    double GetLogoAndProgressLogoFadeInDelay();
+    [Ref] LoadingScreen SetLogoAndProgressLogoFadeInDelay(double value);
+    boolean GetShowProgressBar();
+    [Ref] LoadingScreen SetShowProgressBar(boolean value);
+    double GetProgressBarMaxWidth();
+    [Ref] LoadingScreen SetProgressBarMaxWidth(double value);
+    double GetProgressBarMinWidth();
+    [Ref] LoadingScreen SetProgressBarMinWidth(double value);
+    double GetProgressBarWidthPercent();
+    [Ref] LoadingScreen SetProgressBarWidthPercent(double value);
+    double GetProgressBarHeight();
+    [Ref] LoadingScreen SetProgressBarHeight(double value);
+    long GetProgressBarColor();
+    [Ref] LoadingScreen SetProgressBarColor(long value);
+
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -346,6 +370,8 @@ interface Project {
     void SetAdaptGameResolutionAtRuntime(boolean adaptGameResolutionAtRuntime);
     void SetScaleMode([Const] DOMString scaleMode);
     [Const, Ref] DOMString GetScaleMode();
+    void SetPixelsRounding(boolean pixelsRounding);
+    boolean GetPixelsRounding();
     void SetSizeOnStartupMode([Const] DOMString orientation);
     [Const, Ref] DOMString GetSizeOnStartupMode();
     long GetMaximumFPS();
@@ -366,9 +392,6 @@ interface Project {
 
     [Ref] PlatformSpecificAssets GetPlatformSpecificAssets();
     [Ref] LoadingScreen GetLoadingScreen();
-
-    //createObject
-    //createEvent
 
     boolean HasLayoutNamed([Const] DOMString name);
     [Ref] Layout GetLayout([Const] DOMString name);
@@ -409,7 +432,6 @@ interface Project {
     [Ref] ResourcesManager GetResourcesManager();
     void ExposeResources([Ref] ArbitraryResourceWorker worker);
     boolean STATIC_ValidateName([Const] DOMString name);
-    boolean IsDirty();
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 
@@ -586,7 +608,7 @@ interface Layout {
     void SerializeLayersTo([Ref] SerializerElement element);
     void UnserializeLayersFrom([Const, Ref] SerializerElement element);
 
-    [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
+    [Ref] EditorSettings GetAssociatedEditorSettings();
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
@@ -635,7 +657,7 @@ interface ExternalLayout {
     [Const, Ref] DOMString GetAssociatedLayout();
 
     [Ref] InitialInstancesContainer GetInitialInstances();
-    [Ref] LayoutEditorCanvasOptions GetAssociatedSettings();
+    [Ref] EditorSettings GetAssociatedEditorSettings();
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -667,7 +689,7 @@ interface Effect {
 
 interface EffectsContainer {
   void EffectsContainer();
-  
+
   boolean HasEffectNamed([Const] DOMString name);
   [Ref] Effect GetEffect([Const] DOMString name);
   [Ref] Effect GetEffectAt(unsigned long index);
@@ -700,6 +722,11 @@ interface Layer {
 
     [Ref] EffectsContainer GetEffects();
 
+    // Note that for now, cameras are not used in the editor (and not supported in the game engine).
+    // Just exposing the count to ensure we can test it.
+    unsigned long GetCameraCount();
+    void SetCameraCount(unsigned long cameraCount);
+
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
 };
@@ -716,7 +743,8 @@ interface PropertyDescriptor {
     [Ref] PropertyDescriptor SetDescription([Const] DOMString label);
     [Const, Ref] DOMString GetDescription();
     [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
-    [Value] VectorString GetExtraInfo();
+    [Ref] PropertyDescriptor SetExtraInfo([Const, Ref] VectorString info);
+    [Ref] VectorString GetExtraInfo();
     [Ref] PropertyDescriptor SetHidden(boolean enable);
     boolean IsHidden();
 
@@ -731,8 +759,6 @@ interface NamedPropertyDescriptor {
 
     [Ref] PropertyDescriptor SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
-
-    [Value] PropertyDescriptor ToPropertyDescriptor();
 };
 NamedPropertyDescriptor implements PropertyDescriptor;
 
@@ -1028,21 +1054,12 @@ interface VectorPairStringTextFormatting {
 };
 
 interface TextFormatting {
-    boolean IsBold();
-    boolean IsItalic();
-    unsigned long GetColorRed();
-    unsigned long GetColorGreen();
-    unsigned long GetColorBlue();
     unsigned long GetUserData();
 };
 
 interface InstructionSentenceFormatter {
     InstructionSentenceFormatter STATIC_Get();
-    [Const, Value] DOMString Translate([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
     [Value] VectorPairStringTextFormatting GetAsFormattedText([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
-    [Value] TextFormatting GetFormattingFromType([Const] DOMString type);
-    [Const, Value] DOMString LabelFromType([Const] DOMString type);
-    void LoadTypesFormattingFromConfig();
 };
 
 //TODO: This should be renamed to InstructionCodeGenerationInformation
@@ -1093,6 +1110,7 @@ interface InstructionMetadata {
         [Const] DOMString type, [Const] DOMString supplementaryInformation);
     [Ref] InstructionMetadata SetDefaultValue([Const] DOMString defaultValue);
     [Ref] InstructionMetadata SetParameterLongDescription([Const] DOMString longDescription);
+    [Ref] InstructionMetadata SetParameterExtraInfo([Const] DOMString extraInfo);
 
     [Ref] InstructionMetadata UseStandardOperatorParameters([Const] DOMString type);
     [Ref] InstructionMetadata UseStandardRelationalOperatorParameters([Const] DOMString type);
@@ -1229,7 +1247,8 @@ interface ParameterMetadataTools {
 };
 
 interface EventsFunctionTools {
-    void STATIC_EventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputGlobalObjectsContainer, [Ref] ObjectsContainer outputObjectsContainer);
+    void STATIC_FreeEventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputGlobalObjectsContainer, [Ref] ObjectsContainer outputObjectsContainer);
+    void STATIC_BehaviorEventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsBasedBehavior eventsBasedBehavior, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputGlobalObjectsContainer, [Ref] ObjectsContainer outputObjectsContainer);
 };
 
 interface ObjectMetadata {
@@ -1380,6 +1399,19 @@ interface BehaviorMetadata {
                                         [Const] DOMString group,
                                         [Const] DOMString icon);
 
+    [Ref] InstructionMetadata AddDuplicatedAction(
+        [Const] DOMString newActionName,
+        [Const] DOMString copiedActionName);
+    [Ref] InstructionMetadata AddDuplicatedCondition(
+        [Const] DOMString newConditionName,
+        [Const] DOMString copiedConditionName);
+    [Ref] ExpressionMetadata AddDuplicatedExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+    [Ref] ExpressionMetadata AddDuplicatedStrExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+
     [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
 
@@ -1396,11 +1428,13 @@ interface EffectMetadata {
     [Ref] EffectMetadata SetHelpPath([Const] DOMString helpPath);
     [Ref] EffectMetadata SetIncludeFile([Const] DOMString includeFile);
     [Ref] EffectMetadata AddIncludeFile([Const] DOMString includeFile);
+    [Ref] EffectMetadata MarkAsNotWorkingForObjects();
 
     [Const, Ref] DOMString GetType();
     [Const, Ref] DOMString GetFullName();
     [Const, Ref] DOMString GetDescription();
     [Const, Ref] DOMString GetHelpPath();
+    boolean IsMarkedAsNotWorkingForObjects();
 
     [Ref] MapStringPropertyDescriptor GetProperties();
 };
@@ -1840,6 +1874,19 @@ interface EventsRefactorer {
     [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions, boolean inEventStrings);
 };
 
+interface UnfilledRequiredBehaviorPropertyProblem {
+  [Const, Ref] Project GetSourceProject();
+  [Ref] gdObject GetSourceObject();
+  [Ref] BehaviorContent GetSourceBehaviorContent();
+  [Const, Ref] DOMString GetSourcePropertyName();
+  [Const, Ref] DOMString GetExpectedBehaviorTypeName();
+};
+
+interface VectorUnfilledRequiredBehaviorPropertyProblem {
+    unsigned long size();
+    [Const, Ref] UnfilledRequiredBehaviorPropertyProblem at(unsigned long index);
+};
+
 interface WholeProjectRefactorer {
     void STATIC_ExposeProjectEvents([Ref] Project project, [Ref] ArbitraryEventsWorker worker);
     void STATIC_RenameEventsFunctionsExtension(
@@ -1871,7 +1918,7 @@ interface WholeProjectRefactorer {
       [Const] DOMString functionName,
       unsigned long oldIndex,
       unsigned long newIndex);
-    void STATIC_RenameBehaviorProperty(
+    void STATIC_RenameEventsBasedBehaviorProperty(
       [Ref] Project project,
       [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
       [Const, Ref] EventsBasedBehavior eventsBasedBehavior,
@@ -1890,6 +1937,11 @@ interface WholeProjectRefactorer {
     void STATIC_GlobalObjectOrGroupRemoved([Ref] Project project, [Const] DOMString objectName, boolean isObjectGroup, boolean removeEventsAndGroups);
     [Value] SetString STATIC_GetAllObjectTypesUsingEventsBasedBehavior([Const, Ref] Project project, [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension, [Const, Ref] EventsBasedBehavior eventsBasedBehavior);
     void STATIC_EnsureBehaviorEventsFunctionsProperParameters([Const, Ref] EventsFunctionsExtension eventsFunctionsExtension, [Const, Ref] EventsBasedBehavior eventsBasedBehavior);
+    void STATIC_AddBehaviorAndRequiredBehaviors([Ref] Project project, [Ref] gdObject obj, [Const] DOMString behaviorType, [Const] DOMString behaviorName);
+    [Value] VectorString STATIC_FindDependentBehaviorNames([Const, Ref] Project project, [Const, Ref] gdObject obj, [Const] DOMString behaviorName);
+    [Value] VectorUnfilledRequiredBehaviorPropertyProblem STATIC_FindInvalidRequiredBehaviorProperties([Const, Ref] Project project);
+    [Value] VectorString STATIC_GetBehaviorsWithType([Const, Ref] gdObject obj, [Const] DOMString type);
+    boolean STATIC_FixInvalidRequiredBehaviorProperties([Ref] Project project);
 };
 
 interface UsedExtensionsFinder {
@@ -1945,6 +1997,9 @@ interface MetadataProvider {
     [Const, Ref] ExpressionMetadata STATIC_GetStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
     [Const, Ref] ExpressionMetadata STATIC_GetBehaviorStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+
+    boolean STATIC_IsBadExpressionMetadata([Const, Ref] ExpressionMetadata metadata);
+    boolean STATIC_IsBadBehaviorMetadata([Const, Ref] BehaviorMetadata metadata);
 };
 
 interface ExpressionParserDiagnostic {
@@ -2280,8 +2335,8 @@ interface ResourcesInUseHelper {
 };
 ResourcesInUseHelper implements ArbitraryResourceWorker;
 
-interface LayoutEditorCanvasOptions {
-    void LayoutEditorCanvasOptions();
+interface EditorSettings {
+    void EditorSettings();
 
     void SerializeTo([Ref] SerializerElement element);
     void UnserializeFrom([Const, Ref] SerializerElement element);
@@ -2658,6 +2713,7 @@ interface PreviewExportOptions {
     [Ref] PreviewExportOptions SetExternalLayoutName([Const] DOMString externalLayoutName);
     [Ref] PreviewExportOptions SetIncludeFileHash([Const] DOMString includeFile, long hash);
     [Ref] PreviewExportOptions SetProjectDataOnlyExport(boolean enable);
+    [Ref] PreviewExportOptions SetFullLoadingScreen(boolean enable);
     [Ref] PreviewExportOptions SetNonRuntimeScriptsCacheBurst(unsigned long value);
 };
 
@@ -2668,8 +2724,6 @@ interface Exporter {
 
     boolean ExportProjectForPixiPreview([Const, Ref] PreviewExportOptions options);
     boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir, [Ref] MapStringBoolean exportOptions);
-
-    boolean ExportWholeCocos2dProject([Ref] Project project, boolean debugMode, [Const] DOMString exportDir);
 
     [Const, Ref] DOMString GetLastError();
 };

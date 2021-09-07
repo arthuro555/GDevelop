@@ -42,15 +42,7 @@ cd newIDE/app && npm start # Be sure to have this running in another terminal, b
 # In a new terminal:
 cd newIDE/electron-app
 npm install # or yarn
-
-#For macOS:
-npm run electron-mac
-
-#For Windows:
-npm run electron-win
-
-#For Linux:
-npm run electron-linux
+npm run start # or yarn start
 ```
 
 ### Quick Install and Run
@@ -118,22 +110,13 @@ Cloud storage providers are set up with development keys when you're running GDe
 
 ### Desktop version
 
-First, update the version number in `newIDE/electron-app/app/package.json`.
+First, update the version number in `newIDE/electron-app/app/package.json` and merge the change to master.
 
-```bash
-cd newIDE/electron-app
-yarn build # or npm run build
-```
+Then, wait for the CIs (CircleCI & AppVeyor) to build the artifacts needed for the release (MacOS+Linux and Windows respectively).
 
-This will build and package the Electron app for Windows, macOS or Linux (according to your OS). The output is stored inside `newIDE/electron-app/dist`.
+Once finished, you can download them (use `newIDE/app/scripts/download-all-build-artifacts.js` script) and upload them to the new Github release!
 
-To build artifacts for all platforms and publish to a draft GitHub release:
-
-```
-GH_TOKEN=xxx yarn build --mac --win --linux AppImage --publish always
-```
-
-> To build beta versions, you can create archives: `yarn build --mac zip --win zip --linux AppImage`.
+> Note: You can also build manually a desktop version locally by running `npm run build` in `newIDE/electron-app`.
 
 ### Webapp version
 
@@ -142,7 +125,7 @@ cd newIDE/web-app
 yarn deploy # or npm run deploy
 ```
 
-> Note: this will also upload the game engine (GDJS) and extension sources, needed by the IDE and purge the CloudFlare cache. If examples have been added/changed, be also sure to run `newIDE/web-app/scripts/deploy-examples-resources.js`.
+> Note: this will also upload the game engine (GDJS) and extension sources, needed by the IDE and purge the CloudFlare cache.
 
 ### (Optional) Updating translations
 

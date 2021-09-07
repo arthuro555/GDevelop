@@ -22,6 +22,7 @@ import useForceUpdate from '../Utils/UseForceUpdate';
 import HotReloadPreviewButton, {
   type HotReloadPreviewButtonProps,
 } from '../HotReload/HotReloadPreviewButton';
+import EffectsList from '../EffectsList';
 
 type Props = {|
   open: boolean,
@@ -41,6 +42,7 @@ type Props = {|
   resourceExternalEditors: Array<ResourceExternalEditor>,
   unsavedChanges?: UnsavedChanges,
   onUpdateBehaviorsSharedData: () => void,
+  initialTab: ?string,
 
   // Preview:
   hotReloadPreviewButtonProps: HotReloadPreviewButtonProps,
@@ -55,7 +57,9 @@ type InnerDialogProps = {|
 |};
 
 const InnerDialog = (props: InnerDialogProps) => {
-  const [currentTab, setCurrentTab] = React.useState('properties');
+  const [currentTab, setCurrentTab] = React.useState(
+    props.initialTab || 'properties'
+  );
   const [newObjectName, setNewObjectName] = React.useState(props.objectName);
   const forceUpdate = useForceUpdate();
   const onCancelChanges = useSerializableObjectCancelableEditor({
@@ -105,6 +109,7 @@ const InnerDialog = (props: InnerDialogProps) => {
       open={props.open}
       noTitleMargin
       fullHeight
+      flexBody
       title={
         <div>
           <Tabs value={currentTab} onChange={setCurrentTab}>
@@ -118,41 +123,57 @@ const InnerDialog = (props: InnerDialogProps) => {
               value={'behaviors'}
               key={'behaviors'}
             />
+            <Tab
+              label={<Trans>Effects</Trans>}
+              value={'effects'}
+              key={'effects'}
+            />
           </Tabs>
         </div>
       }
     >
-      <Line>
-        <Column expand>
-          <SemiControlledTextField
-            fullWidth
-            commitOnBlur
-            floatingLabelText={<Trans>Object name</Trans>}
-            floatingLabelFixed
-            value={newObjectName}
-            hintText={t`Object Name`}
-            onChange={text => {
-              if (text === newObjectName) return;
+      {currentTab === 'properties' && EditorComponent && (
+        <Column
+          noMargin
+          expand
+          useFullHeight={
+            true /* Ensure editors with large/scrolling children won't grow outside of the dialog. */
+          }
+          noOverflowParent={
+            true /* Ensure editors with large/scrolling children won't grow outside of the dialog. */
+          }
+        >
+          <Line>
+            <Column expand>
+              <SemiControlledTextField
+                fullWidth
+                commitOnBlur
+                floatingLabelText={<Trans>Object name</Trans>}
+                floatingLabelFixed
+                value={newObjectName}
+                hintText={t`Object Name`}
+                onChange={text => {
+                  if (text === newObjectName) return;
 
-              if (props.canRenameObject(text)) {
-                setNewObjectName(text);
-              }
-            }}
+                  if (props.canRenameObject(text)) {
+                    setNewObjectName(text);
+                  }
+                }}
+              />
+            </Column>
+          </Line>
+          <EditorComponent
+            object={props.object}
+            project={props.project}
+            resourceSources={props.resourceSources}
+            onChooseResource={props.onChooseResource}
+            resourceExternalEditors={props.resourceExternalEditors}
+            onSizeUpdated={
+              forceUpdate /*Force update to ensure dialog is properly positionned*/
+            }
+            objectName={props.objectName}
           />
         </Column>
-      </Line>
-      {currentTab === 'properties' && EditorComponent && (
-        <EditorComponent
-          object={props.object}
-          project={props.project}
-          resourceSources={props.resourceSources}
-          onChooseResource={props.onChooseResource}
-          resourceExternalEditors={props.resourceExternalEditors}
-          onSizeUpdated={
-            forceUpdate /*Force update to ensure dialog is properly positionned*/
-          }
-          objectName={props.objectName}
-        />
       )}
       {currentTab === 'behaviors' && (
         <BehaviorsEditor
@@ -165,6 +186,19 @@ const InnerDialog = (props: InnerDialogProps) => {
             forceUpdate /*Force update to ensure dialog is properly positionned*/
           }
           onUpdateBehaviorsSharedData={props.onUpdateBehaviorsSharedData}
+        />
+      )}
+      {currentTab === 'effects' && (
+        <EffectsList
+          target="object"
+          project={props.project}
+          resourceSources={props.resourceSources}
+          onChooseResource={props.onChooseResource}
+          resourceExternalEditors={props.resourceExternalEditors}
+          effectsContainer={props.object.getEffects()}
+          onEffectsUpdated={
+            forceUpdate /*Force update to ensure dialog is properly positionned*/
+          }
         />
       )}
     </Dialog>
@@ -221,7 +255,7 @@ export default class ObjectEditorDialog extends Component<Props, State> {
   }
 
   render() {
-    const { object } = this.props;
+    const { object, initialTab } = this.props;
     const { editorComponent, castToObjectType, helpPagePath } = this.state;
 
     if (!object || !castToObjectType) return null;
@@ -234,6 +268,7 @@ export default class ObjectEditorDialog extends Component<Props, State> {
         helpPagePath={helpPagePath}
         object={castToObjectType(object)}
         objectName={this.state.objectName}
+        initialTab={initialTab}
       />
     );
   }

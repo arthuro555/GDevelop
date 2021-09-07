@@ -7,7 +7,11 @@ import ViewPosition from './ViewPosition';
 import SelectedInstances from './SelectedInstances';
 import HighlightedInstance from './HighlightedInstance';
 import SelectionRectangle from './SelectionRectangle';
-import InstancesResizer from './InstancesResizer';
+import InstancesResizer, {
+  type ResizeGrabbingLocation,
+  canMoveOnX,
+  canMoveOnY,
+} from './InstancesResizer';
 import InstancesRotator from './InstancesRotator';
 import InstancesMover from './InstancesMover';
 import Grid from './Grid';
@@ -26,6 +30,7 @@ import PinchHandler, { shouldBeHandledByPinch } from './PinchHandler';
 import { type ScreenType } from '../UI/Reponsive/ScreenTypeMeasurer';
 import InstancesSelection from './InstancesSelection';
 import LongTouchHandler from './LongTouchHandler';
+import { type InstancesEditorSettings } from './InstancesEditorSettings';
 
 const styles = {
   canvasArea: { flex: 1, position: 'absolute', overflow: 'hidden' },
@@ -38,8 +43,10 @@ export type InstancesEditorPropsWithoutSizeAndScroll = {|
   project: gdProject,
   layout: gdLayout,
   initialInstances: gdInitialInstancesContainer,
-  options: Object,
-  onChangeOptions: (uiSettings: Object) => void,
+  instancesEditorSettings: InstancesEditorSettings,
+  onChangeInstancesEditorSettings: (
+    instancesEditorSettings: InstancesEditorSettings
+  ) => void,
   instancesSelection: InstancesSelection,
   onDeleteSelection: () => void,
   onInstancesAdded: (instances: Array<gdInitialInstance>) => void,
@@ -156,7 +163,7 @@ export default class InstancesEditor extends Component<Props> {
       return false;
     });
 
-    this.pixiRenderer.view.onwheel = event => {
+    this.pixiRenderer.view.onwheel = (event: any) => {
       if (this.keyboardShortcuts.shouldZoom()) {
         this.zoomOnCursorBy(-event.deltaY / 5000);
       } else if (this.keyboardShortcuts.shouldScrollHorizontally()) {
@@ -204,9 +211,11 @@ export default class InstancesEditor extends Component<Props> {
 
       this._onBackgroundClicked(event.data.global.x, event.data.global.y);
     });
-    this.backgroundArea.on('mousemove', event =>
-      this._onMouseMove(event.data.global.x, event.data.global.y)
-    );
+    this.backgroundArea.on('mousemove', event => {
+      const cursorX = event.data.global.x || 0;
+      const cursorY = event.data.global.y || 0;
+      this._onMouseMove(cursorX, cursorY);
+    });
     this.backgroundArea.on('panmove', event =>
       this._onPanMove(
         event.deltaX,
@@ -223,13 +232,13 @@ export default class InstancesEditor extends Component<Props> {
       initialViewY: project ? project.getGameResolutionHeight() / 2 : 0,
       width: this.props.width,
       height: this.props.height,
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
     this.pixiContainer.addChild(this.viewPosition.getPixiContainer());
 
     this.grid = new Grid({
       viewPosition: this.viewPosition,
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
     this.pixiContainer.addChild(this.grid.getPixiObject());
 
@@ -259,7 +268,7 @@ export default class InstancesEditor extends Component<Props> {
 
     this._instancesAdder = new InstancesAdder({
       instances: this.props.initialInstances,
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
 
     this._mountEditorComponents(this.props);
@@ -342,12 +351,14 @@ export default class InstancesEditor extends Component<Props> {
     });
     this.instancesResizer = new InstancesResizer({
       instanceMeasurer: this.instancesRenderer.getInstanceMeasurer(),
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
-    this.instancesRotator = new InstancesRotator();
+    this.instancesRotator = new InstancesRotator(
+      this.instancesRenderer.getInstanceMeasurer()
+    );
     this.instancesMover = new InstancesMover({
       instanceMeasurer: this.instancesRenderer.getInstanceMeasurer(),
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
     this.windowBorder = new WindowBorder({
       project: props.project,
@@ -357,7 +368,7 @@ export default class InstancesEditor extends Component<Props> {
     this.windowMask = new WindowMask({
       project: props.project,
       viewPosition: this.viewPosition,
-      options: this.props.options,
+      instancesEditorSettings: this.props.instancesEditorSettings,
     });
     this.statusBar = new StatusBar({
       width: this.props.width,
@@ -412,13 +423,25 @@ export default class InstancesEditor extends Component<Props> {
       this._renderScene();
     }
 
-    if (nextProps.options !== this.props.options) {
-      this.grid.setOptions(nextProps.options);
-      this.instancesMover.setOptions(nextProps.options);
-      this.instancesResizer.setOptions(nextProps.options);
-      this.windowMask.setOptions(nextProps.options);
-      this.viewPosition.setOptions(nextProps.options);
-      this._instancesAdder.setOptions(nextProps.options);
+    if (
+      nextProps.instancesEditorSettings !== this.props.instancesEditorSettings
+    ) {
+      this.grid.setInstancesEditorSettings(nextProps.instancesEditorSettings);
+      this.instancesMover.setInstancesEditorSettings(
+        nextProps.instancesEditorSettings
+      );
+      this.instancesResizer.setInstancesEditorSettings(
+        nextProps.instancesEditorSettings
+      );
+      this.windowMask.setInstancesEditorSettings(
+        nextProps.instancesEditorSettings
+      );
+      this.viewPosition.setInstancesEditorSettings(
+        nextProps.instancesEditorSettings
+      );
+      this._instancesAdder.setInstancesEditorSettings(
+        nextProps.instancesEditorSettings
+      );
     }
 
     if (nextProps.screenType !== this.props.screenType) {
@@ -476,11 +499,12 @@ export default class InstancesEditor extends Component<Props> {
   }
 
   getZoomFactor = () => {
-    return this.props.options.zoomFactor;
+    return this.props.instancesEditorSettings.zoomFactor;
   };
 
   setZoomFactor = (zoomFactor: number) => {
-    this.props.onChangeOptions({
+    this.props.onChangeInstancesEditorSettings({
+      ...this.props.instancesEditorSettings,
       zoomFactor: Math.max(Math.min(zoomFactor, 10), 0.01),
     });
   };
@@ -578,7 +602,11 @@ export default class InstancesEditor extends Component<Props> {
     this.highlightedInstance.setInstance(instance);
   };
 
-  _onDownInstance = (instance: gdInitialInstance) => {
+  _onDownInstance = (
+    instance: gdInitialInstance,
+    sceneX: number,
+    sceneY: number
+  ) => {
     if (this.keyboardShortcuts.shouldMoveView()) {
       // If the user wants to move the view, discard the click on an instance:
       // it's just the beginning of the user panning the view.
@@ -606,6 +634,8 @@ export default class InstancesEditor extends Component<Props> {
         );
       }
     }
+
+    this.instancesMover.startMove(sceneX, sceneY);
   };
 
   _onOutInstance = (instance: gdInitialInstance) => {
@@ -654,19 +684,26 @@ export default class InstancesEditor extends Component<Props> {
     this.props.onInstancesMoved(selectedInstances);
   };
 
-  _onResize = (deltaX: number | null, deltaY: number | null) => {
-    const sceneDeltaX = deltaX !== null ? deltaX / this.getZoomFactor() : 0;
-    const sceneDeltaY = deltaY !== null ? deltaY / this.getZoomFactor() : 0;
+  _onResize = (
+    deltaX: number,
+    deltaY: number,
+    grabbingLocation: ResizeGrabbingLocation
+  ) => {
+    const sceneDeltaX = deltaX / this.getZoomFactor();
+    const sceneDeltaY = deltaY / this.getZoomFactor();
 
     const selectedInstances = this.props.instancesSelection.getSelectedInstances();
     const forceProportional =
-      this.props.screenType === 'touch' && deltaX !== null && deltaY !== null;
+      this.props.screenType === 'touch' &&
+      canMoveOnX(grabbingLocation) &&
+      canMoveOnY(grabbingLocation);
     const proportional =
       forceProportional || this.keyboardShortcuts.shouldResizeProportionally();
     this.instancesResizer.resizeBy(
       selectedInstances,
       sceneDeltaX,
       sceneDeltaY,
+      grabbingLocation,
       proportional
     );
   };

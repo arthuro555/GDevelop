@@ -29,10 +29,7 @@ class PrimitiveDrawingJsExtension : public gd::PlatformExtension {
         .AddIncludeFile("Extensions/PrimitiveDrawing/pixi-graphics-extras/graphics-extras.min.js")
         .AddIncludeFile(
             "Extensions/PrimitiveDrawing/"
-            "shapepainterruntimeobject-pixi-renderer.js")
-        .AddIncludeFile(
-            "Extensions/PrimitiveDrawing/"
-            "shapepainterruntimeobject-cocos-renderer.js");
+            "shapepainterruntimeobject-pixi-renderer.js");
 
     GetAllActionsForObject(
         "PrimitiveDrawing::Drawer")["PrimitiveDrawing::Rectangle"]
@@ -106,6 +103,9 @@ class PrimitiveDrawingJsExtension : public gd::PlatformExtension {
     GetAllActionsForObject(
         "PrimitiveDrawing::Drawer")["PrimitiveDrawing::ArcTo"]
         .SetFunctionName("drawArcTo");*/
+    GetAllActionsForObject(
+        "PrimitiveDrawing::Drawer")["PrimitiveDrawing::Drawer::ClearShapes"]
+        .SetFunctionName("clear");
     GetAllActionsForObject(
         "PrimitiveDrawing::Drawer")["PrimitiveDrawing::ClearBetweenFrames"]
         .SetFunctionName("setClearBetweenFrames");

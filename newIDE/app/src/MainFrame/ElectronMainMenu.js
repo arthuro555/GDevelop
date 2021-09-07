@@ -167,15 +167,15 @@ const buildAndSendMenuTemplate = (
   const editTemplate = {
     label: i18n._(t`File`),
     submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
+      { label: i18n._(t`Undo`), role: 'undo' },
+      { label: i18n._(t`Redo`), role: 'redo' },
       { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
-      { role: 'pasteandmatchstyle' },
-      { role: 'delete' },
-      { role: 'selectall' },
+      { label: i18n._(t`Cut`), role: 'cut' },
+      { label: i18n._(t`Copy`), role: 'copy' },
+      { label: i18n._(t`Paste`), role: 'paste' },
+      { label: i18n._(t`Paste and Match Style`), role: 'pasteandmatchstyle' },
+      { label: i18n._(t`Delete`), role: 'delete' },
+      { label: i18n._(t`Select All`), role: 'selectall' },
     ],
   };
 
@@ -200,9 +200,9 @@ const buildAndSendMenuTemplate = (
         enabled: !!project,
       },
       { type: 'separator' },
-      { role: 'toggledevtools' },
+      { label: i18n._(t`Toggle Developer Tools`), role: 'toggledevtools' },
       { type: 'separator' },
-      { role: 'togglefullscreen' },
+      { label: i18n._(t`Toggle Fullscreen`), role: 'togglefullscreen' },
     ],
   };
 

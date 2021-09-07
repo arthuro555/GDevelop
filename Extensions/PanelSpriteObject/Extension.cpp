@@ -9,7 +9,8 @@ This project is released under the MIT License.
  * Florian Rival ( Minor changes and adaptations )
  */
 
-#include "GDCpp/Extensions/ExtensionBase.h"
+#include "GDCore/Extensions/PlatformExtension.h"
+#include "GDCore/Tools/Localization.h"
 #include "PanelSpriteObject.h"
 
 void DeclarePanelSpriteObjectExtension(gd::PlatformExtension& extension) {
@@ -134,9 +135,9 @@ void DeclarePanelSpriteObjectExtension(gd::PlatformExtension& extension) {
       .SetIncludeFile("PanelSpriteObject/PanelSpriteObject.h");
 
   obj.AddAction("Angle",
-                _("Angle"),
-                _("Modify the angle of a Panel Sprite."),
-                _("the angle"),
+                "Angle",
+                "Modify the angle of a Panel Sprite.",
+                "the angle",
                 _("Size and angle"),
                 "res/actions/rotate24.png",
                 "res/actions/rotate.png")
@@ -149,9 +150,9 @@ void DeclarePanelSpriteObjectExtension(gd::PlatformExtension& extension) {
       .SetIncludeFile("PanelSpriteObject/PanelSpriteObject.h");
 
   obj.AddCondition("Angle",
-                   _("Angle"),
-                   _("Check the angle of a Panel Sprite."),
-                   _("the angle"),
+                   "Angle",
+                   "Check the angle of a Panel Sprite.",
+                   "the angle",
                    _("Size and angle"),
                    "res/conditions/rotate24.png",
                    "res/conditions/rotate.png")
@@ -177,36 +178,3 @@ void DeclarePanelSpriteObjectExtension(gd::PlatformExtension& extension) {
       .SetIncludeFile("PanelSpriteObject/PanelSpriteObject.h");
 #endif
 }
-
-/**
- * \brief This class declares information about the extension.
- */
-class PanelSpriteObjectCppExtension : public ExtensionBase {
- public:
-  /**
-   * Constructor of an extension declares everything the extension contains:
-   * objects, actions, conditions and expressions.
-   */
-  PanelSpriteObjectCppExtension() {
-    DeclarePanelSpriteObjectExtension(*this);
-    AddRuntimeObject<PanelSpriteObject, RuntimePanelSpriteObject>(
-        GetObjectMetadata("PanelSpriteObject::PanelSprite"),
-        "RuntimePanelSpriteObject");
-
-    GD_COMPLETE_EXTENSION_COMPILATION_INFORMATION();
-  };
-};
-
-#if defined(ANDROID)
-extern "C" ExtensionBase* CreateGDCppPanelSpriteObjectExtension() {
-  return new PanelSpriteObjectCppExtension;
-}
-#elif !defined(EMSCRIPTEN)
-/**
- * Used by GDevelop to create the extension class
- * -- Do not need to be modified. --
- */
-extern "C" ExtensionBase* GD_EXTENSION_API CreateGDExtension() {
-  return new PanelSpriteObjectCppExtension;
-}
-#endif

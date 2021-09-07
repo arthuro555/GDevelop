@@ -4,7 +4,6 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceRoot}",
-                "${workspaceRoot}/GDCpp",
                 "${workspaceRoot}/GDJS",
                 "${workspaceRoot}/Extensions",
                 "${workspaceRoot}/Core",
@@ -16,6 +15,7 @@
                 "${workspaceRoot}"
             ],
             "defines": [
+                "EMSCRIPTEN",
                 "GD_IDE_ONLY",
                 "GD_CORE_API=/* Macro used to export classes on Windows, please ignore */",
                 "GD_API=/* Macro used to export classes on Windows, please ignore */",
@@ -45,7 +45,6 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceRoot}",
-                "${workspaceRoot}/GDCpp",
                 "${workspaceRoot}/GDJS",
                 "${workspaceRoot}/Extensions",
                 "${workspaceRoot}/Core",
@@ -55,6 +54,7 @@
                 "${workspaceRoot}"
             ],
             "defines": [
+                "EMSCRIPTEN",
                 "GD_IDE_ONLY",
                 "GD_CORE_API=/* Macro used to export classes on Windows, please ignore */",
                 "GD_API=/* Macro used to export classes on Windows, please ignore */",
@@ -75,7 +75,6 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceRoot}",
-                "${workspaceRoot}/GDCpp",
                 "${workspaceRoot}/GDJS",
                 "${workspaceRoot}/Extensions",
                 "${workspaceRoot}/Core",
@@ -85,6 +84,7 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
+                "EMSCRIPTEN",
                 "GD_IDE_ONLY",
                 "GD_CORE_API=/* Macro used to export classes on Windows, please ignore */",
                 "GD_API=/* Macro used to export classes on Windows, please ignore */",

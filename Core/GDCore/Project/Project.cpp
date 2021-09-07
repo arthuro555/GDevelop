@@ -26,7 +26,6 @@
 #include "GDCore/Project/EventsFunctionsExtension.h"
 #include "GDCore/Project/ExternalEvents.h"
 #include "GDCore/Project/ExternalLayout.h"
-#include "GDCore/Project/ImageManager.h"
 #include "GDCore/Project/Layout.h"
 #include "GDCore/Project/Object.h"
 #include "GDCore/Project/ObjectGroupsContainer.h"
@@ -64,26 +63,20 @@ Project::Project()
       minFPS(20),
       verticalSync(false),
       scaleMode("linear"),
+      pixelsRounding(false),
       adaptGameResolutionAtRuntime(true),
       sizeOnStartupMode("adaptWidth"),
       projectUuid(""),
-      useDeprecatedZeroAsDefaultZOrder(false),
-      imageManager(std::make_shared<ImageManager>())
+      useDeprecatedZeroAsDefaultZOrder(false)
 #if defined(GD_IDE_ONLY)
       ,
       useExternalSourceFiles(false),
       currentPlatform(NULL),
       gdMajorVersion(gd::VersionWrapper::Major()),
       gdMinorVersion(gd::VersionWrapper::Minor()),
-      gdBuildVersion(gd::VersionWrapper::Build()),
-      dirty(false)
+      gdBuildVersion(gd::VersionWrapper::Build())
 #endif
 {
-  imageManager->SetResourcesManager(&resourcesManager);
-
-#if !defined(GD_IDE_ONLY)
-  platforms.push_back(&CppPlatform::Get());
-#endif
 }
 
 Project::~Project() {}
@@ -104,33 +97,6 @@ std::unique_ptr<gd::Object> Project::CreateObject(
     if (object && object->GetType() == type)
       return object;  // If the object is valid and has the good type (not a
                       // base object), return it
-  }
-
-  return nullptr;
-}
-
-gd::Behavior* Project::GetBehavior(const gd::String& type,
-                                   const gd::String& platformName) {
-  for (std::size_t i = 0; i < platforms.size(); ++i) {
-    if (!platformName.empty() && platforms[i]->GetName() != platformName)
-      continue;
-
-    gd::Behavior* behavior = platforms[i]->GetBehavior(type);
-    if (behavior) return behavior;
-  }
-
-  return nullptr;
-}
-
-gd::BehaviorsSharedData* Project::GetBehaviorSharedDatas(
-    const gd::String& type, const gd::String& platformName) {
-  for (std::size_t i = 0; i < platforms.size(); ++i) {
-    if (!platformName.empty() && platforms[i]->GetName() != platformName)
-      continue;
-
-    gd::BehaviorsSharedData* behaviorSharedData =
-        platforms[i]->GetBehaviorSharedDatas(type);
-    if (behaviorSharedData) return behaviorSharedData;
   }
 
   return nullptr;
@@ -515,8 +481,6 @@ void Project::ClearEventsFunctionsExtensions() {
 void Project::UnserializeFrom(const SerializerElement& element) {
 // Checking version
 #if defined(GD_IDE_ONLY)
-  gd::String updateText;
-
   const SerializerElement& gdVersionElement =
       element.GetChild("gdVersion", 0, "GDVersion");
   gdMajorVersion =
@@ -528,10 +492,10 @@ void Project::UnserializeFrom(const SerializerElement& element) {
 
   if (gdMajorVersion > gd::VersionWrapper::Major())
     gd::LogWarning(
-        _("The version of GDevelop used to create this game seems to be a new "
-          "version.\nGDevelop may fail to open the game, or data may be "
-          "missing.\nYou should check if a new version of GDevelop is "
-          "available."));
+        "The version of GDevelop used to create this game seems to be a new "
+        "version.\nGDevelop may fail to open the game, or data may be "
+        "missing.\nYou should check if a new version of GDevelop is "
+        "available.");
   else {
     if ((gdMajorVersion == gd::VersionWrapper::Major() &&
          gdMinorVersion > gd::VersionWrapper::Minor()) ||
@@ -543,22 +507,12 @@ void Project::UnserializeFrom(const SerializerElement& element) {
          gdBuildVersion == gd::VersionWrapper::Build() &&
          revision > gd::VersionWrapper::Revision())) {
       gd::LogWarning(
-          _("The version of GDevelop used to create this game seems to be "
-            "greater.\nGDevelop may fail to open the game, or data may be "
-            "missing.\nYou should check if a new version of GDevelop is "
-            "available."));
+          "The version of GDevelop used to create this game seems to be "
+          "greater.\nGDevelop may fail to open the game, or data may be "
+          "missing.\nYou should check if a new version of GDevelop is "
+          "available.");
     }
   }
-
-  // Compatibility code
-  if (gdMajorVersion <= 1) {
-    gd::LogError(_(
-        "The game was saved with version of GDevelop which is too old. Please "
-        "open and save the game with one of the first version of GDevelop 2. "
-        "You will then be able to open your game with this GDevelop version."));
-    return;
-  }
-// End of Compatibility code
 #endif
 
   const SerializerElement& propElement =
@@ -575,6 +529,7 @@ void Project::UnserializeFrom(const SerializerElement& element) {
   SetVerticalSyncActivatedByDefault(
       propElement.GetChild("verticalSync").GetValue().GetBool());
   SetScaleMode(propElement.GetStringAttribute("scaleMode", "linear"));
+  SetPixelsRounding(propElement.GetBoolAttribute("pixelsRounding", false));
   SetAdaptGameResolutionAtRuntime(
       propElement.GetBoolAttribute("adaptGameResolutionAtRuntime", false));
   SetSizeOnStartupMode(propElement.GetStringAttribute("sizeOnStartupMode", ""));
@@ -682,21 +637,6 @@ void Project::UnserializeFrom(const SerializerElement& element) {
     currentPlatform = platforms.back();
 #endif
 
-// Compatibility code
-#if defined(GD_IDE_ONLY)
-  if (VersionWrapper::IsOlder(gdMajorVersion, 0, 0, 0, 3, 0, 0, 0)) {
-    updateText +=
-        _("Sprite scaling has changed since GD 2: The resizing is made so that "
-          "the origin point of the object won't move whatever the scale of the "
-          "object.\n");
-    updateText +=
-        _("You may have to slightly change the position of some objects if you "
-          "have changed their size.\n\n");
-    updateText += _("Thank you for your understanding.\n");
-  }
-#endif
-// End of Compatibility code
-
 #if defined(GD_IDE_ONLY)
   GetObjectGroups().UnserializeFrom(
       element.GetChild("objectsGroups", 0, "ObjectGroups"));
@@ -802,6 +742,7 @@ void Project::SerializeTo(SerializerElement& element) const {
   propElement.AddChild("verticalSync")
       .SetValue(IsVerticalSynchronizationEnabledByDefault());
   propElement.SetAttribute("scaleMode", scaleMode);
+  propElement.SetAttribute("pixelsRounding", pixelsRounding);
   propElement.SetAttribute("adaptGameResolutionAtRuntime",
                            adaptGameResolutionAtRuntime);
   propElement.SetAttribute("sizeOnStartupMode", sizeOnStartupMode);
@@ -877,10 +818,6 @@ void Project::SerializeTo(SerializerElement& element) const {
   for (std::size_t i = 0; i < externalSourceFiles.size(); ++i)
     externalSourceFiles[i]->SerializeTo(
         externalSourceFilesElement.AddChild("sourceFile"));
-
-#if defined(GD_IDE_ONLY)
-  dirty = false;
-#endif
 }
 
 bool Project::ValidateName(const gd::String& name) {
@@ -997,6 +934,7 @@ void Project::Init(const gd::Project& game) {
   minFPS = game.minFPS;
   verticalSync = game.verticalSync;
   scaleMode = game.scaleMode;
+  pixelsRounding = game.pixelsRounding;
   adaptGameResolutionAtRuntime = game.adaptGameResolutionAtRuntime;
   sizeOnStartupMode = game.sizeOnStartupMode;
   projectUuid = game.projectUuid;
@@ -1023,9 +961,7 @@ void Project::Init(const gd::Project& game) {
   platforms = game.platforms;
 
   resourcesManager = game.resourcesManager;
-  imageManager = std::make_shared<ImageManager>(*game.imageManager);
-  imageManager->SetResourcesManager(&resourcesManager);
-
+  
   initialObjects = gd::Clone(game.initialObjects);
 
   scenes = gd::Clone(game.scenes);
@@ -1047,7 +983,6 @@ void Project::Init(const gd::Project& game) {
 
 #if defined(GD_IDE_ONLY)
   projectFile = game.GetProjectFile();
-  imagesChanged = game.imagesChanged;
 #endif
 }
 

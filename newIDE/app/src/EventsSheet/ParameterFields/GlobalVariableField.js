@@ -45,6 +45,7 @@ export default class GlobalVariableField extends React.Component<
           onChange={this.props.onChange}
           isInline={this.props.isInline}
           onRequestClose={this.props.onRequestClose}
+          onApply={this.props.onApply}
           ref={field => (this._field = field)}
           onOpenDialog={() => this.setState({ editorOpen: true })}
           globalObjectsContainer={this.props.globalObjectsContainer}
@@ -59,6 +60,7 @@ export default class GlobalVariableField extends React.Component<
             onCancel={() => this.setState({ editorOpen: false })}
             onApply={() => {
               this.setState({ editorOpen: false });
+              if (this._field) this._field.updateAutocompletions();
             }}
             emptyExplanationMessage={
               <Trans>

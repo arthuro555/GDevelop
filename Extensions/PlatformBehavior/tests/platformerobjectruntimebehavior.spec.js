@@ -34,9 +34,104 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
           canBeGrabbed: true,
         },
       ],
+      effects: [],
     });
     platform.setCustomWidthAndHeight(60, 32);
     runtimeScene.addObject(platform);
+
+    return platform;
+  };
+
+  const addUpSlopePlatformObject = (runtimeScene) => {
+    const platform = new gdjs.TestSpriteRuntimeObject(runtimeScene, {
+      name: 'slope',
+      type: '',
+      behaviors: [
+        {
+          type: 'PlatformBehavior::PlatformBehavior',
+          name: 'Platform',
+          canBeGrabbed: true,
+        },
+      ],
+      effects: [],
+      animations: [
+        {
+          name: 'animation',
+          directions: [
+            {
+              sprites: [
+                {
+                  originPoint: { x: 0, y: 0 },
+                  centerPoint: { x: 50, y: 50 },
+                  points: [
+                    { name: 'Center', x: 0, y: 0 },
+                    { name: 'Origin', x: 50, y: 50 },
+                  ],
+                  hasCustomCollisionMask: true,
+                  customCollisionMask: [
+                    [
+                      { x: 100, y: 100 },
+                      { x: 0, y: 100 },
+                      { x: 100, y: 0 },
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    runtimeScene.addObject(platform);
+    platform.setUnscaledWidthAndHeight(100, 100);
+    platform.setCustomWidthAndHeight(100, 100);
+
+    return platform;
+  };
+
+  const addDownSlopePlatformObject = (runtimeScene) => {
+    const platform = new gdjs.TestSpriteRuntimeObject(runtimeScene, {
+      name: 'slope',
+      type: '',
+      behaviors: [
+        {
+          type: 'PlatformBehavior::PlatformBehavior',
+          name: 'Platform',
+          canBeGrabbed: true,
+        },
+      ],
+      effects: [],
+      animations: [
+        {
+          name: 'animation',
+          directions: [
+            {
+              sprites: [
+                {
+                  originPoint: { x: 0, y: 0 },
+                  centerPoint: { x: 50, y: 50 },
+                  points: [
+                    { name: 'Center', x: 0, y: 0 },
+                    { name: 'Origin', x: 50, y: 50 },
+                  ],
+                  hasCustomCollisionMask: true,
+                  customCollisionMask: [
+                    [
+                      { x: 100, y: 100 },
+                      { x: 0, y: 100 },
+                      { x: 0, y: 0 },
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    runtimeScene.addObject(platform);
+    platform.setUnscaledWidthAndHeight(100, 100);
+    platform.setCustomWidthAndHeight(100, 100);
 
     return platform;
   };
@@ -53,6 +148,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
           canBeGrabbed: false,
         },
       ],
+      effects: [],
     });
     platform.setCustomWidthAndHeight(60, 32);
     runtimeScene.addObject(platform);
@@ -72,6 +168,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
           platformType: 'Ladder',
         },
       ],
+      effects: [],
     });
     ladder.setCustomWidthAndHeight(20, 60);
     runtimeScene.addObject(ladder);
@@ -106,6 +203,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             slopeMaxAngle: 60,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -302,6 +400,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             slopeMaxAngle: 60,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -332,7 +431,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       );
       expect(object.getY()).to.be(platform.getY());
 
-      object.getBehavior('auto1').simulateReleaseKey();
+      object.getBehavior('auto1').simulateReleasePlatformKey();
       for (let i = 0; i < 10; ++i) {
         runtimeScene.renderAndStep(1000 / 60);
         expect(object.getBehavior('auto1').isFalling()).to.be(true);
@@ -389,7 +488,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
         expect(object.getBehavior('auto1').isGrabbingPlatform()).to.be(true);
 
         // Release upper platform
-        object.getBehavior('auto1').simulateReleaseKey();
+        object.getBehavior('auto1').simulateReleasePlatformKey();
         for (let i = 0; i < 35; ++i) {
           object.getBehavior('auto1').simulateLeftKey();
           runtimeScene.renderAndStep(1000 / 60);
@@ -469,6 +568,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             roundCoordinates: true,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -549,6 +649,11 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
         false
       );
       expect(object.getBehavior('auto1').isMoving()).to.be(false);
+
+      // Forbid to jump
+      object.getBehavior('auto1').setCanNotAirJump();
+      // It has no impact as the object is on a platform.
+      expect(object.getBehavior('auto1').canJump()).to.be(true);
 
       // Jump with sustaining as much as possible, and
       // even more (18 frames at 60fps is greater than 0.2s)
@@ -649,13 +754,103 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       );
       expect(object.getBehavior('auto1').isMoving()).to.be(false);
 
-      // Fell from the platform
+      // Fall from the platform
       for (let i = 0; i < 35; ++i) {
         object.getBehavior('auto1').simulateLeftKey();
         runtimeScene.renderAndStep(1000 / 60);
       }
 
       // Try to jump
+      object.getBehavior('auto1').simulateJumpKey();
+      runtimeScene.renderAndStep(1000 / 60);
+      expect(object.getBehavior('auto1').isJumping()).to.be(false);
+      expect(object.getBehavior('auto1').isFalling()).to.be(true);
+      expect(object.getBehavior('auto1').isFallingWithoutJumping()).to.be(true);
+    });
+
+    it('can be allowed to jump in mid air', function () {
+      // Ensure the object falls on the platform
+      for (let i = 0; i < 10; ++i) {
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+
+      // Check the object is on the platform
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
+      expect(object.getBehavior('auto1').isFalling()).to.be(false);
+      expect(object.getBehavior('auto1').isFallingWithoutJumping()).to.be(
+        false
+      );
+      expect(object.getBehavior('auto1').isMoving()).to.be(false);
+
+      // Fall from the platform
+      for (let i = 0; i < 20; ++i) {
+        object.getBehavior('auto1').simulateLeftKey();
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+      // Allow to jump in mid air
+      expect(object.getBehavior('auto1').isFalling()).to.be(true);
+      object.getBehavior('auto1').setCanJump();
+      expect(object.getBehavior('auto1').canJump()).to.be(true);
+
+      // Can jump in the air
+      object.getBehavior('auto1').simulateJumpKey();
+      runtimeScene.renderAndStep(1000 / 60);
+      expect(object.getBehavior('auto1').isJumping()).to.be(true);
+      expect(object.getBehavior('auto1').isFalling()).to.be(false);
+      expect(object.getBehavior('auto1').isFallingWithoutJumping()).to.be(
+        false
+      );
+
+      for (let i = 0; i < 40; ++i) {
+        object.getBehavior('auto1').simulateLeftKey();
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+      expect(object.getBehavior('auto1').isJumping()).to.be(false);
+
+      // Can no longer to jump
+      object.getBehavior('auto1').simulateJumpKey();
+      runtimeScene.renderAndStep(1000 / 60);
+      expect(object.getBehavior('auto1').isJumping()).to.be(false);
+      expect(object.getBehavior('auto1').isFalling()).to.be(true);
+      expect(object.getBehavior('auto1').isFallingWithoutJumping()).to.be(true);
+    });
+
+    it('can allow coyote time', function () {
+      // Ensure the object falls on the platform
+      for (let i = 0; i < 10; ++i) {
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+
+      // Check the object is on the platform
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
+      expect(object.getBehavior('auto1').isFalling()).to.be(false);
+      expect(object.getBehavior('auto1').isFallingWithoutJumping()).to.be(
+        false
+      );
+      expect(object.getBehavior('auto1').isMoving()).to.be(false);
+
+      // Fall from the platform
+      for (let i = 0; i < 20; ++i) {
+        object.getBehavior('auto1').simulateLeftKey();
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+      // Allow to jump
+      expect(object.getBehavior('auto1').isFalling()).to.be(true);
+      object.getBehavior('auto1').setCanJump();
+      expect(object.getBehavior('auto1').canJump()).to.be(true);
+
+      // Still falling from the platform
+      for (let i = 0; i < 4; ++i) {
+        object.getBehavior('auto1').simulateLeftKey();
+        runtimeScene.renderAndStep(1000 / 60);
+      }
+
+      // Suppose that we miss an eventual time frame or some condition.
+      // So we forbid to jump again:
+      object.getBehavior('auto1').setCanNotAirJump();
+      expect(object.getBehavior('auto1').canJump()).to.be(false);
+
+      // Can no longer to jump in mid air
       object.getBehavior('auto1').simulateJumpKey();
       runtimeScene.renderAndStep(1000 / 60);
       expect(object.getBehavior('auto1').isJumping()).to.be(false);
@@ -820,6 +1015,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             slopeMaxAngle: 60,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -842,6 +1038,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             platformType: 'Jumpthru',
           },
         ],
+        effects: [],
       });
       jumpthru.setCustomWidthAndHeight(60, 5);
       runtimeScene.addObject(jumpthru);
@@ -956,6 +1153,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             slopeMaxAngle: 60,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -1217,6 +1415,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
               slopeMaxAngle: 60,
             },
           ],
+          effects: [],
         });
         object.setCustomWidthAndHeight(10, 20);
         runtimeScene.addObject(object);
@@ -1346,6 +1545,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             slopeMaxAngle: 60,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -1381,6 +1581,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             platformType: 'Platform',
           },
         ],
+        effects: [],
       });
       object2.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object2);
@@ -1504,6 +1705,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             roundCoordinates: true,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
@@ -1532,9 +1734,19 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
         object.getBehavior('auto1').simulateUpKey();
         runtimeScene.renderAndStep(1000 / 60);
         expect(object.getBehavior('auto1').isOnLadder()).to.be(true);
-        //TODO Probably a bug, uncomment it after it's fixed
-        //expect(object.getBehavior('auto1').isMoving()).to.be(true);
+        expect(object.getBehavior('auto1').isMoving()).to.be(true);
         expect(object.getY()).to.be.below(lastY);
+      }
+    };
+
+    const releaseLadder = (frameCount) => {
+      object.getBehavior('auto1').simulateReleaseLadderKey();
+      for (let i = 0; i < frameCount; ++i) {
+        const lastY = object.getY();
+        runtimeScene.renderAndStep(1000 / 60);
+        expect(object.getBehavior('auto1').isOnLadder()).to.be(false);
+        expect(object.getBehavior('auto1').isMoving()).to.be(true);
+        expect(object.getY()).to.be.above(lastY);
       }
     };
 
@@ -1586,7 +1798,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       expect(object.getBehavior('auto1').isMoving()).to.be(false);
     };
 
-    it('can climb a ladder', function () {
+    it('can climb and release a ladder', function () {
       object.setPosition(30, -32);
       // Ensure the object falls on the platform
       fallOnPlatform(10);
@@ -1595,7 +1807,15 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       object.getBehavior('auto1').simulateLadderKey();
       climbLadder(10);
       stayOnLadder(10);
-      climbLadder(14);
+      const objectPositionAfterFirstClimb = object.getY();
+      releaseLadder(10);
+      object.getBehavior('auto1').simulateLadderKey();
+      expect(object.getY()).to.be.within(
+        // gravity is 1500, 10 frames falling ~ 23px
+        objectPositionAfterFirstClimb + 22,
+        objectPositionAfterFirstClimb + 24
+      );
+      climbLadder(24);
       // Check that we reached the maximum height
       const playerAtLadderTop = ladder.getY() - object.getHeight();
       expect(object.getY()).to.be.within(
@@ -1851,7 +2071,6 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
   describe('(walk)', function () {
     let runtimeScene;
     let object;
-    let platform;
 
     beforeEach(function () {
       runtimeScene = makeTestRuntimeScene();
@@ -1877,13 +2096,10 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
             roundCoordinates: true,
           },
         ],
+        effects: [],
       });
       object.setCustomWidthAndHeight(10, 20);
       runtimeScene.addObject(object);
-
-      // Put a platform.
-      platform = addPlatformObject(runtimeScene);
-      platform.setPosition(0, -10);
     });
 
     const fall = (frameCount) => {
@@ -1900,15 +2116,28 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
     };
 
     const walkRight = (frameCount) => {
+      const behavior = object.getBehavior('auto1');
       for (let i = 0; i < frameCount; ++i) {
         const lastX = object.getX();
-        object.getBehavior('auto1').simulateRightKey();
+        const lastSpeed = behavior.getCurrentSpeed();
+        behavior.simulateRightKey();
         runtimeScene.renderAndStep(1000 / 60);
-        expect(object.getBehavior('auto1').isOnFloor()).to.be(true);
+        expect(behavior.isOnFloor()).to.be(true);
         expect(object.getX()).to.be.above(lastX);
-        if (Math.abs(object.getX() - lastX) > 1) {
-          expect(object.getBehavior('auto1').isMoving()).to.be(true);
-        }
+        // Check that the object doesn't stop
+        expect(behavior.getCurrentSpeed()).to.be.above(lastSpeed);
+      }
+    };
+
+    const walkRightMayStop = (frameCount) => {
+      const behavior = object.getBehavior('auto1');
+      for (let i = 0; i < frameCount; ++i) {
+        const lastX = object.getX();
+        const lastSpeed = behavior.getCurrentSpeed();
+        behavior.simulateRightKey();
+        runtimeScene.renderAndStep(1000 / 60);
+        expect(behavior.isOnFloor()).to.be(true);
+        expect(object.getX()).to.be.above(lastX);
       }
     };
 
@@ -1918,12 +2147,19 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
         runtimeScene.renderAndStep(1000 / 60);
       }
       //Check the object is on the platform
-      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
       expect(object.getBehavior('auto1').isFalling()).to.be(false);
       expect(object.getBehavior('auto1').isMoving()).to.be(false);
     };
 
+    const slopesDimensions = {
+      26: { width: 50, height: 25 },
+      45: { width: 50, height: 50 },
+    };
+
     it('can walk from a platform to another one', function () {
+      // Put a platform.
+      const platform = addPlatformObject(runtimeScene);
+      platform.setPosition(0, -10);
       const platform2 = addPlatformObject(runtimeScene);
       platform2.setPosition(
         platform.getX() + platform.getWidth(),
@@ -1933,14 +2169,18 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       object.setPosition(30, -32);
       // Ensure the object falls on the platform
       fallOnPlatform(10);
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
 
-      // walk from the 1st platform to the 2nd one
+      // Walk from the 1st platform to the 2nd one.
       walkRight(30);
       expect(object.getX()).to.be.above(platform2.getX());
       expect(object.getY()).to.be(platform2.getY() - object.getHeight());
     });
 
     it('can walk from a platform to another one that not aligned', function () {
+      // Put a platform.
+      const platform = addPlatformObject(runtimeScene);
+      platform.setPosition(0, -10);
       // the 2nd platform is 1 pixel higher
       const platform2 = addPlatformObject(runtimeScene);
       platform2.setPosition(
@@ -1951,14 +2191,18 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       object.setPosition(30, -32);
       // Ensure the object falls on the platform
       fallOnPlatform(10);
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
 
-      // walk from the 1st platform to the 2nd one
+      // Walk from the 1st platform to the 2nd one.
       walkRight(30);
       expect(object.getX()).to.be.above(platform2.getX());
       expect(object.getY()).to.be(platform2.getY() - object.getHeight());
     });
 
     it("can't walk from a platform to another one that is too high", function () {
+      // Put a platform.
+      const platform = addPlatformObject(runtimeScene);
+      platform.setPosition(0, -10);
       // the 2nd platform is 2 pixels higher
       const platform2 = addPlatformObject(runtimeScene);
       platform2.setPosition(
@@ -1969,6 +2213,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       object.setPosition(30, -32);
       // Ensure the object falls on the platform
       fallOnPlatform(10);
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
 
       // walk right
       for (let i = 0; i < 20; ++i) {
@@ -1982,6 +2227,10 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
     });
 
     it('can walk from a platform to another one that is rotated', function () {
+      // Put a platform.
+      const platform = addPlatformObject(runtimeScene);
+      platform.setPosition(0, -10);
+
       const platform2 = addPlatformObject(runtimeScene);
 
       const angle = (-30 * Math.PI) / 180;
@@ -2006,12 +2255,210 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
       object.setPosition(30, -32);
       // Ensure the object falls on the platform
       fallOnPlatform(10);
+      expect(object.getY()).to.be(-30); // -30 = -10 (platform y) + -20 (object height)
 
-      // walk from the 1st platform to the 2nd one
+      // Walk from the 1st platform to the 2nd one.
       walkRight(30);
       expect(object.getX()).to.be.above(platform2.getX());
-      // gone upward following the 2nd platform
+      // Gone upward following the 2nd platform.
       expect(object.getY()).to.be.below(platform.getY());
+    });
+
+    [26, 45].forEach((slopeAngle) => {
+      it(`can go uphill from a 0° slope to a ${slopeAngle}° slope`, function () {
+        // Put a platform.
+        const platform = addPlatformObject(runtimeScene);
+        platform.setCustomWidthAndHeight(50, 50);
+        platform.setPosition(0, 0);
+
+        const slope = addUpSlopePlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngle].width,
+          slopesDimensions[slopeAngle].height
+        );
+        slope.setPosition(
+          platform.getX() + platform.getWidth(),
+          platform.getY() - slope.getHeight()
+        );
+
+        object.setPosition(0, -32);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
+        // See https://github.com/4ian/GDevelop/issues/3013.
+        if (slopeAngle === 45) {
+          walkRightMayStop(40);
+        } else {
+          walkRight(30);
+        }
+        expect(object.getX()).to.be.above(slope.getX());
+        // Gone upward following the 2nd platform.
+        expect(object.getY()).to.be.below(platform.getY() - object.getHeight());
+      });
+
+      it(`can go uphill from a ${slopeAngle}° slope to a 0° slope`, function () {
+        // Put a platform.
+        const slope = addUpSlopePlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngle].width,
+          slopesDimensions[slopeAngle].height
+        );
+        slope.setPosition(0, 0);
+
+        const platform = addPlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(50, 50);
+        platform.setPosition(slope.getX() + slope.getWidth(), slope.getY());
+
+        object.setPosition(0, 0);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
+        // See https://github.com/4ian/GDevelop/issues/3013.
+        walkRightMayStop(40);
+        expect(object.getX()).to.be.above(platform.getX());
+        // Gone upward following the 2nd platform.
+        expect(object.getY()).to.be(platform.getY() - object.getHeight());
+      });
+    });
+
+    [
+      [26, 45],
+      [45, 26],
+      [26, 26],
+      [45, 45],
+    ].forEach((slopeAngles) => {
+      it(`can go uphill from a ${slopeAngles[0]}° slope to a ${slopeAngles[1]}° slope`, function () {
+        // Put a platform.
+        const slope1 = addUpSlopePlatformObject(runtimeScene);
+        slope1.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngles[0]].width,
+          slopesDimensions[slopeAngles[0]].height
+        );
+        slope1.setPosition(0, 0);
+
+        const slope2 = addUpSlopePlatformObject(runtimeScene);
+        slope2.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngles[1]].width,
+          slopesDimensions[slopeAngles[1]].height
+        );
+        slope2.setPosition(
+          slope1.getX() + slope1.getWidth(),
+          slope1.getY() - slope2.getHeight()
+        );
+
+        object.setPosition(0, 0);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
+        // See https://github.com/4ian/GDevelop/issues/3013.
+        if (slopeAngles[0] === 26 && slopeAngles[1] === 26) {
+          walkRight(30);
+        } else {
+          walkRightMayStop(40);
+        }
+        expect(object.getX()).to.be.above(slope2.getX());
+        // Gone upward following the 2nd platform.
+        expect(object.getY()).to.be.below(slope1.getY() - object.getHeight());
+      });
+    });
+
+    [26, 45].forEach((slopeAngle) => {
+      it(`can go downhill from a 0° slope to a ${slopeAngle}° slope`, function () {
+        // Put a platform.
+        const platform = addPlatformObject(runtimeScene);
+        platform.setCustomWidthAndHeight(50, 50);
+        platform.setPosition(0, 0);
+
+        const slope = addDownSlopePlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngle].width,
+          slopesDimensions[slopeAngle].height
+        );
+        slope.setPosition(
+          platform.getX() + platform.getWidth(),
+          platform.getY()
+        );
+
+        object.setPosition(0, -32);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        walkRight(30);
+        expect(object.getX()).to.be.above(slope.getX());
+        // Gone downward following the 2nd platform.
+        expect(object.getY()).to.be.above(slope.getY() - object.getHeight());
+      });
+
+      it(`can go downhill from a ${slopeAngle}° slope to a 0° slope`, function () {
+        // Put a platform.
+        const slope = addDownSlopePlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngle].width,
+          slopesDimensions[slopeAngle].height
+        );
+        slope.setPosition(0, 0);
+
+        const platform = addPlatformObject(runtimeScene);
+        slope.setCustomWidthAndHeight(50, 50);
+        platform.setPosition(
+          slope.getX() + slope.getWidth(),
+          slope.getY() + slope.getHeight()
+        );
+
+        object.setPosition(0, -32);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        walkRight(30);
+        expect(object.getX()).to.be.above(platform.getX());
+        // Gone downward following the 2nd platform.
+        expect(object.getY()).to.be(platform.getY() - object.getHeight());
+      });
+    });
+
+    [
+      [26, 45],
+      [45, 26],
+      [26, 26],
+      [45, 45],
+    ].forEach((slopeAngles) => {
+      it(`can go downhill from a ${slopeAngles[0]}° slope to a ${slopeAngles[1]}° slope`, function () {
+        // Put a platform.
+        const slope1 = addDownSlopePlatformObject(runtimeScene);
+        slope1.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngles[0]].width,
+          slopesDimensions[slopeAngles[0]].height
+        );
+        slope1.setPosition(0, 0);
+
+        const slope2 = addDownSlopePlatformObject(runtimeScene);
+        slope2.setCustomWidthAndHeight(
+          slopesDimensions[slopeAngles[1]].width,
+          slopesDimensions[slopeAngles[1]].height
+        );
+        slope2.setPosition(
+          slope1.getX() + slope1.getWidth(),
+          slope1.getY() + slope1.getHeight()
+        );
+
+        object.setPosition(0, -32);
+        // Ensure the object falls on the platform
+        fallOnPlatform(10);
+
+        // Walk from the 1st platform to the 2nd one.
+        walkRight(30);
+        expect(object.getX()).to.be.above(slope2.getX());
+        // Gone downward following the 2nd platform.
+        expect(object.getY()).to.be.above(slope2.getY() - object.getHeight());
+      });
     });
   });
 });

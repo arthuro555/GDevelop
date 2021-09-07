@@ -8,7 +8,8 @@ This project is released under the MIT License.
 
 #include <iostream>
 
-#include "GDCpp/Extensions/ExtensionBase.h"
+#include "GDCore/Extensions/PlatformExtension.h"
+#include "GDCore/Tools/Localization.h"
 #include "TiledSpriteObject.h"
 
 void DeclareTiledSpriteObjectExtension(gd::PlatformExtension& extension) {
@@ -147,9 +148,9 @@ void DeclareTiledSpriteObjectExtension(gd::PlatformExtension& extension) {
       .SetIncludeFile("TiledSpriteObject/TiledSpriteObject.h");
 
   obj.AddCondition("Angle",
-                   _("Angle"),
-                   _("Test the angle of a Tiled Sprite."),
-                   _("the angle"),
+                   "Angle",
+                   "Test the angle of a Tiled Sprite.",
+                   "the angle",
                    _("Size and angle"),
                    "res/conditions/rotate24.png",
                    "res/conditions/rotate.png")
@@ -219,36 +220,3 @@ void DeclareTiledSpriteObjectExtension(gd::PlatformExtension& extension) {
       .SetIncludeFile("TiledSpriteObject/TiledSpriteObject.h");
 #endif
 }
-
-/**
- * \brief This class declares information about the extension.
- */
-class TiledSpriteObjectCppExtension : public ExtensionBase {
- public:
-  /**
-   * Constructor of an extension declares everything the extension contains:
-   * objects, actions, conditions and expressions.
-   */
-  TiledSpriteObjectCppExtension() {
-    DeclareTiledSpriteObjectExtension(*this);
-    AddRuntimeObject<TiledSpriteObject, RuntimeTiledSpriteObject>(
-        GetObjectMetadata("TiledSpriteObject::TiledSprite"),
-        "RuntimeTiledSpriteObject");
-
-    GD_COMPLETE_EXTENSION_COMPILATION_INFORMATION();
-  };
-};
-
-#if defined(ANDROID)
-extern "C" ExtensionBase* CreateGDCppTiledSpriteObjectExtension() {
-  return new TiledSpriteObjectCppExtension;
-}
-#elif !defined(EMSCRIPTEN)
-/**
- * Used by GDevelop to create the extension class
- * -- Do not need to be modified. --
- */
-extern "C" ExtensionBase* GD_EXTENSION_API CreateGDExtension() {
-  return new TiledSpriteObjectCppExtension;
-}
-#endif

@@ -11,6 +11,7 @@ export type EnumeratedEffectMetadata = {|
   fullName: string,
   description: string,
   parametersSchema: Schema,
+  isMarkedAsNotWorkingForObjects: boolean,
 |};
 
 /**
@@ -115,10 +116,20 @@ export const enumerateEffectsMetadata = (
             effectMetadata,
             fullName: effectMetadata.getFullName(),
             description: effectMetadata.getDescription(),
+            isMarkedAsNotWorkingForObjects: effectMetadata.isMarkedAsNotWorkingForObjects(),
             parametersSchema,
           };
         });
     })
+  ).sort(
+    (
+      enumeratedEffectMetadata1: EnumeratedEffectMetadata,
+      enumeratedEffectMetadata2: EnumeratedEffectMetadata
+    ) => {
+      return enumeratedEffectMetadata1.fullName.localeCompare(
+        enumeratedEffectMetadata2.fullName
+      );
+    }
   );
 };
 

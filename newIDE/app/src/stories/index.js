@@ -242,6 +242,8 @@ import {
   AccordionHeader,
   AccordionBody,
 } from '../UI/Accordion';
+import ProjectPropertiesDialog from '../ProjectManager/ProjectPropertiesDialog';
+import { LoadingScreenEditor } from '../ProjectManager/LoadingScreenEditor';
 
 configureActions({
   depth: 2,
@@ -269,6 +271,9 @@ const buildFakeMenuTemplate = () => [
 const hotReloadPreviewButtonProps: HotReloadPreviewButtonProps = {
   hasPreviewsRunning: false,
   launchProjectDataOnlyPreview: action('launchProjectDataOnlyPreview'),
+  launchProjectWithLoadingScreenPreview: action(
+    'launchProjectWithLoadingScreenPreview'
+  ),
 };
 
 storiesOf('Welcome', module)
@@ -382,7 +387,7 @@ storiesOf('UI Building Blocks/Buttons', module)
       </Line>
       <Line>
         <MiniToolbar>
-          <MiniToolbarText>Some text:</MiniToolbarText>
+          <MiniToolbarText firstChild>Some text:</MiniToolbarText>
           <IconButton>
             <Brush />
           </IconButton>
@@ -541,7 +546,7 @@ storiesOf('UI Building Blocks/SemiControlledTextField', module)
     return (
       <React.Fragment>
         <MiniToolbar>
-          <MiniToolbarText>Please enter something:</MiniToolbarText>
+          <MiniToolbarText firstChild>Please enter something:</MiniToolbarText>
           <SemiControlledTextField
             margin="none"
             value={value}
@@ -728,7 +733,7 @@ storiesOf('UI Building Blocks/SemiControlledAutoComplete', module)
       render={(value, onChange) => (
         <React.Fragment>
           <MiniToolbar>
-            <MiniToolbarText>Please make a choice:</MiniToolbarText>
+            <MiniToolbarText firstChild>Please make a choice:</MiniToolbarText>
             <SemiControlledAutoComplete
               margin="none"
               value={value}
@@ -1311,37 +1316,22 @@ storiesOf('UI Building Blocks/ColorField', module)
         floatingLabelText="Particles start color"
         disableAlpha
         fullWidth
-        color={{
-          r: 100,
-          g: 100,
-          b: 200,
-          a: 255,
-        }}
-        onChangeComplete={() => {}}
+        color="100;100;200"
+        onChange={() => {}}
       />
       <ColorField
         floatingLabelText="This has a helper text"
         disableAlpha
         fullWidth
-        color={{
-          r: 100,
-          g: 100,
-          b: 200,
-          a: 255,
-        }}
-        onChangeComplete={() => {}}
+        color="100;100;200"
+        onChange={() => {}}
         helperMarkdownText="Lorem ipsum **dolor sit amet**, consectetur _adipiscing elit_, [sed do eiusmod](http://example.com) tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
       />
       <ColorField
         floatingLabelText="This is not full width"
         disableAlpha
-        color={{
-          r: 100,
-          g: 100,
-          b: 200,
-          a: 255,
-        }}
-        onChangeComplete={() => {}}
+        color="100;100;200"
+        onChange={() => {}}
       />
     </div>
   ));
@@ -2104,6 +2094,7 @@ storiesOf('ParameterFields', module)
       render={(value, onChange) => (
         <MouseField
           project={testProject.project}
+          scope={{}}
           value={value}
           onChange={onChange}
           globalObjectsContainer={testProject.project}
@@ -3633,6 +3624,18 @@ storiesOf('BehaviorsEditor', module)
         onUpdateBehaviorsSharedData={() => {}}
       />
     </SerializedObjectDisplay>
+  ))
+  .add('without any behaviors', () => (
+    <SerializedObjectDisplay object={testProject.spriteObjectWithoutBehaviors}>
+      <BehaviorsEditor
+        project={testProject.project}
+        object={testProject.spriteObjectWithoutBehaviors}
+        resourceSources={[]}
+        onChooseResource={() => Promise.reject('Unimplemented')}
+        resourceExternalEditors={fakeResourceExternalEditors}
+        onUpdateBehaviorsSharedData={() => {}}
+      />
+    </SerializedObjectDisplay>
   ));
 
 storiesOf('VariablesList', module)
@@ -4350,6 +4353,9 @@ storiesOf('ProjectManager', module)
       )}
       freezeUpdate={false}
       hotReloadPreviewButtonProps={hotReloadPreviewButtonProps}
+      resourceSources={[]}
+      onChooseResource={() => Promise.reject('unimplemented')}
+      resourceExternalEditors={fakeResourceExternalEditors}
     />
   ))
   .add('Error in functions', () => (
@@ -4394,6 +4400,9 @@ storiesOf('ProjectManager', module)
       )}
       freezeUpdate={false}
       hotReloadPreviewButtonProps={hotReloadPreviewButtonProps}
+      resourceSources={[]}
+      onChooseResource={() => Promise.reject('unimplemented')}
+      resourceExternalEditors={fakeResourceExternalEditors}
     />
   ));
 
@@ -4508,8 +4517,9 @@ storiesOf('LayersList', module)
 storiesOf('EffectsList', module)
   .addDecorator(paperDecorator)
   .addDecorator(muiDecorator)
-  .add('with some effects', () => (
+  .add('with some effects (for a layer)', () => (
     <EffectsList
+      target="layer"
       project={testProject.project}
       resourceExternalEditors={fakeResourceExternalEditors}
       onChooseResource={() => {
@@ -4521,8 +4531,23 @@ storiesOf('EffectsList', module)
       onEffectsUpdated={action('effects updated')}
     />
   ))
-  .add('with an effect without effect type', () => (
+  .add('with some effects (for an object)', () => (
     <EffectsList
+      target="object"
+      project={testProject.project}
+      resourceExternalEditors={fakeResourceExternalEditors}
+      onChooseResource={() => {
+        action('onChooseResource');
+        return Promise.reject();
+      }}
+      resourceSources={[]}
+      effectsContainer={testProject.spriteObjectWithEffects.getEffects()}
+      onEffectsUpdated={action('effects updated')}
+    />
+  ))
+  .add('with an effect without effect type (for a layer)', () => (
+    <EffectsList
+      target="layer"
       project={testProject.project}
       resourceExternalEditors={fakeResourceExternalEditors}
       onChooseResource={() => {
@@ -4534,8 +4559,9 @@ storiesOf('EffectsList', module)
       onEffectsUpdated={action('effects updated')}
     />
   ))
-  .add('without effects', () => (
+  .add('without effects (for a layer)', () => (
     <EffectsList
+      target="layer"
       project={testProject.project}
       resourceExternalEditors={fakeResourceExternalEditors}
       onChooseResource={() => {
@@ -4544,6 +4570,20 @@ storiesOf('EffectsList', module)
       }}
       resourceSources={[]}
       effectsContainer={testProject.layerWithoutEffects.getEffects()}
+      onEffectsUpdated={action('effects updated')}
+    />
+  ))
+  .add('without effects (for an object)', () => (
+    <EffectsList
+      target="object"
+      project={testProject.project}
+      resourceExternalEditors={fakeResourceExternalEditors}
+      onChooseResource={() => {
+        action('onChooseResource');
+        return Promise.reject();
+      }}
+      resourceSources={[]}
+      effectsContainer={testProject.spriteObjectWithoutEffects.getEffects()}
       onEffectsUpdated={action('effects updated')}
     />
   ));
@@ -4638,12 +4678,14 @@ storiesOf('HotReloadPreviewButton', module)
     <HotReloadPreviewButton
       hasPreviewsRunning={false}
       launchProjectDataOnlyPreview={() => {}}
+      launchProjectWithLoadingScreenPreview={() => {}}
     />
   ))
   .add('with preview(s) running', () => (
     <HotReloadPreviewButton
       hasPreviewsRunning={true}
       launchProjectDataOnlyPreview={() => {}}
+      launchProjectWithLoadingScreenPreview={() => {}}
     />
   ));
 
@@ -5100,5 +5142,34 @@ storiesOf('GamesShowcase/ShowcasedGameListItem', module)
     <ShowcasedGameListItem
       onHeightComputed={() => {}}
       showcasedGame={showcasedGame1}
+    />
+  ));
+
+storiesOf('ProjectPropertiesDialog', module)
+  .addDecorator(muiDecorator)
+  .add('default', () => (
+    <ProjectPropertiesDialog
+      open
+      initialTab="properties"
+      project={testProject.project}
+      onClose={action('onClose')}
+      onApply={action('onApply')}
+      onChangeSubscription={action('onChangeSubscription')}
+      resourceSources={[]}
+      onChooseResource={() => Promise.reject('unimplemented')}
+      resourceExternalEditors={fakeResourceExternalEditors}
+    />
+  ));
+
+storiesOf('ProjectPropertiesDialog/LoadingScreenEditor', module)
+  .addDecorator(muiDecorator)
+  .add('default', () => (
+    <LoadingScreenEditor
+      loadingScreen={testProject.project.getLoadingScreen()}
+      onChangeSubscription={action('onChangeSubscription')}
+      project={testProject.project}
+      resourceSources={[]}
+      onChooseResource={() => Promise.reject('unimplemented')}
+      resourceExternalEditors={fakeResourceExternalEditors}
     />
   ));

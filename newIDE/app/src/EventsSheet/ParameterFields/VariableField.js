@@ -39,6 +39,13 @@ export default class VariableField extends Component<Props, State> {
   }
 
   componentDidMount() {
+    this.updateAutocompletions();
+  }
+
+  /**
+   * Can be called to set up or force updating the variables list.
+   */
+  updateAutocompletions() {
     const definedVariableNames = enumerateVariables(
       this.props.variablesContainer
     )
@@ -78,6 +85,7 @@ export default class VariableField extends Component<Props, State> {
       onOpenDialog,
       parameterMetadata,
       onRequestClose,
+      onApply,
     } = this.props;
 
     const description = parameterMetadata
@@ -99,6 +107,7 @@ export default class VariableField extends Component<Props, State> {
             value={value}
             onChange={onChange}
             onRequestClose={onRequestClose}
+            onApply={onApply}
             dataSource={this.state.autocompletionVariableNames}
             openOnFocus={!isInline}
             ref={field => (this._field = field)}

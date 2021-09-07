@@ -19,9 +19,11 @@ export type CommandName =
   | 'OPEN_RECENT_PROJECT'
   | 'OPEN_COMMAND_PALETTE'
   | 'OPEN_PROJECT_PROPERTIES'
+  | 'OPEN_PROJECT_LOADING_SCREEN'
   | 'OPEN_PROJECT_VARIABLES'
   | 'OPEN_PLATFORM_SPECIFIC_ASSETS_DIALOG'
   | 'OPEN_PROJECT_RESOURCES'
+  | 'OPEN_SEARCH_EXTENSIONS_DIALOG'
   | 'OPEN_LAYOUT'
   | 'OPEN_EXTERNAL_EVENTS'
   | 'OPEN_EXTERNAL_LAYOUT'
@@ -43,6 +45,8 @@ export type CommandName =
   | 'EDIT_LAYER'
   | 'EDIT_NETWORK_PREVIEW'
   | 'EDIT_OBJECT'
+  | 'EDIT_OBJECT_BEHAVIORS'
+  | 'EDIT_OBJECT_EFFECTS'
   | 'EDIT_OBJECT_VARIABLES'
   | 'EDIT_OBJECT_GROUP'
   | 'ADD_STANDARD_EVENT'
@@ -154,6 +158,10 @@ const commandsList: { [CommandName]: CommandMetadata } = {
     area: 'PROJECT',
     displayText: t`Open project properties`,
   },
+  OPEN_PROJECT_LOADING_SCREEN: {
+    area: 'PROJECT',
+    displayText: t`Edit loading screen`,
+  },
   OPEN_PROJECT_VARIABLES: {
     area: 'PROJECT',
     displayText: t`Edit global variables`,
@@ -165,6 +173,10 @@ const commandsList: { [CommandName]: CommandMetadata } = {
   OPEN_PROJECT_RESOURCES: {
     area: 'PROJECT',
     displayText: t`Open project resources`,
+  },
+  OPEN_SEARCH_EXTENSIONS_DIALOG: {
+    area: 'PROJECT',
+    displayText: t`Search/import extensions`,
   },
 
   // Tab-opening commands
@@ -241,6 +253,14 @@ const commandsList: { [CommandName]: CommandMetadata } = {
 
   // Objects list commands
   EDIT_OBJECT: { area: 'SCENE', displayText: t`Edit object...` },
+  EDIT_OBJECT_BEHAVIORS: {
+    area: 'SCENE',
+    displayText: t`Edit object behaviors...`,
+  },
+  EDIT_OBJECT_EFFECTS: {
+    area: 'SCENE',
+    displayText: t`Edit object effects...`,
+  },
   EDIT_OBJECT_VARIABLES: {
     area: 'SCENE',
     displayText: t`Edit object variables...`,

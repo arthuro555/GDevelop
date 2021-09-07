@@ -5,10 +5,14 @@
  */
 
 #include "Layout.h"
+
 #include <algorithm>
 #include <vector>
+
 #include "GDCore/CommonTools.h"
 #include "GDCore/Events/Serialization.h"
+#include "GDCore/Extensions/Metadata/BehaviorMetadata.h"
+#include "GDCore/Extensions/Metadata/MetadataProvider.h"
 #include "GDCore/Extensions/Platform.h"
 #include "GDCore/IDE/SceneNameMangler.h"
 #include "GDCore/Project/Behavior.h"
@@ -219,16 +223,21 @@ void Layout::UpdateBehaviorsSharedData(gd::Project& project) {
        ++i) {
     const gd::String& name = allBehaviorsNames[i];
 
-    if (behaviorsSharedData.find(name) == behaviorsSharedData.end()) {
-      gd::BehaviorsSharedData* behaviorSharedData =
-          project.GetBehaviorSharedDatas(allBehaviorsTypes[i]);
-      if (behaviorSharedData) {
-        auto behaviorContent =
-            gd::make_unique<gd::BehaviorContent>(name, allBehaviorsTypes[i]);
-        behaviorSharedData->InitializeContent(behaviorContent->GetContent());
-        behaviorsSharedData[name] = std::move(behaviorContent);
-      }
-    }
+    if (behaviorsSharedData.find(name) != behaviorsSharedData.end()) continue;
+
+    const gd::BehaviorMetadata& behaviorMetadata =
+        gd::MetadataProvider::GetBehaviorMetadata(project.GetCurrentPlatform(),
+                                                  allBehaviorsTypes[i]);
+    if (gd::MetadataProvider::IsBadBehaviorMetadata(behaviorMetadata)) continue;
+
+    gd::BehaviorsSharedData* behaviorSharedData =
+        behaviorMetadata.GetSharedDataInstance();
+    if (!behaviorSharedData) continue;
+
+    auto behaviorContent =
+        gd::make_unique<gd::BehaviorContent>(name, allBehaviorsTypes[i]);
+    behaviorSharedData->InitializeContent(behaviorContent->GetContent());
+    behaviorsSharedData[name] = std::move(behaviorContent);
   }
 
   // Remove useless shared data:
@@ -263,7 +272,7 @@ void Layout::SerializeTo(SerializerElement& element) const {
                        disableInputWhenNotFocused);
 
 #if defined(GD_IDE_ONLY)
-  GetAssociatedSettings().SerializeTo(element.AddChild("uiSettings"));
+  editorSettings.SerializeTo(element.AddChild("uiSettings"));
 #endif
 
   GetObjectGroups().SerializeTo(element.AddChild("objectsGroups"));
@@ -324,7 +333,7 @@ void Layout::UnserializeFrom(gd::Project& project,
       element.GetBoolAttribute("disableInputWhenNotFocused");
 
 #if defined(GD_IDE_ONLY)
-  associatedSettings.UnserializeFrom(
+  editorSettings.UnserializeFrom(
       element.GetChild("uiSettings", 0, "UISettings"));
 
   GetObjectGroups().UnserializeFrom(
@@ -403,7 +412,7 @@ void Layout::Init(const Layout& other) {
 
 #if defined(GD_IDE_ONLY)
   events = other.events;
-  associatedSettings = other.associatedSettings;
+  editorSettings = other.editorSettings;
   objectGroups = other.objectGroups;
 
   profiler = other.profiler;

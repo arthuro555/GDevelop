@@ -117,6 +117,7 @@ import { useDiscordRichPresence } from '../Utils/UpdateDiscordRichPresence';
 import { useResourceFetcher } from '../ProjectsStorage/ResourceFetcher';
 import { delay } from '../Utils/Delay';
 import { type ExtensionShortHeader } from '../Utils/GDevelopServices/Extension';
+import { findAndLogProjectPreviewErrors } from '../Utils/ProjectErrorsChecker';
 
 const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
 
@@ -184,6 +185,7 @@ type LaunchPreviewOptions = {
   networkPreview?: boolean,
   hotReload?: boolean,
   projectDataOnlyExport?: boolean,
+  fullLoadingScreen?: boolean,
 };
 
 export type Props = {
@@ -1220,6 +1222,7 @@ const MainFrame = (props: Props) => {
       networkPreview,
       hotReload,
       projectDataOnlyExport,
+      fullLoadingScreen,
     }: LaunchPreviewOptions) => {
       if (!currentProject) return;
       if (currentProject.getLayoutsCount() === 0) return;
@@ -1249,6 +1252,11 @@ const MainFrame = (props: Props) => {
 
       autosaveProjectIfNeeded();
 
+      // Note that in the future, this kind of checks could be done
+      // and stored in a "diagnostic report", rather than hiding errors
+      // from the user.
+      findAndLogProjectPreviewErrors(currentProject);
+
       eventsFunctionsExtensionsState
         .ensureLoadFinished()
         .then(() =>
@@ -1259,6 +1267,7 @@ const MainFrame = (props: Props) => {
             networkPreview: !!networkPreview,
             hotReload: !!hotReload,
             projectDataOnlyExport: !!projectDataOnlyExport,
+            fullLoadingScreen: !!fullLoadingScreen,
             getIsMenuBarHiddenInPreview:
               preferences.getIsMenuBarHiddenInPreview,
             getIsAlwaysOnTopInPreview: preferences.getIsAlwaysOnTopInPreview,
@@ -1303,6 +1312,8 @@ const MainFrame = (props: Props) => {
   const hotReloadPreviewButtonProps: HotReloadPreviewButtonProps = React.useMemo(
     () => ({
       hasPreviewsRunning,
+      launchProjectWithLoadingScreenPreview: () =>
+        launchPreview({ fullLoadingScreen: true }),
       launchProjectDataOnlyPreview: () =>
         launchPreview({ hotReload: true, projectDataOnlyExport: true }),
     }),
@@ -2109,6 +2120,9 @@ const MainFrame = (props: Props) => {
             freezeUpdate={!projectManagerOpen}
             unsavedChanges={unsavedChanges}
             hotReloadPreviewButtonProps={hotReloadPreviewButtonProps}
+            resourceSources={props.resourceSources}
+            onChooseResource={onChooseResource}
+            resourceExternalEditors={resourceExternalEditors}
           />
         )}
         {!state.currentProject && (
@@ -2199,11 +2213,10 @@ const MainFrame = (props: Props) => {
                   onOpenGamesShowcase: () => onOpenGamesShowcase(),
                   onOpenHelpFinder: () => openHelpFinderDialog(true),
                   onOpenLanguageDialog: () => openLanguageDialog(true),
-                  onLoadEventsFunctionsExtensions: () => {
+                  onLoadEventsFunctionsExtensions: () =>
                     eventsFunctionsExtensionsState.loadProjectEventsFunctionsExtensions(
                       currentProject
-                    );
-                  },
+                    ),
                   onDeleteResource: (
                     resource: gdResource,
                     cb: boolean => void

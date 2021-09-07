@@ -28,7 +28,6 @@ class Object;
 class VariablesContainer;
 class ArbitraryResourceWorker;
 class SourceFile;
-class ImageManager;
 class Behavior;
 class BehaviorsSharedData;
 class BaseEvent;
@@ -278,6 +277,19 @@ class GD_CORE_API Project : public ObjectsContainer {
   void SetScaleMode(const gd::String& scaleMode_) { scaleMode = scaleMode_; }
 
   /**
+   * Return true if pixels rounding option is enabled.
+   */
+  bool GetPixelsRounding() const {
+    return pixelsRounding;
+  }
+
+  /**
+   * Set pixels rounding option to true or false.
+   */
+  void SetPixelsRounding(bool enable) { pixelsRounding = enable; }
+
+
+  /**
    * \brief Return if the project should set 0 as Z-order for objects created
    * from events (which is deprecated) - instead of the highest Z order that was
    * found on each layer when the scene started.
@@ -390,37 +402,6 @@ class GD_CORE_API Project : public ObjectsContainer {
                                            const gd::String& name,
                                            const gd::String& platformName = "");
 
-  /**
-   * Get the behavior of the given type.
-   *
-   * \note A project can use more than one platform. In this case, the first
-   * platform supporting the behavior is used, unless \a platformName argument
-   * is not empty.
-   * It is assumed that each platform provides an equivalent
-   * behavior.
-   *
-   * \param type The type of the behavior
-   * \param platformName The name of the platform to be used. If empty, the
-   * first platform supporting the object is used.
-   */
-  gd::Behavior* GetBehavior(const gd::String& type,
-                            const gd::String& platformName = "");
-
-  /**
-   * Get the behavior shared data of the given type.
-   *
-   * \note A project can use more than one platform. In this case, the first
-   * platform supporting the behavior shared data is used, unless \a
-   * platformName argument is not empty.
-   * It is assumed that each platform provides equivalent behavior shared data.
-   *
-   * \param type The type of behavior
-   * \param platformName The name of the platform to be used. If empty, the
-   * first platform supporting the object is used.
-   */
-  gd::BehaviorsSharedData* GetBehaviorSharedDatas(
-      const gd::String& type, const gd::String& platformName = "");
-
 #if defined(GD_IDE_ONLY)
   /**
    * Create an event of the given type.
@@ -528,19 +509,6 @@ class GD_CORE_API Project : public ObjectsContainer {
    * "Dirty" flag is set to false when serialization is done.
    */
   void SerializeTo(SerializerElement& element) const;
-
-  /**
-   * \brief Return true if the project is marked as being modified (The IDE or
-   * application using the project should ask to save the project if the project
-   * is closed).
-   */
-  bool IsDirty() { return dirty; }
-
-  /**
-   * \brief Mark the project as being modified (The IDE or application
-   * using the project should ask to save the project if the project is closed).
-   */
-  void SetDirty(bool enable = true) { dirty = enable; }
 
   /**
    * Get the major version of GDevelop used to save the project.
@@ -824,28 +792,6 @@ class GD_CORE_API Project : public ObjectsContainer {
   ResourcesManager& GetResourcesManager() { return resourcesManager; }
 
   /**
-   * \brief Provide access to the ImageManager allowing to load SFML or OpenGL
-   * textures for the IDE ( or at runtime for the GD C++ Platform ).
-   */
-  const std::shared_ptr<gd::ImageManager>& GetImageManager() const {
-    return imageManager;
-  }
-
-  /**
-   * \brief Provide access to the ImageManager allowing to load SFML or OpenGL
-   * textures for the IDE ( or at runtime for the GD C++ Platform ).
-   */
-  std::shared_ptr<gd::ImageManager>& GetImageManager() { return imageManager; }
-
-  /**
-   * \brief Provide access to the ImageManager allowing to load SFML or OpenGL
-   * textures for the IDE ( or at runtime for the GD C++ Platform ).
-   */
-  void SetImageManager(std::shared_ptr<gd::ImageManager> imageManager_) {
-    imageManager = imageManager_;
-  }
-
-  /**
    * \brief Called ( e.g. during compilation ) so as to inventory internal
    * resources, sometimes update their filename or any other work or resources.
    *
@@ -941,12 +887,6 @@ class GD_CORE_API Project : public ObjectsContainer {
 #endif
 ///@}
 
-// TODO: Put this in private part
-#if defined(GD_IDE_ONLY)
-  std::vector<gd::String> imagesChanged;  ///< Images that have been changed and
-                                          ///< which have to be reloaded
-#endif
-
  private:
   /**
    * Initialize from another game. Used by copy-ctor and assign-op.
@@ -963,6 +903,8 @@ class GD_CORE_API Project : public ObjectsContainer {
                         ///< are below this number )
   bool verticalSync;    ///< If true, must activate vertical synchronization.
   gd::String scaleMode;
+  bool pixelsRounding; ///< If true, the rendering should stop pixel interpolation 
+                       ///< of rendered objects.
   bool adaptGameResolutionAtRuntime;  ///< Should the game resolution be adapted
                                       ///< to the window size at runtime
   gd::String
@@ -985,9 +927,6 @@ class GD_CORE_API Project : public ObjectsContainer {
 #endif
   gd::ResourcesManager
       resourcesManager;  ///< Contains all resources used by the project
-  std::shared_ptr<gd::ImageManager>
-      imageManager;  ///< Image manager is accessed thanks to a (smart) ptr as
-                     ///< it can be shared with GD C++ Platform projects.
   std::vector<gd::Platform*>
       platforms;  ///< Pointers to the platforms this project supports.
   gd::String firstLayout;
@@ -1018,7 +957,6 @@ class GD_CORE_API Project : public ObjectsContainer {
                                         ///< time the project was saved.
   mutable unsigned int gdBuildVersion;  ///< The GD build version used the last
                                         ///< time the project was saved.
-  mutable bool dirty;  ///< True to flag the project as being modified.
 #endif
 };
 

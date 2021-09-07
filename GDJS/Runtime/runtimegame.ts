@@ -40,6 +40,7 @@ namespace gdjs {
     _soundManager: SoundManager;
     _fontManager: FontManager;
     _jsonManager: JsonManager;
+    _effectsManager: EffectsManager;
     _bitmapFontManager: BitmapFontManager;
     _maxFPS: integer;
     _minFPS: integer;
@@ -50,6 +51,7 @@ namespace gdjs {
     _resizeMode: 'adaptWidth' | 'adaptHeight' | string;
     _adaptGameResolutionAtRuntime: boolean;
     _scaleMode: 'linear' | 'nearest';
+    _pixelsRounding: boolean;
     _renderer: RuntimeGameRenderer;
 
     //Game loop management (see startGameLoop method)
@@ -94,6 +96,7 @@ namespace gdjs {
         this._data.resources.resources,
         this._imageManager
       );
+      this._effectsManager = new gdjs.EffectsManager();
       this._maxFPS = this._data ? this._data.properties.maxFPS : 60;
       this._minFPS = this._data ? this._data.properties.minFPS : 15;
       this._gameResolutionWidth = this._data.properties.windowWidth;
@@ -103,6 +106,7 @@ namespace gdjs {
       this._resizeMode = this._data.properties.sizeOnStartupMode;
       this._adaptGameResolutionAtRuntime = this._data.properties.adaptGameResolutionAtRuntime;
       this._scaleMode = data.properties.scaleMode || 'linear';
+      this._pixelsRounding = this._data.properties.pixelsRounding;
       this._renderer = new gdjs.RuntimeGameRenderer(
         this,
         this._options.forceFullscreen || false
@@ -199,6 +203,15 @@ namespace gdjs {
      */
     getJsonManager(): gdjs.JsonManager {
       return this._jsonManager;
+    }
+
+    /**
+     * Get the effects manager of the game, which allows to manage
+     * effects on runtime objects or runtime layers.
+     * @return The effects manager for the game
+     */
+    getEffectsManager(): gdjs.EffectsManager {
+      return this._effectsManager;
     }
 
     /**
@@ -417,6 +430,13 @@ namespace gdjs {
     }
 
     /**
+     * Return if the game is rounding pixels when rendering.
+     */
+    getPixelsRounding(): boolean {
+      return this._pixelsRounding;
+    }
+
+    /**
      * Set or unset the game as paused.
      * When paused, the game won't step and will be freezed. Useful for debugging.
      * @param enable true to pause the game, false to unpause
@@ -431,6 +451,7 @@ namespace gdjs {
     loadAllAssets(callback: () => void, progressCallback?: (float) => void) {
       const loadingScreen = new gdjs.LoadingScreenRenderer(
         this.getRenderer(),
+        this._imageManager,
         this._data.properties.loadingScreen
       );
       const allAssetsTotal = this._data.resources.resources.length;
@@ -442,7 +463,7 @@ namespace gdjs {
       this._imageManager.loadTextures(
         function (count, total) {
           const percent = Math.floor((count / allAssetsTotal) * 100);
-          loadingScreen.render(percent);
+          loadingScreen.setPercent(percent);
           if (progressCallback) {
             progressCallback(percent);
           }
@@ -453,7 +474,7 @@ namespace gdjs {
               const percent = Math.floor(
                 ((texturesTotalCount + count) / allAssetsTotal) * 100
               );
-              loadingScreen.render(percent);
+              loadingScreen.setPercent(percent);
               if (progressCallback) {
                 progressCallback(percent);
               }
@@ -466,7 +487,7 @@ namespace gdjs {
                       allAssetsTotal) *
                       100
                   );
-                  loadingScreen.render(percent);
+                  loadingScreen.setPercent(percent);
                   if (progressCallback) {
                     progressCallback(percent);
                   }
@@ -482,7 +503,7 @@ namespace gdjs {
                           allAssetsTotal) *
                           100
                       );
-                      loadingScreen.render(percent);
+                      loadingScreen.setPercent(percent);
                       if (progressCallback) {
                         progressCallback(percent);
                       }
@@ -499,11 +520,11 @@ namespace gdjs {
                               allAssetsTotal) *
                               100
                           );
-                          loadingScreen.render(percent);
+                          loadingScreen.setPercent(percent);
                           if (progressCallback) progressCallback(percent);
                         })
+                        .then(() => loadingScreen.unload())
                         .then(() => {
-                          loadingScreen.unload();
                           callback();
                         });
                     }

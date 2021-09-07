@@ -108,12 +108,14 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "xlocbuf": "cpp",
-        "xlocmes": "cpp"
+        "xlocmes": "cpp",
+        "xmemory0": "cpp"
     },
     "files.exclude": {
         "Binaries/*build*": true,
         "Binaries/Output": true,
         "ExtLibs/SFML": true,
+        "GDJS/Runtime-dist": true,
         "docs": true,
         "newIDE/electron-app/dist": true,
         "newIDE/app/build": true,

@@ -6,6 +6,7 @@ This project is released under the MIT License.
 */
 #if defined(GD_IDE_ONLY)
 #include "GDCore/Extensions/PlatformExtension.h"
+#include "GDCore/Tools/Localization.h"
 #include "ParticleEmitterObject.h"
 
 void DeclareParticleSystemExtension(gd::PlatformExtension& extension);
@@ -28,10 +29,7 @@ class ParticleSystemJsExtension : public gd::PlatformExtension {
         .AddIncludeFile(
             "Extensions/ParticleSystem/particleemitterobject-pixi-renderer.js")
         .AddIncludeFile(
-            "Extensions/ParticleSystem/pixi-particles-pixi-renderer.min.js")
-        .AddIncludeFile(
-            "Extensions/ParticleSystem/"
-            "particleemitterobject-cocos-renderer.js");
+            "Extensions/ParticleSystem/pixi-particles-pixi-renderer.min.js");
 
     auto& actions = GetAllActionsForObject("ParticleSystem::ParticleEmitter");
     auto& conditions =
