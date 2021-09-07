@@ -40,7 +40,7 @@ import {
   shouldCloseOrCancel,
   shouldSubmit,
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   container: {

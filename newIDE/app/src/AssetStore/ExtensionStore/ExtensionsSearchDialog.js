@@ -10,7 +10,7 @@ import EventsFunctionsExtensionsContext from '../../EventsFunctionsExtensionsLoa
 import HelpButton from '../../UI/HelpButton';
 import { importExtension, installExtension } from './InstallExtension';
 import InfoBar from '../../UI/Messages/InfoBar';
-import { type ExtensionShortHeader } from '../../Utils/GDevelopServices/Extension';
+import { type ExtensionShortHeader } from '../../Utils/GDeveloppeServices/Extension';
 
 type Props = {|
   project: gdProject,

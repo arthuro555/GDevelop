@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import GDevelopThemeContext from '../UI/Theme/ThemeContext';
+import GDeveloppeThemeContext from '../UI/Theme/ThemeContext';
 
 type Props = {|
   style?: Object,
@@ -23,7 +23,7 @@ type Props = {|
  * at least one of the sibling elements have `position: relative` set.
  */
 const CheckeredBackground = (props: Props) => {
-  const theme = React.useContext(GDevelopThemeContext);
+  const theme = React.useContext(GDeveloppeThemeContext);
   const backgroundStyle = {
     position: 'absolute',
     top: 0,

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   type AssetShortHeader,
   isPixelArt,
-} from '../Utils/GDevelopServices/Asset';
+} from '../Utils/GDeveloppeServices/Asset';
 import { getPixelatedImageRendering } from '../Utils/CssHelpers';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Text from '../UI/Text';

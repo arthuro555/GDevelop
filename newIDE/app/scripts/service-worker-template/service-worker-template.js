@@ -12,11 +12,11 @@ if (typeof importScripts === 'function') {
       blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
     });
 
-    // Cache resources from GDevelop cloudfront server (CORS enabled).
+    // Cache resources from GDeveloppe cloudfront server (CORS enabled).
     workbox.routing.registerRoute(
       /https:\/\/resources\.gdevelop-app\.com\/.*$/,
       workbox.strategies.networkFirst({
-        cacheName: 'gdevelop-resources-cache',
+        cacheName: 'GDeveloppe-resources-cache',
         plugins: [
           new workbox.expiration.Plugin({
             maxEntries: 500,

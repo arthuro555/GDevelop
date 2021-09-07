@@ -7,17 +7,17 @@
 - To generate the GDJS Runtime (game engine) documentation:
 
   ```bash
-  cd <GDevelop repository>/GDJS
+  cd <GDeveloppe repository>/GDJS
   npm run generate-doc
   ```
 
-  Output will be in `<GDevelop repository>/docs/GDJS Documentation`.
+  Output will be in `<GDeveloppe repository>/docs/GDJS Documentation`.
 
 - To generate the GDJS Platform documentation for the IDE, install [Doxygen](https://www.doxygen.nl/index.html). Then:
 
   ```bash
-  cd <GDevelop repository>/GDJS/docs
+  cd <GDeveloppe repository>/GDJS/docs
   doxygen
   ```
 
-  Output will be in `<GDevelop repository>/docs/GDJS Runtime Documentation`.
+  Output will be in `<GDeveloppe repository>/docs/GDJS Runtime Documentation`.

@@ -10,7 +10,7 @@ import ListIcon from '../UI/ListIcon';
 import Text from '../UI/Text';
 import { type StorageProvider, type FileMetadata } from '../ProjectsStorage';
 import UrlStorageProvider from '../ProjectsStorage/UrlStorageProvider';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   onOpen: (

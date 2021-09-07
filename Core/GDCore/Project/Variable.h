@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -97,7 +97,7 @@ class GD_CORE_API Variable {
    */
   void SetValue(double val) {
     value = val;
-    // NaN values are not supported by GDevelop nor the serializer.
+    // NaN values are not supported by GDeveloppe nor the serializer.
     if(std::isnan(value)) value = 0.0;
     type = Type::Number;
   }

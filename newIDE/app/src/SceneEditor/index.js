@@ -74,7 +74,7 @@ import { type InfoBarDetails } from '../Hints/ObjectsAdditionalWork';
 import { type HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
 import EventsRootVariablesFinder from '../Utils/EventsRootVariablesFinder';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const INSTANCES_CLIPBOARD_KIND = 'Instances';
 

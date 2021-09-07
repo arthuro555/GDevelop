@@ -4,7 +4,7 @@
  * to the folder passed as parameter, in a subfolder with the extension name.
  *
  * This is useful to avoid mixing the Electron extension source files inside
- * GDevelop sources.
+ * GDeveloppe sources.
  */
 var shell = require('shelljs');
 var fs = require('fs');

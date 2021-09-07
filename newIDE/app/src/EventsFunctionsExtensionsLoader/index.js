@@ -13,7 +13,7 @@ import {
   declareBehaviorPropertiesInstructionAndExpressions,
 } from './MetadataDeclarationHelpers';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type EventsFunctionCodeWriter = {|
   getIncludeFileFor: (functionName: string) => string,

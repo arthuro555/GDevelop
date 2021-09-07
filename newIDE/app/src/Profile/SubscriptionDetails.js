@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Column, Line } from '../UI/Grid';
-import { type Subscription } from '../Utils/GDevelopServices/Usage';
+import { type Subscription } from '../Utils/GDeveloppeServices/Usage';
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import RaisedButton from '../UI/RaisedButton';
 import { Trans } from '@lingui/macro';

@@ -111,7 +111,7 @@ type Props = {|
  *     and [Material Design specification](https://material.io/components/text-fields/#specs)).
  *
  *   The filled background gives them more emphasize compared compared to a single underline
- *   (as done in previous GDevelop versions). They have a label indicating what they refer to.
+ *   (as done in previous GDeveloppe versions). They have a label indicating what they refer to.
  *
  * 2. Sometimes, a floating label would not provide more information and is considered to be
  *   obvious (thanks to the existing value, dialog title or button label).

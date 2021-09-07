@@ -24,7 +24,7 @@ import getObjectByName from '../Utils/GetObjectByName';
 import { getAllPointNames } from '../ObjectEditor/Editors/SpriteEditor/Utils/SpriteObjectHelper';
 import { mapFor } from '../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type BaseExpressionAutocompletion = {|
   completion: string,
@@ -63,7 +63,7 @@ export type ExpressionAutocompletion =
     |};
 
 type ExpressionAutocompletionContext = {|
-  gd: libGDevelop,
+  gd: libGDeveloppe,
   project: gdProject,
   globalObjectsContainer: gdObjectsContainer,
   objectsContainer: gdObjectsContainer,

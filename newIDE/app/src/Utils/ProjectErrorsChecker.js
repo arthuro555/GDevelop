@@ -1,7 +1,7 @@
 // @flow
 import { showErrorBox } from '../UI/Messages/MessageBox';
 import values from 'lodash/values';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type ProjectError = {
   type: 'error' | 'warning',

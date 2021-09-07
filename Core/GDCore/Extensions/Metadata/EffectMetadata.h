@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-present Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -50,7 +50,7 @@ class GD_CORE_API EffectMetadata {
   };
 
   /**
-   * Set the help path of the effect, relative to the GDevelop documentation
+   * Set the help path of the effect, relative to the GDeveloppe documentation
    * root.
    */
   EffectMetadata& SetHelpPath(const gd::String& path) {
@@ -88,7 +88,7 @@ class GD_CORE_API EffectMetadata {
   }
 
   /**
-   * \brief Get the help path of the effect, relative to the GDevelop
+   * \brief Get the help path of the effect, relative to the GDeveloppe
    * documentation root.
    */
   const gd::String& GetHelpPath() const { return helpPath; }

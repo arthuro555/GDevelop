@@ -1,9 +1,9 @@
-import { createGdevelopTheme } from '../CreateTheme';
+import { createGDeveloppeTheme } from '../CreateTheme';
 
 import darkStyles from './SolarizedDarkThemeVariables';
 import './SolarizedDarkThemeVariables.css';
 
-export default createGdevelopTheme(
+export default createGDeveloppeTheme(
   darkStyles,
   'SolarizedDarkTheme',
   'dark',

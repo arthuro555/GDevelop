@@ -1,5 +1,5 @@
 /*
-GDevelop - Platform Behavior Extension
+GDeveloppe - Platform Behavior Extension
 Copyright (c) 2013-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 namespace gdjs {

@@ -17,7 +17,7 @@ import { ExplanationHeader, DoneFooter } from '../GenericExporters/HTML5Export';
 const electron = optionalRequire('electron');
 const shell = electron ? electron.shell : null;
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type ExportState = {
   outputDir: string,

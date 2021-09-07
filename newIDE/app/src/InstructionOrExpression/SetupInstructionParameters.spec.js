@@ -6,7 +6,7 @@ import {
   enumerateFreeInstructions,
 } from './EnumerateInstructions';
 import { setupInstructionParameters } from './SetupInstructionParameters';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('setupInstructionParameters', () => {
   it('sets the proper number of parameters', () => {

@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -164,13 +164,13 @@ class GD_CORE_API ObjectMetadata {
   ObjectMetadata& SetDescription(const gd::String& description_);
 
   /**
-   * \brief Get the help path of the object, relative to the GDevelop
+   * \brief Get the help path of the object, relative to the GDeveloppe
    * documentation root.
    */
   const gd::String& GetHelpPath() const { return helpPath; }
 
   /**
-   * \brief Set the help path of the object, relative to the GDevelop
+   * \brief Set the help path of the object, relative to the GDeveloppe
    * documentation root.
    *
    * The object instructions will have this help path set by

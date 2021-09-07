@@ -9,7 +9,7 @@ import TextField from '../UI/TextField';
 import {
   type LoginForm,
   type LoginError,
-} from '../Utils/GDevelopServices/Authentification';
+} from '../Utils/GDeveloppeServices/Authentification';
 import LeftLoader from '../UI/LeftLoader';
 import BackgroundText from '../UI/BackgroundText';
 import { ColumnStackLayout } from '../UI/Layout';

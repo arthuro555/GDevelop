@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. Copyright 2016 Victor Levasseur (victorlevasseur52@gmail.com) This
  * project is released under the MIT License.
@@ -106,9 +106,9 @@ class GD_CORE_API PlatformExtension {
   }
 
   /**
-   * \brief Set the path to the help, relative to the GDevelop documentation
+   * \brief Set the path to the help, relative to the GDeveloppe documentation
    * root. For example, "/all-features/collisions" for
-   * "http://wiki.compilgames.net/doku.php/gdevelop5/all-features/collisions".
+   * "http://wiki.compilgames.net/doku.php/GDeveloppe5/all-features/collisions".
    *
    * The instructions, objects and behaviors will have this help path set by
    * default, unless you call SetHelpPath on them.
@@ -356,7 +356,7 @@ class GD_CORE_API PlatformExtension {
 
   /**
    * \brief Return the help path of extension, relative to the
-   * GDevelop documentation root.
+   * GDeveloppe documentation root.
    */
   const gd::String& GetHelpPath() const { return helpPath; }
 

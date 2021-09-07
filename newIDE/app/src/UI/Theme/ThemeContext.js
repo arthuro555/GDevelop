@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import { type GDevelopTheme } from '.';
+import { type GDeveloppeTheme } from '.';
 import DefaultTheme from './DefaultTheme';
 
-const GDevelopThemeContext = React.createContext<GDevelopTheme>(
-  DefaultTheme.gdevelopTheme
+const GDeveloppeThemeContext = React.createContext<GDeveloppeTheme>(
+  DefaultTheme.GDeveloppeTheme
 );
 
-export default GDevelopThemeContext;
+export default GDeveloppeThemeContext;

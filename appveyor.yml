@@ -1,4 +1,4 @@
-# AppVeyor configuration to build GDevelop app running
+# AppVeyor configuration to build GDeveloppe app running
 # on the Electron runtime (newIDE/electron-app) for Windows.
 # For macOS and Linux, see the config.yml file.
 
@@ -16,9 +16,9 @@ init:
 - ps: ''
 install:
 - ps: Install-Product node 14
-# Build GDevelop.js (and run tests to ensure it works)
+# Build GDeveloppe.js (and run tests to ensure it works)
 - cmd: >-
-    cd GDevelop.js
+    cd GDeveloppe.js
 
     git clone https://github.com/juj/emsdk.git
 
@@ -38,7 +38,7 @@ install:
 
     cd ..
 
-# Build GDevelop IDE
+# Build GDeveloppe IDE
 - cmd: >-
     cd newIDE\app
 
@@ -68,7 +68,7 @@ build_script:
 # Run a few tests on Windows.
 test_script:
 - cmd: >-
-    cd GDevelop.js
+    cd GDeveloppe.js
 
     npm test
 
@@ -82,7 +82,7 @@ test_script:
 
 artifacts:
   - path: newIDE\electron-app\dist
-    name: GDevelopWindows
+    name: GDeveloppeWindows
 
 # Upload artifacts (AWS) - configuration is stored on AppVeyor itself.
 deploy:

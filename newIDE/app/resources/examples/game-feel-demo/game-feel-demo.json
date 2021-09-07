@@ -26,7 +26,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensionProperties": [],
     "extensions": [
@@ -96,10 +96,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -544,7 +544,7 @@
       "r": 83,
       "standardSortMethod": true,
       "stopSoundsOnStartup": true,
-      "title": "GDevelop Juice Tutorial",
+      "title": "GDeveloppe Juice Tutorial",
       "v": 3,
       "uiSettings": {
         "grid": true,
@@ -4205,7 +4205,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "Hi There\n\nThis is a collection of small effects, tricks and general tips for making your game feel better. I'll also briefly touch on subjects like camera movement and sound design so you have a pretty broad tutorial example at hand.\n\nPlease note that this is an intermediate tutorial. It won't explain every single step to make these things, rather you are supposed to look at and coppy the events/objects and figure some stuff out yourself. You'll need some understanding of how GDev works in general and how variables and object variables work in particular. If you are new to GDevelop you should do other tutorials first.\n\nMany of the systems here work with game states, so things like screenshake etc have \na) events that can initialize them from anywhere in the game and \nb) events that govern their behavior once initialised.\n\nAlso I'd like to note that, while I uses these technique in and action game context, they are applicable to nearly any type of games. If you look at recent entries for deck builders or strategy games you'll see at least some of the techniques used. And speaking of reference games: I tried to mention examples of games that use these techniques to good effect as often as possible. \n\nFor further reference on why this stuff is important I recommend Jan Willem Nijmans video on the topic: https://www.youtube.com/watch?v=AJdEqssNZ-U\n\n- Comments always refer to the event that comes bellow them.\n- Comment colors indicate categories:",
+          "comment": "Hi There\n\nThis is a collection of small effects, tricks and general tips for making your game feel better. I'll also briefly touch on subjects like camera movement and sound design so you have a pretty broad tutorial example at hand.\n\nPlease note that this is an intermediate tutorial. It won't explain every single step to make these things, rather you are supposed to look at and coppy the events/objects and figure some stuff out yourself. You'll need some understanding of how GDev works in general and how variables and object variables work in particular. If you are new to GDeveloppe you should do other tutorials first.\n\nMany of the systems here work with game states, so things like screenshake etc have \na) events that can initialize them from anywhere in the game and \nb) events that govern their behavior once initialised.\n\nAlso I'd like to note that, while I uses these technique in and action game context, they are applicable to nearly any type of games. If you look at recent entries for deck builders or strategy games you'll see at least some of the techniques used. And speaking of reference games: I tried to mention examples of games that use these techniques to good effect as often as possible. \n\nFor further reference on why this stuff is important I recommend Jan Willem Nijmans video on the topic: https://www.youtube.com/watch?v=AJdEqssNZ-U\n\n- Comments always refer to the event that comes bellow them.\n- Comment colors indicate categories:",
           "comment2": ""
         },
         {
@@ -6925,7 +6925,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "---Shot Trail Scaling---\n\nHere we handle our shot trail. Note that the factor we divide the trail by is shorter than the actual sprite. The trail has a lot of glow but the actual trail is only 96px long. Also look at the vfx_shot_trail animation and note that the origin/center is at the point where the trail physically starts, since that is the position we want it to extend from.\n\nUsing the linked object conditions comes with the advantage that the trail will stop growing as soon as the shot is removed, but you might want to adjust that if you need different behaviors.\n\nWith good sprites you can make this quite a nice effect, but there are limits due to the fact that this uses stretching in order to scale the trail. There might be a better method to do this in future version of GDevelop.",
+          "comment": "---Shot Trail Scaling---\n\nHere we handle our shot trail. Note that the factor we divide the trail by is shorter than the actual sprite. The trail has a lot of glow but the actual trail is only 96px long. Also look at the vfx_shot_trail animation and note that the origin/center is at the point where the trail physically starts, since that is the position we want it to extend from.\n\nUsing the linked object conditions comes with the advantage that the trail will stop growing as soon as the shot is removed, but you might want to adjust that if you need different behaviors.\n\nWith good sprites you can make this quite a nice effect, but there are limits due to the fact that this uses stretching in order to scale the trail. There might be a better method to do this in future version of GDeveloppe.",
           "comment2": ""
         },
         {

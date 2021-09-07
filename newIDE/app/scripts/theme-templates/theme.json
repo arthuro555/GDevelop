@@ -2,7 +2,7 @@
   "theme": {
     "primary": {
       "color": {
-        "value": "{gdevelop.color.blue.value}"
+        "value": "{GDeveloppe.color.blue.value}"
       },
       "text-contrast-color": {
         "value": "#fff"
@@ -35,7 +35,7 @@
     },
     "selection": {
       "background-color": {
-        "value": "{gdevelop.color.selection.value}"
+        "value": "{GDeveloppe.color.selection.value}"
       },
       "color": {
         "value": "white"
@@ -101,7 +101,7 @@
       },
       "selected": {
         "background-color": {
-          "value": "{gdevelop.color.dark-blue.value}"
+          "value": "{GDeveloppe.color.dark-blue.value}"
         },
         "color": {
           "value": "#EEE"

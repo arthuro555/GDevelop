@@ -4,7 +4,7 @@ import SearchBar from '../../UI/SearchBar';
 import { Column, Line } from '../../UI/Grid';
 import Background from '../../UI/Background';
 import ScrollView from '../../UI/ScrollView';
-import { type Resource } from '../../Utils/GDevelopServices/Asset';
+import { type Resource } from '../../Utils/GDeveloppeServices/Asset';
 import { FiltersChooser } from '../../UI/Search/FiltersChooser';
 import { ResourceStoreContext } from './ResourceStoreContext';
 import { BoxSearchResults } from '../../UI/Search/BoxSearchResults';

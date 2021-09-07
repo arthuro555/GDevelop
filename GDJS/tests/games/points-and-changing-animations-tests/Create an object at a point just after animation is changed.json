@@ -30,7 +30,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": false
+      "showGDeveloppeSplash": false
     },
     "extensions": [
       {
@@ -93,10 +93,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -427,7 +427,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "All ball objects should be created at the proper point according to the current animation (if you press the arrow buttons randomly, then balls should do a perfect cross on the screen).\n\nThis means that if the animation is changed, the ball must be created at the position of the \"Point\" of the animation that was just set.\n\nThere was a bug in GDevelop (GD 5.0.0 beta 83 and older) were the \"Point\" was still considered to be at the position of the previous animation.",
+          "comment": "All ball objects should be created at the proper point according to the current animation (if you press the arrow buttons randomly, then balls should do a perfect cross on the screen).\n\nThis means that if the animation is changed, the ball must be created at the position of the \"Point\" of the animation that was just set.\n\nThere was a bug in GDeveloppe (GD 5.0.0 beta 83 and older) were the \"Point\" was still considered to be at the position of the previous animation.",
           "comment2": ""
         },
         {

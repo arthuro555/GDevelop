@@ -10,7 +10,7 @@ import {
 import localFileSystem from '../../Export/LocalExporters/LocalFileSystem';
 import assignIn from 'lodash/assignIn';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const fs = optionalRequire('fs-extra');
 const path = optionalRequire('path');
@@ -148,7 +148,7 @@ export const onSaveProjectAs = (
   const browserWindow = electron.remote.getCurrentWindow();
   const options = {
     defaultPath,
-    filters: [{ name: 'GDevelop 5 project', extensions: ['json'] }],
+    filters: [{ name: 'GDeveloppe 5 project', extensions: ['json'] }],
   };
 
   if (!dialog) {

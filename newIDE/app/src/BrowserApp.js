@@ -4,7 +4,7 @@ import MainFrame from './MainFrame';
 import Window from './Utils/Window';
 import ExportDialog from './Export/ExportDialog';
 import CreateProjectDialog from './ProjectCreation/CreateProjectDialog';
-import Authentification from './Utils/GDevelopServices/Authentification';
+import Authentification from './Utils/GDeveloppeServices/Authentification';
 import './UI/iconmoon-font.css'; // Styles for Iconmoon font.
 
 // Import for browser only IDE

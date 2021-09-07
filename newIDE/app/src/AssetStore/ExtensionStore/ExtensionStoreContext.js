@@ -5,8 +5,8 @@ import {
   getExtensionsRegistry,
   type ExtensionsRegistry,
   type ExtensionShortHeader,
-} from '../../Utils/GDevelopServices/Extension';
-import { type Filters } from '../../Utils/GDevelopServices/Types.flow';
+} from '../../Utils/GDeveloppeServices/Extension';
+import { type Filters } from '../../Utils/GDeveloppeServices/Types.flow';
 import { useSearchItem } from '../../UI/Search/UseSearchItem';
 
 const defaultSearchText = '';

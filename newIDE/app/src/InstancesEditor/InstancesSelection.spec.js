@@ -1,6 +1,6 @@
 // @flow
 import InstancesSelection from './InstancesSelection';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('InstancesSelection', () => {
   it('handles multiselection of instances', () => {

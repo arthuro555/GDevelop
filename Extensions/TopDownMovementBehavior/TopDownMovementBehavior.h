@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Top-down movement Behavior Extension
+GDeveloppe - Top-down movement Behavior Extension
 Copyright (c) 2010-present Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */

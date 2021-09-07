@@ -72,7 +72,7 @@ export default class HelpFinder extends React.PureComponent<Props, State> {
             primary={false}
             onClick={() => {
               Window.openExternalURL(
-                'http://wiki.compilgames.net/doku.php/gdevelop5/start'
+                'http://wiki.compilgames.net/doku.php/GDeveloppe5/start'
               );
             }}
             label={<Trans>Browse the documentation</Trans>}

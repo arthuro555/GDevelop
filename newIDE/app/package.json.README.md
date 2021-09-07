@@ -1,6 +1,6 @@
-# About GDevelop IDE dependencies (package.json)
+# About GDeveloppe IDE dependencies (package.json)
 
-GDevelop relies on some dependencies that can have special requirements:
+GDeveloppe relies on some dependencies that can have special requirements:
 
 - **TypeScript** here is only used to check the types in the `scripts/` files. The IDE uses Flow for static typing. TypeScript is used in the game engine too (see GDJS and Extensions folders).
 

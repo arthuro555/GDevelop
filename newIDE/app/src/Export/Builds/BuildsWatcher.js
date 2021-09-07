@@ -1,5 +1,5 @@
 // @flow
-import { type Build, getBuild } from '../../Utils/GDevelopServices/Build';
+import { type Build, getBuild } from '../../Utils/GDeveloppeServices/Build';
 import { delay } from '../../Utils/Delay';
 import { type UserProfile } from '../../Profile/UserProfileContext';
 

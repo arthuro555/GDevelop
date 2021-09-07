@@ -95,7 +95,7 @@ export default function Tutorials() {
           <Line justifyContent="center" noMargin>
             <RaisedButton
               primary
-              label={<Trans>Open GDevelop documentation</Trans>}
+              label={<Trans>Open GDeveloppe documentation</Trans>}
               onClick={() => {
                 Window.openExternalURL(getHelpLink('/'));
               }}
@@ -120,7 +120,7 @@ export default function Tutorials() {
           <Line justifyContent="center" noMargin>
             <RaisedButton
               primary
-              label={<Trans>Find more on GDevelop Youtube channel</Trans>}
+              label={<Trans>Find more on GDeveloppe Youtube channel</Trans>}
               onClick={() => {
                 Window.openExternalURL(
                   'https://www.youtube.com/watch?v=dQw4w9WgXcQ'

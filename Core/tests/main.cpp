@@ -1,10 +1,10 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
 /**
- * @file Main file for GDevelop Core tests
+ * @file Main file for GDeveloppe Core tests
  *
  * Please write any new test in a separate file.
  */

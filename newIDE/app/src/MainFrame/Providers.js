@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import { getTheme } from '../UI/Theme';
 import UserProfileProvider from '../Profile/UserProfileProvider';
-import Authentification from '../Utils/GDevelopServices/Authentification';
+import Authentification from '../Utils/GDeveloppeServices/Authentification';
 import PreferencesProvider from './Preferences/PreferencesProvider';
 import PreferencesContext from './Preferences/PreferencesContext';
 import GDI18nProvider from '../Utils/i18n/GDI18nProvider';
@@ -20,7 +20,7 @@ import {
   type EventsFunctionsExtensionWriter,
   type EventsFunctionsExtensionOpener,
 } from '../EventsFunctionsExtensionsLoader/Storage';
-import GDevelopThemeContext from '../UI/Theme/ThemeContext';
+import GDeveloppeThemeContext from '../UI/Theme/ThemeContext';
 import { UnsavedChangesContextProvider } from './UnsavedChangesContext';
 import { CommandsContextProvider } from '../CommandPalette/CommandsContext';
 import { create } from 'jss';
@@ -79,7 +79,7 @@ export default class Providers extends React.Component<Props, {||}> {
                 });
                 return (
                   <GDI18nProvider language={values.language}>
-                    <GDevelopThemeContext.Provider value={theme.gdevelopTheme}>
+                    <GDeveloppeThemeContext.Provider value={theme.GDeveloppeTheme}>
                       <StylesProvider jss={jss}>
                         <ThemeProvider theme={theme.muiTheme}>
                           <UserProfileProvider
@@ -122,7 +122,7 @@ export default class Providers extends React.Component<Props, {||}> {
                           </UserProfileProvider>
                         </ThemeProvider>
                       </StylesProvider>
-                    </GDevelopThemeContext.Provider>
+                    </GDeveloppeThemeContext.Provider>
                   </GDI18nProvider>
                 );
               }}

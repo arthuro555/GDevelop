@@ -19,7 +19,7 @@ import {
   rgbStringAndAlphaToRGBColor,
   type RGBColor,
 } from '../Utils/ColorTransformer';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   open: boolean,

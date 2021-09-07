@@ -8,6 +8,6 @@
  * an null/empty object.
  */
 export const isNullPtr = (
-  gd: libGDevelop,
+  gd: libGDeveloppe,
   object: gdEmscriptenObject
 ): boolean => gd.getPointer(object) === 0;

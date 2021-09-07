@@ -1,6 +1,6 @@
 import { enumerateObjects, filterObjectsList } from './EnumerateObjects';
 import { makeTestProject } from '../fixtures/TestProject';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('EnumerateObjects', () => {
   it('can enumerate objects from a project and scene', () => {

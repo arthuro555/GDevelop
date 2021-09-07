@@ -3,7 +3,7 @@ import { Trans } from '@lingui/macro';
 import * as React from 'react';
 import Text from '../../UI/Text';
 import { Column, Line } from '../../UI/Grid';
-import { type TargetName } from '../../Utils/GDevelopServices/Build';
+import { type TargetName } from '../../Utils/GDeveloppeServices/Build';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';

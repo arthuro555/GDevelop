@@ -194,14 +194,14 @@ export function getThemeMode(color: string, contrastText: string) {
   };
 }
 
-export function createGdevelopTheme(
+export function createGDeveloppeTheme(
   styles: any,
   rootClassNameIdentifier: string,
   paletteType: string,
-  gdevelopIconsCSSFilter: string = ''
+  GDeveloppeIconsCSSFilter: string = ''
 ) {
   return {
-    gdevelopTheme: {
+    GDeveloppeTheme: {
       palette: {
         canvasColor: styles['ThemeSurfaceCanvasBackgroundColor'],
       },
@@ -215,7 +215,7 @@ export function createGdevelopTheme(
         separatorColor: styles['ThemeToolbarSeparatorColor'],
       },
       closableTabs: {
-        fontFamily: styles['GdevelopFontFamily'],
+        fontFamily: styles['GDeveloppeFontFamily'],
         containerBackgroundColor: styles['ThemeSurfaceWindowBackgroundColor'],
         backgroundColor: styles['ThemeClosableTabsDefaultBackgroundColor'],
         textColor: styles['ThemeClosableTabsDefaultColor'],
@@ -261,11 +261,11 @@ export function createGdevelopTheme(
       logo: {
         src: 'res/GD-logo-big.png',
       },
-      gdevelopIconsCSSFilter,
+      GDeveloppeIconsCSSFilter,
     },
     muiThemeOptions: {
       typography: {
-        fontFamily: styles['GdevelopFontFamily'],
+        fontFamily: styles['GDeveloppeFontFamily'],
       },
       palette: {
         type: paletteType,

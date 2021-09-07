@@ -9,7 +9,7 @@ import Error from '@material-ui/icons/Error';
 import { Spacer, Line, Column } from './Grid';
 import FlatButton from './FlatButton';
 import Text from './Text';
-import GDevelopThemeContext from './Theme/ThemeContext';
+import GDeveloppeThemeContext from './Theme/ThemeContext';
 import { ResponsiveLineStackLayout } from './Layout';
 
 const styles = {
@@ -36,7 +36,7 @@ const AlertMessage = ({
   renderRightButton,
   renderLeftIcon,
 }: Props) => {
-  const gdevelopTheme = React.useContext(GDevelopThemeContext);
+  const GDeveloppeTheme = React.useContext(GDeveloppeThemeContext);
 
   return (
     <Paper elevation={10} square>
@@ -60,7 +60,7 @@ const AlertMessage = ({
                   <Warning
                     style={{
                       ...styles.icon,
-                      color: gdevelopTheme.message.warning,
+                      color: GDeveloppeTheme.message.warning,
                     }}
                   />
                 )}
@@ -68,7 +68,7 @@ const AlertMessage = ({
                   <Error
                     style={{
                       ...styles.icon,
-                      color: gdevelopTheme.message.error,
+                      color: GDeveloppeTheme.message.error,
                     }}
                   />
                 )}

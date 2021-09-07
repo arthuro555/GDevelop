@@ -16,7 +16,7 @@ import AlertMessage from '../../UI/AlertMessage';
 import { ColumnStackLayout } from '../../UI/Layout';
 import DismissableTutorialMessage from '../../Hints/DismissableTutorialMessage';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = EditorProps;
 

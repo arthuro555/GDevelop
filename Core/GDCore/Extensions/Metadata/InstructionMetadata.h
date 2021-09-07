@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -70,13 +70,13 @@ class GD_CORE_API InstructionMetadata {
   bool CanHaveSubInstructions() const { return canHaveSubInstructions; }
 
   /**
-   * Get the help path of the instruction, relative to the GDevelop
+   * Get the help path of the instruction, relative to the GDeveloppe
    * documentation root.
    */
   const gd::String &GetHelpPath() const { return helpPath; }
 
   /**
-   * Set the help path of the instruction, relative to the GDevelop
+   * Set the help path of the instruction, relative to the GDeveloppe
    * documentation root.
    */
   InstructionMetadata &SetHelpPath(const gd::String &path) {
@@ -133,7 +133,7 @@ class GD_CORE_API InstructionMetadata {
   /**
    * \brief Add a parameter to the instruction metadata.
    *
-   * \param type One of the type handled by GDevelop. This
+   * \param type One of the type handled by GDeveloppe. This
    * will also determine the type of the argument used when calling the function
    * in the generated code.
    * \param description Description for parameter
@@ -152,7 +152,7 @@ class GD_CORE_API InstructionMetadata {
   /**
    * \brief Add a parameter not displayed in editor.
    *
-   * \param type One of the type handled by GDevelop. This will also determine
+   * \param type One of the type handled by GDeveloppe. This will also determine
    * the type of the argument used when calling the function in the generated
    * code. \param supplementaryInformation Depends on `type`. For example, when
    * `type == "inlineCode"`, the content of supplementaryInformation is inserted

@@ -53,12 +53,12 @@ namespace gdjs {
      */
     constructor(runtimeScene: gdjs.RuntimeScene, objectData: BBTextObjectData) {
       super(runtimeScene, objectData);
-      // @ts-ignore - parseFloat should not be required, but GDevelop 5.0 beta 92 and below were storing it as a string.
+      // @ts-ignore - parseFloat should not be required, but GDeveloppe 5.0 beta 92 and below were storing it as a string.
       this._opacity = parseFloat(objectData.content.opacity);
       this._text = objectData.content.text;
       this._color = gdjs.rgbOrHexToRGBColor(objectData.content.color);
       this._fontFamily = objectData.content.fontFamily;
-      // @ts-ignore - parseFloat should not be required, but GDevelop 5.0 beta 92 and below were storing it as a string.
+      // @ts-ignore - parseFloat should not be required, but GDeveloppe 5.0 beta 92 and below were storing it as a string.
       this._fontSize = parseFloat(objectData.content.fontSize);
       this._wordWrap = objectData.content.wordWrap;
       this._align = objectData.content.align;

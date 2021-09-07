@@ -1,6 +1,6 @@
 // @ts-check
 
-const gdevelopWikiUrlRoot = 'http://wiki.compilgames.net/doku.php/gdevelop5';
+const GDeveloppeWikiUrlRoot = 'http://wiki.compilgames.net/doku.php/GDeveloppe5';
 const improperlyFormattedHelpPaths = new Set();
 
 /** @param {string} str */
@@ -29,7 +29,7 @@ const getHelpLink = path => {
   };
 
   if (isRelativePathToDocumentationRoot(path))
-    return `${gdevelopWikiUrlRoot}${path}`;
+    return `${GDeveloppeWikiUrlRoot}${path}`;
 
   if (isDocumentationAbsoluteUrl(path)) return path;
 
@@ -68,7 +68,7 @@ const getExtensionFolderName = extensionName => {
 };
 
 module.exports = {
-  gdevelopWikiUrlRoot,
+  GDeveloppeWikiUrlRoot,
   improperlyFormattedHelpPaths,
   getHelpLink,
   generateReadMoreLink,

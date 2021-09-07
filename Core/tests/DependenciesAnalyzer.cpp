@@ -1,10 +1,10 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
 /**
- * @file Tests covering common features of GDevelop Core.
+ * @file Tests covering common features of GDeveloppe Core.
  */
 #include "GDCore/IDE/DependenciesAnalyzer.h"
 #include "GDCore/Events/Builtin/LinkEvent.h"

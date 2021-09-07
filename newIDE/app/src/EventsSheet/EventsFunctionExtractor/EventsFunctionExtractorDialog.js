@@ -25,7 +25,7 @@ import EventsFunctionParametersEditor from '../../EventsFunctionsExtensionEditor
 import EventsFunctionPropertiesEditor from '../../EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/EventsFunctionPropertiesEditor';
 import HelpButton from '../../UI/HelpButton';
 import { ResponsiveLineStackLayout } from '../../UI/Layout';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

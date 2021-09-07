@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { CorsAwareImage } from './CorsAwareImage';
-import GDevelopThemeContext from './Theme/ThemeContext';
+import GDeveloppeThemeContext from './Theme/ThemeContext';
 // No i18n in this file
 
 type SizeProps =
@@ -17,7 +17,7 @@ type Props = {|
   src: string,
   tooltip?: string,
   disabled?: boolean,
-  isGDevelopIcon?: boolean,
+  isGDeveloppeIcon?: boolean,
   cssAnimation?: string,
   useExactIconSize?: boolean,
   ...SizeProps,
@@ -28,12 +28,12 @@ type Props = {|
  * See also ToolbarIcon.
  */
 function ListIcon(props: Props) {
-  const gdevelopTheme = React.useContext(GDevelopThemeContext);
+  const GDeveloppeTheme = React.useContext(GDeveloppeThemeContext);
   const {
     src,
     tooltip,
     disabled,
-    isGDevelopIcon,
+    isGDeveloppeIcon,
     cssAnimation,
     useExactIconSize,
   } = props;
@@ -55,11 +55,11 @@ function ListIcon(props: Props) {
     height: useExactIconSize ? iconHeight : undefined,
     verticalAlign: 'middle', // Vertical centering
     animation: cssAnimation,
-    filter: !isGDevelopIcon
+    filter: !isGDeveloppeIcon
       ? undefined
       : disabled
       ? 'grayscale(100%)'
-      : gdevelopTheme.gdevelopIconsCSSFilter,
+      : GDeveloppeTheme.GDeveloppeIconsCSSFilter,
   };
 
   return (
@@ -72,7 +72,7 @@ function ListIcon(props: Props) {
         paddingRight,
       }}
     >
-      {isGDevelopIcon ? (
+      {isGDeveloppeIcon ? (
         <img title={tooltip} alt={tooltip} src={src} style={style} />
       ) : (
         <CorsAwareImage title={tooltip} alt={tooltip} src={src} style={style} />

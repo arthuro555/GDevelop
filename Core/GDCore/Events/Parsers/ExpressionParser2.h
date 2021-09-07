@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-present Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -633,7 +633,7 @@ class GD_CORE_API ExpressionParser2 {
                 gd::make_unique<ExpressionParserError>(
                     "unknown_parameter_type",
                     _("This function is improperly set up. Reach out to the "
-                      "extension developer or a GDevelop maintainer to fix "
+                      "extension developer or a GDeveloppe maintainer to fix "
                       "this issue"),
                     parameterStartPosition,
                     GetCurrentPosition());

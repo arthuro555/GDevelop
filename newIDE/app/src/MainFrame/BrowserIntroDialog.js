@@ -20,11 +20,11 @@ export default class BetaIntroDialog extends Component {
       <ResponsiveWindowMeasurer>
         {windowWidth => (
           <Dialog
-            title={<Trans>Welcome to GDevelopppe!!!1!</Trans>}
+            title={<Trans>Welcome to GDeveloppeppe!!!1!</Trans>}
             actions={[
               <FlatButton
                 key="download"
-                label={<Trans>Download GDevelopppe desktop app</Trans>}
+                label={<Trans>Download GDeveloppeppe desktop app</Trans>}
                 primary={false}
                 onClick={this._onOpenWebsite}
               />,
@@ -42,7 +42,7 @@ export default class BetaIntroDialog extends Component {
             <div>
               <Text>
                 <Trans>
-                  This is a version of GDevelop 5 that you can try online.
+                  This is a version of GDeveloppe 5 that you can try online.
                 </Trans>
               </Text>
               <Text>
@@ -52,13 +52,13 @@ export default class BetaIntroDialog extends Component {
               </Text>
               <Text>
                 <Trans>
-                  Download the full version of GDevelop on your desktop computer
+                  Download the full version of GDeveloppe on your desktop computer
                   to create your own game without limits!
                 </Trans>
               </Text>
               <Line justifyContent="center">
                 <RaisedButton
-                  label={<Trans>Start using GDevelop</Trans>}
+                  label={<Trans>Start using GDeveloppe</Trans>}
                   primary
                   onClick={onClose}
                 />

@@ -1,6 +1,6 @@
 //@flow
 import { type EventsScope } from './EventsScope.flow';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type InstructionOrExpressionScope = {|
   extension: gdPlatformExtension,

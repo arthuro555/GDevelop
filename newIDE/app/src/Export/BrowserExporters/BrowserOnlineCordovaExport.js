@@ -6,7 +6,7 @@ import {
   type Build,
   buildCordovaAndroid,
   getBuildFileUploadOptions,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import { uploadBlobFile } from './BrowserFileUploader';
 import { type UserProfile } from '../../Profile/UserProfileContext';
 import { findGDJS } from '../../GameEngineFinder/BrowserS3GDJSFinder';
@@ -26,7 +26,7 @@ import {
   type ExportState,
   SetupExportHeader,
 } from '../GenericExporters/OnlineCordovaExport';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type PreparedExporter = {|
   exporter: gdjsExporter,

@@ -17,7 +17,7 @@ import Measure from 'react-measure';
 import { CodeEditor } from '../../../CodeEditor';
 import { shouldActivate } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 import { Trans } from '@lingui/macro';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const fontFamily = '"Lucida Console", Monaco, monospace';
 const MINIMUM_EDITOR_HEIGHT = 200;

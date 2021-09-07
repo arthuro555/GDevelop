@@ -6,7 +6,7 @@ import { getLastObjectParameterValue } from './ParameterMetadataTools';
 import SemiControlledAutoComplete, {
   type SemiControlledAutoCompleteInterface,
 } from '../../UI/SemiControlledAutoComplete';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type State = {|
   errorText: ?string,

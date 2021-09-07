@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -21,7 +21,7 @@ namespace gd {
  * 
  * \note This is for loading extensions declared in C++, usually in
  * files called "Extension.cpp" or "JsExtension.cpp".
- * GDevelop 5 extensions can also be declared directly in JavaScript. 
+ * GDeveloppe 5 extensions can also be declared directly in JavaScript. 
  * See newIDE/app/src/JsExtensionsLoader and "JsExtension.js" files
  * for extensions declared in JavaScript.
  */

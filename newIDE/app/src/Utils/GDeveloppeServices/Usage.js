@@ -1,0 +1,198 @@
+// @flow
+import { t } from '@lingui/macro';
+import axios from 'axios';
+import { GDeveloppeUsageApi } from './ApiConfigs';
+import { type MessageDescriptor } from '../i18n/MessageDescriptor.flow';
+
+export type Usage = {
+  id: string,
+  userId: string,
+  type: string,
+  createdAt: number,
+};
+export type Usages = Array<Usage>;
+
+export type Subscription = {|
+  userId: string,
+  planId: string | null,
+  createdAt: number,
+  updatedAt: number,
+  stripeSubscriptionId?: string,
+  stripeCustomerId?: string,
+|};
+
+export type Limit = {|
+  limitReached: boolean,
+  current: number,
+  max: number,
+|};
+
+export type Limits = {
+  [string]: Limit,
+};
+
+export type PlanDetails = {
+  planId: string | null,
+  name: string,
+  monthlyPriceInEuros: number,
+  smallDescription?: MessageDescriptor,
+  descriptionBullets: Array<{|
+    isLocalAppOnly?: boolean,
+    message: MessageDescriptor,
+  |}>,
+  extraDescription?: MessageDescriptor,
+};
+
+export const getSubscriptionPlans = (): Array<PlanDetails> => [
+  {
+    planId: 'GDeveloppe_pro',
+    name: 'GDeveloppe Pro',
+    monthlyPriceInEuros: 7,
+    smallDescription: t`Ideal for advanced game makers`,
+    descriptionBullets: [
+      {
+        message: t`Package your game for Android up to 70 times a day (every 24 hours).`,
+      },
+      {
+        message: t`One-click packaging for Windows, macOS and Linux up to 70 times a day (every 24 hours).`,
+      },
+      {
+        message: t`Immerse your players by removing GDeveloppe logo when the game loads.`,
+      },
+    ],
+    extraDescription: t`You'll also have access to online packaging for iOS or other services when they are released.`,
+  },
+  {
+    planId: 'GDeveloppe_indie',
+    name: 'GDeveloppe Indie',
+    monthlyPriceInEuros: 2,
+    smallDescription: t`Ideal for beginners`,
+    descriptionBullets: [
+      {
+        message: t`Package your game for Android up to 10 times a day (every 24 hours).`,
+      },
+      {
+        message: t`One-click packaging for Windows, macOS and Linux up to 10 times a day (every 24 hours).`,
+      },
+      {
+        message: t`Immerse your players by removing GDeveloppe logo when the game loads`,
+      },
+    ],
+    extraDescription: t`You'll also have access to online packaging for iOS or other services when they are released.`,
+  },
+  {
+    planId: null,
+    name: 'No subscription',
+    monthlyPriceInEuros: 0,
+    descriptionBullets: [
+      {
+        message: t`You can use GDeveloppe for free! Online packaging for Android, Windows, macOS and Linux is limited to twice a day (every 24 hours) to avoid overloading the services.`,
+      },
+    ],
+  },
+];
+
+export const getUserUsages = (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Usages> => {
+  return getAuthorizationHeader()
+    .then(authorizationHeader =>
+      axios.get(`${GDeveloppeUsageApi.baseUrl}/usage`, {
+        params: {
+          userId,
+        },
+        headers: {
+          Authorization: authorizationHeader,
+        },
+      })
+    )
+    .then(response => response.data);
+};
+
+export const getUserLimits = (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Limits> => {
+  return getAuthorizationHeader()
+    .then(authorizationHeader =>
+      axios.get(`${GDeveloppeUsageApi.baseUrl}/limits`, {
+        params: {
+          userId,
+        },
+        headers: {
+          Authorization: authorizationHeader,
+        },
+      })
+    )
+    .then(response => response.data.limits);
+};
+
+export const getUserSubscription = (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Subscription> => {
+  return getAuthorizationHeader()
+    .then(authorizationHeader =>
+      axios.get(`${GDeveloppeUsageApi.baseUrl}/subscription-v2`, {
+        params: {
+          userId,
+        },
+        headers: {
+          Authorization: authorizationHeader,
+        },
+      })
+    )
+    .then(response => response.data);
+};
+
+export const changeUserSubscription = (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string,
+  newSubscriptionDetails: { planId: string | null, stripeToken?: any }
+): Promise<Subscription> => {
+  return getAuthorizationHeader()
+    .then(authorizationHeader =>
+      axios.post(
+        `${GDeveloppeUsageApi.baseUrl}/subscription-v2`,
+        newSubscriptionDetails,
+        {
+          params: {
+            userId,
+          },
+          headers: {
+            Authorization: authorizationHeader,
+          },
+        }
+      )
+    )
+    .then(response => response.data);
+};
+
+type UploadType = 'build' | 'preview';
+
+export const getSignedUrl = (params: {|
+  uploadType: UploadType,
+  key: string,
+  contentType: string,
+|}): Promise<{
+  signedUrl: string,
+}> => {
+  return axios
+    .post(`${GDeveloppeUsageApi.baseUrl}/upload-options/signed-url`, params)
+    .then(response => response.data);
+};
+
+export const getRedirectToCheckoutUrl = (
+  planId: string,
+  uid: string,
+  email: string
+): string => {
+  return `${
+    GDeveloppeUsageApi.baseUrl
+  }/subscription-v2/redirect-to-checkout?planId=${encodeURIComponent(
+    planId
+  )}&clientReferenceId=${encodeURIComponent(
+    uid
+  )}&customerEmail=${encodeURIComponent(email)}`;
+};

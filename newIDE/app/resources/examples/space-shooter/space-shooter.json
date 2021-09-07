@@ -10,7 +10,7 @@
     "adaptGameResolutionAtRuntime": false,
     "folderProject": false,
     "orientation": "landscape",
-    "packageName": "com.gdevelop.gdblade",
+    "packageName": "com.GDeveloppe.gdblade",
     "projectUuid": "76f4fbde-f341-4c2c-8d3a-150c1b02b4ea",
     "scaleMode": "nearest",
     "sizeOnStartupMode": "",
@@ -26,7 +26,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensionProperties": [],
     "extensions": [
@@ -90,10 +90,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [

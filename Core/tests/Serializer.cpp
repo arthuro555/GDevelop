@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -129,13 +129,13 @@ TEST_CASE("Serializer", "[common]") {
 
   SECTION("UTF8 characters") {
     gd::String originalJSON =
-        u8"{\"Ich heiße GDevelop\":\"Gut!\",\"Bonjour à tout le monde\":"
+        u8"{\"Ich heiße GDeveloppe\":\"Gut!\",\"Bonjour à tout le monde\":"
         u8"1,\"Hello 官话 world\":\"官话\"}";
     SerializerElement element = Serializer::FromJSON(originalJSON);
     REQUIRE(
         element.GetChild(u8"Bonjour à tout le monde").GetBoolValue() ==
         true);
-    REQUIRE(element.GetChild(u8"Ich heiße GDevelop").GetStringValue() ==
+    REQUIRE(element.GetChild(u8"Ich heiße GDeveloppe").GetStringValue() ==
             "Gut!");
     REQUIRE(element.GetChild(u8"Hello 官话 world").GetStringValue() ==
             u8"官话");

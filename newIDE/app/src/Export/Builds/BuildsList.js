@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import {
   type Build,
   type BuildArtifactKeyName,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import { Column, Line } from '../../UI/Grid';
 import EmptyMessage from '../../UI/EmptyMessage';
 import PlaceholderLoader from '../../UI/PlaceholderLoader';

@@ -5,7 +5,7 @@ import SearchBar from '../UI/SearchBar';
 import { Column, Line } from '../UI/Grid';
 import Background from '../UI/Background';
 import ScrollView from '../UI/ScrollView';
-import { type AssetShortHeader } from '../Utils/GDevelopServices/Asset';
+import { type AssetShortHeader } from '../Utils/GDeveloppeServices/Asset';
 import { BoxSearchResults } from '../UI/Search/BoxSearchResults';
 import { FiltersChooser } from '../UI/Search/FiltersChooser';
 import { AssetStoreContext } from './AssetStoreContext';

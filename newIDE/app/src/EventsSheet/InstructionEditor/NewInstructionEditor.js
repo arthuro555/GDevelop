@@ -14,7 +14,7 @@ import {
   filterEnumeratedInstructionOrExpressionMetadataByScope,
 } from '../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata.js';
 import { type EventsScope } from '../../InstructionOrExpression/EventsScope.flow';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /** Helper to get the gdInstructionMetadata of an instruction. */
 export const getInstructionMetadata = ({

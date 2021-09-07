@@ -83,7 +83,7 @@ const commandsList: { [CommandName]: CommandMetadata } = {
   // General commands
   QUIT_APP: {
     area: 'GENERAL',
-    displayText: t`Close GDevelop`,
+    displayText: t`Close GDeveloppe`,
     handledByElectron: true,
   },
   OPEN_PROJECT_MANAGER: {

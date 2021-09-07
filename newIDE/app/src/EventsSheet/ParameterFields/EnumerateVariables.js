@@ -2,7 +2,7 @@
 import flatten from 'lodash/flatten';
 import { mapFor } from '../../Utils/MapFor';
 import flatMap from 'lodash/flatMap';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 // Note that in theory we could have this function inside gd.ExpressionParser2,
 // to be sure it's following perfectly the grammar of the expression parser. In

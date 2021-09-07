@@ -13,7 +13,7 @@ type Props = {|
  * Update the title bar according to the project and the current theme.
  */
 export default function ProjectTitlebar({ fileMetadata }: Props) {
-  const gdevelopTheme = React.useContext(ThemeContext);
+  const GDeveloppeTheme = React.useContext(ThemeContext);
   const unsavedChanges = React.useContext(UnsavedChangesContext);
   const hasUnsavedChanges = unsavedChanges.hasUnsavedChanges;
 
@@ -32,9 +32,9 @@ export default function ProjectTitlebar({ fileMetadata }: Props) {
         .join(' - ');
 
       Window.setTitle(title);
-      Window.setTitleBarColor(gdevelopTheme.toolbar.backgroundColor);
+      Window.setTitleBarColor(GDeveloppeTheme.toolbar.backgroundColor);
     },
-    [fileMetadata, hasUnsavedChanges, gdevelopTheme.toolbar.backgroundColor]
+    [fileMetadata, hasUnsavedChanges, GDeveloppeTheme.toolbar.backgroundColor]
   );
 
   return null;

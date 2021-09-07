@@ -117,7 +117,7 @@ export class SubscriptionCheckDialog extends React.Component<
             {mode === 'try' ? (
               <Text>
                 <Trans>
-                  Please get a subscription to keep GDevelopppe{' '}
+                  Please get a subscription to keep GDeveloppeppe{' '}
                   <a
                     href="https://www.youtube.com/watch?v=-XkT5JVVlmI"
                     target="always-running"

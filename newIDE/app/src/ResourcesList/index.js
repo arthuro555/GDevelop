@@ -27,7 +27,7 @@ const path = optionalRequire('path');
 const electron = optionalRequire('electron');
 const hasElectron = electron ? true : false;
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   listContainer: {

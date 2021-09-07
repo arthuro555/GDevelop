@@ -7,7 +7,7 @@ const async = require('async');
 const path = require('path');
 const remote = electron.remote;
 
-let piskelOptions; // The options received from GDevelop
+let piskelOptions; // The options received from GDeveloppe
 const updateFrameElements = () => {
   setTimeout(() => {
     const editorContentDocument = document.getElementById('piskel-frame')
@@ -244,13 +244,13 @@ const loadPiskelDataFromGd = () => {
       });
 
       // Compare the imported frames - so as to make the layered Piskel Document
-      // the same as the changes done in Gdevelop without flattening any layers
+      // the same as the changes done in GDeveloppe without flattening any layers
       let flattenedImagePaths = [];
       piskelOptions.resources.forEach((resource, frameIndex) => {
         const flattenedFramePath = path.normalize(resource.resourcePath);
         flattenedImagePaths.push(flattenedFramePath);
 
-        // Import any frames that were added in Gdevelop
+        // Import any frames that were added in GDeveloppe
         if (!editorDataPaths.includes(flattenedFramePath)) {
           pskl.utils.BlobUtils.dataToBlob(
             readBase64ImageFile(flattenedFramePath),
@@ -294,7 +294,7 @@ const loadPiskelDataFromGd = () => {
         .getLayers()[0]
         .getFrames()
         .forEach(frame => {
-          // The frame was in metadata, but is not in GDevelop frames, if so remove it
+          // The frame was in metadata, but is not in GDeveloppe frames, if so remove it
           if (
             editorDataPaths.includes(frame.originalPath) &&
             !flattenedImagePaths.includes(frame.originalPath)
@@ -390,7 +390,7 @@ ipcRenderer.on('piskel-load-animation', (event, receivedOptions) => {
   );
 
   electronWindow.setTitle(
-    'GDevelop Pixel Editor (Piskel) - ' +
+    'GDeveloppe Pixel Editor (Piskel) - ' +
       path.normalize(
         !piskelOptions.singleFrame
           ? receivedOptions.projectPath + '/' + receivedOptions.name
@@ -408,7 +408,7 @@ ipcRenderer.on('piskel-load-animation', (event, receivedOptions) => {
   } else {
     // If there are resources, but no metadata, load the images that were received from GD
     loadImagesIntoPiskel();
-    // Disable changing path and naming convention by user - on animations imported from gdevelop
+    // Disable changing path and naming convention by user - on animations imported from GDeveloppe
     savePathEditor.disableSavePathControls();
   }
   updateFrameElements();

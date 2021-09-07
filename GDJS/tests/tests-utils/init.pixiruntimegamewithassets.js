@@ -16,7 +16,7 @@ gdjs.getPixiRuntimeGameWithAssets = () => {
       adaptGameResolutionAtRuntime: true,
       folderProject: false,
       orientation: 'landscape',
-      packageName: 'com.gdevelop.integrationtest',
+      packageName: 'com.GDeveloppe.integrationtest',
       projectFile: '',
       scaleMode: 'linear',
       pixelsRounding: false,
@@ -32,7 +32,7 @@ gdjs.getPixiRuntimeGameWithAssets = () => {
       minFPS: 20,
       verticalSync: true,
       loadingScreen: {
-        showGDevelopSplash: true,
+        showGDeveloppeSplash: true,
         backgroundImageResourceName: '',
         backgroundColor: 0,
         backgroundFadeInDuration: 0.2,

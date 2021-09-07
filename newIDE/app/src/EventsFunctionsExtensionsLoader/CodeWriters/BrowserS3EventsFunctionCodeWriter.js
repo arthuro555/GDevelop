@@ -3,7 +3,7 @@ import {
   type EventsFunctionCodeWriter,
   type EventsFunctionCodeWriterCallbacks,
 } from '..';
-import { uploadObject, getBaseUrl } from '../../Utils/GDevelopServices/Preview';
+import { uploadObject, getBaseUrl } from '../../Utils/GDeveloppeServices/Preview';
 import { makeTimestampedId } from '../../Utils/TimestampedId';
 import slugs from 'slugs';
 

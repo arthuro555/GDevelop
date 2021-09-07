@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2018 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -11,8 +11,8 @@
 namespace gd {
 
 LoadingScreen::LoadingScreen()
-    : showGDevelopSplash(true),
-      gdevelopLogoStyle("light"),
+    : showGDeveloppeSplash(true),
+      GDeveloppeLogoStyle("light"),
       backgroundImageResourceName(""),
       backgroundColor(0),
       backgroundFadeInDuration(0.2),
@@ -27,9 +27,9 @@ LoadingScreen::LoadingScreen()
       progressBarColor(0xFFFFFF){};
 
 void LoadingScreen::SerializeTo(SerializerElement& element) const {
-  element.SetAttribute("showGDevelopSplash", showGDevelopSplash);
-  element.SetAttribute("gdevelopLogoStyle",
-                       gdevelopLogoStyle);
+  element.SetAttribute("showGDeveloppeSplash", showGDeveloppeSplash);
+  element.SetAttribute("GDeveloppeLogoStyle",
+                       GDeveloppeLogoStyle);
   element.SetAttribute("backgroundImageResourceName",
                        backgroundImageResourceName);
   element.SetAttribute("backgroundColor", backgroundColor);
@@ -46,9 +46,9 @@ void LoadingScreen::SerializeTo(SerializerElement& element) const {
 }
 
 void LoadingScreen::UnserializeFrom(const SerializerElement& element) {
-  showGDevelopSplash = element.GetBoolAttribute("showGDevelopSplash", true);
-  gdevelopLogoStyle =
-      element.GetStringAttribute("gdevelopLogoStyle", "light");
+  showGDeveloppeSplash = element.GetBoolAttribute("showGDeveloppeSplash", true);
+  GDeveloppeLogoStyle =
+      element.GetStringAttribute("GDeveloppeLogoStyle", "light");
   backgroundImageResourceName =
       element.GetStringAttribute("backgroundImageResourceName");
   backgroundColor = element.GetIntAttribute("backgroundColor", 0);

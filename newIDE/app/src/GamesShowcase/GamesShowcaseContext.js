@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import { type FiltersState, useFilters } from '../UI/Search/FiltersChooser';
-import { type Filters } from '../Utils/GDevelopServices/Types.flow';
+import { type Filters } from '../Utils/GDeveloppeServices/Types.flow';
 import {
   listAllShowcasedGames,
   type AllShowcasedGames,
   type ShowcasedGame,
-} from '../Utils/GDevelopServices/Game';
+} from '../Utils/GDeveloppeServices/Game';
 import { useSearchItem } from '../UI/Search/UseSearchItem';
 
 const defaultSearchText = '';

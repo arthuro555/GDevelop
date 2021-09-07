@@ -9,7 +9,7 @@ import {
 } from '../ClassNames';
 import { type EventRendererProps } from './EventRenderer';
 import ConditionsActionsColumns from '../ConditionsActionsColumns';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   actionsList: {

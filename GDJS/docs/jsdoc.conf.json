@@ -24,12 +24,12 @@
     "../node_modules/jsdoc-typeof-plugin"
   ],
   "templates": {
-    "referenceTitle": "GDevelop JavaScript reference",
+    "referenceTitle": "GDeveloppe JavaScript reference",
     "disableSort": false,
     "collapse": false,
     "resources": {
-        "Github -": "https://github.com/4ian/GDevelop",
-        "GDevelop Documentation": "http://wiki.compilgames.net/doku.php/gdevelop5/start"
+        "Github -": "https://github.com/4ian/GDeveloppe",
+        "GDeveloppe Documentation": "http://wiki.compilgames.net/doku.php/GDeveloppe5/start"
     }
   },
   "markdown": {

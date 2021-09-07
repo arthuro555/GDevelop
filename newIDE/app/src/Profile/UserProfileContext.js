@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
-import { type Profile } from '../Utils/GDevelopServices/Authentification';
+import { type Profile } from '../Utils/GDeveloppeServices/Authentification';
 import {
   type Limits,
   type Usages,
   type Subscription,
-} from '../Utils/GDevelopServices/Usage';
+} from '../Utils/GDeveloppeServices/Usage';
 
 export type UserProfile = {|
   authenticated: boolean,

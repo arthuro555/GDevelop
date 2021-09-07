@@ -221,7 +221,7 @@ const buildAndSendMenuTemplate = (
         onClickOpenLink: 'https://secret.arthuro555.com',
       },
       {
-        label: i18n._(t`GDevelop website`),
+        label: i18n._(t`GDeveloppe website`),
         onClickOpenLink: 'http://gdevelop-app.com',
       },
       { type: 'separator' },
@@ -231,26 +231,26 @@ const buildAndSendMenuTemplate = (
       },
       {
         label: i18n._(t`Community Discord Chat`),
-        onClickOpenLink: 'https://discord.gg/gdevelop',
+        onClickOpenLink: 'https://discord.gg/GDeveloppe',
       },
       { type: 'separator' },
       {
-        label: i18n._(t`Contribute to GDevelop`),
+        label: i18n._(t`Contribute to GDeveloppe`),
         onClickOpenLink: 'https://gdevelop-app.com/contribute/',
       },
       {
-        label: i18n._(t`Create Extensions for GDevelop`),
+        label: i18n._(t`Create Extensions for GDeveloppe`),
         onClickOpenLink:
-          'https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md',
+          'https://github.com/4ian/GDeveloppe/blob/master/newIDE/README-extensions.md',
       },
       { type: 'separator' },
       {
-        label: i18n._(t`Help to Translate GDevelop`),
-        onClickOpenLink: 'https://crowdin.com/project/gdevelop',
+        label: i18n._(t`Help to Translate GDeveloppe`),
+        onClickOpenLink: 'https://crowdin.com/project/GDeveloppe',
       },
       {
         label: i18n._(t`Report a wrong translation`),
-        onClickOpenLink: 'https://github.com/4ian/GDevelop/issues/969',
+        onClickOpenLink: 'https://github.com/4ian/GDeveloppe/issues/969',
       },
     ],
   };
@@ -258,7 +258,7 @@ const buildAndSendMenuTemplate = (
     helpTemplate.submenu.push(
       { type: 'separator' },
       {
-        label: i18n._(t`About GDevelopppe 6`),
+        label: i18n._(t`About GDeveloppeppe 6`),
         onClickSendEvent: 'main-menu-open-about',
       }
     );

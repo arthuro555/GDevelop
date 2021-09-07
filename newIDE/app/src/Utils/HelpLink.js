@@ -10,7 +10,7 @@ export const isDocumentationAbsoluteUrl = (path: string) => {
 
 export const getHelpLink = (path: string): string => {
   if (isRelativePathToDocumentationRoot(path))
-    return `http://wiki.compilgames.net/doku.php/gdevelop5${path}?utm_source=gdevelop&utm_medium=help-link`;
+    return `http://wiki.compilgames.net/doku.php/GDeveloppe5${path}?utm_source=GDeveloppe&utm_medium=help-link`;
 
   if (isDocumentationAbsoluteUrl(path)) return path;
 

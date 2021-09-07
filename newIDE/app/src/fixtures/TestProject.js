@@ -41,7 +41,7 @@ export type TestProject = {|
  *
  * @param gd The GD instance to use to create the project.
  */
-export const makeTestProject = (gd /*: libGDevelop */) /*: TestProject */ => {
+export const makeTestProject = (gd /*: libGDeveloppe */) /*: TestProject */ => {
   // Create and expose a game project
   const project = gd.ProjectHelper.createNewGDJSProject();
 

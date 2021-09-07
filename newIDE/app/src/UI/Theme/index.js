@@ -18,10 +18,10 @@ import './Global/Table.css';
 export type Theme = $Exact<typeof DefaultTheme>;
 export const themes = themeList;
 
-export type GDevelopTheme = $PropertyType<Theme, 'gdevelopTheme'>;
-type ActualTheme = {| gdevelopTheme: GDevelopTheme, muiTheme: Object |};
+export type GDeveloppeTheme = $PropertyType<Theme, 'GDeveloppeTheme'>;
+type ActualTheme = {| GDeveloppeTheme: GDeveloppeTheme, muiTheme: Object |};
 type MuiThemeOptions = $PropertyType<Theme, 'muiThemeOptions'>;
-const defaultThemeName = 'GDevelop default';
+const defaultThemeName = 'GDeveloppe default';
 
 export function getTheme({
   themeName,
@@ -40,9 +40,9 @@ export function getTheme({
   }
 
   const ltr = isLtr(language);
-  const { gdevelopTheme, muiThemeOptions } = theme;
+  const { GDeveloppeTheme, muiThemeOptions } = theme;
   return {
-    gdevelopTheme,
+    GDeveloppeTheme,
     muiTheme: ltr
       ? createLtrTheme(muiThemeOptions)
       : createRtlTheme(muiThemeOptions),

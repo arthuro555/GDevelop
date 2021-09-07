@@ -2,7 +2,7 @@ const shell = require('shelljs');
 const { downloadLocalFile } = require('./lib/DownloadLocalFile');
 const path = require('path');
 
-const sourceDirectory = '../../../Binaries/embuild/GDevelop.js';
+const sourceDirectory = '../../../Binaries/embuild/GDeveloppe.js';
 const destinationTestDirectory = '../node_modules/libGD.js-for-tests-only';
 const alreadyHasLibGdJs =
   shell.test('-f', '../public/libGD.js') &&
@@ -23,7 +23,7 @@ if (shell.test('-f', path.join(sourceDirectory, 'libGD.js'))) {
     '..',
     '..',
     '..',
-    'GDevelop.js',
+    'GDeveloppe.js',
     'scripts',
     'copy-to-newIDE.js'
   );
@@ -31,7 +31,7 @@ if (shell.test('-f', path.join(sourceDirectory, 'libGD.js'))) {
 } else {
   // Download a pre-built version otherwise
   shell.echo(
-    '🌐 Downloading pre-built libGD.js from https://s3.amazonaws.com/gdevelop-gdevelop.js (be patient)...'
+    '🌐 Downloading pre-built libGD.js from https://s3.amazonaws.com/GDeveloppe-GDeveloppe.js (be patient)...'
   );
 
   // Try to download libGD.js from a specific commit on the current branch
@@ -65,7 +65,7 @@ if (shell.test('-f', path.join(sourceDirectory, 'libGD.js'))) {
 
       resolve(
         downloadLibGdJs(
-          `https://s3.amazonaws.com/gdevelop-gdevelop.js/${branch}/commit/${hash}`
+          `https://s3.amazonaws.com/GDeveloppe-GDeveloppe.js/${branch}/commit/${hash}`
         )
       );
     });
@@ -75,7 +75,7 @@ if (shell.test('-f', path.join(sourceDirectory, 'libGD.js'))) {
     shell.echo(`ℹ️ Trying to download libGD.js from master, latest build.`);
 
     return downloadLibGdJs(
-      `https://s3.amazonaws.com/gdevelop-gdevelop.js/master/latest`
+      `https://s3.amazonaws.com/GDeveloppe-GDeveloppe.js/master/latest`
     );
   };
 

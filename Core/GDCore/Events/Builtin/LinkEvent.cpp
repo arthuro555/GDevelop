@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -135,7 +135,7 @@ void LinkEvent::UnserializeFrom(gd::Project& project,
   SetTarget(element.GetChild("target", 0, "Scene").GetValue().GetString());
 
   if (includeElement.HasAttribute("includeAll")) {
-    // Compatibility with GDevelop <= 4.0.92
+    // Compatibility with GDeveloppe <= 4.0.92
     if (includeElement.GetBoolAttribute("includeAll", true)) {
       SetIncludeAllEvents();
     } else {
@@ -143,7 +143,7 @@ void LinkEvent::UnserializeFrom(gd::Project& project,
                             includeElement.GetIntAttribute("end"));
     }
   } else {
-    // GDevelop > 4.0.92
+    // GDeveloppe > 4.0.92
     IncludeConfig config = static_cast<IncludeConfig>(
         includeElement.GetIntAttribute("includeConfig", 0));
     if (config == INCLUDE_ALL)

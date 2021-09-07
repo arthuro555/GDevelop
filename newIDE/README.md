@@ -1,17 +1,17 @@
-# GDevelop IDE
+# GDeveloppe IDE
 
-This is the GDevelop 5 editor. It is based on [React](https://facebook.github.io/react/), [Material-UI](http://www.material-ui.com), [Pixi.js](https://github.com/pixijs/pixi.js) and [Electron](https://electron.atom.io/).
-It uses GDevelop [core C++ classes compiled to Javascript](https://github.com/4ian/GDevelop.js) to work with GDevelop games.
+This is the GDeveloppe 5 editor. It is based on [React](https://facebook.github.io/react/), [Material-UI](http://www.material-ui.com), [Pixi.js](https://github.com/pixijs/pixi.js) and [Electron](https://electron.atom.io/).
+It uses GDeveloppe [core C++ classes compiled to Javascript](https://github.com/4ian/GDeveloppe.js) to work with GDeveloppe games.
 
-![GDevelop editor](https://raw.githubusercontent.com/4ian/GDevelop/master/newIDE/gd-ide-screenshot.png "GDevelop editor")
+![GDeveloppe editor](https://raw.githubusercontent.com/4ian/GDeveloppe/master/newIDE/gd-ide-screenshot.png "GDeveloppe editor")
 
 ## 1) Installation 💻
 
 Make sure to have [Git](https://git-scm.com/) and [Node.js](https://nodejs.org) installed. [Yarn](https://yarnpkg.com) is optional.
 
 ```bash
-git clone https://github.com/4ian/GDevelop.git
-cd GDevelop/newIDE/app
+git clone https://github.com/4ian/GDeveloppe.git
+cd GDeveloppe/newIDE/app
 npm install # or yarn
 ```
 
@@ -23,8 +23,8 @@ npm start # or yarn start
 
 This will open the app in your web browser.
 
-Images resources, GDJS Runtime, extensions will be copied in resources, and [libGD.js](https://github.com/4ian/GDevelop.js) will be downloaded automatically. If you wish, you can
-[build libGD.js by yourself](https://github.com/4ian/GDevelop.js) (useful if you modified GDevelop native code like extensions).
+Images resources, GDJS Runtime, extensions will be copied in resources, and [libGD.js](https://github.com/4ian/GDeveloppe.js) will be downloaded automatically. If you wish, you can
+[build libGD.js by yourself](https://github.com/4ian/GDeveloppe.js) (useful if you modified GDeveloppe native code like extensions).
 
 > Note for Linux: If you get an error message that looks like this:
 > `Error: watch GD/newIDE/app/some/file ENOSPC` then follow the instructions [here](https://stackoverflow.com/questions/22475849/node-js-error-enospc) to fix.
@@ -49,7 +49,7 @@ npm run start # or yarn start
 
 There is a script file that automates cloning this repository, building the IDE and running it:
 
--   For Windows: You can download the batch script [here](https://raw.githubusercontent.com/4ian/GDevelop/master/scripts/gitCloneAndBuildGD.bat) and save it to where you want GDevelop to be cloned, then simply run it.
+-   For Windows: You can download the batch script [here](https://raw.githubusercontent.com/4ian/GDeveloppe/master/scripts/gitCloneAndBuildGD.bat) and save it to where you want GDeveloppe to be cloned, then simply run it.
 
 ### Development of UI components
 
@@ -81,32 +81,32 @@ Make sure to have the standalone app running with Electron.
 
 -   If you want to create/modify _extensions_, check the [README about extensions](./README-extensions.md) for step-by-step explanations to get started in 5 minutes.
 
--   The _game engine core_ ([GDJS](https://github.com/4ian/GDevelop/tree/master/GDJS)) is in [GDJS/Runtime folder](https://github.com/4ian/GDevelop/tree/master/GDJS/Runtime).
+-   The _game engine core_ ([GDJS](https://github.com/4ian/GDeveloppe/tree/master/GDJS)) is in [GDJS/Runtime folder](https://github.com/4ian/GDeveloppe/tree/master/GDJS/Runtime).
 
 If you modify any file while the IDE is running with Electron, a watcher will _automatically import_ your changes (look at the console to be sure).
 
-You can then _launch a preview_ in GDevelop (again, be sure to be using [the standalone app running with Electron](https://github.com/4ian/GDevelop/blob/master/newIDE/README.md#development-of-the-standalone-app) to be sure to have your changes reflected immediately).
+You can then _launch a preview_ in GDeveloppe (again, be sure to be using [the standalone app running with Electron](https://github.com/4ian/GDeveloppe/blob/master/newIDE/README.md#development-of-the-standalone-app) to be sure to have your changes reflected immediately).
 
 > If you deactivated the watcher in preferences, run the `import-GDJS-Runtime.js` script manually (`cd newIDE/app/scripts` then `node import-GDJS-Runtime.js`) after every change, before launching a preview.
 
 ### Recommended tools for development
 
-Any text editor is fine, but it's a good idea to have one with _Prettier_ (code formatting), _ESLint_ (code linting) and _Flow_ (type checking) integration. [Modern JavaScript is used for the editor](https://github.com/4ian/GDevelop/blob/master/newIDE/docs/Supported-JavaScript-features-and-coding-style.md).
+Any text editor is fine, but it's a good idea to have one with _Prettier_ (code formatting), _ESLint_ (code linting) and _Flow_ (type checking) integration. [Modern JavaScript is used for the editor](https://github.com/4ian/GDeveloppe/blob/master/newIDE/docs/Supported-JavaScript-features-and-coding-style.md).
 
 👉 You can use [Visual Studio Code](https://code.visualstudio.com) with these extensions: [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Flow Language Support](https://github.com/flowtype/flow-for-vscode).
 
 ### Testing and developing with the cloud storage providers (Google Drive, Dropbox, OneDrive, etc...)
 
-Cloud storage providers are set up with development keys when you're running GDevelop in development mode. For these, to work, you must execute the web-app not from the traditional `http://localhost:3000` origin, but from `http://gdevelop-app-local:3000`:
+Cloud storage providers are set up with development keys when you're running GDeveloppe in development mode. For these, to work, you must execute the web-app not from the traditional `http://localhost:3000` origin, but from `http://gdevelop-app-local:3000`:
 
 -   Set up a [redirection in your hosts file](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/), that should look like: `127.0.0.1 gdevelop-app-local.com`.
 -   Launch then the web app from `http://gdevelop-app-local:3000`.
 
-> This is only necessary if you want to have cloud storage providers working in development. If not done, GDevelop will simply display an error while trying to use them.
+> This is only necessary if you want to have cloud storage providers working in development. If not done, GDeveloppe will simply display an error while trying to use them.
 
 ## (Optional) Building and deploying the standalone app 📦
 
-> 🖐 This section is only for maintainers that want to deploy the "official app" on the GDevelop website. If you're working on contributions for GDevelop, you won't need it. You can download ["Nightly Builds" of GDevelop here too](./docs/Nightly-Builds-and-continuous-deployment.md).
+> 🖐 This section is only for maintainers that want to deploy the "official app" on the GDeveloppe website. If you're working on contributions for GDeveloppe, you won't need it. You can download ["Nightly Builds" of GDeveloppe here too](./docs/Nightly-Builds-and-continuous-deployment.md).
 
 ### Desktop version
 
@@ -129,14 +129,14 @@ yarn deploy # or npm run deploy
 
 ### (Optional) Updating translations
 
-Extract translations from the editor, as well as GDevelop Core and extensions:
+Extract translations from the editor, as well as GDeveloppe Core and extensions:
 
 ```bash
 cd newIDE/app
 yarn extract-all-translations # or npm run extract-all-translations
 ```
 
-This will create `ide-messages.po` (in `newIDE/app/src/locales`) and `gdcore-gdcpp-gdjs-extensions-messages.pot` (in `scripts`). Upload both of them to [the GDevelop Crowdin project](https://crowdin.com/project/gdevelop).
+This will create `ide-messages.po` (in `newIDE/app/src/locales`) and `gdcore-gdcpp-gdjs-extensions-messages.pot` (in `scripts`). Upload both of them to [the GDeveloppe Crowdin project](https://crowdin.com/project/GDeveloppe).
 
 To update translations, build and download the translations from Crowdin. Extract everything in `newIDE/app/src/locales`. And run:
 
@@ -148,12 +148,12 @@ yarn compile-translations # or npm run compile-translations
 
 The editor, the game engine and extensions are always in development. Your contribution is welcome!
 
--   Check [the **roadmap** for ideas and features planned](https://trello.com/b/qf0lM7k8/gdevelop-roadmap).
+-   Check [the **roadmap** for ideas and features planned](https://trello.com/b/qf0lM7k8/GDeveloppe-roadmap).
 
     You can contribute by picking anything here or anything that you think is missing or could be improved in GD5! If you don't know how to start, it's a good idea to play a bit with the editor and see if there is something that is unavailable and that you can add or fix.
 
--   Follow the [Development](https://github.com/4ian/GDevelop/tree/master/newIDE#development) section of the README to set up GDevelop and start modifying either **the editor** or **[the game engine/extensions](https://github.com/4ian/GDevelop/tree/master/newIDE#development-of-the-game-engine-or-extensions)**.
+-   Follow the [Development](https://github.com/4ian/GDeveloppe/tree/master/newIDE#development) section of the README to set up GDeveloppe and start modifying either **the editor** or **[the game engine/extensions](https://github.com/4ian/GDeveloppe/tree/master/newIDE#development-of-the-game-engine-or-extensions)**.
 
 -   To submit your changes, you have to first create a Fork on GitHub (use the Fork button on the top right), then [create a Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
--   Finally, make sure that the tests pass (refer to this README and the [game engine README](https://github.com/4ian/GDevelop/tree/master/GDJS) for learning how to run tests).
+-   Finally, make sure that the tests pass (refer to this README and the [game engine README](https://github.com/4ian/GDeveloppe/tree/master/GDJS) for learning how to run tests).

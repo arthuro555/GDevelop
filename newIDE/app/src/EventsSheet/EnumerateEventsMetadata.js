@@ -2,7 +2,7 @@
 
 import flatten from 'lodash/flatten';
 import { mapFor } from '../Utils/MapFor';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type EventMetadata = {|
   type: string,

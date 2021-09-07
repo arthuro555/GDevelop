@@ -21,18 +21,18 @@ import {
   flashExtensionShortHeader,
   fireBulletExtensionShortHeader,
   fakeAssetWithEventCustomizationsAndUnknownExtension1,
-} from '../fixtures/GDevelopServicesTestData';
+} from '../fixtures/GDeveloppeServicesTestData';
 import { makeTestExtensions } from '../fixtures/TestExtensions';
 import {
   getExtensionsRegistry,
   getExtension,
-} from '../Utils/GDevelopServices/Extension';
+} from '../Utils/GDeveloppeServices/Extension';
 import { jssPreset } from '@material-ui/core';
-import { getAsset } from '../Utils/GDevelopServices/Asset';
-const gd: libGDevelop = global.gd;
+import { getAsset } from '../Utils/GDeveloppeServices/Asset';
+const gd: libGDeveloppe = global.gd;
 
-jest.mock('../Utils/GDevelopServices/Extension');
-jest.mock('../Utils/GDevelopServices/Asset');
+jest.mock('../Utils/GDeveloppeServices/Extension');
+jest.mock('../Utils/GDeveloppeServices/Asset');
 
 const mockFn = (fn: Function): JestMockFn<any, any> => fn;
 
@@ -112,7 +112,7 @@ describe('InstallAsset', () => {
       resource.setName('player-ship1.png');
       resource.setFile('https://example.com/player-ship1.png');
       resource.setOrigin(
-        'gdevelop-asset-store',
+        'GDeveloppe-asset-store',
         'https://example.com/player-ship1.png'
       );
       project.getResourcesManager().addResource(resource);
@@ -154,7 +154,7 @@ describe('InstallAsset', () => {
       resource.setName('renamed-player-ship1.png');
       resource.setFile('https://example.com/modified-player-ship.png');
       resource.setOrigin(
-        'gdevelop-asset-store',
+        'GDeveloppe-asset-store',
         'https://example.com/player-ship1.png'
       );
       project.getResourcesManager().addResource(resource);

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import GDevelopThemeContext from '../Theme/ThemeContext';
+import GDeveloppeThemeContext from '../Theme/ThemeContext';
 
 const styles = {
   row: {
@@ -21,14 +21,14 @@ type TreeTableRowProps = {|
 |};
 
 export const TreeTableRow = (props: TreeTableRowProps) => {
-  const gdevelopTheme = React.useContext(GDevelopThemeContext);
+  const GDeveloppeTheme = React.useContext(GDeveloppeThemeContext);
 
   return (
     <div
       style={{
         ...styles.row,
         alignItems: props.alignItems,
-        backgroundColor: gdevelopTheme.list.itemsBackgroundColor,
+        backgroundColor: GDeveloppeTheme.list.itemsBackgroundColor,
       }}
     >
       {props.children}

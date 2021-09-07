@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Shopify Extension
+GDeveloppe - Shopify Extension
 Copyright (c)2017  Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */
@@ -99,7 +99,7 @@ extern "C" gd::PlatformExtension* CreateGDJSShopifyExtension() {
 }
 #else
 /**
- * Used by GDevelop to create the extension class
+ * Used by GDeveloppe to create the extension class
  * -- Do not need to be modified. --
  */
 extern "C" gd::PlatformExtension* GD_EXTENSION_API CreateGDJSExtension() {

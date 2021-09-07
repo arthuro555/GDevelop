@@ -4,7 +4,7 @@ import { showErrorBox } from '../../UI/Messages/MessageBox';
 import {
   getExtension,
   type ExtensionShortHeader,
-} from '../../Utils/GDevelopServices/Extension';
+} from '../../Utils/GDeveloppeServices/Extension';
 import { addSerializedExtensionsToProject } from '../InstallAsset';
 import { type EventsFunctionsExtensionsState } from '../../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
 import { t } from '@lingui/macro';

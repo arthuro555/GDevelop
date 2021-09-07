@@ -1,4 +1,4 @@
-# GDevelop Themes
+# GDeveloppe Themes
 
 Themes are a consistent set of colors and other styles that unify the look and feel of the application.  
 

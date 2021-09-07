@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2013-present Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */
@@ -39,7 +39,7 @@ declare type VariableType =
   | 'structure'
   | 'array';
 
-/** Data representation of a GDevelop variable */
+/** Data representation of a GDeveloppe variable */
 declare type VariableData = Readonly<{
   /** The name of the variable. Leave blank for array children. */
   name?: string;
@@ -190,7 +190,7 @@ declare interface ExtensionProperty {
 }
 
 declare interface LoadingScreenData {
-  showGDevelopSplash: boolean;
+  showGDeveloppeSplash: boolean;
   backgroundImageResourceName: string;
   backgroundColor: integer;
   backgroundFadeInDuration: float;

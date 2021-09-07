@@ -1,17 +1,17 @@
-# Writing extensions for GDevelop 5
+# Writing extensions for GDeveloppe 5
 
-GDevelop editor and games engines are designed so that all objects, behaviors, effects, actions, conditions and expressions
+GDeveloppe editor and games engines are designed so that all objects, behaviors, effects, actions, conditions and expressions
 are provided by _extensions_. These extensions are composed of two parts:
 
 -   the _declaration_ of the extension, traditionally done in a file called `JsExtension.js`.
 -   the _implementation_ of the extension for the game engine (also called the "Runtime"), written in [TypeScript](https://www.typescriptlang.org/), containing the functions corresponding to the actions/conditions/expressions and the classes used for the objects or behaviors. The implementation is traditionally in files called `extensionnametools.ts`, `objectnameruntimeobject.ts` or `objectnameruntimebehavior.ts`.
 
-> Note that some GDevelop extensions are declared in C++, in files called `JsExtension.cpp`. If you want to edit them,
+> Note that some GDeveloppe extensions are declared in C++, in files called `JsExtension.cpp`. If you want to edit them,
 > refer to the paragraph about them at the end.
 
 ## 1) Installation 💻
 
-To modify extensions, you need to have the development version of GDevelop running. Make sure to have [Git](https://git-scm.com/) and [Node.js](https://nodejs.org) installed. [Yarn](https://yarnpkg.com) is optional.
+To modify extensions, you need to have the development version of GDeveloppe running. Make sure to have [Git](https://git-scm.com/) and [Node.js](https://nodejs.org) installed. [Yarn](https://yarnpkg.com) is optional.
 
 ```bash
 git clone https://github.com/4ian/GD.git
@@ -19,38 +19,38 @@ cd GD/newIDE/app
 npm install #or yarn
 ```
 
-Refer to the [GDevelop IDE Readme](./README.md) for more information about the installation.
+Refer to the [GDeveloppe IDE Readme](./README.md) for more information about the installation.
 
 ## 2) Development 🤓
 
--   First, run [GDevelop with Electron](https://github.com/4ian/GDevelop/blob/master/newIDE/README.md#development-of-the-standalone-app).
+-   First, run [GDeveloppe with Electron](https://github.com/4ian/GDeveloppe/blob/master/newIDE/README.md#development-of-the-standalone-app).
 
-    When GDevelop is started, the developer console should be opened. Search for the message `Loaded x JS extensions.` that indicates the loading of extensions.
+    When GDeveloppe is started, the developer console should be opened. Search for the message `Loaded x JS extensions.` that indicates the loading of extensions.
 
--   You can now open an extension contained in the folder _Extensions_ at the root of the repository. For example, you can open [Extensions/FacebookInstantGames](https://github.com/4ian/GDevelop/tree/master/Extensions/FacebookInstantGames). Edit the JsExtension.js file or a runtime file. Any changes will be automatically imported into the editor.
+-   You can now open an extension contained in the folder _Extensions_ at the root of the repository. For example, you can open [Extensions/FacebookInstantGames](https://github.com/4ian/GDeveloppe/tree/master/Extensions/FacebookInstantGames). Edit the JsExtension.js file or a runtime file. Any changes will be automatically imported into the editor.
 
     > Verify that changes are imported in the console: you should see a message starting with `GDJS Runtime update`.
     > If you deactivated the automatic import in the preferences or want to import manually your changes, run the `import-GDJS-Runtime.js` script:
     >
     > ```bash
     > cd scripts
-    > node import-GDJS-Runtime.js # This copy extensions declaration and runtime into GDevelop.
+    > node import-GDJS-Runtime.js # This copy extensions declaration and runtime into GDeveloppe.
     > ```
 
 -   Finally, verify that the changes are applied:
 
-    -   If you modified the declaration (`JsExtension.js`), reload GDevelop by pressing Ctrl+R (or Cmd+R on macOS) in the developer console.
+    -   If you modified the declaration (`JsExtension.js`), reload GDeveloppe by pressing Ctrl+R (or Cmd+R on macOS) in the developer console.
     -   If you modified a Runtime file, relaunch a preview. Open the developer console if you want to check for any errors.
 
 -   You can now iterate and relaunch the script to develop the extension! 🚀
 
-    > ⚠️ Always check the developer console after reloading GDevelop. If there is any error signaled, click on it to see what went wrong. You may have done a syntax error or misused an API.
+    > ⚠️ Always check the developer console after reloading GDeveloppe. If there is any error signaled, click on it to see what went wrong. You may have done a syntax error or misused an API.
 
 ### 2.1) Implement your feature for the game engine 👾
 
 > ℹ️ Implement your extension in a file called `extensionnametools.ts` (for general functions), `objectnameruntimeobject.ts` (for objects) or `behaviornameruntimebehavior.ts` (for behaviors). See then the next section for declaring these files and the content of the extension to the IDE.
 
-Check the [GDJS game engine documentation here](https://docs.gdevelop-app.com/GDJS%20Runtime%20Documentation/index.html). It's also a good idea to check the [Runtime folder of GDJS](../GDJS/README.md) to see directly how the game engine is done when needed. Files for the game engine should [almost all be written in TypeScript, with a few precautions to ensure good performance (click to learn more)](https://github.com/4ian/GDevelop/blob/master/newIDE/docs/Supported-JavaScript-features-and-coding-style.md).
+Check the [GDJS game engine documentation here](https://docs.gdevelop-app.com/GDJS%20Runtime%20Documentation/index.html). It's also a good idea to check the [Runtime folder of GDJS](../GDJS/README.md) to see directly how the game engine is done when needed. Files for the game engine should [almost all be written in TypeScript, with a few precautions to ensure good performance (click to learn more)](https://github.com/4ian/GDeveloppe/blob/master/newIDE/docs/Supported-JavaScript-features-and-coding-style.md).
 
 #### How to create functions to be called by events
 
@@ -102,7 +102,7 @@ Use [`addAction`](https://docs.gdevelop-app.com/GDCore%20Documentation/classgd_1
 
 > You can call these functions on the `extension` object, or on the objects returned by `extension.addObject` (for objects) or `extension.addBehavior` (for behaviors). See below.
 
-> ⚠️ Always double-check that you've not forgotten an argument. Such errors/mismatches can create silent bugs that could make GDevelop unstable or crash while being used.
+> ⚠️ Always double-check that you've not forgotten an argument. Such errors/mismatches can create silent bugs that could make GDeveloppe unstable or crash while being used.
 
 > 👉 See an example in the [example extension _JsExtension.js_ file](../Extensions/ExampleJsExtension/JsExtension.js).
 
@@ -125,7 +125,7 @@ Add an object using [`addObject`](https://docs.gdevelop-app.com/GDCore%20Documen
 
 > 👉 See an example in the [example extension _JsExtension.js_ file](../Extensions/ExampleJsExtension/JsExtension.js). Learn more about [properties here](docs/Properties-schema-and-PropertiesEditor-explanations.md).
 
-> ℹ️ After doing this, you can actually see your object in GDevelop! Read the next sections to see how to add an editor and a renderer for instances on the scene editor.
+> ℹ️ After doing this, you can actually see your object in GDeveloppe! Read the next sections to see how to add an editor and a renderer for instances on the scene editor.
 
 #### Declare a property
 
@@ -213,7 +213,7 @@ registerEditorConfigurations: function(objectsEditorService /*: ObjectsEditorSer
   objectsEditorService.registerEditorConfiguration(
     "MyDummyExtension::DummyObject", // Replace by your extension and object type names.
     objectsEditorService.getDefaultObjectJsImplementationPropertiesEditor({
-      helpPagePath : "/extensions/extend-gdevelop" // The link to the help page for your object, in GDevelop wiki.
+      helpPagePath : "/extensions/extend-GDeveloppe" // The link to the help page for your object, in GDeveloppe wiki.
     })
   );
 }
@@ -246,7 +246,7 @@ If you want to start a new extension:
 -   Choose a unique and descriptive name. Create a folder with this name in _Extensions_.
 -   Create a file in it named _JsExtension.js_ and copy the content of the _JsExtension.js_ of another extension.
 -   Change the extension information (`extension.setExtensionInformation`). The first argument is the extension internal name and should be the same name as your folder for consistency.
--   Remove all the actions/conditions/expressions declarations and tests, run `node import-GDJS-Runtime.js` and reload GDevelop to verify that your extension is loaded.
+-   Remove all the actions/conditions/expressions declarations and tests, run `node import-GDJS-Runtime.js` and reload GDeveloppe to verify that your extension is loaded.
 -   Create a file called for example _yourextensionnametools.js_ in the same directory.
 -   Add back the declarations in your extension. Use `setIncludeFile` when declaring your actions/conditions/expressions and set the name of the ts file that you've created **but with a js extension**, prefixed by the path from the root folder. For example:
     ```js
@@ -259,15 +259,15 @@ If you have ideas or are creating a new extension, your contribution is welcome!
 
 -   To submit your extension, you have first to create a Fork on GitHub (use the Fork button on the top right), then [create a Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
--   Check [the **roadmap** for ideas and features planned](https://trello.com/b/qf0lM7k8/gdevelop-roadmap).
+-   Check [the **roadmap** for ideas and features planned](https://trello.com/b/qf0lM7k8/GDeveloppe-roadmap).
 
 -   A few enhancements are also possible to exploit the full potential of extensions:
 
     -   [ ] Add support for events
     -   [ ] Document how to add custom icons
-    -   [ ] Add a button to reload extensions without reloading GDevelop IDE entirely.
+    -   [ ] Add a button to reload extensions without reloading GDeveloppe IDE entirely.
 
 ## 4) Note on the development of extensions declared in C++ (`JsExtension.cpp` or `Extension.cpp`)
 
-Some extensions are still declared in C++ for being compatible with GDevelop 4.
-Check the sources in the [Extensions folder](https://github.com/4ian/GDevelop/tree/master/Extensions) and install [GDevelop.js](https://github.com/4ian/GDevelop.js). You'll then be able to make changes in C++ source files and have this reflected in the editor.
+Some extensions are still declared in C++ for being compatible with GDeveloppe 4.
+Check the sources in the [Extensions folder](https://github.com/4ian/GDeveloppe/tree/master/Extensions) and install [GDeveloppe.js](https://github.com/4ian/GDeveloppe.js). You'll then be able to make changes in C++ source files and have this reflected in the editor.

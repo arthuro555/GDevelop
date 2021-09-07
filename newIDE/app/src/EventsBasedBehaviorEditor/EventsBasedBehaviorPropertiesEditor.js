@@ -26,7 +26,7 @@ import StringArrayEditor from '../StringArrayEditor';
 import ColorField from '../UI/ColorField';
 import BehaviorTypeSelector from '../BehaviorTypeSelector';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,
@@ -55,7 +55,7 @@ const validatePropertyName = (
   if (newName === 'name' || newName === 'type') {
     showWarningBox(
       i18n._(
-        t`The name of a property cannot be "name" or "type", as they are used by GDevelop internally.`
+        t`The name of a property cannot be "name" or "type", as they are used by GDeveloppe internally.`
       ),
       { delayToNextTick: true }
     );

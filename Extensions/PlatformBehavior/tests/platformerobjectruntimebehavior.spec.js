@@ -2287,7 +2287,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
 
         // Walk from the 1st platform to the 2nd one.
         // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
-        // See https://github.com/4ian/GDevelop/issues/3013.
+        // See https://github.com/4ian/GDeveloppe/issues/3013.
         if (slopeAngle === 45) {
           walkRightMayStop(40);
         } else {
@@ -2317,7 +2317,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
 
         // Walk from the 1st platform to the 2nd one.
         // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
-        // See https://github.com/4ian/GDevelop/issues/3013.
+        // See https://github.com/4ian/GDeveloppe/issues/3013.
         walkRightMayStop(40);
         expect(object.getX()).to.be.above(platform.getX());
         // Gone upward following the 2nd platform.
@@ -2356,7 +2356,7 @@ describe('gdjs.PlatformerObjectRuntimeBehavior', function () {
 
         // Walk from the 1st platform to the 2nd one.
         // TODO: replace by walkRight(30) when the object no longer loss its velocity at the junction.
-        // See https://github.com/4ian/GDevelop/issues/3013.
+        // See https://github.com/4ian/GDeveloppe/issues/3013.
         if (slopeAngles[0] === 26 && slopeAngles[1] === 26) {
           walkRight(30);
         } else {

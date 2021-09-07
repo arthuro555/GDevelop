@@ -3,7 +3,7 @@ import { type ExpressionAutocompletion } from '../ExpressionAutocompletion';
 import { type EnumeratedExpressionMetadata } from '../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata.js';
 import { mapVector } from '../Utils/MapFor';
 
-const makeNewFakeExtension = (gd: libGDevelop) => {
+const makeNewFakeExtension = (gd: libGDeveloppe) => {
   const extension = new gd.PlatformExtension();
   extension.setExtensionInformation(
     'FakeExtensionForAutocompletionTests',
@@ -35,7 +35,7 @@ const makeFakeEnumeratedExpressionMetadata = (
 });
 
 export const makeFakeExactExpressionAutocompletion = () => {
-  const gd: libGDevelop = global.gd;
+  const gd: libGDeveloppe = global.gd;
   const expressionMetadata = new gd.ExpressionMetadata(
     'number',
     'SomeExtension',
@@ -68,7 +68,7 @@ export const makeFakeExactExpressionAutocompletion = () => {
 };
 
 export const makeFakeExpressionAutocompletions = (): Array<ExpressionAutocompletion> => {
-  const gd: libGDevelop = global.gd;
+  const gd: libGDeveloppe = global.gd;
 
   const expressionMetadata = new gd.ExpressionMetadata(
     'number',

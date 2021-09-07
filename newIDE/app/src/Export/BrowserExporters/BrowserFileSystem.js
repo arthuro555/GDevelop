@@ -1,6 +1,6 @@
 // @flow
 import path from 'path';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type BlobFileDescriptor = {|
   filePath: string,
@@ -40,7 +40,7 @@ const pathPosix = path.posix || path;
 // from URLs, while this file system does download files).
 
 /**
- * An in-memory "file system" that can be used for GDevelop exports.
+ * An in-memory "file system" that can be used for GDeveloppe exports.
  */
 export default class BrowserFileSystem {
   // The representation of the "file system":

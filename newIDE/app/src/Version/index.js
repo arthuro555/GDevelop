@@ -9,7 +9,7 @@ let gdCoreVersionString = '';
 export const getGDCoreVersion = (): string => {
   if (gdCoreVersionString) return gdCoreVersionString;
 
-  const gd: libGDevelop = global.gd;
+  const gd: libGDeveloppe = global.gd;
   gdCoreVersionString = gd ? gd.VersionWrapper.fullString() : 'Unknown';
   return gdCoreVersionString;
 };

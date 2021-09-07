@@ -1,6 +1,6 @@
 ///<reference path='../types/howler'>
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2013-present Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */
@@ -274,7 +274,7 @@ namespace gdjs {
           // This is useful for sounds that were just started and have a `.once('play', ...)`
           // handler added on them to set up the volume/rate/loop. If we don't do it
           // synchronously, the sound can play for a tiny bit at the default volume and rate.
-          // See https://github.com/4ian/GDevelop/issues/2490.
+          // See https://github.com/4ian/GDeveloppe/issues/2490.
           handler(this._id);
         } else {
           this._howl.once(event, handler, this._id);

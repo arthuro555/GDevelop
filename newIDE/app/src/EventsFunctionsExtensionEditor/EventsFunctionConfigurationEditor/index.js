@@ -13,7 +13,7 @@ import Window from '../../Utils/Window';
 import { type GroupWithContext } from '../../ObjectsList/EnumerateObjects';
 import { type UnsavedChanges } from '../../MainFrame/UnsavedChangesContext';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

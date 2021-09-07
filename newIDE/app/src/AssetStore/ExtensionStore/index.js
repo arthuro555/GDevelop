@@ -5,7 +5,7 @@ import SearchBar from '../../UI/SearchBar';
 import { Column, Line } from '../../UI/Grid';
 import Background from '../../UI/Background';
 import ScrollView from '../../UI/ScrollView';
-import { type ExtensionShortHeader } from '../../Utils/GDevelopServices/Extension';
+import { type ExtensionShortHeader } from '../../Utils/GDeveloppeServices/Extension';
 import { FiltersChooser } from '../../UI/Search/FiltersChooser';
 import { ExtensionStoreContext } from './ExtensionStoreContext';
 import { ListSearchResults } from '../../UI/Search/ListSearchResults';

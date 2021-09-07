@@ -15,7 +15,7 @@ const editors: Array<ResourceExternalEditor> = [
     edit: () => {
       sendExternalEditorOpened('piskel');
       Window.showMessageBox(
-        'This feature is only supported in the desktop version for now!\nDownload it from GDevelop website.'
+        'This feature is only supported in the desktop version for now!\nDownload it from GDeveloppe website.'
       );
     },
   },
@@ -26,7 +26,7 @@ const editors: Array<ResourceExternalEditor> = [
     edit: () => {
       sendExternalEditorOpened('jfxr');
       Window.showMessageBox(
-        'This feature is only supported in the desktop version for now!\nDownload it from GDevelop website.'
+        'This feature is only supported in the desktop version for now!\nDownload it from GDeveloppe website.'
       );
     },
   },
@@ -37,7 +37,7 @@ const editors: Array<ResourceExternalEditor> = [
     edit: () => {
       sendExternalEditorOpened('yarn');
       Window.showMessageBox(
-        'This feature is only supported in the desktop version for now!\nDownload it from GDevelop website.'
+        'This feature is only supported in the desktop version for now!\nDownload it from GDeveloppe website.'
       );
     },
   },

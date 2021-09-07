@@ -11,7 +11,7 @@ export const ExplanationHeader = () => (
   <Text>
     <Trans>
       Prepare your game for Facebook Instant Games so that it can be play on
-      Facebook Messenger. GDevelop will create a compressed file that you can
+      Facebook Messenger. GDeveloppe will create a compressed file that you can
       upload on your Facebook Developer account.
     </Trans>
   </Text>

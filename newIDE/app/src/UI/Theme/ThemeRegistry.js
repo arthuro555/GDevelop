@@ -7,7 +7,7 @@ import OneDarkTheme from './OneDarkTheme';
 
 /*eslint no-useless-computed-key: "off"*/
 export const themes = {
-  ['GDevelop default']: DefaultTheme,
+  ['GDeveloppe default']: DefaultTheme,
   ['Dark']: DarkTheme,
   ['Nord']: NordTheme,
   ['Solarized Dark']: SolarizedDarkTheme,

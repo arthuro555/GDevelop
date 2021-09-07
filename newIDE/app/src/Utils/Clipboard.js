@@ -8,10 +8,10 @@ export type ClipboardKind = string;
 let internalClipboard = '';
 
 const mangleClipboardKind = (kind: ClipboardKind): string => {
-  // Mangle the name with GDevelop specific strings and random
+  // Mangle the name with GDeveloppe specific strings and random
   // characters so that the probability that something that is not
-  // a valid GDevelop clipboard content is recognized as valid is almost 0.
-  return 'GDEVELOP_' + kind + '_CLIPBOARD_KIND-jsBdHbLy912y8Rc';
+  // a valid GDeveloppe clipboard content is recognized as valid is almost 0.
+  return 'GDeveloppe_' + kind + '_CLIPBOARD_KIND-jsBdHbLy912y8Rc';
 };
 
 /**

@@ -92,7 +92,7 @@ export default class CreateProjectDialog extends React.Component<Props, State> {
               key="submit-example"
               onClick={() => {
                 Window.openExternalURL(
-                  'https://github.com/GDevelopApp/GDevelop-examples/issues/new/choose'
+                  'https://github.com/GDeveloppeApp/GDeveloppe-examples/issues/new/choose'
                 );
               }}
               primary

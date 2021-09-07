@@ -1,6 +1,6 @@
 ---
 name: "\U0001F41BBug report"
-about: Create a bug report about GDevelop or the game engine
+about: Create a bug report about GDeveloppe or the game engine
 title: ''
 labels: ''
 assignees: ''
@@ -24,5 +24,5 @@ Steps to reproduce the behavior:
 
 ## Other details
 * Include any OS/browser version/smartphone that you're using
-* Which version of GDevelop are you using? The desktop app or the web-app?
+* Which version of GDeveloppe are you using? The desktop app or the web-app?
 * Add any other context about the problem here.

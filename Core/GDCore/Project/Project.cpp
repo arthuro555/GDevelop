@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -492,9 +492,9 @@ void Project::UnserializeFrom(const SerializerElement& element) {
 
   if (gdMajorVersion > gd::VersionWrapper::Major())
     gd::LogWarning(
-        "The version of GDevelop used to create this game seems to be a new "
-        "version.\nGDevelop may fail to open the game, or data may be "
-        "missing.\nYou should check if a new version of GDevelop is "
+        "The version of GDeveloppe used to create this game seems to be a new "
+        "version.\nGDeveloppe may fail to open the game, or data may be "
+        "missing.\nYou should check if a new version of GDeveloppe is "
         "available.");
   else {
     if ((gdMajorVersion == gd::VersionWrapper::Major() &&
@@ -507,9 +507,9 @@ void Project::UnserializeFrom(const SerializerElement& element) {
          gdBuildVersion == gd::VersionWrapper::Build() &&
          revision > gd::VersionWrapper::Revision())) {
       gd::LogWarning(
-          "The version of GDevelop used to create this game seems to be "
-          "greater.\nGDevelop may fail to open the game, or data may be "
-          "missing.\nYou should check if a new version of GDevelop is "
+          "The version of GDeveloppe used to create this game seems to be "
+          "greater.\nGDeveloppe may fail to open the game, or data may be "
+          "missing.\nYou should check if a new version of GDeveloppe is "
           "available.");
     }
   }
@@ -593,9 +593,9 @@ void Project::UnserializeFrom(const SerializerElement& element) {
   if (VersionWrapper::IsOlderOrEqual(
           gdMajorVersion, gdMajorVersion, gdMinorVersion, 0, 3, 4, 73, 0)) {
     if (currentPlatformName == "Game Develop C++ platform")
-      currentPlatformName = "GDevelop C++ platform";
+      currentPlatformName = "GDeveloppe C++ platform";
     if (currentPlatformName == "Game Develop JS platform")
-      currentPlatformName = "GDevelop JS platform";
+      currentPlatformName = "GDeveloppe JS platform";
   }
   // End of Compatibility code
 
@@ -607,8 +607,8 @@ void Project::UnserializeFrom(const SerializerElement& element) {
     // Compatibility code
     if (VersionWrapper::IsOlderOrEqual(
             gdMajorVersion, gdMajorVersion, gdMinorVersion, 0, 3, 4, 73, 0)) {
-      if (name == "Game Develop C++ platform") name = "GDevelop C++ platform";
-      if (name == "Game Develop JS platform") name = "GDevelop JS platform";
+      if (name == "Game Develop C++ platform") name = "GDeveloppe C++ platform";
+      if (name == "Game Develop JS platform") name = "GDeveloppe JS platform";
     }
     // End of Compatibility code
 
@@ -628,7 +628,7 @@ void Project::UnserializeFrom(const SerializerElement& element) {
   if (platformsElement.GetChildrenCount() == 0) {
     // Compatibility with GD2.x
     platforms.push_back(
-        gd::PlatformManager::Get()->GetPlatform("GDevelop C++ platform"));
+        gd::PlatformManager::Get()->GetPlatform("GDeveloppe C++ platform"));
     currentPlatform = platforms.back();
   }
   // End of Compatibility code

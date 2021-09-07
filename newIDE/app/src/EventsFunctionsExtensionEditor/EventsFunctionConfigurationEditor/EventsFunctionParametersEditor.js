@@ -30,7 +30,7 @@ import { ColumnStackLayout, ResponsiveLineStackLayout } from '../../UI/Layout';
 import { getLastObjectParameterObjectType } from '../../EventsSheet/ParameterFields/ParameterMetadataTools';
 import StringArrayEditor from '../../StringArrayEditor';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

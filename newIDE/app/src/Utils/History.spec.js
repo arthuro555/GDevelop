@@ -7,7 +7,7 @@ import {
   redo,
 } from './History';
 import { makeTestProject } from '../fixtures/TestProject';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('History', () => {
   it('can save changes for a simple serializable object from libGD.js', () => {

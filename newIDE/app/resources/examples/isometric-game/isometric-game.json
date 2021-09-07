@@ -54,7 +54,7 @@
       "ios-icon-87": "ios-icon-87.png"
     },
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensionProperties": [],
     "extensions": [
@@ -118,10 +118,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -24158,7 +24158,7 @@
               "disabled": false,
               "folded": false,
               "type": "BuiltinCommonInstructions::JsCode",
-              "inlineCode": "//Get function parameter\r\nconst playerId = eventsFunctionContext.getArgument(\"player_ID\") - 1;\r\nvar newDeadzone = eventsFunctionContext.getArgument(\"deadzone\");\r\n\r\nif (playerId < 0 || playerId > 4) {\r\n    console.error('Parameter gamepad identifier in action: \"Set gamepad deadzone for sticks\", is not valid, must be between 0 and 4.');\r\n    return;\r\n}\r\n\r\n// clamp the newDeadzone in range [0, 1].\r\n// https://github.com/4ian/GDevelop-extensions/pull/33#issuecomment-618224857\r\ngdjs._extensionController.players[playerId].deadzone = gdjs.evtTools.common.clamp(newDeadzone, 0, 1);\r\n",
+              "inlineCode": "//Get function parameter\r\nconst playerId = eventsFunctionContext.getArgument(\"player_ID\") - 1;\r\nvar newDeadzone = eventsFunctionContext.getArgument(\"deadzone\");\r\n\r\nif (playerId < 0 || playerId > 4) {\r\n    console.error('Parameter gamepad identifier in action: \"Set gamepad deadzone for sticks\", is not valid, must be between 0 and 4.');\r\n    return;\r\n}\r\n\r\n// clamp the newDeadzone in range [0, 1].\r\n// https://github.com/4ian/GDeveloppe-extensions/pull/33#issuecomment-618224857\r\ngdjs._extensionController.players[playerId].deadzone = gdjs.evtTools.common.clamp(newDeadzone, 0, 1);\r\n",
               "parameterObjects": "",
               "useStrict": true,
               "eventsSheetExpanded": false

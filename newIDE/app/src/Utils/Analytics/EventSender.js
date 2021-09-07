@@ -2,7 +2,7 @@
 import Keen from 'keen-tracking';
 import Window from '../Window';
 import { getUserUUID } from './UserUUID';
-import Authentification from '../GDevelopServices/Authentification';
+import Authentification from '../GDeveloppeServices/Authentification';
 import {
   getProgramOpeningCount,
   incrementProgramOpeningCount,
@@ -126,7 +126,7 @@ export const sendExportLaunched = (exportKind: string) => {
   if (isDev || !client) return;
 
   client.recordEvent('export_launched', {
-    platform: 'GDevelop JS Platform', // Hardcoded here for now
+    platform: 'GDeveloppe JS Platform', // Hardcoded here for now
     exportKind,
   });
 };
@@ -135,7 +135,7 @@ export const sendNewGameCreated = (templateName: string) => {
   if (isDev || !client) return;
 
   client.recordEvent('new_game_creation', {
-    platform: 'GDevelop JS Platform', // Hardcoded here for now
+    platform: 'GDeveloppe JS Platform', // Hardcoded here for now
     templateName,
   });
 };

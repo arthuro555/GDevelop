@@ -14,7 +14,7 @@ const updateDiscordRichPresence = (project: ?gdProject) => {
     state: 'GDeveloppe 6',
     startTimestamp: richPresenceStartTimestamp,
     largeImageKey: 'gdicon',
-    largeImageText: 'GDevelop',
+    largeImageText: 'GDeveloppe',
   };
 
   ipc.send('update-discord-rich-presence', config);

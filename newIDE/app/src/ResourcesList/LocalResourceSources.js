@@ -14,7 +14,7 @@ const electron = optionalRequire('electron');
 const dialog = electron ? electron.remote.dialog : null;
 const path = optionalRequire('path');
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export default [
   {

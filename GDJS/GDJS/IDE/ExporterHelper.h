@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -88,7 +88,7 @@ struct PreviewExportOptions {
 
   /**
    * \brief Set if the export should show the full loading screen (false
-   * by default, skipping the minimum duration and GDevelop logo).
+   * by default, skipping the minimum duration and GDeveloppe logo).
    */
   PreviewExportOptions &SetFullLoadingScreen(bool enable) {
     fullLoadingScreen = enable;
@@ -168,7 +168,7 @@ class ExporterHelper {
    */
   void AddLibsInclude(bool pixiRenderers,
                       bool websocketDebuggerClient,
-                      gd::String gdevelopLogoStyle,
+                      gd::String GDeveloppeLogoStyle,
                       std::vector<gd::String> &includesFiles);
 
   /**

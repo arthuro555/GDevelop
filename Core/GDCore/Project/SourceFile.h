@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -54,13 +54,13 @@ class GD_CORE_API SourceFile {
 
   /**
    * \brief Set if the file is hidden from the user point of view and is only
-   * managed by GDevelop
+   * managed by GDeveloppe
    */
   void SetGDManaged(bool gdManaged_) { gdManaged = gdManaged_; };
 
   /**
    * \brief Return true if the file is hidden from the user point of view and is
-   * only managed by GDevelop
+   * only managed by GDeveloppe
    */
   bool IsGDManaged() const { return gdManaged; };
 
@@ -77,7 +77,7 @@ class GD_CORE_API SourceFile {
  private:
   gd::String filename;  ///< Filename
   bool gdManaged;  ///< True if the source file is hidden from the user point of
-                   ///< view and is managed only by GDevelop.
+                   ///< view and is managed only by GDeveloppe.
   gd::String language;  ///< String identifying the language of this source file
                         ///< (typically "C++ or "Javascript").
   std::weak_ptr<BaseEvent>

@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro';
 import * as React from 'react';
 import RaisedButton from '../UI/RaisedButton';
 import { Column, Line } from '../UI/Grid';
-import { type Limit, type Subscription } from '../Utils/GDevelopServices/Usage';
+import { type Limit, type Subscription } from '../Utils/GDeveloppeServices/Usage';
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import Text from '../UI/Text';
 

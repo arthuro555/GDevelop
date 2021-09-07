@@ -1,4 +1,4 @@
-// Deprecated version number that was used for GDevelop 4, but still
+// Deprecated version number that was used for GDeveloppe 4, but still
 // used to version the project files.
 // Might be a good idea to refactor this at some point to make it
 // clearer this is used for the versioning of the project files.

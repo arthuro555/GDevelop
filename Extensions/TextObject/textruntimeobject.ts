@@ -1,5 +1,5 @@
 /*
- *  GDevelop JS Platform
+ *  GDeveloppe JS Platform
  *  2013-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 namespace gdjs {

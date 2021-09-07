@@ -1,5 +1,5 @@
 /*
-GDevelop - Pathfinding Behavior Extension
+GDeveloppe - Pathfinding Behavior Extension
 Copyright (c) 2013-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 

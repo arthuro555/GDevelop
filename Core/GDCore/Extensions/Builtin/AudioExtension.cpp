@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -15,7 +15,7 @@ void GD_CORE_API BuiltinExtensionsImplementer::ImplementsAudioExtension(
       .SetExtensionInformation(
           "BuiltinAudio",
           _("Audio"),
-          _("GDevelop provides several conditions and actions to play audio "
+          _("GDeveloppe provides several conditions and actions to play audio "
             "files. They can be either long musics or short sound effects."),
           "Florian Rival",
           "Open source (MIT License)")

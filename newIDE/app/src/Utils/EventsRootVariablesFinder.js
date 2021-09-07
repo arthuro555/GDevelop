@@ -1,5 +1,5 @@
 // @flow
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /** Naive way to check if a variable expression is not using a structure/array. */
 const isRootVariableName = fullName =>

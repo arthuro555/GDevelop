@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -62,7 +62,7 @@ bool Exporter::ExportWholePixiProject(
 
     // Always disable the splash for Facebook Instant Games
     if (exportForFacebookInstantGames)
-      exportedProject.GetLoadingScreen().ShowGDevelopSplash(false);
+      exportedProject.GetLoadingScreen().ShowGDeveloppeSplash(false);
 
     // Prepare the export directory
     fs.MkDir(exportDir);
@@ -83,7 +83,7 @@ bool Exporter::ExportWholePixiProject(
     helper.AddLibsInclude(
         /*pixiRenderers=*/true,
         /*websocketDebuggerClient=*/false,
-        exportedProject.GetLoadingScreen().GetGDevelopLogoStyle(),
+        exportedProject.GetLoadingScreen().GetGDeveloppeLogoStyle(),
         includesFiles);
 
     // Export files for object and behaviors

@@ -35,7 +35,7 @@ const styles = {
 };
 
 // There must be missing tons of people.
-// If you contributed to GDevelop but you're not in the list, please
+// If you contributed to GDeveloppe but you're not in the list, please
 // send a Pull Request on GitHub or open an issue ;)
 const contributors = [
   // Core development team
@@ -48,28 +48,28 @@ const contributors = [
   // GitHub contributors
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Victor Levasseur',
     description:
-      'Numerous code contributions to GDevelop and community moderation',
+      'Numerous code contributions to GDeveloppe and community moderation',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Lizard-13',
     description:
-      'Numerous code contributions to GDevelop and community moderation',
+      'Numerous code contributions to GDeveloppe and community moderation',
   },
   {
     name: "Christina 'Castpixel' Antoinette Neofotistou",
@@ -78,126 +78,126 @@ const contributors = [
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
-  { name: 'ale26reg', description: 'Contributions to GDevelop' },
-  { name: 'dos1', description: 'Contributions to GDevelop' },
+  { name: 'ale26reg', description: 'Contributions to GDeveloppe' },
+  { name: 'dos1', description: 'Contributions to GDeveloppe' },
   {
     name: 'Aurélien Vivet',
     description:
-      'Numerous code contributions to GDevelop and community management',
+      'Numerous code contributions to GDeveloppe and community management',
     link: 'https://www.witly.fr',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Todor Imreorov',
-    description: 'Numerous code contributions to GDevelop',
+    description: 'Numerous code contributions to GDeveloppe',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
-  { name: 'brylie', description: 'Contributions to GDevelop' },
-  { name: 'Nnarol', description: 'Contributions to GDevelop' },
-  { name: 'wild-master', description: 'Contributions to GDevelop' },
+  { name: 'brylie', description: 'Contributions to GDeveloppe' },
+  { name: 'Nnarol', description: 'Contributions to GDeveloppe' },
+  { name: 'wild-master', description: 'Contributions to GDeveloppe' },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
-  { name: 'RandomShaper', description: 'Contributions to GDevelop' },
-  { name: 'RyanNerd', description: 'Contributions to GDevelop' },
-  { name: 'greater', description: 'Contributions to GDevelop' },
+  { name: 'RandomShaper', description: 'Contributions to GDeveloppe' },
+  { name: 'RyanNerd', description: 'Contributions to GDeveloppe' },
+  { name: 'greater', description: 'Contributions to GDeveloppe' },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
-    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
-  },
-  {
-    name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
-  { name: 'triptych', description: 'Contributions to GDevelop' },
+  {
+    name: 'Arthur Pacaud (arthuro555)',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
+    link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
+  },
+  { name: 'triptych', description: 'Contributions to GDeveloppe' },
   {
     name: 'Wend1go',
-    description: 'Contributions to GDevelop, Tutorials, Examples',
+    description: 'Contributions to GDeveloppe, Tutorials, Examples',
   },
-  { name: 'mattiascibien', description: 'Contributions to GDevelop' },
-  { name: 'araujo921', description: 'Contributions to GDevelop' },
-  { name: 'ronnystandtke', description: 'Contributions to GDevelop' },
+  { name: 'mattiascibien', description: 'Contributions to GDeveloppe' },
+  { name: 'araujo921', description: 'Contributions to GDeveloppe' },
+  { name: 'ronnystandtke', description: 'Contributions to GDeveloppe' },
   {
     name: 'Thomas Flecy',
-    description: 'Contributions to GDevelop (original sound object extension)',
+    description: 'Contributions to GDeveloppe (original sound object extension)',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
     description:
-      'Numerous code contributions to GDevelop and community moderation',
+      'Numerous code contributions to GDeveloppe and community moderation',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'The Gem Dev',
-    description: 'Code contributions to GDevelop and tutorials on Youtube',
+    description: 'Code contributions to GDeveloppe and tutorials on Youtube',
     link: 'https://www.youtube.com/channel/UCsZ4Ue8c94YLJDbGRafCI5Q',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'The Gem Dev',
-    description: 'Contributions to GDevelop and tutorials on Youtube',
+    description: 'Contributions to GDeveloppe and tutorials on Youtube',
   },
   {
     name: 'D8H',
-    description: 'Numerous code contributions to GDevelop',
+    description: 'Numerous code contributions to GDeveloppe',
     link: 'https://www.youtube.com/channel/UCsZ4Ue8c94YLJDbGRafCI5Q',
   },
   {
     name: 'Harsimran Singh Virk',
-    description: 'Numerous code contributions to GDevelop',
+    description: 'Numerous code contributions to GDeveloppe',
     link: 'https://github.com/HarsimranVirk',
   },
   {
     name: 'Nilay Majorwar',
-    description: 'Numerous code contributions to GDevelop',
+    description: 'Numerous code contributions to GDeveloppe',
     link: 'https://github.com/nilaymaj',
   },
 
   // Community members:
   {
     name: 'ddabrahim',
-    description: 'Lots of examples bundled with GDevelop',
+    description: 'Lots of examples bundled with GDeveloppe',
     link: 'https://gametemplates.itch.io/',
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
     name: 'Gametemplates',
-    description: 'Examples bundled with GDevelop',
+    description: 'Examples bundled with GDeveloppe',
     link: 'https://gametemplates.itch.io/',
   },
   { name: 'Mats', description: 'Tutorials, Examples' },
   { name: 'erdo', description: 'Tutorials, Examples' },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   { name: 'Jubileuksen3', description: 'Tutorials, Examples' },
@@ -207,7 +207,7 @@ const contributors = [
   { name: 'kalel', description: 'Tutorials' },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   { name: 'mtarzaim', description: 'Tutorials' },
@@ -218,12 +218,12 @@ const contributors = [
   {
     name: 'Jose David Cuartas Correa',
     description:
-      'Author of Digitopolis (a book on how to make games with GDevelop4)',
+      'Author of Digitopolis (a book on how to make games with GDeveloppe4)',
   },
 
   {
     name: 'François Dumortier',
-    description: 'GDevelop logo design',
+    description: 'GDeveloppe logo design',
     link: 'http://www.fdumortier.com',
   },
   {
@@ -232,7 +232,7 @@ const contributors = [
   },
   {
     name: 'Arthur Pacaud (arthuro555)',
-    description: 'Contributions to GDevelop and Moderation on the Forum',
+    description: 'Contributions to GDeveloppe and Moderation on the Forum',
     link: 'https://forum.gdevelop-app.com/u/arthuro555/summary',
   },
   {
@@ -241,17 +241,17 @@ const contributors = [
   },
   {
     name: 'Tristan Rhodes (Victris Games)',
-    description: 'High quality extensions for GDevelop',
+    description: 'High quality extensions for GDeveloppe',
     link: 'https://www.youtube.com/channel/UClbq1M-D83t_bYhfa1mfyEQ',
   },
   {
     name: 'Entropy',
-    description: 'High quality extensions for GDevelop',
+    description: 'High quality extensions for GDeveloppe',
     link: 'https://github.com/Entr0py404',
   },
   {
     name: 'FlokiTV',
-    description: 'High quality extensions for GDevelop',
+    description: 'High quality extensions for GDeveloppe',
     link: 'https://github.com/Entr0py404',
   },
   {
@@ -276,7 +276,7 @@ const contributors = [
   },
   {
     name: 'VegeTato',
-    description: 'Extensions for GDevelop',
+    description: 'Extensions for GDeveloppe',
   },
   {
     name: 'Leo Red',
@@ -285,23 +285,23 @@ const contributors = [
   },
   {
     name: 'add_',
-    description: 'Extensions for GDevelop',
+    description: 'Extensions for GDeveloppe',
     link: 'https://github.com/add00',
   },
   {
     name: 'HelperWesley',
-    description: 'Examples and youtube content that is relevant to GDevelop',
+    description: 'Examples and youtube content that is relevant to GDeveloppe',
     link: 'https://www.youtube.com/channel/UC8RsU74-hU1pfNKHNMfiFfw',
   },
   {
     name: 'UlisesFreitas',
     description:
-      'Numerous examples and making external services that integrate with GDevelop games',
+      'Numerous examples and making external services that integrate with GDeveloppe games',
     link: 'https://ulisesfreitas.itch.io/',
   },
   {
     name: 'IttaloXD',
-    description: 'The GDevelop embassador in Brazil',
+    description: 'The GDeveloppe embassador in Brazil',
     link: 'https://twitter.com/ittaloxd',
   },
 ];
@@ -360,7 +360,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
             <Column noMargin>
               <img
                 src="res/GD-logo.png"
-                alt="GDevelop logo"
+                alt="GDeveloppe logo"
                 style={styles.logo}
               />
               <Tabs value={currentTab} onChange={this._changeTab}>
@@ -373,7 +373,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
                   <Column>
                     <Line>
                       <Text>
-                        <Trans>GDeveloppe 6, based on GDevelop</Trans>
+                        <Trans>GDeveloppe 6, based on GDeveloppe</Trans>
                       </Text>
                     </Line>
                     <Line>
@@ -402,7 +402,7 @@ export default class AboutDialog extends PureComponent<Props, State> {
                   <Column>
                     <Text>
                       <Trans>
-                        GDevelop was created by Florian "4ian" Rival. The parody
+                        GDeveloppe was created by Florian "4ian" Rival. The parody
                         GDeveloppe was made by arthuro555.
                       </Trans>
                     </Text>

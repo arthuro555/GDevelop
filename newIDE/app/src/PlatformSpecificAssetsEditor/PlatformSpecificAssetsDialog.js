@@ -19,7 +19,7 @@ import optionalRequire from '../Utils/OptionalRequire';
 import Text from '../UI/Text';
 import { ColumnStackLayout } from '../UI/Layout';
 const path = optionalRequire('path');
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,
@@ -268,7 +268,7 @@ export default class PlatformSpecificAssetsDialog extends React.Component<
             ) : (
               <Text>
                 <Trans>
-                  Download GDevelop desktop version to generate the Android and
+                  Download GDeveloppe desktop version to generate the Android and
                   iOS icons of your game.
                 </Trans>
               </Text>

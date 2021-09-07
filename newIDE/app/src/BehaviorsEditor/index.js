@@ -30,7 +30,7 @@ import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import ScrollView from '../UI/ScrollView';
 import { IconContainer } from '../UI/IconContainer';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

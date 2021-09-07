@@ -156,7 +156,7 @@ export const allAlertMessages: Array<{
 ];
 
 /**
- * All the preferences of GDevelop. To add a new preference, add it into this
+ * All the preferences of GDeveloppe. To add a new preference, add it into this
  * type and add a setter into `Preferences` type. Then, update the
  * preference dialog.
  */
@@ -190,7 +190,7 @@ export type PreferencesValues = {|
 |};
 
 /**
- * Type containing all the preferences of GDevelop and their setters.
+ * Type containing all the preferences of GDeveloppe and their setters.
  */
 export type Preferences = {|
   values: PreferencesValues,
@@ -248,7 +248,7 @@ export const initialPreferences = {
   values: {
     language: 'en',
     autoDownloadUpdates: false,
-    themeName: 'GDevelop default',
+    themeName: 'GDeveloppe default',
     codeEditorThemeName: 'vs-dark',
     hiddenAlertMessages: {},
     hiddenTutorialHints: {},

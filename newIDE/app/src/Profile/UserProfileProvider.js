@@ -5,12 +5,12 @@ import {
   getUserUsages,
   getUserSubscription,
   getUserLimits,
-} from '../Utils/GDevelopServices/Usage';
+} from '../Utils/GDeveloppeServices/Usage';
 import Authentification, {
   type Profile,
   type LoginForm,
   type LoginError,
-} from '../Utils/GDevelopServices/Authentification';
+} from '../Utils/GDeveloppeServices/Authentification';
 import LoginDialog from './LoginDialog';
 import { watchPromiseInState } from '../Utils/WatchPromiseInState';
 import { showWarningBox } from '../UI/Messages/MessageBox';

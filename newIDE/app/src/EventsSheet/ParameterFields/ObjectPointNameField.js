@@ -7,7 +7,7 @@ import getObjectByName from '../../Utils/GetObjectByName';
 import { getLastObjectParameterValue } from './ParameterMetadataTools';
 import { getAllPointNames } from '../../ObjectEditor/Editors/SpriteEditor/Utils/SpriteObjectHelper';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export default class ObjectPointNameField extends Component<
   ParameterFieldProps,

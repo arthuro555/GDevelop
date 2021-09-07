@@ -6,7 +6,7 @@ import * as React from 'react';
 import FlatButton from '../UI/FlatButton';
 import { Line, Spacer } from '../UI/Grid';
 import RaisedButton from '../UI/RaisedButton';
-import { type Game } from '../Utils/GDevelopServices/Game';
+import { type Game } from '../Utils/GDeveloppeServices/Game';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 

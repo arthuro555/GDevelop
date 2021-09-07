@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2013-2016 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */
@@ -38,8 +38,8 @@ namespace gdjs {
   export const callbacksRuntimeSceneUnloaded: Array<RuntimeSceneCallback> = [];
   export const callbacksObjectDeletedFromScene: Array<RuntimeSceneRuntimeObjectCallback> = [];
 
-  /** Base64 encoded logo of GDevelop for the splash screen. */
-  export let gdevelopLogo: string = '';
+  /** Base64 encoded logo of GDeveloppe for the splash screen. */
+  export let GDeveloppeLogo: string = '';
 
   /**
    * Convert a RGB object to a Hex string.

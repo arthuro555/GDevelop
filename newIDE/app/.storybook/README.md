@@ -1,6 +1,6 @@
 This folder contains some Storybook configuration.
 
-> ℹ️ Check the **general [README](../../README.md)** to know how to launch Storybook for GDevelop.
+> ℹ️ Check the **general [README](../../README.md)** to know how to launch Storybook for GDeveloppe.
 > This documentation is information about some specific Storybook configuration/work-arounds.
 
 - `.babelrc` is needed as `src/locales` folder contains huge .js file, that would cause babel to hang/freeze/crash. We redefine `.babelrc` for Storybook, so that it's the same Preset as create-react-app but ignoring `src/locales`.

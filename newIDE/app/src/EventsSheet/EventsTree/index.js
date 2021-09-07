@@ -31,7 +31,7 @@ import ThemeConsumer from '../../UI/Theme/ThemeConsumer';
 import BottomButtons from './BottomButtons';
 import EmptyEventsPlaceholder from './EmptyEventsPlaceholder';
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const getThumbnail = ObjectsRenderingService.getThumbnail.bind(
   ObjectsRenderingService

@@ -4,7 +4,7 @@ import optionalRequire from '../Utils/OptionalRequire.js';
 import newNameGenerator from '../Utils/NewNameGenerator';
 const fs = optionalRequire('fs');
 const path = optionalRequire('path');
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export const RESOURCE_EXTENSIONS = {
   image: 'png,jpg,jpeg,PNG,JPG,JPEG',

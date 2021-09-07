@@ -3,7 +3,7 @@ import {
   type Asset,
   type AssetShortHeader,
   getAsset,
-} from '../Utils/GDevelopServices/Asset';
+} from '../Utils/GDeveloppeServices/Asset';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { unserializeFromJSObject } from '../Utils/Serializer';
 import flatten from 'lodash/flatten';
@@ -13,10 +13,10 @@ import {
   getExtensionsRegistry,
   getExtension,
   type SerializedExtension,
-} from '../Utils/GDevelopServices/Extension';
+} from '../Utils/GDeveloppeServices/Extension';
 import { type EventsFunctionsExtensionsState } from '../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
 import { mapVector } from '../Utils/MapFor';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const toNewGdMapStringString = (object: {
   [string]: string,
@@ -325,7 +325,7 @@ type RequiredExtension = {|
 |};
 
 export const filterMissingExtensions = (
-  gd: libGDevelop,
+  gd: libGDeveloppe,
   requiredExtensions: Array<RequiredExtension>
 ): Array<RequiredExtension> => {
   const loadedExtensionNames = mapVector(
@@ -364,7 +364,7 @@ export const getRequiredExtensionsForEventsFromAsset = (
 };
 
 export const filterMissingBehaviors = (
-  gd: libGDevelop,
+  gd: libGDeveloppe,
   requiredBehaviors: Array<RequiredBehavior>
 ): Array<RequiredBehavior> => {
   return requiredBehaviors.filter(({ behaviorType }) => {

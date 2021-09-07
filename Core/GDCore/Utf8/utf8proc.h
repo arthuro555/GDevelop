@@ -111,7 +111,7 @@ typedef bool utf8proc_bool;
 #endif
 #include <limits.h>
 
-//PATCH FOR GDevelop
+//PATCH FOR GDeveloppe
 
 /*#ifdef _WIN32
 #  ifdef UTF8PROC_EXPORTS
@@ -127,7 +127,7 @@ typedef bool utf8proc_bool;
 
 #define UTF8PROC_DLLEXPORT GD_CORE_API
 
-//END OF PATCH FOR GDevelop
+//END OF PATCH FOR GDeveloppe
 
 #ifdef __cplusplus
 extern "C" {

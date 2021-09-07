@@ -27,7 +27,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensionProperties": [],
     "extensions": [
@@ -91,10 +91,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -126,7 +126,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Hurt.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -139,7 +139,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Idle_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -152,7 +152,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Idle_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -165,7 +165,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -178,7 +178,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Protection.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -191,7 +191,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -204,7 +204,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_3.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -217,7 +217,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_4.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -230,7 +230,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_6.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -243,7 +243,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/GrafxKid Pack/Character Pack 1/Spikey Bub/Spikey Bub_Running_5.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       }
     ],

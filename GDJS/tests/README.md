@@ -1,4 +1,4 @@
-These are the tests for the GDevelop JavaScript game engine.
+These are the tests for the GDeveloppe JavaScript game engine.
 
 ## Launching tests
 
@@ -17,7 +17,7 @@ npm run test-benchmark:watch # This will also run benchmarks
 npm run test:firefox:watch # To run tests using Firefox
 ```
 
-> ⚠️ If you're working on GDJS or extensions, make sure to have the development version of GDevelop running so that changes in GDJS or extension files are rebuilt (or run `npm run build` in `GDJS/`, but better run GDevelop so that any changes are watched).
+> ⚠️ If you're working on GDJS or extensions, make sure to have the development version of GDeveloppe running so that changes in GDJS or extension files are rebuilt (or run `npm run build` in `GDJS/`, but better run GDeveloppe so that any changes are watched).
 
 ## About the tests
 

@@ -30,7 +30,7 @@
       "backgroundColor": 0,
       "backgroundFadeInDuration": 0.2,
       "backgroundImageResourceName": "",
-      "gdevelopLogoStyle": "light",
+      "GDeveloppeLogoStyle": "light",
       "logoAndProgressFadeInDuration": 0.2,
       "logoAndProgressLogoFadeInDelay": 0.2,
       "minDuration": 1.5,
@@ -39,16 +39,16 @@
       "progressBarMaxWidth": 200,
       "progressBarMinWidth": 40,
       "progressBarWidthPercent": 30,
-      "showGDevelopSplash": true,
+      "showGDeveloppeSplash": true,
       "showProgressBar": true
     },
     "extensionProperties": [],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -62,7 +62,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Industrial Platformer Pack (110 assets)/PNG/Retina/Industrial platform.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -75,7 +75,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Industrial Platformer Pack (110 assets)/PNG/Retina/tiled_Industrial platform.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -88,7 +88,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_dead.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -101,7 +101,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_duck.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -114,7 +114,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_fall.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -127,7 +127,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_hit.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -140,7 +140,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_roll.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -153,7 +153,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_stand.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -166,7 +166,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_swim_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -179,7 +179,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_swim_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -192,7 +192,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_switch_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -205,7 +205,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_switch_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -218,7 +218,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_up_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -231,7 +231,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_up_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -244,7 +244,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_up_3.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -257,7 +257,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_walk_1.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -270,7 +270,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_walk_2.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -283,7 +283,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_walk_3.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -296,7 +296,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_walk_4.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       },
       {
@@ -309,7 +309,7 @@
         "userAdded": false,
         "origin": {
           "identifier": "https://resources.gdevelop-app.com/assets/Abstract Platformer Pack (370 assets)/PNG/Players/Player Blue/Blue player_walk_5.png",
-          "name": "gdevelop-asset-store"
+          "name": "GDeveloppe-asset-store"
         }
       }
     ],

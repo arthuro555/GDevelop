@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Primitive Drawing Extension
+GDeveloppe - Primitive Drawing Extension
 Copyright (c) 2008-2016 Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */
@@ -96,7 +96,7 @@ class PrimitiveDrawingJsExtension : public gd::PlatformExtension {
     GetAllActionsForObject(
         "PrimitiveDrawing::Drawer")["PrimitiveDrawing::Star"]
         .SetFunctionName("drawStar");
-    // These actions are not exposed yet as the way they work is unsure. See https://github.com/4ian/GDevelop/pull/1256
+    // These actions are not exposed yet as the way they work is unsure. See https://github.com/4ian/GDeveloppe/pull/1256
     /*GetAllActionsForObject(
         "PrimitiveDrawing::Drawer")["PrimitiveDrawing::Arc"]
         .SetFunctionName("drawArc");
@@ -180,7 +180,7 @@ extern "C" gd::PlatformExtension* CreateGDJSPrimitiveDrawingExtension() {
 }
 #else
 /**
- * Used by GDevelop to create the extension class
+ * Used by GDeveloppe to create the extension class
  * -- Do not need to be modified. --
  */
 extern "C" gd::PlatformExtension* GD_EXTENSION_API CreateGDJSExtension() {

@@ -1,10 +1,10 @@
 # Travis CI configuration to build and run all tests
 # (and typing/formatting) for the Core, newIDE, GDJS.
 #
-# This builds GDevelop.js and store it on a S3 so it can be used to run
-# GDevelop without building it.
+# This builds GDeveloppe.js and store it on a S3 so it can be used to run
+# GDeveloppe without building it.
 #
-# See also Semaphore CI for quick tests (not building GDevelop.js, so
+# See also Semaphore CI for quick tests (not building GDeveloppe.js, so
 # faster but not always reliable).
 
 language: cpp
@@ -32,7 +32,7 @@ addons:
     - /$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)/commit/$(git rev-parse HEAD)
     - /$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)/latest
     paths:
-    - Binaries/embuild/GDevelop.js
+    - Binaries/embuild/GDeveloppe.js
   apt:
     sources:
     - ubuntu-toolchain-r-test
@@ -68,15 +68,15 @@ install:
   - cmake -DBUILD_GDJS=FALSE -DBUILD_TESTS=TRUE -DCMAKE_CXX_COMPILER=$(which $CXX) -DCMAKE_C_COMPILER=$(which $CC) ..
   - make -j 4
   - cd ..
-# Install Emscripten (for GDevelop.js)
+# Install Emscripten (for GDeveloppe.js)
   - git clone https://github.com/juj/emsdk.git
   - cd emsdk
   - ./emsdk install 1.39.6
   - ./emsdk activate 1.39.6
   - source ./emsdk_env.sh
   - cd ..
-# Install GDevelop.js dependencies and compile it
-  - cd GDevelop.js
+# Install GDeveloppe.js dependencies and compile it
+  - cd GDeveloppe.js
   - npm install -g grunt-cli
   - npm install
   - npm run build
@@ -93,8 +93,8 @@ script:
   - cd .build-tests
   - Core/GDCore_tests
   - cd ..
-# GDevelop.js tests
-  - cd GDevelop.js
+# GDeveloppe.js tests
+  - cd GDeveloppe.js
   - npm test
   - cd ..
 # newIDE tests:
@@ -108,6 +108,6 @@ script:
   - npm run check-format
   - cd ..
 # GDJS game engine tests, disabled on Travis CI because ChromeHeadless can't be started.
-# See them running on Semaphore-CI instead: https://gdevelop.semaphoreci.com/projects/GDevelop
+# See them running on Semaphore-CI instead: https://GDeveloppe.semaphoreci.com/projects/GDeveloppe
 #  - cd GDJS/tests && npm test
 #  - cd ../..

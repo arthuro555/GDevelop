@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2018 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -26,23 +26,23 @@ class GD_CORE_API LoadingScreen {
   virtual ~LoadingScreen(){};
 
   /**
-   * \brief Return true if the GDevelop logo should be shown while loading
+   * \brief Return true if the GDeveloppe logo should be shown while loading
    * assets.
    */
-  bool IsGDevelopSplashShown() const { return showGDevelopSplash; };
+  bool IsGDeveloppeSplashShown() const { return showGDeveloppeSplash; };
 
   /**
-   * \brief Set if the GDevelop logo should be shown while loading assets.
+   * \brief Set if the GDeveloppe logo should be shown while loading assets.
    */
-  LoadingScreen& ShowGDevelopSplash(bool show) {
-    showGDevelopSplash = show;
+  LoadingScreen& ShowGDeveloppeSplash(bool show) {
+    showGDeveloppeSplash = show;
     return *this;
   };
 
-  const gd::String& GetGDevelopLogoStyle() const { return gdevelopLogoStyle; };
+  const gd::String& GetGDeveloppeLogoStyle() const { return GDeveloppeLogoStyle; };
 
-  LoadingScreen& SetGDevelopLogoStyle(const gd::String& value) {
-    gdevelopLogoStyle = value;
+  LoadingScreen& SetGDeveloppeLogoStyle(const gd::String& value) {
+    GDeveloppeLogoStyle = value;
     return *this;
   }
 
@@ -153,8 +153,8 @@ class GD_CORE_API LoadingScreen {
   ///@}
 
  private:
-  bool showGDevelopSplash;
-  gd::String gdevelopLogoStyle;
+  bool showGDeveloppeSplash;
+  gd::String GDeveloppeLogoStyle;
   gd::String backgroundImageResourceName;
   int backgroundColor;
   double backgroundFadeInDuration; // In seconds.

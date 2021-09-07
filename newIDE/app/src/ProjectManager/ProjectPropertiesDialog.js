@@ -322,12 +322,12 @@ function ProjectPropertiesDialog(props: Props) {
                 </Text>
                 <AlertMessage kind="info">
                   <Trans>
-                    When you create an object using an action, GDevelop now sets
+                    When you create an object using an action, GDeveloppe now sets
                     the Z order of the object to the maximum value that was
                     found when starting the scene for each layer. This allow to
                     make sure that objects that you create are in front of
                     others. This game was created before this change, so
-                    GDevelop maintains the old behavior: newly created objects Z
+                    GDeveloppe maintains the old behavior: newly created objects Z
                     order is set to 0. It's recommended that you switch to the
                     new behavior by clicking the following button.
                   </Trans>
@@ -550,16 +550,6 @@ function ProjectPropertiesDialog(props: Props) {
           />
         )}
       </Dialog>
-      <SubscriptionChecker
-        ref={subscriptionChecker}
-        onChangeSubscription={() => {
-          onCancelChanges();
-          props.onChangeSubscription();
-        }}
-        mode="mandatory"
-        id="Disable GDevelop splash at startup"
-        title={<Trans>Disable GDeveloppe splash at startup</Trans>}
-      />
     </React.Fragment>
   );
 }

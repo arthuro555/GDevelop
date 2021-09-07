@@ -2,7 +2,7 @@
 import 'element-closest';
 import React, { Component, type Element } from 'react';
 import ReactDOM from 'react-dom';
-import Authentification from './Utils/GDevelopServices/Authentification';
+import Authentification from './Utils/GDeveloppeServices/Authentification';
 import {
   sendProgramOpening,
   installAnalyticsEvents,
@@ -53,20 +53,20 @@ class Bootstrapper extends Component<{}, State> {
     installRaven();
     GD_STARTUP_TIMES.push(['bootstrapperComponentDidMount', performance.now()]);
 
-    // Load GDevelop.js, ensuring a new version is fetched when the version changes.
+    // Load GDeveloppe.js, ensuring a new version is fetched when the version changes.
     loadScript(
       `./libGD.js?cache-buster=${VersionMetadata.versionWithHash}`
     ).then(() => {
       GD_STARTUP_TIMES.push(['libGDLoadedTime', performance.now()]);
-      const initializeGDevelopJs = global.initializeGDevelopJs;
-      if (!initializeGDevelopJs) {
+      const initializeGDeveloppeJs = global.initializeGDeveloppeJs;
+      if (!initializeGDeveloppeJs) {
         this.handleEditorLoadError(
-          new Error('Missing initializeGDevelopJs in libGD.js')
+          new Error('Missing initializeGDeveloppeJs in libGD.js')
         );
         return;
       }
 
-      initializeGDevelopJs({
+      initializeGDeveloppeJs({
         // Override the resolved URL for the .wasm file,
         // to ensure a new version is fetched when the version changes.
         locateFile: (path: string, prefix: string) => {

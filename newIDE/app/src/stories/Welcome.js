@@ -8,9 +8,9 @@ import AlertMessage from '../UI/AlertMessage';
 export default function Welcome() {
   return (
     <Column>
-      <Text size="title">Welcome to GDevelop Storybook</Text>
+      <Text size="title">Welcome to GDeveloppe Storybook</Text>
       <Text>
-        <Trans>This is a UI component dev environment for GDevelop.</Trans>
+        <Trans>This is a UI component dev environment for GDeveloppe.</Trans>
       </Text>
       <Text>
         Stories are inside the "newIDE/app/src/stories" directory.

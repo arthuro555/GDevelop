@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -108,13 +108,13 @@ class GD_CORE_API EventsFunctionsExtension : public EventsFunctionsContainer {
   }
 
   /**
-   * \brief Get the help path of this extension, relative to the GDevelop
+   * \brief Get the help path of this extension, relative to the GDeveloppe
    * documentation root.
    */
   const gd::String& GetHelpPath() const { return helpPath; };
 
   /**
-   * \brief Set the help path of this extension, relative to the GDevelop
+   * \brief Set the help path of this extension, relative to the GDeveloppe
    * documentation root.
    */
   EventsFunctionsExtension& SetHelpPath(const gd::String& helpPath_) {

@@ -11,7 +11,7 @@ import {
   type PlanDetails,
   changeUserSubscription,
   getRedirectToCheckoutUrl,
-} from '../Utils/GDevelopServices/Usage';
+} from '../Utils/GDeveloppeServices/Usage';
 import { showMessageBox, showErrorBox } from '../UI/Messages/MessageBox';
 import {
   sendSubscriptionDialogShown,

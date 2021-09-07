@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -82,7 +82,7 @@ bool ExporterHelper::ExportProjectForPixiPreview(
   if (!options.fullLoadingScreen) {
     // Most of the time, we skip the logo and minimum duration so that
     // the preview start as soon as possible.
-    exportedProject.GetLoadingScreen().ShowGDevelopSplash(false);
+    exportedProject.GetLoadingScreen().ShowGDeveloppeSplash(false);
     exportedProject.GetLoadingScreen().SetMinDuration(0);
   }
 
@@ -102,7 +102,7 @@ bool ExporterHelper::ExportProjectForPixiPreview(
   // Export engine libraries
   AddLibsInclude(/*pixiRenderers=*/true,
                  /*websocketDebuggerClient=*/true,
-                 exportedProject.GetLoadingScreen().GetGDevelopLogoStyle(),
+                 exportedProject.GetLoadingScreen().GetGDeveloppeLogoStyle(),
                  includesFiles);
 
   // Export files for object and behaviors
@@ -522,7 +522,7 @@ bool ExporterHelper::CompleteIndexFile(
 
 void ExporterHelper::AddLibsInclude(bool pixiRenderers,
                                     bool websocketDebuggerClient,
-                                    gd::String gdevelopLogoStyle,
+                                    gd::String GDeveloppeLogoStyle,
                                     std::vector<gd::String> &includesFiles) {
   // First, do not forget common includes (they must be included before events
   // generated code files).
@@ -560,11 +560,11 @@ void ExporterHelper::AddLibsInclude(bool pixiRenderers,
   InsertUnique(includesFiles, "events-tools/windowtools.js");
   InsertUnique(includesFiles, "events-tools/networktools.js");
 
-  if (gdevelopLogoStyle == "dark") {
+  if (GDeveloppeLogoStyle == "dark") {
     InsertUnique(includesFiles, "splash/gd-logo-dark.js");
-  } else if (gdevelopLogoStyle == "dark-colored") {
+  } else if (GDeveloppeLogoStyle == "dark-colored") {
     InsertUnique(includesFiles, "splash/gd-logo-dark-colored.js");
-  } else if (gdevelopLogoStyle == "light-colored") {
+  } else if (GDeveloppeLogoStyle == "light-colored") {
     InsertUnique(includesFiles, "splash/gd-logo-light-colored.js");
   } else {
     InsertUnique(includesFiles, "splash/gd-logo-light.js");

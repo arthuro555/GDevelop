@@ -33,10 +33,10 @@
             <extension name="PrimitiveDrawing" />
         </extensions>
         <platforms>
-            <platform name="GDevelop JS platform" />
-            <platform name="GDevelop C++ platform" />
+            <platform name="GDeveloppe JS platform" />
+            <platform name="GDeveloppe C++ platform" />
         </platforms>
-        <currentPlatform>GDevelop JS platform</currentPlatform>
+        <currentPlatform>GDeveloppe JS platform</currentPlatform>
     </properties>
     <resources>
         <resources>

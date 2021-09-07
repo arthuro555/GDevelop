@@ -286,7 +286,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     );
 
     if (lastLaunchedVersion === undefined) {
-      // This is the first time GDevelop is launched, don't
+      // This is the first time GDeveloppe is launched, don't
       // warn about this version being new.
       return false;
     }

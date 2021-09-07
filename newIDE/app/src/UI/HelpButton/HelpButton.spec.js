@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import HelpButton from '.';
 
 describe('HelpButton', () => {
-  it('renders the button linking to a GDevelop documentation help page', () => {
+  it('renders the button linking to a GDeveloppe documentation help page', () => {
     const tree = renderer
       .create(<HelpButton helpPagePath="/objects/tiled_sprite" />)
       .toJSON();

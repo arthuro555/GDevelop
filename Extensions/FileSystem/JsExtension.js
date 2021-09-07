@@ -1,15 +1,15 @@
 // @flow
 /**
- * This is a declaration of an extension for GDevelop 5.
+ * This is a declaration of an extension for GDeveloppe 5.
  *
  * ℹ️ Changes in this file are watched and automatically imported if the editor
  * is running. You can also manually run `node import-GDJS-Runtime.js` (in newIDE/app/scripts).
  *
- * The file must be named "JsExtension.js", otherwise GDevelop won't load it.
+ * The file must be named "JsExtension.js", otherwise GDeveloppe won't load it.
  * ⚠️ If you make a change and the extension is not loaded, open the developer console
  * and search for any errors.
  *
- * More information on https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md
+ * More information on https://github.com/4ian/GDeveloppe/blob/master/newIDE/README-extensions.md
  */
 
 /*::
@@ -22,7 +22,7 @@ import { type ObjectsRenderingService, type ObjectsEditorService } from '../JsEx
 module.exports = {
   createExtension: function (
     _ /*: (string) => string */,
-    gd /*: libGDevelop */
+    gd /*: libGDeveloppe */
   ) {
     const extension = new gd.PlatformExtension();
     extension
@@ -490,7 +490,7 @@ module.exports = {
     return extension;
   },
   runExtensionSanityTests: function (
-    gd /*: libGDevelop */,
+    gd /*: libGDeveloppe */,
     extension /*: gdPlatformExtension*/
   ) {
     return [];

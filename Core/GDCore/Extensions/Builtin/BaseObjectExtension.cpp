@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -17,7 +17,7 @@ void GD_CORE_API BuiltinExtensionsImplementer::ImplementsBaseObjectExtension(
       .SetExtensionInformation(
           "BuiltinObject",
           _("Features for all objects"),
-          _("Common features that can be used for all objects in GDevelop."),
+          _("Common features that can be used for all objects in GDeveloppe."),
           "Florian Rival",
           "Open source (MIT License)")
       .SetExtensionHelpPath("/objects/base_object/events");
@@ -1214,7 +1214,7 @@ void GD_CORE_API BuiltinExtensionsImplementer::ImplementsBaseObjectExtension(
       .AddAction(
           "MoveObjects",
           _("Apply movement to all objects"),
-          _("Moves all objects according to the forces they have. GDevelop "
+          _("Moves all objects according to the forces they have. GDeveloppe "
             "calls this action at the end of the events by default."),
           _("Apply movement to all objects"),
           _("Movement using forces"),

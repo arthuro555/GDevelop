@@ -1,15 +1,15 @@
 // @ts-check
 /**
- * Launch this script to generate a reference of all expressions supported by GDevelop.
+ * Launch this script to generate a reference of all expressions supported by GDeveloppe.
  */
-const initializeGDevelopJs = require('../public/libGD.js');
+const initializeGDeveloppeJs = require('../public/libGD.js');
 const { mapVector } = require('./lib/MapFor');
 const makeExtensionsLoader = require('./lib/LocalJsExtensionsLoader');
 const fs = require('fs').promises;
 const path = require('path');
 const shell = require('shelljs');
 const {
-  gdevelopWikiUrlRoot,
+  GDeveloppeWikiUrlRoot,
   getHelpLink,
   generateReadMoreLink,
   improperlyFormattedHelpPaths,
@@ -93,13 +93,13 @@ const generateFileHeaderText = () => {
 
 Expressions can be entered when you see a field with one of these buttons:
 
-{{ :gdevelop5:field_expressions.png?nolink |}}
+{{ :GDeveloppe5:field_expressions.png?nolink |}}
 
   * The left button indicates a "string expression" (a text)
   * The right button indicates a "numerical expression" (a number)
 
-This page is a reference of all expressions that can be used in GDevelop, grouped by the extension,
-object or behavior they belong too. When \`Object\` is written, you should enter an object name. **[[gdevelop5:all-features:expressions|Learn more here about how to write expressions.]]**
+This page is a reference of all expressions that can be used in GDeveloppe, grouped by the extension,
+object or behavior they belong too. When \`Object\` is written, you should enter an object name. **[[GDeveloppe5:all-features:expressions|Learn more here about how to write expressions.]]**
 
 <note>Expressions are sometime also called functions, like in mathematics.</note>
 `,
@@ -123,9 +123,9 @@ const generateExtensionFooterText = ({ extension }) => {
     text:
       `
 ---
-*This page is an auto-generated reference page about the **${extension.getFullName()}** feature of [[https://gdevelop-app.com/|GDevelop, the open-source, cross-platform game engine designed for everyone]].*` +
+*This page is an auto-generated reference page about the **${extension.getFullName()}** feature of [[https://gdevelop-app.com/|GDeveloppe, the open-source, cross-platform game engine designed for everyone]].*` +
       ' ' +
-      'Learn more about [[gdevelop5:all-features|all GDevelop features here]].',
+      'Learn more about [[GDeveloppe5:all-features|all GDeveloppe features here]].',
   };
 };
 
@@ -536,9 +536,9 @@ const generateAllFeaturesStartPageRawTexts = extensionReferences => {
   const headerText = {
     text: `# All features
 
-This page lists **all the features** that are provided in GDevelop. These can be objects, behaviors but also features that can be used directly using actions, conditions or expressions (without requiring an object to be existing on the scene).
+This page lists **all the features** that are provided in GDeveloppe. These can be objects, behaviors but also features that can be used directly using actions, conditions or expressions (without requiring an object to be existing on the scene).
 
-Note that GDevelop can also be extended with extensions: take a look at [[gdevelop5:extensions|the list of community extensions]] or learn how to create your [[gdevelop5:extensions:create|own set of features (behaviors, actions, conditions or expressions)]].
+Note that GDeveloppe can also be extended with extensions: take a look at [[GDeveloppe5:extensions|the list of community extensions]] or learn how to create your [[GDeveloppe5:extensions:create|own set of features (behaviors, actions, conditions or expressions)]].
 
 `,
   };
@@ -546,11 +546,11 @@ Note that GDevelop can also be extended with extensions: take a look at [[gdevel
     text: `
 You can also find a **reference sheet of all expressions**:
 
-* [[gdevelop5:all-features:expressions-reference|Expressions reference]]
+* [[GDeveloppe5:all-features:expressions-reference|Expressions reference]]
 
 ## More features as extensions
 
-Remember that you can also [[gdevelop5:extensions|search for new features in the community extensions]], or create your [[gdevelop5:extensions:create|own set of features (behaviors, actions, conditions or expressions)]].`,
+Remember that you can also [[GDeveloppe5:extensions|search for new features in the community extensions]], or create your [[GDeveloppe5:extensions:create|own set of features (behaviors, actions, conditions or expressions)]].`,
   };
 
   return [
@@ -566,7 +566,7 @@ Remember that you can also [[gdevelop5:extensions|search for new features in the
           extensionReferences.extension.getName()
         );
         const helpPagePath = extensionReferences.extension.getHelpPath();
-        const referencePageUrl = `${gdevelopWikiUrlRoot}/all-features/${folderName}/reference`;
+        const referencePageUrl = `${GDeveloppeWikiUrlRoot}/all-features/${folderName}/reference`;
         const helpPageUrl = getHelpLink(helpPagePath) || referencePageUrl;
 
         return [
@@ -792,7 +792,7 @@ const rawTextsToString = rawTexts =>
     })
     .join('\n');
 
-initializeGDevelopJs().then(async gd => {
+initializeGDeveloppeJs().then(async gd => {
   try {
     const loadingResults = await makeExtensionsLoader({
       gd,

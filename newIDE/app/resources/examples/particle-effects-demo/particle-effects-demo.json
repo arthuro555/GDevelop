@@ -16,7 +16,7 @@
     "sizeOnStartupMode": "adaptWidth",
     "useExternalSourceFiles": false,
     "version": "1.0.0",
-    "name": "Free GDevelop Particles Library",
+    "name": "Free GDeveloppe Particles Library",
     "author": "Wishforge Games",
     "windowWidth": 800,
     "windowHeight": 600,
@@ -50,7 +50,7 @@
       "ios-icon-80": ""
     },
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensionProperties": [],
     "extensions": [
@@ -114,10 +114,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -1611,7 +1611,7 @@
           "underlined": false,
           "variables": [],
           "behaviors": [],
-          "string": "GDevelop Particles 1.0",
+          "string": "GDeveloppe Particles 1.0",
           "font": "Montserrat-Light.ttf",
           "characterSize": 20,
           "color": {
@@ -1668,7 +1668,7 @@
           "underlined": false,
           "variables": [],
           "behaviors": [],
-          "string": "GDevelop Particles v. 1.0.0\n\nThis project is developed by Andriy Matviychuk (Wishforge Games) using GDevelop Engine. \n\nYou are free to use these particle effects in your free or commercial projects and there is no need to mention Wishforge Games in any way, but it's very appreciated if you do so.\n\nSome VFX use images generated using Photoshop Brushes from www.brusheezy.com and all the icons used in this app are downloaded from www.iconfinder.com\n\nIf you wish to leave your feedback, suggest new particles to be included in the release or simply say hi, please do so on my Twitter, Youtube or Discord.\n\nThank you for downloading this Free GDevelop Particles Library.",
+          "string": "GDeveloppe Particles v. 1.0.0\n\nThis project is developed by Andriy Matviychuk (Wishforge Games) using GDeveloppe Engine. \n\nYou are free to use these particle effects in your free or commercial projects and there is no need to mention Wishforge Games in any way, but it's very appreciated if you do so.\n\nSome VFX use images generated using Photoshop Brushes from www.brusheezy.com and all the icons used in this app are downloaded from www.iconfinder.com\n\nIf you wish to leave your feedback, suggest new particles to be included in the release or simply say hi, please do so on my Twitter, Youtube or Discord.\n\nThank you for downloading this Free GDeveloppe Particles Library.",
           "font": "Montserrat-Light.ttf",
           "characterSize": 14,
           "color": {

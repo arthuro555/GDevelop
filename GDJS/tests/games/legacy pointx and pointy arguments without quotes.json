@@ -13,7 +13,7 @@
     "macExecutableFilename": "",
     "orientation": "landscape",
     "packageName": "com.example.gamename",
-    "projectFile": "/Users/florianrival/GDevelop projects/My project1313/game.json",
+    "projectFile": "/Users/florianrival/GDeveloppe projects/My project1313/game.json",
     "scaleMode": "linear",
     "sizeOnStartupMode": "adaptWidth",
     "useExternalSourceFiles": false,
@@ -30,7 +30,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensions": [
       {
@@ -93,10 +93,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [],

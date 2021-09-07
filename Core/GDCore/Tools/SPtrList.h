@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com)
                                    and Victor Levasseur
  (victorlevasseur52@gmail.com).

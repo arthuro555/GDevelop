@@ -17,7 +17,7 @@ import {
   shouldValidate,
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 import { Trans } from '@lingui/macro';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   container: {

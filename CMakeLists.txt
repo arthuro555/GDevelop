@@ -1,4 +1,4 @@
-#This is the CMake file used to build GDevelop.
+#This is the CMake file used to build GDeveloppe.
 #For more information, see the Readme.md file.
 
 cmake_minimum_required(VERSION 2.6)
@@ -14,8 +14,8 @@ macro(gd_set_option var default type docstring)
     endif()
     set(${var} ${${var}} CACHE ${type} ${docstring} FORCE)
 endmacro()
-gd_set_option(BUILD_CORE TRUE BOOL "TRUE to build GDevelop Core library")
-gd_set_option(BUILD_GDJS TRUE BOOL "TRUE to build GDevelop JS Platform")
+gd_set_option(BUILD_CORE TRUE BOOL "TRUE to build GDeveloppe Core library")
+gd_set_option(BUILD_GDJS TRUE BOOL "TRUE to build GDeveloppe JS Platform")
 gd_set_option(BUILD_EXTENSIONS TRUE BOOL "TRUE to build the extensions")
 gd_set_option(BUILD_TESTS FALSE BOOL "TRUE to build the tests")
 
@@ -25,16 +25,16 @@ set(NO_GUI TRUE CACHE BOOL "" FORCE) #Force disable old GUI related code.
 #Setting up installation directory, for Linux (has to be done before "project" command).
 IF(NOT WIN32)
 	if (NOT APPLE)
-	gd_set_option(GD_INSTALL_PREFIX "/opt/gdevelop/" STRING "The directory where GDevelop should be installed")
+	gd_set_option(GD_INSTALL_PREFIX "/opt/GDeveloppe/" STRING "The directory where GDeveloppe should be installed")
 	ELSE()
-	gd_set_option(GD_INSTALL_PREFIX "." STRING "The directory where GDevelop should be installed")
+	gd_set_option(GD_INSTALL_PREFIX "." STRING "The directory where GDeveloppe should be installed")
 	ENDIF()
 
 	#As we embed SFML, prevent it to be installed system-wide
 	set(CMAKE_INSTALL_PREFIX "${GD_INSTALL_PREFIX}/useless")
 ENDIF()
 
-project(GDevelop)
+project(GDeveloppe)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 IF(NOT WIN32 AND NOT APPLE AND NOT BUILD_TESTS)
 	SET(CMAKE_SKIP_BUILD_RPATH  TRUE) #Avoid errors when packaging for linux.
@@ -87,7 +87,7 @@ IF(BUILD_GDJS)
 	ADD_SUBDIRECTORY(GDJS)
 ENDIF()
 IF(EMSCRIPTEN)
-	ADD_SUBDIRECTORY(GDevelop.js)
+	ADD_SUBDIRECTORY(GDeveloppe.js)
 ENDIF()
 IF(BUILD_EXTENSIONS)
 	ADD_SUBDIRECTORY(Extensions)

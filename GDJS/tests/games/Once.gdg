@@ -32,9 +32,9 @@
             <extension name="BuiltinExternalLayouts" />
         </extensions>
         <platforms>
-            <platform name="GDevelop JS platform" />
+            <platform name="GDeveloppe JS platform" />
         </platforms>
-        <currentPlatform>GDevelop JS platform</currentPlatform>
+        <currentPlatform>GDeveloppe JS platform</currentPlatform>
     </properties>
     <resources>
         <resources />

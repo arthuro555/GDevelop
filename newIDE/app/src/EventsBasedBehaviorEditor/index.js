@@ -11,7 +11,7 @@ import DismissableAlertMessage from '../UI/DismissableAlertMessage';
 import AlertMessage from '../UI/AlertMessage';
 import EventsBasedBehaviorPropertiesEditor from './EventsBasedBehaviorPropertiesEditor';
 import { ColumnStackLayout } from '../UI/Layout';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type TabName = 'configuration' | 'properties';
 

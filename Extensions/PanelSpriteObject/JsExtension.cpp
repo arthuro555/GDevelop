@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Panel Sprite Extension
+GDeveloppe - Panel Sprite Extension
 Copyright (c) 2012-2016 Victor Levasseur (victorlevasseur01@orange.fr)
 This project is released under the MIT License.
 */
@@ -80,7 +80,7 @@ extern "C" gd::PlatformExtension* CreateGDJSPanelSpriteObjectExtension() {
 }
 #else
 /**
- * Used by GDevelop to create the extension class
+ * Used by GDeveloppe to create the extension class
  * -- Do not need to be modified. --
  */
 extern "C" gd::PlatformExtension* GD_EXTENSION_API CreateGDJSExtension() {

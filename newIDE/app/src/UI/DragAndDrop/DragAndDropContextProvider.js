@@ -15,7 +15,7 @@ class DragAndDropContextProvider extends Component {
  * touch devices like phones).
  *
  * When doing the switch from HTML5 backend to Touch backend, the existing events
- * are passed to the new backend. Unsure if this is necessary in GDevelop case.
+ * are passed to the new backend. Unsure if this is necessary in GDeveloppe case.
  */
 export default DragDropContext(MultiBackend(HTML5toTouch))(
   DragAndDropContextProvider

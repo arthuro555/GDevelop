@@ -157,7 +157,7 @@ const lintMessagePo = (locale, path) => {
     }
     if (subjectWithBracketsCount !== 7 && subjectWithBracketsCount !== 11 && subjectWithBracketsCount !== 14) {
       // 7 is for no translations at all for <subject>, 14 is for all translated and
-      // 11 is for only the ones before GDevelop 5.0 beta 106 translated.
+      // 11 is for only the ones before GDeveloppe 5.0 beta 106 translated.
       errors.push({
         str:
           'Unexpected number of <subject>: verify the <subject> translations',

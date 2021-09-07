@@ -15,7 +15,7 @@ import {
   type Game,
   getGame,
   registerGame,
-} from '../Utils/GDevelopServices/Game';
+} from '../Utils/GDeveloppeServices/Game';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import { GameDetailsDialog } from './GameDetailsDialog';

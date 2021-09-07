@@ -8,7 +8,7 @@ import {
 const electron = optionalRequire('electron');
 const path = optionalRequire('path');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /**
  * Open Piskel editor for the specified resources.

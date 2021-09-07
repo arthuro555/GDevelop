@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -192,14 +192,14 @@ void ExtensionsLoader::LoadExtension(const gd::String &fullpath,
     error += "Not the same SFML version.\n";
 
   else if (extensionPtr->compilationInfo.gdCoreVersion != GD_VERSION_STRING)
-    error += "Not the same GDevelop Core version.\n(Extension is using " +
+    error += "Not the same GDeveloppe Core version.\n(Extension is using " +
              extensionPtr->compilationInfo.gdCoreVersion +
-             ", GDevelop is using " + GD_VERSION_STRING + ")\n";
+             ", GDeveloppe is using " + GD_VERSION_STRING + ")\n";
 
   else if (extensionPtr->compilationInfo.sizeOfpInt != sizeof(int *))
     error += "Not the same architecture.\n(Extension sizeof(int*) is " +
              gd::String::From(extensionPtr->compilationInfo.sizeOfpInt) +
-             ", GDevelop sizeof(int*) is " + gd::String::From(sizeof(int *)) +
+             ", GDeveloppe sizeof(int*) is " + gd::String::From(sizeof(int *)) +
              ")\n";
 
   if (!error.empty()) {

@@ -9,7 +9,7 @@ import {
 import { createTree } from './CreateTree';
 import { makeTestExtensions } from '../fixtures/TestExtensions';
 import { type EnumeratedExpressionMetadata } from './EnumeratedInstructionOrExpressionMetadata.js';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('EnumerateExpressions', () => {
   it('can enumerate and filter free expressions', () => {

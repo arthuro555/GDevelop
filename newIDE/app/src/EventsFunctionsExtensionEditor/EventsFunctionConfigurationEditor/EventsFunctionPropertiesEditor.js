@@ -21,7 +21,7 @@ import { type MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow'
 import { ResponsiveLineStackLayout, ColumnStackLayout } from '../../UI/Layout';
 import DismissableAlertMessage from '../../UI/DismissableAlertMessage';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   eventsFunction: gdEventsFunction,

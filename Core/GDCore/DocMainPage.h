@@ -1,24 +1,24 @@
 /**
- * \mainpage GDevelop Core
+ * \mainpage GDeveloppe Core
  * \image html gdlogo.png
- * \section welcome GDevelop Core documentation
+ * \section welcome GDeveloppe Core documentation
  *
- * The **GDevelop Core** library contains the structure of a GDevelop game, classes and tools that are used by the *platforms* and the *GDevelop IDE*.
+ * The **GDeveloppe Core** library contains the structure of a GDeveloppe game, classes and tools that are used by the *platforms* and the *GDeveloppe IDE*.
  *
  * \section gettingstarted Getting started
  *
- * In most cases, you should start by <a href="https://github.com/4ian/GDevelop/blob/master/newIDE/README.md">installing and launching the development version of GDevelop</a>.
+ * In most cases, you should start by <a href="https://github.com/4ian/GDeveloppe/blob/master/newIDE/README.md">installing and launching the development version of GDeveloppe</a>.
  *
- * - If you're interested in writing extensions for GDevelop, read <a href="https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md">the documentation about extensions</a>.
- * - If you want to dig more into how GDevelop is architectured and work on the core, read <a href="https://github.com/4ian/GDevelop/blob/master/Core/GDevelop-Architecture-Overview.md">GDevelop Architecture Overview</a>. Then, you can browse this reference to get more information about a class or function.
+ * - If you're interested in writing extensions for GDeveloppe, read <a href="https://github.com/4ian/GDeveloppe/blob/master/newIDE/README-extensions.md">the documentation about extensions</a>.
+ * - If you want to dig more into how GDeveloppe is architectured and work on the core, read <a href="https://github.com/4ian/GDeveloppe/blob/master/Core/GDeveloppe-Architecture-Overview.md">GDeveloppe Architecture Overview</a>. Then, you can browse this reference to get more information about a class or function.
  *
  * \section other Other documentations
  *
- * GDevelop is architectured around a `Core` (this library), a game engine (`GDJS`) and extensions (`Extensions` folder). The editor (`newIDE` folder) is using all of these libraries.
+ * GDeveloppe is architectured around a `Core` (this library), a game engine (`GDJS`) and extensions (`Extensions` folder). The editor (`newIDE` folder) is using all of these libraries.
  *
- *  - [Open GDevelop JS Platform documentation](../GDJS Documentation/index.html)
- *  - <a href="https://github.com/4ian/GDevelop/blob/master/newIDE/README.md">Getting started with the editor</a>
- *  - <a href="https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md">Getting started with the extensions</a>
+ *  - [Open GDeveloppe JS Platform documentation](../GDJS Documentation/index.html)
+ *  - <a href="https://github.com/4ian/GDeveloppe/blob/master/newIDE/README.md">Getting started with the editor</a>
+ *  - <a href="https://github.com/4ian/GDeveloppe/blob/master/newIDE/README-extensions.md">Getting started with the extensions</a>
  */
 
 /**

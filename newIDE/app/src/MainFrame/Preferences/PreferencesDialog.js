@@ -119,7 +119,7 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
               label={<Trans>Learn more</Trans>}
               onClick={() => {
                 Window.openExternalURL(
-                  'https://github.com/4ian/GDevelop/tree/master/newIDE#theming'
+                  'https://github.com/4ian/GDeveloppe/tree/master/newIDE#theming'
                 );
               }}
             />

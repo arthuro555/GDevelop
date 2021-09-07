@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Top-down movement Behavior Extension
+GDeveloppe - Top-down movement Behavior Extension
 Copyright (c) 2010-2016 Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */
@@ -129,7 +129,7 @@ extern "C" gd::PlatformExtension* CreateGDJSTopDownMovementBehaviorExtension() {
 }
 #else
 /**
- * Used by GDevelop to create the extension class
+ * Used by GDeveloppe to create the extension class
  * -- Do not need to be modified. --
  */
 extern "C" gd::PlatformExtension* GD_EXTENSION_API CreateGDJSExtension() {

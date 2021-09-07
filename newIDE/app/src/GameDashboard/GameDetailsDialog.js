@@ -9,7 +9,7 @@ import {
   type Game,
   updateGame,
   deleteGame,
-} from '../Utils/GDevelopServices/Game';
+} from '../Utils/GDeveloppeServices/Game';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Dialog from '../UI/Dialog';
 import { Tab, Tabs } from '../UI/Tabs';
@@ -20,7 +20,7 @@ import Text from '../UI/Text';
 import {
   type GameMetrics,
   getGameMetrics,
-} from '../Utils/GDevelopServices/Analytics';
+} from '../Utils/GDeveloppeServices/Analytics';
 import UserProfileContext from '../Profile/UserProfileContext';
 import PlaceholderError from '../UI/PlaceholderError';
 import SelectField from '../UI/SelectField';

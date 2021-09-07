@@ -25,7 +25,7 @@ import { type ResourceExternalEditor } from '../../../ResourcesList/ResourceExte
 import { applyResourceDefaults } from '../../../ResourcesList/ResourceUtils';
 import FlatButton from '../../../UI/FlatButton';
 import ThemeConsumer from '../../../UI/Theme/ThemeConsumer';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 const path = require('path');
 
 const SPRITE_SIZE = 100; //TODO: Factor with Thumbnail

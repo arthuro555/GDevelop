@@ -15,7 +15,7 @@ const { downloadLocalFile } = require('./lib/DownloadLocalFile');
 const editor = process.argv[2];
 const gitRelease = process.argv[3];
 const expectedFolderHash = process.argv[4];
-const gitUrl = 'https://github.com/4ian/GDevelop';
+const gitUrl = 'https://github.com/4ian/GDeveloppe';
 const basePath = path.join('../public/external/', editor, editor + '-editor');
 const zipFilePath = basePath + '.zip';
 

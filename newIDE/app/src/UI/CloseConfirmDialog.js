@@ -25,7 +25,7 @@ export default React.memo<Props>(function CloseConfirmDialog({
     () => {
       if (Window.isDev()) return; // Don't prevent live-reload in development
 
-      const quitMessage = i18n._(t`Are you sure you want to quit GDevelop?`);
+      const quitMessage = i18n._(t`Are you sure you want to quit GDeveloppe?`);
       const unsavedChangesMessage = hasUnsavedChanges
         ? i18n._(t`Any unsaved changes in the project will be lost.`)
         : '';

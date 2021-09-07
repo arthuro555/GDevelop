@@ -1,6 +1,6 @@
 /**
 
-GDevelop - TextEntry Object Extension
+GDeveloppe - TextEntry Object Extension
 Copyright (c) 2011-2013 Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */

@@ -3,7 +3,7 @@ import { unserializeFromJSObject } from '../../Utils/Serializer';
 import { mapVector } from '../../Utils/MapFor';
 import { getFreeEventsFunctionType } from '../../EventsFunctionsExtensionsLoader';
 import getObjectGroupByName from '../../Utils/GetObjectGroupByName';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /**
  * Set up an events function with the given serialized events,

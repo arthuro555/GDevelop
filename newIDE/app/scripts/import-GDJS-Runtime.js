@@ -8,7 +8,7 @@ const path = require('path');
 const copy = require('recursive-copy');
 const args = require('minimist')(process.argv.slice(2));
 
-const gdevelopRootPath = path.join(__dirname, '..', '..', '..');
+const GDeveloppeRootPath = path.join(__dirname, '..', '..', '..');
 const destinationPaths = [
   path.join(__dirname, '..', 'resources', 'GDJS'),
   path.join(__dirname, '..', 'node_modules', 'GDJS-for-web-app-only'),
@@ -27,7 +27,7 @@ if (!args['skip-clean']) {
 destinationPaths.forEach(destinationPath => {
   const outPath = path.join(destinationPath, 'Runtime');
   const output = shell.exec(`node scripts/build.js --out ${outPath}`, {
-    cwd: path.join(gdevelopRootPath, 'GDJS'),
+    cwd: path.join(GDeveloppeRootPath, 'GDJS'),
   });
   if (output.code !== 0) {
     shell.exit(0);
@@ -57,12 +57,12 @@ if (!args['skip-sources']) {
     // that only copy files with changed content.
     return Promise.all([
       copy(
-        path.join(gdevelopRootPath, 'GDJS', 'Runtime'),
+        path.join(GDeveloppeRootPath, 'GDJS', 'Runtime'),
         path.join(destinationPath, 'Runtime-sources'),
         copyOptions
       ),
       copy(
-        path.join(gdevelopRootPath, 'Extensions'),
+        path.join(GDeveloppeRootPath, 'Extensions'),
         path.join(destinationPath, 'Runtime-sources', 'Extensions'),
         { ...copyOptions, filter: ['**/*.js', '**/*.ts'] }
       ),

@@ -7,7 +7,7 @@
       "path": "newIDE/app/",
       "group": "build",
       "label": "Start development server",
-      "detail": "Starts the GDevelop development server.",
+      "detail": "Starts the GDeveloppe development server.",
       "problemMatcher": [
         {
           "owner": "cra",
@@ -47,15 +47,15 @@
       "group": "build",
       "problemMatcher": [],
       "label": "Start electron app",
-      "detail": "Starts the development local version of GDevelop."
+      "detail": "Starts the development local version of GDeveloppe."
     },
     {
       "type": "npm",
       "script": "build",
-      "path": "GDevelop.js/",
+      "path": "GDeveloppe.js/",
       "group": "build",
       "problemMatcher": [],
-      "label": "Build GDevelop.js",
+      "label": "Build GDeveloppe.js",
       "detail": "Builds GDCore for newIDE."
     },
     {

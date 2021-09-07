@@ -82,7 +82,7 @@ import InfoBar from '../UI/Messages/InfoBar';
 import { ScreenTypeMeasurer } from '../UI/Reponsive/ScreenTypeMeasurer';
 import { ResponsiveWindowMeasurer } from '../UI/Reponsive/ResponsiveWindowMeasurer';
 import { type UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

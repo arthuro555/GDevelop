@@ -1,6 +1,6 @@
 /**
 
-GDevelop - Tiled Sprite Extension
+GDeveloppe - Tiled Sprite Extension
 Copyright (c) 2012-2016 Victor Levasseur (victorlevasseur01@orange.fr)
 Copyright (c) 2014-2016 Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
@@ -121,7 +121,7 @@ extern "C" gd::PlatformExtension* CreateGDJSTiledSpriteObjectExtension() {
 }
 #else
 /**
- * Used by GDevelop to create the extension class
+ * Used by GDeveloppe to create the extension class
  * -- Do not need to be modified. --
  */
 extern "C" gd::PlatformExtension* GD_EXTENSION_API CreateGDJSExtension() {

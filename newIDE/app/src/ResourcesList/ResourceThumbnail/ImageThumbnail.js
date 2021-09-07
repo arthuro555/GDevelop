@@ -3,7 +3,7 @@ import * as React from 'react';
 import ResourcesLoader from '../../ResourcesLoader';
 import Checkbox from '../../UI/Checkbox';
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
-import GDevelopThemeContext from '../../UI/Theme/ThemeContext';
+import GDeveloppeThemeContext from '../../UI/Theme/ThemeContext';
 import { useLongTouch } from '../../Utils/UseLongTouch';
 import CheckeredBackground from '../CheckeredBackground';
 
@@ -53,7 +53,7 @@ type Props = {|
 
 const ImageThumbnail = (props: Props) => {
   const { onContextMenu, resourcesLoader, resourceName, project } = props;
-  const theme = React.useContext(GDevelopThemeContext);
+  const theme = React.useContext(GDeveloppeThemeContext);
 
   // Allow a long press to show the context menu
   const longTouchForContextMenuProps = useLongTouch(

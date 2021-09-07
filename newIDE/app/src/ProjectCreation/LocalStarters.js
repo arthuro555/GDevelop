@@ -22,7 +22,7 @@ const path = optionalRequire('path');
 const electron = optionalRequire('electron');
 const app = electron ? electron.remote.app : null;
 var fs = optionalRequire('fs-extra');
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   onOpen: (
@@ -87,7 +87,7 @@ export default class LocalStarters extends Component<Props, State> {
       if (path && app)
         this.props.onChangeOutputPath(
           findEmptyPath(
-            path.join(app.getPath('documents'), 'GDevelop projects')
+            path.join(app.getPath('documents'), 'GDeveloppe projects')
           )
         );
   }

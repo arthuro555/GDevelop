@@ -7,7 +7,7 @@ const fs = require('fs').promises;
 const { default: axios } = require('axios');
 const path = require('path');
 const {
-  gdevelopWikiUrlRoot,
+  GDeveloppeWikiUrlRoot,
   getHelpLink,
   generateReadMoreLink,
   getExtensionFolderName,
@@ -32,9 +32,9 @@ const generateExtensionFooterText = fullName => {
   return (
     `
 ---
-*This page is an auto-generated reference page about the **${fullName}** extension, made by the community of [[https://gdevelop-app.com/|GDevelop, the open-source, cross-platform game engine designed for everyone]].*` +
+*This page is an auto-generated reference page about the **${fullName}** extension, made by the community of [[https://gdevelop-app.com/|GDeveloppe, the open-source, cross-platform game engine designed for everyone]].*` +
     ' ' +
-    'Learn more about [[gdevelop5:extensions|all GDevelop community-made extensions here]].'
+    'Learn more about [[GDeveloppe5:extensions|all GDeveloppe community-made extensions here]].'
   );
 };
 
@@ -72,15 +72,15 @@ const getAllExtensions = async () => {
 
     let indexPageContent = `# Extensions
 
-GDevelop is built in a flexible way. In addition to [[gdevelop5:all-features|core features]], new capabilities are provided by extensions. Extensions can contain objects, behaviors, actions, conditions, expressions or events.
+GDeveloppe is built in a flexible way. In addition to [[GDeveloppe5:all-features|core features]], new capabilities are provided by extensions. Extensions can contain objects, behaviors, actions, conditions, expressions or events.
 
-[[gdevelop5:extensions:search|Directly from GDevelop]], you have access to a collection of community created extensions, listed here. You can also [[gdevelop5:extensions:create|create]], directly in your project, new behaviors, actions, conditions or expressions for your game.
+[[GDeveloppe5:extensions:search|Directly from GDeveloppe]], you have access to a collection of community created extensions, listed here. You can also [[GDeveloppe5:extensions:create|create]], directly in your project, new behaviors, actions, conditions or expressions for your game.
 
 `;
 
     for (const extension of extensions) {
       const folderName = getExtensionFolderName(extension.name);
-      const referencePageUrl = `${gdevelopWikiUrlRoot}/extensions/${folderName}/reference`;
+      const referencePageUrl = `${GDeveloppeWikiUrlRoot}/extensions/${folderName}/reference`;
       const helpPageUrl = getHelpLink(extension.helpPath) || referencePageUrl;
 
       const referencePageContent =
@@ -136,9 +136,9 @@ It's easy to create, directly in your project, new behaviors, actions, condition
 
 Read more about this:
 
-* [[gdevelop5:extensions:create|Create your own extensions]]
-* [[gdevelop5:extensions:share|Share extensions with the community]]
-* [[gdevelop5:extensions:extend-gdevelop|Extend GDevelop with JavaScript or C++]]`;
+* [[GDeveloppe5:extensions:create|Create your own extensions]]
+* [[GDeveloppe5:extensions:share|Share extensions with the community]]
+* [[GDeveloppe5:extensions:extend-GDeveloppe|Extend GDeveloppe with JavaScript or C++]]`;
 
     try {
       await fs.mkdir(path.dirname(extensionsFilePath), { recursive: true });

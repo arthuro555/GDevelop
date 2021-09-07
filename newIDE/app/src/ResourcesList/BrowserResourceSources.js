@@ -45,7 +45,7 @@ class GenericResourcesChooser extends React.Component<
     const newResource = this.props.createNewResource();
     newResource.setFile(chosenResourceUrl);
     newResource.setName(path.basename(chosenResourceUrl));
-    newResource.setOrigin('gdevelop-asset-store', chosenResourceUrl);
+    newResource.setOrigin('GDeveloppe-asset-store', chosenResourceUrl);
 
     resolveWithResources([newResource]);
     this.setState({

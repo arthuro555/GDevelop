@@ -15,7 +15,7 @@ import { type EventRendererProps } from './EventRenderer';
 import ConditionsActionsColumns from '../ConditionsActionsColumns';
 import { shouldActivate } from '../../../UI/KeyboardShortcuts/InteractionKeys.js';
 import { Trans } from '@lingui/macro';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   container: {

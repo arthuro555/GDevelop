@@ -4,7 +4,7 @@ import MainFrame from './MainFrame';
 import Window from './Utils/Window';
 import ExportDialog from './Export/ExportDialog';
 import CreateProjectDialog from './ProjectCreation/CreateProjectDialog';
-import Authentification from './Utils/GDevelopServices/Authentification';
+import Authentification from './Utils/GDeveloppeServices/Authentification';
 import './UI/iconmoon-font.css'; // Styles for Iconmoon font.
 
 // Import for Electron powered IDE.
@@ -27,7 +27,7 @@ import LocalFileStorageProvider from './ProjectsStorage/LocalFileStorageProvider
 import { LocalGDJSDevelopmentWatcher } from './GameEngineFinder/LocalGDJSDevelopmentWatcher';
 import { LocalResourceFetcher } from './ProjectsStorage/ResourceFetcher/LocalResourceFetcher';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export const create = (authentification: Authentification) => {
   Window.setUpContextMenu();

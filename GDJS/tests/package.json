@@ -1,7 +1,7 @@
 {
   "name": "GDJS-tests",
   "version": "0.0.0",
-  "description": "Tests for the HTML5 engine of GDevelop",
+  "description": "Tests for the HTML5 engine of GDeveloppe",
   "main": "index.js",
   "private": true,
   "scripts": {

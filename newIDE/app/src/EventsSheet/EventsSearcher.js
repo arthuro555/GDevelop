@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type SelectionState } from './SelectionHandler';
 import { mapFor } from '../Utils/MapFor';
 import uniqBy from 'lodash/uniqBy';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type SearchInEventsInputs = {|
   searchInSelection: boolean,

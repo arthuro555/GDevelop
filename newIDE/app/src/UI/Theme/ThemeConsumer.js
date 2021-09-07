@@ -1,19 +1,19 @@
 // @flow
 import * as React from 'react';
-import { type GDevelopTheme } from '.';
-import GDevelopThemeContext from './ThemeContext';
+import { type GDeveloppeTheme } from '.';
+import GDeveloppeThemeContext from './ThemeContext';
 
 type Props = {|
-  children: (gdevelopTheme: GDevelopTheme) => React.Node,
+  children: (GDeveloppeTheme: GDeveloppeTheme) => React.Node,
 |};
 
 /**
  * Expose the Material UI theme.
  */
 const ThemeConsumer = (props: Props) => (
-  <GDevelopThemeContext.Consumer>
-    {gdevelopTheme => props.children(gdevelopTheme)}
-  </GDevelopThemeContext.Consumer>
+  <GDeveloppeThemeContext.Consumer>
+    {GDeveloppeTheme => props.children(GDeveloppeTheme)}
+  </GDeveloppeThemeContext.Consumer>
 );
 
 export default ThemeConsumer;

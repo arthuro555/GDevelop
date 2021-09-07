@@ -10,7 +10,7 @@ import { type ResourceExternalEditor } from '../ResourcesList/ResourceExternalEd
 import { type EventsScope } from '../InstructionOrExpression/EventsScope.flow';
 import { setupInstructionParameters } from '../InstructionOrExpression/SetupInstructionParameters';
 import { getObjectParameterIndex } from '../InstructionOrExpression/EnumerateInstructions';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

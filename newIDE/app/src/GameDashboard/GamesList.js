@@ -4,7 +4,7 @@ import * as React from 'react';
 import UserProfileContext from '../Profile/UserProfileContext';
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import PlaceholderError from '../UI/PlaceholderError';
-import { type Game, getGames } from '../Utils/GDevelopServices/Game';
+import { type Game, getGames } from '../Utils/GDeveloppeServices/Game';
 import { GameCard } from './GameCard';
 import { ColumnStackLayout } from '../UI/Layout';
 import { GameRegistration } from './GameRegistration';

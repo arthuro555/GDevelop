@@ -99,9 +99,9 @@ export const LoadingScreenEditor = ({
           </Text>
           <Checkbox
             label={
-              <Trans>Display GDevelop logo at startup (in exported game)</Trans>
+              <Trans>Display GDeveloppe logo at startup (in exported game)</Trans>
             }
-            checked={loadingScreen.isGDevelopSplashShown()}
+            checked={loadingScreen.isGDeveloppeSplashShown()}
             onCheck={(e, checked) => {
               if (!checked) {
                 if (
@@ -110,16 +110,16 @@ export const LoadingScreenEditor = ({
                 )
                   return;
               }
-              loadingScreen.showGDevelopSplash(checked);
+              loadingScreen.showGDeveloppeSplash(checked);
               forceUpdate();
             }}
           />
           <SelectField
             fullWidth
-            floatingLabelText={<Trans>GDevelop logo style</Trans>}
-            value={loadingScreen.getGDevelopLogoStyle()}
+            floatingLabelText={<Trans>GDeveloppe logo style</Trans>}
+            value={loadingScreen.getGDeveloppeLogoStyle()}
             onChange={(e, i, value: string) => {
-              loadingScreen.setGDevelopLogoStyle(value);
+              loadingScreen.setGDeveloppeLogoStyle(value);
               forceUpdate();
             }}
           >
@@ -263,8 +263,8 @@ export const LoadingScreenEditor = ({
             ref={subscriptionChecker}
             onChangeSubscription={onChangeSubscription}
             mode="mandatory"
-            id="Disable GDevelop splash at startup"
-            title={<Trans>Disable GDevelop splash at startup</Trans>}
+            id="Disable GDeveloppe splash at startup"
+            title={<Trans>Disable GDeveloppe splash at startup</Trans>}
           />
         </ColumnStackLayout>
       )}

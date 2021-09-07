@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   type ShowcasedGame,
   type ShowcasedGameLink,
-} from '../Utils/GDevelopServices/Game';
+} from '../Utils/GDeveloppeServices/Game';
 import { Card } from '@material-ui/core';
 import Text from '../UI/Text';
 import { Trans } from '@lingui/macro';

@@ -7,7 +7,7 @@ import {
   type Build,
   type BuildArtifactKeyName,
   getBuildArtifactUrl,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import Window from '../../Utils/Window';
 import BuildsWatcher from './BuildsWatcher';
 

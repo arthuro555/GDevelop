@@ -5,7 +5,7 @@ let testExtensionsAdded = false;
  * Create dummy extensions into gd.JsPlatform
  * @param gd The GD instance to use to create the extensions and find the platform.
  */
-export const makeTestExtensions = (gd: libGDevelop) => {
+export const makeTestExtensions = (gd: libGDeveloppe) => {
   // Be sure to only add test extensions once, as gd.JsPlatform is a singleton.
   if (testExtensionsAdded) return;
   testExtensionsAdded = true;

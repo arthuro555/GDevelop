@@ -1,10 +1,10 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
 /**
- * @file Tests covering events of GDevelop Core.
+ * @file Tests covering events of GDeveloppe Core.
  */
 #include "catch.hpp"
 

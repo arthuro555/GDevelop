@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -155,7 +155,7 @@ class GD_CORE_API Resource {
   gd::String originName;
   gd::String originIdentifier;
   bool userAdded;  ///< True if the resource was added by the user, and not
-                   ///< automatically by GDevelop.
+                   ///< automatically by GDeveloppe.
 
   static gd::String badStr;
 };

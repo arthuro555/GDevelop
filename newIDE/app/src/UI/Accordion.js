@@ -6,7 +6,7 @@ import MUIAccordionDetails from '@material-ui/core/AccordionDetails';
 import MUIAccordionActions from '@material-ui/core/AccordionActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from './IconButton';
-import GDevelopThemeContext from './Theme/ThemeContext';
+import GDeveloppeThemeContext from './Theme/ThemeContext';
 
 const styles = {
   bodyRoot: {
@@ -113,7 +113,7 @@ type AccordionProps = {|
  */
 export const Accordion = (props: AccordionProps) => {
   const { costlyBody, ...otherProps } = props;
-  const theme = React.useContext(GDevelopThemeContext);
+  const theme = React.useContext(GDeveloppeThemeContext);
 
   return (
     <MUIAccordion

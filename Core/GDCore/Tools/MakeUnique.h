@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * This project is released under the MIT License.
  *
  * This file is from https://isocpp.org/files/papers/N3656.txt

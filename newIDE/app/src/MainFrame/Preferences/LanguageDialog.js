@@ -100,7 +100,7 @@ export default class LanguageDialog extends Component<Props, State> {
                       primary={false}
                       onClick={() =>
                         Window.openExternalURL(
-                          'https://github.com/4ian/GDevelop/issues/969'
+                          'https://github.com/4ian/GDeveloppe/issues/969'
                         )
                       }
                     />,
@@ -122,7 +122,7 @@ export default class LanguageDialog extends Component<Props, State> {
                     <Line expand>
                       <SelectField
                         floatingLabelText={
-                          <Trans>Choose GDevelopppes language</Trans>
+                          <Trans>Choose GDeveloppeppes language</Trans>
                         }
                         value={values.language}
                         onChange={(e, i, value: string) => {
@@ -150,7 +150,7 @@ export default class LanguageDialog extends Component<Props, State> {
                         }
                         onClick={() =>
                           Window.openExternalURL(
-                            'https://crowdin.com/project/gdevelop'
+                            'https://crowdin.com/project/GDeveloppe'
                           )
                         }
                         fullWidth

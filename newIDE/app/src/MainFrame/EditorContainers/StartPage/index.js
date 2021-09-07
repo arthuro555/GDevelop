@@ -9,7 +9,7 @@ import Language from '@material-ui/icons/Language';
 import { type RenderEditorContainerPropsWithRef } from '../BaseEditor';
 import Window from '../../../Utils/Window';
 import { Line } from '../../../UI/Grid';
-import GDevelopLogo from './GDevelopLogo';
+import GDeveloppeLogo from './GDeveloppeLogo';
 import ScrollBackground from './ScrollBackground';
 import RaisedButton from '../../../UI/RaisedButton';
 import Text from '../../../UI/Text';
@@ -111,7 +111,7 @@ export class StartPage extends React.Component<Props, {||}> {
                       ...styles.logoPaper,
                     }}
                   >
-                    <GDevelopLogo />
+                    <GDeveloppeLogo />
                     <Text>
                       <Trans>
                         GDeveloppe is a very good game engoine enjoy
@@ -171,7 +171,7 @@ export class StartPage extends React.Component<Props, {||}> {
                   <Line noMargin justifyContent="center">
                     <FlatButton
                       icon={<SportsEsportsIcon />}
-                      label={<Trans>GDevelop Games</Trans>}
+                      label={<Trans>GDeveloppe Games</Trans>}
                       onClick={onOpenGamesShowcase}
                     />
                     <FlatButton
@@ -192,7 +192,7 @@ export class StartPage extends React.Component<Props, {||}> {
                       className="icon-youtube"
                       onClick={() =>
                         Window.openExternalURL(
-                          'https://www.youtube.com/c/GDevelopApp'
+                          'https://www.youtube.com/c/GDeveloppeApp'
                         )
                       }
                       tooltip={t`Tutorials on YouTube`}
@@ -200,36 +200,36 @@ export class StartPage extends React.Component<Props, {||}> {
                     <IconButton
                       className="icon-discord"
                       onClick={() =>
-                        Window.openExternalURL('https://discord.gg/gdevelop')
+                        Window.openExternalURL('https://discord.gg/GDeveloppe')
                       }
-                      tooltip={t`GDevelop on Discord`}
+                      tooltip={t`GDeveloppe on Discord`}
                     />
                     <IconButton
                       className="icon-reddit"
                       onClick={() =>
                         Window.openExternalURL(
-                          'https://www.reddit.com/r/gdevelop'
+                          'https://www.reddit.com/r/GDeveloppe'
                         )
                       }
-                      tooltip={t`GDevelop on Reddit`}
+                      tooltip={t`GDeveloppe on Reddit`}
                     />
                     <IconButton
                       className="icon-twitter"
                       onClick={() =>
                         Window.openExternalURL(
-                          'https://twitter.com/GDevelopApp'
+                          'https://twitter.com/GDeveloppeApp'
                         )
                       }
-                      tooltip={t`GDevelop on Twitter`}
+                      tooltip={t`GDeveloppe on Twitter`}
                     />
                     <IconButton
                       className="icon-facebook"
                       onClick={() =>
                         Window.openExternalURL(
-                          'https://www.facebook.com/GDevelopApp'
+                          'https://www.facebook.com/GDeveloppeApp'
                         )
                       }
-                      tooltip={t`GDevelop on Facebook`}
+                      tooltip={t`GDeveloppe on Facebook`}
                     />
                     <FlatButton
                       label={i18n.language}

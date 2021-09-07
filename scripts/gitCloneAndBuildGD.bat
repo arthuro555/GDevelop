@@ -1,15 +1,15 @@
 @echo off
 
 REM ===============================================================
-REM This Windows batch script downloads Gdevelop from the master branch, builds the newIde and launches it.
+REM This Windows batch script downloads GDeveloppe from the master branch, builds the newIde and launches it.
 REM
 REM It still requires git, nodejs and electron to be installed.
-REM If Gdevelop is already built, the script will simply launch it.
+REM If GDeveloppe is already built, the script will simply launch it.
 REM ===============================================================
-echo This will clone, install, and launch GDevelop development version. Please make sure you have git and Node.js installed.
+echo This will clone, install, and launch GDeveloppe development version. Please make sure you have git and Node.js installed.
 
 SET fork=4ian
-SET project=GDevelop
+SET project=GDeveloppe
 
 IF exist %project%/newIDE/electron-app/node_modules (
 	echo /newIDE/electron-app/node_modules already exists. Skipping "npm install..."

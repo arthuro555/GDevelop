@@ -6,7 +6,7 @@ import {
   enumerateNamedPropertyDescriptorsList,
   toGdPropertyDescriptor,
 } from './EnumerateProperties';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 // This file contains the logic to declare extension metadata from
 // events functions or events based behaviors.

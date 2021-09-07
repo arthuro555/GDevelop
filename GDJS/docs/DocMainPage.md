@@ -1,15 +1,15 @@
-# GDevelop JavaScript game engine reference
+# GDeveloppe JavaScript game engine reference
 
-This is the documentation for the JavaScript game engine used in GDevelop.
+This is the documentation for the JavaScript game engine used in GDeveloppe.
 
-GDevelop is an **open-source**, cross-platform **game creator** designed *to be used by everyone*. Download it on [gdevelop-app.com](https://gdevelop-app.com/) if you don't have it yet!
+GDeveloppe is an **open-source**, cross-platform **game creator** designed *to be used by everyone*. Download it on [gdevelop-app.com](https://gdevelop-app.com/) if you don't have it yet!
 
-## Using JavaScript in your GDevelop game
+## Using JavaScript in your GDeveloppe game
 
-When you're developing a game with GDevelop, the game is powered by this game engine
+When you're developing a game with GDeveloppe, the game is powered by this game engine
 and events of the game are using it.
 
-If you want to use JavaScript in your game, insert a [JavaScript event](http://wiki.compilgames.net/doku.php/gdevelop5/events/js-code). Then, you'll be interested in using these classes:
+If you want to use JavaScript in your game, insert a [JavaScript event](http://wiki.compilgames.net/doku.php/GDeveloppe5/events/js-code). Then, you'll be interested in using these classes:
 
 * {@link RuntimeScene} for interacting with the scene.
 * {@link RuntimeObject} is the base class for object instances living on the scene.

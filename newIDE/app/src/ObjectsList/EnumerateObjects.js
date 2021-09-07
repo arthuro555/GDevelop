@@ -2,7 +2,7 @@
 import { mapFor } from '../Utils/MapFor';
 import flatten from 'lodash/flatten';
 import { type SelectedTags, hasStringAllTags } from '../Utils/TagsHelper';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export type EnumeratedObjectMetadata = {|
   extension: gdPlatformExtension,

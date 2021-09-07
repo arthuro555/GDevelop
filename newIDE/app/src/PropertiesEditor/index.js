@@ -223,7 +223,7 @@ export default class PropertiesEditor extends React.Component<Props, {||}> {
   };
 
   _renderInputField = (field: ValueField) => {
-    if (field.name === 'PLEASE_ALSO_SHOW_EDIT_BUTTON_THANKS') return null; // This special property was used in GDevelop 4 IDE to ask for a Edit button to be shown, ignore it.
+    if (field.name === 'PLEASE_ALSO_SHOW_EDIT_BUTTON_THANKS') return null; // This special property was used in GDeveloppe 4 IDE to ask for a Edit button to be shown, ignore it.
 
     if (field.valueType === 'boolean') {
       const { setValue } = field;

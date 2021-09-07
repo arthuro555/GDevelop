@@ -1,12 +1,12 @@
 {
-  "name": "gdevelopppe",
+  "name": "GDeveloppeppe",
   "productName": "GDeveloppe 6",
   "description": "GDeveloppe 6 IDE running on the Electron runtime",
   "version": "1.0.0",
   "author": "Arturoe",
   "license": "MIT",
   "homepage": "http://gdevelop-app.com",
-  "repository": "github:arthuro555/GDevelop",
+  "repository": "github:arthuro555/GDeveloppe",
   "private": true,
   "scripts": {
     "postinstall": "npm run import-zipped-electron-extensions && cd app && npm install",

@@ -11,7 +11,7 @@ import {
   type Author,
   getAsset,
   isPixelArt,
-} from '../Utils/GDevelopServices/Asset';
+} from '../Utils/GDeveloppeServices/Asset';
 import { getPixelatedImageRendering } from '../Utils/CssHelpers';
 import LeftLoader from '../UI/LeftLoader';
 import PlaceholderLoader from '../UI/PlaceholderLoader';

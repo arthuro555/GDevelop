@@ -4,7 +4,7 @@ import * as React from 'react';
 import Text from '../../UI/Text';
 import Checkbox from '../../UI/Checkbox';
 import { Column, Line } from '../../UI/Grid';
-import { type TargetName } from '../../Utils/GDevelopServices/Build';
+import { type TargetName } from '../../Utils/GDeveloppeServices/Build';
 
 export type ExportState = {|
   targets: Array<TargetName>,

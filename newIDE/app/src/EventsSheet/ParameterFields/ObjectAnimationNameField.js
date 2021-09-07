@@ -7,7 +7,7 @@ import getObjectByName from '../../Utils/GetObjectByName';
 import { getLastObjectParameterValue } from './ParameterMetadataTools';
 import { mapFor } from '../../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export default class ObjectAnimationNameField extends Component<
   ParameterFieldProps,

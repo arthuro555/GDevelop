@@ -1,7 +1,7 @@
 // @flow
 import path from 'path';
-import { uploadObject } from '../../Utils/GDevelopServices/Preview';
-const gd: libGDevelop = global.gd;
+import { uploadObject } from '../../Utils/GDeveloppeServices/Preview';
+const gd: libGDeveloppe = global.gd;
 
 export type TextFileDescriptor = {|
   filePath: string,
@@ -29,7 +29,7 @@ const isURL = (filename: string) => {
 };
 
 /**
- * An in-memory "file system" that can be used for GDevelop previews.
+ * An in-memory "file system" that can be used for GDeveloppe previews.
  */
 export default class BrowserS3FileSystem {
   prefix: string;

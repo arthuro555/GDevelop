@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2021-present Aurélien Vivet (bouh.vivez@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */

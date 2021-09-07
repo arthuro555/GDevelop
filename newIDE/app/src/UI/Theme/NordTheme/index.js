@@ -1,9 +1,9 @@
-import { createGdevelopTheme } from '../CreateTheme';
+import { createGDeveloppeTheme } from '../CreateTheme';
 
 import darkStyles from './NordThemeVariables.json';
 import './NordThemeVariables.css';
 
-export default createGdevelopTheme(
+export default createGDeveloppeTheme(
   darkStyles,
   'NordTheme',
   'dark',

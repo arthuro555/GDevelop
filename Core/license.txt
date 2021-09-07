@@ -1,4 +1,4 @@
-GDevelop Core (GDCore)
+GDeveloppe Core (GDCore)
 --------------------------
 
 The MIT License (MIT)
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-External libraries used by GDevelop Core
+External libraries used by GDeveloppe Core
 --------------------------------------------
 
 * SFML is distributed under the zlib/png license

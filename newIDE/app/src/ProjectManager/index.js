@@ -50,7 +50,7 @@ import { type MenuItemTemplate } from '../UI/Menu/Menu.flow';
 import ProjectManagerCommands from './ProjectManagerCommands';
 import { type HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
 import { shouldValidate } from '../UI/KeyboardShortcuts/InteractionKeys';
-import { type ExtensionShortHeader } from '../Utils/GDevelopServices/Extension';
+import { type ExtensionShortHeader } from '../Utils/GDeveloppeServices/Extension';
 import EventsRootVariablesFinder from '../Utils/EventsRootVariablesFinder';
 import { IconContainer } from '../UI/IconContainer';
 import {
@@ -812,7 +812,7 @@ export default class ProjectManager extends React.Component<Props, State> {
             leftIcon={
               <ListIcon
                 iconSize={24}
-                isGDevelopIcon
+                isGDeveloppeIcon
                 src="res/ribbon_default/projectManager32.png"
               />
             }
@@ -853,7 +853,7 @@ export default class ProjectManager extends React.Component<Props, State> {
             leftIcon={
               <ListIcon
                 iconSize={24}
-                isGDevelopIcon
+                isGDeveloppeIcon
                 src="res/ribbon_default/sceneadd32.png"
               />
             }
@@ -918,7 +918,7 @@ export default class ProjectManager extends React.Component<Props, State> {
             leftIcon={
               <ListIcon
                 iconSize={24}
-                isGDevelopIcon
+                isGDeveloppeIcon
                 src="res/ribbon_default/externalevents32.png"
               />
             }
@@ -983,7 +983,7 @@ export default class ProjectManager extends React.Component<Props, State> {
             leftIcon={
               <ListIcon
                 iconSize={24}
-                isGDevelopIcon
+                isGDeveloppeIcon
                 src="res/ribbon_default/externallayout32.png"
               />
             }
@@ -1050,7 +1050,7 @@ export default class ProjectManager extends React.Component<Props, State> {
             leftIcon={
               <ListIcon
                 iconSize={24}
-                isGDevelopIcon
+                isGDeveloppeIcon
                 src="res/ribbon_default/function32.png"
               />
             }

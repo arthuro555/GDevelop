@@ -6,7 +6,7 @@ import {
 } from './EnumeratedInstructionOrExpressionMetadata.js';
 import { fuzzyOrEmptyFilter } from '../Utils/FuzzyOrEmptyFilter';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const GROUP_DELIMITER = '/';
 

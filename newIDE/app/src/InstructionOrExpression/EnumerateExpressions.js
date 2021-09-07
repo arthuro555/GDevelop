@@ -5,7 +5,7 @@ import {
 } from './EnumeratedInstructionOrExpressionMetadata.js';
 import { mapVector } from '../Utils/MapFor';
 import flatten from 'lodash/flatten';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const GROUP_DELIMITER = '/';
 

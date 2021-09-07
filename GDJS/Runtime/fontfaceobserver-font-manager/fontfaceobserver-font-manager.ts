@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2013-present Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */
@@ -56,7 +56,7 @@ namespace gdjs {
      * Return the font file associated to the specified font resource name.
      * The font resource must have been loaded before. If that's not the case,
      * the resource name will be returned (to
-     * keep compatibility with GDevelop 5.0-beta56 and previous).
+     * keep compatibility with GDeveloppe 5.0-beta56 and previous).
      *
      * Should only be useful for renderers running on a non HTML5/non browser environment.
      *
@@ -86,7 +86,7 @@ namespace gdjs {
       }
 
       // Replaces all non-alphanumeric characters with dashes to ensure no issues when
-      // refering to this font family (see https://github.com/4ian/GDevelop/issues/1521).
+      // refering to this font family (see https://github.com/4ian/GDeveloppe/issues/1521).
       let baseSlugifiedName =
         'gdjs_font_' + filename.toLowerCase().replace(/[^\w]/gi, '-');
 

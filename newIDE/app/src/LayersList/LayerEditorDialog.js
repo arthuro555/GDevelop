@@ -26,7 +26,7 @@ import HelpButton from '../UI/HelpButton';
 import { Tab, Tabs } from '../UI/Tabs';
 import EffectsList from '../EffectsList';
 import { Column, Spacer } from '../UI/Grid';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

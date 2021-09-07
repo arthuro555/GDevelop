@@ -6,7 +6,7 @@
 //                 Carlos Urango <https://github.com/cjurango>
 //                 R.J. <https://github.com/jun-sheaf>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Adapted by arthuro555 for the GDevelop project
+// Adapted by arthuro555 for the GDeveloppe project
 
 declare type HowlBaseCallback = (soundId: number) => void;
 declare type HowlErrorCallback = (soundId: number, error?: string) => void;

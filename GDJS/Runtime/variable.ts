@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2013-2016 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
  * This project is released under the MIT License.
  */
@@ -103,7 +103,7 @@ namespace gdjs {
 
     /**
      * Converts a JavaScript object into a value compatible
-     * with GDevelop variables and store it inside this variable.
+     * with GDeveloppe variables and store it inside this variable.
      * @param obj - The value to convert.
      */
     fromJSObject(obj: any): this {
@@ -138,7 +138,7 @@ namespace gdjs {
           console.warn(
             'Integers bigger than ' +
               Number.MAX_SAFE_INTEGER +
-              " aren't supported by GDevelop variables, it will be reduced to that size."
+              " aren't supported by GDeveloppe variables, it will be reduced to that size."
           );
         // @ts-ignore
         variable.setNumber(parseInt(obj, 10));

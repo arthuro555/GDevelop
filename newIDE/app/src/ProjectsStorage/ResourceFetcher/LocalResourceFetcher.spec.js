@@ -3,7 +3,7 @@ import optionalRequire from '../../Utils/OptionalRequire.js';
 import { LocalResourceFetcher } from './LocalResourceFetcher';
 import { makeTestProject } from '../../fixtures/TestProject';
 import path from 'path';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 jest.mock('../../Utils/OptionalRequire.js');
 

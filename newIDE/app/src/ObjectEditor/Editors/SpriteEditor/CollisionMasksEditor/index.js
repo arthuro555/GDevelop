@@ -24,7 +24,7 @@ import EditorMosaic, {
 } from '../../../../UI/EditorMosaic';
 import { useResponsiveWindowWidth } from '../../../../UI/Reponsive/ResponsiveWindowMeasurer';
 import Background from '../../../../UI/Background';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const horizontalMosaicNodes: EditorMosaicNode = {
   direction: 'row',

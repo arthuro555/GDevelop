@@ -37,7 +37,7 @@ import { Column } from '../../../UI/Grid';
 import { ResponsiveLineStackLayout } from '../../../UI/Layout';
 import ScrollView from '../../../UI/ScrollView';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type AnimationProps = {|
   animation: gdAnimation,

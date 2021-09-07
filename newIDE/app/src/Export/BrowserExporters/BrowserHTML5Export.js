@@ -18,7 +18,7 @@ import {
 import RaisedButton from '../../UI/RaisedButton';
 import { BlobDownloadUrlHolder } from '../../Utils/BlobDownloadUrlHolder';
 import { ExplanationHeader, DoneFooter } from '../GenericExporters/HTML5Export';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type ExportState = null;
 

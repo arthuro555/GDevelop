@@ -15,7 +15,7 @@
 
 /*::
 export type ObjectsRenderingService = {
-  gd: libGDevelop,
+  gd: libGDeveloppe,
   PIXI: any,
   RenderedInstance: any,
   registerInstanceRenderer: (objectType: string, renderer: any) => void,

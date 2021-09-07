@@ -101,7 +101,7 @@
       },
       "selected": {
         "background-color": {
-          "value": "{gdevelop.color.light-blue.value}"
+          "value": "{GDeveloppe.color.light-blue.value}"
         },
         "color": {
           "value": "#889bca"

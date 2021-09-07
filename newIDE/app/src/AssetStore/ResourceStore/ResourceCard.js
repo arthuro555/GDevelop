@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type Resource } from '../../Utils/GDevelopServices/Asset';
+import { type Resource } from '../../Utils/GDeveloppeServices/Asset';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Text from '../../UI/Text';
 import InsertDriveFile from '@material-ui/icons/InsertDriveFile';

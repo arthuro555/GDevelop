@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -511,17 +511,17 @@ class GD_CORE_API Project : public ObjectsContainer {
   void SerializeTo(SerializerElement& element) const;
 
   /**
-   * Get the major version of GDevelop used to save the project.
+   * Get the major version of GDeveloppe used to save the project.
    */
   unsigned int GetLastSaveGDMajorVersion() { return gdMajorVersion; };
 
   /**
-   * Get the minor version of GDevelop used to save the project.
+   * Get the minor version of GDeveloppe used to save the project.
    */
   unsigned int GetLastSaveGDMinorVersion() { return gdMinorVersion; };
 
   /**
-   * Get the minor version of GDevelop used to save the project.
+   * Get the minor version of GDeveloppe used to save the project.
    */
   unsigned int GetLastSaveGDBuildVersion() { return gdBuildVersion; };
 #endif

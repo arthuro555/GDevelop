@@ -1,9 +1,9 @@
-import { createGdevelopTheme } from '../CreateTheme';
+import { createGDeveloppeTheme } from '../CreateTheme';
 
 import styles from './OneDarkThemeVariables.json';
 import './OneDarkThemeVariables.css';
 
-export default createGdevelopTheme(
+export default createGDeveloppeTheme(
   styles,
   'OneDarkTheme',
   'dark',

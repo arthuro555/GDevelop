@@ -42,7 +42,7 @@ import { type UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import { getParametersIndexOffset } from '../EventsFunctionsExtensionsLoader';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   project: gdProject,

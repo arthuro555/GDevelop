@@ -1,7 +1,7 @@
 // @flow
 import { setupFunctionFromEvents } from '.';
 import { makeTestProject } from '../../fixtures/TestProject';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const serializedEvents = [
   {

@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -9,11 +9,11 @@
 /** @file
  * Provide a way to mark strings to be translated.
  * 
- * Strings to be translated in GDevelop Core codebase
+ * Strings to be translated in GDeveloppe Core codebase
  * are marked with the underscore macro, for example: _("Hello World").
  * 
  * The macro is then defined to be using the translation function
- * of the underlying platform (Emscripten for GDevelop 5).
+ * of the underlying platform (Emscripten for GDeveloppe 5).
  */
 
 #if defined(EMSCRIPTEN)

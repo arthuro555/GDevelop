@@ -1,10 +1,10 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2015-2016 Victor Levasseur (victorlevasseur52@gmail.com)
  * This project is released under the MIT License.
  */
 /**
- * @file Tests covering utf8 features from GDevelop Core.
+ * @file Tests covering utf8 features from GDeveloppe Core.
  */
 
 #include <SFML/System/String.hpp>
@@ -240,10 +240,10 @@ TEST_CASE("Utf8 String", "[common][utf8]") {
   }
 
   SECTION("case-insensitive find/rfind") {
-    gd::String str1 = u8"Ich heiße GDevelop";
+    gd::String str1 = u8"Ich heiße GDeveloppe";
     gd::String search1 = u8"HEISSE";
     gd::String search2 = u8"heiße";
-    gd::String search3 = u8"gdevelop";
+    gd::String search3 = u8"GDeveloppe";
 
     REQUIRE(str1.FindCaseInsensitive(search1) == 4);
     REQUIRE(str1.FindCaseInsensitive(search1, 4) == 4);
@@ -257,24 +257,24 @@ TEST_CASE("Utf8 String", "[common][utf8]") {
     REQUIRE(str1.FindCaseInsensitive(search3, 10) == 10);
     REQUIRE(str1.FindCaseInsensitive(search3, 11) == gd::String::npos);
 
-    gd::String str2 = u8"Ich heiße GDevelop ß";
+    gd::String str2 = u8"Ich heiße GDeveloppe ß";
     REQUIRE(str2.FindCaseInsensitive(u8"SS") == 7);
     REQUIRE(str2.FindCaseInsensitive(u8"SS", 7) == 7);
     REQUIRE(str2.FindCaseInsensitive(u8"SS", 8) == 19);
   }
 
   SECTION("find and replace") {
-    gd::String str1 = u8"Ich heiße GDevelop";
+    gd::String str1 = u8"Ich heiße GDeveloppe";
     REQUIRE(str1.FindAndReplace(u8"heiße", "bin", false) ==
-            u8"Ich bin GDevelop");
+            u8"Ich bin GDeveloppe");
 
-    gd::String str2 = u8"Ich heiße heiße GDevelop";
+    gd::String str2 = u8"Ich heiße heiße GDeveloppe";
     REQUIRE(str2.FindAndReplace(u8"heiße", "bin", false) ==
-            u8"Ich bin heiße GDevelop");
-    REQUIRE(str2.FindAndReplace(u8"heiße", "bin") == u8"Ich bin bin GDevelop");
+            u8"Ich bin heiße GDeveloppe");
+    REQUIRE(str2.FindAndReplace(u8"heiße", "bin") == u8"Ich bin bin GDeveloppe");
 
-    gd::String str3 = u8"Ich heiße GDevelop ß";
-    REQUIRE(str3.FindAndReplace(u8"ß", "SS") == u8"Ich heiSSe GDevelop SS");
+    gd::String str3 = u8"Ich heiße GDeveloppe ß";
+    REQUIRE(str3.FindAndReplace(u8"ß", "SS") == u8"Ich heiSSe GDeveloppe SS");
 
     gd::String str4 = "AAA";
     REQUIRE(str4.FindAndReplace("A", "A", false) == "AAA");

@@ -20,7 +20,7 @@ import ExternalEventsAutoComplete from './ExternalEventsAutoComplete';
 import { showWarningBox } from '../../../../UI/Messages/MessageBox';
 import { type EventRendererProps } from '../EventRenderer';
 import { shouldActivate } from '../../../../UI/KeyboardShortcuts/InteractionKeys';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   container: {

@@ -8,7 +8,7 @@ import {
   type ExtensionHeader,
   getExtensionHeader,
   isCompatibleWithExtension,
-} from '../../Utils/GDevelopServices/Extension';
+} from '../../Utils/GDeveloppeServices/Extension';
 import LeftLoader from '../../UI/LeftLoader';
 import PlaceholderLoader from '../../UI/PlaceholderLoader';
 import PlaceholderError from '../../UI/PlaceholderError';

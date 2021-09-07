@@ -3,7 +3,7 @@ import * as React from 'react';
 const marginsSize = 4;
 
 /**
- * A Line in the standard GDevelop grid to position components.
+ * A Line in the standard GDeveloppe grid to position components.
  * Check `Layout` first to see if there is already a layout made
  * specifically for your components (like `TextFieldWithButton`).
  */
@@ -31,7 +31,7 @@ export const Line = (props: {|
 );
 
 /**
- * A Column in the standard GDevelop grid to position components.
+ * A Column in the standard GDeveloppe grid to position components.
  * Check `Layout` first to see if there is already a layout made
  * specifically for your components (like `TextFieldWithButton`).
  */
@@ -69,7 +69,7 @@ export const Column = (props: {|
 );
 
 /**
- * A Spacer in the standard GDevelop grid to position components.
+ * A Spacer in the standard GDeveloppe grid to position components.
  * Check `Layout` first to see if there is already a layout made
  * specifically for your components (like `TextFieldWithButton`).
  */

@@ -1,15 +1,15 @@
 // @flow
 /**
- * This is a declaration of an extension for GDevelop 5.
+ * This is a declaration of an extension for GDeveloppe 5.
  *
  * ℹ️ Changes in this file are watched and automatically imported if the editor
  * is running. You can also manually run `node import-GDJS-Runtime.js` (in newIDE/app/scripts).
  *
- * The file must be named "JsExtension.js", otherwise GDevelop won't load it.
+ * The file must be named "JsExtension.js", otherwise GDeveloppe won't load it.
  * ⚠️ If you make a change and the extension is not loaded, open the developer console
  * and search for any errors.
  *
- * More information on https://github.com/4ian/GDevelop/blob/master/newIDE/README-extensions.md
+ * More information on https://github.com/4ian/GDeveloppe/blob/master/newIDE/README-extensions.md
  */
 
 /*::
@@ -22,14 +22,14 @@ import { type ObjectsRenderingService, type ObjectsEditorService } from '../JsEx
 module.exports = {
   createExtension: function (
     _ /*: (string) => string */,
-    gd /*: libGDevelop */
+    gd /*: libGDeveloppe */
   ) {
     const extension = new gd.PlatformExtension();
     extension.setExtensionInformation(
       'Effects',
       'Effects',
       'Lots of different effects to be used in your game.',
-      'Various contributors from PixiJS, PixiJS filters and GDevelop',
+      'Various contributors from PixiJS, PixiJS filters and GDeveloppe',
       'MIT'
     ).setExtensionHelpPath('/interface/scene-editor/layer-effects');
 
@@ -307,7 +307,7 @@ module.exports = {
       .setLabel(_('Color map texture for the effect'))
       .setDescription(
         _(
-          'You can change colors of pixels by modifing a reference color image, containing each colors, called the *Color Map Texture*. To get started, **download** [a default color map texture here](http://wiki.compilgames.net/doku.php/gdevelop5/interface/scene-editor/layer-effects).'
+          'You can change colors of pixels by modifing a reference color image, containing each colors, called the *Color Map Texture*. To get started, **download** [a default color map texture here](http://wiki.compilgames.net/doku.php/GDeveloppe5/interface/scene-editor/layer-effects).'
         )
       );
     colorMapProperties
@@ -442,7 +442,7 @@ module.exports = {
       .setLabel(_('Displacement map texture'))
       .setDescription(
         _(
-          'Displacement map texture for the effect. To get started, **download** [a default displacement map texture here](http://wiki.compilgames.net/doku.php/gdevelop5/interface/scene-editor/layer-effects).'
+          'Displacement map texture for the effect. To get started, **download** [a default displacement map texture here](http://wiki.compilgames.net/doku.php/GDeveloppe5/interface/scene-editor/layer-effects).'
         )
       );
     displacementProperties
@@ -1155,7 +1155,7 @@ module.exports = {
     return extension;
   },
   runExtensionSanityTests: function (
-    gd /*: libGDevelop */,
+    gd /*: libGDeveloppe */,
     extension /*: gdPlatformExtension*/
   ) {
     return [];

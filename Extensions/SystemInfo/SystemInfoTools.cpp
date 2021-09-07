@@ -1,6 +1,6 @@
 /**
 
-GDevelop - SystemInfo Extension
+GDeveloppe - SystemInfo Extension
 Copyright (c) 2016 Florian Rival (Florian.Rival@gmail.com)
 This project is released under the MIT License.
 */

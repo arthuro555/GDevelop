@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-present Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -73,7 +73,7 @@ void ExpressionCodeGenerator::OnVisitUnaryOperatorNode(
     UnaryOperatorNode& node) {
   output.push_back(node.op);
   output += "(";  // Add extra parenthesis to ensure that things like --2 are
-                  // properly outputted as -(-2) (GDevelop don't have -- or ++
+                  // properly outputted as -(-2) (GDeveloppe don't have -- or ++
                   // operators, but JavaScript and C++ have).
   node.factor->Visit(*this);
   output += ")";

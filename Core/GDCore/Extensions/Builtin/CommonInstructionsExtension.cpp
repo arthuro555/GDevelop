@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -27,7 +27,7 @@ BuiltinExtensionsImplementer::ImplementsCommonInstructionsExtension(
       .SetExtensionInformation(
           "BuiltinCommonInstructions",
           _("Builtin events"),
-          "GDevelop comes with a set of events and conditions that allow to "
+          "GDeveloppe comes with a set of events and conditions that allow to "
           "express the game logic and rules.",
           "Florian Rival",
           "Open source (MIT License)")

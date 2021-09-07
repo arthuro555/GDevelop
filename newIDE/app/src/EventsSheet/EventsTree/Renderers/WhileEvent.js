@@ -12,7 +12,7 @@ import {
 import { type EventRendererProps } from './EventRenderer';
 import ConditionsActionsColumns from '../ConditionsActionsColumns';
 import { Trans } from '@lingui/macro';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   container: {

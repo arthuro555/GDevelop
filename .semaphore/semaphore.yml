@@ -1,5 +1,5 @@
 version: v1.0
-name: Fast tests (not building GDevelop.js - can have false negatives)
+name: Fast tests (not building GDeveloppe.js - can have false negatives)
 agent:
   machine:
     type: e1-standard-2

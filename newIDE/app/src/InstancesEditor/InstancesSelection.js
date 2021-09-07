@@ -1,5 +1,5 @@
 // @flow
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /**
  * Represents a list of selected instances.

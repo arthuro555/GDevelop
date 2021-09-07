@@ -4,7 +4,7 @@ import SearchBar from '../UI/SearchBar';
 import { Column, Line } from '../UI/Grid';
 import Background from '../UI/Background';
 import ScrollView from '../UI/ScrollView';
-import { type ShowcasedGame } from '../Utils/GDevelopServices/Game';
+import { type ShowcasedGame } from '../Utils/GDeveloppeServices/Game';
 import { ListSearchResults } from '../UI/Search/ListSearchResults';
 import { GamesShowcaseContext } from './GamesShowcaseContext';
 import { ShowcasedGameListItem } from './ShowcasedGameListItem';

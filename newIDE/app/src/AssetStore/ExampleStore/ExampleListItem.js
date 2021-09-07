@@ -6,7 +6,7 @@ import {
   type ExampleShortHeader,
   isCompatibleWithAsset,
   getExample,
-} from '../../Utils/GDevelopServices/Asset';
+} from '../../Utils/GDeveloppeServices/Asset';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Text from '../../UI/Text';
 import { Trans } from '@lingui/macro';

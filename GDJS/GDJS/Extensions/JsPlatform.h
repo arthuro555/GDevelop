@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -13,7 +13,7 @@
 namespace gdjs {
 
 /**
- * \brief GDevelop Javascript Platform
+ * \brief GDeveloppe Javascript Platform
  *
  * Platform designed to be used to create 2D games based on Javascript.<br>
  * <br>
@@ -23,7 +23,7 @@ namespace gdjs {
  */
 class GD_API JsPlatform : public gd::Platform {
  public:
-  virtual gd::String GetName() const { return "GDevelop JS platform"; }
+  virtual gd::String GetName() const { return "GDeveloppe JS platform"; }
   virtual gd::String GetFullName() const {
     return _("HTML5 (Web and Android games)");
   }

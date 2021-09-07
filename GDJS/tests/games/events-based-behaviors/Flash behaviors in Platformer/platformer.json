@@ -13,7 +13,7 @@
     "macExecutableFilename": "",
     "orientation": "landscape",
     "packageName": "com.example.platformer",
-    "projectFile": "/Users/florian/GDevelop projects/My project889/platformer.json",
+    "projectFile": "/Users/florian/GDeveloppe projects/My project889/platformer.json",
     "scaleMode": "linear",
     "sizeOnStartupMode": "adaptWidth",
     "useExternalSourceFiles": false,
@@ -30,7 +30,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensions": [
       {
@@ -102,10 +102,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [

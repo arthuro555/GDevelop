@@ -33,10 +33,10 @@
             <extension name="DraggableBehavior" />
         </extensions>
         <platforms>
-            <platform name="GDevelop JS platform" />
-            <platform name="GDevelop C++ platform" />
+            <platform name="GDeveloppe JS platform" />
+            <platform name="GDeveloppe C++ platform" />
         </platforms>
-        <currentPlatform>GDevelop C++ platform</currentPlatform>
+        <currentPlatform>GDeveloppe C++ platform</currentPlatform>
     </properties>
     <resources>
         <resources>

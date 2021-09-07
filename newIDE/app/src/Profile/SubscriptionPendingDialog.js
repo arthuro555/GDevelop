@@ -95,7 +95,7 @@ export default function SubscriptionPendingDialog({
           <Line>
             <Text>
               <Trans>
-                Thanks for getting a subscription and supporting GDevelopSEC!
+                Thanks for getting a subscription and supporting GDeveloppeSEC!
               </Trans>{' '}
               {'❤️'}
             </Text>

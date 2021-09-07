@@ -4,7 +4,7 @@ import { Trans } from '@lingui/macro';
 import * as React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { Column, Line, Spacer } from '../UI/Grid';
-import { type Profile } from '../Utils/GDevelopServices/Authentification';
+import { type Profile } from '../Utils/GDeveloppeServices/Authentification';
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import { getGravatarUrl } from '../UI/GravatarUrl';
 import Text from '../UI/Text';
@@ -24,7 +24,7 @@ export default ({ profile }: Props) =>
       <Line>
         <Text>
           <Trans>
-            An account allows you to access GDevelop services online.
+            An account allows you to access GDeveloppe services online.
           </Trans>
         </Text>
       </Line>

@@ -50,7 +50,7 @@ const BehaviorListItem = ({
       <ListIcon
         src={behaviorMetadata.iconFilename}
         iconSize={40}
-        isGDevelopIcon
+        isGDeveloppeIcon
       />
     }
     key={behaviorMetadata.type}

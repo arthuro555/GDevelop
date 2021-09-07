@@ -1,5 +1,5 @@
 /*
-GDevelop - Top-down movement Behavior Extension
+GDeveloppe - Top-down movement Behavior Extension
 Copyright (c) 2010-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 

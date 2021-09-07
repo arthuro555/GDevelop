@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type ExtensionShortHeader } from '../../Utils/GDevelopServices/Extension';
+import { type ExtensionShortHeader } from '../../Utils/GDeveloppeServices/Extension';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Text from '../../UI/Text';
 import { Trans } from '@lingui/macro';

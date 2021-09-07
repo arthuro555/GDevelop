@@ -10,7 +10,7 @@ import {
   TableRow,
   TableRowColumn,
 } from '../UI/Table';
-import { type Usages } from '../Utils/GDevelopServices/Usage';
+import { type Usages } from '../Utils/GDeveloppeServices/Usage';
 import { Column, Line } from '../UI/Grid';
 import EmptyMessage from '../UI/EmptyMessage';
 import format from 'date-fns/format';

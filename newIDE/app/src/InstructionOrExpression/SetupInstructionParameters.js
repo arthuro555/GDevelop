@@ -1,6 +1,6 @@
 // @flow
 import { getObjectParameterIndex } from './EnumerateInstructions';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 /**
  * After selecting an instruction, this function allows to set up the proper

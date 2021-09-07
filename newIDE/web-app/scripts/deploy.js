@@ -37,7 +37,7 @@ isGitClean()
       fs.stat(path.join(appPublicPath, 'libGD.js'), (err, stats) => {
         if (err) {
           shell.echo(
-            `❌ Unable to check libGD.js size. Have you compiled GDevelop.js? Error is: ${err}`
+            `❌ Unable to check libGD.js size. Have you compiled GDeveloppe.js? Error is: ${err}`
           );
           shell.exit(1);
         }

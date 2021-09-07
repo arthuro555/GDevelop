@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -24,7 +24,7 @@ namespace gd {
  * It is used for serialization (to JSON or XML), or as a generic
  * container for properties of objects (see for example gd::BehaviorContent).
  *
- * It also has specialized methods in GDevelop.js (see postjs.js) to be
+ * It also has specialized methods in GDeveloppe.js (see postjs.js) to be
  * converted to a JavaScript object.
  *
  * \note Children are stored with their order preserved, but this also

@@ -1,5 +1,5 @@
 /*
- * GDevelop JS Platform
+ * GDeveloppe JS Platform
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -187,14 +187,14 @@ void JsPlatform::DestroySingleton() {
 
 #if !defined(EMSCRIPTEN)
 /**
- * Used by GDevelop to create the platform class
+ * Used by GDeveloppe to create the platform class
  */
 extern "C" gd::Platform *GD_API CreateGDPlatform() {
   return &JsPlatform::Get();
 }
 
 /**
- * Used by GDevelop to destroy the platform class
+ * Used by GDeveloppe to destroy the platform class
  */
 extern "C" void GD_API DestroyGDPlatform() { JsPlatform::DestroySingleton(); }
 #endif

@@ -1,8 +1,8 @@
 /**
- * \mainpage GDevelop JS Platform
+ * \mainpage GDeveloppe JS Platform
  * \image html gdlogo.png
  * \section welcome Welcome
- * This is the help file for the GDevelop JS Platform, which contains a reference of all the features provided
+ * This is the help file for the GDeveloppe JS Platform, which contains a reference of all the features provided
  * by the JS Platform and explains how to create <b>extensions</b> for this platform.<br>
  * Writing extensions requires to know Javascript and you need to write a bit of C++ code: Do not worry, everything is explained
  * here.

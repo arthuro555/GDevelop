@@ -9,7 +9,7 @@ import {
   type Build,
   type BuildArtifactKeyName,
   getBuildArtifactUrl,
-} from '../Utils/GDevelopServices/Build';
+} from '../Utils/GDeveloppeServices/Build';
 import { type UserProfile } from '../Profile/UserProfileContext';
 import { Column, Line } from '../UI/Grid';
 import { showErrorBox } from '../UI/Messages/MessageBox';
@@ -20,7 +20,7 @@ import {
   displayProjectErrorsBox,
   getProjectPropertiesErrors,
 } from '../Utils/ProjectErrorsChecker';
-import { type Limit } from '../Utils/GDevelopServices/Usage';
+import { type Limit } from '../Utils/GDeveloppeServices/Usage';
 import BuildsWatcher from './Builds/BuildsWatcher';
 import BuildStepsProgress, {
   type BuildStep,

@@ -53,7 +53,7 @@ const fixSomeHtmlCharacters = (str: string) => {
     .replace(/&#x27;/g, "'");
 };
 
-const indexName = 'gdevelop';
+const indexName = 'GDeveloppe';
 const appId = 'BH4D9OD16A';
 const apiKey = '69c73fc1a710bb79543d4b91f6b81c08';
 const algoliaOptions = { hitsPerPage: 5 };

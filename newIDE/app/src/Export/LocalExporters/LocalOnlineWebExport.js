@@ -6,7 +6,7 @@ import {
   type Build,
   buildWeb,
   getBuildFileUploadOptions,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import { uploadLocalFile } from './LocalFileUploader';
 import { type UserProfile } from '../../Profile/UserProfileContext';
 import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
@@ -20,7 +20,7 @@ import {
 import { ExplanationHeader } from '../GenericExporters/OnlineWebExport';
 const path = optionalRequire('path');
 const os = optionalRequire('os');
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type ExportState = null;
 

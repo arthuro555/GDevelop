@@ -6,7 +6,7 @@ import {
   type Build,
   buildElectron,
   getBuildFileUploadOptions,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import { type UserProfile } from '../../Profile/UserProfileContext';
 import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
 import { uploadLocalFile } from './LocalFileUploader';
@@ -23,7 +23,7 @@ import {
 } from '../GenericExporters/OnlineElectronExport';
 const path = optionalRequire('path');
 const os = optionalRequire('os');
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type PreparedExporter = {|
   exporter: gdjsExporter,

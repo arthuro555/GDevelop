@@ -1,4 +1,4 @@
-GDevelop extensions
+GDeveloppe extensions
 -------------------
 
 The MIT License (MIT)

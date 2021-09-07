@@ -23,7 +23,7 @@ export const getLocalExporters = (): Array<Exporter> => [
     helpPage: '/publishing/android_and_ios',
     description: (
       <Trans>
-        Package your game for Android directly from GDevelop. iOS support is
+        Package your game for Android directly from GDeveloppe. iOS support is
         coming soon!
       </Trans>
     ),

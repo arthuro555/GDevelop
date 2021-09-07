@@ -34,7 +34,7 @@ import { getInstructionMetadata } from './NewInstructionEditor';
 import { ColumnStackLayout } from '../../UI/Layout';
 import { setupInstructionParameters } from '../../InstructionOrExpression/SetupInstructionParameters';
 import ScrollView from '../../UI/ScrollView';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   // When displaying the empty message, center the message:

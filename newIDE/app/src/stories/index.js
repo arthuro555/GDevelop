@@ -2,9 +2,9 @@
 import * as React from 'react';
 
 // Keep first as it creates the `global.gd` object:
-import GDevelopJsInitializerDecorator, {
+import GDeveloppeJsInitializerDecorator, {
   testProject,
-} from './GDevelopJsInitializerDecorator';
+} from './GDeveloppeJsInitializerDecorator';
 
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action, configureActions } from '@storybook/addon-actions';
@@ -106,11 +106,11 @@ import {
   gameRollingMetricsWithoutPlayersAndRetention1,
   showcasedGame1,
   exampleFromFutureVersion,
-} from '../fixtures/GDevelopServicesTestData';
+} from '../fixtures/GDeveloppeServicesTestData';
 import {
-  GDevelopAnalyticsApi,
-  GDevelopGameApi,
-} from '../Utils/GDevelopServices/ApiConfigs.js';
+  GDeveloppeAnalyticsApi,
+  GDeveloppeGameApi,
+} from '../Utils/GDeveloppeServices/ApiConfigs.js';
 import debuggerGameDataDump from '../fixtures/DebuggerGameDataDump.json';
 import profilerOutput from '../fixtures/ProfilerOutputsTestData.json';
 import SubscriptionDetails from '../Profile/SubscriptionDetails';
@@ -250,7 +250,7 @@ configureActions({
   limit: 20,
 });
 
-addDecorator(GDevelopJsInitializerDecorator);
+addDecorator(GDeveloppeJsInitializerDecorator);
 
 // No i18n in this file
 
@@ -4869,7 +4869,7 @@ storiesOf('GameDashboard/GamesList', module)
   .add('without a project opened', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopGameApi.baseUrl}/game`)
+      .onGet(`${GDeveloppeGameApi.baseUrl}/game`)
       .reply(200, [game1, game2])
       .onAny()
       .reply(config => {
@@ -4886,7 +4886,7 @@ storiesOf('GameDashboard/GamesList', module)
   .add('without a project opened, long loading', () => {
     const mock = new MockAdapter(axios, { delayResponse: 2500 });
     mock
-      .onGet(`${GDevelopGameApi.baseUrl}/game`)
+      .onGet(`${GDeveloppeGameApi.baseUrl}/game`)
       .reply(200, [game1, game2])
       .onAny()
       .reply(config => {
@@ -4903,7 +4903,7 @@ storiesOf('GameDashboard/GamesList', module)
   .add('with an error', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopGameApi.baseUrl}/game`)
+      .onGet(`${GDeveloppeGameApi.baseUrl}/game`)
       .reply(500)
       .onAny()
       .reply(config => {
@@ -4946,7 +4946,7 @@ storiesOf('GameDashboard/GameDetailsDialog', module)
   .add('Error loading analytics', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
+      .onGet(`${GDeveloppeAnalyticsApi.baseUrl}/game-metrics`)
       .reply(500)
       .onAny()
       .reply(config => {
@@ -4970,7 +4970,7 @@ storiesOf('GameDashboard/GameDetailsDialog', module)
   .add('Missing analytics', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
+      .onGet(`${GDeveloppeAnalyticsApi.baseUrl}/game-metrics`)
       .reply(404)
       .onAny()
       .reply(config => {
@@ -4994,7 +4994,7 @@ storiesOf('GameDashboard/GameDetailsDialog', module)
   .add('With partial analytics', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
+      .onGet(`${GDeveloppeAnalyticsApi.baseUrl}/game-metrics`)
       .reply(200, gameRollingMetricsWithoutPlayersAndRetention1)
       .onAny()
       .reply(config => {
@@ -5018,7 +5018,7 @@ storiesOf('GameDashboard/GameDetailsDialog', module)
   .add('With analytics', () => {
     const mock = new MockAdapter(axios);
     mock
-      .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
+      .onGet(`${GDeveloppeAnalyticsApi.baseUrl}/game-metrics`)
       .reply(200, gameRollingMetrics1)
       .onAny()
       .reply(config => {
@@ -5042,7 +5042,7 @@ storiesOf('GameDashboard/GameDetailsDialog', module)
   .add('With analytics, long loading', () => {
     const mock = new MockAdapter(axios, { delayResponse: 2000 });
     mock
-      .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
+      .onGet(`${GDeveloppeAnalyticsApi.baseUrl}/game-metrics`)
       .reply(200, gameRollingMetrics1)
       .onAny()
       .reply(config => {

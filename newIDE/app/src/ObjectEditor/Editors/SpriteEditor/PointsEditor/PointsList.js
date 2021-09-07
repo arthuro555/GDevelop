@@ -19,7 +19,7 @@ import { Column, Line, Spacer } from '../../../../UI/Grid';
 import RaisedButton from '../../../../UI/RaisedButton';
 import { Trans } from '@lingui/macro';
 import AddIcon from '@material-ui/icons/Add';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const SortablePointRow = SortableElement(PointRow);
 

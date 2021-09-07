@@ -1,5 +1,5 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
@@ -155,13 +155,13 @@ class GD_CORE_API ExpressionMetadata {
   }
 
   /**
-   * Get the help path of the expression, relative to the GDevelop documentation
+   * Get the help path of the expression, relative to the GDeveloppe documentation
    * root.
    */
   const gd::String& GetHelpPath() const { return helpPath; }
 
   /**
-   * Set the help path of the expression, relative to the GDevelop documentation
+   * Set the help path of the expression, relative to the GDeveloppe documentation
    * root.
    */
   ExpressionMetadata& SetHelpPath(const gd::String& path) {

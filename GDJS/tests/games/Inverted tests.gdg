@@ -25,9 +25,9 @@
             <Extension name="BuiltinMathematicalTools" />
             <Extension name="BuiltinExternalLayouts" />
         </Extensions>
-        <Platforms current="GDevelop JS platform">
-            <Platform name="GDevelop JS platform" />
-            <Platform name="GDevelop C++ platform" />
+        <Platforms current="GDeveloppe JS platform">
+            <Platform name="GDeveloppe JS platform" />
+            <Platform name="GDeveloppe C++ platform" />
         </Platforms>
         <WindowW value="800" />
         <WindowH value="600" />

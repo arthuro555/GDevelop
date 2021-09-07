@@ -2,10 +2,10 @@ const path = require('path');
 const recursive = require('recursive-readdir');
 const fs = require('fs').promises;
 
-const gdevelopRootPath = path.join(__dirname, '..', '..', '..');
+const GDeveloppeRootPath = path.join(__dirname, '..', '..', '..');
 const gdjsRootPath = path.join(__dirname, '..', '..');
 
-const extensionsRuntimePath = path.join(gdevelopRootPath, 'Extensions');
+const extensionsRuntimePath = path.join(GDeveloppeRootPath, 'Extensions');
 const gdjsRuntimePath = path.join(gdjsRootPath, 'Runtime');
 
 // The extensions to be included in the bundled Runtime (will be built with esbuild or copied).
@@ -18,7 +18,7 @@ const transformIncludedExtensions = ['.js', '.ts'];
 // (they will be copied).
 const transformExcludedExtensions = ['.min.js', '.d.ts'];
 
-// Files under these paths (relative to the GDevelop root path) won't
+// Files under these paths (relative to the GDeveloppe root path) won't
 // be built with esbuild, but simply copied.
 const untransformedPaths = [
   // GDJS prebuilt files:
@@ -42,7 +42,7 @@ const untransformedPaths = [
   'Extensions/Shopify/shopify-buy.umd.polyfilled.min.js',
   'Extensions/TweenBehavior/shifty.js',
   'Extensions/JsExtensionTypes.flow.js',
-].map((untransformedPath) => path.resolve(gdevelopRootPath, untransformedPath));
+].map((untransformedPath) => path.resolve(GDeveloppeRootPath, untransformedPath));
 
 /**
  * Check if a file is not a source file (should not be included in the built Runtime).
@@ -135,7 +135,7 @@ module.exports = {
       getInOutPaths(gdjsRuntimePath, options.bundledOutPath)
     );
     const allExtensionsInOutFilePaths = allExtensionsInFilePaths.map(
-      getInOutPaths(gdevelopRootPath, options.bundledOutPath)
+      getInOutPaths(GDeveloppeRootPath, options.bundledOutPath)
     );
 
     return { allGDJSInOutFilePaths, allExtensionsInOutFilePaths };

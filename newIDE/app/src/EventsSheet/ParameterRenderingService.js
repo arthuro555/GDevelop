@@ -49,7 +49,7 @@ import SceneNameField from './ParameterFields/SceneNameField';
 import ObjectPointNameField from './ParameterFields/ObjectPointNameField';
 import ObjectAnimationNameField from './ParameterFields/ObjectAnimationNameField';
 import { type MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const components = {
   default: DefaultField,

@@ -19,7 +19,7 @@ import {
 } from '../ResourcesList/ResourceSource.flow';
 import { getResourceFilePathStatus } from '../ResourcesList/ResourceUtils.js';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const electron = optionalRequire('electron');
 const shell = electron ? electron.shell : null;

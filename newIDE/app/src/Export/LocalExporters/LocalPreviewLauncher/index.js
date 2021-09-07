@@ -15,7 +15,7 @@ const electron = optionalRequire('electron');
 const path = optionalRequire('path');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 const BrowserWindow = electron ? electron.remote.BrowserWindow : null;
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type Props = {|
   getIncludeFileHashs: () => { [string]: number },

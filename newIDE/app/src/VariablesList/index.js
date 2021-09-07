@@ -22,7 +22,7 @@ import {
 } from '../Utils/Serializer';
 import { type VariableOrigin } from './VariablesList.flow';
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const SortableVariableRow = SortableElement(VariableRow);
 const SortableAddVariableRow = SortableElement(EditVariableRow);

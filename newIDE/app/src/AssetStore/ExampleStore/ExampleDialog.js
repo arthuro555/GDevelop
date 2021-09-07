@@ -9,7 +9,7 @@ import {
   type Example,
   isCompatibleWithAsset,
   getExample,
-} from '../../Utils/GDevelopServices/Asset';
+} from '../../Utils/GDeveloppeServices/Asset';
 import LeftLoader from '../../UI/LeftLoader';
 import PlaceholderLoader from '../../UI/PlaceholderLoader';
 import PlaceholderError from '../../UI/PlaceholderError';
@@ -119,8 +119,8 @@ export function ExampleDialog({
         {!isCompatible && (
           <AlertMessage kind="error">
             <Trans>
-              Unfortunately, this example requires a newer version of GDevelop
-              to work. Upgrade GDevelop to be able to use this extension in your
+              Unfortunately, this example requires a newer version of GDeveloppe
+              to work. Upgrade GDeveloppe to be able to use this extension in your
               project.
             </Trans>
           </AlertMessage>

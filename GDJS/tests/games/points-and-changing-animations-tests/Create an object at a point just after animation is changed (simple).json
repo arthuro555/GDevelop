@@ -30,7 +30,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensions": [
       {
@@ -93,10 +93,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -588,7 +588,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "Expected: \na PlayerParticle at the right of the Player that is at 100;200\na EnemyParticle at the left of the Player that is at 400;200\n\nThere was a bug in GDevelop 5.0.0 beta 83 and older where the points where not properly placed after changing the animation",
+          "comment": "Expected: \na PlayerParticle at the right of the Player that is at 100;200\na EnemyParticle at the left of the Player that is at 400;200\n\nThere was a bug in GDeveloppe 5.0.0 beta 83 and older where the points where not properly placed after changing the animation",
           "comment2": ""
         },
         {

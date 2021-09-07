@@ -1,7 +1,7 @@
 // @flow
 import * as PIXI from 'pixi.js-legacy';
 import Rectangle from '../Utils/Rectangle';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export default class SelectionRectangle {
   instances: gdInitialInstancesContainer;

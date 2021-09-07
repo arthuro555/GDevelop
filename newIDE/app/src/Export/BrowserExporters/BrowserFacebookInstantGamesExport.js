@@ -22,7 +22,7 @@ import {
   DoneFooter,
 } from '../GenericExporters/FacebookInstantGamesExport';
 import { openBlobDownloadUrl } from '.';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type ExportState = null;
 

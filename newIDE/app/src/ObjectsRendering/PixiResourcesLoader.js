@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as PIXI from 'pixi.js-legacy';
 import ResourcesLoader from '../ResourcesLoader';
 import { loadFontFace } from '../Utils/FontFaceLoader';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const loadedBitmapFonts = {};
 const loadedFontFamilies = {};

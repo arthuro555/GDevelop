@@ -1,6 +1,6 @@
 // @flow
 import { getLastObjectParameterValue } from './ParameterMetadataTools';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('getLastObjectParameterValue', () => {
   it('returns null if no parameter index passed', () => {

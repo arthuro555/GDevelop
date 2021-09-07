@@ -1,0 +1,2757 @@
+/*
+ * GDeveloppe.js
+ * Copyright 2015 Florian Rival (Florian.Rival@gmail.com). All rights reserved.
+ * This project is released under the MIT License.
+ */
+
+/**
+ * IDL file for GDeveloppe classes bindings.
+ *
+ * Notes:
+ *
+ * WRAPPED_* and STATIC_* functions are declared as such
+ * to allow the Wrapper.cpp file to use a macro to do special work on it.
+ * These functions are renamed in the final .js file (so that
+ * `WRAPPED_set` become `set` for example).
+ */
+
+//Interfaces for some types from
+//the C++ Standard Library:
+
+interface VectorString {
+    void VectorString();
+
+    void push_back([Const] DOMString str);
+    void resize(unsigned long size);
+    unsigned long size();
+    [Const, Ref] DOMString at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const] DOMString str);
+    void clear();
+};
+
+interface VectorPlatformExtension {
+    unsigned long size();
+    [Const] PlatformExtension WRAPPED_at(unsigned long index);
+};
+
+interface VectorDependencyMetadata {
+    unsigned long size();
+    [Const, Ref] DependencyMetadata at(unsigned long index);
+};
+
+interface VectorVariable {
+    unsigned long size();
+    [Const] Variable WRAPPED_at(unsigned long index);
+};
+
+interface MapStringString {
+    void MapStringString();
+
+    [Const, Ref] DOMString MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const] DOMString str);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringBoolean {
+    void MapStringBoolean();
+
+    boolean MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, boolean value);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringDouble {
+    void MapStringDouble();
+
+    double MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, double value);
+    double MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringVariable {
+    [Ref] Variable MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] Variable prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringExpressionMetadata {
+    [Ref] ExpressionMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] ExpressionMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringInstructionMetadata {
+    [Ref] InstructionMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] InstructionMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringEventMetadata {
+    [Ref] EventMetadata MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] EventMetadata prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapExtensionProperties {
+    [Ref] MapStringPropertyDescriptor MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] MapStringPropertyDescriptor prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface SetString {
+    void SetString();
+    [Value] VectorString FREE_toNewVectorString();
+};
+
+interface ProjectHelper {
+    [Ref] Project STATIC_CreateNewGDJSProject();
+    void STATIC_InitializePlatforms();
+    [Const, Value] DOMString STATIC_SanityCheckBehaviorProperty(Behavior behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckBehaviorsSharedDataProperty(BehaviorsSharedData behavior, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckObjectProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+    [Const, Value] DOMString STATIC_SanityCheckObjectInitialInstanceProperty(gdObject obj, [Const] DOMString propertyName, [Const] DOMString newValue);
+};
+
+interface EventsVariablesFinder {
+    void EventsVariablesFinder();
+
+    [Const, Value] SetString STATIC_FindAllGlobalVariables([Const, Ref] Platform platform, [Const, Ref] Project project);
+    [Const, Value] SetString STATIC_FindAllLayoutVariables([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout);
+    [Const, Value] SetString STATIC_FindAllObjectVariables([Const, Ref] Platform platform, [Const, Ref] Project project, [Const, Ref] Layout layout, [Const, Ref] gdObject obj);
+
+    //Inherited from ExpressionParser2NodeWorker:
+};
+
+interface VersionWrapper {
+    long STATIC_Major();
+    long STATIC_Minor();
+    long STATIC_Build();
+    long STATIC_Revision();
+
+    [Const, Value] DOMString STATIC_FullString();
+    [Const, Value] DOMString STATIC_Status();
+    [Const, Value] DOMString STATIC_Year();
+    [Const, Value] DOMString STATIC_Month();
+    [Const, Value] DOMString STATIC_Date();
+};
+
+interface Platform {
+    [Const, Value] DOMString GetName();
+    [Const, Value] DOMString GetFullName();
+    [Const, Value] DOMString GetSubtitle();
+    [Const, Value] DOMString GetDescription();
+    boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
+    void ReloadBuiltinExtensions();
+
+    [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
+};
+
+interface JsPlatform {
+    [Ref] JsPlatform STATIC_Get();
+    void AddNewExtension([Const, Ref] PlatformExtension extension);
+
+    // Inherited from Platform:
+    [Const, Value] DOMString GetName();
+    [Const, Value] DOMString GetFullName();
+    [Const, Value] DOMString GetSubtitle();
+    [Const, Value] DOMString GetDescription();
+    boolean IsExtensionLoaded([Const] DOMString name);
+    void RemoveExtension([Const] DOMString name);
+    void ReloadBuiltinExtensions();
+
+    [Const, Ref] VectorPlatformExtension GetAllPlatformExtensions();
+};
+
+interface PairStringVariable {
+    void PairStringVariable();
+
+    [Const, Ref] DOMString WRAPPED_GetName();
+    [Ref] Variable WRAPPED_GetVariable();
+};
+
+enum Variable_Type {
+    "Variable::String",
+    "Variable::Number",
+    "Variable::Boolean",
+    "Variable::Structure",
+    "Variable::Array"
+};
+
+interface Variable {
+    void Variable();
+
+    boolean STATIC_IsPrimitive([Const] Variable_Type type);
+
+    Variable_Type GetType();
+    void CastTo([Const] DOMString type);
+
+    void SetString([Const] DOMString str);
+    [Const, Ref] DOMString GetString();
+    void SetValue([Const] double val);
+    double GetValue();
+    void SetBool([Const] boolean val);
+    boolean GetBool();
+
+    unsigned long GetChildrenCount();
+    boolean Contains([Const, Ref] Variable variableToSearch, boolean recursive);
+
+    boolean HasChild([Const] DOMString str);
+    [Ref] Variable GetChild([Const] DOMString str);
+    void RemoveChild([Const] DOMString name);
+    boolean RenameChild([Const] DOMString oldName, [Const] DOMString newName);
+    [Value] VectorString GetAllChildrenNames();
+    void RemoveRecursively([Const, Ref] Variable variableToRemove);
+
+    [Ref] Variable GetAtIndex([Const] unsigned long index);
+    [Ref] Variable PushNew();
+    void RemoveAtIndex([Const] unsigned long index);
+    [Const, Ref] VectorVariable GetAllChildrenArray();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface VariablesContainer {
+    void VariablesContainer();
+
+    boolean Has([Const] DOMString name);
+    [Ref] Variable Get([Const] DOMString name);
+    [Ref] Variable GetAt(unsigned long index);
+    [Const, Ref] DOMString GetNameAt(unsigned long index);
+    [Ref] Variable Insert([Const] DOMString name, [Const, Ref] Variable variable, unsigned long index);
+    [Ref] Variable InsertNew([Const] DOMString name, unsigned long index);
+    void Remove([Const] DOMString name);
+    boolean Rename([Const] DOMString oldName, [Const] DOMString newName);
+    void Swap(unsigned long firstIndex, unsigned long secondIndex);
+    void Move(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetPosition([Const] DOMString name);
+    unsigned long Count();
+    void Clear();
+    void RemoveRecursively([Const, Ref] Variable variableToRemove);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ObjectGroup {
+    void ObjectGroup();
+
+    [Const, Ref] DOMString GetName();
+    void SetName([Const] DOMString name);
+    void AddObject([Const] DOMString obj);
+    void RemoveObject([Const] DOMString obj);
+    boolean Find([Const] DOMString obj);
+
+    [Const, Ref] VectorString GetAllObjectsNames();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ObjectGroupsContainer {
+    void ObjectGroupsContainer();
+
+    boolean Has([Const] DOMString name);
+    [Ref] ObjectGroup Insert([Const, Ref] ObjectGroup objectGroup, unsigned long position);
+    [Ref] ObjectGroup InsertNew([Const] DOMString name, unsigned long position);
+    unsigned long Count();
+    [Ref] ObjectGroup Get([Const] DOMString name);
+    [Ref] ObjectGroup GetAt(unsigned long index);
+    void Clear();
+    void Remove([Const] DOMString name);
+    unsigned long GetPosition([Const] DOMString name);
+    boolean Rename([Const] DOMString oldName, [Const] DOMString newName);
+    void Move(unsigned long oldIndex, unsigned long newIndex);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface PlatformSpecificAssets {
+    void PlatformSpecificAssets();
+
+    boolean Has([Const] DOMString platform, [Const] DOMString name);
+    [Const, Ref] DOMString Get([Const] DOMString platform, [Const] DOMString name);
+    void Remove([Const] DOMString platform, [Const] DOMString name);
+    void Set([Const] DOMString platform, [Const] DOMString name, [Const] DOMString resourceName);
+
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface LoadingScreen {
+    void LoadingScreen();
+
+    boolean IsGDeveloppeSplashShown();
+    void ShowGDeveloppeSplash(boolean show);
+    [Const, Ref] DOMString GetGDeveloppeLogoStyle();
+    [Ref] LoadingScreen SetGDeveloppeLogoStyle([Const] DOMString value);
+    [Const, Ref] DOMString GetBackgroundImageResourceName();
+    [Ref] LoadingScreen SetBackgroundImageResourceName([Const] DOMString value);
+    long GetBackgroundColor();
+    [Ref] LoadingScreen SetBackgroundColor(long value);
+    double GetBackgroundFadeInDuration();
+    [Ref] LoadingScreen SetBackgroundFadeInDuration(double value);
+    double GetMinDuration();
+    [Ref] LoadingScreen SetMinDuration(double value);
+    double GetLogoAndProgressFadeInDuration();
+    [Ref] LoadingScreen SetLogoAndProgressFadeInDuration(double value);
+    double GetLogoAndProgressLogoFadeInDelay();
+    [Ref] LoadingScreen SetLogoAndProgressLogoFadeInDelay(double value);
+    boolean GetShowProgressBar();
+    [Ref] LoadingScreen SetShowProgressBar(boolean value);
+    double GetProgressBarMaxWidth();
+    [Ref] LoadingScreen SetProgressBarMaxWidth(double value);
+    double GetProgressBarMinWidth();
+    [Ref] LoadingScreen SetProgressBarMinWidth(double value);
+    double GetProgressBarWidthPercent();
+    [Ref] LoadingScreen SetProgressBarWidthPercent(double value);
+    double GetProgressBarHeight();
+    [Ref] LoadingScreen SetProgressBarHeight(double value);
+    long GetProgressBarColor();
+    [Ref] LoadingScreen SetProgressBarColor(long value);
+
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ObjectsContainer {
+    void ObjectsContainer();
+
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    unsigned long GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
+    void MoveObjectToAnotherContainer([Const] DOMString name, [Ref] ObjectsContainer newObjectsContainer, unsigned long newPosition);
+    unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
+};
+
+interface Project {
+    void Project();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetVersion([Const] DOMString authorName);
+    [Const, Ref] DOMString GetVersion();
+    void SetAuthor([Const] DOMString authorName);
+    [Const, Ref] DOMString GetAuthor();
+    void SetPackageName([Const] DOMString packageName);
+    [Const, Ref] DOMString GetPackageName();
+    void SetOrientation([Const] DOMString orientation);
+    [Const, Ref] DOMString GetOrientation();
+    void SetProjectUuid([Const] DOMString projectUuid);
+    [Const, Ref] DOMString GetProjectUuid();
+    void ResetProjectUuid();
+    void SetProjectFile([Const] DOMString file);
+    [Const, Ref] DOMString GetProjectFile();
+    void SetGameResolutionSize(long width, long height);
+    long GetGameResolutionWidth();
+    long GetGameResolutionHeight();
+    boolean GetAdaptGameResolutionAtRuntime();
+    void SetAdaptGameResolutionAtRuntime(boolean adaptGameResolutionAtRuntime);
+    void SetScaleMode([Const] DOMString scaleMode);
+    [Const, Ref] DOMString GetScaleMode();
+    void SetPixelsRounding(boolean pixelsRounding);
+    boolean GetPixelsRounding();
+    void SetSizeOnStartupMode([Const] DOMString orientation);
+    [Const, Ref] DOMString GetSizeOnStartupMode();
+    long GetMaximumFPS();
+    void SetMaximumFPS(long fps);
+    long GetMinimumFPS();
+    void SetMinimumFPS(long fps);
+    void SetFolderProject(boolean enable);
+    boolean IsFolderProject();
+    void SetUseDeprecatedZeroAsDefaultZOrder(boolean enable);
+    boolean GetUseDeprecatedZeroAsDefaultZOrder();
+
+    void SetLastCompilationDirectory([Const] DOMString path);
+    [Const, Ref] DOMString GetLastCompilationDirectory();
+
+    [Ref] ExtensionProperties GetExtensionProperties();
+    void AddPlatform([Ref] Platform platform);
+    [Ref] Platform GetCurrentPlatform();
+
+    [Ref] PlatformSpecificAssets GetPlatformSpecificAssets();
+    [Ref] LoadingScreen GetLoadingScreen();
+
+    boolean HasLayoutNamed([Const] DOMString name);
+    [Ref] Layout GetLayout([Const] DOMString name);
+    [Ref] Layout GetLayoutAt(unsigned long index);
+    void SwapLayouts(unsigned long first, unsigned long second);
+    unsigned long GetLayoutsCount();
+    [Ref] Layout InsertNewLayout([Const] DOMString name, unsigned long position);
+    void RemoveLayout([Const] DOMString name);
+    void SetFirstLayout([Const] DOMString name);
+    [Const, Ref] DOMString GetFirstLayout();
+
+    boolean HasExternalEventsNamed([Const] DOMString name);
+    [Ref] ExternalEvents GetExternalEvents([Const] DOMString name);
+    [Ref] ExternalEvents GetExternalEventsAt(unsigned long index);
+    void SwapExternalEvents(unsigned long first, unsigned long second);
+    unsigned long GetExternalEventsCount();
+    [Ref] ExternalEvents InsertNewExternalEvents([Const] DOMString name, unsigned long position);
+    void RemoveExternalEvents([Const] DOMString name);
+
+    boolean HasExternalLayoutNamed([Const] DOMString name);
+    [Ref] ExternalLayout GetExternalLayout([Const] DOMString name);
+    [Ref] ExternalLayout GetExternalLayoutAt(unsigned long index);
+    void SwapExternalLayouts(unsigned long first, unsigned long second);
+    unsigned long GetExternalLayoutsCount();
+    [Ref] ExternalLayout InsertNewExternalLayout([Const] DOMString name, unsigned long position);
+    void RemoveExternalLayout([Const] DOMString name);
+
+    boolean HasEventsFunctionsExtensionNamed([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtension([Const] DOMString name);
+    [Ref] EventsFunctionsExtension GetEventsFunctionsExtensionAt(unsigned long index);
+    void SwapEventsFunctionsExtensions(unsigned long first, unsigned long second);
+    unsigned long GetEventsFunctionsExtensionsCount();
+    [Ref] EventsFunctionsExtension InsertNewEventsFunctionsExtension([Const] DOMString name, unsigned long position);
+    [Ref] EventsFunctionsExtension InsertEventsFunctionsExtension([Const, Ref] EventsFunctionsExtension eventsFunctionsExtension, unsigned long position);
+    void RemoveEventsFunctionsExtension([Const] DOMString name);
+
+    [Ref] VariablesContainer GetVariables();
+    [Ref] ResourcesManager GetResourcesManager();
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+    boolean STATIC_ValidateName([Const] DOMString name);
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+
+    [Const, Value] DOMString FREE_GetTypeOfBehavior([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Const, Value] DOMString FREE_GetTypeOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+    [Value] VectorString FREE_GetBehaviorsOfObject([Const, Ref] Layout layout, [Const] DOMString name, boolean searchInGroups);
+
+    //Inherited from gd::ObjectsContainer
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    unsigned long GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
+    void MoveObjectToAnotherContainer([Const] DOMString name, [Ref] ObjectsContainer newObjectsContainer, unsigned long newPosition);
+    unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
+};
+
+interface ExtensionProperties {
+    [Const, Ref] DOMString GetValue([Const] DOMString extension, [Const] DOMString property);
+    void SetValue([Const] DOMString extension, [Const] DOMString property, [Const] DOMString newValue);
+    boolean HasProperty([Const] DOMString extension, [Const] DOMString property);
+    [Value] MapStringPropertyDescriptor GetAllExtensionProperties([Const] DOMString extension, [Ref] Project project);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface Behavior {
+    void Behavior();
+
+    Behavior Clone();
+    [Const, Ref] DOMString GetTypeName();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Const, Ref] SerializerElement behaviorContent);
+    boolean UpdateProperty([Ref] SerializerElement behaviorContent, [Const] DOMString name, [Const] DOMString value);
+    void InitializeContent([Ref] SerializerElement behaviorContent);
+};
+
+[JSImplementation=Behavior]
+interface BehaviorJsImplementation {
+    void BehaviorJsImplementation();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Const, Ref] SerializerElement behaviorContent);
+    boolean UpdateProperty([Ref] SerializerElement behaviorContent, [Const] DOMString name, [Const] DOMString value);
+    void InitializeContent([Ref] SerializerElement behaviorContent);
+};
+
+interface BehaviorContent {
+    void BehaviorContent([Const] DOMString name, [Const] DOMString type);
+
+    BehaviorContent Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetTypeName();
+    [Ref] SerializerElement GetContent();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface BehaviorsSharedData {
+    void BehaviorsSharedData();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Const, Ref] SerializerElement behaviorSharedDataContent);
+    boolean UpdateProperty([Ref] SerializerElement behaviorSharedDataContent, [Const] DOMString name, [Const] DOMString value);
+    void InitializeContent([Ref] SerializerElement behaviorSharedDataContent);
+};
+
+[JSImplementation=BehaviorsSharedData]
+interface BehaviorSharedDataJsImplementation {
+    void BehaviorSharedDataJsImplementation();
+
+    [Value] MapStringPropertyDescriptor GetProperties([Const, Ref] SerializerElement behaviorSharedDataContent);
+    boolean UpdateProperty([Ref] SerializerElement behaviorSharedDataContent, [Const] DOMString name, [Const] DOMString value);
+    void InitializeContent([Ref] SerializerElement behaviorSharedDataContent);
+};
+
+interface gdObject {
+    // /!\ We need to call it gdObject to avoid messing up with javascript Object
+    //     global in glue.js!
+    void gdObject([Const] DOMString name);
+    [Value] UniquePtrObject Clone();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    void SetTags([Const] DOMString tags);
+    [Const, Ref] DOMString GetTags();
+
+    [Value] MapStringPropertyDescriptor GetProperties();
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value);
+
+    [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
+    boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
+
+    void ExposeResources([Ref] ArbitraryResourceWorker worker);
+
+    [Ref] VariablesContainer GetVariables();
+    [Ref] EffectsContainer GetEffects();
+    [Value] VectorString GetAllBehaviorNames();
+    boolean HasBehaviorNamed([Const] DOMString name);
+    BehaviorContent AddNewBehavior([Ref] Project project, [Const] DOMString type, [Const] DOMString name);
+    [Ref] BehaviorContent GetBehavior([Const] DOMString name);
+    void RemoveBehavior([Const] DOMString name);
+    boolean RenameBehavior([Const] DOMString oldName, [Const] DOMString name);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface UniquePtrObject {
+    gdObject get();
+    gdObject release();
+};
+
+[JSImplementation=gdObject]
+interface ObjectJsImplementation {
+    void ObjectJsImplementation();
+    [Value] UniquePtrObject Clone();
+
+    [Value] MapStringPropertyDescriptor GetProperties();
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value);
+
+    [Value] MapStringPropertyDescriptor GetInitialInstanceProperties([Const, Ref] InitialInstance instance, [Ref] Project project, [Ref] Layout scene);
+    boolean UpdateInitialInstanceProperty([Ref] InitialInstance instance, [Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout scene);
+
+    [Const, Ref] DOMString GetRawJSONContent();
+    [Ref] ObjectJsImplementation SetRawJSONContent([Const] DOMString newContent);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
+    // Not exposed as protected:
+    // void DoSerializeTo([Ref] SerializerElement element);
+    // void DoUnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface Layout {
+    void Layout();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorRed();
+    unsigned long GetBackgroundColorGreen();
+    unsigned long GetBackgroundColorBlue();
+    void SetWindowDefaultTitle([Const] DOMString name);
+    [Const, Ref] DOMString GetWindowDefaultTitle();
+    [Ref] InitialInstancesContainer GetInitialInstances();
+    [Ref] VariablesContainer GetVariables();
+    [Ref] EventsList GetEvents();
+
+    void UpdateBehaviorsSharedData([Ref] Project project);
+    [Value] VectorString GetAllBehaviorSharedDataNames();
+    boolean HasBehaviorSharedData([Const] DOMString behaviorName);
+    [Ref] BehaviorContent GetBehaviorSharedData([Const] DOMString behaviorName);
+
+    void InsertNewLayer([Const] DOMString name, unsigned long position);
+    void InsertLayer([Const, Ref] Layer layer, unsigned long position);
+    [Ref] Layer GetLayer([Const] DOMString name);
+    [Ref] Layer GetLayerAt(unsigned long pos);
+    boolean HasLayerNamed([Const] DOMString name);
+    void RemoveLayer([Const] DOMString name);
+    unsigned long GetLayersCount();
+    void SwapLayers(unsigned long firstLayerIndex, unsigned long secondLayerIndex);
+    void MoveLayer(unsigned long oldIndex, unsigned long newIndex);
+    void SerializeLayersTo([Ref] SerializerElement element);
+    void UnserializeLayersFrom([Const, Ref] SerializerElement element);
+
+    [Ref] EditorSettings GetAssociatedEditorSettings();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
+    void SetStopSoundsOnStartup(boolean enable);
+    boolean StopSoundsOnStartup();
+
+    //Inherited from gd::ObjectsContainer
+    [Ref] gdObject InsertNewObject([Ref] Project project, [Const] DOMString type, [Const] DOMString name, unsigned long pos);
+    [Ref] gdObject InsertObject([Const, Ref] gdObject obj, unsigned long pos);
+    boolean HasObjectNamed([Const] DOMString name);
+    [Ref] gdObject GetObject([Const] DOMString name);
+    [Ref] gdObject GetObjectAt(unsigned long pos);
+    unsigned long GetObjectPosition([Const] DOMString name);
+    void RemoveObject([Const] DOMString name);
+    void SwapObjects(unsigned long first, unsigned long second);
+    void MoveObject(unsigned long oldIndex, unsigned long newIndex);
+    void MoveObjectToAnotherContainer([Const] DOMString name, [Ref] ObjectsContainer newObjectsContainer, unsigned long newPosition);
+    unsigned long GetObjectsCount();
+
+    [Ref] ObjectGroupsContainer GetObjectGroups();
+};
+
+interface ExternalEvents {
+    void ExternalEvents();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+
+    [Const, Ref] DOMString GetAssociatedLayout();
+    void SetAssociatedLayout([Const] DOMString name);
+
+    [Ref] EventsList GetEvents();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface ExternalLayout {
+    void ExternalLayout();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+
+    void SetAssociatedLayout([Const] DOMString name);
+    [Const, Ref] DOMString GetAssociatedLayout();
+
+    [Ref] InitialInstancesContainer GetInitialInstances();
+    [Ref] EditorSettings GetAssociatedEditorSettings();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface Effect {
+  void Effect();
+
+  void SetName([Const] DOMString name_);
+  [Const, Ref] DOMString GetName();
+
+  void SetEffectType([Const] DOMString effectType_);
+  [Const, Ref] DOMString GetEffectType();
+
+  void SetDoubleParameter([Const] DOMString name, double value);
+  double GetDoubleParameter([Const] DOMString name);
+  void SetStringParameter([Const] DOMString name, [Const] DOMString value);
+  [Const, Ref] DOMString GetStringParameter([Const] DOMString name);
+  void SetBooleanParameter([Const] DOMString name, boolean value);
+  boolean GetBooleanParameter([Const] DOMString name);
+  [Const, Ref] MapStringDouble GetAllDoubleParameters();
+  [Const, Ref] MapStringString GetAllStringParameters();
+  [Const, Ref] MapStringBoolean GetAllBooleanParameters();
+  void ClearParameters();
+
+  void SerializeTo([Ref] SerializerElement element);
+  void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface EffectsContainer {
+  void EffectsContainer();
+
+  boolean HasEffectNamed([Const] DOMString name);
+  [Ref] Effect GetEffect([Const] DOMString name);
+  [Ref] Effect GetEffectAt(unsigned long index);
+  unsigned long GetEffectPosition([Const] DOMString name);
+  unsigned long GetEffectsCount();
+  [Ref] Effect InsertNewEffect([Const] DOMString name, unsigned long position);
+  void InsertEffect([Const, Ref] Effect theEffect, unsigned long position);
+  void RemoveEffect([Const] DOMString name);
+  void SwapEffects(unsigned long firstEffectIndex, unsigned long secondEffectIndex);
+
+  void SerializeTo([Ref] SerializerElement element);
+  void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface Layer {
+    void Layer();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetVisibility(boolean visible);
+    boolean GetVisibility();
+    void SetLightingLayer(boolean lightingLayer);
+    boolean IsLightingLayer();
+    void SetFollowBaseLayerCamera(boolean followBaseLayerCamera);
+    boolean IsFollowingBaseLayerCamera();
+
+    void SetAmbientLightColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetAmbientLightColorRed();
+    unsigned long GetAmbientLightColorGreen();
+    unsigned long GetAmbientLightColorBlue();
+
+    [Ref] EffectsContainer GetEffects();
+
+    // Note that for now, cameras are not used in the editor (and not supported in the game engine).
+    // Just exposing the count to ensure we can test it.
+    unsigned long GetCameraCount();
+    void SetCameraCount(unsigned long cameraCount);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface PropertyDescriptor {
+    void PropertyDescriptor([Const] DOMString propValue);
+
+    [Ref] PropertyDescriptor SetValue([Const] DOMString value);
+    [Const, Ref] DOMString GetValue();
+    [Ref] PropertyDescriptor SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    [Ref] PropertyDescriptor SetLabel([Const] DOMString label);
+    [Const, Ref] DOMString GetLabel();
+    [Ref] PropertyDescriptor SetDescription([Const] DOMString label);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] PropertyDescriptor AddExtraInfo([Const] DOMString type);
+    [Ref] PropertyDescriptor SetExtraInfo([Const, Ref] VectorString info);
+    [Ref] VectorString GetExtraInfo();
+    [Ref] PropertyDescriptor SetHidden(boolean enable);
+    boolean IsHidden();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+    void SerializeValuesTo([Ref] SerializerElement element);
+    void UnserializeValuesFrom([Const, Ref] SerializerElement element);
+};
+
+interface NamedPropertyDescriptor {
+    void NamedPropertyDescriptor();
+
+    [Ref] PropertyDescriptor SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+};
+NamedPropertyDescriptor implements PropertyDescriptor;
+
+interface MapStringPropertyDescriptor {
+    void MapStringPropertyDescriptor();
+
+    [Ref] PropertyDescriptor MAP_getOrCreate([Const] DOMString name);
+    [Ref] PropertyDescriptor MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] PropertyDescriptor prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface MapStringSerializerValue {
+    void MapStringSerializerValue();
+
+    [Ref] SerializerValue MAP_getOrCreate([Const] DOMString name);
+    [Ref] SerializerValue MAP_get([Const] DOMString name);
+    void MAP_set([Const] DOMString name, [Const, Ref] SerializerValue prop);
+    boolean MAP_has([Const] DOMString name);
+    [Value] VectorString MAP_keys();
+};
+
+interface VectorPairStringSharedPtrSerializerElement {
+    unsigned long size();
+    [Const, Ref] DOMString WRAPPED_GetString(unsigned long id);
+    [Value] SharedPtrSerializerElement WRAPPED_GetSharedPtrSerializerElement(unsigned long id);
+};
+
+interface Resource {
+    void Resource();
+
+    Resource Clone();
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetKind([Const] DOMString kind);
+    [Const, Ref] DOMString GetKind();
+    boolean IsUserAdded();
+    void SetUserAdded(boolean yes);
+    boolean UseFile();
+    void SetFile([Const] DOMString file);
+    [Const, Ref] DOMString GetFile();
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
+    void SetOrigin([Const] DOMString originName, [Const] DOMString originIdentifier);
+    [Const, Ref] DOMString GetOriginName();
+    [Const, Ref] DOMString GetOriginIdentifier();
+
+    [Value] MapStringPropertyDescriptor GetProperties();
+    boolean UpdateProperty([Const] DOMString name, [Const] DOMString value);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface ResourcesManager {
+    void ResourcesManager();
+
+    [Value] VectorString GetAllResourceNames();
+    boolean HasResource([Const] DOMString name);
+    [Const, Ref] Resource GetResource([Const] DOMString name);
+    [Const, Ref] DOMString GetResourceNameWithOrigin([Const] DOMString originName, [Const] DOMString originIdentifier);
+    [Const, Ref] DOMString GetResourceNameWithFile([Const] DOMString file);
+    boolean AddResource([Const, Ref] Resource res);
+    void RemoveResource([Const] DOMString name);
+    void RenameResource([Const] DOMString oldName, [Const] DOMString name);
+    unsigned long GetResourcePosition([Const] DOMString name);
+    boolean MoveResourceUpInList([Const] DOMString oldName);
+    boolean MoveResourceDownInList([Const] DOMString oldName);
+    void MoveResource(unsigned long oldIndex, unsigned long newIndex);
+};
+
+interface ImageResource {
+    void ImageResource();
+
+    boolean IsSmooth();
+    void SetSmooth(boolean enable);
+};
+ImageResource implements Resource;
+
+interface AudioResource {
+    void AudioResource();
+};
+AudioResource implements Resource;
+
+interface FontResource {
+    void FontResource();
+};
+FontResource implements Resource;
+
+interface BitmapFontResource {
+    void BitmapFontResource();
+};
+BitmapFontResource implements Resource;
+
+interface VideoResource {
+    void VideoResource();
+};
+VideoResource implements Resource;
+
+interface JsonResource {
+    void JsonResource();
+};
+JsonResource implements Resource;
+
+interface InitialInstance {
+    void InitialInstance();
+
+    void SetObjectName([Const] DOMString name);
+    [Const, Ref] DOMString GetObjectName();
+
+    float GetX();
+    void SetX(float x);
+    float GetY();
+    void SetY(float y);
+    float GetAngle();
+    void SetAngle(float angle);
+    boolean IsLocked();
+    void SetLocked(boolean lock);
+    long GetZOrder();
+    void SetZOrder(long zOrder);
+    [Const, Ref] DOMString GetLayer();
+    void SetLayer([Const] DOMString layer);
+
+    void SetHasCustomSize(boolean enable);
+    boolean HasCustomSize();
+
+    void SetCustomWidth(float width);
+    float GetCustomWidth();
+    void SetCustomHeight(float height);
+    float GetCustomHeight();
+
+    [Ref] InitialInstance ResetPersistentUuid();
+
+    void UpdateCustomProperty([Const] DOMString name, [Const] DOMString value, [Ref] Project project, [Ref] Layout layout);
+    [Value] MapStringPropertyDescriptor GetCustomProperties([Ref] Project project, [Ref] Layout layout);
+    float GetRawDoubleProperty([Const] DOMString name);
+    [Const, Ref] DOMString GetRawStringProperty([Const] DOMString name);
+    void SetRawDoubleProperty([Const] DOMString name, float value);
+    void SetRawStringProperty([Const] DOMString name, [Const] DOMString value);
+
+    [Ref] VariablesContainer GetVariables();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface InitialInstancesContainer {
+    void InitialInstancesContainer();
+    InitialInstancesContainer Clone();
+
+    unsigned long GetInstancesCount();
+
+    void IterateOverInstances([Ref] InitialInstanceFunctor func);
+    void IterateOverInstancesWithZOrdering([Ref] InitialInstanceFunctor func, [Const] DOMString layer);
+    void MoveInstancesToLayer([Const] DOMString fromLayer, [Const] DOMString toLayer);
+    void RemoveAllInstancesOnLayer([Const] DOMString layer);
+    void RemoveInitialInstancesOfObject([Const] DOMString obj);
+    boolean HasInstancesOfObject([Const] DOMString objectName);
+    boolean SomeInstancesAreOnLayer([Const] DOMString layer);
+    void RenameInstancesOfObject([Const] DOMString oldName, [Const] DOMString newName);
+    void RemoveInstance([Const, Ref] InitialInstance inst);
+
+    [Ref] InitialInstance InsertNewInitialInstance();
+    [Ref] InitialInstance InsertInitialInstance([Const, Ref] InitialInstance inst);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface HighestZOrderFinder {
+    void HighestZOrderFinder();
+
+    void RestrictSearchToLayer([Const] DOMString layer);
+    long GetHighestZOrder();
+    long GetLowestZOrder();
+    unsigned long GetInstancesCount();
+};
+
+interface InitialInstanceFunctor {};
+interface InitialInstanceJSFunctorWrapper {};
+[JSImplementation=InitialInstanceJSFunctorWrapper]
+interface InitialInstanceJSFunctor {
+    void InitialInstanceJSFunctor();
+
+    void invoke(InitialInstance instance);
+};
+
+interface SerializerValue {
+    boolean GetBool();
+    [Const, Value] DOMString GetString();
+    long GetInt();
+    float GetDouble();
+
+    [Const, Value] DOMString GetRawString();
+
+    boolean IsBoolean();
+    boolean IsString();
+    boolean IsInt();
+    boolean IsDouble();
+};
+
+interface SerializerElement {
+    void SerializerElement();
+
+    // Setting and reading the value:
+    void SetBoolValue(boolean value);
+    void SetStringValue([Const] DOMString value);
+    void SetIntValue(long value);
+    void SetDoubleValue(double value);
+
+    [Const, Ref] SerializerValue GetValue();
+    boolean GetBoolValue();
+    [Const, Value] DOMString GetStringValue();
+    long GetIntValue();
+    double GetDoubleValue();
+
+    boolean IsValueUndefined();
+
+    // Setting and reading attributes (will be serialized as children in JSON,
+    // but the setter/getter are faster to type and offer better semantic compared
+    // to AddChild/GetChild):
+    [Ref] SerializerElement SetBoolAttribute([Const] DOMString name, boolean value);
+    [Ref] SerializerElement SetStringAttribute([Const] DOMString name, [Const] DOMString value);
+    [Ref] SerializerElement SetIntAttribute([Const] DOMString name, long value);
+    [Ref] SerializerElement SetDoubleAttribute([Const] DOMString name, double value);
+
+    boolean GetBoolAttribute([Const] DOMString name);
+    [Const, Value] DOMString GetStringAttribute([Const] DOMString name);
+    long GetIntAttribute([Const] DOMString name);
+    double GetDoubleAttribute([Const] DOMString name);
+
+    // Use the element as an array:
+    void ConsiderAsArray();
+    boolean ConsideredAsArray();
+
+    // Use the element as an object ("associative array", "dictionary") or array:
+    [Ref] SerializerElement AddChild([Const] DOMString str);
+    [Ref] SerializerElement GetChild([Const] DOMString str);
+    void WRAPPED_SetChild([Const] DOMString str, [Const, Ref] SerializerElement element);
+    boolean HasChild([Const] DOMString str);
+
+    [Const, Ref] VectorPairStringSharedPtrSerializerElement GetAllChildren();
+    [Const, Ref] MapStringSerializerValue GetAllAttributes();
+};
+
+interface SharedPtrSerializerElement {
+    SerializerElement get();
+    void reset();
+};
+
+interface Serializer {
+    [Const, Value] DOMString STATIC_ToJSON([Const, Ref] SerializerElement element);
+    [Value] SerializerElement STATIC_FromJSON([Const] DOMString json);
+};
+
+interface InstructionsList {
+    void InstructionsList();
+
+    [Ref] Instruction Insert([Const, Ref] Instruction instr, unsigned long pos);
+    void InsertInstructions([Const, Ref] InstructionsList list, unsigned long begin, unsigned long end, unsigned long pos);
+    unsigned long size();
+    void WRAPPED_set(unsigned long index, [Const, Ref] Instruction instr);
+    boolean Contains([Const, Ref] Instruction instr/*, boolean recursive*/); //TODO
+    [Ref] Instruction Get(unsigned long index);
+    void Remove([Const, Ref] Instruction instr);
+    void RemoveAt(unsigned long index);
+    void Clear();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface Instruction {
+    void Instruction();
+
+    Instruction CLONE_Instruction();
+    void SetType([Const] DOMString type);
+    [Const, Ref] DOMString GetType();
+    void SetInverted(boolean inverted);
+    boolean IsInverted();
+    void SetParameter(unsigned long id, [Const] DOMString value);
+    [Const, Ref] DOMString GetParameter(unsigned long id);
+    void SetParametersCount(unsigned long count);
+    unsigned long GetParametersCount();
+    [Ref] InstructionsList GetSubInstructions();
+};
+
+interface VectorPairStringTextFormatting {
+    unsigned long size();
+    [Const, Ref] DOMString WRAPPED_GetString(unsigned long id);
+    [Ref] TextFormatting WRAPPED_GetTextFormatting(unsigned long id);
+};
+
+interface TextFormatting {
+    unsigned long GetUserData();
+};
+
+interface InstructionSentenceFormatter {
+    InstructionSentenceFormatter STATIC_Get();
+    [Value] VectorPairStringTextFormatting GetAsFormattedText([Const, Ref] Instruction instr, [Const, Ref] InstructionMetadata metadat);
+};
+
+//TODO: This should be renamed to InstructionCodeGenerationInformation
+[Prefix="gd::InstructionMetadata::"]
+interface ExtraInformation {
+    [Ref] ExtraInformation SetFunctionName([Const] DOMString functionName_);
+    [Ref] ExtraInformation SetManipulatedType([Const] DOMString type_);
+    [Ref] ExtraInformation SetGetter([Const] DOMString getter);
+    [Ref] ExtraInformation SetMutators([Const, Ref] MapStringString mutators);
+    [Ref] ExtraInformation SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ExtraInformation AddIncludeFile([Const] DOMString includeFile);
+};
+
+interface ExpressionCodeGenerationInformation {
+    [Ref] ExpressionCodeGenerationInformation SetFunctionName([Const] DOMString functionName);
+    [Ref] ExpressionCodeGenerationInformation SetStatic();
+    [Ref] ExpressionCodeGenerationInformation SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ExpressionCodeGenerationInformation AddIncludeFile([Const] DOMString includeFile);
+};
+
+interface InstructionMetadata {
+    void InstructionMetadata(); // For tests only.
+
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetSentence();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetIconFilename();
+    [Const, Ref] DOMString GetSmallIconFilename();
+    [Const, Ref] DOMString GetHelpPath();
+    boolean CanHaveSubInstructions();
+    [Ref] ParameterMetadata GetParameter(unsigned long index);
+    unsigned long GetParametersCount();
+    [Const, Ref] VectorParameterMetadata GetParameters();
+    long GetUsageComplexity();
+    boolean IsHidden();
+    boolean IsPrivate();
+
+    [Ref] InstructionMetadata SetCanHaveSubInstructions();
+    [Ref] InstructionMetadata SetHelpPath([Const] DOMString helpPath);
+    [Ref] InstructionMetadata SetHidden();
+    [Ref] InstructionMetadata SetPrivate();
+    [Ref] InstructionMetadata AddParameter([Const] DOMString type,
+                                        [Const] DOMString description,
+                                        [Const] DOMString optionalObjectType,
+                                        boolean parameterIsOptional);
+    [Ref] InstructionMetadata AddCodeOnlyParameter(
+        [Const] DOMString type, [Const] DOMString supplementaryInformation);
+    [Ref] InstructionMetadata SetDefaultValue([Const] DOMString defaultValue);
+    [Ref] InstructionMetadata SetParameterLongDescription([Const] DOMString longDescription);
+    [Ref] InstructionMetadata SetParameterExtraInfo([Const] DOMString extraInfo);
+
+    [Ref] InstructionMetadata UseStandardOperatorParameters([Const] DOMString type);
+    [Ref] InstructionMetadata UseStandardRelationalOperatorParameters([Const] DOMString type);
+
+    [Ref] InstructionMetadata MarkAsSimple();
+    [Ref] InstructionMetadata MarkAsAdvanced();
+    [Ref] InstructionMetadata MarkAsComplex();
+
+    [Ref] ExtraInformation GetCodeExtraInformation();
+};
+
+interface ExpressionMetadata {
+    void ExpressionMetadata(
+        [Const] DOMString returnType,
+        [Const] DOMString extensionNamespace,
+        [Const] DOMString name,
+        [Const] DOMString fullname,
+        [Const] DOMString description,
+        [Const] DOMString group,
+        [Const] DOMString smallicon);
+
+    [Const, Ref] DOMString GetReturnType();
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetSmallIconFilename();
+    boolean IsShown();
+    boolean IsPrivate();
+    [Ref] ParameterMetadata GetParameter(unsigned long id);
+    unsigned long GetParametersCount();
+    [Const, Ref] VectorParameterMetadata GetParameters();
+
+    [Ref] ExpressionMetadata SetHidden();
+    [Ref] ExpressionMetadata SetPrivate();
+    [Ref] ExpressionMetadata AddParameter(
+        [Const] DOMString type,
+        [Const] DOMString description,
+        [Const] DOMString optionalObjectType,
+        boolean parameterIsOptional);
+    [Ref] ExpressionMetadata AddCodeOnlyParameter(
+        [Const] DOMString type, [Const] DOMString supplementaryInformation);
+    [Ref] ExpressionMetadata SetDefaultValue([Const] DOMString defaultValue);
+    [Ref] ExpressionMetadata SetParameterLongDescription([Const] DOMString longDescription);
+
+    [Ref] ExpressionCodeGenerationInformation GetCodeExtraInformation();
+};
+
+interface MultipleInstructionMetadata {
+    [Ref] MultipleInstructionMetadata AddParameter([Const] DOMString type,
+                                        [Const] DOMString description,
+                                        [Const] DOMString optionalObjectType,
+                                        boolean parameterIsOptional);
+    [Ref] MultipleInstructionMetadata AddCodeOnlyParameter(
+        [Const] DOMString type, [Const] DOMString supplementaryInformation);
+    [Ref] MultipleInstructionMetadata SetDefaultValue([Const] DOMString defaultValue);
+    [Ref] MultipleInstructionMetadata SetParameterLongDescription([Const] DOMString longDescription);
+
+    [Ref] MultipleInstructionMetadata UseStandardParameters([Const] DOMString type);
+
+    [Ref] MultipleInstructionMetadata SetHidden();
+
+    [Ref] MultipleInstructionMetadata SetFunctionName([Const] DOMString functionName);
+    [Ref] MultipleInstructionMetadata SetGetter([Const] DOMString getter);
+
+    [Ref] MultipleInstructionMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] MultipleInstructionMetadata AddIncludeFile([Const] DOMString includeFile);
+
+    [Ref] MultipleInstructionMetadata MarkAsSimple();
+    [Ref] MultipleInstructionMetadata MarkAsAdvanced();
+    [Ref] MultipleInstructionMetadata MarkAsComplex();
+};
+
+interface DependencyMetadata {
+    void DependencyMetadata();
+
+    [Const, Ref] DOMString GetName();
+    [Ref] DependencyMetadata SetName([Const] DOMString name_);
+    [Const, Ref] DOMString GetExportName();
+    [Ref] DependencyMetadata SetExportName([Const] DOMString exportName_);
+    [Const, Ref] DOMString GetVersion();
+    [Ref] DependencyMetadata SetVersion([Const] DOMString version_);
+    [Const, Ref] DOMString GetDependencyType();
+    [Ref] DependencyMetadata SetDependencyType([Const] DOMString dependencyType_);
+    [Ref] DependencyMetadata SetExtraSetting([Const] DOMString settingName, [Const, Ref] PropertyDescriptor settingValue);
+    [Const, Ref] MapStringPropertyDescriptor GetAllExtraSettings();
+
+    [Ref] DependencyMetadata OnlyIfSomeExtraSettingsNonEmpty();
+    [Ref] DependencyMetadata OnlyIfOtherDependencyIsExported([Const] DOMString otherDependency);
+
+    void CopyFrom([Const, Ref] DependencyMetadata dependencyMetadata);
+};
+
+interface ParameterMetadata {
+    void ParameterMetadata();
+
+    [Const, Ref] DOMString GetType();
+    [Ref] ParameterMetadata SetType([Const] DOMString type_);
+    [Const, Ref] DOMString GetName();
+    [Ref] ParameterMetadata SetName([Const] DOMString name_);
+    [Const, Ref] DOMString GetExtraInfo();
+    [Ref] ParameterMetadata SetExtraInfo([Const] DOMString extraInfo_);
+    boolean IsOptional();
+    [Ref] ParameterMetadata SetOptional(boolean optional_);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] ParameterMetadata SetDescription([Const] DOMString description_);
+    [Const, Ref] DOMString GetLongDescription();
+    [Ref] ParameterMetadata SetLongDescription([Const] DOMString longDescription_);
+    boolean IsCodeOnly();
+    [Ref] ParameterMetadata SetCodeOnly(boolean codeOnly_);
+    [Const, Ref] DOMString GetDefaultValue();
+    [Ref] ParameterMetadata SetDefaultValue([Const] DOMString defaultValue_);
+    boolean STATIC_IsObject([Const] DOMString param);
+    boolean STATIC_IsBehavior([Const] DOMString param);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+interface VectorParameterMetadata {
+    void VectorParameterMetadata();
+
+    void push_back([Const, Ref] ParameterMetadata parameterMetadata);
+    unsigned long size();
+    [Ref] ParameterMetadata at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] ParameterMetadata parameterMetadata);
+    void FREE_removeFromVectorParameterMetadata(unsigned long index);
+    void FREE_swapInVectorParameterMetadata(unsigned long oldIndex, unsigned long newIndex);
+    void clear();
+};
+
+interface ParameterMetadataTools {
+    void STATIC_ParametersToObjectsContainer([Ref] Project project, [Const, Ref] VectorParameterMetadata parameters, [Ref] ObjectsContainer outputObjectsContainer);
+    unsigned long STATIC_GetObjectParameterIndexFor([Const, Ref] VectorParameterMetadata parameters, unsigned long parameterIndex);
+};
+
+interface EventsFunctionTools {
+    void STATIC_FreeEventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputGlobalObjectsContainer, [Ref] ObjectsContainer outputObjectsContainer);
+    void STATIC_BehaviorEventsFunctionToObjectsContainer([Ref] Project project, [Const, Ref] EventsBasedBehavior eventsBasedBehavior, [Const, Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer outputGlobalObjectsContainer, [Ref] ObjectsContainer outputObjectsContainer);
+};
+
+interface ObjectMetadata {
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetIconFilename();
+    [Const, Ref] DOMString GetHelpPath();
+
+    [Const, Ref] InstructionMetadata AddScopedCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddScopedAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+
+    // Prefer using AddScopedCondition, or even better: AddExpressionAndCondition.
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    // Prefer using AddScopedAction, or even better: AddExpressionAndConditionAndAction.
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
+
+    [Value] MultipleInstructionMetadata AddExpressionAndCondition(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Value] MultipleInstructionMetadata AddExpressionAndConditionAndAction(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Ref] ObjectMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] ObjectMetadata AddIncludeFile([Const] DOMString includeFile);
+};
+
+interface BehaviorMetadata {
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDefaultName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
+    [Const, Ref] DOMString GetIconFilename();
+    [Const, Ref] DOMString GetHelpPath();
+
+    [Const, Ref] InstructionMetadata AddScopedCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddScopedAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+
+    // Prefer using AddScopedCondition, or even better: AddExpressionAndCondition.
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    // Prefer using AddScopedAction, or even better: AddExpressionAndConditionAndAction.
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
+
+    [Value] MultipleInstructionMetadata AddExpressionAndCondition(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Value] MultipleInstructionMetadata AddExpressionAndConditionAndAction(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Ref] InstructionMetadata AddDuplicatedAction(
+        [Const] DOMString newActionName,
+        [Const] DOMString copiedActionName);
+    [Ref] InstructionMetadata AddDuplicatedCondition(
+        [Const] DOMString newConditionName,
+        [Const] DOMString copiedConditionName);
+    [Ref] ExpressionMetadata AddDuplicatedExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+    [Ref] ExpressionMetadata AddDuplicatedStrExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+
+    [Ref] BehaviorMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] BehaviorMetadata AddIncludeFile([Const] DOMString includeFile);
+
+    [Ref] BehaviorMetadata SetObjectType([Const] DOMString objectType);
+    [Const, Ref] DOMString GetObjectType();
+
+    [Ref] Behavior Get();
+    BehaviorsSharedData GetSharedDataInstance();
+};
+
+interface EffectMetadata {
+    [Ref] EffectMetadata SetFullName([Const] DOMString fullName);
+    [Ref] EffectMetadata SetDescription([Const] DOMString description);
+    [Ref] EffectMetadata SetHelpPath([Const] DOMString helpPath);
+    [Ref] EffectMetadata SetIncludeFile([Const] DOMString includeFile);
+    [Ref] EffectMetadata AddIncludeFile([Const] DOMString includeFile);
+    [Ref] EffectMetadata MarkAsNotWorkingForObjects();
+
+    [Const, Ref] DOMString GetType();
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetHelpPath();
+    boolean IsMarkedAsNotWorkingForObjects();
+
+    [Ref] MapStringPropertyDescriptor GetProperties();
+};
+
+interface EventMetadata {
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetGroup();
+};
+
+interface PlatformExtension {
+    void PlatformExtension();
+    [Ref] PlatformExtension SetExtensionInformation([Const] DOMString name,
+                                [Const] DOMString fullname,
+                                [Const] DOMString description,
+                                [Const] DOMString author,
+                                [Const] DOMString license);
+    [Ref] PlatformExtension SetExtensionHelpPath([Const] DOMString helpPath);
+    [Ref] PlatformExtension SetIconUrl([Const] DOMString iconUrl);
+    void MarkAsDeprecated();
+
+    [Value] MultipleInstructionMetadata AddExpressionAndCondition(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Value] MultipleInstructionMetadata AddExpressionAndConditionAndAction(
+                                        [Const] DOMString type,
+                                        [Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentenceName,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon);
+
+    [Const, Ref] InstructionMetadata AddCondition([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString sentence,
+                                        [Const] DOMString group,
+                                        [Const] DOMString icon,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] InstructionMetadata AddAction([Const] DOMString name,
+                                     [Const] DOMString fullname,
+                                     [Const] DOMString description,
+                                     [Const] DOMString sentence,
+                                     [Const] DOMString group,
+                                     [Const] DOMString icon,
+                                     [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddExpression([Const] DOMString name,
+                                        [Const] DOMString fullname,
+                                        [Const] DOMString description,
+                                        [Const] DOMString group,
+                                        [Const] DOMString smallicon);
+
+    [Const, Ref] ExpressionMetadata AddStrExpression([Const] DOMString name,
+                                           [Const] DOMString fullname,
+                                           [Const] DOMString description,
+                                           [Const] DOMString group,
+                                           [Const] DOMString smallicon);
+
+    [Const, Ref] DependencyMetadata AddDependency();
+
+    [Ref] BehaviorMetadata WRAPPED_AddBehavior([Const] DOMString name,
+        [Const] DOMString fullname,
+        [Const] DOMString defaultName,
+        [Const] DOMString description,
+        [Const] DOMString group,
+        [Const] DOMString icon24x24,
+        [Const] DOMString className,
+        Behavior instance,
+        BehaviorsSharedData sharedDatasInstance);
+
+    [Ref] ObjectMetadata WRAPPED_AddObject([Const] DOMString name,
+        [Const] DOMString fullname,
+        [Const] DOMString description,
+        [Const] DOMString icon24x24,
+        gdObject instance);
+
+    [Ref] EffectMetadata AddEffect([Const] DOMString name);
+
+    [Ref] PropertyDescriptor RegisterProperty([Const] DOMString name);
+
+    [Const, Ref] DOMString GetFullName();
+    [Const, Ref] DOMString GetName();
+    [Const, Ref] DOMString GetDescription();
+    [Const, Ref] DOMString GetAuthor();
+    [Const, Ref] DOMString GetLicense();
+    [Const, Ref] DOMString GetHelpPath();
+    [Const, Ref] DOMString GetIconUrl();
+    boolean IsBuiltin();
+    [Const, Ref] DOMString GetNameSpace();
+
+    [Ref] InstructionMetadata AddDuplicatedAction(
+        [Const] DOMString newActionName,
+        [Const] DOMString copiedActionName);
+    [Ref] InstructionMetadata AddDuplicatedCondition(
+        [Const] DOMString newConditionName,
+        [Const] DOMString copiedConditionName);
+    [Ref] ExpressionMetadata AddDuplicatedExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+    [Ref] ExpressionMetadata AddDuplicatedStrExpression(
+        [Const] DOMString newExpressionName,
+        [Const] DOMString copiedExpressionName);
+
+    [Value] VectorString GetExtensionObjectsTypes();
+    [Value] VectorString GetBehaviorsTypes();
+    [Value] VectorString GetExtensionEffectTypes();
+    [Ref] ObjectMetadata GetObjectMetadata([Const] DOMString type);
+    [Ref] BehaviorMetadata GetBehaviorMetadata([Const] DOMString type);
+    [Ref] EffectMetadata GetEffectMetadata([Const] DOMString type);
+    [Ref] MapStringEventMetadata GetAllEvents();
+    [Ref] MapStringInstructionMetadata GetAllActions();
+    [Ref] MapStringInstructionMetadata GetAllConditions();
+    [Ref] MapStringExpressionMetadata GetAllExpressions();
+    [Ref] MapStringExpressionMetadata GetAllStrExpressions();
+    [Ref] MapStringInstructionMetadata GetAllActionsForObject([Const] DOMString objectType);
+    [Ref] MapStringInstructionMetadata GetAllConditionsForObject([Const] DOMString objectType);
+    [Ref] MapStringExpressionMetadata GetAllExpressionsForObject([Const] DOMString objectType);
+    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForObject([Const] DOMString objectType);
+    [Ref] MapStringInstructionMetadata GetAllActionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringInstructionMetadata GetAllConditionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllExpressionsForBehavior([Const] DOMString autoType);
+    [Ref] MapStringExpressionMetadata GetAllStrExpressionsForBehavior([Const] DOMString autoType);
+
+    [Ref] MapStringPropertyDescriptor GetAllProperties();
+    [Ref] VectorDependencyMetadata GetAllDependencies();
+
+    [Const, Value] DOMString STATIC_GetNamespaceSeparator();
+};
+
+interface EventsList {
+    void EventsList();
+
+    [Ref] BaseEvent InsertEvent([Const, Ref] BaseEvent event, unsigned long pos);
+    [Ref] BaseEvent InsertNewEvent([Ref] Project project, [Const] DOMString type, unsigned long pos);
+    void InsertEvents([Const, Ref] EventsList list, unsigned long begin, unsigned long end, unsigned long pos);
+    [Ref] BaseEvent GetEventAt(unsigned long pos);
+    void RemoveEventAt(unsigned long pos);
+    void RemoveEvent([Const, Ref] BaseEvent event);
+    unsigned long GetEventsCount();
+    boolean Contains([Const, Ref] BaseEvent event, boolean recursive);
+    boolean MoveEventToAnotherEventsList([Const, Ref] BaseEvent eventToMove, [Ref] EventsList newEventsList, unsigned long newPosition);
+    boolean IsEmpty();
+    void Clear();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+
+interface BaseEvent {
+    void BaseEvent();
+
+    BaseEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface StandardEvent {
+    void StandardEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    StandardEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface RepeatEvent {
+    void RepeatEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+    void SetRepeatExpression([Const] DOMString expr);
+    [Const, Ref] DOMString GetRepeatExpression();
+
+    //Inherited from BaseEvent:
+    RepeatEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface WhileEvent {
+    void WhileEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetWhileConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    WhileEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface ForEachEvent {
+    void ForEachEvent();
+
+    void SetObjectToPick([Const] DOMString objects);
+    [Const, Ref] DOMString GetObjectToPick();
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+
+    //Inherited from BaseEvent:
+    ForEachEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface ForEachChildVariableEvent {
+    void ForEachChildVariableEvent();
+
+    [Ref] InstructionsList GetConditions();
+    [Ref] InstructionsList GetActions();
+
+    [Const, Ref] DOMString GetIterableVariableName();
+    [Const, Ref] DOMString GetKeyIteratorVariableName();
+    [Const, Ref] DOMString GetValueIteratorVariableName();
+    void SetIterableVariableName([Const] DOMString newName);
+    void SetKeyIteratorVariableName([Const] DOMString newName);
+    void SetValueIteratorVariableName([Const] DOMString newName);
+
+    //Inherited from BaseEvent:
+    ForEachChildVariableEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface CommentEvent {
+    void CommentEvent();
+
+    [Const, Ref] DOMString GetComment();
+    void SetComment([Const] DOMString type);
+
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorRed();
+    unsigned long GetBackgroundColorGreen();
+    unsigned long GetBackgroundColorBlue();
+
+    void SetTextColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetTextColorRed();
+    unsigned long GetTextColorGreen();
+    unsigned long GetTextColorBlue();
+
+    //Inherited from BaseEvent:
+    CommentEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface GroupEvent {
+    void GroupEvent();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetBackgroundColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetBackgroundColorR();
+    unsigned long GetBackgroundColorG();
+    unsigned long GetBackgroundColorB();
+    void SetSource([Const] DOMString source);
+    [Const, Ref] DOMString GetSource();
+    [Ref] VectorString GetCreationParameters();
+    unsigned long GetCreationTimestamp();
+    void SetCreationTimestamp(unsigned long ts);
+
+    //Inherited from BaseEvent:
+    GroupEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface LinkEvent {
+    void LinkEvent();
+
+    void SetTarget([Const] DOMString name);
+    [Const, Ref] DOMString GetTarget();
+
+    long GetIncludeConfig();
+    void SetIncludeAllEvents();
+    void SetIncludeEventsGroup([Const] DOMString source);
+    [Const, Ref] DOMString GetEventsGroupName();
+    void SetIncludeStartAndEnd(unsigned long start, unsigned long end);
+    unsigned long GetIncludeStart();
+    unsigned long GetIncludeEnd();
+
+    //Inherited from BaseEvent:
+    LinkEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface EventsRemover {
+    void EventsRemover();
+
+    void AddEventToRemove([Ref] BaseEvent eventToRemove);
+    void AddInstructionToRemove([Ref] Instruction instructionToRemove);
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsListUnfolder {
+    void STATIC_UnfoldWhenContaining([Ref] EventsList list, [Const, Ref] BaseEvent eventToContain);
+};
+
+interface EventsSearchResult {
+  boolean IsEventsListValid();
+  [Const, Ref] EventsList GetEventsList();
+  unsigned long GetPositionInList();
+  boolean IsEventValid();
+  [Const, Ref] BaseEvent GetEvent();
+};
+
+interface VectorEventsSearchResult {
+    void VectorEventsSearchResult();
+
+    VectorEventsSearchResult CLONE_VectorEventsSearchResult();
+    void push_back([Const, Ref] EventsSearchResult result);
+    void resize(unsigned long size);
+    unsigned long size();
+    [Const, Ref] EventsSearchResult at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] EventsSearchResult result);
+    void clear();
+};
+
+interface EventsRefactorer {
+    void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
+    void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString name);
+    void STATIC_ReplaceStringInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
+    [Value] VectorEventsSearchResult STATIC_SearchInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions, boolean inEventStrings);
+};
+
+interface UnfilledRequiredBehaviorPropertyProblem {
+  [Const, Ref] Project GetSourceProject();
+  [Ref] gdObject GetSourceObject();
+  [Ref] BehaviorContent GetSourceBehaviorContent();
+  [Const, Ref] DOMString GetSourcePropertyName();
+  [Const, Ref] DOMString GetExpectedBehaviorTypeName();
+};
+
+interface VectorUnfilledRequiredBehaviorPropertyProblem {
+    unsigned long size();
+    [Const, Ref] UnfilledRequiredBehaviorPropertyProblem at(unsigned long index);
+};
+
+interface WholeProjectRefactorer {
+    void STATIC_ExposeProjectEvents([Ref] Project project, [Ref] ArbitraryEventsWorker worker);
+    void STATIC_RenameEventsFunctionsExtension(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_RenameEventsFunction(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_RenameBehaviorEventsFunction(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const, Ref] EventsBasedBehavior eventsBasedBehavior,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_MoveEventsFunctionParameter(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString functionName,
+      unsigned long oldIndex,
+      unsigned long newIndex);
+    void STATIC_MoveBehaviorEventsFunctionParameter(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const, Ref] EventsBasedBehavior eventsBasedBehavior,
+      [Const] DOMString functionName,
+      unsigned long oldIndex,
+      unsigned long newIndex);
+    void STATIC_RenameEventsBasedBehaviorProperty(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const, Ref] EventsBasedBehavior eventsBasedBehavior,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_RenameEventsBasedBehavior(
+      [Ref] Project project,
+      [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension,
+      [Const] DOMString oldName,
+      [Const] DOMString newName);
+    void STATIC_ObjectOrGroupRenamedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString oldName, [Const] DOMString newName, boolean isObjectGroup);
+    void STATIC_ObjectOrGroupRemovedInLayout([Ref] Project project, [Ref] Layout layout, [Const] DOMString objectName, boolean isObjectGroup, boolean removeEventsAndGroups);
+    void STATIC_ObjectOrGroupRenamedInEventsFunction([Ref] Project project, [Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer globalObjectsContainer, [Ref] ObjectsContainer objectsContainer, [Const] DOMString oldName, [Const] DOMString newName, boolean isObjectGroup);
+    void STATIC_ObjectOrGroupRemovedInEventsFunction([Ref] Project project, [Ref] EventsFunction eventsFunction, [Ref] ObjectsContainer globalObjectsContainer, [Ref] ObjectsContainer objectsContainer, [Const] DOMString objectName, boolean isObjectGroup, boolean removeEventsAndGroups);
+    void STATIC_GlobalObjectOrGroupRenamed([Ref] Project project, [Const] DOMString oldName, [Const] DOMString newName, boolean isObjectGroup);
+    void STATIC_GlobalObjectOrGroupRemoved([Ref] Project project, [Const] DOMString objectName, boolean isObjectGroup, boolean removeEventsAndGroups);
+    [Value] SetString STATIC_GetAllObjectTypesUsingEventsBasedBehavior([Const, Ref] Project project, [Const, Ref] EventsFunctionsExtension eventsFunctionsExtension, [Const, Ref] EventsBasedBehavior eventsBasedBehavior);
+    void STATIC_EnsureBehaviorEventsFunctionsProperParameters([Const, Ref] EventsFunctionsExtension eventsFunctionsExtension, [Const, Ref] EventsBasedBehavior eventsBasedBehavior);
+    void STATIC_AddBehaviorAndRequiredBehaviors([Ref] Project project, [Ref] gdObject obj, [Const] DOMString behaviorType, [Const] DOMString behaviorName);
+    [Value] VectorString STATIC_FindDependentBehaviorNames([Const, Ref] Project project, [Const, Ref] gdObject obj, [Const] DOMString behaviorName);
+    [Value] VectorUnfilledRequiredBehaviorPropertyProblem STATIC_FindInvalidRequiredBehaviorProperties([Const, Ref] Project project);
+    [Value] VectorString STATIC_GetBehaviorsWithType([Const, Ref] gdObject obj, [Const] DOMString type);
+    boolean STATIC_FixInvalidRequiredBehaviorProperties([Ref] Project project);
+};
+
+interface UsedExtensionsFinder {
+  [Value] SetString STATIC_ScanProject([Ref] Project project);
+};
+
+interface ExtensionAndBehaviorMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] BehaviorMetadata GetMetadata();
+};
+
+interface ExtensionAndObjectMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] ObjectMetadata GetMetadata();
+};
+
+interface ExtensionAndEffectMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] EffectMetadata GetMetadata();
+};
+
+interface ExtensionAndInstructionMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] InstructionMetadata GetMetadata();
+};
+
+interface ExtensionAndExpressionMetadata {
+  [Const, Ref] PlatformExtension GetExtension();
+  [Const, Ref] ExpressionMetadata GetMetadata();
+};
+
+interface MetadataProvider {
+
+    [Value] ExtensionAndBehaviorMetadata STATIC_GetExtensionAndBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndObjectMetadata STATIC_GetExtensionAndObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndEffectMetadata STATIC_GetExtensionAndEffectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndInstructionMetadata STATIC_GetExtensionAndActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndInstructionMetadata STATIC_GetExtensionAndConditionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndObjectExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndBehaviorExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Value] ExtensionAndExpressionMetadata STATIC_GetExtensionAndBehaviorStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Const, Ref] BehaviorMetadata STATIC_GetBehaviorMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ObjectMetadata STATIC_GetObjectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] EffectMetadata STATIC_GetEffectMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] InstructionMetadata STATIC_GetActionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] InstructionMetadata STATIC_GetConditionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetObjectExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetBehaviorExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetObjectStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString objectType, [Const] DOMString type);
+    [Const, Ref] ExpressionMetadata STATIC_GetBehaviorStrExpressionMetadata([Const, Ref] Platform p, [Const] DOMString autoType, [Const] DOMString type);
+
+    boolean STATIC_IsBadExpressionMetadata([Const, Ref] ExpressionMetadata metadata);
+    boolean STATIC_IsBadBehaviorMetadata([Const, Ref] BehaviorMetadata metadata);
+};
+
+interface ExpressionParserDiagnostic {
+    boolean IsError();
+    [Const, Ref] DOMString GetMessage();
+    unsigned long GetStartPosition();
+    unsigned long GetEndPosition();
+};
+
+interface VectorExpressionParserDiagnostic {
+    unsigned long size();
+    [Const] ExpressionParserDiagnostic at(unsigned long index);
+};
+
+interface ExpressionParser2NodeWorker {
+};
+
+interface ExpressionValidator {
+    void ExpressionValidator();
+
+    [Const, Ref] VectorExpressionParserDiagnostic GetErrors();
+
+    //Inherited from ExpressionParser2NodeWorker:
+};
+
+enum ExpressionCompletionDescription_CompletionKind {
+  "ExpressionCompletionDescription::Object",
+  "ExpressionCompletionDescription::Behavior",
+  "ExpressionCompletionDescription::Expression",
+  "ExpressionCompletionDescription::Variable",
+  "ExpressionCompletionDescription::Text"
+};
+
+interface ExpressionCompletionDescription {
+  ExpressionCompletionDescription_CompletionKind GetCompletionKind();
+  [Const, Ref] DOMString GetType();
+  [Const, Ref] DOMString GetPrefix();
+  [Const, Ref] DOMString GetObjectName();
+  [Const, Ref] DOMString GetBehaviorName();
+  boolean IsExact();
+  boolean IsLastParameter();
+  unsigned long GetReplacementStartPosition();
+  unsigned long GetReplacementEndPosition();
+  [Const, Ref] ParameterMetadata GetParameterMetadata();
+};
+
+interface VectorExpressionCompletionDescription {
+    unsigned long size();
+    [Value] ExpressionCompletionDescription at(unsigned long index);
+};
+
+interface ExpressionCompletionFinder {
+    [Value] VectorExpressionCompletionDescription STATIC_GetCompletionDescriptionsFor([Ref] ExpressionNode node, unsigned long location);
+
+    [Const, Ref] VectorExpressionCompletionDescription GetCompletionDescriptions();
+
+    //Inherited from ExpressionParser2NodeWorker:
+};
+
+interface ExpressionNode {
+    void Visit([Ref] ExpressionParser2NodeWorker worker);
+};
+
+interface UniquePtrExpressionNode {
+    ExpressionNode get();
+};
+
+interface ExpressionParser2 {
+    void ExpressionParser2([Const, Ref] Platform platform, [Const, Ref] ObjectsContainer globalObjectsContainer, [Const, Ref] ObjectsContainer objectsContainer);
+
+    [Value] UniquePtrExpressionNode ParseExpression([Const] DOMString type, [Const] DOMString expression);
+};
+
+enum EventsFunction_FunctionType {
+  "EventsFunction::Action",
+  "EventsFunction::Condition",
+  "EventsFunction::Expression",
+  "EventsFunction::StringExpression"
+};
+
+interface EventsFunction {
+    void EventsFunction();
+    EventsFunction Clone();
+
+    [Ref] EventsFunction SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] EventsFunction SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Ref] EventsFunction SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+    [Ref] EventsFunction SetSentence([Const] DOMString sentence);
+    [Const, Ref] DOMString GetSentence();
+    [Ref] EventsFunction SetPrivate(boolean isPrivate);
+    boolean IsPrivate();
+    [Ref] EventsFunction SetFunctionType(EventsFunction_FunctionType type);
+    EventsFunction_FunctionType GetFunctionType();
+
+    [Ref] EventsList GetEvents();
+    [Ref] VectorParameterMetadata GetParameters();
+    [Ref] ObjectGroupsContainer GetObjectGroups();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};
+
+interface EventsFunctionsContainer {
+    [Ref] EventsFunction InsertNewEventsFunction([Const] DOMString name, unsigned long pos);
+    [Ref] EventsFunction InsertEventsFunction([Const, Ref] EventsFunction eventsFunction, unsigned long pos);
+    boolean HasEventsFunctionNamed([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunction([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunctionAt(unsigned long pos);
+    void RemoveEventsFunction([Const] DOMString name);
+    void MoveEventsFunction(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetEventsFunctionsCount();
+    unsigned long GetEventsFunctionPosition([Const, Ref] EventsFunction eventsFunction);
+};
+
+interface EventsBasedBehavior {
+    void EventsBasedBehavior();
+
+    [Ref] EventsBasedBehavior SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] EventsBasedBehavior SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Ref] EventsBasedBehavior SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+    [Ref] EventsBasedBehavior SetObjectType([Const] DOMString fullName);
+    [Const, Ref] DOMString GetObjectType();
+
+    [Ref] EventsFunctionsContainer GetEventsFunctions();
+    [Ref] NamedPropertyDescriptorsList GetPropertyDescriptors();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
+    [Const, Value] DOMString STATIC_GetPropertyActionName([Const] DOMString propertyName);
+    [Const, Value] DOMString STATIC_GetPropertyConditionName([Const] DOMString propertyName);
+    [Const, Value] DOMString STATIC_GetPropertyExpressionName([Const] DOMString propertyName);
+};
+
+interface EventsBasedBehaviorsList {
+    [Ref] EventsBasedBehavior InsertNew([Const] DOMString name, unsigned long pos);
+    [Ref] EventsBasedBehavior Insert([Const, Ref] EventsBasedBehavior item, unsigned long pos);
+    boolean Has([Const] DOMString name);
+    [Ref] EventsBasedBehavior Get([Const] DOMString name);
+    [Ref] EventsBasedBehavior GetAt(unsigned long pos);
+    void Remove([Const] DOMString name);
+    void Move(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetCount();
+    unsigned long GetPosition([Const, Ref] EventsBasedBehavior item);
+
+    unsigned long size();
+    [Ref] EventsBasedBehavior at(unsigned long index);
+};
+
+interface NamedPropertyDescriptorsList {
+    void NamedPropertyDescriptorsList();
+
+    [Ref] NamedPropertyDescriptor InsertNew([Const] DOMString name, unsigned long pos);
+    [Ref] NamedPropertyDescriptor Insert([Const, Ref] NamedPropertyDescriptor item, unsigned long pos);
+    boolean Has([Const] DOMString name);
+    [Ref] NamedPropertyDescriptor Get([Const] DOMString name);
+    [Ref] NamedPropertyDescriptor GetAt(unsigned long pos);
+    void Remove([Const] DOMString name);
+    void Move(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetCount();
+
+    unsigned long size();
+    [Ref] NamedPropertyDescriptor at(unsigned long index);
+};
+
+interface EventsFunctionsExtension {
+    void EventsFunctionsExtension();
+
+    [Ref] EventsFunctionsExtension SetNamespace([Const] DOMString namespace_);
+    [Const, Ref] DOMString GetNamespace();
+    [Ref] EventsFunctionsExtension SetVersion([Const] DOMString version);
+    [Const, Ref] DOMString GetVersion();
+    [Ref] EventsFunctionsExtension SetShortDescription([Const] DOMString shortDescription);
+    [Const, Ref] DOMString GetShortDescription();
+    [Ref] EventsFunctionsExtension SetDescription([Const] DOMString description);
+    [Const, Ref] DOMString GetDescription();
+    [Ref] EventsFunctionsExtension SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    [Ref] EventsFunctionsExtension SetFullName([Const] DOMString fullName);
+    [Const, Ref] DOMString GetFullName();
+    [Ref] VectorString GetTags();
+    [Ref] EventsFunctionsExtension SetAuthor([Const] DOMString author);
+    [Const, Ref] DOMString GetAuthor();
+    [Ref] EventsFunctionsExtension SetPreviewIconUrl([Const] DOMString previewIconUrl);
+    [Const, Ref] DOMString GetPreviewIconUrl();
+    [Ref] EventsFunctionsExtension SetIconUrl([Const] DOMString iconUrl);
+    [Const, Ref] DOMString GetIconUrl();
+    [Ref] EventsFunctionsExtension SetHelpPath([Const] DOMString helpPath);
+    [Const, Ref] DOMString GetHelpPath();
+
+    [Ref] DependencyMetadata AddDependency();
+    void RemoveDependencyAt(unsigned long index);
+    [Ref] VectorDependencyMetadata GetAllDependencies();
+
+    [Ref] EventsBasedBehaviorsList GetEventsBasedBehaviors();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+
+    boolean STATIC_IsExtensionLifecycleEventsFunction([Const] DOMString eventsFunctionName);
+
+    // Inherited from EventsFunctionsContainer:
+    [Ref] EventsFunction InsertNewEventsFunction([Const] DOMString name, unsigned long pos);
+    [Ref] EventsFunction InsertEventsFunction([Const, Ref] EventsFunction eventsFunction, unsigned long pos);
+    boolean HasEventsFunctionNamed([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunction([Const] DOMString name);
+    [Ref] EventsFunction GetEventsFunctionAt(unsigned long pos);
+    void RemoveEventsFunction([Const] DOMString name);
+    void MoveEventsFunction(unsigned long oldIndex, unsigned long newIndex);
+    unsigned long GetEventsFunctionsCount();
+    unsigned long GetEventsFunctionPosition([Const, Ref] EventsFunction eventsFunction);
+};
+
+interface AbstractFileSystem {
+};
+
+[JSImplementation=AbstractFileSystem]
+interface AbstractFileSystemJS {
+    void AbstractFileSystemJS();
+
+    void MkDir([Const] DOMString dir);
+    void DirExists([Const] DOMString dir);
+    void ClearDir([Const] DOMString dir);
+    [Const, Ref] DOMString GetTempDir();
+    [Const, Ref] DOMString FileNameFrom([Const] DOMString dir);
+    [Const, Ref] DOMString DirNameFrom([Const] DOMString dir);
+    //void MakeAbsolute([Const] DOMString dir);
+    //void MakeRelative([Const] DOMString dir);
+    boolean IsAbsolute([Const] DOMString fn);
+    void CopyFile([Const] DOMString src, [Const] DOMString dest);
+    void WriteToFile([Const] DOMString fn, [Const] DOMString content);
+    [Const, Ref] DOMString ReadFile([Const] DOMString fn);
+    [Value] VectorString ReadDir([Const] DOMString dir);
+    boolean FileExists([Const] DOMString fn);
+};
+
+interface ProjectResourcesAdder {
+    void STATIC_AddAllMissing([Ref] Project project, [Const] DOMString resourceType);
+    [Value] VectorString STATIC_GetAllUseless([Ref] Project project, [Const] DOMString resourceType);
+    void STATIC_RemoveAllUseless([Ref] Project project, [Const] DOMString resourceType);
+};
+
+interface ArbitraryEventsWorker {
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsParametersLister {
+    void EventsParametersLister([Ref] Project project);
+    [Const, Ref] MapStringString GetParametersAndTypes();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsTypesLister {
+    void EventsTypesLister([Const, Ref] Project project);
+    [Const, Ref] VectorString GetAllEventsTypes();
+    [Const, Ref] VectorString GetAllConditionsTypes();
+    [Const, Ref] VectorString GetAllActionsTypes();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
+interface InstructionsTypeRenamer {
+    void InstructionsTypeRenamer([Const, Ref] Project project, [Const] DOMString oldType, [Const] DOMString newType);
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
+interface EventsContext {
+    [Const, Ref] SetString GetReferencedObjectOrGroupNames();
+    [Const, Ref] SetString GetObjectNames();
+    [Const, Ref] SetString GetBehaviorNamesOfObjectOrGroup([Const] DOMString objectOrGroupName);
+};
+
+interface EventsContextAnalyzer {
+    void EventsContextAnalyzer([Const, Ref] Platform platform, [Ref] ObjectsContainer globalObjectsContainer, [Ref] ObjectsContainer objectsContainer);
+    [Const, Ref] EventsContext GetEventsContext();
+
+    //Inherited from ArbitraryEventsWorker
+    void Launch([Ref] EventsList events);
+};
+
+interface ArbitraryResourceWorker {
+};
+[JSImplementation=ArbitraryResourceWorker]
+interface ArbitraryResourceWorkerJS {
+    void ArbitraryResourceWorkerJS();
+
+    void ExposeImage([Ref] DOMString image);
+    void ExposeShader([Ref] DOMString shader);
+    void ExposeFile([Ref] DOMString file);
+};
+
+interface ResourcesMergingHelper {
+    void ResourcesMergingHelper([Ref] AbstractFileSystem fs);
+
+    void SetBaseDirectory([Const] DOMString basePath);
+    [Ref] MapStringString GetAllResourcesOldAndNewFilename();
+};
+ResourcesMergingHelper implements ArbitraryResourceWorker;
+
+interface ResourcesRenamer {
+    void ResourcesRenamer([Const, Ref] MapStringString oldToNewNames);
+};
+ResourcesRenamer implements ArbitraryResourceWorker;
+
+interface ProjectResourcesCopier {
+    boolean STATIC_CopyAllResourcesTo([Ref] Project project,
+                                 [Ref] AbstractFileSystem fs,
+                                 [Const] DOMString destinationDirectory,
+                                 boolean updateOriginalProject,
+                                 boolean preserveAbsoluteFilenames,
+                                 boolean preserveDirectoryStructure);
+};
+
+interface ResourcesInUseHelper {
+    void ResourcesInUseHelper();
+
+    [Ref] SetString GetAllImages();
+    [Ref] SetString GetAllAudios();
+    [Ref] SetString GetAllFonts();
+    [Ref] SetString GetAllBitmapFonts();
+    [Ref] SetString GetAll([Const] DOMString resourceType);
+};
+ResourcesInUseHelper implements ArbitraryResourceWorker;
+
+interface EditorSettings {
+    void EditorSettings();
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Const, Ref] SerializerElement element);
+};
+
+//SpriteObject:
+
+interface Point {
+    void Point([Const] DOMString name);
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+    void SetXY(float x, float y);
+    float GetX();
+    void SetX(float x);
+    float GetY();
+    void SetY(float y);
+};
+
+interface VectorPoint {
+    void VectorPoint();
+
+    void push_back([Const, Ref] Point pt);
+    unsigned long size();
+    [Ref] Point at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Point pt);
+    void clear();
+};
+
+interface Polygon2d {
+    void Polygon2d();
+
+    [Ref] VectorVector2f GetVertices();
+    void Move(float x, float y);
+    void Rotate(float angle);
+    boolean IsConvex();
+    [Value] Vector2f ComputeCenter();
+
+    [Value] Polygon2d STATIC_CreateRectangle(float width, float height);
+};
+
+interface VectorPolygon2d {
+    void VectorPolygon2d();
+
+    void push_back([Const, Ref] Polygon2d polygon);
+    unsigned long size();
+    [Ref] Polygon2d at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Polygon2d polygon);
+    void FREE_removeFromVectorPolygon2d(unsigned long index);
+    void clear();
+};
+
+interface Sprite {
+    void Sprite();
+
+    void SetImageName([Const] DOMString name);
+    [Const, Ref] DOMString GetImageName();
+
+    [Ref] Point GetOrigin();
+    [Ref] Point GetCenter();
+    boolean IsDefaultCenterPoint();
+    void SetDefaultCenterPoint(boolean defaultPoint);
+
+    [Ref] VectorPoint GetAllNonDefaultPoints();
+    void AddPoint([Const, Ref] Point point);
+    void DelPoint([Const] DOMString name);
+    [Ref] Point GetPoint([Const] DOMString name);
+    boolean HasPoint([Const] DOMString name);
+
+    boolean IsCollisionMaskAutomatic();
+    void SetCollisionMaskAutomatic(boolean enabled);
+
+    [Ref] VectorPolygon2d GetCustomCollisionMask();
+    void SetCustomCollisionMask([Const, Ref] VectorPolygon2d collisionMask);
+};
+
+interface Direction {
+    void Direction();
+
+    void AddSprite([Const, Ref] Sprite sprite);
+    [Ref] Sprite GetSprite(unsigned long index);
+    unsigned long GetSpritesCount();
+    boolean HasNoSprites();
+    void RemoveSprite(unsigned long index);
+    void RemoveAllSprites();
+    boolean IsLooping();
+    void SetLoop(boolean enable);
+    float GetTimeBetweenFrames();
+    void SetTimeBetweenFrames(float time);
+    void SwapSprites(unsigned long first, unsigned long second);
+    void MoveSprite(unsigned long oldIndex, unsigned long newIndex);
+
+    void SetMetadata([Const] DOMString metadata);
+    [Const, Ref] DOMString GetMetadata();
+};
+
+interface Animation {
+    void Animation();
+
+    void SetName([Const] DOMString name);
+    [Const, Ref] DOMString GetName();
+
+    void SetDirectionsCount(unsigned long count);
+    unsigned long GetDirectionsCount();
+    [Ref] Direction GetDirection(unsigned long index);
+    void SetDirection([Const, Ref] Direction direction, unsigned long index);
+    boolean HasNoDirections();
+
+    boolean UseMultipleDirections();
+    void SetUseMultipleDirections(boolean enable);
+};
+
+interface SpriteObject {
+    void SpriteObject([Const] DOMString name);
+
+    void AddAnimation([Const, Ref] Animation animation);
+    [Ref] Animation GetAnimation(unsigned long index);
+    unsigned long GetAnimationsCount();
+    void RemoveAnimation(unsigned long index);
+    void RemoveAllAnimations();
+    boolean HasNoAnimations();
+    void SwapAnimations(unsigned long first, unsigned long second);
+    void MoveAnimation(unsigned long oldIndex, unsigned long newIndex);
+};
+SpriteObject implements gdObject;
+
+[Prefix="sf::"]
+interface Vector2f {
+    void Vector2f();
+
+    attribute float x;
+    attribute float y;
+};
+
+interface VectorVector2f {
+    void VectorVector2f();
+
+    void push_back([Const, Ref] Vector2f pt);
+    unsigned long size();
+    [Ref] Vector2f at(unsigned long index);
+    void WRAPPED_set(unsigned long index, [Const, Ref] Vector2f pt);
+    void FREE_removeFromVectorVector2f(unsigned long index);
+    void clear();
+};
+
+//Extensions bindings:
+
+interface TextObject {
+    void TextObject([Const] DOMString name);
+
+    void SetString([Const] DOMString string);
+    [Const, Ref] DOMString GetString();
+    void SetCharacterSize(float size);
+    float GetCharacterSize();
+    void SetFontName([Const] DOMString string);
+    [Const, Ref] DOMString GetFontName();
+    boolean IsBold();
+    void SetBold(boolean enable);
+    boolean IsItalic();
+    void SetItalic(boolean enable);
+    boolean IsUnderlined();
+    void SetUnderlined(boolean enable);
+    void SetColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetColorR();
+    unsigned long GetColorG();
+    unsigned long GetColorB();
+};
+TextObject implements gdObject;
+
+interface TiledSpriteObject {
+    void TiledSpriteObject([Const] DOMString name);
+
+    void SetTexture([Const] DOMString texture);
+    [Const, Ref] DOMString GetTexture();
+    void SetWidth(float width);
+    float GetWidth();
+    void SetHeight(float height);
+    float GetHeight();
+};
+TiledSpriteObject implements gdObject;
+
+interface PanelSpriteObject {
+    void PanelSpriteObject([Const] DOMString name);
+
+    float GetLeftMargin();
+    void SetLeftMargin(float newMargin);
+
+    float GetTopMargin();
+    void SetTopMargin(float newMargin);
+
+    float GetRightMargin();
+    void SetRightMargin(float newMargin);
+
+    float GetBottomMargin();
+    void SetBottomMargin(float newMargin);
+
+    boolean IsTiled();
+    void SetTiled(boolean enable);
+
+    void SetTexture([Const] DOMString texture);
+    [Const, Ref] DOMString GetTexture();
+
+    void SetWidth(float width);
+    float GetWidth();
+    void SetHeight(float height);
+    float GetHeight();
+};
+PanelSpriteObject implements gdObject;
+
+interface ShapePainterObject {
+    void ShapePainterObject([Const] DOMString name);
+
+    void SetCoordinatesAbsolute();
+    void SetCoordinatesRelative();
+    boolean AreCoordinatesAbsolute();
+
+    void SetClearBetweenFrames(boolean value);
+    boolean IsClearedBetweenFrames();
+
+    void SetOutlineSize(float size);
+    float GetOutlineSize();
+
+    void SetOutlineOpacity(float val);
+    float GetOutlineOpacity();
+
+    void SetOutlineColor(unsigned long r, unsigned long g, unsigned long b);
+    unsigned long GetOutlineColorR();
+    unsigned long GetOutlineColorG();
+    unsigned long GetOutlineColorB();
+
+    void SetFillOpacity(float val);
+    float GetFillOpacity();
+
+    void SetFillColor(unsigned long r,unsigned long g, unsigned long b);
+    unsigned long GetFillColorR();
+    unsigned long GetFillColorG();
+    unsigned long GetFillColorB();
+};
+ShapePainterObject implements gdObject;
+
+interface TextEntryObject {
+    void TextEntryObject([Const] DOMString name);
+};
+TextEntryObject implements gdObject;
+
+enum ParticleEmitterObject_RendererType {
+  "ParticleEmitterObject::Point",
+  "ParticleEmitterObject::Line",
+  "ParticleEmitterObject::Quad"
+};
+
+interface ParticleEmitterObject {
+    void ParticleEmitterObject([Const] DOMString name);
+
+    void SetRendererType(ParticleEmitterObject_RendererType type);
+    ParticleEmitterObject_RendererType GetRendererType();
+
+    void SetParticleTexture([Const] DOMString resourceName);
+    [Const, Ref] DOMString GetParticleTexture();
+    void SetRendererParam1(float newValue);
+    float GetRendererParam1();
+    void SetRendererParam2(float newValue);
+    float GetRendererParam2();
+
+    boolean IsRenderingAdditive();
+    void SetRenderingAdditive();
+    void SetRenderingAlpha();
+
+    void SetMaxParticleNb(float newValue);
+    float GetMaxParticleNb();
+    void SetTank(float newValue);
+    float GetTank();
+    void SetFlow(float newValue);
+    float GetFlow();
+    void SetDestroyWhenNoParticles(boolean enable);
+    boolean GetDestroyWhenNoParticles();
+
+    void SetEmitterForceMin(float newValue);
+    float GetEmitterForceMin();
+    void SetEmitterForceMax(float newValue);
+    float GetEmitterForceMax();
+
+    void SetConeSprayAngle(float newValue);
+    float GetConeSprayAngle();
+
+    void SetZoneRadius(float newValue);
+    float GetZoneRadius();
+
+    void SetParticleGravityX(float newValue);
+    float GetParticleGravityX();
+    void SetParticleGravityY(float newValue);
+    float GetParticleGravityY();
+    void SetParticleGravityZ(float newValue);
+    float GetParticleGravityZ();
+    void SetParticleGravityAngle(float newValue);
+    float GetParticleGravityAngle();
+    void SetParticleGravityLength(float newValue);
+    float GetParticleGravityLength();
+    void SetFriction(float newValue);
+    float GetFriction();
+
+    void SetParticleLifeTimeMin(float newValue);
+    float GetParticleLifeTimeMin();
+    void SetParticleLifeTimeMax(float newValue);
+    float GetParticleLifeTimeMax();
+
+    void SetParticleRed1(float newValue);
+    float GetParticleRed1();
+    void SetParticleRed2(float newValue);
+    float GetParticleRed2();
+    void SetParticleGreen1(float newValue);
+    float GetParticleGreen1();
+    void SetParticleGreen2(float newValue);
+    float GetParticleGreen2();
+    void SetParticleBlue1(float newValue);
+    float GetParticleBlue1();
+    void SetParticleBlue2(float newValue);
+    float GetParticleBlue2();
+    void SetParticleAlpha1(float newValue);
+    float GetParticleAlpha1();
+    void SetParticleAlpha2(float newValue);
+    float GetParticleAlpha2();
+    void SetParticleSize1(float newValue);
+    float GetParticleSize1();
+    void SetParticleSize2(float newValue);
+    float GetParticleSize2();
+    void SetParticleAngle1(float newValue);
+    float GetParticleAngle1();
+    void SetParticleAngle2(float newValue);
+    float GetParticleAngle2();
+    void SetParticleAlphaRandomness1(float newValue);
+    float GetParticleAlphaRandomness1();
+    void SetParticleAlphaRandomness2(float newValue);
+    float GetParticleAlphaRandomness2();
+    void SetParticleSizeRandomness1(float newValue);
+    float GetParticleSizeRandomness1();
+    void SetParticleSizeRandomness2(float newValue);
+    float GetParticleSizeRandomness2();
+    void SetParticleAngleRandomness1(float newValue);
+    float GetParticleAngleRandomness1();
+    void SetParticleAngleRandomness2(float newValue);
+    float GetParticleAngleRandomness2();
+
+};
+ParticleEmitterObject implements gdObject;
+
+//GDJS bindings:
+[Prefix="gdjs::"]
+interface LayoutCodeGenerator {
+    void LayoutCodeGenerator([Ref] Project project);
+    [Const, Value] DOMString GenerateLayoutCompleteCode([Const, Ref] Layout layout, [Ref] SetString includes, boolean compilationForRuntime);
+};
+
+[Prefix="gdjs::"]
+interface BehaviorCodeGenerator {
+    void BehaviorCodeGenerator([Ref] Project project);
+    [Const, Value] DOMString GenerateRuntimeBehaviorCompleteCode([Const] DOMString extensionName, [Const, Ref] EventsBasedBehavior eventsBasedBehavior, [Const] DOMString codeNamespace, [Const, Ref] MapStringString behaviorMethodMangledNames, [Ref] SetString includes, boolean compilationForRuntime);
+    [Const, Value] DOMString STATIC_GetBehaviorPropertyGetterName([Const] DOMString propertyName);
+    [Const, Value] DOMString STATIC_GetBehaviorPropertySetterName([Const] DOMString propertyName);
+
+};
+
+[Prefix="gdjs::"]
+interface EventsFunctionsExtensionCodeGenerator {
+    void EventsFunctionsExtensionCodeGenerator([Ref] Project project);
+    [Const, Value] DOMString GenerateFreeEventsFunctionCompleteCode([Const, Ref] EventsFunction eventsFunction, [Const] DOMString codeNamespac, [Ref] SetString includes, boolean compilationForRuntime);
+};
+
+[Prefix="gdjs::"]
+interface PreviewExportOptions {
+    void PreviewExportOptions([Ref] Project project, [Const] DOMString outputPath);
+    [Ref] PreviewExportOptions SetDebuggerServerAddress([Const] DOMString address, [Const] DOMString port);
+    [Ref] PreviewExportOptions SetLayoutName([Const] DOMString layoutName);
+    [Ref] PreviewExportOptions SetExternalLayoutName([Const] DOMString externalLayoutName);
+    [Ref] PreviewExportOptions SetIncludeFileHash([Const] DOMString includeFile, long hash);
+    [Ref] PreviewExportOptions SetProjectDataOnlyExport(boolean enable);
+    [Ref] PreviewExportOptions SetFullLoadingScreen(boolean enable);
+    [Ref] PreviewExportOptions SetNonRuntimeScriptsCacheBurst(unsigned long value);
+};
+
+[Prefix="gdjs::"]
+interface Exporter {
+    void Exporter([Ref] AbstractFileSystem fs, [Const] DOMString gdjsRoot);
+    void SetCodeOutputDirectory([Const] DOMString path);
+
+    boolean ExportProjectForPixiPreview([Const, Ref] PreviewExportOptions options);
+    boolean ExportWholePixiProject([Ref] Project project, [Const] DOMString exportDir, [Ref] MapStringBoolean exportOptions);
+
+    [Const, Ref] DOMString GetLastError();
+};
+
+[Prefix="gdjs::"]
+interface JsCodeEvent {
+    void JsCodeEvent();
+
+    [Const, Ref] DOMString GetInlineCode();
+    void SetInlineCode([Const] DOMString type);
+    [Const, Ref] DOMString GetParameterObjects();
+    void SetParameterObjects([Const] DOMString type);
+    boolean IsEventsSheetExpanded();
+    void SetEventsSheetExpanded(boolean enable);
+
+    //Inherited from BaseEvent:
+    JsCodeEvent Clone();
+    [Const, Ref] DOMString GetType();
+    void SetType([Const] DOMString type);
+    boolean IsExecutable();
+    boolean CanHaveSubEvents();
+    boolean HasSubEvents();
+    [Ref] EventsList GetSubEvents();
+    boolean IsDisabled();
+    void SetDisabled(boolean disable);
+    boolean IsFolded();
+    void SetFolded(boolean folded);
+
+    void SerializeTo([Ref] SerializerElement element);
+    void UnserializeFrom([Ref] Project project, [Const, Ref] SerializerElement element);
+};

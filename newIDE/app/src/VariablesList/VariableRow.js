@@ -19,7 +19,7 @@ import { type VariableOrigin } from './VariablesList.flow';
 import Text from '../UI/Text';
 import ElementWithMenu from '../UI/Menu/ElementWithMenu';
 import BackgroundText from '../UI/BackgroundText';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 //TODO: Refactor into TreeTable?
 const Indent = React.memo(({ width }) => (

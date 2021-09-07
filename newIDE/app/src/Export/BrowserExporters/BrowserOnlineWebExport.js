@@ -6,7 +6,7 @@ import {
   type Build,
   buildWeb,
   getBuildFileUploadOptions,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 import { uploadBlobFile } from './BrowserFileUploader';
 import { type UserProfile } from '../../Profile/UserProfileContext';
 import { findGDJS } from '../../GameEngineFinder/BrowserS3GDJSFinder';
@@ -23,7 +23,7 @@ import {
   type ExportPipelineContext,
 } from '../ExportPipeline.flow';
 import { ExplanationHeader } from '../GenericExporters/OnlineWebExport';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type ExportState = null;
 

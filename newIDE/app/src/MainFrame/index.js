@@ -116,12 +116,12 @@ import HotReloadLogsDialog from '../HotReload/HotReloadLogsDialog';
 import { useDiscordRichPresence } from '../Utils/UpdateDiscordRichPresence';
 import { useResourceFetcher } from '../ProjectsStorage/ResourceFetcher';
 import { delay } from '../Utils/Delay';
-import { type ExtensionShortHeader } from '../Utils/GDevelopServices/Extension';
+import { type ExtensionShortHeader } from '../Utils/GDeveloppeServices/Extension';
 import { findAndLogProjectPreviewErrors } from '../Utils/ProjectErrorsChecker';
 
 const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
 
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const styles = {
   drawerContent: {
@@ -468,7 +468,7 @@ const MainFrame = (props: Props) => {
     // A change in the language will automatically be applied
     // on all React components, as it's handled by GDI18nProvider.
     // We still have this method that will be called when the language
-    // dialog is closed after a language change. We then reload GDevelop
+    // dialog is closed after a language change. We then reload GDeveloppe
     // extensions so that they declare all objects/actions/condition/etc...
     // using the new language.
     gd.JsPlatform.get().reloadBuiltinExtensions();
@@ -511,7 +511,7 @@ const MainFrame = (props: Props) => {
           console.error(
             `💣 Dangerous exceptions while loading ${
               dangerousLoadingResults.length
-            } JS extensions. 🔥 Please check these errors as they will CRASH GDevelop:`,
+            } JS extensions. 🔥 Please check these errors as they will CRASH GDeveloppe:`,
             dangerousLoadingResults
           );
         }
@@ -848,7 +848,7 @@ const MainFrame = (props: Props) => {
     () => {
       if (!localStorage.getItem('wasChanged')) {
         alert('Hello! Since you are new here use the default theme');
-        preferences.setThemeName('GDevelop default');
+        preferences.setThemeName('GDeveloppe default');
       }
       localStorage.setItem('wasChanged', true);
     },
@@ -862,7 +862,7 @@ const MainFrame = (props: Props) => {
         console.log('evemt time baby');
         if (Math.round(Math.random() * 100) === 69) {
           alert('Hey try the new default theme it is cool :)');
-          preferences.setThemeName('GDevelop default');
+          preferences.setThemeName('GDeveloppe default');
         }
         if (Math.round(Math.random() * 20) === 14) {
           const number = Math.round(Math.random() * 100);

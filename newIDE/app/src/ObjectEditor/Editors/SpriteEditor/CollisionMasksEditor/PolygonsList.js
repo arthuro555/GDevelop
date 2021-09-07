@@ -27,7 +27,7 @@ import { Trans, t } from '@lingui/macro';
 import { Column, Line, Spacer } from '../../../../UI/Grid';
 import RaisedButtonWithSplitMenu from '../../../../UI/RaisedButtonWithSplitMenu';
 import AlertMessage from '../../../../UI/AlertMessage';
-import GDevelopThemeContext from '../../../../UI/Theme/ThemeContext';
+import GDeveloppeThemeContext from '../../../../UI/Theme/ThemeContext';
 import ScrollView from '../../../../UI/ScrollView';
 const gd = global.gd;
 
@@ -130,7 +130,7 @@ type PolygonSectionProps = {|
 |};
 
 const PolygonSection = (props: PolygonSectionProps) => {
-  const theme = React.useContext(GDevelopThemeContext);
+  const theme = React.useContext(GDeveloppeThemeContext);
   const warningColor = theme.message.warning;
 
   const vertices = props.polygon.getVertices();

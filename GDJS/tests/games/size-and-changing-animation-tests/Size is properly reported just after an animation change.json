@@ -30,7 +30,7 @@
     "verticalSync": false,
     "platformSpecificAssets": {},
     "loadingScreen": {
-      "showGDevelopSplash": true
+      "showGDeveloppeSplash": true
     },
     "extensions": [
       {
@@ -93,10 +93,10 @@
     ],
     "platforms": [
       {
-        "name": "GDevelop JS platform"
+        "name": "GDeveloppe JS platform"
       }
     ],
-    "currentPlatform": "GDevelop JS platform"
+    "currentPlatform": "GDeveloppe JS platform"
   },
   "resources": {
     "resources": [
@@ -263,7 +263,7 @@
             "textG": 0,
             "textR": 0
           },
-          "comment": "Expected: \nWhen Up/Down are pressed, the background color is NEVER red, EVEN for one frame.\nIf it's red, it's that we have changed the animation but the width/height are not the one from the current animation.\n\nThis can happen on GDevelop 5.0.0 beta 83 and before, where points and size of a Sprite were not properly updated after an animation change.\n",
+          "comment": "Expected: \nWhen Up/Down are pressed, the background color is NEVER red, EVEN for one frame.\nIf it's red, it's that we have changed the animation but the width/height are not the one from the current animation.\n\nThis can happen on GDeveloppe 5.0.0 beta 83 and before, where points and size of a Sprite were not properly updated after an animation change.\n",
           "comment2": ""
         },
         {

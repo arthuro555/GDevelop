@@ -13,7 +13,7 @@ import Text from '../../UI/Text';
 import {
   type Build,
   type BuildArtifactKeyName,
-} from '../../Utils/GDevelopServices/Build';
+} from '../../Utils/GDeveloppeServices/Build';
 
 const buildTypesConfig = {
   'cordova-build': {

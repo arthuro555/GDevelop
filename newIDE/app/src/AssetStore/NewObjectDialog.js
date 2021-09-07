@@ -18,7 +18,7 @@ import { Line, Column } from '../UI/Grid';
 import InfoBar from '../UI/Messages/InfoBar';
 import { Tabs, Tab } from '../UI/Tabs';
 import { AssetStore } from '.';
-import { type AssetShortHeader } from '../Utils/GDevelopServices/Asset';
+import { type AssetShortHeader } from '../Utils/GDeveloppeServices/Asset';
 import EventsFunctionsExtensionsContext from '../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
 import { installAsset } from './InstallAsset';
 import { AssetDetails } from './AssetDetails';
@@ -60,7 +60,7 @@ const ObjectListItem = ({
         <ListIcon
           src={objectMetadata.iconFilename}
           iconSize={40}
-          isGDevelopIcon
+          isGDeveloppeIcon
         />
       }
       key={objectMetadata.name}
@@ -193,7 +193,7 @@ export default function NewObjectDialog({
         <HelpButton helpPagePath="/objects" key="help" />,
         !electron && screenType !== 'touch' ? (
           <FlatButton
-            key="download-gdevelop"
+            key="download-GDeveloppe"
             label={<Trans>Download GDeveloppe to import your images</Trans>}
             onClick={() =>
               Window.openExternalURL('https://gdevelop-app.com/download')

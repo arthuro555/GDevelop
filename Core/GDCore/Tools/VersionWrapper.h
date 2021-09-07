@@ -1,5 +1,5 @@
 /** \file
- *  GDevelop
+ *  GDeveloppe
  *  2008-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 
@@ -10,29 +10,29 @@
 namespace gd {
 
 /**
- * \brief Used to get information about GDevelop Core version.
+ * \brief Used to get information about GDeveloppe Core version.
  *
  * \ingroup Tools
  */
 class GD_CORE_API VersionWrapper {
  public:
   /**
-   * \brief Get GDevelop Core Major version number
+   * \brief Get GDeveloppe Core Major version number
    */
   static int Major();
 
   /**
-   * \brief Get GDevelop Core Minor version number
+   * \brief Get GDeveloppe Core Minor version number
    */
   static int Minor();
 
   /**
-   * \brief Get GDevelop Core Build version number
+   * \brief Get GDeveloppe Core Build version number
    */
   static int Build();
 
   /**
-   * \brief Get GDevelop Core Revision version number
+   * \brief Get GDeveloppe Core Revision version number
    */
   static int Revision();
 

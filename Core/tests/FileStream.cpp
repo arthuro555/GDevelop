@@ -1,10 +1,10 @@
 /*
- * GDevelop Core
+ * GDeveloppe Core
  * Copyright 2008-2016 Florian Rival (Florian.Rival@gmail.com). All rights
  * reserved. This project is released under the MIT License.
  */
 /**
- * @file Tests covering FileStream class of GDevelop Core.
+ * @file Tests covering FileStream class of GDeveloppe Core.
  */
 #include "GDCore/Tools/FileStream.h"
 #include <fstream>

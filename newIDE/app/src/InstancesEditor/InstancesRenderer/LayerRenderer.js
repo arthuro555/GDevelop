@@ -10,7 +10,7 @@ import { shouldBeHandledByPinch } from '../PinchHandler';
 import { makeDoubleClickable } from './PixiDoubleClickEvent';
 import Rectangle from '../../Utils/Rectangle';
 import { rotatePolygon, type Polygon } from '../../Utils/PolygonHelper';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 export default class LayerRenderer {
   project: gdProject;

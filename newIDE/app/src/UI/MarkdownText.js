@@ -46,7 +46,7 @@ type Props = {|
  * Display a markdown text
  */
 export const MarkdownText = (props: Props) => {
-  const gdevelopTheme = React.useContext(ThemeContext);
+  const GDeveloppeTheme = React.useContext(ThemeContext);
   const markdownCustomRenderers = React.useMemo(
     () =>
       makeMarkdownCustomRenderers(
@@ -62,7 +62,7 @@ export const MarkdownText = (props: Props) => {
       source={props.source}
       className={classNames({
         'gd-markdown': true,
-        [gdevelopTheme.markdownRootClassName]: true,
+        [GDeveloppeTheme.markdownRootClassName]: true,
         'standalone-text-container': props.isStandaloneText,
       })}
       renderers={markdownCustomRenderers}

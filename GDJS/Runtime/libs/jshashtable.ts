@@ -2,7 +2,7 @@
  * A generic map (key-value) container.
  *
  * Used notably for storing lists of objects for
- * GDevelop generated events.
+ * GDeveloppe generated events.
  */
 class Hashtable<T> {
   /**

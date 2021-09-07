@@ -16,13 +16,13 @@ const styles = {
 export default function DropIndicator({ canDrop }: {| canDrop: boolean |}) {
   return (
     <ThemeConsumer>
-      {gdevelopTheme => (
+      {GDeveloppeTheme => (
         <div
           style={{
             ...styles.dropIndicator,
             borderColor: canDrop
-              ? gdevelopTheme.listItem.selectedBackgroundColor
-              : gdevelopTheme.listItem.selectedErrorBackgroundColor,
+              ? GDeveloppeTheme.listItem.selectedBackgroundColor
+              : GDeveloppeTheme.listItem.selectedErrorBackgroundColor,
           }}
         />
       )}

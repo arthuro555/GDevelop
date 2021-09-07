@@ -6,9 +6,9 @@ import BrowserS3FileSystem from '../BrowserS3FileSystem';
 import { findGDJS } from '../../../GameEngineFinder/BrowserS3GDJSFinder';
 import assignIn from 'lodash/assignIn';
 import { type PreviewOptions } from '../../PreviewLauncher.flow';
-import { getBaseUrl } from '../../../Utils/GDevelopServices/Preview';
+import { getBaseUrl } from '../../../Utils/GDeveloppeServices/Preview';
 import { makeTimestampedId } from '../../../Utils/TimestampedId';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 type State = {|
   showPreviewLinkDialog: boolean,

@@ -1,6 +1,6 @@
 // @flow
 import { enumerateVariables } from './EnumerateVariables';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 describe('EnumerateVariables', () => {
   it('can enumerate variables, including children', () => {

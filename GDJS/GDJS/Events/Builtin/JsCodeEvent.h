@@ -1,5 +1,5 @@
 /** \file
- *  GDevelop
+ *  GDeveloppe
  *  2008-2016 Florian Rival (Florian.Rival@gmail.com)
  */
 

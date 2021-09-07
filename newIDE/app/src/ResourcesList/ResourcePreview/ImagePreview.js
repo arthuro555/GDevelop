@@ -13,10 +13,10 @@ import ZoomOutMap from '@material-ui/icons/ZoomOutMap';
 import PlaceholderMessage from '../../UI/PlaceholderMessage';
 import Text from '../../UI/Text';
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
-import GDevelopThemeContext from '../../UI/Theme/ThemeContext';
+import GDeveloppeThemeContext from '../../UI/Theme/ThemeContext';
 import CheckeredBackground from '../CheckeredBackground';
 import { getPixelatedImageRendering } from '../../Utils/CssHelpers';
-const gd: libGDevelop = global.gd;
+const gd: libGDeveloppe = global.gd;
 
 const MARGIN = 50;
 const MAX_ZOOM_FACTOR = 10;
@@ -163,7 +163,7 @@ const ImagePreview = (props: Props) => {
     }));
   };
 
-  const theme = React.useContext(GDevelopThemeContext);
+  const theme = React.useContext(GDeveloppeThemeContext);
   const frameBorderColor = theme.imagePreview.frameBorderColor || '#aaa';
   const previewBorderColor = theme.imagePreview.borderColor || '#aaa';
 

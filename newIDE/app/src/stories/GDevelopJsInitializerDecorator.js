@@ -4,7 +4,7 @@ import { type StoryDecorator } from '@storybook/react';
 import { makeTestExtensions } from '../fixtures/TestExtensions';
 import { makeTestProject, type TestProject } from '../fixtures/TestProject';
 import { getStartupTimesSummary } from '../Utils/StartupTimes';
-const initializeGDevelopJs = global.initializeGDevelopJs;
+const initializeGDeveloppeJs = global.initializeGDeveloppeJs;
 const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
 
 // We create the global "gd" object **synchronously** here. This is done as
@@ -22,11 +22,11 @@ export let testProject: TestProject =
     I_AM_NOT_YET_INITIALIZED_YOU_MUST_USE_TESTPROJECT_INSIDE_A_STORY_ONLY: true,
   };
 
-type GDevelopJsInitializerProps = {|
+type GDeveloppeJsInitializerProps = {|
   children: () => React.Node,
 |};
 
-const GDevelopJsInitializer = ({ children }: GDevelopJsInitializerProps) => {
+const GDeveloppeJsInitializer = ({ children }: GDeveloppeJsInitializerProps) => {
   const [isReady, setIsReady] = React.useState(
     !global.gd.I_AM_NOT_YET_INITIALIZED_YOU_MUST_USE_GD_INSIDE_A_STORY_ONLY
   );
@@ -36,11 +36,11 @@ const GDevelopJsInitializer = ({ children }: GDevelopJsInitializerProps) => {
       return;
 
     console.info(
-      'Loading GDevelop.js and creating test extensions/test project...'
+      'Loading GDeveloppe.js and creating test extensions/test project...'
     );
-    GD_STARTUP_TIMES.push(['initializeGDevelopJsCall', performance.now()]);
-    initializeGDevelopJs().then(gd => {
-      GD_STARTUP_TIMES.push(['initializeGDevelopJsDone', performance.now()]);
+    GD_STARTUP_TIMES.push(['initializeGDeveloppeJsCall', performance.now()]);
+    initializeGDeveloppeJs().then(gd => {
+      GD_STARTUP_TIMES.push(['initializeGDeveloppeJsDone', performance.now()]);
       // We're **updating** the global "gd" object here. This is done so that
       // the source files that are using `global.gd` have the proper reference to the
       // object.
@@ -63,7 +63,7 @@ const GDevelopJsInitializer = ({ children }: GDevelopJsInitializerProps) => {
       delete testProject.I_AM_NOT_YET_INITIALIZED_YOU_MUST_USE_TESTPROJECT_INSIDE_A_STORY_ONLY;
 
       console.info(
-        'Done loading GDevelop.js and created test extensions/test project.'
+        'Done loading GDeveloppe.js and created test extensions/test project.'
       );
 
       GD_STARTUP_TIMES.push([
@@ -77,11 +77,11 @@ const GDevelopJsInitializer = ({ children }: GDevelopJsInitializerProps) => {
   }, []);
 
   if (isReady) return children();
-  return <div>Loading GDevelop.js, test extensions and test project...</div>;
+  return <div>Loading GDeveloppe.js, test extensions and test project...</div>;
 };
 
 const libGDDecorator: StoryDecorator = (story, context) => (
-  <GDevelopJsInitializer>{() => story(context)}</GDevelopJsInitializer>
+  <GDeveloppeJsInitializer>{() => story(context)}</GDeveloppeJsInitializer>
 );
 
 export default libGDDecorator;
