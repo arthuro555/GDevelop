@@ -243,6 +243,24 @@ struct VariableBracketAccessorNode
   std::unique_ptr<ExpressionNode> expression;
 };
 
+/**
+ * \brief A structure variable litteral.
+ *
+ * Example: {MyChild: 1, MyOtherChild: "2"}
+ */
+struct StructureLiteralNode : public ExpressionNode {
+  StructureLiteralNode(): ExpressionNode("variable"){};
+  virtual ~StructureLiteralNode(){};
+  virtual void Visit(ExpressionParser2NodeWorker &worker) {
+    worker.OnVisitStructureLiteralNode(*this);
+  };
+
+  std::map<const gd::String&, std::unique_ptr<gd::ExpressionNode>>
+      children;
+
+  ExpressionParserLocation nameLocation;
+};
+
 struct IdentifierOrFunctionCallOrObjectFunctionNameOrEmptyNode
     : public ExpressionNode {
   IdentifierOrFunctionCallOrObjectFunctionNameOrEmptyNode(

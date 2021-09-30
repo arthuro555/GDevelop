@@ -16,13 +16,14 @@ struct TextNode;
 struct VariableNode;
 struct VariableAccessorNode;
 struct VariableBracketAccessorNode;
+struct StructureLiteralNode;
 struct IdentifierOrFunctionCallOrObjectFunctionNameOrEmptyNode;
 struct IdentifierNode;
 struct FunctionCallOrObjectFunctionNameOrEmptyNode;
 struct ObjectFunctionNameNode;
 struct FunctionCallNode;
 struct EmptyNode;
-}  // namespace gd
+} // namespace gd
 
 namespace gd {
 
@@ -43,6 +44,7 @@ class GD_CORE_API ExpressionParser2NodeWorker {
   friend struct VariableNode;
   friend struct VariableAccessorNode;
   friend struct VariableBracketAccessorNode;
+  friend struct StructureLiteralNode;
   friend struct IdentifierOrFunctionCallOrObjectFunctionNameOrEmptyNode;
   friend struct IdentifierNode;
   friend struct FunctionCallOrObjectFunctionNameOrEmptyNode;
@@ -50,25 +52,26 @@ class GD_CORE_API ExpressionParser2NodeWorker {
   friend struct FunctionCallNode;
   friend struct EmptyNode;
 
- public:
+public:
   virtual ~ExpressionParser2NodeWorker();
 
- protected:
-  virtual void OnVisitSubExpressionNode(SubExpressionNode& node) = 0;
-  virtual void OnVisitOperatorNode(OperatorNode& node) = 0;
-  virtual void OnVisitUnaryOperatorNode(UnaryOperatorNode& node) = 0;
-  virtual void OnVisitNumberNode(NumberNode& node) = 0;
-  virtual void OnVisitTextNode(TextNode& node) = 0;
-  virtual void OnVisitVariableNode(VariableNode& node) = 0;
-  virtual void OnVisitVariableAccessorNode(VariableAccessorNode& node) = 0;
-  virtual void OnVisitVariableBracketAccessorNode(
-      VariableBracketAccessorNode& node) = 0;
-  virtual void OnVisitIdentifierNode(IdentifierNode& node) = 0;
-  virtual void OnVisitObjectFunctionNameNode(ObjectFunctionNameNode& node) = 0;
-  virtual void OnVisitFunctionCallNode(FunctionCallNode& node) = 0;
-  virtual void OnVisitEmptyNode(EmptyNode& node) = 0;
+protected:
+  virtual void OnVisitSubExpressionNode(SubExpressionNode &node) = 0;
+  virtual void OnVisitOperatorNode(OperatorNode &node) = 0;
+  virtual void OnVisitUnaryOperatorNode(UnaryOperatorNode &node) = 0;
+  virtual void OnVisitNumberNode(NumberNode &node) = 0;
+  virtual void OnVisitTextNode(TextNode &node) = 0;
+  virtual void OnVisitVariableNode(VariableNode &node) = 0;
+  virtual void OnVisitVariableAccessorNode(VariableAccessorNode &node) = 0;
+  virtual void
+  OnVisitVariableBracketAccessorNode(VariableBracketAccessorNode &node) = 0;
+  virtual void OnVisitStructureLiteralNode(StructureLiteralNode &node){};
+  virtual void OnVisitIdentifierNode(IdentifierNode &node) = 0;
+  virtual void OnVisitObjectFunctionNameNode(ObjectFunctionNameNode &node) = 0;
+  virtual void OnVisitFunctionCallNode(FunctionCallNode &node) = 0;
+  virtual void OnVisitEmptyNode(EmptyNode &node) = 0;
 };
 
-}  // namespace gd
+} // namespace gd
 
 #endif

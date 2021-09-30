@@ -245,6 +245,18 @@ class GD_CORE_API ExpressionParser2 {
       }
       SkipIfChar(IsClosingParenthesis);
       return factor;
+    } else if (CheckIfChar(IsCollectionLitteralBegin)) {
+      std::unique_ptr<ExpressionNode> factor = CheckIfChar(IsOpeningBrace) ? 
+                                                        StructureLiteral() : 
+                                                        StructureLiteral(); 
+      if (!gd::ParameterMetadata::IsExpression("variable", type))
+        factor->diagnostic =
+            RaiseTypeError(_("You entered a collection variable literal, but "
+                             "this type was expected:") +
+                               type,
+                           expressionStartPosition);
+
+      return factor;
     } else if (IsIdentifierAllowedChar()) {
       // This is a place where the grammar differs according to the
       // type being expected.
@@ -334,6 +346,37 @@ class GD_CORE_API ExpressionParser2 {
           nameLocation.GetStartPosition(), GetCurrentPosition());
       return std::move(identifier);
     }
+  }
+
+  std::unique_ptr<StructureLiteralNode> StructureLiteral() {
+    size_t startPosition = GetCurrentPosition();
+    auto node = gd::make_unique<StructureLiteralNode>();
+    bool firstNode = false;
+
+    SkipIfChar(IsOpeningBrace);
+    SkipAllWhitespaces();
+    while (!CheckIfChar(IsClosingBrace)) {
+      if (!firstNode && !CheckIfChar(IsComma)) {
+        firstNode = true;
+        node->diagnostic =
+            RaiseSyntaxError(_("Missing a comma between two children!"));
+      }
+      SkipAllWhitespaces();
+      auto identifierAndLocation = ReadIdentifierName();
+      const gd::String &name = identifierAndLocation.name;
+      const auto &nameLocation = identifierAndLocation.location;
+      SkipAllWhitespaces();
+      if (!CheckIfChar(IsColon)) {
+        node->diagnostic = RaiseSyntaxError(
+            _("Missing a colon between child name and value."));
+      }
+      node->children[name] = Expression("number|string");
+      SkipAllWhitespaces();
+    }
+
+    node->location = ExpressionParserLocation(startPosition, GetCurrentPosition());
+
+    return std::move(node);
   }
 
   std::unique_ptr<VariableNode> Variable(const gd::String &type,
@@ -883,6 +926,26 @@ class GD_CORE_API ExpressionParser2 {
 
   static bool IsZeroDigit(gd::String::value_type character) {
     return character == '0';
+  }
+
+  static bool IsCollectionLitteralBegin(gd::String::value_type character) {
+    return character == '{' || character == '[';
+  }
+
+  static bool IsOpeningBrace(gd::String::value_type character) {
+    return character == '{';
+  }
+
+  static bool IsClosingBrace(gd::String::value_type character) {
+    return character == '}';
+  }
+
+  static bool IsColon(gd::String::value_type character) {
+    return character == ':';
+  }
+
+  static bool IsComma(gd::String::value_type character) {
+    return character == ',';
   }
 
   bool IsNamespaceSeparator() {
