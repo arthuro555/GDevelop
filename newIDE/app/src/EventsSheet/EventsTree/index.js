@@ -2,7 +2,6 @@
 import React, { Component, type Node } from 'react';
 import findIndex from 'lodash/findIndex';
 import {
-  SortableTreeWithoutDndContext,
   getNodeAtPath,
 } from 'react-sortable-tree';
 import { mapFor } from '../../Utils/MapFor';
@@ -10,7 +9,7 @@ import { getInitialSelection, isEventSelected } from '../SelectionHandler';
 import EventsRenderingService from './EventsRenderingService';
 import EventHeightsCache from './EventHeightsCache';
 import classNames from 'classnames';
-import { eventsTree, eventsTreeWithSearchResults, icon } from './ClassNames';
+import { eventsTreeWithSearchResults, icon } from './ClassNames';
 import {
   type SelectionState,
   type EventContext,
@@ -23,14 +22,10 @@ import getObjectByName from '../../Utils/GetObjectByName';
 import ObjectsRenderingService from '../../ObjectsRendering/ObjectsRenderingService';
 import { type ScreenType } from '../../UI/Reponsive/ScreenTypeMeasurer';
 import { type WidthType } from '../../UI/Reponsive/ResponsiveWindowMeasurer';
-
-// Import default style of react-sortable-tree and the override made for EventsSheet.
-import 'react-sortable-tree/style.css';
-import './style.css';
-import ThemeConsumer from '../../UI/Theme/ThemeConsumer';
 import BottomButtons from './BottomButtons';
 import EmptyEventsPlaceholder from './EmptyEventsPlaceholder';
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
+import { SortableTree } from '../../UI/SortableTree';
 const gd: libGDevelop = global.gd;
 
 const getThumbnail = ObjectsRenderingService.getThumbnail.bind(
@@ -167,19 +162,6 @@ class EventContainer extends Component<EventsContainerProps, {||}> {
 }
 
 const getNodeKey = ({ treeIndex }) => treeIndex;
-
-const SortableTree = ({ className, ...otherProps }) => (
-  <ThemeConsumer>
-    {muiTheme => (
-      <SortableTreeWithoutDndContext
-        className={`${eventsTree} ${
-          muiTheme.eventsSheetRootClassName
-        } ${className}`}
-        {...otherProps}
-      />
-    )}
-  </ThemeConsumer>
-);
 
 const noop = () => {};
 

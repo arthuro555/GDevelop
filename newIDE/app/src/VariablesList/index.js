@@ -2,7 +2,7 @@
 import * as React from 'react';
 import flatten from 'lodash/flatten';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { mapFor } from '../Utils/MapFor';
+import { mapFor, mapVector } from '../Utils/MapFor';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import VariableRow from './VariableRow';
 import EditVariableRow from './EditVariableRow';
@@ -25,6 +25,7 @@ import { Trans } from '@lingui/macro';
 import Text from '../UI/Text';
 import { Column } from '../UI/Grid';
 import ScrollView from '../UI/ScrollView';
+import { SortableTree } from '../UI/SortableTree';
 
 const gd: libGDevelop = global.gd;
 
@@ -60,7 +61,7 @@ type State = {|
   allVariableNames: string[],
 |};
 
-export default class VariablesList extends React.Component<Props, State> {
+export class VariablesList extends React.Component<Props, State> {
   state = {
     nameErrors: {},
     selectedVariables: getInitialSelection(),
@@ -440,12 +441,8 @@ export default class VariablesList extends React.Component<Props, State> {
                 <HelpButton helpPagePath={this.props.helpPagePath} />
               )}
             >
-              <Text>
-                <Trans>{this.props.emptyExplanationMessage}</Trans>
-              </Text>
-              <Text>
-                <Trans>{this.props.emptyExplanationSecondMessage}</Trans>
-              </Text>
+              <Text>{this.props.emptyExplanationMessage}</Text>
+              <Text>{this.props.emptyExplanationSecondMessage}</Text>
             </EmptyPlaceholder>
           </Column>
         ) : null}
@@ -477,3 +474,89 @@ export default class VariablesList extends React.Component<Props, State> {
     );
   }
 }
+
+const isCollection = variable => !gd.Variable.isPrimitive(variable.getType());
+
+const containerToTreeData = (variablesContainer: gdVariablesContainer, props) =>
+  mapFor(0, variablesContainer.count(), index => {
+    const variable = variablesContainer.getAt(index);
+    const name = variablesContainer.getNameAt(index);
+
+    return variableToTreeData({
+      ...props,
+      variable,
+      name,
+      parent: variablesContainer,
+      rootContainer: variablesContainer,
+      path: [{ name, type: gd.Variable.Structure }],
+    });
+  });
+
+const variableToTreeData = (props: {|
+  variable: gdVariable,
+  name: string,
+  parent: gdVariable | gdVariableContainer,
+  rootContainer: gdVariableContainer,
+  variablesContainer: gdVariablesContainer,
+  inheritedVariablesContainer?: gdVariablesContainer,
+  path: Array<{| name: string, type: Variable_Type |}>,
+  isFolded: (variable: gdVariable) => boolean,
+|}) => {
+  const { variable, name, path, isFolded } = props;
+  return {
+    title: () => <VariableRow key={'variable-' + variable.ptr} {...props} />,
+    variable,
+    key: variable.ptr,
+    expanded: isFolded(variable),
+    children: isCollection(variable)
+      ? mapVector<string>(variable.getAllChildrenNames(), childName =>
+          variableToTreeData({
+            ...props,
+            variable: variable.getChild(childName),
+            name: childName,
+            parent: variable,
+            path: [...path, { name, type: variable.getType() }],
+          })
+        )
+      : null,
+  };
+};
+
+const VariableList = (props: Props) => {
+  const { variablesContainer, inheritedVariablesContainer } = props;
+  if (!variablesContainer)
+    throw new Error('VariableList requires a variablesContainer prop!');
+
+  const [folded, setFolded] = React.useState(new Map());
+
+  const treeBuilderSettings = {
+    ...props,
+    isFolded: variable => folded.get(variable),
+  };
+  const variablesTreeData = containerToTreeData(
+    variablesContainer,
+    treeBuilderSettings
+  );
+  const inheritedVariablesTreeData = inheritedVariablesContainer
+    ? containerToTreeData(inheritedVariablesContainer, treeBuilderSettings)
+    : [];
+
+  const treeData = variablesTreeData.concat(inheritedVariablesTreeData);
+  return (
+    <div style={{ flex: 1 }}>
+      <SortableTree
+        treeData={treeData}
+        onChange={() => {}}
+        onVisibilityToggle={({ node: { variable } }) =>
+          setFolded(
+            folded => new Map(folded.set(variable, !folded.get(variable)))
+          )
+        }
+        //canDrop={({ nextParent }) => nextParent && isCollection(nextParent.variable)}
+        canNodeHaveChildren={({ variable }) => isCollection(variable)}
+      />
+    </div>
+  );
+};
+
+export default VariableList;
