@@ -17,6 +17,7 @@
 #include "GDCore/Project/ResourcesManager.h"
 #include "GDCore/Project/VariablesContainer.h"
 #include "GDCore/String.h"
+#include "WindowSettings.h"
 namespace gd {
 class Platform;
 class Layout;
@@ -380,6 +381,16 @@ class GD_CORE_API Project : public ObjectsContainer {
    * current platform won't be changed.
    */
   void SetCurrentPlatform(const gd::String& platformName);
+
+  /**
+   * Return the scale mode used by the game (usually "linear" or "nearest").
+   */
+  gd::WindowSettings& GetWindowSettings() { return windowSettings; }
+
+  /**
+   * Return the scale mode used by the game (usually "linear" or "nearest").
+   */
+  const gd::WindowSettings& GetWindowSettings() const { return windowSettings; }
 
   ///@}
 
@@ -937,8 +948,9 @@ class GD_CORE_API Project : public ObjectsContainer {
   gd::LoadingScreen loadingScreen;
   std::vector<std::unique_ptr<gd::ExternalEvents> >
       externalEvents;  ///< List of all externals events
-  ExtensionProperties
+  gd::ExtensionProperties
       extensionProperties;              ///< The properties of the extensions.
+  gd::WindowSettings windowSettings;        ///< Optional settings for the window
   mutable unsigned int gdMajorVersion;  ///< The GD major version used the last
                                         ///< time the project was saved.
   mutable unsigned int gdMinorVersion;  ///< The GD minor version used the last
