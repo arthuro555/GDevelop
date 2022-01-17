@@ -1,0 +1,9 @@
+diff --git a/node_modules/pixi3d/types/index.d.ts b/node_modules/pixi3d/types/index.d.ts
+index d548eec..712abb2 100644
+--- a/node_modules/pixi3d/types/index.d.ts
++++ b/node_modules/pixi3d/types/index.d.ts
+@@ -62,3 +62,4 @@ export { SpriteBatchRenderer } from "./sprite/sprite-batch-renderer";
+ export { SpriteBillboardType } from "./sprite/sprite-billboard-type";
+ export { RenderPass } from "./pipeline/render-pass";
+ export { Debug } from "./debug";
++export as namespace PIXI3D;

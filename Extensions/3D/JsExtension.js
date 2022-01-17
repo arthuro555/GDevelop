@@ -96,14 +96,30 @@ module.exports = {
 
     const object = extension
       .addObject(
-        '3DBox',
+        'Box3D',
         _('3D Box'),
         _('A 3D box, that can have a color or texture.'),
-        'JsPlatform/Extensions/videoicon32.png',
+        'CppPlatform/Extensions/Box3Dicon24.png',
         videoObject
       )
-      .setIncludeFile('Extensions/3D/videoruntimeobject.js')
-      .addIncludeFile('Extensions/3D/videoruntimeobject-pixi-renderer.js');
+      .setIncludeFile('Extensions/3D/PIXI3D.js')
+      .addIncludeFile('Extensions/3D/Box3Druntimeobject.js')
+      .addIncludeFile('Extensions/3D/Box3Druntimeobject-pixi-renderer.js');
+
+    object
+      .addAction(
+        'SetZ',
+        _('Set Z position'),
+        _('Set the Z pos.'),
+        _('Set the z of _PARAM0_ to _PARAM1_'),
+        '',
+        'CppPlatform/Extensions/Box3Dicon24.png',
+        'CppPlatform/Extensions/Box3Dicon24.png'
+      )
+      .addParameter('object', 'Box3D', 'Box3D', false)
+      .addParameter('expression', _('New position'), '', false)
+      .getCodeExtraInformation()
+      .setFunctionName('setZ');
 
     return extension;
   },
@@ -134,9 +150,9 @@ module.exports = {
     objectsEditorService /*: ObjectsEditorService */
   ) {
     objectsEditorService.registerEditorConfiguration(
-      '3D::3DBox',
+      '3D::Box3D',
       objectsEditorService.getDefaultObjectJsImplementationPropertiesEditor({
-        helpPagePath: '/objects/3dbox',
+        helpPagePath: '/objects/Box3D',
       })
     );
   },
@@ -151,6 +167,7 @@ module.exports = {
   ) {
     const RenderedInstance = objectsRenderingService.RenderedInstance;
     const PIXI = objectsRenderingService.PIXI;
+    const PIXI3D = objectsRenderingService.requireModule(__dirname, 'PIXI3D');
 
     /**
      * Renderer for instances of VideoObject inside the IDE.
@@ -159,7 +176,7 @@ module.exports = {
      * @class RenderedVideoObjectInstance
      * @constructor
      */
-    class Rendered3DBoxInstance extends RenderedInstance {
+    class RenderedBox3DInstance extends RenderedInstance {
       constructor(
         project,
         layout,
@@ -176,10 +193,17 @@ module.exports = {
           pixiContainer,
           pixiResourcesLoader
         );
+
+        // Setup lighting. We need to do that only now as PIXI3D is not properly initialized before.
+        if (!PIXI3D.LightingEnvironment.main.imageBasedLighting)
+          PIXI3D.LightingEnvironment.main.imageBasedLighting =
+            new PIXI3D.ImageBasedLighting(
+              PIXI3D.Cubemap.fromColors(new PIXI3D.Color(1, 1, 1)),
+              PIXI3D.Cubemap.fromColors(new PIXI3D.Color(1, 1, 1))
+            );
+
         //Setup the PIXI object:
-        this._pixiObject = new PIXI.Sprite(this._getVideoTexture());
-        this._pixiObject.anchor.x = 0.5;
-        this._pixiObject.anchor.y = 0.5;
+        this._pixiObject = PIXI3D.Mesh3D.createCube();
         this._pixiContainer.addChild(this._pixiObject);
         this.update();
       }
@@ -198,32 +222,39 @@ module.exports = {
         */
 
         // Read position and angle from the instance
-        this._pixiObject.position.x =
-          this._instance.getX() + this._pixiObject.width / 2;
-        this._pixiObject.position.y =
-          this._instance.getY() + this._pixiObject.height / 2;
-        this._pixiObject.rotation = RenderedInstance.toRad(
+        PIXI3D.Camera.main.screenToWorld(
+          this._instance.getX(),
+          this._instance.getY(),
+          5,
+          this._pixiObject.position
+        );
+
+        this._pixiObject.rotationQuaternion.setEulerAngles(
+          0,
+          0,
           this._instance.getAngle()
         );
 
         if (this._instance.hasCustomSize()) {
-          this._pixiObject.width = this._instance.getCustomWidth();
-          this._pixiObject.height = this._instance.getCustomHeight();
+          this._pixiObject.scale.x = this._instance.getCustomWidth();
+          this._pixiObject.scale.y = this._instance.getCustomHeight();
+        } else {
+          this._pixiObject.scale.set(1);
         }
       }
 
       getDefaultWidth() {
-        return 1;
+        return 2;
       }
 
       getDefaultHeight() {
-        return 1;
+        return 2;
       }
     }
 
     objectsRenderingService.registerInstanceRenderer(
-      '3D::3DBox',
-      RenderedVideoObjectInstance
+      '3D::Box3D',
+      RenderedBox3DInstance
     );
   },
 };

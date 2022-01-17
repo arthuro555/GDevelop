@@ -21,6 +21,7 @@ export const getExperimentalObjects = (): {
   [string]: boolean,
 } => ({
   'BitmapText::BitmapTextObject': true,
+  '3D::Box3D': true,
   'TileMap::TileMap': true,
 });
 

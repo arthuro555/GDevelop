@@ -1,16 +1,32 @@
-/// <reference path="./PIXI3D.d.ts" />
+/// <reference types="../../GDJS/node_modules/pixi3d/types/index" />
 namespace gdjs {
   const logger = new gdjs.Logger('3D box renderer');
+  import PIXI = GlobalPIXIModule.PIXI;
+
+  {
+    const original = PIXI.State.for2d;
+    PIXI.State.for2d = function (...args) {
+      const state = original(...args);
+      state.depthTest = true;
+      return state;
+    };
+  }
+
+  // Register a global white ambiant light after the first scene (and thereby PIXI) have loaded.
+  gdjs.registerFirstRuntimeSceneLoadedCallback(() => {
+    PIXI3D.LightingEnvironment.main.imageBasedLighting =
+      new PIXI3D.ImageBasedLighting(
+        PIXI3D.Cubemap.fromColors(new PIXI3D.Color(1, 1, 1)),
+        PIXI3D.Cubemap.fromColors(new PIXI3D.Color(1, 1, 1))
+      );
+  });
 
   /**
    * The PIXI.js renderer for the VideoRuntimeObject.
    */
   export class Box3DRuntimeObjectPixiRenderer {
-    _object: Box3DRuntimeObject;
-
-    // Load (or reset) the video
-    _pixiObject: PIXI3D.Mesh3D;
-    _textureWasValid: boolean = false;
+    private _object: Box3DRuntimeObject;
+    private _pixiObject: PIXI3D.Mesh3D = PIXI3D.Mesh3D.createCube();
 
     /**
      * @param runtimeObject The object to render
@@ -21,13 +37,6 @@ namespace gdjs {
       runtimeScene: gdjs.RuntimeScene
     ) {
       this._object = runtimeObject;
-      this._pixiObject = PIXI3D.Mesh3D.createCube();
-      this._pixiObject._texture.baseTexture.resource.autoPlay = false;
-
-      // Needed to avoid video not playing/crashing in Chrome/Chromium browsers.
-      // See https://github.com/pixijs/pixi.js/issues/5996
-      this._pixiObject._texture.baseTexture.resource.source.preload = 'auto';
-      this._pixiObject._texture.baseTexture.resource.source.autoload = true;
 
       // Will be set to true when video texture is loaded.
       runtimeScene
@@ -35,52 +44,35 @@ namespace gdjs {
         .getRenderer()
         .addRendererObject(this._pixiObject, runtimeObject.getZOrder());
 
-      // Set the anchor in the center, so that the object rotates around
-      // its center
-      this._pixiObject.anchor.x = 0.5;
-      this._pixiObject.anchor.y = 0.5;
       this.updatePosition();
       this.updateAngle();
       this.updateOpacity();
-      this.updateVolume();
-      this.updateLoop();
     }
 
     getRendererObject() {
       return this._pixiObject;
     }
 
-    ensureUpToDate() {
-      // Make sure that the video is repositioned after the texture was loaded
-      // (as width and height will change).
-      if (
-        !this._textureWasValid &&
-        this._pixiObject.texture &&
-        this._pixiObject.texture.valid
-      ) {
-        this.updatePosition();
-        this._textureWasValid = true;
-      }
-    }
-
     updatePosition(): void {
-      this._pixiObject.position.x = this._object.x + this._pixiObject.width / 2;
-      this._pixiObject.position.y =
-        this._object.y + this._pixiObject.height / 2;
+      PIXI3D.Camera.main.screenToWorld(
+        this._object.getX(),
+        this._object.getY(),
+        this._object.getZ(),
+        this._pixiObject.position
+      );
     }
 
-    updateLoop(): void {
-      this._pixiObject._texture.baseTexture.resource.source.loop =
-        this._object._loop;
-    }
-
-    updateVolume(): void {
-      this._pixiObject._texture.baseTexture.resource.source.volume =
-        this._object._volume / 100;
+    updateScale() {
+      this._pixiObject.scale.x = this._object.getWidth();
+      this._pixiObject.scale.y = this._object.getHeight();
     }
 
     updateAngle(): void {
-      this._pixiObject.rotation = gdjs.toRad(this._object.angle);
+      this._pixiObject.rotationQuaternion.setEulerAngles(
+        0,
+        0,
+        this._object.angle
+      );
     }
 
     updateOpacity(): void {
