@@ -452,8 +452,7 @@ gd::String EventsCodeGenerator::GenerateConditionsListCode(
 gd::String EventsCodeGenerator::GenerateActionCode(
     gd::Instruction& action,
     EventsCodeGenerationContext& context,
-    const gd::String& functionPrefix,
-    const gd::String& functionSuffix) {
+    const gd::String& asyncCallback) {
   gd::String actionCode;
 
   const gd::InstructionMetadata& instrInfos =
@@ -526,8 +525,7 @@ gd::String EventsCodeGenerator::GenerateActionCode(
                                              arguments,
                                              instrInfos,
                                              context,
-                                             functionPrefix,
-                                             functionSuffix);
+                                             asyncCallback);
 
           context.SetNoCurrentObject();
         }
@@ -561,8 +559,7 @@ gd::String EventsCodeGenerator::GenerateActionCode(
                                    arguments,
                                    instrInfos,
                                    context,
-                                   functionPrefix,
-                                   functionSuffix);
+                                   asyncCallback);
 
         context.SetNoCurrentObject();
       }
@@ -570,12 +567,71 @@ gd::String EventsCodeGenerator::GenerateActionCode(
   } else {
     vector<gd::String> arguments = GenerateParametersCodes(
         action.GetParameters(), instrInfos.parameters, context);
-    actionCode += GenerateFreeAction(
-        arguments, instrInfos, context, functionPrefix, functionSuffix);
+    actionCode +=
+        GenerateFreeAction(arguments, instrInfos, context, asyncCallback);
   }
 
   return actionCode;
 }
+
+const EventsCodeGenerator::CallbackDescriptor
+EventsCodeGenerator::GenerateCallback(
+    const gd::String& callbackID,
+    const gd::EventsCodeGenerationContext& parentContext,
+    gd::InstructionsList& actions,
+    gd::EventsList* subEvents) {
+  gd::EventsCodeGenerationContext callbackContext;
+  callbackContext.InheritsAsAsyncCallbackFrom(parentContext);
+  const gd::String callbackFunctionName =
+      GetCodeNamespaceAccessor() + "asyncCallback" + callbackID;
+  const gd::String callbackFunctionArguments =
+      GenerateEventsParameters(callbackContext);
+
+  // Generate actions
+  gd::String actionsCode = GenerateActionsListCode(actions, callbackContext);
+
+  // Generate subevents
+  if (subEvents != nullptr)  // Sub events
+  {
+    actionsCode += "\n{ //Subevents\n";
+    actionsCode += GenerateEventsListCode(*subEvents, callbackContext);
+    actionsCode += "} //End of subevents\n";
+  }
+
+  // Compose the callback function and add outside main
+  const gd::String actionsDeclarationsCode =
+      GenerateObjectsDeclarationCode(callbackContext);
+
+  const gd::String callbackCode = callbackFunctionName + " = function (" +
+                                  GenerateEventsParameters(callbackContext) +
+                                  ") {\n" + actionsDeclarationsCode +
+                                  actionsCode + "}\n";
+
+  AddCustomCodeOutsideMain(callbackCode);
+
+  std::set<gd::String> requiredObjects;
+  // Build the list of all objects required by the callback. Any object that has
+  // already been declared could have gone through previous object picking, so
+  // if such an object is used by the actions or subevents of this callback, we
+  // must ask the caller to pass the already exiting objects lists through a
+  // `LongLivedObjectsList` to the callback function.
+  for (const auto& objectUsedInSubTree :
+       callbackContext.GetAllDeclaredObjectsAcrossChildren()) {
+    if (parentContext.ObjectAlreadyDeclared(objectUsedInSubTree))
+      requiredObjects.insert(objectUsedInSubTree);
+  };
+
+  return CallbackDescriptor(
+      callbackFunctionName, callbackFunctionArguments, requiredObjects);
+};
+
+const gd::String EventsCodeGenerator::GenerateEventsParameters(
+    const gd::EventsCodeGenerationContext& context) {
+  gd::String parameters = "runtimeScene";
+  if (!HasProjectAndLayout()) parameters += ", eventsFunctionContext";
+  if (context.IsAsync()) parameters += ", asyncObjectsList";
+  return parameters;
+};
 
 /**
  * Generate actions code.
@@ -1027,8 +1083,7 @@ gd::String EventsCodeGenerator::GenerateFreeAction(
     const std::vector<gd::String>& arguments,
     const gd::InstructionMetadata& instrInfos,
     gd::EventsCodeGenerationContext& context,
-    const gd::String& functionPrefix,
-    const gd::String& functionSuffix) {
+    const gd::String& asyncCallback) {
   // Generate call
   gd::String call;
   if (instrInfos.codeExtraInformation.type == "number" ||
@@ -1052,9 +1107,13 @@ gd::String EventsCodeGenerator::GenerateFreeAction(
           arguments,
           instrInfos.codeExtraInformation.functionCallName);
   } else {
-    call = functionPrefix + instrInfos.codeExtraInformation.functionCallName +
-           "(" + GenerateArgumentsList(arguments) + ")" + functionSuffix;
+    call = instrInfos.codeExtraInformation.functionCallName + "(" +
+           GenerateArgumentsList(arguments) + ")";
   }
+
+  if (!asyncCallback.empty())
+    call = "runtimeScene.getAsyncTasksManager().addTask(" + call + ", " +
+           asyncCallback + ")";
 
   return call + ";\n";
 }
@@ -1065,8 +1124,7 @@ gd::String EventsCodeGenerator::GenerateObjectAction(
     const std::vector<gd::String>& arguments,
     const gd::InstructionMetadata& instrInfos,
     gd::EventsCodeGenerationContext& context,
-    const gd::String& functionPrefix,
-    const gd::String& functionSuffix) {
+    const gd::String& asyncCallback) {
   // Create call
   gd::String call;
   if ((instrInfos.codeExtraInformation.type == "number" ||
@@ -1091,11 +1149,13 @@ gd::String EventsCodeGenerator::GenerateObjectAction(
   } else {
     gd::String argumentsStr = GenerateArgumentsList(arguments, 1);
 
-    call = functionPrefix + instrInfos.codeExtraInformation.functionCallName +
-           "(" + argumentsStr + ")" + functionSuffix;
+    call = instrInfos.codeExtraInformation.functionCallName + "(" +
+           argumentsStr + ")";
 
     return "For each picked object \"" + objectName + "\", call " + call + "(" +
-           argumentsStr + ").\n";
+           argumentsStr + ")" +
+           (asyncCallback.empty() ? "" : (", then call" + asyncCallback)) +
+           ".\n";
   }
 }
 
@@ -1106,8 +1166,7 @@ gd::String EventsCodeGenerator::GenerateBehaviorAction(
     const std::vector<gd::String>& arguments,
     const gd::InstructionMetadata& instrInfos,
     gd::EventsCodeGenerationContext& context,
-    const gd::String& functionPrefix,
-    const gd::String& functionSuffix) {
+    const gd::String& asyncCallback) {
   // Create call
   gd::String call;
   if ((instrInfos.codeExtraInformation.type == "number" ||
@@ -1131,11 +1190,13 @@ gd::String EventsCodeGenerator::GenerateBehaviorAction(
   } else {
     gd::String argumentsStr = GenerateArgumentsList(arguments, 2);
 
-    call = functionPrefix + instrInfos.codeExtraInformation.functionCallName +
-           "(" + argumentsStr + ")" + functionSuffix;
+    call = instrInfos.codeExtraInformation.functionCallName + "(" +
+           argumentsStr + ")";
 
     return "For each picked object \"" + objectName + "\", call " + call + "(" +
-           argumentsStr + ")" + " for behavior \"" + behaviorName + "\".\n";
+           argumentsStr + ")" + " for behavior \"" + behaviorName + "\"" +
+           (asyncCallback.empty() ? "" : (", then call" + asyncCallback)) +
+           ".\n";
   }
 }
 

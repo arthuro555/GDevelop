@@ -364,6 +364,7 @@ interface Project {
 
     void SetName([Const] DOMString name);
     [Const, Ref] DOMString GetName();
+    [Ref] VectorString GetCategories();
     void SetDescription([Const] DOMString description);
     [Const, Ref] DOMString GetDescription();
     void SetVersion([Const] DOMString authorName);
@@ -371,6 +372,12 @@ interface Project {
     void SetAuthor([Const] DOMString authorName);
     [Const, Ref] DOMString GetAuthor();
     [Ref] VectorString GetAuthorIds();
+    boolean IsPlayableWithKeyboard();
+    void SetPlayableWithKeyboard(boolean playable);
+    boolean IsPlayableWithGamepad();
+    void SetPlayableWithGamepad(boolean playable);
+    boolean IsPlayableWithMobile();
+    void SetPlayableWithMobile(boolean playable);
     void SetPackageName([Const] DOMString packageName);
     [Const, Ref] DOMString GetPackageName();
     void SetOrientation([Const] DOMString orientation);
@@ -1920,7 +1927,7 @@ interface VectorEventsSearchResult {
 interface EventsRefactorer {
     void STATIC_RenameObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString oldName, [Const] DOMString newName);
     void STATIC_RemoveObjectInEvents([Const, Ref] Platform platform, [Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString name);
-    void STATIC_ReplaceStringInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions);
+    void STATIC_ReplaceStringInEvents([Ref] ObjectsContainer project, [Ref] ObjectsContainer layout, [Ref] EventsList events, [Const] DOMString toReplace, [Const] DOMString newString, boolean matchCase, boolean inConditions, boolean inActions,  boolean inEventStrings);
     [Value] VectorEventsSearchResult STATIC_SearchInEvents([Const, Ref] Platform platform, [Ref] EventsList events, [Const] DOMString search, boolean matchCase, boolean inConditions, boolean inActions, boolean inEventStrings, boolean inEventSentences);
 };
 

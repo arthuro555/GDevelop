@@ -359,7 +359,6 @@ namespace gdjs {
      */
     updatePreRender(runtimeScene: gdjs.RuntimeScene): void {}
 
-    //Nothing to do.
     /**
      * Called when the object is created from an initial instance at the startup of the scene.<br>
      * Note that common properties (position, angle, z order...) have already been setup.
@@ -370,7 +369,6 @@ namespace gdjs {
       initialInstanceData: InstanceData
     ): void {}
 
-    //Nothing to do.
     /**
      * Called when the object must be updated using the specified objectData. This is the
      * case during hot-reload, and is only called if the object was modified.
@@ -427,6 +425,22 @@ namespace gdjs {
       this.destroyCallbacks.forEach((c) => c());
       this.clearEffects();
     }
+
+    /**
+     * Called whenever the scene owning the object is paused.
+     * This should *not* impact objects, but some may need to inform their renderer.
+     *
+     * @param runtimeScene The scene owning the object.
+     */
+    onScenePaused(runtimeScene: gdjs.RuntimeScene): void {}
+
+    /**
+     * Called whenever the scene owning the object is resumed after a pause.
+     * This should *not* impact objects, but some may need to inform their renderer.
+     *
+     * @param runtimeScene The scene owning the object.
+     */
+    onSceneResumed(runtimeScene: gdjs.RuntimeScene): void {}
 
     //Rendering:
     /**
@@ -2337,6 +2351,7 @@ namespace gdjs {
      *
      * The position should be in "world" coordinates, i.e use gdjs.Layer.convertCoords
      * if you need to pass the mouse or a touch position that you get from gdjs.InputManager.
+     * To check if a point is inside the object collision mask, you can use `isCollidingWithPoint` instead.
      *
      */
     insideObject(x: float, y: float): boolean {

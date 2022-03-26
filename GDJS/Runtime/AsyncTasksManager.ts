@@ -12,7 +12,7 @@ namespace gdjs {
     /**
      * Maps a task to the callback to be executed once it is finished.
      */
-    private tasks = new Array<{
+    private tasksWithCallback = new Array<{
       asyncTask: AsyncTask;
       callback: (runtimeScene: gdjs.RuntimeScene) => void;
     }>();
@@ -21,11 +21,12 @@ namespace gdjs {
      * Run all pending asynchronous tasks.
      */
     processTasks(runtimeScene: RuntimeScene): void {
-      for (const task of this.tasks) {
-        if (task.asyncTask.update(runtimeScene)) {
+      for (let i = 0; i < this.tasksWithCallback.length; i++) {
+        const taskWithCallback = this.tasksWithCallback[i];
+        if (taskWithCallback.asyncTask.update(runtimeScene)) {
           // The task has finished, run the callback and remove it.
-          task.callback(runtimeScene);
-          this.tasks.splice(this.tasks.indexOf(task), 1);
+          taskWithCallback.callback(runtimeScene);
+          this.tasksWithCallback.splice(i--, 1);
         }
       }
     }
@@ -39,7 +40,7 @@ namespace gdjs {
       asyncTask: AsyncTask,
       callback: (runtimeScene: RuntimeScene) => void
     ): void {
-      this.tasks.push({ asyncTask, callback });
+      this.tasksWithCallback.push({ asyncTask, callback });
     }
 
     /**
@@ -47,7 +48,7 @@ namespace gdjs {
      * @internal
      */
     clearTasks() {
-      this.tasks.length = 0;
+      this.tasksWithCallback.length = 0;
     }
   }
 
@@ -63,14 +64,30 @@ namespace gdjs {
     abstract update(runtimeScene: RuntimeScene): boolean;
   }
 
-  const logger = new gdjs.Logger('Internal PromiseTask');
+  export class TaskGroup extends AsyncTask {
+    private tasks = new Array<AsyncTask>();
 
-  export class ResolvingTask extends AsyncTask {
+    addTask(task: AsyncTask) {
+      this.tasks.push(task);
+    }
+
+    update(runtimeScene: gdjs.RuntimeScene) {
+      for (let i = 0; i < this.tasks.length; i++) {
+        const task = this.tasks[i];
+        if (task.update(runtimeScene)) this.tasks.splice(i--, 1);
+      }
+
+      return this.tasks.length === 0;
+    }
+  }
+
+  export class ResolveTask extends AsyncTask {
     update() {
       return true;
     }
   }
 
+  const logger = new gdjs.Logger('Internal PromiseTask');
   /**
    * A task that resolves with a promise.
    */

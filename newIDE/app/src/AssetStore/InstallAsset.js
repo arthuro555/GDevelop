@@ -199,6 +199,7 @@ export const addAssetToProject = async ({
         const behavior = behaviorMetadata.get();
         // TODO: When this feature is exposed to users, we might want to use
         // gd.WholeProjectRefactorer.addBehaviorAndRequiredBehaviors instead.
+        // And add analytics for this.
         const behaviorContent = object.addNewBehavior(
           project,
           behaviorType,
@@ -243,9 +244,10 @@ export const addAssetToProject = async ({
             groupEvent.getSubEvents(),
             parameter.name,
             parameter.defaultValue,
-            true,
-            true,
-            true
+            /*matchCase=*/ true,
+            /*inConditions=*/ true,
+            /*inActions=*/ true,
+            /*inEventStrings=*/ false
           );
         });
 
