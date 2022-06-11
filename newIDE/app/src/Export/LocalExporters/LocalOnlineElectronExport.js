@@ -12,7 +12,7 @@ import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
 import { uploadLocalFile } from './LocalFileUploader';
 import { archiveLocalFolder } from '../../Utils/LocalArchiver';
 import optionalRequire from '../../Utils/OptionalRequire';
-import localFileSystem from './LocalFileSystem';
+import { LocalFileSystem } from './LocalFileSystem';
 import {
   type ExportPipeline,
   type ExportPipelineContext,
@@ -28,6 +28,7 @@ const gd: libGDevelop = global.gd;
 type PreparedExporter = {|
   exporter: gdjsExporter,
   temporaryOutputDir: string,
+  localFS: LocalFileSystem,
 |};
 
 type ExportOutput = {|
@@ -77,10 +78,9 @@ export const localOnlineElectronExportPipeline: ExportPipeline<
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
-      const fileSystem = assignIn(
-        new gd.AbstractFileSystemJS(),
-        localFileSystem
-      );
+      const localFS = new LocalFileSystem();
+      // TODO: Memory leak? Check for other exporters too.
+      const fileSystem = assignIn(new gd.AbstractFileSystemJS(), localFS);
       const exporter = new gd.Exporter(fileSystem, gdjsRoot);
       const temporaryOutputDir = path.join(
         fileSystem.getTempDir(),
@@ -92,13 +92,14 @@ export const localOnlineElectronExportPipeline: ExportPipeline<
       return {
         exporter,
         temporaryOutputDir,
+        localFS,
       };
     });
   },
 
-  launchExport: (
+  launchExport: async (
     context: ExportPipelineContext<ExportState>,
-    { exporter, temporaryOutputDir }: PreparedExporter
+    { exporter, temporaryOutputDir, localFS }: PreparedExporter
   ): Promise<ExportOutput> => {
     const exportOptions = new gd.MapStringBoolean();
     exportOptions.set('exportForElectron', true);
@@ -110,7 +111,9 @@ export const localOnlineElectronExportPipeline: ExportPipeline<
     exportOptions.delete();
     exporter.delete();
 
-    return Promise.resolve({ temporaryOutputDir });
+    await localFS.waitForPendingOperationsToEnd();
+
+    return { temporaryOutputDir };
   },
 
   launchResourcesDownload: (

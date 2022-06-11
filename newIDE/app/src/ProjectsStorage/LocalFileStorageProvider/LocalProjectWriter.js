@@ -7,7 +7,7 @@ import {
   splitPaths,
   getSlugifiedUniqueNameFromProperty,
 } from '../../Utils/ObjectSplitter';
-import localFileSystem from '../../Export/LocalExporters/LocalFileSystem';
+import { LocalFileSystem } from '../../Export/LocalExporters/LocalFileSystem';
 import assignIn from 'lodash/assignIn';
 
 const gd: libGDevelop = global.gd;
@@ -144,7 +144,10 @@ export const onSaveProjectAs = (
   fileMetadata: ?FileMetadata,
 |}> => {
   const defaultPath = fileMetadata ? fileMetadata.fileIdentifier : '';
-  const fileSystem = assignIn(new gd.AbstractFileSystemJS(), localFileSystem);
+  const fileSystem = assignIn(
+    new gd.AbstractFileSystemJS(),
+    new LocalFileSystem()
+  );
   const browserWindow = remote.getCurrentWindow();
   const options = {
     defaultPath,

@@ -2,9 +2,9 @@
 import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
-import localFileSystem from '../LocalFileSystem';
+import { LocalFileSystem } from '../LocalFileSystem';
 import optionalRequire from '../../../Utils/OptionalRequire';
-import { timeFunction } from '../../../Utils/TimeFunction';
+import { timePromise } from '../../../Utils/TimeFunction';
 import { findGDJS } from '../../../GameEngineFinder/LocalGDJSFinder';
 import LocalNetworkPreviewDialog from './LocalNetworkPreviewDialog';
 import assignIn from 'lodash/assignIn';
@@ -146,18 +146,18 @@ export default class LocalPreviewLauncher extends React.Component<
     outputDir: string,
     exporter: gdjsExporter,
     gdjsRoot: string,
+    localFS: LocalFileSystem,
   |}> => {
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
-      const fileSystem = assignIn(
-        new gd.AbstractFileSystemJS(),
-        localFileSystem
-      );
+      const localFS = new LocalFileSystem();
+      const fileSystem = assignIn(new gd.AbstractFileSystemJS(), localFS);
       const outputDir = path.join(fileSystem.getTempDir(), 'preview');
       const exporter = new gd.Exporter(fileSystem, gdjsRoot);
 
       return {
+        localFS,
         outputDir,
         exporter,
         gdjsRoot,
@@ -182,9 +182,9 @@ export default class LocalPreviewLauncher extends React.Component<
         );
       })
       .then(() => this._prepareExporter())
-      .then(({ outputDir, exporter, gdjsRoot }) => {
-        timeFunction(
-          () => {
+      .then(({ outputDir, exporter, gdjsRoot, localFS }) => {
+        timePromise(
+          async () => {
             const previewExportOptions = new gd.PreviewExportOptions(
               project,
               outputDir
@@ -238,6 +238,8 @@ export default class LocalPreviewLauncher extends React.Component<
             exporter.exportProjectForPixiPreview(previewExportOptions);
             previewExportOptions.delete();
             exporter.delete();
+
+            await localFS.waitForPendingOperationsToEnd();
 
             if (shouldHotReload) {
               debuggerIds.forEach(debuggerId => {

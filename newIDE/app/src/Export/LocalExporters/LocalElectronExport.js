@@ -5,7 +5,7 @@ import React from 'react';
 import RaisedButton from '../../UI/RaisedButton';
 import { Column, Line } from '../../UI/Grid';
 import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
-import localFileSystem from './LocalFileSystem';
+import { LocalFileSystem } from './LocalFileSystem';
 import LocalFolderPicker from '../../UI/LocalFolderPicker';
 import assignIn from 'lodash/assignIn';
 import optionalRequire from '../../Utils/OptionalRequire';
@@ -28,6 +28,7 @@ type ExportState = {
 
 type PreparedExporter = {|
   exporter: gdjsExporter,
+  localFS: LocalFileSystem,
 |};
 
 type ExportOutput = null;
@@ -84,22 +85,21 @@ export const localElectronExportPipeline: ExportPipeline<
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
+      const localFS = new LocalFileSystem();
       // TODO: Memory leak? Check for other exporters too.
-      const fileSystem = assignIn(
-        new gd.AbstractFileSystemJS(),
-        localFileSystem
-      );
+      const fileSystem = assignIn(new gd.AbstractFileSystemJS(), localFS);
       const exporter = new gd.Exporter(fileSystem, gdjsRoot);
 
       return {
         exporter,
+        localFS,
       };
     });
   },
 
   launchExport: (
     context: ExportPipelineContext<ExportState>,
-    { exporter }: PreparedExporter
+    { exporter, localFS }: PreparedExporter
   ): Promise<ExportOutput> => {
     const exportOptions = new gd.MapStringBoolean();
     exportOptions.set('exportForElectron', true);
@@ -111,7 +111,7 @@ export const localElectronExportPipeline: ExportPipeline<
     exportOptions.delete();
     exporter.delete();
 
-    return Promise.resolve(null);
+    return localFS.waitForPendingOperationsToEnd();
   },
 
   launchResourcesDownload: (
