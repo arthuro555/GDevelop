@@ -2337,6 +2337,28 @@ interface AbstractFileSystemJS {
     boolean FileExists([Const] DOMString fn);
 };
 
+interface InMemoryFileSystem {
+    void InMemoryFileSystem();
+
+    void MkDir([Const] DOMString dir);
+    void DirExists([Const] DOMString dir);
+    void ClearDir([Const] DOMString dir);
+    [Const, Ref] DOMString GetTempDir();
+    [Const, Ref] DOMString FileNameFrom([Const] DOMString dir);
+    [Const, Ref] DOMString DirNameFrom([Const] DOMString dir);
+    //void MakeAbsolute([Const] DOMString dir);
+    //void MakeRelative([Const] DOMString dir);
+    boolean IsAbsolute([Const] DOMString fn);
+    void CopyFile([Const] DOMString src, [Const] DOMString dest);
+    void WriteToFile([Const] DOMString fn, [Const] DOMString content);
+    [Const, Ref] DOMString ReadFile([Const] DOMString fn);
+    [Value] VectorString ReadDir([Const] DOMString dir);
+    boolean FileExists([Const] DOMString fn);
+
+    void MountFS(AbstractFileSystem fs, [Const] DOMString mountLocation, [Const] DOMString linkedDirectory);
+    void Persist();
+};
+
 interface ProjectResourcesAdder {
     [Value] VectorString STATIC_GetAllUseless([Ref] Project project, [Const] DOMString resourceType);
     void STATIC_RemoveAllUseless([Ref] Project project, [Const] DOMString resourceType);

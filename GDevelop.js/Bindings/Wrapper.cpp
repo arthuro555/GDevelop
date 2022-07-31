@@ -20,6 +20,7 @@
 #include <GDCore/Extensions/Metadata/ParameterMetadataTools.h>
 #include <GDCore/Extensions/Platform.h>
 #include <GDCore/IDE/AbstractFileSystem.h>
+#include <GDCore/IDE/InMemoryFileSystem.h>
 #include <GDCore/IDE/Dialogs/LayoutEditorCanvas/EditorSettings.h>
 #include <GDCore/IDE/Events/ArbitraryEventsWorker.h>
 #include <GDCore/IDE/Events/EventsContextAnalyzer.h>
