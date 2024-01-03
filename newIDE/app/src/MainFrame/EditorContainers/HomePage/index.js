@@ -577,7 +577,7 @@ export const HomePage = React.memo<Props>(
                   // $FlowIgnore - displayTooltipDelayed makes sure the element is defined
                   anchorElement={manageTabElement}
                   title={<Trans>Games Dashboard</Trans>}
-                  thumbnailSource="res/features/games-dashboard.svg"
+                  thumbnailSource="res/down.png"
                   thumbnailAlt={'Red hero presenting games analytics'}
                   content={[
                     <Text noMargin key="paragraph">

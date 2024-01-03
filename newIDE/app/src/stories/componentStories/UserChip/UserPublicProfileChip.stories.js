@@ -21,7 +21,7 @@ export const UserPublicProfileChip = () => (
       donateLink: 'https://myurl.com',
       discordUsername: 'username#1234',
       communityLinks: {},
-      iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+      iconUrl: 'res/down.png',
     }}
   />
 );

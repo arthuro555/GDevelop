@@ -41,7 +41,7 @@ const GetSubscriptionCard = (props: Props) => {
 
   return (
     <div style={subscriptionContainerStyle}>
-      <img src="res/diamond.svg" style={styles.diamondIcon} alt="diamond" />
+      <img src="res/down.png" style={styles.diamondIcon} alt="diamond" />
       <LineStackLayout alignItems="center" expand>
         <Column noMargin expand>
           {props.children}

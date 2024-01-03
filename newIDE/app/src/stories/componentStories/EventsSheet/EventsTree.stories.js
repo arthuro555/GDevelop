@@ -26,10 +26,10 @@ const eventsTreeTutorials: Array<Tutorial> = [
     description: 'Description 1',
     descriptionByLocale: { en: 'Description 1' },
     thumbnailUrl:
-      'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
+      'res/down.png',
     thumbnailUrlByLocale: {
       en:
-        'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
+        'res/down.png',
     },
     link: 'https://example.com/tutorial.html',
     linkByLocale: { en: 'https://example.com/tutorial.html' },

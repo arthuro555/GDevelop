@@ -28,7 +28,7 @@ export const Default = () => (
         style={{
           backgroundSize: 'contain',
           backgroundImage:
-            "url('https://resources.gdevelop-app.com/assets/Packs/wesxdz skullcup.png?gdUsage=img')",
+            "url('res/down.png?gdUsage=img')",
           aspectRatio: '16 / 9',
           height: 200,
           padding: 10,
@@ -44,7 +44,7 @@ export const Default = () => (
         style={{
           backgroundSize: 'contain',
           backgroundImage:
-            "url('https://resources.gdevelop-app.com/assets/Packs/wesxdz skullcup.png?gdUsage=img')",
+            "url('res/down.png?gdUsage=img')",
           aspectRatio: '16 / 9',
           height: 200,
           padding: 10,

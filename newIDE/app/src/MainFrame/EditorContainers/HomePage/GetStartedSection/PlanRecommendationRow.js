@@ -25,15 +25,15 @@ const styles = {
 
 const planImages = {
   individual: {
-    path: 'res/plan-individual.svg',
+    path: 'res/down.png',
     alt: t`Red hero taking care of their diamond`,
   },
   education: {
-    path: 'res/plan-education.svg',
+    path: 'res/down.png',
     alt: t`Red hero sharing knowledge with pink cloud students`,
   },
   professional: {
-    path: 'res/plan-professional.svg',
+    path: 'res/down.png',
     alt: t`Red and Green heroes running side by side carrying their diamonds`,
   },
 };

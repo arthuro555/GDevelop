@@ -29,7 +29,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'ledge tolerance,jump,platform',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Sports and Fitness/Sports and Fitness_training_running_run.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -40,7 +40,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -49,7 +49,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -68,7 +68,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'ledge tolerance,jump,platform',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Sports and Fitness/Sports and Fitness_training_running_run.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -79,7 +79,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -88,7 +88,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -108,7 +108,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'p2p,performance,advanced',
       category: 'Network',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Applications and Programming/Applications and Programming_sitemap_map_ux_application.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 1,
       authors: [
@@ -119,7 +119,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -138,7 +138,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'align,alignment,center',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/format-vertical-align-center.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 14,
       authors: [
@@ -149,7 +149,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -169,7 +169,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'back,forth,movement',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -180,7 +180,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -200,7 +200,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
         'array,variable,index,tool,math,string,sort,find,slice,cut,random,copy,combine,concat,append,insert',
       category: 'General',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/code-array.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 31,
       authors: [
@@ -211,7 +211,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -230,7 +230,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'text,bbtext,dialogue,visual novel,autotyping,bitmap',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/typewriter.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 3,
       eventsFunctionsCount: 0,
       authors: [
@@ -241,7 +241,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -259,7 +259,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'back,mobile,button,input',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/keyboard-backspace.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 4,
       authors: [
@@ -270,7 +270,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -289,7 +289,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'binary,numbers,number,base,hex,decimal',
       category: 'Advanced',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/hexadecimal.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 2,
       authors: [
@@ -300,7 +300,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -319,7 +319,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'remapper,key,bindings,presets,platformer,top-down',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/alpha-w-box-outline.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 2,
       eventsFunctionsCount: 0,
       authors: [
@@ -330,7 +330,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -351,7 +351,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'flock,swarm,boids,crowd,horde',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Glyphster Pack/Master/SVG/Restaurant/Restaurant_restaurant_seafood_animal_fish.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 1,
       authors: [
@@ -362,7 +362,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -371,7 +371,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -390,7 +390,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'boomerang,throw,attack,projectile,ricochet,rebound,launch',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/boomerang.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -401,7 +401,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -410,7 +410,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -429,7 +429,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'bounce,bullet',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/volleyball.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -440,7 +440,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -462,7 +462,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'shaking,camera,effect,screen,shake,zoom,position,rotate',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/vector-difference-ab.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 4,
       authors: [
@@ -473,7 +473,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'm4hBMBTUilft4s1V4FQQPakVDGx1',
@@ -482,7 +482,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -504,7 +504,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'Camera,Layer,Zoom',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/UI Essentials/UI Essentials_zoom_in_plus.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -515,7 +515,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: '30b1QQoYi1gQQHzIjMlNY8aLyYV2',
@@ -524,7 +524,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -544,7 +544,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'drag,drop',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/step-backward.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -555,7 +555,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -574,7 +574,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'checkbox,ui,widget,shape painter,toggle,checkmark',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/checkbox-marked.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -585,7 +585,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -606,7 +606,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'position,checkpoint',
       category: 'Game mechanic',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/flag-variant.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -617,7 +617,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: '2OwwM8ToR9dx9RJ2sAKTcrLmCB92',
@@ -626,7 +626,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -645,7 +645,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'choose,random',
       category: 'General',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/dice-multiple.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 2,
       authors: [
@@ -656,7 +656,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -677,7 +677,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'clipboard,pasteboard,paste,copy,write',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/clipboard-text-multiple-outline.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -688,7 +688,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'ZgrsWuRTAkXgeuPV9bo0zuEcA2w1',
@@ -697,7 +697,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -720,7 +720,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'color,conversion,hexadecimal,rgb,hsl,hsv,hsb',
       category: 'Advanced',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/invert-colors.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 9,
       authors: [
@@ -731,7 +731,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'AlZ3D1xkH0QDao7T37VZZUeYNpn1',
@@ -740,7 +740,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -749,7 +749,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -767,7 +767,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'string,compression,zip',
       category: 'Advanced',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/folder-zip-outline.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -778,7 +778,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -798,7 +798,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'camera,clone,zoom,position,layer,angle,copy',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/layers-triple-outline.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 1,
       authors: [
@@ -809,7 +809,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -829,7 +829,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'create,multiple,object,grid,row,column',
       category: 'Visual effect',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/grid.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 1,
       authors: [
@@ -840,7 +840,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -860,7 +860,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'version',
       category: 'Advanced',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/numeric.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 1,
       authors: [
@@ -871,7 +871,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -890,7 +890,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'mouse,pointer,cursor',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Computers and Hardware/Computers and Hardware_mouse_pc.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -901,7 +901,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -923,7 +923,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'cursor,javascript,desktop',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/cursor-default-outline.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 2,
       authors: [
@@ -934,7 +934,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: '2OwwM8ToR9dx9RJ2sAKTcrLmCB92',
@@ -943,7 +943,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -962,7 +962,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'depth,effect,scale,y,text,sprite',
       category: 'Visual effect',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Virtual Reality/Virtual Reality_vr_computer_3d_cube_screen_tv.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 2,
       eventsFunctionsCount: 0,
       authors: [
@@ -973,7 +973,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -992,7 +992,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'discord,rich,presence,integration,status',
       category: 'Third-party',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/discord.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -1003,7 +1003,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -1022,7 +1022,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'double-click,double-tap',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Computers and Hardware/Computers and Hardware_mouse_wireless_pc.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 3,
       authors: [
@@ -1033,7 +1033,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -1055,7 +1055,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'pointer,drag,camera,scroll,gestures',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/drag-variant.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 0,
       eventsFunctionsCount: 1,
       authors: [
@@ -1066,7 +1066,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -1075,7 +1075,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -1094,7 +1094,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'draggable,mouse,touch,physics,object,joint,fling',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Glyphster Pack/Master/SVG/Virtual Reality/Virtual Reality_hand_vr_ar_360.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -1105,7 +1105,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -1128,7 +1128,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'draggable,slider,shape painter,ui,widget',
       category: 'User interface',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/UI Essentials/UI Essentials_sliders_options.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -1139,7 +1139,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -1148,7 +1148,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -1167,7 +1167,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
       tags: 'pathfinding,debug,shape painter,draw',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/resistor-nodes.svg',
+        'res/down.png',
       eventsBasedBehaviorsCount: 1,
       eventsFunctionsCount: 0,
       authors: [
@@ -1178,7 +1178,7 @@ export const fakeExtensionsRegistry: ExtensionsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },

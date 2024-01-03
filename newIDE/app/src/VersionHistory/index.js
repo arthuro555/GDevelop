@@ -18,10 +18,10 @@ import ScrollView from '../UI/ScrollView';
 import type { ClientCoordinates } from '../Utils/UseLongTouch';
 
 const anonymousAvatars = [
-  { src: 'res/avatar/green-hero.svg', alt: 'Green hero avatar' },
-  { src: 'res/avatar/red-hero.svg', alt: 'Red hero avatar' },
-  { src: 'res/avatar/ghost.svg', alt: 'Ghost avatar' },
-  { src: 'res/avatar/pink-cloud.svg', alt: 'Pink cloud avatar' },
+  { src: 'res/down.png', alt: 'Green hero avatar' },
+  { src: 'res/down.png', alt: 'Red hero avatar' },
+  { src: 'res/down.png', alt: 'Ghost avatar' },
+  { src: 'res/down.png', alt: 'Pink cloud avatar' },
 ];
 
 const styles = {

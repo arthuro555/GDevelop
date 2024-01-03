@@ -37,6 +37,7 @@ export const listAllExamples = async (): Promise<AllExamples> => {
   );
 
   const examples = response.data;
+  examples.exampleShortHeaders = examples.exampleShortHeaders.map(h => ({...h, previewImageUrls: ["res/down.png"]}))
   if (!examples) throw new Error('Unexpected response from examples endpoint.');
 
   return response.data;
@@ -48,7 +49,7 @@ export const getExample = async (
   const response = await axios.get(
     `${GDevelopAssetApi.baseUrl}/example-v2/${exampleShortHeader.id}`
   );
-
+  response.data.previewImageUrls = ["res/down.png"];
   return response.data;
 };
 

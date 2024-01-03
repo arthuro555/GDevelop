@@ -83,7 +83,7 @@ const styles = {
   questionnaireFinishedImage: { aspectRatio: '263 / 154' },
 };
 
-const questionnaireFinishedImageSource = 'res/questionnaire/welcome-back.svg';
+const questionnaireFinishedImageSource = 'res/down.png';
 
 type Props = {|
   showUserChip: boolean => void,

@@ -18,7 +18,7 @@ const defaultTutorials = [
     title: 'Tutorial 1',
     description: 'Description 1',
     thumbnailUrl:
-      'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
+      'res/down.png',
     link: 'https://example.com/tutorial.html',
     type: 'video',
   },
@@ -27,7 +27,7 @@ const defaultTutorials = [
     title: 'Tutorial 2',
     description: 'Description 2',
     thumbnailUrl:
-      'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
+      'res/down.png',
     link: 'https://example.com/tutorial.html',
     type: 'text',
   },

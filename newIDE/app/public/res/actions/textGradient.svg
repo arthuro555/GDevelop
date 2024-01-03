@@ -1,96 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="50"
-   height="50"
-   viewBox="0 0 50.000001 50.000001"
-   id="svg2"
-   version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="textGradient.svg"
-   inkscape:export-filename="/home/matthias/Programme/GD_MyFork/GDevelop/Binaries/Output/Release_Windows/res/actions/textGradient.png"
-   inkscape:export-xdpi="28.799999"
-   inkscape:export-ydpi="28.799999">
-  <defs
-     id="defs4">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient4183">
-      <stop
-         style="stop-color:#f00000;stop-opacity:1"
-         offset="0"
-         id="stop4185" />
-      <stop
-         id="stop4191"
-         offset="0.5"
-         style="stop-color:#00f02f;stop-opacity:1" />
-      <stop
-         style="stop-color:#1400f0;stop-opacity:1"
-         offset="1"
-         id="stop4187" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4183"
-       id="linearGradient4189"
-       x1="24.945677"
-       y1="1050.0177"
-       x2="24.945677"
-       y2="1004.6278"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="2.6657926"
-     inkscape:cx="14.118182"
-     inkscape:cy="12.090551"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1026"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Ebene 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-1002.3622)">
-    <g
-       style="font-style:normal;font-weight:normal;font-size:62.55903244px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4189);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="text4176">
-      <path
-         d="m 3.9840758,1004.5593 42.0318502,0 0,8.889 -15.12047,0 0,36.7167 -11.760365,0 0,-36.7167 -15.1510152,0 0,-8.889 z"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:62.55903244px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;fill-opacity:1;fill:url(#linearGradient4189)"
-         id="path4181" />
-    </g>
-  </g>
-</svg>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="115"
+    height="93"
+    viewBox="-5 -1 115 93"
+    fill="none"
+  >
+    <path
+      d="M60.9224 67.0771C52.3232 67.0771 44.0446 64.752 36.7313 59.6893C31.6337 56.1619 25.7339 48.197 25.7339 34.6939C25.7339 9.64282 38.5302 0.5 64.2455 0.5H110.542L115 14.7683H67.7736C50.801 14.7683 40.7089 16.0919 40.7089 34.6939C40.7089 40.8384 42.4416 45.2112 46.008 48.0604C52.0354 52.8764 63.7507 53.0813 70.9092 52.3913C70.9092 52.3913 73.8463 42.9467 74.33 41.4134C74.8966 39.6166 74.6485 39.188 72.881 39.188C70.328 39.188 65.7384 39.188 60.8673 39.188C57.4536 39.188 54.0998 37.4699 54.0998 33.3432C54.0998 29.3579 57.2201 27.0447 61.4974 27.0447C68.9034 27.0447 84.1565 27.0447 87.0113 27.0447C90.754 27.0447 94.5734 27.5814 92.6247 33.5063L82.3047 64.8043C82.3054 64.805 73.8741 67.0771 60.9224 67.0771V67.0771Z"
+      fill="currentColor"
+    />
+    <path
+      d="M89.8255 72.3901C84.6241 76.0318 76.9198 78.0446 63.8468 78.0446C41.3145 78.0446 24.8236 69.9479 18.0999 54.2515C14.9211 46.8323 15.227 38.4234 15.227 27.051H0.252679C0.252679 39.043 0.0463766 48.4458 3.25452 57.1063C11.6669 79.8247 33.3301 92.0307 62.4312 92.0307C90.5999 92.0307 102.273 83.9981 109.882 72.3901H89.8255Z"
+      fill="currentColor"
+    />
+  </svg>

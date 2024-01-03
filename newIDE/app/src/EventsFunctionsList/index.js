@@ -175,44 +175,44 @@ export default class EventsFunctionsList extends React.Component<Props, State> {
   _getFunctionThumbnail = (eventsFunction: gdEventsFunction) => {
     switch (eventsFunction.getFunctionType()) {
       default:
-        return 'res/functions/function.svg';
+        return 'res/down.png';
       case gd.EventsFunction.Action:
       case gd.EventsFunction.ActionWithOperator:
         switch (eventsFunction.getName()) {
           default:
-            return 'res/functions/action.svg';
+            return 'res/down.png';
 
           case 'onSceneUnloading':
           case 'onDestroy':
-            return 'res/functions/destroy.svg';
+            return 'res/down.png';
 
           case 'onSceneResumed':
           case 'onActivate':
-            return 'res/functions/activate.svg';
+            return 'res/down.png';
 
           case 'onScenePaused':
           case 'onDeActivate':
-            return 'res/functions/deactivate.svg';
+            return 'res/down.png';
 
           case 'onScenePreEvents':
           case 'onScenePostEvents':
           case 'doStepPreEvents':
           case 'doStepPostEvents':
-            return 'res/functions/step.svg';
+            return 'res/down.png';
 
           case 'onSceneLoaded':
           case 'onFirstSceneLoaded':
           case 'onCreated':
-            return 'res/functions/create.svg';
+            return 'res/down.png';
 
           case 'onHotReloading':
-            return 'res/functions/reload.svg';
+            return 'res/down.png';
         }
       case gd.EventsFunction.Condition:
-        return 'res/functions/condition.svg';
+        return 'res/down.png';
       case gd.EventsFunction.Expression:
       case gd.EventsFunction.ExpressionAndCondition:
-        return 'res/functions/expression.svg';
+        return 'res/down.png';
     }
   };
   _rename = (eventsFunction: gdEventsFunction, newName: string) => {

@@ -6,7 +6,7 @@ export const itemsWithJustImage: Array<ImageTileComponent> = Array(10)
   .map((_, index) => ({
     onClick: () => {},
     imageUrl:
-      'https://resources.gdevelop-app.com/examples/platformer/preview.png',
+      'res/down.png',
   }));
 
 export const itemsWithTitleAndDescription: Array<ImageTileComponent> = Array(10)
@@ -24,7 +24,7 @@ export const itemsWithTitleAndDescription: Array<ImageTileComponent> = Array(10)
       index,
     onClick: () => {},
     imageUrl:
-      'https://resources.gdevelop-app.com/examples/platformer/preview.png',
+      'res/down.png',
   }));
 
 export const itemsWithOverlay: Array<ImageTileComponent> = Array(10)
@@ -32,6 +32,6 @@ export const itemsWithOverlay: Array<ImageTileComponent> = Array(10)
   .map((_, index) => ({
     onClick: () => {},
     imageUrl:
-      'https://resources.gdevelop-app.com/examples/platformer/preview.png',
+      'res/down.png',
     overlayText: 'Overlay ' + index,
   }));

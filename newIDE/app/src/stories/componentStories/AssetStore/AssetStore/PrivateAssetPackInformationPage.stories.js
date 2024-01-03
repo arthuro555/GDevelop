@@ -28,7 +28,7 @@ const privateAssetPackListingData: PrivateAssetPackListingData = {
   isSellerGDevelop: false,
   productType: 'ASSET_PACK',
   thumbnailUrls: [
-    'https://resources.gdevelop-app.com/staging/private-assets/French Food/thumbnail1.png',
+    'res/down.png',
   ],
   updatedAt: '2022-09-14T12:43:51.329Z',
   createdAt: '2022-09-14T12:43:51.329Z',
@@ -60,12 +60,12 @@ const privateAssetPackDetails = {
     partial: 2,
   },
   previewImageUrls: [
-    'https://resources.gdevelop-app.com/assets/Packs/gdevelop platformer.png',
-    'https://resources.gdevelop-app.com/assets/Packs/space shooter.png',
-    'https://resources.gdevelop-app.com/assets/Packs/particles emitter.png',
-    'https://resources.gdevelop-app.com/assets/Packs/lucid icons pack.png',
-    'https://resources.gdevelop-app.com/assets/Packs/wesxdz skullcup.png',
-    'https://resources.gdevelop-app.com/assets/Packs/casual buttons pack.png',
+    'res/down.png',
+    'res/down.png',
+    'res/down.png',
+    'res/down.png',
+    'res/down.png',
+    'res/down.png',
   ],
   updatedAt: '2022-09-15T08:17:59.977Z',
   createdAt: '2022-09-14T12:27:27.173Z',
@@ -115,7 +115,7 @@ export const Default = () => {
           isSellerGDevelop: false,
           productType: 'ASSET_PACK',
           thumbnailUrls: [
-            'https://resources.gdevelop-app.com/staging/private-assets/French Food/thumbnail1.png',
+            'res/down.png',
           ],
           updatedAt: '2022-09-14T12:43:51.329Z',
           createdAt: '2022-09-14T12:43:51.329Z',
@@ -136,7 +136,7 @@ export const Default = () => {
           isSellerGDevelop: false,
           productType: 'ASSET_PACK',
           thumbnailUrls: [
-            'https://resources.gdevelop-app.com/staging/private-assets/French Sounds/thumbnail0.png',
+            'res/down.png',
           ],
           updatedAt: '2022-09-14T12:43:51.329Z',
           createdAt: '2022-09-14T12:43:51.329Z',
@@ -215,7 +215,7 @@ export const ForAlreadyPurchasedAssetPack = () => {
             isSellerGDevelop: false,
             productType: 'ASSET_PACK',
             thumbnailUrls: [
-              'https://resources.gdevelop-app.com/staging/private-assets/French Food/thumbnail1.png',
+              'res/down.png',
             ],
             updatedAt: '2022-09-14T12:43:51.329Z',
             createdAt: '2022-09-14T12:43:51.329Z',
@@ -236,7 +236,7 @@ export const ForAlreadyPurchasedAssetPack = () => {
             isSellerGDevelop: false,
             productType: 'ASSET_PACK',
             thumbnailUrls: [
-              'https://resources.gdevelop-app.com/staging/private-assets/French Sounds/thumbnail0.png',
+              'res/down.png',
             ],
             updatedAt: '2022-09-14T12:43:51.329Z',
             createdAt: '2022-09-14T12:43:51.329Z',

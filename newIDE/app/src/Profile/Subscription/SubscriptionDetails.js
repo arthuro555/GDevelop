@@ -154,7 +154,7 @@ const SubscriptionDetails = ({
               <Column expand noMargin>
                 <LineStackLayout alignItems="center">
                   <img
-                    src="res/diamond.svg"
+                    src="res/down.png"
                     style={styles.diamondIcon}
                     alt="diamond"
                   />
@@ -244,7 +244,7 @@ const SubscriptionDetails = ({
                   <Paper background="dark" variant="outlined">
                     <LineStackLayout alignItems="center" noMargin>
                       <img
-                        src="res/diamond.svg"
+                        src="res/down.png"
                         style={styles.diamondIcon}
                         alt="diamond"
                       />
@@ -271,7 +271,7 @@ const SubscriptionDetails = ({
               <Column expand noMargin>
                 <LineStackLayout alignItems="center">
                   <img
-                    src="res/diamond.svg"
+                    src="res/down.png"
                     style={styles.diamondIcon}
                     alt="diamond"
                   />
@@ -352,7 +352,7 @@ const SubscriptionDetails = ({
             <Column expand noMargin>
               <LineStackLayout alignItems="center">
                 <img
-                  src="res/diamond.svg"
+                  src="res/down.png"
                   style={styles.diamondIcon}
                   alt="diamond"
                 />

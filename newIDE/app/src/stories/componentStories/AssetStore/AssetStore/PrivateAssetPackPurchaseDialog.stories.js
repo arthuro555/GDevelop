@@ -29,7 +29,7 @@ const privateAssetPackListingData: PrivateAssetPackListingData = {
   isSellerGDevelop: false,
   productType: 'ASSET_PACK',
   thumbnailUrls: [
-    'https://resources.gdevelop-app.com/staging/private-assets/French Food/thumbnail1.png',
+    'res/down.png',
   ],
   updatedAt: '2022-09-14T12:43:51.329Z',
   createdAt: '2022-09-14T12:43:51.329Z',

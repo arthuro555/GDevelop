@@ -42,7 +42,7 @@ const getAssetPacksListingData = (
     updatedAt: '2021-11-18T10:19:50.417Z',
     createdAt: '2021-11-18T10:19:50.417Z',
     thumbnailUrls: [
-      'https://resources.gdevelop-app.com/private-assets/Blue Girl Platformer Pack/thumbnail.png',
+      'res/down.png',
     ],
     prices: [
       {

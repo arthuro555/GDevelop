@@ -313,7 +313,7 @@ export default function SubscriptionDialog({
         >
           <ColumnStackLayout noMargin expand>
             <LineStackLayout noMargin alignItems="center">
-              <img src="res/diamond.svg" style={styles.diamondIcon} alt="" />
+              <img src="res/down.png" style={styles.diamondIcon} alt="" />
               <Text>
                 <Trans>
                   Get a subscription to unlock more one-click exports and other

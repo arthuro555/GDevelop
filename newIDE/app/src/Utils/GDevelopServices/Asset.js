@@ -192,7 +192,12 @@ export const listAllPublicAssets = async ({
   const responsesData = await Promise.all([
     client
       .get(assetShortHeadersUrl)
-      .then(response => response.data)
+      .then(response =>
+        response.data.map(header => {
+          header.previewImageUrls = ['res/down.png'];
+          return header;
+        })
+      )
       .catch(e => e),
     client
       .get(filtersUrl)
@@ -200,7 +205,16 @@ export const listAllPublicAssets = async ({
       .catch(e => e),
     client
       .get(assetPacksUrl)
-      .then(response => response.data)
+      .then(response => {
+        const { starterPacks } = response.data;
+        return {
+          ...response.data,
+          starterPacks: starterPacks.map(pack => {
+            pack.thumbnailUrl = 'res/down.png';
+            return pack;
+          }),
+        };
+      })
       .catch(e => e),
   ]);
 
@@ -234,11 +248,22 @@ export const getPublicAsset = async (
       environment,
     },
   });
+  console.log(response.data);
   if (!response.data.assetUrl) {
     throw new Error('Unexpected response from the asset endpoint.');
   }
 
-  const assetResponse = await client.get(response.data.assetUrl);
+  const assetResponse = await client.get(response.data.assetUrl).data;
+  assetResponse.previewImageUrls = assetResponse.previewImageUrls.map(
+    _ => 'res/down.png'
+  );
+  assetResponse.objectAssets = assetResponse.objectAssets.map(a => {
+    a.resources = a.resources.map(b => {
+      b.file = 'res/down.png';
+      return b;
+    });
+    return a;
+  });
   return assetResponse.data;
 };
 
@@ -299,8 +324,12 @@ export const listAllResources = ({
         if (!resources || !filters) {
           throw new Error('Unexpected response from the resources endpoints.');
         }
+
         return {
-          resources,
+          resources: resources.map(r => {
+            r.url = 'res/down.png';
+            return r;
+          }),
           filters,
         };
       });

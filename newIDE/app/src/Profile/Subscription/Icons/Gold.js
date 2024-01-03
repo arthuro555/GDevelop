@@ -4,88 +4,18 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 export default React.memo(props => (
   <SvgIcon
     {...props}
-    width="57"
-    height="66"
-    viewBox="0 0 57 66"
+    width="115"
+    height="93"
+    viewBox="-5 -1 115 93"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
   >
-    <g opacity="0.2" filter="url(#filter0_f_984_3942)">
-      <path
-        d="M23.1777 47.7929L19.2254 44.853C17.1961 43.3435 16.0001 40.9633 16.0001 38.4341L16 27.2866C16 24.8114 17.1457 22.4757 19.103 20.9605L23.2941 17.7161C26.1321 15.5192 30.0859 15.4811 32.9656 17.623L36.8496 20.5118C38.8791 22.0213 40.0752 24.4016 40.0752 26.9309V38.1228C40.0752 40.5726 38.9527 42.8874 37.029 44.4045L32.9063 47.6557C30.0671 49.8947 26.079 49.951 23.1777 47.7929Z"
-        fill="#FFF69B"
-      />
-    </g>
-    <g filter="url(#filter1_f_984_3942)">
-      <ellipse
-        cx="8.40812"
-        cy="0.459085"
-        rx="8.40812"
-        ry="0.459085"
-        transform="matrix(0.904419 0.426646 -0.444506 0.895776 19.3289 46.0032)"
-        fill="black"
-        fillOpacity="0.9"
-      />
-    </g>
     <path
-      d="M28.0447 19.823L37.8324 32.3622L28.0447 35.1759V19.823Z"
-      fill="#FFF69B"
+      d="M60.9224 67.0771C52.3232 67.0771 44.0446 64.752 36.7313 59.6893C31.6337 56.1619 25.7339 48.197 25.7339 34.6939C25.7339 9.64282 38.5302 0.5 64.2455 0.5H110.542L115 14.7683H67.7736C50.801 14.7683 40.7089 16.0919 40.7089 34.6939C40.7089 40.8384 42.4416 45.2112 46.008 48.0604C52.0354 52.8764 63.7507 53.0813 70.9092 52.3913C70.9092 52.3913 73.8463 42.9467 74.33 41.4134C74.8966 39.6166 74.6485 39.188 72.881 39.188C70.328 39.188 65.7384 39.188 60.8673 39.188C57.4536 39.188 54.0998 37.4699 54.0998 33.3432C54.0998 29.3579 57.2201 27.0447 61.4974 27.0447C68.9034 27.0447 84.1565 27.0447 87.0113 27.0447C90.754 27.0447 94.5734 27.5814 92.6247 33.5063L82.3047 64.8043C82.3054 64.805 73.8741 67.0771 60.9224 67.0771V67.0771Z"
+      fill="currentColor"
     />
     <path
-      d="M28.0447 45.6775L18.257 32.3626L28.0447 35.1765L28.0447 45.6775Z"
-      fill="#D39902"
+      d="M89.8255 72.3901C84.6241 76.0318 76.9198 78.0446 63.8468 78.0446C41.3145 78.0446 24.8236 69.9479 18.0999 54.2515C14.9211 46.8323 15.227 38.4234 15.227 27.051H0.252679C0.252679 39.043 0.0463766 48.4458 3.25452 57.1063C11.6669 79.8247 33.3301 92.0307 62.4312 92.0307C90.5999 92.0307 102.273 83.9981 109.882 72.3901H89.8255Z"
+      fill="currentColor"
     />
-    <path
-      d="M28.0443 19.8248V35.1774L18.2566 32.3638L28.0443 19.8248Z"
-      fill="#FED501"
-    />
-    <path
-      d="M28.0441 45.677L28.0441 35.1762L37.8318 32.3622L28.0441 45.677Z"
-      fill="#FED501"
-    />
-    <defs>
-      <filter
-        id="filter0_f_984_3942"
-        x="0"
-        y="0.0419922"
-        width="56.0752"
-        height="65.332"
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="BackgroundImageFix"
-          result="shape"
-        />
-        <feGaussianBlur
-          stdDeviation="8"
-          result="effect1_foregroundBlur_984_3942"
-        />
-      </filter>
-      <filter
-        id="filter1_f_984_3942"
-        x="9.12207"
-        y="36.3906"
-        width="35.2144"
-        height="27.2222"
-        filterUnits="userSpaceOnUse"
-        colorInterpolationFilters="sRGB"
-      >
-        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-        <feBlend
-          mode="normal"
-          in="SourceGraphic"
-          in2="BackgroundImageFix"
-          result="shape"
-        />
-        <feGaussianBlur
-          stdDeviation="5"
-          result="effect1_foregroundBlur_984_3942"
-        />
-      </filter>
-    </defs>
   </SvgIcon>
 ));

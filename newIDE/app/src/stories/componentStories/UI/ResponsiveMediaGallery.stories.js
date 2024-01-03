@@ -28,32 +28,32 @@ export const Default = () => (
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/gdevelop platformer.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/space shooter.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/particles emitter.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/lucid icons pack.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/wesxdz skullcup.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/casual buttons pack.png',
+                  'res/down.png',
               },
             ]}
             altTextTemplate={'Image {imageIndex}'}
@@ -70,32 +70,32 @@ export const Default = () => (
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/gdevelop platformer.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/space shooter.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/particles emitter.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/lucid icons pack.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/wesxdz skullcup.png',
+                  'res/down.png',
               },
               {
                 kind: 'image',
                 url:
-                  'https://resources.gdevelop-app.com/assets/Packs/casual buttons pack.png',
+                  'res/down.png',
               },
             ]}
             altTextTemplate={'Image {imageIndex}'}

@@ -35,7 +35,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: '3d',
       category: 'Visual effect',
       previewIconUrl:
-        'https://asset-resources.gdevelop.io/public-resources/Icons/b46f9cf1fc6b0ef59a461c7831003d1fb091137cbedbae876774f40f8b7dea97_pine-tree.svg',
+        'res/down.png',
       extensionName: 'Billboard',
       description:
         'Rotate to always face the camera (only the front face of the cube should be enabled).',
@@ -56,7 +56,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'bounce,bullet,ricochet',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/volleyball.svg',
+        'res/down.png',
       extensionName: 'Bounce',
       description:
         'Provides an action to make the object bounce from another object it just touched. Add a permanent force to the object and, when in collision with another one, use the action to make it bounce realistically.',
@@ -71,7 +71,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -91,7 +91,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'fire,bullet,spawn,firerate,reload,weapon,ranged,ammo,overheat',
       category: 'Game mechanic',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/bullet.svg',
+        'res/down.png',
       extensionName: 'FireBullet',
       description: 'Fire bullets, manage ammo, reloading, and overheating.',
       objectType: '',
@@ -105,7 +105,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -114,7 +114,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -131,7 +131,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'flash,blink,visible,invisible,hit,damage',
       category: 'Visual effect',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/flash-outline.svg',
+        'res/down.png',
       extensionName: 'Flash',
       description:
         'Make the object flash (blink) for a period of time, so that it is alternately visible and invisible.\nTrigger the effect by using the Flash action.',
@@ -152,7 +152,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'controllers,gamepads,joysticks,axis,xbox,ps4',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/gamepad-variant-outline.svg',
+        'res/down.png',
       extensionName: 'Gamepads',
       description: 'Control a platformer character with a gamepad.',
       objectType: '',
@@ -166,7 +166,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -183,7 +183,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'controllers,gamepads,joysticks,axis,xbox,ps4',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/gamepad-variant-outline.svg',
+        'res/down.png',
       extensionName: 'Gamepads',
       description: 'Control a top-down character with a gamepad.',
       objectType: '',
@@ -197,7 +197,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -217,7 +217,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'health,life,damage,hit,heal,shield,regeneration,armor',
       category: 'Game mechanic',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/heart-half-full.svg',
+        'res/down.png',
       extensionName: 'Health',
       description:
         'Manage health (life) points including a protective shield and armor.',
@@ -232,7 +232,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -241,7 +241,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -258,7 +258,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'camera,scrolling,follow,smooth',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Computers and Hardware/Computers and Hardware_camcoder_gopro_go_pro_camera.svg',
+        'res/down.png',
       extensionName: 'SmoothCamera',
       description: 'Smoothly scroll to follow an object.',
       objectType: '',
@@ -272,7 +272,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -289,7 +289,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'camera,scrolling,follow,smooth',
       category: 'Camera',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Computers and Hardware/Computers and Hardware_camcoder_gopro_go_pro_camera.svg',
+        'res/down.png',
       extensionName: 'SmoothCamera',
       description:
         'Smoothly scroll to follow a character and stabilize the camera when jumping.',
@@ -304,7 +304,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -326,7 +326,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Videogames/Videogames_controller_joystick_arrows_direction.svg',
+        'res/down.png',
       extensionName: 'SpriteMultitouchJoystick',
       description:
         'Control a platformer character with a multitouch controller.',
@@ -341,7 +341,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -350,7 +350,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -372,7 +372,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
       category: 'Input',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Videogames/Videogames_controller_joystick_arrows_direction.svg',
+        'res/down.png',
       extensionName: 'SpriteMultitouchJoystick',
       description: 'Control a top-down character with a multitouch controller.',
       objectType: '',
@@ -386,7 +386,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -395,7 +395,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -415,7 +415,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'positioning,camera,screen',
       category: 'Movement',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/monitor-screenshot.svg',
+        'res/down.png',
       extensionName: 'StayOnScreen',
       description:
         'Force the object to stay visible on the screen by setting back its position inside the viewport of the camera.',
@@ -430,7 +430,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'IWykYNRvhCZBN3vEgKEbBPOR3Oc2',
@@ -439,7 +439,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -456,7 +456,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'z-order,y-sort,depth,fake-depth,isometric,rpg',
       category: 'Visual effect',
       previewIconUrl:
-        'https://resources.gdevelop-app.com/assets/Icons/sort-ascending.svg',
+        'res/down.png',
       extensionName: 'YSort',
       description:
         'Set the depth (Z-order) of the instance to the value of its Y position in the scene, creating an illusion of depth. The origin point of the object is used to determine the Z-order.',
@@ -481,7 +481,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'joint,ragdoll,physics,spring,rope,weld,revolute,distance',
       category: 'General',
       previewIconUrl:
-        'https://asset-resources.gdevelop.io/public-resources/Icons/8834e0c63a962c74f1dab4c8f918c171261597341c4ca6574b300ab35855274b_human.svg',
+        'res/down.png',
       extensionName: 'JointConnector',
       description:
         'Create and manage revolute joints between two objects.\nAlso known as a hinge joint because the objects act like they are connected with a hinge that pivots.',
@@ -496,7 +496,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -505,7 +505,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -525,7 +525,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'joint,ragdoll,physics,spring,rope,weld,revolute,distance',
       category: 'General',
       previewIconUrl:
-        'https://asset-resources.gdevelop.io/public-resources/Icons/8834e0c63a962c74f1dab4c8f918c171261597341c4ca6574b300ab35855274b_human.svg',
+        'res/down.png',
       extensionName: 'JointConnector',
       description:
         'Create and manage weld joints between two objects.\nAlso known as a static joint because the objects stay glued in the same relative position to each other.',
@@ -540,7 +540,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -549,7 +549,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -569,7 +569,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'joint,ragdoll,physics,spring,rope,weld,revolute,distance',
       category: 'General',
       previewIconUrl:
-        'https://asset-resources.gdevelop.io/public-resources/Icons/8834e0c63a962c74f1dab4c8f918c171261597341c4ca6574b300ab35855274b_human.svg',
+        'res/down.png',
       extensionName: 'JointConnector',
       description:
         'Create and manage distance joints between two objects. \nActs like a spring because the objects try to stay the same distance apart.',
@@ -584,7 +584,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -593,7 +593,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },
@@ -613,7 +613,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       tags: 'joint,ragdoll,physics,spring,rope,weld,revolute,distance',
       category: 'General',
       previewIconUrl:
-        'https://asset-resources.gdevelop.io/public-resources/Icons/8834e0c63a962c74f1dab4c8f918c171261597341c4ca6574b300ab35855274b_human.svg',
+        'res/down.png',
       extensionName: 'JointConnector',
       description:
         'Create and manage rope joints between two objects. \nObjects can get closer, but they cannot exceed the starting distance from each other.\n',
@@ -628,7 +628,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
         {
           id: 'gqDaZjCfevOOxBYkK6zlhtZnXCg1',
@@ -637,7 +637,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
           donateLink: null,
           discordUsername: null,
           communityLinks: {},
-          iconUrl: 'https://resources.gdevelop-app.com/avatars/4ian.png',
+          iconUrl: 'res/down.png',
         },
       ],
     },

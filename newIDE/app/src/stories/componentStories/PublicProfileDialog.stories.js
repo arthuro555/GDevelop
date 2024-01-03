@@ -40,7 +40,7 @@ const assetPacks = new Array(5).fill(0).map((_, i) => ({
   productType: 'ASSET_PACK',
   listing: 'ASSET_PACK',
   thumbnailUrls: [
-    'https://resources.gdevelop-app.com/private-assets/Blue Girl Platformer Pack/thumbnail.png',
+    'res/down.png',
   ],
   stripeProductId: 'prod_MypbkdW56ntnME',
   prices: [

@@ -93,7 +93,7 @@ const showcaseItems = [
     title: 'Vai Juliette!',
     onClick: () => action('Clicked on vai-juliette'),
     thumbnailUrl:
-      'https://cdn6.aptoide.com/imgs/0/d/3/0d3926b58fd241dc9ecccc1661f187ec_fgraphic.png',
+      'res/down.png',
   },
   {
     id: 'alanna-the-princess-of-puzzles',
@@ -108,7 +108,7 @@ const showcaseItems = [
     title: 'Miko Adventures Puffball',
     onClick: () => action('Clicked on miko-adventures-puffball'),
     thumbnailUrl:
-      'https://resources.gdevelop-app.com/games-showcase/images/miko-adventures-puffball/Miko_adventures_puffball_header_logo.png',
+      'res/down.png',
     overlayText: 'Old',
     overlayTextPosition: 'topLeft',
   },
@@ -131,7 +131,7 @@ const showcaseItems = [
     title: 'Hyperspace Dogfights',
     onClick: () => action('Clicked on hyperspace-dogfights'),
     thumbnailUrl:
-      'https://resources.gdevelop-app.com/games-showcase/images/hyperspace-dogfights/hdog_screenshot_dodge.png',
+      'res/down.png',
   },
   {
     id: 'uphill-climb-racing-neon',
@@ -145,7 +145,7 @@ const showcaseItems = [
     title: 'Karambola',
     onClick: () => action('Clicked on karambola'),
     thumbnailUrl:
-      'https://resources.gdevelop-app.com/games-showcase/images/karambola-banner.png',
+      'res/down.png',
   },
   {
     id: 'the-research-age',

@@ -593,7 +593,7 @@ const defaultAuthenticatedUserWithNoSubscription: AuthenticatedUser = {
       name: 'Gamepasses',
       longDescription: '',
       previewImageUrls: [
-        'https://resources.gdevelop-app.com/staging/private-assets/Gamepasses/thumbnail.png',
+        'res/down.png',
       ],
       tag: 'gamepasses',
       content: {},
@@ -919,10 +919,10 @@ const spaceshipSerializedObject = {
 const spaceshipSerializedResources = [
   {
     alwaysLoaded: false,
-    file: 'https://example.com/player-ship1.png',
+    file: 'res/down.png',
     origin: {
       name: 'gdevelop-asset-store',
-      identifier: 'https://example.com/player-ship1.png',
+      identifier: 'res/down.png',
     },
     kind: 'image',
     metadata: '',
@@ -932,10 +932,10 @@ const spaceshipSerializedResources = [
   },
   {
     alwaysLoaded: false,
-    file: 'https://example.com/player-ship2.png',
+    file: 'res/down.png',
     origin: {
       name: 'gdevelop-asset-store',
-      identifier: 'https://example.com/player-ship2.png',
+      identifier: 'res/down.png',
     },
     kind: 'image',
     metadata: '',
@@ -952,7 +952,7 @@ export const fakeAsset1: Asset = {
     'A spaceship that can be moved with the keyboard or by touching the screen',
   description: "A very nice way to start a shoot'em up.",
   previewImageUrls: [
-    'https://asset-resources.gdevelop.io/public-resources/Simple Space/spaceships/b0e7ae371773ea6cf1e18a7db1d32ea1b4b9dd388f1f31aed5b7c1501437292c_Complex Spaceship_Type A.png',
+    'res/down.png',
   ],
   animationsCount: 6,
   maxFramesCount: 6,
@@ -1048,7 +1048,7 @@ export const fakeAssetWithCustomObject: Asset = {
         {
           alwaysLoaded: false,
           file:
-            'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Hovered.png',
+            'res/down.png',
           kind: 'image',
           metadata: '',
           name: 'object_YellowButton_Hovered.png',
@@ -1056,13 +1056,13 @@ export const fakeAssetWithCustomObject: Asset = {
           origin: {
             name: 'gdevelop-asset-store',
             identifier:
-              'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Hovered.png',
+              'res/down.png',
           },
         },
         {
           alwaysLoaded: false,
           file:
-            'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Idle.png',
+            'res/down.png',
           kind: 'image',
           metadata: '',
           name: 'object_YellowButton_Idle.png',
@@ -1070,13 +1070,13 @@ export const fakeAssetWithCustomObject: Asset = {
           origin: {
             name: 'gdevelop-asset-store',
             identifier:
-              'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Idle.png',
+              'res/down.png',
           },
         },
         {
           alwaysLoaded: false,
           file:
-            'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Pressed.png',
+            'res/down.png',
           kind: 'image',
           metadata: '',
           name: 'object_YellowButton_Pressed.png',
@@ -1084,7 +1084,7 @@ export const fakeAssetWithCustomObject: Asset = {
           origin: {
             name: 'gdevelop-asset-store',
             identifier:
-              'https://resources.gdevelop-app.com/assets/Custom objects/object_YellowButton_Pressed.png',
+              'res/down.png',
           },
         },
       ],
@@ -1102,7 +1102,7 @@ export const fakeAssetWithCustomObject: Asset = {
   animationsCount: 1,
   maxFramesCount: 1,
   previewImageUrls: [
-    'https://asset-resources.gdevelop.io/public-resources/Menu buttons/3e1b2da0279f60b6a6d1cfe4c79875b70a81b0bec7aa45ff18bff03eb26326eb_Yellow Button.preview.png',
+    'res/down.png',
   ],
   width: 256,
   height: 106,
@@ -1184,7 +1184,7 @@ export const fakeAssetShortHeader1: AssetShortHeader = {
   name: 'Dino Doux',
   objectType: 'sprite',
   previewImageUrls: [
-    'https://resources.gdevelop-app.com/assets/24x24 Dino Characters/Dino Doux_Crouch.png',
+    'res/down.png',
   ],
   shortDescription: 'with 6 animations',
   tags: [
@@ -1209,7 +1209,7 @@ export const fakeAssetShortHeader2: AssetShortHeader = {
   name: 'Dino Doux 2',
   objectType: 'sprite',
   previewImageUrls: [
-    'https://resources.gdevelop-app.com/assets/24x24 Dino Characters/Dino Doux_Crouch.png',
+    'res/down.png',
   ],
   shortDescription: 'with 5 animations',
   tags: [
@@ -1233,7 +1233,7 @@ export const fakePrivateAssetShortHeader1: AssetShortHeader = {
   width: 36,
   name: 'Premium Dino Doux',
   objectType: 'sprite',
-  previewImageUrls: ['https://private-assets.gdevelop.io/fake-preview.png'],
+  previewImageUrls: ['res/down.png'],
   shortDescription: 'with 10 animations',
   tags: [
     '24x24 dino characters',
@@ -1276,7 +1276,7 @@ export const fireBulletExtensionShortHeader: ExtensionShortHeader = {
     'https://resources.gdevelop-app.com/extensions/FireBullet-header.json',
   tags: ['fire', 'bullets', 'spawn', 'firerate'],
   category: 'Movement',
-  previewIconUrl: 'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+  previewIconUrl: 'res/down.png',
   eventsBasedBehaviorsCount: 1,
   eventsFunctionsCount: 0,
 };
@@ -1286,7 +1286,7 @@ export const fireBulletExtensionHeader: ExtensionHeader = {
   description:
     'This is a longer description explaining:\n* How to\n* Use the extension\n\nWith *some* **markdown** :)',
   helpPath: 'https://example.com',
-  iconUrl: 'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+  iconUrl: 'res/down.png',
 };
 
 export const uncompatibleFireBulletExtensionShortHeader: ExtensionShortHeader = {
@@ -1325,7 +1325,7 @@ export const flashExtensionShortHeader: ExtensionShortHeader = {
   headerUrl: 'Extensions/Flash-header.json',
   tags: ['flash', 'blink', 'visible', 'invisible', 'hit', 'damage'],
   category: 'Visual effect',
-  previewIconUrl: 'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+  previewIconUrl: 'res/down.png',
   eventsBasedBehaviorsCount: 1,
   eventsFunctionsCount: 0,
 };
@@ -1367,7 +1367,7 @@ export const communityTierExtensionShortHeader: ExtensionShortHeader = {
     'https://resources.gdevelop-app.com/extensions/FakeCommunityExtension-header.json',
   tags: ['fire', 'bullets', 'spawn', 'firerate'],
   category: '',
-  previewIconUrl: 'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+  previewIconUrl: 'res/down.png',
   eventsBasedBehaviorsCount: 1,
   eventsFunctionsCount: 0,
 };
@@ -1377,7 +1377,7 @@ export const communityTierExtensionHeader: ExtensionHeader = {
   description:
     'This is a longer description explaining:\n* How to\n* Use the extension\n\nWith *some* **markdown** :)',
   helpPath: 'https://example.com',
-  iconUrl: 'https://resources.gdevelop-app.com/assets/Icons/repeat.svg',
+  iconUrl: 'res/down.png',
 };
 
 export const fakeGame: Game = {
@@ -1629,7 +1629,7 @@ export const geometryMonsterExampleShortHeader: ExampleShortHeader = {
     'A hyper casual endless game where you have to collect shapes and avoid bombs, with a progressively increasing difficulty.\n',
   license: 'MIT',
   previewImageUrls: [
-    'https://resources.gdevelop-app.com/examples/geometry-monster/thumbnail.png',
+    'res/down.png',
   ],
   authorIds: [],
   tags: [
@@ -1684,7 +1684,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'platformer',
       categories: ['full-game-pack'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/platformer.png',
+        'res/down.png',
       assetsCount: 16,
       authors: [],
       licenses: [],
@@ -1694,7 +1694,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'space shooter',
       categories: [],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/space shooter.png',
+        'res/down.png',
       assetsCount: 140,
       authors: [],
       licenses: [],
@@ -1704,7 +1704,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'tank pack',
       categories: [],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/tank pack.png',
+        'res/down.png',
       assetsCount: 32,
       authors: [],
       licenses: [],
@@ -1714,7 +1714,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'pixel adventure pack',
       categories: ['full-game-pack'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/pixel adventure pack.png',
+        'res/down.png',
       assetsCount: 80,
       authors: [],
       licenses: [],
@@ -1724,7 +1724,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'pirate bomb pack',
       categories: ['full-game-pack'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/pirate bomb pack.png',
+        'res/down.png',
       assetsCount: 48,
       authors: [],
       licenses: [],
@@ -1736,7 +1736,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'pixel effects pack',
       categories: ['visual-effect'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/pixel effects pack.png',
+        'res/down.png',
       assetsCount: 20,
       authors: [],
       licenses: [],
@@ -1745,7 +1745,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       name: 'Emotes',
       tag: 'emote',
       categories: [],
-      thumbnailUrl: 'https://resources.gdevelop-app.com/assets/Packs/emote.png',
+      thumbnailUrl: 'res/down.png',
       assetsCount: 176,
       authors: [],
       licenses: [],
@@ -1755,7 +1755,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: '24x24 dino characters',
       categories: ['character'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/24x24 dino characters.png',
+        'res/down.png',
       assetsCount: 5,
       authors: [],
       licenses: [],
@@ -1765,7 +1765,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: '16x16 pixel art spinning items',
       categories: ['props'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/16x16 pixel art spinning items.png',
+        'res/down.png',
       assetsCount: 30,
       authors: [],
       licenses: [],
@@ -1776,7 +1776,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: '16x16 pixel art rpg items',
       categories: ['props'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/16x16 pixel art rpg items.png',
+        'res/down.png',
       assetsCount: 64,
       authors: [],
       licenses: [],
@@ -1786,7 +1786,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: '16x16 rpg item pack',
       categories: ['props'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/16x16 rpg item pack.png',
+        'res/down.png',
       assetsCount: 144,
       authors: [],
       licenses: [],
@@ -1796,7 +1796,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: '32x32 fantasy icons pack v2',
       categories: [],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/32x32 fantasy icons pack v2.png',
+        'res/down.png',
       assetsCount: 285,
       authors: [],
       licenses: [],
@@ -1806,7 +1806,7 @@ export const fakeAssetPacks: PublicAssetPacks = {
       tag: 'on-screen controls',
       categories: ['interface'],
       thumbnailUrl:
-        'https://resources.gdevelop-app.com/assets/Packs/on-screen controls.png',
+        'res/down.png',
       assetsCount: 287,
       authors: [],
       licenses: [],
@@ -1902,7 +1902,7 @@ export const fakeAnnouncements: Announcement[] = [
     },
     markdownMessageByLocale: {
       en:
-        'Something important but not urgent to announce, with a big image.\n\n![some image](https://raw.githubusercontent.com/4ian/GDevelop/master/newIDE/GDevelop%20banner.png)',
+        'Something important but not urgent to announce, with a big image.\n\n![some image](res/down.png)',
     },
     buttonLabelByLocale: { en: 'View' },
     buttonUrl: 'https://gdevelop.io',
@@ -1915,7 +1915,7 @@ export const fakeAnnouncements: Announcement[] = [
     },
     markdownMessageByLocale: {
       en:
-        '[![GDevelop Android](https://resources.gdevelop.io/announcements/GDevelop_Android.png)](https://play.google.com/store/apps/details?id=io.gdevelop.ide)',
+        '[![GDevelop Android](res/down.png)](https://play.google.com/store/apps/details?id=io.gdevelop.ide)',
     },
   },
 ];

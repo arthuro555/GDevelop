@@ -55,7 +55,7 @@ export const WithThumbnailSetByHref = () => {
               </Link>
             </Text>,
           ]}
-          thumbnailSource="https://resources.gdevelop-app.com/tutorials/images/best-practices-when-making-games.png?gdUsage=img"
+          thumbnailSource="res/down.png?gdUsage=img"
           onClose={action('onClose')}
           closeWithBackdropClick={false}
         />
