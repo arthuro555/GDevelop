@@ -1,4 +1,3 @@
-// @flow
 import GDevelopJsInitializerDecorator from '../src/stories/GDevelopJsInitializerDecorator';
 import i18nProviderDecorator from '../src/stories/I18nProviderDecorator';
 import BrowserDropDownMenuDisablerDecorator from '../src/stories/BrowserDropDownMenuDisablerDecorator';
@@ -40,4 +39,4 @@ export const decorators = [
   GDevelopJsInitializerDecorator,
   i18nProviderDecorator,
   BrowserDropDownMenuDisablerDecorator
-]
+];

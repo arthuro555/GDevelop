@@ -1,0 +1,70 @@
+import * as React from 'react';
+import AlertContext from './AlertContext';
+import {
+  ShowAlertDialogOptions,
+  ShowConfirmDeleteDialogOptions,
+  ShowConfirmDialogOptions,
+  ShowYesNoCancelDialogOptions,
+} from './AlertContext';
+
+const useAlertDialog = () => {
+  const {
+    showAlertDialog,
+    showConfirmDialog,
+    showConfirmDeleteDialog,
+    showYesNoCancelDialog,
+  } = React.useContext(AlertContext);
+
+  const showAlert = React.useCallback(
+    (options: ShowAlertDialogOptions): Promise<void> => new Promise(resolve: (result: Promise<never>) => void => {
+      showAlertDialog({ callback: resolve, ...options });
+// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+    }),
+    [showAlertDialog]
+// @ts-expect-error - TS1128 - Declaration or statement expected.
+  );
+
+  const showConfirmation = React.useCallback(
+    (options: ShowConfirmDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
+      showConfirmDialog({ callback: resolve, ...options });
+// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+    }),
+    [showConfirmDialog]
+// @ts-expect-error - TS1128 - Declaration or statement expected.
+  );
+
+  const showDeleteConfirmation = React.useCallback(
+    (options: ShowConfirmDeleteDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
+      showConfirmDeleteDialog({ callback: resolve, ...options });
+// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+    }),
+    [showConfirmDeleteDialog]
+// @ts-expect-error - TS1128 - Declaration or statement expected.
+  );
+
+  /**
+   * Displays a 3-choice alert dialog (Defaults to Yes No Cancel).
+   * Callback will be called with:
+   * - 0 for yes (primary button)
+   * - 1 for no (flat button next to primary button)
+   * - 2 for cancel (secondary action)
+   */
+  const showYesNoCancel = React.useCallback(
+    (options: ShowYesNoCancelDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
+      showYesNoCancelDialog({ callback: resolve, ...options });
+// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+    }),
+    [showYesNoCancelDialog]
+// @ts-expect-error - TS1128 - Declaration or statement expected.
+  );
+
+  return {
+    showAlert,
+    showConfirmation,
+    showDeleteConfirmation,
+    showYesNoCancel,
+  };
+// @ts-expect-error - TS1128 - Declaration or statement expected.
+};
+
+export default useAlertDialog;

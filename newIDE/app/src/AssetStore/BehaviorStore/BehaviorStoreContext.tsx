@@ -1,0 +1,302 @@
+import * as React from 'react';
+// @ts-expect-error - TS6142 - Module '../../UI/Search/FiltersChooser' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/FiltersChooser.tsx', but '--jsx' is not set.
+import { FiltersState, useFilters } from '../../UI/Search/FiltersChooser';
+import {
+  getBehaviorsRegistry,
+  BehaviorsRegistry,
+  BehaviorShortHeader,
+} from '../../Utils/GDevelopServices/Extension';
+import { Filters } from '../../Utils/GDevelopServices/Filters';
+import {
+  useSearchStructuredItem,
+  SearchMatch,
+} from '../../UI/Search/UseSearchStructuredItem';
+// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+import PreferencesContext from '../../MainFrame/Preferences/PreferencesContext';
+import { BEHAVIORS_FETCH_TIMEOUT } from '../../Utils/GlobalFetchTimeouts';
+
+const gd: libGDevelop = global.gd;
+
+const emptySearchText = '';
+
+const noExcludedTiers = new Set();
+const excludedCommunityTiers = new Set(['community']);
+
+export type SearchableBehaviorMetadata = {
+  type: string,
+  fullName: string,
+  description: string,
+  objectType: string,
+  /**
+   * All required behaviors including transitive ones.
+   */
+  allRequiredBehaviorTypes: Array<string>,
+  previewIconUrl: string,
+  category: string,
+  tags: string[],
+  isDeprecated?: boolean
+};
+
+type BehaviorStoreState = {
+  filters: Filters | null | undefined,
+  searchResults: Array<{
+    item: BehaviorShortHeader | SearchableBehaviorMetadata,
+    matches: SearchMatch[]
+  }> | null | undefined,
+  fetchBehaviors: () => void,
+  error: Error | null | undefined,
+  searchText: string,
+  setSearchText: (arg1: string) => void,
+  allCategories: string[],
+  chosenCategory: string,
+  setChosenCategory: (arg1: string) => void,
+  setInstalledBehaviorMetadataList: (installedBehaviorMetadataList: Array<SearchableBehaviorMetadata>) => void,
+  behaviorShortHeadersByType: {
+    [name: string]: BehaviorShortHeader
+  },
+  filtersState: FiltersState
+};
+
+export const BehaviorStoreContext = React.createContext<BehaviorStoreState>({
+  filters: null,
+  searchResults: null,
+  fetchBehaviors: () => {},
+  error: null,
+  searchText: '',
+  setSearchText: () => {},
+  allCategories: [],
+  // '' means all categories.
+  chosenCategory: '',
+  setChosenCategory: () => {},
+  setInstalledBehaviorMetadataList: () => {},
+  behaviorShortHeadersByType: {},
+  filtersState: {
+    chosenFilters: new Set(),
+    addFilter: () => {},
+    removeFilter: () => {},
+    chosenCategory: null,
+    setChosenCategory: () => {},
+  },
+});
+
+type BehaviorStoreStateProviderProps = {
+  children: React.ReactNode,
+  defaultSearchText?: string
+};
+
+export const BehaviorStoreStateProvider = ({
+  children,
+  defaultSearchText,
+}: BehaviorStoreStateProviderProps) => {
+  const [
+    installedBehaviorMetadataList,
+    setInstalledBehaviorMetadataList,
+  ] = React.useState<Array<SearchableBehaviorMetadata>>([]);
+  const [
+    behaviorShortHeadersByType,
+    setBehaviorShortHeadersByType,
+  ] = React.useState<{
+    [key: string]: BehaviorShortHeader
+  }>({});
+
+  const preferences = React.useContext(PreferencesContext);
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+  const { showCommunityExtensions } = preferences.values;
+  const [firstBehaviorIds, setFirstBehaviorIds] = React.useState<Array<string>>([]);
+  const [error, setError] = React.useState<Error | null | undefined>(null);
+  const isLoading = React.useRef<boolean>(false);
+
+  const [searchText, setSearchText] = React.useState(
+    defaultSearchText || emptySearchText
+  );
+  const [chosenCategory, setChosenCategory] = React.useState('');
+  const filtersState = useFilters();
+
+  const fetchBehaviors = React.useCallback(
+    () => {
+      // Don't attempt to load again resources and filters if they
+      // were loaded already.
+      if (Object.keys(behaviorShortHeadersByType).length || isLoading.current)
+        return;
+
+      (async () => {
+        setError(null);
+        isLoading.current = true;
+
+        try {
+          const behaviorsRegistry: BehaviorsRegistry = await getBehaviorsRegistry();
+          const behaviorShortHeaders = behaviorsRegistry.headers;
+
+          const behaviorShortHeadersByType: Record<string, any> = {};
+          behaviorShortHeaders.forEach(behavior => {
+            behaviorShortHeadersByType[behavior.type] = behavior;
+          });
+
+          console.info(
+            `Loaded ${
+              behaviorShortHeaders ? behaviorShortHeaders.length : 0
+            } behaviors from the extension store.`
+          );
+          setBehaviorShortHeadersByType(behaviorShortHeadersByType);
+          setFirstBehaviorIds(
+            behaviorsRegistry.views.default.firstIds.map(
+              ({ extensionName, behaviorName }) =>
+                gd.PlatformExtension.getBehaviorFullType(
+                  extensionName,
+                  behaviorName
+                )
+            )
+          );
+        } catch (error: any) {
+          console.error(
+            `Unable to load the behaviors from the extension store:`,
+            error
+          );
+          setError(error);
+        }
+
+        isLoading.current = false;
+      })();
+    },
+    [behaviorShortHeadersByType, isLoading]
+  );
+
+  React.useEffect(
+    () => {
+      // Don't attempt to load again extensions and filters if they
+      // were loaded already.
+      if (Object.keys(behaviorShortHeadersByType).length || isLoading.current)
+        return;
+
+      const timeoutId = setTimeout(() => {
+        console.info('Pre-fetching behaviors from extension store...');
+        fetchBehaviors();
+      }, BEHAVIORS_FETCH_TIMEOUT);
+      return () => clearTimeout(timeoutId);
+    },
+    [fetchBehaviors, behaviorShortHeadersByType, isLoading]
+  );
+
+  const allBehaviors = React.useMemo(
+    () => {
+      const allBehaviors: {
+        [name: string]: BehaviorShortHeader | SearchableBehaviorMetadata
+      } = {};
+      for (const type in behaviorShortHeadersByType) {
+        allBehaviors[type] = behaviorShortHeadersByType[type];
+      }
+      for (const installedBehaviorMetadata of installedBehaviorMetadataList) {
+        allBehaviors[
+          installedBehaviorMetadata.type
+        ] = installedBehaviorMetadata;
+      }
+      return allBehaviors;
+    },
+    [installedBehaviorMetadataList, behaviorShortHeadersByType]
+  );
+
+  const allCategories = React.useMemo(
+    () => {
+      const categoriesSet = new Set();
+      for (const type in allBehaviors) {
+        categoriesSet.add(allBehaviors[type].category);
+      }
+      const sortedCategories = [...categoriesSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
+        tag1.toLowerCase().localeCompare(tag2.toLowerCase())
+      );
+      return sortedCategories;
+    },
+    [allBehaviors]
+  );
+
+  const filters = React.useMemo(
+    () => {
+      const tagsSet = new Set();
+      for (const type in allBehaviors) {
+        const behavior = allBehaviors[type];
+        behavior.tags.forEach(tag => {
+          if (
+            showCommunityExtensions ||
+// @ts-expect-error - TS2339 - Property 'tier' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
+            !behavior.tier ||
+// @ts-expect-error - TS2339 - Property 'tier' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
+            !excludedCommunityTiers.has(behavior.tier)
+          ) {
+            tagsSet.add(tag);
+          }
+        });
+      }
+      const sortedTags = [...tagsSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
+        tag1.toLowerCase().localeCompare(tag2.toLowerCase())
+      );
+      return {
+        allTags: sortedTags,
+        defaultTags: sortedTags,
+        tagsTree: [],
+      };
+    },
+    [allBehaviors, showCommunityExtensions]
+  );
+
+  const defaultFirstSearchItemIds = React.useMemo(
+    () => [
+      ...installedBehaviorMetadataList.map(behavior => behavior.type),
+      ...firstBehaviorIds,
+    ],
+    [firstBehaviorIds, installedBehaviorMetadataList]
+  );
+
+  const searchResults: Array<{
+    item: BehaviorShortHeader | SearchableBehaviorMetadata,
+    matches: SearchMatch[]
+  }> | null | undefined = useSearchStructuredItem(allBehaviors, {
+    searchText,
+    chosenItemCategory: chosenCategory,
+    chosenCategory: filtersState.chosenCategory,
+    chosenFilters: filtersState.chosenFilters,
+// @ts-expect-error - TS2322 - Type 'Set<unknown>' is not assignable to type 'Set<string>'.
+    excludedTiers: showCommunityExtensions
+      ? noExcludedTiers
+      : excludedCommunityTiers,
+    defaultFirstSearchItemIds: defaultFirstSearchItemIds,
+  });
+
+  const behaviorStoreState = React.useMemo(
+    () => ({
+      searchResults,
+      fetchBehaviors,
+      filters,
+      allCategories,
+      chosenCategory,
+      setChosenCategory,
+      error,
+      searchText,
+      setSearchText,
+      setInstalledBehaviorMetadataList,
+      behaviorShortHeadersByType,
+      filtersState,
+    }),
+    [
+      searchResults,
+      error,
+      filters,
+      allCategories,
+      chosenCategory,
+      setChosenCategory,
+      searchText,
+      setInstalledBehaviorMetadataList,
+      behaviorShortHeadersByType,
+      filtersState,
+      fetchBehaviors,
+    ]
+  );
+
+  return (
+// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ searchResults: { item: BehaviorShortHeader | SearchableBehaviorMetadata; matches: SearchMatch[]; }[] | null | undefined; ... 10 more ...; filtersState: any; }' is not assignable to type 'BehaviorStoreState'.
+    <BehaviorStoreContext.Provider value={behaviorStoreState}>
+      {children}
+    </BehaviorStoreContext.Provider>
+  );
+};

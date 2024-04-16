@@ -1,0 +1,163 @@
+import * as React from 'react';
+// @ts-expect-error - TS6142 - Module '../../EventsFunctionsExtensionEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/index.tsx', but '--jsx' is not set.
+import EventsFunctionsExtensionEditor from '../../EventsFunctionsExtensionEditor';
+import {
+  RenderEditorContainerProps,
+  RenderEditorContainerPropsWithRef,
+} from './BaseEditor';
+
+const styles = {
+  container: {
+    display: 'flex',
+    flex: 1,
+    // In some cases, if some flex children cannot contract to
+    // within the div, it is possible for the div to overflow
+    // outside its parent. Setting min-width to 0 avoids this.
+    // See: https://stackoverflow.com/a/36247448/6199068
+    minWidth: 0,
+  },
+} as const;
+
+export class EventsFunctionsExtensionEditorContainer extends React.Component<RenderEditorContainerProps> {
+  editor: EventsFunctionsExtensionEditor | null | undefined;
+
+  getProject(): gdProject | null | undefined {
+    return this.props.project;
+  }
+
+  getLayout(): gdLayout | null | undefined {
+    return null;
+  }
+
+  updateToolbar() {
+    if (this.editor) this.editor.updateToolbar();
+  }
+
+  forceUpdateEditor() {
+    // No updates to be done.
+  }
+
+  shouldComponentUpdate(nextProps: RenderEditorContainerProps) {
+    // We stop updates when the component is inactive.
+    // If it's active, was active or becoming active again we let update propagate.
+    // Especially important to note that when becoming inactive, a "last" update is allowed.
+    return this.props.isActive || nextProps.isActive;
+  }
+
+  componentDidUpdate(prevProps: any) {
+    // Ensure that the editor will trigger the
+    // reload/regeneration of extensions when the user
+    // is focusing another editor
+    if (prevProps.isActive && !this.props.isActive) {
+      this.props.onLoadEventsFunctionsExtensions();
+    }
+  }
+
+  componentWillUnmount() {
+    // Ensure that a closed editor will still trigger the
+    // reload/regeneration of extensions, as changes can have
+    // been made inside before it's closed.
+    if (this.props.isActive) {
+      this.props.onLoadEventsFunctionsExtensions();
+    }
+  }
+
+  _reloadExtensionMetadata = () => {
+    // Immediately trigger the reload/regeneration of the extension
+    // as a change in function declaration must be seen in the instructions
+    // especially to avoid to show "unsupported instructions".
+    try {
+      const extension = this.getEventsFunctionsExtension();
+      if (extension) {
+        this.props.onReloadEventsFunctionsExtensionMetadata(extension);
+      }
+    } catch (error: any) {
+      console.warn(
+        'Error while loading events functions extensions - ignoring this in the context of the EventsFunctionsExtensionEditorContainer.',
+        error
+      );
+    }
+  };
+
+  previewOrExportWillStart = () => {
+    // Immediately trigger the reload/regeneration of extensions
+    // if a preview is about to start, as changes chan have been made
+    // inside. The preview or export is responsible for waiting
+    // for extensions to be loaded before starting.
+    if (this.props.isActive) {
+      this.props.onLoadEventsFunctionsExtensions();
+    }
+  };
+
+  getEventsFunctionsExtension(): gdEventsFunctionsExtension | null | undefined {
+    const { project, projectItemName } = this.props;
+    if (!project || !projectItemName) return null;
+
+    if (!project.hasEventsFunctionsExtensionNamed(projectItemName)) {
+      return null;
+    }
+    return project.getEventsFunctionsExtension(projectItemName);
+  }
+
+  getEventsFunctionsExtensionName(): string | null | undefined {
+    const { project, projectItemName } = this.props;
+    if (!project || !projectItemName) return null;
+
+    return projectItemName;
+  }
+
+  selectEventsFunctionByName(
+    eventsFunctionName: string,
+    behaviorName?: string | null
+  ) {
+    if (this.editor)
+      this.editor.selectEventsFunctionByName(eventsFunctionName, behaviorName);
+  }
+
+  selectEventsBasedBehaviorByName(behaviorName: string) {
+    if (this.editor) this.editor.selectEventsBasedBehaviorByName(behaviorName);
+  }
+
+  render() {
+    const { project, projectItemName } = this.props;
+    const eventsFunctionsExtension = this.getEventsFunctionsExtension();
+
+    if (!eventsFunctionsExtension || !project) {
+      //TODO: Error component
+// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      return <div>No extension called {projectItemName} found!</div>;
+    }
+
+    const { initiallyFocusedFunctionName, initiallyFocusedBehaviorName } =
+      this.props.extraEditorProps || {};
+
+    return (
+// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      <div style={styles.container}>
+{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        <EventsFunctionsExtensionEditor
+          key={eventsFunctionsExtension.ptr}
+          project={project}
+          eventsFunctionsExtension={eventsFunctionsExtension}
+          setToolbar={this.props.setToolbar}
+          resourceManagementProps={this.props.resourceManagementProps}
+          openInstructionOrExpression={this.props.openInstructionOrExpression}
+          onCreateEventsFunction={this.props.onCreateEventsFunction}
+          initiallyFocusedFunctionName={initiallyFocusedFunctionName}
+          initiallyFocusedBehaviorName={initiallyFocusedBehaviorName}
+          onBehaviorEdited={this._reloadExtensionMetadata}
+          onObjectEdited={this._reloadExtensionMetadata}
+          onFunctionEdited={this._reloadExtensionMetadata}
+// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
+          ref={editor => (this.editor = editor)}
+          unsavedChanges={this.props.unsavedChanges}
+        />
+      </div>
+    );
+  }
+}
+
+export const renderEventsFunctionsExtensionEditorContainer = (
+  props: RenderEditorContainerPropsWithRef
+// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+) => <EventsFunctionsExtensionEditorContainer {...props} />;
