@@ -12,6 +12,7 @@ export type ButtonInterface = {
  * but is still better than nothing.
  */
 export const focusButton = (button: ButtonInterface) => {
+// @ts-expect-error - TS2345 - Argument of type 'ButtonInterface' is not assignable to parameter of type 'ReactInstance | null | undefined'.
   const element = ReactDOM.findDOMNode(button);
   if (element instanceof HTMLButtonElement) {
     element.focus();

@@ -58,6 +58,7 @@ export default class ObjectGroupsListWithObjectGroupEditor extends React.Compone
     return (
       <React.Fragment>
         <ObjectGroupsList
+// @ts-expect-error - TS2322 - Type '{ globalObjectGroups: gd.ObjectGroupsContainer; objectGroups: gd.ObjectGroupsContainer; onEditGroup: (editedGroup?: any) => void; onDeleteGroup: (groupWithScope: GroupWithContext, done: (arg1: boolean) => void) => void; ... 6 more ...; unsavedChanges: UnsavedChanges | ... 1 more ... | undefined; }' is not assignable to type 'IntrinsicAttributes & ObjectGroupsListInterface & RefAttributes<Props>'.
           globalObjectGroups={globalObjectGroups}
           objectGroups={objectGroups}
           onEditGroup={this.editGroup}

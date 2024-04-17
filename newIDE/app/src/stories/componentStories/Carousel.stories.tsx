@@ -168,6 +168,7 @@ export const RoundedImagesWithOverlay = () => {
   return (
     <Carousel
       title={<Trans>Showcase</Trans>}
+// @ts-expect-error - TS2322 - Type '({ id: string; title: string; onClick: () => HandlerFunction; thumbnailUrl: string; overlayText: string; overlayTextPosition: string; } | { id: string; title: string; onClick: () => HandlerFunction; thumbnailUrl: string; overlayText?: undefined; overlayTextPosition?: undefined; })[]' is not assignable to type 'CarouselThumbnail[]'.
       items={showcaseItems}
       browseAllLabel={<Trans>Browse all</Trans>}
       onBrowseAllClick={() => action('Browse all button clicked')}
@@ -182,6 +183,7 @@ export const WithoutArrows = () => {
   return (
     <Carousel
       title={<Trans>Showcase</Trans>}
+// @ts-expect-error - TS2322 - Type '({ id: string; title: string; onClick: () => HandlerFunction; thumbnailUrl: string; overlayText: string; overlayTextPosition: string; } | { id: string; title: string; onClick: () => HandlerFunction; thumbnailUrl: string; overlayText?: undefined; overlayTextPosition?: undefined; })[]' is not assignable to type 'CarouselThumbnail[]'.
       items={showcaseItems}
       browseAllLabel={<Trans>Browse all</Trans>}
       onBrowseAllClick={() => action('Browse all button clicked')}

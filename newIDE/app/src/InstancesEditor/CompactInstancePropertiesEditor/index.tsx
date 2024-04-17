@@ -112,7 +112,7 @@ const CompactInstancePropertiesEditor = ({
   const instance = instances[0];
 
   const { object, instanceSchema } = React.useMemo<{
-    object?: gd.Object;
+    object?: gd.gdObject;
     instanceSchema?: Schema;
   }>(() => {
     if (!instance) return { object: undefined, instanceSchema: undefined };

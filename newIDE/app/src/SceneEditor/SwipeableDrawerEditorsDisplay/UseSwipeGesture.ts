@@ -13,12 +13,14 @@ const minSpeed = 200; // px/s
 const absoluteMaxDelta = 30; // px
 
 const useSwipeGesture = ({ containerRef, onSwipeDown, onSwipeUp }: Props) => {
-  const startTimeRef = React.useRef<number | null | undefined>(null);
-  const startYRef = React.useRef<number | null | undefined>(null);
+  const startTimeRef = React.useRef<number>(null);
+  const startYRef = React.useRef<number>(null);
 
   const onTouchStart = React.useCallback(
     (event: TouchEvent) => {
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       startTimeRef.current = Date.now();
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       startYRef.current = event.touches[0].clientY;
 
       // Reset the position of the movement with the touch, if any.
@@ -69,7 +71,9 @@ const useSwipeGesture = ({ containerRef, onSwipeDown, onSwipeUp }: Props) => {
         containerRef.current.style.transform = `translateY(0px)`;
       }
 
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       startTimeRef.current = null;
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       startYRef.current = null;
     },
     [onSwipeUp, onSwipeDown, containerRef]

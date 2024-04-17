@@ -184,7 +184,7 @@ const PrivateAssetPackInformationPage = ({
 }: Props) => {
   const { id, name, sellerId } = privateAssetPackListingData;
   const { privateAssetPackListingDatas } = React.useContext(AssetStoreContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const {
     receivedAssetPacks,
@@ -545,6 +545,7 @@ const PrivateAssetPackInformationPage = ({
                 >
                   <div style={styles.leftColumnContainer}>
                     <ResponsiveMediaGallery
+// @ts-expect-error - TS2322 - Type '{ kind: string; url: string; }[]' is not assignable to type 'MediaItem[]'.
                       mediaItems={mediaItems}
                       altTextTemplate={`Asset pack ${name} preview image or sound {mediaIndex}`}
                       horizontalOuterMarginToEatOnMobile={8}

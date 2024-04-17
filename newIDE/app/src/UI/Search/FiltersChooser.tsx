@@ -101,7 +101,6 @@ export const FiltersChooser = ({ filtersState, allFilters, error }: Props) => {
         </EmptyMessage>
       ) : selectedCategoryTags.length ? (
         selectedCategoryTags.map((tag) => (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <InlineCheckbox
             key={tag}
             label={capitalize(tag)}

@@ -26,6 +26,7 @@ export const Default = () => (
     <SerializedObjectDisplay object={testProject.testLayout}>
       <div style={{ height: 250 }}>
         <ObjectGroupsList
+// @ts-expect-error - TS2322 - Type '{ globalObjectGroups: any; objectGroups: any; onEditGroup: HandlerFunction; onRenameGroup: HandlerFunction; onDeleteGroup: HandlerFunction; getValidatedObjectOrGroupName: (newName: any) => any; }' is not assignable to type 'IntrinsicAttributes & ObjectGroupsListInterface & RefAttributes<Props>'.
           globalObjectGroups={testProject.project.getObjectGroups()}
           objectGroups={testProject.testLayout.getObjectGroups()}
           onEditGroup={action('onEditGroup')}

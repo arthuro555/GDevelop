@@ -145,11 +145,9 @@ export default function SetupGridDialog(props: Props) {
           />
         </ResponsiveLineStackLayout>
         <ResponsiveLineStackLayout noMargin expand>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             checked={props.instancesEditorSettings.gridType === 'isometric'}
             label={<Trans>Isometric</Trans>}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onCheck={(e, check) =>
               props.onChangeInstancesEditorSettings({
                 ...props.instancesEditorSettings,

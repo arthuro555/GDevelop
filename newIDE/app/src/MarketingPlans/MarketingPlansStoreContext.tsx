@@ -55,6 +55,7 @@ export const MarketingPlansStoreStateProvider = ({
           `Unable to load the marketing plans from the store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 

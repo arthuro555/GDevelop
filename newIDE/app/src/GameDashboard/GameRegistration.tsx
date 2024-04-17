@@ -35,7 +35,7 @@ export type GameRegistrationProps = {
   suggestAdditionalActions?: boolean;
   hideLoader?: boolean;
   hideLogin?: boolean;
-  onGameRegistered?: () => undefined | Promise<undefined>;
+  onGameRegistered?: () => void;
 };
 
 export type GameAvailabilityError = 'not-found' | 'not-owned' | 'unexpected';
@@ -53,7 +53,7 @@ export const GameRegistration = ({
     profile,
     onAcceptGameStatsEmail,
   } = React.useContext(AuthenticatedUserContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const [error, setError] = React.useState<Error | null>(null);
   const [gameAvailabilityError, setGameAvailabilityError] = React.useState<
@@ -100,6 +100,7 @@ export const GameRegistration = ({
         setGameAvailabilityError('unexpected');
       }
 
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null>'.
       setError(error);
     }
   }, [project, getAuthorizationHeader, profile]);

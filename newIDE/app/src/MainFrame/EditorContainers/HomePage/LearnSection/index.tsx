@@ -119,7 +119,6 @@ const LearnSection = ({
   if (tutorialLoadingError)
     return (
       <Paper square style={styles.paper} background="dark">
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError onRetry={fetchTutorials}>
           <Trans>
             Can't load the tutorials. Verify your internet connection or retry

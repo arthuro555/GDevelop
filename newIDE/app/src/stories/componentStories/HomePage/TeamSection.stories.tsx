@@ -40,42 +40,49 @@ const team: Team = {
 
 const initialMembers: Array<User> = [
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: null; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user1',
     email: 'user1@hotmail.com',
     username: null,
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: string; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user2',
     email: 'user2@naver.com',
     username: 'DrCortex',
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: string; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user3',
     email: 'user3@gmail.com',
     username: 'Sonic',
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: string; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user4',
     email: 'user4@live.com',
     username: 'Peach',
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: null; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user5',
     email: 'user5@live.fr',
     username: null,
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: string; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user6',
     email: 'user6@live.it',
     username: 'Mario',
   },
   // $FlowIgnore - the whole user object is not needed for this component
+// @ts-expect-error - TS2740 - Type '{ id: string; email: string; username: string; }' is missing the following properties from type 'Profile': description, updatedAt, createdAt, getGameStatsEmail, and 9 more.
   {
     id: 'user7',
     email: 'user7@mail.ru',
@@ -217,6 +224,7 @@ const MockTeamProvider = ({
     if (
       membershipToChangeIndex === -1 ||
       (memberships[membershipToChangeIndex].groups &&
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
         memberships[membershipToChangeIndex].groups[0] === group.id)
     ) {
       return;
@@ -291,6 +299,7 @@ export const Default = () => (
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(file: FileMetadataAndStorageProviderName) => Promise<void>'.
         onOpenRecentFile={action('onOpenRecentFile')}
         storageProviders={[CloudStorageProvider]}
       />
@@ -304,6 +313,7 @@ export const WithNoGroupsYet = () => (
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(file: FileMetadataAndStorageProviderName) => Promise<void>'.
         onOpenRecentFile={action('onOpenRecentFile')}
         storageProviders={[CloudStorageProvider]}
       />
@@ -317,6 +327,7 @@ export const Loading = () => (
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(file: FileMetadataAndStorageProviderName) => Promise<void>'.
         onOpenRecentFile={action('onOpenRecentFile')}
         storageProviders={[CloudStorageProvider]}
       />

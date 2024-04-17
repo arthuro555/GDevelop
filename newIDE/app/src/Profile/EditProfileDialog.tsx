@@ -92,7 +92,9 @@ const CommunityLinkLine = ({
         onChange={onChange}
         disabled={disabled}
         errorText={
+// @ts-expect-error - TS2339 - Property 'getFormattingError' does not exist on type '{ readonly icon: Element; readonly getFormattingError: (value: string) => Element | undefined; readonly maxLength: 150; } | { readonly icon: Element; readonly getFormattingError: (value: string) => Element | undefined; readonly maxLength: 150; } | ... 7 more ... | { ...; }'.
           config.getFormattingError
+// @ts-expect-error - TS2339 - Property 'getFormattingError' does not exist on type '{ readonly icon: Element; readonly getFormattingError: (value: string) => Element | undefined; readonly maxLength: 150; } | { readonly icon: Element; readonly getFormattingError: (value: string) => Element | undefined; readonly maxLength: 150; } | ... 7 more ... | { ...; }'.
             ? config.getFormattingError(value)
             : undefined
         }
@@ -115,7 +117,6 @@ const EditProfileDialog = ({
   actionInProgress,
   error,
 }: Props) => {
-  // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showDeleteConfirmation, showAlert } = useAlertDialog();
 
   const communityLinks = profile.communityLinks || {};
@@ -298,7 +299,6 @@ const EditProfileDialog = ({
           onApply={edit}
           open
         >
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Form onSubmit={edit} autoComplete="on" name="editProfile">
             <ColumnStackLayout noMargin>
               <UsernameField
@@ -347,6 +347,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="personalWebsiteLink"
                 value={personalWebsiteLink}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`Personal website, itch.io page, etc.`}
                 onChange={(e, value) => {
                   setPersonalWebsiteLink(value);
@@ -356,6 +357,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="personalWebsite2Link"
                 value={personalWebsite2Link}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`Another personal website, newgrounds.com page, etc.`}
                 onChange={(e, value) => {
                   setPersonalWebsite2Link(value);
@@ -365,6 +367,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="twitterUsername"
                 value={twitterUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setTwitterUsername(value);
@@ -374,6 +377,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="facebookUsername"
                 value={facebookUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setFacebookUsername(value);
@@ -383,6 +387,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="youtubeUsername"
                 value={youtubeUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setYoutubeUsername(value);
@@ -392,6 +397,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="tiktokUsername"
                 value={tiktokUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setTiktokUsername(value);
@@ -401,6 +407,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="instagramUsername"
                 value={instagramUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setInstagramUsername(value);
@@ -410,6 +417,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="redditUsername"
                 value={redditUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setRedditUsername(value);
@@ -419,6 +427,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="snapchatUsername"
                 value={snapchatUsername}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`username`}
                 onChange={(e, value) => {
                   setSnapchatUsername(value);
@@ -428,6 +437,7 @@ const EditProfileDialog = ({
               <CommunityLinkLine
                 id="discordServerLink"
                 value={discordServerLink}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
                 translatableHintText={t`Discord server, e.g: https://discord.gg/...`}
                 onChange={(e, value) => {
                   setDiscordServerLink(value);
@@ -451,23 +461,19 @@ const EditProfileDialog = ({
                 errorText={donateLinkError}
                 maxLength={donateLinkConfig.maxLength}
               />
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 label={<Trans>I want to receive the GDevelop Newsletter</Trans>}
                 checked={getNewsletterEmail}
-                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(e, value) => {
                   setGetNewsletterEmail(value);
                 }}
                 disabled={actionInProgress}
               />
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 label={
                   <Trans>I want to receive weekly stats about my games</Trans>
                 }
                 checked={getGameStatsEmail}
-                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(e, value) => {
                   setGetGameStatsEmail(value);
                 }}

@@ -16,7 +16,7 @@ import { mapVector } from '../../Utils/MapFor';
 
 export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
   function ObjectPointNameField(props: ParameterFieldProps, ref) {
-    const field = React.useRef<GenericExpressionField | null | undefined>(null);
+    const field = React.useRef<GenericExpressionField>(null);
     const focus: FieldFocusFunction = (options) => {
       if (field.current) field.current.focus(options);
     };
@@ -55,6 +55,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
         const animations = spriteConfiguration.getAnimations();
 
         return getAllPointNames(animations)
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
           .map((pointName) => (pointName.length > 0 ? pointName : null))
           .filter(Boolean)
           .sort()
@@ -86,6 +87,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
             const animations = spriteConfiguration.getAnimations();
 
             return getAllPointNames(animations)
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
               .map((pointName) => (pointName.length > 0 ? pointName : null))
               .filter(Boolean);
           }

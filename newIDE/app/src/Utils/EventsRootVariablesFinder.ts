@@ -1,6 +1,5 @@
-
 /** Naive way to check if a variable expression is not using a structure/array. */
-const isRootVariableName = fullName: string =>
+const isRootVariableName = (fullName: string) =>
   !fullName.includes('.') && !fullName.includes('[') && fullName.length > 0;
 
 /**
@@ -14,7 +13,10 @@ const isRootVariableName = fullName: string =>
  * "shape"/"types" of identified variables (especially for structures/arrays).
  */
 export default class EventsRootVariablesFinder {
-  static findAllGlobalVariables(platform: gd.Platform, project: gd.Project): string[] {
+  static findAllGlobalVariables(
+    platform: gd.Platform,
+    project: gd.Project
+  ): string[] {
     return (
       gd.EventsVariablesFinder.findAllGlobalVariables(platform, project)
         .toNewVectorString()
@@ -24,7 +26,11 @@ export default class EventsRootVariablesFinder {
     );
   }
 
-  static findAllLayoutVariables(platform: gd.Platform, project: gd.Project, layout: gd.Layout): string[] {
+  static findAllLayoutVariables(
+    platform: gd.Platform,
+    project: gd.Project,
+    layout: gd.Layout
+  ): string[] {
     return gd.EventsVariablesFinder.findAllLayoutVariables(
       project.getCurrentPlatform(),
       project,
@@ -39,7 +45,7 @@ export default class EventsRootVariablesFinder {
     platform: gd.Platform,
     project: gd.Project,
     layout: gd.Layout,
-    object: gd.Object,
+    object: gd.gdObject
   ): string[] {
     return gd.EventsVariablesFinder.findAllObjectVariables(
       project.getCurrentPlatform(),

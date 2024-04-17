@@ -90,8 +90,10 @@ export const downloadResourcesAsBlobs = async ({
     })
     .filter(Boolean);
 
+// @ts-expect-error - TS2322 - Type 'ItemResult<{ url: string; }>[]' is not assignable to type 'ItemResult<ResourceToFetch>[]'.
   const downloadedBlobsAndResources: Array<ItemResult<ResourceToFetch>> =
     await downloadUrlsToBlobs({
+// @ts-expect-error - TS2322 - Type '(ResourceToFetch | null | undefined)[]' is not assignable to type '{ url: string; }[]'.
       urlContainers: resourcesToFetchAndUpload,
       onProgress: (count, total) => {
         onProgress(count, total * 2);
@@ -126,7 +128,7 @@ const addSpacesToPascalCase = (pascalCaseName: string): string => {
 };
 
 type EnumeratedObject = {
-  object: gd.Object;
+  object: gd.gdObject;
   path: string;
 };
 
@@ -238,6 +240,7 @@ const ObjectExporterDialog = ({ project, layout: scene, onClose }: Props) => {
   } =
     useGenericRetryableProcessWithProgress<DownloadResourcesAsBlobsOptionsWithoutProgress>(
       {
+// @ts-expect-error - TS2322 - Type '(options: DownloadResourcesAsBlobsOptionsWithoutProgress, onProgress: (count: number, total: number) => void) => Promise<{ readonly erroredResources: readonly []; }>' is not assignable to type '(options: DownloadResourcesAsBlobsOptionsWithoutProgress, onProgress: (count: number, total: number) => void) => Promise<GenericRetryableProcessWithProgressResults>'.
         onDoProcess: React.useCallback(
           (options, onProgress) =>
             downloadResourcesAsBlobs({ ...options, onProgress }),

@@ -102,6 +102,7 @@ export const PublicGamePropertiesDialog = ({
   const [authorIds, setAuthorIds] =
     React.useState<string[]>(publicGameAuthorIds);
   const [authorUsernames, setAuthorUsernames] = React.useState<string[]>(
+// @ts-expect-error - TS2345 - Argument of type '(string | null | undefined)[]' is not assignable to parameter of type 'string[] | (() => string[])'.
     publicGameAuthorUsernames
   );
   const [ownerIds, setOwnerIds] = React.useState<string[]>(publicGameOwnerIds);

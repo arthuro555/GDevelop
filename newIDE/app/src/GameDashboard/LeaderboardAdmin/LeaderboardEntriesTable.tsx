@@ -97,6 +97,7 @@ const LeaderboardEntriesTable = ({
                       : entry.score}
                   </TableCell>
                   <TableCell
+// @ts-expect-error - TS2322 - Type '{ maxWidth: number; overflow: string; whiteSpace: string; textOverflow: string; }' is not assignable to type 'Properties<string | number, string & {}>'.
                     style={{
                       ...textEllipsisStyle,
                       maxWidth: 0, // to trigger the text ellipsis when overflowing
@@ -108,11 +109,13 @@ const LeaderboardEntriesTable = ({
                   </TableCell>
                   <TableCell>
                     <Tooltip
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
                       title={i18n.date(entry.createdAt, {
                         dateStyle: 'short',
                         timeStyle: 'short',
                       })}
                     >
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                       <span>{i18n.date(entry.createdAt)}</span>
                     </Tooltip>
                   </TableCell>

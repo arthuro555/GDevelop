@@ -276,6 +276,7 @@ const TooltipHeader = ({
         {tooltipContent && (
           <Typography
             variant="body2"
+// @ts-expect-error - TS2769 - No overload matches this call.
             style={{ ...styles.headerContentPreview, ...textEllipsisStyle }}
             translate="no"
           >
@@ -375,6 +376,7 @@ const InAppTutorialTooltipDisplayer = ({
         },
       }}
       style={{
+// @ts-expect-error - TS2322 - Type 'string | number' is not assignable to type 'ZIndex | undefined'.
         zIndex: getDisplayZIndexForHighlighter(anchorElement),
         maxWidth: 'min(90%, 300px)',
         width: isMobile ? '100%' : undefined,
@@ -391,6 +393,7 @@ const InAppTutorialTooltipDisplayer = ({
           >
             <Column noMargin>
               <TooltipHeader
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '"dark" | "light"'.
                 paletteType={paletteType}
                 // Display the hide button when standalone only
                 showFoldButton={!!tooltip.standalone}

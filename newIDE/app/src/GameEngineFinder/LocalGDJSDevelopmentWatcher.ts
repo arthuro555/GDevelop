@@ -3,7 +3,7 @@ import * as React from 'react';
 import optionalRequire from '../Utils/OptionalRequire';
 
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 /**

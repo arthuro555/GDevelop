@@ -142,6 +142,7 @@ const VersionHistory = React.memo<Props>(
           return;
         }
         const _usersPublicProfileByIds = await getUserPublicProfilesByIds(
+// @ts-expect-error - TS2345 - Argument of type '(string | undefined)[]' is not assignable to parameter of type 'string[]'.
           Array.from(userIdsToFetch)
         );
         setUsersPublicProfileByIds(_usersPublicProfileByIds);
@@ -296,6 +297,7 @@ const VersionHistory = React.memo<Props>(
           )}
         </I18n>
         <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
           ref={contextMenuRef}
           buildMenuTemplate={buildVersionMenuTemplate}
         />

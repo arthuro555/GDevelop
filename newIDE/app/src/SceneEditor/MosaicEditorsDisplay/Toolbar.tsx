@@ -59,7 +59,7 @@ type Props = {
   openSetupGrid: () => void;
   getContextMenuZoomItems: (arg1: I18nType) => Array<MenuItemTemplate>;
   setZoomFactor: (arg1: number) => void;
-  onOpenSettings?: () => void | null | undefined;
+  onOpenSettings?: () => void;
   settingsIcon?: React.ReactNode;
   canRenameObject: boolean;
   onRenameObject: () => void;

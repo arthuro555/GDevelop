@@ -560,11 +560,9 @@ const GetStartedSection = ({
             isAuthenticated: authenticatedUser.authenticated,
           }) && (
             <div style={styles.bottomPageButtonContainer}>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 label={<Trans>Don't show this screen on next startup</Trans>}
                 checked={!preferences.showGetStartedSectionByDefault}
-                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                 onCheck={(e, checked) => {
                   if (checked) onUserSurveyHidden();
                   setShowGetStartedSectionByDefault(!checked);
@@ -618,11 +616,9 @@ const GetStartedSection = ({
       noColumnMargin
       noMargin
     >
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Checkbox
         label={<Trans>Don't show this screen on next startup</Trans>}
         checked={!preferences.showGetStartedSectionByDefault}
-        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
         onCheck={(e, checked) => setShowGetStartedSectionByDefault(!checked)}
       />
     </ResponsiveLineStackLayout>

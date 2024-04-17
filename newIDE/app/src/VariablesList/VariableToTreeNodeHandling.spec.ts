@@ -108,6 +108,7 @@ describe('VariableToTreeNodeHandling', () => {
           variable: expect.any(gd.Variable),
         }),
       ]);
+// @ts-expect-error - TS7005 - Variable 'secondArrayChild' implicitly has an 'any' type.
       expect(variable.getBool()).toBe(secondArrayChild.getBool());
     });
 
@@ -133,6 +134,7 @@ describe('VariableToTreeNodeHandling', () => {
           variable: expect.any(gd.Variable),
         }),
       ]);
+// @ts-expect-error - TS7005 - Variable 'firstStructureChild' implicitly has an 'any' type.
       expect(variable.getString()).toBe(firstStructureChild.getString());
     });
   });

@@ -40,7 +40,7 @@ const CreditsUsageDialog = ({
 }: Props) => {
   const [isPurchasing, setIsPurchasing] = React.useState(false);
   const [isPurchaseSuccessful, setisPurchaseSuccessful] = React.useState(false);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const {
     onRefreshGameTemplatePurchases,

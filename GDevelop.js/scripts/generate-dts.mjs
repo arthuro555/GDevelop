@@ -11,18 +11,18 @@ const bindingsFile = readFileSync(
 
 /** @type {Record<string, {returnType: string, inputType?: string}>} */
 const castFunctions = {
-  StandardEvent: { inputType: 'Event', returnType: 'StandardEvent' },
-  RepeatEvent: { inputType: 'Event', returnType: 'RepeatEvent' },
-  WhileEvent: { inputType: 'Event', returnType: 'WhileEvent' },
-  ForEachEvent: { inputType: 'Event', returnType: 'ForEachEvent' },
+  StandardEvent: { inputType: 'BaseEvent', returnType: 'StandardEvent' },
+  RepeatEvent: { inputType: 'BaseEvent', returnType: 'RepeatEvent' },
+  WhileEvent: { inputType: 'BaseEvent', returnType: 'WhileEvent' },
+  ForEachEvent: { inputType: 'BaseEvent', returnType: 'ForEachEvent' },
   ForEachChildVariableEvent: {
-    inputType: 'Event',
+    inputType: 'BaseEvent',
     returnType: 'ForEachChildVariableEvent',
   },
-  CommentEvent: { inputType: 'Event', returnType: 'CommentEvent' },
-  GroupEvent: { inputType: 'Event', returnType: 'GroupEvent' },
-  LinkEvent: { inputType: 'Event', returnType: 'LinkEvent' },
-  JsCodeEvent: { inputType: 'Event', returnType: 'JsCodeEvent' },
+  CommentEvent: { inputType: 'BaseEvent', returnType: 'CommentEvent' },
+  GroupEvent: { inputType: 'BaseEvent', returnType: 'GroupEvent' },
+  LinkEvent: { inputType: 'BaseEvent', returnType: 'LinkEvent' },
+  JsCodeEvent: { inputType: 'BaseEvent', returnType: 'JsCodeEvent' },
 
   Platform: { inputType: 'JsPlatform', returnType: 'Platform' },
 

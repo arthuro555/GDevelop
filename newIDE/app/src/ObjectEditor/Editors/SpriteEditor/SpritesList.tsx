@@ -311,7 +311,7 @@ const SpritesList = ({
     ContextMenuInterface | null | undefined
   >(null);
   const forceUpdate = useForceUpdate();
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showConfirmation } = useAlertDialog();
 
   const updateSelectionIndexesAfterMoveUp = React.useCallback(
@@ -574,7 +574,6 @@ const SpritesList = ({
 
   return (
     <ColumnStackLayout noMargin>
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DirectionTools
         animationName={animationName}
         direction={direction}
@@ -605,6 +604,7 @@ const SpritesList = ({
           axis="x"
         />
         <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
           ref={spriteContextMenu}
           buildMenuTemplate={(i18n: I18nType) => [
             {

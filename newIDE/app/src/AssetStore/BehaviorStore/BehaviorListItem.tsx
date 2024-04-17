@@ -78,7 +78,7 @@ export const BehaviorListItem = ({
     );
 
   // Report the height of the item once it's known.
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useLayoutEffect(() => {
     if (containerRef.current)
       onHeightComputed(containerRef.current.getBoundingClientRect().height);
@@ -111,9 +111,12 @@ export const BehaviorListItem = ({
   const hasChip =
     alreadyAdded ||
     !isObjectCompatible ||
+// @ts-expect-error - TS2339 - Property 'tier' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
     behaviorShortHeader.tier === 'community' ||
+// @ts-expect-error - TS2339 - Property 'isDeprecated' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
     behaviorShortHeader.isDeprecated ||
     false;
+// @ts-expect-error - TS2339 - Property 'authors' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
   const hasInfoButton = behaviorShortHeader.authors || false;
   const iconStyle = {
     paddingTop: hasInfoButton ? 10 : hasChip ? 6 : 4,
@@ -130,7 +133,6 @@ export const BehaviorListItem = ({
         style={
           isEnabled ? styles.container : { ...styles.container, opacity: 0.384 }
         }
-        // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
         ref={containerRef}
       >
         <LineStackLayout>
@@ -166,6 +168,7 @@ export const BehaviorListItem = ({
                   variant="outlined"
                 />
               )}
+{ /* @ts-expect-error - TS2339 - Property 'tier' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'. */}
               {behaviorShortHeader.tier === 'community' && (
                 <Chip
                   size="small"
@@ -173,6 +176,7 @@ export const BehaviorListItem = ({
                   color="primary"
                 />
               )}
+{ /* @ts-expect-error - TS2339 - Property 'isDeprecated' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'. */}
               {behaviorShortHeader.isDeprecated && (
                 <Chip
                   size="small"
@@ -180,9 +184,11 @@ export const BehaviorListItem = ({
                   color="primary"
                 />
               )}
+{ /* @ts-expect-error - TS2339 - Property 'authors' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'. */}
               {behaviorShortHeader.authors && (
                 <Tooltip
                   title={
+// @ts-expect-error - TS2339 - Property 'authors' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
                     behaviorShortHeader.authors.length > 0 ? (
                       <Line>
                         <div style={{ flexWrap: 'wrap' }}>

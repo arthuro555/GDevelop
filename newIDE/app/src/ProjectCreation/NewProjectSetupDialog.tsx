@@ -80,7 +80,7 @@ import GetSubscriptionCard from '../Profile/Subscription/GetSubscriptionCard';
 import { PrivateGameTemplateListingData } from '../Utils/GDevelopServices/Shop';
 import { extractGDevelopApiErrorStatusAndCode } from '../Utils/GDevelopServices/Errors';
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
 
@@ -147,7 +147,7 @@ const NewProjectSetupDialog = ({
   const { getAuthorizationHeader, profile } = React.useContext(
     AuthenticatedUserContext
   );
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const isOnline = useOnlineStatus();
   const { values, setNewProjectsDefaultStorageProviderName } =
@@ -258,13 +258,16 @@ const NewProjectSetupDialog = ({
     storageProvider.internalName === 'Empty';
 
   const selectedWidth =
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
     resolutionOptions[resolutionOption].width ||
     customWidth ||
     defaultCustomWidth;
   const selectedHeight =
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
     resolutionOptions[resolutionOption].height ||
     customHeight ||
     defaultCustomHeight;
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
   const selectedOrientation = resolutionOptions[resolutionOption].orientation;
 
   const isLoading = isGeneratingProject || isOpeningProject;
@@ -626,21 +629,17 @@ const NewProjectSetupDialog = ({
                 <Text size="sub-title">
                   <Trans>Advanced File options</Trans>
                 </Text>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   checked={optimizeForPixelArt}
                   label={<Trans>Optimize for Pixel Art</Trans>}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     setOptimizeForPixelArt(checked);
                   }}
                   disabled={isLoading}
                 />
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   checked={allowPlayersToLogIn}
                   label={<Trans>Allow players to authenticate in-game</Trans>}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     setAllowPlayersToLogIn(checked);
                   }}

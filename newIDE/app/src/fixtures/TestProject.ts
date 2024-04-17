@@ -5,16 +5,16 @@ export type TestProject = {|
   textObjectConfiguration: gd.ObjectConfiguration,
   particleEmitterConfiguration: gd.ObjectConfiguration,
   tiledSpriteObjectConfiguration: gd.ObjectConfiguration,
-  panelSpriteObject: gd.Object,
+  panelSpriteObject: gd.gdObject,
   spriteObjectConfiguration: gd.SpriteObject,
   emptySpriteObjectConfiguration: gd.SpriteObject,
-  cube3dObject: gd.Object,
-  textInputObject: gd.Object,
-  customObject: gd.Object,
-  spriteObject: gd.Object,
-  emptySpriteObject: gd.Object,
-  spriteObjectWithBehaviors: gd.Object,
-  spriteObjectWithoutBehaviors: gd.Object,
+  cube3dObject: gd.gdObject,
+  textInputObject: gd.gdObject,
+  customObject: gd.gdObject,
+  spriteObject: gd.gdObject,
+  emptySpriteObject: gd.gdObject,
+  spriteObjectWithBehaviors: gd.gdObject,
+  spriteObjectWithoutBehaviors: gd.gdObject,
   testSpriteObjectInstance: gd.InitialInstance,
   testLayout: gd.Layout,
   group1: gd.ObjectGroup,
@@ -43,8 +43,8 @@ export type TestProject = {|
   layerWith2DEffects: gd.Layer,
   layerWithEffectWithoutEffectType: gd.Layer,
   layerWithoutEffects: gd.Layer,
-  spriteObjectWithEffects: gd.Object,
-  spriteObjectWithoutEffects: gd.Object,
+  spriteObjectWithEffects: gd.gdObject,
+  spriteObjectWithoutEffects: gd.gdObject,
   stringRelationalOperatorParameterMetadata: gd.ParameterMetadata,
   numberRelationalOperatorParameterMetadata: gd.ParameterMetadata,
   colorRelationalOperatorParameterMetadata: gd.ParameterMetadata,
@@ -59,7 +59,9 @@ export type TestProject = {|
  *
  * @param gd The GD instance to use to create the project.
  */
-export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProject */ => {
+export const makeTestProject = (
+  gd: libGDevelop /*: libGDevelop */
+) /*: TestProject */ => {
   // Create and expose a game project
   const project = gd.ProjectHelper.createNewGDJSProject();
 
@@ -510,7 +512,7 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
   jsCodeEvent.setInlineCode('console.log("Hello, World!");');
   jsCodeEvent.setParameterObjects('MyObject');
 
-  const makeKeyPressedCondition = key: string => {
+  const makeKeyPressedCondition = (key: string) => {
     const condition = new gd.Instruction();
     condition.setType('KeyPressed');
     condition.setParametersCount(2);
@@ -518,7 +520,7 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
     return condition; // This leaks memory if not deleted
   };
 
-  const makeMouseButtonPressedCondition = button: string => {
+  const makeMouseButtonPressedCondition = (button: string) => {
     const condition = new gd.Instruction();
     condition.setType('SourisBouton');
     condition.setParametersCount(2);
@@ -526,7 +528,7 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
     return condition; // This leaks memory if not deleted
   };
 
-  const makeDeleteAction = objectToDelete: string => {
+  const makeDeleteAction = (objectToDelete: string) => {
     var action = new gd.Instruction(); //Add a simple action
     action.setType('Delete');
     action.setParametersCount(2);
@@ -643,10 +645,11 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
   const emptyEventsList = new gd.EventsList();
 
   // Events functions extension
-  const someAlreadyInstalledExtension = project.insertNewEventsFunctionsExtension(
-    'SomeAlreadyInstalledExtension',
-    0
-  );
+  const someAlreadyInstalledExtension =
+    project.insertNewEventsFunctionsExtension(
+      'SomeAlreadyInstalledExtension',
+      0
+    );
   someAlreadyInstalledExtension.setNamespace('SomeAlreadyInstalledExtension');
   someAlreadyInstalledExtension.setName('SomeAlreadyInstalledExtension');
   someAlreadyInstalledExtension.setFullName(
@@ -655,10 +658,8 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
   someAlreadyInstalledExtension.setVersion('1.2.3');
 
   // Events functions extension
-  const testEventsFunctionsExtension = project.insertNewEventsFunctionsExtension(
-    'TestExt',
-    0
-  );
+  const testEventsFunctionsExtension =
+    project.insertNewEventsFunctionsExtension('TestExt', 0);
   testEventsFunctionsExtension.setNamespace('MyExt');
   testEventsFunctionsExtension.setVersion('1.1');
   testEventsFunctionsExtension.setName('My name');
@@ -666,10 +667,8 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
   testEventsFunctionsExtension.setDescription('My description');
 
   // Events function
-  const testEventsFunction = testEventsFunctionsExtension.insertNewEventsFunction(
-    'MyTestFunction',
-    0
-  );
+  const testEventsFunction =
+    testEventsFunctionsExtension.insertNewEventsFunction('MyTestFunction', 0);
 
   const parameter1 = new gd.ParameterMetadata();
   parameter1.setType('objectList');
@@ -954,5 +953,4 @@ export const makeTestProject = (gd: libGDevelop /*: libGDevelop */) /*: TestProj
     unknownRelationalOperatorParameterMetadata,
     emptyObjectsContainer: new gd.ObjectsContainer(),
   };
-
 };

@@ -18,30 +18,25 @@ import Edit from '../../../../UI/CustomSvgIcons/Edit';
 const POINT_COORDINATE_PRECISION = 4;
 
 type Props = {
-  pointName: string,
-  nameError?: boolean,
-  onChangePointName?: (newName: string) => void,
-  onRemove?: (ev?: any) => void | null | undefined,
-  onEdit?: (ev?: any) => void | null | undefined,
-  onClick: (pointName: string) => void,
-  onPointerEnter: (pointName?: string | null | undefined) => void,
-  onPointerLeave: (pointName?: string | null | undefined) => void,
-  selected: boolean,
-  pointX: number,
-  pointY: number,
-  onChangePointX: (value: number) => void,
-  onChangePointY: (value: number) => void,
-  isAutomatic?: boolean
+  pointName: string;
+  nameError?: boolean;
+  onChangePointName?: (newName: string) => void;
+  onRemove?: (ev?: any) => void;
+  onEdit?: (ev?: any) => void;
+  onClick: (pointName: string) => void;
+  onPointerEnter: (pointName?: string | null | undefined) => void;
+  onPointerLeave: (pointName?: string | null | undefined) => void;
+  selected: boolean;
+  pointX: number;
+  pointY: number;
+  onChangePointX: (value: number) => void;
+  onChangePointY: (value: number) => void;
+  isAutomatic?: boolean;
 };
 
-const PointRow = ({
-  pointX,
-  pointY,
-  ...props
-}: Props) => {
+const PointRow = ({ pointX, pointY, ...props }: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-
     <TableRow
       style={{
         backgroundColor: props.selected
@@ -66,7 +61,7 @@ const PointRow = ({
           errorText={props.nameError ? 'This name is already taken' : undefined}
           disabled={!props.onChangePointName}
           commitOnBlur
-          onChange={props.onChangePointName || (newName: any => {})}
+          onChange={props.onChangePointName || ((newName: string) => {})}
         />
       </TableRowColumn>
       <TableRowColumn style={styles.coordinateColumn} padding="none">
@@ -82,13 +77,11 @@ const PointRow = ({
             type="number"
             step={0.5}
             id="point-x"
-
-            onChange={value => {
+            onChange={(value) => {
               const valueAsNumber = parseFloat(value);
               if (!isNaN(valueAsNumber)) props.onChangePointX(valueAsNumber);
             }}
-
-            onBlur={event => {
+            onBlur={(event) => {
               props.onChangePointX(parseFloat(event.currentTarget.value) || 0);
             }}
             disabled={props.isAutomatic}
@@ -108,13 +101,11 @@ const PointRow = ({
             type="number"
             step={0.5}
             id="point-y"
-
-            onChange={value => {
+            onChange={(value) => {
               const valueAsNumber = parseFloat(value);
               if (!isNaN(valueAsNumber)) props.onChangePointY(valueAsNumber);
             }}
-
-            onBlur={event => {
+            onBlur={(event) => {
               props.onChangePointY(parseFloat(event.currentTarget.value) || 0);
             }}
             disabled={props.isAutomatic}
@@ -123,13 +114,11 @@ const PointRow = ({
       </TableRowColumn>
       <TableRowColumn style={styles.toolColumn}>
         {!!props.onRemove && (
-
           <IconButton size="small" onClick={props.onRemove}>
             <Trash />
           </IconButton>
         )}
         {!!props.onEdit && (
-
           <IconButton size="small" onClick={props.onEdit}>
             <Edit />
           </IconButton>

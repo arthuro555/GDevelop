@@ -81,6 +81,7 @@ const ProjectStorageProviders = (props: Props) => {
   >(null);
 
   const [renderDialog, setRenderDialog] =
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type '(() => ReactElement<any, string | JSXElementConstructor<any>> | null | undefined) | (() => () => ReactElement<any, string | JSXElementConstructor<any>> | null | undefined)'.
     React.useState<() => React.ReactElement | null | undefined>(null);
   const defaultConfiguration = computeDefaultConfiguration(
     props.defaultStorageProvider,

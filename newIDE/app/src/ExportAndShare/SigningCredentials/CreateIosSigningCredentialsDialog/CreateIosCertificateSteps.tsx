@@ -31,24 +31,29 @@ import { signingCredentialApi } from '../../../Utils/GDevelopServices/Build';
 import SemiControlledTextField from '../../../UI/SemiControlledTextField';
 
 export const getBase64FromFile = async (file: File) => {
-  return new Promise((resolve: (result: Promise<string> | string) => void, reject: (error?: any) => void) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result !== 'string')
-        throw new Error('Unexpected result when reading file.');
+  return new Promise(
+    (
+      resolve: (result: Promise<string> | string) => void,
+      reject: (error?: any) => void
+    ) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result !== 'string')
+          throw new Error('Unexpected result when reading file.');
 
-      const base64String = reader.result.split(',')[1];
-      if (!base64String) {
-        reject(new Error('Could not read base64 content from the file.'));
-        return;
-      }
-      resolve(base64String);
-    };
-    reader.onerror = error: ProgressEvent => {
-      reject(error);
-    };
-    reader.readAsDataURL(file);
-  });
+        const base64String = reader.result.split(',')[1];
+        if (!base64String) {
+          reject(new Error('Could not read base64 content from the file.'));
+          return;
+        }
+        resolve(base64String);
+      };
+      reader.onerror = (error: ProgressEvent) => {
+        reject(error);
+      };
+      reader.readAsDataURL(file);
+    }
+  );
 };
 
 const styles = {
@@ -59,14 +64,12 @@ const styles = {
 } as const;
 
 type Props = {
-  authenticatedUser: AuthenticatedUser
+  authenticatedUser: AuthenticatedUser;
 };
 
-export const CreateIosCertificateSteps = ({
-  authenticatedUser,
-}: Props) => {
+export const CreateIosCertificateSteps = ({ authenticatedUser }: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showConfirmation } = useAlertDialog();
   const userId = authenticatedUser.profile
     ? authenticatedUser.profile.id
@@ -74,30 +77,24 @@ export const CreateIosCertificateSteps = ({
 
   const [commonName, setCommonName] = React.useState('');
   const [countryName, setCountryName] = React.useState('');
-  const [certificateRequestUuid, setCertificateRequestUuid] = React.useState(
-    ''
-  );
+  const [certificateRequestUuid, setCertificateRequestUuid] =
+    React.useState('');
   const [csrPem, setCsrPem] = React.useState('');
   const [
     isCertificateSigningRequestLoading,
     setIsCertificateSigningRequestLoading,
   ] = React.useState(false);
-  const [
-    certificateSigningRequestError,
-    setCertificateSigningRequestError,
-  ] = React.useState<Error | null | undefined>(null);
+  const [certificateSigningRequestError, setCertificateSigningRequestError] =
+    React.useState<Error | null | undefined>(null);
 
-  const onCreateSigningRequest = React.useCallback(
-    async () => {
-      if (!userId) return;
+  const onCreateSigningRequest = React.useCallback(async () => {
+    if (!userId) return;
 
-      try {
-        setIsCertificateSigningRequestLoading(true);
-        setCertificateSigningRequestError(null);
-        const {
-          certificateRequestUuid,
-          csrPem,
-        } = await signingCredentialApi.createCertificateSigningRequest(
+    try {
+      setIsCertificateSigningRequestLoading(true);
+      setCertificateSigningRequestError(null);
+      const { certificateRequestUuid, csrPem } =
+        await signingCredentialApi.createCertificateSigningRequest(
           authenticatedUser.getAuthorizationHeader,
           userId,
           {
@@ -105,39 +102,37 @@ export const CreateIosCertificateSteps = ({
             countryName: countryName || 'US',
           }
         );
-        setCertificateRequestUuid(certificateRequestUuid);
-        setCsrPem(csrPem);
-      } catch (error: any) {
-        console.error(
-          'Error while creating certificate signing request:',
-          error
-        );
-        setCertificateSigningRequestError(error);
-      } finally {
-        setIsCertificateSigningRequestLoading(false);
-      }
-    },
-    [authenticatedUser.getAuthorizationHeader, userId, commonName, countryName]
-  );
+      setCertificateRequestUuid(certificateRequestUuid);
+      setCsrPem(csrPem);
+    } catch (error: any) {
+      console.error('Error while creating certificate signing request:', error);
+      setCertificateSigningRequestError(error);
+    } finally {
+      setIsCertificateSigningRequestLoading(false);
+    }
+  }, [
+    authenticatedUser.getAuthorizationHeader,
+    userId,
+    commonName,
+    countryName,
+  ]);
 
-  const [wasCertificateGenerated, setWasCertificateGenerated] = React.useState(
-    false
-  );
-  const [certificateError, setCertificateError] = React.useState<Error | null | undefined>(null);
+  const [wasCertificateGenerated, setWasCertificateGenerated] =
+    React.useState(false);
+  const [certificateError, setCertificateError] = React.useState<
+    Error | null | undefined
+  >(null);
   const [isCertificateLoading, setIsCertificateLoading] = React.useState(false);
   const [
     lastUploadedProvisioningProfileName,
     setLastUploadedProvisioningProfileName,
   ] = React.useState('');
 
-  const [
-    mobileProvisionError,
-    setMobileProvisionError,
-  ] = React.useState<Error | null | undefined>(null);
-  const [
-    isMobileProvisionLoading,
-    setIsMobileProvisionLoading,
-  ] = React.useState(false);
+  const [mobileProvisionError, setMobileProvisionError] = React.useState<
+    Error | null | undefined
+  >(null);
+  const [isMobileProvisionLoading, setIsMobileProvisionLoading] =
+    React.useState(false);
 
   const onUploadCertificate = React.useCallback(
     async (certificateFile: File) => {
@@ -148,16 +143,14 @@ export const CreateIosCertificateSteps = ({
         setIsCertificateLoading(true);
 
         const certificateAsBase64 = await getBase64FromFile(certificateFile);
-        const {
-          certificateSerial,
-          certificateKind,
-        } = await signingCredentialApi.uploadCertificate(
-          authenticatedUser.getAuthorizationHeader,
-          userId,
-          {
-            certificateAsBase64,
-          }
-        );
+        const { certificateSerial, certificateKind } =
+          await signingCredentialApi.uploadCertificate(
+            authenticatedUser.getAuthorizationHeader,
+            userId,
+            {
+              certificateAsBase64,
+            }
+          );
         if (certificateKind === 'unknown') {
           const answer = await showConfirmation({
             title: t`Unknown certificate type`,
@@ -201,9 +194,8 @@ export const CreateIosCertificateSteps = ({
         setLastUploadedProvisioningProfileName('');
         setIsMobileProvisionLoading(true);
 
-        const mobileProvisionAsBase64 = await getBase64FromFile(
-          mobileProvisionFile
-        );
+        const mobileProvisionAsBase64 =
+          await getBase64FromFile(mobileProvisionFile);
         const { name } = await signingCredentialApi.uploadMobileProvision(
           authenticatedUser.getAuthorizationHeader,
           userId,
@@ -222,16 +214,12 @@ export const CreateIosCertificateSteps = ({
   );
 
   return (
-
     <ColumnStackLayout noMargin>
       <AlertMessage
         kind="info"
-
         renderLeftIcon={() => <Apple style={styles.appleIcon} />}
         renderRightButton={() => (
-
           <FlatButton
-
             label={<Trans>Open Apple Developer</Trans>}
             onClick={() =>
               Window.openExternalURL('https://developer.apple.com/account')
@@ -255,20 +243,16 @@ export const CreateIosCertificateSteps = ({
       <LineStackLayout noMargin>
         <SemiControlledTextField
           fullWidth
-
           floatingLabelText={<Trans>Company name or full name</Trans>}
           value={commonName}
-
-          onChange={text => setCommonName(text)}
+          onChange={(text) => setCommonName(text)}
           maxLength={64}
         />
         <SemiControlledTextField
           fullWidth
-
           floatingLabelText={<Trans>Country name</Trans>}
           value={countryName}
-
-          onChange={text => setCountryName(text)}
+          onChange={(text) => setCountryName(text)}
           maxLength={64}
         />
       </LineStackLayout>
@@ -278,7 +262,6 @@ export const CreateIosCertificateSteps = ({
           <RaisedButton
             primary={!certificateRequestUuid}
             disabled={isCertificateSigningRequestLoading}
-
             label={<Trans>Create a signing request</Trans>}
             onClick={onCreateSigningRequest}
           />
@@ -292,13 +275,11 @@ export const CreateIosCertificateSteps = ({
               'request.csr'
             )
           }
-
           label={<Trans>Download the request file</Trans>}
         />
       </LineStackLayout>
 
       {certificateSigningRequestError && (
-
         <AlertMessage kind="error">
           An error occured while generating the Certificate Signing Request.
         </AlertMessage>
@@ -322,7 +303,7 @@ export const CreateIosCertificateSteps = ({
         <Line expand>
           <Column expand>
             <input
-// @ts-expect-error - TS2322 - Type 'string[]' is not assignable to type 'string'.
+              // @ts-expect-error - TS2322 - Type 'string[]' is not assignable to type 'string'.
               accept={['*/*']}
               style={{
                 color: gdevelopTheme.text.color.primary,
@@ -330,8 +311,8 @@ export const CreateIosCertificateSteps = ({
               multiple={false}
               type="file"
               disabled={!certificateRequestUuid || isCertificateLoading}
-              onChange={event => {
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+              onChange={(event) => {
+                // @ts-expect-error - TS2531 - Object is possibly 'null'.
                 const file = event.currentTarget.files[0] || null;
                 setCertificateError(null);
                 if (file) onUploadCertificate(file);
@@ -342,13 +323,11 @@ export const CreateIosCertificateSteps = ({
       </Paper>
 
       {certificateError && (
-
         <AlertMessage kind="error">
           <Trans>An error occured while generating the certificate.</Trans>
         </AlertMessage>
       )}
       {wasCertificateGenerated && (
-
         <AlertMessage kind="valid">
           <Trans>
             The certificate was properly generated. Don't forget to create and
@@ -370,7 +349,7 @@ export const CreateIosCertificateSteps = ({
         <Line expand>
           <Column expand>
             <input
-// @ts-expect-error - TS2322 - Type 'string[]' is not assignable to type 'string'.
+              // @ts-expect-error - TS2322 - Type 'string[]' is not assignable to type 'string'.
               accept={['*/*']}
               style={{
                 color: gdevelopTheme.text.color.primary,
@@ -378,8 +357,8 @@ export const CreateIosCertificateSteps = ({
               multiple={false}
               type="file"
               disabled={isMobileProvisionLoading}
-              onChange={event => {
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+              onChange={(event) => {
+                // @ts-expect-error - TS2531 - Object is possibly 'null'.
                 const file = event.currentTarget.files[0] || null;
                 setMobileProvisionError(null);
                 if (file) onUploadMobileProvision(file);
@@ -390,7 +369,6 @@ export const CreateIosCertificateSteps = ({
       </Paper>
 
       {mobileProvisionError && (
-
         <AlertMessage kind="error">
           <Trans>
             An error occured while storing the provisioning profile.
@@ -398,7 +376,6 @@ export const CreateIosCertificateSteps = ({
         </AlertMessage>
       )}
       {lastUploadedProvisioningProfileName && (
-
         <AlertMessage kind="valid">
           <Trans>
             The provisioning profile was properly stored (

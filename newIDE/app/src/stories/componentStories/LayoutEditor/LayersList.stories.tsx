@@ -24,6 +24,7 @@ export const Default = () => {
   return (
     <DragAndDropContextProvider>
       <LayersList
+// @ts-expect-error - TS2322 - Type '{ project: any; selectedLayer: string; onSelectLayer: Dispatch<SetStateAction<string>>; onEditLayerEffects: HandlerFunction; onEditLayer: HandlerFunction; ... 4 more ...; hotReloadPreviewButtonProps: HotReloadPreviewButtonProps; }' is not assignable to type 'IntrinsicAttributes & LayersListInterface & RefAttributes<Props>'.
         project={testProject.project}
         selectedLayer={selectedLayer}
         onSelectLayer={setSelectedLayer}
@@ -49,6 +50,7 @@ export const SmallWidthAndHeight = () => {
     <DragAndDropContextProvider>
       <div style={{ width: 250, height: 200 }}>
         <LayersList
+// @ts-expect-error - TS2322 - Type '{ project: any; selectedLayer: string; onSelectLayer: Dispatch<SetStateAction<string>>; onEditLayerEffects: HandlerFunction; onEditLayer: HandlerFunction; ... 4 more ...; hotReloadPreviewButtonProps: HotReloadPreviewButtonProps; }' is not assignable to type 'IntrinsicAttributes & LayersListInterface & RefAttributes<Props>'.
           project={testProject.project}
           selectedLayer={selectedLayer}
           onSelectLayer={setSelectedLayer}

@@ -328,7 +328,6 @@ const PublishHome = ({
     null
   );
 
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
 
   const onBack = () => {

@@ -140,6 +140,7 @@ const HighlightingTooltip = ({
         },
       }}
       style={{
+// @ts-expect-error - TS2322 - Type 'string | number' is not assignable to type 'ZIndex | undefined'.
         zIndex: getDisplayZIndexForHighlighter(anchorElement),
         maxWidth: 'min(90%, 300px)',
       }}

@@ -2,7 +2,7 @@ import { serializeToJSObject } from '../../Utils/Serializer';
 
 import optionalRequire from '../../Utils/OptionalRequire';
 const fs = optionalRequire('fs-extra');
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 const remote = optionalRequire('@electron/remote');
 const dialog = remote ? remote.dialog : null;
 

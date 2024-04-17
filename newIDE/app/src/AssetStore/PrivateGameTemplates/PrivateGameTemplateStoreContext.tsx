@@ -129,7 +129,7 @@ export const PrivateGameTemplateStoreStateProvider = ({
   const initialGameTemplateOpened = React.useRef<boolean>(false);
 
   const isLoading = React.useRef<boolean>(false);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const [shopSearchText, setShopSearchText] = React.useState(defaultSearchText);
@@ -183,6 +183,7 @@ export const PrivateGameTemplateStoreStateProvider = ({
           `Unable to load the game templates from the store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 

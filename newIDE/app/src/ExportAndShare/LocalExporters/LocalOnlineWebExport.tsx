@@ -23,8 +23,8 @@ import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 
 import OnlineWebExportFlow from '../GenericExporters/OnlineWebExport/OnlineWebExportFlow';
 
-const path = optionalRequire('path');
-const os = optionalRequire('os');
+const path = optionalRequire('path') as typeof import('path');
+const os = optionalRequire('os') as typeof import('os');
 
 type ExportState = null;
 

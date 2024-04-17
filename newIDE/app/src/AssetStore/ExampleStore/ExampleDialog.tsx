@@ -43,7 +43,7 @@ import { ExampleDifficultyChip } from '../../UI/ExampleDifficultyChip';
 import { ExampleSizeChip } from '../../UI/ExampleSizeChip';
 const isDev = Window.isDev();
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   exampleShortHeader: ExampleShortHeader;
@@ -76,7 +76,7 @@ export function ExampleDialog({
     try {
       const example = await getExample(exampleShortHeader);
       setExample(example);
-    } catch (error) {
+    } catch (error: any) {
       setError(error);
     }
   }, [exampleShortHeader]);
@@ -190,7 +190,6 @@ export function ExampleDialog({
           </Column>
         )}
         {!example && error && (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={loadExample}>
             <Trans>
               Can't load the example. Verify your internet connection or try

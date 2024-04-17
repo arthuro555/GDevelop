@@ -48,7 +48,7 @@ type Props = {
   redo: () => void;
   canRedo: boolean;
   onToggleSearchPanel: () => void;
-  onOpenSettings?: () => void | null | undefined;
+  onOpenSettings?: () => void;
   settingsIcon?: React.ReactNode;
   moveEventsIntoNewGroup: () => void;
   canMoveEventsIntoNewGroup: boolean;

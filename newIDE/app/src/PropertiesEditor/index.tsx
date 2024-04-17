@@ -303,7 +303,6 @@ const PropertiesEditor = ({
         const description = getFieldDescription(field);
 
         return (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <InlineCheckbox
             label={
               !description ? (
@@ -320,7 +319,6 @@ const PropertiesEditor = ({
             key={field.name}
             id={field.name}
             checked={getFieldValue({ instances, field })}
-            // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'newValue' implicitly has an 'any' type.
             onCheck={(event, newValue) => {
               instances.forEach((i) => setValue(i, !!newValue));
               _onInstancesModified(instances);
@@ -426,6 +424,7 @@ const PropertiesEditor = ({
               />
             )}
             renderButton={(style) =>
+// @ts-expect-error - TS2322 - Type 'Element | null' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
               onEditButtonClick && !onEditButtonBuildMenuTemplate ? (
                 <RaisedButton
                   style={style}
@@ -442,6 +441,7 @@ const PropertiesEditor = ({
                   disabled={instances.length !== 1}
                   icon={<Edit />}
                   label={<Trans>Edit</Trans>}
+// @ts-expect-error - TS2322 - Type '(() => void) | undefined' is not assignable to type '() => void'.
                   onClick={onEditButtonClick}
                   buildMenuTemplate={onEditButtonBuildMenuTemplate}
                 />
@@ -480,12 +480,14 @@ const PropertiesEditor = ({
             key={field.name}
             id={field.name}
             floatingLabelText={getFieldLabel({ instances, field })}
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
             helperMarkdownText={getFieldDescription(field)}
             onChange={(event, index, newValue: string) => {
               instances.forEach((i) => setValue(i, parseFloat(newValue) || 0));
               _onInstancesModified(instances);
             }}
             style={styles.field}
+// @ts-expect-error - TS2322 - Type 'boolean | ((instances: gd.InitialInstance[]) => boolean) | undefined' is not assignable to type 'boolean | undefined'.
             disabled={field.disabled}
           >
             {children}
@@ -503,6 +505,7 @@ const PropertiesEditor = ({
             key={field.name}
             id={field.name}
             floatingLabelText={getFieldLabel({ instances, field })}
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
             helperMarkdownText={getFieldDescription(field)}
             onChange={(event, index, newValue: string) => {
               instances.forEach((i) => setValue(i, newValue || ''));

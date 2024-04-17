@@ -1,4 +1,4 @@
-import panable, {PanMoveEvent} from '../../Utils/PixiSimpleGesture/pan';
+import panable, { PanMoveEvent } from '../../Utils/PixiSimpleGesture/pan';
 import ObjectsRenderingService from '../../ObjectsRendering/ObjectsRenderingService';
 import RenderedInstance from '../../ObjectsRendering/Renderers/RenderedInstance';
 import getObjectByName from '../../Utils/GetObjectByName';
@@ -23,20 +23,26 @@ export default class LayerRenderer {
   layer: gd.Layer;
   viewPosition: ViewPosition;
   onInstanceClicked: (arg1: gd.InitialInstance) => void;
-  onInstanceRightClicked: (
-    arg1: {
-      offsetX: number,
-      offsetY: number,
-      x: number,
-      y: number
-    },
-  ) => void;
+  onInstanceRightClicked: (arg1: {
+    offsetX: number;
+    offsetY: number;
+    x: number;
+    y: number;
+  }) => void;
   onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void;
   onOverInstance: (arg1: gd.InitialInstance) => void;
   onOutInstance: (arg1: gd.InitialInstance) => void;
-  onMoveInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
+  onMoveInstance: (
+    arg1: gd.InitialInstance,
+    arg2: number,
+    arg3: number
+  ) => void;
   onMoveInstanceEnd: (arg1: undefined) => void;
-  onDownInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
+  onDownInstance: (
+    arg1: gd.InitialInstance,
+    arg2: number,
+    arg3: number
+  ) => void;
   onUpInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
   /** Used for instances culling on rendering. */
   viewTopLeft: [number, number];
@@ -44,7 +50,7 @@ export default class LayerRenderer {
   viewBottomRight: [number, number];
 
   renderedInstances: {
-    [key: number]: RenderedInstance | Rendered3DInstance
+    [key: number]: RenderedInstance | Rendered3DInstance;
   } = {};
   pixiContainer: PIXI.Container;
 
@@ -54,7 +60,12 @@ export default class LayerRenderer {
   wasUsed: boolean = false;
 
   _temporaryRectangle: Rectangle = new Rectangle();
-  _temporaryRectanglePath: Polygon = [[0, 0], [0, 0], [0, 0], [0, 0]];
+  _temporaryRectanglePath: Polygon = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ];
 
   /**
    * The render texture where the whole 2D layer is rendered.
@@ -99,29 +110,39 @@ export default class LayerRenderer {
     pixiRenderer,
     showObjectInstancesIn3D,
   }: {
-    project: gd.Project,
-    instances: gd.InitialInstancesContainer,
-    layout: gd.Layout,
-    layer: gd.Layer,
-    viewPosition: ViewPosition,
-    onInstanceClicked: (arg1: gd.InitialInstance) => void,
-    onInstanceRightClicked: (
-      arg1: {
-        offsetX: number,
-        offsetY: number,
-        x: number,
-        y: number
-      },
-    ) => void,
-    onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void,
-    onOverInstance: (arg1: gd.InitialInstance) => void,
-    onOutInstance: (arg1: gd.InitialInstance) => void,
-    onMoveInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
-    onMoveInstanceEnd: (arg1: undefined) => void,
-    onDownInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
-    onUpInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
-    pixiRenderer: PIXI.Renderer,
-    showObjectInstancesIn3D: boolean
+    project: gd.Project;
+    instances: gd.InitialInstancesContainer;
+    layout: gd.Layout;
+    layer: gd.Layer;
+    viewPosition: ViewPosition;
+    onInstanceClicked: (arg1: gd.InitialInstance) => void;
+    onInstanceRightClicked: (arg1: {
+      offsetX: number;
+      offsetY: number;
+      x: number;
+      y: number;
+    }) => void;
+    onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void;
+    onOverInstance: (arg1: gd.InitialInstance) => void;
+    onOutInstance: (arg1: gd.InitialInstance) => void;
+    onMoveInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    onMoveInstanceEnd: (arg1: undefined) => void;
+    onDownInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    onUpInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    pixiRenderer: PIXI.Renderer;
+    showObjectInstancesIn3D: boolean;
   }) {
     this.project = project;
     this.instances = instances;
@@ -148,23 +169,25 @@ export default class LayerRenderer {
 
     // Functor used to render an instance
     this.instancesRenderer = new gd.InitialInstanceJSFunctor();
-    this.instancesRenderer.invoke = instancePtr: any => {
+    this.instancesRenderer.invoke = (instancePtr: any) => {
       const instance: gd.InitialInstance = gd.wrapPointer(
         instancePtr,
         gd.InitialInstance
       );
 
       //Get the "RenderedInstance" object associated to the instance and tell it to update.
-      var renderedInstance: RenderedInstance | Rendered3DInstance | null = this.getRendererOfInstance(instance);
+      var renderedInstance: RenderedInstance | Rendered3DInstance | null =
+        this.getRendererOfInstance(instance);
       if (!renderedInstance) return;
 
-      const pixiObject: PIXI.DisplayObject | null = renderedInstance.getPixiObject();
+      const pixiObject: PIXI.DisplayObject | null =
+        renderedInstance.getPixiObject();
       if (pixiObject) {
         if (renderedInstance instanceof Rendered3DInstance) {
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+          // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
           pixiObject.zOrder = instance.getZ() + renderedInstance.getDepth();
         } else {
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+          // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
           pixiObject.zOrder = instance.getZOrder();
         }
       }
@@ -267,23 +290,26 @@ export default class LayerRenderer {
     const width = hasCustomSize
       ? instance.getCustomWidth()
       : renderedInstance
-      ? renderedInstance.getDefaultWidth()
-      : 0;
+        ? renderedInstance.getDefaultWidth()
+        : 0;
     const height = hasCustomSize
       ? instance.getCustomHeight()
       : renderedInstance
-      ? renderedInstance.getDefaultHeight()
-      : 0;
+        ? renderedInstance.getDefaultHeight()
+        : 0;
     const depth = hasCustomDepth
       ? instance.getCustomDepth()
       : renderedInstance
-      ? renderedInstance.getDefaultDepth()
-      : 0;
+        ? renderedInstance.getDefaultDepth()
+        : 0;
 
     return [width, height, depth];
   };
 
-  getUnrotatedInstanceAABB(instance: gd.InitialInstance, bounds: Rectangle): Rectangle {
+  getUnrotatedInstanceAABB(
+    instance: gd.InitialInstance,
+    bounds: Rectangle
+  ): Rectangle {
     const size = this.getUnrotatedInstanceSize(instance);
     const left = this.getUnrotatedInstanceLeft(instance);
     const top = this.getUnrotatedInstanceTop(instance);
@@ -377,22 +403,21 @@ export default class LayerRenderer {
       if (!associatedObject) return null;
 
       //...so let's create a renderer.
-      renderedInstance = this.renderedInstances[
-        instance.ptr
-      ] = ObjectsRenderingService.createNewInstanceRenderer(
-        this.project,
-        this.layout,
-        instance,
-        associatedObject.getConfiguration(),
-        this.pixiContainer,
-        this._threeGroup
-      );
+      renderedInstance = this.renderedInstances[instance.ptr] =
+        ObjectsRenderingService.createNewInstanceRenderer(
+          this.project,
+          this.layout,
+          instance,
+          associatedObject.getConfiguration(),
+          this.pixiContainer,
+          this._threeGroup
+        );
 
       renderedInstance._pixiObject.eventMode = 'static';
       panable(renderedInstance._pixiObject);
       makeDoubleClickable(renderedInstance._pixiObject);
-      renderedInstance._pixiObject.addEventListener('click', event => {
-// @ts-expect-error - TS2339 - Property 'button' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
+      renderedInstance._pixiObject.addEventListener('click', (event) => {
+        // @ts-expect-error - TS2339 - Property 'button' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
         if (event.data.originalEvent.button === 0)
           this.onInstanceClicked(instance);
       });
@@ -404,7 +429,7 @@ export default class LayerRenderer {
       });
       renderedInstance._pixiObject.addEventListener(
         'mousedown',
-// @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
+        // @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
         (event: PIXI.InteractionEvent) => {
           if (event.data.originalEvent.button === 0) {
             const viewPoint = event.data.global;
@@ -418,7 +443,7 @@ export default class LayerRenderer {
       );
       renderedInstance._pixiObject.addEventListener(
         'mouseup',
-// @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
+        // @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
         (event: PIXI.InteractionEvent) => {
           if (event.data.originalEvent.button === 0) {
             const viewPoint = event.data.global;
@@ -432,7 +457,7 @@ export default class LayerRenderer {
       );
       renderedInstance._pixiObject.addEventListener(
         'rightclick',
-        interactionEvent => {
+        (interactionEvent) => {
           const {
             data: { global: viewPoint, originalEvent: event },
           } = interactionEvent;
@@ -447,13 +472,13 @@ export default class LayerRenderer {
           // Then call right click callback
           if (this.onInstanceRightClicked) {
             this.onInstanceRightClicked({
-// @ts-expect-error - TS2339 - Property 'offsetX' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
+              // @ts-expect-error - TS2339 - Property 'offsetX' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
               offsetX: event.offsetX,
-// @ts-expect-error - TS2339 - Property 'offsetY' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
+              // @ts-expect-error - TS2339 - Property 'offsetY' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
               offsetY: event.offsetY,
-// @ts-expect-error - TS2339 - Property 'clientX' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
+              // @ts-expect-error - TS2339 - Property 'clientX' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
               x: event.clientX,
-// @ts-expect-error - TS2339 - Property 'clientY' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
+              // @ts-expect-error - TS2339 - Property 'clientY' does not exist on type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>'.
               y: event.clientY,
             });
           }
@@ -461,8 +486,8 @@ export default class LayerRenderer {
           return false;
         }
       );
-      renderedInstance._pixiObject.addEventListener('touchstart', event => {
-// @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
+      renderedInstance._pixiObject.addEventListener('touchstart', (event) => {
+        // @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
         if (shouldBeHandledByPinch(event.data && event.data.originalEvent)) {
           return null;
         }
@@ -474,8 +499,8 @@ export default class LayerRenderer {
         );
         this.onDownInstance(instance, scenePoint[0], scenePoint[1]);
       });
-      renderedInstance._pixiObject.addEventListener('touchend', event => {
-// @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
+      renderedInstance._pixiObject.addEventListener('touchend', (event) => {
+        // @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
         if (shouldBeHandledByPinch(event.data && event.data.originalEvent)) {
           return null;
         }
@@ -490,11 +515,11 @@ export default class LayerRenderer {
       renderedInstance._pixiObject.addEventListener('mouseout', () => {
         this.onOutInstance(instance);
       });
-// @ts-expect-error - TS2769 - No overload matches this call.
+      // @ts-expect-error - TS2769 - No overload matches this call.
       renderedInstance._pixiObject.addEventListener(
         'panmove',
         (event: PanMoveEvent) => {
-// @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
+          // @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
           if (shouldBeHandledByPinch(event.data && event.data.originalEvent)) {
             return null;
           }
@@ -502,8 +527,8 @@ export default class LayerRenderer {
           this.onMoveInstance(instance, event.deltaX, event.deltaY);
         }
       );
-      renderedInstance._pixiObject.addEventListener('panend', event => {
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      renderedInstance._pixiObject.addEventListener('panend', (event) => {
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         this.onMoveInstanceEnd();
       });
     }
@@ -734,7 +759,7 @@ export default class LayerRenderer {
       clear: false,
     });
     pixiRenderer.renderTexture.bind(
-// @ts-expect-error - TS2345 - Argument of type 'RenderTexture | null' is not assignable to parameter of type 'RenderTexture | undefined'.
+      // @ts-expect-error - TS2345 - Argument of type 'RenderTexture | null' is not assignable to parameter of type 'RenderTexture | undefined'.
       oldRenderTexture,
       oldSourceFrame,
       undefined
@@ -745,14 +770,16 @@ export default class LayerRenderer {
    * Set the texture of the 2D plane in the 3D world to be the same WebGL texture
    * as the PixiJS RenderTexture - so that the 2D rendering can be shown in the 3D world.
    */
-  updateThreePlaneTextureFromPixiRenderTexture(threeRenderer: THREE.WebGLRenderer, pixiRenderer: PIXI.Renderer): void {
+  updateThreePlaneTextureFromPixiRenderTexture(
+    threeRenderer: THREE.WebGLRenderer,
+    pixiRenderer: PIXI.Renderer
+  ): void {
     if (!this._threePlaneTexture || !this._renderTexture) {
       return;
     }
 
-    const glTexture = this._renderTexture.baseTexture._glTextures[
-      pixiRenderer.CONTEXT_UID
-    ];
+    const glTexture =
+      this._renderTexture.baseTexture._glTextures[pixiRenderer.CONTEXT_UID];
     if (glTexture) {
       // "Hack" into the Three.js renderer by getting the internal WebGL texture for the PixiJS plane,
       // and set it so that it's the same as the WebGL texture for the PixiJS RenderTexture.
@@ -764,11 +791,11 @@ export default class LayerRenderer {
 
   _updatePixiObjectsZOrder() {
     this.pixiContainer.children.sort((a, b) => {
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       a.zOrder = a.zOrder || 0;
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       b.zOrder = b.zOrder || 0;
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       return a.zOrder - b.zOrder;
     });
   }

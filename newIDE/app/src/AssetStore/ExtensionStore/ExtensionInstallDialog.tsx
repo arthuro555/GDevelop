@@ -40,7 +40,6 @@ import HelpButton from '../../UI/HelpButton';
 import useAlertDialog from '../../UI/Alert/useAlertDialog';
 
 export const useOutOfDateAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (): Promise<boolean> => {
     return await showConfirmation({
@@ -294,7 +293,6 @@ const ExtensionInstallDialog = ({
         )}
         {!extensionHeader && !error && <PlaceholderLoader />}
         {!extensionHeader && error && (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={loadExtensionheader}>
             <Trans>
               Can't load the extension registry. Verify your internet connection

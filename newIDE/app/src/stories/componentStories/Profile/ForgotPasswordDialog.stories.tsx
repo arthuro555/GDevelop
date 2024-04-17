@@ -14,6 +14,7 @@ export default {
 export const Default = () => (
   <ForgotPasswordDialog
     onClose={() => action('onClose')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
     onForgotPassword={() => action('onForgotPassword')()}
   />
 );

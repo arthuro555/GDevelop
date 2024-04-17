@@ -49,8 +49,8 @@ type Props = {
  * dismissed on click/touch outside) but positioned under the edited parameter.
  */
 export default function InlinePopover(props: Props) {
-  const startSentinel = React.useRef<HTMLDivElement | null | undefined>(null);
-  const endSentinel = React.useRef<HTMLDivElement | null | undefined>(null);
+  const startSentinel = React.useRef<HTMLDivElement>(null);
+  const endSentinel = React.useRef<HTMLDivElement>(null);
   const { isMobile } = useResponsiveWindowSize();
 
   return (
@@ -152,12 +152,10 @@ export default function InlinePopover(props: Props) {
         }}
       >
         <Background>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'. */}
           <div tabIndex={0} ref={startSentinel} />
           <Column expand>
             <Line>{props.children}</Line>
           </Column>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'. */}
           <div tabIndex={0} ref={endSentinel} />
         </Background>
       </Popper>

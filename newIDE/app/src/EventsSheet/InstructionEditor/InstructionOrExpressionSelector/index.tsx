@@ -164,6 +164,7 @@ const InstructionOrExpressionSelector = <
             : undefined
         }
         helpPagePath={helpPagePath}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SearchBarInterface | null | undefined>' is not assignable to type 'Ref<SearchBarInterface> | undefined'.
         ref={searchBarRef}
         autoFocus={focusOnMount ? 'desktop' : undefined}
       />
@@ -196,6 +197,7 @@ const InstructionOrExpressionSelector = <
             ) : (
               <>
                 {renderInstructionOrExpressionTree({
+// @ts-expect-error - TS2322 - Type 'EnumeratedInstructionOrExpressionMetadata | { [key: string]: TreeNode<T>; }' is not assignable to type 'InstructionOrExpressionTreeNode'.
                   instructionTreeNode: instructionsInfoTree,
                   iconSize,
                   onChoose,

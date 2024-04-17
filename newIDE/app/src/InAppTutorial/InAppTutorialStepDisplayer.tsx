@@ -98,8 +98,10 @@ const getWrongEditorTooltip = (
     : '';
 
   return {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '(TranslatedText & string) | undefined'.
     title: i18n._(t`You're leaving the game tutorial`),
     placement: 'top',
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '(TranslatedText & string) | undefined'.
     description: i18n._(
       t`Go back to ${translatedExpectedEditor}${sceneMention} to keep creating your game.`
     ),

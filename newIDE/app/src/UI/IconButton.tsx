@@ -26,7 +26,7 @@ type IconProps = // Support a few specific icons from icomoon-font.css
 // We support a subset of the props supported by Material-UI v0.x IconButton
 // They should be self descriptive - refer to Material UI docs otherwise.
 type Props = IconProps & {
-  onClick?: (ev?: any) => undefined | Promise<undefined>;
+  onClick?: (ev?: any) => void;
   target?: string;
   onContextMenu?: () => void;
   disabled?: boolean;
@@ -86,6 +86,7 @@ const useStyles = makeStyles({
  */
 
 const IconButton = React.forwardRef<Props, Record<any, any>>(
+// @ts-expect-error - TS2345 - Argument of type '(props: Props, ref: ForwardedRef<Props>) => Element' is not assignable to parameter of type 'ForwardRefRenderFunction<Props, Record<any, any>>'.
   (props: Props, ref) => {
     const {
       selected,

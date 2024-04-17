@@ -45,7 +45,7 @@ export type ObjectEditorTab =
 
 type Props = {
   open: boolean;
-  object: gd.Object | null | undefined;
+  object: gd.gdObject | null | undefined;
   onApply: () => void;
   onCancel: () => void;
   // Object renaming:
@@ -70,11 +70,10 @@ type InnerDialogProps = Props & {
   editorComponent: React.ComponentType<EditorProps> | null | undefined;
   objectName: string;
   helpPagePath: string | null | undefined;
-  object: gd.Object;
+  object: gd.gdObject;
 };
 
 const InnerDialog = (props: InnerDialogProps) => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   const { openBehaviorEvents } = props;
   const [currentTab, setCurrentTab] = React.useState<ObjectEditorTab>(
@@ -90,7 +89,7 @@ const InnerDialog = (props: InnerDialogProps) => {
   } = useSerializableObjectCancelableEditor({
     serializableObject: props.object,
     useProjectToUnserialize: props.project,
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
     onCancel: props.onCancel,
     resetThenClearPersistentUuid: true,
   });
@@ -198,6 +197,7 @@ const InnerDialog = (props: InnerDialogProps) => {
         <Tabs
           value={currentTab}
           onChange={setCurrentTab}
+// @ts-expect-error - TS2322 - Type '({ label: Element; value: string; id?: undefined; } | { label: Element; value: string; id: string; } | null)[]' is not assignable to type 'TabOptions<SetStateAction<ObjectEditorTab>>'.
           options={[
             {
               label: <Trans>Properties</Trans>,
@@ -372,7 +372,7 @@ class ObjectEditorDialog extends React.Component<Props, State> {
     }
   }
 
-  _loadFrom(object?: gd.Object | null) {
+  _loadFrom(object?: gd.gdObject | null) {
     if (!object) return;
 
     const editorConfiguration = ObjectsEditorService.getEditorConfiguration(

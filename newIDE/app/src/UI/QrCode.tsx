@@ -14,7 +14,7 @@ type Props = {
 const QrCode = ({ url, size = 128 }: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
 
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     const containerElement = containerRef.current;
 
@@ -40,7 +40,7 @@ const QrCode = ({ url, size = 128 }: Props) => {
       }
     };
   }, [url, size, gdevelopTheme]);
-  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+
   return <div ref={containerRef} style={styles.qrCodeContainer} />;
 };
 

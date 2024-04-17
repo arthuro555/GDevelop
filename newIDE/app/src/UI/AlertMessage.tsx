@@ -33,7 +33,7 @@ const styles = {
 type Props = {
   kind?: 'info' | 'warning' | 'error' | 'valid';
   children: React.ReactNode;
-  onHide?: () => void | null | undefined;
+  onHide?: () => void;
   hideButtonSize?: 'small';
   renderLeftIcon?: () => React.ReactElement;
   renderRightButton?: () => React.ReactElement | null | undefined;

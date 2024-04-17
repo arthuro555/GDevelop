@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 type Props = {
-  onSubmit: () => undefined | Promise<undefined>;
+  onSubmit: () => void;
   autoComplete?: 'on' | 'off';
   name: string;
   children: React.ReactNode;

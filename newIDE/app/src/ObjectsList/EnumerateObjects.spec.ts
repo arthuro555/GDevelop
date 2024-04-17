@@ -10,11 +10,8 @@ import { makeTestProject } from '../fixtures/TestProject';
 describe('EnumerateObjects', () => {
   it('can enumerate objects from a project and scene', () => {
     const { project, testLayout } = makeTestProject(gd);
-    const {
-      containerObjectsList,
-      projectObjectsList,
-      allObjectsList,
-    } = enumerateObjects(project, testLayout);
+    const { containerObjectsList, projectObjectsList, allObjectsList } =
+      enumerateObjects(project, testLayout);
 
     expect(containerObjectsList).toHaveLength(22);
     expect(projectObjectsList).toHaveLength(2);
@@ -75,21 +72,20 @@ describe('EnumerateObjects', () => {
 
   it('can do a case-insensitive search in the lists of objects', () => {
     const { project, testLayout } = makeTestProject(gd);
-    const {
-      containerObjectsList,
-      projectObjectsList,
-      allObjectsList,
-    } = enumerateObjects(project, testLayout);
+    const { containerObjectsList, projectObjectsList, allObjectsList } =
+      enumerateObjects(project, testLayout);
 
     expect(
       filterObjectsList(containerObjectsList, {
         searchText: 'myshapepainterobject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
       })
     ).toHaveLength(1);
     expect(
       filterObjectsList(containerObjectsList, {
         searchText: 'myshapepainterobject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; hideExactMatches: true; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
         hideExactMatches: true,
       })
@@ -97,6 +93,7 @@ describe('EnumerateObjects', () => {
     expect(
       filterObjectsList(containerObjectsList, {
         searchText: 'MyShapePainterObject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; hideExactMatches: true; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
         hideExactMatches: true,
       })
@@ -104,18 +101,21 @@ describe('EnumerateObjects', () => {
     expect(
       filterObjectsList(projectObjectsList, {
         searchText: 'myshapepainterobject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
       })
     ).toHaveLength(0);
     expect(
       filterObjectsList(allObjectsList, {
         searchText: 'myshapepainterobject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
       })
     ).toHaveLength(1);
     expect(
       filterObjectsList(allObjectsList, {
         searchText: 'myshapepainterobject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; hideExactMatches: true; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
         hideExactMatches: true,
       })
@@ -123,6 +123,7 @@ describe('EnumerateObjects', () => {
     expect(
       filterObjectsList(allObjectsList, {
         searchText: 'MyShapePainterObject',
+// @ts-expect-error - TS2345 - Argument of type '{ searchText: string; selectedTags: never[]; hideExactMatches: true; }' is not assignable to parameter of type 'ObjectFilteringOptions'.
         selectedTags: [],
         hideExactMatches: true,
       })
@@ -133,7 +134,7 @@ describe('EnumerateObjects', () => {
     const { testLayout } = makeTestProject(gd);
     const objectGroupsList: GroupWithContextList = enumerateGroups(
       testLayout.getObjectGroups()
-    ).map(group => ({ group, global: false }));
+    ).map((group) => ({ group, global: false }));
 
     expect(
       filterGroupsList(objectGroupsList, {

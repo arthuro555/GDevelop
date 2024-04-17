@@ -39,6 +39,7 @@ export const Default = () => (
 );
 
 export const WithObjectEditor = () => {
+// @ts-expect-error - TS2322 - Type '{ getShowEventBasedObjectsEditor: () => true; values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; ... 35 more ...; readonly editorStateByProject: {}; }; ... 58 more ...; setEditorStateForProject: (projectId: any,...' is not assignable to type 'Preferences'.
   const preferences: Preferences = {
     ...initialPreferences,
     getShowEventBasedObjectsEditor: () => true,

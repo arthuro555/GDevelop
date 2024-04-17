@@ -232,9 +232,11 @@ export const PublicAssetPackTile = ({
         />
         <Column>
           <Line justifyContent="space-between" noMargin>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} size="body2">
               {assetPack.name}
             </Text>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} color="primary" size="body2">
               <Trans>{assetPack.assetsCount} Assets</Trans>
               {assetPack.userFriendlyPrice
@@ -303,9 +305,11 @@ export const PrivateAssetPackTile = ({
         </div>
         <Column>
           <Line justifyContent="space-between" noMargin>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} size="body2">
               {assetPackListingData.name}
             </Text>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} color="primary" size="body2">
               {assetPackListingData.description}
             </Text>
@@ -456,6 +460,7 @@ export const CategoryTile = ({
         />
         <Column>
           <Line justifyContent="center" noMargin>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} size="sub-title">
               {title}
             </Text>
@@ -507,6 +512,7 @@ export const PrivateGameTemplateTile = ({
         </div>
         <Column>
           <Line justifyContent="flex-start" noMargin>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} size="body2">
               {privateGameTemplateListingData.name}
             </Text>
@@ -553,6 +559,7 @@ export const ExampleTile = ({
         />
         <Column>
           <Line justifyContent="flex-start" noMargin>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
             <Text style={styles.packTitle} size="body2">
               {exampleShortHeader.name}
             </Text>

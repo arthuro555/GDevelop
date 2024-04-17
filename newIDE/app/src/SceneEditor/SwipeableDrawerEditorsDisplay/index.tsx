@@ -93,7 +93,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
   const instancesListRef = React.useRef<
     InstancesListInterface | null | undefined
   >(null);
-  const editorRef = React.useRef<InstancesEditor | null | undefined>(null);
+  const editorRef = React.useRef<InstancesEditor>(null);
   const objectsListRef = React.useRef<ObjectsListInterface | null | undefined>(
     null
   );
@@ -344,6 +344,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
                       beforeSetAsGlobalObject={(objectName) =>
                         props.canObjectOrGroupBeGlobal(i18n, objectName)
                       }
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ObjectsListInterface | null | undefined>' is not assignable to type 'Ref<ObjectsListInterface> | undefined'.
                       ref={objectsListRef}
                       unsavedChanges={props.unsavedChanges}
                       hotReloadPreviewButtonProps={
@@ -365,6 +366,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
                       onEditObjectByName={props.editObjectByName}
                       onInstancesModified={forceUpdateInstancesList}
                       onGetInstanceSize={getInstanceSize}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<CompactInstancePropertiesEditorInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
                       ref={instancesPropertiesEditorRef}
                       unsavedChanges={props.unsavedChanges}
                       historyHandler={props.historyHandler}
@@ -376,6 +378,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
                 <I18n>
                   {({ i18n }) => (
                     <ObjectGroupsList
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ObjectGroupsListInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
                       ref={objectGroupsListRef}
                       globalObjectGroups={project.getObjectGroups()}
                       objectGroups={layout.getObjectGroups()}
@@ -409,6 +412,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
                     instances={initialInstances}
                     selectedInstances={selectedInstances}
                     onSelectInstances={selectInstances}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<InstancesListInterface | null | undefined>' is not assignable to type 'Ref<InstancesListInterface> | undefined'.
                     ref={instancesListRef}
                   />
                 </Paper>
@@ -425,6 +429,7 @@ const SwipeableDrawerEditorsDisplay = React.forwardRef<
                   onCreateLayer={forceUpdateInstancesPropertiesEditor}
                   layersContainer={layout}
                   unsavedChanges={props.unsavedChanges}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<LayersListInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
                   ref={layersListRef}
                   hotReloadPreviewButtonProps={
                     props.hotReloadPreviewButtonProps

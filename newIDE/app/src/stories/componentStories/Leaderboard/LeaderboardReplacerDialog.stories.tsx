@@ -18,7 +18,9 @@ export default {
 export const IsReplacingLeaderboards = () => (
   <LeaderboardReplacerProgressDialog
     progress={30}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onAbandon={null}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onRetry={null}
     erroredLeaderboards={[
       { leaderboardId: 'errored-leaderboard-id', error: new Error() },

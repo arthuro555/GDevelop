@@ -116,6 +116,7 @@ export const tuneMatches = <T>(result: SearchResult<T>, searchText: string) =>
   result.matches.map<SearchMatch>((match) => ({
     key: match.key,
     value: match.value,
+// @ts-expect-error - TS2322 - Type '(number[] | undefined)[]' is not assignable to type 'number[][]'.
     indices: tuneMatchIndices(match, searchText),
   }));
 
@@ -150,6 +151,7 @@ export const filterSearchResults = <SearchItem extends SearchableItem>(
         chosenCategory.node.isTagContainerOnly ||
         // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
         (item.tags &&
+// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchableItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
           item.tags.some((tag) => tag === chosenCategory.node.name));
       if (!hasChosenCategoryTag) return false; // Item is not in the selected category
       for (const parentNode of chosenCategory.parentNodes) {
@@ -231,7 +233,7 @@ export const useSearchStructuredItem = <SearchItem extends SearchableItem>(
     }>
   | null
   | undefined => {
-  const searchApiRef = React.useRef<any | null | undefined>(null);
+  const searchApiRef = React.useRef<any>(null);
   const [searchResults, setSearchResults] = React.useState<
     | Array<{
         item: SearchItem;

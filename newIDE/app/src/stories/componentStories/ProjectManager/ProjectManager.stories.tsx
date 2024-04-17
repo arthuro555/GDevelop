@@ -25,6 +25,7 @@ export const Default = () => (
       <ProjectManager
         project={testProject.project}
         onSaveProjectProperties={async () => true}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: string) => Promise<void>'.
         onChangeProjectName={action('onChangeProjectName')}
         onOpenExternalEvents={action('onOpenExternalEvents')}
         onOpenLayout={action('onOpenLayout')}
@@ -66,6 +67,7 @@ export const ErrorsInFunctions = () => (
       <ProjectManager
         project={testProject.project}
         onSaveProjectProperties={async () => true}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: string) => Promise<void>'.
         onChangeProjectName={action('onChangeProjectName')}
         onOpenExternalEvents={action('onOpenExternalEvents')}
         onOpenLayout={action('onOpenLayout')}

@@ -127,7 +127,7 @@ const gameTypes = [
   'megaman',
 ];
 
-const startWithVowel = word: string =>
+const startWithVowel = (word: string) =>
   ['a', 'e', 'i', 'o', 'u'].includes(word[0].toLowerCase());
 const formatWordWithAdaptedDeterminer = (word: string) =>
   `${startWithVowel(word) ? 'an' : 'a'} ${word}`;
@@ -139,13 +139,13 @@ const generatePrompt = (): string => {
   const collectable = sample(collectables);
   const goal = sample(goals);
   return `${formatWordWithAdaptedDeterminer(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
     gameType
   )} game with ${formatWordWithAdaptedDeterminer(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
     mainCharacter
   )} in ${formatWordWithAdaptedDeterminer(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
     place
   )} collecting ${collectable} and trying to reach ${goal}`;
 };

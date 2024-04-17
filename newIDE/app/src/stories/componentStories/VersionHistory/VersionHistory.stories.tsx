@@ -238,6 +238,7 @@ export const Default = () => {
     .onGet(`${GDevelopUserApi.baseUrl}/user-public-profile`)
     .reply(200, userPublicProfilesByIds)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];

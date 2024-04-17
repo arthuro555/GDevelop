@@ -39,6 +39,7 @@ export const BoxSearchResults = React.forwardRef<
   Props<SearchItem>,
   BoxSearchResultsInterface
 >(
+// @ts-expect-error - TS2345 - Argument of type '({ searchItems, renderSearchItem, spacing, error, onRetry, baseSize, noResultPlaceholder, noScroll, }: Props<SearchItem>, ref: ForwardedRef<Props<SearchItem>>) => {}' is not assignable to parameter of type 'ForwardRefRenderFunction<Props<SearchItem>, BoxSearchResultsInterface>'.
   (
     {
       searchItems,
@@ -52,7 +53,7 @@ export const BoxSearchResults = React.forwardRef<
     }: Props<SearchItem>,
     ref
   ) => {
-    const grid = React.useRef<Grid | null | undefined>(null);
+    const grid = React.useRef<Grid>(null);
     // @ts-expect-error - TS2740 - Type '{ getScrollPosition: () => any; scrollToPosition: (y: number) => void; }' is missing the following properties from type 'Props<SearchItem>': searchItems, renderSearchItem, spacing, error, and 2 more.
     React.useImperativeHandle(ref, () => ({
       /**
@@ -82,7 +83,6 @@ export const BoxSearchResults = React.forwardRef<
       if (!error) return <PlaceholderLoader />;
       else {
         return (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={onRetry}>
             <Trans>
               Can't load the results. Verify your internet connection or retry

@@ -170,6 +170,7 @@ export const getTabsToDisplay = ({
     displayPlayTab ? 'play' : null,
     'community',
   ].filter(Boolean);
+// @ts-expect-error - TS2538 - Type 'null' cannot be used as an index type.
   return tabs.map((tab) => homePageMenuTabs[tab]);
 };
 

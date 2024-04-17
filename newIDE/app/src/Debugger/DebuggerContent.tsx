@@ -177,6 +177,7 @@ export default class DebuggerContent extends React.Component<Props, State> {
                     <RawContentInspector
                       gameData={get(gameData, selectedInspectorFullPath, null)}
                       onEdit={(path, newValue) =>
+// @ts-expect-error - TS2769 - No overload matches this call.
                         onEdit(selectedInspectorFullPath.concat(path), newValue)
                       }
                     />
@@ -222,12 +223,10 @@ export default class DebuggerContent extends React.Component<Props, State> {
               <Line justifyContent="space-between" alignItems="center" noMargin>
                 <HelpButton helpPagePath="/interface/debugger" />
                 <div>
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     checkedIcon={<Flash />}
                     uncheckedIcon={<FlashOff />}
                     checked={rawMode}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'enabled' implicitly has an 'any' type.
                     onCheck={(e, enabled) =>
                       this.setState({
                         rawMode: enabled,
@@ -269,6 +268,7 @@ export default class DebuggerContent extends React.Component<Props, State> {
         {({ getDefaultEditorMosaicNode, setDefaultEditorMosaicNode }) => (
           <EditorMosaic
             ref={(editors) => (this._editors = editors)}
+// @ts-expect-error - TS2322 - Type '{ readonly inspectors: { readonly type: "primary"; readonly title: MessageDescriptor; readonly toolbarControls: readonly []; readonly renderEditor: () => JSX.Element; }; readonly 'selected-inspector': { ...; }; readonly profiler: { ...; }; readonly console: { ...; }; }' is not assignable to type '{ [key: string]: Editor; }'.
             editors={editors}
             initialNodes={
               getDefaultEditorMosaicNode('debugger') || initialMosaicEditorNodes

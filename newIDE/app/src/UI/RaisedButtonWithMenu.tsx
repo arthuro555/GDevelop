@@ -2,6 +2,7 @@ import * as React from 'react';
 import RaisedButton, { RaisedButtonPropsWithoutOnClick } from './RaisedButton';
 
 import ElementWithMenu from './Menu/ElementWithMenu';
+// @ts-expect-error - TS2307 - Cannot find module './Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from './Menu/Menu.flow';
 
 import { I18n as I18nType } from '@lingui/core';

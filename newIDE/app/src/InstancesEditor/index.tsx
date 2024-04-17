@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import panable, { PanMoveEvent } from '../Utils/PixiSimpleGesture/pan';
 import KeyboardShortcuts, { MID_MOUSE_BUTTON } from '../UI/KeyboardShortcuts';
 import InstancesRenderer from './InstancesRenderer';
@@ -50,52 +50,60 @@ const styles = {
   dropCursor: { cursor: 'copy' },
 } as const;
 
-const DropTarget = makeDropTarget<Record<any, any>>(objectWithContextReactDndType);
+const DropTarget = makeDropTarget<Record<any, any>>(
+  objectWithContextReactDndType
+);
 
 export type InstancesEditorShortcutsCallbacks = {
-  onDelete: () => void,
-  onCopy: () => void,
-  onCut: () => void,
-  onPaste: () => void,
-  onDuplicate: () => void,
-  onUndo: () => void,
-  onRedo: () => void,
-  onZoomOut: () => void,
-  onZoomIn: () => void,
-  onShift1: () => void,
-  onShift2: () => void,
-  onShift3: () => void
+  onDelete: () => void;
+  onCopy: () => void;
+  onCut: () => void;
+  onPaste: () => void;
+  onDuplicate: () => void;
+  onUndo: () => void;
+  onRedo: () => void;
+  onZoomOut: () => void;
+  onZoomIn: () => void;
+  onShift1: () => void;
+  onShift2: () => void;
+  onShift3: () => void;
 };
 
 export type InstancesEditorPropsWithoutSizeAndScroll = {
-  project: gd.Project,
-  layout: gd.Layout,
-  selectedLayer: string,
-  initialInstances: gd.InitialInstancesContainer,
-  instancesEditorSettings: InstancesEditorSettings,
-  isInstanceOf3DObject: (arg1: gd.InitialInstance) => boolean,
-  onInstancesEditorSettingsMutated: (instancesEditorSettings: InstancesEditorSettings) => void,
-  instancesSelection: InstancesSelection,
-  onInstancesAdded: (instances: Array<gd.InitialInstance>) => void,
-  onInstancesSelected: (instances: Array<gd.InitialInstance>) => void,
-  onInstanceDoubleClicked: (instance: gd.InitialInstance) => void,
-  onInstancesMoved: (instances: Array<gd.InitialInstance>) => void,
-  onInstancesResized: (instances: Array<gd.InitialInstance>) => void,
-  onInstancesRotated: (instances: Array<gd.InitialInstance>) => void,
-  selectedObjectNames: Array<string>,
-  onContextMenu: (x: number, y: number, ignoreSelectedObjectNamesForContextMenu?: boolean) => void,
-  pauseRendering: boolean,
-  instancesEditorShortcutsCallbacks: InstancesEditorShortcutsCallbacks
+  project: gd.Project;
+  layout: gd.Layout;
+  selectedLayer: string;
+  initialInstances: gd.InitialInstancesContainer;
+  instancesEditorSettings: InstancesEditorSettings;
+  isInstanceOf3DObject: (arg1: gd.InitialInstance) => boolean;
+  onInstancesEditorSettingsMutated: (
+    instancesEditorSettings: InstancesEditorSettings
+  ) => void;
+  instancesSelection: InstancesSelection;
+  onInstancesAdded: (instances: Array<gd.InitialInstance>) => void;
+  onInstancesSelected: (instances: Array<gd.InitialInstance>) => void;
+  onInstanceDoubleClicked: (instance: gd.InitialInstance) => void;
+  onInstancesMoved: (instances: Array<gd.InitialInstance>) => void;
+  onInstancesResized: (instances: Array<gd.InitialInstance>) => void;
+  onInstancesRotated: (instances: Array<gd.InitialInstance>) => void;
+  selectedObjectNames: Array<string>;
+  onContextMenu: (
+    x: number,
+    y: number,
+    ignoreSelectedObjectNamesForContextMenu?: boolean
+  ) => void;
+  pauseRendering: boolean;
+  instancesEditorShortcutsCallbacks: InstancesEditorShortcutsCallbacks;
 };
 
-type Props = (InstancesEditorPropsWithoutSizeAndScroll) & {
-  width: number,
-  height: number,
-  onViewPositionChanged?: (arg1: ViewPosition) => void,
-  onMouseMove?: (arg1: MouseEvent) => void,
-  onMouseLeave?: (arg1: MouseEvent) => void,
-  screenType: ScreenType,
-  showObjectInstancesIn3D: boolean
+type Props = InstancesEditorPropsWithoutSizeAndScroll & {
+  width: number;
+  height: number;
+  onViewPositionChanged?: (arg1: ViewPosition) => void;
+  onMouseMove?: (arg1: MouseEvent) => void;
+  onMouseLeave?: (arg1: MouseEvent) => void;
+  screenType: ScreenType;
+  showObjectInstancesIn3D: boolean;
 };
 
 export default class InstancesEditor extends Component<Props> {
@@ -105,52 +113,52 @@ export default class InstancesEditor extends Component<Props> {
   lastCursorY = 0;
   fpsLimiter = new FpsLimiter({ maxFps: 60, idleFps: 10 });
   canvasArea: HTMLDivElement | null | undefined;
-// @ts-expect-error - TS2564 - Property 'pixiRenderer' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'pixiRenderer' has no initializer and is not definitely assigned in the constructor.
   pixiRenderer: PIXI.Renderer;
   threeRenderer: THREE.WebGLRenderer | null = null;
-// @ts-expect-error - TS2564 - Property 'keyboardShortcuts' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'keyboardShortcuts' has no initializer and is not definitely assigned in the constructor.
   keyboardShortcuts: KeyboardShortcuts;
-// @ts-expect-error - TS2564 - Property 'pinchHandler' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'pinchHandler' has no initializer and is not definitely assigned in the constructor.
   pinchHandler: PinchHandler;
-// @ts-expect-error - TS2564 - Property 'canvasCursor' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'canvasCursor' has no initializer and is not definitely assigned in the constructor.
   canvasCursor: CanvasCursor;
-// @ts-expect-error - TS2564 - Property '_instancesAdder' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_instancesAdder' has no initializer and is not definitely assigned in the constructor.
   _instancesAdder: InstancesAdder;
-// @ts-expect-error - TS2564 - Property 'selectionRectangle' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'selectionRectangle' has no initializer and is not definitely assigned in the constructor.
   selectionRectangle: SelectionRectangle;
-// @ts-expect-error - TS2564 - Property 'selectedInstances' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'selectedInstances' has no initializer and is not definitely assigned in the constructor.
   selectedInstances: SelectedInstances;
-// @ts-expect-error - TS2564 - Property 'highlightedInstance' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'highlightedInstance' has no initializer and is not definitely assigned in the constructor.
   highlightedInstance: HighlightedInstance;
-// @ts-expect-error - TS2564 - Property 'instancesResizer' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'instancesResizer' has no initializer and is not definitely assigned in the constructor.
   instancesResizer: InstancesResizer;
-// @ts-expect-error - TS2564 - Property 'instancesRotator' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'instancesRotator' has no initializer and is not definitely assigned in the constructor.
   instancesRotator: InstancesRotator;
-// @ts-expect-error - TS2564 - Property 'instancesMover' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'instancesMover' has no initializer and is not definitely assigned in the constructor.
   instancesMover: InstancesMover;
-// @ts-expect-error - TS2564 - Property 'windowBorder' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'windowBorder' has no initializer and is not definitely assigned in the constructor.
   windowBorder: WindowBorder;
-// @ts-expect-error - TS2564 - Property 'windowMask' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'windowMask' has no initializer and is not definitely assigned in the constructor.
   windowMask: WindowMask;
-// @ts-expect-error - TS2564 - Property 'statusBar' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'statusBar' has no initializer and is not definitely assigned in the constructor.
   statusBar: StatusBar;
-// @ts-expect-error - TS2564 - Property 'pixiContainer' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'pixiContainer' has no initializer and is not definitely assigned in the constructor.
   pixiContainer: PIXI.Container;
-// @ts-expect-error - TS2564 - Property 'backgroundArea' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'backgroundArea' has no initializer and is not definitely assigned in the constructor.
   backgroundArea: PIXI.Container;
-// @ts-expect-error - TS2564 - Property 'instancesRenderer' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'instancesRenderer' has no initializer and is not definitely assigned in the constructor.
   instancesRenderer: InstancesRenderer;
-// @ts-expect-error - TS2564 - Property 'viewPosition' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'viewPosition' has no initializer and is not definitely assigned in the constructor.
   viewPosition: ViewPosition;
-// @ts-expect-error - TS2564 - Property 'longTouchHandler' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'longTouchHandler' has no initializer and is not definitely assigned in the constructor.
   longTouchHandler: LongTouchHandler;
-// @ts-expect-error - TS2564 - Property 'grid' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'grid' has no initializer and is not definitely assigned in the constructor.
   grid: Grid;
   _unmounted = false;
   _renderingPaused = false;
-// @ts-expect-error - TS2564 - Property 'nextFrame' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'nextFrame' has no initializer and is not definitely assigned in the constructor.
   nextFrame: number;
-// @ts-expect-error - TS2564 - Property 'contextMenuLongTouchTimeoutID' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'contextMenuLongTouchTimeoutID' has no initializer and is not definitely assigned in the constructor.
   contextMenuLongTouchTimeoutID: number;
   hasCursorMovedSinceItIsDown = false;
   _showObjectInstancesIn3D: boolean = false;
@@ -182,7 +190,6 @@ export default class InstancesEditor extends Component<Props> {
 
     this.keyboardShortcuts = new KeyboardShortcuts({
       shortcutCallbacks: {
-// @ts-expect-error - TS2322 - Type '(x: number, y: number) => void' is not assignable to type '(arg1: number, arg2: number) => Promise<undefined> | undefined'.
         onMove: this.moveSelection,
         ...this.props.instancesEditorShortcutsCallbacks,
       },
@@ -221,7 +228,7 @@ export default class InstancesEditor extends Component<Props> {
       this.threeRenderer = threeRenderer;
     } else {
       // Create the renderer and setup the rendering area for scene editor.
-// @ts-expect-error - TS2740 - Type 'IRenderer<ICanvas>' is missing the following properties from type 'Renderer': gl, globalUniforms, CONTEXT_UID, mask, and 27 more.
+      // @ts-expect-error - TS2740 - Type 'IRenderer<ICanvas>' is missing the following properties from type 'Renderer': gl, globalUniforms, CONTEXT_UID, mask, and 27 more.
       this.pixiRenderer = PIXI.autoDetectRenderer({
         width: this.props.width,
         height: this.props.height,
@@ -233,7 +240,7 @@ export default class InstancesEditor extends Component<Props> {
         backgroundAlpha: 0,
       });
 
-// @ts-expect-error - TS2740 - Type 'ICanvas' is missing the following properties from type 'HTMLCanvasElement': captureStream, transferControlToOffscreen, accessKey, accessKeyLabel, and 271 more.
+      // @ts-expect-error - TS2740 - Type 'ICanvas' is missing the following properties from type 'HTMLCanvasElement': captureStream, transferControlToOffscreen, accessKey, accessKeyLabel, and 271 more.
       gameCanvas = this.pixiRenderer.view;
     }
 
@@ -245,17 +252,17 @@ export default class InstancesEditor extends Component<Props> {
     // Add the renderer view element to the DOM
     canvasArea.appendChild(gameCanvas);
 
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2339 - Property 'outline' does not exist on type 'ICanvasStyle'.
+    // @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2339 - Property 'outline' does not exist on type 'ICanvasStyle'.
     this.pixiRenderer.view.style.outline = 'none';
 
     this.longTouchHandler = new LongTouchHandler({
-// @ts-expect-error - TS2322 - Type 'ICanvas' is not assignable to type 'HTMLCanvasElement'.
+      // @ts-expect-error - TS2322 - Type 'ICanvas' is not assignable to type 'HTMLCanvasElement'.
       canvas: this.pixiRenderer.view,
-      onLongTouch: event =>
+      onLongTouch: (event) =>
         this.props.onContextMenu(event.clientX, event.clientY),
     });
 
-// @ts-expect-error - TS2339 - Property 'onwheel' does not exist on type 'ICanvas'.
+    // @ts-expect-error - TS2339 - Property 'onwheel' does not exist on type 'ICanvas'.
     this.pixiRenderer.view.onwheel = (event: WheelEvent) => {
       this.fpsLimiter.notifyInteractionHappened();
       const zoomFactor = this.getZoomFactor();
@@ -272,42 +279,42 @@ export default class InstancesEditor extends Component<Props> {
 
       event.preventDefault();
     };
-// @ts-expect-error - TS2339 - Property 'setAttribute' does not exist on type 'ICanvas'.
+    // @ts-expect-error - TS2339 - Property 'setAttribute' does not exist on type 'ICanvas'.
     this.pixiRenderer.view.setAttribute('tabIndex', -1);
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
+    // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
     this.pixiRenderer.view.addEventListener(
       'keydown',
       this.keyboardShortcuts.onKeyDown
     );
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
+    // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
     this.pixiRenderer.view.addEventListener(
       'keyup',
       this.keyboardShortcuts.onKeyUp
     );
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
+    // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
     this.pixiRenderer.view.addEventListener(
       'mousedown',
       this.keyboardShortcuts.onMouseDown
     );
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
+    // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2769 - No overload matches this call.
     this.pixiRenderer.view.addEventListener(
       'mouseup',
       this.keyboardShortcuts.onMouseUp
     );
     if (onMouseMove)
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
-      this.pixiRenderer.view.addEventListener('mousemove', event => {
-// @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'MouseEvent'.
+      // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
+      this.pixiRenderer.view.addEventListener('mousemove', (event) => {
+        // @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'MouseEvent'.
         onMouseMove(event);
       });
     if (onMouseLeave)
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
-      this.pixiRenderer.view.addEventListener('mouseout', event => {
-// @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'MouseEvent'.
+      // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
+      this.pixiRenderer.view.addEventListener('mouseout', (event) => {
+        // @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'MouseEvent'.
         onMouseLeave(event);
       });
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
-    this.pixiRenderer.view.addEventListener('focusout', event => {
+    // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'.
+    this.pixiRenderer.view.addEventListener('focusout', (event) => {
       if (this.keyboardShortcuts) {
         this.keyboardShortcuts.resetModifiers();
       }
@@ -323,15 +330,15 @@ export default class InstancesEditor extends Component<Props> {
       this.props.height
     );
     panable(this.backgroundArea);
-    this.backgroundArea.addEventListener('mousedown', event =>
+    this.backgroundArea.addEventListener('mousedown', (event) =>
       this._onDownBackground(event.data.global.x, event.data.global.y, event)
     );
-    this.backgroundArea.addEventListener('mouseup', event =>
+    this.backgroundArea.addEventListener('mouseup', (event) =>
       this._onUpBackground(event.data.global.x, event.data.global.y, event)
     );
     this.backgroundArea.addEventListener(
       'rightclick',
-// @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
+      // @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
       (interactionEvent: PIXI.InteractionEvent) => {
         const {
           data: { originalEvent: event },
@@ -347,28 +354,28 @@ export default class InstancesEditor extends Component<Props> {
         return false;
       }
     );
-    this.backgroundArea.addEventListener('touchstart', event => {
-// @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
+    this.backgroundArea.addEventListener('touchstart', (event) => {
+      // @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
       if (shouldBeHandledByPinch(event.data && event.data.originalEvent)) {
         return;
       }
 
       this._onDownBackground(event.data.global.x, event.data.global.y);
     });
-    this.backgroundArea.addEventListener('touchend', event => {
-// @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
+    this.backgroundArea.addEventListener('touchend', (event) => {
+      // @ts-expect-error - TS2345 - Argument of type 'FederatedEvent<MouseEvent | PointerEvent | PixiTouch>' is not assignable to parameter of type 'TouchEvent'.
       if (shouldBeHandledByPinch(event.data && event.data.originalEvent)) {
         return;
       }
 
       this._onUpBackground(event.data.global.x, event.data.global.y);
     });
-    this.backgroundArea.addEventListener('globalmousemove', event => {
+    this.backgroundArea.addEventListener('globalmousemove', (event) => {
       const cursorX = event.data.global.x || 0;
       const cursorY = event.data.global.y || 0;
       this._onMouseMove(cursorX, cursorY);
     });
-// @ts-expect-error - TS2769 - No overload matches this call.
+    // @ts-expect-error - TS2769 - No overload matches this call.
     this.backgroundArea.addEventListener('panmove', (event: PanMoveEvent) =>
       this._onPanMove(
         event.deltaX,
@@ -377,7 +384,7 @@ export default class InstancesEditor extends Component<Props> {
         event.data.global.y
       )
     );
-    this.backgroundArea.addEventListener('panend', event => this._onPanEnd());
+    this.backgroundArea.addEventListener('panend', (event) => this._onPanEnd());
     this.pixiContainer.addChild(this.backgroundArea);
 
     this.viewPosition = new ViewPosition({
@@ -395,7 +402,7 @@ export default class InstancesEditor extends Component<Props> {
     this.pixiContainer.addChild(this.grid.getPixiObject());
 
     this.pinchHandler = new PinchHandler({
-// @ts-expect-error - TS2322 - Type 'ICanvas' is not assignable to type 'HTMLCanvasElement'.
+      // @ts-expect-error - TS2322 - Type 'ICanvas' is not assignable to type 'HTMLCanvasElement'.
       canvas: this.pixiRenderer.view,
       setZoomFactor: this.setZoomFactor,
       getZoomFactor: this.getZoomFactor,
@@ -665,9 +672,8 @@ export default class InstancesEditor extends Component<Props> {
   };
 
   setZoomFactor = (zoomFactor: number) => {
-    this.props.instancesEditorSettings.zoomFactor = clampInstancesEditorZoom(
-      zoomFactor
-    );
+    this.props.instancesEditorSettings.zoomFactor =
+      clampInstancesEditorZoom(zoomFactor);
 
     this.props.onInstancesEditorSettingsMutated(
       this.props.instancesEditorSettings
@@ -678,15 +684,13 @@ export default class InstancesEditor extends Component<Props> {
    * Immediately add serialized instances at the given
    * position (in scene coordinates).
    */
-  addSerializedInstances = (
-    options: {
-      position: [number, number],
-      copyReferential: [number, number],
-      serializedInstances: Array<any>,
-      preventSnapToGrid?: boolean,
-      addInstancesInTheForeground?: boolean
-    },
-  ): Array<gd.InitialInstance> => {
+  addSerializedInstances = (options: {
+    position: [number, number];
+    copyReferential: [number, number];
+    serializedInstances: Array<any>;
+    preventSnapToGrid?: boolean;
+    addInstancesInTheForeground?: boolean;
+  }): Array<gd.InitialInstance> => {
     return this._instancesAdder.addSerializedInstances(options);
   };
 
@@ -694,7 +698,11 @@ export default class InstancesEditor extends Component<Props> {
    * Immediately add instances for the specified objects at the given
    * position (in scene coordinates) given their names.
    */
-  addInstances = (pos: [number, number], objectNames: Array<string>, layer: string): Array<gd.InitialInstance> => {
+  addInstances = (
+    pos: [number, number],
+    objectNames: Array<string>,
+    layer: string
+  ): Array<gd.InitialInstance> => {
     return this._instancesAdder.addInstances(pos, objectNames, layer);
   };
 
@@ -706,7 +714,7 @@ export default class InstancesEditor extends Component<Props> {
   _onDownBackground = (x: number, y: number, event?: PointerEvent) => {
     this.lastCursorX = x;
     this.lastCursorY = y;
-// @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'ICanvas'.
+    // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'ICanvas'.
     this.pixiRenderer.view.focus();
 
     // KeyboardShortcuts.shouldMoveView cannot be used here because
@@ -791,15 +799,15 @@ export default class InstancesEditor extends Component<Props> {
 
   _onInstanceClicked = (instance: gd.InitialInstance) => {
     this.fpsLimiter.notifyInteractionHappened();
-// @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'ICanvas'.
+    // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'ICanvas'.
     this.pixiRenderer.view.focus();
   };
 
   _onInstanceRightClicked = (coordinates: {
-    offsetX: number,
-    offsetY: number,
-    x: number,
-    y: number
+    offsetX: number;
+    offsetY: number;
+    x: number;
+    y: number;
   }) => {
     this._onRightClicked({
       ...coordinates,
@@ -814,11 +822,11 @@ export default class InstancesEditor extends Component<Props> {
     y,
     ignoreSelectedObjectNamesForContextMenu,
   }: {
-    offsetX: number,
-    offsetY: number,
-    x: number,
-    y: number,
-    ignoreSelectedObjectNamesForContextMenu?: boolean
+    offsetX: number;
+    offsetY: number;
+    x: number;
+    y: number;
+    ignoreSelectedObjectNamesForContextMenu?: boolean;
   }) => {
     this.lastContextMenuX = offsetX;
     this.lastContextMenuY = offsetY;
@@ -924,8 +932,8 @@ export default class InstancesEditor extends Component<Props> {
   ) => {
     this.fpsLimiter.notifyInteractionHappened();
 
-    const isMovingForTheFirstTimeSinceItIsDown = !this
-      .hasCursorMovedSinceItIsDown;
+    const isMovingForTheFirstTimeSinceItIsDown =
+      !this.hasCursorMovedSinceItIsDown;
     this.hasCursorMovedSinceItIsDown = true;
 
     const sceneDeltaX = deltaX / this.getZoomFactor();
@@ -954,7 +962,8 @@ export default class InstancesEditor extends Component<Props> {
       this.keyboardShortcuts.shouldCloneInstances() &&
       isMovingForTheFirstTimeSinceItIsDown
     ) {
-      const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+      const selectedInstances =
+        this.props.instancesSelection.getSelectedInstances();
       for (let i = 0; i < selectedInstances.length; i++) {
         const instance = selectedInstances[i];
         this.props.initialInstances
@@ -967,7 +976,8 @@ export default class InstancesEditor extends Component<Props> {
       this._onInstanceClicked(instance);
     }
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     this.instancesMover.moveBy(
       selectedInstances,
       sceneDeltaX,
@@ -989,7 +999,8 @@ export default class InstancesEditor extends Component<Props> {
 
     this.instancesMover.endMove();
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     this.props.onInstancesMoved(selectedInstances);
   };
 
@@ -1002,7 +1013,8 @@ export default class InstancesEditor extends Component<Props> {
     const sceneDeltaX = deltaX / this.getZoomFactor();
     const sceneDeltaY = deltaY / this.getZoomFactor();
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     const forceProportional =
       this.props.screenType === 'touch' &&
       canMoveOnX(grabbingLocation) &&
@@ -1022,7 +1034,8 @@ export default class InstancesEditor extends Component<Props> {
   _onResizeEnd = () => {
     this.instancesResizer.endResize();
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     this.props.onInstancesResized(selectedInstances);
   };
 
@@ -1031,7 +1044,8 @@ export default class InstancesEditor extends Component<Props> {
     const sceneDeltaX = deltaX / this.getZoomFactor();
     const sceneDeltaY = deltaY / this.getZoomFactor();
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     this.instancesRotator.rotateBy(
       selectedInstances,
       sceneDeltaX,
@@ -1043,7 +1057,8 @@ export default class InstancesEditor extends Component<Props> {
   _onRotateEnd = () => {
     this.instancesRotator.endRotate();
 
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     this.props.onInstancesRotated(selectedInstances);
   };
 
@@ -1053,11 +1068,12 @@ export default class InstancesEditor extends Component<Props> {
 
   moveSelection = (x: number, y: number) => {
     this.fpsLimiter.notifyInteractionHappened();
-    const selectedInstances = this.props.instancesSelection.getSelectedInstances();
+    const selectedInstances =
+      this.props.instancesSelection.getSelectedInstances();
     const unlockedSelectedInstances = selectedInstances.filter(
-      instance => !instance.isLocked()
+      (instance) => !instance.isLocked()
     );
-    unlockedSelectedInstances.forEach(instance => {
+    unlockedSelectedInstances.forEach((instance) => {
       instance.setX(instance.getX() + x);
       instance.setY(instance.getY() + y);
     });
@@ -1086,7 +1102,7 @@ export default class InstancesEditor extends Component<Props> {
     {
       adaptZoom,
     }: {
-      adaptZoom: boolean
+      adaptZoom: boolean;
     }
   ) {
     const idealZoom = this.viewPosition.fitToRectangle(rectangle);
@@ -1108,7 +1124,7 @@ export default class InstancesEditor extends Component<Props> {
     const instanceMeasurer = this.instancesRenderer.getInstanceMeasurer();
     let contentAABB: Rectangle | null | undefined;
     const getInstanceRectangle = new gd.InitialInstanceJSFunctor();
-    getInstanceRectangle.invoke = instancePtr: any => {
+    getInstanceRectangle.invoke = (instancePtr: any) => {
       const instance: gd.InitialInstance = gd.wrapPointer(
         instancePtr,
         gd.InitialInstance
@@ -1148,7 +1164,7 @@ export default class InstancesEditor extends Component<Props> {
       firstInstance,
       new Rectangle()
     );
-    otherInstances.forEach(instance => {
+    otherInstances.forEach((instance) => {
       selectedInstancesRectangle.union(
         instanceMeasurer.getInstanceAABB(instance, new Rectangle())
       );
@@ -1239,7 +1255,9 @@ export default class InstancesEditor extends Component<Props> {
     startPIXITicker();
   };
 
-  getInstanceSize = (initialInstance: gd.InitialInstance): [number, number, number] => {
+  getInstanceSize = (
+    initialInstance: gd.InitialInstance
+  ): [number, number, number] => {
     return this.instancesRenderer
       .getInstanceMeasurer()
       .getUnrotatedInstanceSize(initialInstance);
@@ -1249,15 +1267,14 @@ export default class InstancesEditor extends Component<Props> {
     if (!this.props.project) return null;
 
     return (
-
       <DropTarget
         canDrop={() => true}
-
-        hover={monitor => {
+        hover={(monitor) => {
           this.fpsLimiter.notifyInteractionHappened();
           const { _instancesAdder, viewPosition, canvasArea } = this;
           if (!_instancesAdder || !canvasArea || !viewPosition) return;
 
+// @ts-expect-error - TS2339 - Property 'x' does not exist on type 'XYCoord | null'. | TS2339 - Property 'y' does not exist on type 'XYCoord | null'.
           const { x, y } = monitor.getClientOffset();
           const canvasRect = canvasArea.getBoundingClientRect();
           const pos = viewPosition.toSceneCoordinates(
@@ -1270,8 +1287,7 @@ export default class InstancesEditor extends Component<Props> {
             this.props.selectedLayer
           );
         }}
-
-        drop={monitor => {
+        drop={(monitor) => {
           this.fpsLimiter.notifyInteractionHappened();
 
           const { _instancesAdder, viewPosition, canvasArea } = this;
@@ -1284,15 +1300,15 @@ export default class InstancesEditor extends Component<Props> {
             return;
           }
 
+// @ts-expect-error - TS2339 - Property 'x' does not exist on type 'XYCoord | null'. | TS2339 - Property 'y' does not exist on type 'XYCoord | null'.
           const { x, y } = monitor.getClientOffset();
           const canvasRect = canvasArea.getBoundingClientRect();
           const pos = viewPosition.toSceneCoordinates(
             x - canvasRect.left,
             y - canvasRect.top
           );
-          const instances = _instancesAdder.updateTemporaryInstancePositions(
-            pos
-          );
+          const instances =
+            _instancesAdder.updateTemporaryInstancePositions(pos);
           _instancesAdder.commitTemporaryInstances();
           this.props.onInstancesAdded(instances);
         }}
@@ -1306,9 +1322,8 @@ export default class InstancesEditor extends Component<Props> {
           }
 
           return connectDropTarget(
-
             <div
-              ref={canvasArea => (this.canvasArea = canvasArea)}
+              ref={(canvasArea) => (this.canvasArea = canvasArea)}
               style={styles.canvasArea}
               id={instancesEditorId}
             />

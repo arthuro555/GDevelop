@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import optionalRequire from './OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipc = electron ? electron.ipcRenderer : null;
 
 const richPresenceStartTimestamp = Date.now();

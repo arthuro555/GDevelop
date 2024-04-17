@@ -230,11 +230,9 @@ export function PublicGameProperties({
                 />
               )}
               {setDiscoverable && (
-                // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Checkbox
                   label={<Trans>Make your game discoverable on gd.games</Trans>}
                   checked={!!discoverable}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => setDiscoverable(checked)}
                   disabled={disabled}
                 />
@@ -365,27 +363,21 @@ export function PublicGameProperties({
             setPlayableWithGamepad &&
             setPlayableWithMobile && (
               <React.Fragment>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={<Trans>Playable with a keyboard</Trans>}
                   checked={!!playWithKeyboard}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => setPlayableWithKeyboard(checked)}
                   disabled={disabled}
                 />
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={<Trans>Playable with a gamepad</Trans>}
                   checked={!!playWithGamepad}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => setPlayableWithGamepad(checked)}
                   disabled={disabled}
                 />
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={<Trans>Playable on mobile</Trans>}
                   checked={!!playWithMobile}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => setPlayableWithMobile(checked)}
                   disabled={disabled}
                 />

@@ -27,9 +27,9 @@ export interface JsExtensionsLoader {
  * Run extensions tests and check for any non-empty results.
  */
 const runExtensionSanityTests = (
-  gd: any /*: any */,
-  extension: gd.PlatformExtension /*: gd.PlatformExtension*/,
-  jsExtensionModule: JsExtensionModule /*: JsExtensionModule*/
+  gd /*: any */,
+  extension /*: gd.PlatformExtension*/,
+  jsExtensionModule /*: JsExtensionModule*/
 ) /*: ExtensionLoadingResult*/ => {
   if (!jsExtensionModule.runExtensionSanityTests) {
     return {
@@ -60,10 +60,10 @@ const runExtensionSanityTests = (
  */
 // @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'loadExtension'.
 const loadExtension = (
-  _: TranslationFunction /*: TranslationFunction */,
-  gd: any /*: any */,
-  platform: gd.JsPlatform /*: gd.JsPlatform*/,
-  jsExtensionModule: JsExtensionModule /*: JsExtensionModule*/
+  _ /*: TranslationFunction */,
+  gd /*: any */,
+  platform /*: gd.JsPlatform*/,
+  jsExtensionModule /*: JsExtensionModule*/
 ) /*: ExtensionLoadingResult*/ => {
   if (!jsExtensionModule.createExtension) {
     return {

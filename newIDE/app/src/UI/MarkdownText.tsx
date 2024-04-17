@@ -71,6 +71,7 @@ export const MarkdownText = (props: Props) => {
           components={markdownCustomComponents}
           remarkPlugins={[remarkGfm]}
         >
+{ /* @ts-expect-error - TS2322 - Type 'string | undefined' is not assignable to type 'string'. */}
           {props.translatableSource
             ? i18n._(props.translatableSource)
             : props.source}

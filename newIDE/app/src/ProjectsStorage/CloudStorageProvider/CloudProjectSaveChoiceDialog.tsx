@@ -13,8 +13,8 @@ import LeftLoader from '../../UI/LeftLoader';
 type Props = {
   onClose: () => void;
   isLoading: boolean;
-  onSaveAsMainVersion: () => undefined | Promise<undefined>;
-  onSaveAsDuplicate: () => undefined | Promise<undefined>;
+  onSaveAsMainVersion: () => void;
+  onSaveAsDuplicate: () => void;
 };
 
 const CloudProjectRecoveryDialog = ({

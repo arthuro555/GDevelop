@@ -82,6 +82,7 @@ import {
   ExternalLayoutTreeViewItemProps,
   ExternalLayoutTreeViewItemCallbacks,
 } from './ExternalLayoutTreeViewItemContent';
+// @ts-expect-error - TS2307 - Cannot find module '../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../UI/Menu/Menu.flow';
 import useAlertDialog from '../UI/Alert/useAlertDialog';
 import { ShowConfirmDeleteDialogOptions } from '../UI/Alert/AlertContext';
@@ -511,7 +512,7 @@ const ProjectManager = React.forwardRef<ProjectManagerInterface, Props>(
     >(null);
     const forceUpdate = useForceUpdate();
     const { isMobile } = useResponsiveWindowSize();
-    // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+
     const { showDeleteConfirmation } = useAlertDialog();
 
     const forceUpdateList = React.useCallback(() => {
@@ -824,31 +825,30 @@ const ProjectManager = React.forwardRef<ProjectManagerInterface, Props>(
     );
     React.useEffect(() => {
       if (keyboardShortcutsRef.current) {
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
         keyboardShortcutsRef.current.setShortcutCallback('onDelete', () => {
           if (selectedItems.length > 0) {
             deleteItem(selectedItems[0]);
           }
         });
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
         keyboardShortcutsRef.current.setShortcutCallback('onRename', () => {
           if (selectedItems.length > 0) {
             editName(selectedItems[0].content.getId());
           }
         });
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
         keyboardShortcutsRef.current.setShortcutCallback('onCopy', () => {
           if (selectedItems.length > 0) {
             selectedItems[0].content.copy();
           }
         });
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
         keyboardShortcutsRef.current.setShortcutCallback('onPaste', () => {
           if (selectedItems.length > 0) {
             selectedItems[0].content.paste();
           }
         });
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
         keyboardShortcutsRef.current.setShortcutCallback('onCut', () => {
           if (selectedItems.length > 0) {
             selectedItems[0].content.cut();
@@ -1315,6 +1315,7 @@ const ProjectManager = React.forwardRef<ProjectManagerInterface, Props>(
           <LineStackLayout>
             <Column expand noMargin>
               <SearchBar
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SearchBarInterface | null | undefined>' is not assignable to type 'Ref<SearchBarInterface> | undefined'.
                 ref={searchBarRef}
                 value={searchText}
                 onRequestSearch={() => {}}
@@ -1345,32 +1346,48 @@ const ProjectManager = React.forwardRef<ProjectManagerInterface, Props>(
                         height={height}
                         forceAllOpened={!!currentlyRunningInAppTutorial}
                         searchText={searchText}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => React.ReactNode' is not assignable to type '(arg1: ItemBaseAttributes) => ReactNode'.
                         getItemName={getTreeViewItemName}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => string | null | undefined' is not assignable to type '(arg1: ItemBaseAttributes) => string | null | undefined'.
                         getItemThumbnail={getTreeViewItemThumbnail}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => TreeViewItem[] | null | undefined' is not assignable to type '(arg1: ItemBaseAttributes) => ItemBaseAttributes[] | null | undefined'.
                         getItemChildren={getTreeViewItemChildren(i18n)}
                         multiSelect={false}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => string' is not assignable to type '(arg1: ItemBaseAttributes) => string'.
                         getItemId={getTreeViewItemId}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, index: number) => string | null | undefined' is not assignable to type '(arg1: ItemBaseAttributes, index: number) => string | null | undefined'.
                         getItemHtmlId={getTreeViewItemHtmlId}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => { [key: string]: string; }' is not assignable to type '(arg1: ItemBaseAttributes) => HTMLDataset | null | undefined'.
                         getItemDataset={getTreeViewItemDataSet}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(arg1: ItemBaseAttributes) => void'.
                         onEditItem={editItem}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(Item: ItemBaseAttributes) => void'.
                         onCollapseItem={onCollapseItem}
                         selectedItems={selectedItems}
                         onSelectItems={(items) => {
                           const itemToSelect = items[0];
                           if (!itemToSelect) return;
                           if (itemToSelect.isRoot) return;
+// @ts-expect-error - TS2345 - Argument of type 'ItemBaseAttributes[]' is not assignable to parameter of type 'SetStateAction<TreeViewItem[]>'.
                           setSelectedItems(items);
                         }}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(arg1: ItemBaseAttributes) => void'.
                         onClickItem={onClickItem}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, newName: string) => void' is not assignable to type '(arg1: ItemBaseAttributes, newName: string) => void'.
                         onRenameItem={renameItem}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, index: number) => MenuItemTemplate[]' is not assignable to type '(arg1: ItemBaseAttributes, index: number) => any'.
                         buildMenuTemplate={buildMenuTemplate(i18n)}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => MenuButton | null | undefined' is not assignable to type '(arg1: ItemBaseAttributes) => MenuButton | null | undefined'.
                         getItemRightButton={getTreeViewItemRightButton(i18n)}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => React.ReactNode' is not assignable to type '(arg1: ItemBaseAttributes) => ReactNode'.
                         renderRightComponent={renderTreeViewItemRightComponent(
                           i18n
                         )}
                         onMoveSelectionToItem={(destinationItem, where) =>
+// @ts-expect-error - TS2345 - Argument of type 'ItemBaseAttributes' is not assignable to parameter of type 'TreeViewItem'.
                           moveSelectionTo(i18n, destinationItem, where)
                         }
+// @ts-expect-error - TS2322 - Type '(destinationItem: TreeViewItem, where: 'before' | 'inside' | 'after') => boolean' is not assignable to type '(destinationItem: ItemBaseAttributes, where: "inside" | "after" | "before") => boolean | null | undefined'.
                         canMoveSelectionToItem={canMoveSelectionTo}
                         reactDndType={extensionItemReactDndType}
                         initiallyOpenedNodeIds={initiallyOpenedNodeIds}
@@ -1384,6 +1401,7 @@ const ProjectManager = React.forwardRef<ProjectManagerInterface, Props>(
                 {projectPropertiesDialogOpen && (
                   <ProjectPropertiesDialog
                     open
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '"properties" | "loading-screen"'.
                     initialTab={projectPropertiesDialogInitialTab}
                     project={project}
                     onClose={() => setProjectPropertiesDialogOpen(false)}

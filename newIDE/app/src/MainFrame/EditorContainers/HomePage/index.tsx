@@ -494,6 +494,7 @@ export const HomePage = React.memo<Props>(
               {displayTooltipDelayed && (
                 <HighlightingTooltip
                   // $FlowIgnore - displayTooltipDelayed makes sure the element is defined
+// @ts-expect-error - TS2322 - Type 'HTMLElement | null' is not assignable to type 'HTMLElement'.
                   anchorElement={manageTabElement}
                   title={<Trans>Games Dashboard</Trans>}
                   thumbnailSource="res/features/games-dashboard.svg"

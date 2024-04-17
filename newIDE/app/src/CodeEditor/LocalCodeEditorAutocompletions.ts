@@ -1,8 +1,8 @@
 import { findGDJS } from '../GameEngineFinder/LocalGDJSFinder';
 
 import optionalRequire from '../Utils/OptionalRequire';
-const fs = optionalRequire('fs');
-const path = optionalRequire('path');
+const fs = optionalRequire('fs') as typeof import('fs');
+const path = optionalRequire('path') as typeof import('path');
 
 export const setupAutocompletions = (monaco: any) => {
   const importAllJsFilesFromFolder = (folderPath: string) =>
@@ -20,7 +20,7 @@ export const setupAutocompletions = (monaco: any) => {
         filenames.forEach((filename) => {
           if (filename.endsWith('.ts') || filename.endsWith('.js')) {
             const fullPath = path.join(folderPath, filename);
-            // @ts-expect-error - TS7006 - Parameter 'fileError' implicitly has an 'any' type. | TS7006 - Parameter 'content' implicitly has an 'any' type.
+
             fs.readFile(fullPath, 'utf8', (fileError, content) => {
               if (fileError) {
                 console.error(

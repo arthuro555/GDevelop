@@ -5,7 +5,7 @@ import {
 } from './ResourceUtils';
 
 const addNewAnimationWithImageToSpriteObject = (
-  object: gd.Object,
+  object: gd.gdObject,
   imageName: string
 ) => {
   const spriteObject = gd.asSpriteConfiguration(object.getConfiguration());

@@ -33,7 +33,6 @@ export default class PanelSpriteEditor extends React.Component<
     return (
       <ColumnStackLayout noMargin>
         {renderObjectNameField && renderObjectNameField()}
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={
             <Trans>
@@ -41,18 +40,15 @@ export default class PanelSpriteEditor extends React.Component<
             </Trans>
           }
           checked={!shapePainterConfiguration.areCoordinatesAbsolute()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             if (!checked) shapePainterConfiguration.setCoordinatesAbsolute();
             else shapePainterConfiguration.setCoordinatesRelative();
             this.forceUpdate();
           }}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Clear the rendered image between each frame</Trans>}
           checked={shapePainterConfiguration.isClearedBetweenFrames()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             shapePainterConfiguration.setClearBetweenFrames(checked);
             this.forceUpdate();

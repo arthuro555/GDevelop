@@ -30,7 +30,7 @@ import AlertMessage from '../UI/AlertMessage';
 
 import ErrorBoundary from '../UI/ErrorBoundary';
 
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 
 type Props = {
   project: gd.Project;

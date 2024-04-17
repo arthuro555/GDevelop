@@ -153,6 +153,7 @@ export const BehaviorStoreStateProvider = ({
           `Unable to load the behaviors from the extension store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 
@@ -192,6 +193,7 @@ export const BehaviorStoreStateProvider = ({
       categoriesSet.add(allBehaviors[type].category);
     }
     const sortedCategories = [...categoriesSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
       tag1.toLowerCase().localeCompare(tag2.toLowerCase())
     );
     return sortedCategories;
@@ -214,6 +216,7 @@ export const BehaviorStoreStateProvider = ({
       });
     }
     const sortedTags = [...tagsSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
       tag1.toLowerCase().localeCompare(tag2.toLowerCase())
     );
     return {
@@ -280,6 +283,7 @@ export const BehaviorStoreStateProvider = ({
   );
 
   return (
+// @ts-expect-error - TS2322 - Type '{ searchResults: { item: BehaviorShortHeader | SearchableBehaviorMetadata; matches: SearchMatch[]; }[] | null | undefined; ... 10 more ...; filtersState: FiltersState; }' is not assignable to type 'BehaviorStoreState'.
     <BehaviorStoreContext.Provider value={behaviorStoreState}>
       {children}
     </BehaviorStoreContext.Provider>

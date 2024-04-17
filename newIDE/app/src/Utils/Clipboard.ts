@@ -1,5 +1,5 @@
 import optionalRequire from './OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const electronClipboard = electron ? electron.clipboard : null;
 
 export type ClipboardKind = string;

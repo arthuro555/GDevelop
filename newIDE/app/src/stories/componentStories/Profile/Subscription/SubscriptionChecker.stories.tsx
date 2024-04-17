@@ -36,9 +36,11 @@ export const NotAuthenticatedTryMode = () => {
     <AuthenticatedUserContext.Provider value={fakeNotAuthenticatedUser}>
       <RaisedButton label="Click here" onClick={onClick} primary />
       <SubscriptionChecker
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SubscriptionCheckerInterface | null | undefined>' is not assignable to type 'Ref<SubscriptionCheckerInterface> | undefined'.
         ref={checkerRef}
         title="Preview over wifi"
         id="Preview over wifi"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<undefined> | undefined'.
         onChangeSubscription={action('change subscription')}
         mode="try"
       />
@@ -61,6 +63,7 @@ export const NotAuthenticatedMandatoryMode = () => {
         ref={checkerRef}
         title="Preview over wifi"
         id="Preview over wifi"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<undefined> | undefined'.
         onChangeSubscription={action('change subscription')}
         mode="mandatory"
       />
@@ -85,6 +88,7 @@ export const UserWithNoSubscription = () => {
         ref={checkerRef}
         title="Preview over wifi"
         id="Preview over wifi"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<undefined> | undefined'.
         onChangeSubscription={action('change subscription')}
         mode="mandatory"
       />
@@ -107,6 +111,7 @@ export const UserWithGoldSubscription = () => {
         ref={checkerRef}
         title="Preview over wifi"
         id="Preview over wifi"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<undefined> | undefined'.
         onChangeSubscription={action('change subscription')}
         mode="mandatory"
       />

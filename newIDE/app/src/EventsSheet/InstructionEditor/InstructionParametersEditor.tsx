@@ -395,7 +395,6 @@ const InstructionParametersEditor = React.forwardRef<
                     labelPosition="right"
                     toggled={instruction.isInverted()}
                     style={styles.invertToggle}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'enabled' implicitly has an 'any' type.
                     onToggle={(e, enabled) => {
                       instruction.setInverted(enabled);
                       forceUpdate();
@@ -413,7 +412,6 @@ const InstructionParametersEditor = React.forwardRef<
                     labelPosition="right"
                     toggled={instruction.isAwaited()}
                     style={styles.invertToggle}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'enabled' implicitly has an 'any' type.
                     onToggle={(e, enabled) => {
                       instruction.setAwaited(enabled);
                       forceUpdate();

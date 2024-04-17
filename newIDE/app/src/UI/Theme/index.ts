@@ -34,6 +34,7 @@ export function getFullTheme({
   language: string;
   isMobile: boolean;
 }): FullTheme {
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ "GDevelop default Dark": { gdevelopTheme: { palette: { type: string; canvasColor: any; alternateCanvasColor: any; primary: any; secondary: any; }; message: { warning: any; error: any; valid: any; hot: { ...; }; }; ... 26 more ...; credits: { ...; }; }; muiThemeOptions: { ...; }; }; ... 5 more ...; "Ros\u00E9 Pine"...'.
   let theme: Theme = themes[themeName];
 
   if (!theme) {
@@ -48,6 +49,7 @@ export function getFullTheme({
   return {
     gdevelopTheme,
     muiTheme: createMuiTheme(
+// @ts-expect-error - TS2345 - Argument of type '{ typography: { fontFamily: any; }; palette: { text: { primary: any; secondary: any; disabled: any; hint: any; }; primary: { light: string; main: string; dark: string; contrastText: string; }; secondary: { light: string; main: string; dark: string; contrastText: string; }; ... 6 more ...; background: { ...; }; } | {...' is not assignable to parameter of type 'ThemeOptions'.
       muiThemeOptions,
       {
         ...(isMobile ? { overrides: smallScreenMuiOverrides } : {}),

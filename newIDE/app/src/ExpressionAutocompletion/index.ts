@@ -284,8 +284,10 @@ const getAutocompletionsForText = function (
       );
       const animations = spriteConfiguration.getAnimations();
 
+// @ts-expect-error - TS2322 - Type '(string | null)[]' is not assignable to type 'string[]'.
       autocompletionTexts = getAllPointNames(animations)
         .map((spriteObjectName) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
           spriteObjectName.length > 0 ? `"${spriteObjectName}"` : null
         )
         .filter(Boolean);

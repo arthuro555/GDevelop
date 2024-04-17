@@ -194,6 +194,7 @@ const PrettyBreakablePath = ({ path }: { path: string }) => {
         ...acc,
 
         <wbr key={separatorIndex} />,
+// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
         path.substring(separatorIndex, nextSeparatorIndex || path.length),
       ];
     },

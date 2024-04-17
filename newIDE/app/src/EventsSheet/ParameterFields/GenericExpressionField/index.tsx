@@ -510,6 +510,7 @@ export default class ExpressionField extends React.Component<Props, State> {
 
     const newAutocompletions = getAutocompletionsFromDescriptions(
       {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
         gd,
         project,
         projectScopedContainers,
@@ -517,6 +518,7 @@ export default class ExpressionField extends React.Component<Props, State> {
       },
       completionDescriptions,
       // $FlowFixMe The autocompletion doesn't display the groups so it doesn't need to be able to translate them.
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'I18n'.
       null
     );
 

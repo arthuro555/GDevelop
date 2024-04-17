@@ -14,7 +14,7 @@ import type { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow'
 import LocalFolderPicker from '../../UI/LocalFolderPicker';
 
 const fs = optionalRequire('fs-extra');
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 const remote = optionalRequire('@electron/remote');
 const dialog = remote ? remote.dialog : null;
 
@@ -264,6 +264,7 @@ export const getProjectLocation = ({
   newProjectsDefaultFolder?: string;
 }): SaveAsLocation => {
   const outputPath = saveAsLocation
+// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
     ? path.dirname(saveAsLocation.fileIdentifier)
     : newProjectsDefaultFolder
       ? newProjectsDefaultFolder
@@ -295,10 +296,12 @@ export const renderNewProjectSaveAsLocationChooser = ({
   return (
     <LocalFolderPicker
       fullWidth
+// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
       value={path.dirname(projectLocation.fileIdentifier)}
       onChange={(newOutputPath) => {
         const newOutputFileIdentifier = path.join(
           newOutputPath,
+// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
           path.basename(projectLocation.fileIdentifier)
         );
         setSaveAsLocation(

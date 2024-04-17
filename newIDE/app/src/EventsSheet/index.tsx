@@ -1,5 +1,4 @@
-
-import {t, Trans} from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 
 import { I18n } from '@lingui/react';
 
@@ -15,7 +14,6 @@ import InstructionEditorDialog from './InstructionEditor/InstructionEditorDialog
 import InstructionEditorMenu from './InstructionEditor/InstructionEditorMenu';
 import EventTextDialog, {
   filterEditableWithEventTextDialog,
-
 } from './InstructionEditor/EventTextDialog';
 
 import Toolbar from './Toolbar';
@@ -69,7 +67,6 @@ import { ensureSingleOnceInstructions } from './OnceInstructionSanitizer';
 import EventsContextAnalyzerDialog, {
   EventsContextResult,
   toEventsContextResult,
-
 } from './EventsContextAnalyzerDialog';
 
 import SearchPanel, { SearchPanelInterface } from './SearchPanel';
@@ -85,7 +82,6 @@ import {
 } from './EnumerateEventsMetadata';
 import PreferencesContext, {
   Preferences,
-
 } from '../MainFrame/Preferences/PreferencesContext';
 
 import EventsFunctionExtractorDialog from './EventsFunctionExtractor/EventsFunctionExtractorDialog';
@@ -131,77 +127,82 @@ import {
   unregisterOnResourceExternallyChangedCallback,
 } from '../MainFrame/ResourcesWatcher';
 
-
 const zoomLevel = { min: 1, max: 50 } as const;
 
 export type ChangeContext = {
-  events?: Array<EventContext>,
-  instructions?: Array<InstructionContextWithEventContext>
+  events?: Array<EventContext>;
+  instructions?: Array<InstructionContextWithEventContext>;
 };
 
 type Props = {
-  project: gd.Project,
-  scope: EventsScope,
-  globalObjectsContainer: gd.ObjectsContainer,
-  objectsContainer: gd.ObjectsContainer,
-  events: gd.EventsList,
-  setToolbar: (arg1?: React.ReactNode | null | undefined) => void,
-  onOpenSettings?: () => void | null | undefined,
-  settingsIcon?: React.ReactNode,
-  onOpenExternalEvents: (arg1: string) => void,
-  onOpenLayout: (arg1: string) => void,
-  resourceManagementProps: ResourceManagementProps,
-  openInstructionOrExpression: (extension: gd.PlatformExtension, type: string) => void,
-  onCreateEventsFunction: (extensionName: string, eventsFunction: gd.EventsFunction) => void,
-  onBeginCreateEventsFunction: () => void,
-  unsavedChanges?: UnsavedChanges | null | undefined,
-  isActive: boolean
+  project: gd.Project;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  events: gd.EventsList;
+  setToolbar: (arg1?: React.ReactNode | null | undefined) => void;
+  onOpenSettings?: () => void;
+  settingsIcon?: React.ReactNode;
+  onOpenExternalEvents: (arg1: string) => void;
+  onOpenLayout: (arg1: string) => void;
+  resourceManagementProps: ResourceManagementProps;
+  openInstructionOrExpression: (
+    extension: gd.PlatformExtension,
+    type: string
+  ) => void;
+  onCreateEventsFunction: (
+    extensionName: string,
+    eventsFunction: gd.EventsFunction
+  ) => void;
+  onBeginCreateEventsFunction: () => void;
+  unsavedChanges?: UnsavedChanges | null | undefined;
+  isActive: boolean;
 };
 
-type ComponentProps = (Props) & {
-  authenticatedUser: AuthenticatedUser,
-  preferences: Preferences,
-  tutorials: Array<Tutorial> | null | undefined,
-  leaderboardsManager: LeaderboardState | null | undefined,
-  shortcutMap: ShortcutMap
+type ComponentProps = Props & {
+  authenticatedUser: AuthenticatedUser;
+  preferences: Preferences;
+  tutorials: Array<Tutorial> | null | undefined;
+  leaderboardsManager: LeaderboardState | null | undefined;
+  shortcutMap: ShortcutMap;
 };
 
 type State = {
-  eventsHistory: HistoryState,
+  eventsHistory: HistoryState;
   editedInstruction: {
     // TODO: This could be adapted to be a InstructionContext
-    isCondition: boolean,
-    instruction: gd.Instruction | null | undefined,
-    instrsList: gd.InstructionsList | null | undefined,
-    indexInList: number | null | undefined,
-    eventContext: EventContext | null | undefined
-  },
+    isCondition: boolean;
+    instruction: gd.Instruction | null | undefined;
+    instrsList: gd.InstructionsList | null | undefined;
+    indexInList: number | null | undefined;
+    eventContext: EventContext | null | undefined;
+  };
   editedParameter: {
     // TODO: This could be adapted to be a ParameterContext
-    isCondition: boolean,
-    instruction: gd.Instruction | null | undefined,
-    instrsList: gd.InstructionsList | null | undefined,
-    parameterIndex: number,
-    eventContext: EventContext | null | undefined
-  },
-  selection: SelectionState,
-  inlineEditing: boolean,
-  inlineEditingAnchorEl: HTMLElement | null | undefined,
-  inlineInstructionEditorAnchorEl: HTMLElement | null | undefined,
-  inlineEditingPreviousValue: string | null | undefined,
-  analyzedEventsContextResult: EventsContextResult | null | undefined,
-  serializedEventsToExtract: any | null | undefined,
-  textEditedEvent: gd.BaseEvent | null | undefined,
-  showSearchPanel: boolean,
-  searchResults: Array<gd.BaseEvent> | null | undefined,
-  searchFocusOffset: number | null | undefined,
-  allEventsMetadata: Array<EventMetadata>,
-  fontSize: number
+    isCondition: boolean;
+    instruction: gd.Instruction | null | undefined;
+    instrsList: gd.InstructionsList | null | undefined;
+    parameterIndex: number;
+    eventContext: EventContext | null | undefined;
+  };
+  selection: SelectionState;
+  inlineEditing: boolean;
+  inlineEditingAnchorEl: HTMLElement | null | undefined;
+  inlineInstructionEditorAnchorEl: HTMLElement | null | undefined;
+  inlineEditingPreviousValue: string | null | undefined;
+  analyzedEventsContextResult: EventsContextResult | null | undefined;
+  serializedEventsToExtract: any | null | undefined;
+  textEditedEvent: gd.BaseEvent | null | undefined;
+  showSearchPanel: boolean;
+  searchResults: Array<gd.BaseEvent> | null | undefined;
+  searchFocusOffset: number | null | undefined;
+  allEventsMetadata: Array<EventMetadata>;
+  fontSize: number;
 };
 
 type EventInsertionContext = {
-  eventsList: gd.EventsList,
-  indexInList: number
+  eventsList: gd.EventsList;
+  indexInList: number;
 };
 
 const styles = {
@@ -214,7 +215,10 @@ const styles = {
   },
 } as const;
 
-export class EventsSheetComponentWithoutHandle extends React.Component<ComponentProps, State> {
+export class EventsSheetComponentWithoutHandle extends React.Component<
+  ComponentProps,
+  State
+> {
   _eventsTree: EventsTree | null | undefined;
   _eventSearcher: EventsSearcher | null | undefined;
   _searchPanel: SearchPanelInterface | null | undefined;
@@ -226,25 +230,24 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
       !this.state.analyzedEventsContextResult &&
       !this.state.serializedEventsToExtract,
     shortcutCallbacks: {
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
       onDelete: () => this.deleteSelection(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onCopy: () => this.copySelection(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onCut: () => this.cutSelection(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onPaste: () => this.pasteEventsOrInstructions(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onSearch: () => this._toggleSearchPanel(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onEscape: () => this._closeSearchPanel(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onUndo: () => this.undo(),
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onRedo: () => this.redo(),
-// @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type '(arg1: KeyboardEvent) => Promise<undefined> | undefined'.
+
       onZoomIn: (event: KeyboardEvent) => this.onZoomEvent('IN')(event),
-// @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type '(arg1: KeyboardEvent) => Promise<undefined> | undefined'.
+
       onZoomOut: (event: KeyboardEvent) => this.onZoomEvent('OUT')(event),
     },
   });
@@ -252,7 +255,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   eventContextMenu: ContextMenuInterface | null | undefined;
   resourceExternallyChangedCallbackId: string | null | undefined;
   instructionContextMenu: ContextMenuInterface | null | undefined;
-  addNewEvent: (type: string, context?: EventInsertionContext | null | undefined) => Array<gd.BaseEvent>;
+  addNewEvent: (
+    type: string,
+    context?: EventInsertionContext | null | undefined
+  ) => Array<gd.BaseEvent>;
 
   state = {
     eventsHistory: getHistoryInitialState(this.props.events, {
@@ -307,9 +313,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   componentDidMount() {
     this.setState({ allEventsMetadata: enumerateEventsMetadata() });
-    this.resourceExternallyChangedCallbackId = registerOnResourceExternallyChangedCallback(
-      this.onResourceExternallyChanged.bind(this)
-    );
+    this.resourceExternallyChangedCallbackId =
+      registerOnResourceExternallyChangedCallback(
+        this.onResourceExternallyChanged.bind(this)
+      );
   }
   componentWillUnmount() {
     unregisterOnResourceExternallyChangedCallback(
@@ -335,8 +342,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     }
   }
 
-// @ts-expect-error - TS7006 - Parameter 'resourceInfo' implicitly has an 'any' type.
-  onResourceExternallyChanged = resourceInfo => {
+  // @ts-expect-error - TS7006 - Parameter 'resourceInfo' implicitly has an 'any' type.
+  onResourceExternallyChanged = (resourceInfo) => {
     if (this._eventsTree) this._eventsTree.forceEventsUpdate();
   };
 
@@ -346,7 +353,6 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     const canAddSubEvent = this._selectionCanHaveSubEvents();
 
     this.props.setToolbar(
-
       <Toolbar
         allEventsMetadata={this.state.allEventsMetadata}
         onAddStandardEvent={this._addStandardEvent}
@@ -388,8 +394,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   _toggleSearchPanel = () => {
     this.setState(
-// @ts-expect-error - TS2345 - Argument of type '(state: Readonly<State>) => { showSearchPanel: boolean; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<ComponentProps>) => State | Pick<State, "showSearchPanel"> | null) | Pick<...> | null'.
-      state => {
+      // @ts-expect-error - TS2345 - Argument of type '(state: Readonly<State>) => { showSearchPanel: boolean; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<ComponentProps>) => State | Pick<State, "showSearchPanel"> | null) | Pick<...> | null'.
+      (state) => {
         if (
           state.showSearchPanel &&
           this._searchPanel &&
@@ -458,12 +464,15 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   };
 
   _selectionCanToggleDisabled = () => {
-    return getSelectedEvents(this.state.selection).some(event => {
+    return getSelectedEvents(this.state.selection).some((event) => {
       return event.isExecutable();
     });
   };
 
-  _addNewEvent = (type: string, context?: EventInsertionContext | null): Array<gd.BaseEvent> => {
+  _addNewEvent = (
+    type: string,
+    context?: EventInsertionContext | null
+  ): Array<gd.BaseEvent> => {
     const { project } = this.props;
     const selectedEventContext = getLastSelectedEventContext(
       this.state.selection
@@ -541,7 +550,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
           const clickableElement = document.querySelector(
             `[data-row-index="${rowIndex}"] [data-editable-text="true"]`
           );
-// @ts-expect-error - TS2339 - Property 'click' does not exist on type 'Element'.
+          // @ts-expect-error - TS2339 - Property 'click' does not exist on type 'Element'.
           if (clickableElement) clickableElement.click();
         }
       });
@@ -629,7 +638,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     inlineInstructionEditorAnchorEl: HTMLButtonElement | null = null
   ) => {
     if (this.state.editedInstruction.instruction) {
-// @ts-expect-error - TS2339 - Property 'delete' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'delete' does not exist on type 'never'.
       this.state.editedInstruction.instruction.delete();
       console.warn(
         'state.editedInstruction.instruction was containing an instruction - deleting it. Verify the logic handling the state in EventsSheet because that should not happen.'
@@ -641,16 +650,16 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
       editedInstruction: {
         instrsList: instructionContext.instrsList,
         isCondition: instructionContext.isCondition,
-// @ts-expect-error - TS2339 - Property 'instruction' does not exist on type 'InstructionsListContext | InstructionContext'.
+        // @ts-expect-error - TS2339 - Property 'instruction' does not exist on type 'InstructionsListContext | InstructionContext'.
         instruction: instructionContext.instruction
-// @ts-expect-error - TS2339 - Property 'instruction' does not exist on type 'InstructionsListContext | InstructionContext'.
-          ? instructionContext.instruction.clone()
+          ? // @ts-expect-error - TS2339 - Property 'instruction' does not exist on type 'InstructionsListContext | InstructionContext'.
+            instructionContext.instruction.clone()
           : new gd.Instruction(),
         indexInList:
-// @ts-expect-error - TS2339 - Property 'indexInList' does not exist on type 'InstructionsListContext | InstructionContext'.
+          // @ts-expect-error - TS2339 - Property 'indexInList' does not exist on type 'InstructionsListContext | InstructionContext'.
           instructionContext.indexInList !== undefined
-// @ts-expect-error - TS2339 - Property 'indexInList' does not exist on type 'InstructionsListContext | InstructionContext'.
-            ? instructionContext.indexInList
+            ? // @ts-expect-error - TS2339 - Property 'indexInList' does not exist on type 'InstructionsListContext | InstructionContext'.
+              instructionContext.indexInList
             : undefined,
         eventContext,
       },
@@ -675,11 +684,11 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
         // editedInstruction and after the re-rendering, in an effort to be
         // sure that instruction is not used after deletion.
         if (instruction) {
-// @ts-expect-error - TS2339 - Property 'delete' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'delete' does not exist on type 'never'.
           instruction.delete();
         }
         if (saveChanges && eventContext) {
-// @ts-expect-error - TS2339 - Property 'event' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'event' does not exist on type 'never'.
           const positions = this._getChangedEventRows([eventContext.event]);
           this._saveChangesToHistory('EDIT', {
             positionsBeforeAction: positions,
@@ -707,7 +716,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   moveSelectionToInstructionsList = (
     eventContext: EventContext,
     destinationContext: InstructionsListContext,
-// @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type 'number | null'.
+    // @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type 'number | null'.
     indexInList: number | null = undefined
   ) => {
     const selectedInstructions = getSelectedInstructions(this.state.selection);
@@ -716,10 +725,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
         ? destinationContext.instrsList.size()
         : indexInList;
 
-    const isTryingToDragAnInstructionIntoItsOwnNestedInstructions = !!selectedInstructions.filter(
-      instruction =>
+    const isTryingToDragAnInstructionIntoItsOwnNestedInstructions =
+      !!selectedInstructions.filter((instruction) =>
         containsSubInstructions(instruction, destinationContext.instrsList)
-    ).length;
+      ).length;
 
     if (isTryingToDragAnInstructionIntoItsOwnNestedInstructions) return;
 
@@ -839,17 +848,17 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
         },
         ...this.state.allEventsMetadata
           .filter(
-            metadata =>
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
+            (metadata) =>
+              // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
               metadata.type !== 'BuiltinCommonInstructions::Standard' &&
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
+              // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
               metadata.type !== 'BuiltinCommonInstructions::Comment'
           )
-          .map(metadata => ({
-// @ts-expect-error - TS2339 - Property 'fullName' does not exist on type 'never'.
+          .map((metadata) => ({
+            // @ts-expect-error - TS2339 - Property 'fullName' does not exist on type 'never'.
             label: i18n._(t`Add ${metadata.fullName}`),
             click: () => {
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
+              // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'never'.
               this.addNewEvent(metadata.type);
             },
           })),
@@ -906,7 +915,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
               click: () => this.expandToLevel(-1),
             },
             { type: 'separator' },
-            ...[0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => {
+            ...[0, 1, 2, 3, 4, 5, 6, 7, 8].map((index) => {
               return {
                 label: i18n._(t`Level ${index + 1}`),
                 click: () => this.expandToLevel(index),
@@ -991,18 +1000,15 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   };
 
   closeParameterEditor = (shouldCancel: boolean) => {
-    const {
-      instruction,
-      parameterIndex,
-      eventContext,
-    } = this.state.editedParameter;
+    const { instruction, parameterIndex, eventContext } =
+      this.state.editedParameter;
     if (instruction) {
       // If the user canceled, revert the value to the positionsBeforeAction value, if not null.
       if (
         shouldCancel &&
         typeof this.state.inlineEditingPreviousValue === 'string'
       ) {
-// @ts-expect-error - TS2339 - Property 'setParameter' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'setParameter' does not exist on type 'never'.
         instruction.setParameter(
           parameterIndex,
           this.state.inlineEditingPreviousValue
@@ -1012,11 +1018,11 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
       if (
         !shouldCancel &&
         this.state.inlineEditingPreviousValue !==
-// @ts-expect-error - TS2339 - Property 'getParameter' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'getParameter' does not exist on type 'never'.
           instruction.getParameter(parameterIndex) &&
         eventContext
       ) {
-// @ts-expect-error - TS2339 - Property 'event' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'event' does not exist on type 'never'.
         const positions = this._getChangedEventRows([eventContext.event]);
         this._saveChangesToHistory('EDIT', {
           positionsBeforeAction: positions,
@@ -1051,7 +1057,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
           // instruction in case of cancellation.
           // As the state change is applied, the inline popover is already
           // gone and we can change the focus without worries.
-// @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
           inlineEditingAnchorEl.focus();
         }
       }
@@ -1061,7 +1067,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   toggleDisabled = () => {
     let shouldBeSaved = false;
     const selectedEvents = getSelectedEvents(this.state.selection);
-    selectedEvents.forEach(event => {
+    selectedEvents.forEach((event) => {
       if (event.isExecutable()) {
         event.setDisabled(!event.isDisabled());
         shouldBeSaved = true;
@@ -1087,20 +1093,20 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     deleteEvents = true,
     shouldSaveInHistory = true,
   }: {
-    deleteInstructions?: boolean,
-    deleteEvents?: boolean,
-    shouldSaveInHistory?: boolean
+    deleteInstructions?: boolean;
+    deleteEvents?: boolean;
+    shouldSaveInHistory?: boolean;
   } = {}) => {
     const { events } = this.props;
     const eventsRemover = new gd.EventsRemover();
     let eventsWithDeletion: Array<gd.BaseEvent> = [];
     if (deleteEvents) {
       const selectedEvents = getSelectedEvents(this.state.selection);
-      selectedEvents.forEach(event => eventsRemover.addEventToRemove(event));
+      selectedEvents.forEach((event) => eventsRemover.addEventToRemove(event));
       eventsWithDeletion = eventsWithDeletion.concat(selectedEvents);
     }
     if (deleteInstructions) {
-      getSelectedInstructions(this.state.selection).forEach(instruction =>
+      getSelectedInstructions(this.state.selection).forEach((instruction) =>
         eventsRemover.addInstructionToRemove(instruction)
       );
       eventsWithDeletion = eventsWithDeletion.concat(
@@ -1231,7 +1237,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   _invertSelectedConditions = () => {
     getSelectedInstructionsContexts(this.state.selection).forEach(
-      instructionContext => {
+      (instructionContext) => {
         if (instructionContext.isCondition) {
           instructionContext.instruction.setInverted(
             !instructionContext.instruction.isInverted()
@@ -1258,7 +1264,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   _hasSelectedOptionallyAsyncActions = (): boolean => {
     return getSelectedInstructionsContexts(this.state.selection).some(
-      instructionContext => {
+      (instructionContext) => {
         if (!instructionContext.isCondition) {
           const instructionMetadata = getInstructionMetadata({
             instructionType: instructionContext.instruction.getType(),
@@ -1277,7 +1283,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   _toggleAwaitingActions = () => {
     getSelectedInstructionsContexts(this.state.selection).forEach(
-      instructionContext => {
+      (instructionContext) => {
         if (!instructionContext.isCondition) {
           const instructionMetadata = getInstructionMetadata({
             instructionType: instructionContext.instruction.getType(),
@@ -1321,7 +1327,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   _getChangedEventRows = (events: Array<gd.BaseEvent>) => {
     const currentTree = this._eventsTree;
     if (currentTree) {
-      return events.map(event => currentTree.getEventRow(event));
+      return events.map((event) => currentTree.getEventRow(event));
     }
     return [];
   };
@@ -1330,8 +1336,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     // actionType is defined from the point of view of the event.
     actionType: RevertableActionType,
     positions: {
-      positionsBeforeAction: Array<number>,
-      positionAfterAction: Array<number>
+      positionsBeforeAction: Array<number>;
+      positionAfterAction: Array<number>;
     },
     cb?: any | null
   ) => {
@@ -1369,9 +1375,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
       const {
         changeContext: { positions },
         type,
-      } = newEventsHistory.futureActions[
-        newEventsHistory.futureActions.length - 1
-      ];
+      } =
+        newEventsHistory.futureActions[
+          newEventsHistory.futureActions.length - 1
+        ];
 
       let newSelection: SelectionState = getInitialSelection();
       // If it is a DELETE or EDIT, then the element will be present, so we can select them.
@@ -1424,9 +1431,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
       const {
         changeContext: { positions },
         type,
-      } = newEventsHistory.previousActions[
-        newEventsHistory.previousActions.length - 1
-      ];
+      } =
+        newEventsHistory.previousActions[
+          newEventsHistory.previousActions.length - 1
+        ];
 
       // If it is a ADD or EDIT, then the element will be present, so we can select them.
       // If it is a DELETE, then they will not be present, so we can't select them.
@@ -1462,7 +1470,9 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     });
   };
 
-  onZoomEvent = (towards: 'IN' | 'OUT'): (domEvent?: KeyboardEvent) => void => {
+  onZoomEvent = (
+    towards: 'IN' | 'OUT'
+  ): ((domEvent?: KeyboardEvent) => void) => {
     const factor = towards === 'IN' ? 1 : -1;
     return (domEvent?: KeyboardEvent) => {
       if (domEvent) {
@@ -1502,7 +1512,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     );
 
     const eventsList = new gd.EventsList();
-    getSelectedEvents(this.state.selection).forEach(event =>
+    getSelectedEvents(this.state.selection).forEach((event) =>
       eventsList.insertEvent(event, eventsList.getEventsCount())
     );
 
@@ -1611,7 +1621,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   };
 
   _replaceInEvents = (
-    doReplaceInEvents: (inputs: ReplaceInEventsInputs, cb: () => void) => Array<gd.BaseEvent>,
+    doReplaceInEvents: (
+      inputs: ReplaceInEventsInputs,
+      cb: () => void
+    ) => Array<gd.BaseEvent>,
     inputs: ReplaceInEventsInputs
   ) => {
     const modifiedEvents = doReplaceInEvents(inputs, () => {
@@ -1650,12 +1663,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   };
 
   _renderInstructionEditorDialog = () => {
-    const {
-      project,
-      scope,
-      globalObjectsContainer,
-      objectsContainer,
-    } = this.props;
+    const { project, scope, globalObjectsContainer, objectsContainer } =
+      this.props;
 
     // Choose the dialog to use
     const Dialog = this.state.inlineInstructionEditorAnchorEl
@@ -1664,10 +1673,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
     const instruction = this.state.editedInstruction.instruction;
     return instruction ? (
-
       <I18n>
         {({ i18n }) => (
-
           <Dialog
             i18n={i18n}
             project={project}
@@ -1683,20 +1690,17 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
             open={true}
             onCancel={() => this.closeInstructionEditor()}
             onSubmit={() => {
-              const {
-                instrsList,
-                instruction,
-                indexInList,
-              } = this.state.editedInstruction;
+              const { instrsList, instruction, indexInList } =
+                this.state.editedInstruction;
               if (!instrsList || !instruction) return;
 
               if (indexInList !== undefined && indexInList !== null) {
                 // Replace an existing instruction
-// @ts-expect-error - TS2339 - Property 'set' does not exist on type 'never'.
+                // @ts-expect-error - TS2339 - Property 'set' does not exist on type 'never'.
                 instrsList.set(indexInList, instruction);
               } else {
                 // Add a new instruction
-// @ts-expect-error - TS2339 - Property 'insert' does not exist on type 'never'. | TS2339 - Property 'size' does not exist on type 'never'.
+                // @ts-expect-error - TS2339 - Property 'insert' does not exist on type 'never'. | TS2339 - Property 'size' does not exist on type 'never'.
                 instrsList.insert(instruction, instrsList.size());
               }
 
@@ -1705,7 +1709,6 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
               if (this._eventsTree) this._eventsTree.forceEventsUpdate();
             }}
             resourceManagementProps={this.props.resourceManagementProps}
-
             openInstructionOrExpression={(extension, type) => {
               this.closeInstructionEditor();
               this.props.openInstructionOrExpression(extension, type);
@@ -1716,11 +1719,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                 : hasClipboardActions()
             }
             onPasteInstructions={() => {
-              const {
-                instrsList,
-                isCondition,
-                eventContext,
-              } = this.state.editedInstruction;
+              const { instrsList, isCondition, eventContext } =
+                this.state.editedInstruction;
               if (!instrsList) return;
 
               eventContext &&
@@ -1732,9 +1732,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
           />
         )}
       </I18n>
-    ) : (
-      undefined
-    );
+    ) : undefined;
   };
 
   /**
@@ -1811,13 +1809,11 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
           )));
 
     return (
-
       <ResponsiveWindowMeasurer>
         {({ windowSize }) => (
-
           <EventsSearcher
             key={events.ptr}
-            ref={eventSearcher => (this._eventSearcher = eventSearcher)}
+            ref={(eventSearcher) => (this._eventSearcher = eventSearcher)}
             events={events}
             globalObjectsContainer={globalObjectsContainer}
             objectsContainer={objectsContainer}
@@ -1832,23 +1828,21 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
               goToPreviousSearchResult,
               goToNextSearchResult,
             }) => (
-
               <div
                 id="events-editor"
                 data-active={isActive ? 'true' : undefined}
                 className="gd-events-sheet"
                 style={styles.container}
-// @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
                 onKeyDown={this._keyboardShortcuts.onKeyDown}
-// @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
                 onKeyUp={this._keyboardShortcuts.onKeyUp}
-// @ts-expect-error - TS2322 - Type '(evt: DragEvent) => void' is not assignable to type 'DragEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(evt: DragEvent) => void' is not assignable to type 'DragEventHandler<HTMLDivElement>'.
                 onDragOver={this._keyboardShortcuts.onDragOver}
                 ref={this._containerDiv}
                 tabIndex={0}
               >
                 {isFunctionOnlyCallingItself && (
-
                   <Line>
                     <Column expand>
                       <AlertMessage kind="warning">
@@ -1862,8 +1856,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   </Line>
                 )}
                 <EventsTree
-
-                  ref={eventsTree => (this._eventsTree = eventsTree)}
+                  ref={(eventsTree) => (this._eventsTree = eventsTree)}
                   key={events.ptr}
                   onScroll={this._ensureFocused}
                   events={events}
@@ -1917,22 +1910,17 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   tutorials={tutorials}
                 />
                 {this.state.showSearchPanel && (
-
                   <ErrorBoundary
-
                     componentTitle={<Trans>Search panel</Trans>}
                     scope="scene-events-search"
                     onClose={() => this._closeSearchPanel()}
                   >
                     <SearchPanel
-
-                      ref={searchPanel => (this._searchPanel = searchPanel)}
-
-                      onSearchInEvents={inputs =>
+                      ref={(searchPanel) => (this._searchPanel = searchPanel)}
+                      onSearchInEvents={(inputs) =>
                         this._searchInEvents(searchInEvents, inputs)
                       }
-
-                      onReplaceInEvents={inputs => {
+                      onReplaceInEvents={(inputs) => {
                         this._replaceInEvents(replaceInEvents, inputs);
                       }}
                       resultsCount={
@@ -1973,19 +1961,16 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   isCondition={this.state.editedParameter.isCondition}
                   instruction={this.state.editedParameter.instruction}
                   parameterIndex={this.state.editedParameter.parameterIndex}
-
-                  onChange={value => {
-                    const {
-                      instruction,
-                      parameterIndex,
-                    } = this.state.editedParameter;
+                  onChange={(value) => {
+                    const { instruction, parameterIndex } =
+                      this.state.editedParameter;
                     if (!instruction || !this.state.inlineEditing) {
                       // Unlikely to ever happen, but maybe a component could
                       // fire the "onChange" while the inline editor was just
                       // dismissed.
                       return;
                     }
-// @ts-expect-error - TS2339 - Property 'setParameter' does not exist on type 'never'.
+                    // @ts-expect-error - TS2339 - Property 'setParameter' does not exist on type 'never'.
                     instruction.setParameter(parameterIndex, value);
                     // Ask the component to re-render, so that the new parameter
                     // set for the instruction in the state
@@ -1997,29 +1982,27 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   resourceManagementProps={resourceManagementProps}
                 />
                 <ContextMenu
-
-                  ref={eventContextMenu =>
+                  ref={(eventContextMenu) =>
                     (this.eventContextMenu = eventContextMenu)
                   }
+// @ts-expect-error - TS2322 - Type '(i18n: I18nType) => ({ label: string; click: () => void; visible: boolean; accelerator?: undefined; enabled?: undefined; type?: undefined; submenu?: undefined; } | { label: string; click: () => void; accelerator: string; visible?: undefined; enabled?: undefined; type?: undefined; submenu?: undefined; } | { ...; } | ...' is not assignable to type '(i18n: I18n, options?: any) => MenuItemTemplate[]'.
                   buildMenuTemplate={this._buildEventContextMenu}
                 />
                 <ContextMenu
-
-                  ref={instructionContextMenu =>
+                  ref={(instructionContextMenu) =>
                     (this.instructionContextMenu = instructionContextMenu)
                   }
+// @ts-expect-error - TS2322 - Type '(i18n: I18nType) => ({ label: string; click: () => void; accelerator: string; enabled?: undefined; } | { label: string; click: () => void; enabled: boolean; accelerator: string; } | { label: string; click: () => void; accelerator?: undefined; enabled?: undefined; } | null)[]' is not assignable to type '(i18n: I18n, options?: any) => MenuItemTemplate[]'.
                   buildMenuTemplate={this._buildInstructionContextMenu}
                 />
                 {this._renderInstructionEditorDialog()}
                 {this.state.analyzedEventsContextResult && (
-
                   <EventsContextAnalyzerDialog
                     onClose={this._closeEventsContextAnalyzer}
                     eventsContextResult={this.state.analyzedEventsContextResult}
                   />
                 )}
                 {this.state.serializedEventsToExtract && (
-
                   <EventsFunctionExtractorDialog
                     project={project}
                     scope={scope}
@@ -2031,7 +2014,6 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                       })
                     }
                     serializedEvents={this.state.serializedEventsToExtract}
-
                     onCreate={(extensionName, eventsFunction) => {
                       onCreateEventsFunction(extensionName, eventsFunction);
                       this._replaceSelectionByEventsFunction(
@@ -2045,7 +2027,6 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   />
                 )}
                 {this.state.textEditedEvent && (
-
                   <EventTextDialog
                     event={this.state.textEditedEvent}
                     onApply={() => {
@@ -2064,33 +2045,32 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 }
 
 export type EventsSheetInterface = {
-  updateToolbar: () => void,
-  onResourceExternallyChanged: (
-    arg1: {
-      identifier: string
-    },
-  ) => void
+  updateToolbar: () => void;
+  onResourceExternallyChanged: (arg1: { identifier: string }) => void;
 };
 
 // EventsSheet is a wrapper so that the component can use multiple
 // context in class methods while correctly exposing the interface.
-const EventsSheet = (props: Props, ref: ((arg1: null | EventsSheetInterface) => unknown) | {
-  current: null | EventsSheetInterface
-}) => {
+const EventsSheet = (
+  props: Props,
+  ref:
+    | ((arg1: null | EventsSheetInterface) => unknown)
+    | {
+        current: null | EventsSheetInterface;
+      }
+) => {
   React.useImperativeHandle(ref, () => ({
     updateToolbar,
     onResourceExternallyChanged,
   }));
 
-  const component = React.useRef<EventsSheetComponentWithoutHandle | null | undefined>(null);
+  const component = React.useRef<EventsSheetComponentWithoutHandle>(null);
   const updateToolbar = () => {
     if (component.current) component.current.updateToolbar();
   };
-  const onResourceExternallyChanged = resourceInfo: {
-// @ts-expect-error - TS7031 - Binding element 'string' implicitly has an 'any' type.
-    identifier: string
-
-  } => {
+  const onResourceExternallyChanged = (resourceInfo: {
+    identifier: string;
+  }) => {
     if (component.current)
       component.current.onResourceExternallyChanged(resourceInfo);
   };
@@ -2111,7 +2091,6 @@ const EventsSheet = (props: Props, ref: ((arg1: null | EventsSheetInterface) => 
       {...props}
     />
   );
-
 };
 
 // @ts-expect-error - TS2345 - Argument of type '(props: Props, ref: { current: null | EventsSheetInterface; } | ((arg1: null | EventsSheetInterface) => unknown)) => void' is not assignable to parameter of type 'ForwardRefRenderFunction<Props, EventsSheetInterface>'.

@@ -151,7 +151,7 @@ export const installResource = (
 };
 
 export type InstallAssetOutput = {
-  createdObjects: Array<gd.Object>;
+  createdObjects: Array<gd.gdObject>;
 };
 
 export type InstallAssetArgs = {
@@ -167,7 +167,7 @@ export const addAssetToProject = async ({
 }: InstallAssetArgs): Promise<InstallAssetOutput> => {
   const objectNewNames: Record<string, any> = {};
   const resourceNewNames: Record<string, any> = {};
-  const createdObjects: Array<gd.Object> = [];
+  const createdObjects: Array<gd.gdObject> = [];
 
   // Create objects (and their behaviors)
   asset.objectAssets.forEach((objectAsset) => {

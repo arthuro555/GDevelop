@@ -99,6 +99,7 @@ export const CreditsPackageStoreStateProvider = ({
           `Unable to load the credit packages from the store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 
@@ -139,10 +140,12 @@ export const CreditsPackageStoreStateProvider = ({
         null;
       creditsPackageListingDatas.forEach((creditsPackageListingData) => {
         const packageCreditsAmount = getCreditsAmountFromId(
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'never'.
           creditsPackageListingData.id
         );
 
         const shortlistedPackageCreditsAmount =
+// @ts-expect-error - TS7005 - Variable 'creditsPackageListingDataWithShorterPositiveDifferenceInCredits' implicitly has an 'any' type.
           creditsPackageListingDataWithShorterPositiveDifferenceInCredits
             ? getCreditsAmountFromId(
                 // @ts-expect-error - TS7005 - Variable 'creditsPackageListingDataWithShorterPositiveDifferenceInCredits' implicitly has an 'any' type.
@@ -163,6 +166,7 @@ export const CreditsPackageStoreStateProvider = ({
       if (!creditsPackageListingDataWithShorterPositiveDifferenceInCredits) {
         creditsPackageListingDataWithShorterPositiveDifferenceInCredits =
           creditsPackageListingDatas.reduce((a, b) => {
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'never'. | TS2339 - Property 'id' does not exist on type 'never'.
             return getCreditsAmountFromId(a.id) > getCreditsAmountFromId(b.id)
               ? a
               : b;

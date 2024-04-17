@@ -128,6 +128,7 @@ const TeamProvider = ({ children }: Props) => {
         );
         if (
           memberships[membershipIndex].groups &&
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
           memberships[membershipIndex].groups[0] === group.id
         ) {
           return;

@@ -28,6 +28,7 @@ export const AlwaysError = () => {
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type '{ initialTab: string; authenticatedUser: AuthenticatedUser; signingCredentials: null; error: null; onRefreshSigningCredentials: HandlerFunction; onClose: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & Props'.
         signingCredentials={null}
         error={null}
         onRefreshSigningCredentials={action('refresh')}
@@ -53,6 +54,7 @@ export const WorkingCertificateRequestButCertificateError = () => {
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type '{ initialTab: string; authenticatedUser: AuthenticatedUser; signingCredentials: null; error: null; onRefreshSigningCredentials: HandlerFunction; onClose: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & Props'.
         signingCredentials={null}
         error={null}
         onRefreshSigningCredentials={action('refresh')}
@@ -85,6 +87,7 @@ export const WorkingCertificateRequestButCertificateUnknownKind = () => {
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type '{ initialTab: string; authenticatedUser: AuthenticatedUser; signingCredentials: null; error: null; onRefreshSigningCredentials: HandlerFunction; onClose: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & Props'.
         signingCredentials={null}
         error={null}
         onRefreshSigningCredentials={action('refresh')}
@@ -129,6 +132,7 @@ export const AllWorking = () => {
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type '{ initialTab: string; authenticatedUser: AuthenticatedUser; signingCredentials: null; error: null; onRefreshSigningCredentials: HandlerFunction; onClose: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & Props'.
         signingCredentials={null}
         error={null}
         onRefreshSigningCredentials={action('refresh')}

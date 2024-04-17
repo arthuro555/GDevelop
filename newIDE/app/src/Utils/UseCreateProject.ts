@@ -81,7 +81,7 @@ const useCreateProject = ({
   const profile = authenticatedUser.profile;
   const unsavedChanges = React.useContext(UnsavedChangesContext);
   const preferences = React.useContext(PreferencesContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const { getInAppTutorialShortHeader } =
     React.useContext(InAppTutorialContext);
@@ -233,6 +233,7 @@ const useCreateProject = ({
       } catch (rawError) {
         const { getWriteErrorMessage } = getStorageProviderOperations();
         const errorMessage = getWriteErrorMessage
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'Error'.
           ? getWriteErrorMessage(rawError)
           : t`An error occurred when opening or saving the project. Try again later or choose another location to save the project to.`;
         showAlert({

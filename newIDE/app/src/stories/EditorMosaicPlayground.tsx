@@ -24,6 +24,7 @@ type Props = {
   renderEditorMosaic: (arg1: {
     // $FlowFixMe
     editorRef: {
+// @ts-expect-error - TS2749 - 'EditorMosaic' refers to a value, but is being used as a type here. Did you mean 'typeof EditorMosaic'? | TS2749 - 'EditorNavigator' refers to a value, but is being used as a type here. Did you mean 'typeof EditorNavigator'?
       current: EditorMosaic | EditorNavigator | null;
     };
   }) => React.ReactElement;
@@ -31,6 +32,7 @@ type Props = {
 
 export default ({ renderButtons, renderEditorMosaic }: Props) => {
   const editorRef = React.useRef(
+// @ts-expect-error - TS2749 - 'EditorMosaic' refers to a value, but is being used as a type here. Did you mean 'typeof EditorMosaic'? | TS2749 - 'EditorNavigator' refers to a value, but is being used as a type here. Did you mean 'typeof EditorNavigator'?
     null as EditorMosaic | null | undefined | EditorNavigator | null | undefined
   );
   const openEditor = (

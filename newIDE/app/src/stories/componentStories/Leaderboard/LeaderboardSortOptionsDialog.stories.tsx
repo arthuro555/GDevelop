@@ -15,6 +15,7 @@ export const Default = () => (
   <LeaderboardSortOptionsDialog
     open
     onClose={() => action('onClose')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
     onSave={() => action('onSave')()}
     sort={'ASC'}
     extremeAllowedScore={undefined}

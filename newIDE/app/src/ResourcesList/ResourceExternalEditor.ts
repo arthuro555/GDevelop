@@ -130,6 +130,7 @@ export const saveBlobUrlsFromExternalEditorBase64Resources = async ({
   resourceKind: ResourceKind;
 }): Promise<Array<ResourceWithTemporaryBlobUrl>> => {
   const resourcesManager = project.getResourcesManager();
+// @ts-expect-error - TS2322 - Type '({ resource: any; originalIndex: number | null | undefined; blobUrl: string; } | null)[]' is not assignable to type 'ResourceWithTemporaryBlobUrl[]'.
   const blobs: Array<ResourceWithTemporaryBlobUrl> = resources
     .map(({ name, dataUrl, localFilePath, extension, originalIndex }) => {
       // Convert the data url to a blob URL.

@@ -20,6 +20,7 @@ export const Generating = () => {
     <ProjectGeneratingDialog
       storageProvider={UrlStorageProvider}
       onClose={() => action('on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreate={() => action('on create')()}
       generatingProjectId="fake-generating-project-id"
       saveAsLocation={null}
@@ -33,6 +34,7 @@ export const Errored = () => {
       <ProjectGeneratingDialog
         storageProvider={UrlStorageProvider}
         onClose={() => action('on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         onCreate={() => action('on create')()}
         generatingProjectId="fake-generating-project-id"
         saveAsLocation={null}

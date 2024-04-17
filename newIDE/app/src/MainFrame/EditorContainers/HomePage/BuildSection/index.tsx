@@ -62,6 +62,7 @@ import ChevronArrowRight from '../../../../UI/CustomSvgIcons/ChevronArrowRight';
 import Refresh from '../../../../UI/CustomSvgIcons/Refresh';
 
 import ProjectFileListItem from './ProjectFileListItem';
+// @ts-expect-error - TS2307 - Cannot find module '../../../../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../../../../UI/Menu/Menu.flow';
 import {
   getAllGameTemplatesAndExamplesFlaggedAsGameCount,
@@ -89,8 +90,8 @@ import ContextMenu, {
 import type { ClientCoordinates } from '../../../../Utils/UseLongTouch';
 
 import PromotionsSlideshow from '../../../../Promotions/PromotionsSlideshow';
-const electron = optionalRequire('electron');
-const path = optionalRequire('path');
+const electron = optionalRequire('electron') as typeof import('electron');
+const path = optionalRequire('path') as typeof import('path');
 
 const cellSpacing = 2;
 
@@ -169,7 +170,7 @@ const BuildSection = ({
 }: Props) => {
   const { getRecentProjectFiles } = React.useContext(PreferencesContext);
   const { exampleShortHeaders } = React.useContext(ExampleStoreContext);
-  // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showDeleteConfirmation, showAlert } = useAlertDialog();
   const { removeRecentProjectFile } = React.useContext(PreferencesContext);
   const [pendingProject, setPendingProject] = React.useState<
@@ -325,6 +326,7 @@ const BuildSection = ({
     } else {
       actions.push({
         label: i18n._(t`Remove from list`),
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         click: () => removeRecentProjectFile(file),
       });
     }
@@ -542,7 +544,6 @@ const BuildSection = ({
         </ResponsiveLineStackLayout>
         {cloudProjectsFetchingErrorLabel && (
           <Line>
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PlaceholderError onRetry={onCloudProjectsChanged}>
               <AlertMessage kind="warning">
                 {cloudProjectsFetchingErrorLabel}
@@ -667,6 +668,7 @@ const BuildSection = ({
         actionLabel={<Trans>Log in</Trans>}
       />
       <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
         ref={contextMenu}
         buildMenuTemplate={(_i18n, { file }) => buildContextMenu(_i18n, file)}
       />

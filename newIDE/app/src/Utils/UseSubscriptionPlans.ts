@@ -11,6 +11,7 @@ const mergeSubscriptionPlansWithPrices = (
   subscriptionPlans: SubscriptionPlan[],
   subscriptionPlanPricingSystems: SubscriptionPlanPricingSystem[]
 ): SubscriptionPlanWithPricingSystems[] => {
+// @ts-expect-error - TS2322 - Type '({ pricingSystems: SubscriptionPlanPricingSystem[]; id: string; isLegacy: boolean; nameByLocale: MessageByLocale; descriptionByLocale: MessageByLocale; ... 5 more ...; featureNamesByLocale: { ...; }; } | null)[]' is not assignable to type 'SubscriptionPlanWithPricingSystems[]'.
   return subscriptionPlans
     .map((subscriptionPlan) => {
       if (subscriptionPlan.id === 'free') {

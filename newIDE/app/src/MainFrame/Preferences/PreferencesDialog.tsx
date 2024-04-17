@@ -47,7 +47,7 @@ import defaultShortcuts from '../../KeyboardShortcuts/DefaultShortcuts';
 import AlertMessage from '../../UI/AlertMessage';
 
 import ErrorBoundary from '../../UI/ErrorBoundary';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   i18n: I18n;
@@ -273,7 +273,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             <Trans>Updates</Trans>
           </Text>
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setAutoDownloadUpdates(check)}
             toggled={values.autoDownloadUpdates}
             labelPosition="right"
@@ -282,7 +281,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             }
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setAutoDisplayChangelog(check)}
             toggled={values.autoDisplayChangelog}
             labelPosition="right"
@@ -296,14 +294,12 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             <Trans>Events Sheet</Trans>
           </Text>
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setEventsSheetShowObjectThumbnails(check)}
             toggled={values.eventsSheetShowObjectThumbnails}
             labelPosition="right"
             label={<Trans>Display object thumbnails in Events Sheets</Trans>}
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setEventsSheetUseAssignmentOperators(check)}
             toggled={values.eventsSheetUseAssignmentOperators}
             labelPosition="right"
@@ -354,14 +350,12 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             <Trans>Advanced</Trans>
           </Text>
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setAutosaveOnPreview(check)}
             toggled={values.autosaveOnPreview}
             labelPosition="right"
             label={<Trans>Auto-save project on Preview</Trans>}
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setAutoOpenMostRecentProject(check)}
             toggled={values.autoOpenMostRecentProject}
             labelPosition="right"
@@ -372,7 +366,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             }
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setShowCommunityExtensions(check)}
             toggled={values.showCommunityExtensions}
             labelPosition="right"
@@ -384,7 +377,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             }
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setShowEventBasedObjectsEditor(check)}
             toggled={values.showEventBasedObjectsEditor}
             labelPosition="right"
@@ -411,7 +403,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             />
           )}
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setShowDeprecatedInstructionWarning(check)}
             toggled={values.showDeprecatedInstructionWarning}
             labelPosition="right"
@@ -420,7 +411,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             }
           />
           <Toggle
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onToggle={(e, check) => setUse3DEditor(check)}
             toggled={values.use3DEditor}
             labelPosition="right"
@@ -438,14 +428,12 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
             <>
               <ColumnStackLayout expand noMargin>
                 <Toggle
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
                   onToggle={(e, check) => setIsMenuBarHiddenInPreview(check)}
                   toggled={values.isMenuBarHiddenInPreview}
                   labelPosition="right"
                   label={<Trans>Hide the menu bar in the preview window</Trans>}
                 />
                 <Toggle
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
                   onToggle={(e, check) => setIsAlwaysOnTopInPreview(check)}
                   toggled={values.isAlwaysOnTopInPreview}
                   labelPosition="right"
@@ -466,6 +454,7 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
                       Enable "Close project" shortcut (
                       {adaptAcceleratorString(
                         getElectronAccelerator(
+// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
                           values.userShortcutMap['CLOSE_PROJECT'] ||
                             defaultShortcuts['CLOSE_PROJECT']
                         )
@@ -479,7 +468,6 @@ const PreferencesDialog = ({ i18n, onClose }: Props) => {
           )}
           {Window.isDev() && (
             <Toggle
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
               onToggle={(e, check) => setUseGDJSDevelopmentWatcher(check)}
               toggled={values.useGDJSDevelopmentWatcher}
               labelPosition="right"

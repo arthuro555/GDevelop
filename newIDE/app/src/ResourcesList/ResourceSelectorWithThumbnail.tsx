@@ -42,6 +42,7 @@ const ResourceSelectorWithThumbnail = ({
 }: Props) => {
   const { isMobile } = useResponsiveWindowSize();
   const itemsAlignment = isMobile ? 'center' : 'flex-end';
+// @ts-expect-error - TS2345 - Argument of type 'ResourceKind' is not assignable to parameter of type '"image"'.
   const displayThumbnail = resourcesKindsWithThumbnail.includes(resourceKind);
 
   const resourcesSelector = (

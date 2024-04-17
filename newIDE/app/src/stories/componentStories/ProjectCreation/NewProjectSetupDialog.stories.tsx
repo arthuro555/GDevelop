@@ -36,11 +36,16 @@ export const OpenAndNotAuthenticated = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedExampleShortHeader={null}
@@ -60,11 +65,16 @@ export const OpenAndAuthenticated = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedExampleShortHeader={null}
@@ -85,11 +95,16 @@ export const Opening = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedExampleShortHeader={null}
@@ -111,11 +126,16 @@ export const LimitsReached = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedExampleShortHeader={null}
@@ -135,12 +155,17 @@ export const FromExample = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       selectedExampleShortHeader={geometryMonsterExampleShortHeader}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedPrivateGameTemplateListingData={null}
@@ -159,12 +184,17 @@ export const FromPrivateGameTemplate = () => {
         DownloadFileStorageProvider,
       ]}
       onClose={() => action('click on close')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateEmptyProject={() => action('create empty')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromExample={() => action('create from example')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateWithLogin={() => action('create with login')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onCreateFromAIGeneration={() => action('create from AI generation')()}
       selectedExampleShortHeader={null}
       onCreateProjectFromPrivateGameTemplate={() =>
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
         action('create project from private game template')()
       }
       selectedPrivateGameTemplateListingData={

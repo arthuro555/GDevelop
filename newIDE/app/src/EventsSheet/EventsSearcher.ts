@@ -133,6 +133,7 @@ export default class EventsSearcher extends React.Component<Props, State> {
     // tree is made event by event.
     return uniqBy<gd.BaseEvent>(
       resultEventsWithDuplicates,
+// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
       (event) => event.ptr
     );
   };

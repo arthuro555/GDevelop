@@ -1,12 +1,10 @@
-
-import {t, Trans} from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import React, { Component } from 'react';
 import {
   AutoSizer,
   Table as RVTable,
   Column as RVColumn,
   SortDirection,
-
 } from 'react-virtualized';
 
 import IconButton from '../../UI/IconButton';
@@ -38,14 +36,14 @@ const minimumWidths = {
 } as const;
 
 type RenderedRowInfo = {
-  instance: gd.InitialInstance,
-  name: string,
-  locked: boolean,
-  x: string,
-  y: string,
-  angle: string,
-  layer: string,
-  zOrder: string
+  instance: gd.InitialInstance;
+  name: string;
+  locked: boolean;
+  x: string;
+  y: string;
+  angle: string;
+  layer: string;
+  zOrder: string;
 };
 
 const styles = {
@@ -72,19 +70,20 @@ const compareStrings = (x: string, y: string, direction: number): number => {
 };
 
 export type InstancesListInterface = {
-  forceUpdate: () => void
+  forceUpdate: () => void;
 };
 
 type State = {
-  searchText: string,
-  sortBy: string,
-  sortDirection: SortDirection
+  searchText: string;
+  sortBy: string;
+// @ts-expect-error - TS2749 - 'SortDirection' refers to a value, but is being used as a type here. Did you mean 'typeof SortDirection'?
+  sortDirection: SortDirection;
 };
 
 type Props = {
-  instances: gd.InitialInstancesContainer,
-  selectedInstances: Array<gd.InitialInstance>,
-  onSelectInstances: (arg1: Array<gd.InitialInstance>, arg2: boolean) => void
+  instances: gd.InitialInstancesContainer;
+  selectedInstances: Array<gd.InitialInstance>;
+  onSelectInstances: (arg1: Array<gd.InitialInstance>, arg2: boolean) => void;
 };
 
 class InstancesList extends Component<Props, State> {
@@ -106,7 +105,7 @@ class InstancesList extends Component<Props, State> {
   UNSAFE_componentWillMount() {
     // Functor used to display an instance row
     this.instanceRowRenderer = new gd.InitialInstanceJSFunctor();
-    this.instanceRowRenderer.invoke = instancePtr: any => {
+    this.instanceRowRenderer.invoke = (instancePtr: any) => {
       const { searchText } = this.state;
       const instance = gd.wrapPointer(instancePtr, gd.InitialInstance);
 
@@ -133,11 +132,7 @@ class InstancesList extends Component<Props, State> {
     if (this.instanceRowRenderer) this.instanceRowRenderer.delete();
   }
 
-  _onRowClick = ({
-    index,
-  }: {
-    index: number
-  }) => {
+  _onRowClick = ({ index }: { index: number }) => {
     if (!this.renderedRows[index]) return;
 
     this.props.onSelectInstances(
@@ -146,19 +141,11 @@ class InstancesList extends Component<Props, State> {
     );
   };
 
-  _rowGetter = ({
-    index,
-  }: {
-    index: number
-  }) => {
+  _rowGetter = ({ index }: { index: number }) => {
     return this.renderedRows[index];
   };
 
-  _rowClassName = ({
-    index,
-  }: {
-    index: number
-  }) => {
+  _rowClassName = ({ index }: { index: number }) => {
     if (index < 0) {
       return 'tableHeaderRow';
     } else {
@@ -173,10 +160,9 @@ class InstancesList extends Component<Props, State> {
   _renderLockCell = ({
     rowData: { instance },
   }: {
-    rowData: RenderedRowInfo
+    rowData: RenderedRowInfo;
   }) => {
     return (
-
       <IconButton
         size="small"
         onClick={() => {
@@ -193,13 +179,10 @@ class InstancesList extends Component<Props, State> {
         }}
       >
         {instance.isLocked() && instance.isSealed() ? (
-
           <RemoveCircle />
         ) : instance.isLocked() ? (
-
           <Lock />
         ) : (
-
           <LockOpen />
         )}
       </IconButton>
@@ -216,39 +199,37 @@ class InstancesList extends Component<Props, State> {
     sortBy,
     sortDirection,
   }: {
-    sortBy: string,
-    sortDirection: SortDirection
+    sortBy: string;
+// @ts-expect-error - TS2749 - 'SortDirection' refers to a value, but is being used as a type here. Did you mean 'typeof SortDirection'?
+    sortDirection: SortDirection;
   }) => {
     this.setState({ sortBy, sortDirection });
   };
 
   _orderRenderedRows = () => {
-    this.renderedRows.sort(
-      (a: RenderedRowInfo, b: RenderedRowInfo): number => {
-        const direction =
-          this.state.sortDirection === SortDirection.ASC ? 1 : -1;
+    this.renderedRows.sort((a: RenderedRowInfo, b: RenderedRowInfo): number => {
+      const direction = this.state.sortDirection === SortDirection.ASC ? 1 : -1;
 
-        switch (this.state.sortBy) {
-          case 'name':
-            return compareStrings(a.name, b.name, direction);
-          case 'x':
-            return direction * (parseFloat(a.x) - parseFloat(b.x));
-          case 'y':
-            return direction * (parseFloat(a.y) - parseFloat(b.y));
-          case 'angle':
-            return direction * (parseFloat(a.angle) - parseFloat(b.angle));
-          case 'layer':
-            return compareStrings(a.layer, b.layer, direction);
-          case 'locked':
-            return direction * (Number(a.locked) - Number(b.locked));
-          case 'zOrder':
-            return direction * (parseFloat(a.zOrder) - parseFloat(b.zOrder));
+      switch (this.state.sortBy) {
+        case 'name':
+          return compareStrings(a.name, b.name, direction);
+        case 'x':
+          return direction * (parseFloat(a.x) - parseFloat(b.x));
+        case 'y':
+          return direction * (parseFloat(a.y) - parseFloat(b.y));
+        case 'angle':
+          return direction * (parseFloat(a.angle) - parseFloat(b.angle));
+        case 'layer':
+          return compareStrings(a.layer, b.layer, direction);
+        case 'locked':
+          return direction * (Number(a.locked) - Number(b.locked));
+        case 'zOrder':
+          return direction * (parseFloat(a.zOrder) - parseFloat(b.zOrder));
 
-          default:
-            return 0;
-        }
+        default:
+          return 0;
       }
-    );
+    });
   };
 
   render() {
@@ -267,17 +248,14 @@ class InstancesList extends Component<Props, State> {
     const tableKey = instances.ptr;
 
     return (
-
       <GDevelopThemeContext.Consumer>
-        {gdevelopTheme => (
-
+        {(gdevelopTheme) => (
           <div style={styles.container}>
             <Line>
               <Column expand>
                 <SearchBar
                   value={searchText}
-
-                  onChange={searchText =>
+                  onChange={(searchText) =>
                     this.setState({
                       searchText,
                     })
@@ -291,17 +269,16 @@ class InstancesList extends Component<Props, State> {
             </Line>
             <div
               style={styles.tableContainer}
-// @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+              // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
               onKeyDown={this._keyboardShortcuts.onKeyDown}
-// @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+              // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
               onKeyUp={this._keyboardShortcuts.onKeyUp}
             >
               <AutoSizer>
                 {({ height, width }) => (
-
                   <RVTable
-// @ts-expect-error - TS7006 - Parameter 'table' implicitly has an 'any' type.
-                    ref={table => (this.table = table)}
+                    // @ts-expect-error - TS7006 - Parameter 'table' implicitly has an 'any' type.
+                    ref={(table) => (this.table = table)}
                     key={tableKey}
                     headerHeight={30}
                     height={height}
@@ -318,7 +295,6 @@ class InstancesList extends Component<Props, State> {
                     width={Math.max(width, minimumWidths.table)}
                   >
                     <RVColumn
-
                       label={<Trans>Object name</Trans>}
                       dataKey="name"
                       width={Math.max(width * 0.35, minimumWidths.objectName)}
@@ -335,7 +311,6 @@ class InstancesList extends Component<Props, State> {
                       cellRenderer={this._renderLockCell}
                     />
                     <RVColumn
-
                       label={<Trans>X</Trans>}
                       dataKey="x"
                       width={Math.max(
@@ -345,7 +320,6 @@ class InstancesList extends Component<Props, State> {
                       className={'tableColumn'}
                     />
                     <RVColumn
-
                       label={<Trans>Y</Trans>}
                       dataKey="y"
                       width={Math.max(
@@ -355,7 +329,6 @@ class InstancesList extends Component<Props, State> {
                       className={'tableColumn'}
                     />
                     <RVColumn
-
                       label={<Trans>Angle</Trans>}
                       dataKey="angle"
                       width={Math.max(
@@ -365,14 +338,12 @@ class InstancesList extends Component<Props, State> {
                       className={'tableColumn'}
                     />
                     <RVColumn
-
                       label={<Trans>Layer</Trans>}
                       dataKey="layer"
                       width={Math.max(width * 0.2, minimumWidths.layerName)}
                       className={'tableColumn'}
                     />
                     <RVColumn
-
                       label={<Trans>Z Order</Trans>}
                       dataKey="zOrder"
                       width={Math.max(
@@ -392,7 +363,10 @@ class InstancesList extends Component<Props, State> {
   }
 }
 
-const InstancesListWithErrorBoundary = React.forwardRef<InstancesListInterface, Props>((props, ref) => {
+const InstancesListWithErrorBoundary = React.forwardRef<
+  InstancesListInterface,
+  Props
+>((props, ref) => {
   const forceUpdate = useForceUpdate();
 
   React.useImperativeHandle(ref, () => ({
@@ -400,9 +374,7 @@ const InstancesListWithErrorBoundary = React.forwardRef<InstancesListInterface, 
   }));
 
   return (
-
     <ErrorBoundary
-
       componentTitle={<Trans>Instances list</Trans>}
       scope="scene-editor-instances-list"
     >

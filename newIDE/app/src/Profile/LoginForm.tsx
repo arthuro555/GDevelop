@@ -87,7 +87,6 @@ const LoginForm = ({
         justifyContent="center"
         alignItems="stretch"
       >
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Form onSubmit={onLogin} autoComplete="on" name="login">
           <ColumnStackLayout noMargin>
             {accountsExistsWithOtherCredentials && (

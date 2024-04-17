@@ -210,6 +210,7 @@ export default class SortableVirtualizedItemList<Item> extends React.Component<
                   return (
                     <div style={style} key={key}>
                       <DragSourceAndDropTarget
+// @ts-expect-error - TS2322 - Type '() => DraggedItem' is not assignable to type '() => Item'.
                         beginDrag={() => {
                           // This is a hack for touch screens. We need to prevent the react-dnd list from scrolling
                           // at the same time as the drag is happening.
@@ -218,6 +219,7 @@ export default class SortableVirtualizedItemList<Item> extends React.Component<
                           // by setting the overflow to 'hidden' and then back to 'auto' when the drag is finished.
                           if (screenType === 'touch') {
                             if (this._list) {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
                               this._list.props.style.overflow = 'hidden';
                             }
                           }
@@ -234,7 +236,7 @@ export default class SortableVirtualizedItemList<Item> extends React.Component<
                             name: getItemName(item),
                             thumbnail:
                               this.props.reactDndType ===
-                                'GD_OBJECT_WITH_CONTEXT' && getItemThumbnail
+                                'gd.gdObject_WITH_CONTEXT' && getItemThumbnail
                                 ? getItemThumbnail(item)
                                 : undefined,
                           };
@@ -242,6 +244,7 @@ export default class SortableVirtualizedItemList<Item> extends React.Component<
                         }}
                         canDrag={() => canDrag}
                         canDrop={() =>
+// @ts-expect-error - TS2322 - Type 'boolean | null | undefined' is not assignable to type 'boolean'.
                           canMoveSelectionToItem
                             ? canMoveSelectionToItem(item)
                             : true
@@ -253,6 +256,7 @@ export default class SortableVirtualizedItemList<Item> extends React.Component<
                           // Re-enable scrolling on touch screens.
                           if (screenType !== 'touch') return;
                           if (this._list) {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
                             this._list.props.style.overflow = 'auto';
                             this.forceUpdate();
                           }

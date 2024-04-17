@@ -140,7 +140,7 @@ const CustomObjectPropertiesEditor = (props: Props) => {
     forceUpdate();
   }, [animations, project, forceUpdate]);
 
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
   const animationList = React.useRef<AnimationListInterface | null | undefined>(
     null
   );
@@ -148,7 +148,7 @@ const CustomObjectPropertiesEditor = (props: Props) => {
   const [justAddedAnimationName, setJustAddedAnimationName] = React.useState<
     string | null | undefined
   >(null);
-  const justAddedAnimationElement = React.useRef<any | null | undefined>(null);
+  const justAddedAnimationElement = React.useRef<any>(null);
 
   React.useEffect(() => {
     if (
@@ -170,7 +170,6 @@ const CustomObjectPropertiesEditor = (props: Props) => {
     <I18n>
       {({ i18n }) => (
         <>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ScrollView ref={scrollView}>
             <ColumnStackLayout noMargin>
               {renderObjectNameField && renderObjectNameField()}
@@ -293,6 +292,7 @@ const CustomObjectPropertiesEditor = (props: Props) => {
                         <Trans>Animations</Trans>
                       </Text>
                       <AnimationList
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<AnimationListInterface | null | undefined>' is not assignable to type 'Ref<AnimationListProps> | undefined'.
                         ref={animationList}
                         animations={animations}
                         project={project}
@@ -393,7 +393,6 @@ const CustomObjectPropertiesEditor = (props: Props) => {
               fullHeight
               open={pointsEditorOpen}
             >
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <PointsEditor
                 animations={animations}
                 resourcesLoader={ResourcesLoader}
@@ -437,7 +436,6 @@ const CustomObjectPropertiesEditor = (props: Props) => {
               onRequestClose={() => setCollisionMasksEditorOpen(false)}
               open={collisionMasksEditorOpen}
             >
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CollisionMasksEditor
                 animations={animations}
                 resourcesLoader={ResourcesLoader}

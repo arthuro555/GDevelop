@@ -125,6 +125,7 @@ function InAppTutorialElementHighlighter({ element }: Props) {
             ...elementRectangle.toCSSPosition(),
             borderRadius:
               elementComputedStyle.getPropertyValue('border-radius'),
+// @ts-expect-error - TS2322 - Type 'string | number' is not assignable to type 'ZIndex | undefined'.
             zIndex: getDisplayZIndexForHighlighter(element),
           }}
         />

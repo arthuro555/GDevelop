@@ -59,7 +59,7 @@ type State = {
   debuggerServerState: 'started' | 'stopped';
   debuggerServerError: any | null | undefined;
   debuggerIds: Array<DebuggerId>;
-  unregisterDebuggerServerCallbacks: () => void | null | undefined;
+  unregisterDebuggerServerCallbacks: () => void;
   debuggerGameData: Partial<Record<DebuggerId, any>>;
   profilerOutputs: Partial<Record<DebuggerId, ProfilerOutput>>;
   profilingInProgress: Partial<Record<DebuggerId, boolean>>;
@@ -112,6 +112,7 @@ export default class Debugger extends React.Component<Props, State> {
         }
         onToggleProfiler={() => {
           if (this._debuggerContents[this.state.selectedId])
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
             this._debuggerContents[this.state.selectedId].toggleProfiler();
         }}
         canOpenConsole={this._hasSelectedDebugger()}
@@ -121,6 +122,7 @@ export default class Debugger extends React.Component<Props, State> {
         }
         onToggleConsole={() => {
           if (this._debuggerContents[this.state.selectedId])
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
             this._debuggerContents[this.state.selectedId].toggleConsole();
         }}
       />

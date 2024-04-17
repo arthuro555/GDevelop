@@ -16,30 +16,27 @@ const useAlertDialog = () => {
   } = React.useContext(AlertContext);
 
   const showAlert = React.useCallback(
-    (options: ShowAlertDialogOptions): Promise<void> => new Promise(resolve: (result: Promise<never>) => void => {
-      showAlertDialog({ callback: resolve, ...options });
-
-    }),
+    (options: ShowAlertDialogOptions): Promise<void> =>
+      new Promise((resolve) => {
+        showAlertDialog({ callback: resolve, ...options });
+      }),
     [showAlertDialog]
-
   );
 
   const showConfirmation = React.useCallback(
-    (options: ShowConfirmDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
-      showConfirmDialog({ callback: resolve, ...options });
-
-    }),
+    (options: ShowConfirmDialogOptions): Promise<boolean> =>
+      new Promise((resolve) => {
+        showConfirmDialog({ callback: resolve, ...options });
+      }),
     [showConfirmDialog]
-
   );
 
   const showDeleteConfirmation = React.useCallback(
-    (options: ShowConfirmDeleteDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
-      showConfirmDeleteDialog({ callback: resolve, ...options });
-
-    }),
+    (options: ShowConfirmDeleteDialogOptions): Promise<boolean> =>
+      new Promise((resolve) => {
+        showConfirmDeleteDialog({ callback: resolve, ...options });
+      }),
     [showConfirmDeleteDialog]
-
   );
 
   /**
@@ -50,12 +47,11 @@ const useAlertDialog = () => {
    * - 2 for cancel (secondary action)
    */
   const showYesNoCancel = React.useCallback(
-    (options: ShowYesNoCancelDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
-      showYesNoCancelDialog({ callback: resolve, ...options });
-
-    }),
+    (options: ShowYesNoCancelDialogOptions): Promise<boolean> =>
+      new Promise((resolve) => {
+        showYesNoCancelDialog({ callback: resolve, ...options });
+      }),
     [showYesNoCancelDialog]
-
   );
 
   return {
@@ -64,7 +60,6 @@ const useAlertDialog = () => {
     showDeleteConfirmation,
     showYesNoCancel,
   };
-
 };
 
 export default useAlertDialog;

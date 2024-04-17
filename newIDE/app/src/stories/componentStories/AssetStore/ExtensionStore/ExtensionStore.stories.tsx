@@ -51,6 +51,7 @@ export const Default = () => (
       <ExtensionStore
         project={testProject.project}
         isInstalling={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
         onInstall={action('onInstall')}
         showOnlyWithBehaviors={false}
       />
@@ -64,6 +65,7 @@ export const WithCommunityExtensions = () => {
     React.useState(true);
   const preferences: Preferences = {
     ...initialPreferences,
+// @ts-expect-error - TS2322 - Type '{ showCommunityExtensions: boolean; language: "en"; autoDownloadUpdates: true; themeName: "GDevelop default Dark"; codeEditorThemeName: "vs-dark"; hiddenAlertMessages: {}; hiddenTutorialHints: {}; ... 32 more ...; editorStateByProject: {}; }' is not assignable to type 'PreferencesValues'.
     values: { ...initialPreferences.values, showCommunityExtensions },
     setShowCommunityExtensions,
   };
@@ -75,6 +77,7 @@ export const WithCommunityExtensions = () => {
           <ExtensionStore
             project={testProject.project}
             isInstalling={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
             onInstall={action('onInstall')}
             showOnlyWithBehaviors={false}
           />
@@ -91,6 +94,7 @@ export const WithServerSideErrors = () => (
       <ExtensionStore
         project={testProject.project}
         isInstalling={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
         onInstall={action('onInstall')}
         showOnlyWithBehaviors={false}
       />
@@ -105,6 +109,7 @@ export const ShowingAnAlreadyInstalledExtension = () => (
       <ExtensionStore
         project={testProject.project}
         isInstalling={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
         onInstall={action('onInstall')}
         showOnlyWithBehaviors={false}
       />
@@ -119,6 +124,7 @@ export const ExtensionBeingInstalled = () => (
       <ExtensionStore
         project={testProject.project}
         isInstalling={true}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
         onInstall={action('onInstall')}
         showOnlyWithBehaviors={false}
       />
@@ -133,6 +139,7 @@ export const OnlyWithBehaviors = () => (
       <ExtensionStore
         project={testProject.project}
         isInstalling={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: ExtensionShortHeader) => Promise<boolean>'.
         onInstall={action('onInstall')}
         showOnlyWithBehaviors={true}
       />

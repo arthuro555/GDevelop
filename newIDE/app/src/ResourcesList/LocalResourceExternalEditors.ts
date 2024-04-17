@@ -22,9 +22,9 @@ import {
 } from '../Utils/BlobDownloader';
 import { ResourceKind } from './ResourceSource';
 
-const path = optionalRequire('path');
-const fs = optionalRequire('fs');
-const electron = optionalRequire('electron');
+const path = optionalRequire('path') as typeof import('path');
+const fs = optionalRequire('fs') as typeof import('fs');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 /**

@@ -25,6 +25,7 @@ export const Default = () => (
       object={testProject.spriteObjectWithBehaviors}
       resourceManagementProps={fakeResourceManagementProps}
       onUpdateBehaviorsSharedData={() => {}}
+// @ts-expect-error - TS2739 - Type 'HandlerFunction' is missing the following properties from type 'Promise<void>': then, catch, finally, [Symbol.toStringTag]
       openBehaviorEvents={() => action('Open behavior events')}
       onBehaviorsUpdated={() => {}}
     />
@@ -38,6 +39,7 @@ export const WithoutAnyBehaviors = () => (
       object={testProject.spriteObjectWithoutBehaviors}
       resourceManagementProps={fakeResourceManagementProps}
       onUpdateBehaviorsSharedData={() => {}}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
       openBehaviorEvents={() => action('Open behavior events')}
       onBehaviorsUpdated={() => {}}
     />

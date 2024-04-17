@@ -107,7 +107,6 @@ const LoginDialog = ({
         <Text size="body2" noMargin>
           <Trans>Don't have an account yet?</Trans>
         </Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Link href="" onClick={onGoToCreateAccount} disabled={loginInProgress}>
           <Text size="body2" noMargin color="inherit">
             <Trans>Create an account</Trans>

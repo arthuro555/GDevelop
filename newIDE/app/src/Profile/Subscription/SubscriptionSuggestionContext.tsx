@@ -57,7 +57,7 @@ export const SubscriptionSuggestionProvider = ({
     'individual' | 'team' | 'education' | null
   >(null);
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const { subscriptionPlansWithPricingSystems } = useSubscriptionPlans({
     includeLegacy: true,

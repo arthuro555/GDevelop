@@ -176,6 +176,7 @@ export const moveUrlResourcesToCloudProject = async ({
     await uploadProjectResourceFiles(
       authenticatedUser,
       newCloudProjectId,
+// @ts-expect-error - TS2339 - Property 'file' does not exist on type '{ resource: gd.Resource; file: File; } | null'.
       downloadedFilesAndResourcesToUpload.map(({ file }) => file),
       (count, total) => {
         onProgress(total + count, total * 2);
@@ -184,6 +185,7 @@ export const moveUrlResourcesToCloudProject = async ({
 
   // Update resources with the newly created URLs.
   uploadedProjectResourceFiles.forEach(({ url, error }, index) => {
+// @ts-expect-error - TS2531 - Object is possibly 'null'.
     const resource = downloadedFilesAndResourcesToUpload[index].resource;
     if (error || !url) {
       result.erroredResources.push({

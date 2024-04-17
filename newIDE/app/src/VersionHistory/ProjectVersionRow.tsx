@@ -268,6 +268,7 @@ const ProjectVersionRow = ({
             )}
             {isEditing ? (
               <TextField
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
                 ref={textFieldRef}
                 margin="none"
                 value={newLabel}
@@ -328,10 +329,12 @@ const ProjectVersionRow = ({
                 <div style={styles.dateContainer}>
                   <Text noMargin style={styles.greyed}>
                     {displayFullDate
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
                       ? i18n.date(version.createdAt, {
                           dateStyle: 'medium',
                           timeStyle: 'short',
                         })
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
                       : i18n.date(version.createdAt, {
                           hour: 'numeric',
                           minute: 'numeric',
@@ -342,6 +345,7 @@ const ProjectVersionRow = ({
             ) : (
               <LineStackLayout noMargin>
                 <Text noMargin>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                   {i18n.date(version.createdAt, {
                     hour: 'numeric',
                     minute: 'numeric',
@@ -362,6 +366,7 @@ const ProjectVersionRow = ({
                   </div>
                   <Text noMargin>
                     {version.restoredFromVersion.label ||
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
                       i18n.date(version.restoredFromVersion.createdAt, {
                         dateStyle: 'medium',
                         timeStyle: 'short',
@@ -529,6 +534,7 @@ export const DayGroupRow = ({
                   alignItems="center"
                 >
                   <Text noMargin>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                     {i18n.date(day, {
                       month: 'short',
                       day: 'numeric',

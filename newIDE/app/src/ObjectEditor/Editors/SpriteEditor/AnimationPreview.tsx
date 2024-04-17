@@ -98,7 +98,7 @@ const AnimationPreview = ({
   const imagesLoadedArray = React.useRef(
     new Array(resourceNames.length).fill(false)
   );
-  const loaderTimeout = React.useRef<number | null | undefined>(null);
+  const loaderTimeout = React.useRef<number>(null);
 
   const [isStillLoadingResources, setIsStillLoadingResources] =
     React.useState(true);
@@ -220,6 +220,7 @@ const AnimationPreview = ({
     // Image has loaded, so cancel the timeout if it was set.
     if (loaderTimeout.current) {
       clearTimeout(loaderTimeout.current);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       loaderTimeout.current = null;
     }
     forceUpdate();

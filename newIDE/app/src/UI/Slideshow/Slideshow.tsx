@@ -88,7 +88,7 @@ type SlideshowProps = {
         id: string;
         imageUrl: string;
         mobileImageUrl: string;
-        onClick: () => void | null | undefined;
+        onClick: () => void;
       }>
     | null
     | undefined;
@@ -258,6 +258,7 @@ const Slideshow = ({
               alt={`Slideshow item for ${item.id}`}
               style={{
                 ...styles.slideImage,
+// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'AspectRatio | undefined'.
                 aspectRatio: shouldUseMobileImage
                   ? itemMobileRatio
                   : itemDesktopRatio,

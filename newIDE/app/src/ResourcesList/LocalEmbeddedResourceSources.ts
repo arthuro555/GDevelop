@@ -1,34 +1,36 @@
-
 import optionalRequire from '../Utils/OptionalRequire';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { isPathInProjectFolder } from './ResourceUtils';
 import { createNewResource } from './ResourceSource';
-const fs = optionalRequire('fs');
-const path = optionalRequire('path');
+const fs = optionalRequire('fs') as typeof import('fs');
+const path = optionalRequire('path') as typeof import('path');
 
 export type EmbeddedResource = {
-  resourceKind: string,
-  resourceName?: string,
+  resourceKind: string;
+  resourceName?: string;
   /** The "path" to the embedded resource (e.g: a tileset) as stored in the parent resource (e.g: a tilemap). */
-  relPath: string,
+  relPath: string;
   /** The full path to the file of the embedded resource. */
-  fullPath: string,
+  fullPath: string;
   /** True if the embedded resource file is outside the project folder. */
-  isOutsideProjectFolder: boolean
+  isOutsideProjectFolder: boolean;
 };
 
 export type EmbeddedResources = {
-  hasAnyEmbeddedResourceOutsideProjectFolder: boolean,
-  embeddedResources: Map<string, EmbeddedResource>
+  hasAnyEmbeddedResourceOutsideProjectFolder: boolean;
+  embeddedResources: Map<string, EmbeddedResource>;
 };
 
 export type MappedResources = {
   mapping: {
-    [key: string]: string
-  }
+    [key: string]: string;
+  };
 };
 
-type ParseEmbeddedFiles = (project: gd.Project, filePath: string) => Promise<EmbeddedResources | null | undefined>;
+type ParseEmbeddedFiles = (
+  project: gd.Project,
+  filePath: string
+) => Promise<EmbeddedResources | null | undefined>;
 
 /**
  * Copy the embedded resources inside the project folder
@@ -62,7 +64,7 @@ export async function copyAllEmbeddedResourcesToProjectFolder(
 
       const newFileNameWithoutExtension = newNameGenerator(
         fileNameWithoutExtension,
-        tentativeFileName => {
+        (tentativeFileName) => {
           const tentativePath =
             path.join(projectPath, tentativeFileName) + fileExtension;
           return fs.existsSync(tentativePath);
@@ -89,7 +91,7 @@ export async function copyAllEmbeddedResourcesToProjectFolder(
  */
 export function createAndMapEmbeddedResources(
   project: gd.Project,
-  filesWithEmbeddedResources: Map<string, EmbeddedResources>,
+  filesWithEmbeddedResources: Map<string, EmbeddedResources>
 ): Map<string, MappedResources> {
   const projectPath = path.dirname(project.getProjectFile());
 
@@ -148,7 +150,10 @@ export function createAndMapEmbeddedResources(
  * @param filePath The file path of a resource
  * @returns
  */
-export async function listTileMapEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listTileMapEmbeddedResources(
+  project: gd.Project,
+  filePath: string
+): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) {
     return null;
   }
@@ -220,16 +225,18 @@ export async function listTileMapEmbeddedResources(project: gd.Project, filePath
   }
 }
 
-export async function listSpineEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listSpineEmbeddedResources(
+  project: gd.Project,
+  filePath: string
+): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) return null;
 
   const atlasPath = filePath.replace('.json', '.atlas');
-  const hasAtlasWithSameBasename = await new Promise<boolean>(resolve: (result: Promise<boolean> | boolean) => void => {
+  const hasAtlasWithSameBasename = await new Promise<boolean>((resolve) => {
     fs.promises
       .access(atlasPath, fs.constants.F_OK)
       .then(() => resolve(true))
       .catch(() => resolve(false));
-
   });
 
   // Spine resources usually have the same base names:
@@ -257,7 +264,10 @@ export async function listSpineEmbeddedResources(project: gd.Project, filePath: 
   };
 }
 
-export async function listSpineTextureAtlasEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listSpineTextureAtlasEmbeddedResources(
+  project: gd.Project,
+  filePath: string
+): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) return null;
 
   let atlasContent: string | null | undefined = null;
@@ -303,7 +313,7 @@ export async function listSpineTextureAtlasEmbeddedResources(project: gd.Project
 }
 
 export const embeddedResourcesParsers: {
-  [key: string]: ParseEmbeddedFiles
+  [key: string]: ParseEmbeddedFiles;
 } = {
   tilemap: listTileMapEmbeddedResources,
   json: listTileMapEmbeddedResources,

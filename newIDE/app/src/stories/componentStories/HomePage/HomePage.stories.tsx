@@ -78,6 +78,7 @@ const WrappedHomePage = ({
 }) => (
   <FixedHeightFlexContainer height={1080}>
     <PreferencesContext.Provider
+// @ts-expect-error - TS2322 - Type '{ getRecentProjectFiles: () => FileMetadataAndStorageProviderName[]; getTutorialProgress: () => InAppTutorialUserProgress | undefined; ... 58 more ...; setEditorStateForProject: (projectId: any, editorState: any) => void; }' is not assignable to type 'Preferences'.
       value={{
         ...initialPreferences,
         getRecentProjectFiles: () => recentProjectFiles,
@@ -125,6 +126,7 @@ const WrappedHomePage = ({
                 canOpen={true}
                 storageProviders={[CloudStorageProvider]}
                 onChooseProject={() => action('onChooseProject')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
                 onOpenRecentFile={() => action('onOpenRecentFile')()}
                 onOpenExampleStore={() => action('onOpenExampleStore')()}
                 onSelectExampleShortHeader={() =>
@@ -142,6 +144,7 @@ const WrappedHomePage = ({
                   action('onOpenNewProjectSetupDialog')()
                 }
                 canSave={true}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
                 onSave={() => action('onSave')()}
                 selectInAppTutorial={() => action('select in app tutorial')()}
                 onOpenProfile={() => action('open profile')()}

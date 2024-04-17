@@ -396,7 +396,6 @@ function LeaderboardAppearanceDialog({
             <Text size="sub-title" noMargin>
               <Trans>Visual appearance (advanced)</Trans>
             </Text>
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Checkbox
               label={<Trans>Use custom CSS for the leaderboard</Trans>}
               disabled={
@@ -406,7 +405,6 @@ function LeaderboardAppearanceDialog({
                 (!canUseCustomCss && !useCustomCss) || isLoading
               }
               checked={useCustomCss}
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
               onCheck={(e, checked) => setUseCustomCss(checked)}
             />
             <SemiControlledTextField
@@ -469,6 +467,7 @@ function LeaderboardAppearanceDialog({
               floatingLabelText={<Trans>Score display</Trans>}
               onChange={(e, i, newValue) =>
                 // $FlowIgnore
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'SetStateAction<"time" | "custom">'.
                 setScoreType(newValue)
               }
               disabled={isLoading}

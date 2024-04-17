@@ -105,7 +105,7 @@ const useVersionHistory = ({
   onOpenCloudProjectOnSpecificVersion,
 }: Props) => {
   const { hasUnsavedChanges } = React.useContext(UnsavedChangesContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const { openSubscriptionDialog } = React.useContext(
     SubscriptionSuggestionContext
@@ -460,7 +460,6 @@ const useVersionHistory = ({
         ) : !state.versions && versionsFetchingError ? (
           <Line expand>
             <Column expand>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <PlaceholderError onRetry={onLoadMoreVersions}>
                 {versionsFetchingError}
               </PlaceholderError>

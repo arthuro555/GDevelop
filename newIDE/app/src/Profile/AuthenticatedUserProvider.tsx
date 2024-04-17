@@ -149,10 +149,9 @@ export default class AuthenticatedUserProvider extends React.Component<
     // Listen to when the user logs out.
     // 1. Send this information to analytics, to reset the user being identified.
     // 2. Fetch the user profile, which will reset the user to an unauthenticated state.
-    // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
     this.props.authentication.addUserLogoutListener(onUserLogoutForAnalytics);
     this.props.authentication.addUserLogoutListener(
-      // @ts-expect-error - TS2345 - Argument of type '() => Promise<void>' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
       this._fetchUserProfileWithoutThrowingErrors
     );
 
@@ -163,7 +162,7 @@ export default class AuthenticatedUserProvider extends React.Component<
     //   refresh.
     // - at any other moment (Firebase user was updated), in which case it's probably
     //   not a problem to fetch again the user profile.
-    // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+
     this.props.authentication.addUserUpdateListener(() => {
       if (this._automaticallyUpdateUserProfile) {
         console.info(
@@ -946,6 +945,7 @@ export default class AuthenticatedUserProvider extends React.Component<
       this.openCreateAccountDialog(false);
       this._showLoginSnackbar(this.state.authenticatedUser);
     } catch (apiCallError) {
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
       if (apiCallError.name !== userCancellationErrorName) {
         showErrorBox({
           rawError: apiCallError,
@@ -954,9 +954,11 @@ export default class AuthenticatedUserProvider extends React.Component<
           message: `An error occurred while logging in with provider ${provider}. Please check your internet connection or try again later.`,
         });
         this.setState({
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
           apiCallError,
           authenticatedUser: {
             ...this.state.authenticatedUser,
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
             authenticationError: apiCallError,
           },
         });
@@ -1000,9 +1002,11 @@ export default class AuthenticatedUserProvider extends React.Component<
       this._showLoginSnackbar(this.state.authenticatedUser);
     } catch (apiCallError) {
       this.setState({
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
         apiCallError,
         authenticatedUser: {
           ...this.state.authenticatedUser,
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
           authenticationError: apiCallError,
         },
       });
@@ -1052,6 +1056,7 @@ export default class AuthenticatedUserProvider extends React.Component<
       await this._fetchUserProfileWithoutThrowingErrors();
       this.openEditProfileDialog(false);
     } catch (apiCallError) {
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
       this.setState({ apiCallError });
       if (throwError) {
         throw apiCallError;
@@ -1114,9 +1119,11 @@ export default class AuthenticatedUserProvider extends React.Component<
       });
     } catch (apiCallError) {
       this.setState({
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
         apiCallError,
         authenticatedUser: {
           ...this.state.authenticatedUser,
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
           authenticationError: apiCallError,
         },
       });
@@ -1149,6 +1156,7 @@ export default class AuthenticatedUserProvider extends React.Component<
         message: <Trans>Your account has been deleted!</Trans>,
       });
     } catch (apiCallError) {
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
       this.setState({ apiCallError });
     }
     this.setState({
@@ -1192,6 +1200,7 @@ export default class AuthenticatedUserProvider extends React.Component<
       );
       await this._fetchUserProfileWithoutThrowingErrors();
     } catch (apiCallError) {
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
       this.setState({ apiCallError });
     }
     this.setState({
@@ -1217,6 +1226,7 @@ export default class AuthenticatedUserProvider extends React.Component<
       await this._fetchUserProfileWithoutThrowingErrors();
       this.openChangeEmailDialog(false);
     } catch (apiCallError) {
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'AuthError | null | undefined'.
       this.setState({ apiCallError });
     }
     this.setState({

@@ -1,5 +1,4 @@
-
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import React, { useContext } from 'react';
 
@@ -19,10 +18,10 @@ import Text from '../../UI/Text';
 import Link from '../../UI/Link';
 
 type Props = {
-  onLanguageChanged: (language: string) => void
+  onLanguageChanged: (language: string) => void;
 };
 
-const displayLocaleMetadata = localeMetadata: any => {
+const displayLocaleMetadata = (localeMetadata: any) => {
   if (localeMetadata.languageCode === 'en') return false;
   if (localeMetadata.languageCode === 'pseudo_LOCALE') return Window.isDev();
 
@@ -31,15 +30,13 @@ const displayLocaleMetadata = localeMetadata: any => {
 
 const localesToDisplay = LocalesMetadata.filter(displayLocaleMetadata);
 const goodProgressLocales = localesToDisplay.filter(
-
-  localeMetadata => localeMetadata.translationRatio > 0.5
+  (localeMetadata) => localeMetadata.translationRatio > 0.5
 );
 const startedLocales = localesToDisplay.filter(
-
-  localeMetadata => localeMetadata.translationRatio < 0.5
+  (localeMetadata) => localeMetadata.translationRatio < 0.5
 );
 
-const renderLanguageSelectOption = localeMetadata: any => {
+const renderLanguageSelectOption = (localeMetadata: any) => {
   const translationRatio = localeMetadata.translationRatio || 0;
   const percent = (100 * localeMetadata.translationRatio).toFixed(0);
   const isStarted = translationRatio > 0;
@@ -56,20 +53,15 @@ const renderLanguageSelectOption = localeMetadata: any => {
   );
 };
 
-const LanguageSelector = ({
-  onLanguageChanged,
-}: Props) => {
+const LanguageSelector = ({ onLanguageChanged }: Props) => {
   const { values, setLanguage } = useContext(PreferencesContext);
 
   return (
-
     <Column noMargin>
       <Line noMargin expand>
         <SelectField
-
           floatingLabelText={<Trans>Choose GDevelop language</Trans>}
           value={values.language}
-
           onChange={(e, i, value: string) => {
             setLanguage(value);
             onLanguageChanged(value);
@@ -77,10 +69,10 @@ const LanguageSelector = ({
           fullWidth
         >
           <SelectOption value="en" label="English (default)" />
-          {goodProgressLocales.map(localeMetadata =>
+          {goodProgressLocales.map((localeMetadata) =>
             renderLanguageSelectOption(localeMetadata)
           )}
-          {startedLocales.map(localeMetadata =>
+          {startedLocales.map((localeMetadata) =>
             renderLanguageSelectOption(localeMetadata)
           )}
         </SelectField>

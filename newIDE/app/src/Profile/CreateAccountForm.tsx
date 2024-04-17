@@ -90,7 +90,6 @@ const CreateAccountForm = ({
 
   return (
     <Column noMargin expand justifyContent="center" alignItems="center">
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Form onSubmit={onCreateAccount} autoComplete="on" name="createAccount">
         <ColumnStackLayout noMargin>
           {accountsExistsWithOtherCredentials && (
@@ -136,11 +135,9 @@ const CreateAccountForm = ({
             }}
             disabled={createAccountInProgress}
           />
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             label={<Trans>I want to receive the GDevelop Newsletter</Trans>}
             checked={optInNewsletterEmail}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
             onCheck={(e, value) => {
               onChangeOptInNewsletterEmail(value);
             }}

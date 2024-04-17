@@ -1,7 +1,6 @@
-import { ReactNode } from 'react';
 import { CommandName } from './CommandsList';
 import { AlgoliaSearchHit } from '../Utils/AlgoliaSearch';
-type CommandHandler = () => undefined | Promise<undefined>;
+type CommandHandler = () => void;
 
 export type SimpleCommand = {
   handler: CommandHandler;

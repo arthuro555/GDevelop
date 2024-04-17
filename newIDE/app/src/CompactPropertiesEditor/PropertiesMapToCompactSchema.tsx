@@ -12,20 +12,24 @@ const createField = (
   name: string,
   property: gd.PropertyDescriptor,
   getProperties: (instance: Instance) => any,
-  onUpdateProperty: (instance: Instance, propertyName: string, newValue: string) => void,
-  object?: gd.Object | null,
+  onUpdateProperty: (
+    instance: Instance,
+    propertyName: string,
+    newValue: string
+  ) => void,
+  object?: gd.gdObject | null
 ): Field | null | undefined => {
   const propertyDescription = property.getDescription();
   const getLabel = (instance: Instance) => {
-    const propertyName = getProperties(instance)
-      .get(name)
-      .getLabel();
+    const propertyName = getProperties(instance).get(name).getLabel();
     if (propertyName) return propertyName;
-    return name.charAt(0).toUpperCase() +
-    name
-      .slice(1)
-      .split(/(?=[A-Z])/)
-      .join(' ');
+    return (
+      name.charAt(0).toUpperCase() +
+      name
+        .slice(1)
+        .split(/(?=[A-Z])/)
+        .join(' ')
+    );
   };
   const getDescription = () => propertyDescription;
   const getEndAdornment = (instance: Instance) => {
@@ -34,7 +38,6 @@ const createField = (
     return {
       label: getMeasurementUnitShortLabel(measurementUnit),
       tooltipContent: (
-
         <MeasurementUnitDocumentation
           label={measurementUnit.getLabel()}
           description={measurementUnit.getDescription()}
@@ -50,13 +53,7 @@ const createField = (
       name,
       valueType,
       getValue: (instance: Instance): number => {
-        return (
-          parseFloat(
-            getProperties(instance)
-              .get(name)
-              .getValue()
-          ) || 0
-        ); // Consider a missing value as 0 to avoid propagating NaN.
+        return parseFloat(getProperties(instance).get(name).getValue()) || 0; // Consider a missing value as 0 to avoid propagating NaN.
       },
       setValue: (instance: Instance, newValue: number) => {
         onUpdateProperty(instance, name, '' + newValue);
@@ -70,9 +67,7 @@ const createField = (
       name,
       valueType: 'string',
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -85,11 +80,7 @@ const createField = (
       name,
       valueType,
       getValue: (instance: Instance): boolean => {
-        return (
-          getProperties(instance)
-            .get(name)
-            .getValue() === 'true'
-        );
+        return getProperties(instance).get(name).getValue() === 'true';
       },
       setValue: (instance: Instance, newValue: boolean) => {
         onUpdateProperty(instance, name, newValue ? '1' : '0');
@@ -102,16 +93,14 @@ const createField = (
     const choices = property
       .getExtraInfo()
       .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-      .map(value => ({ value, label: value }));
+      // @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
+      .map((value) => ({ value, label: value }));
     return {
       name,
       valueType: 'string',
       getChoices: () => choices,
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -131,20 +120,18 @@ const createField = (
           : object
               .getAllBehaviorNames()
               .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'name' implicitly has an 'any' type.
-              .map(name =>
+              // @ts-expect-error - TS7006 - Parameter 'name' implicitly has an 'any' type.
+              .map((name) =>
                 object.getBehavior(name).getTypeName() === behaviorType
                   ? name
                   : null
               )
               .filter(Boolean)
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-              .map(value => ({ value, label: value }));
+              // @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
+              .map((value) => ({ value, label: value }));
       },
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -163,9 +150,7 @@ const createField = (
       resourceKind: kind,
       fallbackResourceKind: fallbackKind,
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -178,9 +163,7 @@ const createField = (
       name,
       valueType: 'color',
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -193,9 +176,7 @@ const createField = (
       name,
       valueType: 'textarea',
       getValue: (instance: Instance): string => {
-        return getProperties(instance)
-          .get(name)
-          .getValue();
+        return getProperties(instance).get(name).getValue();
       },
       setValue: (instance: Instance, newValue: string) => {
         onUpdateProperty(instance, name, newValue);
@@ -231,7 +212,7 @@ const propertyKeywordCouples: Array<Array<string>> = [
   ['MaxSpeed', 'SlopeMaxAngle'],
 ];
 
-const uncapitalize = str: string => {
+const uncapitalize = (str: string) => {
   if (!str) return str;
   return str[0].toLowerCase() + str.substr(1);
 };
@@ -247,7 +228,7 @@ const uncapitalize = str: string => {
 const isPropertyVisible = (
   properties: gd.MapStringPropertyDescriptor,
   name: string,
-  visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated',
+  visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated'
 ): boolean => {
   if (!properties.has(name)) {
     return false;
@@ -284,16 +265,20 @@ const isPropertyVisible = (
 const propertiesMapToSchema = (
   properties: gd.MapStringPropertyDescriptor,
   getProperties: (instance: Instance) => any,
-  onUpdateProperty: (instance: Instance, propertyName: string, newValue: string) => void,
-  object?: gd.Object | null,
-  visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated' = 'All',
+  onUpdateProperty: (
+    instance: Instance,
+    propertyName: string,
+    newValue: string
+  ) => void,
+  object?: gd.gdObject | null,
+  visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated' = 'All'
 ): Schema => {
   const propertyNames = properties.keys();
   // Aggregate field by groups to be able to build field groups with a title.
   const fieldsByGroups = new Map<string, Array<Field>>();
   const alreadyHandledProperties = new Set<string>();
 
-  mapFor(0, propertyNames.size(), i => {
+  mapFor(0, propertyNames.size(), (i) => {
     const name = propertyNames.at(i);
     const property = properties.get(name);
     if (!isPropertyVisible(properties, name, visibility)) {
@@ -316,7 +301,7 @@ const propertiesMapToSchema = (
         const keyword = propertyKeywords[index];
 
         if (name.includes(keyword)) {
-          const rowAllPropertyNames = propertyKeywords.map(otherKeyword =>
+          const rowAllPropertyNames = propertyKeywords.map((otherKeyword) =>
             name.replace(keyword, otherKeyword)
           );
           for (const rowPropertyName of rowAllPropertyNames) {
@@ -327,7 +312,7 @@ const propertiesMapToSchema = (
         }
         const uncapitalizeKeyword = uncapitalize(keyword);
         if (name.startsWith(uncapitalizeKeyword)) {
-          const rowAllPropertyNames = propertyKeywords.map(otherKeyword =>
+          const rowAllPropertyNames = propertyKeywords.map((otherKeyword) =>
             name.replace(uncapitalizeKeyword, uncapitalize(otherKeyword))
           );
           for (const rowPropertyName of rowAllPropertyNames) {
@@ -338,12 +323,12 @@ const propertiesMapToSchema = (
         }
       }
       if (rowPropertyNames.length > 1) {
-        const rowProperties = rowPropertyNames.map(name =>
+        const rowProperties = rowPropertyNames.map((name) =>
           properties.get(name)
         );
         if (
           rowProperties.every(
-            property => property.getGroup() === rowProperties[0].getGroup()
+            (property) => property.getGroup() === rowProperties[0].getGroup()
           )
         ) {
           const rowFields: Field[] = [];
@@ -373,7 +358,7 @@ const propertiesMapToSchema = (
               type: 'row',
               children: rowFields,
             };
-            rowPropertyNames.forEach(propertyName => {
+            rowPropertyNames.forEach((propertyName) => {
               alreadyHandledProperties.add(propertyName);
             });
           }
@@ -405,7 +390,7 @@ const propertiesMapToSchema = (
   const groupNames = [...fieldsByGroups.keys()].sort((a, b) =>
     a.localeCompare(b)
   );
-  return groupNames.map(groupName => ({
+  return groupNames.map((groupName) => ({
     name: groupName,
     type: 'column',
     title: groupName,
@@ -416,9 +401,10 @@ const propertiesMapToSchema = (
 
 const exponents = ['⁰', '¹', '²', '³', '⁴', '⁵'];
 
-export const getMeasurementUnitShortLabel = (measurementUnit: gd.MeasurementUnit): string => {
-
-  return mapFor(0, measurementUnit.getElementsCount(), i => {
+export const getMeasurementUnitShortLabel = (
+  measurementUnit: gd.MeasurementUnit
+): string => {
+  return mapFor(0, measurementUnit.getElementsCount(), (i) => {
     const baseUnit = measurementUnit.getElementBaseUnit(i);
     const power = measurementUnit.getElementPower(i);
     const absPower = Math.abs(power);

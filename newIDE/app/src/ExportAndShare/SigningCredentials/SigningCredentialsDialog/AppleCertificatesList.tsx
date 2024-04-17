@@ -66,7 +66,7 @@ export const AppleCertificatesList = ({
   onAddNew,
 }: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showConfirmation } = useAlertDialog();
 
   const appleCertificateSigningCredentials =
@@ -75,7 +75,6 @@ export const AppleCertificatesList = ({
   return (
     <ColumnStackLayout noMargin>
       {error ? (
-        // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <PlaceholderError onRetry={onRefreshSigningCredentials}>
           <Trans>An error happened while loading the certificates.</Trans>
         </PlaceholderError>

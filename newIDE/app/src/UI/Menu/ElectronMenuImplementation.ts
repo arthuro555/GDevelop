@@ -1,6 +1,6 @@
 import optionalRequire from '../../Utils/OptionalRequire';
 import { MenuItemTemplate, ContextMenuImplementation } from './Menu';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 
 /**

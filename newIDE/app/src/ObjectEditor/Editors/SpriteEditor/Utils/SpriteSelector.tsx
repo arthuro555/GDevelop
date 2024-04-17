@@ -125,14 +125,12 @@ const SpriteSelector = ({
             label={setSameForAllAnimationsLabel}
             labelPosition="right"
             toggled={sameForAllAnimations}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
             onToggle={(e, checked) => setSameForAllAnimations(checked)}
           />
           <Toggle
             label={setSameForAllSpritesLabel}
             labelPosition="right"
             toggled={sameForAllSprites}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
             onToggle={(e, checked) => setSameForAllSprites(checked)}
           />
         </>

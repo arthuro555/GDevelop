@@ -24,7 +24,7 @@ type Props = {
    */
   url: string | null | undefined;
   onClose: () => void;
-  onExport: () => void | null | undefined;
+  onExport: () => void;
   onRunPreviewLocally: () => void;
   error: any | null | undefined;
 };

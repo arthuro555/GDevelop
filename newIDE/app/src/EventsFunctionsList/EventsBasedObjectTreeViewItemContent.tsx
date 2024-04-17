@@ -133,6 +133,7 @@ export class EventsBasedObjectTreeViewItemContent
     this.props.editName(this.getId());
   }
 
+// @ts-expect-error - TS2416 - Property 'buildMenuTemplate' in type 'EventsBasedObjectTreeViewItemContent' is not assignable to the same property in base type 'TreeViewItemContent'.
   buildMenuTemplate(i18n: I18nType, index: number) {
     return [
       {
@@ -326,6 +327,7 @@ export class EventsBasedObjectTreeViewItemContent
           ) + 1
         : eventsFunctionsContainer.getEventsFunctionsCount();
     this.props.addNewEventsFunction({
+// @ts-expect-error - TS2322 - Type 'this' is not assignable to type 'TreeViewItemContent | null | undefined'.
       itemContent: this,
       eventsBasedBehavior: null,
       eventsBasedObject: this.eventsBasedObject,

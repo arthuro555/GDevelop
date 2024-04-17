@@ -101,6 +101,7 @@ export const UsersAutocomplete = ({
       setLoading(true);
       const userPublicProfilesByIds = await getUserPublicProfilesByIds(userIds);
       setUsers(
+// @ts-expect-error - TS2345 - Argument of type '({ text: string; value: string; } | null)[]' is not assignable to parameter of type 'SetStateAction<AutocompleteOption[]>'.
         userIds
           .map((userId) => {
             const userPublicProfile: UserPublicProfile =
@@ -162,8 +163,10 @@ export const UsersAutocomplete = ({
       onInputChange={(event, value) => {
         setUserInput(value);
       }}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledMultiAutoCompleteInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledMultiAutoCompleteInterface> | undefined'.
       ref={autocompleteRef}
       dataSource={completionOwnUserProfile.concat(
+// @ts-expect-error - TS2769 - No overload matches this call.
         completionUserPublicProfiles
           .map((userPublicProfile: UserPublicProfile) => {
             if (userPublicProfile.username && userPublicProfile.id) {

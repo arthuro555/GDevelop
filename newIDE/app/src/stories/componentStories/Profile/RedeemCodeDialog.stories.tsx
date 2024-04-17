@@ -18,6 +18,7 @@ export const WorkingCode = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(200)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -26,6 +27,7 @@ export const WorkingCode = () => {
   return (
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(hasJustRedeemedCode: boolean) => Promise<void>'.
       onClose={action('onClose')}
     />
   );
@@ -37,6 +39,7 @@ export const CodeDoesNotExist = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(404)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -45,6 +48,7 @@ export const CodeDoesNotExist = () => {
   return (
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(hasJustRedeemedCode: boolean) => Promise<void>'.
       onClose={action('onClose')}
     />
   );
@@ -56,6 +60,7 @@ export const UnknownError = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(500)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -64,6 +69,7 @@ export const UnknownError = () => {
   return (
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(hasJustRedeemedCode: boolean) => Promise<void>'.
       onClose={action('onClose')}
     />
   );
@@ -77,6 +83,7 @@ export const CannotBeRedeemedAnymoreError = () => {
       code: 'redemption-code/cannot-be-redeemed-anymore',
     })
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -85,6 +92,7 @@ export const CannotBeRedeemedAnymoreError = () => {
   return (
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(hasJustRedeemedCode: boolean) => Promise<void>'.
       onClose={action('onClose')}
     />
   );
@@ -98,6 +106,7 @@ export const AlreadyRedeemedByUser = () => {
       code: 'user-redeemed-code/already-redeemed-by-user',
     })
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -106,6 +115,7 @@ export const AlreadyRedeemedByUser = () => {
   return (
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(hasJustRedeemedCode: boolean) => Promise<void>'.
       onClose={action('onClose')}
     />
   );

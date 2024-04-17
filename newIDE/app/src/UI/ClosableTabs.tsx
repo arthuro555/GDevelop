@@ -1,5 +1,4 @@
-
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
@@ -43,8 +42,8 @@ const styles = {
 } as const;
 
 type TabContentContainerProps = {
-  active: boolean,
-  children: React.ReactNode
+  active: boolean;
+  children: React.ReactNode;
 };
 
 /**
@@ -64,7 +63,6 @@ export class TabContentContainer extends React.Component<TabContentContainerProp
   render() {
     const { children, active } = this.props;
     return (
-
       <div
         style={{
           ...styles.tabContentContainer,
@@ -78,15 +76,12 @@ export class TabContentContainer extends React.Component<TabContentContainerProp
 }
 
 type ClosableTabsProps = {
-  hideLabels?: boolean,
-  children: React.ReactNode
+  hideLabels?: boolean;
+  children: React.ReactNode;
 };
 
-export const ClosableTabs = ({
-  hideLabels,
-  children,
-}: ClosableTabsProps) => {
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+export const ClosableTabs = ({ hideLabels, children }: ClosableTabsProps) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const tabItemContainerStyle = {
     maxWidth: '100%', // Tabs should take all width
     display: hideLabels ? 'none' : 'flex',
@@ -104,14 +99,12 @@ export const ClosableTabs = ({
   }, []);
 
   return (
-
     <div
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
       ref={containerRef}
       className="almost-invisible-scrollbar"
-// @ts-expect-error - TS2322 - Type '{ readonly maxWidth: "100%"; readonly display: "none" | "flex"; readonly flexWrap: "nowrap"; readonly overflowX: "overlay"; readonly overflowY: "hidden"; readonly marginTop: 6; }' is not assignable to type 'Properties<string | number, string & {}>'.
+      // @ts-expect-error - TS2322 - Type '{ readonly maxWidth: "100%"; readonly display: "none" | "flex"; readonly flexWrap: "nowrap"; readonly overflowX: "overlay"; readonly overflowY: "hidden"; readonly marginTop: 6; }' is not assignable to type 'Properties<string | number, string & {}>'.
       style={tabItemContainerStyle}
-// @ts-expect-error - TS2322 - Type '(event: WheelEvent) => void' is not assignable to type 'WheelEventHandler<HTMLDivElement>'.
+      // @ts-expect-error - TS2322 - Type '(event: WheelEvent) => void' is not assignable to type 'WheelEventHandler<HTMLDivElement>'.
       onWheel={onScroll}
     >
       {children}
@@ -120,17 +113,17 @@ export const ClosableTabs = ({
 };
 
 export type ClosableTabProps = {
-  id?: string,
-  data?: HTMLDataset,
-  active: boolean,
-  label: React.ReactNode | null | undefined,
-  icon: React.ReactNode | null | undefined,
-  closable: boolean,
-  onClose: () => void,
-  onCloseOthers: () => void,
-  onCloseAll: () => void,
-  onClick: () => void,
-  onActivated: () => void
+  id?: string;
+  data?: HTMLDataset;
+  active: boolean;
+  label: React.ReactNode | null | undefined;
+  icon: React.ReactNode | null | undefined;
+  closable: boolean;
+  onClose: () => void;
+  onCloseOthers: () => void;
+  onCloseAll: () => void;
+  onClick: () => void;
+  onActivated: () => void;
 };
 
 export function ClosableTab({
@@ -146,29 +139,24 @@ export function ClosableTab({
   onClick,
   onActivated,
 }: ClosableTabProps) {
-  React.useEffect(
-    () => {
-      if (active) {
-        onActivated();
-      }
-    },
-    [active, onActivated]
+  React.useEffect(() => {
+    if (active) {
+      onActivated();
+    }
+  }, [active, onActivated]);
+  const contextMenu = React.useRef<ContextMenuInterface | null | undefined>(
+    null
   );
-  const contextMenu = React.useRef<ContextMenuInterface | null | undefined>(null);
 
-// @ts-expect-error - TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected.
-  const openContextMenu = event: any => {
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
+  const openContextMenu = (event: any) => {
     event.stopPropagation();
     if (contextMenu.current) {
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2339 - Property 'clientX' does not exist on type 'Event'. | TS2532 - Object is possibly 'undefined'. | TS2339 - Property 'clientY' does not exist on type 'Event'.
       contextMenu.current.open(event.clientX, event.clientY);
     }
   };
 
   const closeOnMiddleClick = React.useCallback(
-
-    event => {
+    (event) => {
       if (event.nativeEvent && event.nativeEvent.button === 1) {
         onClose();
       }
@@ -179,7 +167,7 @@ export function ClosableTab({
   // Allow a long press to show the context menu
   const longTouchForContextMenuProps = useLongTouch(
     React.useCallback(
-      event => {
+      (event) => {
         if (contextMenu.current) {
           contextMenu.current.open(event.clientX, event.clientY);
         }
@@ -194,7 +182,6 @@ export function ClosableTab({
     : gdevelopTheme.closableTabs.selectedTextColor;
 
   return (
-
     <React.Fragment>
       <span
         id={id}
@@ -217,7 +204,7 @@ export function ClosableTab({
             : gdevelopTheme.closableTabs.selectedBackgroundColor,
         }}
       >
-{ /* @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ButtonBase
           onClick={onClick}
           onAuxClick={closable ? closeOnMiddleClick : undefined}
@@ -245,7 +232,7 @@ export function ClosableTab({
           </span>
         </ButtonBase>
         {closable && (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ButtonBase
             onClick={onClose}
             onAuxClick={closeOnMiddleClick}
@@ -265,6 +252,7 @@ export function ClosableTab({
         )}
       </span>
       <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
         ref={contextMenu}
         buildMenuTemplate={(i18n: I18nType) => [
           {

@@ -55,6 +55,7 @@ export const CheckpointDialog = () => {
     <InAppTutorialDialog
       endTutorial={() => action('end tutorial')()}
       goToNextStep={() => action('go to next step')()}
+// @ts-expect-error - TS2322 - Type '{ readonly content: readonly [{ readonly messageByLocale: { readonly en: "# Congratulations"; }; }, { readonly messageByLocale: { readonly en: "you made it until the end of the tutorial!"; }; }, { readonly messageByLocale: { ...; }; }, ... 4 more ..., { ...; }]; }' is not assignable to type 'InAppTutorialDialog'.
       dialogContent={dialogContent}
     />
   );
@@ -65,6 +66,7 @@ export const EndDialog = () => {
       isLastStep
       endTutorial={() => action('end tutorial')()}
       goToNextStep={() => action('go to next step')()}
+// @ts-expect-error - TS2322 - Type '{ readonly content: readonly [{ readonly messageByLocale: { readonly en: "# Congratulations"; }; }, { readonly messageByLocale: { readonly en: "you made it until the end of the tutorial!"; }; }, { readonly messageByLocale: { ...; }; }, ... 4 more ..., { ...; }]; }' is not assignable to type 'InAppTutorialDialog'.
       dialogContent={dialogContent}
     />
   );

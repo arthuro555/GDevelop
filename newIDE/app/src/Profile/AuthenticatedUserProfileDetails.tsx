@@ -54,6 +54,7 @@ const AuthenticatedUserProfileDetails = ({
       )}
       <ProfileDetails
         // The firebase user is the source of truth for the emails.
+// @ts-expect-error - TS2322 - Type '{ email: string | null; id: string; username: string | null | undefined; description: string | null | undefined; updatedAt: number; createdAt: number; getGameStatsEmail: boolean; getNewsletterEmail: boolean; ... 15 more ...; hearFrom?: string | undefined; } | null' is not assignable to type 'DisplayedProfile | null | undefined'.
         profile={
           authenticatedUser.profile
             ? { ...authenticatedUser.profile, email: firebaseUser.email }

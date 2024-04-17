@@ -251,6 +251,7 @@ const PrivateAssetPackInformationPageStory = ({
           )
     )
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -262,11 +263,13 @@ const PrivateAssetPackInformationPageStory = ({
     .onGet('/product-license')
     .reply(200, fakeAssetPackLicenses)
     .onPost(`/product/${privateAssetPackListingData.id}/action/redeem`)
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       action('Claim asset pack')();
       return [200, 'OK'];
     })
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];

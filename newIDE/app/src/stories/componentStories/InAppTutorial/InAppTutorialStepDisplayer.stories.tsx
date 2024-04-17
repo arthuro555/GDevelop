@@ -51,6 +51,7 @@ export const StandaloneTooltip = () => {
         step={{
           tooltip: {
             standalone: true,
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '(TranslatedText & string) | undefined'.
             description:
               'This is a standalone tooltip description with an image (data url)',
             image: {

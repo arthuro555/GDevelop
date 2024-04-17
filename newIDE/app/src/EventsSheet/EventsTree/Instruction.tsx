@@ -553,6 +553,7 @@ const Instruction = (props: Props) => {
                     fontSize="small"
                   >
                     <Warning
+// @ts-expect-error - TS2322 - Type '{ style: { color: any; }; className: any; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
                       style={{ color: warningColor }}
                       className={classNames({
                         [icon]: true,
@@ -582,6 +583,7 @@ const Instruction = (props: Props) => {
                       placement="top"
                     >
                       <AsyncIcon
+// @ts-expect-error - TS2322 - Type '{ className: any; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
                         className={classNames({
                           [icon]: true,
                         })}

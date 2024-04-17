@@ -85,6 +85,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -121,6 +122,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions2 = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -162,6 +164,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -221,6 +224,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -260,6 +264,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -303,6 +308,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -356,6 +362,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -397,6 +404,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -439,6 +447,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,
@@ -486,6 +495,7 @@ describe('ExpressionAutocompletion', () => {
         );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
           gd,
           project: project,
           projectScopedContainers,

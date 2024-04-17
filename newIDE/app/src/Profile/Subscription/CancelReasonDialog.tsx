@@ -47,7 +47,7 @@ const CancelReasonDialog = ({ onClose, onCloseAfterSuccess }: Props) => {
   const [otherChecked, setOtherChecked] = React.useState(false);
   const [freeText, setFreeText] = React.useState('');
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const canSubmit =
@@ -198,46 +198,37 @@ const CancelReasonDialog = ({ onClose, onCloseAfterSuccess }: Props) => {
                 fullWidth
               >
                 <ColumnStackLayout noMargin expand>
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>I've stopped using GDevelop</Trans>}
                     checked={stoppedMakingGamesChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) =>
                       setStoppedMakingGamesChecked(checked)
                     }
                     disabled={isLoading}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>I'm struggling to create what I want</Trans>}
                     checked={strugglingChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => setStrugglingChecked(checked)}
                     disabled={isLoading}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>The free version is enough for me</Trans>}
                     checked={preferFreeVersionChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) =>
                       setPreferFreeVersionChecked(checked)
                     }
                     disabled={isLoading}
                   />
 
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={
                       <Trans>It's missing a feature (please specify)</Trans>
                     }
                     checked={missingFeatureChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => setMissingFeatureChecked(checked)}
                     disabled={isLoading}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={
                       <Trans>
@@ -245,15 +236,12 @@ const CancelReasonDialog = ({ onClose, onCloseAfterSuccess }: Props) => {
                       </Trans>
                     }
                     checked={qualityIssuesChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => setQualityIssuesChecked(checked)}
                     disabled={isLoading}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>Other reason (please specify)</Trans>}
                     checked={otherChecked}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => setOtherChecked(checked)}
                     disabled={isLoading}
                   />

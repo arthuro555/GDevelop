@@ -86,7 +86,7 @@ const SemiControlledMultiAutoComplete = React.forwardRef<
 >((props, ref) => {
   const chipStyles = useChipStyles();
   // @ts-expect-error - TS2749 - 'TextField' refers to a value, but is being used as a type here. Did you mean 'typeof TextField'?
-  const inputRef = React.useRef<TextField | null | undefined>(null);
+  const inputRef = React.useRef<TextField>(null);
 
   React.useImperativeHandle(ref, () => ({
     focusInput: () => {
@@ -112,6 +112,7 @@ const SemiControlledMultiAutoComplete = React.forwardRef<
           PaperComponent={AutocompletePaperComponent}
           renderOption={renderItem}
           getOptionLabel={(option: AutocompleteOption) => option.text}
+// @ts-expect-error - TS2322 - Type '(option: AutocompleteOption) => boolean | 0 | undefined' is not assignable to type '(option: AutocompleteOption) => boolean'.
           getOptionDisabled={(option: AutocompleteOption) =>
             option.disabled ||
             !!props.value.find(

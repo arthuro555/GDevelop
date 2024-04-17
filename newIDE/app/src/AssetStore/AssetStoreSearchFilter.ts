@@ -101,13 +101,17 @@ export class AssetPackTypeStoreSearchFilter
     if (!this.isFree && !this.isPremium && !this.isOwned) return 1;
     if (
       this.isOwned &&
+// @ts-expect-error - TS2339 - Property 'prices' does not exist on type 'PrivateAssetPackListingData | PublicAssetPack'.
       searchItem.prices &&
       this.receivedAssetPacks
         .map((assetPack) => assetPack.id)
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'PrivateAssetPackListingData | PublicAssetPack'.
         .includes(searchItem.id)
     )
       return 1;
+// @ts-expect-error - TS2339 - Property 'prices' does not exist on type 'PrivateAssetPackListingData | PublicAssetPack'.
     if (this.isPremium && searchItem.prices) return 1;
+// @ts-expect-error - TS2339 - Property 'prices' does not exist on type 'PrivateAssetPackListingData | PublicAssetPack'.
     if (this.isFree && !searchItem.prices) return 1;
     return 0;
   }

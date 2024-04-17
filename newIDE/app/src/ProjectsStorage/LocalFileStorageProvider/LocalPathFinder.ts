@@ -1,7 +1,7 @@
 import generateName from '../../Utils/NewNameGenerator';
 
 import optionalRequire from '../../Utils/OptionalRequire';
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 var fs = optionalRequire('fs-extra');
 
 const findEmptyPath = (basePath: string) => {

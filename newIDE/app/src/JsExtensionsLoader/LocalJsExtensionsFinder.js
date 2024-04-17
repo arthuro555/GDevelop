@@ -1,8 +1,9 @@
-// Note: this file does not use export/imports nor Flow to allow its usage from Node.js
-
+// Note: this file does not use export/imports and typed with TSDoc to allow its usage from Node.js
 const { findGDJS } = require('../GameEngineFinder/LocalGDJSFinder');
 const optionalRequire = require('../Utils/OptionalRequire');
+/** @type {import("path")} */
 const path = optionalRequire('path');
+/** @type {import("fs")} */
 const fs = optionalRequire('fs');
 
 const checkIfPathHasJsExtensionModule = (extensionFolderPath) => {

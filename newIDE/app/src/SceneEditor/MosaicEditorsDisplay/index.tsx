@@ -110,7 +110,7 @@ const MosaicEditorsDisplay = React.forwardRef<
   const instancesListRef = React.useRef<
     InstancesListInterface | null | undefined
   >(null);
-  const editorRef = React.useRef<InstancesEditor | null | undefined>(null);
+  const editorRef = React.useRef<InstancesEditor>(null);
   const objectsListRef = React.useRef<ObjectsListInterface | null | undefined>(
     null
   );
@@ -272,6 +272,7 @@ const MosaicEditorsDisplay = React.forwardRef<
               onEditObjectByName={props.editObjectByName}
               onInstancesModified={forceUpdateInstancesList}
               onGetInstanceSize={getInstanceSize}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<CompactInstancePropertiesEditorInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
               ref={instancesPropertiesEditorRef}
               unsavedChanges={props.unsavedChanges}
               historyHandler={props.historyHandler}
@@ -295,6 +296,7 @@ const MosaicEditorsDisplay = React.forwardRef<
           onCreateLayer={forceUpdateInstancesPropertiesEditor}
           layersContainer={layout}
           unsavedChanges={props.unsavedChanges}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<LayersListInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
           ref={layersListRef}
           hotReloadPreviewButtonProps={props.hotReloadPreviewButtonProps}
         />
@@ -308,6 +310,7 @@ const MosaicEditorsDisplay = React.forwardRef<
           instances={initialInstances}
           selectedInstances={selectedInstances}
           onSelectInstances={selectInstances}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<InstancesListInterface | null | undefined>' is not assignable to type 'Ref<InstancesListInterface> | undefined'.
           ref={instancesListRef}
         />
       ),
@@ -340,6 +343,7 @@ const MosaicEditorsDisplay = React.forwardRef<
             props.instancesEditorShortcutsCallbacks
           }
           wrappedEditorRef={(editor) => {
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
             editorRef.current = editor;
           }}
           pauseRendering={!props.isActive}
@@ -390,6 +394,7 @@ const MosaicEditorsDisplay = React.forwardRef<
               beforeSetAsGlobalObject={(objectName) =>
                 props.canObjectOrGroupBeGlobal(i18n, objectName)
               }
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ObjectsListInterface | null | undefined>' is not assignable to type 'Ref<ObjectsListInterface> | undefined'.
               ref={objectsListRef}
               unsavedChanges={props.unsavedChanges}
               hotReloadPreviewButtonProps={props.hotReloadPreviewButtonProps}
@@ -405,6 +410,7 @@ const MosaicEditorsDisplay = React.forwardRef<
         <I18n>
           {({ i18n }) => (
             <ObjectGroupsList
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ObjectGroupsListInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
               ref={objectGroupsListRef}
               globalObjectGroups={project.getObjectGroups()}
               objectGroups={layout.getObjectGroups()}
@@ -428,6 +434,7 @@ const MosaicEditorsDisplay = React.forwardRef<
   } as const;
   return (
     <EditorMosaic
+// @ts-expect-error - TS2322 - Type '{ readonly properties: { readonly type: "secondary"; readonly title: MessageDescriptor; readonly renderEditor: () => JSX.Element; }; readonly 'layers-list': { readonly type: "secondary"; readonly title: MessageDescriptor; readonly renderEditor: () => JSX.Element; }; readonly 'instances-list': { ...; }; readonly 'ins...' is not assignable to type '{ [key: string]: Editor; }'.
       editors={editors}
       limitToOneSecondaryEditor={isMobile}
       initialNodes={
@@ -437,6 +444,7 @@ const MosaicEditorsDisplay = React.forwardRef<
       onPersistNodes={(node) =>
         setDefaultEditorMosaicNode('scene-editor', node)
       }
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<EditorMosaicInterface | null | undefined>' is not assignable to type 'Ref<EditorMosaicInterface> | undefined'.
       ref={editorMosaicRef}
     />
   );

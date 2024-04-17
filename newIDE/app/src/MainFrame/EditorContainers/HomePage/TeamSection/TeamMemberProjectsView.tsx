@@ -40,6 +40,7 @@ import ContextMenu, {
   ContextMenuInterface,
 } from '../../../../UI/Menu/ContextMenu';
 import type { ClientCoordinates } from '../../../../Utils/UseLongTouch';
+// @ts-expect-error - TS2307 - Cannot find module '../../../../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../../../../UI/Menu/Menu.flow';
 
 const styles = {
@@ -193,6 +194,7 @@ const TeamMemberProjectsView = ({
         </Line>
       </SectionRow>
       <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
         ref={contextMenu}
         buildMenuTemplate={(_i18n, { file }) => buildContextMenu(_i18n, file)}
       />

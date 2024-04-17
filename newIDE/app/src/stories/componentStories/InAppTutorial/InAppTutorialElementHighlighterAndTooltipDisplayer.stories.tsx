@@ -15,7 +15,6 @@ import SemiControlledTextField from '../../../UI/SemiControlledTextField';
 import {
   ResponsiveLineStackLayout,
   ColumnStackLayout,
-
 } from '../../../UI/Layout';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
@@ -75,18 +74,17 @@ const elementIdToShowQuitButton = {
 export const Default = () => {
   const [listItemRef, setListItemRef] = React.useState<any>(null);
   const [elementToHighlight, setElementToHighlight] = React.useState<any>(null);
-  const [textFieldValue, setTextFieldValue] = React.useState<string>('Object.Variable');
+  const [textFieldValue, setTextFieldValue] =
+    React.useState<string>('Object.Variable');
   const [searchValue, setSearchValue] = React.useState<string>('Search me');
-  const [multilineInputValue, setMultilineInputValue] = React.useState<string>("First layout\nThis is what we're gonna do");
-  const [
-    elementToHighlightId,
-    setElementToHighlightId,
-  ] = React.useState<string>('#add-parameter-button');
+  const [multilineInputValue, setMultilineInputValue] = React.useState<string>(
+    "First layout\nThis is what we're gonna do"
+  );
+  const [elementToHighlightId, setElementToHighlightId] =
+    React.useState<string>('#add-parameter-button');
 
-// @ts-expect-error - TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected.
-  const handleSelect = event: any => {
+  const handleSelect = (event: any) => {
     const {
-// @ts-expect-error - TS2339 - Property 'target' does not exist on type 'Event | undefined'.
       target: { value },
     } = event;
     setElementToHighlightId(event.target.value);
@@ -95,16 +93,13 @@ export const Default = () => {
     }
   };
 
-  React.useEffect(
-    () => {
-      if (elementToHighlightId.startsWith('#')) {
-        setElementToHighlight(
-          queryElementOrItsMostVisuallySignificantParent(elementToHighlightId)
-        );
-      }
-    },
-    [elementToHighlightId]
-  );
+  React.useEffect(() => {
+    if (elementToHighlightId.startsWith('#')) {
+      setElementToHighlight(
+        queryElementOrItsMostVisuallySignificantParent(elementToHighlightId)
+      );
+    }
+  }, [elementToHighlightId]);
 
   return (
     <>
@@ -179,7 +174,7 @@ export const Default = () => {
                   <ListItem primaryText="Choice paradox hits" />
                   <ListItem
                     primaryText="I want this one"
-                    ref={ref => setListItemRef(ref)}
+                    ref={(ref) => setListItemRef(ref)}
                   />
                   <ListItem primaryText="Why not me?" />
                   <ListItem primaryText="There's a choice to do?" />
@@ -214,7 +209,9 @@ export const Default = () => {
           <InAppTutorialElementHighlighter element={elementToHighlight} />
           <InAppTutorialTooltipDisplayer
             anchorElement={elementToHighlight}
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '#add-parameter-button': { readonly title: "This is the title"; readonly description: "This is the description"; readonly placement: "bottom"; }; readonly '#add-event-primary-button': { ...; }; readonly '#input': { ...; }; readonly '#multiline-input': { ...; }; readonly '#search-bar': { ...; }; readonly '...'.
             tooltip={elementIdToTooltip[elementToHighlightId]}
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '#add-parameter-button': true; readonly '#add-event-primary-button': true; readonly '#input': false; readonly 'element-in-list': true; }'.
             showQuitButton={elementIdToShowQuitButton[elementToHighlightId]}
             progress={28}
             endTutorial={() => action('end tutorial')()}
@@ -224,5 +221,4 @@ export const Default = () => {
       )}
     </>
   );
-
 };

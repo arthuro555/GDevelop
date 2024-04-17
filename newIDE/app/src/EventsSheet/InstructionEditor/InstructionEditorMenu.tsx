@@ -212,6 +212,7 @@ const InstructionEditorMenu = ({
             columnsRenderer={{
               'instruction-or-object-selector':
                 renderInstructionOrObjectSelector,
+// @ts-expect-error - TS2322 - Type '() => JSX.Element | null' is not assignable to type '() => ReactElement<any, string | JSXElementConstructor<any>>'.
               'object-instruction-selector': renderObjectInstructionSelector,
             }}
             getColumns={() => {

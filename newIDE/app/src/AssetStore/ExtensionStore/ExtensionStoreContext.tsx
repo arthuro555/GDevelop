@@ -125,6 +125,7 @@ export const ExtensionStoreStateProvider = ({
           `Unable to load the extensions from the extension store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 
@@ -151,6 +152,7 @@ export const ExtensionStoreStateProvider = ({
       categoriesSet.add(extensionShortHeadersByName[name].category);
     }
     const sortedCategories = [...categoriesSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
       tag1.toLowerCase().localeCompare(tag2.toLowerCase())
     );
     return sortedCategories;
@@ -162,6 +164,7 @@ export const ExtensionStoreStateProvider = ({
       extensionShortHeadersByName[name].tags.forEach((tag) => tagsSet.add(tag));
     }
     const sortedTags = [...tagsSet].sort((tag1, tag2) =>
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
       tag1.toLowerCase().localeCompare(tag2.toLowerCase())
     );
     return {
@@ -227,6 +230,7 @@ export const ExtensionStoreStateProvider = ({
   );
 
   return (
+// @ts-expect-error - TS2322 - Type '{ searchResults: { item: ExtensionShortHeader; matches: SearchMatch[]; }[] | null | undefined; fetchExtensionsAndFilters: () => void; filters: { allTags: unknown[]; defaultTags: unknown[]; tagsTree: never[]; }; ... 8 more ...; hasExtensionNamed: (extensionName: string) => boolean; }' is not assignable to type 'ExtensionStoreState'.
     <ExtensionStoreContext.Provider value={extensionStoreState}>
       {children}
     </ExtensionStoreContext.Provider>

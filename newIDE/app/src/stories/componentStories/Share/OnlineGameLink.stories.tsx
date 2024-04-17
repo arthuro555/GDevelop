@@ -47,7 +47,9 @@ export const Export = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'export'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -63,7 +65,9 @@ export const SavingProject = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'export'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject
         project={testProject.project}
@@ -79,7 +83,9 @@ export const ResourcesDownload = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'resources-download'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -95,7 +101,9 @@ export const Compress = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'compress'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -111,7 +119,9 @@ export const Upload = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'upload'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -127,7 +137,9 @@ export const WaitingForBuild = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'waiting-for-build'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -143,7 +155,9 @@ export const Build = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'build'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -159,7 +173,9 @@ export const DoneWithPublicBuild = () => {
         build={{ ...completeWebBuild, id: fakeGame.publicWebBuildId || '' }}
         errored={false}
         exportStep={'done'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}
@@ -175,7 +191,9 @@ export const DoneWithPrivateBuild = () => {
         build={completeWebBuild}
         errored={false}
         exportStep={'done'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         isSavingProject={false}
         project={testProject.project}

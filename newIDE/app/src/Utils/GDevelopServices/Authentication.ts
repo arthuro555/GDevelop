@@ -110,8 +110,8 @@ export type IdentityProvider = 'google' | 'apple' | 'github';
 
 export default class Authentication {
   auth: Auth;
-  _onUserLogoutCallbacks: Array<() => undefined | Promise<undefined>> = [];
-  _onUserUpdateCallbacks: Array<() => undefined | Promise<undefined>> = [];
+  _onUserLogoutCallbacks: Array<() => void> = [];
+  _onUserUpdateCallbacks: Array<() => void> = [];
   loginProvider: LoginProvider | null | undefined;
 
   constructor() {
@@ -132,15 +132,15 @@ export default class Authentication {
     this.loginProvider = loginProvider;
   };
 
-  addUserLogoutListener = (cb: () => undefined | Promise<undefined>) => {
+  addUserLogoutListener = (cb: () => void) => {
     this._onUserLogoutCallbacks.push(cb);
   };
 
-  addUserUpdateListener = (cb: () => undefined | Promise<undefined>) => {
+  addUserUpdateListener = (cb: () => void) => {
     this._onUserUpdateCallbacks.push(cb);
   };
 
-  removeEventListener = (cbToRemove: () => undefined | Promise<undefined>) => {
+  removeEventListener = (cbToRemove: () => void) => {
     this._onUserLogoutCallbacks = this._onUserLogoutCallbacks.filter(
       (cb) => cb !== cbToRemove
     );

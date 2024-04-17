@@ -25,6 +25,7 @@ type Props = {
 export const ExampleDifficultyChip = ({ difficultyLevel }: Props) => {
   const theme = React.useContext(GDevelopThemeContext);
   const color: string | null | undefined =
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ simple: any; advanced: any; expert: any; }'.
     theme.example.difficulty.color[difficultyLevel];
 
   return (

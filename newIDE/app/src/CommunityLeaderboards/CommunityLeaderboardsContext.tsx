@@ -58,6 +58,7 @@ export const CommunityLeaderboardsStateProvider = ({
         `Unable to load the community leaderboards from the api:`,
         error
       );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setError(error);
     }
 

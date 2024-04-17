@@ -62,7 +62,7 @@ const CreditsPackagePurchaseDialog = ({
   const [displayPasswordPrompt, setDisplayPasswordPrompt] =
     React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>('');
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const shouldUseOrSimulateAppStoreProduct =
@@ -77,6 +77,7 @@ const CreditsPackagePurchaseDialog = ({
       try {
         setIsPurchasing(true);
         await purchaseAppStoreProduct(
+// @ts-expect-error - TS2339 - Property 'appStoreProductId' does not exist on type 'never'.
           creditsPackageListingData.appStoreProductId
         );
       } finally {
@@ -89,7 +90,9 @@ const CreditsPackagePurchaseDialog = ({
     try {
       setIsPurchasing(true);
       const checkoutUrl = await getPurchaseCheckoutUrl({
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'never'.
         productId: creditsPackageListingData.id,
+// @ts-expect-error - TS2339 - Property 'prices' does not exist on type 'never'.
         priceName: creditsPackageListingData.prices[0].name,
         userId: profile.id,
         userEmail: profile.email,
@@ -243,6 +246,7 @@ const CreditsPackagePurchaseDialog = ({
           : {
               subtitle: (
                 <Trans>
+{ /* @ts-expect-error - TS2339 - Property 'name' does not exist on type 'never'. */}
                   {creditsPackageListingData.name} will be added to your account
                   {profile.email}.
                 </Trans>
@@ -285,6 +289,7 @@ const CreditsPackagePurchaseDialog = ({
   return (
     <>
       <Dialog
+// @ts-expect-error - TS2339 - Property 'name' does not exist on type 'never'.
         title={creditsPackageListingData.name}
         maxWidth="sm"
         open

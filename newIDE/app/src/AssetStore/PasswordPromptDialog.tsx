@@ -38,7 +38,6 @@ const PasswordPromptDialog = (props: Props) => (
       />,
     ]}
   >
-    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Form onSubmit={props.onApply} name="store-password">
       <TextField
         fullWidth

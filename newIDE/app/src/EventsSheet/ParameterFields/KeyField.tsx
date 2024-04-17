@@ -164,6 +164,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
         openOnFocus={!isInline}
         onRequestClose={onRequestClose}
         onApply={onApply}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledAutoCompleteInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledAutoCompleteInterface> | undefined'.
         ref={field}
         errorText={
           !value ? (

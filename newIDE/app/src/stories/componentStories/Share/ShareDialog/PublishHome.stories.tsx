@@ -42,8 +42,10 @@ export const Default = () => {
   return (
     <PublishHome
       project={testProject.project}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
       onSaveProject={action('onSaveProject')}
       isSavingProject={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
       onGameUpdated={action('onGameUpdated')}
       onChangeSubscription={action('onChangeSubscription')}
       isNavigationDisabled={false}
@@ -69,8 +71,10 @@ export const OnlineWebExporterSelected = () => {
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
       <PublishHome
         project={testProject.project}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
         isSavingProject={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         onChangeSubscription={action('onChangeSubscription')}
         isNavigationDisabled={false}
@@ -97,8 +101,10 @@ export const OnlineWebExporterSelectedForGameNotOwned = () => {
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
       <PublishHome
         project={testProject.project}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
         isSavingProject={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         onChangeSubscription={action('onChangeSubscription')}
         isNavigationDisabled={false}
@@ -125,8 +131,10 @@ export const OnlyOnlineWebExporter = () => {
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
       <PublishHome
         project={testProject.project}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onSaveProject={action('onSaveProject')}
         isSavingProject={false}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onGameUpdated={action('onGameUpdated')}
         onChangeSubscription={action('onChangeSubscription')}
         isNavigationDisabled={false}

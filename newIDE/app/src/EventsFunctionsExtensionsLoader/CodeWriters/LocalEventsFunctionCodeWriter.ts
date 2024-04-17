@@ -7,9 +7,9 @@ import optionalRequire from '../../Utils/OptionalRequire';
 import { getUID } from '../../Utils/LocalUserInfo';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'slugs'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/slugs/slugs.js' implicitly has an 'any' type.
 import slugs from 'slugs';
-const path = optionalRequire('path');
-const os = optionalRequire('os');
-const fs = optionalRequire('fs');
+const path = optionalRequire('path') as typeof import('path');
+const os = optionalRequire('os') as typeof import('os');
+const fs = optionalRequire('fs') as typeof import('fs');
 
 /**
  * Create the EventsFunctionCodeWriter that writes generated code for events functions
@@ -24,7 +24,7 @@ export const makeLocalEventsFunctionCodeWriter = ({
     os.tmpdir(),
     `GDGeneratedEventsFunctions-` + getUID()
   );
-  // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+
   fs.mkdir(outputDir, (err) => {
     if (err && err.code !== 'EEXIST') {
       console.error(
@@ -52,7 +52,7 @@ export const makeLocalEventsFunctionCodeWriter = ({
         ) => {
           const includeFile = getPathFor(functionCodeNamespace);
           onWriteFile({ includeFile, content: code });
-          // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+
           fs.writeFile(includeFile, code, (err) => {
             if (err) return reject(err);
 
@@ -73,7 +73,7 @@ export const makeLocalEventsFunctionCodeWriter = ({
         ) => {
           const includeFile = getPathFor(behaviorCodeNamespace);
           onWriteFile({ includeFile, content: code });
-          // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+
           fs.writeFile(includeFile, code, (err) => {
             if (err) return reject(err);
 
@@ -94,7 +94,7 @@ export const makeLocalEventsFunctionCodeWriter = ({
         ) => {
           const includeFile = getPathFor(objectCodeNamespace);
           onWriteFile({ includeFile, content: code });
-          // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+
           fs.writeFile(includeFile, code, (err) => {
             if (err) return reject(err);
 

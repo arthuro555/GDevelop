@@ -24,6 +24,7 @@ export const WithoutAProjectOpened = () => {
       <GamesList
         project={null}
         games={[game1, game2]}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onRefreshGames={action('onRefreshGames')}
         onOpenGame={action('onOpenGame')}
       />

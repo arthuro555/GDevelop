@@ -243,6 +243,7 @@ export const DebuggerConsole = ({
                           display: 'flex',
                           alignItems: 'flex-start',
                         }}
+// @ts-expect-error - TS2322 - Type '((element?: Element | undefined) => void) | undefined' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
                         ref={registerChild}
                       >
                         <Column noMargin>
@@ -297,7 +298,6 @@ export const DebuggerConsole = ({
       </Line>
       <MiniToolbar>
         <Line justifyContent="space-between" alignItems="center" noMargin>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             label={
               showDetails ? (
@@ -309,16 +309,13 @@ export const DebuggerConsole = ({
             checkedIcon={<MinimizeIcon />}
             uncheckedIcon={<MaximizeIcon />}
             checked={showDetails}
-            // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'enabled' implicitly has an 'any' type.
             onCheck={(_, enabled) => setShowDetails(enabled)}
           />
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             label={<Trans>Show internal</Trans>}
             checkedIcon={<VisibilityIcon />}
             uncheckedIcon={<VisibilityOffIcon />}
             checked={!hideInternal}
-            // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
             onCheck={(_, value) => setHideInternal(!value)}
           />
           <IconButton
@@ -354,11 +351,9 @@ export const DebuggerConsole = ({
               for (const group of groups.values())
                 list.push(
                   <Line key={group}>
-                    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Checkbox
                       label={group}
                       checked={!hiddenGroups.has(group)}
-                      // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                       onCheck={(_, checked) => {
                         if (checked) hiddenGroups.delete(group);
                         else hiddenGroups.add(group);

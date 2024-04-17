@@ -16,13 +16,12 @@ import { Column, LargeSpacer } from '../../UI/Grid';
 
 export const Default = () => {
   const {
-    // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
     showAlert,
-    // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
     showConfirmation,
-    // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+
     showDeleteConfirmation,
-    // @ts-expect-error - TS2339 - Property 'showYesNoCancel' does not exist on type 'void'.
+
     showYesNoCancel,
   } = useAlertDialog();
 
@@ -39,8 +38,10 @@ export const Default = () => {
       title: t`Warning`,
       message: t`Do you want to refactor your project?`,
     });
+// @ts-expect-error - TS2367 - This condition will always return 'false' since the types 'boolean' and 'number' have no overlap.
     if (answer === 0) {
       action('Yes')();
+// @ts-expect-error - TS2367 - This condition will always return 'false' since the types 'boolean' and 'number' have no overlap.
     } else if (answer === 1) {
       action('No')();
     } else {

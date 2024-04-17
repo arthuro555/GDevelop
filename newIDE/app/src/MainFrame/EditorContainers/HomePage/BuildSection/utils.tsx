@@ -63,6 +63,7 @@ export const getLastModifiedInfoByProjectId = async ({
 
   try {
     const userPublicProfileByIds = await getUserPublicProfilesByIds(
+// @ts-expect-error - TS2345 - Argument of type '(string | undefined)[]' is not assignable to parameter of type 'string[]'.
       Array.from(allOtherContributorIds)
     );
     const lastModifiedInfoByProjectId: LastModifiedInfoByProjectId = {};
@@ -95,6 +96,7 @@ export const transformCloudProjectsIntoFileMetadataWithStorageProviderName = (
   cloudProjects: Array<CloudProjectWithUserAccessInfo>,
   ownerId?: string
 ): Array<FileMetadataAndStorageProviderName> => {
+// @ts-expect-error - TS2322 - Type '(FileMetadataAndStorageProviderName | null)[]' is not assignable to type 'FileMetadataAndStorageProviderName[]'.
   return cloudProjects
     .map((cloudProject) => {
       if (cloudProject.deletedAt) return null;

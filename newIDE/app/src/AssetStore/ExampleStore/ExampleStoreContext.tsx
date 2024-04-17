@@ -112,6 +112,7 @@ export const ExampleStoreStateProvider = ({
           `Unable to load the examples from the example store:`,
           error
         );
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
 

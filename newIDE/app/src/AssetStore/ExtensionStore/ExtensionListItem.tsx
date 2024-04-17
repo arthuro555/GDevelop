@@ -59,7 +59,7 @@ export const ExtensionListItem = ({
     : false;
 
   // Report the height of the item once it's known.
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useLayoutEffect(() => {
     if (containerRef.current)
       onHeightComputed(containerRef.current.getBoundingClientRect().height);
@@ -83,7 +83,6 @@ export const ExtensionListItem = ({
 
   return (
     <ButtonBase id={id} onClick={onChoose} focusRipple style={styles.button}>
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'. */}
       <div style={styles.container} ref={containerRef}>
         <LineStackLayout>
           <IconContainer

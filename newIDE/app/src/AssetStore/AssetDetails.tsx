@@ -223,6 +223,7 @@ export const AssetDetails = React.forwardRef<AssetDetailsInterface, Props>(
           }
         } catch (error) {
           console.error('Error while loading asset:', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
           setError(error);
         }
         onAssetLoaded && onAssetLoaded();
@@ -266,6 +267,7 @@ export const AssetDetails = React.forwardRef<AssetDetailsInterface, Props>(
       loadAuthorPublicProfiles();
     }, [loadAuthorPublicProfiles]);
 
+// @ts-expect-error - TS2322 - Type '(Author | undefined)[]' is not assignable to type 'Author[]'.
     const assetAuthors: Array<Author> | null | undefined =
       asset && authors
         ? asset.authors
@@ -553,7 +555,6 @@ export const AssetDetails = React.forwardRef<AssetDetailsInterface, Props>(
                   </Text>
                 </React.Fragment>
               ) : error ? (
-                // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <PlaceholderError onRetry={loadAsset}>
                   <Trans>
                     Error while loading the asset. Verify your internet

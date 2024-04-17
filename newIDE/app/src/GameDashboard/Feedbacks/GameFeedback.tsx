@@ -43,6 +43,7 @@ import FeedbackAverageCard from './FeedbackAverageCard';
 
 import Options from '../../UI/CustomSvgIcons/Options';
 import ContextMenu, { ContextMenuInterface } from '../../UI/Menu/ContextMenu';
+// @ts-expect-error - TS2307 - Cannot find module '../../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../../UI/Menu/Menu.flow';
 import { showErrorBox } from '../../UI/Messages/MessageBox';
 
@@ -105,6 +106,7 @@ const groupFeedbacks = (
           return pushOrCreateKey(feedback.buildId, feedback, acc);
         }
       } else {
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
         const dateKey = i18n.date(feedback.createdAt, {
           month: 'long',
           year: 'numeric',
@@ -351,7 +353,6 @@ const GameFeedback = ({ i18n, authenticatedUser, game }: Props) => {
             !displayedFeedbacks &&
             !isErrored && <PlaceholderLoader />}
           {authenticatedUser.authenticated && isErrored && (
-            // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <PlaceholderError onRetry={loadFeedbacksAndBuilds}>
               <Trans>
                 An error occurred while retrieving feedbacks for this game.
@@ -497,6 +498,7 @@ const GameFeedback = ({ i18n, authenticatedUser, game }: Props) => {
         </Line>
       </Column>
       <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
         ref={contextMenu}
         buildMenuTemplate={buildOptionsContextMenu}
       />

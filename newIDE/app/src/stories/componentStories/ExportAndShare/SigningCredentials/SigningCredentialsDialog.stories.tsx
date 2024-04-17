@@ -26,6 +26,7 @@ export const Loading = () => {
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={null}
         error={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onRefreshSigningCredentials={action('refresh')}
         onClose={action('onClose')}
       />
@@ -40,6 +41,7 @@ export const Errored = () => {
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={null}
         error={new Error('Fake Error')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onRefreshSigningCredentials={action('refresh')}
         onClose={action('onClose')}
       />
@@ -54,6 +56,7 @@ export const Empty = () => {
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={[]}
         error={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onRefreshSigningCredentials={action('refresh')}
         onClose={action('onClose')}
       />
@@ -68,6 +71,7 @@ export const WithSigningCredentials = () => {
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={mockSigningCredentials}
         error={null}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onRefreshSigningCredentials={action('refresh')}
         onClose={action('onClose')}
       />

@@ -105,6 +105,7 @@ const getObjectsAndGroupsDataSource = ({
       ? objects
       : [...objects, { type: 'separator' }, ...groups];
 
+// @ts-expect-error - TS2322 - Type '({ text: any; value: any; } | { type: string; })[]' is not assignable to type 'DataSource'.
   return excludedObjectOrGroupNames
     ? fullList.filter(
         //$FlowFixMe
@@ -244,6 +245,7 @@ const ObjectSelector = React.forwardRef<ObjectSelectorInterface, Props>(
         onApply={onApply}
         dataSource={objectAndGroups}
         errorText={errorText}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledAutoCompleteInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledAutoCompleteInterface> | undefined'.
         ref={fieldRef}
         id={id}
         {...otherProps}
@@ -262,17 +264,23 @@ const ObjectSelector = React.forwardRef<ObjectSelectorInterface, Props>(
             translatableHintText={hintText || t`Choose an object`}
             style={{ flex: otherProps.fullWidth ? 1 : undefined }}
             errorText={errorText}
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
             helperMarkdownText={otherProps.helperMarkdownText}
             floatingLabelText={otherProps.floatingLabelText}
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
             id={id}
           >
             {objectAndGroups.map((option, index) =>
+// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'Option'.
               option.type === 'separator' ? (
                 <optgroup key={`group-divider`} label={i18n._(t`Groups`)} />
               ) : (
                 <SelectOption
+// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'Option'.
                   key={option.value}
+// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'Option'.
                   label={option.value}
+// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'Option'.
                   value={option.value}
                   shouldNotTranslate
                 />

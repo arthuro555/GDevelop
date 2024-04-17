@@ -1,5 +1,5 @@
 import optionalRequire from '../../Utils/OptionalRequire';
-const fs = optionalRequire('fs');
+const fs = optionalRequire('fs') as typeof import('fs');
 const remote = optionalRequire('@electron/remote');
 const dialog = remote ? remote.dialog : null;
 
@@ -11,7 +11,6 @@ const readJSONFile = (filepath: string): Promise<any> => {
       resolve: (result: Promise<never>) => void,
       reject: (error?: any) => void
     ) => {
-      // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'data' implicitly has an 'any' type.
       fs.readFile(filepath, { encoding: 'utf8' }, (err, data) => {
         if (err) return reject(err);
 

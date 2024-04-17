@@ -274,6 +274,7 @@ describe('EnumerateExpressions', () => {
 
     // Check that some Sprite object expressions are there
     expect(generalTreeNode).toHaveProperty('Sprite');
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Sprite"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
     expect(generalTreeNode['Sprite']).toMatchObject({
       Position: {
         PointX: {
@@ -296,6 +297,7 @@ describe('EnumerateExpressions', () => {
       // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Movement"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
       allExpressionsTree['Movement'];
     expect(movementTreeNode).toHaveProperty('Platform behavior');
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Platform behavior"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
     expect(movementTreeNode['Platform behavior']).toMatchObject({
       'Platformer configuration': {
         MaxSpeed: {

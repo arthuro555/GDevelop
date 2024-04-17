@@ -230,6 +230,7 @@ const getPlanSpecificRequirements = (
       )
     : [];
 
+// @ts-expect-error - TS2322 - Type '(string | null)[]' is not assignable to type 'string[]'.
   return planSpecificRequirements;
 };
 
@@ -271,7 +272,6 @@ export default function SubscriptionDialog({
     ) || 'year'
   );
 
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   const [cancelReasonDialogOpen, setCancelReasonDialogOpen] =
     React.useState(false);
@@ -429,18 +429,22 @@ export default function SubscriptionDialog({
           .filter((plan) => {
             if (filter === 'individual') {
               return ['free', 'gdevelop_silver', 'gdevelop_gold'].includes(
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                 plan.id
               );
             }
             if (filter === 'team') {
               return ['gdevelop_startup', 'gdevelop_enterprise'].includes(
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                 plan.id
               );
             }
             if (filter === 'education') {
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
               return ['gdevelop_education'].includes(plan.id);
             }
 
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
             return plan.id !== 'gdevelop_education';
           })
       : null;
@@ -502,6 +506,7 @@ export default function SubscriptionDialog({
                       value: 'year',
                     }}
                     // $FlowIgnore
+// @ts-expect-error - TS2322 - Type 'Dispatch<SetStateAction<"month" | "year">>' is not assignable to type '(arg1: string) => void'.
                     onChange={setPeriod}
                   />
                 </Line>
@@ -554,11 +559,14 @@ export default function SubscriptionDialog({
                     {displayedSubscriptionPlanWithPricingSystems.map(
                       (subscriptionPlanWithPricingSystems) => {
                         const isFreePlan =
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                           subscriptionPlanWithPricingSystems.id === 'free';
                         const isUserCurrentOrLegacyPlan =
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                           userPlanId === subscriptionPlanWithPricingSystems.id;
                         const pricingSystem = isFreePlan
                           ? null
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                           : subscriptionPlanWithPricingSystems.pricingSystems.find(
                               (_pricingSystem) =>
                                 _pricingSystem.period === period
@@ -567,15 +575,18 @@ export default function SubscriptionDialog({
                         if (isFreePlan || !pricingSystem) {
                           // If no plan (free usage), do not display button.
                         } else if (
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                           subscriptionPlanWithPricingSystems.id ===
                           'gdevelop_education'
                         ) {
                           if (!isUserCurrentOrLegacyPlan) {
                             const yearlyPlanPrice =
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                               subscriptionPlanWithPricingSystems.pricingSystems.find(
                                 (price) => price.period === 'year'
                               );
                             const monthlyPlanPrice =
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                               subscriptionPlanWithPricingSystems.pricingSystems.find(
                                 (price) => price.period === 'month'
                               );
@@ -706,6 +717,7 @@ export default function SubscriptionDialog({
                           }
                         } else {
                           const pricingSystem =
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                             subscriptionPlanWithPricingSystems.pricingSystems.find(
                               (_pricingSystem) =>
                                 _pricingSystem.period === period
@@ -733,8 +745,10 @@ export default function SubscriptionDialog({
                         return (
                           <PlanCard
                             key={
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                               subscriptionPlanWithPricingSystems.id || 'free'
                             }
+// @ts-expect-error - TS2322 - Type 'SubscriptionPlanWithPricingSystems | null | undefined' is not assignable to type 'SubscriptionPlanWithPricingSystems'.
                             subscriptionPlanWithPricingSystems={
                               subscriptionPlanWithPricingSystems
                             }
@@ -754,6 +768,7 @@ export default function SubscriptionDialog({
               )}
               {getPlanSpecificRequirements(
                 i18n,
+// @ts-expect-error - TS2345 - Argument of type '(SubscriptionPlanWithPricingSystems | null | undefined)[] | null' is not assignable to parameter of type 'SubscriptionPlanWithPricingSystems[] | null | undefined'.
                 displayedSubscriptionPlanWithPricingSystems
               ).map((planSpecificRequirements) => (
                 <AlertMessage

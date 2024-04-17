@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "ES2023", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,9 +17,13 @@
     "jsx": "react-jsx",
     "types": [
       "../../GDevelop.js/types.d.ts",
-      "./node_modules/@lingui/macro/global",
       "jest"
-    ]
+    ],
+    "paths": {
+      "electron": [ 
+        "../electron-app/node_modules/electron/"
+      ]
+    }
   },
   "include": ["src"],
   "exclude": []

@@ -152,6 +152,7 @@ export const GameFeedbackLeaderboard = ({
                               }
                             >
                               <Text
+// @ts-expect-error - TS2322 - Type '{ overflow: string; whiteSpace: string; textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'.
                                 style={textEllipsisStyle}
                                 noMargin
                                 tooltip={title}

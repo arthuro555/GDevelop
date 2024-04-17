@@ -6,8 +6,8 @@ import useLayersListCommands from '../LayersList/UseLayersListCommands';
 type Props = {
   project: gd.Project;
   layout: gd.Layout;
-  onEditObject: (object: gd.Object) => void;
-  onEditObjectVariables: (object: gd.Object) => void;
+  onEditObject: (object: gd.gdObject) => void;
+  onEditObjectVariables: (object: gd.gdObject) => void;
   onOpenSceneProperties: () => void;
   onOpenSceneVariables: () => void;
   onEditObjectGroup: (group: gd.ObjectGroup) => void;
@@ -29,12 +29,10 @@ const UseSceneEditorCommands = (props: Props) => {
   } = props;
 
   useCommand('OPEN_SCENE_PROPERTIES', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: onOpenSceneProperties,
   });
 
   useCommand('OPEN_SCENE_VARIABLES', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: onOpenSceneVariables,
   });
 

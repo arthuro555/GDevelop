@@ -54,6 +54,7 @@ export const useGetUserSigningCredentials = (
       setSigningCredentials(signingCredentials);
     } catch (error) {
       console.error('Unable to load signing credentials:', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null>'.
       setError(error);
     }
   }, [authenticatedUser.getAuthorizationHeader, userId]);

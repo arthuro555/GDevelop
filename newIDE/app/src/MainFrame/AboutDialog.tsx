@@ -37,7 +37,7 @@ import { ColumnStackLayout } from '../UI/Layout';
 import optionalRequire from '../Utils/OptionalRequire';
 
 import ErrorBoundary from '../UI/ErrorBoundary';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   open?: boolean;

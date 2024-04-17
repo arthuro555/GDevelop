@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro';
-import { type I18n as I18nType } from '@lingui/core';
+import type { I18n as I18nType } from '@lingui/core';
 
 export const translateExtensionCategory = (
   category: string,

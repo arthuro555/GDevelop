@@ -38,6 +38,7 @@ const CompactSemiControlledNumberField = ({
         type="number"
         value={focused ? temporaryValue : value}
         onChange={(valueAsString, reason) => {
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
           const newValue = parseFloat(valueAsString);
           const isNewValueValid = !Number.isNaN(newValue);
           if (isNewValueValid) {

@@ -180,6 +180,7 @@ export const ListItem = React.forwardRef<ListItemRefType, ListItemProps>(
         return props.displayMenuButton ? (
           <MUIListItemSecondaryAction>
             <ElementWithMenu
+// @ts-expect-error - TS2769 - No overload matches this call.
               ref={elementWithMenu}
               element={
                 <IconButton size="small" edge="end" aria-label="menu">
@@ -192,6 +193,7 @@ export const ListItem = React.forwardRef<ListItemRefType, ListItemProps>(
           </MUIListItemSecondaryAction>
         ) : (
           <ElementWithMenu
+// @ts-expect-error - TS2769 - No overload matches this call.
             ref={elementWithMenu}
             element={
               <div /> /* We still need a dummy div for context menu placement */

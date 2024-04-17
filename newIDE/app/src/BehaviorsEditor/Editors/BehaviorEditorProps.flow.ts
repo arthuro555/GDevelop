@@ -6,7 +6,7 @@ import { ResourceManagementProps } from '../../ResourcesList/ResourceSource';
 export type BehaviorEditorProps = {
   behavior: gd.Behavior;
   project: gd.Project;
-  object: gd.Object;
+  object: gd.gdObject;
   resourceManagementProps: ResourceManagementProps;
   onBehaviorUpdated: () => void;
 };

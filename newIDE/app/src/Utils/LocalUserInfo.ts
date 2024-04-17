@@ -1,5 +1,5 @@
 import optionalRequire from './OptionalRequire';
-const os = optionalRequire('os');
+const os = optionalRequire('os') as typeof import('os');
 
 export const getUID = () => {
   try {

@@ -185,7 +185,6 @@ const GuidedLessons = ({ selectInAppTutorial, lessonsIds }: Props) => {
     <Line>
       <div style={styles.bannerContainer}>
         {inAppTutorialsFetchingError ? (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={fetchInAppTutorials}>
             <Trans>An error occurred when downloading the tutorials.</Trans>{' '}
             <Trans>

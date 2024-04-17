@@ -1,5 +1,5 @@
 import optionalRequire from '../../Utils/OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 type UploadOptions = {
@@ -24,12 +24,12 @@ export const uploadLocalFile = (
     ) => {
       ipcRenderer.on(
         'local-file-upload-progress',
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'stepCurrentProgress' implicitly has an 'any' type. | TS7006 - Parameter 'stepMaxProgress' implicitly has an 'any' type.
+
         (event, stepCurrentProgress, stepMaxProgress) => {
           onProgress(stepCurrentProgress, stepMaxProgress);
         }
       );
-      // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'err' implicitly has an 'any' type.
+
       ipcRenderer.on('local-file-upload-done', (event, err) => {
         if (err) return reject(err);
         // @ts-expect-error - TS2794 - Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?

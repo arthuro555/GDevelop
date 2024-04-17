@@ -273,7 +273,6 @@ const FreeAnswer = ({
                 {showCheckbox ? (
                   <div style={styles.answerCheckboxAnchor}>
                     <div style={styles.answerCheckboxContainer}>
-                      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <InlineCheckbox checked={selected} paddingSize="small" />
                     </div>
                   </div>
@@ -338,7 +337,6 @@ const Answer = ({
           {showCheckbox ? (
             <div style={styles.answerCheckboxAnchor}>
               <div style={styles.answerCheckboxContainer}>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <InlineCheckbox checked={selected} paddingSize="small" />
               </div>
             </div>

@@ -10,9 +10,10 @@ import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
 import optionalRequire from '../Utils/OptionalRequire';
 import { isMacLike } from '../Utils/Platform';
 import Window, { useWindowControlsOverlayWatcher } from '../Utils/Window';
+// @ts-expect-error - TS2307 - Cannot find module '../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../UI/Menu/Menu.flow';
 import useForceUpdate from '../Utils/UseForceUpdate';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   onBuildMenuTemplate: () => Array<MenuItemTemplate>;

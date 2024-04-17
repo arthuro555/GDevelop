@@ -140,6 +140,7 @@ const BuildsList = ({
             floatingLabelText={<Trans>Show</Trans>}
             value={buildFilter}
             onChange={(e, i, value) => {
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'SetStateAction<BuildFilter>'.
               setBuildFilter(value);
             }}
           >
@@ -159,7 +160,6 @@ const BuildsList = ({
           <PlaceholderLoader />
         )}
         {authenticatedUser.authenticated && error && (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={loadBuilds}>
             {error.message}
           </PlaceholderError>

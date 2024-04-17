@@ -20,11 +20,11 @@ export type InfoBarDetails = {
 type InfoBarEvent = 'onObjectAdded' | 'onInstanceAdded';
 
 export const onObjectAdded = (
-  object: gd.Object,
+  object: gd.gdObject,
   layout: gd.Layout,
   project: gd.Project
 ): InfoBarDetails | null | undefined => {
-  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.Object, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
+  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.gdObject, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
   const additionalWork = objectType[object.getType()];
   if (additionalWork) {
     additionalWork.onObjectAdded(object, layout, project);
@@ -40,12 +40,12 @@ export const onInstanceAdded = (
   project: gd.Project
 ): InfoBarDetails | null | undefined => {
   const objectName = instance.getObjectName();
-  let object: gd.Object | null | undefined = null;
+  let object: gd.gdObject | null | undefined = null;
   if (layout.hasObjectNamed(objectName)) object = layout.getObject(objectName);
   else if (project.hasObjectNamed(objectName))
     object = project.getObject(objectName);
 
-  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.Object, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
+  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.gdObject, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
   const additionalWork = object ? objectType[object.getType()] : null;
   if (additionalWork) {
     additionalWork.onInstanceAdded(instance, layout, project);
@@ -67,7 +67,7 @@ const getLightingLayer = (layout: gd.Layout): gd.Layer | null | undefined => {
 const objectType = {
   'Lighting::LightObject': {
     onObjectAdded: (
-      object: gd.Object,
+      object: gd.gdObject,
       layout: gd.Layout,
       project: gd.Project
     ) => {

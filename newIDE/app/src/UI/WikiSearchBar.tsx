@@ -62,7 +62,6 @@ const WikiSearchBar = ({ id }: Props) => {
 
   const nonEmpty = !!value && value.length > 0;
 
-  // @ts-expect-error - TS2322 - Type 'GoToWikiCommand[] | { hit: { content: Element; objectID: string; url: string; hierarchy: { lvl0: string; }; }; handler: () => void; }[]' is not assignable to type 'GoToWikiCommand[]'.
   const commands: Array<GoToWikiCommand> = React.useMemo(() => {
     if (!value) return [];
     if (results.hits.length === 0)
@@ -100,7 +99,6 @@ const WikiSearchBar = ({ id }: Props) => {
         },
       ];
 
-    // @ts-expect-error - TS2322 - Type '{ hit: AlgoliaSearchHit; handler: () => void; }[]' is not assignable to type 'GoToWikiCommand[]'.
     const algoliaCommands: Array<GoToWikiCommand> = results.hits.map(
       (hit: AlgoliaSearchHitType) => {
         return {
@@ -196,6 +194,7 @@ const WikiSearchBar = ({ id }: Props) => {
 };
 
 const WikiSearchBarWithAlgoliaSearch = (props: Props) => (
+// @ts-expect-error - TS2322 - Type '{ readonly search: (requests: any) => Promise<{ results: { hits: never[]; }[]; } | MultiResponse<any>>; }' is not assignable to type 'SearchClient'.
   <InstantSearch searchClient={searchClient} indexName={indexName}>
     <WikiSearchBar {...props} />
   </InstantSearch>

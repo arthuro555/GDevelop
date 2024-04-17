@@ -44,7 +44,7 @@ type Props = {
   project: gd.Project;
   onApply: () => void;
   onClose: () => void;
-  onOpenMoreSettings?: () => void | null | undefined;
+  onOpenMoreSettings?: () => void;
   onEditVariables: () => void;
   resourceManagementProps: ResourceManagementProps;
 };
@@ -245,13 +245,11 @@ const ScenePropertiesDialog = ({
           value={windowTitle}
           onChange={(e, value) => setWindowTitle(value)}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={shouldStopSoundsOnStartup}
           label={
             <Trans>Stop music and sounds at the beginning of this scene</Trans>
           }
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
           onCheck={(e, check) => setShouldStopSoundsOnStartup(check)}
         />
         <ColorField

@@ -21,6 +21,7 @@ export const getRelativeOrAbsoluteDisplayDate = ({
 }): React.ReactElement => {
   const nowAsNumber = Date.now();
   if (nowAsNumber - dateAsNumber < 60 * 1000) {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     return i18n._(t`Just now`);
   }
   const now = new Date(nowAsNumber);
@@ -35,23 +36,28 @@ export const getRelativeOrAbsoluteDisplayDate = ({
       // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return (
         i18n._(t`Today`) +
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
         ` ${i18n.date(date, {
           hour: 'numeric',
         })}`
       );
     } else if (sameDayFormat === 'today') {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return i18n._(t`Today`);
     } else {
       if (nowAsNumber - dateAsNumber < 3600 * 1000) {
         const minutesAgo = Math.floor(
           (nowAsNumber - dateAsNumber) / (60 * 1000)
         );
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
         return i18n._(t`${minutesAgo} minutes ago`);
       } else {
         const hoursAgo = Math.floor(
           (nowAsNumber - dateAsNumber) / (3600 * 1000)
         );
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
         if (hoursAgo === 1) return i18n._(t`1 hour ago`);
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
         return i18n._(t`${hoursAgo} hours ago`);
       }
     }
@@ -67,11 +73,13 @@ export const getRelativeOrAbsoluteDisplayDate = ({
       // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return (
         i18n._(t`Yesterday`) +
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
         ` ${i18n.date(date, {
           hour: 'numeric',
         })}`
       );
     } else {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return i18n._(t`Yesterday`);
     }
   }
@@ -85,16 +93,20 @@ export const getRelativeOrAbsoluteDisplayDate = ({
     sevenDaysAgoAtFirstHour.getTime() <= date.getTime()
   ) {
     if (sameWeekFormat === 'thisWeek') {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return i18n._(t`This week`);
     } else {
       const daysAgo = Math.floor(
         (nowAsNumber - dateAsNumber) / (24 * 3600 * 1000)
       );
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       if (daysAgo === 1) return i18n._(t`1 day ago`);
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return i18n._(t`${daysAgo} days ago`);
     }
   }
   if (relativeLimit === 'currentWeek') {
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
     return i18n.date(date);
   }
 
@@ -102,10 +114,12 @@ export const getRelativeOrAbsoluteDisplayDate = ({
     now.getFullYear() === date.getFullYear() &&
     now.getMonth() === date.getMonth()
   ) {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     return i18n._(t`This month`);
   }
 
   if (now.getFullYear() === date.getFullYear()) {
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     return i18n._(t`This year`);
   }
   // @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.

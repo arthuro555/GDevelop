@@ -276,6 +276,7 @@ export default class JsCodeEvent extends React.Component<
             <CodeEditor
               value={jsCodeEvent.getInlineCode()}
               onChange={this.onChange}
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
               width={contentRect.bounds.width - 5}
               height={this._getCodeEditorHeight()}
               onEditorMounted={() => {

@@ -6,6 +6,7 @@ import { I18n } from '@lingui/react';
 
 import { I18n as I18nType } from '@lingui/core';
 
+// @ts-expect-error - TS2307 - Cannot find module '../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../UI/Menu/Menu.flow';
 import { HTMLDataset } from '../Utils/HTMLDataset';
 
@@ -171,6 +172,7 @@ export const Item = ({
     <TextField
       id="rename-item-field"
       margin="none"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
       ref={textFieldRef}
       defaultValue={primaryText}
       onBlur={(e) =>
@@ -208,6 +210,7 @@ export const Item = ({
       style={{ display: 'inline-flex', width: '100%', alignItems: 'center' }}
     >
       <span
+// @ts-expect-error - TS2322 - Type '{ overflow: string; whiteSpace: string; textOverflow: string; }' is not assignable to type 'Properties<string | number, string & {}>'.
         style={textEllipsisStyle}
         title={primaryText}
         className="notranslate"
@@ -403,6 +406,7 @@ export const EventFunctionExtensionItem = ({
       editingName={isEditingName}
       onEdit={() => onEdit(extensionShortHeadersByName)}
       onDelete={onDelete}
+// @ts-expect-error - TS2322 - Type 'MessageDescriptor' is not assignable to type 'string'.
       addLabel={t`Add a New Extension`}
       onAdd={onAdd}
       onRename={onRename}

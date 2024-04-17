@@ -134,8 +134,11 @@ describe('LocalResourceMover', () => {
   // @ts-expect-error - TS7034 - Variable 'project' implicitly has type 'any' in some locations where its type cannot be determined.
   let project = null;
   beforeEach(() => {
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.ensureDir).mockReset();
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.existsSync).mockReset();
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockElectron.ipcRenderer.invoke).mockReset();
     mockFn(axios.get).mockReset();
   });
@@ -148,8 +151,11 @@ describe('LocalResourceMover', () => {
     project = makeTestProjectWithResourcesToDownload();
 
     // Mock a proper download
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.ensureDir).mockResolvedValue({});
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.existsSync).mockReturnValue(false);
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockElectron.ipcRenderer.invoke).mockResolvedValue();
 
     const options = makeMoveAllProjectResourcesOptions(project);
@@ -157,6 +163,7 @@ describe('LocalResourceMover', () => {
 
     // Verify that download was done
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -164,6 +171,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'file-to-download.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -171,6 +179,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'stars_levels (3) 汉字.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -183,9 +192,12 @@ describe('LocalResourceMover', () => {
   it('reports errors in case of download failure', async () => {
     project = makeTestProjectWithResourcesToDownload();
 
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.ensureDir).mockResolvedValue({});
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.existsSync).mockReturnValue(false);
     // Mock failed download twice for first file
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockElectron.ipcRenderer.invoke).mockRejectedValue(
       new Error('Fake download failure')
     );
@@ -195,9 +207,11 @@ describe('LocalResourceMover', () => {
 
     // Verify that download was done and reported as failed, even after 2 tries for each file.
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledTimes(6);
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -205,6 +219,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'file-to-download.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -212,6 +227,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'stars_levels (3) 汉字.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -232,8 +248,11 @@ describe('LocalResourceMover', () => {
     project = makeTestProjectWithResourcesToDownload();
 
     // Mock a failed download once, then successful
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.ensureDir).mockResolvedValue({});
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockFsExtra.existsSync).mockReturnValue(false);
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
     mockFn(optionalRequire.mockElectron.ipcRenderer.invoke)
       .mockRejectedValueOnce(new Error('Fake download failure'))
       .mockImplementationOnce(() => Promise.resolve());
@@ -243,9 +262,11 @@ describe('LocalResourceMover', () => {
 
     // Verify that download was done (including a failure that was retried).
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledTimes(4);
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -253,6 +274,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'file-to-download.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -260,6 +282,7 @@ describe('LocalResourceMover', () => {
       path.join('assets', 'stars_levels (3) 汉字.png')
     );
     expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       optionalRequire.mockElectron.ipcRenderer.invoke
     ).toHaveBeenCalledWith(
       'local-file-download',
@@ -274,9 +297,12 @@ describe('LocalResourceMover', () => {
       project = makeTestProjectWithBlobResourcesToDownload();
 
       // Mock a proper download
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFsExtra.ensureDir).mockResolvedValue({});
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFsExtra.existsSync).mockReturnValue(false);
       mockFn(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).mockResolvedValue();
       mockFn(axios.get).mockResolvedValue({
@@ -288,6 +314,7 @@ describe('LocalResourceMover', () => {
 
       // Verify that download was done
       expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).toHaveBeenCalledWith(
         'local-file-save-from-arraybuffer',
@@ -299,6 +326,7 @@ describe('LocalResourceMover', () => {
         )
       );
       expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).toHaveBeenCalledWith(
         'local-file-save-from-arraybuffer',
@@ -313,12 +341,16 @@ describe('LocalResourceMover', () => {
       project = makeTestProjectWitheBlobResourcesFailingToDownload();
 
       // Mock a failed download
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFsExtra.ensureDir).mockResolvedValue({});
+// @ts-expect-error - TS2339 - Property 'mockFsExtra' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFsExtra.existsSync).mockReturnValue(false);
       mockFn(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).mockRejectedValueOnce(new Error('Fake blob download error'));
       mockFn(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).mockResolvedValueOnce();
       mockFn(axios.get).mockResolvedValue({
@@ -330,6 +362,7 @@ describe('LocalResourceMover', () => {
 
       // Verify that one download was attempted and the other done
       expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).toHaveBeenCalledWith(
         'local-file-save-from-arraybuffer',
@@ -337,6 +370,7 @@ describe('LocalResourceMover', () => {
         path.join('assets', 'MyBlobResourceFailingToDownload')
       );
       expect(
+// @ts-expect-error - TS2339 - Property 'mockElectron' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
         optionalRequire.mockElectron.ipcRenderer.invoke
       ).toHaveBeenCalledWith(
         'local-file-save-from-arraybuffer',

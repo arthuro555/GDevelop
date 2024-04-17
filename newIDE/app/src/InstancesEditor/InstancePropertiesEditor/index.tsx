@@ -310,6 +310,7 @@ const InstancePropertiesEditor = ({
 }: Props) => {
   const forceUpdate = useForceUpdate();
 
+// @ts-expect-error - TS2322 - Type '({ name: any; getValue: (instance: gd.InitialInstance) => any; nonFieldType: string; defaultValue: any; label?: undefined; disabled?: undefined; onClick?: undefined; type?: undefined; children?: undefined; getLabel?: undefined; valueType?: undefined; setValue?: undefined; getChoices?: undefined; } | ... 7 more ... |...' is not assignable to type 'Schema'.
   const schemaFor2D: Schema = React.useMemo(
     () =>
       makeSchema({
@@ -323,6 +324,7 @@ const InstancePropertiesEditor = ({
     [i18n, onGetInstanceSize, onEditObjectByName, layout, forceUpdate]
   );
 
+// @ts-expect-error - TS2322 - Type '({ name: any; getValue: (instance: gd.InitialInstance) => any; nonFieldType: string; defaultValue: any; label?: undefined; disabled?: undefined; onClick?: undefined; type?: undefined; children?: undefined; getLabel?: undefined; valueType?: undefined; setValue?: undefined; getChoices?: undefined; } | ... 7 more ... |...' is not assignable to type 'Schema'.
   const schemaFor3D: Schema = React.useMemo(
     () =>
       makeSchema({

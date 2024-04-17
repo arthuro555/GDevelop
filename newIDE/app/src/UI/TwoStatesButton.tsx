@@ -26,7 +26,7 @@ export type TwoStatesButtonInterface = {
 const TwoStatesButton = React.forwardRef<TwoStatesButtonInterface, Props>(
   ({ leftButton, rightButton, onChange, value }, ref) => {
     // @ts-expect-error - TS2749 - 'Button' refers to a value, but is being used as a type here. Did you mean 'typeof Button'?
-    const leftButtonRef = React.useRef<Button | null | undefined>(null);
+    const leftButtonRef = React.useRef<Button>(null);
 
     const focusLeftButton = React.useCallback(() => {
       if (leftButtonRef.current) focusButton(leftButtonRef.current);

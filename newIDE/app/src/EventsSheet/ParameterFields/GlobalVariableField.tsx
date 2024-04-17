@@ -18,7 +18,7 @@ import GlobalIcon from '../../UI/CustomSvgIcons/Publish';
 
 export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
   function GlobalVariableField(props: ParameterFieldProps, ref) {
-    const field = React.useRef<VariableFieldInterface | null | undefined>(null);
+    const field = React.useRef<VariableFieldInterface>(null);
     const [editorOpen, setEditorOpen] = React.useState(false);
     const focus: FieldFocusFunction = (options) => {
       if (field.current) field.current.focus(options);
@@ -89,4 +89,5 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
 
 export const renderInlineGlobalVariable = (
   props: ParameterInlineRendererProps
+// @ts-expect-error - TS2345 - Argument of type 'MemoExoticComponent<(props: SvgIconProps<"svg", {}>) => Element>' is not assignable to parameter of type '(arg1: SvgIconProps<"svg", {}>) => ReactElement<{ children?: ReactNode; color?: "inherit" | "primary" | "secondary" | "action" | "disabled" | "error" | undefined; ... 4 more ...; viewBox?: string | undefined; } & CommonProps<...> & Pick<...>, string | JSXElementConstructor<...>>'.
 ) => renderVariableWithIcon(props, GlobalIcon, 'global variable');

@@ -708,6 +708,7 @@ const AssetsList = React.forwardRef<AssetsListInterface, Props>(
 
     return (
       <ScrollView
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ScrollViewInterface | null | undefined>' is not assignable to type 'Ref<ScrollViewInterface> | undefined'.
         ref={scrollView}
         id="asset-store-listing"
         style={{
@@ -717,7 +718,6 @@ const AssetsList = React.forwardRef<AssetsListInterface, Props>(
       >
         {!assetTiles && !shopError && <PlaceholderLoader />}
         {!assetTiles && shopError && (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={fetchAssetsAndGameTemplates}>
             <Trans>
               Can't load the results. Verify your internet connection or retry
@@ -893,6 +893,7 @@ const AssetsList = React.forwardRef<AssetsListInterface, Props>(
                           const assetPackListingData =
                             allPrivateAssetPackListingDatas.find(
                               (listingData) =>
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'PublicAssetPack | PrivateAssetPack'.
                                 listingData.id === openedAssetPack.id
                             );
                           if (!assetPackListingData) return;
@@ -964,6 +965,7 @@ const AssetsList = React.forwardRef<AssetsListInterface, Props>(
           // @ts-expect-error - TS2345 - Argument of type 'PublicAssetPack | PrivateAssetPack' is not assignable to parameter of type 'PrivateAssetPack'.
           isAssetPackAudioOnly(openedAssetPack) ? (
           <PrivateAssetPackAudioFilesDownloadButton
+// @ts-expect-error - TS2322 - Type 'PublicAssetPack | PrivateAssetPack' is not assignable to type 'PrivateAssetPack'.
             assetPack={openedAssetPack}
           />
         ) : null}

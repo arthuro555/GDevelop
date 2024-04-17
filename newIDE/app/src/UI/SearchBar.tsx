@@ -108,7 +108,7 @@ const SearchBar = React.forwardRef<SearchBarInterface, Props>(
     const [autocompleteValue, setAutocompleteValue] =
       React.useState<string>(parentValue);
 
-    const textField = React.useRef<TextFieldInterface | null | undefined>(null);
+    const textField = React.useRef<TextFieldInterface>(null);
 
     const nonEmpty = !!value && value.length > 0;
     const debouncedOnChange = useDebounce(onChange ? onChange : noop, 250);
@@ -244,6 +244,7 @@ const SearchBar = React.forwardRef<SearchBarInterface, Props>(
             helpPagePath={helpPagePath}
             aspect={aspect}
             buildMenuTemplate={buildMenuTemplate}
+// @ts-expect-error - TS2322 - Type '(() => Element) | null' is not assignable to type '(() => ReactElement<any, string | JSXElementConstructor<any>> | null | undefined) | undefined'.
             renderSubLine={
               tagsHandler
                 ? () => (

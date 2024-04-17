@@ -130,7 +130,7 @@ function useAnimationOpeningState(openingState: DrawerOpeningState) {
 }
 
 const SwipeableDrawer = (props: Props) => {
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const { openingState, setOpeningState } = props;
   const height =
     openingState === 'closed'
@@ -154,7 +154,6 @@ const SwipeableDrawer = (props: Props) => {
           ? `${animationOpeningState} 0.4s ease-out`
           : undefined,
       }}
-      // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
       ref={containerRef}
     >
       <SwipeableDrawerTopBar

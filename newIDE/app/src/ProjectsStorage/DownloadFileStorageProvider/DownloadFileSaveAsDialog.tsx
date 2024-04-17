@@ -169,6 +169,7 @@ export default function DownloadFileSaveAsDialog({ project, onDone }: Props) {
   const { ensureProcessIsDone, renderProcessDialog } =
     useGenericRetryableProcessWithProgress<DownloadResourcesAsBlobsOptionsWithoutProgress>(
       {
+// @ts-expect-error - TS2322 - Type '(options: DownloadResourcesAsBlobsOptionsWithoutProgress, onProgress: (count: number, total: number) => void) => Promise<{ readonly erroredResources: readonly []; }>' is not assignable to type '(options: DownloadResourcesAsBlobsOptionsWithoutProgress, onProgress: (count: number, total: number) => void) => Promise<GenericRetryableProcessWithProgressResults>'.
         onDoProcess: React.useCallback(
           (options, onProgress) =>
             downloadResourcesAsBlobs({ ...options, onProgress }),

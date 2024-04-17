@@ -12,132 +12,140 @@ import {
   PrivateGameTemplateListingData,
   createProductAuthorizedUrl,
   isPrivateAssetResourceAuthorizedUrl,
-
 } from './Shop';
 
 export type License = {
-  name: string,
-  website: string
+  name: string;
+  website: string;
 };
 
 export type Author = {
-  name: string,
-  website: string
+  name: string;
+  website: string;
 };
 
 export type SerializedParameterMetadata = {
-  codeOnly: boolean,
-  defaultValue: string,
-  description: string,
-  longDescription: string,
-  name: string,
-  optional: boolean,
-  supplementaryInformation: string,
-  type: string // See ParameterRenderingService for valid types.
+  codeOnly: boolean;
+  defaultValue: string;
+  description: string;
+  longDescription: string;
+  name: string;
+  optional: boolean;
+  supplementaryInformation: string;
+  type: string; // See ParameterRenderingService for valid types.
 };
 
 export type ExtensionDependency = {
-  extensionName: string,
-  extensionVersion: string
+  extensionName: string;
+  extensionVersion: string;
 };
 
 export type ObjectAsset = {
-  object: any /*(serialized gd.ObjectConfiguration)*/,
-  resources: Array<
-  any /*(serialized gd.Resource)*/>,
+  object: any /*(serialized gd.ObjectConfiguration)*/;
+  resources: Array<any /*(serialized gd.Resource)*/>;
   // TODO This can become mandatory after the migration of the asset repository.
-  requiredExtensions?: Array<ExtensionDependency>
+  requiredExtensions?: Array<ExtensionDependency>;
 };
 
 export type AssetShortHeader = {
-  id: string,
-  name: string,
-  shortDescription: string,
-  previewImageUrls: Array<string>,
-  tags: Array<string>,
-  license: string,
-  objectType: string,
-  animationsCount: number,
-  maxFramesCount: number,
-  width: number,
-  height: number,
-  dominantColors: number[],
-  assetPackId?: string
+  id: string;
+  name: string;
+  shortDescription: string;
+  previewImageUrls: Array<string>;
+  tags: Array<string>;
+  license: string;
+  objectType: string;
+  animationsCount: number;
+  maxFramesCount: number;
+  width: number;
+  height: number;
+  dominantColors: number[];
+  assetPackId?: string;
 };
 
-export type AssetHeader = (AssetShortHeader) & {
-  gdevelopVersion: string,
-  version: string,
-  description: string
+export type AssetHeader = AssetShortHeader & {
+  gdevelopVersion: string;
+  version: string;
+  description: string;
 };
 
-export type Asset = (AssetHeader) & {
-  authors: Array<string>,
-  authorIds?: Array<string>,
-  license: string,
-  objectAssets: Array<ObjectAsset>
+export type Asset = AssetHeader & {
+  authors: Array<string>;
+  authorIds?: Array<string>;
+  license: string;
+  objectAssets: Array<ObjectAsset>;
 };
 
 export type PublicAssetPack = {
-  name: string,
-  tag: string,
-  thumbnailUrl: string,
-  assetsCount: number,
-  externalWebLink?: string | null | undefined,
-  userFriendlyPrice?: string | null | undefined,
-  categories: Array<string>,
-  authors: Array<Author>,
-  licenses: Array<License>
+  name: string;
+  tag: string;
+  thumbnailUrl: string;
+  assetsCount: number;
+  externalWebLink?: string | null | undefined;
+  userFriendlyPrice?: string | null | undefined;
+  categories: Array<string>;
+  authors: Array<Author>;
+  licenses: Array<License>;
 };
 
 export type PublicAssetPacks = {
-  starterPacks: Array<PublicAssetPack>
+  starterPacks: Array<PublicAssetPack>;
 };
 
-type PrivateAssetPackAssetType = 'font' | 'audio' | 'sprite' | '9patch' | 'tiled' | 'partial' | 'particleEmitter' | 'Scene3D::Model3DObject';
+type PrivateAssetPackAssetType =
+  | 'font'
+  | 'audio'
+  | 'sprite'
+  | '9patch'
+  | 'tiled'
+  | 'partial'
+  | 'particleEmitter'
+  | 'Scene3D::Model3DObject';
 
-export type PrivateAssetPackContent = Partial<Record<PrivateAssetPackAssetType, number>>;
+export type PrivateAssetPackContent = Partial<
+  Record<PrivateAssetPackAssetType, number>
+>;
 
 export type PrivateAssetPack = {
-  id: string,
-  name: string,
-  previewImageUrls: Array<string>,
-  previewSoundUrls?: Array<string>,
-  updatedAt: string,
-  createdAt: string,
-  tag: string,
-  longDescription: string,
-  content: PrivateAssetPackContent
+  id: string;
+  name: string;
+  previewImageUrls: Array<string>;
+  previewSoundUrls?: Array<string>;
+  updatedAt: string;
+  createdAt: string;
+  tag: string;
+  longDescription: string;
+  content: PrivateAssetPackContent;
 };
 
 export type PrivateGameTemplate = {
-  id: string,
-  name: string,
-  previewImageUrls: Array<string>,
-  updatedAt: string,
-  createdAt: string,
-  tag: string,
-  longDescription: string,
-  gamePreviewLink: string
+  id: string;
+  name: string;
+  previewImageUrls: Array<string>;
+  updatedAt: string;
+  createdAt: string;
+  tag: string;
+  longDescription: string;
+  gamePreviewLink: string;
 };
 
 export type AllPublicAssets = {
-  publicAssetShortHeaders: Array<AssetShortHeader>,
-  publicFilters: Filters,
-  publicAssetPacks: PublicAssetPacks
+  publicAssetShortHeaders: Array<AssetShortHeader>;
+  publicFilters: Filters;
+  publicAssetPacks: PublicAssetPacks;
 };
 
 export type Resource = {
-  url: string,
-  name: string,
-  license: string,
-  type: string,
-  tags: Array<string>
+  url: string;
+  name: string;
+  license: string;
+  type: string;
+  tags: Array<string>;
 };
 
 export type AllResources = {
-  resources: Array<Resource>,
-  filters: Filters
+  resources: Array<Resource>;
+  filters: Filters;
 };
 
 export type Environment = 'staging' | 'live';
@@ -150,7 +158,9 @@ export const isAssetPackAudioOnly = (assetPack: PrivateAssetPack): boolean => {
   const contentKeys = Object.keys(assetPack.content);
   return contentKeys.length === 1 && contentKeys[0] === 'audio';
 };
-export const doesAssetPackContainAudio = (assetPack: PrivateAssetPack): boolean => !!assetPack.content.audio && assetPack.content.audio > 0;
+export const doesAssetPackContainAudio = (
+  assetPack: PrivateAssetPack
+): boolean => !!assetPack.content.audio && assetPack.content.audio > 0;
 
 /**
  * Check if the IDE version, passed as argument, satisfy the version required by the asset.
@@ -158,7 +168,7 @@ export const doesAssetPackContainAudio = (assetPack: PrivateAssetPack): boolean 
 export const isCompatibleWithAsset = (
   ideVersion: string,
   assetHeader: {
-    gdevelopVersion: string
+    gdevelopVersion: string;
   }
 ) =>
   assetHeader.gdevelopVersion
@@ -167,13 +177,11 @@ export const isCompatibleWithAsset = (
       })
     : true;
 
-export const listAllPublicAssets = async (
-  {
-    environment,
-  }: {
-    environment: Environment
-  },
-): Promise<AllPublicAssets> => {
+export const listAllPublicAssets = async ({
+  environment,
+}: {
+  environment: Environment;
+}): Promise<AllPublicAssets> => {
   const response = await client.get(`/asset`, {
     params: {
       environment,
@@ -185,19 +193,19 @@ export const listAllPublicAssets = async (
   const responsesData = await Promise.all([
     client
       .get(assetShortHeadersUrl)
-      .then(response => response.data)
-      .catch(e => e),
+      .then((response) => response.data)
+      .catch((e) => e),
     client
       .get(filtersUrl)
-      .then(response => response.data)
-      .catch(e => e),
+      .then((response) => response.data)
+      .catch((e) => e),
     client
       .get(assetPacksUrl)
-      .then(response => response.data)
-      .catch(e => e),
+      .then((response) => response.data)
+      .catch((e) => e),
   ]);
 
-  if (responsesData.some(data => !data || data instanceof Error)) {
+  if (responsesData.some((data) => !data || data instanceof Error)) {
     throw new Error('Unexpected response from the assets endpoints.');
   }
 
@@ -223,8 +231,8 @@ export const getPublicAsset = async (
   {
     environment,
   }: {
-    environment: Environment
-  },
+    environment: Environment;
+  }
 ): Promise<Asset> => {
   const response = await client.get(`/asset/${assetShortHeader.id}`, {
     params: {
@@ -245,16 +253,14 @@ export const getPrivateAsset = async (
   {
     environment,
   }: {
-    environment: Environment
-  },
+    environment: Environment;
+  }
 ): Promise<Asset> => {
   const privateAssetPackId = assetShortHeader.assetPackId;
   if (!privateAssetPackId) {
     throw new Error('The asset does not have a private asset pack id.');
   }
-  const assetUrl = `${
-    GDevelopPrivateAssetsStorage.baseUrl
-  }/${privateAssetPackId}/${assetShortHeader.id}.json`;
+  const assetUrl = `${GDevelopPrivateAssetsStorage.baseUrl}/${privateAssetPackId}/${assetShortHeader.id}.json`;
   const authorizedUrl = createProductAuthorizedUrl(
     assetUrl,
     authorizationToken
@@ -263,10 +269,11 @@ export const getPrivateAsset = async (
   return assetResponse.data;
 };
 
-export const getPrivateAssetPackAudioFilesArchiveUrl = (privateAssetPackId: string, authorizationToken: string): string => {
-  const assetUrl = `${
-    GDevelopPrivateAssetsStorage.baseUrl
-  }/${privateAssetPackId}/resources/audio.zip`;
+export const getPrivateAssetPackAudioFilesArchiveUrl = (
+  privateAssetPackId: string,
+  authorizationToken: string
+): string => {
+  const assetUrl = `${GDevelopPrivateAssetsStorage.baseUrl}/${privateAssetPackId}/resources/audio.zip`;
   const authorizedUrl = createProductAuthorizedUrl(
     assetUrl,
     authorizationToken
@@ -274,27 +281,25 @@ export const getPrivateAssetPackAudioFilesArchiveUrl = (privateAssetPackId: stri
   return authorizedUrl;
 };
 
-export const listAllResources = (
-  {
-    environment,
-  }: {
-    environment: Environment
-  },
-): Promise<AllResources> => {
+export const listAllResources = ({
+  environment,
+}: {
+  environment: Environment;
+}): Promise<AllResources> => {
   return client
     .get(`/resource`, {
       params: {
         environment,
       },
     })
-    .then(response => response.data)
+    .then((response) => response.data)
     .then(({ resourcesUrl, filtersUrl }) => {
       if (!resourcesUrl || !filtersUrl) {
         throw new Error('Unexpected response from the resource endpoint.');
       }
       return Promise.all([
-        client.get(resourcesUrl).then(response => response.data),
-        client.get(filtersUrl).then(response => response.data),
+        client.get(resourcesUrl).then((response) => response.data),
+        client.get(filtersUrl).then((response) => response.data),
       ]).then(([resources, filters]: [any, any]) => {
         if (!resources || !filters) {
           throw new Error('Unexpected response from the resources endpoints.');
@@ -307,67 +312,65 @@ export const listAllResources = (
     });
 };
 
-export const listAllAuthors = (
-  {
-    environment,
-  }: {
-    environment: Environment
-  },
-): Promise<Array<Author>> => {
+export const listAllAuthors = ({
+  environment,
+}: {
+  environment: Environment;
+}): Promise<Array<Author>> => {
   return client
     .get(`/author`, {
       params: {
         environment,
       },
     })
-    .then(response => response.data)
+    .then((response) => response.data)
     .then(({ authorsUrl }) => {
       if (!authorsUrl)
         throw new Error('Unexpected response from author endpoint.');
       return client.get(authorsUrl);
     })
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
-export const listAllLicenses = (
-  {
-    environment,
-  }: {
-    environment: Environment
-  },
-): Promise<Array<License>> => {
+export const listAllLicenses = ({
+  environment,
+}: {
+  environment: Environment;
+}): Promise<Array<License>> => {
   return client
     .get(`/license`, {
       params: {
         environment,
       },
     })
-    .then(response => response.data)
+    .then((response) => response.data)
     .then(({ licensesUrl }) => {
       if (!licensesUrl)
         throw new Error('Unexpected response from license endpoint.');
       return client.get(licensesUrl);
     })
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
-export const getPrivateAssetPack = async (assetPackId: string): Promise<PrivateAssetPack> => {
+export const getPrivateAssetPack = async (
+  assetPackId: string
+): Promise<PrivateAssetPack> => {
   const response = await client.get(`/asset-pack/${assetPackId}`);
   return response.data;
 };
 
-export const getPrivateGameTemplate = async (gameTemplateId: string): Promise<PrivateGameTemplate> => {
+export const getPrivateGameTemplate = async (
+  gameTemplateId: string
+): Promise<PrivateGameTemplate> => {
   const response = await client.get(`/game-template/${gameTemplateId}`);
   return response.data;
 };
 
 export const createPrivateGameTemplateUrl = async (
   privateGameTemplateListingData: PrivateGameTemplateListingData,
-  authorizationToken: string,
+  authorizationToken: string
 ): Promise<string> => {
-  const gameTemplateUrl = `${GDevelopPrivateGameTemplatesStorage.baseUrl}/${
-    privateGameTemplateListingData.id
-  }/game.json`;
+  const gameTemplateUrl = `${GDevelopPrivateGameTemplatesStorage.baseUrl}/${privateGameTemplateListingData.id}/game.json`;
   const authorizedUrl = createProductAuthorizedUrl(
     gameTemplateUrl,
     authorizationToken
@@ -375,13 +378,17 @@ export const createPrivateGameTemplateUrl = async (
   return authorizedUrl;
 };
 
-export const isPixelArt = (assetOrAssetShortHeader: AssetShortHeader | Asset): boolean => {
-  return assetOrAssetShortHeader.tags.some(tag => {
+export const isPixelArt = (
+  assetOrAssetShortHeader: AssetShortHeader | Asset
+): boolean => {
+  return assetOrAssetShortHeader.tags.some((tag) => {
     return tag.toLowerCase() === 'pixel art';
   });
 };
 
-export const isPrivateAsset = (assetOrAssetShortHeader: AssetShortHeader | Asset): boolean => {
+export const isPrivateAsset = (
+  assetOrAssetShortHeader: AssetShortHeader | Asset
+): boolean => {
   const imageUrl = assetOrAssetShortHeader.previewImageUrls[0];
   return !!imageUrl && isPrivateAssetResourceAuthorizedUrl(imageUrl);
 };
@@ -391,8 +398,8 @@ export const listReceivedAssetShortHeaders = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<Array<AssetShortHeader>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.get('/asset-short-header', {
@@ -407,8 +414,8 @@ export const listReceivedAssetPacks = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<Array<PrivateAssetPack>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.get('/asset-pack', {
@@ -423,8 +430,8 @@ export const listReceivedGameTemplates = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<Array<PrivateGameTemplate>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.get('/game-template', {
@@ -437,8 +444,8 @@ export const listReceivedGameTemplates = async (
 export const isPublicAssetResourceUrl = (url: string) =>
   url.startsWith(GDevelopPublicAssetResourcesStorageBaseUrl) ||
   url.startsWith(GDevelopPublicAssetResourcesStorageStagingBaseUrl);
-// @ts-expect-error - TS2448 - Block-scoped variable 'string' used before its declaration. | TS1005 - ',' expected. | TS7005 - Variable 'string' implicitly has an 'any' type. | TS1005 - ';' expected.
-const escapeStringForRegExp = string: string =>
+
+const escapeStringForRegExp = (string: string) =>
   string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 const resourceFilenameRegex = new RegExp(
   `(${escapeStringForRegExp(
@@ -447,7 +454,9 @@ const resourceFilenameRegex = new RegExp(
     GDevelopPublicAssetResourcesStorageStagingBaseUrl
   )})\\/public-resources\\/(.*)\\/([a-z0-9]{64})_(.*)`
 );
-export const extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl = (url: string): string => {
+export const extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl = (
+  url: string
+): string => {
   const matches = resourceFilenameRegex.exec(url);
   if (!matches) {
     throw new Error('The URL is not a valid public asset resource URL: ' + url);

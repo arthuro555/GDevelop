@@ -90,11 +90,11 @@ export default class LayerRemoveDialog extends Component<Props, State> {
 
     const layers = enumerateLayers(this.props.layersContainer);
     const choices = layers
-      // @ts-expect-error - TS7031 - Binding element 'value' implicitly has an 'any' type.
+
       .filter(({ value }) => {
         return value !== this.props.layerRemoved;
       })
-      // @ts-expect-error - TS7031 - Binding element 'value' implicitly has an 'any' type. | TS7031 - Binding element 'label' implicitly has an 'any' type. | TS7031 - Binding element 'labelIsUserDefined' implicitly has an 'any' type.
+
       .map(({ value, label, labelIsUserDefined }) => (
         <SelectOption
           key={value}

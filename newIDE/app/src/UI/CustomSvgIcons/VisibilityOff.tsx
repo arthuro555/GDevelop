@@ -3,6 +3,7 @@ import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
 
 export default React.memo(
   React.forwardRef((props, ref) => (
+// @ts-expect-error - TS2769 - No overload matches this call.
     <SvgIcon {...props} ref={ref} width="24" height="24" viewBox="0 0 24 24">
       <g
         stroke="currentColor"

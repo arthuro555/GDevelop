@@ -9,7 +9,7 @@ import {
 
 export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
   function StringField(props: ParameterFieldProps, ref) {
-    const field = React.useRef<GenericExpressionField | null | undefined>(null);
+    const field = React.useRef<GenericExpressionField>(null);
     const focus: FieldFocusFunction = (options) => {
       if (field.current) field.current.focus(options);
     };

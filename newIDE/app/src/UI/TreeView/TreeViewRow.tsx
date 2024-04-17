@@ -32,12 +32,13 @@ import { DraggedItem } from '../DragAndDrop/DragSourceAndDropTarget';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
 
-const stopPropagation = e: any => e.stopPropagation();
+const stopPropagation = (e: any) => e.stopPropagation();
 
 const DELAY_BEFORE_OPENING_FOLDER_ON_DRAG_HOVER = 800;
 const DELAY_BEFORE_OPENING_CONTEXT_MENU_ON_MOBILE = 1000;
 
 const onInputKeyDown = (event: KeyboardEvent) => {
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type '"Enter" | "ArrowDown" | "ArrowUp" | "ArrowLeft" | "ArrowRight"'.
   if (navigationKeys.includes(event.key)) {
     // Prevent navigating in the tree view when renaming an item.
     event.stopPropagation();
@@ -52,12 +53,12 @@ const SemiControlledRowInput = ({
   onEndRenaming,
   onBlur,
 }: {
-  initialValue: string,
-  onEndRenaming: (newName: string) => void,
-  onBlur: () => void
+  initialValue: string;
+  onEndRenaming: (newName: string) => void;
+  onBlur: () => void;
 }) => {
   const [value, setValue] = React.useState<string>(initialValue);
-  const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   /**
    * When mounting the component, select content.
@@ -75,25 +76,20 @@ const SemiControlledRowInput = ({
    * with the current value, even if the user hit Escape key and expected the
    * initialValue to be set.
    */
-  React.useEffect(
-    () => {
-      return onBlur;
-    },
-    [onBlur]
-  );
+  React.useEffect(() => {
+    return onBlur;
+  }, [onBlur]);
 
   return (
-
     <div className={classes.itemNameInputContainer}>
       <input
         autoFocus
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLInputElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLInputElement> | undefined'.
         ref={inputRef}
         type="text"
         className={classes.itemNameInput}
         value={value}
         spellCheck={false}
-        onChange={e => {
+        onChange={(e) => {
           setValue(e.currentTarget.value);
         }}
         onClick={stopPropagation}
@@ -101,9 +97,9 @@ const SemiControlledRowInput = ({
         onBlur={() => {
           onEndRenaming(value);
         }}
-// @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLInputElement>'.
+        // @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLInputElement>'.
         onKeyDown={onInputKeyDown}
-        onKeyUp={e => {
+        onKeyUp={(e) => {
           if (shouldCloseOrCancel(e)) {
             // Prevent closing dialog if TreeView is displayed in dialog.
             e.preventDefault();
@@ -122,11 +118,11 @@ const memoized = memoizeOne((initialValue, getContainerYPosition) =>
 );
 
 type Props<Item> = {
-  index: number,
-  style: any,
-  data: ItemData<Item>,
+  index: number;
+  style: any;
+  data: ItemData<Item>;
   /** Used by react-window. */
-  isScrolling?: boolean
+  isScrolling?: boolean;
 };
 
 const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
@@ -153,11 +149,12 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   const left = node.depth * 16;
   const forceUpdate = useForceUpdate();
   const isStayingOverRef = React.useRef<boolean>(false);
-  const openWhenOverTimeoutId = React.useRef<number | null | undefined>(null);
-  const [whereToDrop, setWhereToDrop] = React.useState<'before' | 'after' | 'inside'>('before');
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const openWhenOverTimeoutId = React.useRef<number>(null);
+  const [whereToDrop, setWhereToDrop] = React.useState<
+    'before' | 'after' | 'inside'
+  >('before');
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const openContextMenu = React.useCallback(
-
     ({ clientX, clientY }) => {
       onContextMenu({
         index: index,
@@ -174,8 +171,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   });
 
   const onClickItem = React.useCallback(
-
-    event => {
+    (event) => {
       if (!node || node.item.isPlaceholder) return;
       if (node.item.isRoot) {
         onOpen(node);
@@ -221,13 +217,14 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
         node.canHaveChildren &&
         node.collapsed
       ) {
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+        // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
         openWhenOverTimeoutId.current = setTimeout(() => {
           onOpen(node);
         }, DELAY_BEFORE_OPENING_FOLDER_ON_DRAG_HOVER);
         return () => {
-// @ts-expect-error - TS2769 - No overload matches this call.
+          // @ts-expect-error - TS2769 - No overload matches this call.
           clearTimeout(openWhenOverTimeoutId.current);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
           openWhenOverTimeoutId.current = null;
         };
       }
@@ -257,7 +254,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   emptyImage.src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
     <div style={style} ref={containerRef}>
       <DragSourceAndDropTarget
         beginDrag={() => {
@@ -292,8 +288,8 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
         drop={() => {
           onDrop(node.item, whereToDrop);
         }}
-// @ts-expect-error - TS7006 - Parameter 'monitor' implicitly has an 'any' type.
-        hover={monitor => {
+        // @ts-expect-error - TS7006 - Parameter 'monitor' implicitly has an 'any' type.
+        hover={(monitor) => {
           if (node.item.isRoot) {
             if (whereToDrop !== 'inside') setWhereToDrop('inside');
             return;
@@ -312,8 +308,8 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                   y - containerYPosition <= 6
                     ? 'before'
                     : y - containerYPosition <= 26
-                    ? 'inside'
-                    : 'after'
+                      ? 'inside'
+                      : 'after'
                 );
               } else {
                 // If the folder is open, do not suggest to drop after as
@@ -331,21 +327,20 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
         }}
       >
         {({
-// @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type.
+          // @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type.
           connectDragSource,
-// @ts-expect-error - TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type.
+          // @ts-expect-error - TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type.
           connectDropTarget,
-// @ts-expect-error - TS7031 - Binding element 'connectDragPreview' implicitly has an 'any' type.
+          // @ts-expect-error - TS7031 - Binding element 'connectDragPreview' implicitly has an 'any' type.
           connectDragPreview,
-// @ts-expect-error - TS7031 - Binding element 'isOver' implicitly has an 'any' type.
+          // @ts-expect-error - TS7031 - Binding element 'isOver' implicitly has an 'any' type.
           isOver,
-// @ts-expect-error - TS7031 - Binding element 'canDrop' implicitly has an 'any' type.
+          // @ts-expect-error - TS7031 - Binding element 'canDrop' implicitly has an 'any' type.
           canDrop,
         }) => {
           setIsStayingOver(isOver, canDrop);
 
           let itemRow = (
-
             <div
               className={classNames(classes.rowContentSide, {
                 [classes.rowContentSideLeft]: !node.item.isRoot,
@@ -353,52 +348,45 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
               })}
             >
               {displayAsFolder ? (
-
                 <>
                   <IconButton
                     size="small"
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
-                    onClick={e => {
+                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
+                    onClick={(e) => {
                       e.stopPropagation();
                       onOpen(node);
                     }}
                     disabled={node.disableCollapse}
                   >
                     {node.collapsed ? (
-
                       <ArrowHeadRight fontSize="small" />
                     ) : (
-
                       <ArrowHeadBottom fontSize="small" />
                     )}
                   </IconButton>
                   {node.thumbnailSrc && node.thumbnailSrc !== 'FOLDER' ? (
-
                     <div className={classes.thumbnail}>
                       <ListIcon iconSize={20} src={node.thumbnailSrc} />
                     </div>
                   ) : (
                     !node.item.isRoot && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Folder className={classes.folderIcon} />
                     )
                   )}
                 </>
               ) : node.thumbnailSrc ? (
-
                 <div className={classes.thumbnail}>
                   <ListIcon iconSize={20} src={node.thumbnailSrc} />
                 </div>
               ) : null}
               {renamedItemId === node.id && typeof node.name === 'string' ? (
-
                 <SemiControlledRowInput
                   initialValue={node.name}
                   onEndRenaming={endRenaming}
                   onBlur={onBlurField}
                 />
               ) : (
-
                 <span
                   className={classNames(
                     classes.itemName,
@@ -433,10 +421,8 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
             !node.item.isPlaceholder;
 
           const dragSource = connectDragSource(
-
             <div className={classes.fullSpaceContainer}>
               {isOver && whereToDrop === 'before' && (
-
                 <DropIndicator canDrop={canDrop} />
               )}
               <div
@@ -444,7 +430,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                 onDoubleClick={
                   onEditItem ? () => onEditItem(node.item) : undefined
                 }
-// @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onContextMenu={
                   shouldSelectUponContextMenuOpening
                     ? selectAndOpenContextMenu
@@ -454,7 +440,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
               >
                 {itemRow}
                 {(node.rightComponent || rightButton || shouldDisplayMenu) && (
-
                   <div
                     className={classNames(
                       classes.rowContentSide,
@@ -463,12 +448,11 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                   >
                     {node.rightComponent}
                     {rightButton && (
-
                       <IconButton
                         id={rightButton.id}
                         size="small"
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
-                        onClick={e => {
+                        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
+                        onClick={(e) => {
                           e.stopPropagation();
                           if (rightButton.click) {
                             rightButton.click();
@@ -479,11 +463,10 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                       </IconButton>
                     )}
                     {shouldDisplayMenu && (
-
                       <IconButton
                         size="small"
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
-                        onClick={e => {
+                        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
+                        onClick={(e) => {
                           e.stopPropagation();
                           onContextMenu({
                             item: node.item,
@@ -500,7 +483,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                 )}
               </div>
               {isOver && whereToDrop === 'after' && (
-
                 <DropIndicator canDrop={canDrop} />
               )}
             </div>
@@ -518,8 +500,8 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
             : null;
 
           const dropTarget = connectDropTarget(
-
             <div
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
               id={getItemHtmlId ? getItemHtmlId(node.item, index) : undefined}
               onClick={onClickItem}
               className={classNames(
@@ -538,7 +520,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
           );
 
           return (
-
             <div
               style={{ paddingLeft: left }}
               className={classNames(classes.fullHeightFlexContainer, {

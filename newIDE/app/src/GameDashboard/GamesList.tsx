@@ -88,7 +88,7 @@ const GamesList = ({ project, games, onRefreshGames, onOpenGame }: Props) => {
   const { getAuthorizationHeader, profile } = React.useContext(
     AuthenticatedUserContext
   );
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'. | TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showAlert, showConfirmation } = useAlertDialog();
   const [isGameRegistering, setIsGameRegistering] = React.useState(false);
   const [searchText, setSearchText] = React.useState<string>('');

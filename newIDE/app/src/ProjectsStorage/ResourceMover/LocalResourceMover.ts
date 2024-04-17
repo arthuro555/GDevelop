@@ -23,7 +23,7 @@ import {
 import { processByChunk } from '../../Utils/ProcessByChunk';
 import { readLocalFileToFile } from '../../Utils/LocalFileUploader';
 import { isURL, isBlobURL } from '../../ResourcesList/ResourceUtils';
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 
 type ResourceAndFile = {
   resource: gd.Resource;
@@ -113,6 +113,7 @@ export const moveAllLocalResourcesToCloudResources = async ({
 
       const allBufferSize = resourceAndFilesChunk
         .filter(Boolean)
+// @ts-expect-error - TS2339 - Property 'file' does not exist on type 'ResourceAndFile | null'.
         .reduce((size, { file }) => size + file.size, 0);
 
       // Stop a chunk when more than 150MB are read to be uploaded. This is
@@ -124,6 +125,7 @@ export const moveAllLocalResourcesToCloudResources = async ({
     processChunk: async (
       resourceAndFilesChunk: Array<ResourceAndFile | null>
     ) => {
+// @ts-expect-error - TS2322 - Type '(ResourceAndFile | null)[]' is not assignable to type 'ResourceAndFile[]'.
       const resourceAndFilesToUpload: ResourceAndFile[] =
         resourceAndFilesChunk.filter(Boolean);
 

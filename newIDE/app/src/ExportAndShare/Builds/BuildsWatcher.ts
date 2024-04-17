@@ -12,7 +12,7 @@ export default class BuildsWatcher {
   } = {};
   nextWatcherId = 0;
   // @ts-expect-error - TS2564 - Property 'onBuildUpdated' has no initializer and is not definitely assigned in the constructor.
-  onBuildUpdated: (build: Build) => void | null | undefined;
+  onBuildUpdated: (build: Build) => void;
   authenticatedUser: AuthenticatedUser | null | undefined;
 
   start({

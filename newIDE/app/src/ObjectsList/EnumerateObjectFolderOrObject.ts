@@ -37,7 +37,7 @@ const recursivelyEnumerateFoldersInFolder = (
 
 const recursivelyEnumerateObjectsInFolder = (
   folder: gd.ObjectFolderOrObject,
-  result: gd.Object[]
+  result: gd.gdObject[]
 ) => {
   mapFor(0, folder.getChildrenCount(), (i) => {
     const child = folder.getChildAt(i);
@@ -51,9 +51,9 @@ const recursivelyEnumerateObjectsInFolder = (
 
 export const enumerateObjectsInFolder = (
   folder: gd.ObjectFolderOrObject
-): gd.Object[] => {
+): gd.gdObject[] => {
   if (!folder.isFolder()) return [];
-  const result: Array<gd.Object> = [];
+  const result: Array<gd.gdObject> = [];
   recursivelyEnumerateObjectsInFolder(folder, result);
   return result;
 };
@@ -90,7 +90,7 @@ export const enumerateFoldersInContainer = (
 
 export const getObjectsInFolder = (
   objectFolderOrObject: gd.ObjectFolderOrObject
-): gd.Object[] => {
+): gd.gdObject[] => {
   if (!objectFolderOrObject.isFolder()) return [];
 
   return mapFor(0, objectFolderOrObject.getChildrenCount(), (i) => {

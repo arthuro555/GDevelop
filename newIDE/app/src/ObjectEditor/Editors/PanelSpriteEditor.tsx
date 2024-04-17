@@ -43,7 +43,6 @@ export default class PanelSpriteEditor extends React.Component<
           }}
           floatingLabelText={<Trans>Select an image</Trans>}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={
             <Trans>
@@ -51,7 +50,6 @@ export default class PanelSpriteEditor extends React.Component<
             </Trans>
           }
           checked={panelSpriteConfiguration.isTiled()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             panelSpriteConfiguration.setTiled(checked);
             this.forceUpdate();

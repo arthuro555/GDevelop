@@ -184,7 +184,7 @@ export default function InstructionsList({
     isCondition: areConditions,
   } as const;
 
-  const addButton = React.useRef<HTMLButtonElement | null | undefined>(null);
+  const addButton = React.useRef<HTMLButtonElement>(null);
   const addButtonDefaultLabel = areConditions ? (
     <Trans>Add condition</Trans>
   ) : (
@@ -240,6 +240,7 @@ export default function InstructionsList({
                     setCanPaste(false);
                   }}
                 >
+{ /* @ts-expect-error - TS2322 - Type '{ children: {}; ref: RefObject<HTMLButtonElement>; id: string; title: string; onTouchStart: (event: TouchEvent) => void; onTouchMove: (event: TouchEvent) => void; ... 4 more ...; onContextMenu: (e: MouseEvent<...>) => void; }' is not assignable to type 'DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>'. */}
                   <button
                     style={styles.addButton}
                     className="add-link"
@@ -252,7 +253,6 @@ export default function InstructionsList({
                       );
                     }}
                     {...longTouchForContextMenuProps}
-                    // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLButtonElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLButtonElement> | undefined'.
                     ref={addButton}
                     id={
                       addButtonId ||

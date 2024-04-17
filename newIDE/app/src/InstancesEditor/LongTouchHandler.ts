@@ -25,7 +25,7 @@ export default class LongTouchHandler {
   // @ts-expect-error - TS2564 - Property '_longTouchTimeoutID' has no initializer and is not definitely assigned in the constructor.
   _longTouchTimeoutID: number;
   _canvas: HTMLCanvasElement;
-  _onLongTouch: (event: CallbackEvent) => void | null | undefined;
+  _onLongTouch: (event: CallbackEvent) => void;
 
   constructor({ canvas, onLongTouch }: Props) {
     this._canvas = canvas;

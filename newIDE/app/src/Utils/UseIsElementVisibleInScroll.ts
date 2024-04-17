@@ -8,10 +8,11 @@ const useIsElementVisibleInScroll = (
   callback: (arg1: IntersectionObserverEntry[]) => void,
   intersectionObserverOptions?: IntersectionObserverOptions
 ) => {
-  const observerRef = useRef<IntersectionObserver | null | undefined>(null);
+  const observerRef = useRef<IntersectionObserver>(null);
 
   useEffect(() => {
     if (!element) return;
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
     observerRef.current = new IntersectionObserver(callback, {
       root: null,
       threshold: 0.8,

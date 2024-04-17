@@ -53,7 +53,6 @@ import ErrorBoundary from '../UI/ErrorBoundary';
 const isDev = Window.isDev();
 
 export const useExtensionUpdateAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (
     outOfDateExtensionShortHeaders: Array<ExtensionShortHeader>
@@ -116,7 +115,7 @@ type Props = {
   resourceManagementProps: ResourceManagementProps;
   onClose: () => void;
   onCreateNewObject: (type: string) => void;
-  onObjectsAddedFromAssets: (arg1: Array<gd.Object>) => void;
+  onObjectsAddedFromAssets: (arg1: Array<gd.gdObject>) => void;
   canInstallPrivateAsset: () => boolean;
 };
 
@@ -173,7 +172,7 @@ function NewObjectDialog({
   const { installPrivateAsset } = React.useContext(
     PrivateAssetsAuthorizationContext
   );
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const fetchAssets = useFetchAssets();
@@ -235,6 +234,7 @@ function NewObjectDialog({
           assetPackName: openedAssetPack ? openedAssetPack.name : null,
           assetPackTag: openedAssetPack ? openedAssetPack.tag : null,
           assetPackId:
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'PublicAssetPack | PrivateAssetPack'. | TS2339 - Property 'id' does not exist on type 'PublicAssetPack | PrivateAssetPack'.
             openedAssetPack && openedAssetPack.id ? openedAssetPack.id : null,
           assetPackKind: isPrivate ? 'private' : 'public',
         });
@@ -394,7 +394,7 @@ function NewObjectDialog({
       />
     ) : null;
 
-  const assetStore = React.useRef<AssetStoreInterface | null | undefined>(null);
+  const assetStore = React.useRef<AssetStoreInterface>(null);
   const handleClose = React.useCallback(() => {
     assetStore.current && assetStore.current.onClose();
     onClose();
@@ -455,7 +455,6 @@ function NewObjectDialog({
             }
           >
             {currentTab === 'asset-store' && (
-              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <AssetStore ref={assetStore} hideGameTemplates />
             )}
             {currentTab === 'new-object' && (

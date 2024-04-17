@@ -72,6 +72,7 @@ export const DefaultMediumScreenScopeInLayout = () => (
           screenType={'normal'}
           windowSize={'medium'}
           eventsSheetHeight={500}
+// @ts-expect-error - TS2322 - Type '{ readonly values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; readonly hiddenAlertMessages: {}; ... 34 more ...; readonly editorStateByProject: {}; }; ... 59 more ...; readonly setEditorStateForProject: (project...' is not assignable to type 'Preferences'.
           preferences={initialPreferences}
           tutorials={eventsTreeTutorials}
           onEndEditingEvent={action('end editing event')}
@@ -116,6 +117,7 @@ export const DefaultSmallScreenScopeInLayout = () => (
           screenType={'normal'}
           windowSize={'small'}
           eventsSheetHeight={500}
+// @ts-expect-error - TS2322 - Type '{ readonly values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; readonly hiddenAlertMessages: {}; ... 34 more ...; readonly editorStateByProject: {}; }; ... 59 more ...; readonly setEditorStateForProject: (project...' is not assignable to type 'Preferences'.
           preferences={initialPreferences}
           tutorials={eventsTreeTutorials}
           onEndEditingEvent={action('end editing event')}
@@ -157,6 +159,7 @@ export const DefaultMediumScreenScopeNotInLayout = () => (
           screenType={'normal'}
           windowSize={'medium'}
           eventsSheetHeight={500}
+// @ts-expect-error - TS2322 - Type '{ readonly values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; readonly hiddenAlertMessages: {}; ... 34 more ...; readonly editorStateByProject: {}; }; ... 59 more ...; readonly setEditorStateForProject: (project...' is not assignable to type 'Preferences'.
           preferences={initialPreferences}
           tutorials={eventsTreeTutorials}
           onEndEditingEvent={action('end editing event')}
@@ -201,6 +204,7 @@ export const EmptySmallScreenScopeInALayout = () => (
           screenType={'normal'}
           windowSize={'small'}
           eventsSheetHeight={500}
+// @ts-expect-error - TS2322 - Type '{ readonly values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; readonly hiddenAlertMessages: {}; ... 34 more ...; readonly editorStateByProject: {}; }; ... 59 more ...; readonly setEditorStateForProject: (project...' is not assignable to type 'Preferences'.
           preferences={initialPreferences}
           tutorials={eventsTreeTutorials}
           onEndEditingEvent={action('end editing event')}

@@ -5,8 +5,8 @@ import memoize from 'lodash/memoize';
 
 import { splittedProjectFolderNames } from './LocalProjectWriter';
 
-const path = optionalRequire('path');
-const electron = optionalRequire('electron');
+const path = optionalRequire('path') as typeof import('path');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 export const setupResourcesWatcher =
@@ -45,7 +45,7 @@ export const setupResourcesWatcher =
         const folderPath = path.dirname(fileIdentifier);
         const gameFile = path.basename(fileIdentifier);
         const autosaveFile = gameFile + '.autosave';
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'path' implicitly has an 'any' type.
+
         ipcRenderer.on('project-file-changed', (event, path) => {
           // TODO: Is it safe to let it like that since the OS could for some reason
           // do never-ending operations on the folder or its children, making the debounce
@@ -75,7 +75,7 @@ export const setupResourcesWatcher =
 
         return () => {
           ipcRenderer.removeAllListeners('project-file-changed');
-          // @ts-expect-error - TS7006 - Parameter 'subscriptionId' implicitly has an 'any' type.
+
           subscriptionIdPromise.then((subscriptionId) => {
             ipcRenderer.invoke(
               'local-filesystem-watcher-disable',

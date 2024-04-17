@@ -148,11 +148,9 @@ export default function EventsBasedBehaviorEditor({
               </Trans>
             </AlertMessage>
           )}
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             label={<Trans>Private</Trans>}
             checked={eventsBasedBehavior.isPrivate()}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
             onCheck={(e, checked) => {
               eventsBasedBehavior.setPrivate(checked);
               if (onConfigurationUpdated) onConfigurationUpdated('isPrivate');

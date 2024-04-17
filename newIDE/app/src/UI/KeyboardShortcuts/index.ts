@@ -32,23 +32,23 @@ const F2_KEY = 113;
 export const MID_MOUSE_BUTTON = 1;
 
 type ShortcutCallbacks = {
-  onDelete?: () => undefined | Promise<undefined>;
-  onMove?: (arg1: number, arg2: number) => undefined | Promise<undefined>;
-  onCopy?: () => undefined | Promise<undefined>;
-  onCut?: () => undefined | Promise<undefined>;
-  onPaste?: () => undefined | Promise<undefined>;
-  onDuplicate?: () => undefined | Promise<undefined>;
-  onUndo?: () => undefined | Promise<undefined>;
-  onRedo?: () => undefined | Promise<undefined>;
-  onSearch?: () => undefined | Promise<undefined>;
-  onZoomOut?: (arg1: KeyboardEvent) => undefined | Promise<undefined>;
-  onZoomIn?: (arg1: KeyboardEvent) => undefined | Promise<undefined>;
-  onEscape?: () => undefined | Promise<undefined>;
-  onShift1?: () => undefined | Promise<undefined>;
-  onShift2?: () => undefined | Promise<undefined>;
-  onShift3?: () => undefined | Promise<undefined>;
-  onToggleGrabbingTool?: (isEnabled: boolean) => undefined | Promise<undefined>;
-  onRename?: () => undefined | Promise<undefined>;
+  onDelete?: () => void;
+  onMove?: (arg1: number, arg2: number) => void;
+  onCopy?: () => void;
+  onCut?: () => void;
+  onPaste?: () => void;
+  onDuplicate?: () => void;
+  onUndo?: () => void;
+  onRedo?: () => void;
+  onSearch?: () => void;
+  onZoomOut?: (arg1: KeyboardEvent) => void;
+  onZoomIn?: (arg1: KeyboardEvent) => void;
+  onEscape?: () => void;
+  onShift1?: () => void;
+  onShift2?: () => void;
+  onShift3?: () => void;
+  onToggleGrabbingTool?: (isEnabled: boolean) => void;
+  onRename?: () => void;
 };
 
 type ConstructorArgs = {
@@ -83,10 +83,7 @@ export default class KeyboardShortcuts {
     this._isActive = isActive;
   }
 
-  setShortcutCallback(
-    key: keyof ShortcutCallbacks,
-    callback: () => undefined | Promise<undefined>
-  ) {
+  setShortcutCallback(key: keyof ShortcutCallbacks, callback: () => void) {
     this._shortcutCallbacks[key] = callback;
   }
 

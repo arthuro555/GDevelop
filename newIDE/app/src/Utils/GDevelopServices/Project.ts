@@ -35,110 +35,110 @@ const projectResourcesCredentialsApiClient = axios.create({
 /**
  * The token returned by the server to access the project resources and files, if not using a cookie.
  */
-let gd.ResourceJwt: string | null = null;
+let gdResourceJwt: string | null = null;
 
 export const storeGDevelopResourceJwtToken = (token: string) => {
-  gd.ResourceJwt = token;
+  gdResourceJwt = token;
 };
 
 export const getGDevelopResourceJwtToken = (): string | null => {
-  return gd.ResourceJwt;
+  return gdResourceJwt;
 };
 
 export const cleanGDevelopResourceJwtToken = () => {
-  gd.ResourceJwt = null;
+  gdResourceJwt = null;
 };
 
 export const addGDevelopResourceJwtTokenToUrl = (url: string) => {
-  if (!gd.ResourceJwt) return url;
+  if (!gdResourceJwt) return url;
 
   const separator = url.indexOf('?') === -1 ? '?' : '&';
   return (
-    url + separator + 'gd_resource_token=' + encodeURIComponent(gd.ResourceJwt)
+    url + separator + 'gd_resource_token=' + encodeURIComponent(gdResourceJwt)
   );
 };
 
 type ResourceFileWithUploadPresignedUrl = {
-  resourceFile: File,
-  presignedUrl: string,
-  index: number
+  resourceFile: File;
+  presignedUrl: string;
+  index: number;
 };
 
 export type UploadedProjectResourceFiles = Array<{
-  error: Error | null | undefined,
-  resourceFile: File,
-  url: string | null | undefined
+  error: Error | null | undefined;
+  resourceFile: File;
+  url: string | null | undefined;
 }>;
 
 type CloudProject = {
-  id: string,
-  name: string,
-  createdAt: string,
-  deletedAt?: string,
-  updatedAt: string,
-  currentVersion?: string,
-  committedAt?: string,
-  gameId?: string
+  id: string;
+  name: string;
+  createdAt: string;
+  deletedAt?: string;
+  updatedAt: string;
+  currentVersion?: string;
+  committedAt?: string;
+  gameId?: string;
 };
 
 export type CloudProjectVersion = {
-  projectId: string,
-  id: string,
-  label?: string,
-  createdAt: string,
+  projectId: string;
+  id: string;
+  label?: string;
+  createdAt: string;
   /** Was not always recorded so can be undefined. Represents the user who created this version. */
-  userId?: string,
+  userId?: string;
   /** previousVersion is null when the entity represents the initial version of a project. */
-  previousVersion: null | string,
+  previousVersion: null | string;
   /** If the version is a restoration from a previous one, this attribute is set. */
-  restoredFromVersionId?: string
+  restoredFromVersionId?: string;
 };
 
 export type ExpandedCloudProjectVersion = {
-  projectId: string,
-  id: string,
-  label?: string,
-  createdAt: string,
+  projectId: string;
+  id: string;
+  label?: string;
+  createdAt: string;
   /** Was not always recorded so can be undefined. Represents the user who created this version. */
-  userId?: string,
+  userId?: string;
   /** previousVersion is null when the entity represents the initial version of a project. */
-  previousVersion: null | string,
+  previousVersion: null | string;
   /** If the version is a restoration from a previous one, this attribute is set. */
-  restoredFromVersion?: CloudProjectVersion
+  restoredFromVersion?: CloudProjectVersion;
 };
 
-export type CloudProjectWithUserAccessInfo = (CloudProject) & {
+export type CloudProjectWithUserAccessInfo = CloudProject & {
   /** Represents when the current user last modified the project. */
-  lastModifiedAt: string,
+  lastModifiedAt: string;
   /** Was not always recorded so can be undefined. Represents the last user who committed. */
-  lastCommittedBy?: string
+  lastCommittedBy?: string;
 };
 
 export type Feature = 'ownership' | 'collaboration';
 export type Level = 'owner' | 'writer' | 'reader';
 
 export type ProjectUserAcl = {
-  projectId: string,
-  userId: string,
-  feature: Feature,
-  level: Level
+  projectId: string;
+  userId: string;
+  feature: Feature;
+  level: Level;
 };
 
-export type ProjectUserAclWithEmail = (ProjectUserAcl) & {
-  email: string
+export type ProjectUserAclWithEmail = ProjectUserAcl & {
+  email: string;
 };
 
 export type ProjectUserAclRequest = {
-  projectId: string,
-  email: string // The email of the user to add to the project.,
-  feature: Feature,
-  level: Level
+  projectId: string;
+  email: string; // The email of the user to add to the project.,
+  feature: Feature;
+  level: Level;
 };
 
 export const isCloudProjectVersionSane = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
-  versionId: string,
+  versionId: string
 ): Promise<boolean> => {
   const response = await refetchCredentialsForProjectAndRetryIfUnauthorized(
     authenticatedUser,
@@ -163,7 +163,7 @@ export const isCloudProjectVersionSane = async (
 const refetchCredentialsForProjectAndRetryIfUnauthorized = async <T>(
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
-  apiCall: () => Promise<T>,
+  apiCall: () => Promise<T>
 ): Promise<T> => {
   try {
     const response = await apiCall();
@@ -194,7 +194,10 @@ const getVersionIdFromPath = (path: string): string => {
   return path.substring(filenameStartIndex, filenameEndIndex);
 };
 
-export const getLastVersionsOfProject = async (authenticatedUser: AuthenticatedUser, cloudProjectId: string): Promise<Array<ExpandedCloudProjectVersion> | null | undefined> => {
+export const getLastVersionsOfProject = async (
+  authenticatedUser: AuthenticatedUser,
+  cloudProjectId: string
+): Promise<Array<ExpandedCloudProjectVersion> | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -215,7 +218,10 @@ export const getLastVersionsOfProject = async (authenticatedUser: AuthenticatedU
   return projectVersions;
 };
 
-export const getCredentialsForCloudProject = async (authenticatedUser: AuthenticatedUser, cloudProjectId: string): Promise<boolean> => {
+export const getCredentialsForCloudProject = async (
+  authenticatedUser: AuthenticatedUser,
+  cloudProjectId: string
+): Promise<boolean> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return false;
 
@@ -228,7 +234,7 @@ export const getCredentialsForCloudProject = async (authenticatedUser: Authentic
         Authorization: authorizationHeader,
       },
       params: { userId },
-      validateStatus: status => true,
+      validateStatus: (status) => true,
     }
   );
 
@@ -253,9 +259,9 @@ export const clearCloudProjectCredentials = async (): Promise<void> => {
 export const createCloudProject = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectCreationPayload: {
-    name: string,
-    gameId?: string
-  },
+    name: string;
+    gameId?: string;
+  }
 ): Promise<CloudProject | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return null;
@@ -280,21 +286,19 @@ export const createCloudProject = async (
  * In some cases (project recovery from an old version), the new version will have
  * a specific version as parent. In that case, specify a value in `previousVersion`.
  */
-export const commitVersion = async (
-  {
-    authenticatedUser,
-    cloudProjectId,
-    zippedProject,
-    previousVersion,
-    restoredFromVersionId,
-  }: {
-    authenticatedUser: AuthenticatedUser,
-    cloudProjectId: string,
-    zippedProject: Blob,
-    previousVersion?: string | null | undefined,
-    restoredFromVersionId?: string | null | undefined
-  },
-): Promise<string | null | undefined> => {
+export const commitVersion = async ({
+  authenticatedUser,
+  cloudProjectId,
+  zippedProject,
+  previousVersion,
+  restoredFromVersionId,
+}: {
+  authenticatedUser: AuthenticatedUser;
+  cloudProjectId: string;
+  zippedProject: Blob;
+  previousVersion?: string | null | undefined;
+  restoredFromVersionId?: string | null | undefined;
+}): Promise<string | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -321,9 +325,9 @@ export const commitVersion = async (
       )
   );
   const body: {
-    newVersion: string,
-    previousVersion?: string,
-    restoredFromVersionId?: string
+    newVersion: string;
+    previousVersion?: string;
+    restoredFromVersionId?: string;
   } = { newVersion };
   if (previousVersion) {
     body.previousVersion = previousVersion;
@@ -351,7 +355,7 @@ export const uploadProjectResourceFiles = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
   resourceFiles: File[],
-  onProgress: (arg1: number, arg2: number) => void,
+  onProgress: (arg1: number, arg2: number) => void
 ): Promise<UploadedProjectResourceFiles> => {
   if (resourceFiles.length === 0) return [];
 
@@ -382,9 +386,7 @@ export const uploadProjectResourceFiles = async (
             )
         );
 
-        const fullUrl = `${
-          GDevelopProjectResourcesStorage.baseUrl
-        }${presignedUrl}`;
+        const fullUrl = `${GDevelopProjectResourcesStorage.baseUrl}${presignedUrl}`;
         const urlWithoutSearchParams = fullUrl.substr(0, fullUrl.indexOf('?'));
         results[index] = {
           error: null,
@@ -404,7 +406,10 @@ export const uploadProjectResourceFiles = async (
   return results;
 };
 
-export const listUserCloudProjects = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Array<CloudProjectWithUserAccessInfo>> => {
+export const listUserCloudProjects = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Array<CloudProjectWithUserAccessInfo>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await apiClient.get('project', {
     headers: { Authorization: authorizationHeader },
@@ -422,7 +427,7 @@ export const listUserCloudProjects = async (getAuthorizationHeader: () => Promis
 export const listOtherUserCloudProjects = async (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  otherUserId: string,
+  otherUserId: string
 ): Promise<Array<CloudProjectWithUserAccessInfo>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await apiClient.get(`user/${otherUserId}/project`, {
@@ -438,7 +443,10 @@ export const listOtherUserCloudProjects = async (
   return cloudProjects;
 };
 
-export const getCloudProject = async (authenticatedUser: AuthenticatedUser, cloudProjectId: string): Promise<CloudProjectWithUserAccessInfo | null | undefined> => {
+export const getCloudProject = async (
+  authenticatedUser: AuthenticatedUser,
+  cloudProjectId: string
+): Promise<CloudProjectWithUserAccessInfo | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -456,7 +464,7 @@ export const getCloudProject = async (authenticatedUser: AuthenticatedUser, clou
 export const getOtherUserCloudProject = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
-  otherUserId: string,
+  otherUserId: string
 ): Promise<CloudProject | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -479,9 +487,9 @@ export const updateCloudProject = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
   attributes: {
-    name?: string,
-    gameId?: string
-  },
+    name?: string;
+    gameId?: string;
+  }
 ): Promise<CloudProject | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -508,7 +516,10 @@ export const updateCloudProject = async (
   return response.data;
 };
 
-export const deleteCloudProject = async (authenticatedUser: AuthenticatedUser, cloudProjectId: string): Promise<CloudProject | null | undefined> => {
+export const deleteCloudProject = async (
+  authenticatedUser: AuthenticatedUser,
+  cloudProjectId: string
+): Promise<CloudProject | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -523,7 +534,10 @@ export const deleteCloudProject = async (authenticatedUser: AuthenticatedUser, c
   return response.data;
 };
 
-const getPresignedUrlForVersionUpload = async (authenticatedUser: AuthenticatedUser, cloudProjectId: string): Promise<string | null | undefined> => {
+const getPresignedUrlForVersionUpload = async (
+  authenticatedUser: AuthenticatedUser,
+  cloudProjectId: string
+): Promise<string | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -546,7 +560,7 @@ const getPresignedUrlForVersionUpload = async (authenticatedUser: AuthenticatedU
 const getPresignedUrlForResourcesUpload = async (
   authenticatedUser: AuthenticatedUser,
   cloudProjectId: string,
-  resourceFiles: File[],
+  resourceFiles: File[]
 ): Promise<Array<ResourceFileWithUploadPresignedUrl>> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) throw new Error('User is not authenticated.');
@@ -557,7 +571,7 @@ const getPresignedUrlForResourcesUpload = async (
   const authorizationHeader = await getAuthorizationHeader();
 
   const requestedResources = await Promise.all(
-    resourceFiles.map(async resourceFile => ({
+    resourceFiles.map(async (resourceFile) => ({
       type: 'project-resource',
       filename: resourceFile.name,
       size: resourceFile.size,
@@ -592,7 +606,7 @@ const getPresignedUrlForResourcesUpload = async (
 
 export const getProjectFileAsZipBlob = async (
   cloudProject: CloudProject | CloudProjectWithUserAccessInfo,
-  versionId?: string | null,
+  versionId?: string | null
 ): Promise<Blob> => {
   if (!cloudProject.currentVersion) {
     throw new Error('Opening of project without current version not handled');
@@ -600,16 +614,16 @@ export const getProjectFileAsZipBlob = async (
 
   const response = await projectResourcesClient.get(
     addGDevelopResourceJwtTokenToUrl(
-      `/${cloudProject.id}/versions/${versionId ||
-        cloudProject.currentVersion}.zip`
+      `/${cloudProject.id}/versions/${
+        versionId || cloudProject.currentVersion
+      }.zip`
     ),
     { responseType: 'blob' }
   );
   return response.data;
 };
 
-// @ts-expect-error - TS2693 - 'string' only refers to a type, but is being used as a value here. | TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected.
-const escapeStringForRegExp = string: any => {
+const escapeStringForRegExp = (string: any) => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 const resourceFilenameRegex = new RegExp(
@@ -618,7 +632,9 @@ const resourceFilenameRegex = new RegExp(
   )}\\/(.*)\\/resources\\/(.*\\/)*([a-zA-Z0-9]+)-([^\\?\\n\\r]+)`
 );
 
-export const extractDecodedFilenameFromProjectResourceUrl = (url: string): string => {
+export const extractDecodedFilenameFromProjectResourceUrl = (
+  url: string
+): string => {
   if (url.startsWith(GDevelopProjectResourcesStorage.baseUrl)) {
     const matches = resourceFilenameRegex.exec(url);
     if (matches) {
@@ -632,7 +648,9 @@ export const extractDecodedFilenameFromProjectResourceUrl = (url: string): strin
   return url;
 };
 
-export const extractProjectUuidFromProjectResourceUrl = (url: string): string | null => {
+export const extractProjectUuidFromProjectResourceUrl = (
+  url: string
+): string | null => {
   if (url.startsWith(GDevelopProjectResourcesStorage.baseUrl)) {
     const matches = resourceFilenameRegex.exec(url);
     if (matches) {
@@ -645,12 +663,7 @@ export const extractProjectUuidFromProjectResourceUrl = (url: string): string | 
 
 export const createProjectUserAcl = async (
   authenticatedUser: AuthenticatedUser,
-  {
-    projectId,
-    email,
-    feature,
-    level,
-  }: ProjectUserAclRequest,
+  { projectId, email, feature, level }: ProjectUserAclRequest
 ): Promise<ProjectUserAclWithEmail | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -672,11 +685,7 @@ export const createProjectUserAcl = async (
 
 export const deleteProjectUserAcl = async (
   authenticatedUser: AuthenticatedUser,
-  {
-    projectId,
-    userId,
-    feature,
-  }: ProjectUserAcl,
+  { projectId, userId, feature }: ProjectUserAcl
 ): Promise<void> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -697,8 +706,8 @@ export const listProjectUserAcls = async (
   {
     projectId,
   }: {
-    projectId: string
-  },
+    projectId: string;
+  }
 ): Promise<Array<ProjectUserAclWithEmail>> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return [];
@@ -725,8 +734,8 @@ export const updateCloudProjectVersion = async (
   cloudProjectId: string,
   versionId: string,
   attributes: {
-    label: string
-  },
+    label: string;
+  }
 ): Promise<CloudProjectVersion | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -766,12 +775,16 @@ export const listVersionsOfProject = async (
   userId: string | null | undefined,
   cloudProjectId: string,
   options: {
-    forceUri: string | null | undefined
-  },
-): Promise<{
-  versions: Array<ExpandedCloudProjectVersion>,
-  nextPageUri: string | null | undefined
-} | null | undefined> => {
+    forceUri: string | null | undefined;
+  }
+): Promise<
+  | {
+      versions: Array<ExpandedCloudProjectVersion>;
+      nextPageUri: string | null | undefined;
+    }
+  | null
+  | undefined
+> => {
   const authorizationHeader = await getAuthorizationHeader();
   const uri = options.forceUri || `/project/${cloudProjectId}/version`;
 

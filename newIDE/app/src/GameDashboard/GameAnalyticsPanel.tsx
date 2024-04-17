@@ -1,5 +1,4 @@
-
-import {Trans, t} from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 
 import { I18n } from '@lingui/react';
 import * as React from 'react';
@@ -59,16 +58,16 @@ const chartMargins = {
 const chartWidth = '99%';
 const chartHeight = 300;
 
-const minutesFormatter = value: any => {
+const minutesFormatter = (value: any) => {
   return value.toFixed(2);
 };
 
-const percentFormatter = value: any => {
+const percentFormatter = (value: any) => {
   return value.toFixed(2);
 };
 
 type Props = {
-  game: Game
+  game: Game;
 };
 
 const CustomTooltip = ({
@@ -76,12 +75,11 @@ const CustomTooltip = ({
   label,
   customStyle,
 }: {
-  payload: Array<any> | null | undefined,
-  label: string,
-  customStyle: any
+  payload: Array<any> | null | undefined;
+  label: string;
+  customStyle: any;
 }) =>
   payload ? (
-
     <Paper style={customStyle} background="light">
       <ColumnStackLayout>
         <Text size="sub-title" noMargin>
@@ -95,13 +93,12 @@ const CustomTooltip = ({
                 unit,
                 value,
               }: {
-                name: string,
-                unit: string | null | undefined,
-                value: number
+                name: string;
+                unit: string | null | undefined;
+                value: number;
               },
               index
             ) => (
-
               <Text noMargin key={index}>{`${name}: ${
                 Number.isInteger(value) ? value.toString() : value.toFixed(2)
               }${unit ? ` ${unit}` : ''}`}</Text>
@@ -111,14 +108,14 @@ const CustomTooltip = ({
     </Paper>
   ) : null;
 
-export const GameAnalyticsPanel = ({
-  game,
-}: Props) => {
+export const GameAnalyticsPanel = ({ game }: Props) => {
   const { getAuthorizationHeader, profile } = React.useContext(
     AuthenticatedUserContext
   );
 
-  const [gameRollingMetrics, setGameMetrics] = React.useState<GameMetrics[] | null | undefined>(null);
+  const [gameRollingMetrics, setGameMetrics] = React.useState<
+    GameMetrics[] | null | undefined
+  >(null);
   const { yearChartData, monthChartData } = React.useMemo(
     () => buildChartData(gameRollingMetrics),
     [gameRollingMetrics]
@@ -126,44 +123,40 @@ export const GameAnalyticsPanel = ({
   const [dataPeriod, setDataPeriod] = React.useState('month');
   const chartData = dataPeriod === 'year' ? yearChartData : monthChartData;
 
-  const [gameRollingMetricsError, setGameMetricsError] = React.useState<Error | null | undefined>(null);
+  const [gameRollingMetricsError, setGameMetricsError] = React.useState<
+    Error | null | undefined
+  >(null);
   const [isGameMetricsLoading, setIsGameMetricsLoading] = React.useState(false);
 
   // TODO In some timezones, it might ask one less or extra day.
   const lastYearIsoDate = formatISO(subDays(new Date(), daysShownForYear), {
     representation: 'date',
   });
-  const loadGameMetrics = React.useCallback(
-    async () => {
-      if (!profile) return;
+  const loadGameMetrics = React.useCallback(async () => {
+    if (!profile) return;
 
-      const { id } = profile;
+    const { id } = profile;
 
-      setIsGameMetricsLoading(true);
-      setGameMetricsError(null);
-      try {
-        const gameRollingMetrics = await getGameMetricsFrom(
-          getAuthorizationHeader,
-          id,
-          game.id,
-          lastYearIsoDate
-        );
-        setGameMetrics(gameRollingMetrics);
-      } catch (err: any) {
-        console.error(`Unable to load game rolling metrics:`, err);
-        setGameMetricsError(err);
-      }
-      setIsGameMetricsLoading(false);
-    },
-    [getAuthorizationHeader, profile, game, lastYearIsoDate]
-  );
+    setIsGameMetricsLoading(true);
+    setGameMetricsError(null);
+    try {
+      const gameRollingMetrics = await getGameMetricsFrom(
+        getAuthorizationHeader,
+        id,
+        game.id,
+        lastYearIsoDate
+      );
+      setGameMetrics(gameRollingMetrics);
+    } catch (err: any) {
+      console.error(`Unable to load game rolling metrics:`, err);
+      setGameMetricsError(err);
+    }
+    setIsGameMetricsLoading(false);
+  }, [getAuthorizationHeader, profile, game, lastYearIsoDate]);
 
-  React.useEffect(
-    () => {
-      loadGameMetrics();
-    },
-    [loadGameMetrics]
-  );
+  React.useEffect(() => {
+    loadGameMetrics();
+  }, [loadGameMetrics]);
 
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
 
@@ -185,11 +178,9 @@ export const GameAnalyticsPanel = ({
   } as const;
 
   return (
-
     <I18n>
       {({ i18n }) =>
         gameRollingMetricsError ? (
-
           <PlaceholderError
             onRetry={() => {
               loadGameMetrics();
@@ -199,14 +190,12 @@ export const GameAnalyticsPanel = ({
             <Trans>Verify your internet connection or try again later.</Trans>
           </PlaceholderError>
         ) : (
-
           <ColumnStackLayout expand>
             {isGameMetricsLoading && <PlaceholderLoader />}
             <>
               <Line noMargin justifyContent="flex-end">
                 <SelectField
                   value={dataPeriod}
-
                   onChange={(e, i, period: string) => {
                     setDataPeriod(period);
                   }}
@@ -218,7 +207,6 @@ export const GameAnalyticsPanel = ({
               </Line>
               {!isGameMetricsLoading &&
               (!gameRollingMetrics || gameRollingMetrics.length === 0) ? (
-
                 <AlertMessage kind="warning">
                   <Trans>
                     There were no players or stored metrics for this period. Be
@@ -271,8 +259,8 @@ export const GameAnalyticsPanel = ({
                         style={styles.tickLabel}
                       />
                       <Tooltip
-                        content={props =>
-// @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
+                        content={(props) =>
+                          // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
                           CustomTooltip({
                             ...props,
                             customStyle: styles.tooltipContent,
@@ -294,7 +282,7 @@ export const GameAnalyticsPanel = ({
                       <RechartsLine
                         name={i18n._(t`Bounce rate`)}
                         unit="%"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={minutesFormatter}
                         type="monotone"
                         dataKey="bounceRatePercent"
@@ -317,8 +305,8 @@ export const GameAnalyticsPanel = ({
                         style={styles.tickLabel}
                       />
                       <Tooltip
-                        content={props =>
-// @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
+                        content={(props) =>
+                          // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
                           CustomTooltip({
                             ...props,
                             customStyle: styles.tooltipContent,
@@ -348,7 +336,7 @@ export const GameAnalyticsPanel = ({
                       <RechartsLine
                         name={i18n._(t`Mean played time`)}
                         unit={' ' + i18n._(t`minutes`)}
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={minutesFormatter}
                         type="monotone"
                         dataKey="meanPlayedDurationInMinutes"
@@ -371,8 +359,8 @@ export const GameAnalyticsPanel = ({
                         style={styles.tickLabel}
                       />
                       <Tooltip
-                        content={props =>
-// @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
+                        content={(props) =>
+                          // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
                           CustomTooltip({
                             ...props,
                             customStyle: styles.tooltipContent,
@@ -416,7 +404,7 @@ export const GameAnalyticsPanel = ({
                         dataKey="duration"
                         type="number"
                         domain={[0, durationValues[durationValues.length - 1]]}
-// @ts-expect-error - TS4104 - The type 'readonly [1, 3, 5, 10, 15]' is 'readonly' and cannot be assigned to the mutable type '(string | number)[]'.
+                        // @ts-expect-error - TS4104 - The type 'readonly [1, 3, 5, 10, 15]' is 'readonly' and cannot be assigned to the mutable type '(string | number)[]'.
                         ticks={durationValues}
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
@@ -432,8 +420,8 @@ export const GameAnalyticsPanel = ({
                         strokeDasharray="3 3"
                       />
                       <Tooltip
-                        content={props =>
-// @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
+                        content={(props) =>
+                          // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
                           CustomTooltip({
                             ...props,
                             customStyle: styles.tooltipContent,
@@ -470,7 +458,7 @@ export const GameAnalyticsPanel = ({
                         name={i18n._(t`Players`)}
                         type="monotone"
                         dataKey="over60sPlayersPercent"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={percentFormatter}
                         unit={' %'}
                         stroke={gdevelopTheme.chart.dataColor1}
@@ -482,7 +470,7 @@ export const GameAnalyticsPanel = ({
                         name={i18n._(t`Played > 3 minutes`)}
                         type="monotone"
                         dataKey="over180sPlayersPercent"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={percentFormatter}
                         unit={' %'}
                         stroke={gdevelopTheme.chart.dataColor1}
@@ -494,7 +482,7 @@ export const GameAnalyticsPanel = ({
                         name={i18n._(t`Played > 5 minutes`)}
                         type="monotone"
                         dataKey="over300sPlayersPercent"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={percentFormatter}
                         unit={' %'}
                         stroke={gdevelopTheme.chart.dataColor1}
@@ -506,7 +494,7 @@ export const GameAnalyticsPanel = ({
                         name={i18n._(t`Played > 10 minutes`)}
                         type="monotone"
                         dataKey="over600sPlayersPercent"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={percentFormatter}
                         unit={' %'}
                         stroke={gdevelopTheme.chart.dataColor1}
@@ -518,7 +506,7 @@ export const GameAnalyticsPanel = ({
                         name={i18n._(t`Played > 15 minutes`)}
                         type="monotone"
                         dataKey="over900sPlayersPercent"
-// @ts-expect-error - TS2769 - No overload matches this call.
+                        // @ts-expect-error - TS2769 - No overload matches this call.
                         formatter={percentFormatter}
                         unit={' %'}
                         stroke={gdevelopTheme.chart.dataColor1}
@@ -542,8 +530,8 @@ export const GameAnalyticsPanel = ({
                         unit={' %'}
                       />
                       <Tooltip
-                        content={props =>
-// @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
+                        content={(props) =>
+                          // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
                           CustomTooltip({
                             ...props,
                             customStyle: styles.tooltipContent,

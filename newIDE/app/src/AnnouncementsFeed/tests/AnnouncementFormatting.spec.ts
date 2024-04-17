@@ -2,6 +2,7 @@ import { I18n as I18nType } from '@lingui/core';
 import { getAnnouncementContent } from '../AnnouncementFormatting';
 import { Announcement } from '../../Utils/GDevelopServices/Announcement';
 
+// @ts-expect-error - TS2740 - Type '{ _: (message: string | MessageDescriptor) => any; language: string; }' is missing the following properties from type 'I18n': t, select, plural, selectOrdinal, and 7 more.
 const makeFakeI18n = (): I18nType => ({
   // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
   _: (message) => message.id,

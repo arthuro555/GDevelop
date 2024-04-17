@@ -13,7 +13,7 @@ import { getBrowserLanguageOrLocale } from '../Language';
 
 import optionalRequire from '../OptionalRequire';
 import Window from '../Window';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 const isElectronApp = !!electron;
 const isDev = Window.isDev();

@@ -102,6 +102,7 @@ const getBuildCreditPrice = (
  * of an export.
  */
 export default class ExportLauncher extends Component<Props, State> {
+// @ts-expect-error - TS2416 - Property 'state' in type 'ExportLauncher' is not assignable to the same property in base type 'Component<Props, State, any>'.
   state = {
     exportStep: '',
     build: null,
@@ -150,6 +151,7 @@ export default class ExportLauncher extends Component<Props, State> {
     ) {
       this.props.setIsNavigationDisabled(
         this.props.exportPipeline.isNavigationDisabled(
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'BuildStep'.
           this.state.exportStep,
           this.state.errored
         )
@@ -443,6 +445,7 @@ export default class ExportLauncher extends Component<Props, State> {
       });
     } catch (error) {
       console.error('An error happened during export:', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'Error'.
       handleError(error);
     }
   };
@@ -508,6 +511,7 @@ export default class ExportLauncher extends Component<Props, State> {
         if (!buildsRemaining) return false;
       }
 
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'BuildStep'.
       return exportPipeline.canLaunchBuild(exportState, errored, exportStep);
     };
 
@@ -578,6 +582,7 @@ export default class ExportLauncher extends Component<Props, State> {
                     exportState,
                     updateExportState: this._updateExportState,
                     isExporting: isExportingOrWaitingForBuild,
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'BuildStep'.
                     exportStep,
                     build,
                     quota: buildQuota,
@@ -599,7 +604,6 @@ export default class ExportLauncher extends Component<Props, State> {
                           {this._candidateBumpedVersionNumber}
                         </Trans>
                       }
-                      // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'toggled' implicitly has an 'any' type.
                       onToggle={(e, toggled) => {
                         this.setState({
                           shouldBumpVersionNumber: toggled,
@@ -666,6 +670,7 @@ export default class ExportLauncher extends Component<Props, State> {
                   launchExport: async () => this.launchWholeExport({ i18n }),
                   build,
                   errored,
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'BuildStep'.
                   exportStep,
                   isSavingProject,
                   onSaveProject,

@@ -9,10 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Fade from '@material-ui/core/Fade';
 import makeStyles from '@material-ui/styles/makeStyles';
 import { adaptAcceleratorString } from '../AcceleratorString';
-import {
-  MenuItemTemplate,
-  ContextMenuImplementation,
-} from './Menu';
+import { MenuItemTemplate, ContextMenuImplementation } from './Menu';
 
 import ChevronArrowRight from '../CustomSvgIcons/ChevronArrowRight';
 
@@ -49,7 +46,9 @@ const SubMenuItem = ({ item, buildFromTemplate }) => {
   // - clickable, when on a touchscreen or using a pen. This is to allow closing the submenu
   // by clicking outside it.
   const backdropStyles = useStyles();
-  const [pointerType, setPointerType] = React.useState<'mouse' | null | undefined | 'other'>(null);
+  const [pointerType, setPointerType] = React.useState<
+    'mouse' | null | undefined | 'other'
+  >(null);
 
   // We track if the cursor is hovering the menu item or the submenu.
   // If not a mouse, this is not used: all menus are opened/closed
@@ -60,8 +59,7 @@ const SubMenuItem = ({ item, buildFromTemplate }) => {
   // When null, the submenu stays closed.
   const [anchorElement, setAnchorElement] = React.useState<any>(null);
 
-// @ts-expect-error - TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected.
-  const handleClick = event: any => {
+  const handleClick = (event: any) => {
     if (item.enabled === false) {
       return;
     }
@@ -172,7 +170,6 @@ const SubMenuItem = ({ item, buildFromTemplate }) => {
       </Menu>
     </React.Fragment>
   );
-
 };
 
 /**
@@ -190,13 +187,10 @@ const SubMenuItem = ({ item, buildFromTemplate }) => {
  *  - submenu
  */
 export default class MaterialUIMenuImplementation
-  implements ContextMenuImplementation {
+  implements ContextMenuImplementation
+{
   _onClose: () => void;
-  constructor({
-    onClose,
-  }: {
-    onClose: () => void
-  }) {
+  constructor({ onClose }: { onClose: () => void }) {
     this._onClose = onClose;
   }
 
@@ -206,50 +200,48 @@ export default class MaterialUIMenuImplementation
   ) {
     return template
       .map((item, id) => {
-// @ts-expect-error - TS2339 - Property 'visible' does not exist on type 'MenuItemTemplate'.
+        // @ts-expect-error - TS2339 - Property 'visible' does not exist on type 'MenuItemTemplate'.
         if (item.visible === false) return null;
 
-// @ts-expect-error - TS2339 - Property 'accelerator' does not exist on type 'MenuItemTemplate'.
+        // @ts-expect-error - TS2339 - Property 'accelerator' does not exist on type 'MenuItemTemplate'.
         const accelerator = item.accelerator
-// @ts-expect-error - TS2339 - Property 'accelerator' does not exist on type 'MenuItemTemplate'.
-          ? adaptAcceleratorString(item.accelerator)
+          ? // @ts-expect-error - TS2339 - Property 'accelerator' does not exist on type 'MenuItemTemplate'.
+            adaptAcceleratorString(item.accelerator)
           : undefined;
 
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
+        // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
         if (item.type === 'separator') {
-
           return <Divider key={'separator' + id} style={styles.divider} />;
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
+          // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
         } else if (item.type === 'checkbox') {
           return (
-
             <MenuItem
               dense
-// @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
+              // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
               key={'checkbox' + item.label}
-// @ts-expect-error - TS2769 - No overload matches this call.
+              // @ts-expect-error - TS2769 - No overload matches this call.
               checked={
                 // $FlowFixMe - existence should be inferred by Flow.
-// @ts-expect-error - TS2339 - Property 'checked' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'checked' does not exist on type 'MenuItemTemplate'.
                 item.checked
               }
               disabled={
                 // $FlowFixMe - existence should be inferred by Flow.
-// @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
                 item.enabled === false
               }
-              onClick={async e => {
+              onClick={async (e) => {
                 e.stopPropagation();
-// @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
                 if (item.enabled === false) {
                   return;
                 }
 
-// @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
                 if (item.click) {
-// @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
+                  // @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
                   await item.click();
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
+                  // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
                   if (item.type === 'checkbox') {
                     // In case the item click function changes something that React does not detect,
                     // for instance a change in the project/layout C++ object, the menu must be
@@ -263,52 +255,48 @@ export default class MaterialUIMenuImplementation
               style={styles.menuItem}
             >
               <ListItemIcon>
-{ /* @ts-expect-error - TS2339 - Property 'checked' does not exist on type 'MenuItemTemplate'. */}
+                {/* @ts-expect-error - TS2339 - Property 'checked' does not exist on type 'MenuItemTemplate'. */}
                 {item.checked ? (
-
                   <CheckBoxIcon fontSize="small" />
                 ) : (
-
                   <CheckBoxOutlineBlankIcon fontSize="small" />
                 )}
               </ListItemIcon>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'. */}
               <ListItemText primary={item.label} />
             </MenuItem>
           );
-// @ts-expect-error - TS2339 - Property 'submenu' does not exist on type 'MenuItemTemplate'.
+          // @ts-expect-error - TS2339 - Property 'submenu' does not exist on type 'MenuItemTemplate'.
         } else if (item.submenu) {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2786 - 'SubMenuItem' cannot be used as a JSX component.
             <SubMenuItem
-// @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
+              // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
               key={'submenu' + item.label}
               item={item}
-// @ts-expect-error - TS7006 - Parameter 'template' implicitly has an 'any' type.
-              buildFromTemplate={template =>
+              // @ts-expect-error - TS7006 - Parameter 'template' implicitly has an 'any' type.
+              buildFromTemplate={(template) =>
                 this.buildFromTemplate(template, forceUpdate)
               }
             />
           );
         } else {
           return (
-
             <MenuItem
               dense
-// @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
+              // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
               key={'item' + item.label}
-// @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
+              // @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
               disabled={item.enabled === false}
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
-// @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'enabled' does not exist on type 'MenuItemTemplate'.
                 if (item.enabled === false) {
                   return;
                 }
 
-// @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
                 if (item.click) {
-// @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
+                  // @ts-expect-error - TS2339 - Property 'click' does not exist on type 'MenuItemTemplate'.
                   item.click();
                   this._onClose();
                 }
@@ -316,12 +304,11 @@ export default class MaterialUIMenuImplementation
               style={styles.menuItem}
             >
               {!accelerator ? (
-// @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
+                // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
                 item.label
               ) : (
-
                 <div style={styles.labelWithAccelerator}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'. */}
+                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'. */}
                   <span>{item.label}</span>
                   <span style={styles.accelerator}>{accelerator}</span>
                 </div>

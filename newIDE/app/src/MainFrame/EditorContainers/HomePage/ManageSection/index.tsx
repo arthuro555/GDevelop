@@ -224,7 +224,6 @@ const ManageSection = ({
             />
           )
         ) : gamesFetchingError ? (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={onRefreshGames}>
             <Trans>
               Can't load the games. Verify your internet connection or retry

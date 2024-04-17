@@ -176,7 +176,7 @@ const ImagePreview = ({
     [number, number] | null | undefined
   >(null);
   const hasZoomBeenAdaptedToImageRef = React.useRef<boolean>(false);
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const handleImageError = () => {
     setErrored(true);
   };
@@ -185,7 +185,6 @@ const ImagePreview = ({
     new KeyboardShortcuts({
       isActive: () => !deactivateControls,
       shortcutCallbacks: {
-        // @ts-expect-error - TS2322 - Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type '(isEnabled: boolean) => Promise<undefined> | undefined'.
         onToggleGrabbingTool: setShouldMoveView,
       },
     })
@@ -546,7 +545,9 @@ const ImagePreview = ({
     <Measure
       bounds
       onResize={(contentRect) => {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
         setContainerWidth(contentRect.bounds.width);
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
         setContainerHeight(contentRect.bounds.height);
       }}
     >
@@ -618,6 +619,7 @@ const ImagePreview = ({
                 }}
                 ref={(ref) => {
                   measureRef(ref);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
                   containerRef.current = ref;
                 }}
                 // @ts-expect-error - TS2322 - Type '((event: TouchEvent) => void) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.

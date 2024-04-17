@@ -80,7 +80,7 @@ export const create = (authentication: Authentication) => {
 
             getStorageProvider,
           }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <MainFrame
               i18n={i18n}
 
@@ -114,6 +114,7 @@ export const create = (authentication: Authentication) => {
                   initialTab={props.initialTab}
                 />
               )}
+// @ts-expect-error - TS2322 - Type '(() => Element) | null' is not assignable to type '(() => ReactElement<any, string | JSXElementConstructor<any>> | null | undefined) | undefined'.
               renderGDJSDevelopmentWatcher={
 
                 isDev ? () => <LocalGDJSDevelopmentWatcher /> : null
@@ -129,6 +130,7 @@ export const create = (authentication: Authentication) => {
               resourceSources={localResourceSources}
               resourceExternalEditors={localResourceExternalEditors}
               extensionsLoader={makeExtensionsLoader({
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
                 gd,
                 objectsEditorService: ObjectsEditorService,
                 objectsRenderingService: ObjectsRenderingService,

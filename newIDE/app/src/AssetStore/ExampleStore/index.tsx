@@ -149,6 +149,7 @@ export const ExampleStore = ({
     return gameTemplateMatches ? gameTemplateMatches.matches : [];
   };
 
+// @ts-expect-error - TS2322 - Type '(PrivateGameTemplateListingData | ExampleShortHeader)[]' is not assignable to type 'PrivateGameTemplateListingData[] | ExampleShortHeader'.
   const searchItems: ExampleShortHeader | PrivateGameTemplateListingData[] =
     React.useMemo(() => {
       const searchItems: Array<
@@ -205,6 +206,7 @@ export const ExampleStore = ({
               onRequestSearch={() => {}}
               tagsHandler={tagsHandler}
               tags={defaultTags}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SearchBarInterface | null | undefined>' is not assignable to type 'Ref<SearchBarInterface> | undefined'.
               ref={searchBarRef}
               placeholder={t`Search examples`}
             />
@@ -221,23 +223,30 @@ export const ExampleStore = ({
             disableAutoTranslate // Search results text highlighting conflicts with dom handling by browser auto-translations features. Disables auto translation to prevent crashes.
             onRetry={fetchGameTemplatesAndExamples}
             error={gameTemplateStoreError || exampleStoreError}
+// @ts-expect-error - TS2322 - Type 'PrivateGameTemplateListingData[] | ExampleShortHeader' is not assignable to type 'PrivateGameTemplateListingData[] | null | undefined'.
             searchItems={searchItems}
             getSearchItemUniqueId={getItemUniqueId}
             // @ts-expect-error - TS7006 - Parameter 'item' implicitly has an 'any' type. | TS7006 - Parameter 'onHeightComputed' implicitly has an 'any' type.
             renderSearchItem={(item, onHeightComputed) => {
+// @ts-expect-error - TS2339 - Property 'authorIds' does not exist on type 'PrivateGameTemplateListingData'.
               if (item.authorIds) {
                 // This is an ExampleShortHeader.
                 return (
                   <ExampleListItem
                     isOpening={isOpening}
                     onHeightComputed={onHeightComputed}
+// @ts-expect-error - TS2322 - Type 'PrivateGameTemplateListingData' is not assignable to type 'ExampleShortHeader'.
                     exampleShortHeader={item}
+// @ts-expect-error - TS2345 - Argument of type 'PrivateGameTemplateListingData' is not assignable to parameter of type 'ExampleShortHeader'.
                     matches={getExampleShortHeaderMatches(item)}
                     onChoose={() => {
+// @ts-expect-error - TS2339 - Property 'slug' does not exist on type 'PrivateGameTemplateListingData'.
                       sendExampleDetailsOpened(item.slug);
+// @ts-expect-error - TS2345 - Argument of type 'PrivateGameTemplateListingData' is not assignable to parameter of type 'ExampleShortHeader | null | undefined'.
                       onSelectExampleShortHeader(item);
                     }}
                     onOpen={() => {
+// @ts-expect-error - TS2345 - Argument of type 'PrivateGameTemplateListingData' is not assignable to parameter of type 'ExampleShortHeader | null | undefined'.
                       onSelectExampleShortHeader(item);
                       onOpenNewProjectSetupDialog();
                     }}

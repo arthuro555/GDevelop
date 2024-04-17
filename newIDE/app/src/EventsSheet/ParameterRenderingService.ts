@@ -145,17 +145,23 @@ const components = {
 const inlineRenderers: {
   [key: string]: ParameterInlineRenderer;
 } = {
+// @ts-expect-error - TS2322 - Type '({ value, expressionIsValid, parameterMetadata, InvalidParameterValue, MissingParameterValue, }: ParameterInlineRendererProps) => string | JSX.Element' is not assignable to type 'ParameterInlineRenderer'.
   default: renderInlineDefaultField,
+// @ts-expect-error - TS2322 - Type '({ value, }: ParameterInlineRendererProps) => string | JSX.Element' is not assignable to type 'ParameterInlineRenderer'.
   forceMultiplier: renderInlineForceMultiplier,
   globalvar: renderInlineGlobalVariable,
   scenevar: renderInlineSceneVariable,
   objectvar: renderInlineObjectVariable,
+// @ts-expect-error - TS2322 - Type '({ value, InvalidParameterValue, }: ParameterInlineRendererProps) => string | JSX.Element' is not assignable to type 'ParameterInlineRenderer'.
   key: renderInlineKey,
+// @ts-expect-error - TS2322 - Type '({ value, InvalidParameterValue, }: ParameterInlineRendererProps) => string | JSX.Element' is not assignable to type 'ParameterInlineRenderer'.
   mouse: renderInlineMouse,
   object: renderInlineObjectWithThumbnail,
   yesorno: renderInlineYesNo,
   trueorfalse: renderInlineTrueFalse,
+// @ts-expect-error - TS2322 - Type '({ value, InvalidParameterValue, useAssignmentOperators, }: ParameterInlineRendererProps) => JSX.Element | "=" | "+=" | "-=" | "/=" | "*="' is not assignable to type 'ParameterInlineRenderer'.
   operator: renderInlineOperator,
+// @ts-expect-error - TS2322 - Type '({ value, InvalidParameterValue, }: ParameterInlineRendererProps) => JSX.Element | "=" | "<" | ">" | "≤" | "≥" | "≠"' is not assignable to type 'ParameterInlineRenderer'.
   relationalOperator: renderInlineRelationalOperator,
   leaderboardId: renderInlineLeaderboardIdField,
 };

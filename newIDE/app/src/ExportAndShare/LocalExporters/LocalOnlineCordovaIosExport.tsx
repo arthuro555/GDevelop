@@ -24,8 +24,8 @@ import {
 } from '../GenericExporters/OnlineCordovaIosExport';
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 
-const path = optionalRequire('path');
-const os = optionalRequire('os');
+const path = optionalRequire('path') as typeof import('path');
+const os = optionalRequire('os') as typeof import('os');
 
 type PreparedExporter = {
   exporter: gdjsExporter;

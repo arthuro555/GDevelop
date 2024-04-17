@@ -113,8 +113,8 @@ type LeaderboardReplacerProgressDialogProps = {
     leaderboardId: string;
     error: Error;
   }>;
-  onRetry: () => void | null | undefined;
-  onAbandon: () => void | null | undefined;
+  onRetry: () => void;
+  onAbandon: () => void;
   progress: number;
 };
 
@@ -304,6 +304,7 @@ export const useLeaderboardReplacer = (): UseLeaderboardReplacerOutput => {
         setProgress((previousProgress) => previousProgress + progressStep);
         return {
           leaderboardId,
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'Error'.
           error: error,
         };
       }
@@ -317,6 +318,7 @@ export const useLeaderboardReplacer = (): UseLeaderboardReplacerOutput => {
     );
     const leaderboardsWithErrors =
       responseLeaderboardsWithErrors.filter(Boolean);
+// @ts-expect-error - TS2345 - Argument of type '(ErroredLeaderboard | null | undefined)[]' is not assignable to parameter of type 'SetStateAction<ErroredLeaderboard[]>'.
     setErroredLeaderboards(leaderboardsWithErrors);
 
     // Replace leaderboards in events.
@@ -354,6 +356,7 @@ export const useLeaderboardReplacer = (): UseLeaderboardReplacerOutput => {
           setLeaderboardsToReplace(
             leaderboardsToReplace.filter((id) =>
               leaderboardsWithErrors.some(
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
                 (erroredLeaderboard) => erroredLeaderboard.leaderboardId === id
               )
             )
@@ -401,9 +404,9 @@ export const useLeaderboardReplacer = (): UseLeaderboardReplacerOutput => {
       authenticatedUser.authenticated ? (
       <LeaderboardReplacerProgressDialog
         erroredLeaderboards={erroredLeaderboards}
-        // @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void'.
         onRetry={onRetry}
-        // @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void'.
         onAbandon={onAbandon}
         progress={progress}
       />

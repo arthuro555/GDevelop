@@ -63,6 +63,7 @@ const OpenedVersionStatusChip = ({
     <I18n>
       {({ i18n }) => (
         <div
+// @ts-expect-error - TS2322 - Type '{ backgroundColor: any; overflow: string; whiteSpace: string; textOverflow: string; display: "flex"; alignItems: "center"; padding: 4; borderRadius: 6; color: "#111111"; }' is not assignable to type 'Properties<string | number, string & {}>'.
           style={{
             ...styles.chip,
             backgroundColor: getStatusColor(
@@ -76,6 +77,7 @@ const OpenedVersionStatusChip = ({
               ? i18n._(t`Saving...`)
               : (openedVersionStatus.version.label
                   ? shortenString(openedVersionStatus.version.label, 20)
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
                   : i18n.date(
                       Date.parse(openedVersionStatus.version.createdAt),
                       {

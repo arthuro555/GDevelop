@@ -107,7 +107,7 @@ const subscriptionOptions: Partial<
 type Props = {
   subscription: Subscription | null | undefined;
   subscriptionPlansWithPricingSystems: SubscriptionPlanWithPricingSystems[];
-  onManageSubscription: () => undefined | Promise<undefined>;
+  onManageSubscription: () => void;
   isManageSubscriptionLoading: boolean;
   simulateNativeMobileApp?: boolean;
 };
@@ -135,7 +135,7 @@ const SubscriptionDetails = ({
   const { openSubscriptionDialog } = React.useContext(
     SubscriptionSuggestionContext
   );
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const [
@@ -372,6 +372,7 @@ const SubscriptionDetails = ({
                           <Trans>
                             Thanks to the redemption code you've used, you have
                             this subscription enabled until{' '}
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                             {i18n.date(subscription.redemptionCodeValidUntil)}.
                           </Trans>
                         </Text>
@@ -454,6 +455,7 @@ const SubscriptionDetails = ({
                       onClick={() =>
                         openSubscriptionDialog({
                           analyticsMetadata: { reason: 'Consult profile' },
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'SubscriptionType | undefined'.
                           filter: key,
                         })
                       }

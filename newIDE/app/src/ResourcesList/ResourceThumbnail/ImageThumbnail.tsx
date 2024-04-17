@@ -98,10 +98,8 @@ const ImageThumbnail = (props: Props) => {
       />
       {props.selectable && (
         <div style={styles.checkboxContainer}>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             checked={!!props.selected}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onCheck={(e, check) => props.onSelect && props.onSelect(check)}
           />
         </div>

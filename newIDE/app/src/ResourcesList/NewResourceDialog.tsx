@@ -142,7 +142,6 @@ export const NewResourceDialog = ({
         importTabAdvancedResourceSources.length > 0 ? (
           <Column key="show-advanced-toggle">
             <Toggle
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
               onToggle={(e, check) => setIsShowingAdvanced(check)}
               toggled={isShowingAdvanced}
               labelPosition="right"

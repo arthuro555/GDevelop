@@ -111,22 +111,18 @@ export default class TextEditor extends React.Component<
             />
           </Line>
           <Line noMargin alignItems="center">
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Checkbox
               label={<Trans>Bold</Trans>}
               checked={textObjectConfiguration.isBold()}
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
               onCheck={(e, checked) => {
                 textObjectConfiguration.setBold(checked);
                 this.forceUpdate();
               }}
               style={styles.checkbox}
             />
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Checkbox
               label={<Trans>Italic</Trans>}
               checked={textObjectConfiguration.isItalic()}
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
               onCheck={(e, checked) => {
                 textObjectConfiguration.setItalic(checked);
                 this.forceUpdate();
@@ -212,11 +208,9 @@ export default class TextEditor extends React.Component<
         <Text size="block-title" noMargin>
           <Trans>Outline</Trans>
         </Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Enabled</Trans>}
           checked={textObjectConfiguration.isOutlineEnabled()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             textObjectConfiguration.setOutlineEnabled(checked);
             this.forceUpdate();
@@ -255,11 +249,9 @@ export default class TextEditor extends React.Component<
         <Text size="block-title" noMargin>
           <Trans>Shadow</Trans>
         </Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Enabled</Trans>}
           checked={textObjectConfiguration.isShadowEnabled()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             textObjectConfiguration.setShadowEnabled(checked);
             this.forceUpdate();

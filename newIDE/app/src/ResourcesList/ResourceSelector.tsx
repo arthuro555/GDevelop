@@ -99,7 +99,7 @@ const ResourceSelector = React.forwardRef<ResourceSelectorInterface, Props>(
     const autoCompleteRef = React.useRef<
       SemiControlledAutoCompleteInterface | null | undefined
     >(null);
-    // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
     const { showConfirmation } = useAlertDialog();
     const abortControllerRef = React.useRef<AbortController | null | undefined>(
       null
@@ -160,6 +160,7 @@ const ResourceSelector = React.forwardRef<ResourceSelectorInterface, Props>(
           .toJSArray();
         if (resourceKind) {
           const mainResourcesNames = allResourcesNames.filter(
+// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
             (resourceName) => {
               return (
                 resourcesManager.getResource(resourceName).getKind() ===
@@ -328,6 +329,7 @@ const ResourceSelector = React.forwardRef<ResourceSelectorInterface, Props>(
           triggerResourcesHaveChanged();
           forceUpdate();
         } catch (error) {
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
           if (error.name !== 'UserCancellationError') {
             console.error(
               'An exception was thrown when launching or reading resources from the external editor:',
@@ -411,6 +413,7 @@ const ResourceSelector = React.forwardRef<ResourceSelectorInterface, Props>(
                   margin={props.margin}
                   onRequestClose={props.onRequestClose}
                   onApply={props.onApply}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledAutoCompleteInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledAutoCompleteInterface> | undefined'.
                   ref={autoCompleteRef}
                   id={props.id}
                 />
@@ -467,7 +470,6 @@ const ResourceSelector = React.forwardRef<ResourceSelectorInterface, Props>(
               />
             ) : null}
             {externalEditorOpened && (
-              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <ExternalEditorOpenedDialog
                 onClose={cancelEditingWithExternalEditor}
               />

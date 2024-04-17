@@ -138,7 +138,6 @@ export const ExtensionStore = ({
           <Column>
             <Toggle
               onToggle={(e, check) =>
-                // @ts-expect-error - TS2571 - Object is of type 'unknown'.
                 preferences.setShowCommunityExtensions(check)
               }
               toggled={preferences.values.showCommunityExtensions}

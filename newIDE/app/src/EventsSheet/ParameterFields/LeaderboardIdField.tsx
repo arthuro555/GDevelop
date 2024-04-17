@@ -126,6 +126,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
               renderTextField={() =>
                 !isExpressionField ? (
                   <SelectField
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SelectFieldInterface | ExpressionField | null | undefined>' is not assignable to type 'Ref<SelectFieldInterface> | undefined'.
                     ref={field}
                     value={props.value}
                     onChange={onChangeSelectValue}
@@ -154,6 +155,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
                   </SelectField>
                 ) : (
                   <GenericExpressionField
+// @ts-expect-error - TS2769 - No overload matches this call.
                     ref={field}
                     expressionType="string"
                     {...props}

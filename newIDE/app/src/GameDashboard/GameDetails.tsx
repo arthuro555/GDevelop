@@ -142,7 +142,7 @@ const GameDetails = ({
     string | null | undefined
   >(null);
   const [isGameUpdating, setIsGameUpdating] = React.useState(false);
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showConfirmation, showAlert } = useAlertDialog();
 
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
@@ -178,6 +178,7 @@ const GameDetails = ({
       setPublicGame(publicGameResponse);
     } catch (err) {
       console.error(`Unable to load the game:`, err);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setPublicGameError(err);
     }
   }, [game]);
@@ -243,6 +244,7 @@ const GameDetails = ({
         } catch (error) {
           console.error(
             'Unable to update the game slug:',
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
             error.response || error.message
           );
           showErrorBox({
@@ -271,6 +273,7 @@ const GameDetails = ({
       } catch (error) {
         console.error(
           'Unable to update the game owners or authors:',
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
           error.response || error.message
         );
         showErrorBox({
@@ -290,6 +293,7 @@ const GameDetails = ({
     } catch (error) {
       console.error(
         'Unable to update the game:',
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
         error.response || error.message
       );
       showErrorBox({
@@ -406,7 +410,6 @@ const GameDetails = ({
             ) : null}
             {currentTab === 'details' ? (
               publicGameError ? (
-                // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <PlaceholderError onRetry={loadPublicGame}>
                   <Trans>There was an issue getting the game details.</Trans>{' '}
                   <Trans>
@@ -462,6 +465,7 @@ const GameDetails = ({
                     <Line expand justifyContent="flex-end" noMargin>
                       <Text>
                         <Trans>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                           Created on {i18n.date(game.createdAt * 1000)}
                         </Trans>
                       </Text>

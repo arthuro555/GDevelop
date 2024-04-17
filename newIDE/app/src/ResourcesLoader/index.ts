@@ -1,8 +1,8 @@
 import { addGDevelopResourceTokenIfRequired } from '../Utils/CrossOrigin';
 
 import optionalRequire from '../Utils/OptionalRequire';
-const electron = optionalRequire('electron');
-const path = optionalRequire('path');
+const electron = optionalRequire('electron') as typeof import('electron');
+const path = optionalRequire('path') as typeof import('path');
 
 class UrlsCache {
   projectCache: {

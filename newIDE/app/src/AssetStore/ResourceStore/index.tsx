@@ -94,6 +94,7 @@ export const ResourceStore = ({ onChoose, resourceKind }: Props) => {
           </ScrollView>
         </Column>
         <BoxSearchResults
+// @ts-expect-error - TS2322 - Type '{ baseSize: number; spacing: number; onRetry: () => void; error: Error | null | undefined; searchItems: Resource[] | null; renderSearchItem: (resource: any, size: any) => Element; }' is not assignable to type 'IntrinsicAttributes & BoxSearchResultsInterface & RefAttributes<Props<SearchItem>>'.
           baseSize={128}
           spacing={8}
           onRetry={fetchResourcesAndFilters}

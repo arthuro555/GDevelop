@@ -208,7 +208,6 @@ const ProductLicenseOptions = ({
 
   if (error) {
     return (
-      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <PlaceholderError onRetry={() => fetchProductLicenses({ productType })}>
         <Trans>
           Can't load the licenses. Verify your internet connection or try again

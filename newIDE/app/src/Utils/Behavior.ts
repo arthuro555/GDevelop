@@ -1,7 +1,7 @@
 import newNameGenerator from './NewNameGenerator';
 import Window from './Window';
 
-export const hasBehaviorWithType = (object: gd.Object, type: string) =>
+export const hasBehaviorWithType = (object: gd.gdObject, type: string) =>
   object
     .getAllBehaviorNames()
     .toJSArray()
@@ -12,7 +12,7 @@ export const hasBehaviorWithType = (object: gd.Object, type: string) =>
 
 export const addBehaviorToObject = (
   project: gd.Project,
-  object: gd.Object,
+  object: gd.gdObject,
   type: string,
   defaultName: string
 ): boolean => {
@@ -36,7 +36,7 @@ export const addBehaviorToObject = (
   return true;
 };
 
-export const listObjectBehaviorsTypes = (object: gd.Object): Array<string> =>
+export const listObjectBehaviorsTypes = (object: gd.gdObject): Array<string> =>
   object
     .getAllBehaviorNames()
     .toJSArray()

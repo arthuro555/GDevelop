@@ -102,31 +102,25 @@ export default function EventsBasedObjectEditor({
         }}
         fullWidth
       />
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Checkbox
         label={<Trans>Use 3D rendering</Trans>}
         checked={eventsBasedObject.isRenderedIn3D()}
-        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
         onCheck={(e, checked) => {
           eventsBasedObject.markAsRenderedIn3D(checked);
           onChange();
         }}
       />
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Checkbox
         label={<Trans>Has animations</Trans>}
         checked={eventsBasedObject.isAnimatable()}
-        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
         onCheck={(e, checked) => {
           eventsBasedObject.markAsAnimatable(checked);
           onChange();
         }}
       />
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Checkbox
         label={<Trans>Contains text</Trans>}
         checked={eventsBasedObject.isTextContainer()}
-        // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
         onCheck={(e, checked) => {
           eventsBasedObject.markAsTextContainer(checked);
           onChange();

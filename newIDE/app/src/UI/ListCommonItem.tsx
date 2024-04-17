@@ -23,6 +23,7 @@ export const AddListItem = (props: Props) => {
       <Line>
         <RaisedButton
           primary
+// @ts-expect-error - TS2322 - Type '(() => void) | undefined' is not assignable to type '() => void'.
           onClick={props.onClick}
           label={props.primaryText}
           id={props.id}

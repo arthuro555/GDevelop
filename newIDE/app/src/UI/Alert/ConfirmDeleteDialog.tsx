@@ -88,6 +88,7 @@ function ConfirmDeleteDialog(props: Props) {
 
             <DialogPrimaryButton
               key="confirm"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ButtonInterface | null | undefined>' is not assignable to type 'Ref<ButtonInterface> | undefined'.
               ref={confirmButtonRef}
               label={
                 props.confirmButtonLabel ? (

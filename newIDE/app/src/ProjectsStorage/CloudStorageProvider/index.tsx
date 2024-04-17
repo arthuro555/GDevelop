@@ -46,6 +46,7 @@ const isURL = (filename: string) => {
   );
 };
 
+// @ts-expect-error - TS2352 - Conversion of type '{ internalName: string; name: MessageDescriptor; renderIcon: (props: { size?: "small" | "medium" | undefined; }) => Element; hiddenInOpenDialog: true; needUserAuthentication: true; ... 4 more ...; createResourceOperations: ({ authenticatedUser }: { ...; }) => ({ project, resource, i18n, fileMetadata, informUser, }: ...' to type 'StorageProvider' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
 export default {
   internalName: 'Cloud',
   name: t`GDevelop Cloud`,

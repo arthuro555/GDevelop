@@ -1,6 +1,6 @@
 import optionalRequire from './OptionalRequire';
 const remote = optionalRequire('@electron/remote');
-const process = optionalRequire('process');
+const process = optionalRequire('process') as typeof import('process');
 
 let _isWindows = false;
 if (remote) {

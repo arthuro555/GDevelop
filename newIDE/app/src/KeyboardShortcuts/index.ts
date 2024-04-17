@@ -9,7 +9,7 @@ import isUserTyping from './IsUserTyping';
 import defaultShortcuts, { ShortcutMap } from './DefaultShortcuts';
 
 import optionalRequire from '../Utils/OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 // Valid action keys
 type KeyType = // A-Z

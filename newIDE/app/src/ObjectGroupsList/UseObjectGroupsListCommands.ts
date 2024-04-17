@@ -12,7 +12,6 @@ const useObjectGroupsListCommands = (props: Props) => {
   const { project, layout, onEditObjectGroup } = props;
 
   useCommandWithOptions('EDIT_OBJECT_GROUP', true, {
-    // @ts-expect-error - TS2322 - Type '() => { text: any; handler: () => void; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         [

@@ -125,6 +125,7 @@ const AchievementList = ({
                 <Column>
                   {achievementWithBadgeData.unlockedAt ? (
                     <Text>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                       {i18n.date(achievementWithBadgeData.unlockedAt)}
                     </Text>
                   ) : (

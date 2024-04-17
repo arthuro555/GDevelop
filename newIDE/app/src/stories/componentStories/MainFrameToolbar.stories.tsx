@@ -76,7 +76,7 @@ export const NoProjectOpen = () => (
 );
 
 export const NoProjectOpenWithFakeButtons = () => {
-  const toolbar = React.useRef<ToolbarInterface | null | undefined>(null);
+  const toolbar = React.useRef<ToolbarInterface>(null);
   React.useEffect(() => {
     if (toolbar.current) {
       toolbar.current.setEditorToolbar(fakeEditorToolbar);
@@ -165,13 +165,13 @@ export const ProjectOpenPreviewOverridenOnExternalLayout = () => (
 );
 
 export const ProjectOpenWithFakeButtons = () => {
-  const toolbar = React.useRef<ToolbarInterface | null | undefined>(null);
+  const toolbar = React.useRef<ToolbarInterface>(null);
   React.useEffect(() => {
     if (toolbar.current) {
       toolbar.current.setEditorToolbar(fakeEditorToolbar);
     }
   }, [toolbar]);
-  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   return <MainFrameToolbar {...defaultProps} ref={toolbar} isPreviewEnabled />;
 };
 

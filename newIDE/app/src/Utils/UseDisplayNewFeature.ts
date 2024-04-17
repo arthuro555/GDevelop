@@ -65,6 +65,7 @@ const useDisplayNewFeature = () => {
         });
         return;
       }
+// @ts-expect-error - TS2345 - Argument of type '{ [x: string]: { dates: [number]; } | { dates: [number, number]; }; }' is not assignable to parameter of type '{ [featureId: string]: { dates: [number]; }; }'.
       setNewFeaturesAcknowledgements({
         ...newFeaturesAcknowledgements,
         [featureId]: {

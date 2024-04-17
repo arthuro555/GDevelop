@@ -1,5 +1,4 @@
-
-import {Trans, t} from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import React from 'react';
 
 import FlatButton from '../../../../UI/FlatButton';
@@ -14,7 +13,6 @@ import PolygonsList from './PolygonsList';
 import CollisionMasksPreview from './CollisionMasksPreview';
 import ImagePreview, {
   isProjectImageResourceSmooth,
-
 } from '../../../../ResourcesList/ResourcePreview/ImagePreview';
 import {
   getCurrentElements,
@@ -29,7 +27,6 @@ import useForceUpdate from '../../../../Utils/UseForceUpdate';
 import EditorMosaic, {
   Editor,
   EditorMosaicNode,
-
 } from '../../../../UI/EditorMosaic';
 import { useResponsiveWindowSize } from '../../../../UI/Responsive/ResponsiveWindowMeasurer';
 
@@ -68,11 +65,11 @@ const verticalMosaicNodes: EditorMosaicNode = {
 };
 
 type Props = {
-  animations: gd.SpriteAnimationList,
-  resourcesLoader: typeof ResourcesLoader,
-  project: gd.Project,
-  onMasksUpdated?: () => void,
-  onCreateMatchingSpriteCollisionMask: () => Promise<void>
+  animations: gd.SpriteAnimationList;
+  resourcesLoader: typeof ResourcesLoader;
+  project: gd.Project;
+  onMasksUpdated?: () => void;
+  onCreateMatchingSpriteCollisionMask: () => Promise<void>;
 };
 
 const CollisionMasksEditor = ({
@@ -85,16 +82,18 @@ const CollisionMasksEditor = ({
   const [animationIndex, setAnimationIndex] = React.useState(0);
   const [directionIndex, setDirectionIndex] = React.useState(0);
   const [spriteIndex, setSpriteIndex] = React.useState(0);
-  const [
-    highlightedVerticePtr,
-    setHighlightedVerticePtr,
-  ] = React.useState<number | null | undefined>(null);
-  const [selectedVerticePtr, setSelectedVerticePtr] = React.useState<number | null | undefined>(null);
+  const [highlightedVerticePtr, setHighlightedVerticePtr] = React.useState<
+    number | null | undefined
+  >(null);
+  const [selectedVerticePtr, setSelectedVerticePtr] = React.useState<
+    number | null | undefined
+  >(null);
 
-  const [currentSpriteSize, setCurrentSpriteSize] = React.useState<[number, number]>([0, 0]);
+  const [currentSpriteSize, setCurrentSpriteSize] = React.useState<
+    [number, number]
+  >([0, 0]);
   const forceUpdate = useForceUpdate();
 
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
 
   const { animation, sprite } = getCurrentElements(
@@ -105,30 +104,26 @@ const CollisionMasksEditor = ({
   );
 
   // Note: sprite should always be defined so this value will be correctly initialised.
-  const [
-    sameCollisionMasksForAnimations,
-    setSameCollisionMasksForAnimations,
-  ] = React.useState(
-    sprite ? allObjectSpritesHaveSameCollisionMaskAs(sprite, animations) : false
-  );
+  const [sameCollisionMasksForAnimations, setSameCollisionMasksForAnimations] =
+    React.useState(
+      sprite
+        ? allObjectSpritesHaveSameCollisionMaskAs(sprite, animations)
+        : false
+    );
 
   // Note: sprite & animation should always be defined so this value will be correctly initialised.
-  const [
-    sameCollisionMasksForSprites,
-    setSameCollisionMasksForSprites,
-  ] = React.useState(
-    sprite && animation
-      ? allAnimationSpritesHaveSameCollisionMasksAs(sprite, animation)
-      : false
-  );
+  const [sameCollisionMasksForSprites, setSameCollisionMasksForSprites] =
+    React.useState(
+      sprite && animation
+        ? allAnimationSpritesHaveSameCollisionMasksAs(sprite, animation)
+        : false
+    );
 
   const updateCollisionMasks = React.useCallback(
-
     (sameCollisionMasksForAnimations, sameCollisionMasksForSprites) => {
       if (animation && sprite) {
         if (sameCollisionMasksForAnimations) {
-
-          mapFor(0, animations.getAnimationsCount(), i => {
+          mapFor(0, animations.getAnimationsCount(), (i) => {
             const otherAnimation = animations.getAnimation(i);
             copyAnimationsSpriteCollisionMasks(sprite, otherAnimation);
           });
@@ -143,18 +138,18 @@ const CollisionMasksEditor = ({
     [animation, sprite, animations, forceUpdate, onMasksUpdated]
   );
 
-  const chooseAnimation = index: number => {
+  const chooseAnimation = (index: number) => {
     setAnimationIndex(index);
     setDirectionIndex(0);
     setSpriteIndex(0);
   };
 
-  const chooseDirection = index: number => {
+  const chooseDirection = (index: number) => {
     setDirectionIndex(index);
     setSpriteIndex(0);
   };
 
-  const chooseSprite = index: number => {
+  const chooseSprite = (index: number) => {
     setSpriteIndex(index);
   };
 
@@ -162,16 +157,13 @@ const CollisionMasksEditor = ({
   // to enable the toggle.
   // Note: we do not recompute if all animations have the same collision masks, as we consider
   // that if the user has enabled/disabled this, they want to keep it that way.
-  React.useEffect(
-    () => {
-      if (!animation || !sprite) return;
+  React.useEffect(() => {
+    if (!animation || !sprite) return;
 
-      setSameCollisionMasksForSprites(
-        allAnimationSpritesHaveSameCollisionMasksAs(sprite, animation)
-      );
-    },
-    [animation, sprite]
-  );
+    setSameCollisionMasksForSprites(
+      allAnimationSpritesHaveSameCollisionMasksAs(sprite, animation)
+    );
+  }, [animation, sprite]);
 
   const onSetFullImageCollisionMask = React.useCallback(
     async (fullImage: boolean = true) => {
@@ -253,8 +245,7 @@ const CollisionMasksEditor = ({
   );
 
   const onSetAutomaticallyAdaptCollisionMasks = React.useCallback(
-
-    async value => {
+    async (value) => {
       // If enabling automatic while custom was selected, then ask for confirmation.
       if (value && sprite && !sprite.isFullImageCollisionMask()) {
         const answer = await showConfirmation({
@@ -286,30 +277,24 @@ const CollisionMasksEditor = ({
     ]
   );
 
-  const onUseCustomCollisionMask = React.useCallback(
-    () => {
-      onSetFullImageCollisionMask(false);
-      onSetAutomaticallyAdaptCollisionMasks(false);
-    },
-    [onSetFullImageCollisionMask, onSetAutomaticallyAdaptCollisionMasks]
-  );
+  const onUseCustomCollisionMask = React.useCallback(() => {
+    onSetFullImageCollisionMask(false);
+    onSetAutomaticallyAdaptCollisionMasks(false);
+  }, [onSetFullImageCollisionMask, onSetAutomaticallyAdaptCollisionMasks]);
 
-  const onPolygonsUpdated = React.useCallback(
-    () => {
-      // Revert to non-automatic collision mask.
-      animations.setAdaptCollisionMaskAutomatically(false);
-      updateCollisionMasks(
-        sameCollisionMasksForAnimations,
-        sameCollisionMasksForSprites
-      );
-    },
-    [
-      animations,
-      updateCollisionMasks,
+  const onPolygonsUpdated = React.useCallback(() => {
+    // Revert to non-automatic collision mask.
+    animations.setAdaptCollisionMaskAutomatically(false);
+    updateCollisionMasks(
       sameCollisionMasksForAnimations,
-      sameCollisionMasksForSprites,
-    ]
-  );
+      sameCollisionMasksForSprites
+    );
+  }, [
+    animations,
+    updateCollisionMasks,
+    sameCollisionMasksForAnimations,
+    sameCollisionMasksForSprites,
+  ]);
 
   // Keep panes vertical for small screens, side-by-side for large screens
   const { isMobile } = useResponsiveWindowSize();
@@ -319,14 +304,13 @@ const CollisionMasksEditor = ({
   const resourceName = sprite ? sprite.getImageName() : '';
 
   const editors: {
-    [key: string]: Editor
+    [key: string]: Editor;
   } = {
     preview: {
       type: 'primary',
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-
         <Paper background="medium" style={styles.leftContainer} square>
           <Column expand noMargin useFullHeight>
             <ImagePreview
@@ -341,10 +325,8 @@ const CollisionMasksEditor = ({
                 resourceName
               )}
               onImageSize={setCurrentSpriteSize}
-
-              renderOverlay={overlayProps =>
+              renderOverlay={(overlayProps) =>
                 sprite && (
-
                   <CollisionMasksPreview
                     {...overlayProps}
                     isDefaultBoundingBox={sprite.isFullImageCollisionMask()}
@@ -367,7 +349,6 @@ const CollisionMasksEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-
         <Paper background="medium" style={styles.rightContainer} square>
           <Column expand noMargin>
             <Line>
@@ -387,11 +368,9 @@ const CollisionMasksEditor = ({
                   }
                   setSameForAllSprites={setSameCollisionMasksForAllSprites}
                   setSameForAllAnimationsLabel={
-
                     <Trans>Share same collision masks for all animations</Trans>
                   }
                   setSameForAllSpritesLabel={
-
                     <Trans>
                       Share same collision masks for all sprites of this
                       animation
@@ -408,7 +387,6 @@ const CollisionMasksEditor = ({
               {!!sprite &&
                 !sprite.isFullImageCollisionMask() &&
                 !animations.adaptCollisionMaskAutomatically() && (
-
                   <React.Fragment>
                     <PolygonsList
                       polygons={sprite.getCustomCollisionMask()}
@@ -429,7 +407,6 @@ const CollisionMasksEditor = ({
               {!!sprite &&
                 !sprite.isFullImageCollisionMask() &&
                 animations.adaptCollisionMaskAutomatically() && (
-
                   <React.Fragment>
                     <AlertMessage kind="info">
                       <Trans>
@@ -439,7 +416,6 @@ const CollisionMasksEditor = ({
                     </AlertMessage>
                     <Line justifyContent="center">
                       <FlatButton
-
                         label={<Trans>Use a custom collision mask</Trans>}
                         primary={false}
                         onClick={onUseCustomCollisionMask}
@@ -448,7 +424,6 @@ const CollisionMasksEditor = ({
                   </React.Fragment>
                 )}
               {!!sprite && sprite.isFullImageCollisionMask() && (
-
                 <React.Fragment>
                   <AlertMessage kind="info">
                     <Trans>
@@ -458,7 +433,6 @@ const CollisionMasksEditor = ({
                   </AlertMessage>
                   <Line justifyContent="center">
                     <FlatButton
-
                       label={<Trans>Use a custom collision mask</Trans>}
                       primary={false}
                       onClick={onUseCustomCollisionMask}
@@ -467,7 +441,6 @@ const CollisionMasksEditor = ({
                 </React.Fragment>
               )}
               {!sprite && (
-
                 <EmptyMessage>
                   <Trans>
                     Choose an animation and frame to edit the collision masks
@@ -486,7 +459,6 @@ const CollisionMasksEditor = ({
       <EditorMosaic editors={editors} initialNodes={editorNodes} />
     </div>
   );
-
 };
 
 export default CollisionMasksEditor;

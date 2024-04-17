@@ -147,6 +147,7 @@ const PreviewAndShareButtons = React.memo<PreviewAndShareButtonsProps>(
             ) : null
           }
           id="toolbar-preview-button"
+// @ts-expect-error - TS2322 - Type '(i18n: I18nType) => ({ label: string; click: () => void; enabled: boolean; type?: undefined; checked?: undefined; } | { label: string; click: () => void; enabled?: undefined; type?: undefined; checked?: undefined; } | { ...; } | { ...; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
           buildMenuTemplate={previewBuildMenuTemplate}
         />
         <ResponsiveRaisedButton

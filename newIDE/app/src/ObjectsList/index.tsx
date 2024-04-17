@@ -134,7 +134,7 @@ const objectTypeToDefaultName = {
   'Video::VideoObject': 'NewVideo',
 } as const;
 
-export const objectWithContextReactDndType = 'GD_OBJECT_WITH_CONTEXT';
+export const objectWithContextReactDndType = 'gd.gdObject_WITH_CONTEXT';
 
 const getTreeViewItemName = (item: TreeViewItem) => {
   // @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'. | TS2339 - Property 'label' does not exist on type 'TreeViewItem'.
@@ -250,15 +250,15 @@ type Props = {
   beforeSetAsGlobalObject?: (groupName: string) => boolean;
   canSetAsGlobalObject?: boolean;
   onEditObject: (
-    object: gd.Object,
+    object: gd.gdObject,
     initialTab?: ObjectEditorTab | null | undefined
   ) => void;
   onExportAssets: () => void;
-  onObjectCreated: (arg1: gd.Object) => void;
+  onObjectCreated: (arg1: gd.gdObject) => void;
   onObjectFolderOrObjectWithContextSelected: (
     arg1?: ObjectFolderOrObjectWithContext | null | undefined
   ) => void;
-  onObjectPasted?: (arg1: gd.Object) => void;
+  onObjectPasted?: (arg1: gd.gdObject) => void;
   getValidatedObjectOrGroupName: (newName: string, global: boolean) => string;
   onAddObjectInstance: (objectName: string) => void;
   getThumbnail: (
@@ -300,7 +300,7 @@ const ObjectsList = React.forwardRef<ObjectsListInterface, Props>(
     const preferences = React.useContext(PreferencesContext);
     const { currentlyRunningInAppTutorial } =
       React.useContext(InAppTutorialContext);
-    // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+
     const { showDeleteConfirmation } = useAlertDialog();
     const treeViewRef = React.useRef<
       TreeViewInterface<TreeViewItem> | null | undefined
@@ -437,7 +437,7 @@ const ObjectsList = React.forwardRef<ObjectsListInterface, Props>(
     );
 
     const onObjectsAddedFromAssets = React.useCallback(
-      (objects: Array<gd.Object>) => {
+      (objects: Array<gd.gdObject>) => {
         objects.forEach((object) => {
           onObjectCreated(object);
         });
@@ -500,7 +500,7 @@ const ObjectsList = React.forwardRef<ObjectsListInterface, Props>(
         const { objectFolderOrObject, global } =
           objectFolderOrObjectWithContext;
 
-        let objectsToDelete: gd.Object[];
+        let objectsToDelete: gd.gdObject[];
         let folderToDelete: gd.ObjectFolderOrObject | null | undefined = null;
         let message: MessageDescriptor;
         let title: MessageDescriptor;
@@ -588,7 +588,6 @@ const ObjectsList = React.forwardRef<ObjectsListInterface, Props>(
     );
     React.useEffect(() => {
       if (keyboardShortcutsRef.current) {
-        // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
         keyboardShortcutsRef.current.setShortcutCallback('onDelete', () => {
           deleteObjectFolderOrObjectWithContext(
             selectedObjectFolderOrObjectsWithContext[0]
@@ -1688,36 +1687,53 @@ const ObjectsList = React.forwardRef<ObjectsListInterface, Props>(
                     <TreeView
                       key={listKey}
                       ref={treeViewRef}
+// @ts-expect-error - TS2322 - Type 'TreeViewItem[]' is not assignable to type 'ItemBaseAttributes[]'.
                       items={getTreeViewData(i18n)}
                       height={height}
                       forceAllOpened={!!currentlyRunningInAppTutorial}
                       searchText={searchText}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => ReactNode'.
                       getItemName={getTreeViewItemName}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => string | null' is not assignable to type '(arg1: ItemBaseAttributes) => string | null | undefined'.
                       getItemThumbnail={getTreeViewItemThumbnail}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => ItemBaseAttributes[] | null | undefined'.
                       getItemChildren={getTreeViewItemChildren}
                       multiSelect={false}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => string'.
                       getItemId={getTreeViewItemId}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, index: number) => string | undefined' is not assignable to type '(arg1: ItemBaseAttributes, index: number) => string | null | undefined'.
                       getItemHtmlId={getTreeViewItemHtmlId}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => { objectName: any; global: any; } | undefined' is not assignable to type '(arg1: ItemBaseAttributes) => HTMLDataset | null | undefined'.
                       getItemDataset={getTreeViewItemData}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(arg1: ItemBaseAttributes) => void'.
                       onEditItem={editItem}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(Item: ItemBaseAttributes) => void'.
                       onCollapseItem={onCollapseItem}
+// @ts-expect-error - TS2322 - Type 'ObjectFolderOrObjectWithContext[]' is not assignable to type 'readonly ItemBaseAttributes[]'.
                       selectedItems={selectedObjectFolderOrObjectsWithContext}
                       onSelectItems={(items) => {
                         if (!items) selectObjectFolderOrObjectWithContext(null);
                         const itemToSelect = items[0];
                         if (itemToSelect.isRoot) return;
                         selectObjectFolderOrObjectWithContext(
+// @ts-expect-error - TS2345 - Argument of type 'ItemBaseAttributes' is not assignable to parameter of type 'ObjectFolderOrObjectWithContext'.
                           itemToSelect || null
                         );
                       }}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, newName: string) => void' is not assignable to type '(arg1: ItemBaseAttributes, newName: string) => void'.
                       onRenameItem={rename}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, index: number) => ({ label: string; click: () => void; accelerator?: undefined; type?: undefined; enabled?: undefined; visible?: undefined; submenu?: undefined; } | { label: string; click: () => void; accelerator: string; type?: undefined; enabled?: undefined; visible?: undefined; submenu?: unde...' is not assignable to type '(arg1: ItemBaseAttributes, index: number) => any'.
                       buildMenuTemplate={renderObjectMenuTemplate(i18n)}
                       onMoveSelectionToItem={(destinationItem, where) =>
+// @ts-expect-error - TS2345 - Argument of type 'ItemBaseAttributes' is not assignable to parameter of type 'TreeViewItem'.
                         moveSelectionTo(i18n, destinationItem, where)
                       }
+// @ts-expect-error - TS2322 - Type '(destinationItem: TreeViewItem) => boolean' is not assignable to type '(destinationItem: ItemBaseAttributes, where: "inside" | "after" | "before") => boolean | null | undefined'.
                       canMoveSelectionToItem={canMoveSelectionTo}
                       reactDndType={objectWithContextReactDndType}
+// @ts-expect-error - TS2322 - Type '(string | null)[]' is not assignable to type 'string[]'.
                       initiallyOpenedNodeIds={initiallyOpenedNodeIds}
+// @ts-expect-error - TS2322 - Type '{ onGetItemInside: (item: any) => { objectFolderOrObject: any; global: any; } | null; onGetItemOutside: (item: any) => { objectFolderOrObject: any; global: any; } | null; }' is not assignable to type '{ onGetItemInside: (item: ItemBaseAttributes) => ItemBaseAttributes | null | undefined; onGetItemOutside: (item: ItemBaseAttributes) => ItemBaseAttributes | ... 1 more ... | undefined; }'.
                       arrowKeyNavigationProps={arrowKeyNavigationProps}
                       shouldSelectUponContextMenuOpening
                     />

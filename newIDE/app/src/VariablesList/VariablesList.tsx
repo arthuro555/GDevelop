@@ -577,10 +577,12 @@ const VariablesList = (props: Props) => {
   const topLevelVariableValueInputRefs = React.useRef<{
     [key: number]: SimpleTextFieldInterface;
   }>({});
+// @ts-expect-error - TS2345 - Argument of type 'MutableRefObject<{ [key: number]: SimpleTextFieldInterface; }>' is not assignable to parameter of type '{ current: { [identifier: number]: { readonly focus: (arg1?: { caretPosition: number | "end" | null | undefined; } | null | undefined) => void; }; }; }'.
   const refocusNameField = useRefocusField(topLevelVariableNameInputRefs);
+// @ts-expect-error - TS2345 - Argument of type 'MutableRefObject<{ [key: number]: SimpleTextFieldInterface; }>' is not assignable to parameter of type '{ current: { [identifier: number]: { readonly focus: (arg1?: { caretPosition: number | "end" | null | undefined; } | null | undefined) => void; }; }; }'.
   const refocusValueField = useRefocusField(topLevelVariableValueInputRefs);
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-  const draggedNodeId = React.useRef<string | null | undefined>(null);
+  const draggedNodeId = React.useRef<string>(null);
   const forceUpdate = useForceUpdate();
 
   const triggerSearch = React.useCallback(() => {
@@ -674,7 +676,7 @@ const VariablesList = (props: Props) => {
 
   const keyboardShortcuts = new KeyboardShortcuts({
     isActive: () => true,
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'. | TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
     shortcutCallbacks: { onUndo: _undo, onRedo: _redo },
   });
 
@@ -1673,6 +1675,7 @@ const VariablesList = (props: Props) => {
             <Measure
               bounds
               onResize={(contentRect) => {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
                 setContainerWidth(contentRect.bounds.width);
               }}
             >

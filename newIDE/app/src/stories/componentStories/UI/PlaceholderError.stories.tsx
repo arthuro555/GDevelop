@@ -22,7 +22,6 @@ export const Default = () => {
 };
 export const WithRetryButton = () => {
   return (
-    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <PlaceholderError onRetry={() => action('retry')()}>
       <Text>This is an error, but you can retry the failed action</Text>
     </PlaceholderError>

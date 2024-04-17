@@ -127,12 +127,12 @@ const Model3DEditor = ({
   resourceManagementProps,
   renderObjectNameField,
 }: EditorProps) => {
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
 
   const [justAddedAnimationName, setJustAddedAnimationName] = React.useState<
     string | null | undefined
   >(null);
-  const justAddedAnimationElement = React.useRef<any | null | undefined>(null);
+  const justAddedAnimationElement = React.useRef<any>(null);
 
   React.useEffect(() => {
     if (
@@ -145,7 +145,7 @@ const Model3DEditor = ({
       justAddedAnimationElement.current = null;
     }
   }, [justAddedAnimationName]);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const draggedAnimationIndex = React.useRef<number | null>(null);
@@ -469,7 +469,6 @@ const Model3DEditor = ({
 
   return (
     <>
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ScrollView ref={scrollView}>
         <ColumnStackLayout noMargin>
           {renderObjectNameField && renderObjectNameField()}
@@ -760,11 +759,9 @@ const Model3DEditor = ({
                                 >
                                   {sourceSelectOptions}
                                 </SelectField>
-                                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <Checkbox
                                   label={<Trans>Loop</Trans>}
                                   checked={animation.shouldLoop()}
-                                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                                   onCheck={(e, checked) => {
                                     animation.setShouldLoop(checked);
                                     forceUpdate();

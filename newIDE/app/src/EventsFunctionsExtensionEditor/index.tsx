@@ -101,7 +101,7 @@ type State = {
   extensionFunctionSelectorDialogOpen: boolean;
   onAddEventsFunctionCb: (
     parameters?: EventsFunctionCreationParameters | null | undefined
-  ) => void | null | undefined;
+  ) => void;
 };
 
 const extensionEditIconReactNode = <ExtensionEditIcon />;
@@ -780,7 +780,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
     this.setState(
       {
         extensionFunctionSelectorDialogOpen: false,
-        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void'.
         onAddEventsFunctionCb: null,
       },
       () => {
@@ -846,7 +846,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
     this.setState(
       {
         behaviorMethodSelectorDialogOpen: false,
-        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void'.
         onAddEventsFunctionCb: null,
       },
       () => {
@@ -863,7 +863,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
     this.setState(
       {
         objectMethodSelectorDialogOpen: false,
-        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void'.
         onAddEventsFunctionCb: null,
       },
       () => {
@@ -1073,6 +1073,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
       this.state;
     if (selectedEventsBasedBehavior) {
       const eventFunctionContainer =
+// @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
         selectedEventsBasedBehavior.getEventsFunctions();
       for (
         let index = 0;
@@ -1088,6 +1089,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
       }
     } else if (selectedEventsBasedObject) {
       const eventFunctionContainer =
+// @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
         selectedEventsBasedObject.getEventsFunctions();
       for (
         let index = 0;
@@ -1352,8 +1354,10 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
             {({ i18n }) => (
               <EventsFunctionsListWithErrorBoundary
                 ref={(eventsFunctionList) =>
+// @ts-expect-error - TS2322 - Type 'Props | null' is not assignable to type 'EventsFunctionsListInterface | null | undefined'. | TS2322 - Type 'Props | null' is not assignable to type 'EventsFunctionsListInterface | null | undefined'.
                   (this.eventsFunctionList = eventsFunctionList)
                 }
+// @ts-expect-error - TS2322 - Type '{ ref: (eventsFunctionList: Props | null) => Props | null; project: gd.Project; eventsFunctionsExtension: gd.EventsFunctionsExtension; unsavedChanges: UnsavedChanges | null | undefined; ... 17 more ...; onEventsBasedObjectRenamed: () => void; }' is not assignable to type 'IntrinsicAttributes & EventsFunctionsListInterface & RefAttributes<Props>'.
                 project={project}
                 eventsFunctionsExtension={eventsFunctionsExtension}
                 unsavedChanges={this.props.unsavedChanges}
@@ -1413,6 +1417,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
                 ref={(editorNavigator) =>
                   (this._editorNavigator = editorNavigator)
                 }
+// @ts-expect-error - TS2322 - Type '{ readonly parameters: { readonly type: "primary"; readonly title: MessageDescriptor; readonly toolbarControls: readonly []; readonly renderEditor: () => JSX.Element; }; readonly 'events-sheet': { ...; }; readonly 'functions-list': { ...; }; }' is not assignable to type '{ [key: string]: Editor; }'.
                 editors={editors}
                 initialEditorName={'functions-list'}
                 transitions={{
@@ -1447,6 +1452,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
                 }) => (
                   <EditorMosaic
                     ref={(editorMosaic) => (this._editorMosaic = editorMosaic)}
+// @ts-expect-error - TS2322 - Type '{ readonly parameters: { readonly type: "primary"; readonly title: MessageDescriptor; readonly toolbarControls: readonly []; readonly renderEditor: () => JSX.Element; }; readonly 'events-sheet': { ...; }; readonly 'functions-list': { ...; }; }' is not assignable to type '{ [key: string]: Editor; }'.
                     editors={editors}
                     onPersistNodes={(node) =>
                       setDefaultEditorMosaicNode(
@@ -1454,10 +1460,12 @@ export default class EventsFunctionsExtensionEditor extends React.Component<
                         node
                       )
                     }
+// @ts-expect-error - TS2322 - Type 'EditorMosaicNode | { direction: string; first: string; second: { direction: string; first: string; second: string; splitPercentage: number; }; splitPercentage: number; }' is not assignable to type 'EditorMosaicNode'.
                     initialNodes={
                       // Settings from older release may not have the unified
                       // function list.
                       mosaicContainsNode(
+// @ts-expect-error - TS2345 - Argument of type 'EditorMosaicNode | { direction: string; first: string; second: { direction: string; first: string; second: string; splitPercentage: number; }; splitPercentage: number; }' is not assignable to parameter of type 'EditorMosaicNode | null | undefined'.
                         getDefaultEditorMosaicNode(
                           'events-functions-extension-editor'
                         ) || getInitialMosaicEditorNodes(),

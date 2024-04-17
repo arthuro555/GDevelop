@@ -241,6 +241,7 @@ const FeedbackCard = ({
             }
             header={
               <BackgroundText style={styles.backgroundText}>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                 <Trans>{i18n.date(comment.createdAt)}</Trans>
               </BackgroundText>
             }

@@ -147,6 +147,7 @@ const useEditorTabsStateSaving = ({
       }
 
       for (const editorOpeningOption of editorsOpeningOptions) {
+// @ts-expect-error - TS2345 - Argument of type 'EditorOpeningOptions | null' is not assignable to parameter of type 'EditorOpeningOptions'.
         newEditorTabs = openEditorTab(newEditorTabs, editorOpeningOption);
       }
       newEditorTabs = changeCurrentTab(

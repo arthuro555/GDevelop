@@ -1,5 +1,4 @@
-
-import {t, Trans} from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 
 import { I18n as I18nType } from '@lingui/core';
 import React from 'react';
@@ -55,13 +54,13 @@ const styles = {
 } as const;
 
 type Props = {
-  animationName: string,
-  direction: gd.Direction,
-  resourcesLoader: typeof ResourcesLoader,
-  project: gd.Project,
-  resourceExternalEditors: Array<ResourceExternalEditor>,
-  onEditWith: (i18n: I18nType, arg2: ResourceExternalEditor) => Promise<void>,
-  onDirectionUpdated?: () => void
+  animationName: string;
+  direction: gd.Direction;
+  resourcesLoader: typeof ResourcesLoader;
+  project: gd.Project;
+  resourceExternalEditors: Array<ResourceExternalEditor>;
+  onEditWith: (i18n: I18nType, arg2: ResourceExternalEditor) => Promise<void>;
+  onDirectionUpdated?: () => void;
 };
 
 const DirectionTools = ({
@@ -83,9 +82,10 @@ const DirectionTools = ({
   const hasNoSprites = direction.getSpritesCount() === 0;
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
 
-  const saveTimeBetweenFrames = newTimeBetweenFramesString: number => {
+  const saveTimeBetweenFrames = (newTimeBetweenFramesString: number) => {
     if (!newTimeBetweenFramesString) return;
     const newTimeBetweenFrames = Math.max(
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
       parseFloat(newTimeBetweenFramesString),
       0.00001
     );
@@ -112,7 +112,6 @@ const DirectionTools = ({
   };
 
   const imageResourceExternalEditors = resourceExternalEditors.filter(
-// @ts-expect-error - TS7031 - Binding element 'kind' implicitly has an 'any' type.
     ({ kind }) => kind === 'image'
   );
 
@@ -137,8 +136,8 @@ const DirectionTools = ({
                         ? t`Edit`
                         : t`Create`
                       : hasSprites
-                      ? imageResourceExternalEditors[0].editDisplayName
-                      : imageResourceExternalEditors[0].createDisplayName
+                        ? imageResourceExternalEditors[0].editDisplayName
+                        : imageResourceExternalEditors[0].createDisplayName
                   )}
                   icon={<Edit />}
                   onClick={() =>
@@ -175,6 +174,7 @@ const DirectionTools = ({
                 max={5}
                 commitOnBlur
                 value={timeBetweenFramesFormatted}
+// @ts-expect-error - TS2322 - Type '(newTimeBetweenFramesString: number) => void' is not assignable to type '(arg1: string) => void'.
                 onChange={saveTimeBetweenFrames}
                 disabled={hasNoSprites}
               />
@@ -233,7 +233,6 @@ const DirectionTools = ({
       )}
     </I18n>
   );
-
 };
 
 export default DirectionTools;

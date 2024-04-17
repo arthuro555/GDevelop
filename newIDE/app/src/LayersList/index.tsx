@@ -333,6 +333,7 @@ const LayersListWithErrorBoundary = React.forwardRef<
     componentTitle={<Trans>Layers list</Trans>}
     scope="scene-editor-layers-list"
   >
+{ /* @ts-expect-error - TS2322 - Type 'ForwardedRef<Props>' is not assignable to type 'Ref<LayersListInterface> | undefined'. */}
     <LayersList ref={ref} {...props} />
   </ErrorBoundary>
 ));

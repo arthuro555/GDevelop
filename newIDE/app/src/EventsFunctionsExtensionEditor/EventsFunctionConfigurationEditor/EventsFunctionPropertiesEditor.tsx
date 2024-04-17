@@ -261,6 +261,7 @@ export const EventsFunctionPropertiesEditor = ({
           <Measure
             bounds
             onResize={(contentRect) => {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
               setContainerWidth(contentRect.bounds.width);
             }}
           >
@@ -529,11 +530,9 @@ export const EventsFunctionPropertiesEditor = ({
                       getLastObjectParameterObjectType={() => ''}
                     />
                   )}
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>Private</Trans>}
                     checked={eventsFunction.isPrivate()}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       eventsFunction.setPrivate(checked);
                       if (onConfigurationUpdated)
@@ -541,11 +540,9 @@ export const EventsFunctionPropertiesEditor = ({
                       forceUpdate();
                     }}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Checkbox
                     label={<Trans>Asynchronous</Trans>}
                     checked={eventsFunction.isAsync()}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       eventsFunction.setAsync(checked);
                       if (onConfigurationUpdated)

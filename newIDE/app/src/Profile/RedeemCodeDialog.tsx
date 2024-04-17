@@ -90,6 +90,7 @@ export default function RedeemCodeDialog({
       // that a redemption happened - so some update should be fetched.
       onClose(/*hasJustRedeemedCode=*/ true);
     } catch (error) {
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setError(error);
     } finally {
       setIsLoading(false);
@@ -131,7 +132,6 @@ export default function RedeemCodeDialog({
           maxWidth="sm"
           open
         >
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Form onSubmit={onRedeemCode} name="redeemSubscriptionCoupon">
             <ColumnStackLayout noMargin>
               <SemiControlledTextField
@@ -150,6 +150,7 @@ export default function RedeemCodeDialog({
                     <Trans>
                       You currently have a subscription, applied thanks to a
                       redemption code, valid until{' '}
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                       {i18n.date(subscription.redemptionCodeValidUntil)}. If you
                       redeem another code, your existing subscription will be
                       canceled and not redeemable anymore!

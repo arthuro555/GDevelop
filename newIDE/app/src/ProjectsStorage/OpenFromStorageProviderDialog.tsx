@@ -19,7 +19,7 @@ import { Column, Line } from '../UI/Grid';
 import StorageProviderListItem from './StorageProviderListItem';
 
 import AlertMessage from '../UI/AlertMessage';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   storageProviders: Array<StorageProvider>;

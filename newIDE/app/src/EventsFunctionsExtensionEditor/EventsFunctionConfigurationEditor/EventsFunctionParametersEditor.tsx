@@ -1,5 +1,4 @@
-
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import { t } from '@lingui/macro';
 
@@ -39,36 +38,35 @@ import ThreeDotsMenu from '../../UI/CustomSvgIcons/ThreeDotsMenu';
 import Add from '../../UI/CustomSvgIcons/Add';
 import useForceUpdate from '../../Utils/UseForceUpdate';
 
-
 type Props = {
-  project: gd.Project,
-  eventsFunction: gd.EventsFunction,
-  eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
-  eventsBasedObject: gd.EventsBasedObject | null | undefined,
-  eventsFunctionsContainer: gd.EventsFunctionsContainer | null | undefined,
-  onParametersUpdated: () => void,
-  helpPagePath?: string,
-  freezeParameters?: boolean,
+  project: gd.Project;
+  eventsFunction: gd.EventsFunction;
+  eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+  eventsBasedObject: gd.EventsBasedObject | null | undefined;
+  eventsFunctionsContainer: gd.EventsFunctionsContainer | null | undefined;
+  onParametersUpdated: () => void;
+  helpPagePath?: string;
+  freezeParameters?: boolean;
   onMoveFreeEventsParameter?: (
     eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: () => void,
-  ) => void,
+    done: () => void
+  ) => void;
   onMoveBehaviorEventsParameter?: (
     eventsBasedBehavior: gd.EventsBasedBehavior,
     eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: (arg1: boolean) => void,
-  ) => void,
+    done: (arg1: boolean) => void
+  ) => void;
   onMoveObjectEventsParameter?: (
     eventsBasedObject: gd.EventsBasedObject,
     eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: (arg1: boolean) => void,
-  ) => void
+    done: (arg1: boolean) => void
+  ) => void;
 };
 
 const styles = {
@@ -90,12 +88,10 @@ export const EventsFunctionParametersEditor = ({
   onMoveBehaviorEventsParameter,
   onMoveObjectEventsParameter,
 }: Props) => {
-  const [
-    longDescriptionShownIndexes,
-    setLongDescriptionShownIndexes,
-  ] = React.useState<{
-    [key: number]: boolean
-  }>({});
+  const [longDescriptionShownIndexes, setLongDescriptionShownIndexes] =
+    React.useState<{
+      [key: number]: boolean;
+    }>({});
 
   const forceUpdate = useForceUpdate();
 
@@ -103,12 +99,13 @@ export const EventsFunctionParametersEditor = ({
     (index: number) => {
       const parameters = eventsFunction.getParameters();
 
-      const existingParameterNames = mapVector(parameters, parameterMetadata =>
-        parameterMetadata.getName()
+      const existingParameterNames = mapVector(
+        parameters,
+        (parameterMetadata) => parameterMetadata.getName()
       );
       const newParameter = new gd.ParameterMetadata();
       newParameter.setType('objectList');
-      const newName = newNameGenerator('Parameter', name =>
+      const newName = newNameGenerator('Parameter', (name) =>
         existingParameterNames.includes(name)
       );
       newParameter.setName(newName);
@@ -120,13 +117,10 @@ export const EventsFunctionParametersEditor = ({
     [eventsFunction, forceUpdate, onParametersUpdated]
   );
 
-  const addParameter = React.useCallback(
-    () => {
-      const parameters = eventsFunction.getParameters();
-      addParameterAt(parameters.size());
-    },
-    [addParameterAt, eventsFunction]
-  );
+  const addParameter = React.useCallback(() => {
+    const parameters = eventsFunction.getParameters();
+    addParameterAt(parameters.size());
+  }, [addParameterAt, eventsFunction]);
 
   const removeParameter = React.useCallback(
     (index: number) => {
@@ -176,7 +170,7 @@ export const EventsFunctionParametersEditor = ({
             eventsFunction,
             oldIndex,
             newIndex,
-            isDone => {
+            (isDone) => {
               if (!isDone) return;
               gd.swapInVectorParameterMetadata(parameters, oldIndex, newIndex);
               forceUpdate();
@@ -190,7 +184,7 @@ export const EventsFunctionParametersEditor = ({
             eventsFunction,
             oldIndex,
             newIndex,
-            isDone => {
+            (isDone) => {
               if (!isDone) return;
               gd.swapInVectorParameterMetadata(parameters, oldIndex, newIndex);
               forceUpdate();
@@ -203,8 +197,8 @@ export const EventsFunctionParametersEditor = ({
             eventsFunction,
             oldIndex,
             newIndex,
-// @ts-expect-error - TS7006 - Parameter 'isDone' implicitly has an 'any' type. | TS2345 - Argument of type '(isDone: any) => void' is not assignable to parameter of type '() => void'.
-            isDone => {
+            // @ts-expect-error - TS7006 - Parameter 'isDone' implicitly has an 'any' type. | TS2345 - Argument of type '(isDone: any) => void' is not assignable to parameter of type '() => void'.
+            (isDone) => {
               if (!isDone) return;
               gd.swapInVectorParameterMetadata(parameters, oldIndex, newIndex);
               forceUpdate();
@@ -234,9 +228,9 @@ export const EventsFunctionParametersEditor = ({
   const firstParameterIndex = eventsBasedBehavior
     ? 2
     : eventsBasedObject
-    ? 1
-    : 0;
-  const isParameterDisabled = index: number => {
+      ? 1
+      : 0;
+  const isParameterDisabled = (index: number) => {
     return (
       eventsFunction.getFunctionType() ===
         gd.EventsFunction.ActionWithOperator ||
@@ -248,7 +242,7 @@ export const EventsFunctionParametersEditor = ({
   // so we even hide their description and type to avoid cluttering the interface.
   // Same thing for an object which has mandatory Object parameter.
   const typeShownFirstIndex = firstParameterIndex;
-  const isParameterTypeShown = index: number => {
+  const isParameterTypeShown = (index: number) => {
     return index >= typeShownFirstIndex;
   };
   // The first two parameters of a behavior method should not be changed at all,
@@ -261,15 +255,13 @@ export const EventsFunctionParametersEditor = ({
       : 0);
 
   const isParameterDescriptionShown = React.useCallback(
-
-    index => {
+    (index) => {
       return index >= labelShownFirstIndex;
     },
     [labelShownFirstIndex]
   );
 
   const isParameterLongDescriptionShown = React.useCallback(
-
     (parameter, index): boolean => {
       return (
         isParameterDescriptionShown(index) &&
@@ -283,8 +275,8 @@ export const EventsFunctionParametersEditor = ({
   const parametersIndexOffset = eventsBasedBehavior
     ? ParametersIndexOffsets.BehaviorFunction
     : eventsBasedObject
-    ? ParametersIndexOffsets.ObjectFunction
-    : ParametersIndexOffsets.FreeFunction;
+      ? ParametersIndexOffsets.ObjectFunction
+      : ParametersIndexOffsets.FreeFunction;
 
   const isABehaviorLifecycleEventsFunction =
     !!eventsBasedBehavior &&
@@ -353,7 +345,7 @@ export const EventsFunctionParametersEditor = ({
                           margin="none"
                           translatableHintText={t`Enter the parameter name (mandatory)`}
                           value={parameter.getName()}
-                          onChange={text => {
+                          onChange={(text) => {
                             parameter.setName(gd.Project.getSafeName(text));
                             forceUpdate();
                             onParametersUpdated();
@@ -435,7 +427,7 @@ export const EventsFunctionParametersEditor = ({
                             floatingLabelText={<Trans>Label</Trans>}
                             floatingLabelFixed
                             value={parameter.getDescription()}
-                            onChange={text => {
+                            onChange={(text) => {
                               parameter.setDescription(text);
                               forceUpdate();
                             }}
@@ -452,7 +444,7 @@ export const EventsFunctionParametersEditor = ({
                             floatingLabelText={<Trans>Long description</Trans>}
                             floatingLabelFixed
                             value={parameter.getLongDescription()}
-                            onChange={text => {
+                            onChange={(text) => {
                               parameter.setLongDescription(text);
                               forceUpdate();
                             }}
@@ -503,5 +495,4 @@ export const EventsFunctionParametersEditor = ({
       )}
     </I18n>
   );
-
 };

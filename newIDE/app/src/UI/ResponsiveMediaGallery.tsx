@@ -166,6 +166,7 @@ const ResponsiveMediaGallery = ({
         <Measure
           bounds
           onResize={(contentRect) => {
+// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
             setMobileGridClientWidth(contentRect.bounds.width);
           }}
         >

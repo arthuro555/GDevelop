@@ -2855,23 +2855,23 @@ export function removeFromVectorVector2f(index: number): void;
 
 export function moveVector2fInVector(oldIndex: number, newIndex: number): void;
 
-export function asStandardEvent(object: Event): StandardEvent;
+export function asStandardEvent(object: BaseEvent): StandardEvent;
 
-export function asRepeatEvent(object: Event): RepeatEvent;
+export function asRepeatEvent(object: BaseEvent): RepeatEvent;
 
-export function asWhileEvent(object: Event): WhileEvent;
+export function asWhileEvent(object: BaseEvent): WhileEvent;
 
-export function asForEachEvent(object: Event): ForEachEvent;
+export function asForEachEvent(object: BaseEvent): ForEachEvent;
 
-export function asForEachChildVariableEvent(object: Event): ForEachChildVariableEvent;
+export function asForEachChildVariableEvent(object: BaseEvent): ForEachChildVariableEvent;
 
-export function asCommentEvent(object: Event): CommentEvent;
+export function asCommentEvent(object: BaseEvent): CommentEvent;
 
-export function asGroupEvent(object: Event): GroupEvent;
+export function asGroupEvent(object: BaseEvent): GroupEvent;
 
-export function asLinkEvent(object: Event): LinkEvent;
+export function asLinkEvent(object: BaseEvent): LinkEvent;
 
-export function asJsCodeEvent(object: Event): JsCodeEvent;
+export function asJsCodeEvent(object: BaseEvent): JsCodeEvent;
 
 export function asPlatform(object: JsPlatform): Platform;
 

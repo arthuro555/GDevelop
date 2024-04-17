@@ -7,6 +7,7 @@ describe('Array', () => {
       expect(mergeArraysPerGroup([], [], 1, 1)).toEqual([]);
       expect(mergeArraysPerGroup([1, 2, 3, 4], [], 2, 1)).toEqual([1, 2, 3, 4]);
       expect(mergeArraysPerGroup([], [1, 2, 3, 4], 2, 1)).toEqual([1, 2, 3, 4]);
+// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'.
       expect(mergeArraysPerGroup(['a'], [1, 2, 3, 4], 2, 1)).toEqual([
         'a',
         1,
@@ -14,6 +15,7 @@ describe('Array', () => {
         3,
         4,
       ]);
+// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'. | TS2322 - Type 'number' is not assignable to type 'string'.
       expect(mergeArraysPerGroup(['a'], [1, 2, 3, 4], 2, 1)).toEqual([
         'a',
         1,

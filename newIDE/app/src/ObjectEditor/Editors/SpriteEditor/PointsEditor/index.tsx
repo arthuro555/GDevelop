@@ -1,5 +1,4 @@
-
-import {Trans, t} from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import React from 'react';
 
 import EmptyMessage from '../../../../UI/EmptyMessage';
@@ -12,7 +11,6 @@ import PointsList from './PointsList';
 import PointsPreview from './PointsPreview';
 import ImagePreview, {
   isProjectImageResourceSmooth,
-
 } from '../../../../ResourcesList/ResourcePreview/ImagePreview';
 import {
   getCurrentElements,
@@ -27,7 +25,6 @@ import useForceUpdate from '../../../../Utils/UseForceUpdate';
 import EditorMosaic, {
   Editor,
   EditorMosaicNode,
-
 } from '../../../../UI/EditorMosaic';
 import { useResponsiveWindowSize } from '../../../../UI/Responsive/ResponsiveWindowMeasurer';
 
@@ -62,11 +59,11 @@ const verticalMosaicNodes: EditorMosaicNode = {
 };
 
 type Props = {
-  animations: gd.SpriteAnimationList,
-  resourcesLoader: typeof ResourcesLoader,
-  project: gd.Project,
-  onPointsUpdated?: () => void,
-  onRenamedPoint: (oldName: string, newName: string) => void
+  animations: gd.SpriteAnimationList;
+  resourcesLoader: typeof ResourcesLoader;
+  project: gd.Project;
+  onPointsUpdated?: () => void;
+  onRenamedPoint: (oldName: string, newName: string) => void;
 };
 
 const PointsEditor = ({
@@ -79,16 +76,19 @@ const PointsEditor = ({
   const [animationIndex, setAnimationIndex] = React.useState(0);
   const [directionIndex, setDirectionIndex] = React.useState(0);
   const [spriteIndex, setSpriteIndex] = React.useState(0);
-  const [selectedPointName, setSelectedPointName] = React.useState<string | null | undefined>(null);
-  const [
-    highlightedPointName,
-    setHighlightedPointName,
-  ] = React.useState<string | null | undefined>(null);
+  const [selectedPointName, setSelectedPointName] = React.useState<
+    string | null | undefined
+  >(null);
+  const [highlightedPointName, setHighlightedPointName] = React.useState<
+    string | null | undefined
+  >(null);
 
-  const [currentSpriteSize, setCurrentSpriteSize] = React.useState<[number, number]>([0, 0]);
+  const [currentSpriteSize, setCurrentSpriteSize] = React.useState<
+    [number, number]
+  >([0, 0]);
 
   const forceUpdate = useForceUpdate();
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showConfirmation } = useAlertDialog();
 
   const { animation, sprite } = getCurrentElements(
@@ -113,8 +113,7 @@ const PointsEditor = ({
     (samePointsForAnimations: boolean, samePointsForSprites: boolean) => {
       if (animation && sprite) {
         if (samePointsForAnimations) {
-
-          mapFor(0, animations.getAnimationsCount(), i => {
+          mapFor(0, animations.getAnimationsCount(), (i) => {
             const otherAnimation = animations.getAnimation(i);
             copyAnimationsSpritePoints(sprite, otherAnimation);
           });
@@ -129,18 +128,18 @@ const PointsEditor = ({
     [animation, sprite, animations, forceUpdate, onPointsUpdated]
   );
 
-  const chooseAnimation = index: number => {
+  const chooseAnimation = (index: number) => {
     setAnimationIndex(index);
     setDirectionIndex(0);
     setSpriteIndex(0);
   };
 
-  const chooseDirection = index: number => {
+  const chooseDirection = (index: number) => {
     setDirectionIndex(index);
     setSpriteIndex(0);
   };
 
-  const chooseSprite = index: number => {
+  const chooseSprite = (index: number) => {
     setSpriteIndex(index);
   };
 
@@ -148,17 +147,14 @@ const PointsEditor = ({
   // to enable the toggle.
   // Note: we do not recompute if all animations have the same points, as we consider
   // that if the user has enabled/disabled this, they want to keep it that way.
-  React.useEffect(
-    () => {
-      if (!sprite || !animation) {
-        return;
-      }
-      setSamePointsForSprites(
-        allAnimationSpritesHaveSamePointsAs(sprite, animation)
-      );
-    },
-    [animation, sprite]
-  );
+  React.useEffect(() => {
+    if (!sprite || !animation) {
+      return;
+    }
+    setSamePointsForSprites(
+      allAnimationSpritesHaveSamePointsAs(sprite, animation)
+    );
+  }, [animation, sprite]);
 
   const setSamePointsForAllAnimations = React.useCallback(
     async (enable: boolean) => {
@@ -213,14 +209,13 @@ const PointsEditor = ({
   const resourceName = sprite ? sprite.getImageName() : '';
 
   const editors: {
-    [key: string]: Editor
+    [key: string]: Editor;
   } = {
     preview: {
       type: 'primary',
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-
         <Paper background="medium" style={styles.leftContainer} square>
           <Column noMargin expand useFullHeight>
             <ImagePreview
@@ -235,10 +230,8 @@ const PointsEditor = ({
                 resourceName
               )}
               onImageSize={setCurrentSpriteSize}
-
-              renderOverlay={overlayProps =>
+              renderOverlay={(overlayProps) =>
                 sprite && (
-
                   <PointsPreview
                     {...overlayProps}
                     pointsContainer={sprite}
@@ -264,7 +257,6 @@ const PointsEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-
         <Paper background="medium" style={styles.rightContainer} square>
           <Column noMargin expand>
             <Line>
@@ -282,11 +274,9 @@ const PointsEditor = ({
                   setSameForAllAnimations={setSamePointsForAllAnimations}
                   setSameForAllSprites={setSamePointsForAllSprites}
                   setSameForAllAnimationsLabel={
-
                     <Trans>Share same points for all animations</Trans>
                   }
                   setSameForAllSpritesLabel={
-
                     <Trans>
                       Share same points for all sprites of this animation
                     </Trans>
@@ -296,7 +286,6 @@ const PointsEditor = ({
             </Line>
             <ScrollView>
               {!!sprite && (
-
                 <PointsList
                   pointsContainer={sprite}
                   onPointsUpdated={() =>
@@ -310,7 +299,6 @@ const PointsEditor = ({
                 />
               )}
               {!sprite && (
-
                 <EmptyMessage>
                   <Trans>
                     Choose an animation and frame to edit the points
@@ -329,7 +317,6 @@ const PointsEditor = ({
       <EditorMosaic editors={editors} initialNodes={editorNodes} />
     </div>
   );
-
 };
 
 export default PointsEditor;

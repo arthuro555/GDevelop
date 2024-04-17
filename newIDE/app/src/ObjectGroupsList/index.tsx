@@ -76,14 +76,19 @@ const getGroupWithContextName = (groupWithContext: GroupWithContext): string =>
   groupWithContext.group.getName();
 
 const getTreeViewItemName = (item: TreeViewItem) =>
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'. | TS2339 - Property 'label' does not exist on type 'TreeViewItem'. | TS2339 - Property 'group' does not exist on type 'TreeViewItem'.
   item.isRoot || item.isPlaceholder ? item.label : item.group.getName();
 
 const getTreeViewItemChildren = (item: TreeViewItem) =>
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'children' does not exist on type 'TreeViewItem'.
   item.isRoot ? item.children : null;
 
 const getTreeViewItemId = (item: TreeViewItem) =>
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'.
   item.isRoot || item.isPlaceholder
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'TreeViewItem'.
     ? item.id
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
     : `group-item-${getGroupWithContextName(item)}`;
 
 const isGroupWithContextGlobal = (groupWithContext: GroupWithContext) =>
@@ -147,11 +152,10 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
     >(null);
     const forceUpdate = useForceUpdate();
     const {
-      // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
       showDeleteConfirmation,
-      // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
       showConfirmation,
-      // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
       showAlert,
     } = useAlertDialog();
 
@@ -258,6 +262,7 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
     const onDuplicate = React.useCallback(
       (
         groupWithContext: GroupWithContext
+// @ts-expect-error - TS2355 - A function whose declared type is neither 'void' nor 'any' must return a value.
       ): GroupWithContext | null | undefined => {
         const { group, global } = groupWithContext;
 
@@ -372,10 +377,13 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
 
     const canMoveSelectionTo = React.useCallback(
       (destinationItem: TreeViewItem) => {
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'.
         if (destinationItem.isRoot) return false;
         if (!selectedGroupWithContext) return false;
+// @ts-expect-error - TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'.
         if (destinationItem.isPlaceholder) {
           if (
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'TreeViewItem'.
             destinationItem.id === globalGroupsEmptyPlaceholderId &&
             !selectedGroupWithContext.global
           ) {
@@ -387,7 +395,9 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
         }
 
         if (
+// @ts-expect-error - TS2339 - Property 'global' does not exist on type 'TreeViewItem'.
           selectedGroupWithContext.global === destinationItem.global ||
+// @ts-expect-error - TS2339 - Property 'global' does not exist on type 'TreeViewItem'.
           (!selectedGroupWithContext.global && destinationItem.global)
         ) {
           return true;
@@ -403,11 +413,14 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
         destinationItem: TreeViewItem,
         where: 'before' | 'inside' | 'after'
       ) => {
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'.
         if (destinationItem.isRoot) return false;
         if (!selectedGroupWithContext) return;
 
+// @ts-expect-error - TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'.
         if (destinationItem.isPlaceholder) {
           if (
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'TreeViewItem'.
             destinationItem.id === globalGroupsEmptyPlaceholderId &&
             !selectedGroupWithContext.global
           ) {
@@ -421,6 +434,7 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
         let toIndex: number;
 
         const areSelectedAndTargetItemsFromSameContext =
+// @ts-expect-error - TS2339 - Property 'global' does not exist on type 'TreeViewItem'.
           selectedGroupWithContext.global === destinationItem.global;
 
         if (areSelectedAndTargetItemsFromSameContext) {
@@ -431,9 +445,12 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
           fromIndex = container.getPosition(
             selectedGroupWithContext.group.getName()
           );
+// @ts-expect-error - TS2339 - Property 'group' does not exist on type 'TreeViewItem'.
           toIndex = container.getPosition(destinationItem.group.getName());
+// @ts-expect-error - TS2339 - Property 'global' does not exist on type 'TreeViewItem'.
         } else if (!selectedGroupWithContext.global && destinationItem.global) {
           const destinationIndex = globalObjectGroups.getPosition(
+// @ts-expect-error - TS2339 - Property 'group' does not exist on type 'TreeViewItem'.
             destinationItem.group.getName()
           );
           await setAsGlobalGroup(selectedGroupWithContext, destinationIndex);
@@ -459,7 +476,9 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
 
     const editItem = React.useCallback(
       (item: TreeViewItem) => {
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'.
         if (item.isRoot || item.isPlaceholder) return;
+// @ts-expect-error - TS2339 - Property 'group' does not exist on type 'TreeViewItem'.
         onEditGroup(item.group);
       },
       [onEditGroup]
@@ -467,11 +486,13 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
 
     const renderGroupMenuTemplate = React.useCallback(
       (i18n: I18nType) => (item: TreeViewItem, index: number) =>
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'. | TS2339 - Property 'isPlaceholder' does not exist on type 'TreeViewItem'.
         item.isRoot || item.isPlaceholder
           ? []
           : [
               {
                 label: i18n._(t`Duplicate`),
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
                 click: () => onDuplicate(item),
               },
               { type: 'separator' },
@@ -482,16 +503,20 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
               { type: 'separator' },
               {
                 label: i18n._(t`Rename`),
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
                 click: () => onEditName(item),
               },
               {
                 label: i18n._(t`Set as global group`),
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
                 enabled: !isGroupWithContextGlobal(item),
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
                 click: () => setAsGlobalGroup(item),
                 visible: canSetAsGlobalGroup !== false,
               },
               {
                 label: i18n._(t`Delete`),
+// @ts-expect-error - TS2345 - Argument of type 'TreeViewItem' is not assignable to parameter of type 'GroupWithContext'.
                 click: () => onDelete(item),
               },
               { type: 'separator' },
@@ -543,6 +568,7 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
           },
         ];
 
+// @ts-expect-error - TS2322 - Type '{ label: string; children: GroupWithContextList | EmptyPlaceholder[]; isRoot: boolean; id: string; }[]' is not assignable to type 'TreeViewItem[]'.
         return treeViewItems;
       },
       [globalObjectGroups, objectGroups]
@@ -571,8 +597,11 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
               const treeViewData = getTreeViewData(i18n);
               const globalRootItem = treeViewData[0];
               const initiallyOpenedNodeIds = [
+// @ts-expect-error - TS2339 - Property 'isRoot' does not exist on type 'TreeViewItem'.
                 globalRootItem.isRoot &&
+// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'TreeViewItem'.
                 globalRootItem.children.length === 1 &&
+// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'TreeViewItem'.
                 globalRootItem.children[0].isPlaceholder
                   ? null
                   : globalGroupsRootFolderId,
@@ -586,14 +615,20 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
                       <TreeView
                         key={listKey}
                         ref={treeViewRef}
+// @ts-expect-error - TS2322 - Type 'TreeViewItem[]' is not assignable to type 'ItemBaseAttributes[]'.
                         items={treeViewData}
                         height={height}
                         searchText={searchText}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => ReactNode'.
                         getItemName={getTreeViewItemName}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => ItemBaseAttributes[] | null | undefined'.
                         getItemChildren={getTreeViewItemChildren}
                         multiSelect={false}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => any' is not assignable to type '(arg1: ItemBaseAttributes) => string'.
                         getItemId={getTreeViewItemId}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem) => void' is not assignable to type '(arg1: ItemBaseAttributes) => void'.
                         onEditItem={editItem}
+// @ts-expect-error - TS2322 - Type 'GroupWithContext[]' is not assignable to type 'readonly ItemBaseAttributes[]'.
                         selectedItems={
                           selectedGroupWithContext
                             ? [selectedGroupWithContext]
@@ -604,13 +639,19 @@ const ObjectGroupsList = React.forwardRef<ObjectGroupsListInterface, Props>(
                           const itemToSelect = items[0];
                           if (itemToSelect.isRoot || itemToSelect.isPlaceholder)
                             return;
+// @ts-expect-error - TS2345 - Argument of type 'ItemBaseAttributes' is not assignable to parameter of type 'SetStateAction<GroupWithContext | null | undefined>'.
                           setSelectedGroupWithContext(itemToSelect || null);
                         }}
+// @ts-expect-error - TS2322 - Type '(groupWithContext: GroupWithContext, newName: string) => void' is not assignable to type '(arg1: ItemBaseAttributes, newName: string) => void'.
                         onRenameItem={onRename}
+// @ts-expect-error - TS2322 - Type '(item: TreeViewItem, index: number) => ({ type: string; label?: undefined; click?: undefined; enabled?: undefined; visible?: undefined; } | { label: string; click: () => void; type?: undefined; enabled?: undefined; visible?: undefined; } | { ...; })[]' is not assignable to type '(arg1: ItemBaseAttributes, index: number) => any'.
                         buildMenuTemplate={renderGroupMenuTemplate(i18n)}
+// @ts-expect-error - TS2322 - Type '(destinationItem: TreeViewItem, where: 'before' | 'inside' | 'after') => Promise<false | undefined>' is not assignable to type '(destinationItem: ItemBaseAttributes, where: "inside" | "after" | "before") => void'.
                         onMoveSelectionToItem={moveSelectionTo}
+// @ts-expect-error - TS2322 - Type '(destinationItem: TreeViewItem) => boolean' is not assignable to type '(destinationItem: ItemBaseAttributes, where: "inside" | "after" | "before") => boolean | null | undefined'.
                         canMoveSelectionToItem={canMoveSelectionTo}
                         reactDndType={groupWithContextReactDndType}
+// @ts-expect-error - TS2322 - Type '(string | null)[]' is not assignable to type 'string[]'.
                         initiallyOpenedNodeIds={initiallyOpenedNodeIds}
                         shouldSelectUponContextMenuOpening
                       />

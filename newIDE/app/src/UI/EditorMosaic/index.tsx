@@ -1,5 +1,4 @@
-
-import {I18n} from '@lingui/react';
+import { I18n } from '@lingui/react';
 import * as React from 'react';
 import {
   MosaicWindow as RMMosaicWindow,
@@ -18,31 +17,36 @@ import './style.css';
 import classNames from 'classnames';
 
 export type Editor = {
-  type: 'primary' | 'secondary',
-  renderEditor: () => React.ReactElement,
-  noTitleBar?: boolean,
-  noSoftKeyboardAvoidance?: boolean,
-  title?: MessageDescriptor,
-  toolbarControls?: Array<React.ReactNode>
+  type: 'primary' | 'secondary';
+  renderEditor: () => React.ReactElement;
+  noTitleBar?: boolean;
+  noSoftKeyboardAvoidance?: boolean;
+  title?: MessageDescriptor;
+  toolbarControls?: Array<React.ReactNode>;
 };
 
-export type EditorMosaicNode = {
-  direction: 'row' | 'column',
-  splitPercentage: number,
-  first: EditorMosaicNode | null | undefined,
-  second: EditorMosaicNode | null | undefined
-} | string;
+export type EditorMosaicNode =
+  | {
+      direction: 'row' | 'column';
+      splitPercentage: number;
+      first: EditorMosaicNode | null | undefined;
+      second: EditorMosaicNode | null | undefined;
+    }
+  | string;
 
-export const mosaicContainsNode = (mosaic: EditorMosaicNode | null | undefined, node: string): boolean => {
+export const mosaicContainsNode = (
+  mosaic: EditorMosaicNode | null | undefined,
+  node: string
+): boolean => {
   return (
     !!mosaic &&
     (mosaic === node ||
       // $FlowFixMe
-// @ts-expect-error - TS2339 - Property 'first' does not exist on type 'EditorMosaicNode'. | TS2339 - Property 'first' does not exist on type 'EditorMosaicNode'.
-      ((!!mosaic.first && mosaicContainsNode(mosaic.first, node)) ||
-        // $FlowFixMe
-// @ts-expect-error - TS2339 - Property 'second' does not exist on type 'EditorMosaicNode'. | TS2339 - Property 'second' does not exist on type 'EditorMosaicNode'.
-        (!!mosaic.second && mosaicContainsNode(mosaic.second, node))))
+      // @ts-expect-error - TS2339 - Property 'first' does not exist on type 'EditorMosaicNode'. | TS2339 - Property 'first' does not exist on type 'EditorMosaicNode'.
+      (!!mosaic.first && mosaicContainsNode(mosaic.first, node)) ||
+      // $FlowFixMe
+      // @ts-expect-error - TS2339 - Property 'second' does not exist on type 'EditorMosaicNode'. | TS2339 - Property 'second' does not exist on type 'EditorMosaicNode'.
+      (!!mosaic.second && mosaicContainsNode(mosaic.second, node)))
   );
 };
 
@@ -52,7 +56,7 @@ const addNode = (
   newNode: EditorMosaicNode | string,
   position: 'start' | 'end',
   splitPercentage: number,
-  direction: 'row' | 'column',
+  direction: 'row' | 'column'
 ): EditorMosaicNode => {
   if (!currentNode) return newNode;
 
@@ -108,7 +112,7 @@ const addNode = (
 const replaceNode = (
   currentNode?: EditorMosaicNode | null,
   oldNode?: EditorMosaicNode | null,
-  newNode?: EditorMosaicNode | null,
+  newNode?: EditorMosaicNode | null
 ): EditorMosaicNode | null | undefined => {
   if (!currentNode) {
     return currentNode;
@@ -128,7 +132,10 @@ const replaceNode = (
 };
 
 // Remove the specified node (editor).
-const removeNode = (currentNode?: EditorMosaicNode | null, oldNode?: EditorMosaicNode | null): EditorMosaicNode | null | undefined => {
+const removeNode = (
+  currentNode?: EditorMosaicNode | null,
+  oldNode?: EditorMosaicNode | null
+): EditorMosaicNode | null | undefined => {
   if (!currentNode) {
     return currentNode;
   } else if (typeof currentNode === 'string') {
@@ -157,7 +164,7 @@ const removeNode = (currentNode?: EditorMosaicNode | null, oldNode?: EditorMosai
 const resizeNode = (
   currentNode: EditorMosaicNode | null | undefined,
   resizedNode: EditorMosaicNode | null | undefined,
-  splitPercentage: number,
+  splitPercentage: number
 ): EditorMosaicNode | null | undefined => {
   if (!currentNode) {
     return currentNode;
@@ -186,7 +193,7 @@ const resizeNode = (
 
 const getNodeSize = (
   currentNode?: EditorMosaicNode | null,
-  resizedNode?: EditorMosaicNode | null,
+  resizedNode?: EditorMosaicNode | null
 ): number => {
   if (!currentNode) {
     return 0;
@@ -206,11 +213,9 @@ const getNodeSize = (
   );
 };
 
-
 const defaultToolbarControls = [<CloseButton key="close" />];
 
-const renderMosaicWindowPreview = props: any => (
-
+const renderMosaicWindowPreview = (props: any) => (
   <div className="mosaic-preview">
     <div className="mosaic-window-toolbar">
       <div className="mosaic-window-title">{props.title}</div>
@@ -225,7 +230,6 @@ const renderMosaicWindowPreview = props: any => (
  * dragged.
  */
 const MosaicWindow = (props: any) => (
-
   <RMMosaicWindow
     {...props}
     toolbarControls={props.toolbarControls || defaultToolbarControls}
@@ -234,25 +238,28 @@ const MosaicWindow = (props: any) => (
 );
 
 export type EditorMosaicInterface = {
-  getOpenedEditorNames: () => Array<string>,
+  getOpenedEditorNames: () => Array<string>;
   toggleEditor: (
     editorName: string,
     position: 'start' | 'end',
     splitPercentage: number,
-    direction: 'row' | 'column',
-  ) => boolean,
-  collapseEditor: (editorName: string) => boolean,
-  uncollapseEditor: (editorName: string, defaultSplitPercentage: number) => boolean
+    direction: 'row' | 'column'
+  ) => boolean;
+  collapseEditor: (editorName: string) => boolean;
+  uncollapseEditor: (
+    editorName: string,
+    defaultSplitPercentage: number
+  ) => boolean;
 };
 
 type Props = {
-  initialNodes: EditorMosaicNode,
+  initialNodes: EditorMosaicNode;
   editors: {
-    [key: string]: Editor
-  },
-  limitToOneSecondaryEditor?: boolean,
-  onOpenedEditorsChanged?: () => void,
-  onPersistNodes?: (arg1: EditorMosaicNode) => void
+    [key: string]: Editor;
+  };
+  limitToOneSecondaryEditor?: boolean;
+  onOpenedEditorsChanged?: () => void;
+  onPersistNodes?: (arg1: EditorMosaicNode) => void;
 };
 
 /**
@@ -261,189 +268,186 @@ type Props = {
  * Can be used to create a mosaic of resizable editors.
  * Must be used inside a component wrapped in a DragDropContext.
  */
-const EditorMosaic = React.forwardRef<EditorMosaicInterface, Props>((
-  {
+const EditorMosaic = React.forwardRef<EditorMosaicInterface, Props>(
+  (
+    {
+      initialNodes,
 
-    initialNodes,
+      editors,
 
-    editors,
+      limitToOneSecondaryEditor,
 
-    limitToOneSecondaryEditor,
+      onOpenedEditorsChanged,
 
-    onOpenedEditorsChanged,
+      onPersistNodes,
+    },
+    ref
+  ) => {
+    const [mosaicNode, setMosaicNode] = React.useState<
+      EditorMosaicNode | null | undefined
+    >(initialNodes);
+    const collapsedEditorSize = React.useRef<Map<string, number>>(new Map());
 
-    onPersistNodes,
-  },
-  ref
-) => {
-  const [mosaicNode, setMosaicNode] = React.useState<EditorMosaicNode | null | undefined>(initialNodes);
-  const collapsedEditorSize = React.useRef<Map<string, number>>(new Map());
+    const openEditor = React.useCallback(
+      (
+        editorName: string,
+        position: 'start' | 'end',
+        splitPercentage: number,
+        direction: 'row' | 'column'
+      ) => {
+        const editor = editors[editorName];
+        if (!editor) return false;
 
-  const openEditor = React.useCallback(
-    (
-      editorName: string,
-      position: 'start' | 'end',
-      splitPercentage: number,
-      direction: 'row' | 'column'
-    ) => {
-      const editor = editors[editorName];
-      if (!editor) return false;
-
-// @ts-expect-error - TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
-      const openedEditorNames = getLeaves(mosaicNode);
-      if (openedEditorNames.indexOf(editorName) !== -1) {
-        // Editor is already opened.
-        return false;
-      }
-
-      if (limitToOneSecondaryEditor && editor.type === 'secondary') {
-        // Replace the existing secondary editor, if any.
-        const secondaryEditorName = openedEditorNames.find(
-          editorName => editors[editorName].type === 'secondary'
-        );
-        if (secondaryEditorName) {
-          setMosaicNode(
-// @ts-expect-error - TS2345 - Argument of type 'MosaicKey' is not assignable to parameter of type 'EditorMosaicNode | null | undefined'.
-            replaceNode(mosaicNode, secondaryEditorName, editorName)
-          );
-
-          return true;
+        // @ts-expect-error - TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
+        const openedEditorNames = getLeaves(mosaicNode);
+        if (openedEditorNames.indexOf(editorName) !== -1) {
+          // Editor is already opened.
+          return false;
         }
-      }
 
-      // Open a new editor at the indicated position.
-      setMosaicNode(
-        addNode(mosaicNode, editorName, position, splitPercentage, direction)
-      );
+        if (limitToOneSecondaryEditor && editor.type === 'secondary') {
+          // Replace the existing secondary editor, if any.
+          const secondaryEditorName = openedEditorNames.find(
+            (editorName) => editors[editorName].type === 'secondary'
+          );
+          if (secondaryEditorName) {
+            setMosaicNode(
+              // @ts-expect-error - TS2345 - Argument of type 'MosaicKey' is not assignable to parameter of type 'EditorMosaicNode | null | undefined'.
+              replaceNode(mosaicNode, secondaryEditorName, editorName)
+            );
 
-      return true;
-    },
-    [mosaicNode, editors, limitToOneSecondaryEditor]
-  );
+            return true;
+          }
+        }
 
-
-  React.useImperativeHandle(ref, () => ({
-    getOpenedEditorNames: (): Array<string> => {
-// @ts-expect-error - TS2322 - Type 'MosaicKey[]' is not assignable to type 'string[]'. | TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
-      return getLeaves(mosaicNode);
-    },
-    toggleEditor: (
-      editorName: string,
-      position: 'start' | 'end',
-      splitPercentage: number,
-      direction: 'row' | 'column'
-    ) => {
-      const editor = editors[editorName];
-      if (!editor) return false;
-
-// @ts-expect-error - TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
-      const openedEditorNames = getLeaves(mosaicNode);
-      if (openedEditorNames.indexOf(editorName) !== -1) {
-        // The editor is already opened: close it.
-        setMosaicNode(removeNode(mosaicNode, editorName));
-
-        return false;
-      }
-
-      return openEditor(editorName, position, splitPercentage, direction);
-    },
-    collapseEditor: (editorName: string) => {
-      const editor = editors[editorName];
-      if (!editor) return false;
-
-      const nodeSize = getNodeSize(mosaicNode, editorName);
-      if (nodeSize > 0) {
-        collapsedEditorSize.current.set(
-          editorName,
-          getNodeSize(mosaicNode, editorName)
+        // Open a new editor at the indicated position.
+        setMosaicNode(
+          addNode(mosaicNode, editorName, position, splitPercentage, direction)
         );
+
+        return true;
+      },
+      [mosaicNode, editors, limitToOneSecondaryEditor]
+    );
+
+    React.useImperativeHandle(ref, () => ({
+      getOpenedEditorNames: (): Array<string> => {
+        // @ts-expect-error - TS2322 - Type 'MosaicKey[]' is not assignable to type 'string[]'. | TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
+        return getLeaves(mosaicNode);
+      },
+      toggleEditor: (
+        editorName: string,
+        position: 'start' | 'end',
+        splitPercentage: number,
+        direction: 'row' | 'column'
+      ) => {
+        const editor = editors[editorName];
+        if (!editor) return false;
+
+        // @ts-expect-error - TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
+        const openedEditorNames = getLeaves(mosaicNode);
+        if (openedEditorNames.indexOf(editorName) !== -1) {
+          // The editor is already opened: close it.
+          setMosaicNode(removeNode(mosaicNode, editorName));
+
+          return false;
+        }
+
+        return openEditor(editorName, position, splitPercentage, direction);
+      },
+      collapseEditor: (editorName: string) => {
+        const editor = editors[editorName];
+        if (!editor) return false;
+
+        const nodeSize = getNodeSize(mosaicNode, editorName);
+        if (nodeSize > 0) {
+          collapsedEditorSize.current.set(
+            editorName,
+            getNodeSize(mosaicNode, editorName)
+          );
+        }
+        setMosaicNode(resizeNode(mosaicNode, editorName, 0));
+        return true;
+      },
+      uncollapseEditor: (
+        editorName: string,
+        defaultSplitPercentage: number
+      ) => {
+        const editor = editors[editorName];
+        if (!editor) return false;
+
+        if (getNodeSize(mosaicNode, editorName) !== 0) {
+          return false;
+        }
+
+        setMosaicNode(
+          resizeNode(
+            mosaicNode,
+            editorName,
+            collapsedEditorSize.current.get(editorName) ||
+              defaultSplitPercentage
+          )
+        );
+        return true;
+      },
+    }));
+
+    const debouncedPersistNodes = useDebounce(() => {
+      if (onPersistNodes && mosaicNode) {
+        onPersistNodes(mosaicNode);
       }
-      setMosaicNode(resizeNode(mosaicNode, editorName, 0));
-      return true;
-    },
-    uncollapseEditor: (
-      editorName: string,
-      defaultSplitPercentage: number
-    ) => {
-      const editor = editors[editorName];
-      if (!editor) return false;
+    }, 2000);
 
-      if (getNodeSize(mosaicNode, editorName) !== 0) {
-        return false;
-      }
-
-      setMosaicNode(
-        resizeNode(
-          mosaicNode,
-          editorName,
-          collapsedEditorSize.current.get(editorName) ||
-            defaultSplitPercentage
-        )
-      );
-      return true;
-    },
-  }));
-
-  const debouncedPersistNodes = useDebounce(() => {
-    if (onPersistNodes && mosaicNode) {
-      onPersistNodes(mosaicNode);
-    }
-  }, 2000);
-
-  React.useEffect(
-    () => {
+    React.useEffect(() => {
       if (onOpenedEditorsChanged) {
         onOpenedEditorsChanged();
       }
 
       debouncedPersistNodes();
-    },
-    [mosaicNode, onOpenedEditorsChanged, debouncedPersistNodes]
-  );
+    }, [mosaicNode, onOpenedEditorsChanged, debouncedPersistNodes]);
 
-  return (
+    return (
+      <I18n>
+        {({ i18n }) => (
+          // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          <MosaicWithoutDragDropContext
+            className={classNames({
+              'mosaic-gd-theme': true,
+              'mosaic-blueprint-theme': true,
+              // Move the entire mosaic up when the soft keyboard is open:
+              'avoid-soft-keyboard': true,
+            })}
+            renderTile={(editorName: string, path: string) => {
+              const editor = editors[editorName];
+              if (!editor) {
+                console.error(
+                  'Trying to render un unknown editor: ' + editorName
+                );
+                return null;
+              }
 
-    <I18n>
-      {({ i18n }) => (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <MosaicWithoutDragDropContext
-          className={classNames({
-            'mosaic-gd-theme': true,
-            'mosaic-blueprint-theme': true,
-            // Move the entire mosaic up when the soft keyboard is open:
-            'avoid-soft-keyboard': true,
-          })}
-          renderTile={(editorName: string, path: string) => {
-            const editor = editors[editorName];
-            if (!editor) {
-              console.error(
-                'Trying to render un unknown editor: ' + editorName
+              if (editor.noTitleBar) {
+                return editor.renderEditor();
+              }
+
+              return (
+                <MosaicWindow
+                  path={path}
+                  title={i18n._(editor.title)}
+                  toolbarControls={editor.toolbarControls}
+                >
+                  {editor.renderEditor()}
+                </MosaicWindow>
               );
-              return null;
-            }
-
-            if (editor.noTitleBar) {
-              return editor.renderEditor();
-            }
-
-            return (
-
-              <MosaicWindow
-                path={path}
-                title={i18n._(editor.title)}
-                toolbarControls={editor.toolbarControls}
-              >
-                {editor.renderEditor()}
-              </MosaicWindow>
-            );
-          }}
-          value={mosaicNode}
-          onChange={setMosaicNode}
-          onRelease={setMosaicNode}
-        />
-      )}
-    </I18n>
-  );
-});
+            }}
+            value={mosaicNode}
+            onChange={setMosaicNode}
+            onRelease={setMosaicNode}
+          />
+        )}
+      </I18n>
+    );
+  }
+);
 
 export default EditorMosaic;

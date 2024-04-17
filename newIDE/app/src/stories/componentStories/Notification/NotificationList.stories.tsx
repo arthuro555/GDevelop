@@ -148,7 +148,9 @@ export const Default = () => {
       <NotificationList
         notifications={notifications}
         canMarkAllAsRead={true}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         onMarkAllAsRead={action('onMarkAllAsRead')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1: Notification) => Promise<void>'.
         onMarkNotificationAsSeen={action('onMarkNotificationAsSeen')}
         onCloseNotificationList={action('onCloseNotificationList')}
       />

@@ -518,12 +518,12 @@ const InAppTutorialOrchestrator = React.forwardRef<
       elementWithValueToWatchIfChanged,
       setElementWithValueToWatchIfChanged,
     ] = React.useState<string | null | undefined>(null);
-    const inputInitialValueRef = React.useRef<string | null | undefined>(null);
+    const inputInitialValueRef = React.useRef<string>(null);
     const [
       elementWithValueToWatchIfEquals,
       setElementWithValueToWatchIfEquals,
     ] = React.useState<string | null | undefined>(null);
-    const inputExpectedValueRef = React.useRef<string | null | undefined>(null);
+    const inputExpectedValueRef = React.useRef<string>(null);
     const [objectSceneInstancesToWatch, setObjectSceneInstancesToWatch] =
       React.useState<
         | {
@@ -855,6 +855,7 @@ const InAppTutorialOrchestrator = React.forwardRef<
       const { nextStepTrigger, elementToHighlightId } = currentStep;
       if (nextStepTrigger && nextStepTrigger.valueEquals) {
         if (!elementToHighlightId) return;
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
         inputExpectedValueRef.current = nextStepTrigger.valueEquals;
         setElementWithValueToWatchIfEquals(elementToHighlightId);
       } else if (nextStepTrigger && nextStepTrigger.valueHasChanged) {
@@ -862,6 +863,7 @@ const InAppTutorialOrchestrator = React.forwardRef<
         const elementToWatch = document.querySelector(elementToHighlightId);
 
         if (elementToWatch) {
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
           inputInitialValueRef.current = getInputValue(elementToWatch);
         }
         setElementWithValueToWatchIfChanged(elementToHighlightId);

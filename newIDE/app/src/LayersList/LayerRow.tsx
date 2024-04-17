@@ -221,14 +221,12 @@ const LayerRow = ({
                       />
                     ) : (
                       <React.Fragment>
-                        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <InlineCheckbox
                           id="layer-visibility"
                           paddingSize="small"
                           checked={isVisible}
                           checkedIcon={<VisibilityIcon />}
                           uncheckedIcon={<VisibilityOffIcon />}
-                          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                           onCheck={(e, value) => onChangeVisibility(value)}
                           tooltipOrHelperText={
                             isVisible ? (
@@ -238,7 +236,6 @@ const LayerRow = ({
                             )
                           }
                         />
-                        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <InlineCheckbox
                           id="layer-lock"
                           paddingSize="small"
@@ -246,7 +243,6 @@ const LayerRow = ({
                           checked={isLocked || !isVisible}
                           checkedIcon={<LockIcon />}
                           uncheckedIcon={<LockOpenIcon />}
-                          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                           onCheck={(e, value) => onChangeLockState(value)}
                           tooltipOrHelperText={
                             isLocked ? (

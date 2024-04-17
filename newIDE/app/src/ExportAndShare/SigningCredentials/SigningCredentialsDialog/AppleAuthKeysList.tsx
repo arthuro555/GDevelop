@@ -59,7 +59,6 @@ export const AppleAuthKeysList = ({
   return (
     <ColumnStackLayout noMargin>
       {error ? (
-        // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <PlaceholderError onRetry={onRefreshSigningCredentials}>
           <Trans>An error happened while loading the certificates.</Trans>
         </PlaceholderError>

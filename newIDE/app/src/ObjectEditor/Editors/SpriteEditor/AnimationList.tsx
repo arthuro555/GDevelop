@@ -105,7 +105,7 @@ type AnimationListProps = {
    * The edited object. It can be undefined for sub-ObjectConfiguration of
    * custom object. There is no event to refactor in this case.
    */
-  object?: gd.Object;
+  object?: gd.gdObject;
   /**
    * The object name used to build default file name for Piskel.
    * For custom objects, the children names are appended.
@@ -161,7 +161,7 @@ const AnimationList = React.forwardRef<
     );
     const forceUpdate = useForceUpdate();
     const { isMobile } = useResponsiveWindowSize();
-    // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
     const { showConfirmation } = useAlertDialog();
 
     const [justAddedAnimationName, setJustAddedAnimationName] = React.useState<
@@ -182,7 +182,7 @@ const AnimationList = React.forwardRef<
         justAddedAnimationElement.current = null;
       }
     }, [justAddedAnimationName, scrollView]);
-    // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+
     const { showDeleteConfirmation } = useAlertDialog();
 
     const draggedAnimationIndex = React.useRef<number | null>(null);
@@ -571,6 +571,7 @@ const AnimationList = React.forwardRef<
             adaptCollisionMaskIfNeeded();
           }
         } catch (error) {
+// @ts-expect-error - TS2571 - Object is of type 'unknown'.
           if (error.name !== 'UserCancellationError') {
             console.error(
               'An exception was thrown when launching or reading resources from the external editor:',
@@ -837,7 +838,6 @@ const AnimationList = React.forwardRef<
               </>
             )}
             {externalEditorOpened && (
-              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <ExternalEditorOpenedDialog
                 onClose={cancelEditingWithExternalEditor}
               />

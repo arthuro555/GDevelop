@@ -34,6 +34,7 @@ export const DefaultGameFeedback = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -59,6 +60,7 @@ export const GameFeedbackOneSolvedComment = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -84,6 +86,7 @@ export const GameFeedbackWithError = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -109,6 +112,7 @@ export const GameFeedbackEmpty = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];

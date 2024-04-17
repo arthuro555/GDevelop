@@ -1,6 +1,6 @@
 import optionalRequire from './OptionalRequire';
 import optionalLazyRequire from '../Utils/OptionalLazyRequire';
-const fs = optionalRequire('fs');
+const fs = optionalRequire('fs') as typeof import('fs');
 const lazyRequireArchiver = optionalLazyRequire('archiver');
 
 // TODO: Move in a Archiver folder?

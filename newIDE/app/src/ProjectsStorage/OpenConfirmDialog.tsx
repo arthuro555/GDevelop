@@ -1,5 +1,4 @@
-
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
@@ -14,8 +13,8 @@ import Text from '../UI/Text';
 import { StorageProviderOperations } from '.';
 
 type OpenConfirmDialogProps = {
-  onClose: () => void,
-  onConfirm: () => void
+  onClose: () => void;
+  onConfirm: () => void;
 };
 
 export const OpenConfirmDialog = ({
@@ -23,14 +22,10 @@ export const OpenConfirmDialog = ({
   onConfirm,
 }: OpenConfirmDialogProps) => {
   return (
-
     <Dialog
-
       title={<Trans>Confirm the opening</Trans>}
       actions={[
-
         <FlatButton
-
           label={<Trans>Cancel</Trans>}
           key="close"
           primary={false}
@@ -38,7 +33,6 @@ export const OpenConfirmDialog = ({
         />,
 
         <DialogPrimaryButton
-
           label={<Trans>Open the project</Trans>}
           key="open-project"
           primary
@@ -76,7 +70,9 @@ export const OpenConfirmDialog = ({
 
 export const useOpenConfirmDialog = () => {
   const interactionMade = React.useRef(false);
-  const pendingConfirmationPromiseResolve = React.useRef<(arg1: boolean) => void | null | undefined>(null);
+  const pendingConfirmationPromiseResolve = React.useRef<
+    ((arg1: boolean) => void) | null
+  >();
   const [openConfirmDialogOpen, openOpenConfirmDialog] = React.useState(false);
 
   return {
@@ -86,8 +82,10 @@ export const useOpenConfirmDialog = () => {
      * This is for example the case when opening directly the web-app with a file
      * to open from the URL (like a Google Drive file).
      */
-    ensureInteractionHappened: (storageProviderOperations: StorageProviderOperations): Promise<boolean> => {
-      return new Promise(resolve: (result: Promise<boolean> | boolean) => void => {
+    ensureInteractionHappened: (
+      storageProviderOperations: StorageProviderOperations
+    ): Promise<boolean> => {
+      return new Promise((resolve) => {
         if (
           interactionMade.current ||
           !storageProviderOperations.doesInitialOpenRequireUserInteraction
@@ -103,14 +101,11 @@ export const useOpenConfirmDialog = () => {
         );
         pendingConfirmationPromiseResolve.current = resolve;
         openOpenConfirmDialog(true);
-
       });
-
     },
     /**
      * Render, if needed, the dialog that will ask the user to confirm the opening.
      */
-// @ts-expect-error - TS2695 - Left side of comma operator is unused and has no side effects.
     renderOpenConfirmDialog: () => {
       if (!openConfirmDialogOpen) return null;
 
@@ -125,14 +120,11 @@ export const useOpenConfirmDialog = () => {
       };
 
       return (
-
         <OpenConfirmDialog
           onClose={() => closeAndResolveWith(false)}
           onConfirm={() => closeAndResolveWith(true)}
         />
       );
     },
-
   };
-
 };

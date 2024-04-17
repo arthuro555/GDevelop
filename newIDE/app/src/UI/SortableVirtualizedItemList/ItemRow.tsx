@@ -42,7 +42,7 @@ type Props<Item> = {
   onItemSelected: (arg1?: Item | null | undefined) => void;
   errorStatus: '' | 'error' | 'warning';
   buildMenuTemplate: () => Array<MenuItemTemplate>;
-  onEdit?: (arg1: Item) => void | null | undefined;
+  onEdit?: (arg1: Item) => void;
   hideMenuButton: boolean;
   scaleUpItemIconWhenSelected?: boolean;
 };
@@ -85,6 +85,7 @@ function ItemRow<Item>({
     <TextField
       id="rename-item-field"
       margin="none"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
       ref={textFieldRef}
       defaultValue={itemName}
       onBlur={(e) => {
@@ -112,6 +113,7 @@ function ItemRow<Item>({
   ) : (
     <div
       title={typeof itemName === 'string' ? itemName : undefined}
+// @ts-expect-error - TS2322 - Type '{ color: any; fontStyle: "italic" | undefined; fontWeight: "bold" | "normal"; overflow: string; whiteSpace: string; textOverflow: string; }' is not assignable to type 'Properties<string | number, string & {}>'.
       style={{
         ...textEllipsisStyle,
         color: selected ? gdevelopTheme.listItem.selectedTextColor : undefined,

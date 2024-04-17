@@ -89,6 +89,7 @@ export const Default = () => {
           value={value6}
           onChange={(valueAsString) => {
             if (!valueAsString) setValue6(valueAsString);
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
             else setValue6(parseFloat(valueAsString) || 0);
           }}
           renderLeftIcon={(className) => <Angle className={className} />}
@@ -101,6 +102,7 @@ export const Default = () => {
           value={value7}
           onChange={(valueAsString) => {
             if (!valueAsString) setValue7(valueAsString);
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
             else setValue7(parseFloat(valueAsString) || 0);
           }}
           renderLeftIcon={(className) => <Angle className={className} />}

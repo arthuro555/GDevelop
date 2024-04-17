@@ -236,22 +236,18 @@ export default class ParticleEmitterEditor extends React.Component<
             }}
           />
         </ResponsiveLineStackLayout>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Additive rendering</Trans>}
           checked={particleEmitterConfiguration.isRenderingAdditive()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             if (checked) particleEmitterConfiguration.setRenderingAdditive();
             else particleEmitterConfiguration.setRenderingAlpha();
             this.forceUpdate();
           }}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Delete when out of particles</Trans>}
           checked={particleEmitterConfiguration.getDestroyWhenNoParticles()}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => {
             particleEmitterConfiguration.setDestroyWhenNoParticles(checked);
             this.forceUpdate();

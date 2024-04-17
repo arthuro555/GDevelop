@@ -3,8 +3,8 @@ import * as React from 'react';
 import RobotFace from '../UI/CustomSvgIcons/RobotFace';
 import { makeStyles } from '@material-ui/core';
 
-const useClasses = rotating: undefined | boolean =>
-  makeStyles(theme => ({
+const useClasses = (rotating?: boolean) =>
+  makeStyles((theme) => ({
     container: {
       position: 'relative',
       overflow: 'hidden',
@@ -33,7 +33,7 @@ const useClasses = rotating: undefined | boolean =>
         content: "''",
         position: 'absolute',
         inset: '0.35rem',
-// @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
+        // @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
         background: theme.palette.background.alternate,
         zIndex: 1,
         borderRadius: '0.5rem',
@@ -46,15 +46,12 @@ const useClasses = rotating: undefined | boolean =>
   }))();
 
 type Props = {
-  rotating?: boolean
+  rotating?: boolean;
 };
 
-export default function RobotIcon({
-  rotating,
-}: Props) {
+export default function RobotIcon({ rotating }: Props) {
   const classes = useClasses(rotating);
   return (
-
     <div className={classes.container}>
       <div className={classes.svgContainer}>
         <RobotFace />

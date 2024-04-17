@@ -38,14 +38,14 @@ export type SceneEditorsDisplayProps = {
     instance?: gd.InitialInstance | null | undefined
   ) => void;
   editObjectByName: (objectName: string, initialTab?: ObjectEditorTab) => void;
-  onEditObject: (arg1: gd.Object) => void;
+  onEditObject: (arg1: gd.gdObject) => void;
   selectedObjectFolderOrObjectsWithContext: ObjectFolderOrObjectWithContext[];
   onSelectLayer: (layerName: string) => void;
   editLayerEffects: (layer?: gd.Layer | null | undefined) => void;
   editLayer: (layer?: gd.Layer | null | undefined) => void;
   onRemoveLayer: (layerName: string, done: (arg1: boolean) => void) => void;
   onLayerRenamed: () => void;
-  onObjectCreated: (arg1: gd.Object) => void;
+  onObjectCreated: (arg1: gd.gdObject) => void;
   onObjectFolderOrObjectWithContextSelected: (
     arg1?: ObjectFolderOrObjectWithContext | null | undefined
   ) => void;

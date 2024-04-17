@@ -205,6 +205,7 @@ const SearchPanel = (
           <ColumnStackLayout expand>
             <LineStackLayout alignItems="baseline" noMargin>
               <TextField
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
                 ref={searchTextField}
                 margin="dense"
                 endAdornment={
@@ -265,6 +266,7 @@ const SearchPanel = (
               <LineStackLayout alignItems="baseline" noMargin>
                 <TextField
                   margin="dense"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
                   ref={replaceTextField}
                   endAdornment={
                     replaceText ? (
@@ -311,11 +313,9 @@ const SearchPanel = (
             >
               <ResponsiveLineStackLayout noMargin alignItems="center">
                 <LineStackLayout noMargin alignItems="center">
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <InlineCheckbox
                     label={<Trans>Case insensitive</Trans>}
                     checked={!matchCase}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       setMatchCase(!checked);
                     }}
@@ -325,31 +325,25 @@ const SearchPanel = (
                       <Trans>Search in:</Trans>
                     </Text>
                   )}
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <InlineCheckbox
                     label={<Trans>Conditions</Trans>}
                     checked={searchInConditions}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       setSearchInConditions(checked);
                     }}
                   />
                 </LineStackLayout>
                 <Line noMargin alignItems="center">
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <InlineCheckbox
                     label={<Trans>Actions</Trans>}
                     checked={searchInActions}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       setSearchInActions(checked);
                     }}
                   />
-                  {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <InlineCheckbox
                     label={<Trans>Texts</Trans>}
                     checked={searchInEventStrings}
-                    // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                     onCheck={(e, checked) => {
                       setSearchInEventStrings(checked);
                     }}

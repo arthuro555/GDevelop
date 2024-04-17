@@ -66,6 +66,7 @@ export const WithCommunityExtensions = () => {
     React.useState(true);
   const preferences: Preferences = {
     ...initialPreferences,
+// @ts-expect-error - TS2322 - Type '{ showCommunityExtensions: boolean; language: "en"; autoDownloadUpdates: true; themeName: "GDevelop default Dark"; codeEditorThemeName: "vs-dark"; hiddenAlertMessages: {}; hiddenTutorialHints: {}; ... 32 more ...; editorStateByProject: {}; }' is not assignable to type 'PreferencesValues'.
     values: { ...initialPreferences.values, showCommunityExtensions },
     setShowCommunityExtensions,
   };

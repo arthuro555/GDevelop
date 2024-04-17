@@ -6,7 +6,7 @@ import URLSearchParams from 'url-search-params';
 import { isWindows } from './Platform';
 import debounce from 'lodash/debounce';
 import { hexToRGBColor, isLightRgbColor } from './ColorTransformer';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const shell = electron ? electron.shell : null;
 const dialog = remote ? remote.dialog : null;

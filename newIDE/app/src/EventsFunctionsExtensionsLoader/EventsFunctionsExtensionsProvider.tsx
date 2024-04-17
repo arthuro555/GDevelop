@@ -161,6 +161,7 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<
       );
     } catch (eventsFunctionsExtensionsError) {
       this.setState({
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'Error | null | undefined'.
         eventsFunctionsExtensionsError,
       });
       showErrorBox({

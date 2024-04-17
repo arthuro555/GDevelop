@@ -90,12 +90,14 @@ const ColorField = ({
         floatingLabelText={floatingLabelText}
         floatingLabelFixed={!disabled}
         helperMarkdownText={helperMarkdownText}
+// @ts-expect-error - TS2322 - Type '"text"' is not assignable to type '"number"'.
         type="text"
         translatableHintText={disabled ? null : t`R;G;B, like 100;200;180`}
         value={colorValue}
         // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
         onChange={(event) => handleChange(event.target.value, alphaValue)}
         onBlur={handleBlur}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
         ref={textFieldRef}
         disabled={disabled}
       />
@@ -111,6 +113,7 @@ const ColorField = ({
             handleChange(colorValue, parseFloat(newAlphaValue))
           }
           onBlur={handleBlur}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
           ref={textFieldRef}
           type="number"
           step={0.1}

@@ -1,4 +1,4 @@
-import {checkIfCredentialsRequired} from './CrossOrigin';
+import { checkIfCredentialsRequired } from './CrossOrigin';
 import PromisePool from '@supercharge/promise-pool';
 
 const addSearchParameterToUrl = (
@@ -16,29 +16,29 @@ const addSearchParameterToUrl = (
 };
 
 type Input<Item> = {
-  urlContainers: Array<Item>,
-  onProgress: (count: number, total: number) => void
+  urlContainers: Array<Item>;
+  onProgress: (count: number, total: number) => void;
 };
 
 export type ItemResult<Item> = {
-  item: Item,
-  blob?: Blob,
-  error?: Error
+  item: Item;
+  blob?: Blob;
+  error?: Error;
 };
 
-export const downloadUrlsToBlobs = async <Item extends {
-  url: string
-}>(
-  {
-    urlContainers,
-    onProgress,
-  }: Input<Item>,
-): Promise<Array<ItemResult<Item>>> => {
+export const downloadUrlsToBlobs = async <
+  Item extends {
+    url: string;
+  },
+>({
+  urlContainers,
+  onProgress,
+}: Input<Item>): Promise<Array<ItemResult<Item>>> => {
   let count = 0;
 
   const { results } = await PromisePool.withConcurrency(20)
     .for(urlContainers)
-    .process<ItemResult<Item>>(async urlContainer => {
+    .process<ItemResult<Item>>(async (urlContainer) => {
       const { url } = urlContainer;
 
       try {
@@ -79,9 +79,7 @@ export const downloadUrlsToBlobs = async <Item extends {
 
         if (!response.ok) {
           throw new Error(
-            `Error while downloading "${urlWithParameters}" (status: ${
-              response.status
-            })`
+            `Error while downloading "${urlWithParameters}" (status: ${response.status})`
           );
         }
 
@@ -105,38 +103,45 @@ export const downloadUrlsToBlobs = async <Item extends {
   return results;
 };
 
-export const convertBlobToFiles = <Item extends {
-  resource: gd.Resource,
-  filename: string
-}>(
+export const convertBlobToFiles = <
+  Item extends {
+    resource: gd.Resource;
+    filename: string;
+  },
+>(
   itemResults: Array<ItemResult<Item>>,
-  onError: (resourceName: string, error: Error) => void,
-) => itemResults
-  .map(({ item, blob, error }) => {
-    if (error || !blob) {
-      onError(
-        item.resource.getName(),
-        error || new Error('Unknown error during download')
-      );
-      return null;
-    }
+  onError: (resourceName: string, error: Error) => void
+) =>
+  itemResults
+    .map(({ item, blob, error }) => {
+      if (error || !blob) {
+        onError(
+          item.resource.getName(),
+          error || new Error('Unknown error during download')
+        );
+        return null;
+      }
 
-    return {
-      resource: item.resource,
-      file: new File([blob], item.filename, { type: blob.type }),
-    };
-  })
-  .filter(Boolean);
+      return {
+        resource: item.resource,
+        file: new File([blob], item.filename, { type: blob.type }),
+      };
+    })
+    .filter(Boolean);
 
 export function convertBlobToDataURL(blob: Blob): Promise<string> {
   return new Promise<string>(
-    (resolve: (result: Promise<string> | string) => void, reject: (error?: any) => void) => {
+    (
+      resolve: (result: Promise<string> | string) => void,
+      reject: (error?: any) => void
+    ) => {
       const reader = new FileReader();
-      reader.onload = _e: ProgressEvent => resolve(reader.result);
-      reader.onerror = _e: ProgressEvent => reject(reader.error);
-      reader.onabort = _e: ProgressEvent => reject(new Error('Read aborted'));
+// @ts-expect-error - TS2345 - Argument of type 'string | ArrayBuffer | null' is not assignable to parameter of type 'string | Promise<string>'.
+      reader.onload = (_e: ProgressEvent) => resolve(reader.result);
+      reader.onerror = (_e: ProgressEvent) => reject(reader.error);
+      reader.onabort = (_e: ProgressEvent) => reject(new Error('Read aborted'));
       reader.readAsDataURL(blob);
-    },
+    }
   );
 }
 

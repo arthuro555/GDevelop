@@ -174,7 +174,6 @@ const CreditsPackagesDialog = ({
               </Column>
             )}
             {error ? (
-              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <PlaceholderError onRetry={fetchCreditsPackages}>
                 <Trans>
                   Can't load the credits packages. Verify your internet
@@ -195,6 +194,7 @@ const CreditsPackagesDialog = ({
                         const { id, name, description } =
                           creditsPackageListingData;
                         const shouldSuggestPackage =
+// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'never'.
                           !suggestedPackage || suggestedPackage.id === id;
                         return (
                           <div

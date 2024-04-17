@@ -27,7 +27,7 @@ import { isNativeMobileApp } from '../../../Utils/Platform';
 
 import NotificationChip from '../../../UI/User/NotificationChip';
 import { useResponsiveWindowSize } from '../../../UI/Responsive/ResponsiveWindowMeasurer';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 type Props = {
   hasProject: boolean;

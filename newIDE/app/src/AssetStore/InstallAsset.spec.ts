@@ -31,6 +31,7 @@ import * as Asset from '../Utils/GDevelopServices/Asset';
 
 jest.mock('../Utils/GDevelopServices/Extension');
 
+// @ts-expect-error - TS2540 - Cannot assign to 'getPublicAsset' because it is a read-only property.
 Asset.getPublicAsset = jest.fn();
 
 const mockFn = (fn: any): jest.MockedFunction<any> => fn;

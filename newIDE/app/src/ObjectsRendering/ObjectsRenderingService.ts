@@ -22,8 +22,8 @@ import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils';
 
 import optionalRequire from '../Utils/OptionalRequire';
 import { rgbOrHexToHexNumber } from '../Utils/ColorTransformer';
-const path = optionalRequire('path');
-const electron = optionalRequire('electron');
+const path = optionalRequire('path') as typeof import('path');
+const electron = optionalRequire('electron') as typeof import('electron');
 const PIXI = { ...PIXI_LEGACY, ...PIXI_SPINE } as const;
 
 // Some PixiJS plugins like pixi-tilemap are not distributed as UMD modules,
@@ -220,12 +220,14 @@ const ObjectsRenderingService = {
       // to extensions needing it. If we don't, "pixi.js-legacy" is found in development, because Node.js resolution
       // algorithm traverses the paths until it reaches newIDE/app/node_modules, but is not found in production,
       // because newIDE/app node_modules are now gone (compiled by Webpack).
-      const module = optionalRequire('module');
+      const module = optionalRequire('module') as typeof import('module');
+// @ts-expect-error - TS2339 - Property '_load' does not exist on type 'typeof Module'.
       if (!module._load) {
         throw new Error(
           'module._load does not exist. This is possibly a change in Node.js that is breaking the custom loader, in ObjectsRenderingService.requireModule, that is injected to expose Pixi.js to extensions using "require".'
         );
       }
+// @ts-expect-error - TS2339 - Property '_load' does not exist on type 'typeof Module'.
       const originalNodeModuleLoad = module._load;
 
       // Allow pixi.js to be required by extensions:
@@ -240,6 +242,7 @@ const ObjectsRenderingService = {
         '@pixi/utils': PIXI,
         '@pixi/graphics': PIXI,
       } as const;
+// @ts-expect-error - TS2339 - Property '_load' does not exist on type 'typeof Module'.
       module._load = function hookedLoader(
         request: any,
         parent: any,
@@ -277,6 +280,7 @@ const ObjectsRenderingService = {
       }
 
       // Whatever the result, always restore the original "_load" in Node.js "module".
+// @ts-expect-error - TS2339 - Property '_load' does not exist on type 'typeof Module'.
       module._load = originalNodeModuleLoad;
       return requiredModule;
     } else {
@@ -291,6 +295,7 @@ const ObjectsRenderingService = {
     }
   },
   rgbOrHexToHexNumber, // Expose a ColorTransformer function, useful to manage different color types for the extensions
+// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'gd'. Either declare one or provide an initializer.
   gd, // Expose gd so that it can be used by renderers
   PIXI, // Expose PIXI so that it can be used by renderers
   THREE, // Expose THREE so that it can be used by renderers

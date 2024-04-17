@@ -66,7 +66,7 @@ const VariablesEditorDialog = ({
     getOriginalContentSerializedElement,
   } = useSerializableObjectCancelableEditor({
     serializableObject: variablesContainer,
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
     onCancel,
     resetThenClearPersistentUuid: true,
   });

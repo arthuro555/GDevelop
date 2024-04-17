@@ -108,7 +108,6 @@ export const LoadingScreenEditor = ({
           <ColumnStackLayout noMargin>
             <ResponsiveLineStackLayout noMargin>
               <Column expand noMargin justifyContent="center">
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={
                     <Trans>
@@ -116,7 +115,6 @@ export const LoadingScreenEditor = ({
                     </Trans>
                   }
                   checked={loadingScreen.isGDevelopLogoShownDuringLoadingScreen()}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     if (
                       !checked &&
@@ -166,7 +164,6 @@ export const LoadingScreenEditor = ({
 
             <ResponsiveLineStackLayout noMargin>
               <Column expand noMargin justifyContent="center">
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={
                     <Trans>
@@ -175,7 +172,6 @@ export const LoadingScreenEditor = ({
                     </Trans>
                   }
                   checked={watermark.isGDevelopWatermarkShown()}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     if (
                       !checked &&
@@ -333,11 +329,9 @@ export const LoadingScreenEditor = ({
           <Text size="block-title">
             <Trans>Progress bar</Trans>
           </Text>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             label={<Trans>Show progress bar</Trans>}
             checked={loadingScreen.getShowProgressBar()}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
             onCheck={(e, checked) => {
               loadingScreen.setShowProgressBar(checked);
               onUpdate();
@@ -578,6 +572,7 @@ export const LoadingScreenEditor = ({
           ) : null}
 
           <SubscriptionChecker
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SubscriptionCheckerInterface | null | undefined>' is not assignable to type 'Ref<SubscriptionCheckerInterface> | undefined'.
             ref={subscriptionChecker}
             onChangeSubscription={onChangeSubscription}
             mode="mandatory"

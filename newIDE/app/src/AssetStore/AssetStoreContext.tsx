@@ -222,7 +222,7 @@ export const AssetStoreStateProvider = ({
   const [initialPackUserFriendlySlug, setInitialPackUserFriendlySlug] =
     React.useState<string | null | undefined>(null);
   const initialPackOpened = React.useRef<boolean>(false);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const [searchText, setSearchText] = React.useState(defaultSearchText);
@@ -310,6 +310,7 @@ export const AssetStoreStateProvider = ({
         setPrivateAssetPackListingDatas(fetchedPrivateAssetPackListingDatas);
       } catch (error) {
         console.error(`Unable to load the assets from the asset store:`, error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setError(error);
       }
     })();

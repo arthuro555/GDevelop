@@ -45,22 +45,23 @@ const styles = {
 } as const;
 
 type Props = {
-  progress?: number,
+  progress?: number;
   /** For tutorials that cannot be started yet. */
-  locked?: boolean,
-  size?: 'large' | 'banner',
+  locked?: boolean;
+  size?: 'large' | 'banner';
   /** To prevent start on click. */
-  disabled?: boolean,
-  title: MessageDescriptor,
-  description: MessageDescriptor,
-  durationInMinutes?: number,
-  keyPoints?: Array<MessageDescriptor>,
-  onClick: () => void,
-  renderImage: (props?: any) => React.ReactElement,
-  loading?: boolean
+  disabled?: boolean;
+  title: MessageDescriptor;
+  description: MessageDescriptor;
+  durationInMinutes?: number;
+  keyPoints?: Array<MessageDescriptor>;
+  onClick: () => void;
+  renderImage: (props?: any) => React.ReactElement;
+  loading?: boolean;
 };
 
-const getTextStyle = disabled: undefined | boolean => (disabled ? { opacity: 0.4 } : undefined);
+const getTextStyle = (disabled?: boolean) =>
+  disabled ? { opacity: 0.4 } : undefined;
 
 const InAppTutorialPhaseCard = ({
   progress,
@@ -78,10 +79,8 @@ const InAppTutorialPhaseCard = ({
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const shouldTextBeDisabled = loading || disabled || locked;
   return (
-
     <I18n>
       {({ i18n }) => (
-
         <CardWidget
           onClick={onClick}
           size={size}
@@ -94,14 +93,13 @@ const InAppTutorialPhaseCard = ({
                 backgroundColor: locked
                   ? gdevelopTheme.paper.backgroundColor.light
                   : disabled
-                  ? gdevelopTheme.palette.type === 'dark'
-                    ? '#4F28CD'
-                    : '#9979F1'
-                  : '#7046EC',
+                    ? gdevelopTheme.palette.type === 'dark'
+                      ? '#4F28CD'
+                      : '#9979F1'
+                    : '#7046EC',
               }}
             >
               {locked ? (
-
                 <Lock style={styles.lockerImage} />
               ) : (
                 renderImage({
@@ -121,7 +119,6 @@ const InAppTutorialPhaseCard = ({
                 useFullHeight
               >
                 {progress && progress > 0 ? (
-
                   <LineStackLayout alignItems="center" noMargin>
                     <Text displayInlineAsSpan noMargin size="body2">
                       {progress}%
@@ -129,23 +126,19 @@ const InAppTutorialPhaseCard = ({
                     <ColoredLinearProgress value={progress} />
                   </LineStackLayout>
                 ) : durationInMinutes ? (
-
                   <Line noMargin justifyContent="center">
                     <Chip
                       size="small"
                       label={
                         durationInMinutes === 1 ? (
-
                           <Trans>1 minute</Trans>
                         ) : (
-
                           <Trans>{durationInMinutes} minutes</Trans>
                         )
                       }
                     />
                   </Line>
                 ) : (
-
                   <Spacer />
                 )}
                 <Text
@@ -166,7 +159,6 @@ const InAppTutorialPhaseCard = ({
                 </Text>
                 {keyPoints && <Divider />}
                 {keyPoints && (
-
                   <Column
                     noMargin
                     alignItems="flex-start"
@@ -175,7 +167,6 @@ const InAppTutorialPhaseCard = ({
                   >
                     <ul style={styles.keyPointsList}>
                       {keyPoints.map((keyPoint, index) => (
-
                         <Text
                           key={`key-point-${index}`}
                           size="body2"

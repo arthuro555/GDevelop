@@ -31,6 +31,7 @@ export const Default = () => (
   <SerializedObjectDisplay object={testProject.spriteObjectConfiguration}>
     <DragAndDropContextProvider>
       <SpriteEditor
+// @ts-expect-error - TS2322 - Type '() => null' is not assignable to type '() => ReactElement<any, string | JSXElementConstructor<any>>'.
         renderObjectNameField={() => null}
         objectConfiguration={testProject.spriteObjectConfiguration}
         project={testProject.project}
@@ -48,6 +49,7 @@ export const AnimationLocked = () => (
   <SerializedObjectDisplay object={testProject.spriteObjectConfiguration}>
     <DragAndDropContextProvider>
       <SpriteEditor
+// @ts-expect-error - TS2322 - Type '() => null' is not assignable to type '() => ReactElement<any, string | JSXElementConstructor<any>>'.
         renderObjectNameField={() => null}
         isAnimationListLocked
         objectConfiguration={testProject.spriteObjectConfiguration}
@@ -66,6 +68,7 @@ export const Empty = () => (
   <SerializedObjectDisplay object={testProject.emptySpriteObjectConfiguration}>
     <DragAndDropContextProvider>
       <SpriteEditor
+// @ts-expect-error - TS2322 - Type '() => null' is not assignable to type '() => ReactElement<any, string | JSXElementConstructor<any>>'.
         renderObjectNameField={() => null}
         objectConfiguration={testProject.emptySpriteObjectConfiguration}
         project={testProject.project}
@@ -83,7 +86,6 @@ export const Points = () => (
   <SerializedObjectDisplay object={testProject.spriteObjectConfiguration}>
     <DragAndDropContextProvider>
       <FixedHeightFlexContainer height={500}>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PointsEditor
           animations={testProject.spriteObjectConfiguration.getAnimations()}
           project={testProject.project}
@@ -99,11 +101,11 @@ export const CollisionMasks = () => (
   <SerializedObjectDisplay object={testProject.spriteObjectConfiguration}>
     <DragAndDropContextProvider>
       <FixedHeightFlexContainer height={500}>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <CollisionMasksEditor
           animations={testProject.spriteObjectConfiguration.getAnimations()}
           project={testProject.project}
           resourcesLoader={ResourcesLoader}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
           onCreateMatchingSpriteCollisionMask={action(
             'Created a matching sprite collision mask'
           )}

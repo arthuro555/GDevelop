@@ -99,7 +99,6 @@ export const PropertyCheckbox = ({
 
   const property = properties.get(propertyName);
   return (
-    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Checkbox
       checked={property.getValue() === 'true'}
       label={
@@ -110,7 +109,6 @@ export const PropertyCheckbox = ({
           </FormHelperText>
         </React.Fragment>
       }
-      // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
       onCheck={(_, value) => {
         onChangeProperty(propertyName, value ? '1' : '0');
       }}

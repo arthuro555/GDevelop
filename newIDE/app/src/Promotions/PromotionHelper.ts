@@ -9,7 +9,7 @@ export const getOnClick = ({
 }: {
   promotion: Promotion;
   navigateToRoute: (route: Route, additionalArgument?: RouteArguments) => void;
-}): (() => void | null | undefined) => {
+}): (() => void) => {
   const productId = promotion.productId;
   if (productId) {
     if (promotion.type === 'game-template') {
@@ -27,6 +27,6 @@ export const getOnClick = ({
     return () => Window.openExternalURL(linkUrl);
   }
 
-  // @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type '() => void | null | undefined'.
+  // @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type '() => void'.
   return undefined;
 };

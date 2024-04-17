@@ -1,10 +1,13 @@
+/// <reference path="./showOpenFilePicker.d.ts" />
 export default class BrowserEventsFunctionsExtensionOpener {
-  static chooseEventsFunctionExtensionFile = (): Promise<any | null | undefined> => {
-    return new Promise(resolve: (result: Promise<null> | null) => void => {
-// @ts-expect-error - TS7006 - Parameter 'window' implicitly has an 'any' type. | TS1005 - ',' expected. | TS1005 - ',' expected. | TS1005 - ';' expected.
+  static chooseEventsFunctionExtensionFile = (): Promise<
+    any | null | undefined
+  > => {
+    return new Promise((resolve) => {
+      //@ts-ignore TODO: Find why it won't load the dts
       if (window.showOpenFilePicker) {
         window
-// @ts-expect-error - TS2339 - Property 'showOpenFilePicker' does not exist on type 'Window & typeof globalThis'.
+          //@ts-ignore TODO: Find why it won't load the dts
           .showOpenFilePicker({
             types: [
               {
@@ -24,13 +27,12 @@ export default class BrowserEventsFunctionsExtensionOpener {
           .catch(() => {
             resolve(null);
           });
-
       } else {
         const adhocInput = document.createElement('input');
         adhocInput.type = 'file';
         adhocInput.multiple = false;
         adhocInput.accept = 'application/json,.json';
-        adhocInput.onchange = e: any => {
+        adhocInput.onchange = (e: any) => {
           const file = e.target.files[0];
           return resolve(file);
         };
@@ -59,7 +61,7 @@ export default class BrowserEventsFunctionsExtensionOpener {
               onFilePickingDialogFinishedClosing
             );
           }
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+          // @ts-expect-error - TS2531 - Object is possibly 'null'.
           if (!adhocInput.files.length) {
             resolve(null);
           }
@@ -68,7 +70,6 @@ export default class BrowserEventsFunctionsExtensionOpener {
         window.addEventListener('focus', onFocusBackWindow);
         adhocInput.click();
       }
-
     });
   };
 
@@ -90,5 +91,4 @@ export default class BrowserEventsFunctionsExtensionOpener {
       throw error;
     }
   };
-
 }

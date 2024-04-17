@@ -43,6 +43,7 @@ type Props = {
 const WrappedDismissableTutorialMessage = ({
   // @ts-expect-error - TS2322 - Type '{ id: string; title: string; description: string; thumbnailUrl: string; link: string; type: string; }[]' is not assignable to type 'Tutorial[]'.
   tutorials = defaultTutorials,
+// @ts-expect-error - TS2322 - Type '{ readonly values: { readonly language: "en"; readonly autoDownloadUpdates: true; readonly themeName: "GDevelop default Dark"; readonly codeEditorThemeName: "vs-dark"; readonly hiddenAlertMessages: {}; ... 34 more ...; readonly editorStateByProject: {}; }; ... 59 more ...; readonly setEditorStateForProject: (project...' is not assignable to type 'Preferences'.
   preferences = initialPreferences,
   tutorialId,
 }: Props) => (
@@ -78,6 +79,7 @@ export const HiddenTutorial = () => (
     tutorialId="tutorial-1"
     preferences={{
       ...initialPreferences,
+// @ts-expect-error - TS2322 - Type '{ hiddenTutorialHints: { 'tutorial-1': true; }; language: "en"; autoDownloadUpdates: true; themeName: "GDevelop default Dark"; codeEditorThemeName: "vs-dark"; hiddenAlertMessages: {}; hiddenAnnouncements: {}; ... 32 more ...; editorStateByProject: {}; }' is not assignable to type 'PreferencesValues'.
       values: {
         ...initialPreferences.values,
         hiddenTutorialHints: { 'tutorial-1': true },

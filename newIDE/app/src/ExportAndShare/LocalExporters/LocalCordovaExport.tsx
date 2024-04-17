@@ -23,7 +23,7 @@ import {
   ExportFlow,
 } from '../GenericExporters/CordovaExport';
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const shell = electron ? electron.shell : null;
 
 type ExportState = {

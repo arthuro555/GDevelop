@@ -11,7 +11,7 @@ import { ColumnStackLayout } from './Layout';
 
 type Props = {
   children: React.ReactNode;
-  onRetry?: () => undefined | Promise<undefined>;
+  onRetry?: () => void;
 };
 
 const PlaceholderError = ({ onRetry, children }: Props) => {

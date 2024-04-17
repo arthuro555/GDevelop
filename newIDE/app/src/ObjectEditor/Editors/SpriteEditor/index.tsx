@@ -68,7 +68,7 @@ export default function SpriteEditor({
   const animations = spriteConfiguration.getAnimations();
   const { isMobile } = useResponsiveWindowSize();
 
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
   const animationList = React.useRef<AnimationListInterface | null | undefined>(
     null
   );
@@ -76,7 +76,7 @@ export default function SpriteEditor({
   const [justAddedAnimationName, setJustAddedAnimationName] = React.useState<
     string | null | undefined
   >(null);
-  const justAddedAnimationElement = React.useRef<any | null | undefined>(null);
+  const justAddedAnimationElement = React.useRef<any>(null);
 
   React.useEffect(() => {
     if (
@@ -123,12 +123,12 @@ export default function SpriteEditor({
     <I18n>
       {({ i18n }) => (
         <>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ScrollView ref={scrollView}>
             <>
               {renderObjectNameField && renderObjectNameField()}
               <SpacedDismissableTutorialMessage />
               <AnimationList
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<AnimationListInterface | null | undefined>' is not assignable to type 'Ref<AnimationListProps> | undefined'.
                 ref={animationList}
                 animations={animations}
                 project={project}
@@ -177,6 +177,7 @@ export default function SpriteEditor({
                   onClick={() => setCollisionMasksEditorOpen(true)}
                   disabled={!hasAnyFrame(animations)}
                   buildMenuTemplate={(i18n) =>
+// @ts-expect-error - TS2322 - Type '({ label: string; disabled: boolean; click: () => void; } | null)[]' is not assignable to type 'MenuItemTemplate[]'.
                     [
                       {
                         label: i18n._(t`Edit points`),
@@ -226,7 +227,6 @@ export default function SpriteEditor({
               open
             >
               <Column noMargin>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={
                     <Trans>
@@ -235,7 +235,6 @@ export default function SpriteEditor({
                     </Trans>
                   }
                   checked={!spriteConfiguration.getUpdateIfNotVisible()}
-                  // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                   onCheck={(_, value) => {
                     spriteConfiguration.setUpdateIfNotVisible(!value);
 
@@ -269,7 +268,6 @@ export default function SpriteEditor({
               fullHeight
               open={pointsEditorOpen}
             >
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <PointsEditor
                 animations={animations}
                 resourcesLoader={ResourcesLoader}
@@ -313,7 +311,6 @@ export default function SpriteEditor({
               onRequestClose={() => setCollisionMasksEditorOpen(false)}
               open={collisionMasksEditorOpen}
             >
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CollisionMasksEditor
                 animations={animations}
                 resourcesLoader={ResourcesLoader}

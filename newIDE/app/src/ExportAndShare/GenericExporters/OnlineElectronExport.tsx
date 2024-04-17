@@ -62,35 +62,27 @@ export const SetupExportHeader = ({
             </Trans>
           </Text>
         </Line>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Windows (zip file)</Trans>}
           checked={exportState.targets.indexOf('winZip') !== -1}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => setTarget('winZip', checked)}
           disabled={isExporting}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Windows (auto-installer file)</Trans>}
           checked={exportState.targets.indexOf('winExe') !== -1}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => setTarget('winExe', checked)}
           disabled={isExporting}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>macOS (zip file)</Trans>}
           checked={exportState.targets.indexOf('macZip') !== -1}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => setTarget('macZip', checked)}
           disabled={isExporting}
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={<Trans>Linux (AppImage)</Trans>}
           checked={exportState.targets.indexOf('linuxAppImage') !== -1}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) => setTarget('linuxAppImage', checked)}
           disabled={isExporting}
         />

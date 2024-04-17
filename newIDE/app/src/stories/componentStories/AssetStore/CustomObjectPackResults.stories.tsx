@@ -31,6 +31,7 @@ export const Default = () => (
   <Wrapper>
     <CustomObjectPackResults
       packTag="multitouch joysticks"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(assetShortHeader: AssetShortHeader) => Promise<void>'.
       onAssetSelect={action('onAssetSelect')}
       onBack={action('onBack')}
       isAssetBeingInstalled={false}
@@ -42,6 +43,7 @@ export const Installing = () => (
   <Wrapper>
     <CustomObjectPackResults
       packTag="multitouch joysticks"
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(assetShortHeader: AssetShortHeader) => Promise<void>'.
       onAssetSelect={action('onAssetSelect')}
       onBack={action('onBack')}
       isAssetBeingInstalled

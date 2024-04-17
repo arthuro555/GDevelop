@@ -21,7 +21,6 @@ export default {
 
 export const NoProjectLoaded = () => (
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration project={null} onGameRegistered={() => {}} />
   </AuthenticatedUserContext.Provider>
 );

@@ -230,8 +230,8 @@ const TreeView = <Item extends ItemBaseAttributes>(
   const contextMenuRef = React.useRef<ContextMenuInterface | null | undefined>(
     null
   );
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
-  const listRef = React.useRef<FixedSizeList | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const listRef = React.useRef<FixedSizeList>(null);
   const [openedDuringSearchNodeIds, setOpenedDuringSearchNodeIds] =
     React.useState<string[]>([]);
   const { isMobile } = useResponsiveWindowSize();
@@ -725,7 +725,6 @@ const TreeView = <Item extends ItemBaseAttributes>(
         className={classes.treeView}
         // @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
         onKeyDown={onKeyDown}
-        // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
         ref={containerRef}
       >
         <FixedSizeList
@@ -752,6 +751,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
         </FixedSizeList>
       </div>
       <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
         ref={contextMenuRef}
         buildMenuTemplate={(i18n, options) =>
           buildMenuTemplate(options.item, options.index)

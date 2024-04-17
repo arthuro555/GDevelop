@@ -136,6 +136,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
         renderTextField={() =>
           !isExpressionField ? (
             <SelectField
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SelectFieldInterface | ExpressionField | null | undefined>' is not assignable to type 'Ref<SelectFieldInterface> | undefined'.
               ref={field}
               id={
                 props.parameterIndex !== undefined
@@ -158,6 +159,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
             </SelectField>
           ) : (
             <GenericExpressionField
+// @ts-expect-error - TS2769 - No overload matches this call.
               ref={field}
               id={
                 props.parameterIndex !== undefined
@@ -171,6 +173,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
           )
         }
         renderButton={(style) =>
+// @ts-expect-error - TS2322 - Type 'Element | null' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
           props.scope.eventsFunctionsExtension ? null : isExpressionField ? (
             <FlatButton
               id="switch-expression-select"

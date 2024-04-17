@@ -17,7 +17,7 @@ type Props = {
   primary: true; // Force making only primary raised split buttons.,
   disabled?: boolean;
   icon?: React.ReactNode;
-  onClick: () => void | null | undefined;
+  onClick: () => void;
   buildMenuTemplate: (i18n: I18nType) => Array<MenuItemTemplate>;
   style?: {
     marginTop?: number;

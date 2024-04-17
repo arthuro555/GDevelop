@@ -30,7 +30,7 @@ const ObjectGroupEditorDialog = ({
   const { onCancelChanges, notifyOfChange } =
     useSerializableObjectCancelableEditor({
       serializableObject: group,
-      // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onCancel,
     });
 

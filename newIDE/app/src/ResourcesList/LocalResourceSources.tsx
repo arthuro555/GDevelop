@@ -29,7 +29,7 @@ import { FileToCloudProjectResourceUploader } from './FileToCloudProjectResource
 
 const remote = optionalRequire('@electron/remote');
 const dialog = remote ? remote.dialog : null;
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 
 type ResourceStoreChooserProps = {
   options: ChooseResourceOptions;

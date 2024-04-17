@@ -27,6 +27,7 @@ export const Instance2d = () => (
       {({ i18n }) => (
         <SerializedObjectDisplay object={testProject.testLayout}>
           <InstancePropertiesEditor
+// @ts-expect-error - TS2322 - Type '{ i18n: I18n; project: any; layout: any; instances: any[]; editInstanceVariables: HandlerFunction; onGetInstanceSize: () => number[]; onEditObjectByName: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & InstancePropertiesEditorInterface & RefAttributes<Props>'.
             i18n={i18n}
             project={testProject.project}
             layout={testProject.testLayout}
@@ -47,6 +48,7 @@ export const Instance3d = () => (
       {({ i18n }) => (
         <SerializedObjectDisplay object={testProject.testLayout}>
           <InstancePropertiesEditor
+// @ts-expect-error - TS2322 - Type '{ i18n: I18n; project: any; layout: any; instances: any[]; editInstanceVariables: HandlerFunction; onGetInstanceSize: () => number[]; onEditObjectByName: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & InstancePropertiesEditorInterface & RefAttributes<Props>'.
             i18n={i18n}
             project={testProject.project}
             layout={testProject.testLayout}

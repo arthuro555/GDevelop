@@ -76,7 +76,6 @@ export const AnnouncementsFeed = ({
 
   if (error) {
     return (
-      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <PlaceholderError onRetry={fetchAnnouncementsAndPromotions}>
         <Trans>
           Can't load the announcements. Verify your internet connection or try
@@ -135,6 +134,7 @@ export const AnnouncementsFeed = ({
                 return (
                   <AlertMessage
                     kind={announcement.type}
+// @ts-expect-error - TS2322 - Type '(() => Element) | null' is not assignable to type '(() => ReactElement<any, string | JSXElementConstructor<any>> | null | undefined) | undefined'.
                     renderRightButton={
                       buttonLabelByLocale && buttonUrl
                         ? () => (
@@ -148,6 +148,7 @@ export const AnnouncementsFeed = ({
                           )
                         : null
                     }
+// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type '(() => void) | undefined'.
                     onHide={
                       canClose
                         ? () => {

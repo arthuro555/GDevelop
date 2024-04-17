@@ -93,7 +93,7 @@ const OnlineGameLink = ({
   );
   const [timeBeforeExportFinished, setTimeBeforeExportFinished] =
     React.useState<number>(timeForExport);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const exportPending = !errored && exportStep !== '' && exportStep !== 'done';
@@ -137,6 +137,7 @@ const OnlineGameLink = ({
       } catch (error) {
         console.error(
           'Unable to update the authors:',
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
           error.response || error.message
         );
         await showAlert({
@@ -169,6 +170,7 @@ const OnlineGameLink = ({
         } catch (error) {
           console.error(
             'Unable to update the game slug:',
+// @ts-expect-error - TS2571 - Object is of type 'unknown'. | TS2571 - Object is of type 'unknown'.
             error.response || error.message
           );
           await showAlert({

@@ -71,7 +71,6 @@ import { useResponsiveWindowSize } from '../UI/Responsive/ResponsiveWindowMeasur
 const BEHAVIORS_CLIPBOARD_KIND = 'Behaviors';
 
 export const useBehaviorOverridingAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (existingBehaviorNames: Array<string>): Promise<boolean> => {
     return await showConfirmation({
@@ -88,7 +87,7 @@ export const useBehaviorOverridingAlertDialog = () => {
 type BehaviorConfigurationEditorInterface = Record<any, any>;
 type BehaviorConfigurationEditorProps = {
   project: gd.Project;
-  object: gd.Object;
+  object: gd.gdObject;
   behavior: gd.Behavior;
   resourceManagementProps: ResourceManagementProps;
   onBehaviorsUpdated: () => void;
@@ -209,6 +208,7 @@ const BehaviorConfigurationEditor = React.forwardRef<
                   <ThreeDotsMenu />
                 </IconButton>
               }
+// @ts-expect-error - TS2769 - No overload matches this call.
               buildMenuTemplate={(i18n: I18nType) => [
                 {
                   label: i18n._(t`Delete`),
@@ -294,9 +294,9 @@ const BehaviorConfigurationEditor = React.forwardRef<
 type Props = {
   project: gd.Project;
   eventsFunctionsExtension?: gd.EventsFunctionsExtension;
-  object: gd.Object;
+  object: gd.gdObject;
   onUpdateBehaviorsSharedData: () => void;
-  onSizeUpdated?: () => void | null | undefined;
+  onSizeUpdated?: () => void;
   resourceManagementProps: ResourceManagementProps;
   onBehaviorsUpdated: () => void;
   openBehaviorEvents: (
@@ -307,7 +307,7 @@ type Props = {
 
 const BehaviorsEditor = (props: Props) => {
   const { isMobile } = useResponsiveWindowSize();
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
   const [justAddedBehaviorName, setJustAddedBehaviorName] = React.useState<
     string | null | undefined
   >(null);
@@ -621,7 +621,6 @@ const BehaviorsEditor = (props: Props) => {
         </Column>
       ) : (
         <React.Fragment>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ScrollView ref={scrollView}>
             {/* @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type. */}
             {allVisibleBehaviors.map((behavior, index) => {

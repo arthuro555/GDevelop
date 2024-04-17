@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableHeaderColumn,
   TableRow,
-
 } from '../../../../UI/Table';
 import newNameGenerator from '../../../../Utils/NewNameGenerator';
 import { mapVector } from '../../../../Utils/MapFor';
@@ -24,13 +23,13 @@ import styles from './styles';
 import Add from '../../../../UI/CustomSvgIcons/Add';
 
 type PointsListBodyProps = {
-  pointsContainer: gd.Sprite,
-  onPointsUpdated: () => void,
-  onHoverPoint: (pointName?: string | null | undefined) => void,
-  onSelectPoint: (pointName: string) => void,
-  onRenamedPoint: (oldName: string, newName: string) => void,
-  selectedPointName: string | null | undefined,
-  spriteSize: [number, number]
+  pointsContainer: gd.Sprite;
+  onPointsUpdated: () => void;
+  onHoverPoint: (pointName?: string | null | undefined) => void;
+  onSelectPoint: (pointName: string) => void;
+  onRenamedPoint: (oldName: string, newName: string) => void;
+  selectedPointName: string | null | undefined;
+  spriteSize: [number, number];
 };
 
 const PointsListBody = (props: PointsListBodyProps) => {
@@ -43,22 +42,22 @@ const PointsListBody = (props: PointsListBodyProps) => {
     props.onPointsUpdated();
   };
 
-  const updateOriginPointX = newValue: number => {
+  const updateOriginPointX = (newValue: number) => {
     pointsContainer.getOrigin().setX(newValue);
     onPointsUpdated();
   };
 
-  const updateOriginPointY = newValue: number => {
+  const updateOriginPointY = (newValue: number) => {
     pointsContainer.getOrigin().setY(newValue);
     onPointsUpdated();
   };
 
-  const updateCenterPointX = newValue: number => {
+  const updateCenterPointX = (newValue: number) => {
     pointsContainer.getCenter().setX(newValue);
     onPointsUpdated();
   };
 
-  const updateCenterPointY = newValue: number => {
+  const updateCenterPointY = (newValue: number) => {
     pointsContainer.getCenter().setY(newValue);
     onPointsUpdated();
   };
@@ -73,9 +72,10 @@ const PointsListBody = (props: PointsListBodyProps) => {
     onPointsUpdated();
   };
 
-  const onPointerLeave = React.useCallback(() => onHoverPoint(null), [
-    onHoverPoint,
-  ]);
+  const onPointerLeave = React.useCallback(
+    () => onHoverPoint(null),
+    [onHoverPoint]
+  );
 
   const nonDefaultPoints = pointsContainer.getAllNonDefaultPoints();
 
@@ -83,17 +83,15 @@ const PointsListBody = (props: PointsListBodyProps) => {
     const pointName = point.getName();
 
     return (
-
       <PointRow
         key={`point-${point.ptr}`}
         pointX={point.getX()}
         pointY={point.getY()}
-
-        onChangePointX={newValue => updatePointX(point, newValue)}
-
-        onChangePointY={newValue => updatePointY(point, newValue)}
+        onChangePointX={(newValue) => updatePointX(point, newValue)}
+        onChangePointY={(newValue) => updatePointY(point, newValue)}
         pointName={pointName}
         selected={pointName === props.selectedPointName}
+// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
         nameError={nameErrors[pointName]}
         onChangePointName={(newName: string) => {
           if (pointName === newName) return;
@@ -112,7 +110,7 @@ const PointsListBody = (props: PointsListBodyProps) => {
             onPointsUpdated();
           }
 
-          setNameErrors(old => ({ ...old, [pointName]: !success }));
+          setNameErrors((old) => ({ ...old, [pointName]: !success }));
         }}
         onPointerEnter={props.onHoverPoint}
         onPointerLeave={onPointerLeave}
@@ -134,7 +132,6 @@ const PointsListBody = (props: PointsListBodyProps) => {
   const centerPoint = pointsContainer.getCenter();
 
   const originRow = (
-
     <PointRow
       key={'origin-point-row'}
       pointName="Origin"
@@ -151,7 +148,6 @@ const PointsListBody = (props: PointsListBodyProps) => {
 
   const isDefaultCenterPoint = pointsContainer.isDefaultCenterPoint();
   const centerRow = (
-
     <PointRow
       key={'center-point-row'}
       pointName="Center"
@@ -168,6 +164,7 @@ const PointsListBody = (props: PointsListBodyProps) => {
       onPointerLeave={onPointerLeave}
       onClick={props.onSelectPoint}
       selected={'Center' === props.selectedPointName}
+// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type '((ev?: any) => void) | undefined'.
       onEdit={
         pointsContainer.isDefaultCenterPoint()
           ? () => {
@@ -176,6 +173,7 @@ const PointsListBody = (props: PointsListBodyProps) => {
             }
           : null
       }
+// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type '((ev?: any) => void) | undefined'.
       onRemove={
         !pointsContainer.isDefaultCenterPoint()
           ? () => {
@@ -188,22 +186,20 @@ const PointsListBody = (props: PointsListBodyProps) => {
   );
 
   return <TableBody>{[originRow, centerRow, ...pointsRows]}</TableBody>;
-
 };
 
 type PointsListProps = {
-  pointsContainer: gd.Sprite,
-  onPointsUpdated: () => void,
-  onHoverPoint: (pointName?: string | null | undefined) => void,
-  onSelectPoint: (pointName?: string | null | undefined) => void,
-  onRenamedPoint: (oldName: string, newName: string) => void,
-  selectedPointName: string | null | undefined,
-  spriteSize: [number, number]
+  pointsContainer: gd.Sprite;
+  onPointsUpdated: () => void;
+  onHoverPoint: (pointName?: string | null | undefined) => void;
+  onSelectPoint: (pointName?: string | null | undefined) => void;
+  onRenamedPoint: (oldName: string, newName: string) => void;
+  selectedPointName: string | null | undefined;
+  spriteSize: [number, number];
 };
 
 const PointsList = (props: PointsListProps) => {
   return (
-
     <Column expand>
       <Table>
         <TableHeader>
@@ -220,7 +216,6 @@ const PointsList = (props: PointsListProps) => {
             <TableHeaderColumn style={styles.toolColumn} />
           </TableRow>
         </TableHeader>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2786 - 'PointsListBody' cannot be used as a JSX component. */}
         <PointsListBody
           pointsContainer={props.pointsContainer}
           onHoverPoint={props.onHoverPoint}
@@ -235,12 +230,10 @@ const PointsList = (props: PointsListProps) => {
       <Line alignItems="center" justifyContent="center">
         <RaisedButton
           primary
-
           icon={<Add />}
-
           label={<Trans>Add a point</Trans>}
           onClick={() => {
-            const name = newNameGenerator('Point', name =>
+            const name = newNameGenerator('Point', (name) =>
               props.pointsContainer.hasPoint(name)
             );
             const point = new gd.Point(name);

@@ -8,13 +8,14 @@ import { ShortcutMap } from '../KeyboardShortcuts/DefaultShortcuts';
 import {
   MenuDeclarativeItemTemplate,
   MenuItemTemplate,
+// @ts-expect-error - TS2307 - Cannot find module '../UI/Menu/Menu.flow' or its corresponding type declarations.
 } from '../UI/Menu/Menu.flow';
 import { getElectronAccelerator } from '../KeyboardShortcuts';
 import { isMacLike } from '../Utils/Platform';
 import Window from '../Utils/Window';
 
 import optionalRequire from '../Utils/OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 const isDesktop = !!electron;
 
@@ -52,7 +53,7 @@ export type MainMenuCallbacks = {
 };
 
 export type MainMenuExtraCallbacks = {
-  onClosePreview?: (windowId: number) => void | null | undefined;
+  onClosePreview?: (windowId: number) => void;
 };
 
 export type MainMenuEvent =

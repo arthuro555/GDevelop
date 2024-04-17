@@ -116,8 +116,8 @@ type Props = {
   initialInstances: gd.InitialInstancesContainer;
   getInitialInstancesEditorSettings: () => InstancesEditorSettings;
   layout: gd.Layout;
-  onEditObject?: (object: gd.Object) => void | null | undefined;
-  onOpenMoreSettings?: () => void | null | undefined;
+  onEditObject?: (object: gd.gdObject) => void;
+  onOpenMoreSettings?: () => void;
   onOpenEvents: (sceneName: string) => void;
   project: gd.Project;
   setToolbar: (arg1?: React.ReactNode | null | undefined) => void;
@@ -137,7 +137,7 @@ type State = {
   onCloseLayerRemoveDialog: (
     doRemove: boolean,
     newLayer: string | null
-  ) => void | null | undefined;
+  ) => void;
   layerRemoved: string | null | undefined;
   editedLayer: gd.Layer | null | undefined;
   editedLayerInitialTab: 'properties' | 'effects';
@@ -182,7 +182,7 @@ export default class SceneEditor extends React.Component<Props, State> {
       setupGridOpen: false,
       scenePropertiesDialogOpen: false,
       layersListOpen: false,
-      // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(doRemove: boolean, newLayer: string | null) => void | null | undefined'.
+      // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(doRemove: boolean, newLayer: string | null) => void'.
       onCloseLayerRemoveDialog: null,
       layerRemoved: null,
       editedLayer: null,
@@ -470,7 +470,7 @@ export default class SceneEditor extends React.Component<Props, State> {
   };
 
   editObject = (
-    editedObject?: gd.Object | null,
+    editedObject?: gd.gdObject | null,
     initialTab?: ObjectEditorTab | null
   ) => {
     const { project } = this.props;
@@ -816,7 +816,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     this.setState({ newObjectInstanceSceneCoordinates: null });
   };
 
-  _onObjectCreated = (object: gd.Object) => {
+  _onObjectCreated = (object: gd.gdObject) => {
     const infoBarDetails = onObjectAdded(
       object,
       this.props.layout,
@@ -1636,7 +1636,7 @@ export default class SceneEditor extends React.Component<Props, State> {
       this.editorDisplay.forceUpdateInstancesPropertiesEditor();
   };
 
-  reloadResourcesFor = (object: gd.Object) => {
+  reloadResourcesFor = (object: gd.gdObject) => {
     const { project } = this.props;
 
     const resourcesInUse = new gd.ResourcesInUseHelper(
@@ -2022,6 +2022,7 @@ export default class SceneEditor extends React.Component<Props, State> {
                     <ContextMenu
                       ref={(contextMenu) => (this.contextMenu = contextMenu)}
                       buildMenuTemplate={(i18n, buildOptions) =>
+// @ts-expect-error - TS2322 - Type '({ label: string; click: () => void; } | { type: string; label?: undefined; click?: undefined; enabled?: undefined; accelerator?: undefined; } | { label: string; click: () => void; enabled: any; } | null)[]' is not assignable to type 'MenuItemTemplate[]'.
                         this.buildContextMenu(i18n, layout, buildOptions)
                       }
                     />

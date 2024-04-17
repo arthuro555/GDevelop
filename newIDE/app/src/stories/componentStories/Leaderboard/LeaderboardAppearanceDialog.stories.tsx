@@ -24,6 +24,7 @@ export const WithoutSubscription = () => (
     <LeaderboardAppearanceDialog
       open
       onClose={() => action('onClose')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onSave={() => action('onSave')()}
       leaderboardCustomizationSettings={{
         scoreTitle: 'Coins collected',
@@ -43,6 +44,7 @@ export const WithSilverSubscription = () => (
     <LeaderboardAppearanceDialog
       open
       onClose={() => action('onClose')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onSave={() => action('onSave')()}
       leaderboardCustomizationSettings={{
         scoreTitle: 'Coins collected',
@@ -62,6 +64,7 @@ export const WithStartupSubscription = () => (
     <LeaderboardAppearanceDialog
       open
       onClose={() => action('onClose')()}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type 'Promise<void>'.
       onSave={() => action('onSave')()}
       leaderboardCustomizationSettings={{
         scoreTitle: 'Coins collected',

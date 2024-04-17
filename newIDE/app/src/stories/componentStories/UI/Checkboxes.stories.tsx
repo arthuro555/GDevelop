@@ -30,37 +30,29 @@ export const Default = () => {
     <ResponsiveLineStackLayout noColumnMargin noMargin>
       <Column alignItems="flex-start" expand>
         <Text size="block-title">Checkboxes</Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={value}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => setValue(value)}
           label="This is a checkbox"
         />
         <LargeSpacer />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={true}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => {}}
           label="This is a disabled checkbox"
           disabled
         />
         <LargeSpacer />
         <Text>Without label</Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={value}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => setValue(value)}
           checkedIcon={<Visibility />}
           uncheckedIcon={<VisibilityOff />}
         />
         <LargeSpacer />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={true}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => {}}
           label="With some helper text"
           tooltipOrHelperText="This is some helper text"
@@ -68,47 +60,37 @@ export const Default = () => {
       </Column>
       <Column alignItems="flex-start" expand>
         <Text size="block-title">Inline checkboxes</Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlineCheckbox
           checked={inlineValue}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => setInlineValue(value)}
           label="This is a checkbox"
         />
         <LargeSpacer />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlineCheckbox
           checked={true}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => {}}
           label="This is a disabled checkbox"
           disabled
         />
         <LargeSpacer />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlineCheckbox
           checked={true}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => {}}
           label="With some helper text"
           tooltipOrHelperText="This is some helper text"
         />
         <LargeSpacer />
         <Text>Without label</Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlineCheckbox
           checked={inlineValue}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => setInlineValue(value)}
           checkedIcon={<Visibility />}
           uncheckedIcon={<VisibilityOff />}
         />
         <LargeSpacer />
         <Text>Without label and with tooltip</Text>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlineCheckbox
           checked={inlineValue}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(e, value) => setInlineValue(value)}
           checkedIcon={<Visibility />}
           uncheckedIcon={<VisibilityOff />}

@@ -44,6 +44,7 @@ describe('LocalResourceExternalEditors', () => {
     let project = null;
     beforeEach(() => {
       mockFn(downloadUrlsToBlobs).mockReset();
+// @ts-expect-error - TS2339 - Property 'mockFs' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFs.promises.readFile).mockReset();
     });
     afterEach(() => {
@@ -72,6 +73,7 @@ describe('LocalResourceExternalEditors', () => {
       });
 
       // Mock the reading of a local file.
+// @ts-expect-error - TS2339 - Property 'mockFs' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       mockFn(optionalRequire.mockFs.promises.readFile).mockImplementation(
         async () => 'somefakecontent'
       );
@@ -82,6 +84,7 @@ describe('LocalResourceExternalEditors', () => {
       });
 
       // Check that the file were downloaded/read.
+// @ts-expect-error - TS2339 - Property 'mockFs' does not exist on type '(moduleName: string, config?: { rethrowException: boolean; }) => any'.
       expect(optionalRequire.mockFs.promises.readFile).toHaveBeenCalledWith(
         path.resolve('some/local-file.png')
       );

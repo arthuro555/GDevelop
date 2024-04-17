@@ -8,6 +8,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
     },
     topUserCommentQualityRatings: [
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'FbKIILxuBlgSp8wMb3jwgJQ6guA2',
         count: 1,
         userPublicProfile: {
@@ -35,6 +36,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: null; description: null; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'mnVo2kO4b8QgKIrTXBR5hMg3L5F2',
         count: 1,
         userPublicProfile: {
@@ -60,6 +62,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'qaPOb3aaVWWYlOVNiF6WWWQQs732',
         count: 1,
         userPublicProfile: {
@@ -88,6 +91,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'JCyXMuGPACQwiprTfsUqv6pluIy1',
         count: 1,
         userPublicProfile: {
@@ -114,6 +118,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'wY5eR2lNDrgEV3kOoeeWDExRQtr2',
         count: 1,
         userPublicProfile: {
@@ -139,6 +144,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: null; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: '3YxRqY6QbXhcwvMoVVSmNySexgB2',
         count: 1,
         userPublicProfile: {
@@ -172,6 +178,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
     },
     topUserCommentQualityRatings: [
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: string; discordUsername: null; communityLinks: {}; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: '2OwwM8ToR9dx9RJ2sAKTcrLmCB92',
         count: 4,
         userPublicProfile: {
@@ -187,6 +194,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'FbKIILxuBlgSp8wMb3jwgJQ6guA2',
         count: 1,
         userPublicProfile: {
@@ -214,6 +222,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: null; description: null; donateLink: null; discordUsername: null; communityLinks: {}; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: '09pfOz99PXg8Ps3ocfH9G3X1DNw1',
         count: 1,
         userPublicProfile: {
@@ -228,6 +237,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: null; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'mnVo2kO4b8QgKIrTXBR5hMg3L5F2',
         count: 1,
         userPublicProfile: {
@@ -253,6 +263,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: null; donateLink: null; discordUsername: null; communityLinks: {}; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'yXupbJwqoecBbI7qJSyAYdGAMZk1',
         count: 1,
         userPublicProfile: {
@@ -267,6 +278,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'qaPOb3aaVWWYlOVNiF6WWWQQs732',
         count: 1,
         userPublicProfile: {
@@ -295,6 +307,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: string; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'I35IITL2J2OGKEIYfJ6YhrEIwag2',
         count: 1,
         userPublicProfile: {
@@ -320,6 +333,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'JCyXMuGPACQwiprTfsUqv6pluIy1',
         count: 1,
         userPublicProfile: {
@@ -346,6 +360,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: string; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: 'wY5eR2lNDrgEV3kOoeeWDExRQtr2',
         count: 1,
         userPublicProfile: {
@@ -371,6 +386,7 @@ export const fakeUserLeaderboards: UserLeaderboard[] = [
         },
       },
       {
+// @ts-expect-error - TS2322 - Type '{ userId: string; count: number; userPublicProfile: { id: string; username: string; description: null; donateLink: null; discordUsername: null; communityLinks: { twitterUsername: string; redditUsername: string; ... 7 more ...; youtubeUsername: string; }; iconUrl: string; }; }' is not assignable to type 'UserLeaderboardEntry'.
         userId: '3YxRqY6QbXhcwvMoVVSmNySexgB2',
         count: 1,
         userPublicProfile: {

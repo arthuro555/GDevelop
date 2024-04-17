@@ -11,7 +11,7 @@ type Props = {
   duration?: number;
   hide: () => void;
   actionLabel?: React.ReactNode;
-  onActionClick?: () => undefined | Promise<undefined>;
+  onActionClick?: () => void;
 };
 
 const InfoBar = ({

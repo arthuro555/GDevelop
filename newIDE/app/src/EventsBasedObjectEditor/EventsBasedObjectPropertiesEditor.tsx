@@ -103,7 +103,7 @@ export default function EventsBasedObjectPropertiesEditor({
   onRenameProperty,
   onEventsFunctionsAdded,
 }: Props) {
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
 
   const forceUpdate = useForceUpdate();
 
@@ -176,7 +176,6 @@ export default function EventsBasedObjectPropertiesEditor({
     <I18n>
       {({ i18n }) => (
         <Column noMargin expand useFullHeight>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ScrollView ref={scrollView}>
             <Line noMargin>
               <div style={styles.propertiesContainer}>
@@ -211,7 +210,6 @@ export default function EventsBasedObjectPropertiesEditor({
                             fullWidth
                           />
                         </Column>
-                        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <InlineCheckbox
                           label={
                             property.isHidden() ? (
@@ -221,7 +219,6 @@ export default function EventsBasedObjectPropertiesEditor({
                             )
                           }
                           checked={!property.isHidden()}
-                          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                           onCheck={(e, checked) => {
                             property.setHidden(!checked);
                             forceUpdate();

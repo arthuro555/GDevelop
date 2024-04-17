@@ -341,7 +341,7 @@ export function AutoScroll({
   activateTargets: boolean;
   onHover: () => void;
 }) {
-  const delayActivationTimer = React.useRef<number | null | undefined>(null);
+  const delayActivationTimer = React.useRef<number>(null);
   const [show, setShow] = React.useState(false);
 
   // This drop target overlaps with sibling drag source and cancels drag immediately.
@@ -357,6 +357,7 @@ export function AutoScroll({
       setShow(false);
       // @ts-expect-error - TS2769 - No overload matches this call.
       clearTimeout(delayActivationTimer.current);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       delayActivationTimer.current = null;
     }
     return () => {

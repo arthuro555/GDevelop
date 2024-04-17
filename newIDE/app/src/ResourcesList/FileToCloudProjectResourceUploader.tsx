@@ -92,7 +92,7 @@ export const FileToCloudProjectResourceUploader = ({
   createNewResource,
   automaticallyOpenInput,
 }: FileToCloudProjectResourceUploaderProps) => {
-  const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const hasAutomaticallyOpenedInput = React.useRef(false);
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
@@ -141,6 +141,7 @@ export const FileToCloudProjectResourceUploader = ({
         );
       }
     } catch (error) {
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setError(error);
     } finally {
       setIsUploading(false);
@@ -240,7 +241,6 @@ export const FileToCloudProjectResourceUploader = ({
               }}
               multiple={options.multiSelection}
               type="file"
-              // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLInputElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLInputElement> | undefined'.
               ref={inputRef}
               disabled={!canChooseFiles}
               onChange={(event) => {
@@ -278,10 +278,12 @@ export const FileToCloudProjectResourceUploader = ({
         </Line>
       </Paper>
       {invalidFiles.map((erroredFile) => {
+// @ts-expect-error - TS2531 - Object is possibly 'null'.
         if (erroredFile.error === 'too-large')
           return (
             <AlertMessage kind="error">
               <Trans>
+{ /* @ts-expect-error - TS2531 - Object is possibly 'null'. */}
                 The file {erroredFile.filename} is too large. Use files that are
                 smaller for your game: each must be less than{' '}
                 {PROJECT_RESOURCE_MAX_SIZE_IN_BYTES / 1000 / 1000} MB.

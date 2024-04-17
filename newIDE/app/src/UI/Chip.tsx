@@ -30,8 +30,8 @@ export type ChipInterface = {
   focus: () => void;
 };
 
-const Chip = React.forwardRef<Props, ChipInterface>((props, ref) => {
-  const chipRef = React.useRef<HTMLDivElement | null | undefined>(null);
+const Chip = React.forwardRef<ChipInterface, Props>((props, ref) => {
+  const chipRef = React.useRef<HTMLDivElement>(null);
   const focus = () => {
     if (chipRef.current) {
       chipRef.current.focus();
@@ -43,6 +43,7 @@ const Chip = React.forwardRef<Props, ChipInterface>((props, ref) => {
   }));
 
   return (
+    //@ts-ignore TODO
     <MuiChip
       label={props.label}
       icon={props.icon}

@@ -278,6 +278,7 @@ export default function ExpressionAutocompletionsDisplayer({
                     : undefined;
 
                   const parametersLabel =
+// @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
                     expressionAutocompletion.enumeratedExpressionMetadata
                       ? formatParameterTypesString(
                           parameterRenderingService,
@@ -376,6 +377,7 @@ export default function ExpressionAutocompletionsDisplayer({
                       <ExpressionDocumentation
                         expressionMetadata={
                           expressionAutocompletions[selectedCompletionIndex]
+// @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
                             .enumeratedExpressionMetadata.metadata
                         }
                         i18n={i18n}

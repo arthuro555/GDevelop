@@ -42,7 +42,7 @@ type CommandHandlers = {
   previewEnabled: boolean;
   hasPreviewsRunning: boolean;
   onOpenProjectManager: () => void;
-  onLaunchPreview: () => undefined | Promise<undefined>;
+  onLaunchPreview: () => void;
   onLaunchDebugPreview: () => void;
   onLaunchNetworkPreview: () => void;
   onHotReloadPreview: () => void;
@@ -66,17 +66,14 @@ type CommandHandlers = {
 
 const useMainFrameCommands = (handlers: CommandHandlers) => {
   useCommand('QUIT_APP', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onCloseApp,
   });
 
   useCommand('OPEN_PROFILE', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onOpenProfile,
   });
 
   useCommand('OPEN_PROJECT_MANAGER', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onOpenProjectManager,
   });
 
@@ -85,7 +82,6 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
   });
 
   useCommand('HOT_RELOAD_PREVIEW', handlers.hasPreviewsRunning, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onHotReloadPreview,
   });
 
@@ -93,7 +89,6 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
     'LAUNCH_DEBUG_PREVIEW',
     handlers.previewEnabled && handlers.allowNetworkPreview,
     {
-      // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
       handler: handlers.onLaunchDebugPreview,
     }
   );
@@ -102,58 +97,47 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
     'LAUNCH_NETWORK_PREVIEW',
     handlers.previewEnabled && handlers.allowNetworkPreview,
     {
-      // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
       handler: handlers.onLaunchNetworkPreview,
     }
   );
 
   useCommand('OPEN_HOME_PAGE', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onOpenHomePage,
   });
 
   useCommand('CREATE_NEW_PROJECT', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onCreateBlank,
   });
 
   useCommand('OPEN_PROJECT', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onOpenProject,
   });
 
   useCommand('SAVE_PROJECT', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => Promise<void>' is not assignable to type 'CommandHandler'.
     handler: handlers.onSaveProject,
   });
 
   useCommand('SAVE_PROJECT_AS', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onSaveProjectAs,
   });
 
   useCommand('CLOSE_PROJECT', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => Promise<void>' is not assignable to type 'CommandHandler'.
     handler: handlers.onCloseProject,
   });
 
   useCommand('EXPORT_GAME', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onExportGame,
   });
 
   useCommand('INVITE_COLLABORATORS', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onInviteCollaborators,
   });
 
   useCommand('OPEN_COMMAND_PALETTE', true, {
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: handlers.onOpenCommandPalette,
   });
 
   useCommandWithOptions('OPEN_LAYOUT', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => { text: any; handler: () => void; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         generateProjectItemOptions(
@@ -166,7 +150,6 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
   });
 
   useCommandWithOptions('OPEN_EXTERNAL_EVENTS', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => { text: any; handler: () => void; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         generateProjectItemOptions(
@@ -179,7 +162,6 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
   });
 
   useCommandWithOptions('OPEN_EXTERNAL_LAYOUT', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => { text: any; handler: () => void; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         generateProjectItemOptions(
@@ -192,7 +174,6 @@ const useMainFrameCommands = (handlers: CommandHandlers) => {
   });
 
   useCommandWithOptions('OPEN_EXTENSION', !!handlers.project, {
-    // @ts-expect-error - TS2322 - Type '() => { text: any; handler: () => void; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         generateProjectItemOptions(

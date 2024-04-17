@@ -172,7 +172,7 @@ const InviteHome = ({ cloudProjectId }: Props) => {
   const [collaboratorEmail, setCollaboratorEmail] = React.useState('');
   const [collaboratorLevel, setCollaboratorLevel] =
     React.useState<Level>('writer');
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'. | TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showAlert, showConfirmation } = useAlertDialog();
 
   const fetchProjectUserAcls = React.useCallback(async () => {
@@ -398,7 +398,6 @@ const InviteHome = ({ cloudProjectId }: Props) => {
           )}
         {fetchError === 'unexpected' ? (
           <Line noMargin>
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PlaceholderError onRetry={fetchProjectUserAcls}>
               <Trans>
                 Error while loading the collaborators. Verify your internet
@@ -485,7 +484,6 @@ const InviteHome = ({ cloudProjectId }: Props) => {
           onApply={doAddCollaborator}
           open
         >
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Form onSubmit={doAddCollaborator} name="addCollaborator">
             <ColumnStackLayout noMargin>
               <TextField

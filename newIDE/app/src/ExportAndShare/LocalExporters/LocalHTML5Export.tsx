@@ -25,7 +25,7 @@ import {
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 import DismissableTutorialMessage from '../../Hints/DismissableTutorialMessage';
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const shell = electron ? electron.shell : null;
 
 type ExportState = {

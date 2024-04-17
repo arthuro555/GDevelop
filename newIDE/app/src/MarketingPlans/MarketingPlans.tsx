@@ -101,7 +101,7 @@ const MarketingPlans = ({ game }: Props) => {
     fetchMarketingPlans,
   } = React.useContext(MarketingPlansStoreContext);
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
   const [gameFeaturings, setGameFeaturings] = React.useState<
     GameFeaturing[] | null
@@ -186,6 +186,7 @@ const MarketingPlans = ({ game }: Props) => {
       setGameFeaturings(gameFeaturings);
     } catch (error) {
       console.error('An error occurred while fetching game featurings.', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setGameFeaturingsError(error);
     }
   }, [game, getAuthorizationHeader, profile]);
@@ -318,6 +319,7 @@ const MarketingPlans = ({ game }: Props) => {
     }
 
     return activeFeaturing.featuring === 'games-platform-home' ? (
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
       <Trans>Active until {i18n.date(activeFeaturing.expiresAt * 1000)}</Trans>
     ) : (
       <Trans>Active, we will get in touch to get the campaign up!</Trans>

@@ -64,5 +64,6 @@ export const getFolderTagsFromAssetShortHeaders = ({
     (tags) => firstLevelTags.add(tags[0]) // Only add the top one, as this will be the first folder.
   );
 
+// @ts-expect-error - TS2322 - Type 'unknown[]' is not assignable to type 'string[]'.
   return Array.from(firstLevelTags).filter(Boolean);
 };

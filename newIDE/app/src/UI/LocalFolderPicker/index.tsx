@@ -13,7 +13,7 @@ import TextField from '../TextField';
 import optionalRequire from '../../Utils/OptionalRequire';
 
 import FlatButton from '../FlatButton';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const dialog = remote ? remote.dialog : null;
 

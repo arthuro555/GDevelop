@@ -1,9 +1,11 @@
-
-export const getInstancesInLayoutForObject = (initialInstancesContainer: gd.InitialInstancesContainer, objectName: string): Array<gd.InitialInstance> => {
+export const getInstancesInLayoutForObject = (
+  initialInstancesContainer: gd.InitialInstancesContainer,
+  objectName: string
+): Array<gd.InitialInstance> => {
   if (initialInstancesContainer.getInstancesCount() === 0) return [];
   const objectInstances: Array<gd.InitialInstance> = [];
   const instanceGetter = new gd.InitialInstanceJSFunctor();
-  instanceGetter.invoke = instancePtr: any => {
+  instanceGetter.invoke = (instancePtr: any) => {
     const instance: gd.InitialInstance = gd.wrapPointer(
       instancePtr,
       gd.InitialInstance
@@ -17,11 +19,14 @@ export const getInstancesInLayoutForObject = (initialInstancesContainer: gd.Init
   return objectInstances;
 };
 
-export const getInstancesInLayoutForLayer = (initialInstancesContainer: gd.InitialInstancesContainer, layerName: string): Array<gd.InitialInstance> => {
+export const getInstancesInLayoutForLayer = (
+  initialInstancesContainer: gd.InitialInstancesContainer,
+  layerName: string
+): Array<gd.InitialInstance> => {
   if (initialInstancesContainer.getInstancesCount() === 0) return [];
   const objectInstances: Array<gd.InitialInstance> = [];
   const instanceGetter = new gd.InitialInstanceJSFunctor();
-  instanceGetter.invoke = instancePtr: any => {
+  instanceGetter.invoke = (instancePtr: any) => {
     const instance: gd.InitialInstance = gd.wrapPointer(
       instancePtr,
       gd.InitialInstance
@@ -35,7 +40,10 @@ export const getInstancesInLayoutForLayer = (initialInstancesContainer: gd.Initi
   return objectInstances;
 };
 
-export const getInstanceCountInLayoutForObject = (initialInstancesContainer: gd.InitialInstancesContainer, objectName: string): number => {
+export const getInstanceCountInLayoutForObject = (
+  initialInstancesContainer: gd.InitialInstancesContainer,
+  objectName: string
+): number => {
   return getInstancesInLayoutForObject(initialInstancesContainer, objectName)
     .length;
 };

@@ -40,7 +40,6 @@ import useAlertDialog from '../../UI/Alert/useAlertDialog';
 import ExtensionInstallDialog from '../ExtensionStore/ExtensionInstallDialog';
 
 export const useExtensionUpdateAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (): Promise<boolean> => {
     return await showConfirmation({
@@ -148,8 +147,10 @@ export const BehaviorStore = ({
       behaviorShortHeader: BehaviorShortHeader | SearchableBehaviorMetadata
     ) => {
       const isExtensionAlreadyInstalled =
+// @ts-expect-error - TS2339 - Property 'extensionName' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
         behaviorShortHeader.extensionName &&
         project.hasEventsFunctionsExtensionNamed(
+// @ts-expect-error - TS2339 - Property 'extensionName' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
           behaviorShortHeader.extensionName
         );
       if (isExtensionAlreadyInstalled) {
@@ -159,8 +160,11 @@ export const BehaviorStore = ({
         }
       }
 
+// @ts-expect-error - TS2339 - Property 'url' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
       if (behaviorShortHeader.url) {
+// @ts-expect-error - TS2339 - Property 'name' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
         sendExtensionAddedToProject(behaviorShortHeader.name);
+// @ts-expect-error - TS2345 - Argument of type 'BehaviorShortHeader | SearchableBehaviorMetadata' is not assignable to parameter of type 'BehaviorShortHeader'.
         const wasInstalled = await onInstall(behaviorShortHeader);
         // An errorBox is already displayed by `installExtension`.
         if (wasInstalled) {
@@ -270,7 +274,9 @@ export const BehaviorStore = ({
                 installAndChoose(behaviorShortHeader);
               }}
               onShowDetails={() => {
+// @ts-expect-error - TS2339 - Property 'headerUrl' does not exist on type 'BehaviorShortHeader | SearchableBehaviorMetadata'.
                 if (behaviorShortHeader.headerUrl) {
+// @ts-expect-error - TS2345 - Argument of type 'BehaviorShortHeader | SearchableBehaviorMetadata' is not assignable to parameter of type 'SetStateAction<BehaviorShortHeader | null | undefined>'.
                   setSelectedBehaviorShortHeader(behaviorShortHeader);
                 }
               }}

@@ -64,7 +64,7 @@ const PrivateGameTemplatePurchaseDialog = ({
   const [displayPasswordPrompt, setDisplayPasswordPrompt] =
     React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>('');
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+
   const { showAlert } = useAlertDialog();
 
   const shouldUseOrSimulateAppStoreProduct =

@@ -9,8 +9,8 @@ import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 import Window from '../../Utils/Window';
 import ResourcesLoader from '../../ResourcesLoader';
 
-const path = optionalRequire('path');
-const electron = optionalRequire('electron');
+const path = optionalRequire('path') as typeof import('path');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
 

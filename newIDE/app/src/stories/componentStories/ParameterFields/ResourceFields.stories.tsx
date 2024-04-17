@@ -55,6 +55,7 @@ export const AllResourceFields = () => (
         initialValue={''}
         render={(value, onChange) => (
           <ImageResourceField
+// @ts-expect-error - TS2322 - Type '{ project: any; scope: { project: any; layout: any; }; globalObjectsContainer: any; objectsContainer: any; value: any; onChange: (value?: any) => void; parameterRenderingService: { readonly components: { readonly default: ForwardRefExoticComponent<...>; ... 42 more ...; readonly tilesetResource: ForwardRefExoticComp...' is not assignable to type 'IntrinsicAttributes & ParameterFieldInterface & RefAttributes<ParameterFieldProps>'.
             project={testProject.project}
             scope={{
               project: testProject.project,

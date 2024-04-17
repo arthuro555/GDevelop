@@ -502,9 +502,11 @@ export const Default = () => {
                     getItemName={(node) => node.name}
                     onEditItem={action('Edit item')}
                     selectedItems={selectedItems}
+// @ts-expect-error - TS2322 - Type '(items: Node[]) => void' is not assignable to type '(arg1: ItemBaseAttributes[]) => void'.
                     onSelectItems={onSelectItems}
                     onRenameItem={action('Rename item')}
                     getItemThumbnail={(node) =>
+// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'ItemBaseAttributes'.
                       node.children
                         ? null
                         : sample([

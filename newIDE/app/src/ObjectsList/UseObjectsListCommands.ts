@@ -7,10 +7,9 @@ import ObjectsRenderingService from '../ObjectsRendering/ObjectsRenderingService
 const generateLayoutObjectsOptions = (
   project: gd.Project,
   layout: gd.Layout,
-  onChoose: (object: gd.Object, arg?: string | null | undefined) => void,
+  onChoose: (object: gd.gdObject, arg?: string | null | undefined) => void,
   onChooseArg?: string | null
 ): Array<CommandOption> => {
-  // @ts-expect-error - TS2322 - Type '{ text: any; handler: () => void; iconSrc: any; }[]' is not assignable to type 'CommandOption[]'.
   return enumerateObjects(project, layout).containerObjectsList.map((item) => ({
     text: item.object.getName(),
     handler: () => onChoose(item.object, onChooseArg),
@@ -25,10 +24,10 @@ type Props = {
   project: gd.Project;
   layout: gd.Layout;
   onEditObject: (
-    object: gd.Object,
+    object: gd.gdObject,
     initialTab?: string | null | undefined
   ) => void;
-  onEditObjectVariables: (object: gd.Object) => void;
+  onEditObjectVariables: (object: gd.gdObject) => void;
 };
 
 const useObjectsListCommands = (props: Props) => {

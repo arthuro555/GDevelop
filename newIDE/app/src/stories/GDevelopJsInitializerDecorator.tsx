@@ -65,7 +65,7 @@ const GDevelopJsInitializer = ({ children }: GDevelopJsInitializerProps) => {
       // Prepare a test project object, that we are also **updating** as stories
       // already got a reference to it.
       const newTestProject = makeTestProject(gd);
-      // @ts-expect-error - TS2407 - The right-hand side of a 'for...in' statement must be of type 'any', an object type or a type parameter, but here has type 'void'.
+
       for (let key in newTestProject) {
         // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'void'.
         testProject[key] = newTestProject[key];

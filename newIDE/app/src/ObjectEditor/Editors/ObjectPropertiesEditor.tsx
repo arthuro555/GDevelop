@@ -35,7 +35,7 @@ const ObjectPropertiesEditor = (props: Props) => {
   // and associated methods are redefined in JS, they have different arguments (
   // see ObjectJsImplementation C++ implementation). If called directly here from JS,
   // the arguments will be mismatched. To workaround this, always cast the object to
-  // a base gd.Object to ensure C++ methods are called.
+  // a base gd.gdObject to ensure C++ methods are called.
   const objectConfigurationAsGd = gd.castObject(
     objectConfiguration,
     gd.ObjectConfiguration

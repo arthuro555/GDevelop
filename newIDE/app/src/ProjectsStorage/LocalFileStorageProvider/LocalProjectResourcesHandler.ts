@@ -10,7 +10,7 @@ import optionalLazyRequire from '../../Utils/OptionalLazyRequire';
 import optionalRequire from '../../Utils/OptionalRequire';
 
 const lazyRequireGlob = optionalLazyRequire('glob');
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 
 // It's important to use remote and not electron for folder actions,
 // otherwise they will be opened in the background.

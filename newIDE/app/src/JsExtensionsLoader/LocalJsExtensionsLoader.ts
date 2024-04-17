@@ -1,6 +1,5 @@
 // Note: this file does not use export/imports and use Flow comments to allow its usage from Node.js
 
-// @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'loadExtension'.
 const { loadExtension } = require('.');
 // @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'optionalRequire'.
 const optionalRequire = require('../Utils/OptionalRequire');

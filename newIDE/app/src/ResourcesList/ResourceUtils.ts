@@ -3,8 +3,8 @@ import ResourcesLoader from '../ResourcesLoader';
 import optionalRequire from '../Utils/OptionalRequire';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { toNewGdMapStringString } from '../Utils/MapStringString';
-const fs = optionalRequire('fs');
-const path = optionalRequire('path');
+const fs = optionalRequire('fs') as typeof import('fs');
+const path = optionalRequire('path') as typeof import('path');
 
 export const createOrUpdateResource = (
   project: gd.Project,
@@ -61,7 +61,7 @@ export const isPathInProjectFolder = (
 export const copyAllToProjectFolder = (
   project: gd.Project,
   resourcePaths: Array<string>,
-  newToOldFilePaths: Map<string, string>,
+  newToOldFilePaths: Map<string, string>
 ): Promise<Array<string>> => {
   if (!fs || !path) {
     return Promise.resolve(resourcePaths);
@@ -69,9 +69,9 @@ export const copyAllToProjectFolder = (
 
   const projectPath = path.dirname(project.getProjectFile());
 
-// @ts-expect-error - TS2322 - Type 'Promise<unknown[]>' is not assignable to type 'Promise<string[]>'.
+  // @ts-expect-error - TS2322 - Type 'Promise<unknown[]>' is not assignable to type 'Promise<string[]>'.
   return Promise.all(
-    resourcePaths.map(resourcePath => {
+    resourcePaths.map((resourcePath) => {
       if (isPathInProjectFolder(project, resourcePath)) {
         newToOldFilePaths.set(resourcePath, resourcePath);
 
@@ -87,7 +87,7 @@ export const copyAllToProjectFolder = (
 
       const newFileNameWithoutExtension = newNameGenerator(
         fileNameWithoutExtension,
-        tentativeFileName => {
+        (tentativeFileName) => {
           const tentativePath =
             path.join(projectPath, tentativeFileName) + fileExtension;
           return fs.existsSync(tentativePath);
@@ -99,8 +99,8 @@ export const copyAllToProjectFolder = (
         newFileNameWithoutExtension + fileExtension
       );
 
-      return new Promise(resolve: (result: Promise<string> | string) => void => {
-        fs.copyFile(resourcePath, resourceNewPath, err => {
+      return new Promise((resolve) => {
+        fs.copyFile(resourcePath, resourceNewPath, (err) => {
           if (err) {
             newToOldFilePaths.set(resourcePath, resourcePath);
 
@@ -111,13 +111,9 @@ export const copyAllToProjectFolder = (
 
           return resolve(resourceNewPath);
         });
-
       });
-
     })
-
   );
-
 };
 
 export const getResourceFilePathStatus = (
@@ -170,7 +166,7 @@ export const applyResourceDefaults = (
 export const renameResourcesInProject = (
   project: gd.Project,
   resourceNewNames: {
-    [key: string]: string
+    [key: string]: string;
   }
 ) => {
   const renamedResourcesMap = toNewGdMapStringString(resourceNewNames);
@@ -183,9 +179,11 @@ export const renameResourcesInProject = (
   resourcesRenamer.delete();
 };
 
-export const parseLocalFilePathOrExtensionFromMetadata = (resource: gd.Resource): {
-  localFilePath: string | null | undefined,
-  extension: string | null | undefined
+export const parseLocalFilePathOrExtensionFromMetadata = (
+  resource: gd.Resource
+): {
+  localFilePath: string | null | undefined;
+  extension: string | null | undefined;
 } => {
   const metadataAsString = resource.getMetadata();
   if (metadataAsString) {
@@ -221,7 +219,7 @@ export const parseLocalFilePathOrExtensionFromMetadata = (resource: gd.Resource)
 export const updateResourceJsonMetadata = (
   resource: gd.Resource,
   newMetadata: {
-    [key: string]: any
+    [key: string]: any;
   }
 ) => {
   const metadataAsString = resource.getMetadata();

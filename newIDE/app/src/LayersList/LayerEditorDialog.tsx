@@ -63,7 +63,7 @@ const LayerEditorDialog = (props: Props) => {
   const { onCancelChanges, notifyOfChange } =
     useSerializableObjectCancelableEditor({
       serializableObject: layer,
-      // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onCancel: onClose,
     });
   const [camera3DFieldOfViewError, setCamera3DFieldOfViewError] =
@@ -248,11 +248,9 @@ const LayerEditorDialog = (props: Props) => {
               </Trans>
             </Text>
           )}
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <InlineCheckbox
             label={<Trans>Hide the layer</Trans>}
             checked={!layer.getVisibility()}
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
             onCheck={(e, checked) => {
               layer.setVisibility(!checked);
               forceUpdate();
@@ -365,11 +363,9 @@ const LayerEditorDialog = (props: Props) => {
               <Text size="block-title">
                 <Trans>Lighting settings</Trans>
               </Text>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <InlineCheckbox
                 label={<Trans>Automatically follow the base layer.</Trans>}
                 checked={layer.isFollowingBaseLayerCamera()}
-                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                 onCheck={(e, checked) => {
                   layer.setFollowBaseLayerCamera(checked);
                   forceUpdate();

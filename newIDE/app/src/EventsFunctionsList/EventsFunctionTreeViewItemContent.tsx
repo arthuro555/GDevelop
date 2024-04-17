@@ -233,6 +233,7 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
     );
   }
 
+// @ts-expect-error - TS2416 - Property 'buildMenuTemplate' in type 'EventsFunctionTreeViewItemContent' is not assignable to the same property in base type 'TreeViewItemContent'.
   buildMenuTemplate(i18n: I18nType, index: number) {
     return [
       {
@@ -295,6 +296,7 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
           }
         >
           <VisibilityOff
+// @ts-expect-error - TS2322 - Type '{ fontSize: string; style: { color: any; marginRight: 5; verticalAlign: "bottom"; }; }' is not assignable to type 'IntrinsicAttributes & RefAttributes<unknown>'.
             fontSize="small"
             style={{
               ...styles.tooltip,

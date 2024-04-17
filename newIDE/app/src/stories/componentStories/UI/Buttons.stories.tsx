@@ -71,17 +71,20 @@ export const Default = () => (
       <RaisedButton
         icon={<Download />}
         label="Raised button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
       />
       <RaisedButton
         label="Primary Raised button"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
       />
       <RaisedButton
         icon={<Download />}
         label="Primary Raised button"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
       />
       {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
@@ -95,17 +98,20 @@ export const Default = () => (
       <FlatButton
         leftIcon={<Download />}
         label="Flat button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <FlatButton
         label="Primary Flat button"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <FlatButton
         leftIcon={<Download />}
         label="Primary Flat button"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
     </LineStackLayout>
@@ -115,28 +121,33 @@ export const Default = () => (
       <TextButton
         icon={<Download />}
         label="Text button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <TextButton
         primary
         label="Primary Text button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <TextButton
         icon={<Download />}
         primary
         label="Primary Text button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <TextButton
         secondary
         label="Secondary Text button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
       <TextButton
         icon={<Download />}
         secondary
         label="Secondary Text button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '(ev?: any) => void'.
         onClick={action('onClick')()}
       />
     </LineStackLayout>
@@ -146,51 +157,66 @@ export const Default = () => (
     <LineStackLayout noMargin>
       <RaisedButton
         label="Traditional Raised button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
       />
       <RaisedButtonWithSplitMenu
         label="Raised button with split menu"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
       <FlatButtonWithSplitMenu
         label="Flat primary button"
         primary
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
     </LineStackLayout>
     <LineStackLayout noMargin>
       <FlatButtonWithSplitMenu
         label="Flat non primary button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
       <FlatButtonWithSplitMenu
         label="... and with icon"
         icon={<Edit />}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
       <FlatButtonWithSplitMenu
         label="... and disabled"
         icon={<Edit />}
         disabled
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
     </LineStackLayout>
     <LineStackLayout noMargin>
       <FlatButtonWithSplitMenu
         icon={<Edit />}
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
       <FlatButtonWithSplitMenu
         icon={<Edit />}
         disabled
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
+// @ts-expect-error - TS2322 - Type '() => ({ label: string; click: HandlerFunction; type?: undefined; } | { type: string; label?: undefined; click?: undefined; })[]' is not assignable to type '(i18n: I18n) => MenuItemTemplate[]'.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
     </LineStackLayout>
@@ -200,6 +226,7 @@ export const Default = () => (
     <LineStackLayout noMargin>
       <RaisedButton
         label="Traditional Raised button"
+// @ts-expect-error - TS2322 - Type 'void' is not assignable to type '() => void'.
         onClick={action('onClick')()}
       />
       <RaisedButtonWithMenu
@@ -228,6 +255,7 @@ export const Default = () => (
             <Filter />
           </IconButton>
         }
+// @ts-expect-error - TS2769 - No overload matches this call.
         buildMenuTemplate={buildFakeMenuTemplate}
       />
     </LineStackLayout>

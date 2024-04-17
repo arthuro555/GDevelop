@@ -41,14 +41,12 @@ const GameMonetization = ({ game, onGameUpdated }: Props) => {
               earning from your game sessions.
             </Trans>
           </AlertMessage>
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <InlineCheckbox
             checked={
               pendingDisplayAdsOnGamePage !== null
                 ? pendingDisplayAdsOnGamePage
                 : !!game.displayAdsOnGamePage
             }
-            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'enable' implicitly has an 'any' type.
             onCheck={async (e, enable) => {
               setPendingDisplayAdsOnGamePage(enable);
               const updatedGame = {

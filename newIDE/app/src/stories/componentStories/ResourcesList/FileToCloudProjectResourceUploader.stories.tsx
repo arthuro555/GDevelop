@@ -25,6 +25,7 @@ export default {
 export const Default = () => (
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
     <FileToCloudProjectResourceUploader
+// @ts-expect-error - TS2322 - Type '{ project: any; createNewResource: () => any; onChooseResources: HandlerFunction; options: { initialSourceName: string; multiSelection: true; resourceKind: "image"; }; fileMetadata: { ...; }; getStorageProvider: () => StorageProvider; automaticallyOpenInput: false; }' is not assignable to type 'IntrinsicAttributes & FileToCloudProjectResourceUploaderProps'.
       project={testProject.project}
       createNewResource={() => new gd.ImageResource()}
       onChooseResources={action('onChooseResources')}
@@ -43,6 +44,7 @@ export const Default = () => (
 export const AutomaticallyOpenInput = () => (
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
     <FileToCloudProjectResourceUploader
+// @ts-expect-error - TS2322 - Type '{ project: any; createNewResource: () => any; onChooseResources: HandlerFunction; options: { initialSourceName: string; multiSelection: true; resourceKind: "image"; }; fileMetadata: { ...; }; getStorageProvider: () => StorageProvider; automaticallyOpenInput: true; }' is not assignable to type 'IntrinsicAttributes & FileToCloudProjectResourceUploaderProps'.
       project={testProject.project}
       createNewResource={() => new gd.ImageResource()}
       onChooseResources={action('onChooseResources')}
@@ -61,6 +63,7 @@ export const AutomaticallyOpenInput = () => (
 export const SingleFile = () => (
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
     <FileToCloudProjectResourceUploader
+// @ts-expect-error - TS2322 - Type '{ project: any; createNewResource: () => any; onChooseResources: HandlerFunction; options: { initialSourceName: string; multiSelection: false; resourceKind: "image"; }; fileMetadata: { ...; }; getStorageProvider: () => StorageProvider; automaticallyOpenInput: false; }' is not assignable to type 'IntrinsicAttributes & FileToCloudProjectResourceUploaderProps'.
       project={testProject.project}
       createNewResource={() => new gd.ImageResource()}
       onChooseResources={action('onChooseResources')}
@@ -79,6 +82,7 @@ export const SingleFile = () => (
 export const IncompatibleStorageProvider = () => (
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
     <FileToCloudProjectResourceUploader
+// @ts-expect-error - TS2322 - Type '{ project: any; createNewResource: () => any; onChooseResources: HandlerFunction; options: { initialSourceName: string; multiSelection: true; resourceKind: "image"; }; fileMetadata: { ...; }; getStorageProvider: () => StorageProvider; automaticallyOpenInput: false; }' is not assignable to type 'IntrinsicAttributes & FileToCloudProjectResourceUploaderProps'.
       project={testProject.project}
       createNewResource={() => new gd.ImageResource()}
       onChooseResources={action('onChooseResources')}
@@ -97,6 +101,7 @@ export const IncompatibleStorageProvider = () => (
 export const NotAuthenticatedUser = () => (
   <AuthenticatedUserContext.Provider value={fakeNotAuthenticatedUser}>
     <FileToCloudProjectResourceUploader
+// @ts-expect-error - TS2322 - Type '{ project: any; createNewResource: () => any; onChooseResources: HandlerFunction; options: { initialSourceName: string; multiSelection: true; resourceKind: "image"; }; fileMetadata: { ...; }; getStorageProvider: () => StorageProvider; automaticallyOpenInput: false; }' is not assignable to type 'IntrinsicAttributes & FileToCloudProjectResourceUploaderProps'.
       project={testProject.project}
       createNewResource={() => new gd.ImageResource()}
       onChooseResources={action('onChooseResources')}

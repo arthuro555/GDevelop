@@ -27,6 +27,7 @@ const getAdapatedMessageAndRouteNavigationParams = (
       const urlParams = new URLSearchParams(
         groups.linkHref.replace(/.*\?/, '')
       );
+// @ts-expect-error - TS2322 - Type 'string | null' is not assignable to type 'Route | null | undefined'.
       const route: Route | null | undefined = urlParams.get('initial-dialog');
       const otherParams: Record<string, any> = {};
       urlParams.forEach((value, key) => {

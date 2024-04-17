@@ -241,13 +241,13 @@ const ProjectPropertiesDialog = (props: Props) => {
     notifyOfChange: notifyOfLoadingScreenChange,
   } = useSerializableObjectCancelableEditor({
     serializableObject: project.getLoadingScreen(),
-    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
+
     onCancel: props.onClose,
   });
   const { onCancelChanges, notifyOfChange } =
     useSerializableObjectCancelableEditor({
       serializableObject: project.getExtensionProperties(),
-      // @ts-expect-error - TS2322 - Type '() => Promise<void>' is not assignable to type '() => Promise<undefined> | undefined'.
+
       onCancel: onCancelLoadingScreenChanges,
     });
 
@@ -563,7 +563,6 @@ const ProjectPropertiesDialog = (props: Props) => {
                     label={t`Change height to fit the screen or window size`}
                   />
                 </SelectField>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={
                     <Trans>
@@ -573,7 +572,6 @@ const ProjectPropertiesDialog = (props: Props) => {
                   }
                   disabled={sizeOnStartupMode === ''}
                   checked={adaptGameResolutionAtRuntime}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     setAdaptGameResolutionAtRuntime(checked);
                     notifyOfChange();
@@ -664,7 +662,6 @@ const ProjectPropertiesDialog = (props: Props) => {
                     label={t`Nearest (no antialiasing, good for pixel perfect games)`}
                   />
                 </SelectField>
-                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Checkbox
                   label={
                     <Trans>
@@ -673,7 +670,6 @@ const ProjectPropertiesDialog = (props: Props) => {
                     </Trans>
                   }
                   checked={pixelsRounding}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => {
                     setPixelsRounding(checked);
                     notifyOfChange();
@@ -765,6 +761,7 @@ const ProjectPropertiesDialog = (props: Props) => {
                 loadingScreen={project.getLoadingScreen()}
                 watermark={project.getWatermark()}
                 onLoadingScreenUpdated={notifyOfLoadingScreenChange}
+// @ts-expect-error - TS2322 - Type '() => Promise<void>' is not assignable to type '() => Promise<undefined> | undefined'.
                 onChangeSubscription={onCancelChanges}
                 project={project}
                 resourceManagementProps={props.resourceManagementProps}

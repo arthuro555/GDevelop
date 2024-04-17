@@ -101,7 +101,6 @@ const styles = {
 } as const;
 
 export const useEffectOverridingAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (existingEffectNames: Array<string>): Promise<boolean> => {
     return await showConfirmation({
@@ -422,11 +421,11 @@ export default function EffectsList(props: Props) {
     project,
     target,
   } = props;
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
   const [justAddedEffectName, setJustAddedEffectName] = React.useState<
     string | null | undefined
   >(null);
-  const justAddedEffectElement = React.useRef<any | null | undefined>(null);
+  const justAddedEffectElement = React.useRef<any>(null);
 
   React.useEffect(() => {
     if (
@@ -748,7 +747,6 @@ export default function EffectsList(props: Props) {
         <Column noMargin expand useFullHeight>
           {visibleEffectsCount !== 0 ? (
             <React.Fragment>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ScrollView ref={scrollView}>
                 {duplicatedUniqueEffectMetadata && (
                   <Line>

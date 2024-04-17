@@ -46,6 +46,7 @@ export default class EventBasedObjectChildrenEditor extends React.Component<
 > {
   _objectsList: ObjectsListInterface | null | undefined;
 
+// @ts-expect-error - TS2416 - Property 'state' in type 'EventBasedObjectChildrenEditor' is not assignable to the same property in base type 'Component<Props, State, any>'.
   state = {
     editedObjectWithContext: null,
     editedObjectInitialTab: 'properties',
@@ -172,7 +173,7 @@ export default class EventBasedObjectChildrenEditor extends React.Component<
   };
 
   editObject = (
-    editedObject?: gd.Object | null,
+    editedObject?: gd.gdObject | null,
     initialTab?: ObjectEditorTab | null
   ) => {
     if (editedObject) {
@@ -300,6 +301,7 @@ export default class EventBasedObjectChildrenEditor extends React.Component<
                 open
                 // @ts-expect-error - TS2339 - Property 'object' does not exist on type 'never'.
                 object={this.state.editedObjectWithContext.object}
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ObjectEditorTab | null | undefined'.
                 initialTab={this.state.editedObjectInitialTab}
                 project={project}
                 eventsFunctionsExtension={eventsFunctionsExtension}

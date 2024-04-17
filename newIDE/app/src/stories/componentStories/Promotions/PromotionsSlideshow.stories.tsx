@@ -24,6 +24,7 @@ export const Default = () => {
         announcements: fakeAnnouncements,
         promotions: fakePromotions,
         error: null,
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         fetchAnnouncementsAndPromotions: action(
           'fetchAnnouncementsAndPromotions'
         ),
@@ -41,6 +42,7 @@ export const ErrorLoadingPromotions = () => {
         announcements: null,
         promotions: null,
         error: new Error('Fake error'),
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         fetchAnnouncementsAndPromotions: action(
           'fetchAnnouncementsAndPromotions'
         ),
@@ -58,6 +60,7 @@ export const LoadingPromotions = () => {
         announcements: null,
         promotions: null,
         error: null,
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         fetchAnnouncementsAndPromotions: action(
           'fetchAnnouncementsAndPromotions'
         ),
@@ -75,6 +78,7 @@ export const OnlyGame = () => {
         announcements: fakeAnnouncements,
         promotions: fakePromotions,
         error: null,
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         fetchAnnouncementsAndPromotions: action(
           'fetchAnnouncementsAndPromotions'
         ),
@@ -92,6 +96,7 @@ export const OnlyAssetPack = () => {
         announcements: fakeAnnouncements,
         promotions: fakePromotions,
         error: null,
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<void>'.
         fetchAnnouncementsAndPromotions: action(
           'fetchAnnouncementsAndPromotions'
         ),

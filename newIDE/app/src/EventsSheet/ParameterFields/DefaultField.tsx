@@ -37,6 +37,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
           parameterMetadata ? parameterMetadata.getLongDescription() : undefined
         }
         onChange={(text: string) => props.onChange(text)}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledTextFieldInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledTextFieldInterface> | undefined'.
         ref={field}
         fullWidth
       />

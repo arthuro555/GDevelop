@@ -18,8 +18,8 @@ import {
   localPreviewDebuggerServer,
 } from './LocalPreviewDebuggerServer';
 import Window from '../../../Utils/Window';
-const electron = optionalRequire('electron');
-const path = optionalRequire('path');
+const electron = optionalRequire('electron') as typeof import('electron');
+const path = optionalRequire('path') as typeof import('path');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 type Props = {
@@ -130,7 +130,7 @@ export default class LocalPreviewLauncher extends React.Component<
 
           ipcRenderer.removeAllListeners('serve-folder-done');
           ipcRenderer.removeAllListeners('local-network-ips');
-          // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'serverParams' implicitly has an 'any' type.
+
           ipcRenderer.on('serve-folder-done', (event, err, serverParams) => {
             if (err) {
               this.setState({
@@ -148,7 +148,7 @@ export default class LocalPreviewLauncher extends React.Component<
 
             setTimeout(() => this._checkSubscriptionForNetworkPreview());
           });
-          // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'ipAddress' implicitly has an 'any' type.
+
           ipcRenderer.on('local-network-ip', (event, ipAddress) => {
             this.setState({
               networkPreviewHost: ipAddress,
@@ -322,6 +322,7 @@ export default class LocalPreviewLauncher extends React.Component<
           ref={(subscriptionChecker) =>
             (this._networkPreviewSubscriptionChecker = subscriptionChecker)
           }
+// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type '() => Promise<undefined> | undefined'.
           onChangeSubscription={() =>
             this.setState({ networkPreviewDialogOpen: false })
           }
@@ -348,6 +349,7 @@ export default class LocalPreviewLauncher extends React.Component<
           }
           error={networkPreviewError}
           onClose={() => this.setState({ networkPreviewDialogOpen: false })}
+// @ts-expect-error - TS2322 - Type '(() => void) | undefined' is not assignable to type '() => void'.
           onExport={this.props.onExport}
           onRunPreviewLocally={this._openPreviewBrowserWindow}
         />

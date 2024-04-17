@@ -49,9 +49,11 @@ export const renderProductPrice = ({
   // Only use the app store product if it's a credits package.
   if (
     shouldUseAppStoreProduct() &&
+// @ts-expect-error - TS2367 - This condition will always return 'false' since the types '"ASSET_PACK" | "GAME_TEMPLATE"' and '"CREDITS_PACKAGE"' have no overlap.
     productListingData.productType === 'CREDITS_PACKAGE'
   ) {
     const appStoreProduct = getAppStoreProduct(
+// @ts-expect-error - TS2339 - Property 'appStoreProductId' does not exist on type 'never'.
       productListingData.appStoreProductId
     );
     // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
@@ -61,6 +63,7 @@ export const renderProductPrice = ({
   // If we're on mobile, only show credits prices for asset packs & game templates.
   if (
     shouldUseAppStoreProduct() &&
+// @ts-expect-error - TS2367 - This condition will always return 'true' since the types '"ASSET_PACK" | "GAME_TEMPLATE"' and '"CREDITS_PACKAGE"' have no overlap.
     productListingData.productType !== 'CREDITS_PACKAGE'
   ) {
     const creditPrices = productListingData.creditPrices;
@@ -74,6 +77,7 @@ export const renderProductPrice = ({
 
     // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     if (!creditPrice) return '';
+// @ts-expect-error - TS2322 - Type 'string | Element' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     return plainText ? (
       i18n._(t`${creditPrice.amount} credits`)
     ) : (
@@ -99,6 +103,7 @@ export const renderProductPrice = ({
 
   const currencyCode = price.currency === 'USD' ? '$' : '€';
   const formattedPrice = `${currencyCode} ${i18n
+// @ts-expect-error - TS2339 - Property 'number' does not exist on type 'I18n'.
     .number(price.value / 100, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,

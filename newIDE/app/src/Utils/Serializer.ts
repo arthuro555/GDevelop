@@ -22,7 +22,7 @@ export function serializeToJSObject(
 
 export function serializeToObjectAsset(
   project: gd.Project,
-  object: gd.Object,
+  object: gd.gdObject,
   objectFullName: string,
   usedResourceNames: Array<string>
 ) {

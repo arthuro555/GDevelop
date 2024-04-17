@@ -23,6 +23,7 @@ export const Default = () => (
   <DragAndDropContextProvider>
     <FixedHeightFlexContainer height={500}>
       <EventsFunctionsListWithErrorBoundary
+// @ts-expect-error - TS2322 - Type '{ project: any; eventsFunctionsExtension: any; selectedEventsBasedObject: null; selectedEventsBasedBehavior: null; selectedEventsFunction: any; onSelectEventsBasedObject: HandlerFunction; ... 13 more ...; forceUpdateEditor: HandlerFunction; }' is not assignable to type 'IntrinsicAttributes & EventsFunctionsListInterface & RefAttributes<Props>'.
         project={testProject.project}
         eventsFunctionsExtension={testProject.testEventsFunctionsExtension}
         selectedEventsBasedObject={null}

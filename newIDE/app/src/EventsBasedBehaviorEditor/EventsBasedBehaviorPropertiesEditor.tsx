@@ -83,7 +83,6 @@ const styles = {
 } as const;
 
 export const usePropertyOverridingAlertDialog = () => {
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
   return async (existingPropertyNames: Array<string>): Promise<boolean> => {
     return await showConfirmation({
@@ -140,11 +139,11 @@ const getExtraInfoArray = (property: gd.NamedPropertyDescriptor) => {
 
 export default function EventsBasedBehaviorPropertiesEditor(props: Props) {
   const { properties, onPropertiesUpdated, onEventsFunctionsAdded } = props;
-  const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
+  const scrollView = React.useRef<ScrollViewInterface>(null);
   const [justAddedPropertyName, setJustAddedPropertyName] = React.useState<
     string | null | undefined
   >(null);
-  const justAddedPropertyElement = React.useRef<any | null | undefined>(null);
+  const justAddedPropertyElement = React.useRef<any>(null);
 
   React.useEffect(() => {
     if (
@@ -382,7 +381,6 @@ export default function EventsBasedBehaviorPropertiesEditor(props: Props) {
         <Column noMargin expand useFullHeight>
           {properties.getCount() > 0 ? (
             <React.Fragment>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ScrollView ref={scrollView}>
                 <Line>
                   <Column noMargin expand>

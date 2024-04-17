@@ -239,6 +239,7 @@ export const getPlanIcon = ({
     case 'gdevelop_indie': // legacy
       return (
         <Silver
+// @ts-expect-error - TS2322 - Type '{ style: { width: number; height: number; }; }' is not assignable to type 'IntrinsicAttributes & object'.
           style={{
             width: PLAN_LOGO_SIZE,
             height: PLAN_LOGO_SIZE,
@@ -249,6 +250,7 @@ export const getPlanIcon = ({
     case 'gdevelop_pro': // legacy
       return (
         <Gold
+// @ts-expect-error - TS2322 - Type '{ style: { width: number; height: number; }; }' is not assignable to type 'IntrinsicAttributes & object'.
           style={{
             width: PLAN_LOGO_SIZE,
             height: PLAN_LOGO_SIZE,
@@ -258,6 +260,7 @@ export const getPlanIcon = ({
     case 'gdevelop_education':
       return (
         <Education
+// @ts-expect-error - TS2322 - Type '{ style: { width: number; height: number; }; }' is not assignable to type 'IntrinsicAttributes & object'.
           style={{
             width: PLAN_LOGO_SIZE,
             height: PLAN_LOGO_SIZE,
@@ -267,6 +270,7 @@ export const getPlanIcon = ({
     case 'gdevelop_startup':
       return (
         <Startup
+// @ts-expect-error - TS2322 - Type '{ style: { width: number; height: number; }; }' is not assignable to type 'IntrinsicAttributes & object'.
           style={{
             width: PLAN_LOGO_SIZE,
             height: PLAN_LOGO_SIZE,
@@ -276,6 +280,7 @@ export const getPlanIcon = ({
     case 'gdevelop_enterprise':
       return (
         <Business
+// @ts-expect-error - TS2322 - Type '{ style: { width: number; height: number; }; }' is not assignable to type 'IntrinsicAttributes & object'.
           style={{
             width: PLAN_LOGO_SIZE,
             height: PLAN_LOGO_SIZE,

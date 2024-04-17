@@ -27,7 +27,7 @@ const GD_STARTUP_TIMES: Timings = global.GD_STARTUP_TIMES || [];
 
 // No i18n in this file
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import("electron");
 
 // Make sure that the process object is available, even if we are not in Node.
 // This is needed by some libraries like path-browserify for example.

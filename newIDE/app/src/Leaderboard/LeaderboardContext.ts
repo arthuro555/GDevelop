@@ -60,6 +60,7 @@ export const initialLeaderboardState = {
 } as const;
 
 const LeaderboardContext = React.createContext<LeaderboardState>(
+// @ts-expect-error - TS2345 - Argument of type '{ readonly leaderboards: null; readonly currentLeaderboard: null; readonly displayOnlyBestEntry: false; readonly browsing: { readonly entries: null; readonly goToNextPage: null; readonly goToPreviousPage: null; readonly goToFirstPage: null; }; ... 8 more ...; readonly fetchLeaderboardEntries: () => Promise<...>; }' is not assignable to parameter of type 'LeaderboardState'.
   initialLeaderboardState
 );
 

@@ -157,7 +157,7 @@ const EventContainer = (props: EventsContainerProps) => {
     onEventContextMenu,
   } = props;
   const forceUpdate = useForceUpdate();
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const height = containerRef.current ? containerRef.current.offsetHeight : 0;
   React.useEffect(() => {
     eventsHeightsCache.setEventHeight(event, height);
@@ -185,7 +185,6 @@ const EventContainer = (props: EventsContainerProps) => {
 
   return (
     <div
-      // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
       ref={containerRef}
       // @ts-expect-error - TS2322 - Type '(eventContext: EventContext) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
       onClick={props.onEventClick}
@@ -496,7 +495,7 @@ export default class ThemableEventsTree extends Component<
         } = flatDataTree[rowIndex];
         return event ? { event, eventsList, indexInList } : null;
       })
-      .filter(Boolean);
+      .filter(Boolean) as Array<EventContext>;
   }
 
   _eventsToTreeData = (

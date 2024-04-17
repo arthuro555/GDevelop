@@ -4,13 +4,13 @@ import Dialog from './Dialog';
 import Text from './Text';
 import FlatButton from './FlatButton';
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 export const ExternalEditorOpenedDialog = ({
   onClose,
-}: {|
-  onClose?: () => Promise<void>,
-|}) => {
+}: {
+  onClose?: () => Promise<void>;
+}) => {
   if (!!electron) return null;
 
   return (
@@ -30,7 +30,7 @@ export const ExternalEditorOpenedDialog = ({
                 key="close"
               />,
             ]
-          : null
+          : undefined
       }
     >
       <Text>

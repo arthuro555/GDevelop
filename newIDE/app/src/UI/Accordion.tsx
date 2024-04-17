@@ -143,6 +143,7 @@ export const Accordion = React.forwardRef<MUIAccordion, AccordionProps>(
         ref={ref}
         square
         elevation={0}
+// @ts-expect-error - TS2322 - Type '{ border: string | false; padding?: string | undefined; margin?: string | undefined; backgroundColor: any; marginLeft: number; }' is not assignable to type 'Properties<string | number, string & {}>'.
         style={{
           ...{
             border:

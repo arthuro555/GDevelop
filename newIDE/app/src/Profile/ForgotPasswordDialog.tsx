@@ -84,7 +84,6 @@ const ForgotPasswordDialog = ({ onClose, onForgotPassword }: Props) => {
           </Text>
         </Column>
       ) : (
-        // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Form onSubmit={doResetPassword} autoComplete="on" name="resetPassword">
           <Column noMargin>
             <TextField

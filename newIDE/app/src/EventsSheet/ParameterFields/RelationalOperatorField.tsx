@@ -46,7 +46,7 @@ const defaultOperators: {
 
 export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
   function RelationalOperatorField(props: ParameterFieldProps, ref) {
-    const field = React.useRef<SelectFieldInterface | null | undefined>(null);
+    const field = React.useRef<SelectFieldInterface>(null);
     const focus: FieldFocusFunction = (options) => {
       if (field.current) field.current.focus(options);
     };

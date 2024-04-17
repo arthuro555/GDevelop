@@ -41,6 +41,7 @@ export const Default = () => {
             </Container>
           </FixedHeightFlexContainer>
           <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
             ref={contextMenu}
             buildMenuTemplate={(i18n) => [
               {

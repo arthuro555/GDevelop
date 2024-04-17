@@ -1,6 +1,6 @@
 import optionalRequire from './OptionalRequire';
-const path = optionalRequire('path');
-const fs = optionalRequire('fs');
+const path = optionalRequire('path') as typeof import('path');
+const fs = optionalRequire('fs') as typeof import('fs');
 
 const readLocalFileToArrayBuffer = async (
   filePath: string
@@ -10,13 +10,13 @@ const readLocalFileToArrayBuffer = async (
       resolve: (result: Promise<never>) => void,
       reject: (error?: any) => void
     ) => {
-      // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'buffer' implicitly has an 'any' type.
       fs.readFile(filePath, function (err, buffer) {
         if (err) {
           reject(err);
           return;
         }
 
+// @ts-expect-error - TS2345 - Argument of type 'Buffer' is not assignable to parameter of type 'Promise<never>'.
         resolve(buffer);
       });
     }

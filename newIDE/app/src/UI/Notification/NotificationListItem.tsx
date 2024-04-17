@@ -88,13 +88,10 @@ const getNotificationPrimaryTextByType = (
     );
   }
   if (notification.type === 'game-sessions-achievement') {
-    // @ts-expect-error - TS2339 - Property 'gameCount' does not exist on type '{ achievementId: string; sessionsCount: number; gameCount: 1; period: "year"; gameId: string; gameName: string; } | { achievementId: string; sessionsCount: number; gameCount: number; period: "year"; } | { ...; }'.
-    if (notification.data.gameCount === 1) {
-      // @ts-expect-error - TS2339 - Property 'gameId' does not exist on type '{ achievementId: string; sessionsCount: number; gameCount: 1; period: "year"; gameId: string; gameName: string; } | { achievementId: string; sessionsCount: number; gameCount: number; period: "year"; } | { ...; }'. | TS2339 - Property 'gameName' does not exist on type '{ achievementId: string; sessionsCount: number; gameCount: 1; period: "year"; gameId: string; gameName: string; } | { achievementId: string; sessionsCount: number; gameCount: number; period: "year"; } | { ...; }'.
-      if (notification.data.gameId && notification.data.gameName) {
+    if ("gameCount" in notification.data && notification.data.gameCount === 1) {
+      if ("gameId" in notification.data && "gameName" in  notification.data) {
         return (
           <Trans>
-            {/* @ts-expect-error - TS2339 - Property 'gameName' does not exist on type '{ achievementId: string; sessionsCount: number; gameCount: 1; period: "year"; gameId: string; gameName: string; } | { achievementId: string; sessionsCount: number; gameCount: number; period: "year"; } | { ...; }'. */}
             Your game {notification.data.gameName} was played more than
             {notification.data.sessionsCount} times!
           </Trans>

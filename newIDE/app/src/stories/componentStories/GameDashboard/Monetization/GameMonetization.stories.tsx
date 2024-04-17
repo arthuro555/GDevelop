@@ -29,6 +29,7 @@ export const AdsEnabled = () => {
     .onPatch(`${GDevelopGameApi.baseUrl}/game/${game.id}`)
     .reply(200)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -48,6 +49,7 @@ export const AdsDisabled = () => {
     .onPatch(`${GDevelopGameApi.baseUrl}/game/${game.id}`)
     .reply(200)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -67,6 +69,7 @@ export const ErrorWhenUpdatingGame = () => {
     .onPatch(`${GDevelopGameApi.baseUrl}/game/${game.id}`)
     .reply(500)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];

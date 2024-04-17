@@ -1,5 +1,4 @@
-
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
@@ -16,34 +15,28 @@ import { HotReloaderLog } from '../ExportAndShare/PreviewLauncher.flow';
 import PreviewIcon from '../UI/CustomSvgIcons/Preview';
 
 type Props = {
-  logs: Array<HotReloaderLog>,
-  onClose: () => void,
-  onLaunchNewPreview: () => void
+  logs: Array<HotReloaderLog>;
+  onClose: () => void;
+  onLaunchNewPreview: () => void;
 };
 
-const shouldDisplayDialogForLogs = logs: Array<HotReloaderLog> =>
-  logs.filter(log => log.kind === 'error' || log.kind === 'fatal').length > 0;
+const shouldDisplayDialogForLogs = (logs: Array<HotReloaderLog>) =>
+  logs.filter((log) => log.kind === 'error' || log.kind === 'fatal').length > 0;
 
 export default function HotReloadLogsDialog({
   onClose,
   onLaunchNewPreview,
   logs,
-{ }
 }: Props) {
-{ }
   if (!shouldDisplayDialogForLogs(logs)) {
-{ }
     return null;
   }
 
   return (
     <Dialog
-
       title={<Trans>Restarting the preview from scratch is required</Trans>}
       actions={[
-
         <FlatButton
-
           label={<Trans>Close</Trans>}
           key="close"
           primary={false}
@@ -51,9 +44,7 @@ export default function HotReloadLogsDialog({
         />,
 
         <DialogPrimaryButton
-
           icon={<PreviewIcon />}
-
           label={<Trans>Close and launch a new preview</Trans>}
           key="new-preview"
           primary
@@ -61,7 +52,6 @@ export default function HotReloadLogsDialog({
         />,
       ]}
       secondaryActions={[
-
         <HelpButton key="help" helpPagePath={'/interface/preview'} />,
       ]}
       onRequestClose={onClose}

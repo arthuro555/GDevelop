@@ -18,6 +18,7 @@ const fetchNothing: FetchAllProjectResourcesFunction = async () => {
   };
 };
 
+// @ts-expect-error - TS2322 - Type '{ [x: string]: FetchAllProjectResourcesFunction | (({ project, fileMetadata, authenticatedUser, onProgress, }: { project: gd.Project; fileMetadata: FileMetadata; authenticatedUser: AuthenticatedUser; onProgress: (arg1: number, arg2: number) => void; }) => Promise<...>) | (({ project, fileMetadata, onProgress, }: Opt...' is not assignable to type '{ [key: string]: FetchAllProjectResourcesFunction; }'.
 const fetchers: {
   [key: string]: FetchAllProjectResourcesFunction;
 } = {

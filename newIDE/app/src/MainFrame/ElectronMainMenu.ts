@@ -11,7 +11,7 @@ import {
 } from './MainMenu';
 
 import PreferencesContext from './Preferences/PreferencesContext';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
 const ipcRenderer = electron ? electron.ipcRenderer : null;
@@ -26,6 +26,7 @@ const useIPCEventListener = ({
   callback: any;
   shouldApply: boolean;
 }) => {
+// @ts-expect-error - TS2345 - Argument of type '() => (() => Electron.IpcRenderer) | undefined' is not assignable to parameter of type 'EffectCallback'.
   React.useEffect(() => {
     if (!ipcRenderer || !shouldApply) return;
 
@@ -244,7 +245,6 @@ const ElectronMainMenu = ({
 
   const { onOpenRecentFile } = callbacks;
   useCommandWithOptions('OPEN_RECENT_PROJECT', true, {
-    // @ts-expect-error - TS2322 - Type '() => { text: string; handler: () => Promise<void>; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
         recentProjectFiles.map((item) => ({

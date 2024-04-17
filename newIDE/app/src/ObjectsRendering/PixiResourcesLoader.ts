@@ -17,20 +17,30 @@ import { checkIfCredentialsRequired } from '../Utils/CrossOrigin';
 import { ResourceKind } from '../ResourcesList/ResourceSource';
 
 type SpineTextureAtlasOrLoadingError = {
-  textureAtlas: TextureAtlas | null | undefined,
-  loadingError: Error | null | undefined,
-  loadingErrorReason: null | 'invalid-atlas-resource' | 'missing-texture-resources' | 'atlas-resource-loading-error'
+  textureAtlas: TextureAtlas | null | undefined;
+  loadingError: Error | null | undefined;
+  loadingErrorReason:
+    | null
+    | 'invalid-atlas-resource'
+    | 'missing-texture-resources'
+    | 'atlas-resource-loading-error';
 };
 
 export type SpineDataOrLoadingError = {
-  skeleton: ISkeleton | null | undefined,
-  loadingError: Error | null | undefined,
-  loadingErrorReason: null | 'invalid-spine-resource' | 'missing-texture-atlas-name' | // Atlas loading error reasons:
-  'spine-resource-loading-error' | 'invalid-atlas-resource' | 'missing-texture-resources' | 'atlas-resource-loading-error'
+  skeleton: ISkeleton | null | undefined;
+  loadingError: Error | null | undefined;
+  loadingErrorReason:
+    | null
+    | 'invalid-spine-resource'
+    | 'missing-texture-atlas-name' // Atlas loading error reasons:
+    | 'spine-resource-loading-error'
+    | 'invalid-atlas-resource'
+    | 'missing-texture-resources'
+    | 'atlas-resource-loading-error';
 };
 
 type ResourcePromise<T> = {
-  [resourceName: string]: Promise<T>
+  [resourceName: string]: Promise<T>;
 };
 
 let loadedBitmapFonts: Record<string, any> = {};
@@ -39,7 +49,8 @@ let loadedTextures: Record<string, any> = {};
 const invalidTexture = PIXI.Texture.from('res/error48.png');
 let loadedThreeTextures: Record<string, any> = {};
 let loadedThreeMaterials: Record<string, any> = {};
-let loadedOrLoading3DModelPromises: ResourcePromise<THREE.THREE_ADDONS.GLTF> = {};
+let loadedOrLoading3DModelPromises: ResourcePromise<THREE.THREE_ADDONS.GLTF> =
+  {};
 let spineAtlasPromises: ResourcePromise<SpineTextureAtlasOrLoadingError> = {};
 let spineDataPromises: ResourcePromise<SpineDataOrLoadingError> = {};
 
@@ -67,21 +78,21 @@ const createInvalidModel = (): GLTF => {
 };
 const invalidModel: GLTF = createInvalidModel();
 
-// @ts-expect-error - TS7034 - Variable 'gltfLoader' implicitly has type 'any' in some locations where its type cannot be determined.
-let gltfLoader = null;
-const getOrCreateGltfLoader = () => {
-// @ts-expect-error - TS7005 - Variable 'gltfLoader' implicitly has an 'any' type.
+let gltfLoader: GLTFLoader | null = null;
+const getOrCreateGltfLoader = (): GLTFLoader => {
   if (!gltfLoader) {
     gltfLoader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath('./external/draco/gltf/');
     gltfLoader.setDRACOLoader(dracoLoader);
   }
-// @ts-expect-error - TS7005 - Variable 'gltfLoader' implicitly has an 'any' type.
   return gltfLoader;
 };
 
-const load3DModel = (project: gd.Project, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> => {
+const load3DModel = (
+  project: gd.Project,
+  resourceName: string
+): Promise<THREE.THREE_ADDONS.GLTF> => {
   if (!project.getResourcesManager().hasResource(resourceName))
     return Promise.resolve(invalidModel);
 
@@ -94,21 +105,26 @@ const load3DModel = (project: gd.Project, resourceName: string): Promise<THREE.T
 
   const gltfLoader = getOrCreateGltfLoader();
   gltfLoader.withCredentials = checkIfCredentialsRequired(url);
-  return new Promise((resolve: (result: Promise<never>) => void, reject: (error?: any) => void) => {
-    gltfLoader.load(
-      url,
-// @ts-expect-error - TS7006 - Parameter 'gltf' implicitly has an 'any' type.
-      gltf => {
-        traverseToRemoveMetalnessFromMeshes(gltf.scene);
-        resolve(gltf);
-      },
-      undefined,
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-      error => {
-        reject(error);
-      }
-    );
-  });
+  return new Promise(
+    (
+      resolve: (result: Promise<never>) => void,
+      reject: (error?: any) => void
+    ) => {
+      gltfLoader.load(
+        url,
+        // @ts-expect-error - TS7006 - Parameter 'gltf' implicitly has an 'any' type.
+        (gltf) => {
+          traverseToRemoveMetalnessFromMeshes(gltf.scene);
+          resolve(gltf);
+        },
+        undefined,
+        // @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
+        (error) => {
+          reject(error);
+        }
+      );
+    }
+  );
 };
 
 const determineCrossOrigin = (url: string) => {
@@ -151,7 +167,7 @@ const removeMetalness = (material: THREE.Material): void => {
 };
 
 const removeMetalnessFromMesh = (node: THREE.Object3D): void => {
-  const mesh = (node as THREE.Mesh);
+  const mesh = node as THREE.Mesh;
   if (!mesh.material) {
     return;
   }
@@ -167,7 +183,9 @@ const removeMetalnessFromMesh = (node: THREE.Object3D): void => {
 const traverseToRemoveMetalnessFromMeshes = (node: THREE.Object3D) =>
   node.traverse(removeMetalnessFromMesh);
 
-export const readEmbeddedResourcesMapping = (resource: gd.Resource): Record<any, any> | null => {
+export const readEmbeddedResourcesMapping = (
+  resource: gd.Resource
+): Record<any, any> | null => {
   const metadataString = resource.getMetadata();
   try {
     const metadata = JSON.parse(metadataString);
@@ -187,7 +205,7 @@ export const readEmbeddedResourcesMapping = (resource: gd.Resource): Record<any,
 const getEmbedderResources = (
   project: gd.Project,
   embeddedResourceName: string,
-  embedderResourceKind: ResourceKind,
+  embedderResourceKind: ResourceKind
 ): Array<gd.Resource> => {
   const resourcesManager = project.getResourcesManager();
   const embedderResources: Array<gd.Resource> = [];
@@ -249,7 +267,7 @@ export default class PixiResourcesLoader {
       embedderResourceKind
     );
     await Promise.all(
-      embeddedResources.map(embeddedResource =>
+      embeddedResources.map((embeddedResource) =>
         this.reloadResource(project, embeddedResource.getName())
       )
     );
@@ -274,7 +292,7 @@ export default class PixiResourcesLoader {
 
     await PixiResourcesLoader.loadTextures(project, [resourceName]);
 
-// @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<THREE.THREE_ADDONS.GLTF>' is always defined.
+    // @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<THREE.THREE_ADDONS.GLTF>' is always defined.
     if (loadedOrLoading3DModelPromises[resourceName]) {
       delete loadedOrLoading3DModelPromises[resourceName];
     }
@@ -288,7 +306,7 @@ export default class PixiResourcesLoader {
       loadedThreeTextures[resourceName].dispose();
       delete loadedThreeTextures[resourceName];
     }
-// @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<SpineTextureAtlasOrLoadingError>' is always defined.
+    // @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<SpineTextureAtlasOrLoadingError>' is always defined.
     if (spineAtlasPromises[resourceName]) {
       await PIXI.Assets.unload(resourceName).catch(async () => {
         // Workaround:
@@ -306,7 +324,7 @@ export default class PixiResourcesLoader {
       // Also reload any resource embedding this resource:
       await this._reloadEmbedderResources(project, resourceName, 'spine');
     }
-// @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<import("/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsRendering/PixiResourcesLoader").SpineDataOrLoadingError>' is always defined.
+    // @ts-expect-error - TS2801 - This condition will always return true since this 'Promise<import("/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsRendering/PixiResourcesLoader").SpineDataOrLoadingError>' is always defined.
     if (spineDataPromises[resourceName]) {
       await PIXI.Assets.unload(resourceName);
       delete spineDataPromises[resourceName];
@@ -318,11 +336,11 @@ export default class PixiResourcesLoader {
       PIXI.Assets.resolver.prefer();
     }
 
-    const matchingMaterials = Object.keys(loadedThreeMaterials).filter(key =>
+    const matchingMaterials = Object.keys(loadedThreeMaterials).filter((key) =>
       key.startsWith(resourceName)
     );
     if (matchingMaterials.length > 0) {
-      matchingMaterials.forEach(key => {
+      matchingMaterials.forEach((key) => {
         loadedThreeMaterials[key].dispose();
         delete loadedThreeMaterials[key];
       });
@@ -331,11 +349,14 @@ export default class PixiResourcesLoader {
   /**
    * (Re)load the PIXI texture represented by the given resources.
    */
-  static async loadTextures(project: gd.Project, resourceNames: Array<string>): Promise<void> {
+  static async loadTextures(
+    project: gd.Project,
+    resourceNames: Array<string>
+  ): Promise<void> {
     const resourcesManager = project.getResourcesManager();
 
     const imageResources = resourceNames
-      .map(resourceName => {
+      .map((resourceName) => {
         if (!resourcesManager.hasResource(resourceName)) {
           return null;
         }
@@ -345,9 +366,9 @@ export default class PixiResourcesLoader {
         }
         return resource;
       })
-      .filter(Boolean);
+      .filter(Boolean) as gd.Resource[];
     const videoResources = resourceNames
-      .map(resourceName => {
+      .map((resourceName) => {
         if (!resourcesManager.hasResource(resourceName)) {
           return null;
         }
@@ -357,11 +378,11 @@ export default class PixiResourcesLoader {
         }
         return resource;
       })
-      .filter(Boolean);
+      .filter(Boolean) as gd.Resource[];
 
     // TODO use a PromisePool to be able to abort the previous reload of resources.
     await Promise.all([
-      ...imageResources.map(async resource => {
+      ...imageResources.map(async (resource) => {
         const resourceName = resource.getName();
         try {
           const url = ResourcesLoader.getResourceFullUrl(
@@ -387,7 +408,7 @@ export default class PixiResourcesLoader {
           );
         }
       }),
-      ...videoResources.map(async resource => {
+      ...videoResources.map(async (resource) => {
         const resourceName = resource.getName();
         try {
           const url = ResourcesLoader.getResourceFullUrl(
@@ -418,8 +439,8 @@ export default class PixiResourcesLoader {
 
           loadedTextures[resourceName].baseTexture.resource
             .load()
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-            .catch(error => {
+            // @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
+            .catch((error) => {
               console.error(
                 `Unable to load video texture from url ${url}:`,
                 error
@@ -472,8 +493,8 @@ export default class PixiResourcesLoader {
       loadedTextures[resourceName] = invalidTexture;
       return loadedTextures[resourceName];
     }
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-    loadedTextures[resourceName].baseTexture.resource.load().catch(error => {
+    // @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
+    loadedTextures[resourceName].baseTexture.resource.load().catch((error) => {
       console.error(`Unable to load texture from url ${url}:`, error);
       loadedTextures[resourceName] = invalidTexture;
     });
@@ -489,7 +510,10 @@ export default class PixiResourcesLoader {
    * @param resourceName The name of the resource
    * @returns The requested texture, or a placeholder if not found.
    */
-  static getThreeTexture(project: gd.Project, resourceName: string): THREE.Texture {
+  static getThreeTexture(
+    project: gd.Project,
+    resourceName: string
+  ): THREE.Texture {
     const loadedThreeTexture = loadedThreeTextures[resourceName];
     if (loadedThreeTexture) return loadedThreeTexture;
 
@@ -538,7 +562,7 @@ export default class PixiResourcesLoader {
     {
       useTransparentTexture,
     }: {
-      useTransparentTexture: boolean
+      useTransparentTexture: boolean;
     }
   ) {
     const cacheKey = `${resourceName}|transparent:${useTransparentTexture.toString()}`;
@@ -562,7 +586,10 @@ export default class PixiResourcesLoader {
    * @param options
    * @returns The requested material.
    */
-  static get3DModel(project: gd.Project, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> {
+  static get3DModel(
+    project: gd.Project,
+    resourceName: string
+  ): Promise<THREE.THREE_ADDONS.GLTF> {
     const promise = loadedOrLoading3DModelPromises[resourceName];
     if (promise) return promise;
 
@@ -577,7 +604,10 @@ export default class PixiResourcesLoader {
    * @param spineTextureAtlasName The name of the atlas texture resource.
    * @returns The requested texture atlas, or null if it could not be loaded.
    */
-  static async _getSpineTextureAtlas(project: gd.Project, spineTextureAtlasName: string): Promise<SpineTextureAtlasOrLoadingError> {
+  static async _getSpineTextureAtlas(
+    project: gd.Project,
+    spineTextureAtlasName: string
+  ): Promise<SpineTextureAtlasOrLoadingError> {
     const promise = spineAtlasPromises[spineTextureAtlasName];
     if (promise) return promise;
 
@@ -619,74 +649,78 @@ export default class PixiResourcesLoader {
       };
     }
 
-    const images = textureAtlasMappingEntries.reduce<Record<string, any>>((imagesMapping, [relatedPath, resourceName]: [any, any]) => {
-      // flow check
-      if (typeof resourceName === 'string') {
-        imagesMapping[relatedPath] = this.getPIXITexture(
-          project,
-          resourceName
-        );
-      }
-
-      return imagesMapping;
-    }, {});
-
-    return spineAtlasPromises[spineTextureAtlasName] = new Promise(resolve => {
-      const atlasUrl = ResourcesLoader.getResourceFullUrl(
-        project,
-        spineTextureAtlasName,
-        {
-          isResourceForPixi: true,
+    const images = textureAtlasMappingEntries.reduce<Record<string, any>>(
+      (imagesMapping, [relatedPath, resourceName]: [any, any]) => {
+        // flow check
+        if (typeof resourceName === 'string') {
+          imagesMapping[relatedPath] = this.getPIXITexture(
+            project,
+            resourceName
+          );
         }
-      );
-      PIXI.Assets.setPreferences({
-        preferWorkers: false,
-        crossOrigin: checkIfCredentialsRequired(atlasUrl)
-          ? 'use-credentials'
-          : 'anonymous',
-      });
-      PIXI.Assets.add(spineTextureAtlasName, atlasUrl, { images });
-      PIXI.Assets.load(spineTextureAtlasName).then(
-        atlas => {
-          // Ideally atlas of type `TextureAtlas` should be passed here.
-          // But there is a known issue in case of preloaded images (see https://github.com/pixijs/spine/issues/537
-          // and search the other mentions to this issue in the codebase).
-          //
-          // This branching covers all possible ways to make it work fine,
-          // if issue is fixed in pixi-spine or after migration to spine-pixi.
-          if (typeof atlas === 'string') {
-            new PIXI_SPINE.TextureAtlas(
-              atlas,
-              (textureName: any, textureCb: any) =>
-                textureCb(images[textureName].baseTexture),
-              textureAtlas: any =>
-                resolve({
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'textureAtlas'. Either declare one or provide an initializer.
-                  textureAtlas,
-                  loadingError: null,
-                  loadingErrorReason: null,
-                })
+
+        return imagesMapping;
+      },
+      {}
+    );
+
+    return (spineAtlasPromises[spineTextureAtlasName] = new Promise(
+      (resolve) => {
+        const atlasUrl = ResourcesLoader.getResourceFullUrl(
+          project,
+          spineTextureAtlasName,
+          {
+            isResourceForPixi: true,
+          }
+        );
+        PIXI.Assets.setPreferences({
+          preferWorkers: false,
+          crossOrigin: checkIfCredentialsRequired(atlasUrl)
+            ? 'use-credentials'
+            : 'anonymous',
+        });
+        PIXI.Assets.add(spineTextureAtlasName, atlasUrl, { images });
+        PIXI.Assets.load(spineTextureAtlasName).then(
+          (atlas) => {
+            // Ideally atlas of type `TextureAtlas` should be passed here.
+            // But there is a known issue in case of preloaded images (see https://github.com/pixijs/spine/issues/537
+            // and search the other mentions to this issue in the codebase).
+            //
+            // This branching covers all possible ways to make it work fine,
+            // if issue is fixed in pixi-spine or after migration to spine-pixi.
+            if (typeof atlas === 'string') {
+              new PIXI_SPINE.TextureAtlas(
+                atlas,
+                (textureName: any, textureCb: any) =>
+                  textureCb(images[textureName].baseTexture),
+                (textureAtlas: any) =>
+                  resolve({
+                    textureAtlas,
+                    loadingError: null,
+                    loadingErrorReason: null,
+                  })
+              );
+            } else {
+              resolve({
+                textureAtlas: atlas,
+                loadingError: null,
+                loadingErrorReason: null,
+              });
+            }
+          },
+          (err) => {
+            console.error(
+              `Error while loading Spine atlas "${spineTextureAtlasName}": ${err}.\nCheck if you selected the correct pair of atlas and image files.`
             );
-          } else {
             resolve({
-              textureAtlas: atlas,
-              loadingError: null,
-              loadingErrorReason: null,
+              textureAtlas: null,
+              loadingError: err,
+              loadingErrorReason: 'atlas-resource-loading-error',
             });
           }
-        },
-        err => {
-          console.error(
-            `Error while loading Spine atlas "${spineTextureAtlasName}": ${err}.\nCheck if you selected the correct pair of atlas and image files.`
-          );
-          resolve({
-            textureAtlas: null,
-            loadingError: err,
-            loadingErrorReason: 'atlas-resource-loading-error',
-          });
-        }
-      );
-    });
+        );
+      }
+    ));
   }
 
   /**
@@ -695,7 +729,10 @@ export default class PixiResourcesLoader {
    * @param spineName The name of the spine json resource
    * @returns The requested spine skeleton.
    */
-  static async getSpineData(project: gd.Project, spineName: string): Promise<SpineDataOrLoadingError> {
+  static async getSpineData(
+    project: gd.Project,
+    spineName: string
+  ): Promise<SpineDataOrLoadingError> {
     const promise = spineDataPromises[spineName];
     if (promise) return promise;
 
@@ -738,9 +775,9 @@ export default class PixiResourcesLoader {
       };
     }
 
-    return (spineDataPromises[spineName] = new Promise(resolve => {
+    return (spineDataPromises[spineName] = new Promise((resolve) => {
       this._getSpineTextureAtlas(project, spineTextureAtlasName).then(
-        textureAtlasOrLoadingError => {
+        (textureAtlasOrLoadingError) => {
           if (!textureAtlasOrLoadingError.textureAtlas) {
             return resolve({
               skeleton: null,
@@ -766,14 +803,14 @@ export default class PixiResourcesLoader {
             spineAtlas: textureAtlasOrLoadingError.textureAtlas,
           });
           PIXI.Assets.load(spineName).then(
-            jsonData => {
+            (jsonData) => {
               resolve({
                 skeleton: jsonData.spineData,
                 loadingError: null,
                 loadingErrorReason: null,
               });
             },
-            err => {
+            (err) => {
               console.error(
                 `Error while loading Spine data "${spineName}": ${err}.\nCheck if you selected correct files.`
               );
@@ -832,8 +869,8 @@ export default class PixiResourcesLoader {
       return loadedTextures[resourceName];
     }
 
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-    loadedTextures[resourceName].baseTexture.resource.load().catch(error => {
+    // @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
+    loadedTextures[resourceName].baseTexture.resource.load().catch((error) => {
       console.error(`Unable to load video texture from url ${url}:`, error);
       loadedTextures[resourceName] = invalidTexture;
     });
@@ -846,7 +883,10 @@ export default class PixiResourcesLoader {
    * @returns a Promise that resolves with the font-family to be used
    * to render a text with the font.
    */
-  static loadFontFamily(project: gd.Project, resourceName: string): Promise<string> {
+  static loadFontFamily(
+    project: gd.Project,
+    resourceName: string
+  ): Promise<string> {
     // Avoid reloading a font if it's already cached
     if (loadedFontFamilies[resourceName]) {
       return Promise.resolve(loadedFontFamilies[resourceName]);
@@ -880,8 +920,8 @@ export default class PixiResourcesLoader {
       return Promise.resolve('Arial');
     }
 
-// @ts-expect-error - TS7006 - Parameter 'loadedFace' implicitly has an 'any' type.
-    return loadFontFace(fontFamily, fullFilename).then(loadedFace => {
+    // @ts-expect-error - TS7006 - Parameter 'loadedFace' implicitly has an 'any' type.
+    return loadFontFace(fontFamily, fullFilename).then((loadedFace) => {
       loadedFontFamilies[resourceName] = fontFamily;
 
       return fontFamily;
@@ -905,7 +945,10 @@ export default class PixiResourcesLoader {
   /**
    * Get the data from a bitmap font file (fnt/xml) resource in the IDE.
    */
-  static getBitmapFontData(project: gd.Project, resourceName: string): Promise<any> {
+  static getBitmapFontData(
+    project: gd.Project,
+    resourceName: string
+  ): Promise<any> {
     if (loadedBitmapFonts[resourceName]) {
       return Promise.resolve(loadedBitmapFonts[resourceName].data);
     }
@@ -938,7 +981,7 @@ export default class PixiResourcesLoader {
       .get(fullUrl, {
         withCredentials: checkIfCredentialsRequired(fullUrl),
       })
-      .then(response => {
+      .then((response) => {
         loadedBitmapFonts[resourceName] = response;
         return response.data;
       });
@@ -951,7 +994,10 @@ export default class PixiResourcesLoader {
   /**
    * Get the data from a json resource in the IDE.
    */
-  static getResourceJsonData(project: gd.Project, resourceName: string): Promise<any> {
+  static getResourceJsonData(
+    project: gd.Project,
+    resourceName: string
+  ): Promise<any> {
     if (!project.getResourcesManager().hasResource(resourceName))
       return Promise.reject(
         new Error(`Can't find resource called ${resourceName}.`)
@@ -974,6 +1020,6 @@ export default class PixiResourcesLoader {
       .get(fullUrl, {
         withCredentials: checkIfCredentialsRequired(fullUrl),
       })
-      .then(response => response.data);
+      .then((response) => response.data);
   }
 }

@@ -169,7 +169,7 @@ export const BuildCard = ({
     differenceInCalendarDays(Date.now(), build.updatedAt) > 6;
 
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-  const nameInput = React.useRef<TextFieldInterface | null | undefined>(null);
+  const nameInput = React.useRef<TextFieldInterface>(null);
   const { isMobile } = useResponsiveWindowSize();
 
   const [showCopiedInfoBar, setShowCopiedInfoBar] = React.useState(false);

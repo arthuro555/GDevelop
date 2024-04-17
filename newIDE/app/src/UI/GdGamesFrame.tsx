@@ -10,20 +10,19 @@ import { useIsMounted } from '../Utils/UseIsMounted';
 import {
   PrivateGameTemplateListingData,
   PrivateAssetPackListingData,
-
 } from '../Utils/GDevelopServices/Shop';
 
 export type GdGamesMessageEventData = Readonly<{
-  id?: string | any,
-  privateAssetPackListingData?: PrivateAssetPackListingData,
-  privateGameTemplateListingData?: PrivateGameTemplateListingData
+  id?: string | any;
+  privateAssetPackListingData?: PrivateAssetPackListingData;
+  privateGameTemplateListingData?: PrivateGameTemplateListingData;
 }>;
 
 type Props = {
-  loadErrorMessage: React.ReactNode,
-  path: string,
-  onMessageReceived: (data: GdGamesMessageEventData) => void,
-  supportedMessageIds: Array<string>
+  loadErrorMessage: React.ReactNode;
+  path: string;
+  onMessageReceived: (data: GdGamesMessageEventData) => void;
+  supportedMessageIds: Array<string>;
 };
 
 const styles = {
@@ -33,8 +32,8 @@ const styles = {
   },
 } as const;
 
-const gd.GamesHost = 'https://gd.games';
-// const gd.GamesHost = 'http://localhost:4000';
+const gdGamesHost = 'https://gd.games';
+// const gdGamesHost = 'http://localhost:4000';
 
 export const GdGamesFrame = ({
   loadErrorMessage,
@@ -49,55 +48,47 @@ export const GdGamesFrame = ({
   const isMounted = useIsMounted();
   const forceUpdate = useForceUpdate();
 
-  const url = new URL(path, gd.GamesHost);
+  const url = new URL(path, gdGamesHost);
   url.searchParams.set('supportedMessageIds', supportedMessageIds.join(','));
   url.searchParams.set('theme', paletteType);
 
-  React.useEffect(
-    () => {
-      const callback = (event: MessageEvent) => {
-        if (
-          event.origin === gd.GamesHost &&
-          event.data &&
-          typeof event.data === 'object'
-        ) {
-          if (event.data.id === 'pageLoaded') {
-            loadState.current = 'loaded';
-            forceUpdate();
-          } else {
-            onMessageReceived(event.data);
-          }
+  React.useEffect(() => {
+    const callback = (event: MessageEvent) => {
+      if (
+        event.origin === gdGamesHost &&
+        event.data &&
+        typeof event.data === 'object'
+      ) {
+        if (event.data.id === 'pageLoaded') {
+          loadState.current = 'loaded';
+          forceUpdate();
+        } else {
+          onMessageReceived(event.data);
         }
-      };
+      }
+    };
 
-      window.addEventListener('message', callback);
+    window.addEventListener('message', callback);
 
-      return () => window.removeEventListener('message', callback);
-    },
-    [forceUpdate, onMessageReceived]
-  );
+    return () => window.removeEventListener('message', callback);
+  }, [forceUpdate, onMessageReceived]);
 
-  React.useEffect(
-    () => {
-      (async () => {
-        await delay(6000);
-        if (!isMounted.current) return;
+  React.useEffect(() => {
+    (async () => {
+      await delay(6000);
+      if (!isMounted.current) return;
 
-        // Consider the loading of the iframe as a failure if not completed/errored
-        // after 6s.
-        if (loadState.current === 'loaded') return;
-        loadState.current = 'errored';
-        forceUpdate();
-      })();
-    },
-    [forceUpdate, isMounted]
-  );
+      // Consider the loading of the iframe as a failure if not completed/errored
+      // after 6s.
+      if (loadState.current === 'loaded') return;
+      loadState.current = 'errored';
+      forceUpdate();
+    })();
+  }, [forceUpdate, isMounted]);
 
   return (
-
     <>
       {loadState.current !== 'errored' && (
-
         <iframe
           src={url.toString()}
           title="gdgames"
@@ -108,7 +99,6 @@ export const GdGamesFrame = ({
         />
       )}
       {loadState.current === 'loading' && (
-
         <div
           style={{
             position: 'absolute',
@@ -119,7 +109,6 @@ export const GdGamesFrame = ({
         </div>
       )}
       {loadState.current === 'errored' && (
-
         <PlaceholderError
           onRetry={() => {
             loadState.current = 'loading';

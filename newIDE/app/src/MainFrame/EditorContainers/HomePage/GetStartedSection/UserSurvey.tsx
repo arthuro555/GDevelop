@@ -197,6 +197,7 @@ const DesktopDisplay = ({
         {questionsPropsToRender.map((props, index) => (
           <UserSurveyQuestion
             {...props}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined> | null' is not assignable to type 'Ref<HTMLDivElement> | undefined'.
             ref={
               index === questionsPropsToRender.length - 1
                 ? userSurveyQuestionRef

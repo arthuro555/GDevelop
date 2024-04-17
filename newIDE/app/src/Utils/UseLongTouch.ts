@@ -47,7 +47,7 @@ export const useLongTouch = (
     delay?: number;
   }
 ) => {
-  const timeout = React.useRef<number | null | undefined>(null);
+  const timeout = React.useRef<number>(null);
   const context = options && options.context ? options.context : null;
   const delay = options && options.delay ? options.delay : defaultDelay;
   const currentClientCoordinates = React.useRef<ClientCoordinates>({

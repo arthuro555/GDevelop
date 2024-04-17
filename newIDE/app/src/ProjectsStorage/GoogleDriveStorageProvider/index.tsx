@@ -230,6 +230,7 @@ const showFilePicker = ({
   GoogleDriveFileOrFolder | null | undefined
 > => {
   return authenticate().then((googleUser) => {
+// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
     const google = global.google;
 
     return new Promise((resolve) => {

@@ -189,6 +189,7 @@ const ContributionDetails = ({ userId }: Props) => {
         setExtensions(extensions);
       } catch (error) {
         console.error('Error while loading extensions:', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setExtensionError(error);
       }
     })();
@@ -206,6 +207,7 @@ const ContributionDetails = ({ userId }: Props) => {
         setExamples(examples);
       } catch (error) {
         console.error('Error while loading examples:', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
         setExampleError(error);
       }
     })();

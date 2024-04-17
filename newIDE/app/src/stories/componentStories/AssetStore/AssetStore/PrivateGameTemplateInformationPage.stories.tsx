@@ -252,6 +252,7 @@ const PrivateGameTemplateInformationPageStory = ({
           )
     )
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -263,6 +264,7 @@ const PrivateGameTemplateInformationPageStory = ({
     .onGet('/product-license')
     .reply(200, fakeGameTemplateLicenses)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];

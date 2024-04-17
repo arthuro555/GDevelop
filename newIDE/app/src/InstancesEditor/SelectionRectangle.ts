@@ -9,12 +9,12 @@ export default class SelectionRectangle {
 
   pixiRectangle: PIXI.Graphics;
   selectionRectangleStart: {
-    x: number,
-    y: number
+    x: number;
+    y: number;
   } | null;
   selectionRectangleEnd: {
-    x: number,
-    y: number
+    x: number;
+    y: number;
   } | null;
   _instancesInSelectionRectangle: gd.InitialInstance[];
 
@@ -29,9 +29,9 @@ export default class SelectionRectangle {
     instanceMeasurer,
     toSceneCoordinates,
   }: {
-    instances: gd.InitialInstancesContainer,
-    instanceMeasurer: InstanceMeasurer,
-    toSceneCoordinates: (x: number, y: number) => [number, number]
+    instances: gd.InitialInstancesContainer;
+    instanceMeasurer: InstanceMeasurer;
+    toSceneCoordinates: (x: number, y: number) => [number, number];
   }) {
     this.instances = instances;
     this.instanceMeasurer = instanceMeasurer;
@@ -45,7 +45,7 @@ export default class SelectionRectangle {
 
     this._temporaryAABB = new Rectangle();
     this.selector = new gd.InitialInstanceJSFunctor();
-    this.selector.invoke = instancePtr: any => {
+    this.selector.invoke = (instancePtr: any) => {
       const instance = gd.wrapPointer(instancePtr, gd.InitialInstance);
       const instanceAABB = this.instanceMeasurer.getInstanceAABB(
         instance,

@@ -120,6 +120,7 @@ const VariablesListToolbar = React.memo<Props>((props: Props) => {
                     leftIcon={<Icon />}
                     disabled={disabled}
                     label={label}
+// @ts-expect-error - TS2322 - Type '(() => void) | undefined' is not assignable to type '(ev?: any) => void'.
                     onClick={onClick}
                   />
                 )}

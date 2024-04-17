@@ -220,12 +220,15 @@ const RecommendationList = ({
     : [];
 
   const recommendedVideoTutorials = recommendedTutorials.filter(
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
     (tutorial) => tutorial.type === 'video'
   );
   const recommendedTextTutorials = recommendedTutorials.filter(
+// @ts-expect-error - TS2533 - Object is possibly 'null' or 'undefined'.
     (tutorial) => tutorial.type === 'text'
   );
 
+// @ts-expect-error - TS2322 - Type 'Recommendation | undefined' is not assignable to type 'GuidedLessonsRecommendation | null | undefined'.
   const guidedLessonsRecommendation:
     | GuidedLessonsRecommendation
     | null
@@ -236,6 +239,7 @@ const RecommendationList = ({
     ? guidedLessonsRecommendation.lessonsIds
     : null;
 
+// @ts-expect-error - TS2322 - Type 'Recommendation | undefined' is not assignable to type 'PlanRecommendation | null | undefined'.
   const planRecommendation: PlanRecommendation | null | undefined =
     recommendations.find((recommendation) => recommendation.type === 'plan');
 
@@ -307,6 +311,7 @@ const RecommendationList = ({
                 title={<Trans>Get started with game creation</Trans>}
                 margin="dense"
                 items={recommendedVideoTutorials.map((tutorial) =>
+// @ts-expect-error - TS2345 - Argument of type 'Tutorial | null | undefined' is not assignable to parameter of type 'Tutorial'.
                   formatTutorialToImageTileComponent(i18n, tutorial)
                 )}
                 getColumnsFromWindowSize={getVideoTutorialsColumnsFromWidth}

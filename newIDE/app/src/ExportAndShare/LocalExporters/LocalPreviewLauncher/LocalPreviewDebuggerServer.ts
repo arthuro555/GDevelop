@@ -5,7 +5,7 @@ import {
   DebuggerId,
   ServerAddress,
 } from '../../PreviewLauncher.flow';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 let debuggerServerState: 'started' | 'stopped' = 'stopped';
@@ -44,7 +44,6 @@ export const localPreviewDebuggerServer: PreviewDebuggerServer = {
         debuggerServerAddress = null;
         removeServerListeners();
 
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'err' implicitly has an 'any' type.
         ipcRenderer.on('debugger-error-received', (event, err) => {
           if (!serverStartPromiseCompleted) {
             reject(err);
@@ -54,7 +53,6 @@ export const localPreviewDebuggerServer: PreviewDebuggerServer = {
           callbacksList.forEach(({ onErrorReceived }) => onErrorReceived(err));
         });
 
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7031 - Binding element 'id' implicitly has an 'any' type.
         ipcRenderer.on('debugger-connection-closed', (event, { id }) => {
           const debuggerIdIndex = debuggerIds.indexOf(id);
           if (debuggerIdIndex !== -1) debuggerIds.splice(debuggerIdIndex, 1);
@@ -67,7 +65,6 @@ export const localPreviewDebuggerServer: PreviewDebuggerServer = {
           );
         });
 
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7031 - Binding element 'id' implicitly has an 'any' type.
         ipcRenderer.on('debugger-connection-opened', (event, { id }) => {
           debuggerIds.push(id);
           callbacksList.forEach(({ onConnectionOpened }) =>
@@ -80,7 +77,7 @@ export const localPreviewDebuggerServer: PreviewDebuggerServer = {
 
         ipcRenderer.on(
           'debugger-connection-errored',
-          // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7031 - Binding element 'id' implicitly has an 'any' type. | TS7031 - Binding element 'errorMessage' implicitly has an 'any' type.
+
           (event, { id, errorMessage }) => {
             callbacksList.forEach(({ onConnectionErrored }) =>
               onConnectionErrored({
@@ -91,7 +88,6 @@ export const localPreviewDebuggerServer: PreviewDebuggerServer = {
           }
         );
 
-        // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7031 - Binding element 'address' implicitly has an 'any' type.
         ipcRenderer.on('debugger-start-server-done', (event, { address }) => {
           console.info('Local preview debugger started');
           debuggerServerState = 'started';

@@ -363,7 +363,6 @@ export const PurchaseProductButtons = <
       />
       {!isAlreadyReceived && !authenticated && (
         <Text size="body-small">
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Link onClick={onClickBuy} href="">
             <Trans>Restore a previous purchase</Trans>
           </Link>

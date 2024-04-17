@@ -25,8 +25,8 @@ import {
 } from '../GenericExporters/FacebookInstantGamesExport';
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 
-const path = optionalRequire('path');
-const electron = optionalRequire('electron');
+const path = optionalRequire('path') as typeof import('path');
+const electron = optionalRequire('electron') as typeof import('electron');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
 const shell = electron ? electron.shell : null;

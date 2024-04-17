@@ -202,11 +202,13 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
       .filter(Boolean);
     partialQuickSort(
       weightedSearchItems,
+// @ts-expect-error - TS2531 - Object is possibly 'null'.
       (weightedSearchItem) => weightedSearchItem.pertinence,
       pertinenceMin,
       pertinenceMax
     );
     sortedSearchItems = weightedSearchItems.map(
+// @ts-expect-error - TS2531 - Object is possibly 'null'.
       (weightedSearchItem) => weightedSearchItem.searchItem
     );
   }
@@ -241,7 +243,7 @@ export const useSearchItem = <SearchItem extends SearchableItem>(
   chosenFilters?: Set<string> | null,
   searchFilters?: Array<SearchFilter<SearchItem>>
 ): Array<SearchItem> | null | undefined => {
-  const searchApiRef = React.useRef<any | null | undefined>(null);
+  const searchApiRef = React.useRef<any>(null);
   const [searchResults, setSearchResults] = React.useState<
     Array<SearchItem> | null | undefined
   >(null);

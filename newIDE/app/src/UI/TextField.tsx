@@ -14,111 +14,108 @@ import { useShouldAutofocusInput } from './Responsive/ScreenTypeMeasurer';
 import { dataObjectToProps, HTMLDataset } from '../Utils/HTMLDataset';
 
 type ValueProps = // Support "text", "password" and "email" type:
-// "email" type is used to display appropriate keyboard on mobile.
-// Support "number" type (note that onChange returns a string):
-{
-  type?: 'text' | 'password' | 'email',
-  value: string,
-  onChange?: (
-    event: {
-      target: {
-        value: string
-      }
-    },
-    text: string,
-  ) => void
-} | // Support an "uncontrolled" field:
-{
-  type: 'number',
-  value: number | string,
-  onChange?: (event: Record<any, any>, value: string) => void
-} | // Support an empty field with just a hint text:
-{
-  defaultValue: string
-} | {
-  translatableHintText?: MessageDescriptor,
-  hintText?: string
-};
+  // "email" type is used to display appropriate keyboard on mobile.
+  // Support "number" type (note that onChange returns a string):
+  | {
+      type?: 'text' | 'password' | 'email';
+      value: string;
+      onChange?: (
+        event: {
+          target: {
+            value: string;
+          };
+        },
+        text: string
+      ) => void;
+    } // Support an "uncontrolled" field:
+  | {
+      type: 'number';
+      value: number | string;
+      onChange?: (event: Record<any, any>, value: string) => void;
+    } // Support an empty field with just a hint text:
+  | {
+      defaultValue: string;
+    }
+  | {
+      translatableHintText?: MessageDescriptor;
+      hintText?: string;
+    };
 
 // We support a subset of the props supported by Material-UI v0.x TextField
 // They should be self descriptive - refer to Material UI docs otherwise.
 type Props = // Value and change handling:
-(ValueProps) & {
-  // DOM events:
-  onFocus?: (
-    arg1: {
+  ValueProps & {
+    // DOM events:
+    onFocus?: (arg1: {
       currentTarget: {
-        value: string
-      },
-      preventDefault: () => void
-    },
-  ) => void,
-  onBlur?: (
-    arg1: {
+        value: string;
+      };
+      preventDefault: () => void;
+    }) => void;
+    onBlur?: (arg1: {
       currentTarget: {
-        value: string
-      }
-    },
-  ) => void,
-  // Advanced DOM events, for exceptional usage:
-  onClick?: (event: React.PointerEvent<HTMLInputElement>) => void,
-  onKeyPress?: (event: React.KeyboardEvent) => void,
-  onKeyUp?: (event: React.KeyboardEvent) => void,
-  onKeyDown?: (event: React.KeyboardEvent) => void,
-  stopContextMenuPropagation?: boolean,
-  // Error handling/Validation:
-  errorText?: React.ReactNode,
-  required?: boolean,
-  // Accessibility:
-  disabled?: boolean,
-  readOnly?: boolean,
-  // Labels:
-  floatingLabelFixed?: boolean,
-  floatingLabelText?: React.ReactNode,
-  name?: string,
-  translatableHintText?: MessageDescriptor,
-  hintText?: string,
-  helperMarkdownText?: string | null | undefined,
-  id?: string,
-  dataset?: HTMLDataset,
-  // Keyboard focus:
-  autoFocus?: 'desktop' | 'desktopAndMobileDevices',
-  // String text field:
-  maxLength?: number,
-  // Number text field:
-  precision?: number,
-  max?: number,
-  min?: number,
-  step?: number,
-  // Support for multiline:
-  multiline?: boolean,
-  rows?: number,
-  rowsMax?: number,
-  // Support for adornments:
-  endAdornment?: React.ReactNode | null | undefined,
-  startAdornment?: React.ReactNode | null | undefined,
-  // Styling:
-  margin?: 'none' | 'dense',
-  fullWidth?: boolean,
-  style?: {
-    fontSize?: 12 | 14 | 18 | '1.3em' | 'inherit' // 'inherit' should only be used on an event sheet where font size is adapted to zoom.,
-    fontStyle?: 'normal' | 'italic',
-    width?: number | '30%' | '70%' | '100%',
-    flex?: 1,
-    top?: number,
-    padding?: number
-  },
-  inputStyle?: {
-    // Allow to customize color (replace by color prop?) // TO VERIFY
-    color?: string,
-    WebkitTextFillColor?: string,
-    fontSize?: '1em' | 14,
-    // Allow to display monospaced font
-    fontFamily?: '"Lucida Console", Monaco, monospace',
-    padding?: 0
-  },
-  underlineShow?: boolean
-};
+        value: string;
+      };
+    }) => void;
+    // Advanced DOM events, for exceptional usage:
+    onClick?: (event: React.PointerEvent<HTMLInputElement>) => void;
+    onKeyPress?: (event: React.KeyboardEvent) => void;
+    onKeyUp?: (event: React.KeyboardEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
+    stopContextMenuPropagation?: boolean;
+    // Error handling/Validation:
+    errorText?: React.ReactNode;
+    required?: boolean;
+    // Accessibility:
+    disabled?: boolean;
+    readOnly?: boolean;
+    // Labels:
+    floatingLabelFixed?: boolean;
+    floatingLabelText?: React.ReactNode;
+    name?: string;
+    translatableHintText?: MessageDescriptor;
+    hintText?: string;
+    helperMarkdownText?: string | null | undefined;
+    id?: string;
+    dataset?: HTMLDataset;
+    // Keyboard focus:
+    autoFocus?: 'desktop' | 'desktopAndMobileDevices';
+    // String text field:
+    maxLength?: number;
+    // Number text field:
+    precision?: number;
+    max?: number;
+    min?: number;
+    step?: number;
+    // Support for multiline:
+    multiline?: boolean;
+    rows?: number;
+    rowsMax?: number;
+    // Support for adornments:
+    endAdornment?: React.ReactNode | null | undefined;
+    startAdornment?: React.ReactNode | null | undefined;
+    // Styling:
+    margin?: 'none' | 'dense';
+    fullWidth?: boolean;
+    style?: {
+      fontSize?: 12 | 14 | 18 | '1.3em' | 'inherit'; // 'inherit' should only be used on an event sheet where font size is adapted to zoom.,
+      fontStyle?: 'normal' | 'italic';
+      width?: number | '30%' | '70%' | '100%';
+      flex?: 1;
+      top?: number;
+      padding?: number;
+    };
+    inputStyle?: {
+      // Allow to customize color (replace by color prop?) // TO VERIFY
+      color?: string;
+      WebkitTextFillColor?: string;
+      fontSize?: '1em' | 14;
+      // Allow to display monospaced font
+      fontFamily?: '"Lucida Console", Monaco, monospace';
+      padding?: 0;
+    };
+    underlineShow?: boolean;
+  };
 
 /**
  * Compute the `variant`, `margin` and `hiddenLabel` props for a material-ui `TextField`
@@ -156,12 +153,14 @@ type Props = // Value and change handling:
  *   in the very special case of an embedded text field in another form control (like `SearchBar`).
  */
 export const computeTextFieldStyleProps = (props: {
-  margin?: 'none' | 'dense',
-  floatingLabelText?: React.ReactNode
+  margin?: 'none' | 'dense';
+  floatingLabelText?: React.ReactNode;
 }) => {
   return {
     // Use "filled" variant by default, unless `margin` is "none" (see 1. and 2.)
-    variant: props.margin === 'none' ? 'standard' : 'filled',
+    variant: (props.margin === 'none' ? 'standard' : 'filled') as
+      | 'standard'
+      | 'filled',
     // Use "dense" fields by default, unless `margin` is "none" (see 3.)
     margin: props.margin === 'none' ? 'none' : 'dense',
     // For variant "standard", if there is no label, no extra space is taken. For variant "filled",
@@ -172,23 +171,23 @@ export const computeTextFieldStyleProps = (props: {
 };
 
 export type TextFieldInterface = {
-  focus: FieldFocusFunction,
-  blur: () => void,
-  getInputNode: () => HTMLInputElement | null | undefined,
-  getFieldWidth: () => number | null | undefined,
-  getCaretPosition: () => number | null | undefined
+  focus: FieldFocusFunction;
+  blur: () => void;
+  getInputNode: () => HTMLInputElement | null | undefined;
+  getFieldWidth: () => number | null | undefined;
+  getCaretPosition: () => number | null | undefined;
 };
 
 /**
  * A text field based on Material-UI text field.
  */
 const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
-  const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
-// @ts-expect-error - TS2749 - 'MUITextField' refers to a value, but is being used as a type here. Did you mean 'typeof MUITextField'?
-  const muiTextFieldRef = React.useRef<MUITextField | null | undefined>(null);
-  const [isPasswordVisible, setIsPasswordVisible] = React.useState<boolean>(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const muiTextFieldRef = React.useRef<HTMLInputElement>(null);
+  const [isPasswordVisible, setIsPasswordVisible] =
+    React.useState<boolean>(false);
 
-  const focus: FieldFocusFunction = options => {
+  const focus: FieldFocusFunction = (options) => {
     const { current: input } = inputRef;
     if (input) {
       input.focus();
@@ -197,17 +196,17 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
         input.select();
       }
 
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'TextFieldInterface'.
-      if (options && options.caretPosition === 'end' && props.value) {
+      if (options && options.caretPosition === 'end' && 'value' in props) {
         input.setSelectionRange(
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'TextFieldInterface'.
           props.value.toString().length,
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'TextFieldInterface'.
           props.value.toString().length
         );
       }
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'TextFieldInterface'.
-      if (options && Number.isInteger(options.caretPosition) && props.value) {
+      if (
+        options &&
+        Number.isInteger(options.caretPosition) &&
+        'value' in props
+      ) {
         const position = Number(options.caretPosition);
         input.setSelectionRange(position, position);
       }
@@ -242,7 +241,6 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
     return null;
   };
 
-
   React.useImperativeHandle(ref, () => ({
     focus,
     blur,
@@ -251,12 +249,9 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
     getCaretPosition,
   }));
 
-// @ts-expect-error - TS2339 - Property 'onChange' does not exist on type 'TextFieldInterface'.
-  const onChange = props.onChange || undefined;
-
+  const onChange = 'onChange' in props ? props.onChange : undefined;
 
   const helperText = props.helperMarkdownText ? (
-
     <MarkdownText source={props.helperMarkdownText} />
   ) : null;
 
@@ -264,47 +259,42 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
 
   const shouldAutoFocusTextField = !props.autoFocus
     ? false
-
     : props.autoFocus === 'desktopAndMobileDevices'
-    ? true
-    : shouldAutofocusInput;
+      ? true
+      : shouldAutofocusInput;
 
   return (
-
     <I18n>
       {({ i18n }) => (
-
+        //@ts-ignore TS is angry because we allow different variants, and some variants do not accept some props,
+        //           so it's mad we're using these props even though we allow a variant that does not use these.
+        //           No real issue comes with passing props even if the variant doesn't use them though.
         <MUITextField
           ref={muiTextFieldRef}
           color="secondary"
           // Value and change handling:
           type={
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'TextFieldInterface'.
-            props.type !== undefined
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'TextFieldInterface'.
+            'type' in props
               ? props.type === 'password'
                 ? isPasswordVisible
                   ? 'text'
                   : 'password'
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'TextFieldInterface'.
                 : props.type
               : undefined
           }
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'value' does not exist on type 'TextFieldInterface'.
-          value={props.value !== undefined ? props.value : undefined}
+          value={'value' in props ? props.value : undefined}
           defaultValue={
-// @ts-expect-error - TS2339 - Property 'defaultValue' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'defaultValue' does not exist on type 'TextFieldInterface'.
-            props.defaultValue !== undefined ? props.defaultValue : undefined
+            'defaultValue' in props ? props.defaultValue : undefined
           }
-// @ts-expect-error - TS2322 - Type 'Event | ((any: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => any) | undefined' is not assignable to type 'ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined'.
           onChange={
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2531 - Object is possibly 'null'. | TS2339 - Property 'value' does not exist on type 'EventTarget'. | TS1005 - '}' expected. | TS1381 - Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
-            onChange ? event: any => onChange(event, event.target.value) : undefined
+            onChange
+              ? (event: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange(event, event.target.value)
+              : undefined
           }
           onContextMenu={
-
             props.stopContextMenuPropagation
-              ? e: any => e.stopPropagation()
+              ? (event: React.SyntheticEvent) => event.stopPropagation()
               : undefined
           }
           // Error handling:
@@ -313,20 +303,16 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
           disabled={props.disabled}
           required={props.required}
           InputLabelProps={{
-
             shrink: props.floatingLabelFixed ? true : undefined,
           }}
           label={props.floatingLabelText}
           name={props.name}
           placeholder={
-
             props.hintText
-
               ? props.hintText
-
               : props.translatableHintText
-              ? i18n._(props.translatableHintText)
-              : undefined
+                ? i18n._(props.translatableHintText)
+                : undefined
           }
           id={props.id}
           // Keyboard focus:
@@ -336,15 +322,12 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
           rows={props.rows}
           rowsMax={props.rowsMax}
           // Styling:
-{ /* @ts-expect-error - TS2609 - JSX spread child must be an array type. | TS2559 - Type 'TextFieldInterface' has no properties in common with type '{ margin?: "none" | "dense" | undefined; floatingLabelText?: ReactNode; }'. */}
           {...computeTextFieldStyleProps(props)}
           fullWidth={props.fullWidth}
           InputProps={{
             disableUnderline:
-
               props.underlineShow === undefined ? false : !props.underlineShow,
             style: {
-
               fontSize: props.style ? props.style.fontSize : undefined,
 
               fontStyle: props.style ? props.style.fontStyle : undefined,
@@ -354,7 +337,6 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
 
             readOnly: props.readOnly,
             inputProps: {
-
               onKeyPress: props.onKeyPress,
 
               onKeyUp: props.onKeyUp,
@@ -380,9 +362,7 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
             },
             // Input adornment:
             endAdornment:
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'type' does not exist on type 'TextFieldInterface'.
-              props.type !== undefined && props.type === 'password' ? (
-
+              'type' in props && props.type === 'password' ? (
                 <InputAdornment position="end">
                   <IconButton
                     size="small"
@@ -391,34 +371,24 @@ const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
                     <Visibility />
                   </IconButton>
                 </InputAdornment>
-
               ) : props.endAdornment ? (
-
                 <InputAdornment
                   position="end"
-
                   style={props.multiline ? { marginTop: -17 } : undefined}
                 >
                   {props.endAdornment}
                 </InputAdornment>
-              ) : (
-                undefined
-              ),
+              ) : undefined,
 
             startAdornment: props.startAdornment ? (
-
               <InputAdornment position="start">
                 {props.startAdornment}
               </InputAdornment>
-            ) : (
-              undefined
-            ),
+            ) : undefined,
           }}
           style={
-
             props.style
               ? {
-
                   width: props.style.width || undefined,
 
                   flex: props.style.flex || undefined,

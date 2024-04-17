@@ -41,7 +41,7 @@ export const ListSearchResults = <SearchItem extends unknown>({
   error,
   onRetry,
 }: Props<SearchItem>) => {
-  const grid = React.useRef<Grid | null | undefined>(null);
+  const grid = React.useRef<Grid>(null);
 
   // Height of each item is initially unknown. When rendered, the items
   // are reporting their heights and we cache these values.
@@ -86,6 +86,7 @@ export const ListSearchResults = <SearchItem extends unknown>({
           {renderSearchItem(searchItem, (height) => {
             const heightWasUpdated = onItemHeightComputed(searchItem, height);
             if (heightWasUpdated && grid.current) {
+// @ts-expect-error - TS2554 - Expected 0-1 arguments, but got 2.
               grid.current.recomputeGridSize(0, rowIndex);
             }
           })}
@@ -99,7 +100,6 @@ export const ListSearchResults = <SearchItem extends unknown>({
     if (!error) return <PlaceholderLoader />;
     else {
       return (
-        // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <PlaceholderError onRetry={onRetry}>
           <Trans>
             Can't load the results. Verify your internet connection or retry
@@ -141,8 +141,10 @@ export const ListSearchResults = <SearchItem extends unknown>({
                 ref={(el) => {
                   if (el) {
                     // Ensure the grid is recomputed for heights once it is rendered.
+// @ts-expect-error - TS2554 - Expected 0-1 arguments, but got 2.
                     el.recomputeGridSize(0, 0);
                   }
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
                   grid.current = el;
                 }}
                 width={width}

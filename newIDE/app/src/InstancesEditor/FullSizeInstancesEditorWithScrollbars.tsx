@@ -32,9 +32,7 @@ const styles = {
 } as const;
 
 type Props = InstancesEditorPropsWithoutSizeAndScroll & {
-  wrappedEditorRef: (
-    arg1?: InstancesEditor | null | undefined
-  ) => void | null | undefined;
+  wrappedEditorRef: (arg1?: InstancesEditor | null | undefined) => void;
 };
 
 const noop = () => {};
@@ -44,11 +42,11 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
   const { values } = React.useContext(PreferencesContext);
   const isMounted = useIsMounted();
 
-  const editorRef = React.useRef<InstancesEditor | null | undefined>(null);
-  const xScrollbarTrack = React.useRef<HTMLDivElement | null | undefined>(null);
-  const xScrollbarThumb = React.useRef<HTMLDivElement | null | undefined>(null);
-  const yScrollbarTrack = React.useRef<HTMLDivElement | null | undefined>(null);
-  const yScrollbarThumb = React.useRef<HTMLDivElement | null | undefined>(null);
+  const editorRef = React.useRef<InstancesEditor>(null);
+  const xScrollbarTrack = React.useRef<HTMLDivElement>(null);
+  const xScrollbarThumb = React.useRef<HTMLDivElement>(null);
+  const yScrollbarTrack = React.useRef<HTMLDivElement>(null);
+  const yScrollbarThumb = React.useRef<HTMLDivElement>(null);
 
   const showScrollbars = React.useRef<boolean>(false);
   const timeoutHidingScrollbarsId = React.useRef<number | null | undefined>(
@@ -389,6 +387,7 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                 }
                 ref={(editor?: InstancesEditor | null) => {
                   wrappedEditorRef && wrappedEditorRef(editor);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
                   editorRef.current = editor;
                 }}
                 width={width}
@@ -429,7 +428,6 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                 visibility: showScrollbars.current ? 'visible' : 'hidden',
               }}
               className="canvas-vertical-scrollbar-track"
-              // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
               ref={yScrollbarTrack}
             >
               <div
@@ -437,7 +435,6 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                   top: yScrollbarTopPosition,
                 }}
                 className="canvas-scrollbar-thumb canvas-vertical-scrollbar-thumb"
-                // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
                 ref={yScrollbarThumb}
                 // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseEnter={onMouseEnterThumb}
@@ -453,7 +450,6 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                 visibility: showScrollbars.current ? 'visible' : 'hidden',
               }}
               className="canvas-horizontal-scrollbar-track"
-              // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
               ref={xScrollbarTrack}
             >
               <div
@@ -461,7 +457,6 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                   marginLeft: xScrollbarLeftPosition,
                 }}
                 className="canvas-scrollbar-thumb canvas-horizontal-scrollbar-thumb"
-                // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
                 ref={xScrollbarThumb}
                 // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseEnter={onMouseEnterThumb}

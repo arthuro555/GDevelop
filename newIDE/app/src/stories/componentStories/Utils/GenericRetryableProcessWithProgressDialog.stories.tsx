@@ -15,7 +15,9 @@ export const Starting = () => (
   <GenericRetryableProcessWithProgressDialog
     progress={0}
     result={null}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onAbandon={null}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onRetry={null}
     genericError={null}
   />
@@ -25,7 +27,9 @@ export const InProgress = () => (
   <GenericRetryableProcessWithProgressDialog
     progress={40}
     result={null}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onAbandon={null}
+// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => void'.
     onRetry={null}
     genericError={null}
   />

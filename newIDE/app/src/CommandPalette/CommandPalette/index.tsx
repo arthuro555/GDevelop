@@ -145,6 +145,7 @@ const CommandPalette = React.forwardRef<
 
   React.useEffect(launchSearch, [searchText, launchSearch]);
 
+// @ts-expect-error - TS2322 - Type '({ icon: Element; name: CommandName; handler: CommandHandler; } | { icon: Element; name: CommandName; generateOptions: () => CommandOption[]; })[]' is not assignable to type '(GoToWikiCommand | NamedCommand)[]'.
   const allCommands: Array<NamedCommand | GoToWikiCommand> =
     React.useMemo(() => {
       const namedCommands = commandManager
@@ -156,7 +157,6 @@ const CommandPalette = React.forwardRef<
         .map((command) => ({ ...command, icon: <Command /> }));
       if (shouldHideAlgoliaSearchResults) return namedCommands;
 
-      // @ts-expect-error - TS2322 - Type '{ hit: AlgoliaSearchHit; handler: () => void; }[]' is not assignable to type 'GoToWikiCommand[]'.
       const algoliaCommands: Array<GoToWikiCommand> = results.hits.map(
         (hit: AlgoliaSearchHit) => {
           return {
@@ -165,6 +165,7 @@ const CommandPalette = React.forwardRef<
           };
         }
       );
+// @ts-expect-error - TS2769 - No overload matches this call.
       return namedCommands.concat(algoliaCommands);
     }, [commandManager, results.hits, shouldHideAlgoliaSearchResults]);
 
@@ -223,6 +224,7 @@ export const CommandPaletteWithAlgoliaSearch = React.forwardRef<
   Record<any, any>,
   CommandPaletteInterface
 >((props, ref) => (
+// @ts-expect-error - TS2322 - Type '{ readonly search: (requests: any) => Promise<{ results: { hits: never[]; }[]; } | MultiResponse<any>>; }' is not assignable to type 'SearchClient'.
   <InstantSearch searchClient={searchClient} indexName={indexName}>
     {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2739 - Type '{ ref: ForwardedRef<Record<any, any>>; }' is missing the following properties from type 'CommandPaletteInterface': open, launchCommand */}
     <CommandPalette ref={ref} />

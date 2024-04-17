@@ -259,7 +259,7 @@ export const LeaderboardAdmin = ({
   const { isMobile } = useResponsiveWindowSize();
   const [isEditingAppearance, setIsEditingAppearance] =
     React.useState<boolean>(false);
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+
   const { showConfirmation, showDeleteConfirmation } = useAlertDialog();
   const [
     displayMaxLeaderboardCountReachedWarning,
@@ -598,7 +598,6 @@ export const LeaderboardAdmin = ({
   if (apiError && apiError.action === 'leaderboardsFetching') {
     return (
       <CenteredError>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError onRetry={onListLeaderboards}>
           {apiError.message}
         </PlaceholderError>
@@ -610,7 +609,6 @@ export const LeaderboardAdmin = ({
 
     return (
       <CenteredError>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError onRetry={onListLeaderboards}>
           <Trans>
             An error occurred when retrieving leaderboards, please try again
@@ -649,6 +647,7 @@ export const LeaderboardAdmin = ({
         <Line alignItems="center" expand noMargin>
           <TextField
             id="edit-name-field"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
             ref={newNameTextFieldRef}
             margin="none"
             style={styles.leaderboardNameTextField}
@@ -681,6 +680,7 @@ export const LeaderboardAdmin = ({
         </Line>
       ) : (
         <Tooltip title={currentLeaderboard.name}>
+{ /* @ts-expect-error - TS2322 - Type '{ readonly width: 150; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
           <Text size="body2" style={styles.leaderboardNameText}>
             {currentLeaderboard.name}
           </Text>
@@ -745,6 +745,7 @@ export const LeaderboardAdmin = ({
         <Text size="body2">
           <Trans>
             Reset requested the{' '}
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
             {i18n.date(currentLeaderboard.resetLaunchedAt, {
               dateStyle: 'short',
               timeStyle: 'short',
@@ -755,6 +756,7 @@ export const LeaderboardAdmin = ({
       ) : (
         <Tooltip
           title={i18n._(
+// @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'.
             t`Date from which entries are taken into account: ${i18n.date(
               currentLeaderboard.startDatetime,
               {
@@ -765,6 +767,7 @@ export const LeaderboardAdmin = ({
           )}
         >
           <Text size="body2">
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
             {i18n.date(currentLeaderboard.startDatetime)}
           </Text>
         </Tooltip>
@@ -925,6 +928,7 @@ export const LeaderboardAdmin = ({
         <Line alignItems="center" expand noMargin>
           <TextField
             id="edit-autoPlayerNamePrefix-field"
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
             ref={newAutoPlayerNamePrefixTextFieldRef}
             margin="none"
             style={styles.leaderboardNameTextField}
@@ -963,6 +967,7 @@ export const LeaderboardAdmin = ({
             i18n._('No custom prefix for auto-generated player names')
           }
         >
+{ /* @ts-expect-error - TS2322 - Type '{ readonly width: 150; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
           <Text size="body2" style={styles.leaderboardNameText}>
             {currentLeaderboard.autoPlayerNamePrefix ||
               i18n._('No custom prefix for auto-generated player names')}
@@ -1053,6 +1058,7 @@ export const LeaderboardAdmin = ({
           onChange={(e, i, value) => {
             onUpdateLeaderboard(i18n, {
               // $FlowFixMe
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'LeaderboardPlayerUnicityDisplayOption | undefined'.
               playerUnicityDisplayChoice: value,
             });
           }}
@@ -1271,7 +1277,6 @@ export const LeaderboardAdmin = ({
                 </Line>
                 {apiError && apiError.action === 'entriesFetching' ? (
                   <CenteredError>
-                    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <PlaceholderError onRetry={onFetchLeaderboardEntries}>
                       {apiError.message}
                     </PlaceholderError>

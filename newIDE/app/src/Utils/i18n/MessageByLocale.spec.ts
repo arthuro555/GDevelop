@@ -1,6 +1,7 @@
 import { I18n as I18nType } from '@lingui/core';
 import { selectMessageByLocale } from './MessageByLocale';
 
+// @ts-expect-error - TS2740 - Type '{ language: string; }' is missing the following properties from type 'I18n': t, select, plural, selectOrdinal, and 8 more.
 const makeFakeI18n = (fakeI18n: { language: string }): I18nType => fakeI18n;
 
 describe('MessageByLocale', () => {
@@ -77,14 +78,17 @@ describe('MessageByLocale', () => {
         selectMessageByLocale(makeFakeI18n({ language: 'fr' }), 'Test')
       ).toBe('Test');
 
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'MessageByLocale'.
       expect(selectMessageByLocale(makeFakeI18n({ language: 'fr' }), 0)).toBe(
         ''
       );
 
+// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'MessageByLocale'.
       expect(selectMessageByLocale(makeFakeI18n({ language: 'fr' }), 123)).toBe(
         ''
       );
 
+// @ts-expect-error - TS2345 - Argument of type 'never[]' is not assignable to parameter of type 'MessageByLocale'.
       expect(selectMessageByLocale(makeFakeI18n({ language: 'fr' }), [])).toBe(
         ''
       );

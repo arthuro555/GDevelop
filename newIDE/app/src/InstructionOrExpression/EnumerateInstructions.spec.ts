@@ -18,6 +18,7 @@ describe('EnumerateInstructions', () => {
     const instructions = enumerateAllInstructions(
       true,
       // $FlowFixMe The fake I18n translates groups to empty strings.
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'I18n'.
       null
     );
 
@@ -70,6 +71,7 @@ describe('EnumerateInstructions', () => {
     const instructions = enumerateAllInstructions(
       false,
       // $FlowFixMe The fake I18n translates groups to empty strings.
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'I18n'.
       null
     );
 

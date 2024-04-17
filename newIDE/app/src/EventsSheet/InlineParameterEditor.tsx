@@ -54,7 +54,7 @@ const InlineParameterEditor = ({
     gd.InstructionMetadata | null | undefined
   >(null);
   const [ParameterComponent, setParameterComponent] = React.useState<any>(null);
-  const field = React.useRef<ParameterFieldInterface | null | undefined>(null);
+  const field = React.useRef<ParameterFieldInterface>(null);
 
   const softKeyboardBottomOffset = useSoftKeyboardBottomOffset();
 

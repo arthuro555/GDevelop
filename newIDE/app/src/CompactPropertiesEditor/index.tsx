@@ -588,6 +588,7 @@ const CompactPropertiesEditor = ({
               instances.forEach((i) => setValue(i, parseFloat(newValue) || 0));
               _onInstancesModified(instances);
             }}
+// @ts-expect-error - TS2322 - Type '((instances: gd.InitialInstance[]) => boolean) | undefined' is not assignable to type 'boolean | undefined'.
             disabled={field.disabled}
           >
             {children}
@@ -766,6 +767,7 @@ const CompactPropertiesEditor = ({
               allowSelection
               displayInlineAsSpan
               noMargin
+// @ts-expect-error - TS2322 - Type '{ overflow: string; whiteSpace: string; textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'.
               style={textEllipsisStyle}
             >
               {additionalText}

@@ -19,6 +19,7 @@ export const Default = () => {
       open
       tutorialId="flingGame"
       tutorialCompletionStatus={'notStarted'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(scenario: "start" | "startOver" | "resume") => Promise<void>'.
       startTutorial={action('Start tutorial')}
       onClose={() => action('On close dialog')()}
       isProjectOpening={false}
@@ -32,6 +33,7 @@ export const Opening = () => {
       open
       tutorialId="flingGame"
       tutorialCompletionStatus={'notStarted'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(scenario: "start" | "startOver" | "resume") => Promise<void>'.
       startTutorial={action('Start tutorial')}
       onClose={() => action('On close dialog')()}
       isProjectOpening
@@ -45,6 +47,7 @@ export const WithTutorialAlreadyStarted = () => {
       open
       tutorialId="flingGame"
       tutorialCompletionStatus={'started'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(scenario: "start" | "startOver" | "resume") => Promise<void>'.
       startTutorial={action('Start tutorial')}
       onClose={() => action('On close dialog')()}
       isProjectOpening={false}
@@ -57,6 +60,7 @@ export const WithTutorialCompleted = () => {
       open
       tutorialId="flingGame"
       tutorialCompletionStatus={'complete'}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(scenario: "start" | "startOver" | "resume") => Promise<void>'.
       startTutorial={action('Start tutorial')}
       onClose={() => action('On close dialog')()}
       isProjectOpening={false}

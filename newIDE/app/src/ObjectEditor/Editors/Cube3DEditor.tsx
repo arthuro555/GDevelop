@@ -169,7 +169,6 @@ const Cube3DEditor = ({
         <Trans>Settings</Trans>
       </Text>
       <ColumnStackLayout noMargin expand>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           checked={
             properties.get('enableTextureTransparency').getValue() === 'true'
@@ -188,7 +187,6 @@ const Cube3DEditor = ({
               </FormHelperText>
             </React.Fragment>
           }
-          // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onCheck={(_, value) => {
             onChangeProperty('enableTextureTransparency', value ? '1' : '0');
           }}
@@ -269,7 +267,6 @@ const Cube3DEditor = ({
           <Text size="block-title">{faceProperty.blockName}</Text>
           <ColumnStackLayout noMargin>
             <ColumnStackLayout noMargin>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 checked={
                   properties.get(faceProperty.visibilityProperty).getValue() ===
@@ -278,7 +275,6 @@ const Cube3DEditor = ({
                 label={properties
                   .get(faceProperty.visibilityProperty)
                   .getLabel()}
-                // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(_, value) => {
                   onChangeProperty(
                     faceProperty.visibilityProperty,
@@ -287,7 +283,6 @@ const Cube3DEditor = ({
                 }}
                 id={`cube3d-object-${faceProperty.visibilityProperty}`}
               />
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 checked={
                   properties
@@ -297,7 +292,6 @@ const Cube3DEditor = ({
                 label={properties
                   .get(faceProperty.resourceRepeatProperty)
                   .getLabel()}
-                // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(_, value) => {
                   onChangeProperty(
                     faceProperty.resourceRepeatProperty,

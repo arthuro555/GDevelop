@@ -125,6 +125,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
         openOnFocus={
           !props.value /* Only force showing the list if no object is entered, see https://github.com/4ian/GDevelop/issues/859 */
         }
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ObjectSelectorInterface | null | undefined>' is not assignable to type 'Ref<ObjectSelectorInterface> | undefined'.
         ref={field}
       />
     );

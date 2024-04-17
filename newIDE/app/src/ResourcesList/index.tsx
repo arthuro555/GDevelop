@@ -335,7 +335,6 @@ export default class ResourcesList extends React.Component<Props, State> {
           </AutoSizer>
         </div>
         {!!infoBarContent && (
-          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <InfoBar
             duration={7000}
             visible

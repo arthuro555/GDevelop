@@ -430,6 +430,7 @@ const PrivateGameTemplateInformationPage = ({
                 >
                   <div style={styles.leftColumnContainer}>
                     <ResponsiveMediaGallery
+// @ts-expect-error - TS2322 - Type '{ kind: string; url: string; }[]' is not assignable to type 'MediaItem[]'.
                       mediaItems={mediaItems}
                       altTextTemplate={`Game template ${name} preview image {mediaIndex}`}
                       horizontalOuterMarginToEatOnMobile={8}

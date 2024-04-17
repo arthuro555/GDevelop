@@ -81,10 +81,10 @@ const ChangeEmailDialog = ({
       onApply={doChangeEmail}
       open
     >
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Form onSubmit={doChangeEmail} autoComplete="on" name="changeEmail">
         <ColumnStackLayout noMargin>
           <TextField
+// @ts-expect-error - TS2322 - Type 'string | null' is not assignable to type 'string | number'.
             value={email}
             floatingLabelText={<Trans>Email</Trans>}
             errorText={
@@ -92,6 +92,7 @@ const ChangeEmailDialog = ({
               (!isEmailValid ? <Trans>Invalid email address</Trans> : null)
             }
             fullWidth
+// @ts-expect-error - TS2322 - Type '"email"' is not assignable to type '"number"'.
             type="email"
             disabled={changeEmailInProgress}
             required

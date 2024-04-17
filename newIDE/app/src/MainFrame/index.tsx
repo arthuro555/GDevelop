@@ -67,7 +67,6 @@ import { renderResourcesEditorContainer } from './EditorContainers/ResourcesEdit
 import { RenderEditorContainerPropsWithRef } from './EditorContainers/BaseEditor';
 import ErrorBoundary, {
   getEditorErrorBoundaryProps,
-
 } from '../UI/ErrorBoundary';
 import ResourcesLoader from '../ResourcesLoader/index';
 import {
@@ -82,13 +81,13 @@ import {
   ResourceManagementProps,
 } from '../ResourcesList/ResourceSource';
 import { ResourceExternalEditor } from '../ResourcesList/ResourceExternalEditor';
+// @ts-expect-error - TS2305 - Module '"../JsExtensionsLoader"' has no exported member 'JsExtensionsLoader'.
 import { JsExtensionsLoader } from '../JsExtensionsLoader';
 import EventsFunctionsExtensionsContext from '../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
 import {
   getElectronUpdateNotificationTitle,
   getElectronUpdateNotificationBody,
   ElectronUpdateStatus,
-
 } from './UpdaterTools';
 
 import ChangelogDialogContainer from './Changelog/ChangelogDialogContainer';
@@ -102,13 +101,11 @@ import { t } from '@lingui/macro';
 import LanguageDialog from './Preferences/LanguageDialog';
 import PreferencesContext, {
   InAppTutorialUserProgress,
-
 } from './Preferences/PreferencesContext';
 import { getFunctionNameFromType } from '../EventsFunctionsExtensionsLoader';
 import {
   ShareDialogWithoutExportsProps,
   ShareTab,
-
 } from '../ExportAndShare/ShareDialog';
 import { getStartupTimesSummary } from '../Utils/StartupTimes';
 import {
@@ -143,18 +140,14 @@ import useMainFrameCommands from './MainFrameCommands';
 import {
   CommandPaletteWithAlgoliaSearch,
   CommandPaletteInterface,
-
 } from '../CommandPalette/CommandPalette';
 
 import CommandsContextScopedProvider from '../CommandPalette/CommandsScopedContext';
 import { isExtensionNameTaken } from '../ProjectManager/EventFunctionExtensionNameVerifier';
-import {
-  PreviewState,
-  usePreviewDebuggerServerWatcher,
-} from './PreviewState';
+import { PreviewState, usePreviewDebuggerServerWatcher } from './PreviewState';
 
 import { HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
-// @ts-expect-error - TS6142 - Module '../HotReload/HotReloadLogsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadLogsDialog.tsx', but '--jsx' is not set.
+
 import HotReloadLogsDialog from '../HotReload/HotReloadLogsDialog';
 import { useDiscordRichPresence } from '../Utils/UpdateDiscordRichPresence';
 import { delay } from '../Utils/Delay';
@@ -231,8 +224,12 @@ import { ProjectManagerDrawer } from '../ProjectManager/ProjectManagerDrawer';
 
 const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
 
-
-const editorKindToRenderer: Partial<Record<EditorKind, (props: RenderEditorContainerPropsWithRef) => React.ReactElement>> = {
+const editorKindToRenderer: Partial<
+  Record<
+    EditorKind,
+    (props: RenderEditorContainerPropsWithRef) => React.ReactElement
+  >
+> = {
   debugger: renderDebuggerEditorContainer,
   'layout events': renderEventsEditorContainer,
   'external events': renderExternalEventsEditorContainer,
@@ -248,11 +245,11 @@ const defaultSnackbarAutoHideDuration = 3000;
 const findStorageProviderFor = (
   i18n: I18n,
   storageProviders: Array<StorageProvider>,
-  fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName,
+  fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName
 ): StorageProvider | null | undefined => {
   const { storageProviderName } = fileMetadataAndStorageProviderName;
   const storageProvider = storageProviders.filter(
-    storageProvider => storageProvider.internalName === storageProviderName
+    (storageProvider) => storageProvider.internalName === storageProviderName
   )[0];
 
   if (!storageProvider) {
@@ -279,7 +276,7 @@ const findStorageProviderFor = (
  */
 const isCurrentProjectFresh = (
   currentProjectRef: {
-    current: gd.Project | null | undefined
+    current: gd.Project | null | undefined;
   },
   currentProject: gd.Project
 ) =>
@@ -287,17 +284,17 @@ const isCurrentProjectFresh = (
   currentProject.ptr === currentProjectRef.current.ptr;
 
 export type State = {
-  currentProject: gd.Project | null | undefined,
-  currentFileMetadata: FileMetadata | null | undefined,
-  editorTabs: EditorTabsState,
-  snackMessage: string,
-  snackMessageOpen: boolean,
-  snackDuration: number | null | undefined,
-  updateStatus: ElectronUpdateStatus,
-  openFromStorageProviderDialogOpen: boolean,
-  saveToStorageProviderDialogOpen: boolean,
-  eventsFunctionsExtensionsError: Error | null | undefined,
-  gdjsDevelopmentWatcherEnabled: boolean
+  currentProject: gd.Project | null | undefined;
+  currentFileMetadata: FileMetadata | null | undefined;
+  editorTabs: EditorTabsState;
+  snackMessage: string;
+  snackMessageOpen: boolean;
+  snackDuration: number | null | undefined;
+  updateStatus: ElectronUpdateStatus;
+  openFromStorageProviderDialogOpen: boolean;
+  saveToStorageProviderDialogOpen: boolean;
+  eventsFunctionsExtensionsError: Error | null | undefined;
+  gdjsDevelopmentWatcherEnabled: boolean;
 };
 
 const initialPreviewState: PreviewState = {
@@ -309,56 +306,65 @@ const initialPreviewState: PreviewState = {
 };
 
 type LaunchPreviewOptions = {
-  networkPreview?: boolean,
-  hotReload?: boolean,
-  projectDataOnlyExport?: boolean,
-  fullLoadingScreen?: boolean
+  networkPreview?: boolean;
+  hotReload?: boolean;
+  projectDataOnlyExport?: boolean;
+  fullLoadingScreen?: boolean;
 };
 
 export type Props = {
   renderMainMenu?: (
     arg1: BuildMainMenuProps,
     arg2: MainMenuCallbacks,
-    arg3: MainMenuExtraCallbacks,
-  ) => React.ReactElement,
+    arg3: MainMenuExtraCallbacks
+  ) => React.ReactElement;
   renderPreviewLauncher?: (
     props: PreviewLauncherProps,
-    ref: (previewLauncher?: PreviewLauncherInterface | null | undefined) => void,
-  ) => React.ReactElement<React.ComponentProps<PreviewLauncherComponent>>,
-  onEditObject?: (arg1: gd.Object) => void,
-  storageProviders: Array<StorageProvider>,
-  resourceMover: ResourceMover,
-  resourceFetcher: ResourceFetcher,
-  getStorageProviderOperations: (storageProvider?: StorageProvider | null | undefined) => StorageProviderOperations,
-  getStorageProviderResourceOperations: () => ResourcesActionsMenuBuilder | null | undefined,
-  getStorageProvider: () => StorageProvider,
-  resourceSources: Array<ResourceSource>,
-  resourceExternalEditors: Array<ResourceExternalEditor>,
-  requestUpdate?: () => void,
-  renderShareDialog: (arg1: ShareDialogWithoutExportsProps) => React.ReactElement,
-  renderGDJSDevelopmentWatcher?: () => React.ReactElement | null | undefined,
-  extensionsLoader?: JsExtensionsLoader,
-  initialFileMetadataToOpen: FileMetadata | null | undefined,
-  i18n: I18n
+    ref: (previewLauncher?: PreviewLauncherInterface | null | undefined) => void
+  ) => React.ReactElement<React.ComponentProps<PreviewLauncherComponent>>;
+  onEditObject?: (arg1: gd.gdObject) => void;
+  storageProviders: Array<StorageProvider>;
+  resourceMover: ResourceMover;
+  resourceFetcher: ResourceFetcher;
+  getStorageProviderOperations: (
+    storageProvider?: StorageProvider | null | undefined
+  ) => StorageProviderOperations;
+  getStorageProviderResourceOperations: () =>
+    | ResourcesActionsMenuBuilder
+    | null
+    | undefined;
+  getStorageProvider: () => StorageProvider;
+  resourceSources: Array<ResourceSource>;
+  resourceExternalEditors: Array<ResourceExternalEditor>;
+  requestUpdate?: () => void;
+  renderShareDialog: (
+    arg1: ShareDialogWithoutExportsProps
+  ) => React.ReactElement;
+  renderGDJSDevelopmentWatcher?: () => React.ReactElement | null | undefined;
+  extensionsLoader?: JsExtensionsLoader;
+  initialFileMetadataToOpen: FileMetadata | null | undefined;
+  i18n: I18n;
 };
 
 const MainFrame = (props: Props) => {
-  const [state, setState]: [State, (arg1: ((arg1: State) => State) | State) => Promise<State>] = useStateWithCallback(
-    ({
-      currentProject: null,
-      currentFileMetadata: null,
-      editorTabs: getEditorTabsInitialState(),
-      snackMessage: '',
-      snackMessageOpen: false,
-      snackDuration: defaultSnackbarAutoHideDuration,
-      updateStatus: { message: '', status: 'unknown' },
-      openFromStorageProviderDialogOpen: false,
-      saveToStorageProviderDialogOpen: false,
-      eventsFunctionsExtensionsError: null,
-      gdjsDevelopmentWatcherEnabled: false,
-    } as State)
-  );
-  const toolbar = React.useRef<ToolbarInterface | null | undefined>(null);
+// @ts-expect-error - TS2322 - Type 'any[]' is not assignable to type '[State, (arg1: State | ((arg1: State) => State)) => Promise<State>]'.
+  const [state, setState]: [
+    State,
+    (arg1: ((arg1: State) => State) | State) => Promise<State>,
+  ] = useStateWithCallback({
+    currentProject: null,
+    currentFileMetadata: null,
+    editorTabs: getEditorTabsInitialState(),
+    snackMessage: '',
+    snackMessageOpen: false,
+    snackDuration: defaultSnackbarAutoHideDuration,
+    updateStatus: { message: '', status: 'unknown' },
+    openFromStorageProviderDialogOpen: false,
+    saveToStorageProviderDialogOpen: false,
+    eventsFunctionsExtensionsError: null,
+    gdjsDevelopmentWatcherEnabled: false,
+  } as State);
+  const toolbar = React.useRef<ToolbarInterface>(null);
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
   const [
     cloudProjectFileMetadataToRecover,
@@ -368,59 +374,57 @@ const MainFrame = (props: Props) => {
     cloudProjectRecoveryOpenedVersionId,
     setCloudProjectRecoveryOpenedVersionId,
   ] = React.useState<string | null | undefined>(null);
-  const [
-    cloudProjectSaveChoiceOpen,
-    setCloudProjectSaveChoiceOpen,
-  ] = React.useState<boolean>(false);
-  const [
-    chooseResourceOptions,
-    setChooseResourceOptions,
-  ] = React.useState<ChooseResourceOptions | null | undefined>(null);
-  const [onResourceChosen, setOnResourceChosen] = React.useState<(arg1: Array<gd.Resource>) => void | null | undefined>(null);
-  const _previewLauncher = React.useRef((null as PreviewLauncherInterface | null | undefined));
+  const [cloudProjectSaveChoiceOpen, setCloudProjectSaveChoiceOpen] =
+    React.useState<boolean>(false);
+  const [chooseResourceOptions, setChooseResourceOptions] = React.useState<
+    ChooseResourceOptions | null | undefined
+  >(null);
+  const [onResourceChosen, setOnResourceChosen] =
+    React.useState<(arg1: Array<gd.Resource>) => void>(null);
+  const _previewLauncher = React.useRef(
+    null as PreviewLauncherInterface | null | undefined
+  );
   const forceUpdate = useForceUpdate();
-  const [isLoadingProject, setIsLoadingProject] = React.useState<boolean>(false);
+  const [isLoadingProject, setIsLoadingProject] =
+    React.useState<boolean>(false);
   const [isSavingProject, setIsSavingProject] = React.useState<boolean>(false);
-  const [projectManagerOpen, openProjectManager] = React.useState<boolean>(false);
-  const [languageDialogOpen, openLanguageDialog] = React.useState<boolean>(false);
-  const [
-    platformSpecificAssetsDialogOpen,
-    openPlatformSpecificAssetsDialog,
-  ] = React.useState<boolean>(false);
+  const [projectManagerOpen, openProjectManager] =
+    React.useState<boolean>(false);
+  const [languageDialogOpen, openLanguageDialog] =
+    React.useState<boolean>(false);
+  const [platformSpecificAssetsDialogOpen, openPlatformSpecificAssetsDialog] =
+    React.useState<boolean>(false);
   const [aboutDialogOpen, openAboutDialog] = React.useState<boolean>(false);
   const [profileDialogOpen, openProfileDialog] = React.useState<boolean>(false);
-  const [
-    preferencesDialogOpen,
-    openPreferencesDialog,
-  ] = React.useState<boolean>(false);
-  const [
-    newProjectSetupDialogOpen,
-    setNewProjectSetupDialogOpen,
-  ] = React.useState<boolean>(false);
+  const [preferencesDialogOpen, openPreferencesDialog] =
+    React.useState<boolean>(false);
+  const [newProjectSetupDialogOpen, setNewProjectSetupDialogOpen] =
+    React.useState<boolean>(false);
 
-  const [isProjectOpening, setIsProjectOpening] = React.useState<boolean>(false);
+  const [isProjectOpening, setIsProjectOpening] =
+    React.useState<boolean>(false);
   const [
     isProjectClosedSoAvoidReloadingExtensions,
     setIsProjectClosedSoAvoidReloadingExtensions,
   ] = React.useState<boolean>(false);
   const [shareDialogOpen, setShareDialogOpen] = React.useState<boolean>(false);
-  const [
-    shareDialogInitialTab,
-    setShareDialogInitialTab,
-  ] = React.useState<ShareTab | null | undefined>(null);
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
+  const [shareDialogInitialTab, setShareDialogInitialTab] = React.useState<
+    ShareTab | null | undefined
+  >(null);
+
   const { showConfirmation, showAlert } = useAlertDialog();
   const preferences = React.useContext(PreferencesContext);
 
   const { setHasProjectOpened } = preferences;
   const [previewLoading, setPreviewLoading] = React.useState<boolean>(false);
   const [previewState, setPreviewState] = React.useState(initialPreviewState);
-  const commandPaletteRef = React.useRef((null as CommandPaletteInterface | null | undefined));
-  const inAppTutorialOrchestratorRef = React.useRef<InAppTutorialOrchestratorInterface | null | undefined>(null);
-  const [
-    loaderModalOpeningMessage,
-    setLoaderModalOpeningMessage,
-  ] = React.useState<MessageDescriptor | null | undefined>(null);
+  const commandPaletteRef = React.useRef(
+    null as CommandPaletteInterface | null | undefined
+  );
+  const inAppTutorialOrchestratorRef =
+    React.useRef<InAppTutorialOrchestratorInterface>(null);
+  const [loaderModalOpeningMessage, setLoaderModalOpeningMessage] =
+    React.useState<MessageDescriptor | null | undefined>(null);
 
   const eventsFunctionsExtensionsContext = React.useContext(
     EventsFunctionsExtensionsContext
@@ -428,20 +432,13 @@ const MainFrame = (props: Props) => {
   const previewDebuggerServer =
     _previewLauncher.current &&
     _previewLauncher.current.getPreviewDebuggerServer();
-  const {
-    previewDebuggerIds,
-    hotReloadLogs,
-    clearHotReloadLogs,
-  } = usePreviewDebuggerServerWatcher(previewDebuggerServer);
+  const { previewDebuggerIds, hotReloadLogs, clearHotReloadLogs } =
+    usePreviewDebuggerServerWatcher(previewDebuggerServer);
   const hasPreviewsRunning = !!previewDebuggerIds.length;
-  const {
-    ensureInteractionHappened,
-    renderOpenConfirmDialog,
-  } = useOpenConfirmDialog();
-  const {
-    findLeaderboardsToReplace,
-    renderLeaderboardReplacerDialog,
-  } = useLeaderboardReplacer();
+  const { ensureInteractionHappened, renderOpenConfirmDialog } =
+    useOpenConfirmDialog();
+  const { findLeaderboardsToReplace, renderLeaderboardReplacerDialog } =
+    useLeaderboardReplacer();
   const eventsFunctionsExtensionsState = React.useContext(
     EventsFunctionsExtensionsContext
   );
@@ -454,29 +451,19 @@ const MainFrame = (props: Props) => {
     startStepIndex,
     startProjectData,
   } = React.useContext(InAppTutorialContext);
-  const [
-    selectedInAppTutorialInfo,
-    setSelectedInAppTutorialInfo,
-  ] = React.useState<null | {
-    tutorialId: string,
-    userProgress: InAppTutorialUserProgress | null | undefined
-  }>(null);
-  const {
-    InAppTutorialOrchestrator,
-    orchestratorProps,
-  } = useInAppTutorialOrchestrator({ editorTabs: state.editorTabs });
-  const [
-    quitInAppTutorialDialogOpen,
-    setQuitInAppTutorialDialogOpen,
-  ] = React.useState<boolean>(false);
-  const [
-    fileMetadataOpeningProgress,
-    setFileMetadataOpeningProgress,
-  ] = React.useState<number | null | undefined>(null);
-  const [
-    fileMetadataOpeningMessage,
-    setFileMetadataOpeningMessage,
-  ] = React.useState<MessageDescriptor | null | undefined>(null);
+  const [selectedInAppTutorialInfo, setSelectedInAppTutorialInfo] =
+    React.useState<null | {
+      tutorialId: string;
+      userProgress: InAppTutorialUserProgress | null | undefined;
+    }>(null);
+  const { InAppTutorialOrchestrator, orchestratorProps } =
+    useInAppTutorialOrchestrator({ editorTabs: state.editorTabs });
+  const [quitInAppTutorialDialogOpen, setQuitInAppTutorialDialogOpen] =
+    React.useState<boolean>(false);
+  const [fileMetadataOpeningProgress, setFileMetadataOpeningProgress] =
+    React.useState<number | null | undefined>(null);
+  const [fileMetadataOpeningMessage, setFileMetadataOpeningMessage] =
+    React.useState<MessageDescriptor | null | undefined>(null);
 
   // This is just for testing, to check if we're getting the right state
   // and gives us an idea about the number of re-renders.
@@ -506,14 +493,10 @@ const MainFrame = (props: Props) => {
     renderMainMenu,
   } = props;
 
-  const {
-    ensureResourcesAreMoved,
-    renderResourceMoverDialog,
-  } = useResourceMover({ resourceMover });
-  const {
-    ensureResourcesAreFetched,
-    renderResourceFetcherDialog,
-  } = useResourceFetcher({ resourceFetcher });
+  const { ensureResourcesAreMoved, renderResourceMoverDialog } =
+    useResourceMover({ resourceMover });
+  const { ensureResourcesAreFetched, renderResourceFetcherDialog } =
+    useResourceFetcher({ resourceFetcher });
   useResourcesWatcher({
     getStorageProvider,
     fileMetadata: currentFileMetadata,
@@ -558,12 +541,12 @@ const MainFrame = (props: Props) => {
           // to avoid the watcher interfering with the extension loading (by updating GDJS,
           // which could lead in the extension loading failing for some extensions as file
           // are removed/copied).
-          setState(state => ({
+          setState((state) => ({
             ...state,
             gdjsDevelopmentWatcherEnabled: true,
           }))
         )
-        .then(async state => {
+        .then(async (state) => {
           GD_STARTUP_TIMES.push([
             'MainFrameComponentDidMountFinished',
             performance.now(),
@@ -572,7 +555,6 @@ const MainFrame = (props: Props) => {
           console.info('Startup times:', getStartupTimesSummary());
 
           const {
-
             getAutoOpenMostRecentProject,
 
             getRecentProjectFiles,
@@ -595,7 +577,8 @@ const MainFrame = (props: Props) => {
             getRecentProjectFiles()[0]
           ) {
             // Re-open the last opened project, if any and if asked to.
-            const fileMetadataAndStorageProviderName = getRecentProjectFiles()[0];
+            const fileMetadataAndStorageProviderName =
+              getRecentProjectFiles()[0];
             const storageProvider = findStorageProviderFor(
               i18n,
               props.storageProviders,
@@ -603,9 +586,8 @@ const MainFrame = (props: Props) => {
             );
             if (!storageProvider) return;
 
-            const storageProviderOperations = getStorageProviderOperations(
-              storageProvider
-            );
+            const storageProviderOperations =
+              getStorageProviderOperations(storageProvider);
             const proceed = await ensureInteractionHappened(
               storageProviderOperations
             );
@@ -630,28 +612,28 @@ const MainFrame = (props: Props) => {
       name,
       dontFocusTab,
     }: {
-      kind: EditorKind,
-      name: string,
-      dontFocusTab?: boolean
+      kind: EditorKind;
+      name: string;
+      dontFocusTab?: boolean;
     }) => {
       const label =
         kind === 'resources'
           ? i18n._(t`Resources`)
           : kind === 'start page'
-          ? i18n._(t`Home`)
-          : kind === 'debugger'
-          ? i18n._(t`Debugger`)
-          : kind === 'layout events'
-          ? name + ` ${i18n._(t`(Events)`)}`
-          : kind === 'events functions extension'
-          ? name + ` ${i18n._(t`(Extension)`)}`
-          : name;
+            ? i18n._(t`Home`)
+            : kind === 'debugger'
+              ? i18n._(t`Debugger`)
+              : kind === 'layout events'
+                ? name + ` ${i18n._(t`(Events)`)}`
+                : kind === 'events functions extension'
+                  ? name + ` ${i18n._(t`(Extension)`)}`
+                  : name;
       const tabOptions =
         kind === 'layout'
           ? { data: { scene: name, type: 'layout' } }
           : kind === 'layout events'
-          ? { data: { scene: name, type: 'layout-events' } }
-          : undefined;
+            ? { data: { scene: name, type: 'layout-events' } }
+            : undefined;
       const key = [
         'layout',
         'layout events',
@@ -662,7 +644,6 @@ const MainFrame = (props: Props) => {
         ? `${kind} ${name}`
         : kind;
       const icon =
-
         kind === 'start page' ? <HomeIcon titleAccess="Home" /> : undefined;
       const closable = kind !== 'start page';
       const extraEditorProps =
@@ -685,9 +666,8 @@ const MainFrame = (props: Props) => {
   );
 
   const setEditorTabs = React.useCallback(
-
-    newEditorTabs => {
-      setState(state => ({
+    (newEditorTabs) => {
+      setState((state) => ({
         ...state,
         editorTabs: newEditorTabs,
       }));
@@ -704,7 +684,7 @@ const MainFrame = (props: Props) => {
       : null,
     editorTabs: state.editorTabs,
     setEditorTabs: setEditorTabs,
-// @ts-expect-error - TS2322 - Type '({ kind, name, dontFocusTab, }: { kind: EditorKind; name: string; dontFocusTab?: boolean | undefined; }) => { icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { ...; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) =>...' is not assignable to type '(arg1: { kind: EditorKind; name: string; dontFocusTab?: boolean | undefined; }) => EditorOpeningOptions'.
+    // @ts-expect-error - TS2322 - Type '({ kind, name, dontFocusTab, }: { kind: EditorKind; name: string; dontFocusTab?: boolean | undefined; }) => { icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { ...; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) =>...' is not assignable to type '(arg1: { kind: EditorKind; name: string; dontFocusTab?: boolean | undefined; }) => EditorOpeningOptions'.
     getEditorOpeningOptions,
   });
 
@@ -717,20 +697,17 @@ const MainFrame = (props: Props) => {
     openProfileDialog,
   });
 
-  const _closeSnackMessage = React.useCallback(
-    () => {
-      setState(state => ({
-        ...state,
-        snackMessageOpen: false,
-        snackDuration: defaultSnackbarAutoHideDuration, // Reset to default when closing the snackbar.
-      }));
-    },
-    [setState]
-  );
+  const _closeSnackMessage = React.useCallback(() => {
+    setState((state) => ({
+      ...state,
+      snackMessageOpen: false,
+      snackDuration: defaultSnackbarAutoHideDuration, // Reset to default when closing the snackbar.
+    }));
+  }, [setState]);
 
   const _showSnackMessage = React.useCallback(
     (snackMessage: string, autoHideDuration?: number | null) => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         snackMessage,
         snackMessageOpen: true,
@@ -761,13 +738,10 @@ const MainFrame = (props: Props) => {
     [state.editorTabs]
   );
 
-  const closeShareDialog = React.useCallback(
-    () => {
-      setShareDialogOpen(false);
-      setShareDialogInitialTab(null);
-    },
-    [setShareDialogOpen, setShareDialogInitialTab]
-  );
+  const closeShareDialog = React.useCallback(() => {
+    setShareDialogOpen(false);
+    setShareDialogInitialTab(null);
+  }, [setShareDialogOpen, setShareDialogInitialTab]);
 
   const openInitialFileMetadata = async () => {
     if (!initialFileMetadataToOpen) return;
@@ -796,12 +770,9 @@ const MainFrame = (props: Props) => {
     [state.editorTabs]
   );
 
-  React.useEffect(
-    () => {
-      updateToolbar();
-    },
-    [updateToolbar]
-  );
+  React.useEffect(() => {
+    updateToolbar();
+  }, [updateToolbar]);
 
   const _languageDidChange = () => {
     // A change in the language will automatically be applied
@@ -824,104 +795,100 @@ const MainFrame = (props: Props) => {
       return Promise.reject(new Error('No extension loader specified.'));
     }
 
-    return extensionsLoader
-      .loadAllExtensions(getNotNullTranslationFunction(i18n))
-// @ts-expect-error - TS7006 - Parameter 'loadingResults' implicitly has an 'any' type.
-      .then(loadingResults => {
-        const successLoadingResults = loadingResults.filter(
-// @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
-          loadingResult => !loadingResult.result.error
-        );
-        const failLoadingResults = loadingResults.filter(
-// @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
-          loadingResult =>
-            loadingResult.result.error && !loadingResult.result.dangerous
-        );
-        const dangerousLoadingResults = loadingResults.filter(
-// @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
-          loadingResult =>
-            loadingResult.result.error && loadingResult.result.dangerous
-        );
-        console.info(`Loaded ${successLoadingResults.length} JS extensions.`);
-        if (failLoadingResults.length) {
-          console.error(
-            `⚠️ Unable to load ${
-              failLoadingResults.length
-            } JS extensions. Please check these errors:`,
-            failLoadingResults
+    return (
+      extensionsLoader
+        .loadAllExtensions(getNotNullTranslationFunction(i18n))
+        // @ts-expect-error - TS7006 - Parameter 'loadingResults' implicitly has an 'any' type.
+        .then((loadingResults) => {
+          const successLoadingResults = loadingResults.filter(
+            // @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
+            (loadingResult) => !loadingResult.result.error
           );
-        }
-        if (dangerousLoadingResults.length) {
-          console.error(
-            `💣 Dangerous exceptions while loading ${
-              dangerousLoadingResults.length
-            } JS extensions. 🔥 Please check these errors as they will CRASH GDevelop:`,
-            dangerousLoadingResults
+          const failLoadingResults = loadingResults.filter(
+            // @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
+            (loadingResult) =>
+              loadingResult.result.error && !loadingResult.result.dangerous
           );
-        }
-      });
+          const dangerousLoadingResults = loadingResults.filter(
+            // @ts-expect-error - TS7006 - Parameter 'loadingResult' implicitly has an 'any' type.
+            (loadingResult) =>
+              loadingResult.result.error && loadingResult.result.dangerous
+          );
+          console.info(`Loaded ${successLoadingResults.length} JS extensions.`);
+          if (failLoadingResults.length) {
+            console.error(
+              `⚠️ Unable to load ${failLoadingResults.length} JS extensions. Please check these errors:`,
+              failLoadingResults
+            );
+          }
+          if (dangerousLoadingResults.length) {
+            console.error(
+              `💣 Dangerous exceptions while loading ${dangerousLoadingResults.length} JS extensions. 🔥 Please check these errors as they will CRASH GDevelop:`,
+              dangerousLoadingResults
+            );
+          }
+        })
+    );
   };
 
   useDiscordRichPresence(currentProject);
 
-  const closeProject = React.useCallback(
-    async (): Promise<void> => {
-      setHasProjectOpened(false);
-      setPreviewState(initialPreviewState);
+  const closeProject = React.useCallback(async (): Promise<void> => {
+    setHasProjectOpened(false);
+    setPreviewState(initialPreviewState);
 
-      console.info('Closing project...');
-      // TODO Remove this state
-      // Instead:
-      // - Move the EventsFunctionsExtensionsLoader to Core
-      // - Add a dirty flag system to refresh on demand.
-      setIsProjectClosedSoAvoidReloadingExtensions(true);
+    console.info('Closing project...');
+    // TODO Remove this state
+    // Instead:
+    // - Move the EventsFunctionsExtensionsLoader to Core
+    // - Add a dirty flag system to refresh on demand.
+    setIsProjectClosedSoAvoidReloadingExtensions(true);
 
-      // While not strictly necessary, use `currentProjectRef` to be 100%
-      // sure to have the latest project (avoid risking any stale variable to an old
-      // `currentProject` from the state in case someone kept an old reference to `closeProject`
-      // somewhere).
-      const currentProject = currentProjectRef.current;
-      if (!currentProject) return;
+    // While not strictly necessary, use `currentProjectRef` to be 100%
+    // sure to have the latest project (avoid risking any stale variable to an old
+    // `currentProject` from the state in case someone kept an old reference to `closeProject`
+    // somewhere).
+    const currentProject = currentProjectRef.current;
+    if (!currentProject) return;
 
-      // Close the editors related to this project.
-      await setState(state => ({
-        ...state,
-        currentProject: null,
-        currentFileMetadata: null,
-        editorTabs: closeProjectTabs(state.editorTabs, currentProject),
-      }));
+    // Close the editors related to this project.
+    await setState((state) => ({
+      ...state,
+      currentProject: null,
+      currentFileMetadata: null,
+      editorTabs: closeProjectTabs(state.editorTabs, currentProject),
+    }));
 
-      // Delete the project from memory. All references to it have been dropped previously
-      // by the setState.
-      console.info('Deleting project from memory...');
-      eventsFunctionsExtensionsState.unloadProjectEventsFunctionsExtensions(
-        currentProject
-      );
-      await eventsFunctionsExtensionsState.ensureLoadFinished();
-      currentProject.delete();
+    // Delete the project from memory. All references to it have been dropped previously
+    // by the setState.
+    console.info('Deleting project from memory...');
+    eventsFunctionsExtensionsState.unloadProjectEventsFunctionsExtensions(
+      currentProject
+    );
+    await eventsFunctionsExtensionsState.ensureLoadFinished();
+    currentProject.delete();
 
-      if (unsavedChanges.hasUnsavedChanges) {
-
-        unsavedChanges.sealUnsavedChanges();
-      }
-      console.info('Project closed.');
-    },
-    [
-      currentProjectRef,
-      eventsFunctionsExtensionsState,
-      setHasProjectOpened,
-      setState,
-      unsavedChanges,
-    ]
-  );
+    if (unsavedChanges.hasUnsavedChanges) {
+      unsavedChanges.sealUnsavedChanges();
+    }
+    console.info('Project closed.');
+  }, [
+    currentProjectRef,
+    eventsFunctionsExtensionsState,
+    setHasProjectOpened,
+    setState,
+    unsavedChanges,
+  ]);
 
   const loadFromProject = React.useCallback(
-    async (project: gd.Project, fileMetadata?: FileMetadata | null): Promise<State> => {
+    async (
+      project: gd.Project,
+      fileMetadata?: FileMetadata | null
+    ): Promise<State> => {
       if (fileMetadata) {
         const storageProvider = getStorageProvider();
-        const storageProviderOperations = getStorageProviderOperations(
-          storageProvider
-        );
+        const storageProviderOperations =
+          getStorageProviderOperations(storageProvider);
         const { onSaveProject } = storageProviderOperations;
 
         // Only save the project in the recent files if the storage provider
@@ -929,7 +896,6 @@ const MainFrame = (props: Props) => {
         // a recent file: we must wait for the user to save in a "real" storage
         // (like locally or on Google Drive).
         if (onSaveProject) {
-
           preferences.insertRecentProjectFile({
             fileMetadata: {
               ...fileMetadata,
@@ -949,7 +915,7 @@ const MainFrame = (props: Props) => {
       ResourcesLoader.burstAllUrlsCache();
       PixiResourcesLoader.burstCache();
 
-      const state = await setState(state => ({
+      const state = await setState((state) => ({
         ...state,
         currentProject: project,
         currentFileMetadata: fileMetadata,
@@ -966,9 +932,8 @@ const MainFrame = (props: Props) => {
         project.setProjectFile(fileMetadata.fileIdentifier);
 
         const storageProvider = getStorageProvider();
-        const storageProviderOperations = getStorageProviderOperations(
-          storageProvider
-        );
+        const storageProviderOperations =
+          getStorageProviderOperations(storageProvider);
 
         // Fetch the resources if needed, for example:
         // - if opening a local file, with resources stored as URL
@@ -1005,7 +970,10 @@ const MainFrame = (props: Props) => {
   );
 
   const loadFromSerializedProject = React.useCallback(
-    (serializedProject: gd.SerializerElement, fileMetadata?: FileMetadata | null): Promise<State> => {
+    (
+      serializedProject: gd.SerializerElement,
+      fileMetadata?: FileMetadata | null
+    ): Promise<State> => {
       const startTime = Date.now();
       const newProject = gd.ProjectHelper.createNewGDJSProject();
       newProject.unserializeFrom(serializedProject);
@@ -1029,8 +997,8 @@ const MainFrame = (props: Props) => {
     async (
       fileMetadata: FileMetadata,
       options?: {
-        openingMessage?: MessageDescriptor | null | undefined
-      },
+        openingMessage?: MessageDescriptor | null | undefined;
+      }
     ): Promise<State | null | undefined> => {
       const storageProviderOperations = getStorageProviderOperations();
 
@@ -1074,7 +1042,9 @@ const MainFrame = (props: Props) => {
         return onGetAutoSave(fileMetadata);
       };
 
-      const checkForAutosaveAfterFailure = async (): Promise<FileMetadata | null | undefined> => {
+      const checkForAutosaveAfterFailure = async (): Promise<
+        FileMetadata | null | undefined
+      > => {
         if (!getAutoSaveCreationDate || !onGetAutoSave) {
           return null;
         }
@@ -1116,7 +1086,8 @@ const MainFrame = (props: Props) => {
         } catch (error: any) {
           openingError = error;
           // onOpen failed, try to find again an autosave.
-          const autoSaveAfterFailureFileMetadata = await checkForAutosaveAfterFailure();
+          const autoSaveAfterFailureFileMetadata =
+            await checkForAutosaveAfterFailure();
           if (autoSaveAfterFailureFileMetadata) {
             const result = await onOpen(autoSaveAfterFailureFileMetadata);
             content = result.content;
@@ -1127,10 +1098,12 @@ const MainFrame = (props: Props) => {
           setLoaderModalProgress(null, null);
         }
         if (!content) {
-          throw openingError ||
+          throw (
+            openingError ||
             new Error(
               'The project file content could not be read. It might be corrupted/malformed.'
-            );
+            )
+          );
         }
         if (!verifyProjectContent(i18n, content)) {
           // The content is not recognized and the user was warned. Abort the opening.
@@ -1209,8 +1182,8 @@ const MainFrame = (props: Props) => {
     },
     loadFromProject,
     openFromFileMetadata,
-    onProjectSaved: fileMetadata => {
-      setState(state => ({
+    onProjectSaved: (fileMetadata) => {
+      setState((state) => ({
         ...state,
         currentFileMetadata: fileMetadata,
       }));
@@ -1222,13 +1195,10 @@ const MainFrame = (props: Props) => {
     return Window.quit();
   }, []);
 
-  const toggleProjectManager = React.useCallback(
-    () => {
-      if (toolbar.current)
-        openProjectManager(projectManagerOpen => !projectManagerOpen);
-    },
-    [openProjectManager]
-  );
+  const toggleProjectManager = React.useCallback(() => {
+    if (toolbar.current)
+      openProjectManager((projectManagerOpen) => !projectManagerOpen);
+  }, [openProjectManager]);
 
   const setEditorToolbar = (editorToolbar: any, isCurrentTab = true) => {
     if (!toolbar.current || !isCurrentTab) return;
@@ -1248,7 +1218,7 @@ const MainFrame = (props: Props) => {
         eventsFunctionsExtensionName
       )
     ) {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         editorTabs: closeEventsFunctionsExtensionTabs(
           state.editorTabs,
@@ -1270,10 +1240,10 @@ const MainFrame = (props: Props) => {
     );
     if (!answer) return;
 
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeLayoutTabs(state.editorTabs, layout),
-    })).then(state => {
+    })).then((state) => {
       if (currentProject.getFirstLayout() === layout.getName())
         currentProject.setFirstLayout('');
       currentProject.removeLayout(layout.getName());
@@ -1293,10 +1263,10 @@ const MainFrame = (props: Props) => {
     );
     if (!answer) return;
 
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeExternalLayoutTabs(state.editorTabs, externalLayout),
-    })).then(state => {
+    })).then((state) => {
       if (state.currentProject)
         state.currentProject.removeExternalLayout(externalLayout.getName());
       _onProjectItemModified();
@@ -1314,10 +1284,10 @@ const MainFrame = (props: Props) => {
     );
     if (!answer) return;
 
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeExternalEventsTabs(state.editorTabs, externalEvents),
-    })).then(state => {
+    })).then((state) => {
       if (state.currentProject)
         state.currentProject.removeExternalEvents(externalEvents.getName());
       _onProjectItemModified();
@@ -1339,13 +1309,13 @@ const MainFrame = (props: Props) => {
     if (!answer) return;
 
     const extensionName = eventsFunctionsExtension.getName();
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeEventsFunctionsExtensionTabs(
         state.editorTabs,
         extensionName
       ),
-    })).then(state => {
+    })).then((state) => {
       // Unload the Platform extension that was generated from the events
       // functions extension.
       eventsFunctionsExtensionsState.unloadProjectEventsFunctionsExtension(
@@ -1373,7 +1343,7 @@ const MainFrame = (props: Props) => {
 
     const uniqueNewName = newNameGenerator(
       newName || i18n._(t`Unnamed`),
-      tentativeNewName => {
+      (tentativeNewName) => {
         return currentProject.hasLayoutNamed(tentativeNewName);
       }
     );
@@ -1381,10 +1351,10 @@ const MainFrame = (props: Props) => {
     const layout = currentProject.getLayout(oldName);
     const shouldChangeProjectFirstLayout =
       oldName === currentProject.getFirstLayout();
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeLayoutTabs(state.editorTabs, layout),
-    })).then(state => {
+    })).then((state) => {
       layout.setName(uniqueNewName);
       gd.WholeProjectRefactorer.renameLayout(
         currentProject,
@@ -1410,16 +1380,16 @@ const MainFrame = (props: Props) => {
 
     const uniqueNewName = newNameGenerator(
       newName || i18n._(t`Unnamed`),
-      tentativeNewName => {
+      (tentativeNewName) => {
         return currentProject.hasExternalLayoutNamed(tentativeNewName);
       }
     );
 
     const externalLayout = currentProject.getExternalLayout(oldName);
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeExternalLayoutTabs(state.editorTabs, externalLayout),
-    })).then(state => {
+    })).then((state) => {
       externalLayout.setName(uniqueNewName);
       gd.WholeProjectRefactorer.renameExternalLayout(
         currentProject,
@@ -1440,16 +1410,16 @@ const MainFrame = (props: Props) => {
 
     const uniqueNewName = newNameGenerator(
       newName || i18n._(t`Unnamed`),
-      tentativeNewName => {
+      (tentativeNewName) => {
         return currentProject.hasExternalEventsNamed(tentativeNewName);
       }
     );
 
     const externalEvents = currentProject.getExternalEvents(oldName);
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeExternalEventsTabs(state.editorTabs, externalEvents),
-    })).then(state => {
+    })).then((state) => {
       externalEvents.setName(uniqueNewName);
       gd.WholeProjectRefactorer.renameExternalEvents(
         currentProject,
@@ -1472,14 +1442,13 @@ const MainFrame = (props: Props) => {
 
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         return isExtensionNameTaken(tentativeNewName, currentProject);
       }
     );
 
-    const eventsFunctionsExtension = currentProject.getEventsFunctionsExtension(
-      oldName
-    );
+    const eventsFunctionsExtension =
+      currentProject.getEventsFunctionsExtension(oldName);
 
     // Refactor the project to update the instructions (and later expressions)
     // of this extension:
@@ -1495,10 +1464,10 @@ const MainFrame = (props: Props) => {
       oldName
     );
 
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeEventsFunctionsExtensionTabs(state.editorTabs, oldName),
-    })).then(state => {
+    })).then((state) => {
       eventsFunctionsExtensionsState.reloadProjectEventsFunctionsExtensions(
         currentProject
       );
@@ -1511,24 +1480,24 @@ const MainFrame = (props: Props) => {
     previewExternalLayoutName?: string | null
   ) => {
     setPreviewState(
-      previewState =>
-        (({
+      (previewState) =>
+        ({
           ...previewState,
           previewLayoutName,
           previewExternalLayoutName,
-        } as PreviewState))
+        }) as PreviewState
     );
   };
 
   const setPreviewOverride = ({
-// @ts-expect-error - TS7031 - Binding element 'isPreviewOverriden' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'isPreviewOverriden' implicitly has an 'any' type.
     isPreviewOverriden,
-// @ts-expect-error - TS7031 - Binding element 'overridenPreviewLayoutName' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'overridenPreviewLayoutName' implicitly has an 'any' type.
     overridenPreviewLayoutName,
-// @ts-expect-error - TS7031 - Binding element 'overridenPreviewExternalLayoutName' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'overridenPreviewExternalLayoutName' implicitly has an 'any' type.
     overridenPreviewExternalLayoutName,
   }) => {
-    setPreviewState(previewState => ({
+    setPreviewState((previewState) => ({
       ...previewState,
       isPreviewOverriden,
       overridenPreviewLayoutName,
@@ -1536,47 +1505,43 @@ const MainFrame = (props: Props) => {
     }));
   };
 
-  const autosaveProjectIfNeeded = React.useCallback(
-    async () => {
-      if (!currentProject) return;
+  const autosaveProjectIfNeeded = React.useCallback(async () => {
+    if (!currentProject) return;
 
-      const storageProviderOperations = getStorageProviderOperations();
+    const storageProviderOperations = getStorageProviderOperations();
 
-      const hasUnsavedChanges = unsavedChanges.hasUnsavedChanges;
-      if (
-        hasUnsavedChanges && // Only create an autosave if there are unsaved changes.
-
-        preferences.values.autosaveOnPreview &&
-        storageProviderOperations.onAutoSaveProject &&
-        currentFileMetadata
-      ) {
-        try {
-          await storageProviderOperations.onAutoSaveProject(
-            currentProject,
-            currentFileMetadata
-          );
-        } catch (err: any) {
-          console.error('Error while auto-saving the project: ', err);
-          _showSnackMessage(
-            i18n._(
-              t`There was an error while making an auto-save of the project. Verify that you have permissions to write in the project folder.`
-            )
-          );
-        }
+    const hasUnsavedChanges = unsavedChanges.hasUnsavedChanges;
+    if (
+      hasUnsavedChanges && // Only create an autosave if there are unsaved changes.
+      preferences.values.autosaveOnPreview &&
+      storageProviderOperations.onAutoSaveProject &&
+      currentFileMetadata
+    ) {
+      try {
+        await storageProviderOperations.onAutoSaveProject(
+          currentProject,
+          currentFileMetadata
+        );
+      } catch (err: any) {
+        console.error('Error while auto-saving the project: ', err);
+        _showSnackMessage(
+          i18n._(
+            t`There was an error while making an auto-save of the project. Verify that you have permissions to write in the project folder.`
+          )
+        );
       }
-    },
-    [
-      i18n,
-      _showSnackMessage,
-      currentProject,
-      currentFileMetadata,
-      getStorageProviderOperations,
+    }
+  }, [
+    i18n,
+    _showSnackMessage,
+    currentProject,
+    currentFileMetadata,
+    getStorageProviderOperations,
 
-      preferences.values.autosaveOnPreview,
+    preferences.values.autosaveOnPreview,
 
-      unsavedChanges.hasUnsavedChanges,
-    ]
-  );
+    unsavedChanges.hasUnsavedChanges,
+  ]);
 
   const _launchPreview = React.useCallback(
     ({
@@ -1638,13 +1603,12 @@ const MainFrame = (props: Props) => {
             fullLoadingScreen: !!fullLoadingScreen,
             fallbackAuthor,
             getIsMenuBarHiddenInPreview:
-
               preferences.getIsMenuBarHiddenInPreview,
 
             getIsAlwaysOnTopInPreview: preferences.getIsAlwaysOnTopInPreview,
           })
         )
-        .catch(error => {
+        .catch((error) => {
           console.error(
             'Error caught while launching preview, this should never happen.',
             error
@@ -1692,16 +1656,17 @@ const MainFrame = (props: Props) => {
     [launchPreview]
   );
 
-  const hotReloadPreviewButtonProps: HotReloadPreviewButtonProps = React.useMemo(
-    () => ({
-      hasPreviewsRunning,
-      launchProjectWithLoadingScreenPreview: () =>
-        launchPreview({ fullLoadingScreen: true }),
-      launchProjectDataOnlyPreview: () =>
-        launchPreview({ hotReload: true, projectDataOnlyExport: true }),
-    }),
-    [hasPreviewsRunning, launchPreview]
-  );
+  const hotReloadPreviewButtonProps: HotReloadPreviewButtonProps =
+    React.useMemo(
+      () => ({
+        hasPreviewsRunning,
+        launchProjectWithLoadingScreenPreview: () =>
+          launchPreview({ fullLoadingScreen: true }),
+        launchProjectDataOnlyPreview: () =>
+          launchPreview({ hotReload: true, projectDataOnlyExport: true }),
+      }),
+      [hasPreviewsRunning, launchPreview]
+    );
 
   const getEditorsTabStateWithScene = React.useCallback(
     (
@@ -1711,9 +1676,9 @@ const MainFrame = (props: Props) => {
         openEventsEditor,
         openSceneEditor,
       }: {
-        openEventsEditor: boolean,
-        openSceneEditor: boolean
-      },
+        openEventsEditor: boolean;
+        openSceneEditor: boolean;
+      }
     ): EditorTabsState => {
       const sceneEditorOptions = getEditorOpeningOptions({
         kind: 'layout',
@@ -1726,12 +1691,12 @@ const MainFrame = (props: Props) => {
       });
 
       const tabsWithSceneEditor = openSceneEditor
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
-        ? openEditorTab(editorTabs, sceneEditorOptions)
+        ? // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+          openEditorTab(editorTabs, sceneEditorOptions)
         : editorTabs;
       return openEventsEditor
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
-        ? openEditorTab(tabsWithSceneEditor, eventsEditorOptions)
+        ? // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+          openEditorTab(tabsWithSceneEditor, eventsEditorOptions)
         : tabsWithSceneEditor;
     },
     [getEditorOpeningOptions]
@@ -1740,17 +1705,17 @@ const MainFrame = (props: Props) => {
   const openLayout = React.useCallback(
     (
       name: string,
-// @ts-expect-error - TS2739 - Type '{}' is missing the following properties from type '{ openEventsEditor: boolean; openSceneEditor: boolean; }': openEventsEditor, openSceneEditor
+      // @ts-expect-error - TS2739 - Type '{}' is missing the following properties from type '{ openEventsEditor: boolean; openSceneEditor: boolean; }': openEventsEditor, openSceneEditor
       {
         openEventsEditor = true,
         openSceneEditor = true,
       }: {
-        openEventsEditor: boolean,
-        openSceneEditor: boolean
+        openEventsEditor: boolean;
+        openSceneEditor: boolean;
       } = {},
-      editorTabs?: EditorTabsState,
+      editorTabs?: EditorTabsState
     ): void => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         editorTabs: getEditorsTabStateWithScene(
           editorTabs || state.editorTabs,
@@ -1767,11 +1732,11 @@ const MainFrame = (props: Props) => {
 
   const openExternalEvents = React.useCallback(
     (name: string) => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         editorTabs: openEditorTab(
           state.editorTabs,
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+          // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
           getEditorOpeningOptions({ kind: 'external events', name })
         ),
       }));
@@ -1781,11 +1746,11 @@ const MainFrame = (props: Props) => {
 
   const openExternalLayout = React.useCallback(
     (name: string) => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         editorTabs: openEditorTab(
           state.editorTabs,
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+          // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
           getEditorOpeningOptions({ kind: 'external layout', name })
         ),
       }));
@@ -1799,9 +1764,9 @@ const MainFrame = (props: Props) => {
       initiallyFocusedFunctionName?: string | null,
       initiallyFocusedBehaviorName?: string | null
     ) => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
-// @ts-expect-error - TS2345 - Argument of type '{ extraEditorProps: { initiallyFocusedFunctionName: string | null | undefined; initiallyFocusedBehaviorName: string | null | undefined; }; icon: React.JSX.Element | undefined; ... 6 more ...; dontFocusTab: boolean | undefined; }' is not assignable to parameter of type 'EditorOpeningOptions'.
+        // @ts-expect-error - TS2345 - Argument of type '{ extraEditorProps: { initiallyFocusedFunctionName: string | null | undefined; initiallyFocusedBehaviorName: string | null | undefined; }; icon: React.JSX.Element | undefined; ... 6 more ...; dontFocusTab: boolean | undefined; }' is not assignable to parameter of type 'EditorOpeningOptions'.
         editorTabs: openEditorTab(state.editorTabs, {
           ...getEditorOpeningOptions({
             kind: 'events functions extension',
@@ -1817,47 +1782,38 @@ const MainFrame = (props: Props) => {
     [setState, getEditorOpeningOptions]
   );
 
-  const openResources = React.useCallback(
-    () => {
-      setState(state => ({
-        ...state,
-        editorTabs: openEditorTab(
-          state.editorTabs,
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
-          getEditorOpeningOptions({ kind: 'resources', name: '' })
-        ),
-      }));
-    },
-    [getEditorOpeningOptions, setState]
-  );
+  const openResources = React.useCallback(() => {
+    setState((state) => ({
+      ...state,
+      editorTabs: openEditorTab(
+        state.editorTabs,
+        // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+        getEditorOpeningOptions({ kind: 'resources', name: '' })
+      ),
+    }));
+  }, [getEditorOpeningOptions, setState]);
 
-  const openHomePage = React.useCallback(
-    () => {
-      setState(state => ({
-        ...state,
-        editorTabs: openEditorTab(
-          state.editorTabs,
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
-          getEditorOpeningOptions({ kind: 'start page', name: '' })
-        ),
-      }));
-    },
-    [setState, getEditorOpeningOptions]
-  );
+  const openHomePage = React.useCallback(() => {
+    setState((state) => ({
+      ...state,
+      editorTabs: openEditorTab(
+        state.editorTabs,
+        // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+        getEditorOpeningOptions({ kind: 'start page', name: '' })
+      ),
+    }));
+  }, [setState, getEditorOpeningOptions]);
 
-  const _openDebugger = React.useCallback(
-    () => {
-      setState(state => ({
-        ...state,
-        editorTabs: openEditorTab(
-          state.editorTabs,
-// @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
-          getEditorOpeningOptions({ kind: 'debugger', name: '' })
-        ),
-      }));
-    },
-    [getEditorOpeningOptions, setState]
-  );
+  const _openDebugger = React.useCallback(() => {
+    setState((state) => ({
+      ...state,
+      editorTabs: openEditorTab(
+        state.editorTabs,
+        // @ts-expect-error - TS2345 - Argument of type '{ icon: React.JSX.Element | undefined; closable: boolean; label: any; projectItemName: string; tabOptions: { data: { scene: string; type: string; }; } | undefined; renderEditorContainer: ((props: RenderEditorContainerPropsWithRef) => React.ReactElement<...>) | undefined; extraEditorProps: { ...; } | undefined; key: ...' is not assignable to parameter of type 'EditorOpeningOptions'.
+        getEditorOpeningOptions({ kind: 'debugger', name: '' })
+      ),
+    }));
+  }, [getEditorOpeningOptions, setState]);
 
   const openDebugger = addCreateBadgePreHookIfNotClaimed(
     authenticatedUser,
@@ -1865,13 +1821,10 @@ const MainFrame = (props: Props) => {
     _openDebugger
   );
 
-  const launchDebuggerAndPreview = React.useCallback(
-    () => {
-      openDebugger();
-      launchHotReloadPreview();
-    },
-    [openDebugger, launchHotReloadPreview]
-  );
+  const launchDebuggerAndPreview = React.useCallback(() => {
+    openDebugger();
+    launchHotReloadPreview();
+  }, [openDebugger, launchHotReloadPreview]);
 
   const openInstructionOrExpression = (
     extension: gd.PlatformExtension,
@@ -1883,9 +1836,8 @@ const MainFrame = (props: Props) => {
     const extensionName = extension.getName();
     if (currentProject.hasEventsFunctionsExtensionNamed(extensionName)) {
       // It's an events functions extension, open the editor for it.
-      const eventsFunctionsExtension = currentProject.getEventsFunctionsExtension(
-        extensionName
-      );
+      const eventsFunctionsExtension =
+        currentProject.getEventsFunctionsExtension(extensionName);
       const functionName = getFunctionNameFromType(type);
 
       const foundTab = getEventsFunctionsExtensionEditor(
@@ -1898,7 +1850,7 @@ const MainFrame = (props: Props) => {
           functionName.name,
           functionName.behaviorName
         );
-        setState(state => ({
+        setState((state) => ({
           ...state,
           editorTabs: changeCurrentTab(editorTabs, foundTab.tabIndex),
         }));
@@ -1924,9 +1876,8 @@ const MainFrame = (props: Props) => {
 
     if (currentProject.hasEventsFunctionsExtensionNamed(extensionName)) {
       // It's an events functions extension, open the editor for it.
-      const eventsFunctionsExtension = currentProject.getEventsFunctionsExtension(
-        extensionName
-      );
+      const eventsFunctionsExtension =
+        currentProject.getEventsFunctionsExtension(extensionName);
 
       const foundTab = getEventsFunctionsExtensionEditor(
         editorTabs,
@@ -1935,7 +1886,7 @@ const MainFrame = (props: Props) => {
       if (foundTab) {
         // Open the given function and focus the tab
         foundTab.editor.selectEventsBasedBehaviorByName(behaviorName);
-        setState(state => ({
+        setState((state) => ({
           ...state,
           editorTabs: changeCurrentTab(editorTabs, foundTab.tabIndex),
         }));
@@ -1952,7 +1903,6 @@ const MainFrame = (props: Props) => {
   };
 
   const _onProjectItemModified = () => {
-
     if (unsavedChanges) unsavedChanges.triggerUnsavedChanges();
     forceUpdate();
   };
@@ -1960,7 +1910,10 @@ const MainFrame = (props: Props) => {
   const onCreateEventsFunction = (
     extensionName: string,
     eventsFunction: gd.EventsFunction,
-    editorIdentifier: 'scene-events-editor' | 'extension-events-editor' | 'external-events-editor'
+    editorIdentifier:
+      | 'scene-events-editor'
+      | 'extension-events-editor'
+      | 'external-events-editor'
   ) => {
     const { currentProject } = state;
     if (!currentProject) return;
@@ -1971,9 +1924,8 @@ const MainFrame = (props: Props) => {
     });
 
     // Names are assumed to be already validated
-    const createNewExtension = !currentProject.hasEventsFunctionsExtensionNamed(
-      extensionName
-    );
+    const createNewExtension =
+      !currentProject.hasEventsFunctionsExtensionNamed(extensionName);
     const extension = createNewExtension
       ? currentProject.insertNewEventsFunctionsExtension(extensionName, 0)
       : currentProject.getEventsFunctionsExtension(extensionName);
@@ -1993,7 +1945,7 @@ const MainFrame = (props: Props) => {
 
   const openOpenFromStorageProviderDialog = React.useCallback(
     (open: boolean = true) => {
-      setState(state => ({
+      setState((state) => ({
         ...state,
         openFromStorageProviderDialogOpen: open,
       }));
@@ -2007,8 +1959,8 @@ const MainFrame = (props: Props) => {
   // If it has more than one scene, we open the first one and we also open the project manager.
   const openSceneOrProjectManager = React.useCallback(
     (newState: {
-      currentProject: gd.Project | null | undefined,
-      editorTabs: EditorTabsState
+      currentProject: gd.Project | null | undefined;
+      editorTabs: EditorTabsState;
     }) => {
       const { currentProject, editorTabs } = newState;
       if (!currentProject) return;
@@ -2040,12 +1992,10 @@ const MainFrame = (props: Props) => {
   );
 
   const getEditorsTabStateWithAllScenes = React.useCallback(
-    (
-      newState: {
-        currentProject: gd.Project | null | undefined,
-        editorTabs: EditorTabsState
-      },
-    ): EditorTabsState => {
+    (newState: {
+      currentProject: gd.Project | null | undefined;
+      editorTabs: EditorTabsState;
+    }): EditorTabsState => {
       const { currentProject, editorTabs } = newState;
       if (!currentProject) return editorTabs;
       const layoutsCount = currentProject.getLayoutsCount();
@@ -2069,15 +2019,15 @@ const MainFrame = (props: Props) => {
 
   const openAllScenes = React.useCallback(
     (newState: {
-      currentProject: gd.Project | null | undefined,
-      editorTabs: EditorTabsState
+      currentProject: gd.Project | null | undefined;
+      editorTabs: EditorTabsState;
     }) => {
       const { currentProject } = newState;
       if (!currentProject) return;
       const layoutsCount = currentProject.getLayoutsCount();
       if (layoutsCount === 0) return;
 
-      setState(state => ({
+      setState((state) => ({
         ...state,
         editorTabs: getEditorsTabStateWithAllScenes(newState),
       }));
@@ -2089,87 +2039,82 @@ const MainFrame = (props: Props) => {
     [getEditorsTabStateWithAllScenes, setState]
   );
 
-  const chooseProjectWithStorageProviderPicker = React.useCallback(
-    () => {
-      const storageProviderOperations = getStorageProviderOperations();
+  const chooseProjectWithStorageProviderPicker = React.useCallback(() => {
+    const storageProviderOperations = getStorageProviderOperations();
 
-      if (!storageProviderOperations.onOpenWithPicker) return;
+    if (!storageProviderOperations.onOpenWithPicker) return;
 
-      return storageProviderOperations
-        .onOpenWithPicker()
-        .then(fileMetadata => {
-          if (!fileMetadata) return;
+    return storageProviderOperations
+      .onOpenWithPicker()
+      .then((fileMetadata) => {
+        if (!fileMetadata) return;
 
-          return openFromFileMetadata(fileMetadata).then(state => {
-            if (state) {
-              const { currentProject } = state;
-              if (
-                currentProject &&
-                hasAPreviousSaveForEditorTabsState(currentProject)
-              ) {
-                const openedEditorsCount = openEditorTabsFromPersistedState(
-                  currentProject
-                );
-                if (openedEditorsCount === 0) {
-                  openSceneOrProjectManager({
-                    currentProject: currentProject,
-                    editorTabs: state.editorTabs,
-                  });
-                } else {
-                  setIsLoadingProject(false);
-                  setLoaderModalProgress(null, null);
-                  openProjectManager(false);
-                }
-              } else {
+        return openFromFileMetadata(fileMetadata).then((state) => {
+          if (state) {
+            const { currentProject } = state;
+            if (
+              currentProject &&
+              hasAPreviousSaveForEditorTabsState(currentProject)
+            ) {
+              const openedEditorsCount =
+                openEditorTabsFromPersistedState(currentProject);
+              if (openedEditorsCount === 0) {
                 openSceneOrProjectManager({
                   currentProject: currentProject,
                   editorTabs: state.editorTabs,
                 });
+              } else {
+                setIsLoadingProject(false);
+                setLoaderModalProgress(null, null);
+                openProjectManager(false);
               }
-              const currentStorageProvider = getStorageProvider();
-              if (currentStorageProvider.internalName === 'LocalFile') {
-                setHasProjectOpened(true);
-              }
+            } else {
+              openSceneOrProjectManager({
+                currentProject: currentProject,
+                editorTabs: state.editorTabs,
+              });
             }
-          });
-        })
-        .catch(error => {
-          const errorMessage = storageProviderOperations.getOpenErrorMessage
-            ? storageProviderOperations.getOpenErrorMessage(error)
-            : t`Verify that you have the authorization for reading the file you're trying to access.`;
-          showErrorBox({
-            message: [
-              i18n._(t`Unable to open the project.`),
-              i18n._(errorMessage),
-            ].join('\n'),
-            errorId: 'project-open-with-picker-error',
-            rawError: error,
-          });
+            const currentStorageProvider = getStorageProvider();
+            if (currentStorageProvider.internalName === 'LocalFile') {
+              setHasProjectOpened(true);
+            }
+          }
         });
-    },
-    [
-      i18n,
-      hasAPreviousSaveForEditorTabsState,
-      openEditorTabsFromPersistedState,
-      getStorageProviderOperations,
-      openFromFileMetadata,
-      openSceneOrProjectManager,
-      getStorageProvider,
-      setHasProjectOpened,
-    ]
-  );
+      })
+      .catch((error) => {
+        const errorMessage = storageProviderOperations.getOpenErrorMessage
+          ? storageProviderOperations.getOpenErrorMessage(error)
+          : t`Verify that you have the authorization for reading the file you're trying to access.`;
+        showErrorBox({
+          message: [
+            i18n._(t`Unable to open the project.`),
+            i18n._(errorMessage),
+          ].join('\n'),
+          errorId: 'project-open-with-picker-error',
+          rawError: error,
+        });
+      });
+  }, [
+    i18n,
+    hasAPreviousSaveForEditorTabsState,
+    openEditorTabsFromPersistedState,
+    getStorageProviderOperations,
+    openFromFileMetadata,
+    openSceneOrProjectManager,
+    getStorageProvider,
+    setHasProjectOpened,
+  ]);
 
   const openFromFileMetadataWithStorageProvider = React.useCallback(
     async (
       fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName,
       options?: {
-        openAllScenes?: boolean,
-        ignoreUnsavedChanges?: boolean,
-        openingMessage?: MessageDescriptor | null | undefined
-      } | null,
+        openAllScenes?: boolean;
+        ignoreUnsavedChanges?: boolean;
+        openingMessage?: MessageDescriptor | null | undefined;
+      } | null
     ): Promise<void> => {
       if (
-
         unsavedChanges.hasUnsavedChanges &&
         !(options && options.ignoreUnsavedChanges)
       ) {
@@ -2196,7 +2141,7 @@ const MainFrame = (props: Props) => {
       await openFromFileMetadata(fileMetadata, {
         openingMessage: (options && options.openingMessage) || null,
       })
-        .then(state => {
+        .then((state) => {
           if (state) {
             const { currentProject } = state;
             if (options && options.openAllScenes) {
@@ -2208,9 +2153,8 @@ const MainFrame = (props: Props) => {
               currentProject &&
               hasAPreviousSaveForEditorTabsState(currentProject)
             ) {
-              const openedEditorsCount = openEditorTabsFromPersistedState(
-                currentProject
-              );
+              const openedEditorsCount =
+                openEditorTabsFromPersistedState(currentProject);
               if (openedEditorsCount === 0) {
                 openSceneOrProjectManager({
                   currentProject: currentProject,
@@ -2233,7 +2177,7 @@ const MainFrame = (props: Props) => {
             }
           }
         })
-        .catch(error => {
+        .catch((error) => {
           /* Ignore error, it was already surfaced to the user. */
         });
     },
@@ -2253,19 +2197,17 @@ const MainFrame = (props: Props) => {
   );
 
   const onOpenCloudProjectOnSpecificVersion = React.useCallback(
-    (
-      {
-        fileMetadata,
-        versionId,
-        ignoreUnsavedChanges,
-        openingMessage,
-      }: {
-        fileMetadata: FileMetadata,
-        versionId: string,
-        ignoreUnsavedChanges: boolean,
-        openingMessage: MessageDescriptor
-      },
-    ): Promise<void> => {
+    ({
+      fileMetadata,
+      versionId,
+      ignoreUnsavedChanges,
+      openingMessage,
+    }: {
+      fileMetadata: FileMetadata;
+      versionId: string;
+      ignoreUnsavedChanges: boolean;
+      openingMessage: MessageDescriptor;
+    }): Promise<void> => {
       return openFromFileMetadataWithStorageProvider(
         {
           storageProviderName: 'Cloud',
@@ -2299,7 +2241,10 @@ const MainFrame = (props: Props) => {
         // display a picker that does not play nice with material-ui's overlays.
         openProjectManager(false);
       }
-      setState(state => ({ ...state, saveToStorageProviderDialogOpen: open }));
+      setState((state) => ({
+        ...state,
+        saveToStorageProviderDialogOpen: open,
+      }));
     },
     [setState]
   );
@@ -2359,13 +2304,11 @@ const MainFrame = (props: Props) => {
           }
 
           if (canFileMetadataBeSafelySavedAs && currentFileMetadata) {
-            const canProjectBeSafelySavedAs = await canFileMetadataBeSafelySavedAs(
-              currentFileMetadata,
-              {
+            const canProjectBeSafelySavedAs =
+              await canFileMetadataBeSafelySavedAs(currentFileMetadata, {
                 showAlert,
                 showConfirmation,
-              }
-            );
+              });
 
             if (!canProjectBeSafelySavedAs) return;
           }
@@ -2396,7 +2339,6 @@ const MainFrame = (props: Props) => {
 
         if (!wasSaved) return; // Save was cancelled, don't do anything.
 
-
         unsavedChanges.sealUnsavedChanges();
         _replaceSnackMessage(i18n._(t`Project properly saved`));
         setCloudProjectSaveChoiceOpen(false);
@@ -2421,7 +2363,6 @@ const MainFrame = (props: Props) => {
           !isMiniTutorial(currentlyRunningInAppTutorial.id) && // Don't save the progress of mini-tutorials
           inAppTutorialOrchestratorRef.current
         ) {
-
           preferences.saveTutorialProgress({
             tutorialId: currentlyRunningInAppTutorial.id,
             userId: authenticatedUser.profile
@@ -2443,7 +2384,7 @@ const MainFrame = (props: Props) => {
           // We do not want to change the current file metadata if the
           // project has changed since the beginning of the save, which
           // can happen if another project was loaded in the meantime.
-          setState(state => ({
+          setState((state) => ({
             ...state,
             currentFileMetadata: fileMetadata,
           }));
@@ -2487,228 +2428,210 @@ const MainFrame = (props: Props) => {
   // Prevent "save project as" when no current project or when the opened project
   // is a previous version (cloud project only) of the current project.
   const canSaveProjectAs = !!currentProject && !checkedOutVersionStatus;
-  const saveProjectAs = React.useCallback(
-    () => {
-      if (!canSaveProjectAs) {
-        return;
+  const saveProjectAs = React.useCallback(() => {
+    if (!canSaveProjectAs) {
+      return;
+    }
+
+    if (cloudProjectRecoveryOpenedVersionId && !cloudProjectSaveChoiceOpen) {
+      setCloudProjectSaveChoiceOpen(true);
+      return;
+    }
+
+    const storageProviderOperations = getStorageProviderOperations();
+    if (
+      props.storageProviders.filter(
+        ({ hiddenInSaveDialog }) => !hiddenInSaveDialog
+      ).length > 1 ||
+      !storageProviderOperations.onSaveProjectAs
+    ) {
+      openSaveToStorageProviderDialog();
+    } else {
+      saveProjectAsWithStorageProvider();
+    }
+  }, [
+    getStorageProviderOperations,
+    openSaveToStorageProviderDialog,
+    props.storageProviders,
+    saveProjectAsWithStorageProvider,
+    cloudProjectRecoveryOpenedVersionId,
+    cloudProjectSaveChoiceOpen,
+    canSaveProjectAs,
+  ]);
+
+  const saveProject = React.useCallback(async () => {
+    if (!currentProject) return;
+    if (!currentFileMetadata) {
+      return saveProjectAs();
+    }
+    const isProjectOwnedBySomeoneElse = !!currentFileMetadata.ownerId;
+    if (isProjectOwnedBySomeoneElse) return;
+
+    if (cloudProjectRecoveryOpenedVersionId && !cloudProjectSaveChoiceOpen) {
+      setCloudProjectSaveChoiceOpen(true);
+      return;
+    }
+
+    const storageProviderOperations = getStorageProviderOperations();
+    const { onSaveProject, canFileMetadataBeSafelySaved } =
+      storageProviderOperations;
+    if (!onSaveProject) {
+      return saveProjectAs();
+    }
+
+    saveUiSettings(state.editorTabs);
+
+    // Protect against concurrent saves, which can trigger issues with the
+    // file system.
+    if (isSavingProject) {
+      console.info('Project is already being saved, not triggering save.');
+      return;
+    }
+
+    if (checkedOutVersionStatus) {
+      const shouldRestoreCheckedOutVersion = await showConfirmation({
+        title: t`Restore this version`,
+        message: t`You're trying to save changes made to a previous version of your project. If you continue, it will be used as the new latest version.`,
+      });
+      if (!shouldRestoreCheckedOutVersion) return;
+    } else if (canFileMetadataBeSafelySaved) {
+      const canProjectBeSafelySaved = await canFileMetadataBeSafelySaved(
+        currentFileMetadata,
+        {
+          showAlert,
+          showConfirmation,
+        }
+      );
+      if (!canProjectBeSafelySaved) return;
+    }
+
+    _showSnackMessage(i18n._(t`Saving...`), null);
+    setIsSavingProject(true);
+
+    try {
+      const saveStartTime = performance.now();
+
+      // At the end of the promise below, currentProject and storageProvider
+      // may have changed (if the user opened another project). So we read and
+      // store their values in variables now.
+      const storageProviderInternalName = getStorageProvider().internalName;
+
+      const saveOptions: Record<string, any> = {};
+      if (cloudProjectRecoveryOpenedVersionId) {
+        saveOptions.previousVersion = cloudProjectRecoveryOpenedVersionId;
       }
-
-      if (cloudProjectRecoveryOpenedVersionId && !cloudProjectSaveChoiceOpen) {
-        setCloudProjectSaveChoiceOpen(true);
-        return;
-      }
-
-      const storageProviderOperations = getStorageProviderOperations();
-      if (
-        props.storageProviders.filter(
-          ({ hiddenInSaveDialog }) => !hiddenInSaveDialog
-        ).length > 1 ||
-        !storageProviderOperations.onSaveProjectAs
-      ) {
-        openSaveToStorageProviderDialog();
-      } else {
-        saveProjectAsWithStorageProvider();
-      }
-    },
-    [
-      getStorageProviderOperations,
-      openSaveToStorageProviderDialog,
-      props.storageProviders,
-      saveProjectAsWithStorageProvider,
-      cloudProjectRecoveryOpenedVersionId,
-      cloudProjectSaveChoiceOpen,
-      canSaveProjectAs,
-    ]
-  );
-
-  const saveProject = React.useCallback(
-    async () => {
-      if (!currentProject) return;
-      if (!currentFileMetadata) {
-        return saveProjectAs();
-      }
-      const isProjectOwnedBySomeoneElse = !!currentFileMetadata.ownerId;
-      if (isProjectOwnedBySomeoneElse) return;
-
-      if (cloudProjectRecoveryOpenedVersionId && !cloudProjectSaveChoiceOpen) {
-        setCloudProjectSaveChoiceOpen(true);
-        return;
-      }
-
-      const storageProviderOperations = getStorageProviderOperations();
-      const {
-        onSaveProject,
-        canFileMetadataBeSafelySaved,
-      } = storageProviderOperations;
-      if (!onSaveProject) {
-        return saveProjectAs();
-      }
-
-      saveUiSettings(state.editorTabs);
-
-      // Protect against concurrent saves, which can trigger issues with the
-      // file system.
-      if (isSavingProject) {
-        console.info('Project is already being saved, not triggering save.');
-        return;
-      }
-
       if (checkedOutVersionStatus) {
-        const shouldRestoreCheckedOutVersion = await showConfirmation({
-          title: t`Restore this version`,
-          message: t`You're trying to save changes made to a previous version of your project. If you continue, it will be used as the new latest version.`,
-        });
-        if (!shouldRestoreCheckedOutVersion) return;
-      } else if (canFileMetadataBeSafelySaved) {
-        const canProjectBeSafelySaved = await canFileMetadataBeSafelySaved(
-          currentFileMetadata,
-          {
-            showAlert,
-            showConfirmation,
-          }
-        );
-        if (!canProjectBeSafelySaved) return;
+        saveOptions.restoredFromVersionId = checkedOutVersionStatus.version.id;
       }
+      const { wasSaved, fileMetadata } = await onSaveProject(
+        currentProject,
+        currentFileMetadata,
+        saveOptions
+      );
 
-      _showSnackMessage(i18n._(t`Saving...`), null);
-      setIsSavingProject(true);
-
-      try {
-        const saveStartTime = performance.now();
-
-        // At the end of the promise below, currentProject and storageProvider
-        // may have changed (if the user opened another project). So we read and
-        // store their values in variables now.
-        const storageProviderInternalName = getStorageProvider().internalName;
-
-        const saveOptions: Record<string, any> = {};
-        if (cloudProjectRecoveryOpenedVersionId) {
-          saveOptions.previousVersion = cloudProjectRecoveryOpenedVersionId;
-        }
-        if (checkedOutVersionStatus) {
-          saveOptions.restoredFromVersionId =
-            checkedOutVersionStatus.version.id;
-        }
-        const { wasSaved, fileMetadata } = await onSaveProject(
-          currentProject,
-          currentFileMetadata,
-          saveOptions
+      if (wasSaved) {
+        console.info(
+          `Project saved in ${performance.now() - saveStartTime}ms.`
         );
+        setCloudProjectSaveChoiceOpen(false);
+        setCloudProjectRecoveryOpenedVersionId(null);
 
-        if (wasSaved) {
-          console.info(
-            `Project saved in ${performance.now() - saveStartTime}ms.`
-          );
-          setCloudProjectSaveChoiceOpen(false);
-          setCloudProjectRecoveryOpenedVersionId(null);
+        const fileMetadataAndStorageProviderName = {
+          fileMetadata: fileMetadata,
+          storageProviderName: storageProviderInternalName,
+        } as const;
 
-          const fileMetadataAndStorageProviderName = {
-            fileMetadata: fileMetadata,
-            storageProviderName: storageProviderInternalName,
-          } as const;
-
-          preferences.insertRecentProjectFile(
-            fileMetadataAndStorageProviderName
-          );
-          if (
-            currentlyRunningInAppTutorial &&
-            !isMiniTutorial(currentlyRunningInAppTutorial.id) && // Don't save the progress of mini-tutorials
-            inAppTutorialOrchestratorRef.current
-          ) {
-
-            preferences.saveTutorialProgress({
-              tutorialId: currentlyRunningInAppTutorial.id,
-              userId: authenticatedUser.profile
-                ? authenticatedUser.profile.id
-                : null,
-              ...inAppTutorialOrchestratorRef.current.getProgress(),
-              fileMetadataAndStorageProviderName,
-            });
-          }
-          if (isCurrentProjectFresh(currentProjectRef, currentProject)) {
-            // We do not want to change the current file metadata if the
-            // project has changed since the beginning of the save, which
-            // can happen if another project was loaded in the meantime.
-            setState(state => ({
-              ...state,
-              currentFileMetadata: fileMetadata,
-            }));
-          }
-
-
-          unsavedChanges.sealUnsavedChanges();
-          _replaceSnackMessage(i18n._(t`Project properly saved`));
+        preferences.insertRecentProjectFile(fileMetadataAndStorageProviderName);
+        if (
+          currentlyRunningInAppTutorial &&
+          !isMiniTutorial(currentlyRunningInAppTutorial.id) && // Don't save the progress of mini-tutorials
+          inAppTutorialOrchestratorRef.current
+        ) {
+          preferences.saveTutorialProgress({
+            tutorialId: currentlyRunningInAppTutorial.id,
+            userId: authenticatedUser.profile
+              ? authenticatedUser.profile.id
+              : null,
+            ...inAppTutorialOrchestratorRef.current.getProgress(),
+            fileMetadataAndStorageProviderName,
+          });
         }
-      } catch (error: any) {
-        const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-          error
-        );
-        const message =
-          extractedStatusAndCode && extractedStatusAndCode.status === 403
-            ? t`You don't have permissions to save this project. Please choose another location.`
-            : t`An error occurred when saving the project. Please try again later.`;
-        showAlert({
-          title: t`Unable to save the project`,
-          message,
-        });
-        _closeSnackMessage();
-      } finally {
-        setIsSavingProject(false);
+        if (isCurrentProjectFresh(currentProjectRef, currentProject)) {
+          // We do not want to change the current file metadata if the
+          // project has changed since the beginning of the save, which
+          // can happen if another project was loaded in the meantime.
+          setState((state) => ({
+            ...state,
+            currentFileMetadata: fileMetadata,
+          }));
+        }
+
+        unsavedChanges.sealUnsavedChanges();
+        _replaceSnackMessage(i18n._(t`Project properly saved`));
       }
-    },
-    [
-      isSavingProject,
-      currentProject,
-      currentProjectRef,
-      currentFileMetadata,
-      getStorageProviderOperations,
-      _showSnackMessage,
-      _closeSnackMessage,
-      _replaceSnackMessage,
-      i18n,
-      unsavedChanges,
-      saveProjectAs,
-      state.editorTabs,
-      getStorageProvider,
-      preferences,
-      setState,
-      authenticatedUser,
-      currentlyRunningInAppTutorial,
-      cloudProjectRecoveryOpenedVersionId,
-      cloudProjectSaveChoiceOpen,
-      showAlert,
-      showConfirmation,
-      checkedOutVersionStatus,
-    ]
-  );
+    } catch (error: any) {
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(error);
+      const message =
+        extractedStatusAndCode && extractedStatusAndCode.status === 403
+          ? t`You don't have permissions to save this project. Please choose another location.`
+          : t`An error occurred when saving the project. Please try again later.`;
+      showAlert({
+        title: t`Unable to save the project`,
+        message,
+      });
+      _closeSnackMessage();
+    } finally {
+      setIsSavingProject(false);
+    }
+  }, [
+    isSavingProject,
+    currentProject,
+    currentProjectRef,
+    currentFileMetadata,
+    getStorageProviderOperations,
+    _showSnackMessage,
+    _closeSnackMessage,
+    _replaceSnackMessage,
+    i18n,
+    unsavedChanges,
+    saveProjectAs,
+    state.editorTabs,
+    getStorageProvider,
+    preferences,
+    setState,
+    authenticatedUser,
+    currentlyRunningInAppTutorial,
+    cloudProjectRecoveryOpenedVersionId,
+    cloudProjectSaveChoiceOpen,
+    showAlert,
+    showConfirmation,
+    checkedOutVersionStatus,
+  ]);
 
   /**
    * Returns true if the project has been closed and false if the user refused to close it.
    */
-  const askToCloseProject = React.useCallback(
-    async (): Promise<boolean> => {
-      if (!currentProject) return true;
+  const askToCloseProject = React.useCallback(async (): Promise<boolean> => {
+    if (!currentProject) return true;
 
-
-      if (unsavedChanges.hasUnsavedChanges) {
-        const answer = Window.showConfirmDialog(
-          i18n._(
-            t`Close the project? Any changes that have not been saved will be lost.`
-          )
-        );
-        if (!answer) return false;
-      }
-      await closeProject();
-      return true;
-    },
-    [currentProject, unsavedChanges, i18n, closeProject]
-  );
+    if (unsavedChanges.hasUnsavedChanges) {
+      const answer = Window.showConfirmDialog(
+        i18n._(
+          t`Close the project? Any changes that have not been saved will be lost.`
+        )
+      );
+      if (!answer) return false;
+    }
+    await closeProject();
+    return true;
+  }, [currentProject, unsavedChanges, i18n, closeProject]);
 
   const _onChangeEditorTab = (value: number) => {
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: changeCurrentTab(state.editorTabs, value),
-    })).then(state =>
+    })).then((state) =>
       _onEditorTabActivated(getCurrentTab(state.editorTabs), state)
     );
   };
@@ -2727,7 +2650,7 @@ const MainFrame = (props: Props) => {
 
   const _onCloseEditorTab = (editorTab: EditorTab) => {
     saveUiSettings(state.editorTabs);
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeEditorTab(state.editorTabs, editorTab),
     }));
@@ -2735,7 +2658,7 @@ const MainFrame = (props: Props) => {
 
   const _onCloseOtherEditorTabs = (editorTab: EditorTab) => {
     saveUiSettings(state.editorTabs);
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeOtherEditorTabs(state.editorTabs, editorTab),
     }));
@@ -2743,14 +2666,14 @@ const MainFrame = (props: Props) => {
 
   const _onCloseAllEditorTabs = () => {
     saveUiSettings(state.editorTabs);
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: closeAllEditorTabs(state.editorTabs),
     }));
   };
 
   const onDropEditorTab = (fromIndex: number, toHoveredIndex: number) => {
-    setState(state => ({
+    setState((state) => ({
       ...state,
       editorTabs: moveTabToTheRightOfHoveredTab(
         state.editorTabs,
@@ -2776,7 +2699,6 @@ const MainFrame = (props: Props) => {
 
   const selectInAppTutorial = React.useCallback(
     (tutorialId: string) => {
-
       const userProgress = preferences.getTutorialProgress({
         tutorialId,
         userId: authenticatedUser.profile
@@ -2793,28 +2715,26 @@ const MainFrame = (props: Props) => {
     const storageProviderOperations = getStorageProviderOperations();
     let newFileMetadata = { ...currentFileMetadata, name: newName };
     if (storageProviderOperations.onChangeProjectProperty) {
-      const fileMetadataNewAttributes = await storageProviderOperations.onChangeProjectProperty(
-        currentProject,
-        currentFileMetadata,
-        { name: newName }
-      );
+      const fileMetadataNewAttributes =
+        await storageProviderOperations.onChangeProjectProperty(
+          currentProject,
+          currentFileMetadata,
+          { name: newName }
+        );
       if (fileMetadataNewAttributes) {
-
         unsavedChanges.sealUnsavedChanges();
         newFileMetadata = { ...newFileMetadata, ...fileMetadataNewAttributes };
       }
     }
-    await setState(state => ({
+    await setState((state) => ({
       ...state,
       currentFileMetadata: newFileMetadata,
     }));
   };
 
-  const onSaveProjectProperties = async (
-    options: {
-      newName?: string
-    },
-  ): Promise<boolean> => {
+  const onSaveProjectProperties = async (options: {
+    newName?: string;
+  }): Promise<boolean> => {
     const storageProvider = getStorageProvider();
     if (storageProvider.internalName === 'Cloud' && options.newName) {
       return showConfirmation({
@@ -2841,35 +2761,31 @@ const MainFrame = (props: Props) => {
     [cloudProjectFileMetadataToRecover, onOpenCloudProjectOnSpecificVersion]
   );
 
-  const canInstallPrivateAsset = React.useCallback(
-    () => {
-      const storageProvider = getStorageProvider();
-      // A private asset can always be installed locally, as it will be downloaded.
-      // Or on the cloud if the user has saved their project as a cloud project.
-      return (
-        storageProvider.internalName === 'LocalFile' ||
-        storageProvider.internalName === 'Cloud'
-      );
-    },
-    [getStorageProvider]
-  );
+  const canInstallPrivateAsset = React.useCallback(() => {
+    const storageProvider = getStorageProvider();
+    // A private asset can always be installed locally, as it will be downloaded.
+    // Or on the cloud if the user has saved their project as a cloud project.
+    return (
+      storageProvider.internalName === 'LocalFile' ||
+      storageProvider.internalName === 'Cloud'
+    );
+  }, [getStorageProvider]);
 
   const onChooseResource: ChooseResourceFunction = React.useCallback(
     (options: ChooseResourceOptions) => {
-      return new Promise(resolve: (result: Promise<Array<gd.Resource>> | Array<gd.Resource>) => void => {
+      return new Promise((resolve) => {
         setChooseResourceOptions(options);
-        const onResourceChosenSetter: () => (arg1: Promise<Array<gd.Resource>> | Array<gd.Resource>) => void = () => resolve;
+        const onResourceChosenSetter: () => (
+          arg1: Promise<Array<gd.Resource>> | Array<gd.Resource>
+        ) => void = () => resolve;
         setOnResourceChosen(onResourceChosenSetter);
-
       });
-
     },
     [setOnResourceChosen, setChooseResourceOptions]
-
   );
 
   const setElectronUpdateStatus = (updateStatus: ElectronUpdateStatus) => {
-    setState(state => ({ ...state, updateStatus }));
+    setState((state) => ({ ...state, updateStatus }));
 
     const notificationTitle = getElectronUpdateNotificationTitle(updateStatus);
     const notificationBody = getElectronUpdateNotificationBody(updateStatus);
@@ -2927,9 +2843,8 @@ const MainFrame = (props: Props) => {
         }
       }
 
-      const selectedInAppTutorialShortHeader = getInAppTutorialShortHeader(
-        tutorialId
-      );
+      const selectedInAppTutorialShortHeader =
+        getInAppTutorialShortHeader(tutorialId);
       if (!selectedInAppTutorialShortHeader) return;
 
       // If the tutorial has a template, create a new project from it.
@@ -2989,8 +2904,8 @@ const MainFrame = (props: Props) => {
     ]
   );
 
-  const fetchNewlyAddedResources = React.useCallback(
-    async (): Promise<void> => {
+  const fetchNewlyAddedResources =
+    React.useCallback(async (): Promise<void> => {
       if (!currentProjectRef.current || !currentFileMetadataRef.current) return;
 
       await ensureResourcesAreFetched(() => ({
@@ -3002,19 +2917,16 @@ const MainFrame = (props: Props) => {
         fileMetadata: currentFileMetadataRef.current,
         storageProvider: getStorageProvider(),
         storageProviderOperations: getStorageProviderOperations(),
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'authenticatedUser'. Either declare one or provide an initializer.
         authenticatedUser,
       }));
-    },
-    [
+    }, [
       currentProjectRef,
       currentFileMetadataRef,
       ensureResourcesAreFetched,
       getStorageProvider,
       getStorageProviderOperations,
       authenticatedUser,
-    ]
-  );
+    ]);
 
   /** (Stable) callback to launch the fetching of the resources of the project. */
   const onFetchNewlyAddedResources = useStableUpToDateCallback(
@@ -3034,13 +2946,11 @@ const MainFrame = (props: Props) => {
   }, []);
 
   useMainFrameCommands({
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'i18n'. Either declare one or provide an initializer.
     i18n,
     project: state.currentProject,
     previewEnabled:
       !!state.currentProject && state.currentProject.getLayoutsCount() > 0,
     onOpenProjectManager: toggleProjectManager,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'hasPreviewsRunning'. Either declare one or provide an initializer.
     hasPreviewsRunning,
     allowNetworkPreview:
       !!_previewLauncher.current &&
@@ -3060,7 +2970,7 @@ const MainFrame = (props: Props) => {
     },
     onExportGame: () => openShareDialog('publish'),
     onInviteCollaborators: () => openShareDialog('invite'),
-    onOpenLayout: name => {
+    onOpenLayout: (name) => {
       openLayout(name);
     },
     onOpenExternalEvents: openExternalEvents,
@@ -3072,16 +2982,15 @@ const MainFrame = (props: Props) => {
 
   const resourceManagementProps: ResourceManagementProps = React.useMemo(
     () => ({
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'resourceSources'. Either declare one or provide an initializer.
       resourceSources,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'onChooseResource'. Either declare one or provide an initializer.
+
       onChooseResource,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'resourceExternalEditors'. Either declare one or provide an initializer.
+
       resourceExternalEditors,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'getStorageProvider'. Either declare one or provide an initializer.
+
       getStorageProvider,
       onFetchNewlyAddedResources,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'getStorageProviderResourceOperations'. Either declare one or provide an initializer.
+
       getStorageProviderResourceOperations,
     }),
     [
@@ -3099,7 +3008,7 @@ const MainFrame = (props: Props) => {
   const buildMainMenuProps = {
     i18n: i18n,
     project: state.currentProject,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'canSaveProjectAs'. Either declare one or provide an initializer.
+
     canSaveProjectAs,
     recentProjectFiles: preferences.getRecentProjectFiles(),
     shortcutMap,
@@ -3145,6 +3054,7 @@ const MainFrame = (props: Props) => {
           { ...buildMainMenuProps, isApplicationTopLevelMenu: true },
           mainMenuCallbacks,
           {
+// @ts-expect-error - TS2322 - Type '((windowId: number) => void) | null' is not assignable to type '((windowId: number) => void) | undefined'.
             onClosePreview:
               _previewLauncher.current && _previewLauncher.current.closePreview
                 ? _previewLauncher.current.closePreview
@@ -3170,7 +3080,7 @@ const MainFrame = (props: Props) => {
             onChangeProjectName={onChangeProjectName}
             onSaveProjectProperties={onSaveProjectProperties}
             onOpenExternalEvents={openExternalEvents}
-            onOpenLayout={name => {
+            onOpenLayout={(name) => {
               openLayout(name);
             }}
             onOpenExternalLayout={openExternalLayout}
@@ -3288,8 +3198,8 @@ const MainFrame = (props: Props) => {
                     project: currentProject,
                     fileMetadata: currentFileMetadata,
                     storageProvider: getStorageProvider(),
-                    ref: editorRef => (editorTab.editorRef = editorRef),
-                    setToolbar: editorToolbar =>
+                    ref: (editorRef) => (editorTab.editorRef = editorRef),
+                    setToolbar: (editorToolbar) =>
                       setEditorToolbar(editorToolbar, isCurrentTab),
                     projectItemName: editorTab.projectItemName,
                     setPreviewedLayout,
@@ -3302,7 +3212,7 @@ const MainFrame = (props: Props) => {
                     },
                     previewDebuggerServer,
                     hotReloadPreviewButtonProps,
-                    onOpenLayout: name => {
+                    onOpenLayout: (name) => {
                       openLayout(name, {
                         openEventsEditor: true,
                         openSceneEditor: false,
@@ -3327,12 +3237,16 @@ const MainFrame = (props: Props) => {
                     onCloseProject: () => askToCloseProject(),
                     onOpenExampleStore: openExampleStoreDialog,
                     onSelectExampleShortHeader: onSelectExampleShortHeader,
-                    onPreviewPrivateGameTemplateListingData: privateGameTemplateListingData =>
+                    onPreviewPrivateGameTemplateListingData: (
+                      privateGameTemplateListingData
+                    ) =>
                       onSelectPrivateGameTemplate({
                         privateGameTemplateListingData,
                         openDialog: true,
                       }),
-                    onOpenPrivateGameTemplateListingData: privateGameTemplateListingData => {
+                    onOpenPrivateGameTemplateListingData: (
+                      privateGameTemplateListingData
+                    ) => {
                       onSelectPrivateGameTemplate({
                         privateGameTemplateListingData,
                         openDialog: false,
@@ -3352,7 +3266,7 @@ const MainFrame = (props: Props) => {
                         currentProject
                       );
                     },
-                    onReloadEventsFunctionsExtensionMetadata: extension => {
+                    onReloadEventsFunctionsExtensionMetadata: (extension) => {
                       if (isProjectClosedSoAvoidReloadingExtensions) {
                         return;
                       }
@@ -3388,6 +3302,7 @@ const MainFrame = (props: Props) => {
           );
         })}
       </LeaderboardProvider>
+{ /* @ts-expect-error - TS2322 - Type 'MutableRefObject<CommandPaletteInterface | null | undefined>' is not assignable to type 'Ref<Record<any, any>> | undefined'. */}
       <CommandPaletteWithAlgoliaSearch ref={commandPaletteRef} />
       <LoaderModal
         show={showLoader}
@@ -3441,12 +3356,14 @@ const MainFrame = (props: Props) => {
           getStorageProvider={getStorageProvider}
           i18n={i18n}
           resourceSources={resourceSources}
-          onChooseResources={resources => {
+          onChooseResources={(resources) => {
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'SetStateAction<(arg1: gd.Resource[]) => void>'.
             setOnResourceChosen(null);
             setChooseResourceOptions(null);
             onResourceChosen(resources);
           }}
           onClose={() => {
+// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'SetStateAction<(arg1: gd.Resource[]) => void>'.
             setOnResourceChosen(null);
             setChooseResourceOptions(null);
             onResourceChosen([]);
@@ -3503,7 +3420,7 @@ const MainFrame = (props: Props) => {
       {preferencesDialogOpen && (
         <PreferencesDialog
           i18n={props.i18n}
-          onClose={options => {
+          onClose={(options) => {
             openPreferencesDialog(false);
             if (options.languageDidChange) _languageDidChange();
           }}
@@ -3512,7 +3429,7 @@ const MainFrame = (props: Props) => {
       {languageDialogOpen && (
         <LanguageDialog
           open
-          onClose={options => {
+          onClose={(options) => {
             openLanguageDialog(false);
             if (options.languageDidChange) _languageDidChange();
           }}
@@ -3529,7 +3446,7 @@ const MainFrame = (props: Props) => {
         <OpenFromStorageProviderDialog
           onClose={() => openOpenFromStorageProviderDialog(false)}
           storageProviders={props.storageProviders}
-          onChooseProvider={storageProvider => {
+          onChooseProvider={(storageProvider) => {
             openOpenFromStorageProviderDialog(false);
             getStorageProviderOperations(storageProvider);
             chooseProjectWithStorageProviderPicker();
@@ -3540,7 +3457,7 @@ const MainFrame = (props: Props) => {
         <SaveToStorageProviderDialog
           onClose={() => openSaveToStorageProviderDialog(false)}
           storageProviders={props.storageProviders}
-          onChooseProvider={storageProvider => {
+          onChooseProvider={(storageProvider) => {
             openSaveToStorageProviderDialog(false);
             saveProjectAsWithStorageProvider(storageProvider);
           }}
@@ -3566,10 +3483,10 @@ const MainFrame = (props: Props) => {
             !selectedInAppTutorialInfo.userProgress
               ? 'notStarted'
               : selectedInAppTutorialInfo.userProgress.progress.every(
-                  item => item === 100
-                )
-              ? 'complete'
-              : 'started'
+                    (item) => item === 100
+                  )
+                ? 'complete'
+                : 'started'
           }
           tutorialId={selectedInAppTutorialInfo.tutorialId}
           startTutorial={startSelectedTutorial}
@@ -3594,6 +3511,7 @@ const MainFrame = (props: Props) => {
       )}
       {currentlyRunningInAppTutorial && (
         <InAppTutorialOrchestrator
+// @ts-expect-error - TS2322 - Type 'RefObject<InAppTutorialOrchestratorInterface>' is not assignable to type 'Ref<Props> | undefined'.
           ref={inAppTutorialOrchestratorRef}
           tutorial={currentlyRunningInAppTutorial}
           startStepIndex={startStepIndex}
@@ -3603,8 +3521,8 @@ const MainFrame = (props: Props) => {
             shouldCloseProject,
             shouldWarnAboutUnsavedChanges,
           }: {
-            shouldCloseProject: boolean,
-            shouldWarnAboutUnsavedChanges: boolean
+            shouldCloseProject: boolean;
+            shouldWarnAboutUnsavedChanges: boolean;
           }) => {
             if (
               shouldWarnAboutUnsavedChanges &&
@@ -3635,7 +3553,6 @@ const MainFrame = (props: Props) => {
       <CustomDragLayer />
     </div>
   );
-
 };
 
 export default MainFrame;

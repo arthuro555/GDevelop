@@ -164,7 +164,7 @@ import {
 } from '../fixtures/TestExpressionAutocompletions';
 
 import HotReloadPreviewButton from '../HotReload/HotReloadPreviewButton';
-// @ts-expect-error - TS6142 - Module '../HotReload/HotReloadLogsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadLogsDialog.tsx', but '--jsx' is not set.
+
 import HotReloadLogsDialog from '../HotReload/HotReloadLogsDialog';
 
 import ScrollView from '../UI/ScrollView';
@@ -302,6 +302,7 @@ storiesOf('UI Building Blocks/SemiControlledTextField', module)
     return (
       <React.Fragment>
         <SemiControlledTextField
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledTextFieldInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledTextFieldInterface> | undefined'.
           ref={field}
           value={value}
           onChange={setValue}
@@ -420,6 +421,7 @@ storiesOf('UI Building Blocks/SemiControlledAutoComplete', module)
           <SemiControlledAutoComplete
             value={value}
             onChange={onChange}
+// @ts-expect-error - TS2322 - Type '({ text: string; value: string; onClick: HandlerFunction; type?: undefined; } | { type: string; text?: undefined; value?: undefined; onClick?: undefined; })[]' is not assignable to type 'DataSource'.
             dataSource={[
               {
                 text: '',
@@ -457,6 +459,7 @@ storiesOf('UI Building Blocks/SemiControlledAutoComplete', module)
             <SemiControlledAutoComplete
               value={value}
               onChange={onChange}
+// @ts-expect-error - TS2322 - Type '({ text: string; value: string; onClick: HandlerFunction; renderIcon: () => Element; type?: undefined; } | { text: string; value: string; onClick: HandlerFunction; renderIcon?: undefined; type?: undefined; } | { ...; })[]' is not assignable to type 'DataSource'.
               dataSource={[
                 {
                   text: '',
@@ -511,6 +514,7 @@ storiesOf('UI Building Blocks/SemiControlledAutoComplete', module)
           <SemiControlledAutoComplete
             value={value}
             onChange={onChange}
+// @ts-expect-error - TS2322 - Type '({ text: string; value: string; onClick: HandlerFunction; type?: undefined; } | { type: string; text?: undefined; value?: undefined; onClick?: undefined; })[]' is not assignable to type 'DataSource'.
             dataSource={[
               {
                 text: '',
@@ -1820,6 +1824,7 @@ storiesOf('ExpressionAutcompletionsDisplayer', module)
       expressionAutocompletions={makeFakeExpressionAutocompletions()}
       remainingCount={3}
       // $FlowExpectedError
+// @ts-expect-error - TS2740 - Type '{ clientWidth: number; clientHeight: number; getBoundingClientRect: () => { x: number; y: number; width: number; height: number; top: number; right: number; bottom: number; left: number; }; }' is missing the following properties from type 'Element': attributes, classList, className, clientLeft, and 157 more.
       anchorEl={getFakePopperJsAnchorElement()}
       onChoose={action('chosen')}
       selectedCompletionIndex={0}
@@ -1833,6 +1838,7 @@ storiesOf('ExpressionAutcompletionsDisplayer', module)
       expressionAutocompletions={makeFakeExpressionAutocompletions()}
       remainingCount={3}
       // $FlowExpectedError
+// @ts-expect-error - TS2322 - Type '{ clientWidth: number; clientHeight: number; getBoundingClientRect: () => { x: number; y: number; width: number; height: number; top: number; right: number; bottom: number; left: number; }; }' is not assignable to type 'Element'.
       anchorEl={getFakePopperJsAnchorElement()}
       onChoose={action('chosen')}
       selectedCompletionIndex={6}
@@ -1843,9 +1849,11 @@ storiesOf('ExpressionAutcompletionsDisplayer', module)
   .add('empty autocompletions (because exact expression)', () => (
     <ExpressionAutocompletionsDisplayer
       project={testProject.project}
+// @ts-expect-error - TS2322 - Type '{ kind: string; completion: string; addParenthesis: boolean; isExact: boolean; enumeratedExpressionMetadata: EnumeratedExpressionMetadata; shouldConvertToString: boolean; }[]' is not assignable to type 'ExpressionAutocompletion[]'.
       expressionAutocompletions={makeFakeExactExpressionAutocompletion()}
       remainingCount={0}
       // $FlowExpectedError
+// @ts-expect-error - TS2322 - Type '{ clientWidth: number; clientHeight: number; getBoundingClientRect: () => { x: number; y: number; width: number; height: number; top: number; right: number; bottom: number; left: number; }; }' is not assignable to type 'Element'.
       anchorEl={getFakePopperJsAnchorElement()}
       onChoose={action('chosen')}
       selectedCompletionIndex={0}
@@ -1859,6 +1867,7 @@ storiesOf('ExpressionAutcompletionsDisplayer', module)
       expressionAutocompletions={[]}
       remainingCount={0}
       // $FlowExpectedError
+// @ts-expect-error - TS2322 - Type '{ clientWidth: number; clientHeight: number; getBoundingClientRect: () => { x: number; y: number; width: number; height: number; top: number; right: number; bottom: number; left: number; }; }' is not assignable to type 'Element'.
       anchorEl={getFakePopperJsAnchorElement()}
       onChoose={action('chosen')}
       selectedCompletionIndex={0}
@@ -2643,6 +2652,7 @@ storiesOf('BrowserPreviewErrorDialog', module)
       error={
         // $FlowFixMe - mocking an Error with "code field"
         {
+// @ts-expect-error - TS2769 - No overload matches this call.
           code: 'NetworkingError',
           message: "Oops, you're offline",
         }
@@ -2764,6 +2774,7 @@ storiesOf('ProjectPropertiesDialog/LoadingScreenEditor', module)
       loadingScreen={testProject.project.getLoadingScreen()}
       watermark={testProject.project.getWatermark()}
       onLoadingScreenUpdated={action('onLoadingscreenUpdated')}
+// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '() => Promise<undefined> | undefined'.
       onChangeSubscription={action('onChangeSubscription')}
       project={testProject.project}
       resourceManagementProps={fakeResourceManagementProps}

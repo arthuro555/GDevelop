@@ -7,6 +7,7 @@ const PIXEL_TRANSPARENCY_THRESHOLD = 64;
 const loadImage = (img: Image, pathToFile: string) => {
   return new Promise(
     (
+// @ts-expect-error - TS2749 - 'Image' refers to a value, but is being used as a type here. Did you mean 'typeof Image'? | TS2749 - 'Image' refers to a value, but is being used as a type here. Did you mean 'typeof Image'?
       resolve: (result: Promise<Image> | Image) => void,
       reject: (error?: any) => void
     ) => {

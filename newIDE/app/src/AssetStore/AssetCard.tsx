@@ -102,10 +102,12 @@ export const AssetCard = ({ id, assetShortHeader, size }: Props) => {
           height: assetShortHeader.shortDescription ? 40 : 20,
         }}
       >
+{ /* @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'. */}
         <Text noMargin style={styles.title} color="inherit">
           {assetShortHeader.name}
         </Text>
         {assetShortHeader.shortDescription && (
+// @ts-expect-error - TS2322 - Type '{ readonly overflowWrap: "break-word"; readonly overflow: string; readonly whiteSpace: string; readonly textOverflow: string; }' is not assignable to type '{ marginLeft?: number | undefined; marginRight?: number | undefined; overflow?: "hidden" | undefined; overflowWrap?: "anywhere" | "break-word" | undefined; whiteSpace?: "nowrap" | "pre-wrap" | undefined; ... 6 more ...; maxHeight?: number | undefined; }'.
           <Text noMargin style={styles.title} size="body2" color="inherit">
             {assetShortHeader.shortDescription}
           </Text>

@@ -70,6 +70,7 @@ const BottomToolbar = React.memo<Props>((props: Props) => {
                 disableFocusRipple
                 id={buttonId}
                 onClick={() => {
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'EditorId'.
                   props.onSelectEditor(editorId);
                 }}
                 selected={isSelected}

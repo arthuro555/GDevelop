@@ -13,6 +13,7 @@ import CloudStorageProvider from '../CloudStorageProvider';
 import { fetchRelativeResourcesToFullUrls } from '../UrlStorageProvider/UrlResourceFetcher';
 import { moveUrlResourcesToCloudFilesIfPrivate } from '../CloudStorageProvider/CloudResourceFetcher';
 
+// @ts-expect-error - TS2322 - Type '{ [x: string]: (({ project, fileMetadata, authenticatedUser, onProgress, }: { project: gd.Project; fileMetadata: FileMetadata; authenticatedUser: AuthenticatedUser; onProgress: (arg1: number, arg2: number) => void; }) => Promise<...>) | (({ project, fileMetadata, onProgress, authenticatedUser, }: Options) => Promise...' is not assignable to type '{ [key: string]: FetchAllProjectResourcesFunction; }'.
 const fetchers: {
   [key: string]: FetchAllProjectResourcesFunction;
 } = {

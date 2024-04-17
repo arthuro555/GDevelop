@@ -57,7 +57,7 @@ type Props = {
   onAssetsAdded: () => void;
   project: gd.Project;
   objectsContainer: gd.ObjectsContainer | null | undefined;
-  onObjectsAddedFromAssets: (objects: Array<gd.Object>) => void;
+  onObjectsAddedFromAssets: (objects: Array<gd.gdObject>) => void;
   resourceManagementProps: ResourceManagementProps;
   canInstallPrivateAsset: () => boolean;
 };

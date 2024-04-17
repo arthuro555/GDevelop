@@ -15,7 +15,7 @@ export type EnumeratedObjectMetadata = {
 };
 
 export type ObjectWithContext = {
-  object: gd.Object;
+  object: gd.gdObject;
   global: boolean;
 };
 
@@ -60,7 +60,7 @@ export const enumerateObjects = (
   const typeFilter = (filters && filters.type) || null;
   const namesFilter = (filters && filters.names) || null;
   const filterObjectByType = typeFilter
-    ? (object: gd.Object): boolean => {
+    ? (object: gd.gdObject): boolean => {
         return (
           gd.getTypeOfObject(
             project,
@@ -73,7 +73,7 @@ export const enumerateObjects = (
     : null;
 
   const filterObjectByName = namesFilter
-    ? (object: gd.Object): boolean => {
+    ? (object: gd.gdObject): boolean => {
         return namesFilter.includes(object.getName());
       }
     : null;
@@ -94,7 +94,9 @@ export const enumerateObjects = (
     }
   )
     .filter(Boolean)
-    .map((object: gd.Object): ObjectWithContext => ({ object, global: false }));
+    .map(
+      (object: gd.gdObject): ObjectWithContext => ({ object, global: false })
+    );
 
   const projectObjectsList: ObjectWithContextList =
     project === objectsContainer
@@ -111,7 +113,7 @@ export const enumerateObjects = (
         })
           .filter(Boolean)
           .map(
-            (object: gd.Object): ObjectWithContext => ({
+            (object: gd.gdObject): ObjectWithContext => ({
               object,
               global: true,
             })
@@ -215,7 +217,7 @@ export const enumerateObjectsAndGroups = (
   objectType: string | null = undefined,
   requiredBehaviorTypes: Array<string> = []
 ) => {
-  const filterObject = (object: gd.Object): boolean => {
+  const filterObject = (object: gd.gdObject): boolean => {
     return (
       (!objectType ||
         gd.getTypeOfObject(

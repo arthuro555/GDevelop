@@ -225,6 +225,7 @@ const InstructionEditorDialog = ({
           style={styles.fullHeightSelector}
           project={project}
           scope={scope}
+// @ts-expect-error - TS2769 - No overload matches this call.
           ref={freeInstructionComponentRef}
           currentTab={currentInstructionOrObjectSelectorTab}
           onChangeTab={setCurrentInstructionOrObjectSelectorTab}
@@ -264,6 +265,7 @@ const InstructionEditorDialog = ({
       instruction={instruction}
       resourceManagementProps={resourceManagementProps}
       openInstructionOrExpression={openInstructionOrExpression}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<InstructionParametersEditorInterface | null | undefined>' is not assignable to type 'Ref<Props> | undefined'.
       ref={instructionParametersEditor}
       focusOnMount={shouldAutofocusInput && !!instructionType}
       noHelpButton
@@ -342,6 +344,7 @@ const InstructionEditorDialog = ({
         ]}
         open={open}
         onRequestClose={onCancel}
+// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type '(() => void) | undefined'.
         onApply={instructionType ? onSubmit : null}
         maxWidth={false}
         flexBody
@@ -353,9 +356,11 @@ const InstructionEditorDialog = ({
         <SelectColumns
           columnsRenderer={{
             'instruction-or-object-selector': renderInstructionOrObjectSelector,
+// @ts-expect-error - TS2322 - Type '() => JSX.Element | null' is not assignable to type '() => ReactElement<any, string | JSXElementConstructor<any>>'.
             'object-instruction-selector': renderObjectInstructionSelector,
             parameters: renderParameters,
           }}
+// @ts-expect-error - TS2322 - Type '() => ({ columnName: string; } | null)[]' is not assignable to type '() => { columnName: string; ratio?: number | undefined; }[]'.
           getColumns={() => {
             if (isLargeScreen) {
               return [

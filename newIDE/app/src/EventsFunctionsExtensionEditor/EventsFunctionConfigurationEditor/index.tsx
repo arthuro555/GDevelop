@@ -188,6 +188,7 @@ export default class EventsFunctionConfigurationEditor extends React.Component<
         <Line>
           <Column noMargin expand noOverflowParent>
             <Tabs
+// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'TabNames | undefined'.
               value={this.state.currentTab}
               onChange={this._chooseTab}
               options={[
@@ -231,7 +232,6 @@ export default class EventsFunctionConfigurationEditor extends React.Component<
         {this.state.currentTab === 'parameters' ? (
           <ScrollView>
             <Line>
-              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EventsFunctionParametersEditor
                 project={project}
                 eventsFunction={eventsFunction}

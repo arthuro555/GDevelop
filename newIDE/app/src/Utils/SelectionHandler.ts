@@ -18,6 +18,7 @@ export const clearSelection = () => getInitialSelection();
 
 export const getSelection = <T extends ObjectType>(
   selection: SelectionState<T>
+// @ts-expect-error - TS2322 - Type '(T | null | undefined)[]' is not assignable to type 'T[]'.
 ): Array<T> => values(selection).filter((value) => !!value);
 
 export const addToSelection = <T extends ObjectType>(

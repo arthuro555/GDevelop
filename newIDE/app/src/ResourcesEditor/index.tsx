@@ -32,7 +32,7 @@ import {
 // otherwise they will be opened in the background.
 // See https://github.com/electron/electron/issues/4349#issuecomment-777475765
 const remote = optionalRequire('@electron/remote');
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 const styles = {
   container: {
     display: 'flex',

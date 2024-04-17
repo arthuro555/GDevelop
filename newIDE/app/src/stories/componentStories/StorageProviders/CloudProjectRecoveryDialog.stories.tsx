@@ -55,6 +55,7 @@ export const Default = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(200, versions)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -73,6 +74,7 @@ export const Default = () => {
           'content-type': 'application/zip',
         })
         .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
         .reply((config) => {
           console.error(`Unexpected call to ${config.url} (${config.method})`);
           return [504, null];
@@ -84,7 +86,6 @@ export const Default = () => {
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}
@@ -124,6 +125,7 @@ export const NoFallbackVersion = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(200, versions)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -151,6 +153,7 @@ export const NoFallbackVersion = () => {
         'content-type': 'application/zip',
       })
       .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
       .reply((config) => {
         console.error(`Unexpected call to ${config.url} (${config.method})`);
         return [504, null];
@@ -161,7 +164,6 @@ export const NoFallbackVersion = () => {
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}
@@ -181,6 +183,7 @@ export const Errored = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(500)
     .onAny()
+// @ts-expect-error - TS7006 - Parameter 'config' implicitly has an 'any' type.
     .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
@@ -190,7 +193,6 @@ export const Errored = () => {
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}

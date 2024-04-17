@@ -38,7 +38,7 @@ import {
   useSoftKeyboardBottomOffset,
 } from './MobileSoftKeyboard';
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 const DRAGGABLE_PART_CLASS_NAME = 'title-bar-draggable-part';
 
@@ -190,7 +190,7 @@ type DialogProps = {
    * If `onApply` is also specified, this must be interpreted as a "cancelling"
    * of changes.
    */
-  onRequestClose?: () => undefined | Promise<undefined>;
+  onRequestClose?: () => void;
   /**
    * If specified, will be called when the dialog is dismissed in a way where changes
    * must be kept or when using the submit keyboard shortcut.

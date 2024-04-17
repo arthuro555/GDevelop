@@ -83,7 +83,7 @@ const PrivateGameTemplateListItem = ({
 }: Props) => {
   const { isMobile } = useResponsiveWindowSize();
   // Report the height of the item once it's known.
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useLayoutEffect(() => {
     if (containerRef.current)
       onHeightComputed(containerRef.current.getBoundingClientRect().height);
@@ -106,7 +106,6 @@ const PrivateGameTemplateListItem = ({
   };
 
   return (
-    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
     <div style={styles.container} ref={containerRef}>
       <ResponsiveLineStackLayout noMargin expand>
         <ButtonBase style={styles.button} onClick={onChoose} focusRipple>

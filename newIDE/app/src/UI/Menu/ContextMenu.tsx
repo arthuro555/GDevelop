@@ -12,7 +12,7 @@ import MaterialUIMenuImplementation from './MaterialUIMenuImplementation';
 
 import optionalRequire from '../../Utils/OptionalRequire';
 import useForceUpdate from '../../Utils/UseForceUpdate';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 export type ContextMenuInterface = {
   open: (x: number, y: number, options?: any) => void;

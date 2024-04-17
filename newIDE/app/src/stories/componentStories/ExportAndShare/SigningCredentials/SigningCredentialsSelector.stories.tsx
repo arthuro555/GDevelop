@@ -115,6 +115,7 @@ export const WithSigningCredentialsAndOnePreSelected = () => {
         targets={targets}
         authenticatedUser={fakeSilverAuthenticatedUser}
         buildSigningOptions={buildSigningOptions}
+// @ts-expect-error - TS2322 - Type 'Dispatch<SetStateAction<{ certificateSerial: string; mobileProvisionUuid: string; }>>' is not assignable to type '(arg1: BuildSigningOptions | null) => void'.
         onSelectBuildSigningOptions={setBuildSigningOptions}
       />
     </AuthenticatedUserContext.Provider>

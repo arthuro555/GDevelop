@@ -1,8 +1,6 @@
-import {getLastObjectParameterValue} from './ParameterMetadataTools';
-
+import { getLastObjectParameterValue } from './ParameterMetadataTools';
 
 describe('getLastObjectParameterValue', () => {
-
   it('returns null if no parameter index passed', () => {
     expect(
       getLastObjectParameterValue({
@@ -14,7 +12,6 @@ describe('getLastObjectParameterValue', () => {
       })
     ).toBe(null);
   });
-
 
   it('returns the object if there is one before the requested parameter index', () => {
     const instructionMetadata = new gd.InstructionMetadata();
@@ -29,13 +26,13 @@ describe('getLastObjectParameterValue', () => {
     instruction.setParameter(1, 'MyObject');
     instruction.setParameter(2, 'MyBehavior');
 
-    const getValueForParameter = parameterIndex: number =>
+    const getValueForParameter = (parameterIndex: number) =>
       getLastObjectParameterValue({
         instructionMetadata,
         instruction,
         expressionMetadata: null,
         expression: null,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'parameterIndex'. Either declare one or provide an initializer.
+
         parameterIndex,
       });
 
@@ -43,7 +40,6 @@ describe('getLastObjectParameterValue', () => {
     expect(getValueForParameter(1)).toBe('MyObject');
     expect(getValueForParameter(2)).toBe('MyObject');
   });
-
 
   it('returns the object, even if other parameters exist in between', () => {
     const instructionMetadata = new gd.InstructionMetadata();
@@ -71,13 +67,13 @@ describe('getLastObjectParameterValue', () => {
     instruction.setParameter(5, 'MyOtherBehavior');
     instruction.setParameter(6, 'MyOtherVariable');
 
-    const getValueForParameter = parameterIndex: number =>
+    const getValueForParameter = (parameterIndex: number) =>
       getLastObjectParameterValue({
         instructionMetadata,
         instruction,
         expressionMetadata: null,
         expression: null,
-// @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'parameterIndex'. Either declare one or provide an initializer.
+
         parameterIndex,
       });
 

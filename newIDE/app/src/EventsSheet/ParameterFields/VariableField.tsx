@@ -34,7 +34,7 @@ import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
 
 type Props = ParameterFieldProps & {
   variablesContainers: Array<gd.VariablesContainer>;
-  onOpenDialog: () => void | null | undefined;
+  onOpenDialog: () => void;
 };
 
 type VariableNameQuickAnalyzeResult = 0 | 1 | 2 | 3 | 4;
@@ -147,6 +147,7 @@ export default React.forwardRef<VariableFieldInterface, Props>(
               )
               .reduce((a, b) => intersection(a, b));
       setAutocompletionVariableNames(
+// @ts-expect-error - TS2345 - Argument of type '{ text: string | null; value: string | null; }[]' is not assignable to parameter of type 'SetStateAction<DataSource>'.
         definedVariableNames.map((name) => ({
           text: name,
           value: name,
@@ -223,6 +224,7 @@ export default React.forwardRef<VariableFieldInterface, Props>(
                 onChange={onChange}
                 onRequestClose={onRequestClose}
                 onApply={onApply}
+// @ts-expect-error - TS2322 - Type '(Option | null)[]' is not assignable to type 'DataSource'.
                 dataSource={[
                   ...autocompletionVariableNames,
                   // @ts-expect-error - TS2774 - This condition will always return true since this function is always defined. Did you mean to call it instead?
@@ -236,6 +238,7 @@ export default React.forwardRef<VariableFieldInterface, Props>(
                     : null,
                 ].filter(Boolean)}
                 openOnFocus={!isInline}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<SemiControlledAutoCompleteInterface | null | undefined>' is not assignable to type 'Ref<SemiControlledAutoCompleteInterface> | undefined'.
                 ref={field}
                 id={id}
               />

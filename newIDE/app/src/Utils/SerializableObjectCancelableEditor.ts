@@ -9,7 +9,7 @@ const gd = global.gd;
 type Props = {
   serializableObject: gd.Serializable;
   useProjectToUnserialize?: gd.Project | null | undefined;
-  onCancel: () => undefined | Promise<undefined>;
+  onCancel: () => void;
   /**
    * In the future, most serializable objects will be able to have
    * persistent UUID to identify them uniquely. In the meantime, some
@@ -36,7 +36,7 @@ export const useSerializableObjectCancelableEditor = ({
 }: Props) => {
   const serializedElementRef = React.useRef<gd.SerializerElement | null>(null);
   const numberOfChangesRef = React.useRef(0);
-  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+
   const { showConfirmation } = useAlertDialog();
   const preferences = React.useContext(PreferencesContext);
 

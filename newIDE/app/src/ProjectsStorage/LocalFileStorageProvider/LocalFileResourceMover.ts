@@ -22,10 +22,10 @@ import { sanitizeFilename } from '../../Utils/Filename';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
 import { extractDecodedFilenameFromProjectResourceUrl } from '../../Utils/GDevelopServices/Project';
 import axios from 'axios';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 const fs = optionalRequire('fs-extra');
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 
 type Options = {
   project: gd.Project;

@@ -2,8 +2,8 @@ import optionalRequire from '../../Utils/OptionalRequire';
 import { getUID } from '../../Utils/LocalUserInfo';
 import { isURL } from '../../ResourcesList/ResourceUtils';
 const fs = optionalRequire('fs-extra');
-const path = optionalRequire('path');
-const os = optionalRequire('os');
+const path = optionalRequire('path') as typeof import('path');
+const os = optionalRequire('os') as typeof import('os');
 
 export type UrlFileDescriptor = {
   filePath: string;

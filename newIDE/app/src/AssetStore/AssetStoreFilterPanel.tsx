@@ -63,12 +63,11 @@ const MultipleChoiceFilter = ({
           <AccordionBody>
             <ColumnStackLayout>
               {choices.map((tag) => (
-                // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <InlineCheckbox
                   key={tag.value}
+// @ts-expect-error - TS2769 - No overload matches this call.
                   label={i18n._(tag.label)}
                   checked={isChoiceChecked(tag.value)}
-                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                   onCheck={(e, checked) => setChoiceChecked(tag.value, checked)}
                 />
               ))}

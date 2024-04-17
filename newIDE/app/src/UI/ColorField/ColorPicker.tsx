@@ -58,7 +58,7 @@ const ColorPicker = ({
   disableAlpha,
   disabled,
 }: Props) => {
-  const swatchRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const swatchRef = React.useRef<HTMLDivElement>(null);
   const [displayColorPicker, setDisplayColorPicker] = React.useState(false);
 
   const handleClick = () => {
@@ -87,7 +87,6 @@ const ColorPicker = ({
           ...(disabled ? styles.disabled : {}),
         }}
         onClick={handleClick}
-        // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
         ref={swatchRef}
       >
         <div

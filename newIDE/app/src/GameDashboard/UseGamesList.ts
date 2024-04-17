@@ -34,6 +34,7 @@ const useGamesList = () => {
       setGames(fetchedGames);
     } catch (error) {
       console.error('Error while loading user games.', error);
+// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null | undefined>'.
       setGamesFetchingError(error);
     } finally {
       gamesFetchingPromise.current = null;

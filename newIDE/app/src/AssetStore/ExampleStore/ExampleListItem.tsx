@@ -36,7 +36,7 @@ import { SearchMatch } from '../../UI/Search/UseSearchStructuredItem';
 import { ResponsiveLineStackLayout } from '../../UI/Layout';
 import useAlertDialog from '../../UI/Alert/useAlertDialog';
 
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 
 const styles = {
   container: {
@@ -70,10 +70,9 @@ const ExampleListItem = ({
   onOpen,
   onHeightComputed,
 }: Props) => {
-  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
   // Report the height of the item once it's known.
-  const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   React.useLayoutEffect(() => {
     if (containerRef.current)
       onHeightComputed(containerRef.current.getBoundingClientRect().height);
@@ -116,7 +115,6 @@ const ExampleListItem = ({
   };
 
   return (
-    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
     <div style={styles.container} ref={containerRef}>
       <ResponsiveLineStackLayout noMargin expand>
         <ButtonBase style={styles.button} onClick={onChoose} focusRipple>

@@ -132,8 +132,11 @@ const SemiControlledTextField = React.forwardRef<
 
     <TextField
       {...otherProps}
+// @ts-expect-error - TS2322 - Type '"number" | "text"' is not assignable to type '"number"'.
       type={type || 'text'}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TextFieldInterface | null | undefined>' is not assignable to type 'Ref<TextFieldInterface> | undefined'.
       ref={textFieldRef}
+// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | number'.
       value={focused ? text : value}
       onFocus={(event) => {
         setFocused(true);

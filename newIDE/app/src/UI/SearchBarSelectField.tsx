@@ -1,5 +1,4 @@
-
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 
 import { I18n } from '@lingui/react';
@@ -10,10 +9,10 @@ import { makeStyles } from '@material-ui/core';
 import Paper from './Paper';
 
 const INVALID_VALUE = '';
-// @ts-expect-error - TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected. | TS2532 - Object is possibly 'undefined'.
-const stopPropagation = event: any => event.stopPropagation();
 
-const useSelectStyles = textAlign: undefined | 'center' =>
+const stopPropagation = (event: any) => event.stopPropagation();
+
+const useSelectStyles = (textAlign: undefined | 'center') =>
   makeStyles({
     root: {
       textAlign: textAlign || 'left',
@@ -38,73 +37,71 @@ const styles = {
 } as const;
 
 export type SearchBarSelectFieldInterface = {
-  focus: () => void
+  focus: () => void;
 };
 
 type ValueProps = {
-  value: number | string,
+  value: number | string;
   // event and index should not be used, and be removed eventually
   onChange?: (
     event: {
       target: {
-        value: string
-      }
+        value: string;
+      };
     },
     index: number,
     // Note that even for number values, a string is returned
-    text: string,
-  ) => void
+    text: string
+  ) => void;
 };
 
 // We support a subset of the props supported by Material-UI v0.x SelectField
 // They should be self descriptive - refer to Material UI docs otherwise.
-type Props = (ValueProps) & {
-  fullWidth?: boolean,
-  children: React.ReactNode,
-  disabled?: boolean,
-  stopPropagationOnClick?: boolean,
+type Props = ValueProps & {
+  fullWidth?: boolean;
+  children: React.ReactNode;
+  disabled?: boolean;
+  stopPropagationOnClick?: boolean;
   style?: {
-    flex?: 1,
-    width?: 'auto'
-  },
-  margin?: 'none' | 'dense',
-  textAlign?: 'center',
-  helperMarkdownText?: string | null | undefined,
+    flex?: 1;
+    width?: 'auto';
+  };
+  margin?: 'none' | 'dense';
+  textAlign?: 'center';
+  helperMarkdownText?: string | null | undefined;
   // If a hint text is specified, will be shown as an option for the empty
   // value (""), disabled.
-  translatableHintText?: MessageDescriptor
+  translatableHintText?: MessageDescriptor;
 };
 
 /**
  * A select field based on Material-UI select field.
  * To be used with `SelectOption`.
  */
-const SearchBarSelectField = React.forwardRef<SearchBarSelectFieldInterface, Props>((props, ref) => {
-  const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
-  const focus = React.useCallback(
-    () => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    },
-    [inputRef]
-  );
+const SearchBarSelectField = React.forwardRef<
+  SearchBarSelectFieldInterface,
+  Props
+>((props, ref) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const focus = React.useCallback(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
 
   React.useImperativeHandle(ref, () => ({
     focus,
   }));
 
-
   const selectStyles = useSelectStyles(props.textAlign);
-
 
   const onChange = props.onChange || undefined;
 
   // Dig into children props to see if the current value is valid or not.
   let hasValidValue = true;
 
-  const childrenValues = React.Children.map(props.children, child => {
-    if (child === null || !child.props) return null;
+  const childrenValues = React.Children.map(props.children, (child) => {
+    if (!child || typeof child !== 'object' || !('props' in child)) return null;
 
     return child.props.value;
   });
@@ -114,40 +111,31 @@ const SearchBarSelectField = React.forwardRef<SearchBarSelectFieldInterface, Pro
     );
   } else {
     hasValidValue =
-
-      childrenValues.filter(childValue => childValue === props.value).length !==
-      0;
+      childrenValues.filter((childValue) => childValue === props.value)
+        .length !== 0;
   }
 
   const displayedValue = hasValidValue ? props.value : INVALID_VALUE;
 
   return (
-
     <I18n>
       {({ i18n }) => (
-
         <Paper style={styles.root} background="light">
           <div style={styles.searchContainer}>
             <TextField
               select
               color="secondary"
-
               disabled={props.disabled}
-
               fullWidth={props.fullWidth}
               value={displayedValue}
               onClick={
-
                 props.stopPropagationOnClick ? stopPropagation : undefined
               }
-
               onChange={
                 onChange
-                  ? event: any => {
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2531 - Object is possibly 'null'. | TS2339 - Property 'value' does not exist on type 'EventTarget'.
+                  ? (event: React.ChangeEvent<HTMLInputElement>) => {
                       onChange(event, -1, event.target.value);
                     }
-{ }
                   : undefined
               }
               InputProps={{
@@ -166,10 +154,8 @@ const SearchBarSelectField = React.forwardRef<SearchBarSelectFieldInterface, Pro
               inputRef={inputRef}
             >
               {!hasValidValue ? (
-
                 <option value={INVALID_VALUE} disabled>
                   {props.translatableHintText
-
                     ? i18n._(props.translatableHintText)
                     : i18n._(t`Choose an option`)}
                 </option>
@@ -179,11 +165,8 @@ const SearchBarSelectField = React.forwardRef<SearchBarSelectFieldInterface, Pro
           </div>
         </Paper>
       )}
-
     </I18n>
-
   );
-
 });
 
 export default SearchBarSelectField;

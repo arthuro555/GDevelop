@@ -45,7 +45,7 @@ type Option =
       text: string; // The text used for filtering. If empty, item is always shown.,
       value: string; // The value to show on screen and to be selected,
       translatableValue?: MessageDescriptor;
-      onClick?: () => undefined | Promise<undefined>; // If defined, will be called when the item is clicked. onChange/onChoose won't be called.,
+      onClick?: () => void; // If defined, will be called when the item is clicked. onChange/onChoose won't be called.,
       renderIcon?: () =>
         | React.ReactElement<
             React.ComponentProps<typeof ListIcon | typeof SvgIcon>
@@ -147,6 +147,7 @@ const makeRenderItem =
       >
         {/* @ts-expect-error - TS2339 - Property 'renderIcon' does not exist on type 'Option'. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'renderIcon' does not exist on type 'Option'. */}
         {option.renderIcon && (
+// @ts-expect-error - TS2339 - Property 'renderIcon' does not exist on type 'Option'.
           <ListItemIcon>{option.renderIcon()}</ListItemIcon>
         )}
         <ListItemText
@@ -277,6 +278,7 @@ const getDefaultStylingProps = (params: any, props: Props): any => {
 };
 
 const getOptionLabel = (option: Option, value: string): string =>
+// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'Option'. | TS2339 - Property 'value' does not exist on type 'Option'.
   option.value ? option.value : value;
 
 export default React.forwardRef<SemiControlledAutoCompleteInterface, Props>(

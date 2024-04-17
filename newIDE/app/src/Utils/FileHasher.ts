@@ -22,6 +22,7 @@ const digestWithSha512TruncatedTo256 = (
   const shaObj = new jsSHA('SHA-512', 'ARRAYBUFFER');
   shaObj.update(arrayBuffer);
   const hashHexString = shaObj.getHash('HEX');
+// @ts-expect-error - TS2339 - Property 'substr' does not exist on type 'string | ArrayBuffer'.
   return Promise.resolve(hashHexString.substr(0, 64));
 };
 

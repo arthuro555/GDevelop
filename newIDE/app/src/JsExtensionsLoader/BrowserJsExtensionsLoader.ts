@@ -1,6 +1,9 @@
 import {
+// @ts-expect-error - TS2305 - Module '"."' has no exported member 'JsExtensionsLoader'.
   JsExtensionsLoader,
+// @ts-expect-error - TS2305 - Module '"."' has no exported member 'ExtensionLoadingResult'.
   ExtensionLoadingResult,
+// @ts-expect-error - TS2305 - Module '"."' has no exported member 'TranslationFunction'.
   TranslationFunction,
   loadExtension,
 } from '.';

@@ -46,6 +46,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
         }
         onRequestClose={props.onRequestClose}
         onApply={props.onApply}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ResourceSelectorInterface | null | undefined>' is not assignable to type 'Ref<ResourceSelectorInterface> | undefined'.
         ref={field}
       />
     );

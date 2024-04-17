@@ -1,5 +1,4 @@
-
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import * as React from 'react';
 
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
@@ -16,7 +15,6 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-
 } from '../UI/Table';
 
 import { ColumnStackLayout } from '../UI/Layout';
@@ -25,17 +23,17 @@ import LinearProgress from '../UI/LinearProgress';
 
 export type GenericRetryableProcessWithProgressResults = {
   erroredResources: Array<{
-    resourceName: string,
-    error: Error
-  }>
+    resourceName: string;
+    error: Error;
+  }>;
 };
 
 type GenericRetryableProcessWithProgressProps = {
-  progress: number,
-  result: GenericRetryableProcessWithProgressResults | null | undefined,
-  onAbandon: () => void | null | undefined,
-  onRetry: () => void | null | undefined,
-  genericError: Error | null | undefined
+  progress: number;
+  result: GenericRetryableProcessWithProgressResults | null | undefined;
+  onAbandon: () => void;
+  onRetry: () => void;
+  genericError: Error | null | undefined;
 };
 
 const styles = {
@@ -56,15 +54,11 @@ export const GenericRetryableProcessWithProgressDialog = ({
     (result && result.erroredResources.length > 0) || !!genericError;
 
   return (
-
     <Dialog
-
       title={<Trans>Importing project resources</Trans>}
       actions={[
         onAbandon ? (
-
           <FlatButton
-
             label={<Trans>Ignore</Trans>}
             disabled={!onAbandon}
             onClick={onAbandon}
@@ -72,9 +66,7 @@ export const GenericRetryableProcessWithProgressDialog = ({
           />
         ) : null,
         onRetry ? (
-
           <DialogPrimaryButton
-
             label={<Trans>Retry</Trans>}
             primary
             onClick={onRetry}
@@ -90,7 +82,6 @@ export const GenericRetryableProcessWithProgressDialog = ({
       <ColumnStackLayout noMargin expand>
         <Text>
           {hasErrors ? (
-
             <Trans>
               There were errors when importing resources for the project. You
               can retry (recommended) or continue despite the errors. In this
@@ -105,7 +96,6 @@ export const GenericRetryableProcessWithProgressDialog = ({
           />
         </Line>
         {hasErrors ? (
-
           <Table>
             <TableHeader>
               <TableRow>
@@ -120,7 +110,6 @@ export const GenericRetryableProcessWithProgressDialog = ({
             <TableBody>
               {result
                 ? result.erroredResources.map(({ resourceName, error }) => (
-
                     <TableRow key={resourceName}>
                       <TableRowColumn style={styles.tableCell}>
                         {resourceName}
@@ -132,7 +121,6 @@ export const GenericRetryableProcessWithProgressDialog = ({
                   ))
                 : null}
               {genericError ? (
-
                 <TableRow>
                   <TableRowColumn style={styles.tableCell}>-</TableRowColumn>
                   <TableRowColumn style={styles.tableCell}>
@@ -152,11 +140,11 @@ type UseGenericRetryableProcessWithProgressOutput<DoProcessOptions> = {
   /**
    * Launch the process.
    */
-  ensureProcessIsDone: (options: DoProcessOptions) => Promise<void>,
+  ensureProcessIsDone: (options: DoProcessOptions) => Promise<void>;
   /**
    * Render, if needed, the dialog that will show the progress of the process.
    */
-  renderProcessDialog: () => React.ReactElement
+  renderProcessDialog: () => React.ReactElement;
 };
 
 type RetryOrAbandonCallback = () => void;
@@ -165,26 +153,28 @@ type RetryOrAbandonCallback = () => void;
  * Hook allowing to launch a process, displaying its progress, and allowing to retry
  * if errors happened.
  */
-export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends unknown>(
-  {
-    onDoProcess,
-  }: {
-    onDoProcess: (
-      options: DoProcessOptions,
-      onProgress: (count: number, total: number) => void,
-    ) => Promise<GenericRetryableProcessWithProgressResults>
-  },
-// @ts-expect-error - TS2355 - A function whose declared type is neither 'void' nor 'any' must return a value.
-): UseGenericRetryableProcessWithProgressOutput<DoProcessOptions> => {
+export const useGenericRetryableProcessWithProgress = <
+  DoProcessOptions extends unknown,
+>({
+  onDoProcess,
+}: {
+  onDoProcess: (
+    options: DoProcessOptions,
+    onProgress: (count: number, total: number) => void
+  ) => Promise<GenericRetryableProcessWithProgressResults>;
+}): UseGenericRetryableProcessWithProgressOutput<DoProcessOptions> => {
   const [progress, setProgress] = React.useState(0);
   const [genericError, setGenericError] = React.useState<any>(null);
   const [isFetching, setIsFetching] = React.useState(false);
-  const [
-    result,
-    setResult,
-  ] = React.useState<GenericRetryableProcessWithProgressResults | null | undefined>(null);
-  const [onRetry, setOnRetry] = React.useState<RetryOrAbandonCallback | null | undefined>(null);
-  const [onAbandon, setOnAbandon] = React.useState<RetryOrAbandonCallback | null | undefined>(null);
+  const [result, setResult] = React.useState<
+    GenericRetryableProcessWithProgressResults | null | undefined
+  >(null);
+  const [onRetry, setOnRetry] = React.useState<
+    RetryOrAbandonCallback | null | undefined
+  >(null);
+  const [onAbandon, setOnAbandon] = React.useState<
+    RetryOrAbandonCallback | null | undefined
+  >(null);
 
   const ensureProcessIsDone = React.useCallback(
     async (options: DoProcessOptions) => {
@@ -197,6 +187,7 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
       // This will display the dialog:
       setIsFetching(true);
 
+// @ts-expect-error - TS7034 - Variable 'newResult' implicitly has type 'any' in some locations where its type cannot be determined.
       let newResult = null;
       try {
         newResult = await onDoProcess(options, (count, total) => {
@@ -217,7 +208,7 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
 
       // An error happened. Store the errors and offer a way to
       // retry.
-      return new Promise(resolve: (result: Promise<undefined> | undefined) => void => {
+      return new Promise<void>((resolve) => {
         setOnRetry(
           (): RetryOrAbandonCallback => () => {
             // Launch the fetch again, and solve the promise once
@@ -236,36 +227,33 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
         );
 
         // Display the errors to the user:
+// @ts-expect-error - TS7005 - Variable 'newResult' implicitly has an 'any' type.
         setResult(newResult);
         setIsFetching(false);
-
       });
-
     },
     [onDoProcess]
-
   );
 
-  const renderProcessDialog = React.useCallback(
-    () => {
-      const hasErrors =
-        (result && result.erroredResources.length >= 0) || !!genericError;
-      if (!isFetching && !hasErrors) return null;
+  const renderProcessDialog = React.useCallback(() => {
+    const hasErrors =
+      (result && result.erroredResources.length >= 0) || !!genericError;
+    if (!isFetching && !hasErrors) return null;
 
-      return (
+    return (
+      <GenericRetryableProcessWithProgressDialog
+        progress={progress}
+        result={result}
+        genericError={genericError}
+// @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void'.
+        onAbandon={onAbandon}
+// @ts-expect-error - TS2322 - Type 'RetryOrAbandonCallback | null | undefined' is not assignable to type '() => void'.
+        onRetry={onRetry}
+      />
+    );
+  }, [isFetching, progress, result, onAbandon, onRetry, genericError]);
 
-        <GenericRetryableProcessWithProgressDialog
-          progress={progress}
-          result={result}
-          genericError={genericError}
-          onAbandon={onAbandon}
-          onRetry={onRetry}
-        />
-      );
-    },
-    [isFetching, progress, result, onAbandon, onRetry, genericError]
-  );
-
+// @ts-expect-error - TS2322 - Type '{ ensureProcessIsDone: (options: DoProcessOptions) => Promise<void>; renderProcessDialog: () => JSX.Element | null; }' is not assignable to type 'UseGenericRetryableProcessWithProgressOutput<DoProcessOptions>'.
   return React.useMemo(
     () => ({
       ensureProcessIsDone,
@@ -273,5 +261,4 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
     }),
     [ensureProcessIsDone, renderProcessDialog]
   );
-
 };

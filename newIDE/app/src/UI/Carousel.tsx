@@ -217,7 +217,7 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>({
   const classesForArrowButtons = useStylesForArrowButtons();
   const classesForGridList = useStylesForGridList();
   const classesForGridListItem = useStylesForGridListItem();
-  const scrollView = React.useRef<HTMLUListElement | null | undefined>(null);
+  const scrollView = React.useRef<HTMLUListElement>(null);
   const [hoveredElement, setHoveredElement] = React.useState<
     HTMLElement | null | undefined
   >(null);
@@ -538,7 +538,6 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>({
               <AlertMessage kind="warning">{error}</AlertMessage>
             </div>
           ) : (
-            // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <GridList
               classes={classesForGridList}
               cols={itemsToDisplay.length}

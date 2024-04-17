@@ -256,6 +256,7 @@ export const GameCard = ({
                 )}
 
                 <BackgroundText>
+{ /* @ts-expect-error - TS2339 - Property 'date' does not exist on type 'I18n'. */}
                   <Trans>Created on {i18n.date(game.createdAt * 1000)}</Trans>
                 </BackgroundText>
               </Line>

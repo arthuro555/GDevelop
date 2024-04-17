@@ -310,7 +310,6 @@ export default class EventsFunctionExtractorDialog extends React.Component<
             freezeEventsFunctionType
             getFunctionGroupNames={this._getFunctionGroupNames}
           />
-          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <EventsFunctionParametersEditor
             project={project}
             eventsFunction={eventsFunction}

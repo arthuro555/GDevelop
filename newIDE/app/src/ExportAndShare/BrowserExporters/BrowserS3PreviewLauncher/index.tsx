@@ -187,6 +187,7 @@ export default class BrowserS3PreviewLauncher extends React.Component<
       }
     } catch (error) {
       this.setState({
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'Error | null | undefined'.
         error,
       });
     }

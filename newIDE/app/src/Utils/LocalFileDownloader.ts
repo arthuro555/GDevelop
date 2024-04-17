@@ -2,7 +2,7 @@ import PromisePool from '@supercharge/promise-pool';
 import { retryIfFailed } from './RetryIfFailed';
 
 import optionalRequire from './OptionalRequire';
-const electron = optionalRequire('electron');
+const electron = optionalRequire('electron') as typeof import('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 type Input<Item> = {
@@ -51,6 +51,7 @@ export const downloadUrlsToLocalFiles = async <
         firstError = error;
         const result: ItemResult<Item> = {
           item: urlContainer,
+// @ts-expect-error - TS2322 - Type 'unknown' is not assignable to type 'Error | undefined'.
           error,
         };
         return result;

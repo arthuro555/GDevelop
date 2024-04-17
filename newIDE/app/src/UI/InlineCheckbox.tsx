@@ -25,15 +25,15 @@ const useSmallPaddingCheckboxStyles = makeStyles({
 });
 
 type Props = {
-  id?: string,
-  label?: React.ReactNode | null | undefined,
-  checked: boolean,
-  onCheck?: (e: Record<any, any>, checked: boolean) => undefined | Promise<undefined>,
-  checkedIcon?: React.ReactNode,
-  uncheckedIcon?: React.ReactNode,
-  disabled?: boolean,
-  paddingSize?: 'small',
-  tooltipOrHelperText?: React.ReactNode
+  id?: string;
+  label?: React.ReactNode | null | undefined;
+  checked: boolean;
+  onCheck?: (e: Record<any, any>, checked: boolean) => void;
+  checkedIcon?: React.ReactNode;
+  uncheckedIcon?: React.ReactNode;
+  disabled?: boolean;
+  paddingSize?: 'small';
+  tooltipOrHelperText?: React.ReactNode;
 };
 
 /**
@@ -55,24 +55,21 @@ const InlineCheckbox = ({
   const formGroupClasses = useFormGroupStyles();
   const smallPaddingClasses = useSmallPaddingCheckboxStyles();
   const checkbox = (
-
     <Checkbox
       id={id}
       disabled={disabled}
       checked={checked}
-// @ts-expect-error - TS2322 - Type 'Event | ((any: ChangeEvent<HTMLInputElement>) => any) | undefined' is not assignable to type '((event: ChangeEvent<HTMLInputElement>, checked: boolean) => void) | undefined'.
       onChange={
-// @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2532 - Object is possibly 'undefined'. | TS2531 - Object is possibly 'null'. | TS2339 - Property 'checked' does not exist on type 'EventTarget'. | TS1005 - '}' expected.
-        onCheck ? event: any => onCheck(event, event.target.checked) : undefined
-
+        onCheck
+          ? (event: React.ChangeEvent<HTMLInputElement>) =>
+              onCheck(event, event.target.checked)
+          : undefined
       }
-      classes={paddingSize === 'small' ? smallPaddingClasses : null}
+      classes={paddingSize === 'small' ? smallPaddingClasses : undefined}
       icon={uncheckedIcon}
       checkedIcon={checkedIcon}
       color="secondary"
-
     />
-
   );
   return label ? (
     <FormGroup classes={formGroupClasses}>
@@ -90,7 +87,6 @@ const InlineCheckbox = ({
   ) : (
     checkbox
   );
-
 };
 
 export default InlineCheckbox;

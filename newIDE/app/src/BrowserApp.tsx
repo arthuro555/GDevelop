@@ -80,7 +80,7 @@ export const create = (authentication: Authentication) => {
 
             getStorageProvider,
           }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <MainFrame
               i18n={i18n}
 

@@ -1,8 +1,8 @@
-import { type SortableTreeNode } from '.';
+import type { SortableTreeNode } from '.';
 
 export type MoveFunctionArguments = {
-  targetNode: SortableTreeNode,
-  node: SortableTreeNode,
+  targetNode: SortableTreeNode;
+  node: SortableTreeNode;
 };
 
 export const moveEventToEventsList = ({
@@ -11,10 +11,10 @@ export const moveEventToEventsList = ({
   initialEventsList,
   toIndex,
 }: {
-  targetEventsList: gd.EventsList,
-  movingEvent: gd.BaseEvent,
-  initialEventsList: gd.EventsList,
-  toIndex: number,
+  targetEventsList: gd.EventsList;
+  movingEvent: gd.BaseEvent;
+  initialEventsList: gd.EventsList;
+  toIndex: number;
 }) => {
   initialEventsList.moveEventToAnotherEventsList(
     movingEvent,
@@ -99,7 +99,7 @@ export const isJustBelow = (
 export const getNodeAtPath = (
   path: Array<number>,
   treeData: Array<SortableTreeNode>
-) => {
+): SortableTreeNode => {
   if (path.length === 1) return treeData[path[0]];
   return getNodeAtPath(
     path.slice(0, -1),

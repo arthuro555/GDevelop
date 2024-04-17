@@ -177,29 +177,23 @@ const Physics2Editor = (props: Props) => {
         </SelectField>
       </Line>
       <ResponsiveLineStackLayout>
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('bullet').getLabel()}
           checked={properties.get('bullet').getValue() === 'true'}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('bullet', checked ? '1' : '0')
           }
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('fixedRotation').getLabel()}
           checked={properties.get('fixedRotation').getValue() === 'true'}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('fixedRotation', checked ? '1' : '0')
           }
         />
-        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('canSleep').getLabel()}
           checked={properties.get('canSleep').getValue() === 'true'}
-          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('canSleep', checked ? '1' : '0')
           }

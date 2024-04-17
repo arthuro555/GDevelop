@@ -5,9 +5,9 @@ import optionalRequire from '../OptionalRequire';
 import { MessageDescriptor } from '../i18n/MessageDescriptor.flow';
 import { MessageByLocale } from '../i18n/MessageByLocale';
 import Window from '../Window';
-const fs = optionalRequire('fs');
+const fs = optionalRequire('fs') as typeof import('fs');
 const fsPromises = fs ? fs.promises : null;
-const path = optionalRequire('path');
+const path = optionalRequire('path') as typeof import('path');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
 

@@ -46,7 +46,6 @@ const ElementHighlighterProvider = (props: Props) => {
               label="Highlight field"
               labelPosition="right"
               toggled={shouldHighlightField}
-              // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'active' implicitly has an 'any' type.
               onToggle={(e, active) => setShouldHighlightField(active)}
             />
           </Column>

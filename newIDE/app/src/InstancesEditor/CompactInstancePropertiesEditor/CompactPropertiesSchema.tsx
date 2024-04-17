@@ -4,13 +4,16 @@ import { I18n as I18nType } from '@lingui/core';
 
 import { t } from '@lingui/macro';
 
-
-import { Schema, SectionTitle } from '../../CompactPropertiesEditor';
+import type {
+  Schema,
+  SectionTitle,
+  Field,
+  PrimitiveValueField,
+} from '../../CompactPropertiesEditor';
 
 import enumerateLayers from '../../LayersList/EnumerateLayers';
 
 import { styles } from '.';
-
 
 import Layers from '../../UI/CustomSvgIcons/Layers';
 
@@ -49,6 +52,7 @@ import RotateX from '../../UI/CustomSvgIcons/RotateX';
 import RotateY from '../../UI/CustomSvgIcons/RotateY';
 
 import RotateZ from '../../UI/CustomSvgIcons/RotateZ';
+import type { GetProps } from 'react-dnd';
 
 /**
  * Applies ratio to value without intermediary value to avoid precision issues.
@@ -58,9 +62,9 @@ const applyRatio = ({
   newReferenceValue,
   valueToApplyTo,
 }: {
-  oldReferenceValue: number,
-  newReferenceValue: number,
-  valueToApplyTo: number
+  oldReferenceValue: number;
+  newReferenceValue: number;
+  valueToApplyTo: number;
 }) => {
   return (newReferenceValue / oldReferenceValue) * valueToApplyTo;
 };
@@ -70,34 +74,31 @@ const getEditObjectButton = ({
   onEditObjectByName,
   is3DInstance,
 }: {
-  i18n: I18nType,
-  onEditObjectByName: (name: string) => void,
-  is3DInstance: boolean
-}) => ({
+  i18n: I18nType;
+  onEditObjectByName: (name: string) => void;
+  is3DInstance: boolean;
+}): Field => ({
   label: i18n._(t`Edit object`),
   disabled: 'onValuesDifferent',
   nonFieldType: 'button',
+// @ts-expect-error - TS2322 - Type '(props: {    fontSize: GetProps<typeof Object3d>['fontSize'];}) => JSX.Element' is not assignable to type '(arg1: { fontSize: string; }) => ReactElement<any, string | JSXElementConstructor<any>>'.
   getIcon: is3DInstance
-    ? props: {
-// @ts-expect-error - TS2693 - 'string' only refers to a type, but is being used as a value here.
-    fontSize: string
-  } => <Object3d {...props} />
-
-    : props: {
-// @ts-expect-error - TS2693 - 'string' only refers to a type, but is being used as a value here.
-    fontSize: string
-  } => <Object2d {...props} />,
+    ? (props: { fontSize: GetProps<typeof Object3d>['fontSize'] }) => (
+        <Object3d {...props} />
+      )
+    : (props: { fontSize: GetProps<typeof Object3d>['fontSize'] }) => (
+        <Object2d {...props} />
+      ),
   getValue: (instance: gd.InitialInstance) => instance.getObjectName(),
   onClick: (instance: gd.InitialInstance) =>
     onEditObjectByName(instance.getObjectName()),
-
 });
 
 const getRotationXAndRotationYFields = ({
   i18n,
 }: {
-  i18n: I18nType
-}) => [
+  i18n: I18nType;
+}): Field[] => [
   {
     name: 'Rotation X',
     getLabel: () => i18n._(t`Rotation (X)`),
@@ -105,8 +106,7 @@ const getRotationXAndRotationYFields = ({
     getValue: (instance: gd.InitialInstance) => instance.getRotationX(),
     setValue: (instance: gd.InitialInstance, newValue: number) =>
       instance.setRotationX(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    renderLeftIcon: className => <RotateX className={className} />,
+    renderLeftIcon: (className) => <RotateX className={className} />,
   },
   {
     name: 'Rotation Y',
@@ -115,31 +115,19 @@ const getRotationXAndRotationYFields = ({
     getValue: (instance: gd.InitialInstance) => instance.getRotationY(),
     setValue: (instance: gd.InitialInstance, newValue: number) =>
       instance.setRotationY(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    renderLeftIcon: className => <RotateY className={className} />,
+    renderLeftIcon: (className) => <RotateY className={className} />,
   },
 ];
-const getRotationZField = ({
-  i18n,
-}: {
-  i18n: I18nType
-}) => ({
+const getRotationZField = ({ i18n }: { i18n: I18nType }): Field => ({
   name: 'Angle',
   getLabel: () => i18n._(t`Rotation (Z)`),
   valueType: 'number',
   getValue: (instance: gd.InitialInstance) => instance.getAngle(),
   setValue: (instance: gd.InitialInstance, newValue: number) =>
     instance.setAngle(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <RotateZ className={className} />,
+  renderLeftIcon: (className) => <RotateZ className={className} />,
 });
-const getXAndYFields = (
-  {
-    i18n,
-  }: {
-    i18n: I18nType
-  },
-): Schema => [
+const getXAndYFields = ({ i18n }: { i18n: I18nType }): Field[] => [
   {
     name: 'X',
     getLabel: () => i18n._(t`X`),
@@ -148,7 +136,7 @@ const getXAndYFields = (
     setValue: (instance: gd.InitialInstance, newValue: number) =>
       instance.setX(newValue),
 
-    renderLeftIcon: className => <LetterX className={className} />,
+    renderLeftIcon: (className) => <LetterX className={className} />,
   },
   {
     name: 'Y',
@@ -158,30 +146,26 @@ const getXAndYFields = (
     setValue: (instance: gd.InitialInstance, newValue: number) =>
       instance.setY(newValue),
 
-    renderLeftIcon: className => <LetterY className={className} />,
+    renderLeftIcon: (className) => <LetterY className={className} />,
   },
 ];
-const getZField = ({
-  i18n,
-}: {
-  i18n: I18nType
-}) => ({
+const getZField = ({ i18n }: { i18n: I18nType }): Field => ({
   name: 'Z',
   getLabel: () => i18n._(t`Z`),
   valueType: 'number',
   getValue: (instance: gd.InitialInstance) => instance.getZ(),
   setValue: (instance: gd.InitialInstance, newValue: number) =>
     instance.setZ(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <LetterZ className={className} />,
+
+  renderLeftIcon: (className) => <LetterZ className={className} />,
 });
 const getLayerField = ({
   i18n,
   layout,
 }: {
-  i18n: I18nType,
-  layout: gd.Layout
-}) => ({
+  i18n: I18nType;
+  layout: gd.Layout;
+}): Field => ({
   name: 'Layer',
   getLabel: () => i18n._(t`Layer`),
   valueType: 'string',
@@ -189,29 +173,20 @@ const getLayerField = ({
   getValue: (instance: gd.InitialInstance) => instance.getLayer(),
   setValue: (instance: gd.InitialInstance, newValue: string) =>
     instance.setLayer(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <Layers className={className} />,
+
+  renderLeftIcon: (className) => <Layers className={className} />,
 });
-const getZOrderField = ({
-  i18n,
-}: {
-  i18n: I18nType
-}) => ({
+const getZOrderField = ({ i18n }: { i18n: I18nType }): Field => ({
   name: 'Z Order',
   getLabel: () => i18n._(t`Z Order`),
   valueType: 'number',
   getValue: (instance: gd.InitialInstance) => instance.getZOrder(),
   setValue: (instance: gd.InitialInstance, newValue: number) =>
     instance.setZOrder(newValue),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <LetterZ className={className} />,
+  renderLeftIcon: (className) => <LetterZ className={className} />,
 });
 
-const getTitleRow = ({
-  i18n,
-}: {
-  i18n: I18nType
-}) => ({
+const getTitleRow = ({ i18n }: { i18n: I18nType }): Field => ({
   name: 'Title',
   type: 'row',
   preventWrap: true,
@@ -219,9 +194,7 @@ const getTitleRow = ({
     {
       name: 'Instance',
       title: i18n._(t`Instance`),
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type.
-      renderLeftIcon: className => (
-
+      renderLeftIcon: (className) => (
         <Instance className={className} style={styles.icon} />
       ),
       getValue: (instance: gd.InitialInstance) => instance.getObjectName(),
@@ -234,29 +207,24 @@ const getTitleRow = ({
         instance.isSealed()
           ? i18n._(t`Free instance`)
           : instance.isLocked()
-          ? i18n._(t`Prevent selection in the editor`)
-          : i18n._(t`Lock position/angle in the editor`),
+            ? i18n._(t`Prevent selection in the editor`)
+            : i18n._(t`Lock position/angle in the editor`),
       valueType: 'enumIcon',
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-      renderIcon: value =>
+      renderIcon: (value) =>
         value === 'sealed' ? (
-
           <RemoveCircle style={styles.icon} />
         ) : value === 'locked' ? (
-
           <Lock style={styles.icon} />
         ) : (
-
           <LockOpen style={styles.icon} />
         ),
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-      isHighlighted: value => value === 'locked' || value === 'sealed',
+      isHighlighted: (value) => value === 'locked' || value === 'sealed',
       getValue: (instance: gd.InitialInstance) =>
         instance.isSealed()
           ? 'sealed'
           : instance.isLocked()
-          ? 'locked'
-          : 'free',
+            ? 'locked'
+            : 'free',
       setValue: (instance: gd.InitialInstance, newValue: boolean) => {
         if (instance.isSealed()) {
           instance.setSealed(false);
@@ -280,15 +248,17 @@ const getWidthField = ({
   getInstanceDepth,
   forceUpdate,
 }: {
-  i18n: I18nType,
-  getInstanceWidth: (arg1: gd.InitialInstance) => number,
-  getInstanceHeight: (arg1: gd.InitialInstance) => number,
-  getInstanceDepth: (arg1: gd.InitialInstance) => number,
-  forceUpdate: () => void
-}) => ({
+  i18n: I18nType;
+  getInstanceWidth: (arg1: gd.InitialInstance) => number;
+  getInstanceHeight: (arg1: gd.InitialInstance) => number;
+  getInstanceDepth: (arg1: gd.InitialInstance) => number;
+  forceUpdate: () => void;
+}): Field => ({
   name: 'Width',
   getLabel: () => i18n._(t`Width`),
+// @ts-expect-error - TS2322 - Type '"number"' is not assignable to type '"string"'.
   valueType: 'number',
+// @ts-expect-error - TS2322 - Type '(arg1: gd.InitialInstance) => number' is not assignable to type '(arg1: any) => string'.
   getValue: getInstanceWidth,
   setValue: (instance: gd.InitialInstance, newValue: number) => {
     const shouldKeepRatio = instance.shouldKeepRatio();
@@ -321,10 +291,9 @@ const getWidthField = ({
     instance.setHasCustomDepth(true);
     forceUpdate();
   },
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <LetterW className={className} />,
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  getEndAdornmentIcon: className => <Restore className={className} />,
+  renderLeftIcon: (className) => <LetterW className={className} />,
+  //@ts-ignore Genuine type mismatch, whoever coded this please fix this
+  getEndAdornmentIcon: (className) => <Restore className={className} />,
   onClickEndAdornment: (instance: gd.InitialInstance) => {
     instance.setHasCustomSize(false);
     instance.setHasCustomDepth(false);
@@ -338,15 +307,17 @@ const getHeightField = ({
   getInstanceDepth,
   forceUpdate,
 }: {
-  i18n: I18nType,
-  getInstanceWidth: (arg1: gd.InitialInstance) => number,
-  getInstanceHeight: (arg1: gd.InitialInstance) => number,
-  getInstanceDepth: (arg1: gd.InitialInstance) => number,
-  forceUpdate: () => void
-}) => ({
+  i18n: I18nType;
+  getInstanceWidth: (arg1: gd.InitialInstance) => number;
+  getInstanceHeight: (arg1: gd.InitialInstance) => number;
+  getInstanceDepth: (arg1: gd.InitialInstance) => number;
+  forceUpdate: () => void;
+}): Field => ({
   name: 'Height',
   getLabel: () => i18n._(t`Height`),
+// @ts-expect-error - TS2322 - Type '"number"' is not assignable to type '"string"'.
   valueType: 'number',
+// @ts-expect-error - TS2322 - Type '(arg1: gd.InitialInstance) => number' is not assignable to type '(arg1: any) => string'.
   getValue: getInstanceHeight,
   setValue: (instance: gd.InitialInstance, newValue: number) => {
     const shouldKeepRatio = instance.shouldKeepRatio();
@@ -379,10 +350,9 @@ const getHeightField = ({
     instance.setHasCustomDepth(true);
     forceUpdate();
   },
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <LetterH className={className} />,
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  getEndAdornmentIcon: className => <Restore className={className} />,
+  renderLeftIcon: (className) => <LetterH className={className} />,
+  // @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  getEndAdornmentIcon: (className) => <Restore className={className} />,
   onClickEndAdornment: (instance: gd.InitialInstance) => {
     instance.setHasCustomSize(false);
     instance.setHasCustomDepth(false);
@@ -396,15 +366,17 @@ const getDepthField = ({
   getInstanceDepth,
   forceUpdate,
 }: {
-  i18n: I18nType,
-  getInstanceWidth: (arg1: gd.InitialInstance) => number,
-  getInstanceHeight: (arg1: gd.InitialInstance) => number,
-  getInstanceDepth: (arg1: gd.InitialInstance) => number,
-  forceUpdate: () => void
-}) => ({
+  i18n: I18nType;
+  getInstanceWidth: (arg1: gd.InitialInstance) => number;
+  getInstanceHeight: (arg1: gd.InitialInstance) => number;
+  getInstanceDepth: (arg1: gd.InitialInstance) => number;
+  forceUpdate: () => void;
+}): Field => ({
   name: 'Depth',
   getLabel: () => i18n._(t`Depth`),
+// @ts-expect-error - TS2322 - Type '"number"' is not assignable to type '"string"'.
   valueType: 'number',
+// @ts-expect-error - TS2322 - Type '(arg1: gd.InitialInstance) => number' is not assignable to type '(arg1: any) => string'.
   getValue: getInstanceDepth,
   setValue: (instance: gd.InitialInstance, newValue: number) => {
     const shouldKeepRatio = instance.shouldKeepRatio();
@@ -437,10 +409,9 @@ const getDepthField = ({
     instance.setHasCustomDepth(true);
     forceUpdate();
   },
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderLeftIcon: className => <LetterD className={className} />,
-// @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  getEndAdornmentIcon: className => <Restore className={className} />,
+  renderLeftIcon: (className) => <LetterD className={className} />,
+  // @ts-expect-error - TS7006 - Parameter 'className' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  getEndAdornmentIcon: (className) => <Restore className={className} />,
   onClickEndAdornment: (instance: gd.InitialInstance) => {
     instance.setHasCustomSize(false);
     instance.setHasCustomDepth(false);
@@ -454,43 +425,38 @@ const getKeepRatioField = ({
   getInstanceDepth,
   forceUpdate,
 }: {
-  i18n: I18nType,
-  getInstanceWidth: (arg1: gd.InitialInstance) => number,
-  getInstanceHeight: (arg1: gd.InitialInstance) => number,
-  getInstanceDepth: (arg1: gd.InitialInstance) => number,
-  forceUpdate: () => void
-}) => ({
+  i18n: I18nType;
+  getInstanceWidth: (arg1: gd.InitialInstance) => number;
+  getInstanceHeight: (arg1: gd.InitialInstance) => number;
+  getInstanceDepth: (arg1: gd.InitialInstance) => number;
+  forceUpdate: () => void;
+}): PrimitiveValueField => ({
   name: 'Keep ratio',
   getLabel: () => i18n._(t`Keep ratio`),
   valueType: 'enumIcon',
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-  isHighlighted: value => value,
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-  renderIcon: value =>
-
+  isHighlighted: (value) => value,
+  renderIcon: (value) =>
     value ? <Link style={styles.icon} /> : <Unlink style={styles.icon} />,
   getValue: (instance: gd.InitialInstance) => instance.shouldKeepRatio(),
   setValue: (instance: gd.InitialInstance, newValue: boolean) =>
     instance.setShouldKeepRatio(newValue),
 });
 
-export const makeSchema = (
-  {
-    is3DInstance,
-    i18n,
-    forceUpdate,
-    onEditObjectByName,
-    onGetInstanceSize,
-    layout,
-  }: {
-    is3DInstance: boolean,
-    i18n: I18nType,
-    forceUpdate: () => void,
-    onEditObjectByName: (name: string) => void,
-    onGetInstanceSize: (arg1: gd.InitialInstance) => [number, number, number],
-    layout: gd.Layout
-  },
-): Schema => {
+export const makeSchema = ({
+  is3DInstance,
+  i18n,
+  forceUpdate,
+  onEditObjectByName,
+  onGetInstanceSize,
+  layout,
+}: {
+  is3DInstance: boolean;
+  i18n: I18nType;
+  forceUpdate: () => void;
+  onEditObjectByName: (name: string) => void;
+  onGetInstanceSize: (arg1: gd.InitialInstance) => [number, number, number];
+  layout: gd.Layout;
+}): Schema => {
   const getInstanceWidth = (instance: gd.InitialInstance) =>
     instance.hasCustomSize()
       ? instance.getCustomWidth()
@@ -636,10 +602,13 @@ export const makeSchema = (
   ];
 };
 
-export const reorderInstanceSchemaForCustomProperties = (schema: Schema, i18n: I18nType): Schema => {
+export const reorderInstanceSchemaForCustomProperties = (
+  schema: Schema,
+  i18n: I18nType
+): Schema => {
   const newSchema = [...schema];
   const animationFieldIndex = newSchema.findIndex(
-    field => field.name && field.name === 'animation'
+    (field) => 'name' in field && field.name === 'animation'
   );
   const contentSectionTitle: SectionTitle = {
     nonFieldType: 'sectionTitle',
@@ -661,7 +630,7 @@ export const reorderInstanceSchemaForCustomProperties = (schema: Schema, i18n: I
       name: 'Animation',
       type: 'row',
       title: i18n._(t`Animation`),
-      // $FlowIgnore - We are confident the animation field is not a row or a column.
+// @ts-expect-error - TS2322 - Type '{ hideLabel: true; valueType: "number"; getValue: (arg1: any) => number; setValue: (instance: any, newValue: number) => void; getEndAdornment?: ((arg1: any) => { label: string; tooltipContent: ReactNode; }) | undefined; ... 9 more ...; onEditButtonClick?: (() => void) | undefined; } | ... 10 more ... | { ...; }' is not assignable to type 'Field'.
       children: [{ ...animationField, hideLabel: true }],
     },
   ];

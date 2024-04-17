@@ -147,6 +147,7 @@ function LeaderboardSortOptionsDialog({
               value={sortOrder}
               floatingLabelText={<Trans>Scores sort order</Trans>}
               onChange={(e, i, newValue) => {
+// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'SetStateAction<LeaderboardSortOption>'.
                 setSortOrder(newValue);
               }}
             >
@@ -161,7 +162,6 @@ function LeaderboardSortOptionsDialog({
                 label={t`Higher is better`}
               />
             </SelectField>
-            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Checkbox
               label={
                 <>

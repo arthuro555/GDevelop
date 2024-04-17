@@ -23,7 +23,7 @@ export type EditorProps = {
    * The edited object. It can be undefined for sub-ObjectConfiguration of
    * custom object. There is no event to refactor in this case.
    */
-  object?: gd.Object;
+  object?: gd.gdObject;
   /**
    * The object name used to build default file name for Piskel.
    * For custom objects, the children names are appended.

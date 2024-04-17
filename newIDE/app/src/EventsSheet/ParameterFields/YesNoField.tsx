@@ -65,6 +65,7 @@ export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
               id: 'no-button',
             }}
             onChange={props.onChange}
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<TwoStatesButtonInterface | null | undefined>' is not assignable to type 'Ref<TwoStatesButtonInterface> | undefined'.
             ref={button}
           />
         </Line>

@@ -56,6 +56,7 @@ import ContextMenu, {
   ContextMenuInterface,
 } from '../../../../UI/Menu/ContextMenu';
 import type { ClientCoordinates } from '../../../../Utils/UseLongTouch';
+// @ts-expect-error - TS2307 - Cannot find module '../../../../UI/Menu/Menu.flow' or its corresponding type declarations.
 import { MenuItemTemplate } from '../../../../UI/Menu/Menu.flow';
 
 const PADDING = 16;
@@ -111,7 +112,7 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
       forceUpdate,
     }));
 
-    const draggedUserRef = React.useRef<User | null | undefined>(null);
+    const draggedUserRef = React.useRef<User>(null);
     const [selectedUser, setSelectedUser] = React.useState<
       User | null | undefined
     >(null);
@@ -134,6 +135,7 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
     >(null);
 
     const setDraggedUser = React.useCallback((user: User) => {
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
       draggedUserRef.current = user;
     }, []);
 
@@ -258,6 +260,7 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
     const groupsAndMembers = Object.keys(membersByGroupId)
       .map((id) => (id === 'NONE' ? null : membersByGroupId[id]))
       .filter(Boolean)
+// @ts-expect-error - TS2531 - Object is possibly 'null'. | TS2531 - Object is possibly 'null'.
       .sort((a, b) => a.group.name.localeCompare(b.group.name));
 
     return (
@@ -335,11 +338,13 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
             )}
             <ColumnStackLayout noMargin>
               {groupsAndMembers.length > 0 ? (
+// @ts-expect-error - TS2339 - Property 'group' does not exist on type 'GroupWithMembers | null'. | TS2339 - Property 'members' does not exist on type 'GroupWithMembers | null'.
                 groupsAndMembers.map(({ group, members }) => {
                   const membersToDisplay = [...members];
                   if (!!movingUsers && movingUsers.groupId === group.id) {
                     movingUsers.users.forEach((movingUser) => {
                       if (
+// @ts-expect-error - TS7006 - Parameter 'member' implicitly has an 'any' type.
                         !members.some((member) => member.id === movingUser.id)
                       ) {
                         membersToDisplay.push(movingUser);
@@ -354,6 +359,7 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
                         const droppedUser = draggedUserRef.current;
                         if (!droppedUser) return;
                         changeUserGroup(droppedUser, group);
+// @ts-expect-error - TS2540 - Cannot assign to 'current' because it is a read-only property.
                         draggedUserRef.current = null;
                       }}
                       key={group.id}
@@ -424,6 +430,7 @@ const TeamSection = React.forwardRef<TeamSectionInterface, Props>(
           </div>
         </SectionRow>
         <ContextMenu
+// @ts-expect-error - TS2322 - Type 'MutableRefObject<ContextMenuInterface | null | undefined>' is not assignable to type 'Ref<ContextMenuInterface> | undefined'.
           ref={contextMenu}
           buildMenuTemplate={(_i18n, { member }) =>
             buildContextMenu(_i18n, member)
