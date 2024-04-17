@@ -8,20 +8,17 @@ import {
 import { createTree, TreeNode } from './CreateTree';
 import { makeTestExtensions } from '../fixtures/TestExtensions';
 import { EnumeratedExpressionMetadata } from './EnumeratedInstructionOrExpressionMetadata';
-const gd: libGDevelop = global.gd;
 
 const makeFakeI18n = (fakeI18n: undefined): I18nType => ({
-// @ts-expect-error - TS2698 - Spread types may only be created from object types.
+  // @ts-expect-error - TS2698 - Spread types may only be created from object types.
   ...fakeI18n,
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('EnumerateExpressions', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate and filter free expressions (number only)', () => {
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+    // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
     const freeExpressions = enumerateFreeExpressions('number', makeFakeI18n());
 
     // Should find atan, atan2, atanh math function
@@ -34,9 +31,8 @@ describe('EnumerateExpressions', () => {
     expect(filterExpressions(freeExpressions, 'CursorY')).toHaveLength(1);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate and filter free expressions', () => {
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+    // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
     const freeExpressions = enumerateFreeExpressions('string', makeFakeI18n());
 
     // Should find ToString and LargeNumberToString:
@@ -52,7 +48,6 @@ describe('EnumerateExpressions', () => {
     expect(filterExpressions(freeExpressions, 'CursorY')).toHaveLength(1);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate and filter object expressions (number only)', () => {
     const spriteObjectExpressions = enumerateObjectExpressions(
       'number',
@@ -71,7 +66,6 @@ describe('EnumerateExpressions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate object expressions', () => {
     const spriteObjectExpressions = enumerateObjectExpressions(
       'string',
@@ -95,7 +89,6 @@ describe('EnumerateExpressions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate and filter behavior expressions (number only)', () => {
     const platformerObjectBehaviorExpressions = enumerateBehaviorExpressions(
       'number',
@@ -120,7 +113,6 @@ describe('EnumerateExpressions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate behavior expressions', () => {
     makeTestExtensions(gd);
     const fakeBehaviorExpressions = enumerateBehaviorExpressions(
@@ -141,7 +133,6 @@ describe('EnumerateExpressions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can create the tree of some object expressions', () => {
     const objectsExpressions = enumerateObjectExpressions('number', '');
     expect(createTree(objectsExpressions)).toMatchObject({
@@ -164,14 +155,14 @@ describe('EnumerateExpressions', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate all expressions (number only)', () => {
     makeTestExtensions(gd);
-    const allNumberExpressions: Array<EnumeratedExpressionMetadata> = enumerateAllExpressions(
-      'number',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
-      makeFakeI18n()
-    );
+    const allNumberExpressions: Array<EnumeratedExpressionMetadata> =
+      enumerateAllExpressions(
+        'number',
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        makeFakeI18n()
+      );
     // Check a free expression:
     expect(allNumberExpressions).toContainEqual(
       expect.objectContaining({
@@ -195,14 +186,14 @@ describe('EnumerateExpressions', () => {
     ).toHaveLength(0);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate all expressions', () => {
     makeTestExtensions(gd);
-    const allExpressions: Array<EnumeratedExpressionMetadata> = enumerateAllExpressions(
-      'string',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
-      makeFakeI18n()
-    );
+    const allExpressions: Array<EnumeratedExpressionMetadata> =
+      enumerateAllExpressions(
+        'string',
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        makeFakeI18n()
+      );
     // Check a free expression:
     expect(allExpressions).toContainEqual(
       expect.objectContaining({
@@ -227,20 +218,20 @@ describe('EnumerateExpressions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can create the tree of all expressions', () => {
-    const allExpressions: Array<EnumeratedExpressionMetadata> = enumerateAllExpressions(
-      'number',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
-      makeFakeI18n()
-    );
+    const allExpressions: Array<EnumeratedExpressionMetadata> =
+      enumerateAllExpressions(
+        'number',
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        makeFakeI18n()
+      );
     const allExpressionsTree = createTree(allExpressions);
 
     // Check that some free expressions are there
     expect(allExpressionsTree).toHaveProperty('General');
     const generalTreeNode: TreeNode<EnumeratedExpressionMetadata> =
       // $FlowFixMe
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"General"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"General"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
       allExpressionsTree['General'];
     expect(generalTreeNode).toMatchObject({
       'Timers and time': {
@@ -263,7 +254,7 @@ describe('EnumerateExpressions', () => {
     expect(generalTreeNode).toHaveProperty('Objects');
     expect(
       // $FlowFixMe
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Objects"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Objects"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
       generalTreeNode['Objects']
     ).toMatchObject({
       Angle: {
@@ -302,7 +293,7 @@ describe('EnumerateExpressions', () => {
     // Check that some behavior expressions are there
     const movementTreeNode: TreeNode<EnumeratedExpressionMetadata> =
       // $FlowFixMe
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Movement"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"Movement"' can't be used to index type 'TreeNode<EnumeratedExpressionMetadata>'.
       allExpressionsTree['Movement'];
     expect(movementTreeNode).toHaveProperty('Platform behavior');
     expect(movementTreeNode['Platform behavior']).toMatchObject({

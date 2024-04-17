@@ -2,22 +2,24 @@ import * as React from 'react';
 import isDialogOpen from '../UI/OpenedDialogChecker';
 import { isMacLike } from '../Utils/Platform';
 import reservedShortcuts from './ReservedShortcuts';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import commandsList, { CommandName } from '../CommandPalette/CommandsList';
 import isUserTyping from './IsUserTyping';
 import defaultShortcuts, { ShortcutMap } from './DefaultShortcuts';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 const electron = optionalRequire('electron');
 
 // Valid action keys
 type KeyType = // A-Z
-'alphabet' | // Numrow 0-9
-'number' | // F1-F12
-'fn-row' | // Numpad+, Numpad-
-'numpad-arith' | // Numrow-, Numrow=
-'numrow-arith' | 'other'; // Tab, Space
+
+    | 'alphabet' // Numrow 0-9
+    | 'number' // F1-F12
+    | 'fn-row' // Numpad+, Numpad-
+    | 'numpad-arith' // Numrow-, Numrow=
+    | 'numrow-arith'
+    | 'other'; // Tab, Space
 
 const eventWhichToCode = {
   '48': 'Digit0',
@@ -74,7 +76,7 @@ const eventWhichToCode = {
 const getCodeFromEvent = (e: KeyboardEvent): string => {
   // Somehow `which` was sometimes reported to be undefined.
   if (typeof e.which === 'number' && e.which.toString() in eventWhichToCode)
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '48': "Digit0"; readonly '49': "Digit1"; readonly '50': "Digit2"; readonly '51': "Digit3"; readonly '52': "Digit4"; readonly '53': "Digit5"; readonly '54': "Digit6"; readonly '55': "Digit7"; readonly '56': "Digit8"; ... 39 more ...; readonly '188': "Comma"; }'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '48': "Digit0"; readonly '49': "Digit1"; readonly '50': "Digit2"; readonly '51': "Digit3"; readonly '52': "Digit4"; readonly '53': "Digit5"; readonly '54': "Digit6"; readonly '55': "Digit7"; readonly '56': "Digit8"; ... 39 more ...; readonly '188': "Comma"; }'.
     return eventWhichToCode[e.which.toString()];
   return e.code || ''; // Somehow `code` was sometimes reported to be undefined.
 };
@@ -134,9 +136,11 @@ export const isValidShortcutEvent = (e: KeyboardEvent): boolean => {
 /**
  * Extracts shortcut-related information from given event object
  */
-export const getShortcutMetadataFromEvent = (e: KeyboardEvent): {
-  shortcutString: string,
-  isValid: boolean
+export const getShortcutMetadataFromEvent = (
+  e: KeyboardEvent
+): {
+  shortcutString: string;
+  isValid: boolean;
 } => {
   const shortcutString = getShortcutStringFromEvent(e);
   const isValidKey = isValidShortcutEvent(e);
@@ -150,7 +154,7 @@ export const getShortcutMetadataFromEvent = (e: KeyboardEvent): {
  */
 export const useShortcutMap = (): ShortcutMap => {
   const preferences = React.useContext(PreferencesContext);
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
   const userShortcutMap = preferences.values.userShortcutMap;
   return { ...defaultShortcuts, ...userShortcutMap };
 };
@@ -159,44 +163,43 @@ export const useShortcutMap = (): ShortcutMap => {
  * Listens for keyboard shortcuts and launches
  * callback with corresponding command
  */
-export const useKeyboardShortcuts = (onRunCommand: (arg1: CommandName) => void) => {
+export const useKeyboardShortcuts = (
+  onRunCommand: (arg1: CommandName) => void
+) => {
   const shortcutMap = useShortcutMap();
 
-  React.useEffect(
-    () => {
-      const handler = (e: KeyboardEvent) => {
-        // Extract shortcut from event object and check if it's valid
-        const shortcutData = getShortcutMetadataFromEvent(e);
-        if (!shortcutData.isValid) return;
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Extract shortcut from event object and check if it's valid
+      const shortcutData = getShortcutMetadataFromEvent(e);
+      if (!shortcutData.isValid) return;
 
-        // Get corresponding command, if it exists
-        const commandName = Object.keys(shortcutMap).find(
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, string>>'.
-          name => shortcutMap[name] === shortcutData.shortcutString
-        );
-        if (!commandName) return;
+      // Get corresponding command, if it exists
+      const commandName = Object.keys(shortcutMap).find(
+        // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, string>>'.
+        (name) => shortcutMap[name] === shortcutData.shortcutString
+      );
+      if (!commandName) return;
 
-        // On desktop app, ignore shortcuts that are handled by Electron
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, CommandMetadata>>'.
-        if (electron && commandsList[commandName].handledByElectron) return;
+      // On desktop app, ignore shortcuts that are handled by Electron
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, CommandMetadata>>'.
+      if (electron && commandsList[commandName].handledByElectron) return;
 
-        // e.preventDefault tends to block user from typing,
-        // so do it only if user is not typing.
-        if (isUserTyping()) return;
-        e.preventDefault();
+      // e.preventDefault tends to block user from typing,
+      // so do it only if user is not typing.
+      if (isUserTyping()) return;
+      e.preventDefault();
 
-        // Discard shortcut presses if a dialog is open
-        if (isDialogOpen()) return;
+      // Discard shortcut presses if a dialog is open
+      if (isDialogOpen()) return;
 
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
-        onRunCommand(commandName);
-      };
+      // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
+      onRunCommand(commandName);
+    };
 
-      document.addEventListener('keydown', handler);
-      return () => document.removeEventListener('keydown', handler);
-    },
-    [onRunCommand, shortcutMap]
-  );
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [onRunCommand, shortcutMap]);
 };
 
 /**
@@ -222,7 +225,7 @@ export const getShortcutDisplayName = (shortcutString?: string | null) => {
 
   return shortcutString
     .split('+')
-    .map<string>(keyCode => {
+    .map<string>((keyCode) => {
       if (keyCode === 'CmdOrCtrl') return isMacLike() ? 'Cmd' : 'Ctrl';
       if (keyCode === 'Shift' || keyCode === 'Alt') return keyCode;
       return getKeyDisplayName(keyCode);
@@ -250,7 +253,7 @@ const getElectronKeyString = (code: string) => {
 export const getElectronAccelerator = (shortcutString: string) => {
   return shortcutString
     .split('+')
-    .map<string>(keyCode => {
+    .map<string>((keyCode) => {
       if (keyCode === 'CmdOrCtrl' || keyCode === 'Shift' || keyCode === 'Alt')
         return keyCode;
       return getElectronKeyString(keyCode);

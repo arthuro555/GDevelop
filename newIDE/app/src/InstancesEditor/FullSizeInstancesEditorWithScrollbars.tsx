@@ -3,20 +3,19 @@ import ViewPosition from './ViewPosition';
 import throttle from 'lodash/throttle';
 import InstancesEditor, {
   InstancesEditorPropsWithoutSizeAndScroll,
-// @ts-expect-error - TS6142 - Module './index' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/index.tsx', but '--jsx' is not set.
 } from './index';
 import { useScreenType } from '../UI/Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module '../UI/FullSizeMeasurer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FullSizeMeasurer.tsx', but '--jsx' is not set.
+
 import { FullSizeMeasurer } from '../UI/FullSizeMeasurer';
 import useForceUpdate from '../Utils/UseForceUpdate';
 import { useDebounce } from '../Utils/UseDebounce';
 import Rectangle from '../Utils/Rectangle';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import { useIsMounted } from '../Utils/UseIsMounted';
-// @ts-expect-error - TS6142 - Module '../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../UI/ErrorBoundary';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 
 const SCROLLBAR_DETECTION_WIDTH = 50;
@@ -32,8 +31,10 @@ const styles = {
   },
 } as const;
 
-type Props = (InstancesEditorPropsWithoutSizeAndScroll) & {
-  wrappedEditorRef: (arg1?: InstancesEditor | null | undefined) => void | null | undefined
+type Props = InstancesEditorPropsWithoutSizeAndScroll & {
+  wrappedEditorRef: (
+    arg1?: InstancesEditor | null | undefined
+  ) => void | null | undefined;
 };
 
 const noop = () => {};
@@ -50,7 +51,9 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
   const yScrollbarThumb = React.useRef<HTMLDivElement | null | undefined>(null);
 
   const showScrollbars = React.useRef<boolean>(false);
-  const timeoutHidingScrollbarsId = React.useRef<number | null | undefined>(null);
+  const timeoutHidingScrollbarsId = React.useRef<number | null | undefined>(
+    null
+  );
   const isDragging = React.useRef<boolean>(false);
 
   const xValue = React.useRef<number>(0);
@@ -76,20 +79,17 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
     });
   }
 
-  const hideScrollbarsAfterDelay = React.useCallback(
-    () => {
-      if (timeoutHidingScrollbarsId.current) {
-        clearTimeout(timeoutHidingScrollbarsId.current);
-      }
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
-      timeoutHidingScrollbarsId.current = setTimeout(() => {
-        if (!isMounted.current) return;
-        showScrollbars.current = false;
-        forceUpdate();
-      }, 1500);
-    },
-    [forceUpdate, isMounted]
-  );
+  const hideScrollbarsAfterDelay = React.useCallback(() => {
+    if (timeoutHidingScrollbarsId.current) {
+      clearTimeout(timeoutHidingScrollbarsId.current);
+    }
+    // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+    timeoutHidingScrollbarsId.current = setTimeout(() => {
+      if (!isMounted.current) return;
+      showScrollbars.current = false;
+      forceUpdate();
+    }, 1500);
+  }, [forceUpdate, isMounted]);
 
   const hideScrollbarsAfterDelayDebounced = useDebounce(() => {
     hideScrollbarsAfterDelay();
@@ -204,9 +204,8 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
 
   // When the user releases the thumb, we need to stop listening to mouse move and up events.
   const makeMouseUpXThumbHandler = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'mouseMoveHandler' implicitly has an 'any' type.
-    mouseMoveHandler =>
-      (function mouseUpHandler(e: MouseEvent) {
+    (mouseMoveHandler) =>
+      function mouseUpHandler(e: MouseEvent) {
         isDragging.current = false;
         if (
           e.target !== xScrollbarTrack.current &&
@@ -216,13 +215,12 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
         }
         document.removeEventListener('mousemove', mouseMoveHandler);
         document.removeEventListener('mouseup', mouseUpHandler);
-      }),
+      },
     [hideScrollbarsAfterDelay]
   );
   const makeMouseUpYThumbHandler = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'mouseMoveHandler' implicitly has an 'any' type.
-    mouseMoveHandler =>
-      (function mouseUpHandler(e: MouseEvent) {
+    (mouseMoveHandler) =>
+      function mouseUpHandler(e: MouseEvent) {
         isDragging.current = false;
         if (
           e.target !== yScrollbarTrack.current &&
@@ -232,7 +230,7 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
         }
         document.removeEventListener('mousemove', mouseMoveHandler);
         document.removeEventListener('mouseup', mouseUpHandler);
-      }),
+      },
     [hideScrollbarsAfterDelay]
   );
 
@@ -274,33 +272,30 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
   );
 
   // Add the mouse down events once on mount.
-  React.useEffect(
-    () => {
-      const xScrollbarThumbElement = xScrollbarThumb.current;
-      const yScrollbarThumbElement = yScrollbarThumb.current;
-      if (!xScrollbarThumbElement || !yScrollbarThumbElement) return;
+  React.useEffect(() => {
+    const xScrollbarThumbElement = xScrollbarThumb.current;
+    const yScrollbarThumbElement = yScrollbarThumb.current;
+    if (!xScrollbarThumbElement || !yScrollbarThumbElement) return;
 
-      xScrollbarThumbElement.addEventListener(
+    xScrollbarThumbElement.addEventListener(
+      'mousedown',
+      mouseDownXThumbHandler
+    );
+    yScrollbarThumbElement.addEventListener(
+      'mousedown',
+      mouseDownYThumbHandler
+    );
+    return () => {
+      xScrollbarThumbElement.removeEventListener(
         'mousedown',
         mouseDownXThumbHandler
       );
-      yScrollbarThumbElement.addEventListener(
+      yScrollbarThumbElement.removeEventListener(
         'mousedown',
         mouseDownYThumbHandler
       );
-      return () => {
-        xScrollbarThumbElement.removeEventListener(
-          'mousedown',
-          mouseDownXThumbHandler
-        );
-        yScrollbarThumbElement.removeEventListener(
-          'mousedown',
-          mouseDownYThumbHandler
-        );
-      };
-    },
-    [mouseDownXThumbHandler, mouseDownYThumbHandler]
-  );
+    };
+  }, [mouseDownXThumbHandler, mouseDownYThumbHandler]);
 
   const setAndAdjust = React.useCallback(
     ({
@@ -309,10 +304,10 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
       newWidth,
       newHeight,
     }: {
-      newXValue: number,
-      newYValue: number,
-      newWidth: number,
-      newHeight: number
+      newXValue: number;
+      newYValue: number;
+      newWidth: number;
+      newHeight: number;
     }) => {
       xMax.current = Math.max(Math.abs(newXValue) + 100, xMax.current);
       yMax.current = Math.max(Math.abs(newYValue) + 100, yMax.current);
@@ -362,40 +357,32 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
   // Ensure the X Scrollbar doesn't go out of bounds.
   const minXScrollbarLeftPosition = '0%';
   const maxXScrollbarLeftPosition = `calc(100% - ${SCROLLBAR_SIZE}px - ${SCROLLBAR_THUMB_WIDTH}px)`;
-  const expectedXScrollbarLeftPosition = `calc(${((xValue.current -
-    xMin.current) /
-    (xMax.current - xMin.current)) *
-    100 +
-    '%'} - ${SCROLLBAR_SIZE}px / 2)`;
+  const expectedXScrollbarLeftPosition = `calc(${
+    ((xValue.current - xMin.current) / (xMax.current - xMin.current)) * 100 +
+    '%'
+  } - ${SCROLLBAR_SIZE}px / 2)`;
   const xScrollbarLeftPosition = `max(min(${expectedXScrollbarLeftPosition}, ${maxXScrollbarLeftPosition}), ${minXScrollbarLeftPosition})`;
 
   // Ensure the Y Scrollbar doesn't go out of bounds.
   const minYScrollbarTopPosition = '0%';
   const maxYScrollbarTopPosition = `calc(100% - ${SCROLLBAR_SIZE}px - ${SCROLLBAR_THUMB_WIDTH}px)`;
-  const expectedYScrollbarTopPosition = `calc(${((yValue.current -
-    yMin.current) /
-    (yMax.current - yMin.current)) *
-    100 +
-    '%'} - ${SCROLLBAR_SIZE}px / 2)`;
+  const expectedYScrollbarTopPosition = `calc(${
+    ((yValue.current - yMin.current) / (yMax.current - yMin.current)) * 100 +
+    '%'
+  } - ${SCROLLBAR_SIZE}px / 2)`;
   const yScrollbarTopPosition = `max(min(${expectedYScrollbarTopPosition}, ${maxYScrollbarTopPosition}), ${minYScrollbarTopPosition})`;
 
   const screenType = useScreenType();
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FullSizeMeasurer>
-{ /* @ts-expect-error - TS7031 - Binding element 'width' implicitly has an 'any' type. | TS7031 - Binding element 'height' implicitly has an 'any' type. */}
       {({ width, height }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div style={styles.container}>
           {width !== undefined && height !== undefined && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               componentTitle={<Trans>Instances editor</Trans>}
               scope="scene-editor-canvas"
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <InstancesEditor
                 onViewPositionChanged={
                   screenType !== 'touch' ? handleViewPositionChange : noop
@@ -415,13 +402,13 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
                       // Flow says className is not present in ElementTarget but this piece
                       // of code cannot break.
                       // $FlowFixMe
-// @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
+                      // @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
                       relatedTarget.className &&
-// @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
+                      // @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
                       typeof relatedTarget.className === 'string' &&
                       // Hide only if the mouse is not leaving to go on one of the scrollbars' thumb.
                       // $FlowFixMe
-// @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
+                      // @ts-expect-error - TS2339 - Property 'className' does not exist on type 'EventTarget'.
                       !relatedTarget.className.includes(
                         'canvas-scrollbar-thumb'
                       )
@@ -436,53 +423,49 @@ const FullSizeInstancesEditorWithScrollbars = (props: Props) => {
             </ErrorBoundary>
           )}
           {screenType !== 'touch' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               style={{
                 // Keep it in the DOM, so we can register the mouse down event.
                 visibility: showScrollbars.current ? 'visible' : 'hidden',
               }}
               className="canvas-vertical-scrollbar-track"
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+              // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
               ref={yScrollbarTrack}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{
                   top: yScrollbarTopPosition,
                 }}
                 className="canvas-scrollbar-thumb canvas-vertical-scrollbar-thumb"
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
                 ref={yScrollbarThumb}
-// @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseEnter={onMouseEnterThumb}
-// @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseLeave={onMouseLeaveThumb}
               />
             </div>
           )}
           {screenType !== 'touch' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               style={{
                 // Keep it in the DOM, so we can register the mouse down event.
                 visibility: showScrollbars.current ? 'visible' : 'hidden',
               }}
               className="canvas-horizontal-scrollbar-track"
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+              // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
               ref={xScrollbarTrack}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{
                   marginLeft: xScrollbarLeftPosition,
                 }}
                 className="canvas-scrollbar-thumb canvas-horizontal-scrollbar-thumb"
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
                 ref={xScrollbarThumb}
-// @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseEnter={onMouseEnterThumb}
-// @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+                // @ts-expect-error - TS2322 - Type '(event: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
                 onMouseLeave={onMouseLeaveThumb}
               />
             </div>

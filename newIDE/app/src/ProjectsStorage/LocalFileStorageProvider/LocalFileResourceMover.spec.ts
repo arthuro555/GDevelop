@@ -1,11 +1,10 @@
 import axios from 'axios';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../Utils/OptionalRequire';
 import { moveUrlResourcesToLocalFiles } from './LocalFileResourceMover';
 import { makeTestProject } from '../../fixtures/TestProject';
 import { fakeSilverAuthenticatedUser } from '../../fixtures/GDevelopServicesTestData';
 import path from 'path';
-const gd: libGDevelop = global.gd;
 
 jest.mock('../../Utils/OptionalRequire');
 jest.mock('axios');
@@ -25,7 +24,7 @@ const localFileUrl = 'some-local-file.png';
 const blobUrl = 'blob:http://something.com/1234567';
 
 const makeTestProjectWithResourcesToDownload = () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
   const { project } = makeTestProject(gd);
 
   // Add a resource that uses a URL, which will be download
@@ -69,7 +68,7 @@ const makeTestProjectWithResourcesToDownload = () => {
 };
 
 const makeTestProjectWithBlobResourcesToDownload = () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
   const { project } = makeTestProject(gd);
 
   // Add a resource that uses a blob: URL, which will be download
@@ -99,7 +98,7 @@ const makeTestProjectWithBlobResourcesToDownload = () => {
 };
 
 const makeTestProjectWitheBlobResourcesFailingToDownload = () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
   const { project } = makeTestProject(gd);
 
   // Add a resource that uses a blob: URL, which will have an error
@@ -124,16 +123,15 @@ const makeTestProjectWitheBlobResourcesFailingToDownload = () => {
   return project;
 };
 
-const makeMoveAllProjectResourcesOptions = (project: gdProject) => ({
+const makeMoveAllProjectResourcesOptions = (project: gd.Project) => ({
   project,
   onProgress: jest.fn(),
   fileMetadata: { fileIdentifier: 'fake-file' },
   authenticatedUser: fakeSilverAuthenticatedUser,
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('LocalResourceMover', () => {
-// @ts-expect-error - TS7034 - Variable 'project' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'project' implicitly has type 'any' in some locations where its type cannot be determined.
   let project = null;
   beforeEach(() => {
     mockFn(optionalRequire.mockFsExtra.ensureDir).mockReset();
@@ -142,11 +140,10 @@ describe('LocalResourceMover', () => {
     mockFn(axios.get).mockReset();
   });
   afterEach(() => {
-// @ts-expect-error - TS7005 - Variable 'project' implicitly has an 'any' type. | TS7005 - Variable 'project' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'project' implicitly has an 'any' type. | TS7005 - Variable 'project' implicitly has an 'any' type.
     if (project) project.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('fetches resources and can download them', async () => {
     project = makeTestProjectWithResourcesToDownload();
 
@@ -183,7 +180,6 @@ describe('LocalResourceMover', () => {
     expect(fetchedResources.erroredResources).toEqual([]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('reports errors in case of download failure', async () => {
     project = makeTestProjectWithResourcesToDownload();
 
@@ -232,7 +228,6 @@ describe('LocalResourceMover', () => {
     ]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('automatically retries if a resource failed', async () => {
     project = makeTestProjectWithResourcesToDownload();
 
@@ -274,9 +269,7 @@ describe('LocalResourceMover', () => {
     expect(fetchedResources.erroredResources).toEqual([]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('Support for blobs', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('fetches resources with blobs and can download them', async () => {
       project = makeTestProjectWithBlobResourcesToDownload();
 
@@ -316,7 +309,6 @@ describe('LocalResourceMover', () => {
       expect(fetchedResources.erroredResources).toEqual([]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('reports errors in case of failure with blobs', async () => {
       project = makeTestProjectWitheBlobResourcesFailingToDownload();
 

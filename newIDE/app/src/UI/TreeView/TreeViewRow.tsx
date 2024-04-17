@@ -1,18 +1,18 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../SortableVirtualizedItemList/DropIndicator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SortableVirtualizedItemList/DropIndicator.tsx', but '--jsx' is not set.
+
 import DropIndicator from '../SortableVirtualizedItemList/DropIndicator';
 import memoizeOne from 'memoize-one';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-window'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-window/dist/index.cjs.js' implicitly has an 'any' type.
 import { areEqual } from 'react-window';
-// @ts-expect-error - TS6142 - Module '../IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../IconButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../CustomSvgIcons/ArrowHeadBottom'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowHeadBottom.js' implicitly has an 'any' type.
+
 import ArrowHeadBottom from '../CustomSvgIcons/ArrowHeadBottom';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../CustomSvgIcons/ArrowHeadRight'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowHeadRight.js' implicitly has an 'any' type.
+
 import ArrowHeadRight from '../CustomSvgIcons/ArrowHeadRight';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../CustomSvgIcons/Folder'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Folder.js' implicitly has an 'any' type.
+
 import Folder from '../CustomSvgIcons/Folder';
-// @ts-expect-error - TS6142 - Module '../ListIcon' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ListIcon.tsx', but '--jsx' is not set.
+
 import ListIcon from '../ListIcon';
 import useForceUpdate from '../../Utils/UseForceUpdate';
 // @ts-expect-error - TS2307 - Cannot find module './TreeView.module.css' or its corresponding type declarations.
@@ -21,13 +21,13 @@ import {
   shouldCloseOrCancel,
   shouldValidate,
 } from '../KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../CustomSvgIcons/ThreeDotsMenu'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ThreeDotsMenu.js' implicitly has an 'any' type.
+
 import ThreeDotsMenu from '../CustomSvgIcons/ThreeDotsMenu';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TreeView/index.tsx', but '--jsx' is not set.
+
 import { ItemData, ItemBaseAttributes, navigationKeys } from '.';
 import { useLongTouch } from '../../Utils/UseLongTouch';
 import { dataObjectToProps } from '../../Utils/HTMLDataset';
-// @ts-expect-error - TS6142 - Module '../DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { DraggedItem } from '../DragAndDrop/DragSourceAndDropTarget';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
@@ -83,9 +83,8 @@ const SemiControlledRowInput = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <div className={classes.itemNameInputContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <input
         autoFocus
 // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLInputElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLInputElement> | undefined'.
@@ -158,7 +157,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   const [whereToDrop, setWhereToDrop] = React.useState<'before' | 'after' | 'inside'>('before');
   const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
   const openContextMenu = React.useCallback(
-// @ts-expect-error - TS7031 - Binding element 'clientX' implicitly has an 'any' type. | TS7031 - Binding element 'clientY' implicitly has an 'any' type.
+
     ({ clientX, clientY }) => {
       onContextMenu({
         index: index,
@@ -175,7 +174,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   });
 
   const onClickItem = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
+
     event => {
       if (!node || node.item.isPlaceholder) return;
       if (node.item.isRoot) {
@@ -260,7 +259,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
   return (
 // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
     <div style={style} ref={containerRef}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DragSourceAndDropTarget
         beginDrag={() => {
           if (!node.selected) onSelect({ node, exclusive: !node.selected });
@@ -347,7 +345,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
           setIsStayingOver(isOver, canDrop);
 
           let itemRow = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <div
               className={classNames(classes.rowContentSide, {
                 [classes.rowContentSideLeft]: !node.item.isRoot,
@@ -355,9 +353,8 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
               })}
             >
               {displayAsFolder ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <IconButton
                     size="small"
 // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
@@ -368,17 +365,16 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                     disabled={node.disableCollapse}
                   >
                     {node.collapsed ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       <ArrowHeadRight fontSize="small" />
                     ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       <ArrowHeadBottom fontSize="small" />
                     )}
                   </IconButton>
                   {node.thumbnailSrc && node.thumbnailSrc !== 'FOLDER' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <div className={classes.thumbnail}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <ListIcon iconSize={20} src={node.thumbnailSrc} />
                     </div>
                   ) : (
@@ -389,21 +385,20 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                   )}
                 </>
               ) : node.thumbnailSrc ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <div className={classes.thumbnail}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ListIcon iconSize={20} src={node.thumbnailSrc} />
                 </div>
               ) : null}
               {renamedItemId === node.id && typeof node.name === 'string' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <SemiControlledRowInput
                   initialValue={node.name}
                   onEndRenaming={endRenaming}
                   onBlur={onBlurField}
                 />
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <span
                   className={classNames(
                     classes.itemName,
@@ -438,13 +433,12 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
             !node.item.isPlaceholder;
 
           const dragSource = connectDragSource(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <div className={classes.fullSpaceContainer}>
               {isOver && whereToDrop === 'before' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <DropIndicator canDrop={canDrop} />
               )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 className={classes.rowContent}
                 onDoubleClick={
@@ -460,7 +454,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
               >
                 {itemRow}
                 {(node.rightComponent || rightButton || shouldDisplayMenu) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <div
                     className={classNames(
                       classes.rowContentSide,
@@ -469,7 +463,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                   >
                     {node.rightComponent}
                     {rightButton && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       <IconButton
                         id={rightButton.id}
                         size="small"
@@ -485,7 +479,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                       </IconButton>
                     )}
                     {shouldDisplayMenu && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       <IconButton
                         size="small"
 // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type.
@@ -499,7 +493,6 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                           });
                         }}
                       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <ThreeDotsMenu />
                       </IconButton>
                     )}
@@ -507,7 +500,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
                 )}
               </div>
               {isOver && whereToDrop === 'after' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <DropIndicator canDrop={canDrop} />
               )}
             </div>
@@ -525,7 +518,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
             : null;
 
           const dropTarget = connectDropTarget(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <div
               id={getItemHtmlId ? getItemHtmlId(node.item, index) : undefined}
               onClick={onClickItem}
@@ -545,7 +538,7 @@ const TreeViewRow = <Item extends ItemBaseAttributes>(props: Props<Item>) => {
           );
 
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <div
               style={{ paddingLeft: left }}
               className={classNames(classes.fullHeightFlexContainer, {

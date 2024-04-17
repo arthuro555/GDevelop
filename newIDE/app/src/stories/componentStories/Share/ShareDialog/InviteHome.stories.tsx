@@ -1,8 +1,7 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import paperDecorator from '../../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../../ExportAndShare/ShareDialog/InviteHome' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/ShareDialog/InviteHome.tsx', but '--jsx' is not set.
 import InviteHome from '../../../../ExportAndShare/ShareDialog/InviteHome';
 import {
   fakeSilverAuthenticatedUser,
@@ -48,9 +47,7 @@ export default {
 
 export const NotLoggedInOrOffline = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeNotAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId="owned-project-id" />
     </AuthenticatedUserContext.Provider>
   );
@@ -58,9 +55,7 @@ export const NotLoggedInOrOffline = () => {
 
 export const ProjectNotSaved = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId={null} />
     </AuthenticatedUserContext.Provider>
   );
@@ -68,9 +63,7 @@ export const ProjectNotSaved = () => {
 
 export const NoStartupSubscription = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId={ownedProjectId} />
     </AuthenticatedUserContext.Provider>
   );
@@ -78,9 +71,7 @@ export const NoStartupSubscription = () => {
 NoStartupSubscription.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopProjectApi.baseUrl
-      }/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
+      url: `${GDevelopProjectApi.baseUrl}/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
       method: 'GET',
       status: 200,
       response: [],
@@ -91,9 +82,7 @@ NoStartupSubscription.parameters = {
 
 export const NotOwnerOfProject = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId={notOwnedProjectId} />
     </AuthenticatedUserContext.Provider>
   );
@@ -101,9 +90,7 @@ export const NotOwnerOfProject = () => {
 NotOwnerOfProject.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopProjectApi.baseUrl
-      }/project-user-acl?userId=indie-user&projectId=${notOwnedProjectId}`,
+      url: `${GDevelopProjectApi.baseUrl}/project-user-acl?userId=indie-user&projectId=${notOwnedProjectId}`,
       method: 'GET',
       status: 403,
       response: [],
@@ -114,9 +101,7 @@ NotOwnerOfProject.parameters = {
 
 export const Errored = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId={ownedProjectId} />
     </AuthenticatedUserContext.Provider>
   );
@@ -124,9 +109,7 @@ export const Errored = () => {
 Errored.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopProjectApi.baseUrl
-      }/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
+      url: `${GDevelopProjectApi.baseUrl}/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
       method: 'GET',
       status: 500,
       response: [],
@@ -137,9 +120,7 @@ Errored.parameters = {
 
 export const WithCollaborators = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeStartupAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InviteHome cloudProjectId={ownedProjectId} />
     </AuthenticatedUserContext.Provider>
   );
@@ -147,9 +128,7 @@ export const WithCollaborators = () => {
 WithCollaborators.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopProjectApi.baseUrl
-      }/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
+      url: `${GDevelopProjectApi.baseUrl}/project-user-acl?userId=indie-user&projectId=${ownedProjectId}`,
       method: 'GET',
       status: 200,
       response: projectUserAcls,

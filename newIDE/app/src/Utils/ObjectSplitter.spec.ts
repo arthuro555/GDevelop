@@ -4,11 +4,10 @@ import {
   getSlugifiedUniqueNameFromProperty,
   split,
   unsplit,
+  PartialObjectDescription,
 } from './ObjectSplitter';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('split', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split an object', () => {
     const object1 = {
       a: { name: 'NameOfA', aa: '1', ab: '2' },
@@ -57,7 +56,6 @@ describe('split', () => {
     ]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split arrays', () => {
     const object1 = {
       myArray: [
@@ -89,7 +87,6 @@ describe('split', () => {
     ]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split objects inside arrays', () => {
     const object1 = {
       myArray: [
@@ -147,7 +144,6 @@ describe('split', () => {
     ]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split objects inside arrays and create unique reference names', () => {
     const object1 = {
       myArray: [
@@ -234,9 +230,7 @@ describe('split', () => {
   });
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('unsplit', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can unsplit objects inside arrays', () => {
     const originalObject = {
       myArray: [
@@ -288,15 +282,13 @@ describe('unsplit', () => {
     expect.assertions(1);
     return unsplit(splitObject, {
       isReferenceMagicPropertyName: '__REFERENCE_TO_SPLIT_OBJECT',
-      getReferencePartialObject: getReferencePartialObjectInArray(
-        partialObjects
-      ),
+      getReferencePartialObject:
+        getReferencePartialObjectInArray(partialObjects),
     }).then(() => {
       expect(splitObject).toEqual(originalObject);
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can unsplit with a maximum depth', () => {
     const originalObject = {
       myArray: [
@@ -348,9 +340,8 @@ describe('unsplit', () => {
     expect.assertions(1);
     return unsplit(splitObject, {
       isReferenceMagicPropertyName: '__REFERENCE_TO_SPLIT_OBJECT',
-      getReferencePartialObject: getReferencePartialObjectInArray(
-        partialObjects
-      ),
+      getReferencePartialObject:
+        getReferencePartialObjectInArray(partialObjects),
       maxUnsplitDepth: 2,
     }).then(() => {
       expect(splitObject).toEqual({
@@ -380,7 +371,6 @@ describe('unsplit', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can report error while unsplitting', () => {
     const splitObject = {
       myArray: [
@@ -413,20 +403,20 @@ describe('unsplit', () => {
     expect.assertions(1);
     return unsplit(splitObject, {
       isReferenceMagicPropertyName: '__REFERENCE_TO_SPLIT_OBJECT',
-      getReferencePartialObject: getReferencePartialObjectInArray(
-        partialObjects
-      ),
-    }).catch(error => {
+      getReferencePartialObject:
+        getReferencePartialObjectInArray(partialObjects),
+    }).catch((error) => {
       expect(error).toEqual(new Error("Can't find /myArray/Idonotexist"));
     });
   });
 
   // Helper that "load" references from a list of partial objects returned by split.
-// @ts-expect-error - TS7006 - Parameter 'partialObjects' implicitly has an 'any' type.
-  const getReferencePartialObjectInArray = partialObjects => {
-    return referencePath: string => {
+  const getReferencePartialObjectInArray = (
+    partialObjects: PartialObjectDescription[]
+  ) => {
+    return (referencePath: string) => {
       const partialObject = partialObjects.find(
-        partialObject => partialObject.reference === referencePath
+        (partialObject) => partialObject.reference === referencePath
       );
       if (partialObject === undefined) {
         return Promise.reject(new Error("Can't find " + referencePath));
@@ -437,7 +427,7 @@ describe('unsplit', () => {
   };
 
   // Helper to create an "integration" test, testing both splitting and unsplitting.
-// @ts-expect-error - TS7006 - Parameter 'object' implicitly has an 'any' type.
+  // @ts-expect-error - TS7006 - Parameter 'object' implicitly has an 'any' type.
   const testSplitThenUnsplit = (object, shouldSplit: any) => {
     const originalObjectJSON = JSON.stringify(object);
     const partialObjects = split(object, {
@@ -450,16 +440,14 @@ describe('unsplit', () => {
     expect.assertions(1);
     return unsplit(object, {
       isReferenceMagicPropertyName: '__REFERENCE_TO_SPLIT_OBJECT',
-      getReferencePartialObject: getReferencePartialObjectInArray(
-        partialObjects
-      ),
+      getReferencePartialObject:
+        getReferencePartialObjectInArray(partialObjects),
     }).then(() => {
       const finalObjectJSON = JSON.stringify(object);
       expect(finalObjectJSON).toEqual(originalObjectJSON);
     });
   };
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split then unsplit an object (1)', () => {
     return testSplitThenUnsplit(
       { a: 123, b: 456 },
@@ -467,28 +455,27 @@ describe('unsplit', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can split then unsplit an object (2)', () => {
     return testSplitThenUnsplit(
       { a: { c: 123 }, b: 456 },
       splitPaths(new Set(['/a', '/a/c', '/b']))
     );
   });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('can split then unsplit an object (no split actually)', () => {
     return testSplitThenUnsplit(
       { a: { c: 123 }, b: 456 },
       splitPaths(new Set([]))
     );
   });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('can split then unsplit an object (no split actually) (2)', () => {
     return testSplitThenUnsplit(
       { a: { c: 123 }, b: 456 },
       splitPaths(new Set(['', '123', '/', 'ewfkwoe']))
     );
   });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('can split then unsplit an object (array with objects with same name)', () => {
     return testSplitThenUnsplit(
       {

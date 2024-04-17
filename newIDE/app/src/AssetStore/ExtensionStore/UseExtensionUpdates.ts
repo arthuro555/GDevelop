@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2616 - 'diff' can only be imported by using 'import diff = require("semver/functions/diff")' or a default import. | TS2497 - This module can only be referenced with ECMAScript imports/exports by turning on the 'esModuleInterop' flag and referencing its default export.
-import {diff} from 'semver/functions/diff';
+import { diff } from 'semver/functions/diff';
 import { useMemo } from 'react';
 import type {
   ExtensionShortHeader,
@@ -8,12 +8,15 @@ import type {
 
 type UpdateType = 'patch' | 'minor' | 'major';
 type UpdateMetadata = {
-  type: UpdateType,
-  currentVersion: string,
-  newestVersion: string
+  type: UpdateType;
+  currentVersion: string;
+  newestVersion: string;
 };
 
-const getUpdateMetadataFromVersions = (currentVersion: string, newestVersion: string): UpdateMetadata | null => {
+const getUpdateMetadataFromVersions = (
+  currentVersion: string,
+  newestVersion: string
+): UpdateMetadata | null => {
   try {
     const versionDiff: UpdateType = diff(currentVersion, newestVersion);
     if (['patch', 'minor', 'major'].includes(versionDiff)) {
@@ -41,9 +44,12 @@ const getUpdateMetadataFromVersions = (currentVersion: string, newestVersion: st
   return null;
 };
 
-export const useExtensionUpdate = (project: gdProject, extension: ExtensionShortHeader | BehaviorShortHeader): UpdateMetadata | null => {
+export const useExtensionUpdate = (
+  project: gd.Project,
+  extension: ExtensionShortHeader | BehaviorShortHeader
+): UpdateMetadata | null => {
   return useMemo<UpdateMetadata | null>(() => {
-// @ts-expect-error - TS2339 - Property 'extensionName' does not exist on type 'ExtensionShortHeader | BehaviorShortHeader'.
+    // @ts-expect-error - TS2339 - Property 'extensionName' does not exist on type 'ExtensionShortHeader | BehaviorShortHeader'.
     const extensionName = extension.extensionName || extension.name;
     return project.hasEventsFunctionsExtensionNamed(extensionName)
       ? getUpdateMetadataFromVersions(

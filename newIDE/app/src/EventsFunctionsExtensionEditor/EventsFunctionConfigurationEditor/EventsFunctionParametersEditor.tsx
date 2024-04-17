@@ -1,71 +1,70 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from '../../UI/Grid';
 import { mapVector } from '../../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../../UI/IconButton';
-// @ts-expect-error - TS6142 - Module '../../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../../UI/EmptyMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/Menu/ElementWithMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Menu/ElementWithMenu.tsx', but '--jsx' is not set.
+
 import ElementWithMenu from '../../UI/Menu/ElementWithMenu';
-// @ts-expect-error - TS6142 - Module '../../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../../UI/HelpButton';
-// @ts-expect-error - TS6142 - Module '../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../UI/SemiControlledTextField';
-// @ts-expect-error - TS6142 - Module '../../UI/MiniToolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/MiniToolbar.tsx', but '--jsx' is not set.
+
 import MiniToolbar, { MiniToolbarText } from '../../UI/MiniToolbar';
 import { ParametersIndexOffsets } from '../../EventsFunctionsExtensionsLoader';
-// @ts-expect-error - TS6142 - Module '../../UI/DismissableAlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DismissableAlertMessage.tsx', but '--jsx' is not set.
+
 import DismissableAlertMessage from '../../UI/DismissableAlertMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../../UI/Layout';
 import { getLastObjectParameterObjectType } from '../../EventsSheet/ParameterFields/ParameterMetadataTools';
 import newNameGenerator from '../../Utils/NewNameGenerator';
-// @ts-expect-error - TS6142 - Module './ValueTypeEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/ValueTypeEditor.tsx', but '--jsx' is not set.
+
 import ValueTypeEditor from './ValueTypeEditor';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/ThreeDotsMenu'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ThreeDotsMenu.js' implicitly has an 'any' type.
+
 import ThreeDotsMenu from '../../UI/CustomSvgIcons/ThreeDotsMenu';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Add'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Add.js' implicitly has an 'any' type.
+
 import Add from '../../UI/CustomSvgIcons/Add';
 import useForceUpdate from '../../Utils/UseForceUpdate';
 
-const gd: libGDevelop = global.gd;
 
 type Props = {
-  project: gdProject,
-  eventsFunction: gdEventsFunction,
-  eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-  eventsBasedObject: gdEventsBasedObject | null | undefined,
-  eventsFunctionsContainer: gdEventsFunctionsContainer | null | undefined,
+  project: gd.Project,
+  eventsFunction: gd.EventsFunction,
+  eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
+  eventsBasedObject: gd.EventsBasedObject | null | undefined,
+  eventsFunctionsContainer: gd.EventsFunctionsContainer | null | undefined,
   onParametersUpdated: () => void,
   helpPagePath?: string,
   freezeParameters?: boolean,
   onMoveFreeEventsParameter?: (
-    eventsFunction: gdEventsFunction,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
     done: () => void,
   ) => void,
   onMoveBehaviorEventsParameter?: (
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    eventsFunction: gdEventsFunction,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
     done: (arg1: boolean) => void,
   ) => void,
   onMoveObjectEventsParameter?: (
-    eventsBasedObject: gdEventsBasedObject,
-    eventsFunction: gdEventsFunction,
+    eventsBasedObject: gd.EventsBasedObject,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
     done: (arg1: boolean) => void,
@@ -103,7 +102,7 @@ export const EventsFunctionParametersEditor = ({
   const addParameterAt = React.useCallback(
     (index: number) => {
       const parameters = eventsFunction.getParameters();
-// @ts-expect-error - TS7006 - Parameter 'parameterMetadata' implicitly has an 'any' type.
+
       const existingParameterNames = mapVector(parameters, parameterMetadata =>
         parameterMetadata.getName()
       );
@@ -262,7 +261,7 @@ export const EventsFunctionParametersEditor = ({
       : 0);
 
   const isParameterDescriptionShown = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
+
     index => {
       return index >= labelShownFirstIndex;
     },
@@ -270,7 +269,7 @@ export const EventsFunctionParametersEditor = ({
   );
 
   const isParameterLongDescriptionShown = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'parameter' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
+
     (parameter, index): boolean => {
       return (
         isParameterDescriptionShown(index) &&
@@ -342,7 +341,7 @@ export const EventsFunctionParametersEditor = ({
             <div style={styles.parametersContainer}>
               {mapVector(
                 parameters,
-                (parameter: gdParameterMetadata, i: number) => (
+                (parameter: gd.ParameterMetadata, i: number) => (
                   <React.Fragment key={i}>
                     <MiniToolbar noPadding>
                       <MiniToolbarText firstChild>
@@ -504,5 +503,5 @@ export const EventsFunctionParametersEditor = ({
       )}
     </I18n>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };

@@ -1,23 +1,22 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog from '../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../UI/HelpButton';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
 import { showMessageBox } from '../UI/Messages/MessageBox';
 import { getDeprecatedBehaviorsInformation } from '../Hints';
 import { enumerateBehaviorsMetadata } from './EnumerateBehaviorsMetadata';
-// @ts-expect-error - TS6142 - Module '../AssetStore/BehaviorStore' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/BehaviorStore/index.tsx', but '--jsx' is not set.
+
 import { BehaviorStore } from '../AssetStore/BehaviorStore';
-// @ts-expect-error - TS6142 - Module '../AssetStore/BehaviorStore/BehaviorStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/BehaviorStore/BehaviorStoreContext.tsx', but '--jsx' is not set.
+
 import { SearchableBehaviorMetadata } from '../AssetStore/BehaviorStore/BehaviorStoreContext';
 import { BehaviorShortHeader } from '../Utils/GDevelopServices/Extension';
 import EventsFunctionsExtensionsContext from '../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
@@ -30,16 +29,14 @@ import {
 } from '../Utils/GDevelopServices/Badge';
 import { mapVector } from '../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
-
 type Props = {
-  project: gdProject,
-  eventsFunctionsExtension?: gdEventsFunctionsExtension,
-  objectType: string,
-  objectBehaviorsTypes: Array<string>,
-  open: boolean,
-  onClose: () => void,
-  onChoose: (type: string, defaultName: string) => void
+  project: gd.Project;
+  eventsFunctionsExtension?: gd.EventsFunctionsExtension;
+  objectType: string;
+  objectBehaviorsTypes: Array<string>;
+  open: boolean;
+  onClose: () => void;
+  onChoose: (type: string, defaultName: string) => void;
 };
 
 export default function NewBehaviorDialog({
@@ -70,21 +67,22 @@ export default function NewBehaviorDialog({
 
   const getAllRequiredBehaviorTypes = React.useCallback(
     (
-      behaviorMetadata: gdBehaviorMetadata,
-      allRequiredBehaviorTypes: Array<string> = [],
+      behaviorMetadata: gd.BehaviorMetadata,
+      allRequiredBehaviorTypes: Array<string> = []
     ): Array<string> => {
       mapVector(
         behaviorMetadata.getRequiredBehaviorTypes(),
-// @ts-expect-error - TS7006 - Parameter 'requiredBehaviorType' implicitly has an 'any' type.
-        requiredBehaviorType => {
+
+        (requiredBehaviorType) => {
           if (allRequiredBehaviorTypes.includes(requiredBehaviorType)) {
             return;
           }
           allRequiredBehaviorTypes.push(requiredBehaviorType);
-          const requiredBehaviorMetadata = gd.MetadataProvider.getBehaviorMetadata(
-            project.getCurrentPlatform(),
-            requiredBehaviorType
-          );
+          const requiredBehaviorMetadata =
+            gd.MetadataProvider.getBehaviorMetadata(
+              project.getCurrentPlatform(),
+              requiredBehaviorType
+            );
           getAllRequiredBehaviorTypes(
             requiredBehaviorMetadata,
             allRequiredBehaviorTypes
@@ -96,8 +94,8 @@ export default function NewBehaviorDialog({
     [project]
   );
 
-  const allInstalledBehaviorMetadataList: Array<SearchableBehaviorMetadata> = React.useMemo(
-    () => {
+  const allInstalledBehaviorMetadataList: Array<SearchableBehaviorMetadata> =
+    React.useMemo(() => {
       const platform = project.getCurrentPlatform();
       const behaviorMetadataList =
         project && platform
@@ -108,8 +106,8 @@ export default function NewBehaviorDialog({
             )
           : [];
       return behaviorMetadataList
-        .filter(behavior => !behavior.behaviorMetadata.isHidden())
-        .map(behavior => ({
+        .filter((behavior) => !behavior.behaviorMetadata.isHidden())
+        .map((behavior) => ({
           type: behavior.type,
           fullName: behavior.fullName,
           description: behavior.description,
@@ -121,28 +119,25 @@ export default function NewBehaviorDialog({
           ),
           tags: behavior.tags,
         }));
-    },
-    [project, eventsFunctionsExtension, getAllRequiredBehaviorTypes]
-  );
+    }, [project, eventsFunctionsExtension, getAllRequiredBehaviorTypes]);
 
-  const installedBehaviorMetadataList: Array<SearchableBehaviorMetadata> = React.useMemo(
-    () =>
-      allInstalledBehaviorMetadataList.filter(
-        behavior => !deprecatedBehaviorsInformation[behavior.type]
-      ),
-    [allInstalledBehaviorMetadataList, deprecatedBehaviorsInformation]
-  );
+  const installedBehaviorMetadataList: Array<SearchableBehaviorMetadata> =
+    React.useMemo(
+      () =>
+        allInstalledBehaviorMetadataList.filter(
+          (behavior) => !deprecatedBehaviorsInformation[behavior.type]
+        ),
+      [allInstalledBehaviorMetadataList, deprecatedBehaviorsInformation]
+    );
 
-  const deprecatedBehaviorMetadataList: Array<SearchableBehaviorMetadata> = React.useMemo(
-    () => {
+  const deprecatedBehaviorMetadataList: Array<SearchableBehaviorMetadata> =
+    React.useMemo(() => {
       const deprecatedBehaviors = allInstalledBehaviorMetadataList.filter(
-        behavior => deprecatedBehaviorsInformation[behavior.type]
+        (behavior) => deprecatedBehaviorsInformation[behavior.type]
       );
-      deprecatedBehaviors.forEach(behavior => (behavior.isDeprecated = true));
+      deprecatedBehaviors.forEach((behavior) => (behavior.isDeprecated = true));
       return deprecatedBehaviors;
-    },
-    [allInstalledBehaviorMetadataList, deprecatedBehaviorsInformation]
-  );
+    }, [allInstalledBehaviorMetadataList, deprecatedBehaviorsInformation]);
 
   if (!open || !project) return null;
 
@@ -185,26 +180,19 @@ export default function NewBehaviorDialog({
   };
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>Add a new behavior to the object</Trans>}
           actions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <FlatButton
               key="close"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               label={<Trans>Close</Trans>}
               primary={false}
               onClick={onClose}
             />,
           ]}
           secondaryActions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <HelpButton helpPagePath="/behaviors" key="help" />,
           ]}
           open
@@ -213,18 +201,15 @@ export default function NewBehaviorDialog({
           fullHeight
           id="new-behavior-dialog"
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <BehaviorStore
             project={project}
             objectType={objectType}
             objectBehaviorsTypes={objectBehaviorsTypes}
             isInstalling={isInstalling}
-// @ts-expect-error - TS7006 - Parameter 'shortHeader' implicitly has an 'any' type.
-            onInstall={async shortHeader =>
+            onInstall={async (shortHeader) =>
               onInstallExtension(i18n, shortHeader)
             }
-// @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
-            onChoose={behaviorType => chooseBehavior(i18n, behaviorType)}
+            onChoose={(behaviorType) => chooseBehavior(i18n, behaviorType)}
             installedBehaviorMetadataList={installedBehaviorMetadataList}
             deprecatedBehaviorMetadataList={deprecatedBehaviorMetadataList}
           />

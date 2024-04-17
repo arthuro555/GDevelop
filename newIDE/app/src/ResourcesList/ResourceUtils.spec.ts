@@ -3,10 +3,9 @@ import {
   renameResourcesInProject,
   updateResourceJsonMetadata,
 } from './ResourceUtils';
-const gd: libGDevelop = global.gd;
 
 const addNewAnimationWithImageToSpriteObject = (
-  object: gdObject,
+  object: gd.Object,
   imageName: string
 ) => {
   const spriteObject = gd.asSpriteConfiguration(object.getConfiguration());
@@ -20,9 +19,7 @@ const addNewAnimationWithImageToSpriteObject = (
   animations.addAnimation(animation);
 };
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('ResourceUtils', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can rename a resource in the whole project', () => {
     const project = gd.ProjectHelper.createNewGDJSProject();
 
@@ -88,18 +85,12 @@ describe('ResourceUtils', () => {
     expect(project.getResourcesManager().hasResource('Audio1')).toBe(true);
 
     // Verify files have not changed:
-    expect(
-      project
-        .getResourcesManager()
-        .getResource('Image1')
-        .getFile()
-    ).toBe('fake-image1.png');
-    expect(
-      project
-        .getResourcesManager()
-        .getResource('Audio1')
-        .getFile()
-    ).toBe('fake-audio1.mp3');
+    expect(project.getResourcesManager().getResource('Image1').getFile()).toBe(
+      'fake-image1.png'
+    );
+    expect(project.getResourcesManager().getResource('Audio1').getFile()).toBe(
+      'fake-audio1.mp3'
+    );
 
     // Verify renaming was done in objects and in events.
     expect(
@@ -130,17 +121,15 @@ describe('ResourceUtils', () => {
     ).toBe('Audio1');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('Resource metadata', () => {
-// @ts-expect-error - TS7034 - Variable 'resource' implicitly has type 'any' in some locations where its type cannot be determined.
+    // @ts-expect-error - TS7034 - Variable 'resource' implicitly has type 'any' in some locations where its type cannot be determined.
     let resource = null;
     afterEach(() => {
-// @ts-expect-error - TS7005 - Variable 'resource' implicitly has an 'any' type. | TS7005 - Variable 'resource' implicitly has an 'any' type.
+      // @ts-expect-error - TS7005 - Variable 'resource' implicitly has an 'any' type. | TS7005 - Variable 'resource' implicitly has an 'any' type.
       if (resource) resource.delete();
       resource = null;
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can update a resource metadata', () => {
       resource = new gd.Resource();
       updateResourceJsonMetadata(resource, { test: 123, test2: { '4': '56' } });
@@ -161,7 +150,6 @@ describe('ResourceUtils', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can extract "localFilePath" and "extension" from the metadata (used for Blob uploads)', () => {
       resource = new gd.Resource();
 

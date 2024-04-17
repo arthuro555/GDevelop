@@ -1,5 +1,4 @@
 import { ensureSingleOnceInstructions } from './OnceInstructionSanitizer';
-const gd: libGDevelop = global.gd;
 
 describe('OnceInstructionSanitizer', () => {
   const insertInstruction = (list, type) => {

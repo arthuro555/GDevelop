@@ -1,19 +1,17 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
 import LocalFileSystem from '../LocalFileSystem';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../../Utils/OptionalRequire';
 import { timeFunction } from '../../../Utils/TimeFunction';
 import { findGDJS } from '../../../GameEngineFinder/LocalGDJSFinder';
-// @ts-expect-error - TS6142 - Module './LocalNetworkPreviewDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/LocalExporters/LocalPreviewLauncher/LocalNetworkPreviewDialog.tsx', but '--jsx' is not set.
+
 import LocalNetworkPreviewDialog from './LocalNetworkPreviewDialog';
 import assignIn from 'lodash/assignIn';
 import { PreviewOptions } from '../../PreviewLauncher.flow';
 import SubscriptionChecker, {
   SubscriptionCheckerInterface,
-// @ts-expect-error - TS6142 - Module '../../../Profile/Subscription/SubscriptionChecker' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionChecker.tsx', but '--jsx' is not set.
 } from '../../../Profile/Subscription/SubscriptionChecker';
 import {
   getDebuggerServerAddress,
@@ -23,34 +21,39 @@ import Window from '../../../Utils/Window';
 const electron = optionalRequire('electron');
 const path = optionalRequire('path');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
-const gd: libGDevelop = global.gd;
 
 type Props = {
   getIncludeFileHashs: () => {
-    [key: string]: number
-  },
-  onExport?: () => void
+    [key: string]: number;
+  };
+  onExport?: () => void;
 };
 
 type State = {
-  networkPreviewDialogOpen: boolean,
-  networkPreviewHost: string | null | undefined,
-  networkPreviewPort: number | null | undefined,
-  networkPreviewError: any | null | undefined,
-  hotReloadsCount: number,
-  previewGamePath: string | null | undefined,
-  previewBrowserWindowOptions: {
-    width: number,
-    height: number,
-    useContentSize: boolean,
-    title: string,
-    backgroundColor: string
-  } | null | undefined,
-  hideMenuBar: boolean,
-  alwaysOnTop: boolean
+  networkPreviewDialogOpen: boolean;
+  networkPreviewHost: string | null | undefined;
+  networkPreviewPort: number | null | undefined;
+  networkPreviewError: any | null | undefined;
+  hotReloadsCount: number;
+  previewGamePath: string | null | undefined;
+  previewBrowserWindowOptions:
+    | {
+        width: number;
+        height: number;
+        useContentSize: boolean;
+        title: string;
+        backgroundColor: string;
+      }
+    | null
+    | undefined;
+  hideMenuBar: boolean;
+  alwaysOnTop: boolean;
 };
 
-export default class LocalPreviewLauncher extends React.Component<Props, State> {
+export default class LocalPreviewLauncher extends React.Component<
+  Props,
+  State
+> {
   canDoNetworkPreview = () => true;
   canDoHotReload = () => true;
 
@@ -65,8 +68,14 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
     hideMenuBar: true,
     alwaysOnTop: true,
   };
-  _networkPreviewSubscriptionChecker: SubscriptionCheckerInterface | null | undefined = null;
-  _hotReloadSubscriptionChecker: SubscriptionCheckerInterface | null | undefined = null;
+  _networkPreviewSubscriptionChecker:
+    | SubscriptionCheckerInterface
+    | null
+    | undefined = null;
+  _hotReloadSubscriptionChecker:
+    | SubscriptionCheckerInterface
+    | null
+    | undefined = null;
 
   _openPreviewBrowserWindow = () => {
     const { previewGamePath, previewBrowserWindowOptions } = this.state;
@@ -87,7 +96,11 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
     ipcRenderer.invoke('preview-close', { windowId });
   };
 
-  _openPreviewWindow = (project: gdProject, gamePath: string, options: PreviewOptions): void => {
+  _openPreviewWindow = (
+    project: gd.Project,
+    gamePath: string,
+    options: PreviewOptions
+  ): void => {
     this.setState(
       {
         previewBrowserWindowOptions: {
@@ -96,7 +109,7 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
           useContentSize: true,
           title: `Preview of ${project.getName()}`,
           backgroundColor: '#000000',
-// @ts-expect-error - TS2322 - Type '{ width: any; height: any; useContentSize: true; title: string; backgroundColor: string; webPreferences: { webSecurity: false; nodeIntegration: true; contextIsolation: false; }; }' is not assignable to type '{ width: number; height: number; useContentSize: boolean; title: string; backgroundColor: string; }'.
+          // @ts-expect-error - TS2322 - Type '{ width: any; height: any; useContentSize: true; title: string; backgroundColor: string; webPreferences: { webSecurity: false; nodeIntegration: true; contextIsolation: false; }; }' is not assignable to type '{ width: number; height: number; useContentSize: boolean; title: string; backgroundColor: string; }'.
           webPreferences: {
             webSecurity: false, // Allow to access to local files,
             // Allow Node.js API access in renderer process, as long
@@ -117,7 +130,7 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
 
           ipcRenderer.removeAllListeners('serve-folder-done');
           ipcRenderer.removeAllListeners('local-network-ips');
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'serverParams' implicitly has an 'any' type.
+          // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'serverParams' implicitly has an 'any' type.
           ipcRenderer.on('serve-folder-done', (event, err, serverParams) => {
             if (err) {
               this.setState({
@@ -135,7 +148,7 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
 
             setTimeout(() => this._checkSubscriptionForNetworkPreview());
           });
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'ipAddress' implicitly has an 'any' type.
+          // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'ipAddress' implicitly has an 'any' type.
           ipcRenderer.on('local-network-ip', (event, ipAddress) => {
             this.setState({
               networkPreviewHost: ipAddress,
@@ -151,11 +164,11 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
   };
 
   _prepareExporter = (): Promise<{
-    outputDir: string,
-    exporter: gdjsExporter,
-    gdjsRoot: string
+    outputDir: string;
+    exporter: gdjsExporter;
+    gdjsRoot: string;
   }> => {
-// @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -185,7 +198,7 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
     // hot reload.
     return this.getPreviewDebuggerServer()
       .startServer()
-      .catch(err => {
+      .catch((err) => {
         // Ignore any error when running the debugger server - the preview
         // can still work without it.
         console.error(
@@ -235,7 +248,8 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
               )
             );
 
-            const debuggerIds = this.getPreviewDebuggerServer().getExistingDebuggerIds();
+            const debuggerIds =
+              this.getPreviewDebuggerServer().getExistingDebuggerIds();
             const shouldHotReload =
               previewOptions.hotReload && !!debuggerIds.length;
 
@@ -260,7 +274,7 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
             exporter.delete();
 
             if (shouldHotReload) {
-              debuggerIds.forEach(debuggerId => {
+              debuggerIds.forEach((debuggerId) => {
                 this.getPreviewDebuggerServer().sendMessage(debuggerId, {
                   command: 'hotReload',
                 });
@@ -272,14 +286,14 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
               ) {
                 this._hotReloadSubscriptionChecker.checkUserHasSubscription();
               }
-              this.setState(state => ({
+              this.setState((state) => ({
                 hotReloadsCount: state.hotReloadsCount + 1,
               }));
             } else {
               this._openPreviewWindow(project, outputDir, previewOptions);
             }
           },
-          time => console.info(`Preview took ${time}ms`)
+          (time) => console.info(`Preview took ${time}ms`)
         );
       });
   };
@@ -303,36 +317,28 @@ export default class LocalPreviewLauncher extends React.Component<Props, State> 
     } = this.state;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SubscriptionChecker
-// @ts-expect-error - TS7006 - Parameter 'subscriptionChecker' implicitly has an 'any' type.
-          ref={subscriptionChecker =>
+          ref={(subscriptionChecker) =>
             (this._networkPreviewSubscriptionChecker = subscriptionChecker)
           }
           onChangeSubscription={() =>
             this.setState({ networkPreviewDialogOpen: false })
           }
           id="Preview over wifi"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>Preview over wifi</Trans>}
           mode="try"
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SubscriptionChecker
-// @ts-expect-error - TS7006 - Parameter 'subscriptionChecker' implicitly has an 'any' type.
-          ref={subscriptionChecker =>
+          ref={(subscriptionChecker) =>
             (this._hotReloadSubscriptionChecker = subscriptionChecker)
           }
           id="Hot reloading"
           title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>Live preview (apply changes to the running preview)</Trans>
           }
           mode="try"
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <LocalNetworkPreviewDialog
           open={networkPreviewDialogOpen}
           url={

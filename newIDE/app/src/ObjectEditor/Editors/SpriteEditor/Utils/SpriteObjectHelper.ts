@@ -1,14 +1,12 @@
-import {mapVector, mapFor} from '../../../../Utils/MapFor';
+import { mapVector, mapFor } from '../../../../Utils/MapFor';
 import every from 'lodash/every';
-
-const gd: libGDevelop = global.gd;
 
 /**
  * Return the specified animation, direction and sprite for a SpriteObject.
  * Returns null for these elements if the specified choice is not valid.
  */
 export const getCurrentElements = (
-  animations: gdSpriteAnimationList,
+  animations: gd.SpriteAnimationList,
   animationIndex: number,
   directionIndex: number,
   spriteIndex: number
@@ -47,7 +45,7 @@ export const getCurrentElements = (
   };
 };
 
-export const getTotalSpritesCount = (animations: gdSpriteAnimationList) => {
+export const getTotalSpritesCount = (animations: gd.SpriteAnimationList) => {
   let totalSpritesCount = 0;
   for (
     let animationIndex = 0;
@@ -71,7 +69,7 @@ export const getTotalSpritesCount = (animations: gdSpriteAnimationList) => {
 /**
  * Return all the point names
  */
-export const getAllPointNames = (animations: gdSpriteAnimationList) => {
+export const getAllPointNames = (animations: gd.SpriteAnimationList) => {
   const allPointNames = new Set();
   for (
     let animationIndex = 0;
@@ -104,8 +102,8 @@ export const getAllPointNames = (animations: gdSpriteAnimationList) => {
 };
 
 export const copyPoint = (
-  originalPoint: gdPoint,
-  destinationPoint: gdPoint
+  originalPoint: gd.Point,
+  destinationPoint: gd.Point
 ) => {
   destinationPoint.setX(originalPoint.getX());
   destinationPoint.setY(originalPoint.getY());
@@ -113,8 +111,8 @@ export const copyPoint = (
 };
 
 export const copySpritePoints = (
-  originalSprite: gdSprite,
-  destinationSprite: gdSprite
+  originalSprite: gd.Sprite,
+  destinationSprite: gd.Sprite
 ) => {
   if (originalSprite.ptr === destinationSprite.ptr) return;
 
@@ -125,29 +123,27 @@ export const copySpritePoints = (
   );
 
   destinationSprite.getAllNonDefaultPoints().clear();
-// @ts-expect-error - TS7006 - Parameter 'originalPoint' implicitly has an 'any' type.
-  mapVector(originalSprite.getAllNonDefaultPoints(), originalPoint => {
+
+  mapVector(originalSprite.getAllNonDefaultPoints(), (originalPoint) => {
     destinationSprite.addPoint(originalPoint);
   });
 };
 
 export const copyAnimationsSpritePoints = (
-  originalSprite: gdSprite,
-  animation: gdAnimation
+  originalSprite: gd.Sprite,
+  animation: gd.Animation
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, animation.getDirectionsCount(), i => {
+  mapFor(0, animation.getDirectionsCount(), (i) => {
     const direction = animation.getDirection(i);
 
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    mapFor(0, direction.getSpritesCount(), j => {
+    mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
       copySpritePoints(originalSprite, sprite);
     });
   });
 };
 
-export const isSamePoint = (point1: gdPoint, point2: gdPoint) => {
+export const isSamePoint = (point1: gd.Point, point2: gd.Point) => {
   return (
     point1.getX() === point2.getX() &&
     point1.getY() === point2.getY() &&
@@ -155,7 +151,7 @@ export const isSamePoint = (point1: gdPoint, point2: gdPoint) => {
   );
 };
 
-export const haveSamePoints = (sprite1: gdSprite, sprite2: gdSprite) => {
+export const haveSamePoints = (sprite1: gd.Sprite, sprite2: gd.Sprite) => {
   if (!isSamePoint(sprite1.getCenter(), sprite2.getCenter())) return false;
   if (!isSamePoint(sprite1.getOrigin(), sprite2.getOrigin())) return false;
   if (sprite1.isDefaultCenterPoint() !== sprite2.isDefaultCenterPoint())
@@ -168,8 +164,7 @@ export const haveSamePoints = (sprite1: gdSprite, sprite2: gdSprite) => {
     return false;
 
   return every(
-// @ts-expect-error - TS7006 - Parameter 'sprite1Point' implicitly has an 'any' type.
-    mapVector(sprite1.getAllNonDefaultPoints(), sprite1Point => {
+    mapVector(sprite1.getAllNonDefaultPoints(), (sprite1Point) => {
       if (!sprite2.hasPoint(sprite1Point.getName())) return false;
 
       return isSamePoint(
@@ -181,12 +176,11 @@ export const haveSamePoints = (sprite1: gdSprite, sprite2: gdSprite) => {
 };
 
 export const allDirectionSpritesHaveSamePointsAs = (
-  originalSprite: gdSprite,
-  direction: gdDirection
+  originalSprite: gd.Sprite,
+  direction: gd.Direction
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    mapFor(0, direction.getSpritesCount(), j => {
+    mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
       return haveSamePoints(sprite, originalSprite);
     })
@@ -194,12 +188,11 @@ export const allDirectionSpritesHaveSamePointsAs = (
 };
 
 export const allAnimationSpritesHaveSamePointsAs = (
-  originalSprite: gdSprite,
-  animation: gdAnimation
+  originalSprite: gd.Sprite,
+  animation: gd.Animation
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, animation.getDirectionsCount(), i => {
+    mapFor(0, animation.getDirectionsCount(), (i) => {
       const direction = animation.getDirection(i);
       return allDirectionSpritesHaveSamePointsAs(originalSprite, direction);
     })
@@ -207,12 +200,11 @@ export const allAnimationSpritesHaveSamePointsAs = (
 };
 
 export const allObjectSpritesHaveSamePointsAs = (
-  originalSprite: gdSprite,
-  animations: gdSpriteAnimationList
+  originalSprite: gd.Sprite,
+  animations: gd.SpriteAnimationList
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, animations.getAnimationsCount(), i => {
+    mapFor(0, animations.getAnimationsCount(), (i) => {
       const animation = animations.getAnimation(i);
       return allAnimationSpritesHaveSamePointsAs(originalSprite, animation);
     })
@@ -220,8 +212,8 @@ export const allObjectSpritesHaveSamePointsAs = (
 };
 
 export const copySpritePolygons = (
-  originalSprite: gdSprite,
-  destinationSprite: gdSprite
+  originalSprite: gd.Sprite,
+  destinationSprite: gd.Sprite
 ) => {
   if (originalSprite.ptr === destinationSprite.ptr) return;
 
@@ -230,36 +222,36 @@ export const copySpritePolygons = (
   );
 
   destinationSprite.getCustomCollisionMask().clear();
-// @ts-expect-error - TS7006 - Parameter 'originalPolygon' implicitly has an 'any' type.
-  mapVector(originalSprite.getCustomCollisionMask(), originalPolygon => {
+
+  mapVector(originalSprite.getCustomCollisionMask(), (originalPolygon) => {
     destinationSprite.getCustomCollisionMask().push_back(originalPolygon);
   });
 };
 
 export const copyAnimationsSpriteCollisionMasks = (
-  originalSprite: gdSprite,
-  animation: gdAnimation
+  originalSprite: gd.Sprite,
+  animation: gd.Animation
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, animation.getDirectionsCount(), i => {
+  mapFor(0, animation.getDirectionsCount(), (i) => {
     const direction = animation.getDirection(i);
 
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    mapFor(0, direction.getSpritesCount(), j => {
+    mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
       copySpritePolygons(originalSprite, sprite);
     });
   });
 };
 
-export const isSamePolygon = (polygon1: gdPolygon2d, polygon2: gdPolygon2d) => {
+export const isSamePolygon = (
+  polygon1: gd.Polygon2d,
+  polygon2: gd.Polygon2d
+) => {
   const polygon1Vertices = polygon1.getVertices();
   const polygon2Vertices = polygon2.getVertices();
 
   if (polygon1Vertices.size() !== polygon2Vertices.size()) return false;
 
   return every(
-// @ts-expect-error - TS7006 - Parameter 'point1' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
     mapVector(polygon1Vertices, (point1, index) => {
       const point2 = polygon2Vertices.at(index);
       return (
@@ -270,8 +262,8 @@ export const isSamePolygon = (polygon1: gdPolygon2d, polygon2: gdPolygon2d) => {
 };
 
 export const haveSameCollisionMasks = (
-  sprite1: gdSprite,
-  sprite2: gdSprite
+  sprite1: gd.Sprite,
+  sprite2: gd.Sprite
 ) => {
   if (sprite1.isFullImageCollisionMask() !== sprite2.isFullImageCollisionMask())
     return false;
@@ -285,7 +277,6 @@ export const haveSameCollisionMasks = (
   if (sprite1CollisionMask.size() !== sprite2CollisionMask.size()) return false;
 
   return every(
-// @ts-expect-error - TS7006 - Parameter 'sprite1Polygon' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
     mapVector(sprite1CollisionMask, (sprite1Polygon, index) => {
       return isSamePolygon(sprite1Polygon, sprite2CollisionMask.at(index));
     })
@@ -293,12 +284,11 @@ export const haveSameCollisionMasks = (
 };
 
 export const allDirectionSpritesHaveSameCollisionMasksAs = (
-  originalSprite: gdSprite,
-  direction: gdDirection
+  originalSprite: gd.Sprite,
+  direction: gd.Direction
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    mapFor(0, direction.getSpritesCount(), j => {
+    mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
       return haveSameCollisionMasks(sprite, originalSprite);
     })
@@ -306,12 +296,11 @@ export const allDirectionSpritesHaveSameCollisionMasksAs = (
 };
 
 export const allAnimationSpritesHaveSameCollisionMasksAs = (
-  originalSprite: gdSprite,
-  animation: gdAnimation
+  originalSprite: gd.Sprite,
+  animation: gd.Animation
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, animation.getDirectionsCount(), i => {
+    mapFor(0, animation.getDirectionsCount(), (i) => {
       const direction = animation.getDirection(i);
       return allDirectionSpritesHaveSameCollisionMasksAs(
         originalSprite,
@@ -322,12 +311,11 @@ export const allAnimationSpritesHaveSameCollisionMasksAs = (
 };
 
 export const allObjectSpritesHaveSameCollisionMaskAs = (
-  originalSprite: gdSprite,
-  animations: gdSpriteAnimationList
+  originalSprite: gd.Sprite,
+  animations: gd.SpriteAnimationList
 ) => {
   return every(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, animations.getAnimationsCount(), i => {
+    mapFor(0, animations.getAnimationsCount(), (i) => {
       const animation = animations.getAnimation(i);
       return allAnimationSpritesHaveSameCollisionMasksAs(
         originalSprite,
@@ -338,24 +326,22 @@ export const allObjectSpritesHaveSameCollisionMaskAs = (
 };
 
 export const isFirstSpriteUsingFullImageCollisionMask = (
-  animations: gdSpriteAnimationList
+  animations: gd.SpriteAnimationList
 ) => {
   const firstSprite = getCurrentElements(animations, 0, 0, 0).sprite;
   return firstSprite ? firstSprite.isFullImageCollisionMask() : false;
 };
 
 export const deleteSpritesFromAnimation = (
-  animation: gdAnimation,
+  animation: gd.Animation,
   spritePtrs: {
-    [key: number]: boolean
+    [key: number]: boolean;
   }
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, animation.getDirectionsCount(), i => {
+  mapFor(0, animation.getDirectionsCount(), (i) => {
     const direction = animation.getDirection(i);
 
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    const spritesToDelete = mapFor(0, direction.getSpritesCount(), j => {
+    const spritesToDelete = mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
 
       return !!spritePtrs[sprite.ptr];
@@ -373,17 +359,15 @@ export const deleteSpritesFromAnimation = (
 };
 
 export const duplicateSpritesInAnimation = (
-  animation: gdAnimation,
+  animation: gd.Animation,
   spritePtrs: {
-    [key: number]: boolean
+    [key: number]: boolean;
   }
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, animation.getDirectionsCount(), i => {
+  mapFor(0, animation.getDirectionsCount(), (i) => {
     const direction = animation.getDirection(i);
 
-// @ts-expect-error - TS7006 - Parameter 'j' implicitly has an 'any' type.
-    const spritesToDuplicate = mapFor(0, direction.getSpritesCount(), j => {
+    const spritesToDuplicate = mapFor(0, direction.getSpritesCount(), (j) => {
       const sprite = direction.getSprite(j);
 
       return !!spritePtrs[sprite.ptr];
@@ -410,7 +394,7 @@ export const duplicateSpritesInAnimation = (
   });
 };
 
-export const hasAnyFrame = (animations: gdSpriteAnimationList): boolean => {
+export const hasAnyFrame = (animations: gd.SpriteAnimationList): boolean => {
   for (
     let animationIndex = 0;
     animationIndex < animations.getAnimationsCount();
@@ -429,7 +413,9 @@ export const hasAnyFrame = (animations: gdSpriteAnimationList): boolean => {
   return false;
 };
 
-export const getFirstAnimationFrame = (animations: gdSpriteAnimationList): gdSprite | null => {
+export const getFirstAnimationFrame = (
+  animations: gd.SpriteAnimationList
+): gd.Sprite | null => {
   if (animations.getAnimationsCount() === 0) {
     return null;
   }
@@ -445,8 +431,8 @@ export const getFirstAnimationFrame = (animations: gdSpriteAnimationList): gdSpr
 };
 
 export const setCollisionMaskOnAllFrames = (
-  animations: gdSpriteAnimationList,
-  collisionMask: gdVectorPolygon2d | null
+  animations: gd.SpriteAnimationList,
+  collisionMask: gd.VectorPolygon2d | null
 ) => {
   for (
     let animationIndex = 0;

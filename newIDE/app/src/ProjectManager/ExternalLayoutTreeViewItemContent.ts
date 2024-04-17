@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
@@ -14,35 +13,38 @@ import {
   TreeViewItemContent,
   TreeItemProps,
   externalLayoutsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/index.tsx', but '--jsx' is not set.
 } from '.';
 
 const EXTERNAL_LAYOUT_CLIPBOARD_KIND = 'External layout';
 
 export type ExternalLayoutTreeViewItemCallbacks = {
-  onDeleteExternalLayout: (arg1: gdExternalLayout) => void,
-  onRenameExternalLayout: (arg1: string, arg2: string) => void,
-  onOpenExternalLayout: (arg1: string) => void
+  onDeleteExternalLayout: (arg1: gd.ExternalLayout) => void;
+  onRenameExternalLayout: (arg1: string, arg2: string) => void;
+  onOpenExternalLayout: (arg1: string) => void;
 };
 
-export type ExternalLayoutTreeViewItemCommonProps = (TreeItemProps) & (ExternalLayoutTreeViewItemCallbacks);
+export type ExternalLayoutTreeViewItemCommonProps = TreeItemProps &
+  ExternalLayoutTreeViewItemCallbacks;
 
-export type ExternalLayoutTreeViewItemProps = (ExternalLayoutTreeViewItemCommonProps) & {
-  project: gdProject
-};
+export type ExternalLayoutTreeViewItemProps =
+  ExternalLayoutTreeViewItemCommonProps & {
+    project: gd.Project;
+  };
 
-export const getExternalLayoutTreeViewItemId = (externalLayout: gdExternalLayout): string => {
+export const getExternalLayoutTreeViewItemId = (
+  externalLayout: gd.ExternalLayout
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return `external-layout-${externalLayout.ptr}`;
 };
 
 export class ExternalLayoutTreeViewItemContent implements TreeViewItemContent {
-  externalLayout: gdExternalLayout;
+  externalLayout: gd.ExternalLayout;
   props: ExternalLayoutTreeViewItemProps;
 
   constructor(
-    externalLayout: gdExternalLayout,
+    externalLayout: gd.ExternalLayout,
     props: ExternalLayoutTreeViewItemProps
   ) {
     this.externalLayout = externalLayout;
@@ -70,7 +72,7 @@ export class ExternalLayoutTreeViewItemContent implements TreeViewItemContent {
   }
 
   getDataSet(): {
-    [key: string]: string
+    [key: string]: string;
   } {
     return {
       'external-layout': this.externalLayout.getName(),
@@ -185,7 +187,7 @@ export class ExternalLayoutTreeViewItemContent implements TreeViewItemContent {
     if (!name || !copiedExternalLayout) return;
 
     const project = this.props.project;
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       project.hasExternalLayoutNamed(name)
     );
 

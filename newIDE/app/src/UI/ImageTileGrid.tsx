@@ -3,15 +3,15 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from './Grid';
 import {
   useResponsiveWindowSize,
   WindowSizeType,
 } from './Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module './CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from './CorsAwareImage';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
@@ -75,7 +75,7 @@ const styles = {
 } as const;
 
 // Styles to give a visible hover for the mouse cursor.
-const useStylesForTileHover = makeStyles(theme =>
+const useStylesForTileHover = makeStyles((theme) =>
   createStyles({
     tile: {
       transition: 'transform 0.3s ease-in-out',
@@ -86,14 +86,18 @@ const useStylesForTileHover = makeStyles(theme =>
   })
 );
 
-type OverlayTextPosition = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+type OverlayTextPosition =
+  | 'topLeft'
+  | 'topRight'
+  | 'bottomLeft'
+  | 'bottomRight';
 
 const ImageOverlay = ({
   content,
   position,
 }: {
-  content: React.ReactNode,
-  position: OverlayTextPosition
+  content: React.ReactNode;
+  position: OverlayTextPosition;
 }) => {
   const positionStyles = {
     top: position === 'topLeft' || position === 'topRight' ? 8 : undefined,
@@ -104,14 +108,12 @@ const ImageOverlay = ({
       position === 'topRight' || position === 'bottomRight' ? 8 : undefined,
   } as const;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         ...styles.overlay,
         ...positionStyles,
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Typography variant="body1" style={styles.overlayText}>
         {content}
       </Typography>
@@ -120,19 +122,25 @@ const ImageOverlay = ({
 };
 
 export type ImageTileComponent = {
-  onClick: () => void,
-  imageUrl: string,
-  title?: string,
-  description?: string,
-  overlayText?: string | React.ReactNode,
-  overlayTextPosition?: OverlayTextPosition
+  onClick: () => void;
+  imageUrl: string;
+  title?: string;
+  description?: string;
+  overlayText?: string | React.ReactNode;
+  overlayTextPosition?: OverlayTextPosition;
 };
 
 type ImageTileGridProps = {
-  items: Array<ImageTileComponent>,
-  isLoading?: boolean,
-  getColumnsFromWindowSize: (windowSize: WindowSizeType, isLandscape: boolean) => number,
-  getLimitFromWindowSize?: (windowSize: WindowSizeType, isLandscape: boolean) => number
+  items: Array<ImageTileComponent>;
+  isLoading?: boolean;
+  getColumnsFromWindowSize: (
+    windowSize: WindowSizeType,
+    isLandscape: boolean
+  ) => number;
+  getLimitFromWindowSize?: (
+    windowSize: WindowSizeType,
+    isLandscape: boolean
+  ) => number;
 };
 
 const ImageTileGrid = ({
@@ -168,9 +176,7 @@ const ImageTileGrid = ({
   const columns = getColumnsFromWindowSize(windowSize, isLandscape);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Line noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GridList
         cols={columns}
         style={{
@@ -183,9 +189,8 @@ const ImageTileGrid = ({
         {isLoading
           ? new Array(columns).fill(0).map((_, index) => (
               // Display tiles but with skeletons while the data is loading.
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <GridListTile key={index} classes={tileClasses}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Skeleton
                   variant="rect"
                   width="100%"
@@ -195,22 +200,18 @@ const ImageTileGrid = ({
               </GridListTile>
             ))
           : itemsToDisplay.map((item, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <GridListTile key={index} classes={tileClasses}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ButtonBase
                   style={styles.buttonStyle}
                   onClick={item.onClick}
                   tabIndex={0}
                   focusRipple
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <div style={styles.imageContainer}>
                       {!loadedImageUrls.current.has(item.imageUrl) ? (
                         // Display a skeleton behind the image while it's loading.
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                         <Skeleton
                           variant="rect"
                           width="100%"
@@ -218,7 +219,6 @@ const ImageTileGrid = ({
                           style={styles.imageLoadingSkeleton}
                         />
                       ) : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CorsAwareImage
                         style={{
                           // Once ready, animate the image display.
@@ -232,7 +232,6 @@ const ImageTileGrid = ({
                         onLoad={() => setImageLoaded(item.imageUrl)}
                       />
                       {item.overlayText && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <ImageOverlay
                           content={item.overlayText}
                           position={item.overlayTextPosition || 'bottomRight'}
@@ -240,7 +239,6 @@ const ImageTileGrid = ({
                       )}
                     </div>
                     {item.title && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <div
                         style={
                           columns === 1
@@ -248,12 +246,10 @@ const ImageTileGrid = ({
                             : styles.titleContainerWithMinHeight
                         }
                       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <Text size="sub-title">{item.title}</Text>
                       </div>
                     )}
                     {item.description && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Text size="body" color="secondary">
                         {shortenString(item.description, 120)}
                       </Text>

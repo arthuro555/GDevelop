@@ -5,13 +5,13 @@ import { useScreenType } from '../Responsive/ScreenTypeMeasurer';
 import GDevelopThemeContext from '../Theme/GDevelopThemeContext';
 
 type Props = {
-  message: React.ReactNode,
-  touchScreenMessage?: React.ReactNode,
-  visible: boolean,
-  duration?: number,
-  hide: () => void,
-  actionLabel?: React.ReactNode,
-  onActionClick?: () => undefined | Promise<undefined>
+  message: React.ReactNode;
+  touchScreenMessage?: React.ReactNode;
+  visible: boolean;
+  duration?: number;
+  hide: () => void;
+  actionLabel?: React.ReactNode;
+  onActionClick?: () => undefined | Promise<undefined>;
 };
 
 const InfoBar = ({
@@ -26,20 +26,16 @@ const InfoBar = ({
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const screenType = useScreenType();
 
-  React.useEffect(
-    () => {
-      if (visible) {
-        const timeout = setTimeout(() => {
-          hide();
-        }, duration);
-        return () => clearTimeout(timeout);
-      }
-    },
-    [visible, hide, duration]
-  );
+  React.useEffect(() => {
+    if (visible) {
+      const timeout = setTimeout(() => {
+        hide();
+      }, duration);
+      return () => clearTimeout(timeout);
+    }
+  }, [visible, hide, duration]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Snackbar
       open={visible}
       message={
@@ -49,7 +45,6 @@ const InfoBar = ({
       }
       action={
         actionLabel && onActionClick ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Button
             color={
               gdevelopTheme.palette.type === 'light' ? 'secondary' : 'primary'

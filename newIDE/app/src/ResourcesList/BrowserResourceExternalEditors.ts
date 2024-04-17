@@ -10,7 +10,7 @@ import {
   readMetadata,
 } from './ResourceExternalEditor';
 import { sendExternalEditorOpened } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import { isBlobURL, isURL } from './ResourceUtils';
 import { ResourceKind } from './ResourceSource';
@@ -24,152 +24,160 @@ import { displayBlackLoadingScreen } from '../Utils/BrowserExternalWindowUtils';
 import { UserCancellationError } from '../LoginProvider/Utils';
 let nextExternalEditorWindowId = 0;
 
-const externalEditorIndexHtml: Partial<Record<'piskel' | 'yarn' | 'jfxr', string>> = {
+const externalEditorIndexHtml: Partial<
+  Record<'piskel' | 'yarn' | 'jfxr', string>
+> = {
   piskel: 'external/piskel/piskel-index.html',
   yarn: 'external/yarn/yarn-index.html',
   jfxr: 'external/jfxr/jfxr-index.html',
 };
 
-const openAndWaitForExternalEditorWindow = async (
-  {
-    externalEditorWindow,
-    externalEditorName,
-    externalEditorInput,
-    signal,
-  }: {
-    externalEditorWindow: any,
-    externalEditorName: 'piskel' | 'yarn' | 'jfxr',
-    externalEditorInput: ExternalEditorInput,
-    signal: AbortSignal
-  },
-): Promise<ExternalEditorOutput | null | undefined> => {
+const openAndWaitForExternalEditorWindow = async ({
+  externalEditorWindow,
+  externalEditorName,
+  externalEditorInput,
+  signal,
+}: {
+  externalEditorWindow: any;
+  externalEditorName: 'piskel' | 'yarn' | 'jfxr';
+  externalEditorInput: ExternalEditorInput;
+  signal: AbortSignal;
+}): Promise<ExternalEditorOutput | null | undefined> => {
   if (signal.aborted) {
     return Promise.reject(new UserCancellationError(''));
   }
-  return new Promise((resolve: (
-    result?: Promise<ExternalEditorOutput | null | undefined> | ExternalEditorOutput | null | undefined,
-  ) => void, reject: (error?: any) => void) => {
-    let externalEditorLoaded = false;
-    let externalEditorClosed = false;
-    let externalEditorOutput: ExternalEditorOutput | null | undefined = null;
+  return new Promise(
+    (
+      resolve: (
+        result?:
+          | Promise<ExternalEditorOutput | null | undefined>
+          | ExternalEditorOutput
+          | null
+          | undefined
+      ) => void,
+      reject: (error?: any) => void
+    ) => {
+      let externalEditorLoaded = false;
+      let externalEditorClosed = false;
+      let externalEditorOutput: ExternalEditorOutput | null | undefined = null;
 
-    const onMessageEvent = (event: MessageEvent) => {
-      if (event.source !== externalEditorWindow) {
-        return;
-      }
+      const onMessageEvent = (event: MessageEvent) => {
+        if (event.source !== externalEditorWindow) {
+          return;
+        }
 
-      if (!event.data || typeof event.data !== 'object') {
-        console.warn(
-          'Ignoring malformed message data from the external editor window.'
-        );
-        return;
-      }
+        if (!event.data || typeof event.data !== 'object') {
+          console.warn(
+            'Ignoring malformed message data from the external editor window.'
+          );
+          return;
+        }
 
-      const { id, payload } = event.data;
-      if (id === `external-editor-ready`) {
-        console.info(`External editor "${externalEditorName}" ready.`);
+        const { id, payload } = event.data;
+        if (id === `external-editor-ready`) {
+          console.info(`External editor "${externalEditorName}" ready.`);
 
-        // Some browsers like Safari might not trigger the "load" event, but now we can
-        // be sure the editor is loaded: the proof being that we received this message.
-        // Mark the editor as loaded and re-attach a unload listener to be safe.
+          // Some browsers like Safari might not trigger the "load" event, but now we can
+          // be sure the editor is loaded: the proof being that we received this message.
+          // Mark the editor as loaded and re-attach a unload listener to be safe.
+          externalEditorLoaded = true;
+          externalEditorWindow.addEventListener('unload', () => {
+            onExternalEditorWindowClosed();
+          });
+
+          // Now that the external editor is loaded and ready, we can ask it to open the resources.
+          externalEditorWindow.postMessage(
+            {
+              id: 'open-external-editor-input',
+              payload: externalEditorInput,
+            },
+            // Ensure only external editors hosted on the same server as the GDevelop editor
+            // can receive the message:
+            window.location.origin
+          );
+        } else if (id === `save-external-editor-output`) {
+          console.info(
+            `Received data from external editor "${externalEditorName}."`
+          );
+          externalEditorOutput = payload;
+        } else if (event.data.id === 'close') {
+          externalEditorWindow.close();
+          onExternalEditorWindowClosed();
+        }
+      };
+      window.addEventListener('message', onMessageEvent);
+
+      const onExternalEditorWindowClosed = () => {
+        if (externalEditorClosed) {
+          // Somehow this editor was already closed.
+          return;
+        }
+        externalEditorClosed = true;
+        console.info(`External editor "${externalEditorName}" closed.`);
+        window.removeEventListener('message', onMessageEvent);
+        resolve(externalEditorOutput);
+      };
+
+      signal.addEventListener('abort', () => {
+        reject(new UserCancellationError(''));
+        if (externalEditorClosed) return;
+        externalEditorWindow.close();
+        onExternalEditorWindowClosed();
+      });
+
+      externalEditorWindow.addEventListener('load', () => {
+        console.info(`External editor "${externalEditorName}" loaded.`);
         externalEditorLoaded = true;
+
         externalEditorWindow.addEventListener('unload', () => {
           onExternalEditorWindowClosed();
         });
+      });
 
-        // Now that the external editor is loaded and ready, we can ask it to open the resources.
-        externalEditorWindow.postMessage(
-          {
-            id: 'open-external-editor-input',
-            payload: externalEditorInput,
-          },
-          // Ensure only external editors hosted on the same server as the GDevelop editor
-          // can receive the message:
-          window.location.origin
-        );
-      } else if (id === `save-external-editor-output`) {
+      // Change the HTML file displayed by the window so that it starts loading
+      // the editor.
+      // The browser will load the editor HTML/CSS/JS, then will fire the `load` event
+      // (though not on Safari), then the editor will send a `external-editor-ready` event
+      // (on all browsers), after which we will then be ready to have it open the resources.
+      // (see `open-external-editor-input`).
+      externalEditorWindow.location =
+        externalEditorIndexHtml[externalEditorName];
+
+      // If the editor is not ready after 10 seconds and not closed, force it to be closed.
+      // Something wrong is going on and we don't want to block the user.
+      setTimeout(() => {
+        if (externalEditorLoaded || externalEditorClosed) return;
         console.info(
-          `Received data from external editor "${externalEditorName}."`
+          `External editor "${externalEditorName} not loaded after 10 seconds - closing its window."`
         );
-        externalEditorOutput = payload;
-      } else if (event.data.id === 'close') {
+
+        // The external editor is not loaded after 10 seconds, abort.
         externalEditorWindow.close();
         onExternalEditorWindowClosed();
-      }
-    };
-    window.addEventListener('message', onMessageEvent);
-
-    const onExternalEditorWindowClosed = () => {
-      if (externalEditorClosed) {
-        // Somehow this editor was already closed.
-        return;
-      }
-      externalEditorClosed = true;
-      console.info(`External editor "${externalEditorName}" closed.`);
-      window.removeEventListener('message', onMessageEvent);
-      resolve(externalEditorOutput);
-    };
-
-    signal.addEventListener('abort', () => {
-      reject(new UserCancellationError(''));
-      if (externalEditorClosed) return;
-      externalEditorWindow.close();
-      onExternalEditorWindowClosed();
-    });
-
-    externalEditorWindow.addEventListener('load', () => {
-      console.info(`External editor "${externalEditorName}" loaded.`);
-      externalEditorLoaded = true;
-
-      externalEditorWindow.addEventListener('unload', () => {
-        onExternalEditorWindowClosed();
-      });
-    });
-
-    // Change the HTML file displayed by the window so that it starts loading
-    // the editor.
-    // The browser will load the editor HTML/CSS/JS, then will fire the `load` event
-    // (though not on Safari), then the editor will send a `external-editor-ready` event
-    // (on all browsers), after which we will then be ready to have it open the resources.
-    // (see `open-external-editor-input`).
-    externalEditorWindow.location = externalEditorIndexHtml[externalEditorName];
-
-    // If the editor is not ready after 10 seconds and not closed, force it to be closed.
-    // Something wrong is going on and we don't want to block the user.
-    setTimeout(() => {
-      if (externalEditorLoaded || externalEditorClosed) return;
-      console.info(
-        `External editor "${externalEditorName} not loaded after 10 seconds - closing its window."`
-      );
-
-      // The external editor is not loaded after 10 seconds, abort.
-      externalEditorWindow.close();
-      onExternalEditorWindowClosed();
-    }, 10000);
-  });
+      }, 10000);
+    }
+  );
 };
 
 /**
  * Download (or read locally) resources and prepare them to be edited
  * by an external editor.
  */
-export const downloadAndPrepareExternalEditorBase64Resources = async (
-  {
-    project,
-    resourceNames,
-  }: {
-    project: gdProject,
-    resourceNames: Array<string>
-  },
-): Promise<Array<ExternalEditorBase64Resource>> => {
+export const downloadAndPrepareExternalEditorBase64Resources = async ({
+  project,
+  resourceNames,
+}: {
+  project: gd.Project;
+  resourceNames: Array<string>;
+}): Promise<Array<ExternalEditorBase64Resource>> => {
   type ResourceToDownload = {
-    resourceName: string,
-    url: string
+    resourceName: string;
+    url: string;
   };
 
   const urlsToDownload: Array<ResourceToDownload> = [];
   const resourcesManager = project.getResourcesManager();
-  resourceNames.forEach(resourceName => {
+  resourceNames.forEach((resourceName) => {
     if (!resourcesManager.hasResource(resourceName)) return;
 
     const resource = resourcesManager.getResource(resourceName);
@@ -188,15 +196,19 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
     }
   });
 
-  const downloadedBlobs: Array<ItemResult<ResourceToDownload>> = await downloadUrlsToBlobs({
-    urlContainers: urlsToDownload,
-    onProgress: (count, total) => {},
-  });
+  const downloadedBlobs: Array<ItemResult<ResourceToDownload>> =
+    await downloadUrlsToBlobs({
+      urlContainers: urlsToDownload,
+      onProgress: (count, total) => {},
+    });
 
-  const resourcesToDataUrl = new Map<string, {
-    dataUrl: string,
-    localFilePath?: string
-  }>();
+  const resourcesToDataUrl = new Map<
+    string,
+    {
+      dataUrl: string;
+      localFilePath?: string;
+    }
+  >();
   await Promise.all(
     downloadedBlobs.map(async ({ error, blob, item }) => {
       if (blob) {
@@ -204,11 +216,9 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
           resourcesToDataUrl.set(item.resourceName, {
             dataUrl: await convertBlobToDataURL(blob),
           });
-        } catch (error: any) {
+        } catch (error) {
           console.error(
-            `Unable to read data from resource "${
-              item.resourceName
-            }" - ignoring it.`,
+            `Unable to read data from resource "${item.resourceName}" - ignoring it.`,
             error
           );
         }
@@ -216,7 +226,7 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
     })
   );
 
-  return resourceNames.map(resourceName => {
+  return resourceNames.map((resourceName) => {
     const resourceData = resourcesToDataUrl.get(resourceName);
     if (!resourceData)
       return {
@@ -244,12 +254,12 @@ const editWithBrowserExternalEditor = async ({
   resourceKind,
   options,
 }: {
-  externalEditorName: 'piskel' | 'yarn' | 'jfxr',
-  externalEditorWindow: any,
-  defaultName: string,
-  metadataKey: string,
-  resourceKind: ResourceKind,
-  options: EditWithExternalEditorOptions
+  externalEditorName: 'piskel' | 'yarn' | 'jfxr';
+  externalEditorWindow: any;
+  defaultName: string;
+  metadataKey: string;
+  resourceKind: ResourceKind;
+  options: EditWithExternalEditorOptions;
 }) => {
   const { project, resourceNames, resourceManagementProps, signal } = options;
 
@@ -272,9 +282,13 @@ const editWithBrowserExternalEditor = async ({
   };
 
   sendExternalEditorOpened(externalEditorName);
-  const externalEditorOutput: ExternalEditorOutput | null | undefined = await openAndWaitForExternalEditorWindow(
-    { externalEditorWindow, externalEditorName, externalEditorInput, signal }
-  );
+  const externalEditorOutput: ExternalEditorOutput | null | undefined =
+    await openAndWaitForExternalEditorWindow({
+      externalEditorWindow,
+      externalEditorName,
+      externalEditorInput,
+      signal,
+    });
   if (!externalEditorOutput) return null; // Changes cancelled.
 
   // Save the edited files back to the GDevelop resources, as "blob urls" (blob:...)
@@ -292,7 +306,7 @@ const editWithBrowserExternalEditor = async ({
   // or saved locally).
   try {
     await resourceManagementProps.onFetchNewlyAddedResources();
-  } catch (error: any) {
+  } catch (error) {
     console.error(
       'An error happened while fetching the newly added resources:',
       error
@@ -365,7 +379,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Piskel`,
     editDisplayName: t`Edit with Piskel`,
     kind: 'image',
-    edit: async options => {
+    edit: async (options) => {
       if (options.getStorageProvider().internalName !== 'Cloud') {
         const { i18n } = options;
         showWarningBox(i18n._(cloudProjectWarning), {
@@ -374,7 +388,8 @@ const editors: Array<ResourceExternalEditor> = [
         return null;
       }
 
-      const externalEditorWindow = immediatelyOpenLoadingWindowForExternalEditor();
+      const externalEditorWindow =
+        immediatelyOpenLoadingWindowForExternalEditor();
       return await editWithBrowserExternalEditor({
         options,
         externalEditorWindow,
@@ -390,7 +405,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Jfxr`,
     editDisplayName: t`Edit with Jfxr`,
     kind: 'audio',
-    edit: async options => {
+    edit: async (options) => {
       if (options.getStorageProvider().internalName !== 'Cloud') {
         const { i18n } = options;
         showWarningBox(i18n._(cloudProjectWarning), {
@@ -399,7 +414,8 @@ const editors: Array<ResourceExternalEditor> = [
         return null;
       }
 
-      const externalEditorWindow = immediatelyOpenLoadingWindowForExternalEditor();
+      const externalEditorWindow =
+        immediatelyOpenLoadingWindowForExternalEditor();
       return await editWithBrowserExternalEditor({
         options,
         externalEditorWindow,
@@ -415,7 +431,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Yarn`,
     editDisplayName: t`Edit with Yarn`,
     kind: 'json',
-    edit: async options => {
+    edit: async (options) => {
       if (options.getStorageProvider().internalName !== 'Cloud') {
         const { i18n } = options;
         showWarningBox(i18n._(cloudProjectWarning), {
@@ -424,7 +440,8 @@ const editors: Array<ResourceExternalEditor> = [
         return null;
       }
 
-      const externalEditorWindow = immediatelyOpenLoadingWindowForExternalEditor();
+      const externalEditorWindow =
+        immediatelyOpenLoadingWindowForExternalEditor();
       return await editWithBrowserExternalEditor({
         options,
         externalEditorWindow,

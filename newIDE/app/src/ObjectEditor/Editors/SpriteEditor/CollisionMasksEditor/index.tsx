@@ -1,20 +1,20 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {Trans, t} from '@lingui/macro';
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../../../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../../../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../../../../UI/EmptyMessage';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line, Column } from '../../../../UI/Grid';
 import { mapFor } from '../../../../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module './PolygonsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/CollisionMasksEditor/PolygonsList.tsx', but '--jsx' is not set.
+
 import PolygonsList from './PolygonsList';
-// @ts-expect-error - TS6142 - Module './CollisionMasksPreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/CollisionMasksEditor/CollisionMasksPreview.tsx', but '--jsx' is not set.
+
 import CollisionMasksPreview from './CollisionMasksPreview';
 import ImagePreview, {
   isProjectImageResourceSmooth,
-// @ts-expect-error - TS6142 - Module '../../../../ResourcesList/ResourcePreview/ImagePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourcePreview/ImagePreview.tsx', but '--jsx' is not set.
+
 } from '../../../../ResourcesList/ResourcePreview/ImagePreview';
 import {
   getCurrentElements,
@@ -22,22 +22,22 @@ import {
   copyAnimationsSpriteCollisionMasks,
   allObjectSpritesHaveSameCollisionMaskAs,
 } from '../Utils/SpriteObjectHelper';
-// @ts-expect-error - TS6142 - Module '../Utils/SpriteSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/Utils/SpriteSelector.tsx', but '--jsx' is not set.
+
 import SpriteSelector from '../Utils/SpriteSelector';
 import ResourcesLoader from '../../../../ResourcesLoader';
 import useForceUpdate from '../../../../Utils/UseForceUpdate';
 import EditorMosaic, {
   Editor,
   EditorMosaicNode,
-// @ts-expect-error - TS6142 - Module '../../../../UI/EditorMosaic' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/index.tsx', but '--jsx' is not set.
+
 } from '../../../../UI/EditorMosaic';
 import { useResponsiveWindowSize } from '../../../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../../../UI/Paper';
-// @ts-expect-error - TS6142 - Module '../../../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../../../../UI/ScrollView';
 import useAlertDialog from '../../../../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS6142 - Module '../../../../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../../../../UI/AlertMessage';
 
 const styles = {
@@ -68,9 +68,9 @@ const verticalMosaicNodes: EditorMosaicNode = {
 };
 
 type Props = {
-  animations: gdSpriteAnimationList,
+  animations: gd.SpriteAnimationList,
   resourcesLoader: typeof ResourcesLoader,
-  project: gdProject,
+  project: gd.Project,
   onMasksUpdated?: () => void,
   onCreateMatchingSpriteCollisionMask: () => Promise<void>
 };
@@ -123,11 +123,11 @@ const CollisionMasksEditor = ({
   );
 
   const updateCollisionMasks = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'sameCollisionMasksForAnimations' implicitly has an 'any' type. | TS7006 - Parameter 'sameCollisionMasksForSprites' implicitly has an 'any' type.
+
     (sameCollisionMasksForAnimations, sameCollisionMasksForSprites) => {
       if (animation && sprite) {
         if (sameCollisionMasksForAnimations) {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
+
           mapFor(0, animations.getAnimationsCount(), i => {
             const otherAnimation = animations.getAnimation(i);
             copyAnimationsSpriteCollisionMasks(sprite, otherAnimation);
@@ -253,7 +253,7 @@ const CollisionMasksEditor = ({
   );
 
   const onSetAutomaticallyAdaptCollisionMasks = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
+
     async value => {
       // If enabling automatic while custom was selected, then ask for confirmation.
       if (value && sprite && !sprite.isFullImageCollisionMask()) {
@@ -326,11 +326,9 @@ const CollisionMasksEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Paper background="medium" style={styles.leftContainer} square>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand noMargin useFullHeight>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ImagePreview
               resourceName={resourceName}
               imageResourceSource={resourcesLoader.getResourceFullUrl(
@@ -343,10 +341,10 @@ const CollisionMasksEditor = ({
                 resourceName
               )}
               onImageSize={setCurrentSpriteSize}
-// @ts-expect-error - TS7006 - Parameter 'overlayProps' implicitly has an 'any' type.
+
               renderOverlay={overlayProps =>
                 sprite && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <CollisionMasksPreview
                     {...overlayProps}
                     isDefaultBoundingBox={sprite.isFullImageCollisionMask()}
@@ -369,15 +367,11 @@ const CollisionMasksEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Paper background="medium" style={styles.rightContainer} square>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <SpriteSelector
                   animations={animations}
                   animationIndex={animationIndex}
@@ -393,31 +387,29 @@ const CollisionMasksEditor = ({
                   }
                   setSameForAllSprites={setSameCollisionMasksForAllSprites}
                   setSameForAllAnimationsLabel={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <Trans>Share same collision masks for all animations</Trans>
                   }
                   setSameForAllSpritesLabel={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <Trans>
                       Share same collision masks for all sprites of this
                       animation
                     </Trans>
                   }
-                  hideControlsForSprite={(sprite: gdSprite) =>
+                  hideControlsForSprite={(sprite: gd.Sprite) =>
                     animations.adaptCollisionMaskAutomatically() ||
                     sprite.isFullImageCollisionMask()
                   }
                 />
               </Column>
             </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ScrollView>
               {!!sprite &&
                 !sprite.isFullImageCollisionMask() &&
                 !animations.adaptCollisionMaskAutomatically() && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <PolygonsList
                       polygons={sprite.getCustomCollisionMask()}
                       onPolygonsUpdated={onPolygonsUpdated}
@@ -437,21 +429,17 @@ const CollisionMasksEditor = ({
               {!!sprite &&
                 !sprite.isFullImageCollisionMask() &&
                 animations.adaptCollisionMaskAutomatically() && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <AlertMessage kind="info">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Trans>
                         Automatic collision mask activated. Click on the button
                         to replace it with a custom one.
                       </Trans>
                     </AlertMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                         label={<Trans>Use a custom collision mask</Trans>}
                         primary={false}
                         onClick={onUseCustomCollisionMask}
@@ -460,21 +448,17 @@ const CollisionMasksEditor = ({
                   </React.Fragment>
                 )}
               {!!sprite && sprite.isFullImageCollisionMask() && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <AlertMessage kind="info">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       This sprite uses a rectangle that is as large as the
                       sprite for its collision mask.
                     </Trans>
                   </AlertMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Use a custom collision mask</Trans>}
                       primary={false}
                       onClick={onUseCustomCollisionMask}
@@ -483,9 +467,8 @@ const CollisionMasksEditor = ({
                 </React.Fragment>
               )}
               {!sprite && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>
                     Choose an animation and frame to edit the collision masks
                   </Trans>
@@ -503,7 +486,7 @@ const CollisionMasksEditor = ({
       <EditorMosaic editors={editors} initialNodes={editorNodes} />
     </div>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default CollisionMasksEditor;

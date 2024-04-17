@@ -1,22 +1,20 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Spacer, Line, Column, LargeSpacer } from './Grid';
 import { useResponsiveWindowSize } from './Responsive/ResponsiveWindowMeasurer';
 
 type TextFieldWithButtonLayoutProps = {
-  renderTextField: () => React.ReactElement,
-  renderButton: (
-    style: {
-      marginTop?: number,
-      marginBottom?: number,
-      marginLeft?: number,
-      marginRight?: number,
-      margin?: number,
-      flexShrink?: 0
-    },
-  ) => React.ReactElement,
-  margin?: 'none' | 'dense',
-  noFloatingLabelText?: boolean
+  renderTextField: () => React.ReactElement;
+  renderButton: (style: {
+    marginTop?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+    marginRight?: number;
+    margin?: number;
+    flexShrink?: 0;
+  }) => React.ReactElement;
+  margin?: 'none' | 'dense';
+  noFloatingLabelText?: boolean;
 };
 
 const buttonCommonStyles = {
@@ -58,7 +56,6 @@ export const TextFieldWithButtonLayout = ({
   renderButton,
 }: TextFieldWithButtonLayoutProps) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ResponsiveLineStackLayout
       alignItems="flex-start" // Align from the top to stay at the same position when error/multiline
       expand
@@ -71,22 +68,22 @@ export const TextFieldWithButtonLayout = ({
             ? textFieldWithButtonLayoutStyles.standardTextFieldWithoutLabelRightButtonMargins
             : textFieldWithButtonLayoutStyles.standardTextFieldWithLabelRightButtonMargins
           : noFloatingLabelText
-          ? textFieldWithButtonLayoutStyles.filledTextFieldWithoutLabelRightButtonMargins
-          : textFieldWithButtonLayoutStyles.filledTextFieldWithLabelRightButtonMargins
+            ? textFieldWithButtonLayoutStyles.filledTextFieldWithoutLabelRightButtonMargins
+            : textFieldWithButtonLayoutStyles.filledTextFieldWithLabelRightButtonMargins
       )}
     </ResponsiveLineStackLayout>
   );
 };
 
 type LineStackLayoutProps = {
-  id?: string,
-  alignItems?: string,
-  justifyContent?: string,
-  expand?: boolean,
-  noMargin?: boolean,
-  children: React.ReactNode,
-  useLargeSpacer?: boolean,
-  overflow?: 'hidden' // allows children Text components to use text ellipsis when they are too long
+  id?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  expand?: boolean;
+  noMargin?: boolean;
+  children: React.ReactNode;
+  useLargeSpacer?: boolean;
+  overflow?: 'hidden'; // allows children Text components to use text ellipsis when they are too long
 };
 
 export const LineStackLayout = ({
@@ -101,7 +98,6 @@ export const LineStackLayout = ({
 }: LineStackLayoutProps) => {
   let isFirstChild = true;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Line
       id={id}
       alignItems={alignItems}
@@ -117,9 +113,7 @@ export const LineStackLayout = ({
         isFirstChild = false;
 
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {addSpacers && (useLargeSpacer ? <LargeSpacer /> : <Spacer />)}
             {child}
           </React.Fragment>
@@ -130,19 +124,19 @@ export const LineStackLayout = ({
 };
 
 type ResponsiveLineStackLayoutProps = {
-  id?: string,
-  alignItems?: string,
-  justifyContent?: string,
-  expand?: boolean,
+  id?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  expand?: boolean;
   /** Prefer `noColumnMargin` if needed. */
-  noMargin?: boolean,
+  noMargin?: boolean;
   /** Remove the margin on the left and right of the column, when the layout is shown as a single column. */
-  noColumnMargin?: boolean,
+  noColumnMargin?: boolean;
   /** Do not measure window width in case parent component is in smaller component */
-  forceMobileLayout?: boolean,
-  noResponsiveLandscape?: boolean,
-  useLargeSpacer?: boolean,
-  children: React.ReactNode
+  forceMobileLayout?: boolean;
+  noResponsiveLandscape?: boolean;
+  useLargeSpacer?: boolean;
+  children: React.ReactNode;
 };
 
 export const ResponsiveLineStackLayout = ({
@@ -164,7 +158,6 @@ export const ResponsiveLineStackLayout = ({
     assumeMobileScreen && !shouldPreventSwitchingToColumn;
 
   return shouldSwitchToColumn ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ColumnStackLayout
       id={id}
       noMargin={noMargin || noColumnMargin}
@@ -174,7 +167,6 @@ export const ResponsiveLineStackLayout = ({
       {children}
     </ColumnStackLayout>
   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LineStackLayout
       id={id}
       alignItems={alignItems}
@@ -189,15 +181,15 @@ export const ResponsiveLineStackLayout = ({
 };
 
 type ColumnStackLayoutProps = {
-  id?: string,
-  alignItems?: string,
-  justifyContent?: string,
-  expand?: boolean,
-  noMargin?: boolean,
-  children: React.ReactNode,
-  noOverflowParent?: boolean,
-  useFullHeight?: boolean,
-  useLargeSpacer?: boolean
+  id?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  expand?: boolean;
+  noMargin?: boolean;
+  children: React.ReactNode;
+  noOverflowParent?: boolean;
+  useFullHeight?: boolean;
+  useLargeSpacer?: boolean;
 };
 
 export const ColumnStackLayout = ({
@@ -213,7 +205,6 @@ export const ColumnStackLayout = ({
 }: ColumnStackLayoutProps) => {
   let isFirstChild = true;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column
       id={id}
       alignItems={alignItems}
@@ -230,9 +221,7 @@ export const ColumnStackLayout = ({
         isFirstChild = false;
 
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {addSpacers && (useLargeSpacer ? <LargeSpacer /> : <Spacer />)}
             {child}
           </React.Fragment>

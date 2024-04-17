@@ -1,9 +1,7 @@
-import {fakeAssetShortHeader1} from '../fixtures/GDevelopServicesTestData';
+import { fakeAssetShortHeader1 } from '../fixtures/GDevelopServicesTestData';
 const { getFolderTagsFromAssetShortHeaders } = require('./TagsHelper');
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('getFolderTagsFromAssetShortHeaders', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return an empty array if no assets', () => {
     const selectedFolders = ['pack-tag'];
     const assetShortHeaders: Array<AssetShortHeader> = [];
@@ -14,7 +12,6 @@ describe('getFolderTagsFromAssetShortHeaders', () => {
     expect(result).toEqual([]);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return the top level tags of assets in a pack', () => {
     const selectedFolders = ['pack-tag'];
     const assetShortHeader1 = {
@@ -47,7 +44,6 @@ describe('getFolderTagsFromAssetShortHeaders', () => {
     expect(result).toEqual(['tag2', 'tag4']); // no pack-tag, as it's the pack, no tag1 as it matches all assets.
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return the top level tags after navigating inside a folder', () => {
     const selectedFolders = ['pack-tag', 'tag4']; // navigate inside tag4
     const assetShortHeader1 = {
@@ -80,7 +76,6 @@ describe('getFolderTagsFromAssetShortHeaders', () => {
     expect(result).toEqual(['tag5', 'tag6']); // no pack-tag, as it's the pack, no tag1 as it matches all assets.
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('works if a tag is duplicated', () => {
     const selectedFolders = ['pack-tag']; // root of pack.
     const assetShortHeader1 = {

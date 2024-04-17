@@ -1,17 +1,17 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
 import ButtonBase from '@material-ui/core/ButtonBase';
-// @ts-expect-error - TS6142 - Module './Menu/ContextMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Menu/ContextMenu.tsx', but '--jsx' is not set.
+
 import ContextMenu, { ContextMenuInterface } from './Menu/ContextMenu';
 import { useLongTouch } from '../Utils/UseLongTouch';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Spacer } from './Grid';
 import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 import { dataObjectToProps, HTMLDataset } from '../Utils/HTMLDataset';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/Cross'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cross.js' implicitly has an 'any' type.
+
 import Cross from './CustomSvgIcons/Cross';
 
 const styles = {
@@ -64,7 +64,7 @@ export class TabContentContainer extends React.Component<TabContentContainerProp
   render() {
     const { children, active } = this.props;
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <div
         style={{
           ...styles.tabContentContainer,
@@ -104,7 +104,7 @@ export const ClosableTabs = ({
   }, []);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <div
 // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
       ref={containerRef}
@@ -167,7 +167,7 @@ export function ClosableTab({
   };
 
   const closeOnMiddleClick = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
+
     event => {
       if (event.nativeEvent && event.nativeEvent.button === 1) {
         onClose();
@@ -194,9 +194,8 @@ export function ClosableTab({
     : gdevelopTheme.closableTabs.selectedTextColor;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <span
         id={id}
         style={{
@@ -232,7 +231,6 @@ export function ClosableTab({
           // use the size of the ripple and it will be too big.
           disableTouchRipple
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <span
             style={{
               ...styles.tabLabelAndIcon,
@@ -242,9 +240,7 @@ export function ClosableTab({
             }}
           >
             {icon}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {icon && label ? <Spacer /> : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {label && <span style={styles.tabLabel}>{label}</span>}
           </span>
         </ButtonBase>
@@ -257,7 +253,6 @@ export function ClosableTab({
             {...longTouchForContextMenuProps}
             focusRipple
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Cross
               style={{
                 ...styles.closeButton,
@@ -269,7 +264,6 @@ export function ClosableTab({
           </ButtonBase>
         )}
       </span>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ContextMenu
         ref={contextMenu}
         buildMenuTemplate={(i18n: I18nType) => [

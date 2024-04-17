@@ -3,7 +3,7 @@ import {
   RenderEditorContainerProps,
   RenderEditorContainerPropsWithRef,
 } from './BaseEditor';
-// @ts-expect-error - TS6142 - Module '../../ResourcesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesEditor/index.tsx', but '--jsx' is not set.
+
 import ResourcesEditor from '../../ResourcesEditor';
 
 export class ResourcesEditorContainer extends React.Component<RenderEditorContainerProps> {
@@ -16,11 +16,11 @@ export class ResourcesEditorContainer extends React.Component<RenderEditorContai
     return this.props.isActive || nextProps.isActive;
   }
 
-  getProject(): gdProject | null | undefined {
+  getProject(): gd.Project | null | undefined {
     return this.props.project;
   }
 
-  getLayout(): gdLayout | null | undefined {
+  getLayout(): gd.Layout | null | undefined {
     return null;
   }
 
@@ -46,14 +46,12 @@ export class ResourcesEditorContainer extends React.Component<RenderEditorContai
     if (!project) return null;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ResourcesEditor
         setToolbar={this.props.setToolbar}
         onDeleteResource={this.props.onDeleteResource}
         onRenameResource={this.props.onRenameResource}
         resourceManagementProps={this.props.resourceManagementProps}
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-        ref={editor => (this.editor = editor)}
+        ref={(editor) => (this.editor = editor)}
         fileMetadata={this.props.fileMetadata}
         project={project}
         storageProvider={this.props.storageProvider}
@@ -64,5 +62,4 @@ export class ResourcesEditorContainer extends React.Component<RenderEditorContai
 
 export const renderResourcesEditorContainer = (
   props: RenderEditorContainerPropsWithRef
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 ) => <ResourcesEditorContainer {...props} />;

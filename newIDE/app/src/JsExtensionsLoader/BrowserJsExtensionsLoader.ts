@@ -6,7 +6,6 @@ import {
 } from '.';
 import ObjectsEditorService from '../ObjectEditor/ObjectsEditorService';
 import ObjectsRenderingService from '../ObjectsRendering/ObjectsRenderingService';
-const gd: libGDevelop = global.gd;
 
 // The list of "JsExtension.js" files to be bundled in the webapp, keyed by their extension name.
 const jsExtensions = [
@@ -179,9 +178,9 @@ const jsExtensions = [
 ];
 
 type MakeExtensionsLoaderArguments = {
-  objectsEditorService: typeof ObjectsEditorService,
-  objectsRenderingService: typeof ObjectsRenderingService,
-  filterExamples: boolean
+  objectsEditorService: typeof ObjectsEditorService;
+  objectsRenderingService: typeof ObjectsRenderingService;
+  filterExamples: boolean;
 };
 
 /**
@@ -189,18 +188,18 @@ type MakeExtensionsLoaderArguments = {
  * Extensions are usually auto-discovered when declared in Extensions/xxx/JsExtension.js, but not
  * for the web-app where everything must be bundled.
  */
-export default function makeExtensionsLoader(
-  {
-    objectsEditorService,
-    objectsRenderingService,
-    filterExamples,
-  }: MakeExtensionsLoaderArguments,
-): JsExtensionsLoader {
+export default function makeExtensionsLoader({
+  objectsEditorService,
+  objectsRenderingService,
+  filterExamples,
+}: MakeExtensionsLoaderArguments): JsExtensionsLoader {
   return {
-    loadAllExtensions(_: TranslationFunction): Promise<Array<{
-      extensionModulePath: string,
-      result: ExtensionLoadingResult
-    }>> {
+    loadAllExtensions(_: TranslationFunction): Promise<
+      Array<{
+        extensionModulePath: string;
+        result: ExtensionLoadingResult;
+      }>
+    > {
       return Promise.resolve(
         jsExtensions
           .filter(({ name }) => !filterExamples || !name.includes('Example'))
@@ -219,7 +218,7 @@ export default function makeExtensionsLoader(
                 for (const requirePath in objectsRenderingServiceModules) {
                   objectsRenderingService.registerModule(
                     requirePath,
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ 'pixi-multistyle-text/dist/pixi-multistyle-text.umd'?: undefined; 'pixi-tilemap/dist/pixi-tilemap.umd'?: undefined; 'helper/TileMapHelper'?: undefined; 'pako/dist/pako.min'?: undefined; } | { ...; } | { ...; }'.
+                    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ 'pixi-multistyle-text/dist/pixi-multistyle-text.umd'?: undefined; 'pixi-tilemap/dist/pixi-tilemap.umd'?: undefined; 'helper/TileMapHelper'?: undefined; 'pako/dist/pako.min'?: undefined; } | { ...; } | { ...; }'.
                     objectsRenderingServiceModules[requirePath]
                   );
                 }

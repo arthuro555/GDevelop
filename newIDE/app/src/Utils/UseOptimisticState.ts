@@ -11,11 +11,11 @@ export const useOptimisticState = (
   functionToDebounce: (newState?: any, args?: any) => Promise<void>
 ) => {
   const [pending, setPending] = React.useState<any | null | undefined>(null);
-// @ts-expect-error - TS7006 - Parameter 'newState' implicitly has an 'any' type. | TS7019 - Rest parameter 'args' implicitly has an 'any[]' type.
+  // @ts-expect-error - TS7006 - Parameter 'newState' implicitly has an 'any' type. | TS7019 - Rest parameter 'args' implicitly has an 'any[]' type.
   const debouncedFunction = useDebounce(async (newState, ...args) => {
     try {
       await functionToDebounce(newState, ...args);
-    } catch (error: any) {
+    } catch (error) {
       console.error(`Error while updating optimistic state: `, error);
     } finally {
       setPending(null);

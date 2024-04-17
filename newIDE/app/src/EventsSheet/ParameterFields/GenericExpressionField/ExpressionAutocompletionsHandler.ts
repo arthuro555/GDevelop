@@ -1,4 +1,4 @@
-import {ExpressionAutocompletion} from '../../../ExpressionAutocompletion';
+import { ExpressionAutocompletion } from '../../../ExpressionAutocompletion';
 import {
   shouldCloseOrCancel,
   shouldValidate,
@@ -6,9 +6,9 @@ import {
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 
 export type AutocompletionsState = {
-  autocompletions: Array<ExpressionAutocompletion>,
-  selectedCompletionIndex: number,
-  renderEverything: boolean
+  autocompletions: Array<ExpressionAutocompletion>;
+  selectedCompletionIndex: number;
+  renderEverything: boolean;
 };
 
 export const getAutocompletionsInitialState = (): AutocompletionsState => {
@@ -37,7 +37,9 @@ export const getNonRenderedCount = (state: AutocompletionsState): number => {
   return Math.max(0, state.autocompletions.length - DEFAULT_RENDERED_COUNT);
 };
 
-export const getRenderedAutocompletions = (state: AutocompletionsState): Array<ExpressionAutocompletion> => {
+export const getRenderedAutocompletions = (
+  state: AutocompletionsState
+): Array<ExpressionAutocompletion> => {
   const nonRenderedCount = getNonRenderedCount(state);
   return nonRenderedCount === 0
     ? state.autocompletions
@@ -46,7 +48,7 @@ export const getRenderedAutocompletions = (state: AutocompletionsState): Array<E
 
 export const setNewAutocompletions = (
   state: AutocompletionsState,
-  autocompletions: Array<ExpressionAutocompletion>,
+  autocompletions: Array<ExpressionAutocompletion>
 ): AutocompletionsState => {
   const completionsChanged =
     state.autocompletions.length !== autocompletions.length;
@@ -63,7 +65,9 @@ export const setNewAutocompletions = (
   };
 };
 
-export const handleAutocompletionsScroll = (state: AutocompletionsState): AutocompletionsState => {
+export const handleAutocompletionsScroll = (
+  state: AutocompletionsState
+): AutocompletionsState => {
   // If there is a scroll, we need to render all the completions.
   return {
     ...state,
@@ -78,10 +82,10 @@ export const handleAutocompletionsKeyDown = (
     onUpdateAutocompletions,
     onInsertAutocompletion,
   }: {
-    event: React.KeyboardEvent,
-    onUpdateAutocompletions: () => void,
-    onInsertAutocompletion: (arg1: ExpressionAutocompletion) => void
-  },
+    event: React.KeyboardEvent;
+    onUpdateAutocompletions: () => void;
+    onInsertAutocompletion: (arg1: ExpressionAutocompletion) => void;
+  }
 ): AutocompletionsState => {
   if (
     event.key === 'ArrowDown' ||

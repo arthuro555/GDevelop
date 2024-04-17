@@ -21,36 +21,40 @@ import {
   ExportPipelineContext,
   ExportFlowProps,
 } from '../ExportPipeline.flow';
-// @ts-expect-error - TS6142 - Module '../GenericExporters/OnlineWebExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineWebExport/index.tsx', but '--jsx' is not set.
-import { ExplanationHeader } from '../GenericExporters/OnlineWebExport';
-// @ts-expect-error - TS6142 - Module '../GenericExporters/OnlineWebExport/OnlineWebExportFlow' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineWebExport/OnlineWebExportFlow.tsx', but '--jsx' is not set.
-import OnlineWebExportFlow from '../GenericExporters/OnlineWebExport/OnlineWebExportFlow';
 
-const gd: libGDevelop = global.gd;
+import { ExplanationHeader } from '../GenericExporters/OnlineWebExport';
+
+import OnlineWebExportFlow from '../GenericExporters/OnlineWebExport/OnlineWebExportFlow';
 
 type ExportState = null;
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  abstractFileSystem: BrowserFileSystem,
-  outputDir: string
+  exporter: gdjsExporter;
+  abstractFileSystem: BrowserFileSystem;
+  outputDir: string;
 };
 
 type ExportOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  urlFiles: Array<UrlFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  blobFiles: Array<BlobFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  blobFiles: Array<BlobFileDescriptor>;
 };
 
 type CompressionOutput = Blob;
 
 const exportPipelineName = 'browser-online-web';
 
-export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const browserOnlineWebExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
   onlineBuildType: 'web-build',
 
@@ -64,15 +68,15 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
   isNavigationDisabled: (exportStep, errored) =>
     !errored && !['', 'done'].includes(exportStep),
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   renderHeader: () => <ExplanationHeader />,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <OnlineWebExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
     return findGDJS('web').then(({ gdjsRoot, filesContent }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -96,15 +100,11 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
 
   launchExport: (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      outputDir,
-      abstractFileSystem,
-    }: PreparedExporter,
+    { exporter, outputDir, abstractFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const { project } = context;
     const exportOptions = new gd.ExportOptions(project, outputDir);
@@ -126,15 +126,12 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
 
   launchResourcesDownload: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      urlFiles,
-    }: ExportOutput,
+    { textFiles, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     return downloadUrlFilesToBlobFiles({
       urlFiles,
       onProgress: context.updateStepProgress,
-    }).then(blobFiles => ({
+    }).then((blobFiles) => ({
       blobFiles,
       textFiles,
     }));
@@ -142,10 +139,7 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      blobFiles,
-    }: ResourcesDownloadOutput,
+    { textFiles, blobFiles }: ResourcesDownloadOutput
   ): Promise<Blob> => {
     return archiveFiles({
       blobFiles,
@@ -156,8 +150,11 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
     });
   },
 
-  launchUpload: (context: ExportPipelineContext<ExportState>, blobFile: Blob): Promise<string> => {
-    return getBuildFileUploadOptions().then(uploadOptions => {
+  launchUpload: (
+    context: ExportPipelineContext<ExportState>,
+    blobFile: Blob
+  ): Promise<string> => {
+    return getBuildFileUploadOptions().then((uploadOptions) => {
       return uploadBlobFile(
         blobFile,
         uploadOptions,
@@ -172,10 +169,10 @@ export const browserOnlineWebExportPipeline: ExportPipeline<ExportState, Prepare
     uploadBucketKey: string,
     gameId: string,
     options: {
-      gameName: string,
-      gameVersion: string
+      gameName: string;
+      gameVersion: string;
     },
-    payWithCredits: boolean,
+    payWithCredits: boolean
   ): Promise<Build> => {
     const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
     if (!firebaseUser)

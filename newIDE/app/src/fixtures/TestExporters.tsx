@@ -13,36 +13,41 @@ import {
 } from '../Utils/BrowserArchiver';
 import BrowserFileSystem from '../ExportAndShare/BrowserExporters/BrowserFileSystem';
 import { completeWebBuild } from '../fixtures/GDevelopServicesTestData';
-// @ts-expect-error - TS6142 - Module '../ExportAndShare/GenericExporters/OnlineWebExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineWebExport/index.tsx', but '--jsx' is not set.
+
 import { ExplanationHeader } from '../ExportAndShare/GenericExporters/OnlineWebExport';
 import { delay } from '../Utils/Delay';
 import assignIn from 'lodash/assignIn';
-// @ts-expect-error - TS6142 - Module '../ExportAndShare/GenericExporters/OnlineWebExport/OnlineWebExportFlow' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineWebExport/OnlineWebExportFlow.tsx', but '--jsx' is not set.
+
 import OnlineWebExportFlow from '../ExportAndShare/GenericExporters/OnlineWebExport/OnlineWebExportFlow';
-const gd: libGDevelop = global.gd;
 type ExportState = null;
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  abstractFileSystem: BrowserFileSystem,
-  outputDir: string
+  exporter: gdjsExporter;
+  abstractFileSystem: BrowserFileSystem;
+  outputDir: string;
 };
 
 type ExportOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  urlFiles: Array<UrlFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  blobFiles: Array<BlobFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  blobFiles: Array<BlobFileDescriptor>;
 };
 
 type CompressionOutput = Blob;
 
 const exportPipelineName = 'browser-online-web';
 
-export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
   onlineBuildType: 'web-build',
 
@@ -56,15 +61,15 @@ export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, Pre
   isNavigationDisabled: (exportStep, errored) =>
     !errored && !['', 'done'].includes(exportStep),
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   renderHeader: () => <ExplanationHeader />,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <OnlineWebExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: async (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
+  prepareExporter: async (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
     await delay(1000);
 
     const abstractFileSystem = new BrowserFileSystem({
@@ -85,15 +90,11 @@ export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, Pre
 
   launchExport: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      outputDir,
-      abstractFileSystem,
-    }: PreparedExporter,
+    { exporter, outputDir, abstractFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     await delay(1000);
     return { urlFiles: [], textFiles: [] };
@@ -101,10 +102,7 @@ export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, Pre
 
   launchResourcesDownload: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      urlFiles,
-    }: ExportOutput,
+    { textFiles, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     await delay(1000);
     return { blobFiles: [], textFiles: [] };
@@ -112,16 +110,16 @@ export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, Pre
 
   launchCompression: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      blobFiles,
-    }: ResourcesDownloadOutput,
+    { textFiles, blobFiles }: ResourcesDownloadOutput
   ): Promise<Blob> => {
     await delay(1000);
     return new Blob();
   },
 
-  launchUpload: async (context: ExportPipelineContext<ExportState>, blobFile: Blob): Promise<string> => {
+  launchUpload: async (
+    context: ExportPipelineContext<ExportState>,
+    blobFile: Blob
+  ): Promise<string> => {
     await delay(1000);
     return 'uploadKey';
   },
@@ -132,10 +130,10 @@ export const fakeBrowserOnlineWebExportPipeline: ExportPipeline<ExportState, Pre
     uploadBucketKey: string,
     gameId: string,
     options: {
-      gameName: string,
-      gameVersion: string
+      gameName: string;
+      gameVersion: string;
     },
-    payWithCredits: boolean,
+    payWithCredits: boolean
   ): Promise<Build> => {
     await delay(1000);
 

@@ -4,23 +4,19 @@ import { rgbToHexNumber } from '../Utils/ColorTransformer';
 import Rectangle from '../Utils/Rectangle';
 
 type Props = {
-  project: gdProject,
-  layout: gdLayout,
-  toCanvasCoordinates: (x: number, y: number) => [number, number]
+  project: gd.Project;
+  layout: gd.Layout;
+  toCanvasCoordinates: (x: number, y: number) => [number, number];
 };
 
 export default class WindowBorder {
-  project: gdProject;
-  layout: gdLayout;
+  project: gd.Project;
+  layout: gd.Layout;
   toCanvasCoordinates: (x: number, y: number) => [number, number];
   pixiRectangle = new PIXI.Graphics();
   windowRectangle: Rectangle = new Rectangle();
 
-  constructor({
-    project,
-    layout,
-    toCanvasCoordinates,
-  }: Props) {
+  constructor({ project, layout, toCanvasCoordinates }: Props) {
     this.project = project;
     this.layout = layout;
     this.toCanvasCoordinates = toCanvasCoordinates;

@@ -1,5 +1,5 @@
 type WatchedComponent = {
-  readonly onHeightsChanged: (arg1: any) => void
+  readonly onHeightsChanged: (arg1: any) => void;
 };
 
 /**
@@ -23,7 +23,7 @@ export default class EventHeightsCache {
     }
 
     // Notify the component, on the next tick, that heights have changed
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+    // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
     this.updateTimeoutId = setTimeout(() => {
       if (this.component) {
         this.component.onHeightsChanged(() => (this.updateTimeoutId = null));
@@ -33,7 +33,7 @@ export default class EventHeightsCache {
     }, 0);
   }
 
-  setEventHeight(event: gdBaseEvent, height: number) {
+  setEventHeight(event: gd.BaseEvent, height: number) {
     if (height === 0) {
       // Don't store the new height because it's 0, meaning a new rendering later
       // will then render the proper height. In the meantime, we don't want to
@@ -43,19 +43,19 @@ export default class EventHeightsCache {
       return;
     }
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
     const cachedHeight = this.eventHeights[event.ptr];
     if (cachedHeight === undefined || cachedHeight !== height) {
       // Notify the parent component that a height changed.
       this._notifyComponent();
     }
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
     this.eventHeights[event.ptr] = height;
   }
 
-  getEventHeight(event: gdBaseEvent): number {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+  getEventHeight(event: gd.BaseEvent): number {
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
     return this.eventHeights[event.ptr] || 0;
   }
 }

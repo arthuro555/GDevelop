@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import { StorageProvider, FileMetadata } from '../index';
 import {
@@ -11,12 +11,8 @@ import {
   renderNewProjectSaveAsLocationChooser,
   getProjectLocation,
   generateOnAutoSaveProject,
-// @ts-expect-error - TS6142 - Module './CloudProjectWriter' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudProjectWriter.tsx', but '--jsx' is not set.
 } from './CloudProjectWriter';
-import {
-  AppArguments,
-  POSITIONAL_ARGUMENTS_KEY,
-} from '../../Utils/Window';
+import { AppArguments, POSITIONAL_ARGUMENTS_KEY } from '../../Utils/Window';
 import { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow';
 import {
   generateOnOpen,
@@ -24,9 +20,9 @@ import {
   generateGetAutoSaveCreationDate,
   generateOnGetAutoSave,
 } from './CloudProjectOpener';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Cloud'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cloud.js' implicitly has an 'any' type.
+
 import Cloud from '../../UI/CustomSvgIcons/Cloud';
-// @ts-expect-error - TS6142 - Module './CloudProjectResourcesHandler' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudProjectResourcesHandler.tsx', but '--jsx' is not set.
+
 import { generateGetResourceActions } from './CloudProjectResourcesHandler';
 import {
   ShowAlertFunction,
@@ -37,7 +33,7 @@ import {
   CloudProjectWithUserAccessInfo,
 } from '../../Utils/GDevelopServices/Project';
 import { format } from 'date-fns';
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { getUserPublicProfile } from '../../Utils/GDevelopServices/User';
 
 const isURL = (filename: string) => {
@@ -53,8 +49,8 @@ const isURL = (filename: string) => {
 export default {
   internalName: 'Cloud',
   name: t`GDevelop Cloud`,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderIcon: props => <Cloud fontSize={props.size} />,
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  renderIcon: (props) => <Cloud fontSize={props.size} />,
   hiddenInOpenDialog: true,
   needUserAuthentication: true,
   getFileMetadataFromAppArguments: (appArguments: AppArguments) => {
@@ -72,9 +68,8 @@ export default {
   renderNewProjectSaveAsLocationChooser: renderNewProjectSaveAsLocationChooser,
   createOperations: ({ setDialog, closeDialog, authenticatedUser }) => ({
     onOpen: generateOnOpen(authenticatedUser),
-    onEnsureCanAccessResources: generateOnEnsureCanAccessResources(
-      authenticatedUser
-    ),
+    onEnsureCanAccessResources:
+      generateOnEnsureCanAccessResources(authenticatedUser),
     onSaveProject: generateOnSaveProject(authenticatedUser),
     onChooseSaveProjectAsLocation: generateOnChooseSaveProjectAsLocation({
       authenticatedUser,
@@ -97,8 +92,8 @@ export default {
     canFileMetadataBeSafelySaved: async (
       fileMetadata: FileMetadata,
       actions: {
-        showAlert: ShowAlertFunction,
-        showConfirmation: ShowConfirmFunction
+        showAlert: ShowAlertFunction;
+        showConfirmation: ShowConfirmFunction;
       }
     ) => {
       // If the project is saved on the cloud, first fetch it.
@@ -107,10 +102,8 @@ export default {
       // the user and ask them if they want to overwrite the changes.
       const cloudProjectId = fileMetadata.fileIdentifier;
       const openedProjectVersion = fileMetadata.version;
-      const cloudProject: CloudProjectWithUserAccessInfo | null | undefined = await getCloudProject(
-        authenticatedUser,
-        cloudProjectId
-      );
+      const cloudProject: CloudProjectWithUserAccessInfo | null | undefined =
+        await getCloudProject(authenticatedUser, cloudProjectId);
       if (!cloudProject) {
         await actions.showAlert({
           title: t`Unable to save the project`,

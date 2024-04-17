@@ -1,11 +1,8 @@
 import LocalFileSystem from './LocalFileSystem';
 import path from 'path';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('LocalFileSystem', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('file content storing and reading', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can mark files to be copied from an URL as to be downloaded', () => {
       const localFileSystem = new LocalFileSystem({
         downloadUrlsToLocalFiles: true,
@@ -45,9 +42,7 @@ describe('LocalFileSystem', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('file path manipulation', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can make a path relative to another', () => {
       const localFileSystem = new LocalFileSystem({
         downloadUrlsToLocalFiles: true,
@@ -60,7 +55,7 @@ describe('LocalFileSystem', () => {
         'folder/file1'
       );
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it does not make URL relative to another one (on the same domain)', () => {
       const localFileSystem = new LocalFileSystem({
         downloadUrlsToLocalFiles: true,
@@ -73,7 +68,7 @@ describe('LocalFileSystem', () => {
         )
       ).toBe('http://test.com/path/to/file1');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it does not make URL relative to another one (not on the same domain)', () => {
       const localFileSystem = new LocalFileSystem({
         downloadUrlsToLocalFiles: true,
@@ -86,7 +81,7 @@ describe('LocalFileSystem', () => {
         )
       ).toBe('http://test.com/url1');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it can make a path absolute', () => {
       const localFileSystem = new LocalFileSystem({
         downloadUrlsToLocalFiles: true,

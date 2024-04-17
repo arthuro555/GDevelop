@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/index.tsx', but '--jsx' is not set.
+
 import { getIndentWidth, SortableTreeNode } from '.';
 import {
   moveNodeAbove,
@@ -7,12 +7,11 @@ import {
   moveNodeAsSubEvent,
   isJustBelow,
   isSibling,
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './helpers'. '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/helpers.js' implicitly has an 'any' type.
 } from './helpers';
 import { WindowSizeType } from '../../UI/Responsive/ResponsiveWindowMeasurer';
 import './style.css';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DropTarget.tsx', but '--jsx' is not set.
+
 import { DropTargetComponent } from '../../UI/DragAndDrop/DropTarget';
 const sharedStyles = {
   dropArea: { zIndex: 1, position: 'absolute' },
@@ -31,22 +30,22 @@ const sharedStyles = {
 } as const;
 
 type DropTargetContainerStyle = {
-  left?: string,
-  right?: string,
-  top?: string,
-  bottom?: string,
-  width?: number,
-  height?: number
+  left?: string;
+  right?: string;
+  top?: string;
+  bottom?: string;
+  width?: number;
+  height?: number;
 };
 
 type TargetPositionStyles = {
-  [position: string]: DropTargetContainerStyle
+  [position: string]: DropTargetContainerStyle;
 };
 
 const getTargetPositionStyles = (
   indentWidth: number,
   draggedNodeHeight: number,
-  isDraggedNodeSibling: boolean,
+  isDraggedNodeSibling: boolean
 ): TargetPositionStyles => ({
   'bottom-left': { left: '0px', bottom: '0px', top: '50%', width: indentWidth },
   'bottom-right': {
@@ -71,7 +70,9 @@ const getTargetPositionStyles = (
   },
 });
 
-const getIndicatorPositionStyles = (indentWidth: number): TargetPositionStyles => ({
+const getIndicatorPositionStyles = (
+  indentWidth: number
+): TargetPositionStyles => ({
   bottom: { left: '0px', right: '0px', bottom: '-2px' },
   'bottom-right': { left: `${indentWidth}px`, right: '0px', bottom: '-2px' },
   top: { left: '0px', right: '0px', top: '-2px' },
@@ -83,25 +84,22 @@ function DropTargetContainer({
   onDrop,
   style,
 }: {
-  DnDComponent: any,
-  canDrop: () => boolean,
-  onDrop: () => void,
+  DnDComponent: any;
+  canDrop: () => boolean;
+  onDrop: () => void;
   style: {
-    dropIndicator: DropTargetContainerStyle,
-    dropArea: DropTargetContainerStyle
-  }
+    dropIndicator: DropTargetContainerStyle;
+    dropArea: DropTargetContainerStyle;
+  };
 }) {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <DnDComponent canDrop={canDrop} drop={onDrop}>
-{ /* @ts-expect-error - TS7031 - Binding element 'isOver' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'canDrop' implicitly has an 'any' type. */}
+      {/* @ts-expect-error - TS7031 - Binding element 'isOver' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'canDrop' implicitly has an 'any' type. */}
       {({ isOver, connectDropTarget, canDrop }) => {
         return connectDropTarget(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div>
             {/* Drop area */}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <div
               style={{
                 ...sharedStyles.dropArea,
@@ -114,7 +112,6 @@ function DropTargetContainer({
             />
             {/* Drop indicator */}
             {canDrop && isOver && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <div
                 style={{
                   ...sharedStyles.dropIndicator,
@@ -132,44 +129,40 @@ function DropTargetContainer({
 }
 
 type DropContainerProps = {
-  node: SortableTreeNode,
-  draggedNode: SortableTreeNode,
-  DnDComponent: DropTargetComponent<SortableTreeNode>,
+  node: SortableTreeNode;
+  draggedNode: SortableTreeNode;
+  DnDComponent: DropTargetComponent<SortableTreeNode>;
   onDrop: (
-    moveFunction: (
-      arg1: {
-        targetNode: SortableTreeNode,
-        node: SortableTreeNode
-      },
-    ) => void,
-    node: SortableTreeNode,
-  ) => void,
-  activateTargets: boolean,
+    moveFunction: (arg1: {
+      targetNode: SortableTreeNode;
+      node: SortableTreeNode;
+    }) => void,
+    node: SortableTreeNode
+  ) => void;
+  activateTargets: boolean;
   // Computes drop areas and drop indicator indent.
-  windowSize: WindowSizeType,
+  windowSize: WindowSizeType;
   // Used only for the node just above dragged node if it is an only child,
   // so that drop area covers the whole dragged node's row in height.
-  draggedNodeHeight: number,
-  getNodeAtPath: (path: Array<number>) => SortableTreeNode
+  draggedNodeHeight: number;
+  getNodeAtPath: (path: Array<number>) => SortableTreeNode;
 };
 
 type HorizontalDraggedNodeDropContainerProps = {
-  node: SortableTreeNode,
-  draggedNode: SortableTreeNode,
-  DnDComponent: DropTargetComponent<SortableTreeNode>,
+  node: SortableTreeNode;
+  draggedNode: SortableTreeNode;
+  DnDComponent: DropTargetComponent<SortableTreeNode>;
   onDrop: (
-    moveFunction: (
-      arg1: {
-        targetNode: SortableTreeNode,
-        node: SortableTreeNode
-      },
-    ) => void,
-    node: SortableTreeNode,
-  ) => void,
-  activateTargets: boolean,
-  getNodeAtPath: (path: Array<number>) => SortableTreeNode,
-  draggedNodeHeight: number,
-  indentWidth: number
+    moveFunction: (arg1: {
+      targetNode: SortableTreeNode;
+      node: SortableTreeNode;
+    }) => void,
+    node: SortableTreeNode
+  ) => void;
+  activateTargets: boolean;
+  getNodeAtPath: (path: Array<number>) => SortableTreeNode;
+  draggedNodeHeight: number;
+  indentWidth: number;
 };
 
 function HorizontalDraggedNodeDropContainer({
@@ -184,14 +177,12 @@ function HorizontalDraggedNodeDropContainer({
 }: HorizontalDraggedNodeDropContainerProps) {
   const { depth } = node;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
       {new Array(depth).fill(0).map((_, depthStep) => {
         // Skip so that it does not hinder dragging and so that we don't have to
         // worry about delaying the drop target activation.
         if (depthStep === draggedNode.depth) return null;
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <DropTargetContainer
             key={depthStep}
             DnDComponent={DnDComponent}
@@ -257,13 +248,11 @@ export function DropContainer({
     canDrop: () => true,
   } as const;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         visibility: activateTargets ? 'visible' : 'hidden',
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DropTargetContainer
         style={{
           dropIndicator: indicatorStyles['top'],
@@ -273,9 +262,7 @@ export function DropContainer({
         {...commonProps}
       />
       {canHaveSubEvents ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <DropTargetContainer
             style={{
               dropIndicator: indicatorStyles['bottom-right'],
@@ -284,7 +271,6 @@ export function DropContainer({
             onDrop={() => onDrop(moveNodeAsSubEvent, node)}
             {...commonProps}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <DropTargetContainer
             style={{
               dropIndicator: indicatorStyles['bottom'],
@@ -295,9 +281,7 @@ export function DropContainer({
           />
           {/* Allow dragging left/right just below the current node. */}
           {isDraggedNodeJustBelow && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <DropTargetContainer
                 style={{
                   dropIndicator: indicatorStyles['bottom'],
@@ -306,7 +290,6 @@ export function DropContainer({
                 onDrop={() => onDrop(moveNodeBelow, node)}
                 {...commonProps}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <DropTargetContainer
                 style={{
                   dropIndicator: indicatorStyles['bottom-right'],
@@ -319,7 +302,6 @@ export function DropContainer({
           )}
         </>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <DropTargetContainer
           style={{
             dropIndicator: indicatorStyles['bottom'],
@@ -333,7 +315,6 @@ export function DropContainer({
       0 and the depth of the node just above the dragged one (which has information on
       its parents). */}
       {isDraggedNodeJustBelow && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <HorizontalDraggedNodeDropContainer
           node={node}
           draggedNode={draggedNode}
@@ -355,10 +336,10 @@ export function AutoScroll({
   activateTargets,
   onHover,
 }: {
-  direction: 'top' | 'bottom',
-  DnDComponent: DropTargetComponent<SortableTreeNode>,
-  activateTargets: boolean,
-  onHover: () => void
+  direction: 'top' | 'bottom';
+  DnDComponent: DropTargetComponent<SortableTreeNode>;
+  activateTargets: boolean;
+  onHover: () => void;
 }) {
   const delayActivationTimer = React.useRef<number | null | undefined>(null);
   const [show, setShow] = React.useState(false);
@@ -366,42 +347,36 @@ export function AutoScroll({
   // This drop target overlaps with sibling drag source and cancels drag immediately.
   // See: https://github.com/react-dnd/react-dnd/issues/766#issuecomment-388943403
   // Delaying the render of the drop target seems to solve the issue.
-  React.useEffect(
-    () => {
-      if (activateTargets) {
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
-        delayActivationTimer.current = setTimeout(() => {
-          setShow(true);
-        }, 100);
-      } else {
-        setShow(false);
-// @ts-expect-error - TS2769 - No overload matches this call.
+  React.useEffect(() => {
+    if (activateTargets) {
+      // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+      delayActivationTimer.current = setTimeout(() => {
+        setShow(true);
+      }, 100);
+    } else {
+      setShow(false);
+      // @ts-expect-error - TS2769 - No overload matches this call.
+      clearTimeout(delayActivationTimer.current);
+      delayActivationTimer.current = null;
+    }
+    return () => {
+      delayActivationTimer.current &&
         clearTimeout(delayActivationTimer.current);
-        delayActivationTimer.current = null;
-      }
-      return () => {
-        delayActivationTimer.current &&
-          clearTimeout(delayActivationTimer.current);
-      };
-    },
-    [activateTargets]
-  );
+    };
+  }, [activateTargets]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <DnDComponent
       canDrop={() => true}
       drop={() => {
         return;
       }}
     >
-{ /* @ts-expect-error - TS7031 - Binding element 'isOverLazy' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. */}
       {({ isOverLazy, connectDropTarget }) => {
         if (isOverLazy) {
           onHover();
         }
         const dropTarget = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div
             style={{
               ...sharedStyles.autoScroll,

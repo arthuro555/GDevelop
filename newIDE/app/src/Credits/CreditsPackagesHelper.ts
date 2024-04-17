@@ -1,4 +1,7 @@
-export const getItemsSplitInLines = <Item>(items: Item[] | null | undefined, isMediumScreen: boolean): Item[][] | null | undefined => {
+export const getItemsSplitInLines = <Item>(
+  items: Item[] | null | undefined,
+  isMediumScreen: boolean
+): Item[][] | null | undefined => {
   if (!items) return null;
   const itemLines: Item[][] = [];
   // On small laptops and tablets show 3 max.

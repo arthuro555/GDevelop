@@ -1,21 +1,20 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import * as PIXI from 'pixi.js-legacy';
 import { rgbToHexNumber } from '../../Utils/ColorTransformer';
-const gd: libGDevelop = global.gd;
 
 /**
  * Renderer for an ParticleEmitter object.
  */
 export default class RenderedParticleEmitterInstance extends RenderedInstance {
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -37,9 +36,9 @@ export default class RenderedParticleEmitterInstance extends RenderedInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     return 'CppPlatform/Extensions/particleSystemicon.png';
   }
@@ -58,7 +57,7 @@ export default class RenderedParticleEmitterInstance extends RenderedInstance {
       this._associatedObjectConfiguration
     );
 
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
     this._pixiObject.clear();
 
     const emitterAngle = (this._instance.getAngle() / 180) * 3.14159;
@@ -67,9 +66,9 @@ export default class RenderedParticleEmitterInstance extends RenderedInstance {
     const line2Angle = emitterAngle + (sprayConeAngle / 2.0 / 180.0) * 3.14159;
     const length = 64;
 
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
     this._pixiObject.beginFill(0, 0);
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
     this._pixiObject.lineStyle(
       3,
       rgbToHexNumber(
@@ -79,26 +78,26 @@ export default class RenderedParticleEmitterInstance extends RenderedInstance {
       ),
       1
     );
-// @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
     this._pixiObject.moveTo(0, 0);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(
       Math.cos(line1Angle) * length,
       Math.sin(line1Angle) * length
     );
-// @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
     this._pixiObject.moveTo(0, 0);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(
       Math.cos(line2Angle) * length,
       Math.sin(line2Angle) * length
     );
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
     this._pixiObject.endFill();
 
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
     this._pixiObject.lineStyle(0, 0x000000, 1);
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
     this._pixiObject.beginFill(
       rgbToHexNumber(
         particleEmitterConfiguration.getParticleRed1(),
@@ -106,9 +105,9 @@ export default class RenderedParticleEmitterInstance extends RenderedInstance {
         particleEmitterConfiguration.getParticleBlue1()
       )
     );
-// @ts-expect-error - TS2339 - Property 'drawCircle' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'drawCircle' does not exist on type 'DisplayObject'.
     this._pixiObject.drawCircle(0, 0, 8);
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
     this._pixiObject.endFill();
   }
 

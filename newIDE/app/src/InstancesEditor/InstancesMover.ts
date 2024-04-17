@@ -1,4 +1,4 @@
-import {roundPosition} from '../Utils/GridHelpers';
+import { roundPosition } from '../Utils/GridHelpers';
 import Rectangle from '../Utils/Rectangle';
 import { InstancesEditorSettings } from './InstancesEditorSettings';
 import { InstanceMeasurer } from './InstancesRenderer';
@@ -8,9 +8,9 @@ export default class InstancesMover {
   instancesEditorSettings: InstancesEditorSettings;
   instancePositions: {
     [key: number]: {
-      x: number,
-      y: number
-    }
+      x: number;
+      y: number;
+    };
   };
   totalDeltaX: number;
   totalDeltaY: number;
@@ -23,8 +23,8 @@ export default class InstancesMover {
     instanceMeasurer,
     instancesEditorSettings,
   }: {
-    instanceMeasurer: InstanceMeasurer,
-    instancesEditorSettings: InstancesEditorSettings
+    instanceMeasurer: InstanceMeasurer;
+    instancesEditorSettings: InstancesEditorSettings;
   }) {
     this.instanceMeasurer = instanceMeasurer;
     this.instancesEditorSettings = instancesEditorSettings;
@@ -58,7 +58,9 @@ export default class InstancesMover {
     return totalDeltaY;
   }
 
-  _getOrCreateSelectionAABB(instances: gdInitialInstance[]): Rectangle | null | undefined {
+  _getOrCreateSelectionAABB(
+    instances: gd.InitialInstance[]
+  ): Rectangle | null | undefined {
     if (this._initialSelectionAABB) {
       return this._initialSelectionAABB;
     }
@@ -80,7 +82,7 @@ export default class InstancesMover {
   }
 
   moveBy(
-    instances: gdInitialInstance[],
+    instances: gd.InitialInstance[],
     deltaX: number,
     deltaY: number,
     followAxis: boolean,
@@ -90,13 +92,12 @@ export default class InstancesMover {
     this.totalDeltaY += deltaY;
 
     const nonLockedInstances = instances.filter(
-      instance => !instance.isLocked()
+      (instance) => !instance.isLocked()
     );
 
     // It will magnet the corner nearest to the grabbing position
-    const initialSelectionAABB = this._getOrCreateSelectionAABB(
-      nonLockedInstances
-    );
+    const initialSelectionAABB =
+      this._getOrCreateSelectionAABB(nonLockedInstances);
     if (!initialSelectionAABB) return;
     const magnetLeft = this._startX < initialSelectionAABB.centerX();
     const magnetTop = this._startY < initialSelectionAABB.centerY();

@@ -1,39 +1,38 @@
-import {groupResourcesByAnimations} from './AnimationImportHelper';
+import { groupResourcesByAnimations } from './AnimationImportHelper';
 // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
 const gd = global.gd;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('AnimationImportHelper', () => {
-  const createResources = (filePaths: Array<string>): Array<gdResource> => filePaths.map(filePath => {
-    const resource = new gd.ImageResource();
-    resource.setName(filePath);
-    resource.setFile(filePath);
-    return resource;
-  });
+  const createResources = (filePaths: Array<string>): Array<gd.Resource> =>
+    filePaths.map((filePath) => {
+      const resource = new gd.ImageResource();
+      resource.setName(filePath);
+      resource.setFile(filePath);
+      return resource;
+    });
 
-  const deleteResources = (resources: Array<gdResource>): void => {
+  const deleteResources = (resources: Array<gd.Resource>): void => {
     for (const resource of resources) {
       resource.delete();
     }
   };
 
   const getAnimationFramesCount = (
-    resourcesByAnimations: Map<string, Array<gdResource>>,
-    animationName: string,
+    resourcesByAnimations: Map<string, Array<gd.Resource>>,
+    animationName: string
   ): number | null => {
     const frames = resourcesByAnimations.get(animationName);
     return frames ? frames.length : null;
   };
 
   const getAnimationFramesPaths = (
-    resourcesByAnimations: Map<string, Array<gdResource>>,
-    animationName: string,
+    resourcesByAnimations: Map<string, Array<gd.Resource>>,
+    animationName: string
   ): Array<string> | null => {
     const frames = resourcesByAnimations.get(animationName);
-    return frames ? frames.map(resource => resource.getFile()) : null;
+    return frames ? frames.map((resource) => resource.getFile()) : null;
   };
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can handle empty resource lists', () => {
     const resources = createResources([]);
 
@@ -43,7 +42,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can handle 1 frame alone', () => {
     const resources = createResources(['Assets/Player Jump.png']);
 
@@ -54,7 +52,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can handle 1 animation alone', () => {
     const resources = createResources([
       'Assets/Player Run 1.png',
@@ -68,7 +65,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find animation names without frame indexes', () => {
     const resources = createResources([
       'Assets/Player Jump.png',
@@ -84,7 +80,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find animation names without object name', () => {
     const resources = createResources([
       'Assets/Jump.png',
@@ -100,7 +95,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find animation names without any separator', () => {
     const resources = createResources([
       'Assets/PlayerJump.png',
@@ -116,7 +110,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find animation names when separator contains several characters', () => {
     const resources = createResources([
       'Assets/Player - Jump.png',
@@ -132,7 +125,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can sort frames by numerical order', () => {
     const resources = createResources([
       'Assets/PlayerRun02.png',
@@ -150,7 +142,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can sort frames by numerical order without taking "-" as a negative sign', () => {
     const resources = createResources([
       'Assets/Jump.png',
@@ -168,7 +159,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find frame index inside parenthesis', () => {
     const resources = createResources([
       'Assets/Player Run (1).png',
@@ -184,7 +174,6 @@ describe('AnimationImportHelper', () => {
     deleteResources(resources);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find animation frames when indexes have holes', () => {
     const resources = createResources([
       'Assets/Jump.png',

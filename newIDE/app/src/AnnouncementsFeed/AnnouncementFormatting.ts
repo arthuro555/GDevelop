@@ -1,19 +1,22 @@
-import {Announcement} from '../Utils/GDevelopServices/Announcement';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { Announcement } from '../Utils/GDevelopServices/Announcement';
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS6142 - Module '../MainFrame/RouterContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/RouterContext.tsx', but '--jsx' is not set.
+
 import { Route, RouteArguments } from '../MainFrame/RouterContext';
 import { selectMessageByLocale } from '../Utils/i18n/MessageByLocale';
 
-const getAdapatedMessageAndRouteNavigationParams = (message: string): {
-  message: string,
+const getAdapatedMessageAndRouteNavigationParams = (
+  message: string
+): {
+  message: string;
   routeNavigationParams?: {
-    route: Route,
-    params: RouteArguments
-  },
-  isClickableContent?: boolean
+    route: Route;
+    params: RouteArguments;
+  };
+  isClickableContent?: boolean;
 } => {
-  const markdownClickableImageRegex = /\[!\[(?<alt>[^\][]*)\]\((?<imageSource>[^\s]*)\)\]\((?<linkHref>[^\s]*)\)/;
+  const markdownClickableImageRegex =
+    /\[!\[(?<alt>[^\][]*)\]\((?<imageSource>[^\s]*)\)\]\((?<linkHref>[^\s]*)\)/;
   let matches = message.match(markdownClickableImageRegex);
   let groups = matches && matches.groups;
   if (groups && groups.alt && groups.imageSource && groups.linkHref) {
@@ -58,19 +61,22 @@ const getAdapatedMessageAndRouteNavigationParams = (message: string): {
   return { message };
 };
 
-export const getAnnouncementContent = (i18n: I18nType, announcement: Announcement): {
-  title: string,
-  desktopMessage: string,
-  mobileMessage: string,
+export const getAnnouncementContent = (
+  i18n: I18nType,
+  announcement: Announcement
+): {
+  title: string;
+  desktopMessage: string;
+  mobileMessage: string;
   desktopRouteNavigationParams?: {
-    route: Route,
-    params: RouteArguments
-  },
+    route: Route;
+    params: RouteArguments;
+  };
   mobileRouteNavigationParams?: {
-    route: Route,
-    params: RouteArguments
-  },
-  isClickableContent: boolean
+    route: Route;
+    params: RouteArguments;
+  };
+  isClickableContent: boolean;
 } => {
   const title = selectMessageByLocale(i18n, announcement.titleByLocale);
   const message = selectMessageByLocale(

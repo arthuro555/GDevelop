@@ -1,21 +1,20 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/List' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/List.tsx', but '--jsx' is not set.
+
 import { List, ListItem } from '../UI/List';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog from '../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/Tabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Tabs.tsx', but '--jsx' is not set.
+
 import { Tabs } from '../UI/Tabs';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
 import Window from '../Utils/Window';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
-// @ts-expect-error - TS6142 - Module './Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from './Preferences/PreferencesContext';
 import {
   getElectronUpdateStatusLabel,
@@ -24,27 +23,26 @@ import {
   ElectronUpdateStatus,
   useServiceWorkerUpdateStatus,
   getServiceWorkerStatusLabel,
-// @ts-expect-error - TS6142 - Module './UpdaterTools' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UpdaterTools.tsx', but '--jsx' is not set.
 } from './UpdaterTools';
-// @ts-expect-error - TS6142 - Module './Changelog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Changelog/index.tsx', but '--jsx' is not set.
+
 import Changelog from './Changelog';
 import {
   getIDEVersion,
   getGDCoreVersion,
   getIDEVersionWithHash,
 } from '../Version';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
-// @ts-expect-error - TS6142 - Module '../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../UI/ErrorBoundary';
 const electron = optionalRequire('electron');
 
 type Props = {
-  open?: boolean,
-  onClose: () => void,
-  updateStatus: ElectronUpdateStatus
+  open?: boolean;
+  onClose: () => void;
+  updateStatus: ElectronUpdateStatus;
 };
 
 type TabName = 'about' | 'changelog' | 'contributors';
@@ -261,10 +259,7 @@ const contributors = [
   },
 ];
 
-const AboutDialog = ({
-  onClose,
-  updateStatus,
-}: Props) => {
+const AboutDialog = ({ onClose, updateStatus }: Props) => {
   const openContributePage = React.useCallback(() => {
     Window.openExternalURL('https://gdevelop.io/page/contribute/');
   }, []);
@@ -294,23 +289,18 @@ const AboutDialog = ({
   const serviceWorkerUpdateStatus = useServiceWorkerUpdateStatus();
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>About GDevelop</Trans>}
       actions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <FlatButton
           key="website"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           label={<Trans>GDevelop Website</Trans>}
           primary={false}
           onClick={() => Window.openExternalURL('https://gdevelop.io')}
         />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <FlatButton
           key="close"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           label={<Trans>Close</Trans>}
           primary={false}
           onClick={onClose}
@@ -319,10 +309,8 @@ const AboutDialog = ({
       secondaryActions={
         currentTab === 'changelog'
           ? [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <FlatButton
                 key="see-all"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>See all release notes</Trans>}
                 primary={false}
                 onClick={openReleaseNote}
@@ -334,20 +322,16 @@ const AboutDialog = ({
       open
       maxWidth="sm"
       fixedContent={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <img src="res/GD-logo.png" alt="GDevelop logo" style={styles.logo} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Tabs
             value={currentTab}
             onChange={setCurrentTab}
             options={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               { value: 'about', label: <Trans>About GDevelop</Trans> },
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               { value: 'changelog', label: <Trans>What's new?</Trans> },
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               { value: 'contributors', label: <Trans>Contributors</Trans> },
             ]}
           />
@@ -355,15 +339,10 @@ const AboutDialog = ({
       }
     >
       {currentTab === 'about' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   GDevelop is a full-featured, open-source game engine. Build
                   and publish games for any mobile, desktop or web game store.
@@ -371,24 +350,17 @@ const AboutDialog = ({
                   making it better every day.
                 </Trans>
               </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text allowSelection>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>This version of GDevelop is:</Trans> {getIDEVersion()}{' '}
                 (editor full version: {getIDEVersionWithHash()}, core version:{' '}
                 {getGDCoreVersion()})
               </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text size="sub-title">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>Updates</Trans>
               </Text>
               {!!electron && electronUpdateStatusString ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text>{electronUpdateStatusString}</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <FlatButton
                     label={electronUpdateButtonLabel}
                     onClick={() =>
@@ -399,14 +371,11 @@ const AboutDialog = ({
                   />
                 </ColumnStackLayout>
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>No information about available updates.</Trans>
                 </Text>
               )}
               {!electron && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Text>
                   {getServiceWorkerStatusLabel(serviceWorkerUpdateStatus)}
                 </Text>
@@ -416,32 +385,22 @@ const AboutDialog = ({
         </React.Fragment>
       )}
       {currentTab === 'changelog' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Changelog />
         </Column>
       )}
       {currentTab === 'contributors' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Trans>GDevelop was created by Florian "4ian" Rival.</Trans>
             </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Trans>Contributors, in no particular order:</Trans>
             </Text>
           </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <List>
-            {contributors.map(contributor => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            {contributors.map((contributor) => (
               <ListItem
                 key={contributor.name}
                 primaryText={contributor.name}
@@ -452,22 +411,16 @@ const AboutDialog = ({
               />
             ))}
           </List>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Trans>
                 Thanks to all users of GDevelop! There must be missing tons of
                 people, please send your name if you've contributed and you're
                 not listed.
               </Trans>
             </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line alignItems="center" justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Contribute to GDevelop</Trans>}
                 onClick={openContributePage}
               />
@@ -480,14 +433,11 @@ const AboutDialog = ({
 };
 
 const AboutDialogWithErrorBoundary = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     componentTitle={<Trans>About dialog</Trans>}
     scope="about"
     onClose={props.onClose}
   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <AboutDialog {...props} />
   </ErrorBoundary>
 );

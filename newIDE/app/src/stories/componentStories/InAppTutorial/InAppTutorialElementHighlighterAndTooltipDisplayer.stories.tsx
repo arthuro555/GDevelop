@@ -1,34 +1,34 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../InAppTutorial/InAppTutorialElementHighlighter' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialElementHighlighter.tsx', but '--jsx' is not set.
+
 import InAppTutorialElementHighlighter from '../../../InAppTutorial/InAppTutorialElementHighlighter';
-// @ts-expect-error - TS6142 - Module '../../../InAppTutorial/InAppTutorialTooltipDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialTooltipDisplayer.tsx', but '--jsx' is not set.
+
 import InAppTutorialTooltipDisplayer from '../../../InAppTutorial/InAppTutorialTooltipDisplayer';
-// @ts-expect-error - TS6142 - Module '../../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../../../UI/ScrollView';
-// @ts-expect-error - TS6142 - Module '../../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../../UI/SemiControlledTextField';
 import {
   ResponsiveLineStackLayout,
   ColumnStackLayout,
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 } from '../../../UI/Layout';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
-// @ts-expect-error - TS6142 - Module '../../../UI/List' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/List.tsx', but '--jsx' is not set.
+
 import { List, ListItem } from '../../../UI/List';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column } from '../../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../../InAppTutorial/InAppTutorialStepDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialStepDisplayer.tsx', but '--jsx' is not set.
+
 import { queryElementOrItsMostVisuallySignificantParent } from '../../../InAppTutorial/InAppTutorialStepDisplayer';
-// @ts-expect-error - TS6142 - Module '../../../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar from '../../../UI/SearchBar';
 
 export default {
@@ -224,5 +224,5 @@ export const Default = () => {
       )}
     </>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };

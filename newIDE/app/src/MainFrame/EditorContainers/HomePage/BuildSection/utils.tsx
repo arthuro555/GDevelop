@@ -1,60 +1,53 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { getUserPublicProfilesByIds } from '../../../../Utils/GDevelopServices/User';
 import { Profile } from '../../../../Utils/GDevelopServices/Authentication';
 import { CloudProjectWithUserAccessInfo } from '../../../../Utils/GDevelopServices/Project';
 import { FileMetadataAndStorageProviderName } from '../../../../ProjectsStorage';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { marginsSize } from '../../../../UI/Grid';
 import { sendGameTemplateInformationOpened } from '../../../../Utils/Analytics/EventSender';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/ProductPriceTag' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ProductPriceTag.tsx', but '--jsx' is not set.
+
 import { getProductPriceOrOwnedLabel } from '../../../../AssetStore/ProductPriceTag';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { PrivateGameTemplateListingData } from '../../../../Utils/GDevelopServices/Shop';
 import { ExampleShortHeader } from '../../../../Utils/GDevelopServices/Example';
 import { PrivateGameTemplate } from '../../../../Utils/GDevelopServices/Asset';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Carousel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Carousel.tsx', but '--jsx' is not set.
+
 import { CarouselThumbnail } from '../../../../UI/Carousel';
 import {
   ExampleTile,
   PrivateGameTemplateTile,
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/ShopTiles' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ShopTiles.tsx', but '--jsx' is not set.
 } from '../../../../AssetStore/ShopTiles';
 
 export type LastModifiedInfo = {
-  lastModifiedByUsername: string | null | undefined,
-  lastModifiedByIconUrl: string,
-  lastModifiedAt: number,
-  lastKnownVersionId: string | null | undefined
+  lastModifiedByUsername: string | null | undefined;
+  lastModifiedByIconUrl: string;
+  lastModifiedAt: number;
+  lastKnownVersionId: string | null | undefined;
 };
 
 type LastModifiedInfoByProjectId = {
-  [projectId: string]: LastModifiedInfo
+  [projectId: string]: LastModifiedInfo;
 };
 
-export const getProjectLineHeight = ({
-  isMobile,
-}: {
-  isMobile: boolean
-}) => {
+export const getProjectLineHeight = ({ isMobile }: { isMobile: boolean }) => {
   const lineHeight = isMobile ? 52 : 36;
 
   return lineHeight - 2 * marginsSize;
 };
 
-export const getLastModifiedInfoByProjectId = async (
-  {
-    cloudProjects,
-    profile,
-  }: {
-    cloudProjects: Array<CloudProjectWithUserAccessInfo>,
-    profile: Profile
-  },
-): Promise<LastModifiedInfoByProjectId> => {
+export const getLastModifiedInfoByProjectId = async ({
+  cloudProjects,
+  profile,
+}: {
+  cloudProjects: Array<CloudProjectWithUserAccessInfo>;
+  profile: Profile;
+}): Promise<LastModifiedInfoByProjectId> => {
   const cloudProjectsLastModifiedBySomeoneElse = cloudProjects.filter(
-    cloudProject =>
+    (cloudProject) =>
       !!cloudProject.committedAt &&
       !!cloudProject.lastCommittedBy &&
       cloudProject.lastCommittedBy !== profile.id
@@ -62,7 +55,7 @@ export const getLastModifiedInfoByProjectId = async (
 
   const allOtherContributorIds = new Set(
     cloudProjectsLastModifiedBySomeoneElse
-      .map(cloudProject => cloudProject.lastCommittedBy)
+      .map((cloudProject) => cloudProject.lastCommittedBy)
       .filter(Boolean)
   );
 
@@ -73,7 +66,7 @@ export const getLastModifiedInfoByProjectId = async (
       Array.from(allOtherContributorIds)
     );
     const lastModifiedInfoByProjectId: LastModifiedInfoByProjectId = {};
-    cloudProjects.forEach(project => {
+    cloudProjects.forEach((project) => {
       if (!project.lastCommittedBy || !project.committedAt) return;
       const contributorPublicProfile =
         userPublicProfileByIds[project.lastCommittedBy];
@@ -87,7 +80,7 @@ export const getLastModifiedInfoByProjectId = async (
     });
 
     return lastModifiedInfoByProjectId;
-  } catch (error: any) {
+  } catch (error) {
     // We don't block the display of the projects if the public profiles
     // can't be fetched.
     console.error(
@@ -98,9 +91,12 @@ export const getLastModifiedInfoByProjectId = async (
   }
 };
 
-export const transformCloudProjectsIntoFileMetadataWithStorageProviderName = (cloudProjects: Array<CloudProjectWithUserAccessInfo>, ownerId?: string): Array<FileMetadataAndStorageProviderName> => {
+export const transformCloudProjectsIntoFileMetadataWithStorageProviderName = (
+  cloudProjects: Array<CloudProjectWithUserAccessInfo>,
+  ownerId?: string
+): Array<FileMetadataAndStorageProviderName> => {
   return cloudProjects
-    .map(cloudProject => {
+    .map((cloudProject) => {
       if (cloudProject.deletedAt) return null;
       const file: FileMetadataAndStorageProviderName = {
         storageProviderName: 'Cloud',
@@ -120,23 +116,21 @@ export const transformCloudProjectsIntoFileMetadataWithStorageProviderName = (cl
     .filter(Boolean);
 };
 
-const formatGameTemplateListingDataForCarousel = (
-  {
-    gameTemplateListingData,
-    onSelectGameTemplate,
-    i18n,
-    receivedGameTemplates,
-  }: {
-    gameTemplateListingData: PrivateGameTemplateListingData,
-    onSelectGameTemplate: (arg1: PrivateGameTemplateListingData) => void,
-    i18n: I18nType,
-    receivedGameTemplates: Array<PrivateGameTemplate> | null | undefined
-  },
-): CarouselThumbnail => {
+const formatGameTemplateListingDataForCarousel = ({
+  gameTemplateListingData,
+  onSelectGameTemplate,
+  i18n,
+  receivedGameTemplates,
+}: {
+  gameTemplateListingData: PrivateGameTemplateListingData;
+  onSelectGameTemplate: (arg1: PrivateGameTemplateListingData) => void;
+  i18n: I18nType;
+  receivedGameTemplates: Array<PrivateGameTemplate> | null | undefined;
+}): CarouselThumbnail => {
   const isTemplateOwned =
     !!receivedGameTemplates &&
     !!receivedGameTemplates.find(
-      receivedGameTemplate =>
+      (receivedGameTemplate) =>
         receivedGameTemplate.id === gameTemplateListingData.id
     );
   return {
@@ -164,8 +158,8 @@ const formatExampleShortHeaderForCarousel = ({
   exampleShortHeader,
   onSelectExample,
 }: {
-  exampleShortHeader: ExampleShortHeader,
-  onSelectExample: (arg1: ExampleShortHeader) => void
+  exampleShortHeader: ExampleShortHeader;
+  onSelectExample: (arg1: ExampleShortHeader) => void;
 }) => {
   return {
     id: exampleShortHeader.id,
@@ -182,39 +176,42 @@ const formatExampleShortHeaderForCarousel = ({
  * should appear in the carousel only. The rest appears in both the carousel
  * and the grid.
  */
-export const getExampleAndTemplateItemsForBuildSection = (
-  {
-    receivedGameTemplates,
-    privateGameTemplateListingDatas,
-    exampleShortHeaders,
-    onSelectPrivateGameTemplateListingData,
-    onSelectExampleShortHeader,
-    i18n,
-    numberOfItemsExclusivelyInCarousel,
-    numberOfItemsInCarousel,
-    numberOfItemsInGrid,
-    privateGameTemplatesPeriodicity,
-  }: {
-    receivedGameTemplates: Array<PrivateGameTemplate> | null | undefined,
-    privateGameTemplateListingDatas?: Array<PrivateGameTemplateListingData> | null | undefined,
-    exampleShortHeaders?: Array<ExampleShortHeader> | null | undefined,
-    onSelectPrivateGameTemplateListingData: (privateGameTemplateListingData: PrivateGameTemplateListingData) => void,
-    onSelectExampleShortHeader: (exampleShortHeader: ExampleShortHeader) => void,
-    i18n: I18nType,
-    numberOfItemsExclusivelyInCarousel: number,
-    numberOfItemsInCarousel: number,
-    numberOfItemsInGrid: number,
-    privateGameTemplatesPeriodicity: number
-  },
-): {
-  carouselItems: Array<CarouselThumbnail>,
-  gridItems: Array<React.ReactNode>
+export const getExampleAndTemplateItemsForBuildSection = ({
+  receivedGameTemplates,
+  privateGameTemplateListingDatas,
+  exampleShortHeaders,
+  onSelectPrivateGameTemplateListingData,
+  onSelectExampleShortHeader,
+  i18n,
+  numberOfItemsExclusivelyInCarousel,
+  numberOfItemsInCarousel,
+  numberOfItemsInGrid,
+  privateGameTemplatesPeriodicity,
+}: {
+  receivedGameTemplates: Array<PrivateGameTemplate> | null | undefined;
+  privateGameTemplateListingDatas?:
+    | Array<PrivateGameTemplateListingData>
+    | null
+    | undefined;
+  exampleShortHeaders?: Array<ExampleShortHeader> | null | undefined;
+  onSelectPrivateGameTemplateListingData: (
+    privateGameTemplateListingData: PrivateGameTemplateListingData
+  ) => void;
+  onSelectExampleShortHeader: (exampleShortHeader: ExampleShortHeader) => void;
+  i18n: I18nType;
+  numberOfItemsExclusivelyInCarousel: number;
+  numberOfItemsInCarousel: number;
+  numberOfItemsInGrid: number;
+  privateGameTemplatesPeriodicity: number;
+}): {
+  carouselItems: Array<CarouselThumbnail>;
+  gridItems: Array<React.ReactNode>;
 } => {
   if (!exampleShortHeaders || !privateGameTemplateListingDatas) {
     return { carouselItems: [], gridItems: [] };
   }
   const exampleShortHeadersWithThumbnails = exampleShortHeaders.filter(
-    exampleShortHeader =>
+    (exampleShortHeader) =>
       !!exampleShortHeader.previewImageUrls &&
       !!exampleShortHeader.previewImageUrls[0]
   );
@@ -264,11 +261,11 @@ export const getExampleAndTemplateItemsForBuildSection = (
           const isTemplateOwned =
             !!receivedGameTemplates &&
             !!receivedGameTemplates.find(
-              receivedGameTemplate =>
+              (receivedGameTemplate) =>
                 receivedGameTemplate.id === privateGameTemplateListingData.id
             );
           gridItems.push(
-// @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'Node'. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            // @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'Node'. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <PrivateGameTemplateTile
               privateGameTemplateListingData={privateGameTemplateListingData}
               onSelect={() => {
@@ -287,7 +284,7 @@ export const getExampleAndTemplateItemsForBuildSection = (
         const exampleShortHeader =
           exampleShortHeadersWithThumbnails[exampleIndex];
         gridItems.push(
-// @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'Node'. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          // @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'Node'. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ExampleTile
             exampleShortHeader={exampleShortHeader}
             onSelect={() => onSelectExampleShortHeader(exampleShortHeader)}
@@ -306,7 +303,6 @@ export const getExampleAndTemplateItemsForBuildSection = (
     }
   }
 
-// @ts-expect-error - TS2322 - Type 'Node[]' is not assignable to type 'ReactNode[]'.
   return { carouselItems, gridItems };
 };
 
@@ -315,9 +311,12 @@ export const getAllGameTemplatesAndExamplesFlaggedAsGameCount = ({
   exampleShortHeaders,
   columnsCount,
 }: {
-  privateGameTemplateListingDatas: PrivateGameTemplateListingData[] | null | undefined,
-  exampleShortHeaders: ExampleShortHeader[] | null | undefined,
-  columnsCount: number
+  privateGameTemplateListingDatas:
+    | PrivateGameTemplateListingData[]
+    | null
+    | undefined;
+  exampleShortHeaders: ExampleShortHeader[] | null | undefined;
+  columnsCount: number;
 }) => {
   return (
     Math.floor(
@@ -326,7 +325,7 @@ export const getAllGameTemplatesAndExamplesFlaggedAsGameCount = ({
         : 0) +
         (exampleShortHeaders
           ? exampleShortHeaders.filter(
-              exampleShortHeader =>
+              (exampleShortHeader) =>
                 exampleShortHeader.tags.includes('game') ||
                 exampleShortHeader.tags.includes('Starter')
             ).length

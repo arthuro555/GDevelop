@@ -1,27 +1,26 @@
-import {mapFor} from '../Utils/MapFor';
+import { mapFor } from '../Utils/MapFor';
 
 export type ObjectFolderOrObjectWithContext = {
-  objectFolderOrObject: gdObjectFolderOrObject,
-  global: boolean
+  objectFolderOrObject: gd.ObjectFolderOrObject;
+  global: boolean;
 };
 
 export const getObjectFolderOrObjectUnifiedName = (
-  objectFolderOrObject: gdObjectFolderOrObject
+  objectFolderOrObject: gd.ObjectFolderOrObject
 ) =>
   objectFolderOrObject.isFolder()
     ? objectFolderOrObject.getFolderName()
     : objectFolderOrObject.getObject().getName();
 
 const recursivelyEnumerateFoldersInFolder = (
-  folder: gdObjectFolderOrObject,
+  folder: gd.ObjectFolderOrObject,
   prefix: string,
   result: {
-    path: string,
-    folder: gdObjectFolderOrObject
+    path: string;
+    folder: gd.ObjectFolderOrObject;
   }[]
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, folder.getChildrenCount(), i => {
+  mapFor(0, folder.getChildrenCount(), (i) => {
     const child = folder.getChildAt(i);
     if (child.isFolder()) {
       const newPrefix = prefix
@@ -37,11 +36,10 @@ const recursivelyEnumerateFoldersInFolder = (
 };
 
 const recursivelyEnumerateObjectsInFolder = (
-  folder: gdObjectFolderOrObject,
-  result: gdObject[]
+  folder: gd.ObjectFolderOrObject,
+  result: gd.Object[]
 ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, folder.getChildrenCount(), i => {
+  mapFor(0, folder.getChildrenCount(), (i) => {
     const child = folder.getChildAt(i);
     if (!child.isFolder()) {
       result.push(child.getObject());
@@ -51,43 +49,51 @@ const recursivelyEnumerateObjectsInFolder = (
   });
 };
 
-export const enumerateObjectsInFolder = (folder: gdObjectFolderOrObject): gdObject[] => {
+export const enumerateObjectsInFolder = (
+  folder: gd.ObjectFolderOrObject
+): gd.Object[] => {
   if (!folder.isFolder()) return [];
-  const result: Array<gdObject> = [];
+  const result: Array<gd.Object> = [];
   recursivelyEnumerateObjectsInFolder(folder, result);
   return result;
 };
 
-export const enumerateFoldersInFolder = (folder: gdObjectFolderOrObject): {
-  path: string,
-  folder: gdObjectFolderOrObject
+export const enumerateFoldersInFolder = (
+  folder: gd.ObjectFolderOrObject
+): {
+  path: string;
+  folder: gd.ObjectFolderOrObject;
 }[] => {
   if (!folder.isFolder()) return [];
   const result: Array<{
-    folder: gdObjectFolderOrObject,
-    path: string
+    folder: gd.ObjectFolderOrObject;
+    path: string;
   }> = [];
   recursivelyEnumerateFoldersInFolder(folder, '', result);
   return result;
 };
 
-export const enumerateFoldersInContainer = (container: gdObjectsContainer): {
-  path: string,
-  folder: gdObjectFolderOrObject
+export const enumerateFoldersInContainer = (
+  container: gd.ObjectsContainer
+): {
+  path: string;
+  folder: gd.ObjectFolderOrObject;
 }[] => {
   const rootFolder = container.getRootFolder();
   const result: Array<{
-    folder: gdObjectFolderOrObject,
-    path: string
+    folder: gd.ObjectFolderOrObject;
+    path: string;
   }> = [];
   recursivelyEnumerateFoldersInFolder(rootFolder, '', result);
   return result;
 };
 
-export const getObjectsInFolder = (objectFolderOrObject: gdObjectFolderOrObject): gdObject[] => {
+export const getObjectsInFolder = (
+  objectFolderOrObject: gd.ObjectFolderOrObject
+): gd.Object[] => {
   if (!objectFolderOrObject.isFolder()) return [];
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  return mapFor(0, objectFolderOrObject.getChildrenCount(), i => {
+
+  return mapFor(0, objectFolderOrObject.getChildrenCount(), (i) => {
     const child = objectFolderOrObject.getChildAt(i);
     if (child.isFolder()) {
       return null;
@@ -96,7 +102,9 @@ export const getObjectsInFolder = (objectFolderOrObject: gdObjectFolderOrObject)
   }).filter(Boolean);
 };
 
-export const getFoldersAscendanceWithoutRootFolder = (objectFolderOrObject: gdObjectFolderOrObject): gdObjectFolderOrObject[] => {
+export const getFoldersAscendanceWithoutRootFolder = (
+  objectFolderOrObject: gd.ObjectFolderOrObject
+): gd.ObjectFolderOrObject[] => {
   if (objectFolderOrObject.isRootFolder()) return [];
   const parent = objectFolderOrObject.getParent();
   if (parent.isRootFolder()) return [];

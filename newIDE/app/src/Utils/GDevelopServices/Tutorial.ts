@@ -2,31 +2,36 @@ import axios from 'axios';
 import { GDevelopAssetApi } from './ApiConfigs';
 import { MessageByLocale } from '../i18n/MessageByLocale';
 
-export type TutorialCategory = 'game-mechanic' | 'full-game' | 'official-beginner' | 'official-intermediate' | 'official-advanced';
+export type TutorialCategory =
+  | 'game-mechanic'
+  | 'full-game'
+  | 'official-beginner'
+  | 'official-intermediate'
+  | 'official-advanced';
 
 export type Tutorial = {
-  id: string,
+  id: string;
   /** Deprecated - see `titleByLocale`. */
-  title: string,
-  titleByLocale: MessageByLocale,
+  title: string;
+  titleByLocale: MessageByLocale;
   /** Deprecated - see `descriptionByLocale`. */
-  description: string,
-  descriptionByLocale: MessageByLocale,
-  type: 'video' | 'text',
-  category: TutorialCategory,
-  duration?: number,
+  description: string;
+  descriptionByLocale: MessageByLocale;
+  type: 'video' | 'text';
+  category: TutorialCategory;
+  duration?: number;
   /** Deprecated - see `linkByLocale`. */
-  link: string,
-  linkByLocale: MessageByLocale,
+  link: string;
+  linkByLocale: MessageByLocale;
   /** Deprecated - see `thumbnailUrlByLocale`. */
-  thumbnailUrl: string,
-  thumbnailUrlByLocale: MessageByLocale
+  thumbnailUrl: string;
+  thumbnailUrlByLocale: MessageByLocale;
 };
 
 export const listAllTutorials = (): Promise<Array<Tutorial>> => {
   return axios
     .get(`${GDevelopAssetApi.baseUrl}/tutorial`)
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const getObjectTutorialIds = (type: string): Array<string> => {

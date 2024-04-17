@@ -1,127 +1,141 @@
 import axios from 'axios';
 import capitalize from 'lodash/capitalize';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import { GDevelopGameApi, GDevelopGamesPlatform } from './ApiConfigs';
 import { MessageByLocale } from '../i18n/MessageByLocale';
 import { Filters } from './Filters';
-// @ts-expect-error - TS6142 - Module './User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { UserPublicProfile } from './User';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 
 export type CachedGameSlug = {
-  username: string,
-  gameSlug: string
+  username: string;
+  gameSlug: string;
 };
 
 export type GameSlug = {
-  username: string,
-  gameSlug: string,
-  createdAt: number
+  username: string;
+  gameSlug: string;
+  createdAt: number;
 };
 
 export type PublicGame = {
-  id: string,
-  gameName: string,
-  authorName: string // this corresponds to the publisher name,
-  publicWebBuildId?: string | null | undefined,
-  description?: string,
-  owners: Array<UserPublicProfile>,
-  authors: Array<UserPublicProfile>,
-  playWithKeyboard: boolean,
-  playWithGamepad: boolean,
-  playWithMobile: boolean,
-  orientation: string,
-  thumbnailUrl?: string,
-  cachedLastWeekSessionsCount?: number,
-  cachedLastYearSessionsCount?: number,
-  categories?: string[],
-  userSlug?: string,
-  gameSlug?: string,
-  discoverable?: boolean,
-  donateLink: string | null | undefined
+  id: string;
+  gameName: string;
+  authorName: string; // this corresponds to the publisher name,
+  publicWebBuildId?: string | null | undefined;
+  description?: string;
+  owners: Array<UserPublicProfile>;
+  authors: Array<UserPublicProfile>;
+  playWithKeyboard: boolean;
+  playWithGamepad: boolean;
+  playWithMobile: boolean;
+  orientation: string;
+  thumbnailUrl?: string;
+  cachedLastWeekSessionsCount?: number;
+  cachedLastYearSessionsCount?: number;
+  categories?: string[];
+  userSlug?: string;
+  gameSlug?: string;
+  discoverable?: boolean;
+  donateLink: string | null | undefined;
 };
 
 export type Game = {
-  id: string,
-  gameName: string,
-  authorName: string // this corresponds to the publisher name,
-  createdAt: number,
-  publicWebBuildId?: string | null | undefined,
-  description?: string,
-  thumbnailUrl?: string,
-  discoverable?: boolean,
-  acceptsBuildComments?: boolean,
-  acceptsGameComments?: boolean,
-  displayAdsOnGamePage?: boolean,
-  cachedCurrentSlug?: CachedGameSlug
+  id: string;
+  gameName: string;
+  authorName: string; // this corresponds to the publisher name,
+  createdAt: number;
+  publicWebBuildId?: string | null | undefined;
+  description?: string;
+  thumbnailUrl?: string;
+  discoverable?: boolean;
+  acceptsBuildComments?: boolean;
+  acceptsGameComments?: boolean;
+  displayAdsOnGamePage?: boolean;
+  cachedCurrentSlug?: CachedGameSlug;
 };
 
 export type GameCategory = {
-  name: string,
-  type: 'user-defined' | 'admin-only'
+  name: string;
+  type: 'user-defined' | 'admin-only';
 };
 
 export type ShowcasedGameLink = {
-  url: string,
-  type: 'app-store' | 'play-store' | 'play' | 'download' | 'download-win-mac-linux' | 'learn-more'
+  url: string;
+  type:
+    | 'app-store'
+    | 'play-store'
+    | 'play'
+    | 'download'
+    | 'download-win-mac-linux'
+    | 'learn-more';
 };
 
 export type ShowcasedGame = {
-  title: string,
-  author: string,
-  description: string,
-  genres: Array<string>,
-  platforms: Array<string>,
+  title: string;
+  author: string;
+  description: string;
+  genres: Array<string>;
+  platforms: Array<string>;
   /** Represents the union of genres+platforms. */
-  tags: Array<string>,
-  imageUrls: Array<string>,
-  links: Array<ShowcasedGameLink>,
-  isFeatured: boolean,
-  bannerUrl: string,
-  bannerBackgroundPosition: string,
-  thumbnailUrl: string,
-  editorDescription: string
+  tags: Array<string>;
+  imageUrls: Array<string>;
+  links: Array<ShowcasedGameLink>;
+  isFeatured: boolean;
+  bannerUrl: string;
+  bannerBackgroundPosition: string;
+  thumbnailUrl: string;
+  editorDescription: string;
 };
 
 export type AllShowcasedGames = {
-  showcasedGames: Array<ShowcasedGame>,
-  filters: Filters
+  showcasedGames: Array<ShowcasedGame>;
+  filters: Filters;
 };
 
 export type GameApiError = {
-  code: 'game-deletion/leaderboards-exist'
+  code: 'game-deletion/leaderboards-exist';
 };
 
-export type FeaturingType = 'games-platform-home' | 'games-platform-game-page' | 'games-platform-listing' | 'socials-newsletter' | 'gdevelop-banner';
+export type FeaturingType =
+  | 'games-platform-home'
+  | 'games-platform-game-page'
+  | 'games-platform-listing'
+  | 'socials-newsletter'
+  | 'gdevelop-banner';
 
 export type GameFeaturing = {
-  gameId: string,
-  featuring: FeaturingType,
-  createdAt: number // in seconds.,
-  updatedAt: number // in seconds.,
-  expiresAt: number // in seconds.
+  gameId: string;
+  featuring: FeaturingType;
+  createdAt: number; // in seconds.,
+  updatedAt: number; // in seconds.,
+  expiresAt: number; // in seconds.
 };
 
-export type GameUsageType = 'featuring-basic' | 'featuring-pro' | 'featuring-premium';
+export type GameUsageType =
+  | 'featuring-basic'
+  | 'featuring-pro'
+  | 'featuring-premium';
 
 export type MarketingPlan = {
-  id: GameUsageType,
-  nameByLocale: MessageByLocale,
-  descriptionByLocale: MessageByLocale,
-  bulletPointsByLocale: Array<MessageByLocale>
+  id: GameUsageType;
+  nameByLocale: MessageByLocale;
+  descriptionByLocale: MessageByLocale;
+  bulletPointsByLocale: Array<MessageByLocale>;
 };
 
 export type GameLeaderboardEntry = {
-  count: number | null,
-  publicGame: PublicGame | null
+  count: number | null;
+  publicGame: PublicGame | null;
 };
 
 export type GameLeaderboard = {
-  name: string,
-  displayNameByLocale: MessageByLocale,
-  topGameCommentQualityRatings: GameLeaderboardEntry[]
+  name: string;
+  displayNameByLocale: MessageByLocale;
+  topGameCommentQualityRatings: GameLeaderboardEntry[];
 };
 
 export const getCategoryName = (category: string, i18n: I18nType) => {
@@ -184,13 +198,16 @@ export const getPublicGameUrl = (publicGame?: PublicGame | null) => {
     : GDevelopGamesPlatform.getGameUrl(publicGame.id);
 };
 
-export const getAclsFromUserIds = (ownersIds: Array<string>): Array<{
-  userId: string,
-  level: string
-}> => ownersIds.map(ownerId => ({
-  userId: ownerId,
-  level: 'owner',
-}));
+export const getAclsFromUserIds = (
+  ownersIds: Array<string>
+): Array<{
+  userId: string;
+  level: string;
+}> =>
+  ownersIds.map((ownerId) => ({
+    userId: ownerId,
+    level: 'owner',
+  }));
 
 export const listAllShowcasedGames = async (): Promise<AllShowcasedGames> => {
   const response = await axios.get(`${GDevelopGameApi.baseUrl}/showcased-game`);
@@ -202,15 +219,15 @@ export const listAllShowcasedGames = async (): Promise<AllShowcasedGames> => {
   const responsesData = await Promise.all([
     axios
       .get(gamesShowcaseUrl)
-      .then(response => response.data)
-      .catch(e => e),
+      .then((response) => response.data)
+      .catch((e) => e),
     axios
       .get(filtersUrl)
-      .then(response => response.data)
-      .catch(e => e),
+      .then((response) => response.data)
+      .catch((e) => e),
   ]);
 
-  if (responsesData.some(data => !data || data instanceof Error)) {
+  if (responsesData.some((data) => !data || data instanceof Error)) {
     throw new Error('Unexpected response from the assets endpoints.');
   }
 
@@ -232,11 +249,11 @@ export const registerGame = async (
     authorName,
     templateSlug,
   }: {
-    gameId: string,
-    gameName: string,
-    authorName: string,
-    templateSlug: string
-  },
+    gameId: string;
+    gameName: string;
+    authorName: string;
+    templateSlug: string;
+  }
 ): Promise<Game> => {
   const authorizationHeader = await getAuthorizationHeader();
 
@@ -280,21 +297,21 @@ export const updateGame = async (
     acceptsGameComments,
     displayAdsOnGamePage,
   }: {
-    gameName?: string,
-    categories?: string[],
-    authorName?: string,
-    publicWebBuildId?: string | null | undefined,
-    description?: string,
-    playWithKeyboard?: boolean,
-    playWithGamepad?: boolean,
-    playWithMobile?: boolean,
-    orientation?: string,
-    thumbnailUrl?: string | null | undefined,
-    discoverable?: boolean,
-    acceptsBuildComments?: boolean,
-    acceptsGameComments?: boolean,
-    displayAdsOnGamePage?: boolean
-  },
+    gameName?: string;
+    categories?: string[];
+    authorName?: string;
+    publicWebBuildId?: string | null | undefined;
+    description?: string;
+    playWithKeyboard?: boolean;
+    playWithGamepad?: boolean;
+    playWithMobile?: boolean;
+    orientation?: string;
+    thumbnailUrl?: string | null | undefined;
+    discoverable?: boolean;
+    acceptsBuildComments?: boolean;
+    acceptsGameComments?: boolean;
+    displayAdsOnGamePage?: boolean;
+  }
 ): Promise<Game> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.patch(
@@ -334,14 +351,14 @@ export const setGameUserAcls = async (
   gameId: string,
   acls: {
     ownership?: Array<{
-      userId: string,
-      level: string
-    }>,
+      userId: string;
+      level: string;
+    }>;
     author?: Array<{
-      userId: string,
-      level: string
-    }>
-  },
+      userId: string;
+      level: string;
+    }>;
+  }
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.post(
@@ -368,7 +385,7 @@ export const setGameSlug = async (
   userId: string,
   gameId: string,
   userSlug: string,
-  gameSlug: string,
+  gameSlug: string
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.post(
@@ -394,7 +411,7 @@ export const setGameSlug = async (
 export const getGame = async (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  gameId: string,
+  gameId: string
 ): Promise<Game> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.get(
@@ -415,7 +432,7 @@ export const getGame = async (
 export const deleteGame = async (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  gameId: string,
+  gameId: string
 ): Promise<Game> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.delete(
@@ -432,7 +449,10 @@ export const deleteGame = async (
   return response.data;
 };
 
-export const getGames = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Array<Game>> => {
+export const getGames = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Array<Game>> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await axios.get(`${GDevelopGameApi.baseUrl}/game`, {
@@ -466,10 +486,10 @@ export const buyGameFeaturing = async (
     userId,
     usageType,
   }: {
-    gameId: string,
-    userId: string,
-    usageType: GameUsageType
-  },
+    gameId: string;
+    userId: string;
+    usageType: GameUsageType;
+  }
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   await axios.post(
@@ -494,9 +514,9 @@ export const listGameFeaturings = async (
     gameId,
     userId,
   }: {
-    gameId: string,
-    userId: string
-  },
+    gameId: string;
+    userId: string;
+  }
 ): Promise<GameFeaturing[]> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.get(
@@ -520,11 +540,11 @@ export const listMarketingPlans = async (): Promise<MarketingPlan[]> => {
   return response.data;
 };
 
-export const getGameCommentQualityRatingsLeaderboards = async (): Promise<Array<GameLeaderboard>> => {
+export const getGameCommentQualityRatingsLeaderboards = async (): Promise<
+  Array<GameLeaderboard>
+> => {
   const response = await axios.get(
-    `${
-      GDevelopGameApi.baseUrl
-    }/game-comment-quality-ratings-leaderboard?leaderboardRegionName=global`
+    `${GDevelopGameApi.baseUrl}/game-comment-quality-ratings-leaderboard?leaderboardRegionName=global`
   );
 
   if (!Array.isArray(response.data)) {

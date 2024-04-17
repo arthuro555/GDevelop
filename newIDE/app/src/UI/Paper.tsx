@@ -4,16 +4,16 @@ import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 import { GDevelopTheme } from './Theme';
 
 type Props = {
-  id?: string,
-  children: React.ReactNode,
-  elevation?: number,
-  variant?: 'outlined',
+  id?: string;
+  children: React.ReactNode;
+  elevation?: number;
+  variant?: 'outlined';
   // The background property allows to create contrast between papers,
   // 'dark' corresponds to the darker background on Dark theme,
   // but it corresponds to the lighter background on Light theme.
-  background: 'light' | 'medium' | 'dark',
-  style?: any,
-  square?: boolean
+  background: 'light' | 'medium' | 'dark';
+  style?: any;
+  square?: boolean;
 };
 
 export const getBackgroundColor = (
@@ -23,8 +23,8 @@ export const getBackgroundColor = (
   backgroundColor === 'dark'
     ? gdevelopTheme.paper.backgroundColor.dark
     : backgroundColor === 'medium'
-    ? gdevelopTheme.paper.backgroundColor.medium
-    : gdevelopTheme.paper.backgroundColor.light;
+      ? gdevelopTheme.paper.backgroundColor.medium
+      : gdevelopTheme.paper.backgroundColor.light;
 
 const Paper = ({
   id,
@@ -38,7 +38,6 @@ const Paper = ({
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const backgroundColor = getBackgroundColor(gdevelopTheme, background);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <MuiPaper
       id={id}
       variant={variant}

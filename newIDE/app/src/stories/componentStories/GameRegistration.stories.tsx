@@ -1,13 +1,10 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../GameDashboard/GameRegistration' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/GameRegistration.tsx', but '--jsx' is not set.
 import { GameRegistration } from '../../GameDashboard/GameRegistration';
 import GDevelopJsInitializerDecorator, {
   testProject,
-// @ts-expect-error - TS6142 - Module '../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
 } from '../GDevelopJsInitializerDecorator';
 import {
   fakeSilverAuthenticatedUser,
@@ -23,17 +20,14 @@ export default {
 };
 
 export const NoProjectLoaded = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration project={null} onGameRegistered={() => {}} />
   </AuthenticatedUserContext.Provider>
 );
 
 export const NotLoggedIn = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeNotAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -42,9 +36,7 @@ export const NotLoggedIn = () => (
 );
 
 export const NotLoggedInWithoutLogin = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeNotAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -54,9 +46,7 @@ export const NotLoggedInWithoutLogin = () => (
 );
 
 export const NotAuthorized = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -76,9 +66,7 @@ NotAuthorized.parameters = {
 };
 
 export const GameNotExisting = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -98,9 +86,7 @@ GameNotExisting.parameters = {
 };
 
 export const ErrorLoadingGame = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -120,9 +106,7 @@ ErrorLoadingGame.parameters = {
 };
 
 export const RegisteredWithAdditionalActions = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -146,9 +130,7 @@ RegisteredWithAdditionalActions.parameters = {
 };
 
 export const RegisteredWithLoader = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}
@@ -171,9 +153,7 @@ RegisteredWithLoader.parameters = {
 };
 
 export const RegisteredWithoutLoader = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <GameRegistration
       project={testProject.project}
       onGameRegistered={() => {}}

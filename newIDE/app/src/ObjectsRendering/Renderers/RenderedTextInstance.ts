@@ -1,11 +1,10 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import { rgbStringToHexNumber } from '../../Utils/ColorTransformer';
 import * as PIXI from 'pixi.js-legacy';
-const gd: libGDevelop = global.gd;
 
 /**
  * Renderer for a Text object.
@@ -34,10 +33,10 @@ export default class RenderedTextInstance extends RenderedInstance {
   _shadowBlurRadius = 2;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -59,9 +58,9 @@ export default class RenderedTextInstance extends RenderedInstance {
 
     //Setup the PIXI object:
     this._pixiObject = new PIXI.Text('', style);
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.x = 0.5;
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.y = 0.5;
     this._pixiContainer.addChild(this._pixiObject);
     this._styleFontDirty = true;
@@ -77,9 +76,9 @@ export default class RenderedTextInstance extends RenderedInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     return 'CppPlatform/Extensions/texticon24.png';
   }
@@ -88,7 +87,7 @@ export default class RenderedTextInstance extends RenderedInstance {
     const textObjectConfiguration = gd.asTextObjectConfiguration(
       this._associatedObjectConfiguration
     );
-// @ts-expect-error - TS2339 - Property 'text' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'text' does not exist on type 'DisplayObject'.
     this._pixiObject.text = textObjectConfiguration.getText();
 
     //Update style, only if needed to avoid destroying text rendering performances
@@ -141,12 +140,12 @@ export default class RenderedTextInstance extends RenderedInstance {
         this._project,
         textObjectConfiguration.getFontName()
       )
-        .then(fontFamily => {
+        .then((fontFamily) => {
           // Once the font is loaded, we can use the given fontFamily.
           this._fontFamily = fontFamily;
           this._styleFontDirty = true;
         })
-        .catch(err => {
+        .catch((err) => {
           // Ignore errors
           console.warn(
             'Unable to load font family for RenderedTextInstance',
@@ -156,7 +155,7 @@ export default class RenderedTextInstance extends RenderedInstance {
     }
 
     if (this._styleFontDirty) {
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'style' does not exist on type 'DisplayObject'.
       const style = this._pixiObject.style;
       style.fontFamily = this._fontFamily || 'Arial';
       style.fontSize = Math.max(1, this._characterSize);
@@ -185,7 +184,7 @@ export default class RenderedTextInstance extends RenderedInstance {
 
       // Manually ask the PIXI object to re-render as we changed a style property
       // see http://www.html5gamedevs.com/topic/16924-change-text-style-post-render/
-// @ts-expect-error - TS2339 - Property 'dirty' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'dirty' does not exist on type 'DisplayObject'.
       this._pixiObject.dirty = true;
       this._styleFontDirty = false;
     }
@@ -195,30 +194,30 @@ export default class RenderedTextInstance extends RenderedInstance {
         this._textAlignment === 'right'
           ? 1
           : this._textAlignment === 'center'
-          ? 0.5
-          : 0;
+            ? 0.5
+            : 0;
 
       const width = this.getCustomWidth();
 
       // A vector from the custom size center to the renderer center.
       const centerToCenterX =
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+        // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
         (width - this._pixiObject.width) * (alignmentX - 0.5);
 
       this._pixiObject.position.x = this._instance.getX() + width / 2;
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
       this._pixiObject.anchor.x =
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+        // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
         0.5 - centerToCenterX / this._pixiObject.width;
     } else {
       this._pixiObject.position.x =
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+        // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
         this._instance.getX() + this._pixiObject.width / 2;
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
       this._pixiObject.anchor.x = 0.5;
     }
     this._pixiObject.position.y =
-// @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
       this._instance.getY() + this._pixiObject.height / 2;
     this._pixiObject.rotation = RenderedInstance.toRad(
       this._instance.getAngle()
@@ -226,12 +225,12 @@ export default class RenderedTextInstance extends RenderedInstance {
   }
 
   getDefaultWidth() {
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
     return this._pixiObject.width;
   }
 
   getDefaultHeight() {
-// @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
     return this._pixiObject.height;
   }
 }

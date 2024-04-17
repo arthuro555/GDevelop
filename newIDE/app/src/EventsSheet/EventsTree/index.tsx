@@ -1,12 +1,11 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import React, { Component, ReactNode } from 'react';
 import findIndex from 'lodash/findIndex';
 import {
   SortableTreeWithoutDndContext,
   getFlatDataFromTree,
   getNodeAtPath,
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-sortable-tree'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-sortable-tree/dist/index.cjs.js' implicitly has an 'any' type.
+  // @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-sortable-tree'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-sortable-tree/dist/index.cjs.js' implicitly has an 'any' type.
 } from 'react-sortable-tree';
 import { ConnectDragSource } from 'react-dnd';
 import { mapFor } from '../../Utils/MapFor';
@@ -37,33 +36,32 @@ import { WindowSizeType } from '../../UI/Responsive/ResponsiveWindowMeasurer';
 // Import default style of react-sortable-tree and the override made for EventsSheet.
 import 'react-sortable-tree/style.css';
 import './style.css';
-// @ts-expect-error - TS6142 - Module './BottomButtons' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/BottomButtons.tsx', but '--jsx' is not set.
+
 import BottomButtons from './BottomButtons';
-// @ts-expect-error - TS6142 - Module '../../UI/EmptyPlaceholder' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyPlaceholder.tsx', but '--jsx' is not set.
+
 import { EmptyPlaceholder } from '../../UI/EmptyPlaceholder';
-// @ts-expect-error - TS6142 - Module '../../UI/CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import { Preferences } from '../../MainFrame/Preferences/PreferencesContext';
 import { Tutorial } from '../../Utils/GDevelopServices/Tutorial';
-// @ts-expect-error - TS6142 - Module '../../Hints/TutorialMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Hints/TutorialMessage.tsx', but '--jsx' is not set.
+
 import TutorialMessage from '../../Hints/TutorialMessage';
 import getTutorial from '../../Hints/getTutorial';
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { makeDragSourceAndDropTarget } from '../../UI/DragAndDrop/DragSourceAndDropTarget';
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DropTarget.tsx', but '--jsx' is not set.
+
 import { makeDropTarget } from '../../UI/DragAndDrop/DropTarget';
-// @ts-expect-error - TS6142 - Module './DropContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/DropContainer.tsx', but '--jsx' is not set.
+
 import { AutoScroll, DropContainer } from './DropContainer';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './helpers'. '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/helpers.js' implicitly has an 'any' type.
+
 import { isDescendant, MoveFunctionArguments } from './helpers';
 import { dataObjectToProps } from '../../Utils/HTMLDataset';
 import useForceUpdate from '../../Utils/UseForceUpdate';
 import { useLongTouch } from '../../Utils/UseLongTouch';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
-const gd: libGDevelop = global.gd;
 
 const eventsSheetEventsDnDType = 'events-sheet-events-dnd-type';
 
@@ -100,35 +98,44 @@ const getEventContainerStyle = (windowSize: WindowSizeType) =>
     : styles.defaultEventContainer;
 
 type EventsContainerProps = {
-  eventsHeightsCache: EventHeightsCache,
-  event: gdBaseEvent,
-  leftIndentWidth: number,
-  disabled: boolean,
-  project: gdProject,
-  scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  selection: SelectionState,
-  onAddNewInstruction: (arg1: InstructionsListContext) => void,
-  onPasteInstructions: (arg1: InstructionsListContext) => void,
-  onMoveToInstruction: (destinationContext: InstructionContext) => void,
-  onMoveToInstructionsList: (destinationContext: InstructionsListContext) => void,
-  onInstructionClick: (arg1: InstructionContext) => void,
-  onInstructionDoubleClick: (arg1: InstructionContext) => void,
-  onInstructionContextMenu: (x: number, y: number, arg3: InstructionContext) => void,
-  onAddInstructionContextMenu: (arg1: HTMLButtonElement, arg2: InstructionsListContext) => void,
-  onParameterClick: (arg1: ParameterContext) => void,
-  onEventClick: (eventContext: EventContext) => void,
-  onEndEditingEvent: () => void,
-  onEventContextMenu: (x: number, y: number) => void,
-  onOpenExternalEvents: (arg1: string) => void,
-  onOpenLayout: (arg1: string) => void,
-  renderObjectThumbnail: (arg1: string) => Node,
-  screenType: ScreenType,
-  eventsSheetHeight: number,
-  connectDragSource: ConnectDragSource,
-  windowSize: WindowSizeType,
-  idPrefix: string
+  eventsHeightsCache: EventHeightsCache;
+  event: gd.BaseEvent;
+  leftIndentWidth: number;
+  disabled: boolean;
+  project: gd.Project;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  selection: SelectionState;
+  onAddNewInstruction: (arg1: InstructionsListContext) => void;
+  onPasteInstructions: (arg1: InstructionsListContext) => void;
+  onMoveToInstruction: (destinationContext: InstructionContext) => void;
+  onMoveToInstructionsList: (
+    destinationContext: InstructionsListContext
+  ) => void;
+  onInstructionClick: (arg1: InstructionContext) => void;
+  onInstructionDoubleClick: (arg1: InstructionContext) => void;
+  onInstructionContextMenu: (
+    x: number,
+    y: number,
+    arg3: InstructionContext
+  ) => void;
+  onAddInstructionContextMenu: (
+    arg1: HTMLButtonElement,
+    arg2: InstructionsListContext
+  ) => void;
+  onParameterClick: (arg1: ParameterContext) => void;
+  onEventClick: (eventContext: EventContext) => void;
+  onEndEditingEvent: () => void;
+  onEventContextMenu: (x: number, y: number) => void;
+  onOpenExternalEvents: (arg1: string) => void;
+  onOpenLayout: (arg1: string) => void;
+  renderObjectThumbnail: (arg1: string) => Node;
+  screenType: ScreenType;
+  eventsSheetHeight: number;
+  connectDragSource: ConnectDragSource;
+  windowSize: WindowSizeType;
+  idPrefix: string;
 };
 
 const hiddenBecauseHeightNotComputedYetStyle = {
@@ -152,12 +159,9 @@ const EventContainer = (props: EventsContainerProps) => {
   const forceUpdate = useForceUpdate();
   const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
   const height = containerRef.current ? containerRef.current.offsetHeight : 0;
-  React.useEffect(
-    () => {
-      eventsHeightsCache.setEventHeight(event, height);
-    },
-    [event, eventsHeightsCache, height]
-  );
+  React.useEffect(() => {
+    eventsHeightsCache.setEventHeight(event, height);
+  }, [event, eventsHeightsCache, height]);
 
   const _onEventContextMenu = React.useCallback(
     (domEvent: MouseEvent) => {
@@ -180,13 +184,12 @@ const EventContainer = (props: EventsContainerProps) => {
   const EventComponent = EventsRenderingService.getEventComponent(event);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
       ref={containerRef}
-// @ts-expect-error - TS2322 - Type '(eventContext: EventContext) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+      // @ts-expect-error - TS2322 - Type '(eventContext: EventContext) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
       onClick={props.onEventClick}
-// @ts-expect-error - TS2322 - Type '(domEvent: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
+      // @ts-expect-error - TS2322 - Type '(domEvent: MouseEvent) => void' is not assignable to type 'MouseEventHandler<HTMLDivElement>'.
       onContextMenu={_onEventContextMenu}
       {...longTouchForContextMenuProps}
       style={
@@ -196,13 +199,9 @@ const EventContainer = (props: EventsContainerProps) => {
       }
     >
       {!!EventComponent && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div style={styles.eventComponentContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           {props.connectDragSource(<div className={handle} />)}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <div style={styles.container}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <EventComponent
               project={project}
               scope={scope}
@@ -228,7 +227,7 @@ const EventContainer = (props: EventsContainerProps) => {
               disabled={
                 disabled /* Use disabled (not event.disabled) as it is true if a parent event is disabled*/
               }
-// @ts-expect-error - TS2322 - Type '(arg1: string) => Node' is not assignable to type '(arg1: string) => ReactElement<any, string | JSXElementConstructor<any>>'.
+              // @ts-expect-error - TS2322 - Type '(arg1: string) => Node' is not assignable to type '(arg1: string) => ReactElement<any, string | JSXElementConstructor<any>>'.
               renderObjectThumbnail={props.renderObjectThumbnail}
               screenType={props.screenType}
               eventsSheetHeight={props.eventsSheetHeight}
@@ -246,7 +245,6 @@ const EventContainer = (props: EventsContainerProps) => {
 const SortableTree = ({ className, ...otherProps }) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <SortableTreeWithoutDndContext
       className={`${eventsTree} ${
         gdevelopTheme.palette.type === 'light' ? 'light-theme' : 'dark-theme'
@@ -259,76 +257,102 @@ const SortableTree = ({ className, ...otherProps }) => {
 const noop = () => {};
 
 type EventsTreeProps = {
-  events: gdEventsList,
-  project: gdProject,
-  scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  selection: SelectionState,
-  onAddNewInstruction: (eventContext: EventContext, arg2: InstructionsListContext) => void,
-  onPasteInstructions: (eventContext: EventContext, arg2: InstructionsListContext) => void,
-  onMoveToInstruction: (eventContext: EventContext, destinationContext: InstructionContext) => void,
-  onMoveToInstructionsList: (eventContext: EventContext, destinationContext: InstructionsListContext) => void,
-  onInstructionClick: (eventContext: EventContext, instructionContext: InstructionContext) => void,
-  onInstructionDoubleClick: (eventContext: EventContext, instructionContext: InstructionContext) => void,
-  onInstructionContextMenu: (eventContext: EventContext, x: number, y: number, arg4: InstructionContext) => void,
+  events: gd.EventsList;
+  project: gd.Project;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  selection: SelectionState;
+  onAddNewInstruction: (
+    eventContext: EventContext,
+    arg2: InstructionsListContext
+  ) => void;
+  onPasteInstructions: (
+    eventContext: EventContext,
+    arg2: InstructionsListContext
+  ) => void;
+  onMoveToInstruction: (
+    eventContext: EventContext,
+    destinationContext: InstructionContext
+  ) => void;
+  onMoveToInstructionsList: (
+    eventContext: EventContext,
+    destinationContext: InstructionsListContext
+  ) => void;
+  onInstructionClick: (
+    eventContext: EventContext,
+    instructionContext: InstructionContext
+  ) => void;
+  onInstructionDoubleClick: (
+    eventContext: EventContext,
+    instructionContext: InstructionContext
+  ) => void;
+  onInstructionContextMenu: (
+    eventContext: EventContext,
+    x: number,
+    y: number,
+    arg4: InstructionContext
+  ) => void;
   onAddInstructionContextMenu: (
     eventContext: EventContext,
     arg2: HTMLButtonElement,
-    arg3: InstructionsListContext,
-  ) => void,
-  onParameterClick: (eventContext: EventContext, parameterContext: ParameterContext) => void,
-  onEventClick: (eventContext: EventContext) => void,
-  onEventContextMenu: (x: number, y: number, eventContext: EventContext) => void,
-  onAddNewEvent: (eventType: string, eventsList: gdEventsList) => void,
-  onOpenExternalEvents: (arg1: string) => void,
-  onOpenLayout: (arg1: string) => void,
-  showObjectThumbnails: boolean,
-  searchResults: Array<gdBaseEvent> | null | undefined,
-  searchFocusOffset: number | null | undefined,
-  onEventMoved: (previousRowIndex: number, nextRowIndex: number) => void,
-  onEndEditingEvent: (event: gdBaseEvent) => void,
-  onScroll?: () => void,
-  screenType: ScreenType,
-  windowSize: WindowSizeType,
-  eventsSheetHeight: number,
-  fontSize?: number,
-  preferences: Preferences,
-  tutorials: Array<Tutorial> | null | undefined
+    arg3: InstructionsListContext
+  ) => void;
+  onParameterClick: (
+    eventContext: EventContext,
+    parameterContext: ParameterContext
+  ) => void;
+  onEventClick: (eventContext: EventContext) => void;
+  onEventContextMenu: (
+    x: number,
+    y: number,
+    eventContext: EventContext
+  ) => void;
+  onAddNewEvent: (eventType: string, eventsList: gd.EventsList) => void;
+  onOpenExternalEvents: (arg1: string) => void;
+  onOpenLayout: (arg1: string) => void;
+  showObjectThumbnails: boolean;
+  searchResults: Array<gd.BaseEvent> | null | undefined;
+  searchFocusOffset: number | null | undefined;
+  onEventMoved: (previousRowIndex: number, nextRowIndex: number) => void;
+  onEndEditingEvent: (event: gd.BaseEvent) => void;
+  onScroll?: () => void;
+  screenType: ScreenType;
+  windowSize: WindowSizeType;
+  eventsSheetHeight: number;
+  fontSize?: number;
+  preferences: Preferences;
+  tutorials: Array<Tutorial> | null | undefined;
 };
 
 // A node displayed by the SortableTree. Almost always represents an
 // event, except for the buttons at the bottom of the sheet and the tutorial.
 export type SortableTreeNode = {
   // Necessary attributes for react-sortable-tree.
-  title: (
-    node: {
-      node: SortableTreeNode
-    },
-  ) => Node,
-  children: Array<any>,
-  expanded: boolean,
-  eventsList: gdEventsList,
-  event: gdBaseEvent | null | undefined,
-  depth: number,
-  disabled: boolean,
-  indexInList: number,
-  rowIndex: number,
-  nodePath: Array<number>,
-  relativeNodePath: Array<number>,
+  title: (node: { node: SortableTreeNode }) => Node;
+  children: Array<any>;
+  expanded: boolean;
+  eventsList: gd.EventsList;
+  event: gd.BaseEvent | null | undefined;
+  depth: number;
+  disabled: boolean;
+  indexInList: number;
+  rowIndex: number;
+  nodePath: Array<number>;
+  relativeNodePath: Array<number>;
   // Key is event pointer or an identification string.
-  key: number | string,
+  key: number | string;
   // In case of nodes without event (buttons at the bottom of the sheet),
   // use a fixed height.
-  fixedHeight?: number | null | undefined
+  fixedHeight?: number | null | undefined;
 };
 
 type State = {
-  treeData: Array<any>,
-  flatData: Array<gdBaseEvent>,
-  draggedNode: SortableTreeNode | null | undefined,
-  isScrolledTop: boolean,
-  isScrolledBottom: boolean
+  treeData: Array<any>;
+  flatData: Array<gd.BaseEvent>;
+  draggedNode: SortableTreeNode | null | undefined;
+  isScrolledTop: boolean;
+  isScrolledBottom: boolean;
 };
 
 // @ts-expect-error - TS7031 - Binding element 'treeIndex' implicitly has an 'any' type.
@@ -338,13 +362,18 @@ const getNodeKey = ({ treeIndex }) => treeIndex;
  * Display a tree of event. Builtin on react-sortable-tree so that event
  * can be drag'n'dropped and events rows are virtualized.
  */
-export default class ThemableEventsTree extends Component<EventsTreeProps, State> {
+export default class ThemableEventsTree extends Component<
+  EventsTreeProps,
+  State
+> {
   static defaultProps = {
     selection: getInitialSelection(),
   };
   _list: any | null | undefined;
   eventsHeightsCache: EventHeightsCache;
-  DragSourceAndDropTarget = makeDragSourceAndDropTarget<SortableTreeNode>(eventsSheetEventsDnDType);
+  DragSourceAndDropTarget = makeDragSourceAndDropTarget<SortableTreeNode>(
+    eventsSheetEventsDnDType
+  );
   DropTarget = makeDropTarget<SortableTreeNode>(eventsSheetEventsDnDType);
   temporaryUnfoldedNodes: Array<SortableTreeNode>;
   _hoverTimerId: number | null | undefined;
@@ -379,7 +408,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
       this.setState({
         ...this.state,
         treeData: this.state.treeData.filter(
-          data => data.key !== 'eventstree-tutorial-node'
+          (data) => data.key !== 'eventstree-tutorial-node'
         ),
       });
     }
@@ -427,7 +456,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
   /**
    * Unfold events so that the given one is visible
    */
-  unfoldForEvent(event: gdBaseEvent) {
+  unfoldForEvent(event: gd.BaseEvent) {
     gd.EventsListUnfolder.unfoldWhenContaining(this.props.events, event);
     this.forceEventsUpdate();
   }
@@ -442,27 +471,25 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     this.forceEventsUpdate();
   }
 
-  getEventRow(searchedEvent: gdBaseEvent) {
+  getEventRow(searchedEvent: gd.BaseEvent) {
     // TODO: flatData could be replaced by a hashmap of events to row index
     return findIndex(
       this.state.flatData,
-      event => event.ptr === searchedEvent.ptr
+      (event) => event.ptr === searchedEvent.ptr
     );
   }
 
   getEventContextAtRowIndexes(rowIndexes: Array<number>): Array<EventContext> {
     // We use flatDataTree instead of this.state.flatData because we need the events contexts too.
     const flatDataTree: Array<{
-      node: SortableTreeNode
-    }> = getFlatDataFromTree(
-      {
-        treeData: this.state.treeData,
-        getNodeKey,
-        ignoreCollapsed: true,
-      }
-    );
+      node: SortableTreeNode;
+    }> = getFlatDataFromTree({
+      treeData: this.state.treeData,
+      getNodeKey,
+      ignoreCollapsed: true,
+    });
     return rowIndexes
-      .map(rowIndex => {
+      .map((rowIndex) => {
         if (!flatDataTree[rowIndex]) return null;
         const {
           node: { event, eventsList, indexInList },
@@ -473,49 +500,53 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
   }
 
   _eventsToTreeData = (
-    eventsList: gdEventsList,
-    flatData: Array<gdBaseEvent> = [],
+    eventsList: gd.EventsList,
+    flatData: Array<gd.BaseEvent> = [],
     depth: number = 0,
     parentDisabled: boolean = false,
     parentAbsolutePath: Array<number> = [],
     parentRelativePath: Array<number> | null = null
   ) => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    const treeData = mapFor<SortableTreeNode>(0, eventsList.getEventsCount(), i => {
-      const event = eventsList.getEventAt(i);
-      flatData.push(event);
+    // @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
+    const treeData = mapFor<SortableTreeNode>(
+      0,
+      eventsList.getEventsCount(),
+      (i) => {
+        const event = eventsList.getEventAt(i);
+        flatData.push(event);
 
-      const disabled = parentDisabled || event.isDisabled();
-      const absoluteIndex = flatData.length - 1;
-      const currentAbsolutePath = parentAbsolutePath.concat(
-        flatData.length - 1
-      );
-      const currentRelativePath = [...(parentRelativePath || []), i];
+        const disabled = parentDisabled || event.isDisabled();
+        const absoluteIndex = flatData.length - 1;
+        const currentAbsolutePath = parentAbsolutePath.concat(
+          flatData.length - 1
+        );
+        const currentRelativePath = [...(parentRelativePath || []), i];
 
-      return {
-        title: this._renderEvent,
-        event,
-        eventsList,
-        indexInList: i,
-        rowIndex: absoluteIndex,
-        expanded: !event.isFolded(),
-        disabled,
-        depth,
-        key: event.ptr, //TODO: useless?
-        children: this._eventsToTreeData(
-          event.getSubEvents(),
-          // flatData is a flat representation of events, one for each line.
-          // Hence it should not contain the folded events.
-          !event.isFolded() ? flatData : [],
-          depth + 1,
+        return {
+          title: this._renderEvent,
+          event,
+          eventsList,
+          indexInList: i,
+          rowIndex: absoluteIndex,
+          expanded: !event.isFolded(),
           disabled,
-          currentAbsolutePath,
-          currentRelativePath
-        ).treeData,
-        nodePath: currentAbsolutePath,
-        relativeNodePath: currentRelativePath,
-      };
-    });
+          depth,
+          key: event.ptr, //TODO: useless?
+          children: this._eventsToTreeData(
+            event.getSubEvents(),
+            // flatData is a flat representation of events, one for each line.
+            // Hence it should not contain the folded events.
+            !event.isFolded() ? flatData : [],
+            depth + 1,
+            disabled,
+            currentAbsolutePath,
+            currentRelativePath
+          ).treeData,
+          nodePath: currentAbsolutePath,
+          relativeNodePath: currentRelativePath,
+        };
+      }
+    );
     const tutorial = getTutorial(
       this.props.preferences,
       this.props.tutorials,
@@ -527,7 +558,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
       depth === 0
         ? {
             title: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <BottomButtons
                 onAddEvent={(eventType: string) =>
                   this.props.onAddNewEvent(eventType, this.props.events)
@@ -548,9 +578,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
       depth === 0 && eventsList.getEventsCount() !== 0 && tutorial
         ? {
             title: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <TutorialMessage tutorial={tutorial} />
               </Line>
             ),
@@ -566,13 +594,9 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
       depth === 0 && eventsList.getEventsCount() === 0
         ? {
             title: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <EmptyPlaceholder
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 title={<Trans>Add your first event</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 description={<Trans>Events define the rules of a game.</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 actionLabel={<Trans>Add an event</Trans>}
                 helpPagePath="/events"
                 tutorialId="intro-event-system"
@@ -631,11 +655,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     }
   };
 
-  _onVisibilityToggle = ({
-    node,
-  }: {
-    node: SortableTreeNode
-  }) => {
+  _onVisibilityToggle = ({ node }: { node: SortableTreeNode }) => {
     const { event } = node;
     if (!event) return;
 
@@ -651,7 +671,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     if (!object) return null;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CorsAwareImage
         className={classNames({
           [icon]: true,
@@ -667,7 +686,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     if (!event) return;
 
     const isNodeTemporaryUnfolded = this.temporaryUnfoldedNodes.some(
-      foldedNode => node.key === foldedNode.key
+      (foldedNode) => node.key === foldedNode.key
     );
     if (isOverLazy) {
       if (!this._hoverTimerId && !node.expanded) {
@@ -680,7 +699,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
         }
       }
     } else {
-// @ts-expect-error - TS2769 - No overload matches this call.
+      // @ts-expect-error - TS2769 - No overload matches this call.
       window.clearTimeout(this._hoverTimerId);
       this._hoverTimerId = null;
     }
@@ -688,18 +707,14 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
 
   _restoreFoldedNodes = () => {
     this.temporaryUnfoldedNodes.forEach(
-      node => node.event && node.event.setFolded(true)
+      (node) => node.event && node.event.setFolded(true)
     );
 
     this.temporaryUnfoldedNodes = [];
     this.forceEventsUpdate();
   };
 
-  _getRowHeight = ({
-    node,
-  }: {
-    node: SortableTreeNode | null | undefined
-  }) => {
+  _getRowHeight = ({ node }: { node: SortableTreeNode | null | undefined }) => {
     if (!node) return 0;
     if (!node.event) return node.fixedHeight || 0;
 
@@ -718,11 +733,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     }
   };
 
-  _renderEvent = ({
-    node,
-  }: {
-    node: SortableTreeNode
-  }) => {
+  _renderEvent = ({ node }: { node: SortableTreeNode }) => {
     const { event, depth, disabled } = node;
     if (!event) return null;
     const { DragSourceAndDropTarget, DropTarget } = this;
@@ -731,7 +742,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
       (isDescendant(this.state.draggedNode, node) ||
         node.key === this.state.draggedNode.key);
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DragSourceAndDropTarget
         beginDrag={() => {
           this.setState({ draggedNode: node });
@@ -745,7 +755,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
         }}
         endDrag={this._onEndDrag}
       >
-{ /* @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'isOverLazy' implicitly has an 'any' type. */}
         {({ connectDragSource, connectDropTarget, isOverLazy }) => {
           this._temporaryUnfoldNode(isOverLazy, node);
 
@@ -756,7 +765,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
           } as const;
 
           const dropTarget = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               style={{
                 opacity: isDragged ? 0.5 : 1,
@@ -764,7 +772,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
               }}
               {...dataObjectToProps({ rowIndex: node.rowIndex.toString() })}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EventContainer
                 project={this.props.project}
                 scope={this.props.scope}
@@ -775,43 +782,43 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
                 eventsHeightsCache={this.eventsHeightsCache}
                 selection={this.props.selection}
                 leftIndentWidth={depth * getIndentWidth(this.props.windowSize)}
-                onAddNewInstruction={instructionsListContext =>
+                onAddNewInstruction={(instructionsListContext) =>
                   this.props.onAddNewInstruction(
                     eventContext,
                     instructionsListContext
                   )
                 }
-                onPasteInstructions={instructionsListContext =>
+                onPasteInstructions={(instructionsListContext) =>
                   this.props.onPasteInstructions(
                     eventContext,
                     instructionsListContext
                   )
                 }
-                onMoveToInstruction={instructionContext =>
+                onMoveToInstruction={(instructionContext) =>
                   this.props.onMoveToInstruction(
                     eventContext,
                     instructionContext
                   )
                 }
-                onMoveToInstructionsList={instructionContext =>
+                onMoveToInstructionsList={(instructionContext) =>
                   this.props.onMoveToInstructionsList(
                     eventContext,
                     instructionContext
                   )
                 }
-                onInstructionClick={instructionContext =>
+                onInstructionClick={(instructionContext) =>
                   this.props.onInstructionClick(
                     eventContext,
                     instructionContext
                   )
                 }
-                onInstructionDoubleClick={instructionContext =>
+                onInstructionDoubleClick={(instructionContext) =>
                   this.props.onInstructionDoubleClick(
                     eventContext,
                     instructionContext
                   )
                 }
-                onParameterClick={parameterContext =>
+                onParameterClick={(parameterContext) =>
                   this.props.onParameterClick(eventContext, parameterContext)
                 }
                 onEventClick={() =>
@@ -842,7 +849,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
                 disabled={
                   disabled /* Use node.disabled (not event.disabled) as it is true if a parent event is disabled*/
                 }
-// @ts-expect-error - TS2322 - Type '(objectName: string) => React.JSX.Element | null' is not assignable to type '(arg1: string) => Node'.
+                // @ts-expect-error - TS2322 - Type '(objectName: string) => React.JSX.Element | null' is not assignable to type '(arg1: string) => Node'.
                 renderObjectThumbnail={this._renderObjectThumbnail}
                 screenType={this.props.screenType}
                 eventsSheetHeight={this.props.eventsSheetHeight}
@@ -851,7 +858,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
                 idPrefix={`event-${node.relativeNodePath.join('-')}`}
               />
               {this.state.draggedNode && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <DropContainer
                   node={node}
                   draggedNode={this.state.draggedNode}
@@ -862,8 +868,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
                   onDrop={this._onDrop}
                   activateTargets={!isDragged && !!this.state.draggedNode}
                   windowSize={this.props.windowSize}
-// @ts-expect-error - TS7006 - Parameter 'path' implicitly has an 'any' type.
-                  getNodeAtPath={path =>
+                  getNodeAtPath={(path) =>
                     getNodeAtPath({
                       path,
                       treeData: this.state.treeData,
@@ -885,15 +890,15 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     node,
     searchQuery,
   }: {
-    node: SortableTreeNode,
-    searchQuery: Array<gdBaseEvent> | null | undefined
+    node: SortableTreeNode;
+    searchQuery: Array<gd.BaseEvent> | null | undefined;
   }) => {
     const searchResults = searchQuery;
     if (!searchResults) return false;
     const { event } = node;
     if (!event) return false;
 
-    return searchResults.find(highlightedEvent =>
+    return searchResults.find((highlightedEvent) =>
       gd.compare(highlightedEvent, event)
     );
   };
@@ -915,12 +920,11 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
     const zoomLevel = this.props.fontSize || 14;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         style={{
           ...styles.container,
           fontSize: `${zoomLevel}px`,
-// @ts-expect-error - TS2322 - Type '{ fontSize: string; '--icon-size': string; '--instruction-missing-parameter-min-height': string; '--instruction-missing-parameter-min-width': string; flex: 1; position: "relative"; }' is not assignable to type 'Properties<string | number, string & {}>'.
+          // @ts-expect-error - TS2322 - Type '{ fontSize: string; '--icon-size': string; '--instruction-missing-parameter-min-height': string; '--instruction-missing-parameter-min-width': string; flex: 1; position: "relative"; }' is not assignable to type 'Properties<string | number, string & {}>'.
           '--icon-size': `${Math.round(zoomLevel * 1.14)}px`,
           '--instruction-missing-parameter-min-height': `${Math.round(
             zoomLevel * 1.1
@@ -933,9 +937,7 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
         {/* Disable for touchscreen because the dragged DOM node gets deleted, the */}
         {/* touch events are lost and the dnd does not drop anymore (hypothesis). */}
         {this.props.screenType !== 'touch' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <AutoScroll
               DnDComponent={this.DropTarget}
               direction="top"
@@ -944,7 +946,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
               }
               onHover={this._scrollUp}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <AutoScroll
               DnDComponent={this.DropTarget}
               direction="bottom"
@@ -955,7 +956,6 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
             />
           </>
         )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SortableTree
           treeData={treeData}
           scaffoldBlockPxWidth={getIndentWidth(this.props.windowSize)}
@@ -970,10 +970,10 @@ export default class ThemableEventsTree extends Component<EventsTreeProps, State
             this.props.searchResults ? eventsTreeWithSearchResults : ''
           }
           reactVirtualizedListProps={{
-// @ts-expect-error - TS7006 - Parameter 'list' implicitly has an 'any' type.
-            ref: list => (this._list = list),
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onScroll: event => {
+            // @ts-expect-error - TS7006 - Parameter 'list' implicitly has an 'any' type.
+            ref: (list) => (this._list = list),
+            // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
+            onScroll: (event) => {
               this.props.onScroll && this.props.onScroll();
               this.setState({
                 isScrolledTop: event.scrollTop === 0,

@@ -19,12 +19,11 @@ import * as PIXI_SPINE from 'pixi-spine';
 import * as THREE from 'three';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three/examples/jsm/utils/SkeletonUtils'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/examples/jsm/utils/SkeletonUtils.js' implicitly has an 'any' type.
 import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import { rgbOrHexToHexNumber } from '../Utils/ColorTransformer';
 const path = optionalRequire('path');
 const electron = optionalRequire('electron');
-const gd: libGDevelop = global.gd;
 const PIXI = { ...PIXI_LEGACY, ...PIXI_SPINE } as const;
 
 // Some PixiJS plugins like pixi-tilemap are not distributed as UMD modules,
@@ -51,14 +50,14 @@ const ObjectsRenderingService = {
     'ParticleSystem::ParticleEmitter': RenderedParticleEmitterInstance,
   },
   renderers3D: {},
-// @ts-expect-error - TS7023 - 'getThumbnail' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
-  getThumbnail: function(
-    project: gdProject,
-    objectConfiguration: gdObjectConfiguration
+  // @ts-expect-error - TS7023 - 'getThumbnail' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+  getThumbnail: function (
+    project: gd.Project,
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     const objectType = objectConfiguration.getType();
     if (this.renderers.hasOwnProperty(objectType))
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
       return this.renderers[objectType].getThumbnail(
         project,
         ResourcesLoader,
@@ -78,18 +77,18 @@ const ObjectsRenderingService = {
       );
     }
   },
-  createNewInstanceRenderer: function(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
-// @ts-expect-error - TS2749 - 'PIXI.Container' refers to a value, but is being used as a type here. Did you mean 'typeof PIXI.Container'?
+  createNewInstanceRenderer: function (
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
+    // @ts-expect-error - TS2749 - 'PIXI.Container' refers to a value, but is being used as a type here. Did you mean 'typeof PIXI.Container'?
     pixiContainer: PIXI.Container,
-    threeGroup: THREE.Group | null,
+    threeGroup: THREE.Group | null
   ): RenderedInstance | Rendered3DInstance {
     const objectType = associatedObjectConfiguration.getType();
     if (threeGroup && this.renderers3D.hasOwnProperty(objectType)) {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{}'.
       return new this.renderers3D[objectType](
         project,
         layout,
@@ -100,7 +99,7 @@ const ObjectsRenderingService = {
         PixiResourcesLoader
       );
     } else if (this.renderers.hasOwnProperty(objectType))
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
       return new this.renderers[objectType](
         project,
         layout,
@@ -152,7 +151,7 @@ const ObjectsRenderingService = {
       );
     }
   },
-  registerInstanceRenderer: function(objectType: string, renderer: any) {
+  registerInstanceRenderer: function (objectType: string, renderer: any) {
     if (!renderer.getThumbnail) {
       console.warn(
         `Tried to register renderer for object "${objectType}", but getThumbnail is not defined.`
@@ -171,10 +170,10 @@ const ObjectsRenderingService = {
       return;
     }
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly unknownObjectType: typeof RenderedUnknownInstance; readonly Sprite: typeof RenderedSpriteInstance; readonly 'TiledSpriteObject::TiledSprite': typeof RenderedTiledSpriteInstance; ... 4 more ...; readonly 'ParticleSystem::ParticleEmitter': typeof RenderedParticleEmitterInstance; }'.
     this.renderers[objectType] = renderer;
   },
-  registerInstance3DRenderer: function(objectType: string, renderer: any) {
+  registerInstance3DRenderer: function (objectType: string, renderer: any) {
     if (this.renderers3D.hasOwnProperty(objectType)) {
       console.warn(
         `Tried to register 3D renderer for object "${objectType}", but a renderer already exists.`
@@ -185,26 +184,29 @@ const ObjectsRenderingService = {
       return;
     }
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
     this.renderers3D[objectType] = renderer;
   },
   renderersCacheClearingMethods: [],
-  registerClearCache: function(clearCache: (project: gdProject) => void) {
-// @ts-expect-error - TS2339 - Property 'push' does not exist on type 'readonly []'.
+  registerClearCache: function (clearCache: (project: gd.Project) => void) {
+    // @ts-expect-error - TS2339 - Property 'push' does not exist on type 'readonly []'.
     this.renderersCacheClearingMethods.push(clearCache);
   },
   /**
    * Register a module that can be then required using `requireModule`.
    * This is necessary for the web-app, as all files must be bundled.
    */
-  registerModule: function(requirePath: string, module: any) {
+  registerModule: function (requirePath: string, module: any) {
     requirableModules[requirePath] = module;
   },
   /**
    * Require a module, that was either registered using `registerModule` (i.e: on the web-app), or from
    * the specified path (if `optionalRequire` can find the file, i.e: on the electron app).
    */
-  requireModule: function(requireBasePath: string, requirePath: string): any | null | undefined {
+  requireModule: function (
+    requireBasePath: string,
+    requirePath: string
+  ): any | null | undefined {
     // On Electron, where modules can be required at runtime from files, require the
     // file, relative to the base path.
     if (electron && path) {
@@ -238,8 +240,12 @@ const ObjectsRenderingService = {
         '@pixi/utils': PIXI,
         '@pixi/graphics': PIXI,
       } as const;
-      module._load = function hookedLoader(request: any, parent: any, isMain: any) {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'pixi.js-legacy': { readonly SkeletonBounds: typeof SkeletonBounds; readonly Spine: typeof Spine; readonly filterFromString: (text: string) => TextureFilter; ... 279 more ...; readonly CanvasSpriteRenderer: typeof CanvasSpriteRenderer; }; ... 7 more ...; readonly '@pixi/graphics': { ...; }; }'.
+      module._load = function hookedLoader(
+        request: any,
+        parent: any,
+        isMain: any
+      ) {
+        // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'pixi.js-legacy': { readonly SkeletonBounds: typeof SkeletonBounds; readonly Spine: typeof Spine; readonly filterFromString: (text: string) => TextureFilter; ... 279 more ...; readonly CanvasSpriteRenderer: typeof CanvasSpriteRenderer; }; ... 7 more ...; readonly '@pixi/graphics': { ...; }; }'.
         const loadedModule = allowedModules[request];
         if (loadedModule) return loadedModule;
 
@@ -262,7 +268,7 @@ const ObjectsRenderingService = {
       let requiredModule = null;
       try {
         requiredModule = global.require(originalRequiredModulePath);
-      } catch (ex: any) {
+      } catch (ex) {
         console.error(
           `Unable to load module "${requirePath}". Only files located in ${requireBasePath} are supported. Exception was:`,
           ex

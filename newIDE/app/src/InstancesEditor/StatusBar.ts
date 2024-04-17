@@ -1,26 +1,22 @@
 import * as PIXI from 'pixi.js-legacy';
 
 type Props = {
-  getLastCursorSceneCoordinates: () => [number, number],
-  width: number,
-  height: number
+  getLastCursorSceneCoordinates: () => [number, number];
+  width: number;
+  height: number;
 };
 
 export default class StatusBar {
-// @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
   _width: number;
-// @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
   _height: number;
   _getLastCursorSceneCoordinates: () => [number, number];
   _statusBarContainer: PIXI.Container;
   _statusBarBackground: PIXI.Graphics;
   _statusBarText: PIXI.Text;
 
-  constructor({
-    getLastCursorSceneCoordinates,
-    width,
-    height,
-  }: Props) {
+  constructor({ getLastCursorSceneCoordinates, width, height }: Props) {
     this._getLastCursorSceneCoordinates = getLastCursorSceneCoordinates;
     this._statusBarContainer = new PIXI.Container();
     this._statusBarContainer.alpha = 0.8;

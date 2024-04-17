@@ -13,20 +13,19 @@ const styles = {
 } as const;
 
 type TreeTableRowProps = {
-  id?: string,
-  children: React.ReactNode,
+  id?: string;
+  children: React.ReactNode;
   /* Allow to specify a different alignment than the default (centered). */
-  alignItems?: 'flex-start' | null | undefined
+  alignItems?: 'flex-start' | null | undefined;
 };
 
 export const TreeTableRow = (props: TreeTableRowProps) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       id={props.id}
       style={{
         ...styles.row,
-// @ts-expect-error - TS2322 - Type '"flex-start" | null | undefined' is not assignable to type 'AlignItems | undefined'.
+        // @ts-expect-error - TS2322 - Type '"flex-start" | null | undefined' is not assignable to type 'AlignItems | undefined'.
         alignItems: props.alignItems,
       }}
     >
@@ -36,13 +35,12 @@ export const TreeTableRow = (props: TreeTableRowProps) => {
 };
 
 type TreeTableCellProps = {
-  style?: any,
-  expand?: boolean,
-  children?: React.ReactNode
+  style?: any;
+  expand?: boolean;
+  children?: React.ReactNode;
 };
 
 export const TreeTableCell = (props: TreeTableCellProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <div
     style={{
       ...styles.cell,

@@ -1,63 +1,61 @@
 import axios from 'axios';
 import { GDevelopAssetApi } from './ApiConfigs';
 import semverSatisfies from 'semver/functions/satisfies';
-// @ts-expect-error - TS6142 - Module './User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
-import { UserPublicProfile } from './User';
 
-const gd: libGDevelop = global.gd;
+import { UserPublicProfile } from './User';
 
 type ExtensionTier = 'community' | 'reviewed';
 
 export type ExtensionRegistryItemHeader = {
-  tier: ExtensionTier,
-  authorIds: Array<string>,
-  authors?: Array<UserPublicProfile>,
-  extensionNamespace: string,
-  fullName: string,
-  name: string,
-  version: string,
-  gdevelopVersion?: string,
-  url: string,
-  headerUrl: string,
-  tags: Array<string>,
-  category: string,
-  previewIconUrl: string
+  tier: ExtensionTier;
+  authorIds: Array<string>;
+  authors?: Array<UserPublicProfile>;
+  extensionNamespace: string;
+  fullName: string;
+  name: string;
+  version: string;
+  gdevelopVersion?: string;
+  url: string;
+  headerUrl: string;
+  tags: Array<string>;
+  category: string;
+  previewIconUrl: string;
 };
 
-export type ExtensionShortHeader = (ExtensionRegistryItemHeader) & {
-  shortDescription: string,
-  eventsBasedBehaviorsCount: number,
-  eventsFunctionsCount: number
+export type ExtensionShortHeader = ExtensionRegistryItemHeader & {
+  shortDescription: string;
+  eventsBasedBehaviorsCount: number;
+  eventsFunctionsCount: number;
 };
 
-export type ExtensionHeader = (ExtensionShortHeader) & {
-  helpPath: string,
-  description: string,
-  iconUrl: string
+export type ExtensionHeader = ExtensionShortHeader & {
+  helpPath: string;
+  description: string;
+  iconUrl: string;
 };
 
-export type BehaviorShortHeader = (ExtensionRegistryItemHeader) & {
-  description: string,
-  extensionName: string,
-  objectType: string,
+export type BehaviorShortHeader = ExtensionRegistryItemHeader & {
+  description: string;
+  extensionName: string;
+  objectType: string;
   /**
    * All required behaviors including transitive ones.
    */
-  allRequiredBehaviorTypes: Array<string>,
+  allRequiredBehaviorTypes: Array<string>;
   /** This attribute is calculated.
    * @see adaptBehaviorHeader
    */
-  type: string
+  type: string;
 };
 
-export type ObjectShortHeader = (ExtensionRegistryItemHeader) & {
-  description: string,
-  extensionName: string
+export type ObjectShortHeader = ExtensionRegistryItemHeader & {
+  description: string;
+  extensionName: string;
 };
 
 /**
- * This represents a serialized `gdEventsFunctionsExtension`.
- * This can be fed to the `unserializeFrom` function from `gdEventsFunctionsExtension`.
+ * This represents a serialized `gd.EventsFunctionsExtension`.
+ * This can be fed to the `unserializeFrom` function from `gd.EventsFunctionsExtension`.
  *
  * Avoid manipulating this directly: it *can* have similar fields to an `ExtensionHeader` or
  * an `ExtensionShortHeader`, but not all the fields from the headers will be there. For example,
@@ -65,70 +63,76 @@ export type ObjectShortHeader = (ExtensionRegistryItemHeader) & {
  * This is because these fields are specific to the extensions store.
  */
 export type SerializedExtension = {
-  name: string
+  name: string;
 
   // This type is inexact because the typing is not complete.
 };
 
 export type ExtensionsRegistry = {
-  version: string,
-  headers: Array<ExtensionShortHeader>,
+  version: string;
+  headers: Array<ExtensionShortHeader>;
   views: {
     default: {
-      firstIds: Array<string>
-    }
-  }
+      firstIds: Array<string>;
+    };
+  };
 };
 
 export type BehaviorsRegistry = {
-  headers: Array<BehaviorShortHeader>,
+  headers: Array<BehaviorShortHeader>;
   views: {
     default: {
       firstIds: Array<{
-        extensionName: string,
-        behaviorName: string
-      }>
-    }
-  }
+        extensionName: string;
+        behaviorName: string;
+      }>;
+    };
+  };
 };
 
 /**
  * The ExtensionHeader returned by the API, with tags being a string
  * (which is kept in the API for compatibility with older GDevelop versions).
  */
-type ExtensionHeaderWithTagsAsString = (ExtensionHeader) & {
-  tags: string
+type ExtensionHeaderWithTagsAsString = ExtensionHeader & {
+  tags: string;
 };
 
 /**
  * The SerializedExtension returned by the API, with tags being a string
  * (which is kept in the API for compatibility with older GDevelop versions).
  */
-type SerializedExtensionWithTagsAsString = (SerializedExtension) & {
-  tags: string
+type SerializedExtensionWithTagsAsString = SerializedExtension & {
+  tags: string;
 };
 
 /**
  * Transform the tags from their old representation sent by the API (a string)
  * to their new representation (array of strings).
  */
-const transformTagsAsStringToTagsAsArray = <T extends {
-  tags: string
-} | {
-  tags: string[]
-}>(dataWithTags: T): (T) & {
-  tags: Array<string>
+const transformTagsAsStringToTagsAsArray = <
+  T extends
+    | {
+        tags: string;
+      }
+    | {
+        tags: string[];
+      },
+>(
+  dataWithTags: T
+): T & {
+  tags: Array<string>;
 } => {
   // Handle potential future update of the API that would
   // return tags as an array of strings.
   if (Array.isArray(dataWithTags.tags)) {
-// @ts-expect-error - TS2322 - Type 'T' is not assignable to type 'T & { tags: string[]; }'.
+    // @ts-expect-error - TS2322 - Type 'T' is not assignable to type 'T & { tags: string[]; }'.
     return dataWithTags;
   }
 
   return {
     ...dataWithTags,
-    tags: dataWithTags.tags.split(',').map(tag => tag.trim().toLowerCase()),
+    tags: dataWithTags.tags.split(',').map((tag) => tag.trim().toLowerCase()),
   };
 };
 
@@ -153,12 +157,12 @@ export const getExtensionsRegistry = async (): Promise<ExtensionsRegistry> => {
     throw new Error('Unexpected response from the extensions endpoint.');
   }
   if (!extensionsRegistry.headers) {
-// @ts-expect-error - TS2339 - Property 'extensionShortHeaders' does not exist on type 'ExtensionsRegistry'.
+    // @ts-expect-error - TS2339 - Property 'extensionShortHeaders' does not exist on type 'ExtensionsRegistry'.
     extensionsRegistry.headers = extensionsRegistry.extensionShortHeaders;
   }
   if (!extensionsRegistry.views.default.firstIds) {
     extensionsRegistry.views.default.firstIds =
-// @ts-expect-error - TS2339 - Property 'firstExtensionIds' does not exist on type '{ firstIds: string[]; }'.
+      // @ts-expect-error - TS2339 - Property 'firstExtensionIds' does not exist on type '{ firstIds: string[]; }'.
       extensionsRegistry.views.default.firstExtensionIds;
   }
   return {
@@ -183,7 +187,9 @@ export const getBehaviorsRegistry = async (): Promise<BehaviorsRegistry> => {
   };
 };
 
-const adaptBehaviorHeader = (header: BehaviorShortHeader): BehaviorShortHeader => {
+const adaptBehaviorHeader = (
+  header: BehaviorShortHeader
+): BehaviorShortHeader => {
   header.type = gd.PlatformExtension.getBehaviorFullType(
     header.extensionNamespace || header.extensionName,
     header.name
@@ -192,27 +198,31 @@ const adaptBehaviorHeader = (header: BehaviorShortHeader): BehaviorShortHeader =
   return header;
 };
 
-export const getExtensionHeader = (extensionShortHeader: ExtensionShortHeader | BehaviorShortHeader): Promise<ExtensionHeader> => {
-  return axios.get(extensionShortHeader.headerUrl).then(response => {
+export const getExtensionHeader = (
+  extensionShortHeader: ExtensionShortHeader | BehaviorShortHeader
+): Promise<ExtensionHeader> => {
+  return axios.get(extensionShortHeader.headerUrl).then((response) => {
     const data: ExtensionHeaderWithTagsAsString = response.data;
-    const transformedData: ExtensionHeader = transformTagsAsStringToTagsAsArray(
-      data
-    );
+    const transformedData: ExtensionHeader =
+      transformTagsAsStringToTagsAsArray(data);
     return transformedData;
   });
 };
 
-export const getExtension = (extensionHeader: ExtensionShortHeader | BehaviorShortHeader): Promise<SerializedExtension> => {
-  return axios.get(extensionHeader.url).then(response => {
+export const getExtension = (
+  extensionHeader: ExtensionShortHeader | BehaviorShortHeader
+): Promise<SerializedExtension> => {
+  return axios.get(extensionHeader.url).then((response) => {
     const data: SerializedExtensionWithTagsAsString = response.data;
-    const transformedData: SerializedExtension = transformTagsAsStringToTagsAsArray(
-      data
-    );
+    const transformedData: SerializedExtension =
+      transformTagsAsStringToTagsAsArray(data);
     return transformedData;
   });
 };
 
-export const getUserExtensionShortHeaders = async (authorId: string): Promise<Array<ExtensionShortHeader>> => {
+export const getUserExtensionShortHeaders = async (
+  authorId: string
+): Promise<Array<ExtensionShortHeader>> => {
   const response = await axios.get(
     `${GDevelopAssetApi.baseUrl}/extension-short-header`,
     {

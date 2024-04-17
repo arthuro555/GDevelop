@@ -1,50 +1,49 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../LayersList/LayerRemoveDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/LayersList/LayerRemoveDialog.tsx', but '--jsx' is not set.
+
 import LayerRemoveDialog from '../LayersList/LayerRemoveDialog';
-// @ts-expect-error - TS6142 - Module '../LayersList/LayerEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/LayersList/LayerEditorDialog.tsx', but '--jsx' is not set.
+
 import LayerEditorDialog from '../LayersList/LayerEditorDialog';
-// @ts-expect-error - TS6142 - Module '../VariablesList/VariablesEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VariablesList/VariablesEditorDialog.tsx', but '--jsx' is not set.
+
 import VariablesEditorDialog from '../VariablesList/VariablesEditorDialog';
-// @ts-expect-error - TS6142 - Module '../ObjectEditor/ObjectEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/ObjectEditorDialog.tsx', but '--jsx' is not set.
+
 import ObjectEditorDialog from '../ObjectEditor/ObjectEditorDialog';
-// @ts-expect-error - TS6142 - Module '../ObjectEditor/ObjectExporterDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/ObjectExporterDialog.tsx', but '--jsx' is not set.
+
 import ObjectExporterDialog from '../ObjectEditor/ObjectExporterDialog';
-// @ts-expect-error - TS6142 - Module '../ObjectGroupEditor/ObjectGroupEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectGroupEditor/ObjectGroupEditorDialog.tsx', but '--jsx' is not set.
+
 import ObjectGroupEditorDialog from '../ObjectGroupEditor/ObjectGroupEditorDialog';
 import InstancesSelection from '../InstancesEditor/InstancesSelection';
-// @ts-expect-error - TS6142 - Module './SetupGridDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/SetupGridDialog.tsx', but '--jsx' is not set.
+
 import SetupGridDialog from './SetupGridDialog';
-// @ts-expect-error - TS6142 - Module './ScenePropertiesDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/ScenePropertiesDialog.tsx', but '--jsx' is not set.
+
 import ScenePropertiesDialog from './ScenePropertiesDialog';
-// @ts-expect-error - TS6142 - Module '../ObjectEditor/ObjectEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/ObjectEditorDialog.tsx', but '--jsx' is not set.
+
 import { ObjectEditorTab } from '../ObjectEditor/ObjectEditorDialog';
-// @ts-expect-error - TS6142 - Module './MosaicEditorsDisplay/Toolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/MosaicEditorsDisplay/Toolbar.tsx', but '--jsx' is not set.
+
 import MosaicEditorsDisplayToolbar from './MosaicEditorsDisplay/Toolbar';
-// @ts-expect-error - TS6142 - Module './SwipeableDrawerEditorsDisplay/Toolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/SwipeableDrawerEditorsDisplay/Toolbar.tsx', but '--jsx' is not set.
+
 import SwipeableDrawerEditorsDisplayToolbar from './SwipeableDrawerEditorsDisplay/Toolbar';
 import { serializeToJSObject } from '../Utils/Serializer';
 import Clipboard, { SafeExtractor } from '../Utils/Clipboard';
 import Window from '../Utils/Window';
 import { ResponsiveWindowMeasurer } from '../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../UI/Messages/DismissableInfoBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Messages/DismissableInfoBar.tsx', but '--jsx' is not set.
+
 import DismissableInfoBar from '../UI/Messages/DismissableInfoBar';
-// @ts-expect-error - TS6142 - Module '../UI/Menu/ContextMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Menu/ContextMenu.tsx', but '--jsx' is not set.
+
 import ContextMenu, { ContextMenuInterface } from '../UI/Menu/ContextMenu';
 import { shortenString } from '../Utils/StringHelpers';
 import getObjectByName from '../Utils/GetObjectByName';
 import UseSceneEditorCommands from './UseSceneEditorCommands';
 import { InstancesEditorSettings } from '../InstancesEditor/InstancesEditorSettings';
 import { ResourceManagementProps } from '../ResourcesList/ResourceSource';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/EditScene'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/EditScene.js' implicitly has an 'any' type.
+
 import EditSceneIcon from '../UI/CustomSvgIcons/EditScene';
 import {
   HistoryState,
@@ -60,15 +59,15 @@ import {
   ObjectWithContext,
   GroupWithContext,
 } from '../ObjectsList/EnumerateObjects';
-// @ts-expect-error - TS6142 - Module '../UI/Messages/InfoBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Messages/InfoBar.tsx', but '--jsx' is not set.
+
 import InfoBar from '../UI/Messages/InfoBar';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import { UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
-// @ts-expect-error - TS6142 - Module './SceneVariablesDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/SceneVariablesDialog.tsx', but '--jsx' is not set.
+
 import SceneVariablesDialog from './SceneVariablesDialog';
 import { onObjectAdded, onInstanceAdded } from '../Hints/ObjectsAdditionalWork';
 import { InfoBarDetails } from '../Hints/ObjectsAdditionalWork';
-// @ts-expect-error - TS6142 - Module '../HotReload/HotReloadPreviewButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadPreviewButton.tsx', but '--jsx' is not set.
+
 import { HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
 import EventsRootVariablesFinder from '../Utils/EventsRootVariablesFinder';
 import { MOVEMENT_BIG_DELTA } from '../UI/KeyboardShortcuts';
@@ -76,9 +75,9 @@ import { getInstancesInLayoutForObject } from '../Utils/Layout';
 import { zoomInFactor, zoomOutFactor } from '../Utils/ZoomUtils';
 import debounce from 'lodash/debounce';
 import { mapFor } from '../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module './MosaicEditorsDisplay' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/MosaicEditorsDisplay/index.tsx', but '--jsx' is not set.
+
 import MosaicEditorsDisplay from './MosaicEditorsDisplay';
-// @ts-expect-error - TS6142 - Module './SwipeableDrawerEditorsDisplay' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/SwipeableDrawerEditorsDisplay/index.tsx', but '--jsx' is not set.
+
 import SwipeableDrawerEditorsDisplay from './SwipeableDrawerEditorsDisplay';
 import { SceneEditorsDisplayInterface } from './EditorsDisplay.flow';
 import newNameGenerator from '../Utils/NewNameGenerator';
@@ -94,12 +93,15 @@ import {
   unregisterOnResourceExternallyChangedCallback,
 } from '../MainFrame/ResourcesWatcher';
 
-const gd: libGDevelop = global.gd;
-
 const BASE_LAYER_NAME = '';
 const INSTANCES_CLIPBOARD_KIND = 'Instances';
 
-export type EditorId = 'objects-list' | 'properties' | 'object-groups-list' | 'instances-list' | 'layers-list';
+export type EditorId =
+  | 'objects-list'
+  | 'properties'
+  | 'object-groups-list'
+  | 'instances-list'
+  | 'layers-list';
 
 const styles = {
   container: {
@@ -111,53 +113,55 @@ const styles = {
 } as const;
 
 type Props = {
-  initialInstances: gdInitialInstancesContainer,
-  getInitialInstancesEditorSettings: () => InstancesEditorSettings,
-  layout: gdLayout,
-  onEditObject?: (object: gdObject) => void | null | undefined,
-  onOpenMoreSettings?: () => void | null | undefined,
-  onOpenEvents: (sceneName: string) => void,
-  project: gdProject,
-  setToolbar: (arg1?: React.ReactNode | null | undefined) => void,
-  resourceManagementProps: ResourceManagementProps,
-  isActive: boolean,
-  unsavedChanges?: UnsavedChanges | null | undefined,
-  canInstallPrivateAsset: () => boolean,
-  openBehaviorEvents: (extensionName: string, behaviorName: string) => void,
+  initialInstances: gd.InitialInstancesContainer;
+  getInitialInstancesEditorSettings: () => InstancesEditorSettings;
+  layout: gd.Layout;
+  onEditObject?: (object: gd.Object) => void | null | undefined;
+  onOpenMoreSettings?: () => void | null | undefined;
+  onOpenEvents: (sceneName: string) => void;
+  project: gd.Project;
+  setToolbar: (arg1?: React.ReactNode | null | undefined) => void;
+  resourceManagementProps: ResourceManagementProps;
+  isActive: boolean;
+  unsavedChanges?: UnsavedChanges | null | undefined;
+  canInstallPrivateAsset: () => boolean;
+  openBehaviorEvents: (extensionName: string, behaviorName: string) => void;
   // Preview:
-  hotReloadPreviewButtonProps: HotReloadPreviewButtonProps
+  hotReloadPreviewButtonProps: HotReloadPreviewButtonProps;
 };
 
 type State = {
-  setupGridOpen: boolean,
-  scenePropertiesDialogOpen: boolean,
-  layersListOpen: boolean,
-  onCloseLayerRemoveDialog: (doRemove: boolean, newLayer: string | null) => void | null | undefined,
-  layerRemoved: string | null | undefined,
-  editedLayer: gdLayer | null | undefined,
-  editedLayerInitialTab: 'properties' | 'effects',
-  isAssetExporterDialogOpen: boolean,
-  editedObjectWithContext: ObjectWithContext | null | undefined,
-  editedObjectInitialTab: ObjectEditorTab | null | undefined,
-  variablesEditedInstance: gdInitialInstance | null | undefined,
-  newObjectInstanceSceneCoordinates: [number, number] | null | undefined,
-  invisibleLayerOnWhichInstancesHaveJustBeenAdded: string | null,
-  editedGroup: gdObjectGroup | null | undefined,
-  instancesEditorSettings: InstancesEditorSettings,
-  history: HistoryState,
-  layoutVariablesDialogOpen: boolean,
-  showAdditionalWorkInfoBar: boolean,
-  additionalWorkInfoBar: InfoBarDetails,
-  selectedObjectFolderOrObjectsWithContext: Array<ObjectFolderOrObjectWithContext>,
-  selectedLayer: string
+  setupGridOpen: boolean;
+  scenePropertiesDialogOpen: boolean;
+  layersListOpen: boolean;
+  onCloseLayerRemoveDialog: (
+    doRemove: boolean,
+    newLayer: string | null
+  ) => void | null | undefined;
+  layerRemoved: string | null | undefined;
+  editedLayer: gd.Layer | null | undefined;
+  editedLayerInitialTab: 'properties' | 'effects';
+  isAssetExporterDialogOpen: boolean;
+  editedObjectWithContext: ObjectWithContext | null | undefined;
+  editedObjectInitialTab: ObjectEditorTab | null | undefined;
+  variablesEditedInstance: gd.InitialInstance | null | undefined;
+  newObjectInstanceSceneCoordinates: [number, number] | null | undefined;
+  invisibleLayerOnWhichInstancesHaveJustBeenAdded: string | null;
+  editedGroup: gd.ObjectGroup | null | undefined;
+  instancesEditorSettings: InstancesEditorSettings;
+  history: HistoryState;
+  layoutVariablesDialogOpen: boolean;
+  showAdditionalWorkInfoBar: boolean;
+  additionalWorkInfoBar: InfoBarDetails;
+  selectedObjectFolderOrObjectsWithContext: Array<ObjectFolderOrObjectWithContext>;
+  selectedLayer: string;
 };
 
 type CopyCutPasteOptions = {
-  useLastCursorPosition?: boolean,
-  pasteInTheForeground?: boolean
+  useLastCursorPosition?: boolean;
+  pasteInTheForeground?: boolean;
 };
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 const editSceneIconReactNode = <EditSceneIcon />;
 
 export default class SceneEditor extends React.Component<Props, State> {
@@ -178,7 +182,7 @@ export default class SceneEditor extends React.Component<Props, State> {
       setupGridOpen: false,
       scenePropertiesDialogOpen: false,
       layersListOpen: false,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(doRemove: boolean, newLayer: string | null) => void | null | undefined'.
+      // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(doRemove: boolean, newLayer: string | null) => void | null | undefined'.
       onCloseLayerRemoveDialog: null,
       layerRemoved: null,
       editedLayer: null,
@@ -217,9 +221,10 @@ export default class SceneEditor extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.resourceExternallyChangedCallbackId = registerOnResourceExternallyChangedCallback(
-      this.onResourceExternallyChanged.bind(this)
-    );
+    this.resourceExternallyChangedCallbackId =
+      registerOnResourceExternallyChangedCallback(
+        this.onResourceExternallyChanged.bind(this)
+      );
   }
   componentWillUnmount() {
     unregisterOnResourceExternallyChangedCallback(
@@ -232,7 +237,7 @@ export default class SceneEditor extends React.Component<Props, State> {
   }
 
   onResourceExternallyChanged = async (resourceInfo: {
-    identifier: string
+    identifier: string;
   }) => {
     const { project } = this.props;
 
@@ -259,12 +264,12 @@ export default class SceneEditor extends React.Component<Props, State> {
         gd.ProjectBrowserHelper.exposeProjectObjects(project, objectsCollector);
         const objectNames = objectsCollector.getObjectNames().toJSArray();
         objectsCollector.delete();
-        ObjectsRenderingService.renderersCacheClearingMethods.forEach(clear =>
-// @ts-expect-error - TS2349 - This expression is not callable.
+        ObjectsRenderingService.renderersCacheClearingMethods.forEach((clear) =>
+          // @ts-expect-error - TS2349 - This expression is not callable.
           clear(project)
         );
-// @ts-expect-error - TS7006 - Parameter 'objectName' implicitly has an 'any' type.
-        objectNames.forEach(objectName => {
+        // @ts-expect-error - TS7006 - Parameter 'objectName' implicitly has an 'any' type.
+        objectNames.forEach((objectName) => {
           editorDisplay.instancesHandlers.resetInstanceRenderersFor(objectName);
         });
       } finally {
@@ -279,7 +284,6 @@ export default class SceneEditor extends React.Component<Props, State> {
 
     if (editorDisplay.getName() === 'mosaic') {
       this.props.setToolbar(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <MosaicEditorsDisplayToolbar
           selectedInstancesCount={
             this.instancesSelection.getSelectedInstances().length
@@ -318,7 +322,6 @@ export default class SceneEditor extends React.Component<Props, State> {
       );
     } else {
       this.props.setToolbar(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <SwipeableDrawerEditorsDisplayToolbar
           selectedInstancesCount={
             this.instancesSelection.getSelectedInstances().length
@@ -372,11 +375,12 @@ export default class SceneEditor extends React.Component<Props, State> {
         this.props.initialInstances
       );
       this.setState(({ selectedObjectFolderOrObjectsWithContext }) => ({
-        selectedObjectFolderOrObjectsWithContext: cleanNonExistingObjectFolderOrObjectWithContexts(
-          this.props.project,
-          this.props.layout,
-          selectedObjectFolderOrObjectsWithContext
-        ),
+        selectedObjectFolderOrObjectsWithContext:
+          cleanNonExistingObjectFolderOrObjectWithContexts(
+            this.props.project,
+            this.props.layout,
+            selectedObjectFolderOrObjectsWithContext
+          ),
       }));
     }
   }
@@ -449,15 +453,15 @@ export default class SceneEditor extends React.Component<Props, State> {
     this.editObjectByName(selectedInstanceObjectName);
   };
 
-  editLayerEffects = (layer?: gdLayer | null) => {
+  editLayerEffects = (layer?: gd.Layer | null) => {
     this.setState({ editedLayer: layer, editedLayerInitialTab: 'effects' });
   };
 
-  editLayer = (layer?: gdLayer | null) => {
+  editLayer = (layer?: gd.Layer | null) => {
     this.setState({ editedLayer: layer, editedLayerInitialTab: 'properties' });
   };
 
-  editInstanceVariables = (instance?: gdInitialInstance | null) => {
+  editInstanceVariables = (instance?: gd.InitialInstance | null) => {
     this.setState({ variablesEditedInstance: instance });
   };
 
@@ -465,7 +469,10 @@ export default class SceneEditor extends React.Component<Props, State> {
     this.setState({ layoutVariablesDialogOpen: open });
   };
 
-  editObject = (editedObject?: gdObject | null, initialTab?: ObjectEditorTab | null) => {
+  editObject = (
+    editedObject?: gd.Object | null,
+    initialTab?: ObjectEditorTab | null
+  ) => {
     const { project } = this.props;
     if (editedObject) {
       this.setState({
@@ -497,7 +504,7 @@ export default class SceneEditor extends React.Component<Props, State> {
       this.editObject(project.getObject(objectName), initialTab);
   };
 
-  editGroup = (group?: gdObjectGroup | null) => {
+  editGroup = (group?: gd.ObjectGroup | null) => {
     this.setState({ editedGroup: group });
   };
 
@@ -564,7 +571,8 @@ export default class SceneEditor extends React.Component<Props, State> {
   _onObjectFolderOrObjectWithContextSelected = (
     objectFolderOrObjectWithContext: ObjectFolderOrObjectWithContext | null = null
   ) => {
-    const selectedObjectFolderOrObjectsWithContext: Array<ObjectFolderOrObjectWithContext> = [];
+    const selectedObjectFolderOrObjectsWithContext: Array<ObjectFolderOrObjectWithContext> =
+      [];
     if (objectFolderOrObjectWithContext) {
       selectedObjectFolderOrObjectsWithContext.push(
         objectFolderOrObjectWithContext
@@ -590,7 +598,8 @@ export default class SceneEditor extends React.Component<Props, State> {
 
     // Remember where to create the instance, when the object will be created
     this.setState({
-      newObjectInstanceSceneCoordinates: this.editorDisplay.viewControls.getLastCursorSceneCoordinates(),
+      newObjectInstanceSceneCoordinates:
+        this.editorDisplay.viewControls.getLastCursorSceneCoordinates(),
     });
 
     if (this.editorDisplay) this.editorDisplay.openNewObjectDialog();
@@ -615,7 +624,7 @@ export default class SceneEditor extends React.Component<Props, State> {
           (targetPosition === 'upperCenter' ? 4 : 2)
       );
     }
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+    // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
     this._addInstance(position, objectName);
   };
 
@@ -630,11 +639,11 @@ export default class SceneEditor extends React.Component<Props, State> {
     this._onInstancesAdded(instances);
   };
 
-  _onInstancesAdded = (instances: Array<gdInitialInstance>) => {
-// @ts-expect-error - TS7034 - Variable 'invisibleLayerOnWhichInstancesHaveJustBeenAdded' implicitly has type 'any' in some locations where its type cannot be determined.
+  _onInstancesAdded = (instances: Array<gd.InitialInstance>) => {
+    // @ts-expect-error - TS7034 - Variable 'invisibleLayerOnWhichInstancesHaveJustBeenAdded' implicitly has type 'any' in some locations where its type cannot be determined.
     let invisibleLayerOnWhichInstancesHaveJustBeenAdded = null;
-    instances.forEach(instance => {
-// @ts-expect-error - TS7005 - Variable 'invisibleLayerOnWhichInstancesHaveJustBeenAdded' implicitly has an 'any' type.
+    instances.forEach((instance) => {
+      // @ts-expect-error - TS7005 - Variable 'invisibleLayerOnWhichInstancesHaveJustBeenAdded' implicitly has an 'any' type.
       if (invisibleLayerOnWhichInstancesHaveJustBeenAdded === null) {
         const layer = this.props.layout.getLayer(instance.getLayer());
         if (!layer.getVisibility()) {
@@ -672,11 +681,11 @@ export default class SceneEditor extends React.Component<Props, State> {
   };
 
   onInstanceAddedOnInvisibleLayer = (layer?: string | null) => {
-// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | null'.
+    // @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | null'.
     this.setState({ invisibleLayerOnWhichInstancesHaveJustBeenAdded: layer });
   };
 
-  _onInstancesSelected = (instances: Array<gdInitialInstance>) => {
+  _onInstancesSelected = (instances: Array<gd.InitialInstance>) => {
     if (instances.length === 0) {
       this.setState(
         { selectedObjectFolderOrObjectsWithContext: [] },
@@ -720,11 +729,11 @@ export default class SceneEditor extends React.Component<Props, State> {
     }
   };
 
-  _onInstanceDoubleClicked = (instance: gdInitialInstance) => {
+  _onInstanceDoubleClicked = (instance: gd.InitialInstance) => {
     this.editObjectByName(instance.getObjectName());
   };
 
-  _onInstancesMoved = (instances: Array<gdInitialInstance>) => {
+  _onInstancesMoved = (instances: Array<gd.InitialInstance>) => {
     this.setState(
       {
         history: saveToHistory(
@@ -737,7 +746,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     );
   };
 
-  _onInstancesResized = (instances: Array<gdInitialInstance>) => {
+  _onInstancesResized = (instances: Array<gd.InitialInstance>) => {
     this.setState(
       {
         history: saveToHistory(
@@ -750,7 +759,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     );
   };
 
-  _onInstancesRotated = (instances: Array<gdInitialInstance>) => {
+  _onInstancesRotated = (instances: Array<gd.InitialInstance>) => {
     this.setState(
       {
         history: saveToHistory(
@@ -763,13 +772,13 @@ export default class SceneEditor extends React.Component<Props, State> {
     );
   };
 
-  _onInstancesModified = (instances: Array<gdInitialInstance>) => {
+  _onInstancesModified = (instances: Array<gd.InitialInstance>) => {
     this.forceUpdate();
     //TODO: Save for redo with debounce (and cancel on unmount)
   };
 
   _onSelectInstances = (
-    instances: Array<gdInitialInstance>,
+    instances: Array<gd.InitialInstance>,
     multiSelect: boolean,
     targetPosition?: 'center' | 'upperCenter'
   ) => {
@@ -787,7 +796,7 @@ export default class SceneEditor extends React.Component<Props, State> {
         offset = [0, viewPosition.toSceneScale(viewPosition.getHeight() / 4)];
       }
 
-// @ts-expect-error - TS2345 - Argument of type 'number[] | null' is not assignable to parameter of type '[number, number] | null | undefined'.
+      // @ts-expect-error - TS2345 - Argument of type 'number[] | null' is not assignable to parameter of type '[number, number] | null | undefined'.
       viewControls.centerViewOnLastInstance(instances, offset);
     }
     this.updateToolbar();
@@ -807,7 +816,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     this.setState({ newObjectInstanceSceneCoordinates: null });
   };
 
-  _onObjectCreated = (object: gdObject) => {
+  _onObjectCreated = (object: gd.Object) => {
     const infoBarDetails = onObjectAdded(
       object,
       this.props.layout,
@@ -828,8 +837,8 @@ export default class SceneEditor extends React.Component<Props, State> {
   _onRemoveLayer = (layerName: string, done: (arg1: boolean) => void) => {
     const getNewState = (doRemove: boolean) => {
       const newState: {
-        layerRemoved: null,
-        selectedLayer?: string
+        layerRemoved: null;
+        selectedLayer?: string;
       } = {
         layerRemoved: null,
       };
@@ -845,7 +854,7 @@ export default class SceneEditor extends React.Component<Props, State> {
         doRemove: boolean,
         newLayer: string | null
       ) => {
-// @ts-expect-error - TS2345 - Argument of type '{ layerRemoved: null; selectedLayer?: string | undefined; }' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "selectedLayer" | "layerRemoved"> | null) | Pick<...> | null'.
+        // @ts-expect-error - TS2345 - Argument of type '{ layerRemoved: null; selectedLayer?: string | undefined; }' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "selectedLayer" | "layerRemoved"> | null) | Pick<...> | null'.
         this.setState(getNewState(doRemove), () => {
           if (doRemove) {
             if (newLayer === null) {
@@ -883,8 +892,8 @@ export default class SceneEditor extends React.Component<Props, State> {
   };
 
   _startRenamingSelectedObject = () => {
-    const firstSelectedObjectFolderOrObject = this.state
-      .selectedObjectFolderOrObjectsWithContext[0];
+    const firstSelectedObjectFolderOrObject =
+      this.state.selectedObjectFolderOrObjectsWithContext[0];
     if (!firstSelectedObjectFolderOrObject) return;
 
     if (this.editorDisplay)
@@ -914,7 +923,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     const shouldRemoveReferences = answer === 'yes';
     const { project, layout } = this.props;
 
-    objectsWithContext.forEach(objectWithContext => {
+    objectsWithContext.forEach((objectWithContext) => {
       const { object, global } = objectWithContext;
 
       // Unselect instances of the deleted object because these instances
@@ -956,7 +965,7 @@ export default class SceneEditor extends React.Component<Props, State> {
 
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         if (
           layout.hasObjectNamed(tentativeNewName) ||
           project.hasObjectNamed(tentativeNewName) ||
@@ -972,8 +981,8 @@ export default class SceneEditor extends React.Component<Props, State> {
           const layoutsWithObjectOrGroupWithSameName: Array<string> = mapFor(
             0,
             project.getLayoutsCount(),
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-            i => {
+
+            (i) => {
               const otherLayout = project.getLayoutAt(i);
               const otherLayoutName = otherLayout.getName();
               if (layoutName !== otherLayoutName) {
@@ -1049,9 +1058,8 @@ export default class SceneEditor extends React.Component<Props, State> {
   ) => {
     const { objectFolderOrObject, global } = objectFolderOrObjectWithContext;
 
-    const unifiedName = getObjectFolderOrObjectUnifiedName(
-      objectFolderOrObject
-    );
+    const unifiedName =
+      getObjectFolderOrObjectUnifiedName(objectFolderOrObject);
     // Avoid triggering renaming refactoring if name has not really changed
     if (unifiedName === newName) {
       this._onObjectFolderOrObjectWithContextSelected(
@@ -1091,8 +1099,8 @@ export default class SceneEditor extends React.Component<Props, State> {
     const highestZOrderFinder = new gd.HighestZOrderFinder();
 
     const extremeZOrderByLayerName: Record<string, any> = {};
-// @ts-expect-error - TS7006 - Parameter 'layerName' implicitly has an 'any' type.
-    layerNames.forEach(layerName => {
+    // @ts-expect-error - TS7006 - Parameter 'layerName' implicitly has an 'any' type.
+    layerNames.forEach((layerName) => {
       highestZOrderFinder.reset();
       highestZOrderFinder.restrictSearchToLayer(layerName);
       this.props.initialInstances.iterateOverInstances(highestZOrderFinder);
@@ -1103,7 +1111,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     });
     highestZOrderFinder.delete();
 
-    selectedInstances.forEach(instance => {
+    selectedInstances.forEach((instance) => {
       if (!instance.isLocked()) {
         const extremeZOrder = extremeZOrderByLayerName[instance.getLayer()];
         // If instance is already at the extreme z order, do nothing.
@@ -1180,14 +1188,17 @@ export default class SceneEditor extends React.Component<Props, State> {
     done(true);
   };
 
-  canObjectOrGroupBeGlobal = (i18n: I18nType, objectOrGroupName: string): boolean => {
+  canObjectOrGroupBeGlobal = (
+    i18n: I18nType,
+    objectOrGroupName: string
+  ): boolean => {
     const { layout, project } = this.props;
     const layoutName = layout.getName();
     const layoutsWithObjectOrGroupWithSameName: Array<string> = mapFor(
       0,
       project.getLayoutsCount(),
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-      i => {
+
+      (i) => {
         const otherLayout = project.getLayoutAt(i);
         const otherLayoutName = otherLayout.getName();
         if (layoutName !== otherLayoutName) {
@@ -1206,9 +1217,11 @@ export default class SceneEditor extends React.Component<Props, State> {
     if (layoutsWithObjectOrGroupWithSameName.length > 0) {
       return Window.showConfirmDialog(
         i18n._(
-          t`Making "${objectOrGroupName}" global would conflict with the following scenes that have a group or an object with the same name:${'\n\n - ' +
+          t`Making "${objectOrGroupName}" global would conflict with the following scenes that have a group or an object with the same name:${
+            '\n\n - ' +
             layoutsWithObjectOrGroupWithSameName.join('\n\n - ') +
-            '\n\n'}Continue only if you know what you're doing.`
+            '\n\n'
+          }Continue only if you know what you're doing.`
         ),
         'warning'
       );
@@ -1218,7 +1231,7 @@ export default class SceneEditor extends React.Component<Props, State> {
 
   deleteSelection = () => {
     const selectedInstances = this.instancesSelection.getSelectedInstances();
-    selectedInstances.forEach(instance => {
+    selectedInstances.forEach((instance) => {
       if (instance.isLocked()) return;
       this.props.initialInstances.removeInstance(instance);
     });
@@ -1381,11 +1394,12 @@ export default class SceneEditor extends React.Component<Props, State> {
   ) => {
     if (this.contextMenu)
       this.contextMenu.open(x, y, {
-        ignoreSelectedObjectsForContextMenu: !!ignoreSelectedObjectsForContextMenu,
+        ignoreSelectedObjectsForContextMenu:
+          !!ignoreSelectedObjectsForContextMenu,
       });
   };
 
-  isInstanceOf3DObject = (instance: gdInitialInstance) => {
+  isInstanceOf3DObject = (instance: gd.InitialInstance) => {
     const { project, layout } = this.props;
 
     const object = getObjectByName(project, layout, instance.getObjectName());
@@ -1398,7 +1412,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     );
   };
 
-  buildContextMenu = (i18n: I18nType, layout: gdLayout, options: any) => {
+  buildContextMenu = (i18n: I18nType, layout: gd.Layout, options: any) => {
     if (
       options.ignoreSelectedObjectsForContextMenu ||
       !this.instancesSelection.hasSelectedInstances()
@@ -1424,7 +1438,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     const instances = this.instancesSelection.getSelectedInstances();
     if (
       instances.length === 1 ||
-      uniq(instances.map(instance => instance.getObjectName())).length === 1
+      uniq(instances.map((instance) => instance.getObjectName())).length === 1
     ) {
       const { project, layout } = this.props;
       const objectName = instances[0].getObjectName();
@@ -1478,12 +1492,13 @@ export default class SceneEditor extends React.Component<Props, State> {
   }: CopyCutPasteOptions = {}) => {
     const serializedSelection = this.instancesSelection
       .getSelectedInstances()
-      .map(instance => serializeToJSObject(instance));
+      .map((instance) => serializeToJSObject(instance));
 
     let x = 0;
     let y = 0;
     if (this.editorDisplay) {
-      const selectionAABB = this.editorDisplay.instancesHandlers.getSelectionAABB();
+      const selectionAABB =
+        this.editorDisplay.instancesHandlers.getSelectionAABB();
       x = selectionAABB.centerX();
       y = selectionAABB.centerY();
     }
@@ -1498,9 +1513,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     }
   };
 
-  cutSelection = ({
-    useLastCursorPosition,
-  }: CopyCutPasteOptions = {}) => {
+  cutSelection = ({ useLastCursorPosition }: CopyCutPasteOptions = {}) => {
     this.copySelection({ useLastCursorPosition, pasteInTheForeground: true });
     this.deleteSelection();
   };
@@ -1512,7 +1525,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     if (!editorDisplay) return;
     const serializedSelection = this.instancesSelection
       .getSelectedInstances()
-      .map(instance => serializeToJSObject(instance));
+      .map((instance) => serializeToJSObject(instance));
 
     const newInstances = editorDisplay.instancesHandlers.addSerializedInstances(
       {
@@ -1532,9 +1545,7 @@ export default class SceneEditor extends React.Component<Props, State> {
     this.forceUpdatePropertiesEditor();
   };
 
-  paste = ({
-    useLastCursorPosition,
-  }: CopyCutPasteOptions = {}) => {
+  paste = ({ useLastCursorPosition }: CopyCutPasteOptions = {}) => {
     const { editorDisplay } = this;
     if (!editorDisplay) return;
 
@@ -1625,7 +1636,7 @@ export default class SceneEditor extends React.Component<Props, State> {
       this.editorDisplay.forceUpdateInstancesPropertiesEditor();
   };
 
-  reloadResourcesFor = (object: gdObject) => {
+  reloadResourcesFor = (object: gd.Object) => {
     const { project } = this.props;
 
     const resourcesInUse = new gd.ResourcesInUseHelper(
@@ -1671,36 +1682,33 @@ export default class SceneEditor extends React.Component<Props, State> {
     // prettier-ignore
     const infoBarMessage =
       this.state.invisibleLayerOnWhichInstancesHaveJustBeenAdded !== null ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Trans>
           You just added an instance to a hidden layer
           ("{this.state.invisibleLayerOnWhichInstancesHaveJustBeenAdded || (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <Trans>Base layer</Trans>
           )}"). Open the layer panel to make it visible.
         </Trans>
       ) : null;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ResponsiveWindowMeasurer>
         {({ isMobile }) => {
           const EditorsDisplay = isMobile
             ? SwipeableDrawerEditorsDisplay
             : MosaicEditorsDisplay;
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               style={styles.container}
               id="scene-editor"
               data-active={isActive ? 'true' : undefined}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <UseSceneEditorCommands
                 project={project}
                 layout={layout}
                 onEditObject={this.props.onEditObject || this.editObject}
-                onEditObjectVariables={object => {
+                onEditObjectVariables={(object) => {
                   this.editObject(object, 'variables');
                 }}
                 onOpenSceneProperties={this.openSceneProperties}
@@ -1709,10 +1717,8 @@ export default class SceneEditor extends React.Component<Props, State> {
                 onEditLayerEffects={this.editLayerEffects}
                 onEditLayer={this.editLayer}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EditorsDisplay
-// @ts-expect-error - TS7006 - Parameter 'ref' implicitly has an 'any' type.
-                ref={ref => (this.editorDisplay = ref)}
+                ref={(ref) => (this.editorDisplay = ref)}
                 project={project}
                 layout={layout}
                 initialInstances={initialInstances}
@@ -1803,14 +1809,10 @@ export default class SceneEditor extends React.Component<Props, State> {
                 isActive={isActive}
                 onOpenedEditorsChanged={this.updateToolbar}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
                 {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <React.Fragment>
                     {editedObjectWithContext && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <ObjectEditorDialog
                         open
                         object={editedObjectWithContext.object}
@@ -1837,16 +1839,14 @@ export default class SceneEditor extends React.Component<Props, State> {
                           }
                           this.editObject(null);
                         }}
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type.
-                        getValidatedObjectOrGroupName={newName =>
+                        getValidatedObjectOrGroupName={(newName) =>
                           this._getValidatedObjectOrGroupName(
                             newName,
                             editedObjectWithContext.global,
                             i18n
                           )
                         }
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type.
-                        onRename={newName => {
+                        onRename={(newName) => {
                           this._onRenameEditedObject(newName);
                         }}
                         onApply={() => {
@@ -1875,7 +1875,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 )}
               </I18n>
               {this.state.isAssetExporterDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ObjectExporterDialog
                   project={project}
                   layout={layout}
@@ -1883,7 +1882,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 />
               )}
               {!!this.state.editedGroup && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ObjectGroupEditorDialog
                   project={project}
                   group={this.state.editedGroup}
@@ -1894,7 +1892,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 />
               )}
               {this.state.setupGridOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <SetupGridDialog
                   instancesEditorSettings={this.state.instancesEditorSettings}
                   onChangeInstancesEditorSettings={
@@ -1906,7 +1903,6 @@ export default class SceneEditor extends React.Component<Props, State> {
               )}
               {!!this.state.variablesEditedInstance &&
                 !!variablesEditedAssociatedObject && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <VariablesEditorDialog
                     project={project}
                     open
@@ -1915,18 +1911,15 @@ export default class SceneEditor extends React.Component<Props, State> {
                     onCancel={() => this.editInstanceVariables(null)}
                     onApply={() => this.editInstanceVariables(null)}
                     emptyPlaceholderTitle={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Trans>Add your first instance variable</Trans>
                     }
                     emptyPlaceholderDescription={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Trans>
                         Instance variables overwrite the default values of the
                         variables of the object.
                       </Trans>
                     }
                     helpPagePath={'/all-features/variables/instance-variables'}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     title={<Trans>Instance Variables</Trans>}
                     onEditObjectVariables={
                       variablesEditedAssociatedObject
@@ -1965,7 +1958,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 )}
               {!!this.state.layerRemoved &&
                 this.state.onCloseLayerRemoveDialog && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <LayerRemoveDialog
                     open
                     project={project}
@@ -1975,7 +1967,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                   />
                 )}
               {!!this.state.editedLayer && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <LayerEditorDialog
                   project={project}
                   resourceManagementProps={this.props.resourceManagementProps}
@@ -1994,7 +1985,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 />
               )}
               {this.state.scenePropertiesDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ScenePropertiesDialog
                   open
                   project={project}
@@ -2007,7 +1997,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                 />
               )}
               {!!this.state.layoutVariablesDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <SceneVariablesDialog
                   open
                   project={project}
@@ -2019,13 +2008,9 @@ export default class SceneEditor extends React.Component<Props, State> {
                   }
                 />
               )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
                 {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <DismissableInfoBar
                       show={this.state.showAdditionalWorkInfoBar}
                       identifier={this.state.additionalWorkInfoBar.identifier}
@@ -2034,11 +2019,8 @@ export default class SceneEditor extends React.Component<Props, State> {
                         this.state.additionalWorkInfoBar.touchScreenMessage
                       )}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <ContextMenu
-// @ts-expect-error - TS7006 - Parameter 'contextMenu' implicitly has an 'any' type.
-                      ref={contextMenu => (this.contextMenu = contextMenu)}
-// @ts-expect-error - TS7006 - Parameter 'i18n' implicitly has an 'any' type. | TS7006 - Parameter 'buildOptions' implicitly has an 'any' type.
+                      ref={(contextMenu) => (this.contextMenu = contextMenu)}
                       buildMenuTemplate={(i18n, buildOptions) =>
                         this.buildContextMenu(i18n, layout, buildOptions)
                       }
@@ -2046,7 +2028,6 @@ export default class SceneEditor extends React.Component<Props, State> {
                   </React.Fragment>
                 )}
               </I18n>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <InfoBar
                 message={infoBarMessage}
                 duration={7000}

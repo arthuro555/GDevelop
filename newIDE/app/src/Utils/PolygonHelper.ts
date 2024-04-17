@@ -1,6 +1,11 @@
 export type Polygon = Array<[number, number]>;
 
-export function rotatePolygon(vertices: Polygon, centerX: number, centerY: number, angle: number): void {
+export function rotatePolygon(
+  vertices: Polygon,
+  centerX: number,
+  centerY: number,
+  angle: number
+): void {
   //We want a clockwise rotation
   const cosa = Math.cos(-angle);
   const sina = Math.sin(-angle);

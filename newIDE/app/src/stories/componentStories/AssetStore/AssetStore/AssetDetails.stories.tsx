@@ -1,17 +1,16 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/AssetDetails' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetDetails.tsx', but '--jsx' is not set.
+
 import { AssetDetails } from '../../../../AssetStore/AssetDetails';
 import {
   fakeAssetShortHeader1,
   fakeAssetWithCustomObject,
 } from '../../../../fixtures/GDevelopServicesTestData';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/AssetStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreContext.tsx', but '--jsx' is not set.
+
 import { AssetStoreStateProvider } from '../../../../AssetStore/AssetStoreContext';
 import { GDevelopUserApi } from '../../../../Utils/GDevelopServices/ApiConfigs';
-// @ts-expect-error - TS6142 - Module '../../../../Profile/PublicProfileProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/PublicProfileProvider.tsx', but '--jsx' is not set.
+
 import PublicProfileProvider from '../../../../Profile/PublicProfileProvider';
 import { useShopNavigation } from '../../../../AssetStore/AssetStoreNavigator';
 
@@ -21,16 +20,10 @@ export default {
   decorators: [paperDecorator],
 };
 
-const Wrapper = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const navigationState = useShopNavigation();
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <PublicProfileProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AssetStoreStateProvider shopNavigationState={navigationState}>
         {children}
       </AssetStoreStateProvider>
@@ -40,14 +33,11 @@ const Wrapper = ({
 
 export const PublicAsset = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Wrapper>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AssetDetails
         onTagSelection={() => {}}
         assetShortHeader={fakeAssetShortHeader1}
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
-        onOpenDetails={assetShortHeader => {}}
+        onOpenDetails={(assetShortHeader) => {}}
         onPrivateAssetPackSelection={() => {}}
         onPrivateGameTemplateSelection={() => {}}
       />
@@ -57,9 +47,7 @@ export const PublicAsset = () => {
 PublicAsset.parameters = {
   mockData: [
     {
-      url: `https://resources.gdevelop-app.com/assets-database/assets/${
-        fakeAssetShortHeader1.id
-      }.json`,
+      url: `https://resources.gdevelop-app.com/assets-database/assets/${fakeAssetShortHeader1.id}.json`,
       method: 'GET',
       status: 200,
       response: fakeAssetWithCustomObject,
@@ -68,14 +56,11 @@ PublicAsset.parameters = {
 };
 
 export const PrivateAsset = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Wrapper>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <AssetDetails
       onTagSelection={() => {}}
       assetShortHeader={fakeAssetShortHeader1}
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
-      onOpenDetails={assetShortHeader => {}}
+      onOpenDetails={(assetShortHeader) => {}}
       onPrivateAssetPackSelection={() => {}}
       onPrivateGameTemplateSelection={() => {}}
     />
@@ -84,9 +69,7 @@ export const PrivateAsset = () => (
 PrivateAsset.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopUserApi.baseUrl
-      }/user-public-profile?id=ZJxWdIDmJzUA5iAWryEItxINA7n1`,
+      url: `${GDevelopUserApi.baseUrl}/user-public-profile?id=ZJxWdIDmJzUA5iAWryEItxINA7n1`,
       method: 'GET',
       status: 200,
       response: {
@@ -110,9 +93,7 @@ PrivateAsset.parameters = {
       },
     },
     {
-      url: `https://resources.gdevelop-app.com/assets-database/assets/${
-        fakeAssetShortHeader1.id
-      }.json`,
+      url: `https://resources.gdevelop-app.com/assets-database/assets/${fakeAssetShortHeader1.id}.json`,
       method: 'GET',
       status: 200,
       response: {
@@ -125,14 +106,11 @@ PrivateAsset.parameters = {
 };
 
 export const AssetWithMultipleAuthors = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Wrapper>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <AssetDetails
       onTagSelection={() => {}}
       assetShortHeader={fakeAssetShortHeader1}
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
-      onOpenDetails={assetShortHeader => {}}
+      onOpenDetails={(assetShortHeader) => {}}
       onPrivateAssetPackSelection={() => {}}
       onPrivateGameTemplateSelection={() => {}}
     />
@@ -141,9 +119,7 @@ export const AssetWithMultipleAuthors = () => (
 PrivateAsset.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopUserApi.baseUrl
-      }/user-public-profile?id=ZJxWdIDmJzUA5iAWryEItxINA7n1,ABCWdIDmJzUA5iAWryEItxINA7n1`,
+      url: `${GDevelopUserApi.baseUrl}/user-public-profile?id=ZJxWdIDmJzUA5iAWryEItxINA7n1,ABCWdIDmJzUA5iAWryEItxINA7n1`,
       method: 'GET',
       status: 200,
       response: {
@@ -184,9 +160,7 @@ PrivateAsset.parameters = {
       },
     },
     {
-      url: `https://resources.gdevelop-app.com/assets-database/assets/${
-        fakeAssetShortHeader1.id
-      }.json`,
+      url: `https://resources.gdevelop-app.com/assets-database/assets/${fakeAssetShortHeader1.id}.json`,
       method: 'GET',
       status: 200,
       response: {

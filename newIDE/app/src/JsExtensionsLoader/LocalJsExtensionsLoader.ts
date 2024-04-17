@@ -27,33 +27,33 @@ type MakeExtensionsLoaderArguments = {|
  */
 module.exports = function makeExtensionsLoader(
   {
-// @ts-expect-error - TS7031 - Binding element 'gd' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'gd' implicitly has an 'any' type.
     gd,
-// @ts-expect-error - TS7031 - Binding element 'objectsEditorService' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'objectsEditorService' implicitly has an 'any' type.
     objectsEditorService,
-// @ts-expect-error - TS7031 - Binding element 'objectsRenderingService' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'objectsRenderingService' implicitly has an 'any' type.
     objectsRenderingService,
-// @ts-expect-error - TS7031 - Binding element 'filterExamples' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'filterExamples' implicitly has an 'any' type.
     filterExamples,
-// @ts-expect-error - TS7031 - Binding element 'onFindGDJS' implicitly has an 'any' type.
+    // @ts-expect-error - TS7031 - Binding element 'onFindGDJS' implicitly has an 'any' type.
     onFindGDJS,
   } /*: MakeExtensionsLoaderArguments*/
 ) /*: JsExtensionsLoader*/ {
   return {
-// @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type.
+    // @ts-expect-error - TS7006 - Parameter '_' implicitly has an 'any' type.
     loadAllExtensions: (_ /*: TranslationFunction */) => {
       return findJsExtensionModules({ filterExamples, onFindGDJS }).then(
-// @ts-expect-error - TS7006 - Parameter 'extensionModulePaths' implicitly has an 'any' type.
-        extensionModulePaths => {
+        // @ts-expect-error - TS7006 - Parameter 'extensionModulePaths' implicitly has an 'any' type.
+        (extensionModulePaths) => {
           return Promise.all(
-// @ts-expect-error - TS7006 - Parameter 'extensionModulePath' implicitly has an 'any' type.
-            extensionModulePaths.map(extensionModulePath => {
+            // @ts-expect-error - TS7006 - Parameter 'extensionModulePath' implicitly has an 'any' type.
+            extensionModulePaths.map((extensionModulePath) => {
               let extensionModule = null;
               try {
                 extensionModule = optionalRequire(extensionModulePath, {
                   rethrowException: true,
                 });
-              } catch (ex: any) {
+              } catch (ex) {
                 return {
                   extensionModulePath,
                   result: {
@@ -108,8 +108,8 @@ module.exports = function makeExtensionsLoader(
             })
           );
         },
-// @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
-        err => {
+        // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+        (err) => {
           console.error(`Unable to find JS extensions modules`);
           throw err;
         }

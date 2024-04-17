@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
@@ -10,7 +9,7 @@ import {
   serializeToJSObject,
   unserializeFromJSObject,
 } from '../Utils/Serializer';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/index.tsx', but '--jsx' is not set.
+
 import { TreeViewItemContent, TreeItemProps, scenesRootFolderId } from '.';
 import Tooltip from '@material-ui/core/Tooltip';
 import Flag from '@material-ui/icons/Flag';
@@ -22,30 +21,31 @@ const styles = {
 } as const;
 
 export type SceneTreeViewItemCallbacks = {
-  onDeleteLayout: (arg1: gdLayout) => void,
-  onRenameLayout: (arg1: string, arg2: string) => void,
-  onOpenLayout: (arg1: string) => void
+  onDeleteLayout: (arg1: gd.Layout) => void;
+  onRenameLayout: (arg1: string, arg2: string) => void;
+  onOpenLayout: (arg1: string) => void;
 };
 
-export type SceneTreeViewItemCommonProps = (TreeItemProps) & (SceneTreeViewItemCallbacks);
+export type SceneTreeViewItemCommonProps = TreeItemProps &
+  SceneTreeViewItemCallbacks;
 
-export type SceneTreeViewItemProps = (SceneTreeViewItemCommonProps) & {
-  project: gdProject,
-  onOpenLayoutProperties: (layout?: gdLayout | null | undefined) => void,
-  onOpenLayoutVariables: (layout?: gdLayout | null | undefined) => void
+export type SceneTreeViewItemProps = SceneTreeViewItemCommonProps & {
+  project: gd.Project;
+  onOpenLayoutProperties: (layout?: gd.Layout | null | undefined) => void;
+  onOpenLayoutVariables: (layout?: gd.Layout | null | undefined) => void;
 };
 
-export const getSceneTreeViewItemId = (scene: gdLayout): string => {
+export const getSceneTreeViewItemId = (scene: gd.Layout): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return `scene-${scene.ptr}`;
 };
 
 export class SceneTreeViewItemContent implements TreeViewItemContent {
-  scene: gdLayout;
+  scene: gd.Layout;
   props: SceneTreeViewItemProps;
 
-  constructor(scene: gdLayout, props: SceneTreeViewItemProps) {
+  constructor(scene: gd.Layout, props: SceneTreeViewItemProps) {
     this.scene = scene;
     this.props = props;
   }
@@ -71,7 +71,7 @@ export class SceneTreeViewItemContent implements TreeViewItemContent {
   }
 
   getDataSet(): {
-    [key: string]: string
+    [key: string]: string;
   } {
     return {
       scene: this.scene.getName(),
@@ -163,12 +163,10 @@ export class SceneTreeViewItemContent implements TreeViewItemContent {
 
     if (this._isFirstScene()) {
       icons.push(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           key="first-scene"
           title={i18n._(t`This scene will be used as the start scene.`)}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Flag
             fontSize="small"
             style={{
@@ -226,7 +224,7 @@ export class SceneTreeViewItemContent implements TreeViewItemContent {
     if (!name || !copiedScene) return;
 
     const project = this.props.project;
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       project.hasLayoutNamed(name)
     );
 
@@ -243,7 +241,7 @@ export class SceneTreeViewItemContent implements TreeViewItemContent {
 
   _duplicate(): void {
     const { project } = this.props;
-    const newName = newNameGenerator(this.scene.getName(), name =>
+    const newName = newNameGenerator(this.scene.getName(), (name) =>
       project.hasLayoutNamed(name)
     );
 

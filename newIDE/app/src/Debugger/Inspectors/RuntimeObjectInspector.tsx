@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
 import ReactJsonView from 'react-json-view';
@@ -7,35 +6,34 @@ import {
   GameData,
   EditFunction,
   CallFunction,
-// @ts-expect-error - TS6142 - Module '../GDJSInspectorDescriptions' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Debugger/GDJSInspectorDescriptions.tsx', but '--jsx' is not set.
 } from '../GDJSInspectorDescriptions';
-// @ts-expect-error - TS6142 - Module './VariablesContainerInspector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Debugger/Inspectors/VariablesContainerInspector.tsx', but '--jsx' is not set.
+
 import VariablesContainerInspector from './VariablesContainerInspector';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module './TimersInspector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Debugger/Inspectors/TimersInspector.tsx', but '--jsx' is not set.
+
 import TimersInspector from './TimersInspector';
 
 type Props = {
-  runtimeObject: GameData,
-  onCall: CallFunction,
-  onEdit: EditFunction
+  runtimeObject: GameData;
+  onCall: CallFunction;
+  onEdit: EditFunction;
 };
 
 type RuntimeObjectData = {
-  ['X position']: number,
-  ['Y position']: number,
-  ['Z position']?: number,
-  Angle?: number,
-  ['Rotation around X axis']?: number,
-  ['Rotation around Y axis']?: number,
-  ['Rotation around Z axis (Angle)']?: number,
-  Layer: string,
-  ['Z order']: number,
-  ['Is hidden?']: boolean
+  ['X position']: number;
+  ['Y position']: number;
+  ['Z position']?: number;
+  Angle?: number;
+  ['Rotation around X axis']?: number;
+  ['Rotation around Y axis']?: number;
+  ['Rotation around Z axis (Angle)']?: number;
+  Layer: string;
+  ['Z order']: number;
+  ['Is hidden?']: boolean;
 };
 
-const transform = runtimeObject: GameData => {
+const transform = (runtimeObject: GameData) => {
   if (!runtimeObject) return null;
   const runtimeObjectData: RuntimeObjectData = {
     'X position': runtimeObject.x,
@@ -58,10 +56,7 @@ const transform = runtimeObject: GameData => {
   return runtimeObjectData;
 };
 
-const handleEdit = (edit: any, {
-  onCall,
-  onEdit,
-}: Props) => {
+const handleEdit = (edit: any, { onCall, onEdit }: Props) => {
   if (edit.name === 'X position') {
     onCall(['setX'], [parseFloat(edit.new_value)]);
   } else if (edit.name === 'Y position') {
@@ -89,50 +84,42 @@ const handleEdit = (edit: any, {
 };
 
 const RuntimeObjectInspector = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Trans>General:</Trans>
     </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <ReactJsonView
       collapsed={false}
       name={false}
-      src={transform(props.runtimeObject)}
+      // Cast necessary because of bad type definitions on the package's side not allowing valid "null" values
+      // an any cast is used instead of a non null assertion, since the correct type here ought to be any JS value,
+      // so the any type is most appropriate.
+      src={transform(props.runtimeObject) as any}
       enableClipboard={false}
       displayDataTypes={false}
       displayObjectSize={false}
-      onEdit={edit => handleEdit(edit, props)}
+      onEdit={(edit) => handleEdit(edit, props)}
       groupArraysAfterLength={50}
       theme="monokai"
     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Trans>Instance variables:</Trans>
     </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <VariablesContainerInspector
       variablesContainer={
         props.runtimeObject ? props.runtimeObject._variables : null
       }
       // TODO: onEdit and onCall could benefit from a "forward" utility function
       // (can also be applied in DebuggerContent.js)
-// @ts-expect-error - TS7006 - Parameter 'path' implicitly has an 'any' type. | TS7006 - Parameter 'newValue' implicitly has an 'any' type.
+
       onEdit={(path, newValue) =>
         props.onEdit(['_variables'].concat(path), newValue)
       }
-// @ts-expect-error - TS7006 - Parameter 'path' implicitly has an 'any' type. | TS7006 - Parameter 'args' implicitly has an 'any' type.
       onCall={(path, args) => props.onCall(['_variables'].concat(path), args)}
     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Trans>Timers:</Trans>
     </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <TimersInspector
       timers={props.runtimeObject ? props.runtimeObject._timers : null}
     />

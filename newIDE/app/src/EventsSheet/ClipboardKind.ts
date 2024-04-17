@@ -1,4 +1,4 @@
-import Clipboard, {SafeExtractor} from '../Utils/Clipboard';
+import Clipboard, { SafeExtractor } from '../Utils/Clipboard';
 import {
   SelectionState,
   getSelectedEvents,
@@ -14,7 +14,6 @@ import {
   serializeToJSObject,
   unserializeFromJSObject,
 } from '../Utils/Serializer';
-const gd: libGDevelop = global.gd;
 
 export const CLIPBOARD_KIND = 'EventsAndInstructions';
 
@@ -59,10 +58,10 @@ export const copySelectionToClipboard = (selection: SelectionState) => {
   const actionsList = new gd.InstructionsList();
   const conditionsList = new gd.InstructionsList();
 
-  getSelectedEvents(selection).forEach(event =>
+  getSelectedEvents(selection).forEach((event) =>
     eventsList.insertEvent(event, eventsList.getEventsCount())
   );
-  getSelectedInstructionsContexts(selection).forEach(instructionContext => {
+  getSelectedInstructionsContexts(selection).forEach((instructionContext) => {
     if (instructionContext.isCondition) {
       conditionsList.insert(
         instructionContext.instruction,
@@ -87,7 +86,10 @@ export const copySelectionToClipboard = (selection: SelectionState) => {
   conditionsList.delete();
 };
 
-export const pasteEventsFromClipboardInSelection = (project: gdProject, selection: SelectionState): boolean => {
+export const pasteEventsFromClipboardInSelection = (
+  project: gd.Project,
+  selection: SelectionState
+): boolean => {
   const lastSelectEventContext = getLastSelectedEventContext(selection);
   if (!lastSelectEventContext || !hasClipboardEvents()) return false;
 
@@ -117,7 +119,10 @@ export const pasteEventsFromClipboardInSelection = (project: gdProject, selectio
   return true;
 };
 
-export const pasteInstructionsFromClipboardInSelection = (project: gdProject, selection: SelectionState): boolean => {
+export const pasteInstructionsFromClipboardInSelection = (
+  project: gd.Project,
+  selection: SelectionState
+): boolean => {
   if (
     (!hasInstructionSelected(selection) &&
       !hasInstructionsListSelected(selection)) ||
@@ -151,9 +156,8 @@ export const pasteInstructionsFromClipboardInSelection = (project: gdProject, se
     project
   );
 
-  const lastSelectedInstructionContext = getLastSelectedInstructionContext(
-    selection
-  );
+  const lastSelectedInstructionContext =
+    getLastSelectedInstructionContext(selection);
   if (lastSelectedInstructionContext) {
     if (lastSelectedInstructionContext.isCondition) {
       lastSelectedInstructionContext.instrsList.insertInstructions(
@@ -171,9 +175,8 @@ export const pasteInstructionsFromClipboardInSelection = (project: gdProject, se
       );
     }
   }
-  const lastSelectedInstructionsListsContext = getLastSelectedInstructionsListsContext(
-    selection
-  );
+  const lastSelectedInstructionsListsContext =
+    getLastSelectedInstructionsListsContext(selection);
   if (lastSelectedInstructionsListsContext) {
     if (lastSelectedInstructionsListsContext.isCondition) {
       lastSelectedInstructionsListsContext.instrsList.insertInstructions(
@@ -198,7 +201,7 @@ export const pasteInstructionsFromClipboardInSelection = (project: gdProject, se
 };
 
 export const pasteInstructionsFromClipboardInInstructionsList = (
-  project: gdProject,
+  project: gd.Project,
   instructionsListContext: InstructionsListContext
 ) => {
   if (!hasClipboardConditions() && !hasClipboardActions()) return false;

@@ -1,5 +1,4 @@
-import {getObjectParameterIndex} from './EnumerateInstructions';
-const gd: libGDevelop = global.gd;
+import { getObjectParameterIndex } from './EnumerateInstructions';
 
 /**
  * After selecting an instruction, this function allows to set up the proper
@@ -7,10 +6,10 @@ const gd: libGDevelop = global.gd;
  * and set up the behavior name (if a behavior instruction was chosen).
  */
 export const setupInstructionParameters = (
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  instruction: gdInstruction,
-  instructionMetadata: gdInstructionMetadata,
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer,
+  instruction: gd.Instruction,
+  instructionMetadata: gd.InstructionMetadata,
   objectName?: string | null
 ) => {
   instruction.setParametersCount(instructionMetadata.getParametersCount());
@@ -53,8 +52,8 @@ export const setupInstructionParameters = (
         true
       )
       .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
-      .filter(behaviorName => {
+      // @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
+      .filter((behaviorName) => {
         return (
           (!allowedBehaviorType ||
             gd.getTypeOfBehavior(
@@ -92,8 +91,8 @@ export const setupInstructionParameters = (
       // is not already set.
       if (
         !behaviorNames.some(
-// @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
-          behaviorName => currentParameterValue === behaviorName
+          // @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
+          (behaviorName) => currentParameterValue === behaviorName
         )
       ) {
         instruction.setParameter(maybeBehaviorParameterIndex, behaviorNames[0]);

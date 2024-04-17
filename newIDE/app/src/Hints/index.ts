@@ -1,19 +1,18 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import { AlertMessageIdentifier } from '../MainFrame/Preferences/PreferencesContext';
 
 export type Hint = {
-  kind: 'warning' | 'info',
-  message: MessageDescriptor,
-  identifier?: AlertMessageIdentifier
+  kind: 'warning' | 'info';
+  message: MessageDescriptor;
+  identifier?: AlertMessageIdentifier;
 };
 
 export const getDeprecatedBehaviorsInformation = (): {
   [key: string]: {
-    warning: MessageDescriptor
-  }
+    warning: MessageDescriptor;
+  };
 } => ({
   'PhysicsBehavior::PhysicsBehavior': {
     warning: t`A new physics engine (Physics Engine 2.0) is now available. You should prefer using it for new game. For existing games, note that the two behaviors are not compatible, so you should only use one of them with your objects.`,
@@ -21,7 +20,7 @@ export const getDeprecatedBehaviorsInformation = (): {
 });
 
 export const getExtraObjectsInformation = (): {
-  [key: string]: Array<Hint>
+  [key: string]: Array<Hint>;
 } => ({
   'Video::VideoObject': [
     {
@@ -61,7 +60,9 @@ export const getExtraObjectsInformation = (): {
   ],
 });
 
-export const getExtraInstructionInformation = (type: string): Hint | null | undefined => {
+export const getExtraInstructionInformation = (
+  type: string
+): Hint | null | undefined => {
   if (type.indexOf('PhysicsBehavior::') === 0) {
     return {
       kind: 'warning',

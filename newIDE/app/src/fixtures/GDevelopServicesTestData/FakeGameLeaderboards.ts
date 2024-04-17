@@ -1,4 +1,4 @@
-import {GameLeaderboard} from '../../Utils/GDevelopServices/Game';
+import { GameLeaderboard } from '../../Utils/GDevelopServices/Game';
 
 export const fakeGameLeaderboards: GameLeaderboard[] = [
   {
@@ -24,7 +24,7 @@ export const fakeGameLeaderboards: GameLeaderboard[] = [
           thumbnailUrl:
             'https://games.gdevelop-app.com/game-7d7873d6-0274-4dd3-b734-a6c075d85bfe/thumbnail.png',
           publicWebBuildId: '7d7873d6-0274-4dd3-b734-a6c075d85bfe',
-// @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
+          // @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
           internalWebSourceUrl:
             'https://games.gdevelop-app.com/game-7d7873d6-0274-4dd3-b734-a6c075d85bfe/index.html',
           owners: [
@@ -102,7 +102,7 @@ export const fakeGameLeaderboards: GameLeaderboard[] = [
           thumbnailUrl:
             'https://games.gdevelop-app.com/game-8d02f250-6ace-4b6b-9efa-8fa2621aa3cb/thumbnail.png',
           publicWebBuildId: '8d02f250-6ace-4b6b-9efa-8fa2621aa3cb',
-// @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
+          // @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
           internalWebSourceUrl:
             'https://games.gdevelop-app.com/game-8d02f250-6ace-4b6b-9efa-8fa2621aa3cb/index.html',
           owners: [
@@ -188,7 +188,7 @@ export const fakeGameLeaderboards: GameLeaderboard[] = [
           thumbnailUrl:
             'https://games.gdevelop-app.com/game-7d7873d6-0274-4dd3-b734-a6c075d85bfe/thumbnail.png',
           publicWebBuildId: '7d7873d6-0274-4dd3-b734-a6c075d85bfe',
-// @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
+          // @ts-expect-error - TS2322 - Type '{ id: string; gameName: string; authorName: string; description: string; playWithGamepad: false; playWithKeyboard: true; playWithMobile: true; orientation: string; categories: string[]; thumbnailUrl: string; ... 13 more ...; donateLink: null; }' is not assignable to type 'PublicGame'.
           internalWebSourceUrl:
             'https://games.gdevelop-app.com/game-7d7873d6-0274-4dd3-b734-a6c075d85bfe/index.html',
           owners: [

@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { t } from '@lingui/macro';
+
 import { I18n as I18nType } from '@lingui/core';
 import { StorageProvider, FileMetadata } from '../ProjectsStorage';
 import {
@@ -10,12 +9,11 @@ import {
 import { sendNewGameCreated } from '../Utils/Analytics/EventSender';
 import UrlStorageProvider from '../ProjectsStorage/UrlStorageProvider';
 import { showErrorBox } from '../UI/Messages/MessageBox';
-const gd: libGDevelop = global.gd;
 
 export type NewProjectSource = {
-  project: gdProject | null | undefined,
-  storageProvider: StorageProvider | null | undefined,
-  fileMetadata: FileMetadata | null | undefined
+  project: gd.Project | null | undefined;
+  storageProvider: StorageProvider | null | undefined;
+  fileMetadata: FileMetadata | null | undefined;
 };
 
 const getNewProjectSourceFromUrl = (projectUrl: string): NewProjectSource => {
@@ -28,7 +26,7 @@ const getNewProjectSourceFromUrl = (projectUrl: string): NewProjectSource => {
   };
 };
 
-export const addDefaultLightToLayer = (layer: gdLayer): void => {
+export const addDefaultLightToLayer = (layer: gd.Layer): void => {
   const light = layer.getEffects().insertNewEffect('3D Light', 0);
   light.setEffectType('Scene3D::HemisphereLight');
   light.setStringParameter('skyColor', '255;255;255');
@@ -39,14 +37,14 @@ export const addDefaultLightToLayer = (layer: gdLayer): void => {
   light.setDoubleParameter('rotation', 0);
 };
 
-export const addDefaultLightToAllLayers = (layout: gdLayout): void => {
+export const addDefaultLightToAllLayers = (layout: gd.Layout): void => {
   for (let layerIndex = 0; layerIndex < layout.getLayersCount(); layerIndex++) {
     const layer = layout.getLayerAt(layerIndex);
     addDefaultLightToLayer(layer);
   }
 };
 
-const addDefaultLightToProject = (project: gdProject): void => {
+const addDefaultLightToProject = (project: gd.Project): void => {
   for (
     let layoutIndex = 0;
     layoutIndex < project.getLayoutsCount();
@@ -58,7 +56,7 @@ const addDefaultLightToProject = (project: gdProject): void => {
 };
 
 export const createNewEmptyProject = (): NewProjectSource => {
-  const project: gdProject = gd.ProjectHelper.createNewGDJSProject();
+  const project: gd.Project = gd.ProjectHelper.createNewGDJSProject();
 
   sendNewGameCreated({ exampleUrl: '', exampleSlug: '' });
   return {
@@ -82,7 +80,9 @@ export const createNewProjectWithDefaultLogin = (): NewProjectSource => {
   return newProjectSource;
 };
 
-export const createNewProjectFromAIGeneratedProject = (generatedProjectUrl: string): NewProjectSource => {
+export const createNewProjectFromAIGeneratedProject = (
+  generatedProjectUrl: string
+): NewProjectSource => {
   sendNewGameCreated({
     exampleUrl: generatedProjectUrl,
     exampleSlug: 'generated-project',
@@ -90,7 +90,10 @@ export const createNewProjectFromAIGeneratedProject = (generatedProjectUrl: stri
   return getNewProjectSourceFromUrl(generatedProjectUrl);
 };
 
-export const createNewProjectFromTutorialTemplate = (tutorialTemplateUrl: string, tutorialId: string): NewProjectSource => {
+export const createNewProjectFromTutorialTemplate = (
+  tutorialTemplateUrl: string,
+  tutorialId: string
+): NewProjectSource => {
   sendNewGameCreated({
     exampleUrl: tutorialTemplateUrl,
     exampleSlug: tutorialId,
@@ -98,7 +101,10 @@ export const createNewProjectFromTutorialTemplate = (tutorialTemplateUrl: string
   return getNewProjectSourceFromUrl(tutorialTemplateUrl);
 };
 
-export const createNewProjectFromPrivateGameTemplate = (privateGameTemplateUrl: string, privateGameTemplateTag: string): NewProjectSource => {
+export const createNewProjectFromPrivateGameTemplate = (
+  privateGameTemplateUrl: string,
+  privateGameTemplateTag: string
+): NewProjectSource => {
   sendNewGameCreated({
     exampleUrl: privateGameTemplateUrl,
     exampleSlug: privateGameTemplateTag,
@@ -106,15 +112,13 @@ export const createNewProjectFromPrivateGameTemplate = (privateGameTemplateUrl: 
   return getNewProjectSourceFromUrl(privateGameTemplateUrl);
 };
 
-export const createNewProjectFromExampleShortHeader = async (
-  {
-    i18n,
-    exampleShortHeader,
-  }: {
-    i18n: I18nType,
-    exampleShortHeader: ExampleShortHeader
-  },
-): Promise<NewProjectSource | null | undefined> => {
+export const createNewProjectFromExampleShortHeader = async ({
+  i18n,
+  exampleShortHeader,
+}: {
+  i18n: I18nType;
+  exampleShortHeader: ExampleShortHeader;
+}): Promise<NewProjectSource | null | undefined> => {
   try {
     const example = await getExample(exampleShortHeader);
 
@@ -123,7 +127,7 @@ export const createNewProjectFromExampleShortHeader = async (
       exampleSlug: exampleShortHeader.slug,
     });
     return getNewProjectSourceFromUrl(example.projectFileUrl);
-  } catch (error: any) {
+  } catch (error) {
     showErrorBox({
       message:
         i18n._(t`Unable to fetch the example.`) +

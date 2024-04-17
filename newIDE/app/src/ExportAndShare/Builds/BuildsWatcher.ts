@@ -1,4 +1,4 @@
-import {Build, getBuild} from '../../Utils/GDevelopServices/Build';
+import { Build, getBuild } from '../../Utils/GDevelopServices/Build';
 import { delay } from '../../Utils/Delay';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
 
@@ -8,10 +8,10 @@ const maxTimeBeforeIgnoring = 30 * 60 * 1000; // 30 mins in milliseconds
 
 export default class BuildsWatcher {
   runningWatchers: {
-    [key: string]: boolean
+    [key: string]: boolean;
   } = {};
   nextWatcherId = 0;
-// @ts-expect-error - TS2564 - Property 'onBuildUpdated' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property 'onBuildUpdated' has no initializer and is not definitely assigned in the constructor.
   onBuildUpdated: (build: Build) => void | null | undefined;
   authenticatedUser: AuthenticatedUser | null | undefined;
 
@@ -20,15 +20,15 @@ export default class BuildsWatcher {
     builds,
     onBuildUpdated,
   }: {
-    authenticatedUser: AuthenticatedUser,
-    builds: Array<Build>,
-    onBuildUpdated: (build: Build) => void
+    authenticatedUser: AuthenticatedUser;
+    builds: Array<Build>;
+    onBuildUpdated: (build: Build) => void;
   }) {
     this.stop();
     this.authenticatedUser = authenticatedUser;
     this.onBuildUpdated = onBuildUpdated;
 
-    builds.forEach(build => {
+    builds.forEach((build) => {
       if (build.status === 'pending') {
         if (
           (!build.createdAt ||
@@ -75,7 +75,7 @@ export default class BuildsWatcher {
           buildId
         );
         if (this.onBuildUpdated) this.onBuildUpdated(build);
-      } catch (e: any) {
+      } catch (e) {
         console.warn('Error while watching build progress:', e);
       }
 

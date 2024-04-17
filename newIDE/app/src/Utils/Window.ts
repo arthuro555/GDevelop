@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from './OptionalRequire';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'url-search-params'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/url-search-params/build/url-search-params.node.js' implicitly has an 'any' type.
 import URLSearchParams from 'url-search-params';
@@ -13,7 +13,7 @@ const dialog = remote ? remote.dialog : null;
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 export type AppArguments = {
-  [key: string]: any
+  [key: string]: any;
 };
 type YesNoCancelDialogChoice = 'yes' | 'no' | 'cancel';
 
@@ -35,37 +35,34 @@ let currentTitleBarColor: string | null | undefined = null;
 export const useWindowControlsOverlayWatcher = ({
   onChanged,
 }: {
-  onChanged: () => void
+  onChanged: () => void;
 }) => {
-// @ts-expect-error - TS2339 - Property 'windowControlsOverlay' does not exist on type 'Navigator'.
+  // @ts-expect-error - TS2339 - Property 'windowControlsOverlay' does not exist on type 'Navigator'.
   const { windowControlsOverlay } = navigator;
 
-  React.useEffect(
-    () => {
-// @ts-expect-error - TS7034 - Variable 'listenerCallback' implicitly has type 'any' in some locations where its type cannot be determined.
-      let listenerCallback = null;
-      if (windowControlsOverlay) {
-        listenerCallback = debounce(() => {
-          onChanged();
-        }, 50);
-        windowControlsOverlay.addEventListener(
+  React.useEffect(() => {
+    // @ts-expect-error - TS7034 - Variable 'listenerCallback' implicitly has type 'any' in some locations where its type cannot be determined.
+    let listenerCallback = null;
+    if (windowControlsOverlay) {
+      listenerCallback = debounce(() => {
+        onChanged();
+      }, 50);
+      windowControlsOverlay.addEventListener(
+        'geometrychange',
+        listenerCallback
+      );
+    }
+    return () => {
+      // @ts-expect-error - TS7005 - Variable 'listenerCallback' implicitly has an 'any' type.
+      if (listenerCallback) {
+        windowControlsOverlay.removeEventListener(
           'geometrychange',
+          // @ts-expect-error - TS7005 - Variable 'listenerCallback' implicitly has an 'any' type.
           listenerCallback
         );
       }
-      return () => {
-// @ts-expect-error - TS7005 - Variable 'listenerCallback' implicitly has an 'any' type.
-        if (listenerCallback) {
-          windowControlsOverlay.removeEventListener(
-            'geometrychange',
-// @ts-expect-error - TS7005 - Variable 'listenerCallback' implicitly has an 'any' type.
-            listenerCallback
-          );
-        }
-      };
-    },
-    [onChanged, windowControlsOverlay]
-  );
+    };
+  }, [onChanged, windowControlsOverlay]);
 };
 
 /**
@@ -77,7 +74,7 @@ export default class Window {
       try {
         const browserWindow = remote.getCurrentWindow();
         browserWindow.setTitle(title);
-      } catch (err: any) {
+      } catch (err) {
         // This rarely, but sometimes happen that setTitle throw.
         // Catch the error in the hope that things will continue to work.
         console.error(
@@ -135,7 +132,7 @@ export default class Window {
         width: Math.round(width / scaleFactor),
         height: Math.round(height / scaleFactor),
       });
-    } catch (err: any) {
+    } catch (err) {
       console.warn('Unable to change window bounds', err);
     }
     this.show();
@@ -198,7 +195,7 @@ export default class Window {
 
     const argumentsObject: Record<string, any> = {};
     const params = new URLSearchParams(window.location.search);
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type. | TS7006 - Parameter 'name' implicitly has an 'any' type.
+    // @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type. | TS7006 - Parameter 'name' implicitly has an 'any' type.
     params.forEach((value, name) => (argumentsObject[name] = value));
 
     // Emulate the minimist behavior of putting the positional arguments
@@ -224,9 +221,7 @@ export default class Window {
     window.history.replaceState({}, document.title, url.toString());
   }
 
-  static addArguments(argumentNamesAndValues: {
-    [key: string]: string
-  }) {
+  static addArguments(argumentNamesAndValues: { [key: string]: string }) {
     // On Electron, we don't have a way to modify global args.
     if (remote) return;
 
@@ -254,7 +249,10 @@ export default class Window {
     });
   }
 
-  static showYesNoCancelDialog(message: string, type?: 'none' | 'info' | 'error' | 'question' | 'warning'): YesNoCancelDialogChoice {
+  static showYesNoCancelDialog(
+    message: string,
+    type?: 'none' | 'info' | 'error' | 'question' | 'warning'
+  ): YesNoCancelDialogChoice {
     if (!dialog || !electron) {
       // TODO: Find a way to display an alert with 3 buttons (not possible with the 3 native js method confirm, alert and prompt)
       // eslint-disable-next-line
@@ -311,9 +309,9 @@ export default class Window {
         'electron-editor-context-menu'
       );
 
-      window.addEventListener('contextmenu', function(e) {
+      window.addEventListener('contextmenu', function (e) {
         // Only show the context menu in text editors.
-// @ts-expect-error - TS2531 - Object is possibly 'null'. | TS2339 - Property 'closest' does not exist on type 'EventTarget'.
+        // @ts-expect-error - TS2531 - Object is possibly 'null'. | TS2339 - Property 'closest' does not exist on type 'EventTarget'.
         if (!e.target.closest(textEditorSelectors)) return;
 
         var menu = buildEditorContextMenu();
@@ -321,12 +319,12 @@ export default class Window {
         // The 'contextmenu' event is emitted after 'selectionchange' has fired but possibly before the
         // visible selection has changed. Try to wait to show the menu until after that, otherwise the
         // visible selection will update after the menu dismisses and look weird.
-        setTimeout(function() {
+        setTimeout(function () {
           menu.popup({ window: remote.getCurrentWindow() });
         }, 30);
       });
     } else if (document) {
-      document.addEventListener('contextmenu', function(e: any) {
+      document.addEventListener('contextmenu', function (e: any) {
         // Only show the context menu in text editors.
         if (!e.target.closest(textEditorSelectors)) {
           e.preventDefault();
@@ -351,9 +349,9 @@ export default class Window {
 
   static getOrientation(): 'portrait' | 'landscape' {
     try {
-// @ts-expect-error - TS2322 - Type 'string' is not assignable to type '"landscape" | "portrait"'.
+      // @ts-expect-error - TS2322 - Type 'string' is not assignable to type '"landscape" | "portrait"'.
       return window.screen.orientation.type.split('-')[0];
-    } catch (error: any) {
+    } catch (error) {
       console.warn('An error occurred when reading screen orientation', error);
       return 'landscape';
     }
@@ -370,7 +368,7 @@ export default class Window {
     try {
       const isDev = remote.require('electron-is').dev();
       return isDev;
-    } catch (err: any) {
+    } catch (err) {
       // This rarely, but sometimes happen that require throw ("missing remote object").
       // Catch the error in the hope that things will continue to work.
       console.error(

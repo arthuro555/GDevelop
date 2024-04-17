@@ -1,24 +1,22 @@
-const gd: libGDevelop = global.gd;
-
 // Instruction or expression can be private (see IsPrivate, SetPrivate).
 // Their visibility will change according to the scope (i.e: if we're
 // editing events in a behavior, private instructions of the behavior
 // will be visible).
 export type EventsScope = {
-  project: gdProject,
-  layout?: gdLayout | null | undefined,
-  externalEvents?: gdExternalEvents | null | undefined,
-  eventsFunctionsExtension?: gdEventsFunctionsExtension,
-  eventsBasedBehavior?: gdEventsBasedBehavior | null | undefined,
-  eventsBasedObject?: gdEventsBasedObject | null | undefined,
-  eventsFunction?: gdEventsFunction
+  project: gd.Project;
+  layout?: gd.Layout | null | undefined;
+  externalEvents?: gd.ExternalEvents | null | undefined;
+  eventsFunctionsExtension?: gd.EventsFunctionsExtension;
+  eventsBasedBehavior?: gd.EventsBasedBehavior | null | undefined;
+  eventsBasedObject?: gd.EventsBasedObject | null | undefined;
+  eventsFunction?: gd.EventsFunction;
 };
 
 export const getProjectScopedContainersFromScope = (
   scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-): gdProjectScopedContainers => {
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer
+): gd.ProjectScopedContainers => {
   const {
     project,
     layout,
@@ -34,10 +32,11 @@ export const getProjectScopedContainersFromScope = (
     );
   }
 
-  const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersFor(
-    globalObjectsContainer,
-    objectsContainer
-  );
+  const projectScopedContainers =
+    gd.ProjectScopedContainers.makeNewProjectScopedContainersFor(
+      globalObjectsContainer,
+      objectsContainer
+    );
 
   if (eventsBasedBehavior) {
     projectScopedContainers.addPropertiesContainer(

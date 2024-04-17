@@ -1,42 +1,40 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { t } from '@lingui/macro';
+
 import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line, Column } from '../../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../../UI/Checkbox' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Checkbox.tsx', but '--jsx' is not set.
+
 import Checkbox from '../../../UI/Checkbox';
-// @ts-expect-error - TS6142 - Module '../../../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField from '../../../UI/SelectField';
-// @ts-expect-error - TS6142 - Module '../../../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../../../UI/SelectOption';
-// @ts-expect-error - TS6142 - Module '../../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../../UI/SemiControlledTextField';
 import ImagePreview, {
   isProjectImageResourceSmooth,
-// @ts-expect-error - TS6142 - Module '../../../ResourcesList/ResourcePreview/ImagePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourcePreview/ImagePreview.tsx', but '--jsx' is not set.
 } from '../../../ResourcesList/ResourcePreview/ImagePreview';
-// @ts-expect-error - TS6142 - Module '../../../ResourcesList/ResourceSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourceSelector.tsx', but '--jsx' is not set.
+
 import ResourceSelector from '../../../ResourcesList/ResourceSelector';
 import ResourcesLoader from '../../../ResourcesLoader';
-// @ts-expect-error - TS6142 - Module '../../../PropertiesEditor/PropertiesMapToSchema' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PropertiesEditor/PropertiesMapToSchema.tsx', but '--jsx' is not set.
+
 import { getMeasurementUnitShortLabel } from '../../../PropertiesEditor/PropertiesMapToSchema';
-// @ts-expect-error - TS6142 - Module '../../../PropertiesEditor/MeasurementUnitDocumentation' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PropertiesEditor/MeasurementUnitDocumentation.tsx', but '--jsx' is not set.
+
 import MeasurementUnitDocumentation from '../../../PropertiesEditor/MeasurementUnitDocumentation';
-// @ts-expect-error - TS6142 - Module './ShapePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/BehaviorsEditor/Editors/Physics2Editor/ShapePreview.tsx', but '--jsx' is not set.
+
 import ShapePreview from './ShapePreview';
-// @ts-expect-error - TS6142 - Module './PolygonEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/BehaviorsEditor/Editors/Physics2Editor/PolygonEditor.tsx', but '--jsx' is not set.
+
 import PolygonEditor from './PolygonEditor';
 import { BehaviorEditorProps } from '../BehaviorEditorProps.flow';
-// @ts-expect-error - TS6142 - Module '../../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../../UI/DismissableAlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DismissableAlertMessage.tsx', but '--jsx' is not set.
+
 import DismissableAlertMessage from '../../../UI/DismissableAlertMessage';
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ResponsiveLineStackLayout } from '../../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../../../UI/EmptyMessage';
 import useForceUpdate from '../../../Utils/UseForceUpdate';
 import Button from '@material-ui/core/Button';
@@ -47,17 +45,16 @@ import Tooltip from '@material-ui/core/Tooltip';
 type Props = BehaviorEditorProps;
 
 const NumericProperty = (props: {
-  id?: string,
-  properties: gdMapStringPropertyDescriptor,
-  propertyName: string,
-  step: number,
-  onUpdate: (newValue: string) => void
+  id?: string;
+  properties: gd.MapStringPropertyDescriptor;
+  propertyName: string;
+  step: number;
+  onUpdate: (newValue: string) => void;
 }) => {
   const { properties, propertyName, step, onUpdate, id } = props;
   const property = properties.get(propertyName);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <SemiControlledTextField
       id={id}
       fullWidth
@@ -67,22 +64,17 @@ const NumericProperty = (props: {
       step={step}
       onChange={onUpdate}
       type="number"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       endAdornment={<UnitAdornment property={property} />}
     />
   );
 };
 
-const UnitAdornment = (props: {
-  property: gdPropertyDescriptor
-}) => {
+const UnitAdornment = (props: { property: gd.PropertyDescriptor }) => {
   const { property } = props;
   const measurementUnit = property.getMeasurementUnit();
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Tooltip
       title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <MeasurementUnitDocumentation
           label={measurementUnit.getLabel()}
           description={measurementUnit.getDescription()}
@@ -90,7 +82,6 @@ const UnitAdornment = (props: {
         />
       }
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InputAdornment position="end">
         {getMeasurementUnitShortLabel(measurementUnit)}
       </InputAdornment>
@@ -99,16 +90,13 @@ const UnitAdornment = (props: {
 };
 
 const BitGroupEditor = (props: {
-  bits: Array<boolean>,
-  onChange: (index: number, value: boolean) => void
+  bits: Array<boolean>;
+  onChange: (index: number, value: boolean) => void;
 }) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={{ overflowX: 'auto', flex: 1 }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ButtonGroup disableElevation fullWidth>
         {props.bits.map((bit, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Button
             key={index}
             variant={bit ? 'contained' : 'outlined'}
@@ -140,7 +128,6 @@ const Physics2Editor = (props: Props) => {
   const forceUpdate = useForceUpdate();
 
   const updateBehaviorProperty = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'property' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
     (property, value) => {
       behavior.updateProperty(property, value);
       forceUpdate();
@@ -156,36 +143,31 @@ const Physics2Editor = (props: Props) => {
   const masksValues = parseInt(properties.get('masks').getValue(), 10);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column
       expand
       // Avoid overflow on small screens
       noOverflowParent
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SelectField
           id="physics2-parameter-body-type"
           key={'bodyType'}
           fullWidth
           floatingLabelText={properties.get('bodyType').getLabel()}
           value={properties.get('bodyType').getValue()}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
           onChange={(e, i, newValue: string) =>
             updateBehaviorProperty('bodyType', newValue)
           }
         >
           {[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <SelectOption
               key={'dynamic'}
               value={'Dynamic'}
               label={t`Dynamic`}
             />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <SelectOption key={'static'} value={'Static'} label={t`Static`} />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <SelectOption
               key={'kinematic'}
               value={'Kinematic'}
@@ -194,44 +176,40 @@ const Physics2Editor = (props: Props) => {
           ]}
         </SelectField>
       </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('bullet').getLabel()}
           checked={properties.get('bullet').getValue() === 'true'}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
+          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('bullet', checked ? '1' : '0')
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('fixedRotation').getLabel()}
           checked={properties.get('fixedRotation').getValue() === 'true'}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
+          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('fixedRotation', checked ? '1' : '0')
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Checkbox
           label={properties.get('canSleep').getLabel()}
           checked={properties.get('canSleep').getValue() === 'true'}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
+          // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
           onCheck={(e, checked) =>
             updateBehaviorProperty('canSleep', checked ? '1' : '0')
           }
         />
       </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <DismissableAlertMessage
           identifier="physics2-shape-collisions"
           kind="info"
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             The shape used in the Physics behavior is independent from the
             collision mask of the object. Be sure to use the "Collision"
@@ -241,33 +219,24 @@ const Physics2Editor = (props: Props) => {
           </Trans>
         </DismissableAlertMessage>
       </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SelectField
           id="physics2-parameter-shape"
           fullWidth
           floatingLabelText={properties.get('shape').getLabel()}
           value={properties.get('shape').getValue()}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
           onChange={(e, i, newValue: string) =>
             updateBehaviorProperty('shape', newValue)
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption key={'box'} value={'Box'} label={t`Box`} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption key={'circle'} value={'Circle'} label={t`Circle`} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption key={'edge'} value={'Edge'} label={t`Edge`} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption key={'polygon'} value={'Polygon'} label={t`Polygon`} />
         </SelectField>
       </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ResponsiveLineStackLayout>
         {shape !== 'Polygon' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SemiControlledTextField
             fullWidth
             value={properties.get('shapeDimensionA').getValue()}
@@ -276,65 +245,57 @@ const Physics2Editor = (props: Props) => {
               shape === 'Circle'
                 ? 'Radius'
                 : shape === 'Edge'
-                ? 'Length'
-                : 'Width'
+                  ? 'Length'
+                  : 'Width'
             }
             min={0}
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
-            onChange={newValue =>
+            onChange={(newValue) =>
               updateBehaviorProperty('shapeDimensionA', newValue)
             }
             type="number"
             endAdornment={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <UnitAdornment property={properties.get('shapeDimensionA')} />
             }
           />
         )}
         {shape !== 'Polygon' && shape !== 'Circle' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SemiControlledTextField
             fullWidth
             value={properties.get('shapeDimensionB').getValue()}
             key={'shapeDimensionB'}
             floatingLabelText={shape === 'Edge' ? 'Angle' : 'Height'}
             min={shape === 'Edge' ? undefined : 0}
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
-            onChange={newValue =>
+            onChange={(newValue) =>
               updateBehaviorProperty('shapeDimensionB', newValue)
             }
             type="number"
             endAdornment={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <UnitAdornment property={properties.get('shapeDimensionB')} />
             }
           />
         )}
         {shape === 'Polygon' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SelectField
             fullWidth
             floatingLabelText={properties.get('polygonOrigin').getLabel()}
             value={properties.get('polygonOrigin').getValue()}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
             onChange={(e, i, newValue: string) =>
               updateBehaviorProperty('polygonOrigin', newValue)
             }
           >
             {[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <SelectOption
                 key={'center'}
                 value={'Center'}
                 label={t`Center`}
               />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <SelectOption
                 key={'origin'}
                 value={'Origin'}
                 label={t`Origin`}
               />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <SelectOption
                 key={'topLeft'}
                 value={'TopLeft'}
@@ -343,31 +304,26 @@ const Physics2Editor = (props: Props) => {
             ]}
           </SelectField>
         )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'shapeOffsetX'}
           step={1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty('shapeOffsetX', newValue)
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'shapeOffsetY'}
           step={1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty('shapeOffsetY', newValue)
           }
         />
       </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ResourceSelector
           floatingLabelText={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>
               A temporary image to help you visualize the shape/polygon
             </Trans>
@@ -378,8 +334,7 @@ const Physics2Editor = (props: Props) => {
           resourceKind={'image'}
           initialResourceName={''}
           fullWidth
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-          onChange={resourceName => {
+          onChange={(resourceName) => {
             setImage(resourceName);
             onBehaviorUpdated();
             forceUpdate();
@@ -387,11 +342,8 @@ const Physics2Editor = (props: Props) => {
         />
       </Line>
       {!image && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>
               To preview the shape that the Physics engine will use for this
               object, choose first a temporary image to use for the preview.
@@ -400,16 +352,13 @@ const Physics2Editor = (props: Props) => {
         </Line>
       )}
       {image && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <div
             style={{
               width:
                 '100%' /* This div prevents ImagePreview to overflow outside the parent */,
             }}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ImagePreview
               resourceName={image}
               imageResourceSource={resourcesLoader.getResourceFullUrl(
@@ -422,14 +371,12 @@ const Physics2Editor = (props: Props) => {
                 image
               )}
               fixedHeight={200}
-// @ts-expect-error - TS7006 - Parameter 'overlayProps' implicitly has an 'any' type.
-              renderOverlay={overlayProps => {
+              renderOverlay={(overlayProps) => {
                 // The result from `getProperties` is temporary, and because this renderOverlay
                 // function can be called outside of the render, we must get the properties again.
                 const properties = behavior.getProperties();
 
                 return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <ShapePreview
                     {...overlayProps}
                     shape={properties.get('shape').getValue()}
@@ -447,7 +394,6 @@ const Physics2Editor = (props: Props) => {
                     )}
                     polygonOrigin={properties.get('polygonOrigin').getValue()}
                     vertices={JSON.parse(properties.get('vertices').getValue())}
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type. | TS7006 - Parameter 'newX' implicitly has an 'any' type. | TS7006 - Parameter 'newY' implicitly has an 'any' type.
                     onMoveVertex={(index, newX, newY) => {
                       let vertices = JSON.parse(
                         properties.get('vertices').getValue()
@@ -469,18 +415,14 @@ const Physics2Editor = (props: Props) => {
         </Line>
       )}
       {shape === 'Polygon' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <PolygonEditor
             vertices={JSON.parse(properties.get('vertices').getValue())}
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
             onChangeVertexX={(newValue, index) => {
               let vertices = JSON.parse(properties.get('vertices').getValue());
               vertices[index].x = newValue;
               updateBehaviorProperty('vertices', JSON.stringify(vertices));
             }}
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
             onChangeVertexY={(newValue, index) => {
               let vertices = JSON.parse(properties.get('vertices').getValue());
               vertices[index].y = newValue;
@@ -492,8 +434,7 @@ const Physics2Editor = (props: Props) => {
               vertices.push({ x: 0, y: 0 });
               updateBehaviorProperty('vertices', JSON.stringify(vertices));
             }}
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-            onRemove={index => {
+            onRemove={(index) => {
               let vertices = JSON.parse(properties.get('vertices').getValue());
               vertices.splice(index, 1);
               updateBehaviorProperty('vertices', JSON.stringify(vertices));
@@ -501,51 +442,45 @@ const Physics2Editor = (props: Props) => {
           />
         </Line>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           id="physics2-parameter-density"
           properties={properties}
           propertyName={'density'}
           step={0.1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty(
               'density',
               parseFloat(newValue) > 0 ? newValue : '0'
             )
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'gravityScale'}
           step={0.1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty('gravityScale', newValue)
           }
         />
       </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'friction'}
           step={0.1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty(
               'friction',
               parseFloat(newValue) > 0 ? newValue : '0'
             )
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'restitution'}
           step={0.1}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty(
               'restitution',
               parseFloat(newValue) > 0 ? newValue : '0'
@@ -553,35 +488,29 @@ const Physics2Editor = (props: Props) => {
           }
         />
       </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           properties={properties}
           propertyName={'linearDamping'}
           step={0.05}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty('linearDamping', newValue)
           }
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <NumericProperty
           id="physics2-parameter-angular-damping"
           properties={properties}
           propertyName={'angularDamping'}
           step={0.05}
-          onUpdate={newValue =>
+          onUpdate={(newValue) =>
             updateBehaviorProperty('angularDamping', newValue)
           }
         />
       </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text style={{ marginRight: 10 }}>
           {properties.get('layers').getLabel()}
         </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <BitGroupEditor
           bits={bits.map((_, idx) => isBitEnabled(layersValues, idx))}
           onChange={(index, value) => {
@@ -590,13 +519,10 @@ const Physics2Editor = (props: Props) => {
           }}
         />
       </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text style={{ marginRight: 10 }}>
           {properties.get('masks').getLabel()}
         </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <BitGroupEditor
           bits={bits.map((_, idx) => isBitEnabled(masksValues, idx))}
           onChange={(index, value) => {

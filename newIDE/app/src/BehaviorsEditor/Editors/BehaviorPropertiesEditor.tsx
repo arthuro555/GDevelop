@@ -1,31 +1,28 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../PropertiesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PropertiesEditor/index.tsx', but '--jsx' is not set.
+
 import PropertiesEditor from '../../PropertiesEditor';
-// @ts-expect-error - TS6142 - Module '../../PropertiesEditor/PropertiesMapToSchema' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PropertiesEditor/PropertiesMapToSchema.tsx', but '--jsx' is not set.
+
 import propertiesMapToSchema from '../../PropertiesEditor/PropertiesMapToSchema';
-// @ts-expect-error - TS6142 - Module '../../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../../UI/EmptyMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 import { BehaviorEditorProps } from './BehaviorEditorProps.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../UI/Accordion' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Accordion.tsx', but '--jsx' is not set.
+
 import { Accordion, AccordionHeader, AccordionBody } from '../../UI/Accordion';
 import { mapFor } from '../../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
-
 type Props = BehaviorEditorProps;
 
-const areAdvancedPropertiesModified = (behavior: gdBehavior) => {
+const areAdvancedPropertiesModified = (behavior: gd.Behavior) => {
   const behaviorMetadata = gd.MetadataProvider.getBehaviorMetadata(
     gd.JsPlatform.get(),
     behavior.getTypeName()
@@ -34,8 +31,8 @@ const areAdvancedPropertiesModified = (behavior: gdBehavior) => {
   const propertiesValues = behavior.getProperties();
   const propertyNames = propertiesMetadata.keys();
   let hasFoundModifiedAdvancedProperty = false;
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, propertyNames.size(), i => {
+
+  mapFor(0, propertyNames.size(), (i) => {
     const name = propertyNames.at(i);
     const property = propertiesMetadata.get(name);
     const defaultValue = property.getValue();
@@ -60,18 +57,16 @@ const BehaviorPropertiesEditor = ({
   onBehaviorUpdated,
   resourceManagementProps,
 }: Props) => {
-  const [
-    shouldShowDeprecatedProperties,
-    setShouldShowDeprecatedProperties,
-  ] = React.useState<boolean>(false);
+  const [shouldShowDeprecatedProperties, setShouldShowDeprecatedProperties] =
+    React.useState<boolean>(false);
 
   const basicPropertiesSchema = React.useMemo(
     () =>
       propertiesMapToSchema(
         behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type.
-        behavior => behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type. | TS7006 - Parameter 'name' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+
+        (behavior) => behavior.getProperties(),
+
         (behavior, name, value) => {
           behavior.updateProperty(name, value);
         },
@@ -90,9 +85,9 @@ const BehaviorPropertiesEditor = ({
     () =>
       propertiesMapToSchema(
         behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type.
-        behavior => behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type. | TS7006 - Parameter 'name' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+
+        (behavior) => behavior.getProperties(),
+
         (behavior, name, value) => {
           behavior.updateProperty(name, value);
         },
@@ -106,9 +101,9 @@ const BehaviorPropertiesEditor = ({
     () =>
       propertiesMapToSchema(
         behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type.
-        behavior => behavior.getProperties(),
-// @ts-expect-error - TS7006 - Parameter 'behavior' implicitly has an 'any' type. | TS7006 - Parameter 'name' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+
+        (behavior) => behavior.getProperties(),
+
         (behavior, name, value) => {
           behavior.updateProperty(name, value);
         },
@@ -119,14 +114,11 @@ const BehaviorPropertiesEditor = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column expand>
       {basicPropertiesSchema.length > 0 ||
       advancedPropertiesSchema.length > 0 ||
       deprecatedPropertiesSchema.length > 0 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ColumnStackLayout expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <PropertiesEditor
             project={project}
             schema={basicPropertiesSchema}
@@ -136,24 +128,17 @@ const BehaviorPropertiesEditor = ({
           />
           {(advancedPropertiesSchema.length > 0 ||
             deprecatedPropertiesSchema.length > 0) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Accordion
               defaultExpanded={areAdvancedPropertiesExpandedByDefault}
               noMargin
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AccordionHeader noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Text size="sub-title">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>Advanced properties</Trans>
                 </Text>
               </AccordionHeader>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AccordionBody disableGutters>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <PropertiesEditor
                     project={project}
                     schema={advancedPropertiesSchema}
@@ -163,7 +148,6 @@ const BehaviorPropertiesEditor = ({
                   />
                   {deprecatedPropertiesSchema.length > 0 &&
                     (shouldShowDeprecatedProperties ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <PropertiesEditor
                         project={project}
                         schema={deprecatedPropertiesSchema}
@@ -172,12 +156,9 @@ const BehaviorPropertiesEditor = ({
                         resourceManagementProps={resourceManagementProps}
                       />
                     ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <FlatButton
                           key="show-deprecated"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                           label={<Trans>Show deprecated options</Trans>}
                           onClick={() =>
                             setShouldShowDeprecatedProperties(true)
@@ -191,9 +172,7 @@ const BehaviorPropertiesEditor = ({
           )}
         </ColumnStackLayout>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             There is nothing to configure for this behavior. You can still use
             events to interact with the object and this behavior.

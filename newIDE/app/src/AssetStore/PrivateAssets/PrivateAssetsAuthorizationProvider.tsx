@@ -15,22 +15,24 @@ import {
 import {
   createProductAuthorizedUrl,
   getAuthorizationTokenForPrivateAssets,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/Shop';
 import PrivateAssetsAuthorizationContext from './PrivateAssetsAuthorizationContext';
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
-const enrichAssetWithAuthorizedResourceUrls = (asset: Asset, authorizationToken: string): Asset => {
+const enrichAssetWithAuthorizedResourceUrls = (
+  asset: Asset,
+  authorizationToken: string
+): Asset => {
   const objectAssets = asset.objectAssets;
   return {
     ...asset,
-    objectAssets: objectAssets.map(objectAsset => ({
+    objectAssets: objectAssets.map((objectAsset) => ({
       ...objectAsset,
-      resources: objectAsset.resources.map(resource => ({
+      resources: objectAsset.resources.map((resource) => ({
         ...resource,
         file: createProductAuthorizedUrl(resource.file, authorizationToken),
       })),
@@ -38,12 +40,12 @@ const enrichAssetWithAuthorizedResourceUrls = (asset: Asset, authorizationToken:
   };
 };
 
-const PrivateAssetsAuthorizationProvider = ({
-  children,
-}: Props) => {
+const PrivateAssetsAuthorizationProvider = ({ children }: Props) => {
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
   const profile = authenticatedUser.profile;
-  const [authorizationToken, setAuthorizationToken] = React.useState<string | null | undefined>(null);
+  const [authorizationToken, setAuthorizationToken] = React.useState<
+    string | null | undefined
+  >(null);
   const isLoading = React.useRef<boolean>(false);
 
   const fetchAuthorizationToken = React.useCallback(
@@ -71,7 +73,7 @@ const PrivateAssetsAuthorizationProvider = ({
     try {
       isLoading.current = true;
       await fetchAuthorizationToken(userId);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Could not fetch the authorization token', error);
     } finally {
       isLoading.current = false;
@@ -83,8 +85,8 @@ const PrivateAssetsAuthorizationProvider = ({
     {
       environment,
     }: {
-      environment: Environment
-    },
+      environment: Environment;
+    }
   ): Promise<Asset | null | undefined> => {
     if (!profile) return;
     const userId = profile.id;
@@ -97,10 +99,9 @@ const PrivateAssetsAuthorizationProvider = ({
         environment,
       });
       return asset;
-    } catch (error: any) {
-      const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-        error
-      );
+    } catch (error) {
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(error);
       if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
         // If the token is expired, fetch a new one and try again.
         token = await fetchAuthorizationToken(userId);
@@ -113,13 +114,11 @@ const PrivateAssetsAuthorizationProvider = ({
     }
   };
 
-  const installPrivateAsset = async (
-    {
-      asset,
-      project,
-      objectsContainer,
-    }: InstallAssetArgs,
-  ): Promise<InstallAssetOutput | null | undefined> => {
+  const installPrivateAsset = async ({
+    asset,
+    project,
+    objectsContainer,
+  }: InstallAssetArgs): Promise<InstallAssetOutput | null | undefined> => {
     if (!profile) {
       throw new Error(
         'Unable to install the asset because no profile was found.'
@@ -129,10 +128,8 @@ const PrivateAssetsAuthorizationProvider = ({
     const token =
       authorizationToken || (await fetchAuthorizationToken(profile.id));
 
-    const assetWithAuthorizedResourceUrls = enrichAssetWithAuthorizedResourceUrls(
-      asset,
-      token
-    );
+    const assetWithAuthorizedResourceUrls =
+      enrichAssetWithAuthorizedResourceUrls(asset, token);
 
     return addAssetToProject({
       asset: assetWithAuthorizedResourceUrls,
@@ -143,7 +140,9 @@ const PrivateAssetsAuthorizationProvider = ({
 
   // This URL is only valid for a limited time, so this function needs to be called
   // every time the user wants to download the audio files.
-  const getPrivateAssetPackAudioArchiveUrl = async (privateAssetPackId: string): Promise<string | null> => {
+  const getPrivateAssetPackAudioArchiveUrl = async (
+    privateAssetPackId: string
+  ): Promise<string | null> => {
     if (!profile) return null;
 
     // Always fetch a new token, as the URL is only valid for a limited time.
@@ -153,7 +152,6 @@ const PrivateAssetsAuthorizationProvider = ({
   };
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <PrivateAssetsAuthorizationContext.Provider
       value={{
         authorizationToken,

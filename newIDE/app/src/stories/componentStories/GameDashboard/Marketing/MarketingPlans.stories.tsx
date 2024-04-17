@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../../MarketingPlans/MarketingPlans' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MarketingPlans/MarketingPlans.tsx', but '--jsx' is not set.
+
 import MarketingPlans from '../../../../MarketingPlans/MarketingPlans';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
 import { MarketingPlan } from '../../../../Utils/GDevelopServices/Game';
@@ -106,8 +105,7 @@ const marketingPlans: MarketingPlan[] = [
       en: 'Pro',
     },
     descriptionByLocale: {
-      en:
-        'Perfect if you have a Steam page or similar, and wish to collect both feedback and whishlists.',
+      en: 'Perfect if you have a Steam page or similar, and wish to collect both feedback and whishlists.',
       'fr-FR':
         'Parfait si vous avez une page Steam ou similaire et que vous souhaitez collecter à la fois des commentaires et des listes de souhaits.',
       'ar-SA':
@@ -192,8 +190,7 @@ const marketingPlans: MarketingPlan[] = [
       en: 'Premium',
     },
     descriptionByLocale: {
-      en:
-        'Perfect for people with a finished game who want to promote it to the widest audience possible',
+      en: 'Perfect for people with a finished game who want to promote it to the widest audience possible',
       'fr-FR':
         'Parfait pour les personnes ayant un jeu terminé qui souhaitent le promouvoir auprès du plus large public possible',
       'ar-SA':
@@ -266,11 +263,9 @@ const marketingPlans: MarketingPlan[] = [
 
 export const LoadingAndError = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -278,11 +273,9 @@ export const LoadingAndError = () => {
 
 export const Default = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -290,9 +283,7 @@ export const Default = () => {
 Default.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopGameApi.baseUrl
-      }/game-featuring?userId=indie-user&gameId=complete-game-id`,
+      url: `${GDevelopGameApi.baseUrl}/game-featuring?userId=indie-user&gameId=complete-game-id`,
       method: 'GET',
       status: 200,
       response: [],
@@ -308,11 +299,9 @@ Default.parameters = {
 
 export const WithOwnedActiveBasicPlan = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -320,9 +309,7 @@ export const WithOwnedActiveBasicPlan = () => {
 WithOwnedActiveBasicPlan.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopGameApi.baseUrl
-      }/game-featuring?userId=indie-user&gameId=complete-game-id`,
+      url: `${GDevelopGameApi.baseUrl}/game-featuring?userId=indie-user&gameId=complete-game-id`,
       method: 'GET',
       status: 200,
       response: [
@@ -360,11 +347,9 @@ WithOwnedActiveBasicPlan.parameters = {
 
 export const WithOwnedExpiredBasicPlan = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -372,9 +357,7 @@ export const WithOwnedExpiredBasicPlan = () => {
 WithOwnedExpiredBasicPlan.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopGameApi.baseUrl
-      }/game-featuring?userId=indie-user&gameId=complete-game-id`,
+      url: `${GDevelopGameApi.baseUrl}/game-featuring?userId=indie-user&gameId=complete-game-id`,
       method: 'GET',
       status: 200,
       response: [
@@ -412,11 +395,9 @@ WithOwnedExpiredBasicPlan.parameters = {
 
 export const WithOwnedProPlan = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -424,9 +405,7 @@ export const WithOwnedProPlan = () => {
 WithOwnedProPlan.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopGameApi.baseUrl
-      }/game-featuring?userId=indie-user&gameId=complete-game-id`,
+      url: `${GDevelopGameApi.baseUrl}/game-featuring?userId=indie-user&gameId=complete-game-id`,
       method: 'GET',
       status: 200,
       response: [
@@ -450,11 +429,9 @@ WithOwnedProPlan.parameters = {
 
 export const WithOwnedPremiumPlan = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeAuthenticatedUserWithNoSubscriptionAndCredits}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <MarketingPlans game={fakeGame} />
     </AuthenticatedUserContext.Provider>
   );
@@ -462,9 +439,7 @@ export const WithOwnedPremiumPlan = () => {
 WithOwnedPremiumPlan.parameters = {
   mockData: [
     {
-      url: `${
-        GDevelopGameApi.baseUrl
-      }/game-featuring?userId=indie-user&gameId=complete-game-id`,
+      url: `${GDevelopGameApi.baseUrl}/game-featuring?userId=indie-user&gameId=complete-game-id`,
       method: 'GET',
       status: 200,
       response: [

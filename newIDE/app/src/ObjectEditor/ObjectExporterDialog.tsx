@@ -1,33 +1,32 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog from '../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../UI/HelpButton';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
 import { mapFor } from '../Utils/MapFor';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Upload'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Upload.js' implicitly has an 'any' type.
+
 import Upload from '../UI/CustomSvgIcons/Upload';
 import {
   BlobDownloadUrlHolder,
   openBlobDownloadUrl,
 } from '../Utils/BlobDownloadUrlHolder';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import { serializeToObjectAsset } from '../Utils/Serializer';
 import { showErrorBox } from '../UI/Messages/MessageBox';
 import { downloadUrlsToBlobs, ItemResult } from '../Utils/BlobDownloader';
-// @ts-expect-error - TS6142 - Module '../Utils/UseGenericRetryableProcessWithProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/UseGenericRetryableProcessWithProgress.tsx', but '--jsx' is not set.
+
 import { useGenericRetryableProcessWithProgress } from '../Utils/UseGenericRetryableProcessWithProgress';
 import { extractDecodedFilenameFromProjectResourceUrl } from '../Utils/GDevelopServices/Project';
 import {
@@ -48,14 +47,15 @@ const excludedObjectType = [
 ];
 
 type DownloadResourcesAsBlobsOptionsWithoutProgress = {
-  project: gdProject,
-  resourceNames: Array<string>,
-  onAddBlobFile: (resourceName: string, blob: Blob) => void
+  project: gd.Project;
+  resourceNames: Array<string>;
+  onAddBlobFile: (resourceName: string, blob: Blob) => void;
 };
 
-type DownloadResourcesAsBlobsOptions = (DownloadResourcesAsBlobsOptionsWithoutProgress) & {
-  onProgress: (count: number, total: number) => void
-};
+type DownloadResourcesAsBlobsOptions =
+  DownloadResourcesAsBlobsOptionsWithoutProgress & {
+    onProgress: (count: number, total: number) => void;
+  };
 
 export const downloadResourcesAsBlobs = async ({
   project,
@@ -68,41 +68,40 @@ export const downloadResourcesAsBlobs = async ({
   } as const;
 
   type ResourceToFetch = {
-    resource: gdResource,
-    url: string,
-    filename: string
+    resource: gd.Resource;
+    url: string;
+    filename: string;
   };
 
   const resourcesManager = project.getResourcesManager();
   const resourcesToFetchAndUpload = resourceNames
-    .map(
-      (resourceName: string): ResourceToFetch | null | undefined => {
-        const resource = resourcesManager.getResource(resourceName);
-        const resourceFile = ResourcesLoader.getResourceFullUrl(
-          project,
-          resourceName,
-          {}
-        );
-        return {
-          resource,
-          url: resourceFile,
-          filename: extractDecodedFilenameFromProjectResourceUrl(resourceFile),
-        };
-      }
-    )
+    .map((resourceName: string): ResourceToFetch | null | undefined => {
+      const resource = resourcesManager.getResource(resourceName);
+      const resourceFile = ResourcesLoader.getResourceFullUrl(
+        project,
+        resourceName,
+        {}
+      );
+      return {
+        resource,
+        url: resourceFile,
+        filename: extractDecodedFilenameFromProjectResourceUrl(resourceFile),
+      };
+    })
     .filter(Boolean);
 
-  const downloadedBlobsAndResources: Array<ItemResult<ResourceToFetch>> = await downloadUrlsToBlobs({
-    urlContainers: resourcesToFetchAndUpload,
-    onProgress: (count, total) => {
-      onProgress(count, total * 2);
-    },
-  });
+  const downloadedBlobsAndResources: Array<ItemResult<ResourceToFetch>> =
+    await downloadUrlsToBlobs({
+      urlContainers: resourcesToFetchAndUpload,
+      onProgress: (count, total) => {
+        onProgress(count, total * 2);
+      },
+    });
 
   downloadedBlobsAndResources.forEach(({ item, error, blob }) => {
     const { resource } = item;
     if (error || !blob) {
-// @ts-expect-error - TS2339 - Property 'push' does not exist on type 'readonly []'.
+      // @ts-expect-error - TS2339 - Property 'push' does not exist on type 'readonly []'.
       result.erroredResources.push({
         resourceName: resource.getName(),
         error: error || new Error('Unknown error during download.'),
@@ -127,18 +126,17 @@ const addSpacesToPascalCase = (pascalCaseName: string): string => {
 };
 
 type EnumeratedObject = {
-  object: gdObject,
-  path: string
+  object: gd.Object;
+  path: string;
 };
 
 const enumerateAllObjects = (
-  objectTreeItem: gdObjectFolderOrObject,
+  objectTreeItem: gd.ObjectFolderOrObject,
   folderPath: string,
   allObjects: Array<EnumeratedObject>
 ) => {
   if (objectTreeItem.isFolder()) {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, objectTreeItem.getChildrenCount(), i => {
+    mapFor(0, objectTreeItem.getChildrenCount(), (i) => {
       enumerateAllObjects(
         objectTreeItem.getChildAt(i),
         folderPath + objectTreeItem.getFolderName() + '/',
@@ -151,21 +149,23 @@ const enumerateAllObjects = (
 };
 
 const enumerateAllObjectsOfScene = (
-  scene: gdLayout,
+  scene: gd.Layout,
   folderPath: string,
   allObjects: Array<EnumeratedObject>
 ) => {
   const objectTreeItem = scene.getRootFolder();
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, objectTreeItem.getChildrenCount(), i => {
+
+  mapFor(0, objectTreeItem.getChildrenCount(), (i) => {
     enumerateAllObjects(objectTreeItem.getChildAt(i), folderPath, allObjects);
   });
 };
 
 const zipAssets = async (
-  project: gdProject,
+  project: gd.Project,
   enumeratedObjects: Array<EnumeratedObject>,
-  ensureDownloadResourcesAsBlobsIsDone: (options: DownloadResourcesAsBlobsOptionsWithoutProgress) => Promise<void>,
+  ensureDownloadResourcesAsBlobsIsDone: (
+    options: DownloadResourcesAsBlobsOptionsWithoutProgress
+  ) => Promise<void>
 ): Promise<Blob | null> => {
   const blobFiles = new Map<string, BlobFileDescriptor>();
   const textFiles: Array<TextFileDescriptor> = [];
@@ -212,7 +212,7 @@ const zipAssets = async (
       onProgress: (count: number, total: number) => {},
     });
     return zippedAssetsBlob;
-  } catch (rawError: any) {
+  } catch (rawError) {
     showErrorBox({
       message: 'Unable to export your assets because of an internal error.',
       rawError,
@@ -223,81 +223,68 @@ const zipAssets = async (
 };
 
 type Props = {
-  project: gdProject,
-  layout: gdLayout,
-  onClose: () => void
+  project: gd.Project;
+  layout: gd.Layout;
+  onClose: () => void;
 };
 
-const ObjectExporterDialog = ({
-  project,
-  layout: scene,
-  onClose,
-}: Props) => {
-  const [
-    zippedSceneAssetsBlob,
-    setZippedSceneAssetsBlob,
-  ] = React.useState<Blob | null | undefined>(null);
+const ObjectExporterDialog = ({ project, layout: scene, onClose }: Props) => {
+  const [zippedSceneAssetsBlob, setZippedSceneAssetsBlob] = React.useState<
+    Blob | null | undefined
+  >(null);
   const {
     ensureProcessIsDone: ensureDownloadResourcesAsBlobsIsDone,
     renderProcessDialog,
-  } = useGenericRetryableProcessWithProgress<DownloadResourcesAsBlobsOptionsWithoutProgress>({
-    onDoProcess: React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'options' implicitly has an 'any' type. | TS7006 - Parameter 'onProgress' implicitly has an 'any' type.
-      (options, onProgress) =>
-        downloadResourcesAsBlobs({ ...options, onProgress }),
-      []
-    ),
-  });
-  React.useEffect(
-    () => {
-      (async () => {
-        setZippedSceneAssetsBlob(null);
+  } =
+    useGenericRetryableProcessWithProgress<DownloadResourcesAsBlobsOptionsWithoutProgress>(
+      {
+        onDoProcess: React.useCallback(
+          (options, onProgress) =>
+            downloadResourcesAsBlobs({ ...options, onProgress }),
+          []
+        ),
+      }
+    );
+  React.useEffect(() => {
+    (async () => {
+      setZippedSceneAssetsBlob(null);
 
-        const enumeratedObjects: Array<EnumeratedObject> = [];
-        enumerateAllObjectsOfScene(scene, '', enumeratedObjects);
-        enumeratedObjects.filter(
-          ({ object }) => !excludedObjectType.includes(object.getType())
-        );
-        const zippedLayerAssetsBlob = await zipAssets(
-          project,
-          enumeratedObjects,
-          ensureDownloadResourcesAsBlobsIsDone
-        );
-        setZippedSceneAssetsBlob(zippedLayerAssetsBlob);
-      })();
+      const enumeratedObjects: Array<EnumeratedObject> = [];
+      enumerateAllObjectsOfScene(scene, '', enumeratedObjects);
+      enumeratedObjects.filter(
+        ({ object }) => !excludedObjectType.includes(object.getType())
+      );
+      const zippedLayerAssetsBlob = await zipAssets(
+        project,
+        enumeratedObjects,
+        ensureDownloadResourcesAsBlobsIsDone
+      );
+      setZippedSceneAssetsBlob(zippedLayerAssetsBlob);
+    })();
 
-      return () => {
-        setZippedSceneAssetsBlob(null);
-      };
-    },
-    [project, ensureDownloadResourcesAsBlobsIsDone, scene]
-  );
+    return () => {
+      setZippedSceneAssetsBlob(null);
+    };
+  }, [project, ensureDownloadResourcesAsBlobsIsDone, scene]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>Export {scene.getName()} assets</Trans>}
       secondaryActions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <HelpButton
           key="free-pack-help"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           label={<Trans>Submit a free pack</Trans>}
           helpPagePath="/community/contribute-to-the-assets-store"
         />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <HelpButton
           key="paid-pack-help"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           label={<Trans>Submit a paid pack</Trans>}
           helpPagePath="/community/sell-asset-pack-store/"
         />,
       ]}
       actions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           label={<Trans>Close</Trans>}
           keyboardFocused={true}
           onClick={onClose}
@@ -308,25 +295,18 @@ const ObjectExporterDialog = ({
       onRequestClose={onClose}
       maxWidth="sm"
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ColumnStackLayout expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             Export the scene objects to a file and learn more about the
             submission process in the documentation.
           </Trans>
         </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Column alignItems="center">
           {zippedSceneAssetsBlob ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <BlobDownloadUrlHolder blob={zippedSceneAssetsBlob}>
-              {blobDownloadUrl => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+              {(blobDownloadUrl) => (
                 <RaisedButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   icon={<Upload />}
                   primary
                   onClick={() =>
@@ -335,13 +315,11 @@ const ObjectExporterDialog = ({
                       scene.getName() + '.gdo'
                     )
                   }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   label={<Trans>Export as a pack</Trans>}
                 />
               )}
             </BlobDownloadUrlHolder>
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <PlaceholderLoader />
           )}
         </Column>

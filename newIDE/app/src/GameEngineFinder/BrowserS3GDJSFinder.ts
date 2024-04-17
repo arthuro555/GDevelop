@@ -1,6 +1,12 @@
-import {getIDEVersion} from '../Version';
+import { getIDEVersion } from '../Version';
 
-type FileSet = 'preview' | 'cordova' | 'electron' | 'web' | 'cocos2d-js' | 'facebook-instant-games';
+type FileSet =
+  | 'preview'
+  | 'cordova'
+  | 'electron'
+  | 'web'
+  | 'cocos2d-js'
+  | 'facebook-instant-games';
 
 const filesToDownload: Partial<Record<FileSet, Array<string>>> = {
   preview: ['/Runtime/index.html'],
@@ -30,13 +36,15 @@ const filesToDownload: Partial<Record<FileSet, Array<string>>> = {
 };
 
 export type TextFileDescriptor = {
-  text: string,
-  filePath: string
+  text: string;
+  filePath: string;
 };
 
-export const findGDJS = (fileSet: FileSet): Promise<{
-  gdjsRoot: string,
-  filesContent: Array<TextFileDescriptor>
+export const findGDJS = (
+  fileSet: FileSet
+): Promise<{
+  gdjsRoot: string;
+  filesContent: Array<TextFileDescriptor>;
 }> => {
   // Get GDJS for this version. If you updated the version,
   // run `newIDE/web-app/scripts/deploy-GDJS-Runtime` script.
@@ -48,25 +56,25 @@ export const findGDJS = (fileSet: FileSet): Promise<{
   // gdjsRoot = `http://localhost:5000`;
 
   return Promise.all(
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
-    filesToDownload[fileSet].map(relativeFilePath => {
+    // @ts-expect-error - TS2532 - Object is possibly 'undefined'.
+    filesToDownload[fileSet].map((relativeFilePath) => {
       const url = gdjsRoot + relativeFilePath;
 
       // Don't do any caching, rely on the browser cache only.
-      return fetch(url).then(response => {
+      return fetch(url).then((response) => {
         if (!response.ok) {
           console.error(`Error while downloading "${url}"`, response);
           throw new Error(
             `Error while downloading "${url}" (status: ${response.status})`
           );
         }
-        return response.text().then(text => ({
+        return response.text().then((text) => ({
           filePath: url,
           text,
         }));
       });
     })
-  ).then(filesContent => {
+  ).then((filesContent) => {
     return {
       gdjsRoot,
       filesContent,

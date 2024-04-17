@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../EventsSheet' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/index.tsx', but '--jsx' is not set.
+
 import EventsSheet, { EventsSheetInterface } from '../../EventsSheet';
 import { sendEventsExtractedAsFunction } from '../../Utils/Analytics/EventSender';
 import {
@@ -31,7 +31,7 @@ export class EventsEditorContainer extends React.Component<RenderEditorContainer
     }
   }
 
-  getProject(): gdProject | null | undefined {
+  getProject(): gd.Project | null | undefined {
     return this.props.project;
   }
 
@@ -43,7 +43,7 @@ export class EventsEditorContainer extends React.Component<RenderEditorContainer
     // No updates to be done.
   }
 
-  getLayout(): gdLayout | null | undefined {
+  getLayout(): gd.Layout | null | undefined {
     const { project, projectItemName } = this.props;
     if (
       !project ||
@@ -75,15 +75,13 @@ export class EventsEditorContainer extends React.Component<RenderEditorContainer
     const layout = this.getLayout();
     if (!layout || !project) {
       //TODO: Error component
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       return <div>No layout called {projectItemName} found!</div>;
     }
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <EventsSheet
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-        ref={editor => (this.editor = editor)}
+        ref={(editor) => (this.editor = editor)}
         setToolbar={this.props.setToolbar}
         onOpenLayout={this.props.onOpenLayout}
         resourceManagementProps={this.props.resourceManagementProps}
@@ -108,5 +106,4 @@ export class EventsEditorContainer extends React.Component<RenderEditorContainer
 
 export const renderEventsEditorContainer = (
   props: RenderEditorContainerPropsWithRef
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 ) => <EventsEditorContainer {...props} />;

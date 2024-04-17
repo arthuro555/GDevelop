@@ -1,12 +1,12 @@
 import * as React from 'react';
 import ResourcesLoader from '../../ResourcesLoader';
-// @ts-expect-error - TS6142 - Module '../../UI/Checkbox' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Checkbox.tsx', but '--jsx' is not set.
+
 import Checkbox from '../../UI/Checkbox';
-// @ts-expect-error - TS6142 - Module '../../UI/CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
 import { useLongTouch } from '../../Utils/UseLongTouch';
-// @ts-expect-error - TS6142 - Module '../CheckeredBackground' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/CheckeredBackground.tsx', but '--jsx' is not set.
+
 import CheckeredBackground from '../CheckeredBackground';
 
 const SPRITE_SIZE = 100;
@@ -43,14 +43,14 @@ const styles = {
 } as const;
 
 type Props = {
-  project: gdProject,
-  resourceName: string,
-  resourcesLoader: typeof ResourcesLoader,
-  style?: any,
-  selectable?: boolean,
-  selected?: boolean,
-  onSelect?: (checked: boolean) => void,
-  onContextMenu?: (x: number, y: number) => void
+  project: gd.Project;
+  resourceName: string;
+  resourcesLoader: typeof ResourcesLoader;
+  style?: any;
+  selectable?: boolean;
+  selected?: boolean;
+  onSelect?: (checked: boolean) => void;
+  onContextMenu?: (x: number, y: number) => void;
 };
 
 const ImageThumbnail = (props: Props) => {
@@ -60,7 +60,7 @@ const ImageThumbnail = (props: Props) => {
   // Allow a long press to show the context menu
   const longTouchForContextMenuProps = useLongTouch(
     React.useCallback(
-      event => {
+      (event) => {
         if (onContextMenu) onContextMenu(event.clientX, event.clientY);
       },
       [onContextMenu]
@@ -80,31 +80,28 @@ const ImageThumbnail = (props: Props) => {
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: (false | Element | undefined)[]; onTouchStart: (event: TouchEvent) => void; onTouchMove: (event: TouchEvent) => void; onTouchEnd: () => void; title: string; style: any; onContextMenu: (e: MouseEvent<...>) => void; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: (false | Element | undefined)[]; onTouchStart: (event: TouchEvent) => void; onTouchMove: (event: TouchEvent) => void; onTouchEnd: () => void; title: string; style: any; onContextMenu: (e: MouseEvent<...>) => void; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
     <div
       title={resourceName}
       style={containerStyle}
-      onContextMenu={e => {
+      onContextMenu={(e) => {
         e.stopPropagation();
         if (onContextMenu) onContextMenu(e.clientX, e.clientY);
       }}
       {...longTouchForContextMenuProps}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CheckeredBackground />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CorsAwareImage
         style={styles.spriteThumbnailImage}
         alt={resourceName}
         src={resourcesLoader.getResourceFullUrl(project, resourceName, {})}
       />
       {props.selectable && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div style={styles.checkboxContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Checkbox
             checked={!!props.selected}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
+            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'check' implicitly has an 'any' type.
             onCheck={(e, check) => props.onSelect && props.onSelect(check)}
           />
         </div>

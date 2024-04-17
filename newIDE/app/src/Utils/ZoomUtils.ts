@@ -9,9 +9,11 @@ const wheelStepZoomFactor = Math.pow(1.7, zoomStepBasePower);
 // - Mouse sensitivity
 // - MacOS scroll acceleration
 // Signal is usually WheelEvent.deltaY
-export const getWheelStepZoomFactor = (deltaY: number): number => Math.pow(wheelStepZoomFactor, Math.sign(deltaY));
+export const getWheelStepZoomFactor = (deltaY: number): number =>
+  Math.pow(wheelStepZoomFactor, Math.sign(deltaY));
 
 const instancesEditorMaxZoom = 128;
 const instancesEditorMinZoom = 1 / 128;
 
-export const clampInstancesEditorZoom = (zoom: number): number => Math.max(Math.min(zoom, instancesEditorMaxZoom), instancesEditorMinZoom);
+export const clampInstancesEditorZoom = (zoom: number): number =>
+  Math.max(Math.min(zoom, instancesEditorMaxZoom), instancesEditorMinZoom);

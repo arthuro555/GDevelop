@@ -1,7 +1,7 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from './Grid';
 import { getDisplayZIndexForHighlighter } from '../InAppTutorial/HTMLUtils';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -9,13 +9,13 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import { makeStyles } from '@material-ui/core/styles';
-// @ts-expect-error - TS6142 - Module './CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from './CorsAwareImage';
-// @ts-expect-error - TS6142 - Module './IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from './IconButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/Cross'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cross.js' implicitly has an 'any' type.
+
 import Cross from './CustomSvgIcons/Cross';
-// @ts-expect-error - TS6142 - Module './Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from './Layout';
 import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 import InAppTutorialContext from '../InAppTutorial/InAppTutorialContext';
@@ -92,14 +92,14 @@ const useClasses = makeStyles({
 });
 
 type Props = {
-  title: React.ReactNode,
-  thumbnailSource?: string,
-  thumbnailAlt?: string,
-  content: React.ReactNode,
-  anchorElement: HTMLElement,
-  onClose: () => void,
-  placement: 'left' | 'top' | 'bottom' | 'right',
-  closeWithBackdropClick: boolean
+  title: React.ReactNode;
+  thumbnailSource?: string;
+  thumbnailAlt?: string;
+  content: React.ReactNode;
+  anchorElement: HTMLElement;
+  onClose: () => void;
+  placement: 'left' | 'top' | 'bottom' | 'right';
+  closeWithBackdropClick: boolean;
 };
 
 const HighlightingTooltip = ({
@@ -114,13 +114,11 @@ const HighlightingTooltip = ({
 }: Props) => {
   const classes = useClasses();
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-  const { currentlyRunningInAppTutorial } = React.useContext(
-    InAppTutorialContext
-  );
+  const { currentlyRunningInAppTutorial } =
+    React.useContext(InAppTutorialContext);
   if (currentlyRunningInAppTutorial) return null;
 
   const popper = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Popper
       id="in-app-tutorial-tooltip-displayer"
       open={true}
@@ -147,9 +145,7 @@ const HighlightingTooltip = ({
       }}
     >
       {({ TransitionProps }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Fade {...TransitionProps} timeout={{ enter: 350, exit: 0 }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Paper
             style={{
               ...styles.paper,
@@ -157,22 +153,16 @@ const HighlightingTooltip = ({
             }}
             elevation={4}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Line noMargin justifyContent="space-between" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Text noMargin size="sub-title">
                   {title}
                 </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <IconButton size="small" onClick={onClose}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Cross fontSize="small" />
                 </IconButton>
               </Line>
               {thumbnailSource && thumbnailAlt && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <CorsAwareImage
                   src={thumbnailSource}
                   alt={thumbnailAlt}
@@ -181,7 +171,6 @@ const HighlightingTooltip = ({
               )}
               {content}
             </ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <span
               id="new-feature-popper-arrow"
               className={classes.arrow}
@@ -195,9 +184,8 @@ const HighlightingTooltip = ({
 
   if (closeWithBackdropClick) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ClickAwayListener
-        onClickAway={event => {
+        onClickAway={(event) => {
           event.preventDefault();
           event.stopPropagation();
           onClose();

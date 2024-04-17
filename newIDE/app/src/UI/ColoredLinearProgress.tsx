@@ -9,8 +9,8 @@ const styles = {
 } as const;
 
 type Props = {
-  expand?: boolean,
-  value?: number | null | undefined
+  expand?: boolean;
+  value?: number | null | undefined;
 };
 
 function ColoredLinearProgress(props: Props) {
@@ -33,12 +33,11 @@ function ColoredLinearProgress(props: Props) {
   })();
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <MuiLinearProgress
       classes={classes}
       style={styles.linearProgress}
       variant="determinate"
-// @ts-expect-error - TS2322 - Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+      // @ts-expect-error - TS2322 - Type 'number | null | undefined' is not assignable to type 'number | undefined'.
       value={props.value}
     />
   );

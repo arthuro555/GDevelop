@@ -5,4 +5,7 @@
  * with a function `IsBadXxx` to check if the object you're manipulating represents
  * an null/empty object.
  */
-export const isNullPtr = (gd: libGDevelop, object: gdEmscriptenObject): boolean => gd.getPointer(object) === 0;
+export const isNullPtr = (
+  gd: libGDevelop,
+  object: gd.EmscriptenObject
+): boolean => gd.getPointer(object) === 0;

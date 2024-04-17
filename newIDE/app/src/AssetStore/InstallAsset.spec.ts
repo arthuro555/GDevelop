@@ -29,17 +29,13 @@ import {
 import * as Asset from '../Utils/GDevelopServices/Asset';
 //import { useFetchAssets } from './NewObjectDialog';
 
-const gd: libGDevelop = global.gd;
-
 jest.mock('../Utils/GDevelopServices/Extension');
 
 Asset.getPublicAsset = jest.fn();
 
 const mockFn = (fn: any): jest.MockedFunction<any> => fn;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('InstallAsset', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('sanitizeObjectName', () => {
     expect(sanitizeObjectName('')).toBe('UnnamedObject');
     expect(sanitizeObjectName('HelloWorld')).toBe('HelloWorld');
@@ -53,11 +49,9 @@ describe('InstallAsset', () => {
     expect(sanitizeObjectName('  9hello/-=world/-=')).toBe('_9helloWorld');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('addAssetToProject', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('installs an object asset in the project, without renaming it if not needed', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -80,9 +74,8 @@ describe('InstallAsset', () => {
       ).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('renames the object if name is already used', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
       layout.insertNewObject(project, 'Sprite', 'PlayerSpaceship', 0);
@@ -104,9 +97,8 @@ describe('InstallAsset', () => {
       ).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('does not add a resource if it is already existing', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -135,10 +127,7 @@ describe('InstallAsset', () => {
 
       // Verify there was not extra resource added.
       expect(
-        project
-          .getResourcesManager()
-          .getAllResourceNames()
-          .toJSArray()
+        project.getResourcesManager().getAllResourceNames().toJSArray()
       ).toEqual([
         ...originalResourceNames,
         'player-ship1.png',
@@ -146,9 +135,8 @@ describe('InstallAsset', () => {
       ]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('does not add a resource if it is already existing, even if changed but origin is the same', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -178,10 +166,7 @@ describe('InstallAsset', () => {
 
       // Verify there was not extra resource added.
       expect(
-        project
-          .getResourcesManager()
-          .getAllResourceNames()
-          .toJSArray()
+        project.getResourcesManager().getAllResourceNames().toJSArray()
       ).toEqual([
         ...originalResourceNames,
         'renamed-player-ship1.png',
@@ -189,9 +174,8 @@ describe('InstallAsset', () => {
       ]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('add a resource with a new name, if this name is already taken by another', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -218,10 +202,7 @@ describe('InstallAsset', () => {
 
       // Verify there was not extra resource added
       expect(
-        project
-          .getResourcesManager()
-          .getAllResourceNames()
-          .toJSArray()
+        project.getResourcesManager().getAllResourceNames().toJSArray()
       ).toEqual([
         ...originalResourceNames,
         'player-ship1.png',
@@ -229,10 +210,7 @@ describe('InstallAsset', () => {
         'player-ship2.png',
       ]);
       expect(
-        project
-          .getResourcesManager()
-          .getResource('player-ship1.png2')
-          .getFile()
+        project.getResourcesManager().getResource('player-ship1.png2').getFile()
       ).toBe('https://example.com/player-ship1.png');
 
       // Verify the resource names used by the object
@@ -255,9 +233,8 @@ describe('InstallAsset', () => {
       ]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('installs an object asset in the project, smoothing the resources by default', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -290,9 +267,8 @@ describe('InstallAsset', () => {
       ).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('installs an object asset in the project, unsmoothing the resources if the asset is pixel art', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       const layout = project.insertNewLayout('MyTestLayout', 0);
 
@@ -324,9 +300,8 @@ describe('InstallAsset', () => {
       ).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('installs an object asset in the project, unsmoothing the resources if the project is pixel art', async () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       project.setScaleMode('nearest');
       const layout = project.insertNewLayout('MyTestLayout', 0);
@@ -360,9 +335,7 @@ describe('InstallAsset', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('getRequiredExtensionsFromAsset', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('get the required extensions for custom objects in an asset', () => {
       expect(getRequiredExtensionsFromAsset(fakeAssetWithCustomObject)).toEqual(
         [
@@ -410,12 +383,10 @@ describe('InstallAsset', () => {
   //   });
   // });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('checkRequiredExtensionsUpdateForAssets', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can find an extension to install', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       expect(project.hasEventsFunctionsExtensionNamed('Flash')).toBe(false);
 
@@ -445,10 +416,9 @@ describe('InstallAsset', () => {
       });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can find an up to date extension from the project', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       expect(project.hasEventsFunctionsExtensionNamed('Button')).toBe(true);
 
@@ -480,10 +450,9 @@ describe('InstallAsset', () => {
       });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can find an extension to update', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       expect(project.hasEventsFunctionsExtensionNamed('Button')).toBe(true);
 
@@ -515,10 +484,9 @@ describe('InstallAsset', () => {
       });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('errors if an extension is not found in the registry', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
 
       mockFn(getExtensionsRegistry).mockImplementationOnce(() => ({
@@ -536,10 +504,9 @@ describe('InstallAsset', () => {
       });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it("errors if the registry can't be loaded ", async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
 
       mockFn(getExtensionsRegistry).mockImplementationOnce(() => {
@@ -557,7 +524,6 @@ describe('InstallAsset', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('addSerializedExtensionsToProject', () => {
     const mockEventsFunctionsExtensionsState: EventsFunctionsExtensionsState = {
       eventsFunctionsExtensionsError: null,
@@ -574,10 +540,9 @@ describe('InstallAsset', () => {
 
     const serializedExtension = { name: 'ExtensionName' } as const;
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('adds an extension with origin set if it comes from the store', () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       addSerializedExtensionsToProject(
         mockEventsFunctionsExtensionsState,
@@ -600,10 +565,9 @@ describe('InstallAsset', () => {
       ).toEqual(serializedExtension.name);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it("adds an extension with origin not set if it doesn't come from the store", () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       addSerializedExtensionsToProject(
         mockEventsFunctionsExtensionsState,
@@ -628,7 +592,6 @@ describe('InstallAsset', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('installAsset', () => {
     beforeEach(() => {
       mockFn(Asset.getPublicAsset).mockReset();
@@ -649,10 +612,9 @@ describe('InstallAsset', () => {
       getIncludeFileHashs: () => ({}),
     };
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('loads the required extensions ', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       expect(project.hasEventsFunctionsExtensionNamed('FireBullet')).toBe(
         false
@@ -700,10 +662,9 @@ describe('InstallAsset', () => {
       expect(project.hasEventsFunctionsExtensionNamed('FireBullet')).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it("throws if an extension can't be installed, even if its extension was properly found in the registry", async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
 
       mockFn(getExtension).mockImplementationOnce(
@@ -737,10 +698,9 @@ describe('InstallAsset', () => {
     // - an event-based object from another extension (this won't work because
     //   it needs extension dependencies).
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('install an asset with an event-based object that is already installed', async () => {
       makeTestExtensions(gd);
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
       const { project } = makeTestProject(gd);
       expect(project.hasEventsFunctionsExtensionNamed('Button')).toBe(true);
       const layout = project.insertNewLayout('MyTestLayout', 0);

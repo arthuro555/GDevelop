@@ -4,16 +4,15 @@ import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 // No i18n in this file
 
 type Props = {
-  tooltipText?: string,
-  style?: any,
-  children: React.ReactNode | null | undefined,
-  allowSelection?: boolean
+  tooltipText?: string;
+  style?: any;
+  children: React.ReactNode | null | undefined;
+  allowSelection?: boolean;
 };
 
 const BackgroundText = (props: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Typography
       variant="body2"
       align="center"

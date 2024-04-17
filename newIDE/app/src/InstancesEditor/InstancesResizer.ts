@@ -3,7 +3,15 @@ import { roundPositionForResizing } from '../Utils/GridHelpers';
 import { InstancesEditorSettings } from './InstancesEditorSettings';
 import { InstanceMeasurer } from './InstancesRenderer';
 
-export type ResizeGrabbingLocation = 'TopLeft' | 'BottomLeft' | 'BottomRight' | 'TopRight' | 'Top' | 'Left' | 'Bottom' | 'Right';
+export type ResizeGrabbingLocation =
+  | 'TopLeft'
+  | 'BottomLeft'
+  | 'BottomRight'
+  | 'TopRight'
+  | 'Top'
+  | 'Left'
+  | 'Bottom'
+  | 'Right';
 
 export const resizeGrabbingLocationValues = [
   'TopLeft',
@@ -33,7 +41,7 @@ export const canMoveOnX = (location: ResizeGrabbingLocation) =>
 export const canMoveOnY = (location: ResizeGrabbingLocation) =>
   location !== 'Left' && location !== 'Right';
 
-const areAnyInstancesNotStraight = (instances: gdInitialInstance[]) => {
+const areAnyInstancesNotStraight = (instances: gd.InitialInstance[]) => {
   for (let i = 0; i < instances.length; i++) {
     if (instances[i].getAngle() % 90 !== 0) return true;
   }
@@ -47,16 +55,16 @@ export default class InstancesResizer {
   // The initial state of instances before a resize:
   _initialSelectionAABB: Rectangle | null | undefined = null;
   _unrotatedInstanceAABBs: {
-    [key: number]: Rectangle
+    [key: number]: Rectangle;
   } = {};
   _instanceAABBs: {
-    [key: number]: Rectangle
+    [key: number]: Rectangle;
   } = {};
   _instancePositions: {
     [key: number]: {
-      x: number,
-      y: number
-    }
+      x: number;
+      y: number;
+    };
   } = {};
 
   // The coordinates of the vector of the resize being done:
@@ -72,8 +80,8 @@ export default class InstancesResizer {
     instanceMeasurer,
     instancesEditorSettings,
   }: {
-    instanceMeasurer: InstanceMeasurer,
-    instancesEditorSettings: InstancesEditorSettings
+    instanceMeasurer: InstanceMeasurer;
+    instancesEditorSettings: InstancesEditorSettings;
   }) {
     this.instanceMeasurer = instanceMeasurer;
     this.instancesEditorSettings = instancesEditorSettings;
@@ -83,30 +91,27 @@ export default class InstancesResizer {
     this.instancesEditorSettings = instancesEditorSettings;
   }
 
-  _getOrCreateInstanceAABB(instance: gdInitialInstance) {
+  _getOrCreateInstanceAABB(instance: gd.InitialInstance) {
     const initialInstanceAABB = this._instanceAABBs[instance.ptr];
     if (initialInstanceAABB) return initialInstanceAABB;
 
-    return (this._instanceAABBs[
-      instance.ptr
-    ] = this.instanceMeasurer.getInstanceAABB(instance, new Rectangle()));
+    return (this._instanceAABBs[instance.ptr] =
+      this.instanceMeasurer.getInstanceAABB(instance, new Rectangle()));
   }
 
-  _getOrCreateUnrotatedInstanceAABB(instance: gdInitialInstance) {
-    const initialUnrotatedInstanceAABB = this._unrotatedInstanceAABBs[
-      instance.ptr
-    ];
+  _getOrCreateUnrotatedInstanceAABB(instance: gd.InitialInstance) {
+    const initialUnrotatedInstanceAABB =
+      this._unrotatedInstanceAABBs[instance.ptr];
     if (initialUnrotatedInstanceAABB) return initialUnrotatedInstanceAABB;
 
-    return (this._unrotatedInstanceAABBs[
-      instance.ptr
-    ] = this.instanceMeasurer.getUnrotatedInstanceAABB(
-      instance,
-      new Rectangle()
-    ));
+    return (this._unrotatedInstanceAABBs[instance.ptr] =
+      this.instanceMeasurer.getUnrotatedInstanceAABB(
+        instance,
+        new Rectangle()
+      ));
   }
 
-  _getOrCreateInstanceOriginPosition(instance: gdInitialInstance) {
+  _getOrCreateInstanceOriginPosition(instance: gd.InitialInstance) {
     const initialPosition = this._instancePositions[instance.ptr];
     if (initialPosition) return initialPosition;
 
@@ -116,7 +121,9 @@ export default class InstancesResizer {
     });
   }
 
-  _getOrCreateSelectionAABB(instances: gdInitialInstance[]): Rectangle | null | undefined {
+  _getOrCreateSelectionAABB(
+    instances: gd.InitialInstance[]
+  ): Rectangle | null | undefined {
     let initialSelectionAABB = this._initialSelectionAABB;
     if (initialSelectionAABB) {
       return initialSelectionAABB;
@@ -134,7 +141,7 @@ export default class InstancesResizer {
   }
 
   resizeBy(
-    instances: gdInitialInstance[],
+    instances: gd.InitialInstance[],
     deltaX: number,
     deltaY: number,
     grabbingLocation: ResizeGrabbingLocation,
@@ -145,12 +152,11 @@ export default class InstancesResizer {
     this.totalDeltaY += deltaY;
 
     const nonLockedInstances = instances.filter(
-      instance => !instance.isLocked()
+      (instance) => !instance.isLocked()
     );
 
-    const initialSelectionAABB = this._getOrCreateSelectionAABB(
-      nonLockedInstances
-    );
+    const initialSelectionAABB =
+      this._getOrCreateSelectionAABB(nonLockedInstances);
     if (!initialSelectionAABB) return;
 
     // Round the grabbed handle position on the grid.
@@ -279,12 +285,10 @@ export default class InstancesResizer {
     for (let i = 0; i < nonLockedInstances.length; i++) {
       const selectedInstance = nonLockedInstances[i];
 
-      let initialUnrotatedInstanceAABB = this._getOrCreateUnrotatedInstanceAABB(
-        selectedInstance
-      );
-      let initialInstanceOriginPosition = this._getOrCreateInstanceOriginPosition(
-        selectedInstance
-      );
+      let initialUnrotatedInstanceAABB =
+        this._getOrCreateUnrotatedInstanceAABB(selectedInstance);
+      let initialInstanceOriginPosition =
+        this._getOrCreateInstanceOriginPosition(selectedInstance);
 
       // Assume a size of 1 pixel to start the resizing
       // if the instance had a size of 0.

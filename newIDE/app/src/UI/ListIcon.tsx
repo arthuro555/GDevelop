@@ -1,28 +1,30 @@
 import React from 'react';
-// @ts-expect-error - TS6142 - Module './CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from './CorsAwareImage';
 import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 // No i18n in this file
 
-type SizeProps = {
-  iconSize: number
-} | {
-  iconWidth: number,
-  iconHeight: number
-};
+type SizeProps =
+  | {
+      iconSize: number;
+    }
+  | {
+      iconWidth: number;
+      iconHeight: number;
+    };
 
 type Props = {
-  src: string,
-  tooltip?: string,
-  disabled?: boolean,
+  src: string;
+  tooltip?: string;
+  disabled?: boolean;
   /**
    * Set true if icon is either an icon loaded from the
    * app or a base64 encoded SVG in a data url.
    */
-  isGDevelopIcon?: boolean,
-  cssAnimation?: string,
-  useExactIconSize?: boolean
-} & (SizeProps);
+  isGDevelopIcon?: boolean;
+  cssAnimation?: string;
+  useExactIconSize?: boolean;
+} & SizeProps;
 
 /**
  * An icon that can be used as the leftIcon of a ListItem.
@@ -41,10 +43,10 @@ function ListIcon(props: Props) {
   } = props;
 
   const iconWidth =
-// @ts-expect-error - TS2339 - Property 'iconWidth' does not exist on type 'Props'. | TS2339 - Property 'iconWidth' does not exist on type 'Props'. | TS2339 - Property 'iconSize' does not exist on type 'Props'.
+    // @ts-expect-error - TS2339 - Property 'iconWidth' does not exist on type 'Props'. | TS2339 - Property 'iconWidth' does not exist on type 'Props'. | TS2339 - Property 'iconSize' does not exist on type 'Props'.
     props.iconWidth !== undefined ? props.iconWidth : props.iconSize;
   const iconHeight =
-// @ts-expect-error - TS2339 - Property 'iconHeight' does not exist on type 'Props'. | TS2339 - Property 'iconHeight' does not exist on type 'Props'. | TS2339 - Property 'iconSize' does not exist on type 'Props'.
+    // @ts-expect-error - TS2339 - Property 'iconHeight' does not exist on type 'Props'. | TS2339 - Property 'iconHeight' does not exist on type 'Props'. | TS2339 - Property 'iconSize' does not exist on type 'Props'.
     props.iconHeight !== undefined ? props.iconHeight : props.iconSize;
 
   // The material-ui List component reserves 56 pixels for the icon, so the maximum
@@ -74,7 +76,6 @@ function ListIcon(props: Props) {
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         width: iconWidth,
@@ -85,10 +86,9 @@ function ListIcon(props: Props) {
       }}
     >
       {isGDevelopIcon ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+        // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <img title={tooltip} alt={tooltip} src={src} style={style} />
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <CorsAwareImage title={tooltip} alt={tooltip} src={src} style={style} />
       )}
     </div>

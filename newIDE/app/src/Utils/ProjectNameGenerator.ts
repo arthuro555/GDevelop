@@ -2124,6 +2124,7 @@ const nouns = [
   'zoo',
 ];
 
-const generateName = (): string => `${capitalize(sample(adjectives))} ${capitalize(sample(nouns))}`;
+const generateName = (): string =>
+  `${capitalize(sample(adjectives))} ${capitalize(sample(nouns))}`;
 
 export default generateName;

@@ -1,14 +1,16 @@
-import {roundPosition} from '../Utils/GridHelpers';
+import { roundPosition } from '../Utils/GridHelpers';
 import { unserializeFromJSObject } from '../Utils/Serializer';
 import { InstancesEditorSettings } from './InstancesEditorSettings';
-const gd: libGDevelop = global.gd;
 
 type Props = {
-  instances: gdInitialInstancesContainer,
-  instancesEditorSettings: InstancesEditorSettings
+  instances: gd.InitialInstancesContainer;
+  instancesEditorSettings: InstancesEditorSettings;
 };
 
-const roundPositionsToGrid = (pos: [number, number], instancesEditorSettings: InstancesEditorSettings): [number, number] => {
+const roundPositionsToGrid = (
+  pos: [number, number],
+  instancesEditorSettings: InstancesEditorSettings
+): [number, number] => {
   const newPos = pos;
 
   if (instancesEditorSettings.grid && instancesEditorSettings.snap) {
@@ -33,15 +35,12 @@ const roundPositionsToGrid = (pos: [number, number], instancesEditorSettings: In
  * which are real instances but can be deleted as long as they are not "committed".
  */
 export default class InstancesAdder {
-  _instances: gdInitialInstancesContainer;
-  _temporaryInstances: Array<gdInitialInstance>;
+  _instances: gd.InitialInstancesContainer;
+  _temporaryInstances: Array<gd.InitialInstance>;
   _instancesEditorSettings: InstancesEditorSettings;
   _zOrderFinder = new gd.HighestZOrderFinder();
 
-  constructor({
-    instances,
-    instancesEditorSettings,
-  }: Props) {
+  constructor({ instances, instancesEditorSettings }: Props) {
     this._instances = instances;
     this._instancesEditorSettings = instancesEditorSettings;
     this._temporaryInstances = [];
@@ -51,29 +50,27 @@ export default class InstancesAdder {
     this._instancesEditorSettings = instancesEditorSettings;
   }
 
-  addSerializedInstances = (
-    {
-      position,
-      copyReferential,
-      serializedInstances,
-      preventSnapToGrid = false,
-      addInstancesInTheForeground = false,
-    }: {
-      position: [number, number],
-      copyReferential: [number, number],
-      serializedInstances: Array<any>,
-      preventSnapToGrid?: boolean,
-      addInstancesInTheForeground?: boolean
-    },
-  ): Array<gdInitialInstance> => {
+  addSerializedInstances = ({
+    position,
+    copyReferential,
+    serializedInstances,
+    preventSnapToGrid = false,
+    addInstancesInTheForeground = false,
+  }: {
+    position: [number, number];
+    copyReferential: [number, number];
+    serializedInstances: Array<any>;
+    preventSnapToGrid?: boolean;
+    addInstancesInTheForeground?: boolean;
+  }): Array<gd.InitialInstance> => {
     this._zOrderFinder.reset();
     this._instances.iterateOverInstances(this._zOrderFinder);
     const sceneForegroundZOrder = this._zOrderFinder.getHighestZOrder() + 1;
 
-// @ts-expect-error - TS7034 - Variable 'addedInstancesLowestZOrder' implicitly has type 'any' in some locations where its type cannot be determined.
+    // @ts-expect-error - TS7034 - Variable 'addedInstancesLowestZOrder' implicitly has type 'any' in some locations where its type cannot be determined.
     let addedInstancesLowestZOrder = null;
 
-    const newInstances = serializedInstances.map(serializedInstance => {
+    const newInstances = serializedInstances.map((serializedInstance) => {
       const instance = new gd.InitialInstance();
       unserializeFromJSObject(instance, serializedInstance);
       const desiredPosition = [
@@ -82,15 +79,15 @@ export default class InstancesAdder {
       ];
       const newPos = preventSnapToGrid
         ? desiredPosition
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
-        : roundPositionsToGrid(desiredPosition, this._instancesEditorSettings);
+        : // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+          roundPositionsToGrid(desiredPosition, this._instancesEditorSettings);
       instance.setX(newPos[0]);
       instance.setY(newPos[1]);
       if (addInstancesInTheForeground) {
         if (
-// @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
           addedInstancesLowestZOrder === null ||
-// @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
           addedInstancesLowestZOrder > instance.getZOrder()
         ) {
           addedInstancesLowestZOrder = instance.getZOrder();
@@ -104,12 +101,12 @@ export default class InstancesAdder {
     });
 
     if (addInstancesInTheForeground && addedInstancesLowestZOrder !== null) {
-      newInstances.forEach(instance => {
+      newInstances.forEach((instance) => {
         instance.setZOrder(
           instance.getZOrder() -
             // Flow is not happy with addedInstancesLowestZOrder possible null value
             // so 0 is used as a fallback.
-// @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
+            // @ts-expect-error - TS7005 - Variable 'addedInstancesLowestZOrder' implicitly has an 'any' type.
             (addedInstancesLowestZOrder || 0) +
             sceneForegroundZOrder
         );
@@ -123,14 +120,19 @@ export default class InstancesAdder {
    * Immediately create new instance at the specified position
    * (specified in scene coordinates).
    */
-  addInstances = (pos: [number, number], objectNames: Array<string>, layer: string): Array<gdInitialInstance> => {
+  addInstances = (
+    pos: [number, number],
+    objectNames: Array<string>,
+    layer: string
+  ): Array<gd.InitialInstance> => {
     this._zOrderFinder.reset();
     this._instances.iterateOverInstances(this._zOrderFinder);
     const zOrder = this._zOrderFinder.getHighestZOrder() + 1;
 
     const newPos = roundPositionsToGrid(pos, this._instancesEditorSettings);
-    const addedInstances = objectNames.map(objectName => {
-      const instance: gdInitialInstance = this._instances.insertNewInitialInstance();
+    const addedInstances = objectNames.map((objectName) => {
+      const instance: gd.InitialInstance =
+        this._instances.insertNewInitialInstance();
       instance.setObjectName(objectName);
       instance.setX(newPos[0]);
       instance.setY(newPos[1]);
@@ -173,8 +175,9 @@ export default class InstancesAdder {
     const zOrder = this._zOrderFinder.getHighestZOrder() + 1;
 
     const newPos = roundPositionsToGrid(pos, this._instancesEditorSettings);
-    this._temporaryInstances = objectNames.map(objectName => {
-      const instance: gdInitialInstance = this._instances.insertNewInitialInstance();
+    this._temporaryInstances = objectNames.map((objectName) => {
+      const instance: gd.InitialInstance =
+        this._instances.insertNewInitialInstance();
       instance.setObjectName(objectName);
       instance.setX(newPos[0]);
       instance.setY(newPos[1]);
@@ -189,9 +192,11 @@ export default class InstancesAdder {
    * Update the temporary instances  positions
    * (specified in scene coordinates). Useful when dragging these instances.
    */
-  updateTemporaryInstancePositions = (pos: [number, number]): Array<gdInitialInstance> => {
+  updateTemporaryInstancePositions = (
+    pos: [number, number]
+  ): Array<gd.InitialInstance> => {
     const newPos = roundPositionsToGrid(pos, this._instancesEditorSettings);
-    this._temporaryInstances.forEach(instance => {
+    this._temporaryInstances.forEach((instance) => {
       instance.setX(newPos[0]);
       instance.setY(newPos[1]);
     });
@@ -203,7 +208,7 @@ export default class InstancesAdder {
    * Delete the temporary instances.
    */
   deleteTemporaryInstances() {
-    this._temporaryInstances.forEach(instance => {
+    this._temporaryInstances.forEach((instance) => {
       this._instances.removeInstance(instance);
     });
     this._temporaryInstances = [];

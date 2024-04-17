@@ -1,8 +1,7 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { t } from '@lingui/macro';
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS6142 - Module './UpdaterTools' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UpdaterTools.tsx', but '--jsx' is not set.
+
 import { ElectronUpdateStatus } from './UpdaterTools';
 import { FileMetadataAndStorageProviderName } from '../ProjectsStorage';
 import { ShortcutMap } from '../KeyboardShortcuts/DefaultShortcuts';
@@ -13,50 +12,74 @@ import {
 import { getElectronAccelerator } from '../KeyboardShortcuts';
 import { isMacLike } from '../Utils/Platform';
 import Window from '../Utils/Window';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 const electron = optionalRequire('electron');
 
 const isDesktop = !!electron;
 
 export type BuildMainMenuProps = {
-  i18n: I18nType,
-  project: gdProject | null | undefined,
-  canSaveProjectAs: boolean,
-  recentProjectFiles: Array<FileMetadataAndStorageProviderName>,
-  shortcutMap: ShortcutMap,
-  isApplicationTopLevelMenu: boolean
+  i18n: I18nType;
+  project: gd.Project | null | undefined;
+  canSaveProjectAs: boolean;
+  recentProjectFiles: Array<FileMetadataAndStorageProviderName>;
+  shortcutMap: ShortcutMap;
+  isApplicationTopLevelMenu: boolean;
 };
 
 export type MainMenuCallbacks = {
-  onChooseProject: () => void,
-  onOpenRecentFile: (fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName) => Promise<void>,
-  onSaveProject: () => Promise<void>,
-  onSaveProjectAs: () => void,
-  onShowVersionHistory: () => void,
-  onCloseProject: () => Promise<boolean>,
-  onCloseApp: () => void,
-  onExportProject: () => void,
-  onInviteCollaborators: () => void,
-  onCreateProject: (open?: boolean) => void,
-  onCreateBlank: () => void,
-  onOpenProjectManager: (open?: boolean) => void,
-  onOpenHomePage: () => void,
-  onOpenDebugger: () => void,
-  onOpenAbout: (open?: boolean) => void,
-  onOpenPreferences: (open?: boolean) => void,
-  onOpenLanguage: (open?: boolean) => void,
-  onOpenProfile: (open?: boolean) => void,
-  setElectronUpdateStatus: (arg1: ElectronUpdateStatus) => void
+  onChooseProject: () => void;
+  onOpenRecentFile: (
+    fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName
+  ) => Promise<void>;
+  onSaveProject: () => Promise<void>;
+  onSaveProjectAs: () => void;
+  onShowVersionHistory: () => void;
+  onCloseProject: () => Promise<boolean>;
+  onCloseApp: () => void;
+  onExportProject: () => void;
+  onInviteCollaborators: () => void;
+  onCreateProject: (open?: boolean) => void;
+  onCreateBlank: () => void;
+  onOpenProjectManager: (open?: boolean) => void;
+  onOpenHomePage: () => void;
+  onOpenDebugger: () => void;
+  onOpenAbout: (open?: boolean) => void;
+  onOpenPreferences: (open?: boolean) => void;
+  onOpenLanguage: (open?: boolean) => void;
+  onOpenProfile: (open?: boolean) => void;
+  setElectronUpdateStatus: (arg1: ElectronUpdateStatus) => void;
 };
 
 export type MainMenuExtraCallbacks = {
-  onClosePreview?: (windowId: number) => void | null | undefined
+  onClosePreview?: (windowId: number) => void | null | undefined;
 };
 
-export type MainMenuEvent = 'main-menu-open' | 'main-menu-open-recent' | 'main-menu-save' | 'main-menu-save-as' | 'main-menu-show-version-history' | 'main-menu-close' | 'main-menu-close-app' | 'main-menu-export' | 'main-menu-invite-collaborators' | 'main-menu-create-template' | 'main-menu-create-blank' | 'main-menu-open-project-manager' | 'main-menu-open-home-page' | 'main-menu-open-debugger' | 'main-menu-open-about' | 'main-menu-open-preferences' | 'main-menu-open-language' | 'main-menu-open-profile' | 'update-status';
+export type MainMenuEvent =
+  | 'main-menu-open'
+  | 'main-menu-open-recent'
+  | 'main-menu-save'
+  | 'main-menu-save-as'
+  | 'main-menu-show-version-history'
+  | 'main-menu-close'
+  | 'main-menu-close-app'
+  | 'main-menu-export'
+  | 'main-menu-invite-collaborators'
+  | 'main-menu-create-template'
+  | 'main-menu-create-blank'
+  | 'main-menu-open-project-manager'
+  | 'main-menu-open-home-page'
+  | 'main-menu-open-debugger'
+  | 'main-menu-open-about'
+  | 'main-menu-open-preferences'
+  | 'main-menu-open-language'
+  | 'main-menu-open-profile'
+  | 'update-status';
 
-const getMainMenuEventCallback = (mainMenuEvent: string, callbacks: MainMenuCallbacks): any => {
+const getMainMenuEventCallback = (
+  mainMenuEvent: string,
+  callbacks: MainMenuCallbacks
+): any => {
   const mapping = {
     'main-menu-open': callbacks.onChooseProject,
     'main-menu-open-recent': callbacks.onOpenRecentFile,
@@ -79,20 +102,18 @@ const getMainMenuEventCallback = (mainMenuEvent: string, callbacks: MainMenuCall
     'update-status': callbacks.setElectronUpdateStatus,
   } as const;
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly 'main-menu-open': () => void; readonly 'main-menu-open-recent': (fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName) => Promise<...>; ... 16 more ...; readonly 'update-status': (arg1: ElectronUpdateStatus) => void; }'.
+  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly 'main-menu-open': () => void; readonly 'main-menu-open-recent': (fileMetadataAndStorageProviderName: FileMetadataAndStorageProviderName) => Promise<...>; ... 16 more ...; readonly 'update-status': (arg1: ElectronUpdateStatus) => void; }'.
   return mapping[mainMenuEvent] || (() => {});
 };
 
-export const buildMainMenuDeclarativeTemplate = (
-  {
-    shortcutMap,
-    i18n,
-    recentProjectFiles,
-    project,
-    canSaveProjectAs,
-    isApplicationTopLevelMenu,
-  }: BuildMainMenuProps,
-): Array<MenuDeclarativeItemTemplate> => {
+export const buildMainMenuDeclarativeTemplate = ({
+  shortcutMap,
+  i18n,
+  recentProjectFiles,
+  project,
+  canSaveProjectAs,
+  isApplicationTopLevelMenu,
+}: BuildMainMenuProps): Array<MenuDeclarativeItemTemplate> => {
   const fileTemplate: MenuDeclarativeItemTemplate = {
     label: i18n._(t`File`),
     submenu: [
@@ -102,7 +123,7 @@ export const buildMainMenuDeclarativeTemplate = (
           {
             label: i18n._(t`New empty project...`),
             accelerator: getElectronAccelerator(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+              // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
               shortcutMap['CREATE_NEW_PROJECT']
             ),
             onClickSendEvent: 'main-menu-create-blank',
@@ -116,7 +137,7 @@ export const buildMainMenuDeclarativeTemplate = (
       { type: 'separator' },
       {
         label: i18n._(t`Open...`),
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
         accelerator: getElectronAccelerator(shortcutMap['OPEN_PROJECT']),
         onClickSendEvent: 'main-menu-open',
       },
@@ -124,7 +145,7 @@ export const buildMainMenuDeclarativeTemplate = (
         label: i18n._(t`Open Recent`),
         submenu:
           recentProjectFiles.length > 0
-            ? recentProjectFiles.map(item => ({
+            ? recentProjectFiles.map((item) => ({
                 label: item.fileMetadata.fileIdentifier,
                 onClickSendEvent: 'main-menu-open-recent',
                 eventArgs: item,
@@ -139,14 +160,14 @@ export const buildMainMenuDeclarativeTemplate = (
       { type: 'separator' },
       {
         label: i18n._(t`Save`),
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
         accelerator: getElectronAccelerator(shortcutMap['SAVE_PROJECT']),
         onClickSendEvent: 'main-menu-save',
         enabled: !!project,
       },
       {
         label: i18n._(t`Save as...`),
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
         accelerator: getElectronAccelerator(shortcutMap['SAVE_PROJECT_AS']),
         onClickSendEvent: 'main-menu-save-as',
         enabled: canSaveProjectAs,
@@ -160,7 +181,7 @@ export const buildMainMenuDeclarativeTemplate = (
       {
         label: i18n._(t`Invite collaborators`),
         accelerator: getElectronAccelerator(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+          // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
           shortcutMap['INVITE_COLLABORATORS']
         ),
         onClickSendEvent: 'main-menu-invite-collaborators',
@@ -168,7 +189,7 @@ export const buildMainMenuDeclarativeTemplate = (
       },
       {
         label: i18n._(t`Export (web, iOS, Android)...`),
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
         accelerator: getElectronAccelerator(shortcutMap['EXPORT_GAME']),
         onClickSendEvent: 'main-menu-export',
         enabled: !!project,
@@ -176,12 +197,12 @@ export const buildMainMenuDeclarativeTemplate = (
       { type: 'separator' },
       {
         label: i18n._(t`Close Project`),
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
         accelerator: getElectronAccelerator(shortcutMap['CLOSE_PROJECT']),
         onClickSendEvent: 'main-menu-close',
         enabled: !!project,
       },
-// @ts-expect-error - TS2322 - Type '{ type: string; }' is not assignable to type 'MenuDeclarativeItemTemplate'.
+
       ...(!isMacLike() || !isApplicationTopLevelMenu
         ? [
             { type: 'separator' },
@@ -204,7 +225,7 @@ export const buildMainMenuDeclarativeTemplate = (
                   {
                     label: i18n._(t`Exit GDevelop`),
                     accelerator: getElectronAccelerator(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+                      // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
                       shortcutMap['QUIT_APP']
                     ),
                     onClickSendEvent: 'main-menu-close-app',
@@ -238,7 +259,7 @@ export const buildMainMenuDeclarativeTemplate = (
       {
         label: i18n._(t`Show Project Manager`),
         accelerator: getElectronAccelerator(
-// @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+          // @ts-expect-error - TS2345 - Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
           shortcutMap['OPEN_PROJECT_MANAGER']
         ),
         onClickSendEvent: 'main-menu-open-project-manager',
@@ -254,7 +275,7 @@ export const buildMainMenuDeclarativeTemplate = (
         enabled: !!project,
       },
       // Some Electron specific menu items, not shown in the web-app.
-// @ts-expect-error - TS2322 - Type '{ type: string; }' is not assignable to type 'MenuDeclarativeItemTemplate'.
+
       ...(!!electron
         ? [
             { type: 'separator' },
@@ -342,7 +363,7 @@ export const buildMainMenuDeclarativeTemplate = (
         label: i18n._(t`Report a wrong translation`),
         onClickOpenLink: 'https://github.com/4ian/GDevelop/issues/969',
       },
-// @ts-expect-error - TS2322 - Type '{ type: string; }' is not assignable to type 'MenuDeclarativeItemTemplate'.
+
       ...(isMacLike() && isDesktop
         ? []
         : [
@@ -419,56 +440,53 @@ export const buildMainMenuDeclarativeTemplate = (
 
 export const adaptFromDeclarativeTemplate = (
   menuDeclarativeTemplate: Array<MenuDeclarativeItemTemplate>,
-  callbacks: MainMenuCallbacks,
+  callbacks: MainMenuCallbacks
 ): Array<MenuItemTemplate> => {
-// @ts-expect-error - TS2322 - Type '({ click: (() => void) | undefined; submenu: MenuItemTemplate[] | undefined; label: string; visible?: boolean | undefined; enabled?: boolean | undefined; accelerator?: string | undefined; } | { ...; } | { ...; } | { ...; })[]' is not assignable to type 'MenuItemTemplate[]'.
-  const adaptMenuDeclarativeItemTemplate = (menuTemplate: Array<MenuDeclarativeItemTemplate>): Array<MenuItemTemplate> => menuTemplate.map((menuItemTemplate: MenuDeclarativeItemTemplate) => {
-    const {
-      // $FlowFixMe - property can be undefined.
-// @ts-expect-error - TS2339 - Property 'onClickSendEvent' does not exist on type 'MenuDeclarativeItemTemplate'.
-      onClickSendEvent,
-      // $FlowFixMe - property can be undefined.
-// @ts-expect-error - TS2339 - Property 'onClickOpenLink' does not exist on type 'MenuDeclarativeItemTemplate'.
-      onClickOpenLink,
-      // $FlowFixMe - property can be undefined.
-// @ts-expect-error - TS2339 - Property 'eventArgs' does not exist on type 'MenuDeclarativeItemTemplate'.
-      eventArgs,
-      ...menuItemTemplateRest
-    } = menuItemTemplate;
+  const adaptMenuDeclarativeItemTemplate = (
+    menuTemplate: Array<MenuDeclarativeItemTemplate>
+  ): Array<MenuItemTemplate> =>
+    menuTemplate.map((menuItemTemplate: MenuDeclarativeItemTemplate) => {
+      const {
+        // $FlowFixMe - property can be undefined.
 
-    const hasOnClick = onClickSendEvent || onClickOpenLink;
+        onClickSendEvent,
+        // $FlowFixMe - property can be undefined.
 
-    return {
-      ...menuItemTemplateRest,
-      click: hasOnClick
-        ? function() {
-// @ts-expect-error - TS2339 - Property 'onClickSendEvent' does not exist on type 'MenuDeclarativeItemTemplate'.
-            if (menuItemTemplate.onClickSendEvent) {
-// @ts-expect-error - TS2339 - Property 'onClickSendEvent' does not exist on type 'MenuDeclarativeItemTemplate'.
-              const mainMenuEvent = menuItemTemplate.onClickSendEvent;
-              const callback = getMainMenuEventCallback(
-                mainMenuEvent,
-                callbacks
-              );
+        onClickOpenLink,
+        // $FlowFixMe - property can be undefined.
 
-              if (eventArgs) callback(eventArgs);
-              else callback();
+        eventArgs,
+        ...menuItemTemplateRest
+      } = menuItemTemplate;
+
+      const hasOnClick = onClickSendEvent || onClickOpenLink;
+
+      return {
+        ...menuItemTemplateRest,
+        click: hasOnClick
+          ? function () {
+              if (menuItemTemplate.onClickSendEvent) {
+                const mainMenuEvent = menuItemTemplate.onClickSendEvent;
+                const callback = getMainMenuEventCallback(
+                  mainMenuEvent,
+                  callbacks
+                );
+
+                if (eventArgs) callback(eventArgs);
+                else callback();
+              }
+
+              if (menuItemTemplate.onClickOpenLink) {
+                Window.openExternalURL(menuItemTemplate.onClickOpenLink);
+              }
             }
+          : undefined,
 
-// @ts-expect-error - TS2339 - Property 'onClickOpenLink' does not exist on type 'MenuDeclarativeItemTemplate'.
-            if (menuItemTemplate.onClickOpenLink) {
-// @ts-expect-error - TS2339 - Property 'onClickOpenLink' does not exist on type 'MenuDeclarativeItemTemplate'.
-              Window.openExternalURL(menuItemTemplate.onClickOpenLink);
-            }
-          }
-        : undefined,
-// @ts-expect-error - TS2339 - Property 'submenu' does not exist on type 'MenuDeclarativeItemTemplate'.
-      submenu: menuItemTemplate.submenu
-// @ts-expect-error - TS2339 - Property 'submenu' does not exist on type 'MenuDeclarativeItemTemplate'.
-        ? adaptMenuDeclarativeItemTemplate(menuItemTemplate.submenu)
-        : undefined,
-    };
-  });
+        submenu: menuItemTemplate.submenu
+          ? adaptMenuDeclarativeItemTemplate(menuItemTemplate.submenu)
+          : undefined,
+      };
+    });
 
   return adaptMenuDeclarativeItemTemplate(menuDeclarativeTemplate);
 };

@@ -1,11 +1,13 @@
-import {applyResourceDefaults, getLocalResourceFullPath, getResourceFilePathStatus} from '../../ResourcesList/ResourceUtils';
+import {
+  applyResourceDefaults,
+  getLocalResourceFullPath,
+  getResourceFilePathStatus,
+} from '../../ResourcesList/ResourceUtils';
 import { mapVector } from '../../Utils/MapFor';
 import newNameGenerator from '../../Utils/NewNameGenerator';
 import optionalLazyRequire from '../../Utils/OptionalLazyRequire';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
-import optionalRequire from '../../Utils/OptionalRequire';
 
-const gd: libGDevelop = global.gd;
+import optionalRequire from '../../Utils/OptionalRequire';
 
 const lazyRequireGlob = optionalLazyRequire('glob');
 const path = optionalRequire('path');
@@ -19,8 +21,8 @@ export const locateResourceFile = ({
   project,
   resource,
 }: {
-  project: gdProject,
-  resource: gdResource
+  project: gd.Project;
+  resource: gd.Resource;
 }) => {
   const resourceFilePath = getLocalResourceFullPath(
     project,
@@ -34,8 +36,8 @@ export const openResourceFile = ({
   project,
   resource,
 }: {
-  project: gdProject,
-  resource: gdResource
+  project: gd.Project;
+  resource: gd.Resource;
 }) => {
   const resourceFilePath = getLocalResourceFullPath(
     project,
@@ -48,8 +50,8 @@ export const copyResourceFilePath = ({
   project,
   resource,
 }: {
-  project: gdProject,
-  resource: gdResource
+  project: gd.Project;
+  resource: gd.Resource;
 }) => {
   const resourceFilePath = getLocalResourceFullPath(
     project,
@@ -63,9 +65,9 @@ export const scanForNewResources = async ({
   extensions,
   createResource,
 }: {
-  project: gdProject,
-  extensions: Array<string>,
-  createResource: () => gdResource
+  project: gd.Project;
+  extensions: Array<string>;
+  createResource: () => gd.Resource;
 }) => {
   const glob = lazyRequireGlob();
   if (!glob) return;
@@ -75,24 +77,29 @@ export const scanForNewResources = async ({
 
   const allExtensions = [
     ...extensions,
-    ...extensions.map(extension => extension.toUpperCase()),
+    ...extensions.map((extension) => extension.toUpperCase()),
   ];
 
   try {
-    const allFiles = await new Promise((resolve: (result: Promise<never>) => void, reject: (error?: any) => void) => {
-      glob(
-        projectPath + '/**/*.{' + allExtensions.join(',') + '}',
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
-        (error, files) => {
-          if (error) reject(error);
-          else resolve(files);
-        }
-      );
-    });
+    const allFiles = await new Promise(
+      (
+        resolve: (result: Promise<never>) => void,
+        reject: (error?: any) => void
+      ) => {
+        glob(
+          projectPath + '/**/*.{' + allExtensions.join(',') + '}',
+          // @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
+          (error, files) => {
+            if (error) reject(error);
+            else resolve(files);
+          }
+        );
+      }
+    );
 
     const filesToCheck = new gd.VectorString();
-// @ts-expect-error - TS2339 - Property 'forEach' does not exist on type 'never'. | TS7006 - Parameter 'filePath' implicitly has an 'any' type.
-    allFiles.forEach(filePath =>
+    // @ts-expect-error - TS2339 - Property 'forEach' does not exist on type 'never'. | TS7006 - Parameter 'filePath' implicitly has an 'any' type.
+    allFiles.forEach((filePath) =>
       filesToCheck.push_back(path.relative(projectPath, filePath))
     );
     const filePathsNotInResources = project
@@ -101,7 +108,7 @@ export const scanForNewResources = async ({
     filesToCheck.delete();
 
     mapVector(filePathsNotInResources, (relativeFilePath: string) => {
-      const resourceName = newNameGenerator(relativeFilePath, name =>
+      const resourceName = newNameGenerator(relativeFilePath, (name) =>
         resourcesManager.hasResource(name)
       );
 
@@ -116,7 +123,7 @@ export const scanForNewResources = async ({
         `"${relativeFilePath}" added to project as resource named "${resourceName}".`
       );
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error(`Error finding files inside ${projectPath}:`, error);
     return;
   }
@@ -125,19 +132,19 @@ export const scanForNewResources = async ({
 export const removeAllResourcesWithInvalidPath = ({
   project,
 }: {
-  project: gdProject
+  project: gd.Project;
 }) => {
   const resourcesManager = project.getResourcesManager();
   const removedResourceNames = resourcesManager
     .getAllResourceNames()
     .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-    .filter(resourceName => {
+    // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+    .filter((resourceName) => {
       return getResourceFilePathStatus(project, resourceName) === 'error';
     });
 
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-  removedResourceNames.forEach(resourceName => {
+  // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+  removedResourceNames.forEach((resourceName) => {
     resourcesManager.removeResource(resourceName);
     console.info('Removed due to invalid path: ' + resourceName);
   });

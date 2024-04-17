@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../Profile/EditProfileDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/EditProfileDialog.tsx', but '--jsx' is not set.
+
 import EditProfileDialog from '../../../Profile/EditProfileDialog';
 
 export default {
@@ -59,16 +59,16 @@ const defaultProps = {
 export const WithSubscription = () => <EditProfileDialog {...defaultProps} />;
 
 export const WithoutSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <EditProfileDialog {...defaultProps} subscription={null} />
 );
 
 export const ErrorFromBackend = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <EditProfileDialog {...defaultProps} error={{ code: 'auth/username-used' }} />
 );
 
 export const Submitting = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <EditProfileDialog {...defaultProps} actionInProgress />
 );

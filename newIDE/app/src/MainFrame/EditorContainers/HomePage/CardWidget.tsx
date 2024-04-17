@@ -21,29 +21,29 @@ const styles = {
 
 // Styles to give the impression of pressing an element.
 const useStylesForWidget = (useDefaultDisabledStyle?: boolean) =>
-  makeStyles(theme =>
+  makeStyles((theme) =>
     createStyles({
       root: {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+        // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
         border: `1px solid ${theme.palette.text.primary}`,
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+        // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
         borderBottom: `6px solid ${theme.palette.text.primary}`,
         transition: 'background-color 100ms ease',
         '&:focus': {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+          // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
           backgroundColor: theme.palette.action.hover,
         },
         '&:hover': {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+          // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
           backgroundColor: theme.palette.action.hover,
         },
         '&:disabled': useDefaultDisabledStyle
           ? {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+              // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
               opacity: theme.palette.action.disabledOpacity,
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+              // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
               border: `1px solid ${theme.palette.text.secondary}`,
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+              // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
               borderBottom: `6px solid ${theme.palette.text.secondary}`,
             }
           : undefined,
@@ -55,11 +55,11 @@ export const LARGE_WIDGET_SIZE = 320;
 export const SMALL_WIDGET_SIZE = 200;
 
 type Props = {
-  children: React.ReactNode,
-  onClick: () => void,
-  size: 'small' | 'large' | 'banner',
-  disabled?: boolean,
-  useDefaultDisabledStyle?: boolean
+  children: React.ReactNode;
+  onClick: () => void;
+  size: 'small' | 'large' | 'banner';
+  disabled?: boolean;
+  useDefaultDisabledStyle?: boolean;
 };
 
 export const CardWidget = ({
@@ -76,13 +76,13 @@ export const CardWidget = ({
     size === 'banner'
       ? undefined
       : isMobile
-      ? undefined
-      : size === 'small'
-      ? SMALL_WIDGET_SIZE
-      : LARGE_WIDGET_SIZE;
+        ? undefined
+        : size === 'small'
+          ? SMALL_WIDGET_SIZE
+          : LARGE_WIDGET_SIZE;
 
   return (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ButtonBase
       onClick={onClick}
       focusRipple
@@ -100,7 +100,6 @@ export const CardWidget = ({
       }}
       disabled={disabled}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.contentWrapper}>{children}</div>
     </ButtonBase>
   );

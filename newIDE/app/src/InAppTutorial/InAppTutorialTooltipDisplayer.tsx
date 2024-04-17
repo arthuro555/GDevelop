@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -8,28 +8,27 @@ import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
 import { Column, Spacer } from '../UI/Grid';
 import { getDisplayZIndexForHighlighter } from './HTMLUtils';
 import { InAppTutorialFormattedTooltip } from '../Utils/GDevelopServices/InAppTutorial';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ChevronArrowBottom'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowBottom.js' implicitly has an 'any' type.
+
 import ChevronArrowBottom from '../UI/CustomSvgIcons/ChevronArrowBottom';
 import useIsElementVisibleInScroll from '../Utils/UseIsElementVisibleInScroll';
-// @ts-expect-error - TS6142 - Module '../UI/MarkdownText' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/MarkdownText.tsx', but '--jsx' is not set.
+
 import { MarkdownText } from '../UI/MarkdownText';
-// @ts-expect-error - TS6142 - Module '../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../UI/RaisedButton';
 import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Cross'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cross.js' implicitly has an 'any' type.
+
 import Cross from '../UI/CustomSvgIcons/Cross';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { LineStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ChevronArrowTop'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowTop.js' implicitly has an 'any' type.
+
 import ChevronArrowTop from '../UI/CustomSvgIcons/ChevronArrowTop';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/TextEllipsis'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextEllipsis.js' implicitly has an 'any' type.
+
 import { textEllipsisStyle } from '../UI/TextEllipsis';
 import { useResponsiveWindowSize } from '../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../UI/TextButton';
 
 const themeColors = {
@@ -136,10 +135,10 @@ const useClasses = makeStyles({
 });
 
 type TooltipBodyProps = {
-  tooltip: InAppTutorialFormattedTooltip,
-  buttonLabel?: string,
-  goToNextStep: () => void,
-  fillAutomatically?: () => void
+  tooltip: InAppTutorialFormattedTooltip;
+  buttonLabel?: string;
+  goToNextStep: () => void;
+  fillAutomatically?: () => void;
 };
 
 const TooltipBody = ({
@@ -150,28 +149,21 @@ const TooltipBody = ({
 }: TooltipBodyProps) => {
   const { isMobile } = useResponsiveWindowSize();
   const titleAndDescription = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin>
       {tooltip.title && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Typography style={styles.title} variant="subtitle1" translate="no">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <MarkdownText source={tooltip.title} allowParagraphs />
         </Typography>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       {tooltip.title && tooltip.description && <span style={styles.divider} />}
       {tooltip.description && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Typography style={styles.description} translate="no">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <MarkdownText source={tooltip.description} allowParagraphs />
         </Typography>
       )}
     </Column>
   );
   const image = tooltip.image && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <img
       src={tooltip.image.dataUrl}
       alt="Tutorial helper"
@@ -184,22 +176,17 @@ const TooltipBody = ({
     />
   );
   const button = buttonLabel && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       {tooltip.image ? <Spacer /> : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <RaisedButton primary label={buttonLabel} onClick={goToNextStep} />
     </Column>
   );
   const imageAndButton = isMobile ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LineStackLayout noMargin alignItems="center">
       {image}
       {button}
     </LineStackLayout>
   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin alignItems="center">
       {image}
       {button}
@@ -207,16 +194,13 @@ const TooltipBody = ({
   );
 
   const fillAutomaticallyButton = fillAutomatically && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <TextButton
       onClick={fillAutomatically}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Fill automatically</Trans>}
       primary
     />
   );
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin>
       {titleAndDescription}
       {imageAndButton}
@@ -226,13 +210,13 @@ const TooltipBody = ({
 };
 
 type TooltipHeaderProps = {
-  paletteType: 'dark' | 'light',
-  progress: number,
-  showFoldButton: boolean,
-  showQuitButton: boolean,
-  onClickFoldButton: () => void,
-  tooltipContent?: string,
-  endTutorial: () => void
+  paletteType: 'dark' | 'light';
+  progress: number;
+  showFoldButton: boolean;
+  showQuitButton: boolean;
+  onClickFoldButton: () => void;
+  tooltipContent?: string;
+  endTutorial: () => void;
 };
 
 const TooltipHeader = ({
@@ -257,28 +241,24 @@ const TooltipHeader = ({
           backgroundColor: themeColors.grey10,
         };
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LineStackLayout
       alignItems="center"
       noMargin
       justifyContent={tooltipContent ? undefined : 'space-between'}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Typography
         style={{ ...styles.headerText, color: progressColor }}
         translate="no"
       >
         {progress}%
       </Typography>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LineStackLayout noMargin alignItems="center" overflow="hidden">
         {tooltipContent || !showQuitButton ? null : (
           // We hide the quit button:
           // - When the tooltip is folded, the tooltip content should not be null;
           // - When requested.
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <ButtonBase disableRipple onClick={endTutorial}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <div
               style={{
                 ...styles.iconButtonContainer,
@@ -286,18 +266,14 @@ const TooltipHeader = ({
                 ...iconButtonContainerColors,
               }}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Cross />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Typography style={styles.headerText} translate="no">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>Quit tutorial</Trans>
               </Typography>
             </div>
           </ButtonBase>
         )}
         {tooltipContent && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Typography
             variant="body2"
             style={{ ...styles.headerContentPreview, ...textEllipsisStyle }}
@@ -307,16 +283,13 @@ const TooltipHeader = ({
           </Typography>
         )}
         {showFoldButton ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ButtonBase disableRipple onClick={onClickFoldButton}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <span
               style={{
                 ...styles.iconButtonContainer,
                 ...iconButtonContainerColors,
               }}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               {tooltipContent ? <ChevronArrowTop /> : <ChevronArrowBottom />}
             </span>
           </ButtonBase>
@@ -327,14 +300,14 @@ const TooltipHeader = ({
 };
 
 type Props = {
-  anchorElement: HTMLElement,
-  tooltip: InAppTutorialFormattedTooltip,
-  showQuitButton: boolean,
-  buttonLabel?: string,
-  progress: number,
-  endTutorial: () => void,
-  goToNextStep: () => void,
-  fillAutomatically?: () => void
+  anchorElement: HTMLElement;
+  tooltip: InAppTutorialFormattedTooltip;
+  showQuitButton: boolean;
+  buttonLabel?: string;
+  progress: number;
+  endTutorial: () => void;
+  goToNextStep: () => void;
+  fillAutomatically?: () => void;
 };
 
 const InAppTutorialTooltipDisplayer = ({
@@ -364,12 +337,9 @@ const InAppTutorialTooltipDisplayer = ({
   ).replace(/\(.+\)/g, ''); // Remove content between parenthesis as they should contain dynamic content (to prevent unfolding the tooltip for nothing).
 
   // If tooltip changes, we unfold the tooltip.
-  React.useEffect(
-    () => {
-      setFolded(false);
-    },
-    [tooltipConcatenated]
-  );
+  React.useEffect(() => {
+    setFolded(false);
+  }, [tooltipConcatenated]);
 
   useIsElementVisibleInScroll(anchorElement, updateVisibility);
 
@@ -384,7 +354,6 @@ const InAppTutorialTooltipDisplayer = ({
       : '#FAFAFA'; // Grey00
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Popper
       id="in-app-tutorial-tooltip-displayer"
       open={show}
@@ -412,9 +381,7 @@ const InAppTutorialTooltipDisplayer = ({
       }}
     >
       {({ TransitionProps }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Fade {...TransitionProps} timeout={{ enter: 350, exit: 0 }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Paper
             style={{
               ...styles.paper,
@@ -422,9 +389,7 @@ const InAppTutorialTooltipDisplayer = ({
             }}
             elevation={4}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TooltipHeader
                 paletteType={paletteType}
                 // Display the hide button when standalone only
@@ -438,7 +403,6 @@ const InAppTutorialTooltipDisplayer = ({
                 endTutorial={endTutorial}
               />
               {!folded && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <TooltipBody
                   tooltip={tooltip}
                   buttonLabel={buttonLabel}
@@ -447,7 +411,6 @@ const InAppTutorialTooltipDisplayer = ({
                 />
               )}
             </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <span
               id="arrow-popper"
               className={classes.arrow}

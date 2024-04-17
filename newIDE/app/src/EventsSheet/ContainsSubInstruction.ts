@@ -1,8 +1,6 @@
-const gd: libGDevelop = global.gd;
-
 export const containsSubInstructions = (
-  instruction: gdInstruction,
-  instructionsList: gdInstructionsList
+  instruction: gd.Instruction,
+  instructionsList: gd.InstructionsList
 ) => {
   const subInstructionsList = instruction.getSubInstructions();
   if (gd.compare(subInstructionsList, instructionsList)) return true;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GDevelopAssetApi } from './ApiConfigs';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../OptionalRequire';
 import { MessageDescriptor } from '../i18n/MessageDescriptor.flow';
 import { MessageByLocale } from '../i18n/MessageByLocale';
@@ -30,133 +30,168 @@ export const guidedLessonsIds = [
 
 const fullTutorialIds = [FLING_GAME_IN_APP_TUTORIAL_ID];
 
-export const allInAppTutorialIds = [...guidedLessonsIds, ...fullTutorialIds] as const;
+export const allInAppTutorialIds = [
+  ...guidedLessonsIds,
+  ...fullTutorialIds,
+] as const;
 
 export type InAppTutorialShortHeader = {
-  id: string,
-  contentUrl: string,
-  availableLocales: Array<string>,
-  initialTemplateUrl?: string,
+  id: string;
+  contentUrl: string;
+  availableLocales: Array<string>;
+  initialTemplateUrl?: string;
   initialProjectData?: {
-    [key: string]: string
-  }
+    [key: string]: string;
+  };
 };
 
-export type EditorIdentifier = 'Scene' | 'EventsSheet' | 'Home' | 'ExternalEvents' | 'ExternalLayout' | 'Extension' | 'Resources';
+export type EditorIdentifier =
+  | 'Scene'
+  | 'EventsSheet'
+  | 'Home'
+  | 'ExternalEvents'
+  | 'ExternalLayout'
+  | 'Extension'
+  | 'Resources';
 
-export type TranslatedText = {
-  messageDescriptor: MessageDescriptor
-} | {
-  messageByLocale: MessageByLocale
-};
+export type TranslatedText =
+  | {
+      messageDescriptor: MessageDescriptor;
+    }
+  | {
+      messageByLocale: MessageByLocale;
+    };
 
-type InAppTutorialFlowStepDOMChangeTrigger = {
-  presenceOfElement: string
-} | {
-  absenceOfElement: string
-};
-type InAppTutorialFlowStepShortcutTrigger = InAppTutorialFlowStepDOMChangeTrigger | {
-  objectAddedInLayout: true
-};
+type InAppTutorialFlowStepDOMChangeTrigger =
+  | {
+      presenceOfElement: string;
+    }
+  | {
+      absenceOfElement: string;
+    };
+type InAppTutorialFlowStepShortcutTrigger =
+  | InAppTutorialFlowStepDOMChangeTrigger
+  | {
+      objectAddedInLayout: true;
+    };
 
-export type InAppTutorialFlowStepTrigger = InAppTutorialFlowStepDOMChangeTrigger | {
-  editorIsActive: string
-} | {
-  valueHasChanged: true
-} | {
-  valueEquals: string
-} | {
-  instanceAddedOnScene: string,
-  instancesCount?: number
-} | {
-  objectAddedInLayout: true
-} | {
-  previewLaunched: true
-} | {
-  clickOnTooltipButton: TranslatedText
-};
+export type InAppTutorialFlowStepTrigger =
+  | InAppTutorialFlowStepDOMChangeTrigger
+  | {
+      editorIsActive: string;
+    }
+  | {
+      valueHasChanged: true;
+    }
+  | {
+      valueEquals: string;
+    }
+  | {
+      instanceAddedOnScene: string;
+      instancesCount?: number;
+    }
+  | {
+      objectAddedInLayout: true;
+    }
+  | {
+      previewLaunched: true;
+    }
+  | {
+      clickOnTooltipButton: TranslatedText;
+    };
 
-export type InAppTutorialFlowStepFormattedTrigger = InAppTutorialFlowStepDOMChangeTrigger | {
-  editorIsActive: string
-} | {
-  valueHasChanged: true
-} | {
-  valueEquals: string
-} | {
-  instanceAddedOnScene: string,
-  instancesCount?: number
-} | {
-  objectAddedInLayout: true
-} | {
-  previewLaunched: true
-} | {
-  clickOnTooltipButton: string
-};
+export type InAppTutorialFlowStepFormattedTrigger =
+  | InAppTutorialFlowStepDOMChangeTrigger
+  | {
+      editorIsActive: string;
+    }
+  | {
+      valueHasChanged: true;
+    }
+  | {
+      valueEquals: string;
+    }
+  | {
+      instanceAddedOnScene: string;
+      instancesCount?: number;
+    }
+  | {
+      objectAddedInLayout: true;
+    }
+  | {
+      previewLaunched: true;
+    }
+  | {
+      clickOnTooltipButton: string;
+    };
 
 export type InAppTutorialTooltip = {
-  standalone?: true,
-  placement?: 'bottom' | 'left' | 'right' | 'top',
-  mobilePlacement?: 'bottom' | 'left' | 'right' | 'top',
-  title?: TranslatedText,
-  description?: TranslatedText,
-  touchDescription?: TranslatedText,
+  standalone?: true;
+  placement?: 'bottom' | 'left' | 'right' | 'top';
+  mobilePlacement?: 'bottom' | 'left' | 'right' | 'top';
+  title?: TranslatedText;
+  description?: TranslatedText;
+  touchDescription?: TranslatedText;
   image?: {
-    dataUrl: string,
-    width?: string
-  }
+    dataUrl: string;
+    width?: string;
+  };
 };
 
-export type InAppTutorialFormattedTooltip = (InAppTutorialTooltip) & {
-  title?: string,
-  description?: string
+export type InAppTutorialFormattedTooltip = InAppTutorialTooltip & {
+  title?: string;
+  description?: string;
 };
 
 export type InAppTutorialDialog = {
-  content: Array<TranslatedText | {
-    image: {
-      imageSource: string,
-      linkHref?: string
-    }
-  }>
+  content: Array<
+    | TranslatedText
+    | {
+        image: {
+          imageSource: string;
+          linkHref?: string;
+        };
+      }
+  >;
 };
 
 export type InAppTutorialFlowStep = {
-  elementToHighlightId?: string,
-  id?: string,
-  isTriggerFlickering?: true,
-  isCheckpoint?: true,
-  deprecated?: true,
-  nextStepTrigger?: InAppTutorialFlowStepTrigger,
+  elementToHighlightId?: string;
+  id?: string;
+  isTriggerFlickering?: true;
+  isCheckpoint?: true;
+  deprecated?: true;
+  nextStepTrigger?: InAppTutorialFlowStepTrigger;
   shortcuts?: Array<{
-    stepId: string,
+    stepId: string;
     // TODO: Adapt provider to make it possible to use other triggers as shortcuts
-    trigger: InAppTutorialFlowStepShortcutTrigger
-  }>,
-  dialog?: InAppTutorialDialog,
+    trigger: InAppTutorialFlowStepShortcutTrigger;
+  }>;
+  dialog?: InAppTutorialDialog;
   mapProjectData?: {
-    [key: string]: 'projectLastSceneName' | string // string represents accessors with parameters such as lastSceneObjectName:{sceneName}
-  },
-  tooltip?: InAppTutorialTooltip,
-  skippable?: true,
-  isOnClosableDialog?: true
+    [key: string]: 'projectLastSceneName' | string; // string represents accessors with parameters such as lastSceneObjectName:{sceneName}
+  };
+  tooltip?: InAppTutorialTooltip;
+  skippable?: true;
+  isOnClosableDialog?: true;
 };
 
-export type InAppTutorialFlowFormattedStep = (InAppTutorialFlowStep) & {
-  tooltip?: InAppTutorialFormattedTooltip,
-  nextStepTrigger?: InAppTutorialFlowStepFormattedTrigger
+export type InAppTutorialFlowFormattedStep = InAppTutorialFlowStep & {
+  tooltip?: InAppTutorialFormattedTooltip;
+  nextStepTrigger?: InAppTutorialFlowStepFormattedTrigger;
 };
 
 export type InAppTutorial = {
-  id: string,
-  flow: Array<InAppTutorialFlowStep>,
+  id: string;
+  flow: Array<InAppTutorialFlowStep>;
   editorSwitches: {
     [stepId: string]: {
-      editor: EditorIdentifier,
-      scene?: string
-    }
-  },
-  endDialog: InAppTutorialDialog,
-  availableLocales?: Array<string>
+      editor: EditorIdentifier;
+      scene?: string;
+    };
+  };
+  endDialog: InAppTutorialDialog;
+  availableLocales?: Array<string>;
 };
 
 const readJSONFile = async (filepath: string): Promise<any> => {
@@ -166,12 +201,14 @@ const readJSONFile = async (filepath: string): Promise<any> => {
     const data = await fsPromises.readFile(filepath, { encoding: 'utf8' });
     const dataObject = JSON.parse(data);
     return dataObject;
-  } catch (ex: any) {
+  } catch (ex) {
     throw new Error(filepath + ' is a corrupted/malformed file.');
   }
 };
 
-const fetchLocalFileIfDesktop = async (filename: string): Promise<any | null | undefined> => {
+const fetchLocalFileIfDesktop = async (
+  filename: string
+): Promise<any | null | undefined> => {
   const shouldRetrieveTutorialsLocally = !!remote && !Window.isDev();
   if (!shouldRetrieveTutorialsLocally) return null;
 
@@ -188,14 +225,15 @@ const fetchLocalFileIfDesktop = async (filename: string): Promise<any | null | u
   return data;
 };
 
-export const fetchInAppTutorialShortHeaders = async (): Promise<Array<InAppTutorialShortHeader>> => {
+export const fetchInAppTutorialShortHeaders = async (): Promise<
+  Array<InAppTutorialShortHeader>
+> => {
   try {
-    const inAppTutorialShortHeadersStoredLocally = await fetchLocalFileIfDesktop(
-      'inAppTutorialShortHeaders'
-    );
+    const inAppTutorialShortHeadersStoredLocally =
+      await fetchLocalFileIfDesktop('inAppTutorialShortHeaders');
     if (inAppTutorialShortHeadersStoredLocally)
       return inAppTutorialShortHeadersStoredLocally;
-  } catch (error: any) {
+  } catch (error) {
     console.warn(
       'Could not read the short headers stored locally. Trying to fetch the API.'
     );
@@ -207,13 +245,15 @@ export const fetchInAppTutorialShortHeaders = async (): Promise<Array<InAppTutor
   return response.data;
 };
 
-export const fetchInAppTutorial = async (shortHeader: InAppTutorialShortHeader): Promise<InAppTutorial> => {
+export const fetchInAppTutorial = async (
+  shortHeader: InAppTutorialShortHeader
+): Promise<InAppTutorial> => {
   try {
     const inAppTutorialStoredLocally = await fetchLocalFileIfDesktop(
       shortHeader.id
     );
     if (inAppTutorialStoredLocally) return inAppTutorialStoredLocally;
-  } catch (error: any) {
+  } catch (error) {
     console.warn(
       'Could not read the in app tutorial stored locally. Trying to fetch the API.'
     );

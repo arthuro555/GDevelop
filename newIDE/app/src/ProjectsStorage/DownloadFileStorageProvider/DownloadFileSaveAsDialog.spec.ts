@@ -1,7 +1,5 @@
-// @ts-expect-error - TS6142 - Module './DownloadFileSaveAsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/DownloadFileStorageProvider/DownloadFileSaveAsDialog.tsx', but '--jsx' is not set.
-import {downloadResourcesAsBlobs} from './DownloadFileSaveAsDialog';
+import { downloadResourcesAsBlobs } from './DownloadFileSaveAsDialog';
 import { downloadUrlsToBlobs } from '../../Utils/BlobDownloader';
-const gd: libGDevelop = global.gd;
 
 jest.mock('../../Utils/BlobDownloader');
 jest.mock('../../Utils/OptionalRequire');
@@ -63,11 +61,9 @@ const makeTestProjectWithResourcesToDownload = () => {
   return project;
 };
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('DownloadFileSaveAsDialog', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('downloadResourcesAsBlobs', () => {
-    let project: gdProject | null | undefined;
+    let project: gd.Project | null | undefined;
     beforeEach(() => {
       project = makeTestProjectWithResourcesToDownload();
     });
@@ -76,14 +72,13 @@ describe('DownloadFileSaveAsDialog', () => {
       project = null;
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('downloads files as blobs', async () => {
       if (!project)
         throw new Error('Missing project, test is not properly setup.');
       const onAddBlobFile = jest.fn();
-// @ts-expect-error - TS7031 - Binding element 'urlContainers' implicitly has an 'any' type.
+      // @ts-expect-error - TS7031 - Binding element 'urlContainers' implicitly has an 'any' type.
       mockFn(downloadUrlsToBlobs).mockImplementationOnce(({ urlContainers }) =>
-// @ts-expect-error - TS7031 - Binding element 'filename' implicitly has an 'any' type. | TS7031 - Binding element 'resource' implicitly has an 'any' type.
+        // @ts-expect-error - TS7031 - Binding element 'filename' implicitly has an 'any' type. | TS7031 - Binding element 'resource' implicitly has an 'any' type.
         urlContainers.map(({ filename, resource }) => ({
           item: { resource, filename },
           error:

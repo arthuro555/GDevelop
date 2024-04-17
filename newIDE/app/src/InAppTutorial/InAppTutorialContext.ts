@@ -5,25 +5,25 @@ import {
 } from '../Utils/GDevelopServices/InAppTutorial';
 
 export type InAppTutorialState = {
-  currentlyRunningInAppTutorial: InAppTutorial | null,
-  startTutorial: (
-    arg1: {
-      tutorialId: string,
-      initialStepIndex: number,
-      initialProjectData: {
-        [key: string]: string
-      }
-    },
-  ) => Promise<void>,
-  endTutorial: () => void,
-  inAppTutorialShortHeaders: Array<InAppTutorialShortHeader> | null | undefined,
-  getInAppTutorialShortHeader: (tutorialId: string) => InAppTutorialShortHeader | null | undefined,
-  startStepIndex: number,
+  currentlyRunningInAppTutorial: InAppTutorial | null;
+  startTutorial: (arg1: {
+    tutorialId: string;
+    initialStepIndex: number;
+    initialProjectData: {
+      [key: string]: string;
+    };
+  }) => Promise<void>;
+  endTutorial: () => void;
+  inAppTutorialShortHeaders: Array<InAppTutorialShortHeader> | null | undefined;
+  getInAppTutorialShortHeader: (
+    tutorialId: string
+  ) => InAppTutorialShortHeader | null | undefined;
+  startStepIndex: number;
   startProjectData: {
-    [key: string]: string
-  },
-  inAppTutorialsFetchingError: string | null,
-  fetchInAppTutorials: () => Promise<void>
+    [key: string]: string;
+  };
+  inAppTutorialsFetchingError: string | null;
+  fetchInAppTutorials: () => Promise<void>;
 };
 
 export const initialInAppTutorialState: InAppTutorialState = {
@@ -38,6 +38,8 @@ export const initialInAppTutorialState: InAppTutorialState = {
   fetchInAppTutorials: async () => {},
 };
 
-const InAppTutorialContext = React.createContext<InAppTutorialState>(initialInAppTutorialState);
+const InAppTutorialContext = React.createContext<InAppTutorialState>(
+  initialInAppTutorialState
+);
 
 export default InAppTutorialContext;

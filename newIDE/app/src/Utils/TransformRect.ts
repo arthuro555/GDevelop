@@ -2,7 +2,7 @@ import Rectangle from './Rectangle';
 
 export default function transformRect(
   transformPoint: (x: number, y: number) => [number, number],
-  rectangle: Rectangle,
+  rectangle: Rectangle
 ): Rectangle {
   const startPos = transformPoint(rectangle.left, rectangle.top);
   const endPos = transformPoint(rectangle.right, rectangle.bottom);

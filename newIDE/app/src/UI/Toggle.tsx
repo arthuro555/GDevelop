@@ -18,24 +18,24 @@ const useSwitchStyles = ({
   toggled,
   disabled,
 }: {
-  theme: GDevelopTheme,
-  toggled: boolean,
-  disabled: boolean
+  theme: GDevelopTheme;
+  toggled: boolean;
+  disabled: boolean;
 }) =>
   makeStyles({
     thumb: {
       backgroundColor: disabled
         ? theme.switch.thumbColor.disabled
         : toggled
-        ? theme.switch.thumbColor.toggled
-        : theme.switch.thumbColor.default,
+          ? theme.switch.thumbColor.toggled
+          : theme.switch.thumbColor.default,
     },
     track: {
       backgroundColor: disabled
         ? theme.switch.trackColor.disabled
         : toggled
-        ? theme.switch.trackColor.toggled
-        : theme.switch.trackColor.default,
+          ? theme.switch.trackColor.toggled
+          : theme.switch.trackColor.default,
       opacity: '1 !important', // MUI overrides the opacity to 0.5, prevent this.
     },
   })();
@@ -43,14 +43,17 @@ const useSwitchStyles = ({
 // We support a subset of the props supported by Material-UI v0.x Toggle
 // They should be self descriptive - refer to Material UI docs otherwise.
 type Props = {
-  label: React.ReactNode,
-  toggled: boolean,
-  onToggle: (e: Record<any, any>, toggled: boolean) => undefined | Promise<undefined>,
-  disabled?: boolean,
-  labelPosition: 'right' | 'left',
+  label: React.ReactNode;
+  toggled: boolean;
+  onToggle: (
+    e: Record<any, any>,
+    toggled: boolean
+  ) => undefined | Promise<undefined>;
+  disabled?: boolean;
+  labelPosition: 'right' | 'left';
   style?: {
-    marginTop?: number
-  }
+    marginTop?: number;
+  };
 };
 
 /**
@@ -72,13 +75,11 @@ const Toggle = ({
     disabled: !!disabled,
   });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FormControlLabel
       control={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Switch
           checked={toggled}
-          onChange={event => onToggle(event, event.target.checked)}
+          onChange={(event) => onToggle(event, event.target.checked)}
           classes={switchClasses}
           color="default"
         />

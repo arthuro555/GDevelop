@@ -3,9 +3,9 @@ import { GDevelopGamePreviews } from './ApiConfigs';
 import { getSignedUrl } from './Usage';
 
 export type UploadedObject = {
-  Key: string,
-  Body: string,
-  ContentType: 'text/javascript' | 'text/html'
+  Key: string;
+  Body: string;
+  ContentType: 'text/javascript' | 'text/html';
 };
 
 export const uploadObject = (params: UploadedObject): Promise<any> => {

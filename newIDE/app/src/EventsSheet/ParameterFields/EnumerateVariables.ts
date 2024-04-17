@@ -1,7 +1,6 @@
 import flatten from 'lodash/flatten';
 import { mapFor } from '../../Utils/MapFor';
 import flatMap from 'lodash/flatMap';
-const gd: libGDevelop = global.gd;
 
 // Note that in theory we could have this function inside gd.ExpressionParser2,
 // to be sure it's following perfectly the grammar of the expression parser. In
@@ -23,21 +22,23 @@ const convertToStringLiteral = (variableName: string) => {
 };
 
 export type EnumeratedVariable = {
-  name: string,
-  isValidName: boolean,
-  type: Variable_Type
+  name: string;
+  isValidName: boolean;
+  type: Variable_Type;
 };
 
-export const enumerateVariables = (variablesContainer?: gdVariablesContainer | null): Array<EnumeratedVariable> => {
+export const enumerateVariables = (
+  variablesContainer?: gd.VariablesContainer | null
+): Array<EnumeratedVariable> => {
   if (!variablesContainer) {
     return [];
   }
 
   const enumerateVariableAndChildrenNames = (
     fullName: string,
-    variable: gdVariable,
+    variable: gd.Variable,
     isTopLevel: boolean,
-    isFullNameValid: boolean,
+    isFullNameValid: boolean
   ): Array<EnumeratedVariable> => {
     // When a variable is top level, it should in theory not contain
     // any special character making it unusable in an expression.
@@ -50,7 +51,7 @@ export const enumerateVariables = (variablesContainer?: gdVariablesContainer | n
     if (type === gd.Variable.Structure) {
       return [
         enumeratedVariable,
-        ...flatMap(variable.getAllChildrenNames().toJSArray(), childName =>
+        ...flatMap(variable.getAllChildrenNames().toJSArray(), (childName) =>
           enumerateVariableAndChildrenNames(
             isValidIdentifier(childName)
               ? `${fullName}.${childName}`
@@ -82,8 +83,7 @@ export const enumerateVariables = (variablesContainer?: gdVariablesContainer | n
   };
 
   return flatten(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, variablesContainer.count(), i => {
+    mapFor(0, variablesContainer.count(), (i) => {
       return enumerateVariableAndChildrenNames(
         variablesContainer.getNameAt(i),
         variablesContainer.getAt(i),

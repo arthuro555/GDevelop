@@ -7,7 +7,6 @@ import InAppTutorialContext from '../InAppTutorial/InAppTutorialContext';
 // @ts-expect-error - TS7006 - Parameter 'Story' implicitly has an 'any' type. | TS7006 - Parameter 'context' implicitly has an 'any' type.
 const inAppTutorialDecorator: StoryDecorator = (Story, context) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <InAppTutorialContext.Provider
       value={{
         currentlyRunningInAppTutorial: null,
@@ -37,7 +36,6 @@ const inAppTutorialDecorator: StoryDecorator = (Story, context) => {
         },
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Story />
     </InAppTutorialContext.Provider>
   );

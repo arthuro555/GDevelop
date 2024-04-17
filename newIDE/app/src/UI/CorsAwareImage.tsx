@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 type Props = {
-  src: string | null | undefined,
-  className?: string,
-  style?: any,
+  src: string | null | undefined;
+  className?: string;
+  style?: any;
   /* img elements must have an alt prop, either with meaningful text, or an empty string for decorative images */
-  alt: string | null | undefined,
-  title?: string | null | undefined,
-  onError?: (arg1?: Error | null | undefined) => void,
-  onLoad?: (e?: any) => void
+  alt: string | null | undefined;
+  title?: string | null | undefined;
+  onError?: (arg1?: Error | null | undefined) => void;
+  onLoad?: (e?: any) => void;
 };
 
 const addSearchParameterToUrl = (
@@ -35,7 +35,7 @@ const addSearchParameterToUrl = (
  * "res/" folder (i.e: a GDevelop icon), you don't need this and can use `<img>` as usual.
  */
 export const CorsAwareImage = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ src: string | undefined; className?: string | undefined; style?: any; alt: string | null | undefined; title?: string | null | undefined; onError?: ((arg1?: Error | null | undefined) => void) | undefined; onLoad?: ((e?: any) => void) | undefined; }' is not assignable to type 'DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>'.
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ src: string | undefined; className?: string | undefined; style?: any; alt: string | null | undefined; title?: string | null | undefined; onError?: ((arg1?: Error | null | undefined) => void) | undefined; onLoad?: ((e?: any) => void) | undefined; }' is not assignable to type 'DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>'.
   <img // eslint-disable-line jsx-a11y/alt-text
     {...props}
     src={
@@ -58,7 +58,7 @@ export const CorsAwareImage = (props: Props) => (
       //
       // Search for "cors-cache-workaround" in the codebase for the same workarounds.
       props.src
-        ? addSearchParameterToUrl(props.src, 'gdUsage', 'img')
+        ? addSearchParameterToUrl(props.src, 'gd.Usage', 'img')
         : undefined
     }
   />

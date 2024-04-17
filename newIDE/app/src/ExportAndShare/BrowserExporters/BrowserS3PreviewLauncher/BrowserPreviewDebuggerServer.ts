@@ -1,4 +1,8 @@
-import {PreviewDebuggerServerCallbacks, PreviewDebuggerServer, DebuggerId} from '../../PreviewLauncher.flow';
+import {
+  PreviewDebuggerServerCallbacks,
+  PreviewDebuggerServer,
+  DebuggerId,
+} from '../../PreviewLauncher.flow';
 
 let debuggerServerState: 'started' | 'stopped' = 'stopped';
 const callbacksList: Array<PreviewDebuggerServerCallbacks> = [];
@@ -8,7 +12,7 @@ let nextDebuggerId = 0;
 const existingPreviewWindows: Partial<Record<DebuggerId, WindowProxy>> = {};
 
 const getExistingDebuggerIds = () =>
-  Object.keys(existingPreviewWindows).map(key => Number(key));
+  Object.keys(existingPreviewWindows).map((key) => Number(key));
 
 const getDebuggerIdForPreviewWindow = (previewWindow: any) => {
   for (const key in existingPreviewWindows) {
@@ -29,14 +33,14 @@ let windowClosedPollingIntervalId = null;
  * Polling seems the only option to do so.
  */
 const setupWindowClosedPolling = () => {
-// @ts-expect-error - TS7005 - Variable 'windowClosedPollingIntervalId' implicitly has an 'any' type.
+  // @ts-expect-error - TS7005 - Variable 'windowClosedPollingIntervalId' implicitly has an 'any' type.
   if (windowClosedPollingIntervalId !== null) return;
 
   windowClosedPollingIntervalId = setInterval(() => {
     for (const key in existingPreviewWindows) {
       const id = Number(key);
       const previewWindow = existingPreviewWindows[id];
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
+      // @ts-expect-error - TS2532 - Object is possibly 'undefined'.
       if (previewWindow.closed) {
         console.info('A preview window was closed, with debugger id:', id);
         delete existingPreviewWindows[id];
@@ -47,7 +51,7 @@ const setupWindowClosedPolling = () => {
           })
         );
         if (!Object.keys(existingPreviewWindows).length) {
-// @ts-expect-error - TS7005 - Variable 'windowClosedPollingIntervalId' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'windowClosedPollingIntervalId' implicitly has an 'any' type.
           clearInterval(windowClosedPollingIntervalId);
           windowClosedPollingIntervalId = null;
         }
@@ -67,7 +71,7 @@ export const browserPreviewDebuggerServer: PreviewDebuggerServer = {
     if (debuggerServerState === 'started') return;
     debuggerServerState = 'started';
 
-    window.addEventListener('message', event => {
+    window.addEventListener('message', (event) => {
       if (event.origin !== PREVIEWS_ORIGIN) return;
 
       const id = getDebuggerIdForPreviewWindow(event.source);
@@ -78,7 +82,7 @@ export const browserPreviewDebuggerServer: PreviewDebuggerServer = {
         callbacksList.forEach(({ onHandleParsedMessage }) =>
           onHandleParsedMessage({ id, parsedMessage })
         );
-      } catch (error: any) {
+      } catch (error) {
         console.error(
           'Error while parsing messages coming from a preview:',
           error
@@ -96,7 +100,7 @@ export const browserPreviewDebuggerServer: PreviewDebuggerServer = {
 
     try {
       previewWindow.postMessage(message, PREVIEWS_ORIGIN);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Unable to send a message to the preview window:', error);
     }
   },
@@ -128,7 +132,9 @@ export const registerNewPreviewWindow = (previewWindow: WindowProxy) => {
   );
 };
 
-export const getExistingPreviewWindowForDebuggerId = (id?: DebuggerId | null): WindowProxy | null | undefined => {
+export const getExistingPreviewWindowForDebuggerId = (
+  id?: DebuggerId | null
+): WindowProxy | null | undefined => {
   if (id == null) return null;
 
   return existingPreviewWindows[id] || null;

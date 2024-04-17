@@ -1,16 +1,15 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../SceneEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/index.tsx', but '--jsx' is not set.
+
 import SceneEditor from '../../SceneEditor';
 import {
   serializeToJSObject,
   unserializeFromJSObject,
 } from '../../Utils/Serializer';
-// @ts-expect-error - TS6142 - Module '../../UI/PlaceholderMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderMessage.tsx', but '--jsx' is not set.
+
 import PlaceholderMessage from '../../UI/PlaceholderMessage';
 import {
   RenderEditorContainerProps,
@@ -18,16 +17,15 @@ import {
 } from './BaseEditor';
 import ExternalPropertiesDialog, {
   ExternalProperties,
-// @ts-expect-error - TS6142 - Module './ExternalPropertiesDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/ExternalPropertiesDialog.tsx', but '--jsx' is not set.
 } from './ExternalPropertiesDialog';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
 import { prepareInstancesEditorSettings } from '../../InstancesEditor/InstancesEditorSettings';
-// @ts-expect-error - TS6142 - Module '../../UI/TutorialButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TutorialButton/index.tsx', but '--jsx' is not set.
+
 import TutorialButton from '../../UI/TutorialButton';
-// @ts-expect-error - TS6142 - Module '../../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../../UI/HelpButton';
 import {
   registerOnResourceExternallyChangedCallback,
@@ -42,17 +40,20 @@ const styles = {
 } as const;
 
 type State = {
-  externalPropertiesDialogOpen: boolean
+  externalPropertiesDialogOpen: boolean;
 };
 
-export class ExternalLayoutEditorContainer extends React.Component<RenderEditorContainerProps, State> {
+export class ExternalLayoutEditorContainer extends React.Component<
+  RenderEditorContainerProps,
+  State
+> {
   editor: SceneEditor | null | undefined;
   resourceExternallyChangedCallbackId: string | null | undefined;
   state = {
     externalPropertiesDialogOpen: false,
   };
 
-  getProject(): gdProject | null | undefined {
+  getProject(): gd.Project | null | undefined {
     return this.props.project;
   }
 
@@ -73,9 +74,10 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
         projectItemName
       );
     }
-    this.resourceExternallyChangedCallbackId = registerOnResourceExternallyChangedCallback(
-      this.onResourceExternallyChanged.bind(this)
-    );
+    this.resourceExternallyChangedCallbackId =
+      registerOnResourceExternallyChangedCallback(
+        this.onResourceExternallyChanged.bind(this)
+      );
   }
   componentWillUnmount() {
     unregisterOnResourceExternallyChangedCallback(
@@ -94,9 +96,7 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
     }
   }
 
-  onResourceExternallyChanged(resourceInfo: {
-    identifier: string
-  }) {
+  onResourceExternallyChanged(resourceInfo: { identifier: string }) {
     const { editor } = this;
     if (editor) {
       editor.onResourceExternallyChanged(resourceInfo);
@@ -116,7 +116,7 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
     }
   }
 
-  getExternalLayout(): gdExternalLayout | null | undefined {
+  getExternalLayout(): gd.ExternalLayout | null | undefined {
     const { project, projectItemName } = this.props;
     if (!project || !projectItemName) return null;
 
@@ -126,7 +126,7 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
     return project.getExternalLayout(projectItemName);
   }
 
-  getLayout(): gdLayout | null | undefined {
+  getLayout(): gd.Layout | null | undefined {
     const { project } = this.props;
     if (!project) return null;
 
@@ -189,22 +189,19 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
 
     if (!externalLayout || !project) {
       //TODO: Error component
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       return <div>No external layout called {projectItemName} found!</div>;
     }
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div style={styles.container}>
         {layout && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SceneEditor
             setToolbar={this.props.setToolbar}
             resourceManagementProps={this.props.resourceManagementProps}
             unsavedChanges={this.props.unsavedChanges}
             hotReloadPreviewButtonProps={this.props.hotReloadPreviewButtonProps}
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-            ref={editor => (this.editor = editor)}
+            ref={(editor) => (this.editor = editor)}
             project={project}
             layout={layout}
             initialInstances={externalLayout.getInitialInstances()}
@@ -227,52 +224,40 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
           />
         )}
         {!layout && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Trans>
                 To edit the external layout, choose the scene in which it will
                 be included
               </Trans>
             </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <RaisedButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Choose the scene</Trans>}
                 primary
                 onClick={this.openExternalPropertiesDialog}
               />
             </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line justifyContent="flex-start" noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TutorialButton
                 tutorialId="Intermediate-externals"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Watch tutorial</Trans>}
                 renderIfNotFound={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <HelpButton helpPagePath="/interface/events-editor/external-events" />
                 }
               />
             </Line>
           </PlaceholderMessage>
         )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ExternalPropertiesDialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>Configure the external layout</Trans>}
           helpTexts={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>
               In order to see your objects in the scene, you need to add an
               action "Create objects from external layout" in your events sheet.
             </Trans>,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <Trans>
               You can also launch a preview from this external layout, but
               remember that it will still create objects from the scene, as well
@@ -293,5 +278,4 @@ export class ExternalLayoutEditorContainer extends React.Component<RenderEditorC
 
 export const renderExternalLayoutEditorContainer = (
   props: RenderEditorContainerPropsWithRef
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 ) => <ExternalLayoutEditorContainer {...props} />;

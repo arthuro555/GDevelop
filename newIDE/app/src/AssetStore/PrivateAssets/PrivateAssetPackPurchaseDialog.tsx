@@ -1,30 +1,30 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t, Trans } from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { PrivateAssetPackListingData } from '../../Utils/GDevelopServices/Shop';
-// @ts-expect-error - TS6142 - Module '../../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../../UI/Dialog';
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../Profile/CreateProfile' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/CreateProfile.tsx', but '--jsx' is not set.
+
 import CreateProfile from '../../Profile/CreateProfile';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
 import { useInterval } from '../../Utils/UseInterval';
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { getPurchaseCheckoutUrl } from '../../Utils/GDevelopServices/Shop';
 import Window from '../../Utils/Window';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line, Spacer } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/CircularProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CircularProgress.tsx', but '--jsx' is not set.
+
 import CircularProgress from '../../UI/CircularProgress';
-// @ts-expect-error - TS6142 - Module '../../UI/BackgroundText' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/BackgroundText.tsx', but '--jsx' is not set.
+
 import BackgroundText from '../../UI/BackgroundText';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Mark'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Mark.js' implicitly has an 'any' type.
+
 import Mark from '../../UI/CustomSvgIcons/Mark';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout, LineStackLayout } from '../../UI/Layout';
 import useAlertDialog from '../../UI/Alert/useAlertDialog';
 import {
@@ -32,14 +32,14 @@ import {
   purchaseAppStoreProduct,
 } from '../../Utils/AppStorePurchases';
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
-// @ts-expect-error - TS6142 - Module '../PasswordPromptDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PasswordPromptDialog.tsx', but '--jsx' is not set.
+
 import PasswordPromptDialog from '../PasswordPromptDialog';
 
 type Props = {
-  privateAssetPackListingData: PrivateAssetPackListingData,
-  usageType: string,
-  onClose: () => void,
-  simulateAppStoreProduct?: boolean
+  privateAssetPackListingData: PrivateAssetPackListingData;
+  usageType: string;
+  onClose: () => void;
+  simulateAppStoreProduct?: boolean;
 };
 
 const PrivateAssetPackPurchaseDialog = ({
@@ -58,17 +58,13 @@ const PrivateAssetPackPurchaseDialog = ({
     assetPackPurchases,
   } = React.useContext(AuthenticatedUserContext);
   const [isPurchasing, setIsPurchasing] = React.useState(false);
-  const [
-    isCheckingPurchasesAfterLogin,
-    setIsCheckingPurchasesAfterLogin,
-  ] = React.useState(!receivedAssetPacks);
+  const [isCheckingPurchasesAfterLogin, setIsCheckingPurchasesAfterLogin] =
+    React.useState(!receivedAssetPacks);
   const [purchaseSuccessful, setPurchaseSuccessful] = React.useState(false);
-  const [
-    displayPasswordPrompt,
-    setDisplayPasswordPrompt,
-  ] = React.useState<boolean>(false);
+  const [displayPasswordPrompt, setDisplayPasswordPrompt] =
+    React.useState<boolean>(false);
   const [password, setPassword] = React.useState<string>('');
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
 
   const shouldUseOrSimulateAppStoreProduct =
@@ -92,8 +88,7 @@ const PrivateAssetPackPurchaseDialog = ({
     }
 
     const price = privateAssetPackListingData.prices.find(
-// @ts-expect-error - TS7006 - Parameter 'price' implicitly has an 'any' type.
-      price => price.usageType === usageType
+      (price) => price.usageType === usageType
     );
     if (!price) {
       console.error('Unable to find the price for the usage type', usageType);
@@ -115,10 +110,9 @@ const PrivateAssetPackPurchaseDialog = ({
         ...(password ? { password } : undefined),
       });
       Window.openExternalURL(checkoutUrl);
-    } catch (error: any) {
-      const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-        error
-      );
+    } catch (error) {
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(error);
       if (
         extractedStatusAndCode &&
         extractedStatusAndCode.status === 403 &&
@@ -156,32 +150,29 @@ const PrivateAssetPackPurchaseDialog = ({
     []
   );
 
-  React.useEffect(
-    () => {
-      const checkIfPurchaseIsDone = async () => {
-        if (
-          isPurchasing &&
-          assetPackPurchases &&
-          assetPackPurchases.find(
-            userPurchase =>
-              userPurchase.productId === privateAssetPackListingData.id
-          )
-        ) {
-          // We found the purchase, the user has bought the asset pack.
-          // We do not close the dialog yet, as we need to trigger a refresh of the products received.
-          await onPurchaseSuccessful();
-        }
-      };
-      checkIfPurchaseIsDone();
-    },
-    [
-      isPurchasing,
-      assetPackPurchases,
-      privateAssetPackListingData,
-      onPurchaseSuccessful,
-      onRefreshAssetPackPurchases,
-    ]
-  );
+  React.useEffect(() => {
+    const checkIfPurchaseIsDone = async () => {
+      if (
+        isPurchasing &&
+        assetPackPurchases &&
+        assetPackPurchases.find(
+          (userPurchase) =>
+            userPurchase.productId === privateAssetPackListingData.id
+        )
+      ) {
+        // We found the purchase, the user has bought the asset pack.
+        // We do not close the dialog yet, as we need to trigger a refresh of the products received.
+        await onPurchaseSuccessful();
+      }
+    };
+    checkIfPurchaseIsDone();
+  }, [
+    isPurchasing,
+    assetPackPurchases,
+    privateAssetPackListingData,
+    onPurchaseSuccessful,
+    onRefreshAssetPackPurchases,
+  ]);
 
   useInterval(
     () => {
@@ -192,66 +183,57 @@ const PrivateAssetPackPurchaseDialog = ({
 
   // Listen to the received asset pack, to know when a user has just logged in and the received asset packs have been loaded.
   // In this case, start a timeout to remove the loader and give some time for the asset store to refresh.
-  React.useEffect(
-    () => {
-// @ts-expect-error - TS7034 - Variable 'timeoutId' implicitly has type 'any' in some locations where its type cannot be determined.
-      let timeoutId;
-      (async () => {
-        if (receivedAssetPacks) {
-          timeoutId = setTimeout(
-            () => setIsCheckingPurchasesAfterLogin(false),
-            3000
-          );
-        }
-      })();
-      return () => {
-// @ts-expect-error - TS7005 - Variable 'timeoutId' implicitly has an 'any' type.
-        clearTimeout(timeoutId);
-      };
-    },
-    [receivedAssetPacks]
-  );
+  React.useEffect(() => {
+    // @ts-expect-error - TS7034 - Variable 'timeoutId' implicitly has type 'any' in some locations where its type cannot be determined.
+    let timeoutId;
+    (async () => {
+      if (receivedAssetPacks) {
+        timeoutId = setTimeout(
+          () => setIsCheckingPurchasesAfterLogin(false),
+          3000
+        );
+      }
+    })();
+    return () => {
+      // @ts-expect-error - TS7005 - Variable 'timeoutId' implicitly has an 'any' type.
+      clearTimeout(timeoutId);
+    };
+  }, [receivedAssetPacks]);
 
   // If the user has received this particular pack, either:
   // - they just logged in, and already have it, so we close the dialog.
   // - they just bought it, we display the success message.
-  React.useEffect(
-    () => {
-      if (receivedAssetPacks) {
-        const receivedAssetPack = receivedAssetPacks.find(
-          pack => pack.id === privateAssetPackListingData.id
-        );
-        if (receivedAssetPack) {
-          if (isPurchasing) {
-            setIsPurchasing(false);
-            setPurchaseSuccessful(true);
-          } else if (!purchaseSuccessful) {
-            onClose();
-          }
+  React.useEffect(() => {
+    if (receivedAssetPacks) {
+      const receivedAssetPack = receivedAssetPacks.find(
+        (pack) => pack.id === privateAssetPackListingData.id
+      );
+      if (receivedAssetPack) {
+        if (isPurchasing) {
+          setIsPurchasing(false);
+          setPurchaseSuccessful(true);
+        } else if (!purchaseSuccessful) {
+          onClose();
         }
       }
-    },
-    [
-      receivedAssetPacks,
-      privateAssetPackListingData,
-      isPurchasing,
-      onClose,
-      isCheckingPurchasesAfterLogin,
-      purchaseSuccessful,
-    ]
-  );
+    }
+  }, [
+    receivedAssetPacks,
+    privateAssetPackListingData,
+    isPurchasing,
+    onClose,
+    isCheckingPurchasesAfterLogin,
+    purchaseSuccessful,
+  ]);
 
   const dialogContents = !profile
     ? {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         subtitle: <Trans>Log-in to purchase this item</Trans>,
         content: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <CreateProfile
             onOpenLoginDialog={onOpenLoginDialog}
             onOpenCreateAccountDialog={onOpenCreateAccountDialog}
             message={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>
                 Asset packs will be linked to your user account and available
                 for all your projects. Log-in or sign-up to purchase this pack
@@ -263,112 +245,84 @@ const PrivateAssetPackPurchaseDialog = ({
         ),
       }
     : purchaseSuccessful
-    ? {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        subtitle: <Trans>Your purchase has been processed!</Trans>,
-        content: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Line justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <Trans>
-                You can now go back to the asset store to use the assets in your
-                games.
-              </Trans>
-            </Text>
-          </Line>
-        ),
-      }
-    : isPurchasing
-    ? {
-        subtitle: shouldUseOrSimulateAppStoreProduct ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Trans>Complete your purchase with the app store.</Trans>
-        ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Trans>Complete your payment on the web browser</Trans>
-        ),
-        content: shouldUseOrSimulateAppStoreProduct ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <ColumnStackLayout justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <CircularProgress size={40} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-                <Trans>
-                  The purchase will be linked to your account once done.
-                </Trans>
-              </Text>
-            </ColumnStackLayout>
-          </>
-        ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+      ? {
+          subtitle: <Trans>Your purchase has been processed!</Trans>,
+          content: (
             <Line justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <CircularProgress size={20} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-                <Trans>Waiting for the purchase confirmation...</Trans>
+                <Trans>
+                  You can now go back to the asset store to use the assets in
+                  your games.
+                </Trans>
               </Text>
             </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <BackgroundText>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+          ),
+        }
+      : isPurchasing
+        ? {
+            subtitle: shouldUseOrSimulateAppStoreProduct ? (
+              <Trans>Complete your purchase with the app store.</Trans>
+            ) : (
+              <Trans>Complete your payment on the web browser</Trans>
+            ),
+            content: shouldUseOrSimulateAppStoreProduct ? (
+              <>
+                <ColumnStackLayout justifyContent="center" alignItems="center">
+                  <CircularProgress size={40} />
+                  <Text>
+                    <Trans>
+                      The purchase will be linked to your account once done.
+                    </Trans>
+                  </Text>
+                </ColumnStackLayout>
+              </>
+            ) : (
+              <>
+                <Line justifyContent="center" alignItems="center">
+                  <CircularProgress size={20} />
+                  <Spacer />
+                  <Text>
+                    <Trans>Waiting for the purchase confirmation...</Trans>
+                  </Text>
+                </Line>
+                <Spacer />
+                <Line justifyContent="center">
+                  <BackgroundText>
+                    <Trans>
+                      Once you're done, come back to GDevelop and the assets
+                      will be added to your account automatically.
+                    </Trans>
+                  </BackgroundText>
+                </Line>
+              </>
+            ),
+          }
+        : isCheckingPurchasesAfterLogin
+          ? {
+              subtitle: <Trans>Loading your profile...</Trans>,
+              content: (
+                <Line justifyContent="center" alignItems="center">
+                  <CircularProgress size={20} />
+                </Line>
+              ),
+            }
+          : {
+              subtitle: (
                 <Trans>
-                  Once you're done, come back to GDevelop and the assets will be
-                  added to your account automatically.
+                  The asset pack {privateAssetPackListingData.name} will be
+                  linked to your account {profile.email}.
                 </Trans>
-              </BackgroundText>
-            </Line>
-          </>
-        ),
-      }
-    : isCheckingPurchasesAfterLogin
-    ? {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        subtitle: <Trans>Loading your profile...</Trans>,
-        content: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Line justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <CircularProgress size={20} />
-          </Line>
-        ),
-      }
-    : {
-        subtitle: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Trans>
-            The asset pack {privateAssetPackListingData.name} will be linked to
-            your account {profile.email}.
-          </Trans>
-        ),
-        content: shouldUseOrSimulateAppStoreProduct ? null : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Line justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-            <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
-              <Trans>
-                A new secure window will open to complete the purchase.
-              </Trans>
-            </Text>
-          </Line>
-        ),
-      };
+              ),
+              content: shouldUseOrSimulateAppStoreProduct ? null : (
+                <Line justifyContent="center" alignItems="center">
+                  <Text>
+                    <Trans>
+                      A new secure window will open to complete the purchase.
+                    </Trans>
+                  </Text>
+                </Line>
+              ),
+            };
 
   const allowPurchase =
     profile &&
@@ -376,19 +330,15 @@ const PrivateAssetPackPurchaseDialog = ({
     !purchaseSuccessful &&
     !isCheckingPurchasesAfterLogin;
   const dialogActions = [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FlatButton
       key="cancel"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={purchaseSuccessful ? <Trans>Close</Trans> : <Trans>Cancel</Trans>}
       onClick={onClose}
     />,
     allowPurchase ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DialogPrimaryButton
         key="continue"
         primary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         label={<Trans>Continue</Trans>}
         onClick={onWillPurchase}
       />
@@ -396,11 +346,8 @@ const PrivateAssetPackPurchaseDialog = ({
   ];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         title={<Trans>{privateAssetPackListingData.name}</Trans>}
         maxWidth="sm"
         open
@@ -410,17 +357,13 @@ const PrivateAssetPackPurchaseDialog = ({
         cannotBeDismissed // Prevent the user from continuing by clicking outside.
         flexColumnBody
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <LineStackLayout justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           {purchaseSuccessful && <Mark />}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="sub-title">{dialogContents.subtitle}</Text>
         </LineStackLayout>
         {dialogContents.content}
       </Dialog>
       {displayPasswordPrompt && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <PasswordPromptDialog
           onApply={onStartPurchase}
           onClose={() => setDisplayPasswordPrompt(false)}

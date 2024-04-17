@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../Profile/CurrentUsageDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/CurrentUsageDisplayer.tsx', but '--jsx' is not set.
+
 import CurrentUsageDisplayer from '../../../Profile/CurrentUsageDisplayer';
-// @ts-expect-error - TS6142 - Module '../../SubscriptionSuggestionDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/SubscriptionSuggestionDecorator.tsx', but '--jsx' is not set.
+
 import subscriptionSuggestionDecorator from '../../SubscriptionSuggestionDecorator';
 import {
   limitsReached,
@@ -22,7 +22,6 @@ export default {
 };
 
 export const WithSubscriptionLimitNotReached = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForIndieUser}
     quota={{
@@ -40,7 +39,6 @@ export const WithSubscriptionLimitNotReached = () => (
 );
 
 export const WithoutSubscriptionLimitNotReached = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={noSubscription}
     quota={{
@@ -58,7 +56,6 @@ export const WithoutSubscriptionLimitNotReached = () => (
 );
 
 export const WithSubscriptionLimitNotReached30Days = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForIndieUser}
     quota={{
@@ -76,7 +73,6 @@ export const WithSubscriptionLimitNotReached30Days = () => (
 );
 
 export const WithSubscription1BuildRemaining = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForIndieUser}
     quota={{
@@ -94,7 +90,6 @@ export const WithSubscription1BuildRemaining = () => (
 );
 
 export const WithSubscription1BuildRemaining30Days = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForIndieUser}
     quota={{
@@ -112,7 +107,6 @@ export const WithSubscription1BuildRemaining30Days = () => (
 );
 
 export const WithSubscriptionRedemptionCode = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={silverSubscriptionWithRedemptionCode}
     quota={{
@@ -130,7 +124,6 @@ export const WithSubscriptionRedemptionCode = () => (
 );
 
 export const WithSubscriptionExpiredRedemptionCode = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={silverSubscriptionWithExpiredRedemptionCode}
     quota={{
@@ -148,7 +141,6 @@ export const WithSubscriptionExpiredRedemptionCode = () => (
 );
 
 export const WithSubscriptionLimitReached = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForIndieUser}
     quota={limitsReached.quotas['cordova-build']}
@@ -161,7 +153,6 @@ export const WithSubscriptionLimitReached = () => (
 );
 
 export const WithProSubscriptionLimitReached = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={subscriptionForStartupUser}
     quota={limitsReached.quotas['cordova-build']}
@@ -174,7 +165,6 @@ export const WithProSubscriptionLimitReached = () => (
 );
 
 export const WithoutSubscriptionLimitsReached = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <CurrentUsageDisplayer
     subscription={noSubscription}
     quota={limitsReached.quotas['cordova-build']}

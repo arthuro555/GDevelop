@@ -28,9 +28,9 @@ class ProjectCache {
 // @ts-expect-error - TS18004 - No value exists in scope for the shorthand property 'transaction'. Either declare one or provide an initializer. | TS1005 - ',' expected. | TS1005 - ',' expected.
         transaction.objectStore(objectStoreScope).clear();
         resolve();
-// @ts-expect-error - TS1005 - ')' expected.
+
       };
-// @ts-expect-error - TS1068 - Unexpected token. A constructor, method, accessor, or property was expected.
+
     });
   }
 
@@ -93,11 +93,11 @@ class ProjectCache {
         const transaction = database.transaction(objectStoreScope, 'readonly');
         const key = ProjectCache._stringifyCacheKey(cacheKey);
         const request = transaction.objectStore(objectStoreScope).get(key);
-// @ts-expect-error - TS1005 - ';' expected.
+
         request.onsuccess = event: any => {
           resolve(event.target.result);
         };
-// @ts-expect-error - TS1005 - ';' expected.
+
         request.onerror = event: any => {
           console.error(
             'An error occurred while reading from indexedDB:',
@@ -130,10 +130,10 @@ class ProjectCache {
     return entryCreationDate;
   }
 
-  async put(cacheKey: ProjectCacheKey, project: gdProject): Promise<void> {
+  async put(cacheKey: ProjectCacheKey, project: gd.Project): Promise<void> {
     const database = await this._initializeDatabase();
 
-// @ts-expect-error - TS1005 - ':' expected.
+
     return new Promise((resolve: (result: Promise<undefined> | undefined) => void, reject: (error?: any) => void) => {
       try {
         const transaction = database.transaction(objectStoreScope, 'readwrite');
@@ -159,10 +159,10 @@ class ProjectCache {
         console.error('An error occurred while writing to indexedDB:', error);
         reject(error);
       }
-// @ts-expect-error - TS1005 - ',' expected.
+
     });
   }
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 }
 
 export default ProjectCache;

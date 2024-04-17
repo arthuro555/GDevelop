@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import {
   enumerateObjectAndBehaviorsInstructions,
@@ -14,20 +14,17 @@ import {
   filterEnumeratedInstructionOrExpressionMetadataByScope,
 } from '../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
 import { EventsScope } from '../../InstructionOrExpression/EventsScope.flow';
-const gd: libGDevelop = global.gd;
 
-/** Helper to get the gdInstructionMetadata of an instruction. */
-export const getInstructionMetadata = (
-  {
-    instructionType,
-    isCondition,
-    project,
-  }: {
-    instructionType: string,
-    isCondition: boolean,
-    project: gdProject
-  },
-): gdInstructionMetadata | null | undefined => {
+/** Helper to get the gd.InstructionMetadata of an instruction. */
+export const getInstructionMetadata = ({
+  instructionType,
+  isCondition,
+  project,
+}: {
+  instructionType: string;
+  isCondition: boolean;
+  project: gd.Project;
+}): gd.InstructionMetadata | null | undefined => {
   if (!instructionType) return null;
 
   return isCondition
@@ -42,68 +39,73 @@ export const getInstructionMetadata = (
 };
 
 type Parameters = {
-  project: gdProject,
-  instruction: gdInstruction,
-  isCondition: boolean,
-  isNewInstruction: boolean,
-  scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  i18n: I18nType
+  project: gd.Project;
+  instruction: gd.Instruction;
+  isCondition: boolean;
+  isNewInstruction: boolean;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  i18n: I18nType;
 };
 
 type InstructionEditorState = {
-  chosenObjectName: string | null | undefined,
-  chosenObjectInstructionsInfo: Array<EnumeratedInstructionMetadata> | null | undefined,
-  chosenObjectInstructionsInfoTree: InstructionTreeNode | null | undefined
+  chosenObjectName: string | null | undefined;
+  chosenObjectInstructionsInfo:
+    | Array<EnumeratedInstructionMetadata>
+    | null
+    | undefined;
+  chosenObjectInstructionsInfoTree: InstructionTreeNode | null | undefined;
 };
 
 type InstructionEditorSetters = {
   /** Select an instruction - which can be a free or an object instruction. */
-  chooseInstruction: (type: string) => (InstructionEditorState) & {
-    instruction: gdInstruction
-  },
+  chooseInstruction: (type: string) => InstructionEditorState & {
+    instruction: gd.Instruction;
+  };
   /** Select an object, so that then this object specific instructions can be searched and selected. */
-  chooseObject: (objectName: string) => (InstructionEditorState) & {
-    instruction: gdInstruction
-  },
+  chooseObject: (objectName: string) => InstructionEditorState & {
+    instruction: gd.Instruction;
+  };
   /** Select an instruction for the currently selected object. */
-  chooseObjectInstruction: (type: string) => (InstructionEditorState) & {
-    instruction: gdInstruction
-  }
+  chooseObjectInstruction: (type: string) => InstructionEditorState & {
+    instruction: gd.Instruction;
+  };
 };
 
-const findInstruction = (list: Array<EnumeratedInstructionMetadata>, instructionType: string): EnumeratedInstructionMetadata | null | undefined => {
+const findInstruction = (
+  list: Array<EnumeratedInstructionMetadata>,
+  instructionType: string
+): EnumeratedInstructionMetadata | null | undefined => {
   return list.find(({ type }) => type === instructionType);
 };
 
 /** React Hook handling the state of an instruction editor. */
-export const useInstructionEditor = (
-  {
-    instruction,
-    isCondition,
-    project,
-    isNewInstruction,
-    scope,
-    globalObjectsContainer,
-    objectsContainer,
-    i18n,
-  }: Parameters,
-): [InstructionEditorState, InstructionEditorSetters] => {
+export const useInstructionEditor = ({
+  instruction,
+  isCondition,
+  project,
+  isNewInstruction,
+  scope,
+  globalObjectsContainer,
+  objectsContainer,
+  i18n,
+}: Parameters): [InstructionEditorState, InstructionEditorSetters] => {
   const getChosenObjectState = (
     objectName: string,
-    discardInstructionTypeIfNotInObjectInstructions: boolean,
+    discardInstructionTypeIfNotInObjectInstructions: boolean
   ): InstructionEditorState => {
-    const chosenObjectInstructionsInfo = filterEnumeratedInstructionOrExpressionMetadataByScope(
-      enumerateObjectAndBehaviorsInstructions(
-        isCondition,
-        globalObjectsContainer,
-        objectsContainer,
-        objectName,
-        i18n
-      ),
-      scope
-    );
+    const chosenObjectInstructionsInfo =
+      filterEnumeratedInstructionOrExpressionMetadataByScope(
+        enumerateObjectAndBehaviorsInstructions(
+          isCondition,
+          globalObjectsContainer,
+          objectsContainer,
+          objectName,
+          i18n
+        ),
+        scope
+      );
 
     // As we changed to a new object, verify if the instruction is still valid for this object. If not,
     // discard the chosen instruction - this is to avoid the user creating invalid instructions.

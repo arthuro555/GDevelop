@@ -1,17 +1,17 @@
-import {enumerateObjectAndBehaviorsInstructions, enumerateFreeInstructions} from './EnumerateInstructions';
+import {
+  enumerateObjectAndBehaviorsInstructions,
+  enumerateFreeInstructions,
+} from './EnumerateInstructions';
 import { setupInstructionParameters } from './SetupInstructionParameters';
-const gd: libGDevelop = global.gd;
 
 const makeFakeI18n = (fakeI18n: undefined): I18nType => ({
-// @ts-expect-error - TS2698 - Spread types may only be created from object types.
+  // @ts-expect-error - TS2698 - Spread types may only be created from object types.
   ...fakeI18n,
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('setupInstructionParameters', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper number of parameters', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -21,11 +21,11 @@ describe('setupInstructionParameters', () => {
     // Simulate that we select an instruction
     const enumeratedInstructions = enumerateFreeInstructions(
       false,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const playMusicInstruction = enumeratedInstructions.find(
-      enumeratedInstruction => enumeratedInstruction.type === 'PlayMusic'
+      (enumeratedInstruction) => enumeratedInstruction.type === 'PlayMusic'
     );
 
     if (!playMusicInstruction) {
@@ -49,7 +49,6 @@ describe('setupInstructionParameters', () => {
     expect(instruction.getParameter(4).getPlainString()).toBe('');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper number of parameters and the object name', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -63,11 +62,11 @@ describe('setupInstructionParameters', () => {
       project,
       layout,
       objectName,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const setAnimationNameInstruction = enumeratedInstructions.find(
-      enumeratedInstruction =>
+      (enumeratedInstruction) =>
         enumeratedInstruction.type ===
         'AnimatableCapability::AnimatableBehavior::SetName'
     );
@@ -95,7 +94,6 @@ describe('setupInstructionParameters', () => {
     expect(instruction.getParameter(3).getPlainString()).toBe('');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper parameters for a behavior', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -113,11 +111,11 @@ describe('setupInstructionParameters', () => {
       project,
       layout,
       objectName,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const jumpSpeedInstruction = enumeratedInstructions.find(
-      enumeratedInstruction =>
+      (enumeratedInstruction) =>
         enumeratedInstruction.type === 'PlatformBehavior::JumpSpeed'
     );
 
@@ -144,7 +142,6 @@ describe('setupInstructionParameters', () => {
     expect(instruction.getParameter(3).getPlainString()).toBe('');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper parameters for a behavior, selecting the first behavior if multiple', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -167,11 +164,11 @@ describe('setupInstructionParameters', () => {
       project,
       layout,
       objectName,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const jumpSpeedInstruction = enumeratedInstructions.find(
-      enumeratedInstruction =>
+      (enumeratedInstruction) =>
         enumeratedInstruction.type === 'PlatformBehavior::JumpSpeed'
     );
 
@@ -196,7 +193,6 @@ describe('setupInstructionParameters', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper parameters for a behavior, changing it if a wrong behavior name is entered', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -219,11 +215,11 @@ describe('setupInstructionParameters', () => {
       project,
       layout,
       objectName,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const jumpSpeedInstruction = enumeratedInstructions.find(
-      enumeratedInstruction =>
+      (enumeratedInstruction) =>
         enumeratedInstruction.type === 'PlatformBehavior::JumpSpeed'
     );
 
@@ -251,7 +247,6 @@ describe('setupInstructionParameters', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('sets the proper parameters for a behavior, letting an existing behavior name if it is valid', () => {
     const project = new gd.ProjectHelper.createNewGDJSProject();
     const layout = project.insertNewLayout('Scene', 0);
@@ -274,11 +269,11 @@ describe('setupInstructionParameters', () => {
       project,
       layout,
       objectName,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const jumpSpeedInstruction = enumeratedInstructions.find(
-      enumeratedInstruction =>
+      (enumeratedInstruction) =>
         enumeratedInstruction.type === 'PlatformBehavior::JumpSpeed'
     );
 

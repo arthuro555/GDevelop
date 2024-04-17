@@ -1,18 +1,18 @@
-import {useCommand} from '../CommandPalette/CommandHooks';
+import { useCommand } from '../CommandPalette/CommandHooks';
 import useObjectsListCommands from '../ObjectsList/UseObjectsListCommands';
 import useObjectGroupsListCommands from '../ObjectGroupsList/UseObjectGroupsListCommands';
 import useLayersListCommands from '../LayersList/UseLayersListCommands';
 
 type Props = {
-  project: gdProject,
-  layout: gdLayout,
-  onEditObject: (object: gdObject) => void,
-  onEditObjectVariables: (object: gdObject) => void,
-  onOpenSceneProperties: () => void,
-  onOpenSceneVariables: () => void,
-  onEditObjectGroup: (group: gdObjectGroup) => void,
-  onEditLayerEffects: (layer: gdLayer) => void,
-  onEditLayer: (layer: gdLayer) => void
+  project: gd.Project;
+  layout: gd.Layout;
+  onEditObject: (object: gd.Object) => void;
+  onEditObjectVariables: (object: gd.Object) => void;
+  onOpenSceneProperties: () => void;
+  onOpenSceneVariables: () => void;
+  onEditObjectGroup: (group: gd.ObjectGroup) => void;
+  onEditLayerEffects: (layer: gd.Layer) => void;
+  onEditLayer: (layer: gd.Layer) => void;
 };
 
 const UseSceneEditorCommands = (props: Props) => {
@@ -29,12 +29,12 @@ const UseSceneEditorCommands = (props: Props) => {
   } = props;
 
   useCommand('OPEN_SCENE_PROPERTIES', true, {
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
+    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: onOpenSceneProperties,
   });
 
   useCommand('OPEN_SCENE_VARIABLES', true, {
-// @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
+    // @ts-expect-error - TS2322 - Type '() => void' is not assignable to type 'CommandHandler'.
     handler: onOpenSceneVariables,
   });
 

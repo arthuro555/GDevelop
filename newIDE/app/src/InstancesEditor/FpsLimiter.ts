@@ -9,16 +9,10 @@ export default class FpsLimiter {
   _forceUpdate: boolean;
   _maxFps: number;
   _idleFps: number;
-// @ts-expect-error - TS2564 - Property '_lastInteractionTime' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_lastInteractionTime' has no initializer and is not definitely assigned in the constructor.
   _lastInteractionTime: number;
 
-  constructor({
-    idleFps,
-    maxFps,
-  }: {
-    idleFps: number,
-    maxFps: number
-  }) {
+  constructor({ idleFps, maxFps }: { idleFps: number; maxFps: number }) {
     this._maxFps = maxFps;
     this._idleFps = idleFps;
     this._lastFrameTime = Date.now();

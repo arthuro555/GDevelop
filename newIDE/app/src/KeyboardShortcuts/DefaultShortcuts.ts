@@ -1,4 +1,4 @@
-import {CommandName} from '../CommandPalette/CommandsList';
+import { CommandName } from '../CommandPalette/CommandsList';
 
 export type ShortcutMap = Partial<Record<CommandName, string>>;
 

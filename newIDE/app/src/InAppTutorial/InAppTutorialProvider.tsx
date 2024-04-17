@@ -10,7 +10,7 @@ import {
 import { IN_APP_TUTORIALS_FETCH_TIMEOUT } from '../Utils/GlobalFetchTimeouts';
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 const InAppTutorialProvider = (props: Props) => {
@@ -18,18 +18,16 @@ const InAppTutorialProvider = (props: Props) => {
   const [fetchingError, setFetchingError] = React.useState<string | null>(null);
   const [startStepIndex, setStartStepIndex] = React.useState<number>(0);
   const [startProjectData, setStartProjectData] = React.useState<{
-    [key: string]: string
+    [key: string]: string;
   }>({});
-  const [
-    inAppTutorialShortHeaders,
-    setInAppTutorialShortHeaders,
-  ] = React.useState<Array<InAppTutorialShortHeader> | null | undefined>(null);
+  const [inAppTutorialShortHeaders, setInAppTutorialShortHeaders] =
+    React.useState<Array<InAppTutorialShortHeader> | null | undefined>(null);
 
   const getInAppTutorialShortHeader = React.useCallback(
     (tutorialId: string) => {
       if (!inAppTutorialShortHeaders) return null;
       const inAppTutorialShortHeader = inAppTutorialShortHeaders.find(
-        shortHeader => shortHeader.id === tutorialId
+        (shortHeader) => shortHeader.id === tutorialId
       );
       return inAppTutorialShortHeader;
     },
@@ -41,11 +39,11 @@ const InAppTutorialProvider = (props: Props) => {
     initialStepIndex,
     initialProjectData,
   }: {
-    tutorialId: string,
-    initialStepIndex: number,
+    tutorialId: string;
+    initialStepIndex: number;
     initialProjectData: {
-      [key: string]: string
-    }
+      [key: string]: string;
+    };
   }) => {
     if (!inAppTutorialShortHeaders) return;
 
@@ -68,28 +66,25 @@ const InAppTutorialProvider = (props: Props) => {
   const loadInAppTutorials = React.useCallback(async () => {
     setFetchingError(null);
     try {
-      const fetchedInAppTutorialShortHeaders = await fetchInAppTutorialShortHeaders();
+      const fetchedInAppTutorialShortHeaders =
+        await fetchInAppTutorialShortHeaders();
       setInAppTutorialShortHeaders(fetchedInAppTutorialShortHeaders);
-    } catch (error: any) {
+    } catch (error) {
       console.error('An error occurred when fetching in app tutorials:', error);
       setFetchingError('fetching-error');
     }
   }, []);
 
   // Preload the in-app tutorial short headers when the app loads.
-  React.useEffect(
-    () => {
-      const timeoutId = setTimeout(() => {
-        console.info('Pre-fetching in-app tutorials...');
-        loadInAppTutorials();
-      }, IN_APP_TUTORIALS_FETCH_TIMEOUT);
-      return () => clearTimeout(timeoutId);
-    },
-    [loadInAppTutorials]
-  );
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.info('Pre-fetching in-app tutorials...');
+      loadInAppTutorials();
+    }, IN_APP_TUTORIALS_FETCH_TIMEOUT);
+    return () => clearTimeout(timeoutId);
+  }, [loadInAppTutorials]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <InAppTutorialContext.Provider
       value={{
         inAppTutorialShortHeaders,

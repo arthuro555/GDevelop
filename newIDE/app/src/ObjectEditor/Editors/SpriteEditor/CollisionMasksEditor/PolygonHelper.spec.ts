@@ -1,14 +1,11 @@
-import {addVertexOnLongestEdge} from './PolygonHelper';
+import { addVertexOnLongestEdge } from './PolygonHelper';
 import {
   findNearestEdgePoint,
   getMagnetizedVertexForDeletion,
 } from './PolygonHelper';
 
-const gd: libGDevelop = global.gd;
-
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('PolygonHelper', () => {
-  const addVertex = (vertices: gdVectorVector2f, x: number, y: number) => {
+  const addVertex = (vertices: gd.VectorVector2f, x: number, y: number) => {
     const newVertex = new gd.Vector2f();
     newVertex.x = x;
     newVertex.y = y;
@@ -16,9 +13,7 @@ describe('PolygonHelper', () => {
     newVertex.delete();
   };
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('addVertexOnLongestEdge', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can add a vertex in an empty shape', () => {
       const vertices = new gd.VectorVector2f();
       addVertexOnLongestEdge(vertices);
@@ -27,7 +22,6 @@ describe('PolygonHelper', () => {
       vertices.delete();
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can add a vertex to each edge of a square', () => {
       const vertices = new gd.VectorVector2f();
       addVertex(vertices, 0, 0);
@@ -69,9 +63,8 @@ describe('PolygonHelper', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('findNearestEdgePoint', () => {
-    const addVertex = (vertices: gdVectorVector2f, x: number, y: number) => {
+    const addVertex = (vertices: gd.VectorVector2f, x: number, y: number) => {
       const newVertex = new gd.Vector2f();
       newVertex.x = x;
       newVertex.y = y;
@@ -79,7 +72,6 @@ describe('PolygonHelper', () => {
       newVertex.delete();
     };
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can find the nearest edge of a triangle', () => {
       const polygons = new gd.VectorPolygon2d();
       const polygon = new gd.Polygon2d();
@@ -126,9 +118,8 @@ describe('PolygonHelper', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('getMagnetVertexForDeletion', () => {
-    const addVertex = (vertices: gdVectorVector2f, x: number, y: number) => {
+    const addVertex = (vertices: gd.VectorVector2f, x: number, y: number) => {
       const newVertex = new gd.Vector2f();
       newVertex.x = x;
       newVertex.y = y;
@@ -136,7 +127,6 @@ describe('PolygonHelper', () => {
       newVertex.delete();
     };
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can magnet the dragged vertex on a straight line', () => {
       const vertices = new gd.VectorVector2f();
       addVertex(vertices, 0, 0);
@@ -158,7 +148,6 @@ describe('PolygonHelper', () => {
       vertices.delete();
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can magnet the dragged vertex on a neighbor vertex', () => {
       const vertices = new gd.VectorVector2f();
       addVertex(vertices, 0, 0);
@@ -180,7 +169,6 @@ describe('PolygonHelper', () => {
       vertices.delete();
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can keep the dragged vertex in place', () => {
       const vertices = new gd.VectorVector2f();
       addVertex(vertices, 0, 0);

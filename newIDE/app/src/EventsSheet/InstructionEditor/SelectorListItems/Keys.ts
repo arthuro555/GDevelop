@@ -1,4 +1,7 @@
-import type {GroupWithContext, ObjectWithContext} from '../../../ObjectsList/EnumerateObjects';
+import type {
+  GroupWithContext,
+  ObjectWithContext,
+} from '../../../ObjectsList/EnumerateObjects';
 import { EnumeratedInstructionOrExpressionMetadata } from '../../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
 
 // ListItem created must have consistent keys that include their type
@@ -32,10 +35,13 @@ export const getInstructionListItemValue = (instructionType: string) =>
 export const getSubheaderListItemKey = (subheader: string) =>
   `subheader-key-${subheader}`;
 
-export const getInstructionOrExpressionIdentifier = (instructionOrExpressionMetadata: EnumeratedInstructionOrExpressionMetadata): string => `instruction-or-expression-${
-  instructionOrExpressionMetadata.scope.objectMetadata
-    ? instructionOrExpressionMetadata.scope.objectMetadata
-        .getName()
-        .replace(/:/g, '-') + '-'
-    : ''
-}${instructionOrExpressionMetadata.type.replace(/:/g, '-')}`;
+export const getInstructionOrExpressionIdentifier = (
+  instructionOrExpressionMetadata: EnumeratedInstructionOrExpressionMetadata
+): string =>
+  `instruction-or-expression-${
+    instructionOrExpressionMetadata.scope.objectMetadata
+      ? instructionOrExpressionMetadata.scope.objectMetadata
+          .getName()
+          .replace(/:/g, '-') + '-'
+      : ''
+  }${instructionOrExpressionMetadata.type.replace(/:/g, '-')}`;

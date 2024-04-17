@@ -1,8 +1,11 @@
-import {PublicAssetPacks, PrivateAssetPack, PublicAssetPack} from '../Utils/GDevelopServices/Asset';
+import {
+  PublicAssetPacks,
+  PrivateAssetPack,
+  PublicAssetPack,
+} from '../Utils/GDevelopServices/Asset';
 import {
   PrivateAssetPackListingData,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../Utils/GDevelopServices/Shop';
 
 /**
@@ -39,11 +42,13 @@ const getPublicAssetPackUserFriendlySlug = (
 const getIdFromPrivateProductUserFriendlySlug = (slug: string) =>
   slug.slice(-36);
 
-const findPublicAssetPackWithUserFriendlySlug = (publicAssetPacks: PublicAssetPacks, userFriendlySlug: string): PublicAssetPack | null => {
+const findPublicAssetPackWithUserFriendlySlug = (
+  publicAssetPacks: PublicAssetPacks,
+  userFriendlySlug: string
+): PublicAssetPack | null => {
   for (const publicAssetPack of publicAssetPacks.starterPacks) {
-    const publicAssetPackUserFriendlySlug = getPublicAssetPackUserFriendlySlug(
-      publicAssetPack
-    );
+    const publicAssetPackUserFriendlySlug =
+      getPublicAssetPackUserFriendlySlug(publicAssetPack);
     if (publicAssetPackUserFriendlySlug === userFriendlySlug)
       return publicAssetPack;
   }
@@ -51,22 +56,19 @@ const findPublicAssetPackWithUserFriendlySlug = (publicAssetPacks: PublicAssetPa
   return null;
 };
 
-export const getAssetPackFromUserFriendlySlug = (
-  {
-    receivedAssetPacks,
-    publicAssetPacks,
-    userFriendlySlug,
-  }: {
-    receivedAssetPacks: Array<PrivateAssetPack>,
-    publicAssetPacks: PublicAssetPacks,
-    userFriendlySlug: string
-  },
-): PublicAssetPack | PrivateAssetPack | null => {
-  const receivedAssetPackId = getIdFromPrivateProductUserFriendlySlug(
-    userFriendlySlug
-  );
+export const getAssetPackFromUserFriendlySlug = ({
+  receivedAssetPacks,
+  publicAssetPacks,
+  userFriendlySlug,
+}: {
+  receivedAssetPacks: Array<PrivateAssetPack>;
+  publicAssetPacks: PublicAssetPacks;
+  userFriendlySlug: string;
+}): PublicAssetPack | PrivateAssetPack | null => {
+  const receivedAssetPackId =
+    getIdFromPrivateProductUserFriendlySlug(userFriendlySlug);
   const receivedAssetPack = receivedAssetPacks.find(
-    privateAssetPack => receivedAssetPackId === privateAssetPack.id
+    (privateAssetPack) => receivedAssetPackId === privateAssetPack.id
   );
   if (receivedAssetPack) return receivedAssetPack;
 
@@ -79,40 +81,34 @@ export const getAssetPackFromUserFriendlySlug = (
   return null;
 };
 
-export const getPrivateAssetPackListingDataFromUserFriendlySlug = (
-  {
-    privateAssetPackListingDatas,
-    userFriendlySlug,
-  }: {
-    privateAssetPackListingDatas: Array<PrivateAssetPackListingData>,
-    userFriendlySlug: string
-  },
-): PrivateAssetPackListingData | null | undefined => {
-  const privateAssetPackId = getIdFromPrivateProductUserFriendlySlug(
-    userFriendlySlug
-  );
+export const getPrivateAssetPackListingDataFromUserFriendlySlug = ({
+  privateAssetPackListingDatas,
+  userFriendlySlug,
+}: {
+  privateAssetPackListingDatas: Array<PrivateAssetPackListingData>;
+  userFriendlySlug: string;
+}): PrivateAssetPackListingData | null | undefined => {
+  const privateAssetPackId =
+    getIdFromPrivateProductUserFriendlySlug(userFriendlySlug);
   const privateAssetPackListingData = privateAssetPackListingDatas.find(
-    privateAssetPack => privateAssetPackId === privateAssetPack.id
+    (privateAssetPack) => privateAssetPackId === privateAssetPack.id
   );
   if (privateAssetPackListingData) return privateAssetPackListingData;
 
   return null;
 };
 
-export const getPrivateGameTemplateListingDataFromUserFriendlySlug = (
-  {
-    privateGameTemplateListingDatas,
-    userFriendlySlug,
-  }: {
-    privateGameTemplateListingDatas: Array<PrivateGameTemplateListingData>,
-    userFriendlySlug: string
-  },
-): PrivateGameTemplateListingData | null | undefined => {
-  const privateGameTemplateId = getIdFromPrivateProductUserFriendlySlug(
-    userFriendlySlug
-  );
+export const getPrivateGameTemplateListingDataFromUserFriendlySlug = ({
+  privateGameTemplateListingDatas,
+  userFriendlySlug,
+}: {
+  privateGameTemplateListingDatas: Array<PrivateGameTemplateListingData>;
+  userFriendlySlug: string;
+}): PrivateGameTemplateListingData | null | undefined => {
+  const privateGameTemplateId =
+    getIdFromPrivateProductUserFriendlySlug(userFriendlySlug);
   const privateGameTemplateListingData = privateGameTemplateListingDatas.find(
-    privateGameTemplate => privateGameTemplateId === privateGameTemplate.id
+    (privateGameTemplate) => privateGameTemplateId === privateGameTemplate.id
   );
   if (privateGameTemplateListingData) return privateGameTemplateListingData;
 

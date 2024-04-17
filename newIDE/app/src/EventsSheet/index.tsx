@@ -1,30 +1,30 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {t, Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './EventsTree' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/index.tsx', but '--jsx' is not set.
+
 import EventsTree from './EventsTree';
 import { getInstructionMetadata } from './InstructionEditor/InstructionEditor';
-// @ts-expect-error - TS6142 - Module './InstructionEditor/InstructionEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionEditorDialog.tsx', but '--jsx' is not set.
+
 import InstructionEditorDialog from './InstructionEditor/InstructionEditorDialog';
-// @ts-expect-error - TS6142 - Module './InstructionEditor/InstructionEditorMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionEditorMenu.tsx', but '--jsx' is not set.
+
 import InstructionEditorMenu from './InstructionEditor/InstructionEditorMenu';
 import EventTextDialog, {
   filterEditableWithEventTextDialog,
-// @ts-expect-error - TS6142 - Module './InstructionEditor/EventTextDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/EventTextDialog.tsx', but '--jsx' is not set.
+
 } from './InstructionEditor/EventTextDialog';
-// @ts-expect-error - TS6142 - Module './Toolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/Toolbar.tsx', but '--jsx' is not set.
+
 import Toolbar from './Toolbar';
 import KeyboardShortcuts from '../UI/KeyboardShortcuts';
 import { getShortcutDisplayName, useShortcutMap } from '../KeyboardShortcuts';
 import { ShortcutMap } from '../KeyboardShortcuts/DefaultShortcuts';
-// @ts-expect-error - TS6142 - Module './InlineParameterEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InlineParameterEditor.tsx', but '--jsx' is not set.
+
 import InlineParameterEditor from './InlineParameterEditor';
-// @ts-expect-error - TS6142 - Module '../UI/Menu/ContextMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Menu/ContextMenu.tsx', but '--jsx' is not set.
+
 import ContextMenu, { ContextMenuInterface } from '../UI/Menu/ContextMenu';
 import { serializeToJSObject } from '../Utils/Serializer';
 import {
@@ -69,9 +69,9 @@ import { ensureSingleOnceInstructions } from './OnceInstructionSanitizer';
 import EventsContextAnalyzerDialog, {
   EventsContextResult,
   toEventsContextResult,
-// @ts-expect-error - TS6142 - Module './EventsContextAnalyzerDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsContextAnalyzerDialog.tsx', but '--jsx' is not set.
+
 } from './EventsContextAnalyzerDialog';
-// @ts-expect-error - TS6142 - Module './SearchPanel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/SearchPanel.tsx', but '--jsx' is not set.
+
 import SearchPanel, { SearchPanelInterface } from './SearchPanel';
 import { ResourceManagementProps } from '../ResourcesList/ResourceSource';
 import EventsSearcher, {
@@ -85,9 +85,9 @@ import {
 } from './EnumerateEventsMetadata';
 import PreferencesContext, {
   Preferences,
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 } from '../MainFrame/Preferences/PreferencesContext';
-// @ts-expect-error - TS6142 - Module './EventsFunctionExtractor/EventsFunctionExtractorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsFunctionExtractor/EventsFunctionExtractorDialog.tsx', but '--jsx' is not set.
+
 import EventsFunctionExtractorDialog from './EventsFunctionExtractor/EventsFunctionExtractorDialog';
 import { createNewInstructionForEventsFunction } from './EventsFunctionExtractor';
 import {
@@ -105,7 +105,7 @@ import {
 } from './ClipboardKind';
 import { useScreenType } from '../UI/Responsive/ScreenTypeMeasurer';
 import { ResponsiveWindowMeasurer } from '../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import { UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
 import AuthenticatedUserContext, {
   AuthenticatedUser,
@@ -117,21 +117,20 @@ import {
 import LeaderboardContext, {
   LeaderboardState,
 } from '../Leaderboard/LeaderboardContext';
-// @ts-expect-error - TS6142 - Module '../Tutorial/TutorialContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Tutorial/TutorialContext.tsx', but '--jsx' is not set.
+
 import { TutorialContext } from '../Tutorial/TutorialContext';
 import { Tutorial } from '../Utils/GDevelopServices/Tutorial';
-// @ts-expect-error - TS6142 - Module '../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../UI/ErrorBoundary';
 import {
   registerOnResourceExternallyChangedCallback,
   unregisterOnResourceExternallyChangedCallback,
 } from '../MainFrame/ResourcesWatcher';
 
-const gd: libGDevelop = global.gd;
 
 const zoomLevel = { min: 1, max: 50 } as const;
 
@@ -141,19 +140,19 @@ export type ChangeContext = {
 };
 
 type Props = {
-  project: gdProject,
+  project: gd.Project,
   scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  events: gdEventsList,
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer,
+  events: gd.EventsList,
   setToolbar: (arg1?: React.ReactNode | null | undefined) => void,
   onOpenSettings?: () => void | null | undefined,
   settingsIcon?: React.ReactNode,
   onOpenExternalEvents: (arg1: string) => void,
   onOpenLayout: (arg1: string) => void,
   resourceManagementProps: ResourceManagementProps,
-  openInstructionOrExpression: (extension: gdPlatformExtension, type: string) => void,
-  onCreateEventsFunction: (extensionName: string, eventsFunction: gdEventsFunction) => void,
+  openInstructionOrExpression: (extension: gd.PlatformExtension, type: string) => void,
+  onCreateEventsFunction: (extensionName: string, eventsFunction: gd.EventsFunction) => void,
   onBeginCreateEventsFunction: () => void,
   unsavedChanges?: UnsavedChanges | null | undefined,
   isActive: boolean
@@ -172,16 +171,16 @@ type State = {
   editedInstruction: {
     // TODO: This could be adapted to be a InstructionContext
     isCondition: boolean,
-    instruction: gdInstruction | null | undefined,
-    instrsList: gdInstructionsList | null | undefined,
+    instruction: gd.Instruction | null | undefined,
+    instrsList: gd.InstructionsList | null | undefined,
     indexInList: number | null | undefined,
     eventContext: EventContext | null | undefined
   },
   editedParameter: {
     // TODO: This could be adapted to be a ParameterContext
     isCondition: boolean,
-    instruction: gdInstruction | null | undefined,
-    instrsList: gdInstructionsList | null | undefined,
+    instruction: gd.Instruction | null | undefined,
+    instrsList: gd.InstructionsList | null | undefined,
     parameterIndex: number,
     eventContext: EventContext | null | undefined
   },
@@ -192,16 +191,16 @@ type State = {
   inlineEditingPreviousValue: string | null | undefined,
   analyzedEventsContextResult: EventsContextResult | null | undefined,
   serializedEventsToExtract: any | null | undefined,
-  textEditedEvent: gdBaseEvent | null | undefined,
+  textEditedEvent: gd.BaseEvent | null | undefined,
   showSearchPanel: boolean,
-  searchResults: Array<gdBaseEvent> | null | undefined,
+  searchResults: Array<gd.BaseEvent> | null | undefined,
   searchFocusOffset: number | null | undefined,
   allEventsMetadata: Array<EventMetadata>,
   fontSize: number
 };
 
 type EventInsertionContext = {
-  eventsList: gdEventsList,
+  eventsList: gd.EventsList,
   indexInList: number
 };
 
@@ -253,7 +252,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   eventContextMenu: ContextMenuInterface | null | undefined;
   resourceExternallyChangedCallbackId: string | null | undefined;
   instructionContextMenu: ContextMenuInterface | null | undefined;
-  addNewEvent: (type: string, context?: EventInsertionContext | null | undefined) => Array<gdBaseEvent>;
+  addNewEvent: (type: string, context?: EventInsertionContext | null | undefined) => Array<gd.BaseEvent>;
 
   state = {
     eventsHistory: getHistoryInitialState(this.props.events, {
@@ -347,7 +346,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     const canAddSubEvent = this._selectionCanHaveSubEvents();
 
     this.props.setToolbar(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <Toolbar
         allEventsMetadata={this.state.allEventsMetadata}
         onAddStandardEvent={this._addStandardEvent}
@@ -464,7 +463,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     });
   };
 
-  _addNewEvent = (type: string, context?: EventInsertionContext | null): Array<gdBaseEvent> => {
+  _addNewEvent = (type: string, context?: EventInsertionContext | null): Array<gd.BaseEvent> => {
     const { project } = this.props;
     const selectedEventContext = getLastSelectedEventContext(
       this.state.selection
@@ -1094,7 +1093,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   } = {}) => {
     const { events } = this.props;
     const eventsRemover = new gd.EventsRemover();
-    let eventsWithDeletion: Array<gdBaseEvent> = [];
+    let eventsWithDeletion: Array<gd.BaseEvent> = [];
     if (deleteEvents) {
       const selectedEvents = getSelectedEvents(this.state.selection);
       selectedEvents.forEach(event => eventsRemover.addEventToRemove(event));
@@ -1311,7 +1310,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     );
   };
 
-  _onEndEditingStringEvent = (event: gdBaseEvent) => {
+  _onEndEditingStringEvent = (event: gd.BaseEvent) => {
     const eventRowIndex = this._getChangedEventRows([event]);
     this._saveChangesToHistory('EDIT', {
       positionsBeforeAction: eventRowIndex,
@@ -1319,7 +1318,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     });
   };
 
-  _getChangedEventRows = (events: Array<gdBaseEvent>) => {
+  _getChangedEventRows = (events: Array<gd.BaseEvent>) => {
     const currentTree = this._eventsTree;
     if (currentTree) {
       return events.map(event => currentTree.getEventRow(event));
@@ -1554,7 +1553,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
   _replaceSelectionByEventsFunction = (
     extensionName: string,
-    eventsFunction: gdEventsFunction
+    eventsFunction: gd.EventsFunction
   ) => {
     const eventContext = getLastSelectedTopMostOnlyEventContext(
       this.state.selection
@@ -1580,7 +1579,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     this.deleteSelection({ deleteInstructions: false });
   };
 
-  _replaceSelectionByGroupOfEvents = (eventsList: gdEventsList) => {
+  _replaceSelectionByGroupOfEvents = (eventsList: gd.EventsList) => {
     const eventContext = getLastSelectedTopMostOnlyEventContext(
       this.state.selection
     );
@@ -1604,7 +1603,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
     this.deleteSelection({ deleteInstructions: false });
   };
 
-  _ensureEventUnfolded = (cb: () => gdBaseEvent | null | undefined) => {
+  _ensureEventUnfolded = (cb: () => gd.BaseEvent | null | undefined) => {
     const event = cb();
     if (event && this._eventsTree) {
       this._eventsTree.unfoldForEvent(event);
@@ -1612,7 +1611,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
   };
 
   _replaceInEvents = (
-    doReplaceInEvents: (inputs: ReplaceInEventsInputs, cb: () => void) => Array<gdBaseEvent>,
+    doReplaceInEvents: (inputs: ReplaceInEventsInputs, cb: () => void) => Array<gd.BaseEvent>,
     inputs: ReplaceInEventsInputs
   ) => {
     const modifiedEvents = doReplaceInEvents(inputs, () => {
@@ -1665,11 +1664,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
 
     const instruction = this.state.editedInstruction.instruction;
     return instruction ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
         {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <Dialog
             i18n={i18n}
             project={project}
@@ -1707,7 +1705,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
               if (this._eventsTree) this._eventsTree.forceEventsUpdate();
             }}
             resourceManagementProps={this.props.resourceManagementProps}
-// @ts-expect-error - TS7006 - Parameter 'extension' implicitly has an 'any' type. | TS7006 - Parameter 'type' implicitly has an 'any' type.
+
             openInstructionOrExpression={(extension, type) => {
               this.closeInstructionEditor();
               this.props.openInstructionOrExpression(extension, type);
@@ -1813,10 +1811,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
           )));
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <ResponsiveWindowMeasurer>
         {({ windowSize }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <EventsSearcher
             key={events.ptr}
             ref={eventSearcher => (this._eventSearcher = eventSearcher)}
@@ -1834,7 +1832,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
               goToPreviousSearchResult,
               goToNextSearchResult,
             }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <div
                 id="events-editor"
                 data-active={isActive ? 'true' : undefined}
@@ -1850,13 +1848,10 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                 tabIndex={0}
               >
                 {isFunctionOnlyCallingItself && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <AlertMessage kind="warning">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <Trans>
                           This function calls itself (it is "recursive"). Ensure
                           this is expected and there is a proper condition to
@@ -1866,9 +1861,8 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                     </Column>
                   </Line>
                 )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <EventsTree
-// @ts-expect-error - TS7006 - Parameter 'eventsTree' implicitly has an 'any' type.
+
                   ref={eventsTree => (this._eventsTree = eventsTree)}
                   key={events.ptr}
                   onScroll={this._ensureFocused}
@@ -1895,7 +1889,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   onEventContextMenu={this.openEventContextMenu}
                   onAddNewEvent={(
                     eventType: string,
-                    eventsList: gdEventsList
+                    eventsList: gd.EventsList
                   ) => {
                     this.addNewEvent(eventType, {
                       eventsList,
@@ -1923,22 +1917,21 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   tutorials={tutorials}
                 />
                 {this.state.showSearchPanel && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     componentTitle={<Trans>Search panel</Trans>}
                     scope="scene-events-search"
                     onClose={() => this._closeSearchPanel()}
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <SearchPanel
-// @ts-expect-error - TS7006 - Parameter 'searchPanel' implicitly has an 'any' type.
+
                       ref={searchPanel => (this._searchPanel = searchPanel)}
-// @ts-expect-error - TS7006 - Parameter 'inputs' implicitly has an 'any' type.
+
                       onSearchInEvents={inputs =>
                         this._searchInEvents(searchInEvents, inputs)
                       }
-// @ts-expect-error - TS7006 - Parameter 'inputs' implicitly has an 'any' type.
+
                       onReplaceInEvents={inputs => {
                         this._replaceInEvents(replaceInEvents, inputs);
                       }}
@@ -1961,7 +1954,6 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                     />
                   </ErrorBoundary>
                 )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <InlineParameterEditor
                   open={this.state.inlineEditing}
                   anchorEl={this.state.inlineEditingAnchorEl}
@@ -1981,7 +1973,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   isCondition={this.state.editedParameter.isCondition}
                   instruction={this.state.editedParameter.instruction}
                   parameterIndex={this.state.editedParameter.parameterIndex}
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
+
                   onChange={value => {
                     const {
                       instruction,
@@ -2004,17 +1996,15 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   }}
                   resourceManagementProps={resourceManagementProps}
                 />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ContextMenu
-// @ts-expect-error - TS7006 - Parameter 'eventContextMenu' implicitly has an 'any' type.
+
                   ref={eventContextMenu =>
                     (this.eventContextMenu = eventContextMenu)
                   }
                   buildMenuTemplate={this._buildEventContextMenu}
                 />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ContextMenu
-// @ts-expect-error - TS7006 - Parameter 'instructionContextMenu' implicitly has an 'any' type.
+
                   ref={instructionContextMenu =>
                     (this.instructionContextMenu = instructionContextMenu)
                   }
@@ -2022,14 +2012,14 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                 />
                 {this._renderInstructionEditorDialog()}
                 {this.state.analyzedEventsContextResult && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <EventsContextAnalyzerDialog
                     onClose={this._closeEventsContextAnalyzer}
                     eventsContextResult={this.state.analyzedEventsContextResult}
                   />
                 )}
                 {this.state.serializedEventsToExtract && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <EventsFunctionExtractorDialog
                     project={project}
                     scope={scope}
@@ -2041,7 +2031,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                       })
                     }
                     serializedEvents={this.state.serializedEventsToExtract}
-// @ts-expect-error - TS7006 - Parameter 'extensionName' implicitly has an 'any' type. | TS7006 - Parameter 'eventsFunction' implicitly has an 'any' type.
+
                     onCreate={(extensionName, eventsFunction) => {
                       onCreateEventsFunction(extensionName, eventsFunction);
                       this._replaceSelectionByEventsFunction(
@@ -2055,7 +2045,7 @@ export class EventsSheetComponentWithoutHandle extends React.Component<Component
                   />
                 )}
                 {this.state.textEditedEvent && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <EventTextDialog
                     event={this.state.textEditedEvent}
                     onApply={() => {
@@ -2099,7 +2089,7 @@ const EventsSheet = (props: Props, ref: ((arg1: null | EventsSheetInterface) => 
   const onResourceExternallyChanged = resourceInfo: {
 // @ts-expect-error - TS7031 - Binding element 'string' implicitly has an 'any' type.
     identifier: string
-// @ts-expect-error - TS1005 - ';' expected.
+
   } => {
     if (component.current)
       component.current.onResourceExternallyChanged(resourceInfo);
@@ -2121,8 +2111,8 @@ const EventsSheet = (props: Props, ref: ((arg1: null | EventsSheetInterface) => 
       {...props}
     />
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 // @ts-expect-error - TS2345 - Argument of type '(props: Props, ref: { current: null | EventsSheetInterface; } | ((arg1: null | EventsSheetInterface) => unknown)) => void' is not assignable to parameter of type 'ForwardRefRenderFunction<Props, EventsSheetInterface>'.
-export default React.forwardRef<Props, EventsSheetInterface>(EventsSheet);
+export default React.forwardRef<EventsSheetInterface, Props>(EventsSheet);

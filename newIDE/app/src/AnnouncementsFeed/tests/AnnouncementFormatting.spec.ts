@@ -1,17 +1,14 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import { getAnnouncementContent } from '../AnnouncementFormatting';
 import { Announcement } from '../../Utils/GDevelopServices/Announcement';
 
 const makeFakeI18n = (): I18nType => ({
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
   language: 'en',
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('getAnnouncementContent', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return an object with title and message when announcement has a title', () => {
     const announcement: Announcement = {
       id: 'fantasy-dreamland-mega-pack',
@@ -32,7 +29,6 @@ describe('getAnnouncementContent', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return an object with message only when announcement has no title and no link', () => {
     const imageMessage = '![Big Game Jam 4](https://example.com/image.png)';
     const announcement: Announcement = {
@@ -54,7 +50,6 @@ describe('getAnnouncementContent', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return an object with message only when announcement has no title and an external link', () => {
     const imageWithLinkMessage =
       '[![Big Game Jam 4](https://resources.gdevelop.io/announcements/Big_Game_Jam_4.png)](https://itch.io/jam/gdevelop-game-jam-4)';
@@ -77,7 +72,6 @@ describe('getAnnouncementContent', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return an object with message only and routeNavigationParams when announcement has no title and an internal link', () => {
     const imageMarkdown =
       '![GDevelop Mega Pack on GDevelop asset store](https://resources.gdevelop.io/announcements/GDevelops_Mega_Pack_Updated.png)';
@@ -115,7 +109,6 @@ describe('getAnnouncementContent', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('should return mobile and desktop messages and navigation params', () => {
     const imageMarkdown =
       '![GDevelop Mega Pack on GDevelop asset store](https://resources.gdevelop.io/announcements/GDevelops_Mega_Pack_Updated.png)';

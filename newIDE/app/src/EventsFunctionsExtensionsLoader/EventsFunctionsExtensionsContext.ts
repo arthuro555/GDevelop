@@ -5,21 +5,34 @@ import {
 } from './Storage';
 
 export type EventsFunctionsExtensionsState = {
-  eventsFunctionsExtensionsError: Error | null | undefined,
-  loadProjectEventsFunctionsExtensions: (project?: gdProject | null | undefined) => Promise<void>,
-  unloadProjectEventsFunctionsExtensions: (project: gdProject) => void,
-  unloadProjectEventsFunctionsExtension: (project: gdProject, extensionName: string) => void,
-  reloadProjectEventsFunctionsExtensions: (project?: gdProject | null | undefined) => Promise<void>,
+  eventsFunctionsExtensionsError: Error | null | undefined;
+  loadProjectEventsFunctionsExtensions: (
+    project?: gd.Project | null | undefined
+  ) => Promise<void>;
+  unloadProjectEventsFunctionsExtensions: (project: gd.Project) => void;
+  unloadProjectEventsFunctionsExtension: (
+    project: gd.Project,
+    extensionName: string
+  ) => void;
+  reloadProjectEventsFunctionsExtensions: (
+    project?: gd.Project | null | undefined
+  ) => Promise<void>;
   reloadProjectEventsFunctionsExtensionMetadata: (
-    project: gdProject | null | undefined,
-    extension: gdEventsFunctionsExtension,
-  ) => void,
-  getEventsFunctionsExtensionWriter: () => EventsFunctionsExtensionWriter | null | undefined,
-  getEventsFunctionsExtensionOpener: () => EventsFunctionsExtensionOpener | null | undefined,
-  ensureLoadFinished: () => Promise<void>,
+    project: gd.Project | null | undefined,
+    extension: gd.EventsFunctionsExtension
+  ) => void;
+  getEventsFunctionsExtensionWriter: () =>
+    | EventsFunctionsExtensionWriter
+    | null
+    | undefined;
+  getEventsFunctionsExtensionOpener: () =>
+    | EventsFunctionsExtensionOpener
+    | null
+    | undefined;
+  ensureLoadFinished: () => Promise<void>;
   getIncludeFileHashs: () => {
-    [key: string]: number
-  }
+    [key: string]: number;
+  };
 };
 
 const defaultState = {
@@ -39,6 +52,7 @@ const defaultState = {
   getIncludeFileHashs: () => ({}),
 } as const;
 
-const EventsFunctionsExtensionsContext = React.createContext<EventsFunctionsExtensionsState>(defaultState);
+const EventsFunctionsExtensionsContext =
+  React.createContext<EventsFunctionsExtensionsState>(defaultState);
 
 export default EventsFunctionsExtensionsContext;

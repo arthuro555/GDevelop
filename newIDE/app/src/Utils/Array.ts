@@ -2,7 +2,7 @@ export const mergeArraysPerGroup = <T>(
   arr1: Array<T>,
   arr2: Array<T>,
   howManyPerGroup1: number,
-  howManyPerGroup2: number,
+  howManyPerGroup2: number
 ): Array<T> => {
   let arr1Index = 0;
   let arr2Index = 0;
@@ -14,8 +14,8 @@ export const mergeArraysPerGroup = <T>(
     arr1Index += howManyPerGroup1;
     arr2Index += howManyPerGroup2;
 
-    picks1.forEach(item => result.push(item));
-    picks2.forEach(item => result.push(item));
+    picks1.forEach((item) => result.push(item));
+    picks2.forEach((item) => result.push(item));
   }
 
   return result;

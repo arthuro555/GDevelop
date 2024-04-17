@@ -5,7 +5,12 @@ import {
 } from '../Utils/GDevelopServices/Play';
 import { roundTo } from '../Utils/Mathematics';
 
-export const orderedTimeUnits = ['hour', 'minute', 'second', 'millisecond'] as const;
+export const orderedTimeUnits = [
+  'hour',
+  'minute',
+  'second',
+  'millisecond',
+] as const;
 const unitToDivider = {
   hour: 3600000,
   minute: 60000,
@@ -19,7 +24,10 @@ export const unitToNextSeparator = {
   millisecond: '',
 } as const;
 
-export const formatDuration = (durationInSecond: number, options: LeaderboardScoreFormattingTime): string => {
+export const formatDuration = (
+  durationInSecond: number,
+  options: LeaderboardScoreFormattingTime
+): string => {
   let formattedDuration = '';
   let durationInMs = Math.round(durationInSecond * 1000);
   const biggestUnitIndex = orderedTimeUnits.indexOf(options.biggestUnit);
@@ -39,7 +47,10 @@ export const formatDuration = (durationInSecond: number, options: LeaderboardSco
   return formattedDuration;
 };
 
-export const formatCustomScore = (score: number, options: LeaderboardScoreFormattingCustom): string => {
+export const formatCustomScore = (
+  score: number,
+  options: LeaderboardScoreFormattingCustom
+): string => {
   const roundedScore = roundTo(score, options.precision);
 
   return `${options.prefix}${roundedScore.toFixed(
@@ -47,6 +58,10 @@ export const formatCustomScore = (score: number, options: LeaderboardScoreFormat
   )}${options.suffix}`;
 };
 
-export const formatScore = (score: number, options: LeaderboardScoreFormatting): string => options.type === 'time'
-  ? formatDuration(score, options)
-  : formatCustomScore(score, options);
+export const formatScore = (
+  score: number,
+  options: LeaderboardScoreFormatting
+): string =>
+  options.type === 'time'
+    ? formatDuration(score, options)
+    : formatCustomScore(score, options);

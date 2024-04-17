@@ -6,7 +6,7 @@ import * as React from 'react';
  * promises/network dependent effects.
  */
 export const useIsMounted = (): {
-  current: boolean
+  current: boolean;
 } => {
   const isMounted = React.useRef<boolean>(false);
   React.useEffect(() => {

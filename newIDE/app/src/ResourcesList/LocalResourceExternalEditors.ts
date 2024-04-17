@@ -10,9 +10,9 @@ import {
   patchExternalEditorMetadataWithResourcesNamesIfNecessary,
 } from './ResourceExternalEditor';
 import { sendExternalEditorOpened } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import { isBlobURL, isURL } from './ResourceUtils';
 import {
@@ -33,7 +33,7 @@ const ipcRenderer = electron ? electron.ipcRenderer : null;
  */
 const openAndWaitForExternalEditorWindow = async (
   editorName: 'piskel' | 'yarn' | 'jfxr',
-  externalEditorInput: ExternalEditorInput,
+  externalEditorInput: ExternalEditorInput
 ): Promise<ExternalEditorOutput | null | undefined> => {
   if (!ipcRenderer) throw new Error('Not supported.');
 
@@ -48,30 +48,28 @@ const openAndWaitForExternalEditorWindow = async (
  * Download (or read locally) resources and prepare them to be edited
  * by an external editor.
  */
-export const downloadAndPrepareExternalEditorBase64Resources = async (
-  {
-    project,
-    resourceNames,
-  }: {
-    project: gdProject,
-    resourceNames: Array<string>
-  },
-): Promise<Array<ExternalEditorBase64Resource>> => {
+export const downloadAndPrepareExternalEditorBase64Resources = async ({
+  project,
+  resourceNames,
+}: {
+  project: gd.Project;
+  resourceNames: Array<string>;
+}): Promise<Array<ExternalEditorBase64Resource>> => {
   type ResourceToDownload = {
-    resourceName: string,
-    url: string
+    resourceName: string;
+    url: string;
   };
 
   type ResourceToReadLocally = {
-    resourceName: string,
-    localFilePath: string
+    resourceName: string;
+    localFilePath: string;
   };
 
   const projectPath = path.dirname(project.getProjectFile());
   const urlsToDownload: Array<ResourceToDownload> = [];
   const filesToRead: Array<ResourceToReadLocally> = [];
   const resourcesManager = project.getResourcesManager();
-  resourceNames.forEach(resourceName => {
+  resourceNames.forEach((resourceName) => {
     if (!resourcesManager.hasResource(resourceName)) return;
 
     const resource = resourcesManager.getResource(resourceName);
@@ -94,15 +92,19 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
     }
   });
 
-  const downloadedBlobs: Array<ItemResult<ResourceToDownload>> = await downloadUrlsToBlobs({
-    urlContainers: urlsToDownload,
-    onProgress: (count, total) => {},
-  });
+  const downloadedBlobs: Array<ItemResult<ResourceToDownload>> =
+    await downloadUrlsToBlobs({
+      urlContainers: urlsToDownload,
+      onProgress: (count, total) => {},
+    });
 
-  const resourcesToDataUrl = new Map<string, {
-    dataUrl: string,
-    localFilePath?: string
-  }>();
+  const resourcesToDataUrl = new Map<
+    string,
+    {
+      dataUrl: string;
+      localFilePath?: string;
+    }
+  >();
   await Promise.all(
     downloadedBlobs.map(async ({ error, blob, item }) => {
       if (blob) {
@@ -110,11 +112,9 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
           resourcesToDataUrl.set(item.resourceName, {
             dataUrl: await convertBlobToDataURL(blob),
           });
-        } catch (error: any) {
+        } catch (error) {
           console.error(
-            `Unable to read data from resource "${
-              item.resourceName
-            }" - ignoring it.`,
+            `Unable to read data from resource "${item.resourceName}" - ignoring it.`,
             error
           );
         }
@@ -132,7 +132,7 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
           localFilePath,
           dataUrl: 'data:text/plain;base64,' + content.toString('base64'),
         });
-      } catch (error: any) {
+      } catch (error) {
         console.error(
           `Unable to read local file "${localFilePath}" - ignoring it.`,
           error
@@ -141,7 +141,7 @@ export const downloadAndPrepareExternalEditorBase64Resources = async (
     })
   );
 
-  return resourceNames.map(resourceName => {
+  return resourceNames.map((resourceName) => {
     const resourceData = resourcesToDataUrl.get(resourceName);
     if (!resourceData)
       return {
@@ -168,11 +168,11 @@ const editWithLocalExternalEditor = async ({
   resourceKind,
   options,
 }: {
-  externalEditorName: 'piskel' | 'yarn' | 'jfxr',
-  defaultName: string,
-  metadataKey: string,
-  resourceKind: ResourceKind,
-  options: EditWithExternalEditorOptions
+  externalEditorName: 'piskel' | 'yarn' | 'jfxr';
+  defaultName: string;
+  metadataKey: string;
+  resourceKind: ResourceKind;
+  options: EditWithExternalEditorOptions;
 }) => {
   const { project, resourceNames, resourceManagementProps } = options;
 
@@ -195,10 +195,11 @@ const editWithLocalExternalEditor = async ({
     resources,
   };
   sendExternalEditorOpened(externalEditorName);
-  const externalEditorOutput: ExternalEditorOutput | null | undefined = await openAndWaitForExternalEditorWindow(
-    externalEditorName,
-    externalEditorInput
-  );
+  const externalEditorOutput: ExternalEditorOutput | null | undefined =
+    await openAndWaitForExternalEditorWindow(
+      externalEditorName,
+      externalEditorInput
+    );
   if (!externalEditorOutput) return null; // Changes cancelled.
 
   // Save the edited files back to the GDevelop resources, as "blob urls" (blob:...)
@@ -216,7 +217,7 @@ const editWithLocalExternalEditor = async ({
   // or saved locally).
   try {
     await resourceManagementProps.onFetchNewlyAddedResources();
-  } catch (error: any) {
+  } catch (error) {
     console.error(
       'An error happened while fetching the newly added resources:',
       error
@@ -259,7 +260,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Piskel`,
     editDisplayName: t`Edit with Piskel`,
     kind: 'image',
-    edit: async options => {
+    edit: async (options) => {
       return await editWithLocalExternalEditor({
         options,
         externalEditorName: 'piskel',
@@ -274,7 +275,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Jfxr`,
     editDisplayName: t`Edit with Jfxr`,
     kind: 'audio',
-    edit: async options => {
+    edit: async (options) => {
       return await editWithLocalExternalEditor({
         options,
         externalEditorName: 'jfxr',
@@ -289,7 +290,7 @@ const editors: Array<ResourceExternalEditor> = [
     createDisplayName: t`Create with Yarn`,
     editDisplayName: t`Edit with Yarn`,
     kind: 'json',
-    edit: async options => {
+    edit: async (options) => {
       return await editWithLocalExternalEditor({
         options,
         externalEditorName: 'yarn',

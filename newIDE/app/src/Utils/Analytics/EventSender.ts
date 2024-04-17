@@ -7,10 +7,10 @@ import {
   incrementProgramOpeningCount,
 } from './LocalStats';
 import { getIDEVersion, getIDEVersionWithHash } from '../../Version';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesProvider.tsx', but '--jsx' is not set.
+
 import { loadPreferencesFromLocalStorage } from '../../MainFrame/Preferences/PreferencesProvider';
 import { getBrowserLanguageOrLocale } from '../Language';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../OptionalRequire';
 import Window from '../Window';
 const electron = optionalRequire('electron');
@@ -34,9 +34,12 @@ export const setCurrentlyRunningInAppTutorial = (tutorial: string | null) =>
  * Used to send an event to the analytics.
  * This function will retry to send the event if the analytics service is not ready.
  */
-const recordEvent = (name: string, metadata?: {
-  [key: string]: any
-}) => {
+const recordEvent = (
+  name: string,
+  metadata?: {
+    [key: string]: any;
+  }
+) => {
   if (isDev) {
     // Uncomment to inspect analytics in development.
     // console.log(`Should have sent analytics event "${name}"`, metadata);
@@ -57,7 +60,7 @@ const recordEvent = (name: string, metadata?: {
 
   posthog.capture(name, {
     ...metadata,
-// @ts-expect-error - TS7005 - Variable 'currentlyRunningInAppTutorial' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'currentlyRunningInAppTutorial' implicitly has an 'any' type.
     isInAppTutorialRunning: currentlyRunningInAppTutorial,
     isInDesktopApp: isElectronApp,
     isInWebApp: !isElectronApp,
@@ -202,7 +205,7 @@ export const sendExportLaunched = (exportKind: string) => {
 };
 
 export const sendGameDetailsOpened = (options: {
-  from: 'profile' | 'homepage' | 'projectManager'
+  from: 'profile' | 'homepage' | 'projectManager';
 }) => {
   recordEvent('game_details_opened', options);
 };
@@ -215,8 +218,8 @@ export const sendNewGameCreated = ({
   exampleUrl,
   exampleSlug,
 }: {
-  exampleUrl: string,
-  exampleSlug: string
+  exampleUrl: string;
+  exampleSlug: string;
 }) => {
   recordEvent('new_game_creation', {
     platform: 'GDevelop JS Platform', // Hardcoded here for now
@@ -232,55 +235,55 @@ export const sendTutorialOpened = (tutorialName: string) => {
 };
 
 export const sendInAppTutorialStarted = (metadata: {
-  tutorialId: string,
-  scenario: 'startOver' | 'resume' | 'start'
+  tutorialId: string;
+  scenario: 'startOver' | 'resume' | 'start';
 }) => {
   recordEvent('in-app-tutorial-started', metadata);
 };
 
 export const sendAssetPackOpened = (options: {
-  assetPackId: string | null,
-  assetPackName: string,
-  assetPackTag: string | null,
-  assetPackKind: 'public' | 'private' | 'unknown',
-  source: 'store-home' | 'author-profile' | 'new-object'
+  assetPackId: string | null;
+  assetPackName: string;
+  assetPackTag: string | null;
+  assetPackKind: 'public' | 'private' | 'unknown';
+  source: 'store-home' | 'author-profile' | 'new-object';
 }) => {
   recordEvent('asset_pack_opened', options);
 };
 
 export const sendAssetPackBuyClicked = (options: {
-  assetPackId: string,
-  assetPackName: string,
-  assetPackTag: string,
-  assetPackKind: 'public' | 'private' | 'unknown',
-  currency?: string,
-  usageType: string
+  assetPackId: string;
+  assetPackName: string;
+  assetPackTag: string;
+  assetPackKind: 'public' | 'private' | 'unknown';
+  currency?: string;
+  usageType: string;
 }) => {
   recordEvent('asset_pack_buy_clicked', options);
 };
 
 export const sendAssetPackInformationOpened = (options: {
-  assetPackId: string,
-  assetPackName: string,
-  assetPackKind: 'public' | 'private' | 'unknown'
+  assetPackId: string;
+  assetPackName: string;
+  assetPackKind: 'public' | 'private' | 'unknown';
 }) => {
   recordEvent('asset_pack_information_opened', options);
 };
 
 export const sendGameTemplateBuyClicked = (options: {
-  gameTemplateId: string,
-  gameTemplateName: string,
-  gameTemplateTag: string,
-  currency?: string,
-  usageType: string
+  gameTemplateId: string;
+  gameTemplateName: string;
+  gameTemplateTag: string;
+  currency?: string;
+  usageType: string;
 }) => {
   recordEvent('game_template_buy_clicked', options);
 };
 
 export const sendGameTemplateInformationOpened = (options: {
-  gameTemplateId: string,
-  gameTemplateName: string,
-  source: 'store' | 'examples-list' | 'homepage' | 'web-link'
+  gameTemplateId: string;
+  gameTemplateName: string;
+  source: 'store' | 'examples-list' | 'homepage' | 'web-link';
 }) => {
   recordEvent('game_template_information_opened', options);
 };
@@ -303,7 +306,12 @@ export const sendHelpSearch = (searchText: string) => {
 
 export const sendErrorMessage = (
   message: string,
-  type: 'error' | 'error-boundary_mainframe' | 'error-boundary_list-search-result' | 'error-boundary_box-search-result' | 'error-boundary_app',
+  type:
+    | 'error'
+    | 'error-boundary_mainframe'
+    | 'error-boundary_list-search-result'
+    | 'error-boundary_box-search-result'
+    | 'error-boundary_app',
   rawError: any,
   errorId: string
 ) => {
@@ -325,8 +333,8 @@ export const sendSubscriptionCheckDialogShown = ({
   mode,
   id,
 }: {
-  mode: string,
-  id: string
+  mode: string;
+  id: string;
 }) => {
   recordEvent('subscription-check-dialog-shown', {
     mode,
@@ -338,33 +346,49 @@ export const sendSubscriptionCheckDismiss = () => {
   recordEvent('subscription-check-dialog-dismiss');
 };
 
-export type SubscriptionDialogDisplayReason = 'Disable GDevelop splash at startup' | 'Debugger' | 'Hot reloading' | 'Preview over wifi' | 'Landing dialog at opening' | 'Leaderboard count per game limit reached' | 'Cloud Project limit reached' | 'Consult profile' | 'Build limit reached' | 'Leaderboard customization' | 'Extend redeemed subscription' | 'Generate project from prompt' | 'Version history' | 'Add collaborators on project' | 'Claim asset pack' | 'Unlock build type';
+export type SubscriptionDialogDisplayReason =
+  | 'Disable GDevelop splash at startup'
+  | 'Debugger'
+  | 'Hot reloading'
+  | 'Preview over wifi'
+  | 'Landing dialog at opening'
+  | 'Leaderboard count per game limit reached'
+  | 'Cloud Project limit reached'
+  | 'Consult profile'
+  | 'Build limit reached'
+  | 'Leaderboard customization'
+  | 'Extend redeemed subscription'
+  | 'Generate project from prompt'
+  | 'Version history'
+  | 'Add collaborators on project'
+  | 'Claim asset pack'
+  | 'Unlock build type';
 
 export const sendSubscriptionDialogShown = (metadata: {
-  reason: SubscriptionDialogDisplayReason,
-  preStep?: 'subscriptionChecker'
+  reason: SubscriptionDialogDisplayReason;
+  preStep?: 'subscriptionChecker';
 }) => {
   recordEvent('subscription-dialog-shown', metadata);
 };
 
 export const sendAssetOpened = (options: {
-  id: string,
-  name: string,
-  assetPackName: string | null,
-  assetPackTag: string | null,
-  assetPackId: string | null,
-  assetPackKind: 'public' | 'private' | 'unknown'
+  id: string;
+  name: string;
+  assetPackName: string | null;
+  assetPackTag: string | null;
+  assetPackId: string | null;
+  assetPackKind: 'public' | 'private' | 'unknown';
 }) => {
   recordEvent('asset-opened', options);
 };
 
 export const sendAssetAddedToProject = (options: {
-  id: string,
-  name: string,
-  assetPackName: string | null,
-  assetPackTag: string | null,
-  assetPackId: string | null,
-  assetPackKind: 'public' | 'private' | 'unknown'
+  id: string;
+  name: string;
+  assetPackName: string | null;
+  assetPackTag: string | null;
+  assetPackId: string | null;
+  assetPackKind: 'public' | 'private' | 'unknown';
 }) => {
   recordEvent('asset-added-to-project', options);
 };
@@ -386,15 +410,15 @@ export const sendShowcaseGameLinkOpened = (title: string, linkType: string) => {
 };
 
 export const sendChoosePlanClicked = (metadata: {
-  planId: string | null,
-  pricingSystemId: string | null
+  planId: string | null;
+  pricingSystemId: string | null;
 }) => {
   recordEvent('choose-plan-click', metadata);
 };
 
 export const sendCancelSubscriptionToChange = (metadata: {
-  planId: string,
-  pricingSystemId: string | null
+  planId: string;
+  pricingSystemId: string | null;
 }) => {
   recordEvent('cancel-subscription-to-change', metadata);
 };
@@ -404,7 +428,7 @@ export const sendExternalEditorOpened = (editorName: string) => {
 };
 
 export const sendBehaviorsEditorShown = (metadata: {
-  parentEditor: 'object-editor-dialog'
+  parentEditor: 'object-editor-dialog';
 }) => {
   // It would be costly to send an event for each opening of the behaviors editor.
   // We would rather have this aggregated by the app and sent as a property for the user.
@@ -415,31 +439,34 @@ export const sendBehaviorsEditorShown = (metadata: {
 };
 
 export const sendBehaviorAdded = (metadata: {
-  behaviorType: string,
-  parentEditor: 'behaviors-editor' | 'instruction-editor-dialog'
+  behaviorType: string;
+  parentEditor: 'behaviors-editor' | 'instruction-editor-dialog';
 }) => {
   recordEvent('behavior-added', metadata);
 };
 
 export const sendCloudProjectCouldNotBeOpened = (metadata: {
-  userId: string,
-  cloudProjectId: string
+  userId: string;
+  cloudProjectId: string;
 }) => {
   recordEvent('cloud-project-opening-failed', metadata);
 };
 
 export const sendEventsExtractedAsFunction = (metadata: {
-  step: 'begin' | 'end',
-  parentEditor: 'scene-events-editor' | 'extension-events-editor' | 'external-events-editor'
+  step: 'begin' | 'end';
+  parentEditor:
+    | 'scene-events-editor'
+    | 'extension-events-editor'
+    | 'external-events-editor';
 }) => {
   recordEvent('events-extracted-as-function', metadata);
 };
 
 const inAppTutorialProgressLastFiredEvents: {
   [key: string]: {
-    lastStep: number,
-    nextCheckTimeoutId: number | null
-  }
+    lastStep: number;
+    nextCheckTimeoutId: number | null;
+  };
 } = {};
 
 /**
@@ -454,9 +481,9 @@ export const sendInAppTutorialProgress = ({
   tutorialId,
   isCompleted,
 }: {
-  tutorialId: string,
-  step: number,
-  isCompleted: boolean
+  tutorialId: string;
+  step: number;
+  isCompleted: boolean;
 }) => {
   const immediatelyRecordEvent = (
     spentMoreThan30SecondsSinceLastStep?: boolean | null
@@ -470,7 +497,8 @@ export const sendInAppTutorialProgress = ({
       tutorialId,
       step,
       isCompleted,
-      spentMoreThan30SecondsSinceLastStep: !!spentMoreThan30SecondsSinceLastStep,
+      spentMoreThan30SecondsSinceLastStep:
+        !!spentMoreThan30SecondsSinceLastStep,
     });
   };
 
@@ -497,7 +525,7 @@ export const sendInAppTutorialProgress = ({
   // later if there was no more progress.
   inAppTutorialProgressLastFiredEvents[tutorialId] = {
     lastStep: lastFiredEvent.lastStep,
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+    // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
     nextCheckTimeoutId: setTimeout(() => immediatelyRecordEvent(true), 30000),
   };
 };

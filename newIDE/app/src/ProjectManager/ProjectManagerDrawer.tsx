@@ -1,14 +1,14 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../UI/EmptyMessage';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import {
   getAvoidSoftKeyboardStyle,
   useSoftKeyboardBottomOffset,
 } from '../UI/MobileSoftKeyboard';
 import { dataObjectToProps } from '../Utils/HTMLDataset';
-// @ts-expect-error - TS6142 - Module '../UI/DrawerTopBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DrawerTopBar.tsx', but '--jsx' is not set.
+
 import DrawerTopBar from '../UI/DrawerTopBar';
 import Drawer from '@material-ui/core/Drawer';
 
@@ -22,10 +22,10 @@ const styles = {
 } as const;
 
 type Props = {
-  title: string,
-  projectManagerOpen: boolean,
-  toggleProjectManager: () => void,
-  children: React.ReactNode | null
+  title: string;
+  projectManagerOpen: boolean;
+  toggleProjectManager: () => void;
+  children: React.ReactNode | null;
 };
 
 export const ProjectManagerDrawer = ({
@@ -37,7 +37,6 @@ export const ProjectManagerDrawer = ({
   const softKeyboardBottomOffset = useSoftKeyboardBottomOffset();
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Drawer
       open={projectManagerOpen}
       PaperProps={{
@@ -55,7 +54,6 @@ export const ProjectManagerDrawer = ({
         open: projectManagerOpen ? 'true' : undefined,
       })}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DrawerTopBar
         title={title}
         onClose={toggleProjectManager}
@@ -63,9 +61,7 @@ export const ProjectManagerDrawer = ({
       />
       {children}
       {!children && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>To begin, open or create a new project.</Trans>
         </EmptyMessage>
       )}

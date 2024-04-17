@@ -16,19 +16,27 @@ import {
   EventsFunctionsExtensionOpener,
 } from './Storage';
 import { showErrorBox } from '../UI/Messages/MessageBox';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'xxhashjs'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/xxhashjs/lib/index.js' implicitly has an 'any' type.
 import xxhashjs from 'xxhashjs';
 
 type Props = {
-  children: React.ReactNode,
-  i18n: I18nType,
-  makeEventsFunctionCodeWriter: (arg1: EventsFunctionCodeWriterCallbacks) => EventsFunctionCodeWriter | null | undefined,
-  eventsFunctionsExtensionWriter: EventsFunctionsExtensionWriter | null | undefined,
-  eventsFunctionsExtensionOpener: EventsFunctionsExtensionOpener | null | undefined
+  children: React.ReactNode;
+  i18n: I18nType;
+  makeEventsFunctionCodeWriter: (
+    arg1: EventsFunctionCodeWriterCallbacks
+  ) => EventsFunctionCodeWriter | null | undefined;
+  eventsFunctionsExtensionWriter:
+    | EventsFunctionsExtensionWriter
+    | null
+    | undefined;
+  eventsFunctionsExtensionOpener:
+    | EventsFunctionsExtensionOpener
+    | null
+    | undefined;
 };
 
 type State = EventsFunctionsExtensionsState;
@@ -39,33 +47,30 @@ type State = EventsFunctionsExtensionsState;
  * Useful when dealing with events functions extensions (new extension created,
  * removed, pasted, installed, etc...).
  */
-export default class EventsFunctionsExtensionsProvider extends React.Component<Props, State> {
-  _eventsFunctionCodeWriter: EventsFunctionCodeWriter | null | undefined = this.props.makeEventsFunctionCodeWriter(
-    {
+export default class EventsFunctionsExtensionsProvider extends React.Component<
+  Props,
+  State
+> {
+  _eventsFunctionCodeWriter: EventsFunctionCodeWriter | null | undefined =
+    this.props.makeEventsFunctionCodeWriter({
       onWriteFile: this._onWriteFile.bind(this),
-    }
-  );
+    });
   _includeFileHashs: {
-    [key: string]: number
+    [key: string]: number;
   } = {};
   _lastLoadPromise: Promise<undefined> | null | undefined = null;
   state = {
     eventsFunctionsExtensionsError: null,
-    loadProjectEventsFunctionsExtensions: this._loadProjectEventsFunctionsExtensions.bind(
-      this
-    ),
-    unloadProjectEventsFunctionsExtensions: this._unloadProjectEventsFunctionsExtensions.bind(
-      this
-    ),
-    unloadProjectEventsFunctionsExtension: this._unloadProjectEventsFunctionsExtension.bind(
-      this
-    ),
-    reloadProjectEventsFunctionsExtensions: this._reloadProjectEventsFunctionsExtensions.bind(
-      this
-    ),
-    reloadProjectEventsFunctionsExtensionMetadata: this._reloadProjectEventsFunctionsExtensionMetadata.bind(
-      this
-    ),
+    loadProjectEventsFunctionsExtensions:
+      this._loadProjectEventsFunctionsExtensions.bind(this),
+    unloadProjectEventsFunctionsExtensions:
+      this._unloadProjectEventsFunctionsExtensions.bind(this),
+    unloadProjectEventsFunctionsExtension:
+      this._unloadProjectEventsFunctionsExtension.bind(this),
+    reloadProjectEventsFunctionsExtensions:
+      this._reloadProjectEventsFunctionsExtensions.bind(this),
+    reloadProjectEventsFunctionsExtensionMetadata:
+      this._reloadProjectEventsFunctionsExtensionMetadata.bind(this),
     ensureLoadFinished: this._ensureLoadFinished.bind(this),
     getEventsFunctionsExtensionWriter: () =>
       this.props.eventsFunctionsExtensionWriter,
@@ -74,10 +79,7 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
     getIncludeFileHashs: () => this._includeFileHashs,
   };
 
-  _onWriteFile({
-    includeFile,
-    content,
-  }: IncludeFileContent) {
+  _onWriteFile({ includeFile, content }: IncludeFileContent) {
     this._includeFileHashs[includeFile] = xxhashjs
       .h32(content, 0xabcd)
       .toNumber();
@@ -99,14 +101,16 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
       : Promise.resolve();
   }
 
-  _loadProjectEventsFunctionsExtensions(project?: gdProject | null): Promise<void> {
+  _loadProjectEventsFunctionsExtensions(
+    project?: gd.Project | null
+  ): Promise<void> {
     const { i18n } = this.props;
     const eventsFunctionCodeWriter = this._eventsFunctionCodeWriter;
     if (!project || !eventsFunctionCodeWriter) return Promise.resolve();
 
     const lastLoadPromise = this._lastLoadPromise || Promise.resolve();
 
-// @ts-expect-error - TS2322 - Type 'Promise<void | undefined>' is not assignable to type 'Promise<undefined>'.
+    // @ts-expect-error - TS2322 - Type 'Promise<void | undefined>' is not assignable to type 'Promise<undefined>'.
     this._lastLoadPromise = lastLoadPromise
       .then(() =>
         loadProjectEventsFunctionsExtensions(
@@ -136,13 +140,13 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
         this._lastLoadPromise = null;
       });
 
-// @ts-expect-error - TS2322 - Type 'Promise<undefined> | null | undefined' is not assignable to type 'Promise<void>'.
+    // @ts-expect-error - TS2322 - Type 'Promise<undefined> | null | undefined' is not assignable to type 'Promise<void>'.
     return this._lastLoadPromise;
   }
 
   _reloadProjectEventsFunctionsExtensionMetadata(
-    project: gdProject | null | undefined,
-    extension: gdEventsFunctionsExtension,
+    project: gd.Project | null | undefined,
+    extension: gd.EventsFunctionsExtension
   ): void {
     const { i18n } = this.props;
     const eventsFunctionCodeWriter = this._eventsFunctionCodeWriter;
@@ -155,7 +159,7 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
         eventsFunctionCodeWriter,
         i18n
       );
-    } catch (eventsFunctionsExtensionsError: any) {
+    } catch (eventsFunctionsExtensionsError) {
       this.setState({
         eventsFunctionsExtensionsError,
       });
@@ -169,18 +173,20 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
     }
   }
 
-  _unloadProjectEventsFunctionsExtensions(project: gdProject) {
+  _unloadProjectEventsFunctionsExtensions(project: gd.Project) {
     unloadProjectEventsFunctionsExtensions(project);
   }
 
   _unloadProjectEventsFunctionsExtension(
-    project: gdProject,
+    project: gd.Project,
     extensionName: string
   ) {
     unloadProjectEventsFunctionsExtension(project, extensionName);
   }
 
-  _reloadProjectEventsFunctionsExtensions(project?: gdProject | null): Promise<void> {
+  _reloadProjectEventsFunctionsExtensions(
+    project?: gd.Project | null
+  ): Promise<void> {
     if (project) {
       this._unloadProjectEventsFunctionsExtensions(project);
     }
@@ -189,7 +195,6 @@ export default class EventsFunctionsExtensionsProvider extends React.Component<P
 
   render() {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <EventsFunctionsExtensionsContext.Provider value={this.state}>
         {this.props.children}
       </EventsFunctionsExtensionsContext.Provider>

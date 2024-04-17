@@ -16,26 +16,29 @@ export const getTutorialCompletedAchievementId = (tutorialId: string) =>
   'trivial_in-app-tutorial-completed_' + tutorialId;
 
 export type Badge = {
-  seen: boolean,
-  unlockedAt: string,
-  userId: string,
-  achievementId: string
+  seen: boolean;
+  unlockedAt: string;
+  userId: string;
+  achievementId: string;
 };
 
 export type Achievement = {
-  id: string,
-  category: string,
-  name: string,
-  description: string
+  id: string;
+  category: string;
+  name: string;
+  description: string;
 };
 
-export type AchievementWithBadgeData = (Achievement) & {
-  seen?: boolean,
-  unlockedAt: Date | null | undefined
+export type AchievementWithBadgeData = Achievement & {
+  seen?: boolean;
+  unlockedAt: Date | null | undefined;
 };
 
-const isAchievementAlreadyClaimed = (badges: Badge[], achievementId: string): boolean => {
-  return badges.map(badge => badge.achievementId).includes(achievementId);
+const isAchievementAlreadyClaimed = (
+  badges: Badge[],
+  achievementId: string
+): boolean => {
+  return badges.map((badge) => badge.achievementId).includes(achievementId);
 };
 
 export const createOrEnsureBadgeForUser = async (
@@ -45,12 +48,12 @@ export const createOrEnsureBadgeForUser = async (
     getAuthorizationHeader,
     onBadgesChanged,
   }: {
-    badges: Array<Badge> | null | undefined,
-    profile: Profile | null | undefined,
-    getAuthorizationHeader: () => Promise<string>,
-    onBadgesChanged: () => Promise<void>
+    badges: Array<Badge> | null | undefined;
+    profile: Profile | null | undefined;
+    getAuthorizationHeader: () => Promise<string>;
+    onBadgesChanged: () => Promise<void>;
   },
-  achievementId: string,
+  achievementId: string
 ): Promise<Badge | null | undefined> => {
   if (!badges || !profile) return null;
   if (isAchievementAlreadyClaimed(badges, achievementId)) {
@@ -76,7 +79,7 @@ export const createOrEnsureBadgeForUser = async (
     );
     onBadgesChanged();
     return response.data;
-  } catch (error: any) {
+  } catch (error) {
     const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(error);
     if (extractedStatusAndCode && extractedStatusAndCode.status === 409) {
       console.warn('Badge already exists');
@@ -90,18 +93,24 @@ export const createOrEnsureBadgeForUser = async (
  * Check if user has already claimed the achievement, to avoid executing
  * any extra code if that's the case.
  */
-export const addCreateBadgePreHookIfNotClaimed = <T extends (...args: Array<any>) => any>(authenticatedUser: AuthenticatedUser, achievementId: string, callback: T): T => {
+export const addCreateBadgePreHookIfNotClaimed = <
+  T extends (...args: Array<any>) => any,
+>(
+  authenticatedUser: AuthenticatedUser,
+  achievementId: string,
+  callback: T
+): T => {
   const { badges } = authenticatedUser;
   if (!badges) return callback;
   if (isAchievementAlreadyClaimed(badges, achievementId)) {
     return callback;
   }
 
-// @ts-expect-error - TS2322 - Type '(...args: any[]) => any' is not assignable to type 'T'.
+  // @ts-expect-error - TS2322 - Type '(...args: any[]) => any' is not assignable to type 'T'.
   return (...args) => {
     try {
       createOrEnsureBadgeForUser(authenticatedUser, achievementId);
-    } catch (err: any) {
+    } catch (err) {
       console.error(`Couldn't create badge ${achievementId}; ${err}`);
     }
     return callback.apply(null, args);
@@ -119,16 +128,14 @@ export const getAchievements = async (): Promise<Array<Achievement>> => {
   return achievements;
 };
 
-export const markBadgesAsSeen = async (authenticatedUser: AuthenticatedUser): Promise<undefined | null | undefined> => {
-  const {
-    badges,
-    firebaseUser,
-    getAuthorizationHeader,
-    onBadgesChanged,
-  } = authenticatedUser;
+export const markBadgesAsSeen = async (
+  authenticatedUser: AuthenticatedUser
+): Promise<undefined | null | undefined> => {
+  const { badges, firebaseUser, getAuthorizationHeader, onBadgesChanged } =
+    authenticatedUser;
   if (!badges || !firebaseUser) return null;
 
-  const unseenBadges = badges.filter(badge => !badge.seen);
+  const unseenBadges = badges.filter((badge) => !badge.seen);
   if (unseenBadges.length === 0) return;
 
   const userId = firebaseUser.uid;
@@ -136,7 +143,7 @@ export const markBadgesAsSeen = async (authenticatedUser: AuthenticatedUser): Pr
     const authorizationHeader = await getAuthorizationHeader();
     const response = await axios.patch(
       `${GDevelopUserApi.baseUrl}/user/${userId}/badge`,
-      unseenBadges.map(badge => ({
+      unseenBadges.map((badge) => ({
         achievementId: badge.achievementId,
         seen: true,
       })),
@@ -151,7 +158,7 @@ export const markBadgesAsSeen = async (authenticatedUser: AuthenticatedUser): Pr
     );
     onBadgesChanged();
     return response.data;
-  } catch (err: any) {
+  } catch (err) {
     console.error(`Couldn't mark badges as seen: ${err}`);
   }
 };
@@ -161,7 +168,7 @@ export const compareAchievements = (
   b: AchievementWithBadgeData
 ) => {
   if (b.unlockedAt && a.unlockedAt) {
-// @ts-expect-error - TS2362 - The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type. | TS2363 - The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+    // @ts-expect-error - TS2362 - The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type. | TS2363 - The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
     return b.unlockedAt - a.unlockedAt;
   } else if (a.unlockedAt && !b.unlockedAt) {
     return -1;

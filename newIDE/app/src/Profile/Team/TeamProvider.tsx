@@ -13,109 +13,89 @@ import {
   updateUserGroup,
   deleteGroup,
   createGroup,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/User';
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
 import { listOtherUserCloudProjects } from '../../Utils/GDevelopServices/Project';
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
-const TeamProvider = ({
-  children,
-}: Props) => {
+const TeamProvider = ({ children }: Props) => {
   const { profile, getAuthorizationHeader, authenticated } = React.useContext(
     AuthenticatedUserContext
   );
-  const [groups, setGroups] = React.useState<TeamGroup[] | null | undefined>(null);
+  const [groups, setGroups] = React.useState<TeamGroup[] | null | undefined>(
+    null
+  );
   const [team, setTeam] = React.useState<Team | null | undefined>(null);
   const [members, setMembers] = React.useState<User[] | null | undefined>(null);
-  const [memberships, setMemberships] = React.useState<TeamMembership[] | null | undefined>(null);
+  const [memberships, setMemberships] = React.useState<
+    TeamMembership[] | null | undefined
+  >(null);
 
-  React.useEffect(
-    () => {
-      if (!authenticated) {
-        setTeam(null);
-        setGroups(null);
-        setMembers(null);
-        setMemberships(null);
-      }
-    },
-    [authenticated]
-  );
+  React.useEffect(() => {
+    if (!authenticated) {
+      setTeam(null);
+      setGroups(null);
+      setMembers(null);
+      setMemberships(null);
+    }
+  }, [authenticated]);
 
-  React.useEffect(
-    () => {
-      const fetchTeam = async () => {
-        if (!profile || !profile.isTeacher) return;
-        const teams = await listUserTeams(getAuthorizationHeader, profile.id);
-        // Being admin of multiple teams is not supported at the moment.
-        setTeam(teams[0]);
-      };
-      fetchTeam();
-    },
-    [getAuthorizationHeader, profile]
-  );
+  React.useEffect(() => {
+    const fetchTeam = async () => {
+      if (!profile || !profile.isTeacher) return;
+      const teams = await listUserTeams(getAuthorizationHeader, profile.id);
+      // Being admin of multiple teams is not supported at the moment.
+      setTeam(teams[0]);
+    };
+    fetchTeam();
+  }, [getAuthorizationHeader, profile]);
 
-  React.useEffect(
-    () => {
-      const fetchGroups = async () => {
-        if (!team || !profile) return;
-
-        const teamGroups = await listTeamGroups(
-          getAuthorizationHeader,
-          profile.id,
-          team.id
-        );
-        setGroups(teamGroups);
-      };
-      fetchGroups();
-    },
-    [team, getAuthorizationHeader, profile]
-  );
-
-  const fetchMembers = React.useCallback(
-    async () => {
+  React.useEffect(() => {
+    const fetchGroups = async () => {
       if (!team || !profile) return;
 
-      const teamMembers = await listTeamMembers(
+      const teamGroups = await listTeamGroups(
         getAuthorizationHeader,
         profile.id,
         team.id
       );
-      setMembers(teamMembers);
-    },
-    [team, getAuthorizationHeader, profile]
-  );
+      setGroups(teamGroups);
+    };
+    fetchGroups();
+  }, [team, getAuthorizationHeader, profile]);
 
-  React.useEffect(
-    () => {
-      fetchMembers();
-    },
-    [fetchMembers]
-  );
+  const fetchMembers = React.useCallback(async () => {
+    if (!team || !profile) return;
 
-  const fetchMemberships = React.useCallback(
-    async () => {
-      if (!team || !profile) return;
+    const teamMembers = await listTeamMembers(
+      getAuthorizationHeader,
+      profile.id,
+      team.id
+    );
+    setMembers(teamMembers);
+  }, [team, getAuthorizationHeader, profile]);
 
-      const teamMemberships = await listTeamMemberships(
-        getAuthorizationHeader,
-        profile.id,
-        team.id
-      );
-      setMemberships(teamMemberships);
-    },
-    [team, getAuthorizationHeader, profile]
-  );
+  React.useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers]);
 
-  React.useEffect(
-    () => {
-      fetchMemberships();
-    },
-    [fetchMemberships]
-  );
+  const fetchMemberships = React.useCallback(async () => {
+    if (!team || !profile) return;
+
+    const teamMemberships = await listTeamMemberships(
+      getAuthorizationHeader,
+      profile.id,
+      team.id
+    );
+    setMemberships(teamMemberships);
+  }, [team, getAuthorizationHeader, profile]);
+
+  React.useEffect(() => {
+    fetchMemberships();
+  }, [fetchMemberships]);
 
   const onChangeGroupName = React.useCallback(
     async (group: TeamGroup, newName: string) => {
@@ -128,7 +108,7 @@ const TeamProvider = ({
         { name: newName }
       );
       const updatedGroupIndex = groups.findIndex(
-        group_ => group_.id === group.id
+        (group_) => group_.id === group.id
       );
       if (updatedGroupIndex !== -1) {
         const newGroups = [...groups];
@@ -144,7 +124,7 @@ const TeamProvider = ({
       if (!team || !profile || !memberships) return;
       try {
         const membershipIndex = memberships.findIndex(
-          membership => membership.userId === user.id
+          (membership) => membership.userId === user.id
         );
         if (
           memberships[membershipIndex].groups &&
@@ -167,7 +147,7 @@ const TeamProvider = ({
           };
           setMemberships(newMemberships);
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error('An error occurred while update user group:', error);
       }
     },
@@ -190,17 +170,15 @@ const TeamProvider = ({
     async (group: TeamGroup) => {
       if (!profile || !team) return;
       await deleteGroup(getAuthorizationHeader, profile.id, team.id, group.id);
-      setGroups(groups =>
-        groups ? groups.filter(group_ => group_.id !== group.id) : null
+      setGroups((groups) =>
+        groups ? groups.filter((group_) => group_.id !== group.id) : null
       );
     },
     [team, getAuthorizationHeader, profile]
   );
 
   const onCreateGroup = React.useCallback(
-    async (attributes: {
-      name: string
-    }) => {
+    async (attributes: { name: string }) => {
       if (!profile || !team) return;
       const newGroup = await createGroup(
         getAuthorizationHeader,
@@ -213,15 +191,11 @@ const TeamProvider = ({
     [team, getAuthorizationHeader, profile, groups]
   );
 
-  const onRefreshMembers = React.useCallback(
-    async () => {
-      await Promise.all([fetchMembers(), fetchMemberships()]);
-    },
-    [fetchMembers, fetchMemberships]
-  );
+  const onRefreshMembers = React.useCallback(async () => {
+    await Promise.all([fetchMembers(), fetchMemberships()]);
+  }, [fetchMembers, fetchMemberships]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <TeamContext.Provider
       value={{
         team,

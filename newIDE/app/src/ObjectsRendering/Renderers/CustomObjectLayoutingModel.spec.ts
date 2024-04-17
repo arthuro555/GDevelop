@@ -9,11 +9,7 @@ import {
 } from './CustomObjectLayoutingModel';
 import { mapFor } from '../../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
-
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('getLayouts', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with a child', () => {
     const eventBasedObject = createEventBasedObject([]);
     const customObjectConfiguration = createCustomObjectConfiguration(
@@ -26,7 +22,6 @@ describe('getLayouts', () => {
     expect(layouts.has('Background')).toBe(false);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with an hidden child', () => {
     const eventBasedObject = createEventBasedObject([
       { name: 'ShowBackground', extraInfos: ['Background'] },
@@ -45,7 +40,6 @@ describe('getLayouts', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with a child with margins', () => {
     const eventBasedObject = createEventBasedObject([
       { name: 'BarLeftPadding', extraInfos: ['PanelBar'] },
@@ -75,7 +69,6 @@ describe('getLayouts', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent width with margins while keeping default height', () => {
     const eventBasedObject = createEventBasedObject([
       { name: 'BarLeftPadding', extraInfos: ['TiledBar'] },
@@ -117,7 +110,6 @@ describe('getLayouts', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can anchor a child to another child', () => {
     const eventBasedObject = createEventBasedObject([
       // Private properties
@@ -154,7 +146,6 @@ describe('getLayouts', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can anchor a child to another child and be scaled proportionally', () => {
     const eventBasedObject = createEventBasedObject([
       // Private properties
@@ -201,9 +192,7 @@ describe('getLayouts', () => {
   });
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('applyChildLayouts', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with a child', () => {
     const parent = new MockedParent(200, 100);
     // This is the default layout set by RenderedCustomObjectInstance constructor
@@ -224,7 +213,6 @@ describe('applyChildLayouts', () => {
     expect(background.getCustomHeight()).toBe(100);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with an hidden child', () => {
     const parent = new MockedParent(200, 100);
     // The child is hidden by RenderedCustomObjectInstance constructor
@@ -247,7 +235,6 @@ describe('applyChildLayouts', () => {
     expect(background.getCustomHeight()).toBe(100);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with a child with margins', () => {
     const parent = new MockedParent(200, 100);
     const panelBar = parent.addChild('PanelBar', {
@@ -269,7 +256,6 @@ describe('applyChildLayouts', () => {
     expect(panelBar.getCustomHeight()).toBe(100 - 30 - 40);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent with a text child with margins', () => {
     const parent = new MockedParent(200, 100);
     const label = parent.addChild(
@@ -297,7 +283,6 @@ describe('applyChildLayouts', () => {
     expect(label.getCustomWidth()).toBe(200 - 10 - 20);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can fill the parent width with margins while keeping default height', () => {
     const parent = new MockedParent(200, 100);
     parent.addChild('Background', {
@@ -329,7 +314,6 @@ describe('applyChildLayouts', () => {
     expect(tiledBar.getCustomHeight()).toBe(40);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can anchor a child to another child', () => {
     const parent = new MockedParent(200, 100);
     parent.addChild('Background', {
@@ -375,7 +359,6 @@ describe('applyChildLayouts', () => {
     expect(thumb.getCustomHeight()).toBe(60);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can anchor a child to another child and be scaled proportionally', () => {
     const parent = new MockedParent(200, 100);
     parent.addChild(
@@ -420,12 +403,14 @@ describe('applyChildLayouts', () => {
 });
 
 type EventBasedObjectProperty = {
-  name: string,
-  value?: string,
-  extraInfos: string[]
+  name: string;
+  value?: string;
+  extraInfos: string[];
 };
 
-const createEventBasedObject = (propertiesData: EventBasedObjectProperty[]): gdEventsBasedObject => {
+const createEventBasedObject = (
+  propertiesData: EventBasedObjectProperty[]
+): gd.EventsBasedObject => {
   const eventBasedObject = new gd.EventsBasedObject();
   const properties = eventBasedObject.getPropertyDescriptors();
   propertiesData.forEach((propertyData, index) => {
@@ -433,7 +418,7 @@ const createEventBasedObject = (propertiesData: EventBasedObjectProperty[]): gdE
     if (propertyData.value) {
       property.setValue(propertyData.value);
     }
-    propertyData.extraInfos.forEach(extraInfo =>
+    propertyData.extraInfos.forEach((extraInfo) =>
       property.addExtraInfo(extraInfo)
     );
   });
@@ -441,33 +426,33 @@ const createEventBasedObject = (propertiesData: EventBasedObjectProperty[]): gdE
 };
 
 class MockedCustomObjectConfiguration implements PropertiesContainer {
-  mapStringPropertyDescriptor: gdMapStringPropertyDescriptor;
+  mapStringPropertyDescriptor: gd.MapStringPropertyDescriptor;
 
   constructor() {
     this.mapStringPropertyDescriptor = new gd.MapStringPropertyDescriptor();
   }
 
-  getProperties(): gdMapStringPropertyDescriptor {
+  getProperties(): gd.MapStringPropertyDescriptor {
     return this.mapStringPropertyDescriptor;
   }
 }
 
 type CustomObjectPropertyValue = {
-  name: string,
-  value: string
+  name: string;
+  value: string;
 };
 
 const createCustomObjectConfiguration = (
-  eventBasedObject: gdEventsBasedObject,
-  propertiesData: CustomObjectPropertyValue[],
+  eventBasedObject: gd.EventsBasedObject,
+  propertiesData: CustomObjectPropertyValue[]
 ): MockedCustomObjectConfiguration => {
   const customObjectConfiguration = new MockedCustomObjectConfiguration();
 
   // Add default values from the event-based object.
   const instanceProperties = customObjectConfiguration.getProperties();
   const properties = eventBasedObject.getPropertyDescriptors();
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-  mapFor(0, properties.size(), index => {
+
+  mapFor(0, properties.size(), (index) => {
     const property = properties.getAt(index);
     instanceProperties
       .getOrCreate(property.getName())
@@ -486,7 +471,7 @@ const createCustomObjectConfiguration = (
 class MockedChildRenderedInstance implements ChildRenderedInstance {
   _instance: ChildInstance;
   _pixiObject: {
-    height: number
+    height: number;
   };
   defaultWidth: number;
   defaultHeight: number;
@@ -536,7 +521,10 @@ class MockedParent implements LayoutedParent<MockedChildRenderedInstance> {
     this.childrenInstances = [];
     this.childrenLayouts = [];
     this.childrenRenderedInstances = [];
-    this.childrenRenderedInstanceByNames = new Map<string, MockedChildRenderedInstance>();
+    this.childrenRenderedInstanceByNames = new Map<
+      string,
+      MockedChildRenderedInstance
+    >();
   }
 
   getWidth() {
@@ -555,9 +543,9 @@ class MockedParent implements LayoutedParent<MockedChildRenderedInstance> {
     name: string,
     layout: ChildLayout,
     size?: {
-      defaultWidth?: number,
-      defaultHeight?: number,
-      heightAfterUpdate?: number
+      defaultWidth?: number;
+      defaultHeight?: number;
+      heightAfterUpdate?: number;
     }
   ) {
     const childInstance = new ChildInstance();

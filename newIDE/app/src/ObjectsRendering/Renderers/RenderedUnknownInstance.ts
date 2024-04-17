@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
@@ -10,10 +10,10 @@ import * as PIXI from 'pixi.js-legacy';
  */
 export default class RenderedUnknownInstance extends RenderedInstance {
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -37,9 +37,9 @@ export default class RenderedUnknownInstance extends RenderedInstance {
   }
 
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     return 'res/unknown32.png';
   }
@@ -48,21 +48,21 @@ export default class RenderedUnknownInstance extends RenderedInstance {
     const width = this.getWidth();
     const height = this.getHeight();
 
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
     this._pixiObject.clear();
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
     this._pixiObject.beginFill(0x0033ff);
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
     this._pixiObject.lineStyle(1, 0xffd900, 1);
-// @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
     this._pixiObject.moveTo(-width / 2, -height / 2);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(width / 2, -height / 2);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(width / 2, height / 2);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(-width / 2, height / 2);
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
     this._pixiObject.endFill();
 
     this._pixiObject.position.x = this._instance.getX() + width / 2;

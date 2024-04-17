@@ -1,14 +1,14 @@
-import {mapFor, mapVector} from '../../../../Utils/MapFor';
+import { mapFor, mapVector } from '../../../../Utils/MapFor';
 
 // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
 const gd = global.gd;
 
-export const roundVertexToHalfPixel = (vertex: gdVector2f) => {
+export const roundVertexToHalfPixel = (vertex: gd.Vector2f) => {
   vertex.set_x(Math.round(vertex.get_x() * 2) / 2);
   vertex.set_y(Math.round(vertex.get_y() * 2) / 2);
 };
 
-export const addVertexOnLongestEdge = (vertices: gdVectorVector2f) => {
+export const addVertexOnLongestEdge = (vertices: gd.VectorVector2f) => {
   const verticesSize = vertices.size();
   if (verticesSize > 0) {
     let longestEdgeEndVertex = 0;
@@ -17,8 +17,8 @@ export const addVertexOnLongestEdge = (vertices: gdVectorVector2f) => {
       let previousX = lastVertex.x;
       let previousY = lastVertex.y;
       let squaredDistanceMax = -1;
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-      mapFor(0, verticesSize, index => {
+
+      mapFor(0, verticesSize, (index) => {
         const vertex = vertices.at(index);
         const x = vertex.x;
         const y = vertex.y;
@@ -54,10 +54,10 @@ export const addVertexOnLongestEdge = (vertices: gdVectorVector2f) => {
  * Data needed to insert a new vertex in a polygon.
  */
 export type NewVertexHintPoint = {
-  x: number,
-  y: number,
-  polygonIndex: number,
-  vertexIndex: number
+  x: number;
+  y: number;
+  polygonIndex: number;
+  vertexIndex: number;
 };
 
 /**
@@ -72,11 +72,11 @@ export type NewVertexHintPoint = {
  * a new vertex to the polygon.
  */
 export const findNearestEdgePoint = (
-  polygons: gdVectorPolygon2d,
+  polygons: gd.VectorPolygon2d,
   cursorX: number,
   cursorY: number,
   vertexDistanceMin: number,
-  edgeDistanceMax: number,
+  edgeDistanceMax: number
 ): NewVertexHintPoint | null => {
   const vertexSquaredDistanceMin = vertexDistanceMin * vertexDistanceMin;
   const edgeSquaredDistanceMax = edgeDistanceMax * edgeDistanceMax;
@@ -85,13 +85,13 @@ export const findNearestEdgePoint = (
   let foundPolygonIndex = 0;
   let foundEndVertexIndex = 0;
   let projectedPoint = [0, 0];
-// @ts-expect-error - TS7006 - Parameter 'polygon' implicitly has an 'any' type. | TS7006 - Parameter 'polygonIndex' implicitly has an 'any' type.
+
   mapVector(polygons, (polygon, polygonIndex) => {
     const vertices = polygon.getVertices();
     const previousVertex = vertices.at(vertices.size() - 1);
     let previousX = previousVertex.x;
     let previousY = previousVertex.y;
-// @ts-expect-error - TS7006 - Parameter 'vertex' implicitly has an 'any' type. | TS7006 - Parameter 'vertexIndex' implicitly has an 'any' type.
+
     mapVector(vertices, (vertex, vertexIndex) => {
       const vertexX = vertex.x;
       const vertexY = vertex.y;
@@ -103,7 +103,7 @@ export const findNearestEdgePoint = (
         previousY,
         vertexX,
         vertexY,
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+        // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
         projectedPoint
       );
 
@@ -151,7 +151,7 @@ export const findNearestEdgePoint = (
       startVertex.y,
       endVertex.x,
       endVertex.y,
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+      // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
       projectedPoint
     );
     return {
@@ -174,10 +174,10 @@ export const findNearestEdgePoint = (
  * @returns The magnetized location for the vertex if it should be deleted.
  */
 export const getMagnetizedVertexForDeletion = (
-  vertices: gdVectorVector2f,
+  vertices: gd.VectorVector2f,
   vertexIndex: number,
   vertexDistanceMax: number,
-  edgeDistanceMax: number,
+  edgeDistanceMax: number
 ): [number, number] | null => {
   const vertexSquaredDistanceMax = vertexDistanceMax * vertexDistanceMax;
   const edgeSquaredDistanceMax = edgeDistanceMax * edgeDistanceMax;
@@ -229,11 +229,16 @@ export const getMagnetizedVertexForDeletion = (
  * @param y Divisor value.
  * @returns Return the remainder using Euclidean division.
  */
-const mod = function(x: number, y: number): number {
+const mod = function (x: number, y: number): number {
   return ((x % y) + y) % y;
 };
 
-const getSquaredDistance = (x1: number, y1: number, x2: number, y2: number): number => {
+const getSquaredDistance = (
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number
+): number => {
   const deltaX = x1 - x2;
   const deltaY = y1 - y2;
   return deltaX * deltaX + deltaY * deltaY;
@@ -255,7 +260,7 @@ const projectToSegment = (
   y1: number,
   x2: number,
   y2: number,
-  result: [number, number] = [0, 0],
+  result: [number, number] = [0, 0]
 ): [number, number] => {
   const length2 = getSquaredDistance(x1, y1, x2, y2);
   if (length2 === 0) return [x1, y1];

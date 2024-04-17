@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
 
 const style = {
@@ -10,9 +10,9 @@ const style = {
 } as const;
 
 type MiniToolbarProps = {
-  justifyContent?: 'flex-start' | 'flex-end' | 'center',
-  noPadding?: boolean,
-  children: React.ReactNode
+  justifyContent?: 'flex-start' | 'flex-end' | 'center';
+  noPadding?: boolean;
+  children: React.ReactNode;
 };
 
 const MiniToolbar = ({
@@ -20,7 +20,6 @@ const MiniToolbar = ({
   children,
   noPadding,
 }: MiniToolbarProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <div
     style={{
       ...style,
@@ -42,15 +41,14 @@ const toolbarTextStyle = {
 } as const;
 
 type MiniToolbarTextProps = {
-  firstChild?: boolean,
-  children: React.ReactNode
+  firstChild?: boolean;
+  children: React.ReactNode;
 };
 
 export const MiniToolbarText = ({
   children,
   firstChild,
 }: MiniToolbarTextProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Text
     noShrink
     style={firstChild ? firstChildToolbarTextStyle : toolbarTextStyle}

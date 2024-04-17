@@ -1,4 +1,4 @@
-import {aboveMaterialUiMaxZIndex} from '../UI/MaterialUISpecificUtil';
+import { aboveMaterialUiMaxZIndex } from '../UI/MaterialUISpecificUtil';
 
 const getStyleAttribute = (element: Element, prop: string) =>
   getComputedStyle(element).getPropertyValue(prop);

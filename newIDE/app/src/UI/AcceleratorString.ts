@@ -1,4 +1,4 @@
-import {isMacLike, isMobile} from '../Utils/Platform';
+import { isMacLike, isMobile } from '../Utils/Platform';
 
 /**
  * Transform a Electron-like accelerator string (https://www.electronjs.org/docs/latest/api/accelerator)

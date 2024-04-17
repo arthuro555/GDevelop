@@ -5,56 +5,60 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import Window from '../Utils/Window';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from './Grid';
 import { useResponsiveWindowSize } from './Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module './FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from './FlatButton';
 import { shouldValidate } from './KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module './AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from './AlertMessage';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module './CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from './CorsAwareImage';
 import { useIsMounted } from '../Utils/UseIsMounted';
 import useForceUpdate from '../Utils/UseForceUpdate';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/ChevronArrowLeft'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowLeft.js' implicitly has an 'any' type.
+
 import ChevronArrowLeft from './CustomSvgIcons/ChevronArrowLeft';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/ChevronArrowRight'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowRight.js' implicitly has an 'any' type.
+
 import ChevronArrowRight from './CustomSvgIcons/ChevronArrowRight';
 import GDevelopThemeContext from './Theme/GDevelopThemeContext';
 
-type OverlayTextPosition = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+type OverlayTextPosition =
+  | 'topLeft'
+  | 'topRight'
+  | 'bottomLeft'
+  | 'bottomRight';
 
 export type CarouselThumbnail = {
-  id: string,
-  title: string,
-  thumbnailUrl: string,
-  overlayText?: React.ReactNode,
-  overlayTextPosition?: OverlayTextPosition,
-  readonly link?: string,
-  readonly onClick?: () => void
+  id: string;
+  title: string;
+  thumbnailUrl: string;
+  overlayText?: React.ReactNode;
+  overlayTextPosition?: OverlayTextPosition;
+  readonly link?: string;
+  readonly onClick?: () => void;
 };
 
-type SkeletonThumbnail = (CarouselThumbnail) & {
-  skeleton: boolean
+type SkeletonThumbnail = CarouselThumbnail & {
+  skeleton: boolean;
 };
 
 type Props<ThumbnailType> = {
-  title: React.ReactNode,
-  items: Array<ThumbnailType> | null | undefined,
-  additionalAction?: React.ReactNode,
-  onBrowseAllClick?: () => void,
-  browseAllLink?: string,
-  browseAllLabel: React.ReactNode,
-  browseAllIcon: React.ReactNode,
-  displayItemTitles?: boolean,
-  error?: React.ReactNode,
-  roundedImages?: boolean,
-  displayArrowsOnDesktop?: boolean
+  title: React.ReactNode;
+  items: Array<ThumbnailType> | null | undefined;
+  additionalAction?: React.ReactNode;
+  onBrowseAllClick?: () => void;
+  browseAllLink?: string;
+  browseAllLabel: React.ReactNode;
+  browseAllIcon: React.ReactNode;
+  displayItemTitles?: boolean;
+  error?: React.ReactNode;
+  roundedImages?: boolean;
+  displayArrowsOnDesktop?: boolean;
 };
 
 const referenceSizesByWindowSize = {
@@ -73,7 +77,7 @@ const focusItemBorderWidth = 2;
 const skeletonNumber = 6;
 const randomNumbers = Array(skeletonNumber)
   .fill(0)
-  .map(e => Math.random());
+  .map((e) => Math.random());
 
 const styles = {
   itemTitle: {
@@ -114,12 +118,12 @@ const styles = {
 } as const;
 
 const useStylesForArrowButtons = () =>
-  makeStyles(theme =>
+  makeStyles((theme) =>
     createStyles({
       root: {
         '&:hover': {
           filter:
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+            // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
             theme.palette.type === 'dark'
               ? 'brightness(130%)'
               : 'brightness(90%)',
@@ -142,7 +146,7 @@ const useStylesForGridList = makeStyles({
   },
 });
 
-const useStylesForGridListItem = makeStyles(theme =>
+const useStylesForGridListItem = makeStyles((theme) =>
   createStyles({
     root: {
       width: 'unset !important',
@@ -166,8 +170,8 @@ const ImageOverlay = ({
   content,
   position,
 }: {
-  content: React.ReactNode,
-  position: OverlayTextPosition
+  content: React.ReactNode;
+  position: OverlayTextPosition;
 }) => {
   const positionStyles = {
     top: position === 'topLeft' || position === 'topRight' ? 8 : undefined,
@@ -178,7 +182,6 @@ const ImageOverlay = ({
       position === 'topRight' || position === 'bottomRight' ? 8 : undefined,
   } as const;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         ...styles.overlay,
@@ -190,40 +193,34 @@ const ImageOverlay = ({
   );
 };
 
-const Carousel = <ThumbnailType extends CarouselThumbnail>(
-  {
-    title,
-    items,
-    additionalAction,
-    browseAllLink,
-    onBrowseAllClick,
-    browseAllLabel,
-    browseAllIcon,
-    error,
-    displayItemTitles = true,
-    roundedImages = false,
-    displayArrowsOnDesktop = false,
-  }: Props<ThumbnailType>,
-) => {
-  const [
-    shouldDisplayLeftArrow,
-    setShouldDisplayLeftArrow,
-  ] = React.useState<boolean>(false);
-  const [
-    shouldDisplayRightArrow,
-    setShouldDisplayRightArrow,
-  ] = React.useState<boolean>(displayArrowsOnDesktop);
-  const [
-    isMouseOverContainer,
-    setIsMouseOverContainer,
-  ] = React.useState<boolean>(false);
+const Carousel = <ThumbnailType extends CarouselThumbnail>({
+  title,
+  items,
+  additionalAction,
+  browseAllLink,
+  onBrowseAllClick,
+  browseAllLabel,
+  browseAllIcon,
+  error,
+  displayItemTitles = true,
+  roundedImages = false,
+  displayArrowsOnDesktop = false,
+}: Props<ThumbnailType>) => {
+  const [shouldDisplayLeftArrow, setShouldDisplayLeftArrow] =
+    React.useState<boolean>(false);
+  const [shouldDisplayRightArrow, setShouldDisplayRightArrow] =
+    React.useState<boolean>(displayArrowsOnDesktop);
+  const [isMouseOverContainer, setIsMouseOverContainer] =
+    React.useState<boolean>(false);
   const { windowSize, isMobile } = useResponsiveWindowSize();
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const classesForArrowButtons = useStylesForArrowButtons();
   const classesForGridList = useStylesForGridList();
   const classesForGridListItem = useStylesForGridListItem();
   const scrollView = React.useRef<HTMLUListElement | null | undefined>(null);
-  const [hoveredElement, setHoveredElement] = React.useState<HTMLElement | null | undefined>(null);
+  const [hoveredElement, setHoveredElement] = React.useState<
+    HTMLElement | null | undefined
+  >(null);
   const areItemsSet = items && items.length > 0;
   const itemsToDisplay =
     items && items.length > 0
@@ -263,40 +260,44 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
     (displayItemTitles ? titleHeight + spacerSize : 2 * focusItemBorderWidth); // Take focus border into account to make sure it is not cut (box-sizing: content-box not working)
 
   const renderImage = React.useCallback(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    (item: ThumbnailType | SkeletonThumbnail): React.ReactElement => <CorsAwareImage
-      src={item.thumbnailUrl}
-      style={{
-        ...styles.image,
-        // Once ready, animate the image display.
-        opacity: loadedImageUrls.current.has(item.thumbnailUrl) ? 1 : 0,
-        height: imageHeight,
-        minHeight: imageHeight,
-        width: cellWidth,
-        borderRadius: roundedImages ? 8 : 0,
-      }}
-      alt={item.title}
-      title={item.title}
-      onLoad={() => setImageLoaded(item.thumbnailUrl)}
-    />,
+    (item: ThumbnailType | SkeletonThumbnail): React.ReactElement => (
+      <CorsAwareImage
+        src={item.thumbnailUrl}
+        style={{
+          ...styles.image,
+          // Once ready, animate the image display.
+          opacity: loadedImageUrls.current.has(item.thumbnailUrl) ? 1 : 0,
+          height: imageHeight,
+          minHeight: imageHeight,
+          width: cellWidth,
+          borderRadius: roundedImages ? 8 : 0,
+        }}
+        alt={item.title}
+        title={item.title}
+        onLoad={() => setImageLoaded(item.thumbnailUrl)}
+      />
+    ),
     [cellWidth, imageHeight, roundedImages, setImageLoaded]
   );
 
-  const openLinkCallback = (link: string): () => void => (): void => {
-    Window.openExternalURL(link);
-  };
+  const openLinkCallback =
+    (link: string): (() => void) =>
+    (): void => {
+      Window.openExternalURL(link);
+    };
 
   const renderThumbnail = React.useCallback(
-    (item: ThumbnailType | SkeletonThumbnail): React.ReactNode | null | undefined => {
-// @ts-expect-error - TS2339 - Property 'skeleton' does not exist on type 'SkeletonThumbnail | ThumbnailType'.
+    (
+      item: ThumbnailType | SkeletonThumbnail
+    ): React.ReactNode | null | undefined => {
+      // @ts-expect-error - TS2339 - Property 'skeleton' does not exist on type 'SkeletonThumbnail | ThumbnailType'.
       if (!item.skeleton && !item.link && !item.thumbnailUrl) return null;
       if (item.thumbnailUrl || item.link) {
         return renderImage(item);
       }
-// @ts-expect-error - TS2339 - Property 'skeleton' does not exist on type 'SkeletonThumbnail | ThumbnailType'.
+      // @ts-expect-error - TS2339 - Property 'skeleton' does not exist on type 'SkeletonThumbnail | ThumbnailType'.
       if (item.skeleton) {
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Skeleton
             variant="rect"
             height={imageHeight}
@@ -312,23 +313,21 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
   );
 
   const renderItemTitle = React.useCallback(
-    (item: ThumbnailType | SkeletonThumbnail, index: number): React.ReactNode | null | undefined => {
+    (
+      item: ThumbnailType | SkeletonThumbnail,
+      index: number
+    ): React.ReactNode | null | undefined => {
       if (!displayItemTitles) return null;
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Spacer />
           {item.title ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div style={{ ...styles.itemTitleContainer, width: cellWidth }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text noMargin style={styles.itemTitle}>
                 {item.title}
               </Text>
             </div>
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Skeleton
               variant="rect"
               height={titleHeight}
@@ -349,15 +348,18 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
   );
 
   const getVisibleThumbnailsCount = React.useCallback(
-    (element: HTMLElement): number => Math.max(Math.floor(element.offsetWidth / widthUnit), 1),
+    (element: HTMLElement): number =>
+      Math.max(Math.floor(element.offsetWidth / widthUnit), 1),
     [widthUnit]
   );
 
   const computeScroll = React.useCallback(
-    (direction: 'left' | 'right', scrollViewElement: HTMLUListElement): number => {
-      const visibleThumbnailsCount = getVisibleThumbnailsCount(
-        scrollViewElement
-      );
+    (
+      direction: 'left' | 'right',
+      scrollViewElement: HTMLUListElement
+    ): number => {
+      const visibleThumbnailsCount =
+        getVisibleThumbnailsCount(scrollViewElement);
       const scale = visibleThumbnailsCount * widthUnit;
 
       const currentScroll = scrollViewElement.scrollLeft;
@@ -393,43 +395,37 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
     [computeScroll]
   );
 
-  const handleScroll = React.useCallback(
-    (): void => {
-      const scrollViewElement = scrollView.current;
-      if (!scrollViewElement) return;
-      if (!displayArrowsOnDesktop) return;
+  const handleScroll = React.useCallback((): void => {
+    const scrollViewElement = scrollView.current;
+    if (!scrollViewElement) return;
+    if (!displayArrowsOnDesktop) return;
 
-      const isScrollAtStart = scrollViewElement.scrollLeft === 0;
-      const isScrollAtEnd =
-        scrollViewElement.scrollLeft >=
-        scrollViewElement.scrollWidth -
-          scrollViewElement.clientWidth -
-          // margin to avoid having the arrow flickering when the tile is scaling on hover.
-          5;
-      const shouldToggleLeftArrowVisibility =
-        isScrollAtStart === shouldDisplayLeftArrow;
-      const shouldToggleRightArrowVisibility =
-        isScrollAtEnd === shouldDisplayRightArrow;
-      if (shouldToggleLeftArrowVisibility)
-        setShouldDisplayLeftArrow(!shouldDisplayLeftArrow);
-      if (shouldToggleRightArrowVisibility)
-        setShouldDisplayRightArrow(!shouldDisplayRightArrow);
-    },
-    [shouldDisplayLeftArrow, shouldDisplayRightArrow, displayArrowsOnDesktop]
-  );
+    const isScrollAtStart = scrollViewElement.scrollLeft === 0;
+    const isScrollAtEnd =
+      scrollViewElement.scrollLeft >=
+      scrollViewElement.scrollWidth -
+        scrollViewElement.clientWidth -
+        // margin to avoid having the arrow flickering when the tile is scaling on hover.
+        5;
+    const shouldToggleLeftArrowVisibility =
+      isScrollAtStart === shouldDisplayLeftArrow;
+    const shouldToggleRightArrowVisibility =
+      isScrollAtEnd === shouldDisplayRightArrow;
+    if (shouldToggleLeftArrowVisibility)
+      setShouldDisplayLeftArrow(!shouldDisplayLeftArrow);
+    if (shouldToggleRightArrowVisibility)
+      setShouldDisplayRightArrow(!shouldDisplayRightArrow);
+  }, [shouldDisplayLeftArrow, shouldDisplayRightArrow, displayArrowsOnDesktop]);
 
-  const handleScrollEnd = React.useCallback(
-    (): void => {
-      const scrollViewElement = scrollView.current;
-      if (!scrollViewElement) return;
+  const handleScrollEnd = React.useCallback((): void => {
+    const scrollViewElement = scrollView.current;
+    if (!scrollViewElement) return;
 
-      scrollViewElement.scrollTo({
-        left: roundScroll(scrollViewElement.scrollLeft),
-        behavior: 'smooth',
-      });
-    },
-    [roundScroll]
-  );
+    scrollViewElement.scrollTo({
+      left: roundScroll(scrollViewElement.scrollLeft),
+      behavior: 'smooth',
+    });
+  }, [roundScroll]);
 
   const onFocusItem = React.useCallback(
     (event: React.FocusEvent<HTMLLIElement>, index: number): void => {
@@ -465,40 +461,30 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
     [getVisibleThumbnailsCount, hoveredElement, widthUnit]
   );
 
-  React.useEffect(
-    () => {
-      const scrollViewElement = scrollView.current;
-      if (!scrollViewElement) return;
+  React.useEffect(() => {
+    const scrollViewElement = scrollView.current;
+    if (!scrollViewElement) return;
 
-      // Add event listeners on component mount. There is no need to
-      // remove them with a cleanup function because scrollview element
-      // does not change and they will be destroyed when the element is
-      // removed from the DOM.
-      scrollViewElement.addEventListener('scroll', handleScroll);
-      scrollViewElement.addEventListener('touchend', handleScrollEnd);
-      scrollViewElement.addEventListener('touchleave', handleScrollEnd);
-    },
-    [handleScroll, handleScrollEnd]
-  );
+    // Add event listeners on component mount. There is no need to
+    // remove them with a cleanup function because scrollview element
+    // does not change and they will be destroyed when the element is
+    // removed from the DOM.
+    scrollViewElement.addEventListener('scroll', handleScroll);
+    scrollViewElement.addEventListener('touchend', handleScrollEnd);
+    scrollViewElement.addEventListener('touchleave', handleScrollEnd);
+  }, [handleScroll, handleScrollEnd]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line justifyContent="space-between" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text size="section-title">{title}</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
           {additionalAction && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <>
               {additionalAction}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Spacer />
             </>
           )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <FlatButton
             onClick={
               onBrowseAllClick ||
@@ -506,10 +492,8 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
             }
             label={
               isMobile ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Trans>Browse</Trans> // Short label on mobile.
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 browseAllLabel || <Trans>Browse all</Trans>
               )
             }
@@ -518,7 +502,6 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
         </Line>
       </Line>
 
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         style={styles.container}
         onMouseEnter={() => setIsMouseOverContainer(true)}
@@ -529,7 +512,6 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
           !isMobile &&
           shouldDisplayLeftArrow &&
           areItemsSet && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               className={classesForArrowButtons.root}
               style={{
@@ -543,24 +525,20 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
               }}
               onClick={() => onClickArrow('left')}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ChevronArrowLeft />
             </div>
           )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div
           style={{
             width: '100%',
           }}
         >
           {error ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div style={{ ...styles.error, height: cellHeight }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AlertMessage kind="warning">{error}</AlertMessage>
             </div>
           ) : (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <GridList
               classes={classesForGridList}
               cols={itemsToDisplay.length}
@@ -570,15 +548,18 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
               ref={scrollView}
             >
               {itemsToDisplay.map((item, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <GridListTile
                   classes={classesForGridListItem}
                   key={item.id}
                   tabIndex={0}
-                  onFocus={event => onFocusItem(event, index)}
-                  onMouseEnter={event => setHoveredElement(event.currentTarget)}
+                  onFocus={(event) => onFocusItem(event, index)}
+                  onMouseEnter={(event) =>
+                    setHoveredElement(event.currentTarget)
+                  }
                   onMouseLeave={() => setHoveredElement(null)}
-                  onKeyPress={(event: React.KeyboardEvent<HTMLLIElement>): void => {
+                  onKeyPress={(
+                    event: React.KeyboardEvent<HTMLLIElement>
+                  ): void => {
                     if (shouldValidate(event)) {
                       if (item.link) openLinkCallback(item.link)();
                       if (item.onClick) item.onClick();
@@ -588,14 +569,13 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
                     item.link
                       ? openLinkCallback(item.link)
                       : item.onClick
-                      ? item.onClick
-                      : null
+                        ? item.onClick
+                        : null
                   }
                 >
                   {renderThumbnail(item)}
                   {item.overlayText &&
                     loadedImageUrls.current.has(item.thumbnailUrl) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <ImageOverlay
                         content={item.overlayText}
                         position={item.overlayTextPosition || 'bottomRight'}
@@ -612,7 +592,6 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
           !isMobile &&
           shouldDisplayRightArrow &&
           areItemsSet && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div
               className={classesForArrowButtons.root}
               style={{
@@ -625,7 +604,6 @@ const Carousel = <ThumbnailType extends CarouselThumbnail>(
               }}
               onClick={() => onClickArrow('right')}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ChevronArrowRight />
             </div>
           )}

@@ -3,15 +3,15 @@ import ReactJsonView from 'react-json-view';
 
 // This mirrors the internals of gdjs.Timer.
 type Timer = {
-  _name: string,
-  _time: number,
-  _paused: boolean
+  _name: string;
+  _time: number;
+  _paused: boolean;
 };
 // This mirrors the internals of Hashtable<gdjs.Timer>.
 type TimersHashtable = {
   items: {
-    [timerName: string]: Timer
-  }
+    [timerName: string]: Timer;
+  };
 };
 
 const transform = (timersHashtable: TimersHashtable) => {
@@ -27,15 +27,14 @@ const transform = (timersHashtable: TimersHashtable) => {
 };
 
 type Props = {
-  timers: TimersHashtable | null | undefined
+  timers: TimersHashtable | null | undefined;
 };
 
 const TimersInspector = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ReactJsonView
     collapsed={false}
     name={false}
-// @ts-expect-error - TS2322 - Type '{ 'Timer name': any; 'Time (in seconds)': number; 'Is paused': any; }[] | null' is not assignable to type 'object'.
+    // @ts-expect-error - TS2322 - Type '{ 'Timer name': any; 'Time (in seconds)': number; 'Is paused': any; }[] | null' is not assignable to type 'object'.
     src={props.timers ? transform(props.timers) : null}
     enableClipboard={false}
     displayDataTypes={false}

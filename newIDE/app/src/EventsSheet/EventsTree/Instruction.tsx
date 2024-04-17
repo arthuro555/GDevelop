@@ -1,8 +1,7 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t, Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import { t, Trans } from '@lingui/macro';
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
 import { mapFor } from '../../Utils/MapFor';
@@ -21,30 +20,30 @@ import {
   InstructionsListContext,
   InstructionContext,
 } from '../SelectionHandler';
-// @ts-expect-error - TS6142 - Module './InstructionsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/InstructionsList.tsx', but '--jsx' is not set.
+
 import InstructionsList from './InstructionsList';
-// @ts-expect-error - TS6142 - Module './DropIndicator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/DropIndicator.tsx', but '--jsx' is not set.
+
 import DropIndicator from './DropIndicator';
 import ParameterRenderingService from '../ParameterRenderingService';
-// @ts-expect-error - TS6142 - Module './InvalidParameterValue' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/InvalidParameterValue.tsx', but '--jsx' is not set.
+
 import InvalidParameterValue from './InvalidParameterValue';
-// @ts-expect-error - TS6142 - Module './MissingParameterValue' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/MissingParameterValue.tsx', but '--jsx' is not set.
+
 import MissingParameterValue from './MissingParameterValue';
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { makeDragSourceAndDropTarget } from '../../UI/DragAndDrop/DragSourceAndDropTarget';
 import {
   ScreenType,
   useScreenType,
 } from '../../UI/Responsive/ScreenTypeMeasurer';
 import { WindowSizeType } from '../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../../MainFrame/Preferences/PreferencesContext';
 import { useLongTouch } from '../../Utils/UseLongTouch';
 import {
   shouldActivate,
   shouldValidate,
 } from '../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Async'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Async.js' implicitly has an 'any' type.
+
 import AsyncIcon from '../../UI/CustomSvgIcons/Async';
 import Tooltip from '@material-ui/core/Tooltip';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
@@ -54,16 +53,14 @@ import {
 } from '../../InstructionOrExpression/EventsScope.flow';
 import { enumerateParametersUsableInExpressions } from '../ParameterFields/EnumerateFunctionParameters';
 import { getFunctionNameFromType } from '../../EventsFunctionsExtensionsLoader';
-// @ts-expect-error - TS6142 - Module '../../AssetStore/ExtensionStore/ExtensionStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExtensionStore/ExtensionStoreContext.tsx', but '--jsx' is not set.
-import { ExtensionStoreContext } from '../../AssetStore/ExtensionStore/ExtensionStoreContext';
-// @ts-expect-error - TS6142 - Module '../ParameterFields/ObjectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/ObjectField.tsx', but '--jsx' is not set.
-import { getRequiredBehaviorTypes } from '../ParameterFields/ObjectField';
-// @ts-expect-error - TS6142 - Module '../../ObjectsList/ObjectSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsList/ObjectSelector.tsx', but '--jsx' is not set.
-import { checkHasRequiredCapability } from '../../ObjectsList/ObjectSelector';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Warning'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Warning.js' implicitly has an 'any' type.
-import Warning from '../../UI/CustomSvgIcons/Warning';
 
-const gd: libGDevelop = global.gd;
+import { ExtensionStoreContext } from '../../AssetStore/ExtensionStore/ExtensionStoreContext';
+
+import { getRequiredBehaviorTypes } from '../ParameterFields/ObjectField';
+
+import { checkHasRequiredCapability } from '../../ObjectsList/ObjectSelector';
+
+import Warning from '../../UI/CustomSvgIcons/Warning';
 
 const styles = {
   container: {
@@ -77,50 +74,56 @@ const styles = {
 export const reactDndInstructionType = 'GD_DRAGGED_INSTRUCTION';
 
 const DragSourceAndDropTarget = makeDragSourceAndDropTarget<{
-  isCondition: boolean
+  isCondition: boolean;
 }>(reactDndInstructionType);
 
 type Props = {
-  platform: gdPlatform,
-  instruction: gdInstruction,
-  isCondition: boolean,
-  onClick: any,
-  selected: boolean,
-  disabled: boolean,
-  onDoubleClick: () => void,
-  onContextMenu: (x: number, y: number) => void,
-  onMoveToInstruction: () => void,
+  platform: gd.Platform;
+  instruction: gd.Instruction;
+  isCondition: boolean;
+  onClick: any;
+  selected: boolean;
+  disabled: boolean;
+  onDoubleClick: () => void;
+  onContextMenu: (x: number, y: number) => void;
+  onMoveToInstruction: () => void;
   // For potential sub-instructions list:
-  selection: any,
-  onAddNewSubInstruction: (arg1: InstructionsListContext) => void,
-  onPasteSubInstructions: (arg1: InstructionsListContext) => void,
-  onMoveToSubInstruction: (destinationContext: InstructionContext) => void,
-  onMoveToSubInstructionsList: (destinationContext: InstructionsListContext) => void,
-  onSubInstructionClick: (arg1: InstructionContext) => void,
-  onSubInstructionDoubleClick: (arg1: InstructionContext) => void,
+  selection: any;
+  onAddNewSubInstruction: (arg1: InstructionsListContext) => void;
+  onPasteSubInstructions: (arg1: InstructionsListContext) => void;
+  onMoveToSubInstruction: (destinationContext: InstructionContext) => void;
+  onMoveToSubInstructionsList: (
+    destinationContext: InstructionsListContext
+  ) => void;
+  onSubInstructionClick: (arg1: InstructionContext) => void;
+  onSubInstructionDoubleClick: (arg1: InstructionContext) => void;
   onAddSubInstructionContextMenu: (
     button: HTMLButtonElement,
-    instructionsListContext: InstructionsListContext,
-  ) => void,
-  onSubParameterClick: any,
-  onSubInstructionContextMenu: (x: number, y: number, instructionContext: InstructionContext) => void,
-  onParameterClick: (event: any, parameterIndex: number) => void,
-  renderObjectThumbnail: (arg1: string) => React.ReactElement,
-  screenType: ScreenType,
-  windowSize: WindowSizeType,
-  scope: EventsScope,
-  resourcesManager: gdResourcesManager,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  id: string
+    instructionsListContext: InstructionsListContext
+  ) => void;
+  onSubParameterClick: any;
+  onSubInstructionContextMenu: (
+    x: number,
+    y: number,
+    instructionContext: InstructionContext
+  ) => void;
+  onParameterClick: (event: any, parameterIndex: number) => void;
+  renderObjectThumbnail: (arg1: string) => React.ReactElement;
+  screenType: ScreenType;
+  windowSize: WindowSizeType;
+  scope: EventsScope;
+  resourcesManager: gd.ResourcesManager;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  id: string;
 };
 
 const shouldNotBeValidated = ({
   value,
   parameterType,
 }: {
-  value: string,
-  parameterType: string
+  value: string;
+  parameterType: string;
 }) => parameterType === 'layer' && value === '';
 
 const formatValue = ({
@@ -128,42 +131,38 @@ const formatValue = ({
   parameterType,
   i18n,
 }: {
-  value: string,
-  parameterType: string,
-  i18n: I18nType
+  value: string;
+  parameterType: string;
+  i18n: I18nType;
 }) =>
   (value === '' || value === '""') && parameterType === 'layer'
     ? i18n._(t`Base layer`)
     : value;
 
 const InstructionMissing = (props: {
-  instructionType: string,
-  isCondition: boolean
+  instructionType: string;
+  isCondition: boolean;
 }) => {
   const { hasExtensionNamed } = React.useContext(ExtensionStoreContext);
   const { name, behaviorName, extensionName } = getFunctionNameFromType(
     props.instructionType
   );
   const extensionStoreMention = hasExtensionNamed(extensionName) ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>Try installing it from the extension store.</Trans>
   ) : (
     ''
   );
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   const functionNode = <span className="function-name">{name}</span>;
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   const behaviorNode = <span className="behavior-name">{behaviorName}</span>;
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   const extensionNode = <span className="extension-name">{extensionName}</span>;
 
   if (behaviorName) {
     if (props.isCondition) {
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <span className="instruction-missing">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             {functionNode} condition on behavior {behaviorNode} from
             {extensionNode} extension is missing.
@@ -173,9 +172,7 @@ const InstructionMissing = (props: {
       );
     } else {
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <span className="instruction-missing">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             {functionNode} action on behavior {behaviorNode} from
             {extensionNode} extension is missing.
@@ -187,9 +184,7 @@ const InstructionMissing = (props: {
   } else {
     if (props.isCondition) {
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <span className="instruction-missing">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             {functionNode} condition from {extensionNode} extension is missing.
           </Trans>{' '}
@@ -198,9 +193,7 @@ const InstructionMissing = (props: {
       );
     } else {
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <span className="instruction-missing">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             {functionNode} action from {extensionNode} extension is missing.
           </Trans>{' '}
@@ -236,10 +229,8 @@ const Instruction = (props: Props) => {
   const warningColor = theme.message.warning;
 
   const useAssignmentOperators =
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
     preferences.values.eventsSheetUseAssignmentOperators;
   const showDeprecatedInstructionWarning =
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
     preferences.values.showDeprecatedInstructionWarning;
 
   /**
@@ -248,7 +239,7 @@ const Instruction = (props: Props) => {
    * has not particular styling.
    */
   const renderInstructionText = (
-    metadata: gdInstructionMetadata,
+    metadata: gd.InstructionMetadata,
     i18n: I18nType
   ) => {
     const { instruction, disabled, renderObjectThumbnail } = props;
@@ -259,7 +250,6 @@ const Instruction = (props: Props) => {
     const parametersCount = metadata.getParametersCount();
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <span
         className={classNames({
           [disabledText]: disabled,
@@ -269,8 +259,7 @@ const Instruction = (props: Props) => {
           instruction.isInverted() ? 'true' : undefined
         }
       >
-{ /* @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type. */}
-        {mapFor(0, formattedTexts.size(), i => {
+        {mapFor(0, formattedTexts.size(), (i) => {
           const formatting = formattedTexts.getTextFormatting(i);
           const value = formattedTexts.getString(i);
           const parameterIndex = formatting.getUserData();
@@ -280,7 +269,6 @@ const Instruction = (props: Props) => {
           if (!isParameter) {
             if (value === 'Unknown or unsupported instruction') {
               return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <InstructionMissing
                   instructionType={instruction.getType()}
                   isCondition={isCondition}
@@ -288,7 +276,7 @@ const Instruction = (props: Props) => {
                 />
               );
             }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             return <span key={i}>{value}</span>;
           }
 
@@ -383,12 +371,13 @@ const Instruction = (props: Props) => {
                   const functionParameterNameExpression = instruction
                     .getParameter(parameterIndex)
                     .getPlainString();
-                  const functionParameterName = functionParameterNameExpression.substring(
-                    1,
-                    functionParameterNameExpression.length - 1
-                  );
+                  const functionParameterName =
+                    functionParameterNameExpression.substring(
+                      1,
+                      functionParameterNameExpression.length - 1
+                    );
                   expressionIsValid = parameters.some(
-                    parameter => parameter.getName() === functionParameterName
+                    (parameter) => parameter.getName() === functionParameterName
                   );
                 }
               } else {
@@ -406,7 +395,6 @@ const Instruction = (props: Props) => {
           });
 
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <span
               key={i}
               className={classNames({
@@ -414,7 +402,7 @@ const Instruction = (props: Props) => {
                 [instructionParameter]: true,
                 [parameterType]: true,
               })}
-              onClick={domEvent => {
+              onClick={(domEvent) => {
                 props.onParameterClick(domEvent, parameterIndex);
 
                 // On touchscreen, don't propagate the click to the instruction div,
@@ -423,7 +411,7 @@ const Instruction = (props: Props) => {
                   domEvent.stopPropagation();
                 }
               }}
-              onKeyPress={event => {
+              onKeyPress={(event) => {
                 if (shouldActivate(event)) {
                   props.onParameterClick(event, parameterIndex);
                   event.stopPropagation();
@@ -456,7 +444,7 @@ const Instruction = (props: Props) => {
   // Allow a long press to show the context menu
   const longTouchForContextMenuProps = useLongTouch(
     React.useCallback(
-      event => {
+      (event) => {
         onContextMenu(event.clientX, event.clientY);
       },
       [onContextMenu]
@@ -465,11 +453,8 @@ const Instruction = (props: Props) => {
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <DragSourceAndDropTarget
           beginDrag={() => {
             onClick(); // Select the dragged instruction
@@ -481,13 +466,11 @@ const Instruction = (props: Props) => {
             };
           }}
           canDrag={() => dragAllowed}
-// @ts-expect-error - TS7006 - Parameter 'draggedItem' implicitly has an 'any' type.
-          canDrop={draggedItem => draggedItem.isCondition === isCondition}
+          canDrop={(draggedItem) => draggedItem.isCondition === isCondition}
           drop={() => {
             onMoveToInstruction();
           }}
         >
-{ /* @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'isOver' implicitly has an 'any' type. | TS7031 - Binding element 'canDrop' implicitly has an 'any' type. */}
           {({ connectDragSource, connectDropTarget, isOver, canDrop }) => {
             // /!\ It's important to get the metadata now so that we're sure they
             // are valid.
@@ -515,7 +498,7 @@ const Instruction = (props: Props) => {
               smallIconFilename.includes('_black');
 
             const instructionDragSourceElement = connectDragSource(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: any[]; onKeyPress: (event: KeyboardEvent<HTMLDivElement>) => void; tabIndex: number; id: string; onTouchStart: (event: TouchEvent) => void; ... 6 more ...; onContextMenu: (e: MouseEvent<...>) => void; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: any[]; onKeyPress: (event: KeyboardEvent<HTMLDivElement>) => void; tabIndex: number; id: string; onTouchStart: (event: TouchEvent) => void; ... 6 more ...; onContextMenu: (e: MouseEvent<...>) => void; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
               <div
                 style={styles.container}
                 className={classNames({
@@ -524,7 +507,7 @@ const Instruction = (props: Props) => {
                   [warningInstruction]:
                     showDeprecatedInstructionWarning && metadata.isHidden(),
                 })}
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
 
                   if (props.screenType === 'touch' && props.selected) {
@@ -534,16 +517,16 @@ const Instruction = (props: Props) => {
                     props.onClick();
                   }
                 }}
-                onDoubleClick={e => {
+                onDoubleClick={(e) => {
                   e.stopPropagation();
                   props.onDoubleClick();
                 }}
-                onContextMenu={e => {
+                onContextMenu={(e) => {
                   e.stopPropagation();
                   onContextMenu(e.clientX, e.clientY);
                 }}
                 {...longTouchForContextMenuProps}
-                onKeyPress={event => {
+                onKeyPress={(event) => {
                   if (shouldValidate(event)) {
                     props.onDoubleClick();
                     event.stopPropagation();
@@ -558,21 +541,17 @@ const Instruction = (props: Props) => {
                 id={id}
               >
                 {showDeprecatedInstructionWarning && metadata.isHidden() ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Tooltip
                     title={
                       props.isCondition ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <Trans>Deprecated condition</Trans>
                       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <Trans>Deprecated action</Trans>
                       )
                     }
-// @ts-expect-error - TS2322 - Type '{ children: Element; title: Element; fontSize: string; }' is not assignable to type 'IntrinsicAttributes & TooltipProps'.
+                    // @ts-expect-error - TS2322 - Type '{ children: Element; title: Element; fontSize: string; }' is not assignable to type 'IntrinsicAttributes & TooltipProps'.
                     fontSize="small"
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Warning
                       style={{ color: warningColor }}
                       className={classNames({
@@ -582,7 +561,6 @@ const Instruction = (props: Props) => {
                   </Tooltip>
                 ) : null}
                 {instruction.isInverted() && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <img
                     className={classNames({
                       [icon]: true,
@@ -594,10 +572,8 @@ const Instruction = (props: Props) => {
                 {metadata.isAsync() &&
                   (!metadata.isOptionallyAsync() ||
                     instruction.isAwaited()) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Tooltip
                       title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <Trans>
                           Next actions (and sub-events) will wait for this
                           action to be finished before running.
@@ -605,7 +581,6 @@ const Instruction = (props: Props) => {
                       }
                       placement="top"
                     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <AsyncIcon
                         className={classNames({
                           [icon]: true,
@@ -613,7 +588,6 @@ const Instruction = (props: Props) => {
                       />
                     </Tooltip>
                   )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <img
                   className={classNames({
                     [icon]: true,
@@ -631,18 +605,16 @@ const Instruction = (props: Props) => {
               </div>
             );
 
-            const instructionDragSourceDropTargetElement = instructionDragSourceElement
-              ? connectDropTarget(instructionDragSourceElement)
-              : null;
+            const instructionDragSourceDropTargetElement =
+              instructionDragSourceElement
+                ? connectDropTarget(instructionDragSourceElement)
+                : null;
 
             return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 {isOver && <DropIndicator canDrop={canDrop} />}
                 {instructionDragSourceDropTargetElement}
                 {metadata.canHaveSubInstructions() && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <InstructionsList
                     platform={props.platform}
                     style={
@@ -663,7 +635,6 @@ const Instruction = (props: Props) => {
                       props.onAddSubInstructionContextMenu
                     }
                     onParameterClick={props.onSubParameterClick}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     addButtonLabel={<Trans>Add a sub-condition</Trans>}
                     addButtonId="add-sub-condition-button"
                     disabled={props.disabled}

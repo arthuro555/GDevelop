@@ -8,7 +8,6 @@ import {
   getUserBadges,
   listDefaultRecommendations,
   listRecommendations,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../Utils/GDevelopServices/User';
 import Authentication, {
   LoginForm,
@@ -20,7 +19,7 @@ import Authentication, {
   IdentityProvider,
 } from '../Utils/GDevelopServices/Authentication';
 import { User as FirebaseUser } from 'firebase/auth';
-// @ts-expect-error - TS6142 - Module './LoginDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/LoginDialog.tsx', but '--jsx' is not set.
+
 import LoginDialog from './LoginDialog';
 import {
   onUserLogoutForAnalytics,
@@ -33,17 +32,16 @@ import AuthenticatedUserContext, {
   AuthenticatedUser,
   authenticatedUserLoggedOutAttributes,
 } from './AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module './CreateAccountDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/CreateAccountDialog.tsx', but '--jsx' is not set.
+
 import CreateAccountDialog from './CreateAccountDialog';
-// @ts-expect-error - TS6142 - Module './EditProfileDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/EditProfileDialog.tsx', but '--jsx' is not set.
+
 import EditProfileDialog from './EditProfileDialog';
-// @ts-expect-error - TS6142 - Module './ChangeEmailDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/ChangeEmailDialog.tsx', but '--jsx' is not set.
+
 import ChangeEmailDialog from './ChangeEmailDialog';
-// @ts-expect-error - TS6142 - Module './EmailVerificationDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/EmailVerificationDialog.tsx', but '--jsx' is not set.
+
 import EmailVerificationDialog from './EmailVerificationDialog';
 import PreferencesContext, {
   PreferencesValues,
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
 } from '../MainFrame/Preferences/PreferencesContext';
 import {
   listUserCloudProjects,
@@ -55,7 +53,7 @@ import {
   listReceivedAssetPacks,
   listReceivedGameTemplates,
 } from '../Utils/GDevelopServices/Asset';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import Snackbar from '@material-ui/core/Snackbar';
 import RequestDeduplicator from '../Utils/RequestDeduplicator';
@@ -63,35 +61,35 @@ import { burstCloudProjectAutoSaveCache } from '../ProjectsStorage/CloudStorageP
 import { extractGDevelopApiErrorStatusAndCode } from '../Utils/GDevelopServices/Errors';
 import { showErrorBox } from '../UI/Messages/MessageBox';
 import { userCancellationErrorName } from '../LoginProvider/Utils';
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { listUserPurchases } from '../Utils/GDevelopServices/Shop';
 import { listNotifications } from '../Utils/GDevelopServices/Notification';
 
 type Props = {
-  authentication: Authentication,
-  children: React.ReactNode
+  authentication: Authentication;
+  children: React.ReactNode;
 };
 
 type State = {
-  authenticatedUser: AuthenticatedUser,
-  loginDialogOpen: boolean,
-  createAccountDialogOpen: boolean,
-  loginInProgress: boolean,
-  createAccountInProgress: boolean,
-  editProfileDialogOpen: boolean,
-  editInProgress: boolean,
-  deleteInProgress: boolean,
-  apiCallError: AuthError | null | undefined,
-  resetPasswordDialogOpen: boolean,
-  emailVerificationDialogOpen: boolean,
+  authenticatedUser: AuthenticatedUser;
+  loginDialogOpen: boolean;
+  createAccountDialogOpen: boolean;
+  loginInProgress: boolean;
+  createAccountInProgress: boolean;
+  editProfileDialogOpen: boolean;
+  editInProgress: boolean;
+  deleteInProgress: boolean;
+  apiCallError: AuthError | null | undefined;
+  resetPasswordDialogOpen: boolean;
+  emailVerificationDialogOpen: boolean;
   emailVerificationDialogProps: {
-    sendEmailAutomatically: boolean,
-    showSendEmailButton: boolean
-  },
-  forgotPasswordInProgress: boolean,
-  changeEmailDialogOpen: boolean,
-  changeEmailInProgress: boolean,
-  userSnackbarMessage: React.ReactNode | null | undefined
+    sendEmailAutomatically: boolean;
+    showSendEmailButton: boolean;
+  };
+  forgotPasswordInProgress: boolean;
+  changeEmailDialogOpen: boolean;
+  changeEmailInProgress: boolean;
+  userSnackbarMessage: React.ReactNode | null | undefined;
 };
 
 const cleanUserTracesOnDevice = async () => {
@@ -104,7 +102,10 @@ const cleanUserTracesOnDevice = async () => {
 const TEN_SECONDS = 10 * 1000;
 const ONE_MINUTE = 6 * TEN_SECONDS;
 
-export default class AuthenticatedUserProvider extends React.Component<Props, State> {
+export default class AuthenticatedUserProvider extends React.Component<
+  Props,
+  State
+> {
   state = {
     authenticatedUser: initialAuthenticatedUser,
     loginDialogOpen: false,
@@ -135,7 +136,9 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
   // - First one comes from user authenticating and automatically fetching
   //   their cloud projects;
   // - Second one comes from the homepage fetching the cloud projects regularly.
-  _cloudProjectListingDeduplicator = new RequestDeduplicator<Array<CloudProjectWithUserAccessInfo>>(listUserCloudProjects);
+  _cloudProjectListingDeduplicator = new RequestDeduplicator<
+    Array<CloudProjectWithUserAccessInfo>
+  >(listUserCloudProjects);
 
   async componentDidMount() {
     this._initializeAuthenticatedUser();
@@ -146,10 +149,10 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     // Listen to when the user logs out.
     // 1. Send this information to analytics, to reset the user being identified.
     // 2. Fetch the user profile, which will reset the user to an unauthenticated state.
-// @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+    // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
     this.props.authentication.addUserLogoutListener(onUserLogoutForAnalytics);
     this.props.authentication.addUserLogoutListener(
-// @ts-expect-error - TS2345 - Argument of type '() => Promise<void>' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+      // @ts-expect-error - TS2345 - Argument of type '() => Promise<void>' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
       this._fetchUserProfileWithoutThrowingErrors
     );
 
@@ -160,7 +163,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     //   refresh.
     // - at any other moment (Firebase user was updated), in which case it's probably
     //   not a problem to fetch again the user profile.
-// @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
+    // @ts-expect-error - TS2345 - Argument of type '() => void' is not assignable to parameter of type '() => Promise<undefined> | undefined'.
     this.props.authentication.addUserUpdateListener(() => {
       if (this._automaticallyUpdateUserProfile) {
         console.info(
@@ -227,8 +230,8 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           sendEmailAutomatically,
           showSendEmailButton,
         }: {
-          sendEmailAutomatically: boolean,
-          showSendEmailButton: boolean
+          sendEmailAutomatically: boolean;
+          showSendEmailButton: boolean;
         }) =>
           this.openEmailVerificationDialog({
             open: true,
@@ -252,7 +255,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       clearInterval(this._notificationPollingIntervalId);
       this._notificationPollingIntervalId = null;
     }
-// @ts-expect-error - TS2345 - Argument of type '({ authenticatedUser }: Readonly<State>) => { authenticatedUser: { authenticated: false; firebaseUser: null; profile: null; loginState: "done"; badges: null; cloudProjects: readonly []; cloudProjectsFetchingErrorLabel: null; ... 36 more ...; getAuthorizationHeader: () => Promise<...>; }; }' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "authenticatedUser"> | null) | Pick<...> | null'.
+    // @ts-expect-error - TS2345 - Argument of type '({ authenticatedUser }: Readonly<State>) => { authenticatedUser: { authenticated: false; firebaseUser: null; profile: null; loginState: "done"; badges: null; cloudProjects: readonly []; cloudProjectsFetchingErrorLabel: null; ... 36 more ...; getAuthorizationHeader: () => Promise<...>; }; }' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "authenticatedUser"> | null) | Pick<...> | null'.
     this.setState(({ authenticatedUser }) => ({
       authenticatedUser: {
         ...authenticatedUser,
@@ -262,22 +265,23 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     this._hasNotifiedUserAboutEmailVerification = false;
 
     listDefaultRecommendations().then(
-// @ts-expect-error - TS7006 - Parameter 'recommendations' implicitly has an 'any' type.
-      recommendations =>
+      (recommendations) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             recommendations,
           },
         })),
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-      error => {
+
+      (error) => {
         console.error('Error while loading default recommendations:', error);
       }
     );
   }
 
-  _reloadFirebaseProfile = async (): Promise<FirebaseUser | null | undefined> => {
+  _reloadFirebaseProfile = async (): Promise<
+    FirebaseUser | null | undefined
+  > => {
     const { authentication } = this.props;
 
     try {
@@ -308,7 +312,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
         },
       }));
       return firebaseUser;
-    } catch (error: any) {
+    } catch (error) {
       console.error('Unable to fetch the authenticated Firebase user:', error);
       throw error;
     }
@@ -317,7 +321,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
   _fetchUserProfileWithoutThrowingErrors = async () => {
     try {
       await this._fetchUserProfile();
-    } catch (error: any) {
+    } catch (error) {
       console.error(
         'Error while fetching the user profile - but ignoring it.',
         error
@@ -346,7 +350,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
         this._markAuthenticatedUserAsLoggedOut();
         return;
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Unable to fetch the authenticated Firebase user:', error);
       this._markAuthenticatedUserAsLoggedOut();
       throw error;
@@ -356,14 +360,14 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     // the user profile itself, to not block in case one of these calls
     // fails.
     getUserUsages(authentication.getAuthorizationHeader, firebaseUser.uid).then(
-      usages =>
+      (usages) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             usages,
           },
         })),
-      error => {
+      (error) => {
         console.error('Error while loading user usages:', error);
       }
     );
@@ -371,26 +375,26 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       authentication.getAuthorizationHeader,
       firebaseUser.uid
     ).then(
-      subscription =>
+      (subscription) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             subscription,
           },
         })),
-      error => {
+      (error) => {
         console.error('Error while loading user subscriptions:', error);
       }
     );
     getUserLimits(authentication.getAuthorizationHeader, firebaseUser.uid).then(
-      limits =>
+      (limits) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             limits,
           },
         })),
-      error => {
+      (error) => {
         console.error('Error while loading user limits:', error);
       }
     );
@@ -400,20 +404,19 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
         firebaseUser.uid,
       ])
       .then(
-        cloudProjects =>
+        (cloudProjects) =>
           this.setState(({ authenticatedUser }) => ({
             authenticatedUser: {
               ...authenticatedUser,
               cloudProjects,
             },
           })),
-        error => {
+        (error) => {
           console.error('Error while loading user cloud projects:', error);
           this.setState(({ authenticatedUser }) => ({
             authenticatedUser: {
               ...authenticatedUser,
               cloudProjectsFetchingErrorLabel: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Trans>
                   We couldn't load your cloud projects. Verify your internet
                   connection or try again later.
@@ -426,28 +429,28 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     listReceivedAssetPacks(authentication.getAuthorizationHeader, {
       userId: firebaseUser.uid,
     }).then(
-      receivedAssetPacks =>
+      (receivedAssetPacks) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             receivedAssetPacks,
           },
         })),
-      error => {
+      (error) => {
         console.error('Error while loading received asset packs:', error);
       }
     );
     listReceivedAssetShortHeaders(authentication.getAuthorizationHeader, {
       userId: firebaseUser.uid,
     }).then(
-      receivedAssetShortHeaders =>
+      (receivedAssetShortHeaders) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             receivedAssetShortHeaders,
           },
         })),
-      error => {
+      (error) => {
         console.error(
           'Error while loading received asset short headers:',
           error
@@ -457,19 +460,17 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     listRecommendations(authentication.getAuthorizationHeader, {
       userId: firebaseUser.uid,
     }).then(
-// @ts-expect-error - TS7006 - Parameter 'recommendations' implicitly has an 'any' type.
-      recommendations =>
+      (recommendations) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             recommendations,
           },
         })),
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-      error => {
-        const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-          error
-        );
+
+      (error) => {
+        const extractedStatusAndCode =
+          extractGDevelopApiErrorStatusAndCode(error);
         if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
           console.warn(
             'List recommendations endpoint returned 404, user might not have completed survey.'
@@ -482,14 +483,14 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     listReceivedGameTemplates(authentication.getAuthorizationHeader, {
       userId: firebaseUser.uid,
     }).then(
-      receivedGameTemplates =>
+      (receivedGameTemplates) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             receivedGameTemplates,
           },
         })),
-      error => {
+      (error) => {
         console.error('Error while loading received game templates:', error);
       }
     );
@@ -498,16 +499,15 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       productType: 'game-template',
       role: 'receiver',
     }).then(
-// @ts-expect-error - TS7006 - Parameter 'gameTemplatePurchases' implicitly has an 'any' type.
-      gameTemplatePurchases =>
+      (gameTemplatePurchases) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             gameTemplatePurchases,
           },
         })),
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-      error => {
+
+      (error) => {
         console.error('Error while loading game template purchases:', error);
       }
     );
@@ -516,16 +516,15 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       productType: 'asset-pack',
       role: 'receiver',
     }).then(
-// @ts-expect-error - TS7006 - Parameter 'assetPackPurchases' implicitly has an 'any' type.
-      assetPackPurchases =>
+      (assetPackPurchases) =>
         this.setState(({ authenticatedUser }) => ({
           authenticatedUser: {
             ...authenticatedUser,
             assetPackPurchases,
           },
         })),
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-      error => {
+
+      (error) => {
         console.error('Error while loading asset pack purchases:', error);
       }
     );
@@ -545,14 +544,14 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           authentication.getAuthorizationHeader,
           { isCreator: true }
         );
-      } catch (error: any) {
+      } catch (error) {
         // Catch the error so that the user profile is still fetched.
         console.error('Error while updating the user profile:', error);
       }
     }
 
     if (!this._notificationPollingIntervalId) {
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+      // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
       this._notificationPollingIntervalId = setInterval(() => {
         // This property is correctly updated by Electron, browsers and capacitor.
         if (document.visibilityState === 'visible') {
@@ -586,7 +585,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     try {
       const subscription = await getUserSubscription(
         authentication.getAuthorizationHeader,
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
         firebaseUser.uid
       );
       this.setState(({ authenticatedUser }) => ({
@@ -595,7 +594,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           subscription,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading user subscriptions:', error);
     }
   };
@@ -608,7 +607,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     try {
       const notifications = await listNotifications(
         authentication.getAuthorizationHeader,
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
         { userId: firebaseUser.uid }
       );
 
@@ -618,7 +617,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           notifications,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading user notifications:', error);
     }
   };
@@ -631,7 +630,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     try {
       const usages = await getUserUsages(
         authentication.getAuthorizationHeader,
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
         firebaseUser.uid
       );
       this.setState(({ authenticatedUser }) => ({
@@ -640,7 +639,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           usages,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading user usages:', error);
     }
   };
@@ -653,7 +652,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     try {
       const limits = await getUserLimits(
         authentication.getAuthorizationHeader,
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
         firebaseUser.uid
       );
       this.setState(({ authenticatedUser }) => ({
@@ -662,7 +661,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           limits,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading user limits:', error);
     }
   };
@@ -684,7 +683,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       const receivedAssetPacks = await listReceivedAssetPacks(
         authentication.getAuthorizationHeader,
         {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
           userId: firebaseUser.uid,
         }
       );
@@ -695,7 +694,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           receivedAssetPacks,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading received asset packs:', error);
     }
   };
@@ -709,7 +708,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       const receivedAssetShortHeaders = await listReceivedAssetShortHeaders(
         authentication.getAuthorizationHeader,
         {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
           userId: firebaseUser.uid,
         }
       );
@@ -720,7 +719,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           receivedAssetShortHeaders,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading received asset short headers:', error);
     }
   };
@@ -734,7 +733,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       const receivedGameTemplates = await listReceivedGameTemplates(
         authentication.getAuthorizationHeader,
         {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
           userId: firebaseUser.uid,
         }
       );
@@ -745,7 +744,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           receivedGameTemplates,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading received game templates:', error);
     }
   };
@@ -759,7 +758,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       const gameTemplatePurchases = await listUserPurchases(
         authentication.getAuthorizationHeader,
         {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
           userId: firebaseUser.uid,
           productType: 'game-template',
           role: 'receiver',
@@ -772,7 +771,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           gameTemplatePurchases,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading game template purchases:', error);
     }
   };
@@ -786,7 +785,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       const assetPackPurchases = await listUserPurchases(
         authentication.getAuthorizationHeader,
         {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
           userId: firebaseUser.uid,
           productType: 'asset-pack',
           role: 'receiver',
@@ -799,7 +798,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           assetPackPurchases,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading asset pack purchases:', error);
     }
   };
@@ -827,24 +826,23 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     this._cloudProjectListingDeduplicator
       .launchRequestOrGetOngoingPromise([
         authentication.getAuthorizationHeader,
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+        // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
         firebaseUser.uid,
       ])
       .then(
-        cloudProjects =>
+        (cloudProjects) =>
           this.setState(({ authenticatedUser }) => ({
             authenticatedUser: {
               ...authenticatedUser,
               cloudProjects,
             },
           })),
-        error => {
+        (error) => {
           console.error('Error while loading user cloud projects:', error);
           this.setState(({ authenticatedUser }) => ({
             authenticatedUser: {
               ...authenticatedUser,
               cloudProjectsFetchingErrorLabel: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Trans>
                   We couldn't load your cloud projects. Verify your internet
                   connection or try again later.
@@ -860,7 +858,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     const { firebaseUser } = this.state.authenticatedUser;
     if (!firebaseUser) return;
     try {
-// @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'uid' does not exist on type 'never'.
       const badges = await getUserBadges(firebaseUser.uid);
       this.setState(({ authenticatedUser }) => ({
         authenticatedUser: {
@@ -868,7 +866,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           badges,
         },
       }));
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error while loading user badges:', error);
     }
   };
@@ -876,7 +874,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
   _notifyUserAboutEmailVerification = () => {
     const { profile, firebaseUser } = this.state.authenticatedUser;
     if (!profile) return;
-// @ts-expect-error - TS2339 - Property 'emailVerified' does not exist on type 'never'.
+    // @ts-expect-error - TS2339 - Property 'emailVerified' does not exist on type 'never'.
     if (firebaseUser && firebaseUser.emailVerified) return;
 
     const now = Date.now();
@@ -885,7 +883,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     // nor do we show a button to send again.
     // - If they are just logging in, we don't send the email but we show a button to send again.
     // Use a boolean to show the dialog only once.
-// @ts-expect-error - TS2339 - Property 'createdAt' does not exist on type 'never'.
+    // @ts-expect-error - TS2339 - Property 'createdAt' does not exist on type 'never'.
     const accountAgeInMs = now - profile.createdAt;
     const hasJustCreatedAccount = accountAgeInMs < TEN_SECONDS;
     if (!this._hasNotifiedUserAboutEmailVerification) {
@@ -906,7 +904,6 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     this._markAuthenticatedUserAsLoggedOut();
     cleanUserTracesOnDevice();
     this.showUserSnackbar({
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       message: <Trans>You're now logged out</Trans>,
     });
   };
@@ -917,10 +914,8 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       : null;
     this.showUserSnackbar({
       message: username ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Trans>👋 Good to see you {username}!</Trans>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Trans>👋 Good to see you!</Trans>
       ),
     });
@@ -950,7 +945,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       this.openLoginDialog(false);
       this.openCreateAccountDialog(false);
       this._showLoginSnackbar(this.state.authenticatedUser);
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       if (apiCallError.name !== userCancellationErrorName) {
         showErrorBox({
           rawError: apiCallError,
@@ -1003,7 +998,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       await this._fetchUserProfileWithoutThrowingErrors();
       this.openLoginDialog(false);
       this._showLoginSnackbar(this.state.authenticatedUser);
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({
         apiCallError,
         authenticatedUser: {
@@ -1028,7 +1023,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     {
       throwError,
     }: {
-      throwError: boolean
+      throwError: boolean;
     }
   ) => {
     const { authentication } = this.props;
@@ -1056,7 +1051,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       );
       await this._fetchUserProfileWithoutThrowingErrors();
       this.openEditProfileDialog(false);
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({ apiCallError });
       if (throwError) {
         throw apiCallError;
@@ -1095,7 +1090,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
           form,
           preferences.language
         );
-      } catch (error: any) {
+      } catch (error) {
         // Ignore this error - this is a best effort call
         // and the user profile will be created on demand later
         // by the API when fetched.
@@ -1105,21 +1100,19 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       this.openCreateAccountDialog(false);
       sendSignupDone(form.email);
       const firebaseUser = this.state.authenticatedUser.firebaseUser;
-// @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'User'.
+      // @ts-expect-error - TS2345 - Argument of type 'null' is not assignable to parameter of type 'User'.
       aliasUserForAnalyticsAfterSignUp(firebaseUser);
       const profile = this.state.authenticatedUser.profile;
-// @ts-expect-error - TS2339 - Property 'username' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'username' does not exist on type 'never'.
       const username = profile ? profile.username : null;
       this.showUserSnackbar({
         message: username ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>👋 Welcome to GDevelop {username}!</Trans>
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>👋 Welcome to GDevelop!</Trans>
         ),
       });
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({
         apiCallError,
         authenticatedUser: {
@@ -1153,10 +1146,9 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       cleanUserTracesOnDevice();
       this.openEditProfileDialog(false);
       this.showUserSnackbar({
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         message: <Trans>Your account has been deleted!</Trans>,
       });
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({ apiCallError });
     }
     this.setState({
@@ -1171,7 +1163,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
 
     try {
       await authentication.forgotPassword(form);
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       // Do not throw error if the email is not found, as we don't want to
       // give information to the user about which email is registered.
     }
@@ -1199,7 +1191,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
         value
       );
       await this._fetchUserProfileWithoutThrowingErrors();
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({ apiCallError });
     }
     this.setState({
@@ -1224,7 +1216,7 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
       );
       await this._fetchUserProfileWithoutThrowingErrors();
       this.openChangeEmailDialog(false);
-    } catch (apiCallError: any) {
+    } catch (apiCallError) {
       this.setState({ apiCallError });
     }
     this.setState({
@@ -1238,9 +1230,9 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
     sendEmailAutomatically = false,
     showSendEmailButton = false,
   }: {
-    open?: boolean,
-    sendEmailAutomatically?: boolean,
-    showSendEmailButton?: boolean
+    open?: boolean;
+    sendEmailAutomatically?: boolean;
+    showSendEmailButton?: boolean;
   }) => {
     this.setState({
       emailVerificationDialogOpen: open,
@@ -1274,12 +1266,12 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
   showUserSnackbar = ({
     message,
   }: {
-    message: React.ReactNode | null | undefined
+    message: React.ReactNode | null | undefined;
   }) => {
     this.setState({
       // The message is wrapped here to prevent crashes when Google Translate
       // translates the website. See https://github.com/4ian/GDevelop/issues/3453.
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       userSnackbarMessage: message ? <span>{message}</span> : null,
     });
   };
@@ -1308,20 +1300,15 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
 
   render() {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <PreferencesContext.Consumer>
-{ /* @ts-expect-error - TS7031 - Binding element 'preferences' implicitly has an 'any' type. */}
         {({ values: preferences }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <AuthenticatedUserContext.Provider
               value={this.state.authenticatedUser}
             >
               {this.props.children}
             </AuthenticatedUserContext.Provider>
             {this.state.loginDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <LoginDialog
                 onClose={() => {
                   this._cancelLogin();
@@ -1338,13 +1325,11 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
             )}
             {this.state.authenticatedUser.profile &&
               this.state.editProfileDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <EditProfileDialog
                   profile={this.state.authenticatedUser.profile}
                   subscription={this.state.authenticatedUser.subscription}
                   onClose={() => this.openEditProfileDialog(false)}
-// @ts-expect-error - TS7006 - Parameter 'form' implicitly has an 'any' type.
-                  onEdit={form =>
+                  onEdit={(form) =>
                     this._doEdit(form, preferences, { throwError: false })
                   }
                   onDelete={this._doDeleteAccount}
@@ -1356,7 +1341,6 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
               )}
             {this.state.authenticatedUser.firebaseUser &&
               this.state.changeEmailDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ChangeEmailDialog
                   firebaseUser={this.state.authenticatedUser.firebaseUser}
                   onClose={() => this.openChangeEmailDialog(false)}
@@ -1366,12 +1350,10 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
                 />
               )}
             {this.state.createAccountDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <CreateAccountDialog
                 onClose={() => this.openCreateAccountDialog(false)}
                 onGoToLogin={() => this.openLoginDialog(true)}
-// @ts-expect-error - TS7006 - Parameter 'form' implicitly has an 'any' type.
-                onCreateAccount={form =>
+                onCreateAccount={(form) =>
                   this._doCreateAccount(form, preferences)
                 }
                 onLoginWithProvider={this._doLoginWithProvider}
@@ -1380,7 +1362,6 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
               />
             )}
             {this.state.emailVerificationDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <EmailVerificationDialog
                 authenticatedUser={this.state.authenticatedUser}
                 onClose={() => {
@@ -1397,7 +1378,6 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
                 onSendEmail={this._doSendEmailVerification}
               />
             )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Snackbar
               open={!!this.state.userSnackbarMessage}
               autoHideDuration={3000}
@@ -1406,7 +1386,6 @@ export default class AuthenticatedUserProvider extends React.Component<Props, St
                 'aria-describedby': 'snackbar-message',
               }}
               message={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <span id="snackbar-message">
                   {this.state.userSnackbarMessage}
                 </span>

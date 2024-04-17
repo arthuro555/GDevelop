@@ -1,10 +1,8 @@
-const gd: libGDevelop = global.gd;
-
 /**
  * Represents a list of selected instances.
  */
 export default class InstancesSelection {
-  selection: Array<gdInitialInstance> = [];
+  selection: Array<gd.InitialInstance> = [];
 
   hasSelectedInstances() {
     return !!this.getSelectedInstances().length;
@@ -14,7 +12,7 @@ export default class InstancesSelection {
     return this.selection;
   }
 
-  isInstanceSelected(instance: gdInitialInstance) {
+  isInstanceSelected(instance: gd.InitialInstance) {
     for (var i = 0; i < this.selection.length; i++) {
       if (gd.compare(this.selection[i], instance)) return true;
     }
@@ -32,12 +30,15 @@ export default class InstancesSelection {
     layersLocks = null,
     ignoreSeal = false,
   }: {
-    instance: gdInitialInstance,
-    multiSelect: boolean,
-    layersLocks: {
-      [key: string]: boolean
-    } | null | undefined,
-    ignoreSeal?: boolean
+    instance: gd.InitialInstance;
+    multiSelect: boolean;
+    layersLocks:
+      | {
+          [key: string]: boolean;
+        }
+      | null
+      | undefined;
+    ignoreSeal?: boolean;
   }) {
     if (!ignoreSeal && instance.isSealed()) return;
     if (this.isInstanceSelected(instance)) {
@@ -59,16 +60,19 @@ export default class InstancesSelection {
     layersLocks = null,
     ignoreSeal = false,
   }: {
-    instances: Array<gdInitialInstance>,
-    multiSelect: boolean,
-    layersLocks: {
-      [key: string]: boolean
-    } | null | undefined,
-    ignoreSeal?: boolean
+    instances: Array<gd.InitialInstance>;
+    multiSelect: boolean;
+    layersLocks:
+      | {
+          [key: string]: boolean;
+        }
+      | null
+      | undefined;
+    ignoreSeal?: boolean;
   }) {
     if (!multiSelect) this.clearSelection();
 
-    instances.forEach(instance => {
+    instances.forEach((instance) => {
       this.selectInstance({
         instance,
         multiSelect: true,
@@ -78,7 +82,7 @@ export default class InstancesSelection {
     });
   }
 
-  unselectInstance(instance: gdInitialInstance) {
+  unselectInstance(instance: gd.InitialInstance) {
     if (this.isInstanceSelected(instance)) {
       var i = this.selection.length - 1;
       while (i >= -1 && this.selection[i].ptr !== instance.ptr) {
@@ -109,7 +113,7 @@ export default class InstancesSelection {
     }
   }
 
-  cleanNonExistingInstances(instancesContainer: gdInitialInstancesContainer) {
+  cleanNonExistingInstances(instancesContainer: gd.InitialInstancesContainer) {
     const allExistingInstancePointers = new Set<number>();
     const functor = new gd.InitialInstanceJSFunctor();
     functor.invoke = (instancePtr: number) => {

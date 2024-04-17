@@ -6,8 +6,8 @@ import Rectangle from '../Utils/Rectangle';
 export default class HighlightedInstance {
   instanceMeasurer: InstanceMeasurer;
   toCanvasCoordinates: (x: number, y: number) => [number, number];
-  isInstanceOf3DObject: (arg1: gdInitialInstance) => boolean;
-  highlightedInstance: gdInitialInstance | null;
+  isInstanceOf3DObject: (arg1: gd.InitialInstance) => boolean;
+  highlightedInstance: gd.InitialInstance | null;
   isHighlightedInstanceOf3DObject: boolean;
   highlightRectangle: PIXI.Container;
   tooltipBackground: PIXI.Container;
@@ -18,9 +18,9 @@ export default class HighlightedInstance {
     toCanvasCoordinates,
     isInstanceOf3DObject,
   }: {
-    instanceMeasurer: InstanceMeasurer,
-    toCanvasCoordinates: (x: number, y: number) => [number, number],
-    isInstanceOf3DObject: (arg1: gdInitialInstance) => boolean
+    instanceMeasurer: InstanceMeasurer;
+    toCanvasCoordinates: (x: number, y: number) => [number, number];
+    isInstanceOf3DObject: (arg1: gd.InitialInstance) => boolean;
   }) {
     this.instanceMeasurer = instanceMeasurer;
     this.toCanvasCoordinates = toCanvasCoordinates;
@@ -41,14 +41,14 @@ export default class HighlightedInstance {
     this.highlightRectangle.addChild(this.tooltipText);
   }
 
-  setInstance(instance: gdInitialInstance | null) {
+  setInstance(instance: gd.InitialInstance | null) {
     this.isHighlightedInstanceOf3DObject = instance
       ? this.isInstanceOf3DObject(instance)
       : false;
     this.highlightedInstance = instance;
   }
 
-  getInstance(): gdInitialInstance | null | undefined {
+  getInstance(): gd.InitialInstance | null | undefined {
     return this.highlightedInstance;
   }
 
@@ -72,23 +72,23 @@ export default class HighlightedInstance {
     );
 
     this.highlightRectangle.visible = true;
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.clear();
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.beginFill(0xeeeeff);
-// @ts-expect-error - TS2339 - Property 'fill' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'fill' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.fill.alpha = 0.1;
     this.highlightRectangle.alpha = 0.8;
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.lineStyle(1, 0x000000, 1);
-// @ts-expect-error - TS2339 - Property 'drawRect' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'drawRect' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.drawRect(
       highlightRectangle.left,
       highlightRectangle.top,
       highlightRectangle.width(),
       highlightRectangle.height()
     );
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'Container<DisplayObject>'.
     this.highlightRectangle.endFill();
 
     const tooltipInfo =
@@ -111,7 +111,7 @@ export default class HighlightedInstance {
         : '\nZ order: ' + highlightedInstance.getZOrder()) +
       '\n';
 
-// @ts-expect-error - TS2339 - Property 'text' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'text' does not exist on type 'Container<DisplayObject>'.
     this.tooltipText.text = tooltipInfo;
 
     this.tooltipText.x = Math.round(
@@ -124,11 +124,11 @@ export default class HighlightedInstance {
     );
 
     const padding = 5;
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'Container<DisplayObject>'.
     this.tooltipBackground.clear();
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'Container<DisplayObject>'.
     this.tooltipBackground.beginFill(0x000000, 0.8);
-// @ts-expect-error - TS2339 - Property 'drawRoundedRect' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'drawRoundedRect' does not exist on type 'Container<DisplayObject>'.
     this.tooltipBackground.drawRoundedRect(
       this.tooltipText.x - padding,
       this.tooltipText.y - padding,
@@ -136,7 +136,7 @@ export default class HighlightedInstance {
       this.tooltipText.height - padding,
       4
     );
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'Container<DisplayObject>'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'Container<DisplayObject>'.
     this.tooltipBackground.endFill();
   }
 }

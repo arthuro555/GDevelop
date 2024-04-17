@@ -8,10 +8,10 @@ export const shouldBeHandledByPinch = (event?: TouchEvent | null) => {
 };
 
 type PinchDetectorArgs = {
-  canvas: HTMLCanvasElement,
-  onPinchStart: () => void,
-  onPinchMove: (x: number, y: number, scale: number) => void,
-  onPinchEnd: () => void
+  canvas: HTMLCanvasElement;
+  onPinchStart: () => void;
+  onPinchMove: (x: number, y: number, scale: number) => void;
+  onPinchEnd: () => void;
 };
 
 /**
@@ -25,7 +25,7 @@ const registerCanvasPinchDetector = ({
   onPinchMove,
   onPinchEnd,
 }: PinchDetectorArgs) => {
-// @ts-expect-error - TS7034 - Variable 'lastPinch' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'lastPinch' implicitly has type 'any' in some locations where its type cannot be determined.
   let lastPinch = null;
 
   function start() {
@@ -41,7 +41,7 @@ const registerCanvasPinchDetector = ({
     var dx = t[0].clientX - t[1].clientX;
     var dy = t[0].clientY - t[1].clientY;
     var distance = Math.sqrt(dx * dx + dy * dy);
-// @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
     if (!lastPinch) {
       lastPinch = {
         p: {
@@ -53,7 +53,7 @@ const registerCanvasPinchDetector = ({
       return;
     }
     var now = new Date();
-// @ts-expect-error - TS2362 - The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type. | TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
+    // @ts-expect-error - TS2362 - The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type. | TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
     var interval = now - lastPinch.p.date;
     if (interval < 12) {
       return;
@@ -62,11 +62,11 @@ const registerCanvasPinchDetector = ({
       x: (t[0].clientX + t[1].clientX) / 2,
       y: (t[0].clientY + t[1].clientY) / 2,
     } as const;
-// @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
     const scaleChange = distance / lastPinch.p.distance;
 
     onPinchMove(newCenter.x, newCenter.y, scaleChange);
-// @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
     lastPinch.p = {
       distance: distance,
       date: now,
@@ -75,7 +75,7 @@ const registerCanvasPinchDetector = ({
 
   function end(e: TouchEvent) {
     canvas.removeEventListener('touchmove', move);
-// @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'lastPinch' implicitly has an 'any' type.
     if (!lastPinch) {
       return;
     }
@@ -97,10 +97,10 @@ const registerCanvasPinchDetector = ({
 };
 
 type Props = {
-  canvas: HTMLCanvasElement,
-  setZoomFactor: (arg1: number) => void,
-  getZoomFactor: () => number,
-  viewPosition: ViewPosition
+  canvas: HTMLCanvasElement;
+  setZoomFactor: (arg1: number) => void;
+  getZoomFactor: () => number;
+  viewPosition: ViewPosition;
 };
 
 /**
@@ -115,12 +115,7 @@ export default class PinchHandler {
   _viewPosition: ViewPosition;
   _unregisterCanvasPinchDetector: () => void;
 
-  constructor({
-    canvas,
-    setZoomFactor,
-    getZoomFactor,
-    viewPosition,
-  }: Props) {
+  constructor({ canvas, setZoomFactor, getZoomFactor, viewPosition }: Props) {
     this._setZoomFactor = setZoomFactor;
     this._getZoomFactor = getZoomFactor;
     this._viewPosition = viewPosition;

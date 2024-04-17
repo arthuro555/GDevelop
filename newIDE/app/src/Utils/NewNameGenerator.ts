@@ -1,7 +1,7 @@
 const newNameGenerator = (
   name: string /*:string */,
   exists: (arg1: string) => boolean /*:(string) => boolean */,
-  prefix /*: string */ = '',
+  prefix /*: string */ = ''
 ): string => {
   if (!exists(name)) return name;
   if (prefix && !exists(prefix + name)) return prefix + name;
@@ -15,7 +15,9 @@ const newNameGenerator = (
   return potentialName;
 };
 
-export const splitNameAndNumberSuffix = (text: string): [string, number | null] => {
+export const splitNameAndNumberSuffix = (
+  text: string
+): [string, number | null] => {
   for (let i = 0; i < text.length; i++) {
     const suffix = text.slice(i, text.length);
     if (suffix.startsWith('0')) continue;

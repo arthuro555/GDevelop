@@ -1,38 +1,33 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 
 import { useResponsiveWindowSize } from '../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../../MainFrame/Preferences/PreferencesContext';
-import EditorMosaic, {
-  EditorMosaicInterface,
-// @ts-expect-error - TS6142 - Module '../../UI/EditorMosaic' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/index.tsx', but '--jsx' is not set.
-} from '../../UI/EditorMosaic';
-// @ts-expect-error - TS6142 - Module '../../InstancesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/index.tsx', but '--jsx' is not set.
+import EditorMosaic, { EditorMosaicInterface } from '../../UI/EditorMosaic';
+
 import InstancesEditor from '../../InstancesEditor';
-// @ts-expect-error - TS6142 - Module '../../LayersList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/LayersList/index.tsx', but '--jsx' is not set.
+
 import LayersList, { LayersListInterface } from '../../LayersList';
-// @ts-expect-error - TS6142 - Module '../../InstancesEditor/FullSizeInstancesEditorWithScrollbars' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/FullSizeInstancesEditorWithScrollbars.tsx', but '--jsx' is not set.
+
 import FullSizeInstancesEditorWithScrollbars from '../../InstancesEditor/FullSizeInstancesEditorWithScrollbars';
-// @ts-expect-error - TS6142 - Module '../../UI/EditorMosaic/CloseButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/CloseButton.tsx', but '--jsx' is not set.
+
 import CloseButton from '../../UI/EditorMosaic/CloseButton';
-// @ts-expect-error - TS6142 - Module '../../ObjectsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsList/index.tsx', but '--jsx' is not set.
+
 import ObjectsList, { ObjectsListInterface } from '../../ObjectsList';
 import ObjectGroupsList, {
   ObjectGroupsListInterface,
-// @ts-expect-error - TS6142 - Module '../../ObjectGroupsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectGroupsList/index.tsx', but '--jsx' is not set.
 } from '../../ObjectGroupsList';
 import InstancesList, {
   InstancesListInterface,
-// @ts-expect-error - TS6142 - Module '../../InstancesEditor/InstancesList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/InstancesList/index.tsx', but '--jsx' is not set.
 } from '../../InstancesEditor/InstancesList';
 import ObjectsRenderingService from '../../ObjectsRendering/ObjectsRenderingService';
 
 import Rectangle from '../../Utils/Rectangle';
-// @ts-expect-error - TS6142 - Module '..' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/index.tsx', but '--jsx' is not set.
+
 import { EditorId } from '..';
 import {
   SceneEditorsDisplayProps,
@@ -40,7 +35,6 @@ import {
 } from '../EditorsDisplay.flow';
 import CompactInstancePropertiesEditorContainer, {
   CompactInstancePropertiesEditorInterface,
-// @ts-expect-error - TS6142 - Module '../../InstancesEditor/CompactInstancePropertiesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/CompactInstancePropertiesEditor/index.tsx', but '--jsx' is not set.
 } from '../../InstancesEditor/CompactInstancePropertiesEditor';
 
 const initialMosaicEditorNodes = {
@@ -86,34 +80,46 @@ const defaultPanelConfigByEditor = {
 } as const;
 
 // Forward ref to allow Scene editor to force update some editors
-const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEditorsDisplayInterface>((props, ref) => {
+const MosaicEditorsDisplay = React.forwardRef<
+  SceneEditorsDisplayInterface,
+  SceneEditorsDisplayProps
+>((props, ref) => {
   const {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'SceneEditorsDisplayInterface'.
     project,
-// @ts-expect-error - TS2339 - Property 'layout' does not exist on type 'SceneEditorsDisplayInterface'.
+
     layout,
-// @ts-expect-error - TS2339 - Property 'initialInstances' does not exist on type 'SceneEditorsDisplayInterface'.
+
     initialInstances,
-// @ts-expect-error - TS2339 - Property 'selectedLayer' does not exist on type 'SceneEditorsDisplayInterface'.
+
     selectedLayer,
-// @ts-expect-error - TS2339 - Property 'onSelectInstances' does not exist on type 'SceneEditorsDisplayInterface'.
+
     onSelectInstances,
   } = props;
   const { isMobile } = useResponsiveWindowSize();
-  const {
-    getDefaultEditorMosaicNode,
-    setDefaultEditorMosaicNode,
-  } = React.useContext(PreferencesContext);
-// @ts-expect-error - TS2339 - Property 'instancesSelection' does not exist on type 'SceneEditorsDisplayInterface'.
+  const { getDefaultEditorMosaicNode, setDefaultEditorMosaicNode } =
+    React.useContext(PreferencesContext);
+
   const selectedInstances = props.instancesSelection.getSelectedInstances();
 
-  const instancesPropertiesEditorRef = React.useRef<CompactInstancePropertiesEditorInterface | null | undefined>(null);
-  const layersListRef = React.useRef<LayersListInterface | null | undefined>(null);
-  const instancesListRef = React.useRef<InstancesListInterface | null | undefined>(null);
+  const instancesPropertiesEditorRef = React.useRef<
+    CompactInstancePropertiesEditorInterface | null | undefined
+  >(null);
+  const layersListRef = React.useRef<LayersListInterface | null | undefined>(
+    null
+  );
+  const instancesListRef = React.useRef<
+    InstancesListInterface | null | undefined
+  >(null);
   const editorRef = React.useRef<InstancesEditor | null | undefined>(null);
-  const objectsListRef = React.useRef<ObjectsListInterface | null | undefined>(null);
-  const editorMosaicRef = React.useRef<EditorMosaicInterface | null | undefined>(null);
-  const objectGroupsListRef = React.useRef<ObjectGroupsListInterface | null | undefined>(null);
+  const objectsListRef = React.useRef<ObjectsListInterface | null | undefined>(
+    null
+  );
+  const editorMosaicRef = React.useRef<
+    EditorMosaicInterface | null | undefined
+  >(null);
+  const objectGroupsListRef = React.useRef<
+    ObjectGroupsListInterface | null | undefined
+  >(null);
 
   const forceUpdateInstancesPropertiesEditor = React.useCallback(() => {
     if (instancesPropertiesEditorRef.current)
@@ -131,7 +137,7 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
   const forceUpdateLayersList = React.useCallback(() => {
     if (layersListRef.current) layersListRef.current.forceUpdate();
   }, []);
-  const getInstanceSize = React.useCallback((instance: gdInitialInstance) => {
+  const getInstanceSize = React.useCallback((instance: gd.InitialInstance) => {
     if (!editorRef.current) return [0, 0, 0];
 
     return editorRef.current.getInstanceSize(instance);
@@ -143,7 +149,7 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
   }, []);
   const toggleEditorView = React.useCallback((editorId: EditorId) => {
     if (!editorMosaicRef.current) return;
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'EditorId' can't be used to index type '{ readonly 'objects-list': { readonly position: "end"; readonly splitPercentage: 75; readonly direction: "column"; }; readonly properties: { readonly position: "start"; readonly splitPercentage: 25; readonly direction: "column"; }; readonly 'object-groups-list': { ...; }; readonly 'instances-list': { ...; }; readonl...'.
+
     const config = defaultPanelConfigByEditor[editorId];
     editorMosaicRef.current.toggleEditor(
       editorId,
@@ -157,8 +163,7 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
     return editorMosaicRef.current.getOpenedEditorNames().includes(editorId);
   }, []);
   const renameObjectFolderOrObjectWithContext = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'objectWithContext' implicitly has an 'any' type.
-    objectWithContext => {
+    (objectWithContext) => {
       if (objectsListRef.current)
         objectsListRef.current.renameObjectFolderOrObjectWithContext(
           objectWithContext
@@ -175,7 +180,7 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
     else editor.pauseSceneRendering();
   }, []);
 
-// @ts-expect-error - TS2345 - Argument of type '() => { getName: () => string; forceUpdateInstancesList: () => void; forceUpdateInstancesPropertiesEditor: () => void; forceUpdateObjectsList: () => void; forceUpdateObjectGroupsList: () => void; ... 7 more ...; instancesHandlers: { ...; }; }' is not assignable to parameter of type '() => SceneEditorsDisplayProps'.
+  // @ts-expect-error - TS2345 - Argument of type '() => { getName: () => string; forceUpdateInstancesList: () => void; forceUpdateInstancesPropertiesEditor: () => void; forceUpdateObjectsList: () => void; forceUpdateObjectGroupsList: () => void; ... 7 more ...; instancesHandlers: { ...; }; }' is not assignable to parameter of type '() => SceneEditorsDisplayProps'.
   React.useImperativeHandle(ref, () => {
     const { current: editor } = editorRef;
     return {
@@ -227,7 +232,7 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
   });
 
   const selectInstances = React.useCallback(
-    (instances: Array<gdInitialInstance>, multiSelect: boolean) => {
+    (instances: Array<gd.InitialInstance>, multiSelect: boolean) => {
       onSelectInstances(instances, multiSelect);
       forceUpdateInstancesList();
       forceUpdateInstancesPropertiesEditor();
@@ -239,10 +244,9 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
     ]
   );
 
-// @ts-expect-error - TS2339 - Property 'selectedObjectFolderOrObjectsWithContext' does not exist on type 'SceneEditorsDisplayInterface'.
   const selectedObjectNames = props.selectedObjectFolderOrObjectsWithContext
-// @ts-expect-error - TS7006 - Parameter 'objectFolderOrObjectWithContext' implicitly has an 'any' type.
-    .map(objectFolderOrObjectWithContext => {
+
+    .map((objectFolderOrObjectWithContext) => {
       const { objectFolderOrObject } = objectFolderOrObjectWithContext;
 
       if (!objectFolderOrObject) return null; // Protect ourselves from an unexpected null value.
@@ -257,26 +261,19 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
       type: 'secondary',
       title: t`Properties`,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
           {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <CompactInstancePropertiesEditorContainer
               i18n={i18n}
               project={project}
               layout={layout}
               instances={selectedInstances}
-// @ts-expect-error - TS2339 - Property 'editInstanceVariables' does not exist on type 'SceneEditorsDisplayInterface'.
               editInstanceVariables={props.editInstanceVariables}
-// @ts-expect-error - TS2339 - Property 'editObjectByName' does not exist on type 'SceneEditorsDisplayInterface'.
               onEditObjectByName={props.editObjectByName}
               onInstancesModified={forceUpdateInstancesList}
               onGetInstanceSize={getInstanceSize}
               ref={instancesPropertiesEditorRef}
-// @ts-expect-error - TS2339 - Property 'unsavedChanges' does not exist on type 'SceneEditorsDisplayInterface'.
               unsavedChanges={props.unsavedChanges}
-// @ts-expect-error - TS2339 - Property 'historyHandler' does not exist on type 'SceneEditorsDisplayInterface'.
               historyHandler={props.historyHandler}
             />
           )}
@@ -287,26 +284,18 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
       type: 'secondary',
       title: t`Layers`,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LayersList
           project={project}
           selectedLayer={selectedLayer}
-// @ts-expect-error - TS2339 - Property 'onSelectLayer' does not exist on type 'SceneEditorsDisplayInterface'.
           onSelectLayer={props.onSelectLayer}
-// @ts-expect-error - TS2339 - Property 'editLayerEffects' does not exist on type 'SceneEditorsDisplayInterface'.
           onEditLayerEffects={props.editLayerEffects}
-// @ts-expect-error - TS2339 - Property 'editLayer' does not exist on type 'SceneEditorsDisplayInterface'.
           onEditLayer={props.editLayer}
-// @ts-expect-error - TS2339 - Property 'onRemoveLayer' does not exist on type 'SceneEditorsDisplayInterface'.
           onRemoveLayer={props.onRemoveLayer}
-// @ts-expect-error - TS2339 - Property 'onLayerRenamed' does not exist on type 'SceneEditorsDisplayInterface'.
           onLayerRenamed={props.onLayerRenamed}
           onCreateLayer={forceUpdateInstancesPropertiesEditor}
           layersContainer={layout}
-// @ts-expect-error - TS2339 - Property 'unsavedChanges' does not exist on type 'SceneEditorsDisplayInterface'.
           unsavedChanges={props.unsavedChanges}
           ref={layersListRef}
-// @ts-expect-error - TS2339 - Property 'hotReloadPreviewButtonProps' does not exist on type 'SceneEditorsDisplayInterface'.
           hotReloadPreviewButtonProps={props.hotReloadPreviewButtonProps}
         />
       ),
@@ -315,7 +304,6 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
       type: 'secondary',
       title: t`Instances List`,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <InstancesList
           instances={initialInstances}
           selectedInstances={selectedInstances}
@@ -329,46 +317,31 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <FullSizeInstancesEditorWithScrollbars
           project={project}
           layout={layout}
           selectedLayer={selectedLayer}
           initialInstances={initialInstances}
-// @ts-expect-error - TS2339 - Property 'instancesEditorSettings' does not exist on type 'SceneEditorsDisplayInterface'.
           instancesEditorSettings={props.instancesEditorSettings}
           onInstancesEditorSettingsMutated={
-// @ts-expect-error - TS2339 - Property 'onInstancesEditorSettingsMutated' does not exist on type 'SceneEditorsDisplayInterface'.
             props.onInstancesEditorSettingsMutated
           }
-// @ts-expect-error - TS2339 - Property 'instancesSelection' does not exist on type 'SceneEditorsDisplayInterface'.
           instancesSelection={props.instancesSelection}
-// @ts-expect-error - TS2339 - Property 'onInstancesAdded' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstancesAdded={props.onInstancesAdded}
-// @ts-expect-error - TS2339 - Property 'onInstancesSelected' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstancesSelected={props.onInstancesSelected}
-// @ts-expect-error - TS2339 - Property 'onInstanceDoubleClicked' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstanceDoubleClicked={props.onInstanceDoubleClicked}
-// @ts-expect-error - TS2339 - Property 'onInstancesMoved' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstancesMoved={props.onInstancesMoved}
-// @ts-expect-error - TS2339 - Property 'onInstancesResized' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstancesResized={props.onInstancesResized}
-// @ts-expect-error - TS2339 - Property 'onInstancesRotated' does not exist on type 'SceneEditorsDisplayInterface'.
           onInstancesRotated={props.onInstancesRotated}
           selectedObjectNames={selectedObjectNames}
-// @ts-expect-error - TS2339 - Property 'onContextMenu' does not exist on type 'SceneEditorsDisplayInterface'.
           onContextMenu={props.onContextMenu}
-// @ts-expect-error - TS2339 - Property 'isInstanceOf3DObject' does not exist on type 'SceneEditorsDisplayInterface'.
           isInstanceOf3DObject={props.isInstanceOf3DObject}
           instancesEditorShortcutsCallbacks={
-// @ts-expect-error - TS2339 - Property 'instancesEditorShortcutsCallbacks' does not exist on type 'SceneEditorsDisplayInterface'.
             props.instancesEditorShortcutsCallbacks
           }
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-          wrappedEditorRef={editor => {
+          wrappedEditorRef={(editor) => {
             editorRef.current = editor;
           }}
-// @ts-expect-error - TS2339 - Property 'isActive' does not exist on type 'SceneEditorsDisplayInterface'.
           pauseRendering={!props.isActive}
         />
       ),
@@ -376,14 +349,11 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
     'objects-list': {
       type: 'secondary',
       title: t`Objects`,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       toolbarControls: [<CloseButton key="close" />],
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
           {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ObjectsList
               getThumbnail={ObjectsRenderingService.getThumbnail.bind(
                 ObjectsRenderingService
@@ -393,54 +363,35 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
               layout={layout}
               initialInstances={initialInstances}
               onSelectAllInstancesOfObjectInLayout={
-// @ts-expect-error - TS2339 - Property 'onSelectAllInstancesOfObjectInLayout' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.onSelectAllInstancesOfObjectInLayout
               }
-// @ts-expect-error - TS2339 - Property 'resourceManagementProps' does not exist on type 'SceneEditorsDisplayInterface'.
               resourceManagementProps={props.resourceManagementProps}
               selectedObjectFolderOrObjectsWithContext={
-// @ts-expect-error - TS2339 - Property 'selectedObjectFolderOrObjectsWithContext' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.selectedObjectFolderOrObjectsWithContext
               }
-// @ts-expect-error - TS2339 - Property 'canInstallPrivateAsset' does not exist on type 'SceneEditorsDisplayInterface'.
               canInstallPrivateAsset={props.canInstallPrivateAsset}
-// @ts-expect-error - TS2339 - Property 'onEditObject' does not exist on type 'SceneEditorsDisplayInterface'.
               onEditObject={props.onEditObject}
-// @ts-expect-error - TS2339 - Property 'onExportAssets' does not exist on type 'SceneEditorsDisplayInterface'.
               onExportAssets={props.onExportAssets}
-// @ts-expect-error - TS7006 - Parameter 'objectWithContext' implicitly has an 'any' type. | TS7006 - Parameter 'cb' implicitly has an 'any' type.
               onDeleteObjects={(objectWithContext, cb) =>
-// @ts-expect-error - TS2339 - Property 'onDeleteObjects' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.onDeleteObjects(i18n, objectWithContext, cb)
               }
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type. | TS7006 - Parameter 'global' implicitly has an 'any' type.
               getValidatedObjectOrGroupName={(newName, global) =>
-// @ts-expect-error - TS2339 - Property 'getValidatedObjectOrGroupName' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.getValidatedObjectOrGroupName(newName, global, i18n)
               }
-// @ts-expect-error - TS2339 - Property 'onObjectCreated' does not exist on type 'SceneEditorsDisplayInterface'.
               onObjectCreated={props.onObjectCreated}
               onObjectFolderOrObjectWithContextSelected={
-// @ts-expect-error - TS2339 - Property 'onObjectFolderOrObjectWithContextSelected' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.onObjectFolderOrObjectWithContextSelected
               }
               onRenameObjectFolderOrObjectWithContextFinish={
-// @ts-expect-error - TS2339 - Property 'onRenameObjectFolderOrObjectWithContextFinish' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.onRenameObjectFolderOrObjectWithContextFinish
               }
-// @ts-expect-error - TS2339 - Property 'onAddObjectInstance' does not exist on type 'SceneEditorsDisplayInterface'.
               onAddObjectInstance={props.onAddObjectInstance}
-// @ts-expect-error - TS2339 - Property 'updateBehaviorsSharedData' does not exist on type 'SceneEditorsDisplayInterface'.
               onObjectPasted={props.updateBehaviorsSharedData}
-// @ts-expect-error - TS7006 - Parameter 'objectName' implicitly has an 'any' type.
-              beforeSetAsGlobalObject={objectName =>
-// @ts-expect-error - TS2339 - Property 'canObjectOrGroupBeGlobal' does not exist on type 'SceneEditorsDisplayInterface'.
+              beforeSetAsGlobalObject={(objectName) =>
                 props.canObjectOrGroupBeGlobal(i18n, objectName)
               }
               ref={objectsListRef}
-// @ts-expect-error - TS2339 - Property 'unsavedChanges' does not exist on type 'SceneEditorsDisplayInterface'.
               unsavedChanges={props.unsavedChanges}
-// @ts-expect-error - TS2339 - Property 'hotReloadPreviewButtonProps' does not exist on type 'SceneEditorsDisplayInterface'.
               hotReloadPreviewButtonProps={props.hotReloadPreviewButtonProps}
             />
           )}
@@ -451,32 +402,23 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
       type: 'secondary',
       title: t`Object Groups`,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
           {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ObjectGroupsList
               ref={objectGroupsListRef}
               globalObjectGroups={project.getObjectGroups()}
               objectGroups={layout.getObjectGroups()}
-// @ts-expect-error - TS2339 - Property 'onEditObjectGroup' does not exist on type 'SceneEditorsDisplayInterface'.
               onEditGroup={props.onEditObjectGroup}
-// @ts-expect-error - TS2339 - Property 'onDeleteObjectGroup' does not exist on type 'SceneEditorsDisplayInterface'.
               onDeleteGroup={props.onDeleteObjectGroup}
-// @ts-expect-error - TS2339 - Property 'onRenameObjectGroup' does not exist on type 'SceneEditorsDisplayInterface'.
               onRenameGroup={props.onRenameObjectGroup}
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type. | TS7006 - Parameter 'global' implicitly has an 'any' type.
+              // @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type. | TS7006 - Parameter 'global' implicitly has an 'any' type.
               getValidatedObjectOrGroupName={(newName, global) =>
-// @ts-expect-error - TS2339 - Property 'getValidatedObjectOrGroupName' does not exist on type 'SceneEditorsDisplayInterface'.
                 props.getValidatedObjectOrGroupName(newName, global, i18n)
               }
-// @ts-expect-error - TS7006 - Parameter 'groupName' implicitly has an 'any' type.
-              beforeSetAsGlobalGroup={groupName =>
-// @ts-expect-error - TS2339 - Property 'canObjectOrGroupBeGlobal' does not exist on type 'SceneEditorsDisplayInterface'.
+              // @ts-expect-error - TS7006 - Parameter 'groupName' implicitly has an 'any' type.
+              beforeSetAsGlobalGroup={(groupName) =>
                 props.canObjectOrGroupBeGlobal(i18n, groupName)
               }
-// @ts-expect-error - TS2339 - Property 'unsavedChanges' does not exist on type 'SceneEditorsDisplayInterface'.
               unsavedChanges={props.unsavedChanges}
             />
           )}
@@ -485,17 +427,16 @@ const MosaicEditorsDisplay = React.forwardRef<SceneEditorsDisplayProps, SceneEdi
     },
   } as const;
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <EditorMosaic
       editors={editors}
       limitToOneSecondaryEditor={isMobile}
       initialNodes={
         getDefaultEditorMosaicNode('scene-editor') || initialMosaicEditorNodes
       }
-// @ts-expect-error - TS2339 - Property 'onOpenedEditorsChanged' does not exist on type 'SceneEditorsDisplayInterface'.
       onOpenedEditorsChanged={props.onOpenedEditorsChanged}
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-      onPersistNodes={node => setDefaultEditorMosaicNode('scene-editor', node)}
+      onPersistNodes={(node) =>
+        setDefaultEditorMosaicNode('scene-editor', node)
+      }
       ref={editorMosaicRef}
     />
   );

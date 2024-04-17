@@ -1,7 +1,7 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import { useDebounce } from '../Utils/UseDebounce';
 import { useInterval } from '../Utils/UseInterval';
@@ -18,9 +18,9 @@ import {
   createOrEnsureBadgeForUser,
   getTutorialCompletedAchievementId,
 } from '../Utils/GDevelopServices/Badge';
-// @ts-expect-error - TS6142 - Module './InAppTutorialDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialDialog.tsx', but '--jsx' is not set.
+
 import InAppTutorialDialog from './InAppTutorialDialog';
-// @ts-expect-error - TS6142 - Module './InAppTutorialStepDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialStepDisplayer.tsx', but '--jsx' is not set.
+
 import InAppTutorialStepDisplayer from './InAppTutorialStepDisplayer';
 import { selectMessageByLocale } from '../Utils/i18n/MessageByLocale';
 import { sendInAppTutorialProgress } from '../Utils/Analytics/EventSender';
@@ -30,7 +30,7 @@ import {
   getMuiCheckboxValue,
   isMuiCheckbox,
 } from '../UI/MaterialUISpecificUtil';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import AuthenticatedUserContext, {
   AuthenticatedUser,
@@ -49,21 +49,22 @@ const selectorInterpolationProjectDataAccessors = {
 } as const;
 const legacyItemInObjectListDomSelectorPattern = /#object-item-[0-9]{1,2}$/;
 
-const getPhasesStartIndices = (endIndices: Array<number>): Array<number> => endIndices.map((_, i) => {
-  return i === 0 ? 0 : endIndices[i - 1] + 1;
-});
+const getPhasesStartIndices = (endIndices: Array<number>): Array<number> =>
+  endIndices.map((_, i) => {
+    return i === 0 ? 0 : endIndices[i - 1] + 1;
+  });
 
 const interpolateText = (
   text: string,
   data: {
-    [key: string]: string
+    [key: string]: string;
   },
-  project?: gdProject | null
+  project?: gd.Project | null
 ) => {
   const placeholderReplacingRegex = /\$\(([\w:]+)\)/g;
   const match = text.matchAll(placeholderReplacingRegex);
   let formattedText = text;
-  [...match].forEach(match => {
+  [...match].forEach((match) => {
     let replacement;
     const instructionWithBrackets = match[0];
     const instruction = match[1];
@@ -102,21 +103,21 @@ const translateAndInterpolateText = ({
   i18n,
   project,
 }: {
-  text?: TranslatedText,
+  text?: TranslatedText;
   data: {
-    [key: string]: string
-  },
-  i18n: I18nType,
-  project: gdProject | null | undefined
+    [key: string]: string;
+  };
+  i18n: I18nType;
+  project: gd.Project | null | undefined;
 }) => {
   if (!text) return undefined;
   let translatedText;
-// @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
+  // @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
   if (text.messageByLocale) {
-// @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
+    // @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
     translatedText = selectMessageByLocale(i18n, text.messageByLocale);
   } else {
-// @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
+    // @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
     translatedText = i18n._(text.messageDescriptor, data);
   }
 
@@ -128,15 +129,15 @@ const translateAndInterpolateText = ({
 
 const interpolateExpectedEditor = (
   expectedEditor: {
-    editor: EditorIdentifier,
-    scene?: string
+    editor: EditorIdentifier;
+    scene?: string;
   } | null,
   data: {
-    [key: string]: string
-  },
+    [key: string]: string;
+  }
 ): {
-  editor: EditorIdentifier,
-  scene?: string
+  editor: EditorIdentifier;
+  scene?: string;
 } | null => {
   if (!expectedEditor) return null;
   return {
@@ -148,8 +149,8 @@ const interpolateExpectedEditor = (
 const interpolateEditorTabActiveTrigger = (
   trigger: string,
   data: {
-    [key: string]: string
-  },
+    [key: string]: string;
+  }
 ): string => {
   const [sceneKey, editorType] = trigger.split(':');
   if (!editorType) {
@@ -164,15 +165,13 @@ const interpolateEditorTabActiveTrigger = (
   }"]${sceneNameFilter}`;
 };
 
-const countObjectsInScene = (
-  {
-    project,
-    sceneName,
-  }: {
-    project: gdProject,
-    sceneName: string
-  },
-): number | null | undefined => {
+const countObjectsInScene = ({
+  project,
+  sceneName,
+}: {
+  project: gd.Project;
+  sceneName: string;
+}): number | null | undefined => {
   if (project.getLayoutsCount() === 0) return;
 
   const layout = project.hasLayoutNamed(sceneName)
@@ -182,15 +181,13 @@ const countObjectsInScene = (
   return layout.getObjectsCount();
 };
 
-export const getEditorTabSelector = (
-  {
-    editor,
-    sceneName,
-  }: {
-    editor: EditorIdentifier,
-    sceneName?: string
-  },
-): string => {
+export const getEditorTabSelector = ({
+  editor,
+  sceneName,
+}: {
+  editor: EditorIdentifier;
+  sceneName?: string;
+}): string => {
   if (editor === 'Home') {
     return 'button[id="tab-start-page-button"]';
   }
@@ -204,15 +201,15 @@ export const getEditorTabSelector = (
 const interpolateElementId = (
   elementId: string,
   data: {
-    [key: string]: string
-  },
+    [key: string]: string;
+  }
 ): string => {
   if (
     elementId.startsWith(selectorInterpolationProjectDataAccessors.editorTab)
   ) {
     const splittedElementId = elementId.split(':');
     const sceneKey = splittedElementId[1];
-// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'EditorIdentifier'.
+    // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'EditorIdentifier'.
     const editorType: EditorIdentifier = splittedElementId[2];
     if (!editorType) {
       throw new Error(
@@ -230,9 +227,7 @@ const interpolateElementId = (
   ) {
     const splittedElementId = elementId.split(':');
     const objectKey = splittedElementId[1];
-    return `#scene-editor[data-active] #objects-list div[data-object-name="${
-      data[objectKey]
-    }"]`;
+    return `#scene-editor[data-active] #objects-list div[data-object-name="${data[objectKey]}"]`;
   } else if (
     elementId.startsWith(
       selectorInterpolationProjectDataAccessors.sceneInProjectManager
@@ -240,9 +235,7 @@ const interpolateElementId = (
   ) {
     const splittedElementId = elementId.split(':');
     const sceneKey = splittedElementId[1];
-    return `div[role="presentation"][data-open="true"] #project-manager [id^="scene-item"][data-scene="${
-      data[sceneKey]
-    }"]`;
+    return `div[role="presentation"][data-open="true"] #project-manager [id^="scene-item"][data-scene="${data[sceneKey]}"]`;
   } else if (
     elementId.startsWith(
       selectorInterpolationProjectDataAccessors.objectInObjectOrResourceSelector
@@ -250,9 +243,7 @@ const interpolateElementId = (
   ) {
     const splittedElementId = elementId.split(':');
     const objectKey = splittedElementId[1];
-    return `#instruction-or-object-selector div[data-object-name="${
-      data[objectKey]
-    }"]`;
+    return `#instruction-or-object-selector div[data-object-name="${data[objectKey]}"]`;
   }
 
   return elementId;
@@ -260,29 +251,29 @@ const interpolateElementId = (
 
 const containsProjectDataToDisplay = (text?: TranslatedText): boolean => {
   if (!text) return false;
-// @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
+  // @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
   if (text.messageByLocale) {
-// @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
-    return Object.values(text.messageByLocale).some(localizedText =>
+    // @ts-expect-error - TS2339 - Property 'messageByLocale' does not exist on type 'TranslatedText'.
+    return Object.values(text.messageByLocale).some((localizedText) =>
       // $FlowFixMe - known error where Flow returns mixed for object value https://github.com/facebook/flow/issues/2221
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+      // @ts-expect-error - TS2571 - Object is of type 'unknown'.
       localizedText.includes(
         `$(${textInterpolationProjectDataAccessors.instancesCount}`
       )
     );
   } else {
     return (
-// @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
+      // @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
       (typeof text.messageDescriptor === 'string' &&
-// @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
+        // @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
         text.messageDescriptor.includes(
           `$(${textInterpolationProjectDataAccessors.instancesCount}`
         )) ||
-// @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
+      // @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
       (typeof text.messageDescriptor === 'object' &&
-// @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
+        // @ts-expect-error - TS2339 - Property 'messageDescriptor' does not exist on type 'TranslatedText'.
         Object.values(text.messageDescriptor).some(
-          value =>
+          (value) =>
             typeof value === 'string' &&
             value.includes(
               `$(${textInterpolationProjectDataAccessors.instancesCount}`
@@ -295,37 +286,37 @@ const containsProjectDataToDisplay = (text?: TranslatedText): boolean => {
 const isDomBasedTriggerComplete = (
   trigger: InAppTutorialFlowStepTrigger | null | undefined,
   data: {
-    [key: string]: string
-  },
+    [key: string]: string;
+  }
 ): boolean => {
   if (!trigger) return false;
   if (
-// @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
+    // @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
     trigger.presenceOfElement &&
-// @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
+    // @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
     !trigger.presenceOfElement.match(
       legacyItemInObjectListDomSelectorPattern
     ) &&
     document.querySelector(
-// @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
+      // @ts-expect-error - TS2339 - Property 'presenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
       interpolateElementId(trigger.presenceOfElement, data)
     )
   ) {
     return true;
   } else if (
-// @ts-expect-error - TS2339 - Property 'absenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
+    // @ts-expect-error - TS2339 - Property 'absenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
     trigger.absenceOfElement &&
     !document.querySelector(
-// @ts-expect-error - TS2339 - Property 'absenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
+      // @ts-expect-error - TS2339 - Property 'absenceOfElement' does not exist on type 'InAppTutorialFlowStepTrigger'.
       interpolateElementId(trigger.absenceOfElement, data)
     )
   ) {
     return true;
   } else if (
-// @ts-expect-error - TS2339 - Property 'editorIsActive' does not exist on type 'InAppTutorialFlowStepTrigger'.
+    // @ts-expect-error - TS2339 - Property 'editorIsActive' does not exist on type 'InAppTutorialFlowStepTrigger'.
     trigger.editorIsActive &&
     document.querySelector(
-// @ts-expect-error - TS2339 - Property 'editorIsActive' does not exist on type 'InAppTutorialFlowStepTrigger'.
+      // @ts-expect-error - TS2339 - Property 'editorIsActive' does not exist on type 'InAppTutorialFlowStepTrigger'.
       interpolateEditorTabActiveTrigger(trigger.editorIsActive, data)
     )
   ) {
@@ -343,28 +334,26 @@ const getInputValue = (element: HTMLElement): any => {
   }
   // Flow errors on missing value prop in generic type HTMLElement but this
   // line cannot break.
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'HTMLElement'.
+  // @ts-expect-error - TS2339 - Property 'value' does not exist on type 'HTMLElement'.
   return element.value;
 };
 
-const gatherProjectDataOnMultipleSteps = (
-  {
-    flow,
-    startIndex,
-    endIndex,
-    data,
-    project,
-  }: {
-    flow: Array<InAppTutorialFlowStep>,
-    startIndex: number,
-    endIndex: number,
-    data: {
-      [key: string]: string
-    },
-    project: gdProject | null | undefined
-  },
-): {
-  [key: string]: string
+const gatherProjectDataOnMultipleSteps = ({
+  flow,
+  startIndex,
+  endIndex,
+  data,
+  project,
+}: {
+  flow: Array<InAppTutorialFlowStep>;
+  startIndex: number;
+  endIndex: number;
+  data: {
+    [key: string]: string;
+  };
+  project: gd.Project | null | undefined;
+}): {
+  [key: string]: string;
 } => {
   if (!project) return data;
 
@@ -416,170 +405,163 @@ const useGiveTrivialBadgeWhenTutorialIsFinished = ({
   displayEndDialog,
   tutorial,
 }: {
-  authenticatedUser: AuthenticatedUser,
-  displayEndDialog: boolean,
-  tutorial: InAppTutorial
+  authenticatedUser: AuthenticatedUser;
+  displayEndDialog: boolean;
+  tutorial: InAppTutorial;
 }) => {
   // Destructure the user data to avoid the effect to run at every change of the user
   // which is unrelated to badges or the user profile.
-  const {
+  const { badges, onBadgesChanged, profile, getAuthorizationHeader } =
+    authenticatedUser;
+
+  React.useEffect(() => {
+    (async () => {
+      if (!profile || !displayEndDialog) return;
+
+      try {
+        // Give a (trivial) badge when a tutorial is finished.
+        await retryIfFailed({ times: 3 }, () =>
+          createOrEnsureBadgeForUser(
+            { badges, onBadgesChanged, profile, getAuthorizationHeader },
+            getTutorialCompletedAchievementId(tutorial.id)
+          )
+        );
+      } catch (error) {
+        console.error(
+          `Couldn't create completion badge for tutorial ${tutorial.id}.`,
+          error
+        );
+      }
+    })();
+  }, [
+    displayEndDialog,
     badges,
     onBadgesChanged,
     profile,
     getAuthorizationHeader,
-  } = authenticatedUser;
-
-  React.useEffect(
-    () => {
-      (async () => {
-        if (!profile || !displayEndDialog) return;
-
-        try {
-          // Give a (trivial) badge when a tutorial is finished.
-          await retryIfFailed({ times: 3 }, () =>
-            createOrEnsureBadgeForUser(
-              { badges, onBadgesChanged, profile, getAuthorizationHeader },
-              getTutorialCompletedAchievementId(tutorial.id)
-            )
-          );
-        } catch (error: any) {
-          console.error(
-            `Couldn't create completion badge for tutorial ${tutorial.id}.`,
-            error
-          );
-        }
-      })();
-    },
-    [
-      displayEndDialog,
-      badges,
-      onBadgesChanged,
-      profile,
-      getAuthorizationHeader,
-      tutorial.id,
-    ]
-  );
+    tutorial.id,
+  ]);
 };
 
 type Props = {
-  tutorial: InAppTutorial,
-  startStepIndex: number,
+  tutorial: InAppTutorial;
+  startStepIndex: number;
   startProjectData: {
-    [key: string]: string
-  },
-  endTutorial: (
-    arg1: {
-      shouldCloseProject: boolean,
-      shouldWarnAboutUnsavedChanges: boolean
-    },
-  ) => void,
-  project: gdProject | null | undefined,
-  currentEditor: EditorIdentifier | null,
-  currentSceneName: string | null
+    [key: string]: string;
+  };
+  endTutorial: (arg1: {
+    shouldCloseProject: boolean;
+    shouldWarnAboutUnsavedChanges: boolean;
+  }) => void;
+  project: gd.Project | null | undefined;
+  currentEditor: EditorIdentifier | null;
+  currentSceneName: string | null;
 };
 
 export type InAppTutorialOrchestratorInterface = {
-  onPreviewLaunch: () => void,
+  onPreviewLaunch: () => void;
   getProgress: () => {
-    step: number,
-    progress: Array<number>,
+    step: number;
+    progress: Array<number>;
     projectData: {
-      [key: string]: string
-    }
-  },
-  changeData: (oldName: string, newName: string) => void
+      [key: string]: string;
+    };
+  };
+  changeData: (oldName: string, newName: string) => void;
 };
 
-const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestratorInterface>((
-  {
-// @ts-expect-error - TS2339 - Property 'tutorial' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    tutorial,
-// @ts-expect-error - TS2339 - Property 'endTutorial' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    endTutorial,
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    project,
-// @ts-expect-error - TS2339 - Property 'currentEditor' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    currentEditor,
-// @ts-expect-error - TS2339 - Property 'currentSceneName' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    currentSceneName,
-// @ts-expect-error - TS2339 - Property 'startStepIndex' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    startStepIndex,
-// @ts-expect-error - TS2339 - Property 'startProjectData' does not exist on type 'InAppTutorialOrchestratorInterface'.
-    startProjectData,
-  },
-  ref
-) => {
-  const forceUpdate = useForceUpdate();
-  const [
-    wrongEditorInfoOpen,
-    setWrongEditorInfoOpen,
-  ] = React.useState<boolean>(false);
-  const [currentStepIndex, setCurrentStepIndex] = React.useState<number>(startStepIndex);
-  const [
-    endIndicesPerPhase,
-    setEndIndicesPerPhase,
-  ] = React.useState<Array<number> | null | undefined>(null);
-  const [data, setData] = React.useState<{
-    [key: string]: string
-  }>(startProjectData);
-  const objectCountBySceneRef = React.useRef<{
-    [sceneName: string]: number
-  }>({});
-  const [displayEndDialog, setDisplayEndDialog] = React.useState<boolean>(false);
-  const currentStepFallbackStepIndex = React.useRef<number>(0);
-  const [expectedEditor, setExpectedEditor] = React.useState<{
-    editor: EditorIdentifier,
-    scene?: string
-  } | null>(null);
-  const [
-    elementWithValueToWatchIfChanged,
-    setElementWithValueToWatchIfChanged,
-  ] = React.useState<string | null | undefined>(null);
-  const inputInitialValueRef = React.useRef<string | null | undefined>(null);
-  const [
-    elementWithValueToWatchIfEquals,
-    setElementWithValueToWatchIfEquals,
-  ] = React.useState<string | null | undefined>(null);
-  const inputExpectedValueRef = React.useRef<string | null | undefined>(null);
-  const [
-    objectSceneInstancesToWatch,
-    setObjectSceneInstancesToWatch,
-  ] = React.useState<{
-    sceneName: string | null | undefined,
-    objectName: string,
-    count?: number
-  } | null | undefined>(null);
-  const [
-    sceneObjectCountToWatch,
-    setSceneObjectCountToWatch,
-  ] = React.useState<boolean>(false);
-  const domObserverRef = React.useRef<MutationObserver | null | undefined>(null);
-  const [
-    shouldWatchProjectChanges,
-    setShouldWatchProjectChanges,
-  ] = React.useState<boolean>(false);
-  const preferences = React.useContext(PreferencesContext);
-  const authenticatedUser = React.useContext(AuthenticatedUserContext);
-
-  const { flow, endDialog, editorSwitches, id: tutorialId } = tutorial;
-  const stepCount = flow.length;
-  const currentStep = flow[currentStepIndex];
-
-  const changeStep = React.useCallback(
-    (stepIndex: number) => {
-      setCurrentStepIndex(stepIndex);
-      sendInAppTutorialProgress({
-        tutorialId: tutorialId,
-        step: stepIndex,
-        isCompleted: stepIndex >= stepCount - 1,
-      });
+const InAppTutorialOrchestrator = React.forwardRef<
+  Props,
+  InAppTutorialOrchestratorInterface
+>(
+  (
+    {
+      // @ts-expect-error - TS2339 - Property 'tutorial' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      tutorial,
+      // @ts-expect-error - TS2339 - Property 'endTutorial' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      endTutorial,
+      // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      project,
+      // @ts-expect-error - TS2339 - Property 'currentEditor' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      currentEditor,
+      // @ts-expect-error - TS2339 - Property 'currentSceneName' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      currentSceneName,
+      // @ts-expect-error - TS2339 - Property 'startStepIndex' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      startStepIndex,
+      // @ts-expect-error - TS2339 - Property 'startProjectData' does not exist on type 'InAppTutorialOrchestratorInterface'.
+      startProjectData,
     },
-    [tutorialId, stepCount]
-  );
+    ref
+  ) => {
+    const forceUpdate = useForceUpdate();
+    const [wrongEditorInfoOpen, setWrongEditorInfoOpen] =
+      React.useState<boolean>(false);
+    const [currentStepIndex, setCurrentStepIndex] =
+      React.useState<number>(startStepIndex);
+    const [endIndicesPerPhase, setEndIndicesPerPhase] = React.useState<
+      Array<number> | null | undefined
+    >(null);
+    const [data, setData] = React.useState<{
+      [key: string]: string;
+    }>(startProjectData);
+    const objectCountBySceneRef = React.useRef<{
+      [sceneName: string]: number;
+    }>({});
+    const [displayEndDialog, setDisplayEndDialog] =
+      React.useState<boolean>(false);
+    const currentStepFallbackStepIndex = React.useRef<number>(0);
+    const [expectedEditor, setExpectedEditor] = React.useState<{
+      editor: EditorIdentifier;
+      scene?: string;
+    } | null>(null);
+    const [
+      elementWithValueToWatchIfChanged,
+      setElementWithValueToWatchIfChanged,
+    ] = React.useState<string | null | undefined>(null);
+    const inputInitialValueRef = React.useRef<string | null | undefined>(null);
+    const [
+      elementWithValueToWatchIfEquals,
+      setElementWithValueToWatchIfEquals,
+    ] = React.useState<string | null | undefined>(null);
+    const inputExpectedValueRef = React.useRef<string | null | undefined>(null);
+    const [objectSceneInstancesToWatch, setObjectSceneInstancesToWatch] =
+      React.useState<
+        | {
+            sceneName: string | null | undefined;
+            objectName: string;
+            count?: number;
+          }
+        | null
+        | undefined
+      >(null);
+    const [sceneObjectCountToWatch, setSceneObjectCountToWatch] =
+      React.useState<boolean>(false);
+    const domObserverRef = React.useRef<MutationObserver | null | undefined>(
+      null
+    );
+    const [shouldWatchProjectChanges, setShouldWatchProjectChanges] =
+      React.useState<boolean>(false);
+    const preferences = React.useContext(PreferencesContext);
+    const authenticatedUser = React.useContext(AuthenticatedUserContext);
 
-  // Reset current step index on tutorial change.
-  React.useEffect(
-    () => {
+    const { flow, endDialog, editorSwitches, id: tutorialId } = tutorial;
+    const stepCount = flow.length;
+    const currentStep = flow[currentStepIndex];
+
+    const changeStep = React.useCallback(
+      (stepIndex: number) => {
+        setCurrentStepIndex(stepIndex);
+        sendInAppTutorialProgress({
+          tutorialId: tutorialId,
+          step: stepIndex,
+          isCompleted: stepIndex >= stepCount - 1,
+        });
+      },
+      [tutorialId, stepCount]
+    );
+
+    // Reset current step index on tutorial change.
+    React.useEffect(() => {
       changeStep(startStepIndex);
       for (let index = startStepIndex; index >= 0; index--) {
         if (!tutorial.flow[index].isOnClosableDialog) {
@@ -594,65 +576,61 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
           tutorial.flow[index].id &&
           tutorial.editorSwitches.hasOwnProperty(tutorial.flow[index].id)
         ) {
-          newExpectedEditor =
-            tutorial.editorSwitches[tutorial.flow[index].id];
+          newExpectedEditor = tutorial.editorSwitches[tutorial.flow[index].id];
           break;
         }
       }
-// @ts-expect-error - TS2345 - Argument of type '{ editor: string; }' is not assignable to parameter of type 'SetStateAction<{ editor: EditorIdentifier; scene?: string | undefined; } | null>'.
+      // @ts-expect-error - TS2345 - Argument of type '{ editor: string; }' is not assignable to parameter of type 'SetStateAction<{ editor: EditorIdentifier; scene?: string | undefined; } | null>'.
       setExpectedEditor(newExpectedEditor);
-    },
-    [tutorial, changeStep, startStepIndex]
-  );
+    }, [tutorial, changeStep, startStepIndex]);
 
-  const goToStep = React.useCallback(
-    ({
-      stepIndex,
-      gatherData,
-    }: {
-      stepIndex: number,
-      gatherData?: boolean
-    }) => {
-      if (stepIndex >= stepCount) {
-        setDisplayEndDialog(true);
-        return;
-      }
+    const goToStep = React.useCallback(
+      ({
+        stepIndex,
+        gatherData,
+      }: {
+        stepIndex: number;
+        gatherData?: boolean;
+      }) => {
+        if (stepIndex >= stepCount) {
+          setDisplayEndDialog(true);
+          return;
+        }
 
-      let nextStepIndex = stepIndex;
+        let nextStepIndex = stepIndex;
 
-      // Check if we can go directly to next mandatory (not-skippable) and not deprecated step.
-      while (nextStepIndex < stepCount - 1) {
-        if (
-          flow[nextStepIndex] &&
-          (flow[nextStepIndex].deprecated ||
-            (flow[nextStepIndex].skippable &&
-              isDomBasedTriggerComplete(
-                flow[nextStepIndex].nextStepTrigger,
-                data
-              )))
-        )
-          nextStepIndex += 1;
-        else break;
-      }
-      if (gatherData) {
-        const newData = gatherProjectDataOnMultipleSteps({
-          flow,
-          startIndex: currentStepIndex,
-          endIndex: nextStepIndex - 1,
-          data,
-          project,
-        });
-        setData(newData);
-      }
+        // Check if we can go directly to next mandatory (not-skippable) and not deprecated step.
+        while (nextStepIndex < stepCount - 1) {
+          if (
+            flow[nextStepIndex] &&
+            (flow[nextStepIndex].deprecated ||
+              (flow[nextStepIndex].skippable &&
+                isDomBasedTriggerComplete(
+                  flow[nextStepIndex].nextStepTrigger,
+                  data
+                )))
+          )
+            nextStepIndex += 1;
+          else break;
+        }
+        if (gatherData) {
+          const newData = gatherProjectDataOnMultipleSteps({
+            flow,
+            startIndex: currentStepIndex,
+            endIndex: nextStepIndex - 1,
+            data,
+            project,
+          });
+          setData(newData);
+        }
 
-      changeStep(nextStepIndex);
-    },
-    [flow, changeStep, stepCount, data, project, currentStepIndex]
-  );
+        changeStep(nextStepIndex);
+      },
+      [flow, changeStep, stepCount, data, project, currentStepIndex]
+    );
 
-  // Compute phases start positions on flow change.
-  React.useEffect(
-    () => {
+    // Compute phases start positions on flow change.
+    React.useEffect(() => {
       const indices: Array<number> = [];
       for (
         let flowStepIndex = 0;
@@ -665,12 +643,9 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       }
       indices.push(tutorial.flow.length - 1); // Last phase ends at last flow step.
       setEndIndicesPerPhase(indices);
-    },
-    [tutorial.flow]
-  );
+    }, [tutorial.flow]);
 
-  const computeProgress = React.useCallback(
-    (): Array<number> => {
+    const computeProgress = React.useCallback((): Array<number> => {
       if (!endIndicesPerPhase) return [0];
       const startIndicesPerPhase = getPhasesStartIndices(endIndicesPerPhase);
 
@@ -686,38 +661,33 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
           ((currentStepIndex - startIndex) / (endIndex - startIndex)) * 100
         );
       });
-    },
-    [currentStepIndex, endIndicesPerPhase]
-  );
+    }, [currentStepIndex, endIndicesPerPhase]);
 
-  const hasCurrentSceneObjectsCountIncreased = React.useCallback(
-    (): boolean => {
-      if (!project || project.getLayoutsCount() === 0 || !currentSceneName)
-        return false;
-      const count = countObjectsInScene({
-        project,
-        sceneName: currentSceneName,
-      });
-      const initialCount = objectCountBySceneRef.current[currentSceneName];
-      return (
-        typeof initialCount === 'number' &&
-        typeof count === 'number' &&
-        count > initialCount
-      );
-    },
-    [project, currentSceneName]
-  );
+    const hasCurrentSceneObjectsCountIncreased =
+      React.useCallback((): boolean => {
+        if (!project || project.getLayoutsCount() === 0 || !currentSceneName)
+          return false;
+        const count = countObjectsInScene({
+          project,
+          sceneName: currentSceneName,
+        });
+        const initialCount = objectCountBySceneRef.current[currentSceneName];
+        return (
+          typeof initialCount === 'number' &&
+          typeof count === 'number' &&
+          count > initialCount
+        );
+      }, [project, currentSceneName]);
 
-  const getProgress = () => {
-    return {
-      step: currentStepIndex,
-      progress: computeProgress(),
-      projectData: data,
+    const getProgress = () => {
+      return {
+        step: currentStepIndex,
+        progress: computeProgress(),
+        projectData: data,
+      };
     };
-  };
 
-  const watchDomForNextStepTrigger = React.useCallback(
-    () => {
+    const watchDomForNextStepTrigger = React.useCallback(() => {
       // Find the next mandatory (not-skippable) step (It can be the current step).
       let indexOfNextMandatoryStep = currentStepIndex;
       while (flow[indexOfNextMandatoryStep].skippable) {
@@ -762,15 +732,13 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
               hasCurrentSceneObjectsCountIncreased())
           ) {
             shouldGoToStepAtIndex = flow.findIndex(
-// @ts-expect-error - TS7006 - Parameter 'step' implicitly has an 'any' type.
-              step => step.id === shortcutStep.stepId
+              // @ts-expect-error - TS7006 - Parameter 'step' implicitly has an 'any' type.
+              (step) => step.id === shortcutStep.stepId
             );
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+            // @ts-expect-error - TS2531 - Object is possibly 'null'.
             if (shouldGoToStepAtIndex < 0) {
               console.warn(
-                `Step with id ${
-                  shortcutStep.stepId
-                } could not be found. Shortcut not taken.`
+                `Step with id ${shortcutStep.stepId} could not be found. Shortcut not taken.`
               );
               return;
             }
@@ -781,59 +749,53 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       }
 
       goToStep({ stepIndex: shouldGoToStepAtIndex, gatherData: true });
-    },
-    [
+    }, [
       currentStepIndex,
       goToStep,
       data,
       flow,
       hasCurrentSceneObjectsCountIncreased,
-    ]
-  );
+    ]);
 
-  const handleDomMutation = useDebounce(watchDomForNextStepTrigger, 200);
+    const handleDomMutation = useDebounce(watchDomForNextStepTrigger, 200);
 
-  const goToNextStep = React.useCallback(
-    (gatherData?: boolean) => {
-      goToStep({ stepIndex: currentStepIndex + 1, gatherData });
-    },
-    [currentStepIndex, goToStep]
-  );
+    const goToNextStep = React.useCallback(
+      (gatherData?: boolean) => {
+        goToStep({ stepIndex: currentStepIndex + 1, gatherData });
+      },
+      [currentStepIndex, goToStep]
+    );
 
-  const changeData = (oldName: string, newName: string) => {
-    let foundKey: string | null = null;
-    Object.entries(data).forEach(([key, value]: [any, any]) => {
-      if (value === oldName) {
-        foundKey = key;
-        return;
+    const changeData = (oldName: string, newName: string) => {
+      let foundKey: string | null = null;
+      Object.entries(data).forEach(([key, value]: [any, any]) => {
+        if (value === oldName) {
+          foundKey = key;
+          return;
+        }
+      });
+      if (foundKey) {
+        data[foundKey] = newName;
       }
-    });
-    if (foundKey) {
-      data[foundKey] = newName;
-    }
-  };
+    };
 
-// @ts-expect-error - TS2740 - Type '{ onPreviewLaunch: () => void; getProgress: () => { step: number; progress: number[]; projectData: { [key: string]: string; }; }; changeData: (oldName: string, newName: string) => void; }' is missing the following properties from type 'Props': tutorial, startStepIndex, startProjectData, endTutorial, and 3 more.
-  React.useImperativeHandle(ref, () => ({
-    onPreviewLaunch,
-    getProgress,
-    changeData,
-  }));
+    // @ts-expect-error - TS2740 - Type '{ onPreviewLaunch: () => void; getProgress: () => { step: number; progress: number[]; projectData: { [key: string]: string; }; }; changeData: (oldName: string, newName: string) => void; }' is missing the following properties from type 'Props': tutorial, startStepIndex, startProjectData, endTutorial, and 3 more.
+    React.useImperativeHandle(ref, () => ({
+      onPreviewLaunch,
+      getProgress,
+      changeData,
+    }));
 
-  const onPreviewLaunch = React.useCallback(
-    () => {
+    const onPreviewLaunch = React.useCallback(() => {
       if (!currentStep) return;
       const { nextStepTrigger } = currentStep;
       if (nextStepTrigger && nextStepTrigger.previewLaunched) {
         goToNextStep();
       }
-    },
-    [goToNextStep, currentStep]
-  );
+    }, [goToNextStep, currentStep]);
 
-  // Set up mutation observer to be able to detect any change in the dom.
-  React.useEffect(
-    () => {
+    // Set up mutation observer to be able to detect any change in the dom.
+    React.useEffect(() => {
       const appContainer = document.querySelector('body'); // We could have only watch the React root node but Material UI created dialog out of this node.
       if (!appContainer) return;
       const observer = new MutationObserver(handleDomMutation);
@@ -850,13 +812,10 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
           domObserverRef.current = null;
         }
       };
-    },
-    [handleDomMutation]
-  );
+    }, [handleDomMutation]);
 
-  // Methods to run on each step change.
-  React.useEffect(
-    () => {
+    // Methods to run on each step change.
+    React.useEffect(() => {
       if (!currentStep) return;
       const { id, isOnClosableDialog } = currentStep;
       // Set expected editor on each step change
@@ -877,13 +836,10 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       if (currentStepIndex >= stepCount) {
         setDisplayEndDialog(true);
       }
-    },
-    [currentStep, currentStepIndex, stepCount, editorSwitches]
-  );
+    }, [currentStep, currentStepIndex, stepCount, editorSwitches]);
 
-  // Update some refs on each step change and on current scene change.
-  React.useEffect(
-    () => {
+    // Update some refs on each step change and on current scene change.
+    React.useEffect(() => {
       if (!currentStep || !currentSceneName || !project) return;
       const count = countObjectsInScene({
         project,
@@ -891,13 +847,10 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       });
       if (typeof count !== 'number') return;
       objectCountBySceneRef.current[currentSceneName] = count;
-    },
-    [currentStep, currentSceneName, project]
-  );
+    }, [currentStep, currentSceneName, project]);
 
-  // Set up watchers if the next step trigger is not dom-based.
-  React.useEffect(
-    () => {
+    // Set up watchers if the next step trigger is not dom-based.
+    React.useEffect(() => {
       if (!currentStep) return;
       const { nextStepTrigger, elementToHighlightId } = currentStep;
       if (nextStepTrigger && nextStepTrigger.valueEquals) {
@@ -913,10 +866,8 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
         }
         setElementWithValueToWatchIfChanged(elementToHighlightId);
       } else if (nextStepTrigger && nextStepTrigger.instanceAddedOnScene) {
-        const [
-          objectKey,
-          sceneKey,
-        ] = nextStepTrigger.instanceAddedOnScene.split(':');
+        const [objectKey, sceneKey] =
+          nextStepTrigger.instanceAddedOnScene.split(':');
         const objectName = data[objectKey];
         if (!objectName) return;
         const sceneName = sceneKey ? data[sceneKey] : undefined;
@@ -935,29 +886,23 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       ) {
         setSceneObjectCountToWatch(true);
       }
-    },
-    [currentStep, data]
-  );
+    }, [currentStep, data]);
 
-  // Detect in tooltip texts if project changes should be watched
-  React.useEffect(
-    () => {
+    // Detect in tooltip texts if project changes should be watched
+    React.useEffect(() => {
       if (!currentStep) return;
       const { tooltip } = currentStep;
       if (!tooltip) return;
       if (
-        [tooltip.description, tooltip.title].some(translatedText =>
+        [tooltip.description, tooltip.title].some((translatedText) =>
           containsProjectDataToDisplay(translatedText)
         )
       ) {
         setShouldWatchProjectChanges(true);
       }
-    },
-    [currentStep]
-  );
+    }, [currentStep]);
 
-  const watchInputChanges = React.useCallback(
-    () => {
+    const watchInputChanges = React.useCallback(() => {
       if (!elementWithValueToWatchIfChanged) return;
       const elementToWatch = document.querySelector(
         elementWithValueToWatchIfChanged
@@ -966,17 +911,14 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
 
       if (
         elementToWatch &&
-// @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
+        // @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
         getInputValue(elementToWatch) !== inputInitialValue
       ) {
         goToNextStep();
       }
-    },
-    [goToNextStep, elementWithValueToWatchIfChanged]
-  );
+    }, [goToNextStep, elementWithValueToWatchIfChanged]);
 
-  const watchInputEquals = React.useCallback(
-    () => {
+    const watchInputEquals = React.useCallback(() => {
       if (!elementWithValueToWatchIfEquals) return;
       const elementToWatch = document.querySelector(
         elementWithValueToWatchIfEquals
@@ -988,18 +930,15 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
       // Ex: "1 + 1" === "1+1"
       if (
         elementToWatch &&
-// @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
+        // @ts-expect-error - TS2345 - Argument of type 'Element' is not assignable to parameter of type 'HTMLElement'.
         getInputValue(elementToWatch).replace(/\s/g, '') ===
           inputExpectedValue.replace(/\s/g, '')
       ) {
         goToNextStep();
       }
-    },
-    [goToNextStep, elementWithValueToWatchIfEquals]
-  );
+    }, [goToNextStep, elementWithValueToWatchIfEquals]);
 
-  const watchSceneInstanceChanges = React.useCallback(
-    () => {
+    const watchSceneInstanceChanges = React.useCallback(() => {
       if (!objectSceneInstancesToWatch) return;
       if (!project || project.getLayoutsCount() === 0) return;
       const {
@@ -1025,207 +964,195 @@ const InAppTutorialOrchestrator = React.forwardRef<Props, InAppTutorialOrchestra
         );
         if (instancesCount >= count) goToNextStep();
       }
-    },
-    [project, goToNextStep, objectSceneInstancesToWatch]
-  );
+    }, [project, goToNextStep, objectSceneInstancesToWatch]);
 
-  const watchSceneObjects = React.useCallback(
-    () => {
+    const watchSceneObjects = React.useCallback(() => {
       if (!sceneObjectCountToWatch) return;
       if (hasCurrentSceneObjectsCountIncreased()) {
         goToNextStep(true);
       }
-    },
-    [
+    }, [
       hasCurrentSceneObjectsCountIncreased,
       goToNextStep,
       sceneObjectCountToWatch,
-    ]
-  );
+    ]);
 
-  useInterval(forceUpdate, shouldWatchProjectChanges ? 500 : null);
-  useInterval(
-    watchInputChanges,
-    elementWithValueToWatchIfChanged ? 1000 : null
-  );
-  useInterval(
-    watchInputEquals,
-    elementWithValueToWatchIfEquals ? 1000 : null
-  );
-  useInterval(
-    watchSceneInstanceChanges,
-    objectSceneInstancesToWatch ? 500 : null
-  );
-  useInterval(watchSceneObjects, sceneObjectCountToWatch ? 1000 : null);
-  useInterval(
-    watchDomForNextStepTrigger,
-    currentStep && currentStep.isTriggerFlickering ? 500 : null
-  );
-
-  const isRunningMiniTutorial = React.useMemo(
-    () => isMiniTutorial(tutorial.id),
-    [tutorial.id]
-  );
-
-  const isTouchScreen = useScreenType() === 'touch';
-
-  const renderStepDisplayer = (i18n: I18nType) => {
-    if (!currentStep) return null;
-    const stepTooltip = currentStep.tooltip;
-    let formattedTooltip;
-    if (stepTooltip) {
-      const title = translateAndInterpolateText({
-        text: stepTooltip.title,
-        data,
-        i18n,
-        project,
-      });
-      const description = translateAndInterpolateText({
-        text:
-          isTouchScreen && stepTooltip.touchDescription
-            ? stepTooltip.touchDescription
-            : stepTooltip.description,
-        data,
-        i18n,
-        project,
-      });
-      formattedTooltip = {
-        ...stepTooltip,
-        title,
-        description,
-      };
-    }
-
-    let formattedStepTrigger;
-    const stepTrigger = currentStep.nextStepTrigger;
-    if (stepTrigger && stepTrigger.clickOnTooltipButton) {
-      const formattedButtonLabel = translateAndInterpolateText({
-        text: stepTrigger.clickOnTooltipButton,
-        data,
-        i18n,
-        project,
-      });
-      formattedStepTrigger = formattedButtonLabel
-        ? {
-            clickOnTooltipButton: formattedButtonLabel,
-          }
-        : undefined;
-    } else {
-      formattedStepTrigger = stepTrigger;
-    }
-    const formattedStep: InAppTutorialFlowFormattedStep = {
-      ...currentStep,
-      tooltip: formattedTooltip,
-      nextStepTrigger: formattedStepTrigger,
-    };
-    if (currentStep.elementToHighlightId) {
-      formattedStep.elementToHighlightId = interpolateElementId(
-        currentStep.elementToHighlightId,
-        data
-      );
-    }
-
-    let currentPhaseIndex = 0;
-    if (endIndicesPerPhase) {
-      const startIndices = getPhasesStartIndices(endIndicesPerPhase);
-      currentPhaseIndex = endIndicesPerPhase
-        .map((endIndex, i) => {
-          return (
-            currentStepIndex <= endIndex &&
-            currentStepIndex >= startIndices[i]
-          );
-        })
-        .indexOf(true);
-    }
-    return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-      <InAppTutorialStepDisplayer
-        step={formattedStep}
-        expectedEditor={
-          wrongEditorInfoOpen
-            ? interpolateExpectedEditor(expectedEditor, data)
-            : null
-        }
-        goToFallbackStep={() => {
-          changeStep(currentStepFallbackStepIndex.current);
-        }}
-        endTutorial={() =>
-          endTutorial({
-            // Don't close the project if it's a mini tutorial, so that the user can continue playing with the game.
-            shouldCloseProject: !isRunningMiniTutorial,
-            // Don't warn about unsaved changes if it's a mini tutorial.
-            shouldWarnAboutUnsavedChanges: !isRunningMiniTutorial,
-          })
-        }
-        progress={computeProgress()[currentPhaseIndex]}
-        goToNextStep={goToNextStep}
-      />
+    useInterval(forceUpdate, shouldWatchProjectChanges ? 500 : null);
+    useInterval(
+      watchInputChanges,
+      elementWithValueToWatchIfChanged ? 1000 : null
     );
-  };
+    useInterval(
+      watchInputEquals,
+      elementWithValueToWatchIfEquals ? 1000 : null
+    );
+    useInterval(
+      watchSceneInstanceChanges,
+      objectSceneInstancesToWatch ? 500 : null
+    );
+    useInterval(watchSceneObjects, sceneObjectCountToWatch ? 1000 : null);
+    useInterval(
+      watchDomForNextStepTrigger,
+      currentStep && currentStep.isTriggerFlickering ? 500 : null
+    );
 
-  const checkIfWrongEditor = useDebounce(
-    () => {
-      setWrongEditorInfoOpen(
-        !!expectedEditor &&
-          (expectedEditor.editor !== currentEditor ||
-            (!!expectedEditor.scene &&
-              data[expectedEditor.scene] !== currentSceneName))
+    const isRunningMiniTutorial = React.useMemo(
+      () => isMiniTutorial(tutorial.id),
+      [tutorial.id]
+    );
+
+    const isTouchScreen = useScreenType() === 'touch';
+
+    const renderStepDisplayer = (i18n: I18nType) => {
+      if (!currentStep) return null;
+      const stepTooltip = currentStep.tooltip;
+      let formattedTooltip;
+      if (stepTooltip) {
+        const title = translateAndInterpolateText({
+          text: stepTooltip.title,
+          data,
+          i18n,
+          project,
+        });
+        const description = translateAndInterpolateText({
+          text:
+            isTouchScreen && stepTooltip.touchDescription
+              ? stepTooltip.touchDescription
+              : stepTooltip.description,
+          data,
+          i18n,
+          project,
+        });
+        formattedTooltip = {
+          ...stepTooltip,
+          title,
+          description,
+        };
+      }
+
+      let formattedStepTrigger;
+      const stepTrigger = currentStep.nextStepTrigger;
+      if (stepTrigger && stepTrigger.clickOnTooltipButton) {
+        const formattedButtonLabel = translateAndInterpolateText({
+          text: stepTrigger.clickOnTooltipButton,
+          data,
+          i18n,
+          project,
+        });
+        formattedStepTrigger = formattedButtonLabel
+          ? {
+              clickOnTooltipButton: formattedButtonLabel,
+            }
+          : undefined;
+      } else {
+        formattedStepTrigger = stepTrigger;
+      }
+      const formattedStep: InAppTutorialFlowFormattedStep = {
+        ...currentStep,
+        tooltip: formattedTooltip,
+        nextStepTrigger: formattedStepTrigger,
+      };
+      if (currentStep.elementToHighlightId) {
+        formattedStep.elementToHighlightId = interpolateElementId(
+          currentStep.elementToHighlightId,
+          data
+        );
+      }
+
+      let currentPhaseIndex = 0;
+      if (endIndicesPerPhase) {
+        const startIndices = getPhasesStartIndices(endIndicesPerPhase);
+        currentPhaseIndex = endIndicesPerPhase
+          .map((endIndex, i) => {
+            return (
+              currentStepIndex <= endIndex &&
+              currentStepIndex >= startIndices[i]
+            );
+          })
+          .indexOf(true);
+      }
+      return (
+        <InAppTutorialStepDisplayer
+          step={formattedStep}
+          expectedEditor={
+            wrongEditorInfoOpen
+              ? interpolateExpectedEditor(expectedEditor, data)
+              : null
+          }
+          goToFallbackStep={() => {
+            changeStep(currentStepFallbackStepIndex.current);
+          }}
+          endTutorial={() =>
+            endTutorial({
+              // Don't close the project if it's a mini tutorial, so that the user can continue playing with the game.
+              shouldCloseProject: !isRunningMiniTutorial,
+              // Don't warn about unsaved changes if it's a mini tutorial.
+              shouldWarnAboutUnsavedChanges: !isRunningMiniTutorial,
+            })
+          }
+          progress={computeProgress()[currentPhaseIndex]}
+          goToNextStep={goToNextStep}
+        />
       );
-    },
-    wrongEditorInfoOpen ? 0 : 1000
-  );
+    };
 
-  React.useEffect(
-    () => {
+    const checkIfWrongEditor = useDebounce(
+      () => {
+        setWrongEditorInfoOpen(
+          !!expectedEditor &&
+            (expectedEditor.editor !== currentEditor ||
+              (!!expectedEditor.scene &&
+                data[expectedEditor.scene] !== currentSceneName))
+        );
+      },
+      wrongEditorInfoOpen ? 0 : 1000
+    );
+
+    React.useEffect(() => {
       checkIfWrongEditor();
-    },
-    [checkIfWrongEditor, currentEditor, currentSceneName]
-  );
+    }, [checkIfWrongEditor, currentEditor, currentSceneName]);
 
-  useGiveTrivialBadgeWhenTutorialIsFinished({
-    authenticatedUser,
-    tutorial,
-    displayEndDialog,
-  });
+    useGiveTrivialBadgeWhenTutorialIsFinished({
+      authenticatedUser,
+      tutorial,
+      displayEndDialog,
+    });
 
-  return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
-      {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <>
-          {renderStepDisplayer(i18n)}
-          {displayEndDialog && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-            <InAppTutorialDialog
-              isLastStep
-              dialogContent={endDialog}
-              endTutorial={() => {
-                setDisplayEndDialog(false);
-                if (isRunningMiniTutorial) {
-                  // If running a mini tutorial, we save the progress to indicate that the user has finished this lesson.
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
-                  preferences.saveTutorialProgress({
-                    tutorialId: tutorial.id,
-                    userId: authenticatedUser.profile
-                      ? authenticatedUser.profile.id
-                      : undefined,
-                    ...getProgress(),
-                    // We do not specify a storage provider, as we don't need to reload the project.
+    return (
+      <I18n>
+        {({ i18n }) => (
+          <>
+            {renderStepDisplayer(i18n)}
+            {displayEndDialog && (
+              <InAppTutorialDialog
+                isLastStep
+                dialogContent={endDialog}
+                endTutorial={() => {
+                  setDisplayEndDialog(false);
+                  if (isRunningMiniTutorial) {
+                    // If running a mini tutorial, we save the progress to indicate that the user has finished this lesson.
+
+                    preferences.saveTutorialProgress({
+                      tutorialId: tutorial.id,
+                      userId: authenticatedUser.profile
+                        ? authenticatedUser.profile.id
+                        : undefined,
+                      ...getProgress(),
+                      // We do not specify a storage provider, as we don't need to reload the project.
+                    });
+                  }
+                  endTutorial({
+                    shouldCloseProject: false,
+                    shouldWarnAboutUnsavedChanges: !isRunningMiniTutorial,
                   });
-                }
-                endTutorial({
-                  shouldCloseProject: false,
-                  shouldWarnAboutUnsavedChanges: !isRunningMiniTutorial,
-                });
-              }}
-            />
-          )}
-        </>
-      )}
-    </I18n>
-  );
-});
+                }}
+              />
+            )}
+          </>
+        )}
+      </I18n>
+    );
+  }
+);
 
 export default InAppTutorialOrchestrator;

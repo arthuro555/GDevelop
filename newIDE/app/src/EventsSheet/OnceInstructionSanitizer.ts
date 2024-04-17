@@ -1,7 +1,5 @@
-const gd: libGDevelop = global.gd;
-
 export const ensureSingleOnceInstructions = (
-  instructionsList: gdInstructionsList
+  instructionsList: gd.InstructionsList
 ) => {
   let hasEndingOnceInstruction = false;
   let hasInvalidOnce = false;

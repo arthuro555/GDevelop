@@ -34,12 +34,12 @@ export default class Rectangle {
     zMin,
     zMax,
   }: {
-    left: number,
-    top: number,
-    right: number,
-    bottom: number,
-    zMin?: number,
-    zMax?: number
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+    zMin?: number;
+    zMax?: number;
   }) {
     this.left = left;
     this.top = top;
@@ -55,10 +55,10 @@ export default class Rectangle {
     width,
     height,
   }: {
-    centerX: number,
-    centerY: number,
-    width: number,
-    height: number
+    centerX: number;
+    centerY: number;
+    width: number;
+    height: number;
   }) {
     this.set({
       left: centerX - width / 2,

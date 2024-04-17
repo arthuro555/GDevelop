@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../Grid';
 import GDevelopThemeContext from '../Theme/GDevelopThemeContext';
 
@@ -10,12 +10,12 @@ const styles = {
 } as const;
 
 type Props<TColumnName> = {
-// @ts-expect-error - TS2344 - Type 'TColumnName' does not satisfy the constraint 'string | number | symbol'.
-  columnsRenderer: Partial<Record<TColumnName, () => React.ReactElement>>,
+  // @ts-expect-error - TS2344 - Type 'TColumnName' does not satisfy the constraint 'string | number | symbol'.
+  columnsRenderer: Partial<Record<TColumnName, () => React.ReactElement>>;
   getColumns: () => Array<{
-    columnName: TColumnName,
-    ratio?: number
-  }>
+    columnName: TColumnName;
+    ratio?: number;
+  }>;
 };
 
 const columnsPadding = 4;
@@ -27,7 +27,6 @@ export const SelectColumns = ({
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   const columns = getColumns();
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Line noMargin expand>
       {columns.map(({ columnName }, index) => {
         const columnRenderer = columnsRenderer[columnName];
@@ -40,15 +39,14 @@ export const SelectColumns = ({
         const paddingLeft = isFirst
           ? 0
           : columnRatio > 1
-          ? columnsPadding * (columnRatio + 1)
-          : columnsPadding;
+            ? columnsPadding * (columnRatio + 1)
+            : columnsPadding;
         const paddingRight = isLast
           ? 0
           : columnRatio > 1
-          ? columnsPadding * (columnRatio + 1)
-          : columnsPadding;
+            ? columnsPadding * (columnRatio + 1)
+            : columnsPadding;
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div
             style={{
               ...styles.columnContainer,

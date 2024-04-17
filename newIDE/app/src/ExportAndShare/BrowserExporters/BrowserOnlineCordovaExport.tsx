@@ -25,32 +25,35 @@ import {
   ExportState,
   SetupExportHeader,
   ExportFlow,
-// @ts-expect-error - TS6142 - Module '../GenericExporters/OnlineCordovaExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineCordovaExport.tsx', but '--jsx' is not set.
 } from '../GenericExporters/OnlineCordovaExport';
 
-const gd: libGDevelop = global.gd;
-
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  abstractFileSystem: BrowserFileSystem,
-  outputDir: string
+  exporter: gdjsExporter;
+  abstractFileSystem: BrowserFileSystem;
+  outputDir: string;
 };
 
 type ExportOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  urlFiles: Array<UrlFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  blobFiles: Array<BlobFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  blobFiles: Array<BlobFileDescriptor>;
 };
 
 type CompressionOutput = Blob;
 
 const exportPipelineName = 'browser-online-cordova';
 
-export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const browserOnlineCordovaExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
   onlineBuildType: 'cordova-build',
   limitedBuilds: true,
@@ -73,17 +76,17 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
       exportStep
     ),
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderHeader: props => <SetupExportHeader {...props} />,
+  renderHeader: (props) => <SetupExportHeader {...props} />,
 
   shouldSuggestBumpingVersionNumber: () => true,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
     return findGDJS('cordova').then(({ gdjsRoot, filesContent }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -107,15 +110,11 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
 
   launchExport: (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      outputDir,
-      abstractFileSystem,
-    }: PreparedExporter,
+    { exporter, outputDir, abstractFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const { project } = context;
     const exportOptions = new gd.ExportOptions(project, outputDir);
@@ -138,15 +137,12 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
 
   launchResourcesDownload: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      urlFiles,
-    }: ExportOutput,
+    { textFiles, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     return downloadUrlFilesToBlobFiles({
       urlFiles,
       onProgress: context.updateStepProgress,
-    }).then(blobFiles => ({
+    }).then((blobFiles) => ({
       blobFiles,
       textFiles,
     }));
@@ -154,10 +150,7 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      blobFiles,
-    }: ResourcesDownloadOutput,
+    { textFiles, blobFiles }: ResourcesDownloadOutput
   ): Promise<Blob> => {
     return archiveFiles({
       blobFiles,
@@ -167,8 +160,11 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
     });
   },
 
-  launchUpload: (context: ExportPipelineContext<ExportState>, blobFile: Blob): Promise<string> => {
-    return getBuildFileUploadOptions().then(uploadOptions => {
+  launchUpload: (
+    context: ExportPipelineContext<ExportState>,
+    blobFile: Blob
+  ): Promise<string> => {
+    return getBuildFileUploadOptions().then((uploadOptions) => {
       return uploadBlobFile(
         blobFile,
         uploadOptions,
@@ -183,10 +179,10 @@ export const browserOnlineCordovaExportPipeline: ExportPipeline<ExportState, Pre
     uploadBucketKey: string,
     gameId: string,
     options: {
-      gameName: string,
-      gameVersion: string
+      gameName: string;
+      gameVersion: string;
     },
-    payWithCredits: boolean,
+    payWithCredits: boolean
   ): Promise<Build> => {
     const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
     if (!firebaseUser)

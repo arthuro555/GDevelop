@@ -21,7 +21,7 @@ export const shouldPreventRenderingInstanceEditors = (): boolean => {
 export const isElementADialog = (
   element: Element,
   options?: {
-    isVisible: true
+    isVisible: true;
   }
 ) => {
   const isDialog =
@@ -39,7 +39,7 @@ export const isElementADialog = (
  */
 export const isMuiCheckbox = (element: HTMLElement): boolean => {
   const typeAttribute = element.attributes.getNamedItem('type');
-// @ts-expect-error - TS2322 - Type 'boolean | null' is not assignable to type 'boolean'.
+  // @ts-expect-error - TS2322 - Type 'boolean | null' is not assignable to type 'boolean'.
   return (
     typeAttribute &&
     typeAttribute.value === 'checkbox' &&
@@ -69,7 +69,7 @@ export const doesPathContainDialog = (path: Array<Element>): boolean => {
   // So the path is global > document > html > body > dialog.
   try {
     return isElementADialog(path[path.length - 5], { isVisible: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error(
       `An error occurred when determining if path ${
         path && path.join ? path.join(' > ') : '[not serializable]'

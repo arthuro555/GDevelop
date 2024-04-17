@@ -12,18 +12,17 @@ import { makeDoubleClickable } from './PixiDoubleClickEvent';
 import Rectangle from '../../Utils/Rectangle'; // TODO (3D): add support for zMin/zMax/depth.
 import { rotatePolygon, Polygon } from '../../Utils/PolygonHelper';
 import Rendered3DInstance from '../../ObjectsRendering/Renderers/Rendered3DInstance';
-const gd: libGDevelop = global.gd;
 
 export default class LayerRenderer {
-  project: gdProject;
-  instances: gdInitialInstancesContainer;
-  layout: gdLayout;
+  project: gd.Project;
+  instances: gd.InitialInstancesContainer;
+  layout: gd.Layout;
   /** `layer` can be changed at any moment (see InstancesRenderer).
    * /!\ Don't store any other reference.
    */
-  layer: gdLayer;
+  layer: gd.Layer;
   viewPosition: ViewPosition;
-  onInstanceClicked: (arg1: gdInitialInstance) => void;
+  onInstanceClicked: (arg1: gd.InitialInstance) => void;
   onInstanceRightClicked: (
     arg1: {
       offsetX: number,
@@ -32,13 +31,13 @@ export default class LayerRenderer {
       y: number
     },
   ) => void;
-  onInstanceDoubleClicked: (arg1: gdInitialInstance) => void;
-  onOverInstance: (arg1: gdInitialInstance) => void;
-  onOutInstance: (arg1: gdInitialInstance) => void;
-  onMoveInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
+  onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void;
+  onOverInstance: (arg1: gd.InitialInstance) => void;
+  onOutInstance: (arg1: gd.InitialInstance) => void;
+  onMoveInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
   onMoveInstanceEnd: (arg1: undefined) => void;
-  onDownInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
-  onUpInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
+  onDownInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
+  onUpInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
   /** Used for instances culling on rendering. */
   viewTopLeft: [number, number];
   /** Used for instances culling on rendering. */
@@ -50,7 +49,7 @@ export default class LayerRenderer {
   pixiContainer: PIXI.Container;
 
   /** Functor used to render an instance */
-  instancesRenderer: gdInitialInstanceJSFunctor;
+  instancesRenderer: gd.InitialInstanceJSFunctor;
 
   wasUsed: boolean = false;
 
@@ -100,12 +99,12 @@ export default class LayerRenderer {
     pixiRenderer,
     showObjectInstancesIn3D,
   }: {
-    project: gdProject,
-    instances: gdInitialInstancesContainer,
-    layout: gdLayout,
-    layer: gdLayer,
+    project: gd.Project,
+    instances: gd.InitialInstancesContainer,
+    layout: gd.Layout,
+    layer: gd.Layer,
     viewPosition: ViewPosition,
-    onInstanceClicked: (arg1: gdInitialInstance) => void,
+    onInstanceClicked: (arg1: gd.InitialInstance) => void,
     onInstanceRightClicked: (
       arg1: {
         offsetX: number,
@@ -114,13 +113,13 @@ export default class LayerRenderer {
         y: number
       },
     ) => void,
-    onInstanceDoubleClicked: (arg1: gdInitialInstance) => void,
-    onOverInstance: (arg1: gdInitialInstance) => void,
-    onOutInstance: (arg1: gdInitialInstance) => void,
-    onMoveInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
+    onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void,
+    onOverInstance: (arg1: gd.InitialInstance) => void,
+    onOutInstance: (arg1: gd.InitialInstance) => void,
+    onMoveInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
     onMoveInstanceEnd: (arg1: undefined) => void,
-    onDownInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
-    onUpInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
+    onDownInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
+    onUpInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void,
     pixiRenderer: PIXI.Renderer,
     showObjectInstancesIn3D: boolean
   }) {
@@ -150,7 +149,7 @@ export default class LayerRenderer {
     // Functor used to render an instance
     this.instancesRenderer = new gd.InitialInstanceJSFunctor();
     this.instancesRenderer.invoke = instancePtr: any => {
-      const instance: gdInitialInstance = gd.wrapPointer(
+      const instance: gd.InitialInstance = gd.wrapPointer(
         instancePtr,
         gd.InitialInstance
       );
@@ -232,7 +231,7 @@ export default class LayerRenderer {
     return this._threePlaneMesh;
   }
 
-  getUnrotatedInstanceLeft = (instance: gdInitialInstance) => {
+  getUnrotatedInstanceLeft = (instance: gd.InitialInstance) => {
     return (
       instance.getX() -
       (this.renderedInstances[instance.ptr]
@@ -241,7 +240,7 @@ export default class LayerRenderer {
     );
   };
 
-  getUnrotatedInstanceTop = (instance: gdInitialInstance) => {
+  getUnrotatedInstanceTop = (instance: gd.InitialInstance) => {
     return (
       instance.getY() -
       (this.renderedInstances[instance.ptr]
@@ -250,7 +249,7 @@ export default class LayerRenderer {
     );
   };
 
-  getUnrotatedInstanceZMin = (instance: gdInitialInstance) => {
+  getUnrotatedInstanceZMin = (instance: gd.InitialInstance) => {
     return (
       instance.getZ() -
       // 3D objects Z position is always the "Z min":
@@ -261,7 +260,7 @@ export default class LayerRenderer {
     );
   };
 
-  getUnrotatedInstanceSize = (instance: gdInitialInstance) => {
+  getUnrotatedInstanceSize = (instance: gd.InitialInstance) => {
     const renderedInstance = this.renderedInstances[instance.ptr];
     const hasCustomSize = instance.hasCustomSize();
     const hasCustomDepth = instance.hasCustomDepth();
@@ -284,7 +283,7 @@ export default class LayerRenderer {
     return [width, height, depth];
   };
 
-  getUnrotatedInstanceAABB(instance: gdInitialInstance, bounds: Rectangle): Rectangle {
+  getUnrotatedInstanceAABB(instance: gd.InitialInstance, bounds: Rectangle): Rectangle {
     const size = this.getUnrotatedInstanceSize(instance);
     const left = this.getUnrotatedInstanceLeft(instance);
     const top = this.getUnrotatedInstanceTop(instance);
@@ -297,7 +296,7 @@ export default class LayerRenderer {
     return bounds;
   }
 
-  getInstanceAABB(instance: gdInitialInstance, bounds: Rectangle): Rectangle {
+  getInstanceAABB(instance: gd.InitialInstance, bounds: Rectangle): Rectangle {
     const angle = (instance.getAngle() * Math.PI) / 180;
     if (angle === 0) {
       return this.getUnrotatedInstanceAABB(instance, bounds);
@@ -365,7 +364,7 @@ export default class LayerRenderer {
     return bounds;
   }
 
-  getRendererOfInstance = (instance: gdInitialInstance) => {
+  getRendererOfInstance = (instance: gd.InitialInstance) => {
     var renderedInstance = this.renderedInstances[instance.ptr];
     if (renderedInstance === undefined) {
       //No renderer associated yet, the instance must have been just created!...
@@ -517,7 +516,7 @@ export default class LayerRenderer {
    * The approach is a naive bounding box testing but save rendering time on large
    * levels (though this could be improved with spatial partitioning).
    */
-  _isInstanceVisible(instance: gdInitialInstance) {
+  _isInstanceVisible(instance: gd.InitialInstance) {
     const aabb = this.getInstanceAABB(instance, this._temporaryRectangle);
     if (
       aabb.left + aabb.width() < this.viewTopLeft[0] ||

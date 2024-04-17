@@ -1,39 +1,38 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/ListIcon' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ListIcon.tsx', but '--jsx' is not set.
+
 import ListIcon from '../UI/ListIcon';
-// @ts-expect-error - TS6142 - Module '../UI/Subheader' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Subheader.tsx', but '--jsx' is not set.
+
 import Subheader from '../UI/Subheader';
-// @ts-expect-error - TS6142 - Module '../UI/List' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/List.tsx', but '--jsx' is not set.
+
 import { List, ListItem } from '../UI/List';
 import {
   enumerateObjectTypes,
   EnumeratedObjectMetadata,
 } from '../ObjectsList/EnumerateObjects';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
 import { sendNewObjectCreated } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS6142 - Module '../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../UI/ScrollView';
-// @ts-expect-error - TS6142 - Module '../Hints/useDismissableTutorialMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Hints/useDismissableTutorialMessage.tsx', but '--jsx' is not set.
+
 import useDismissableTutorialMessage from '../Hints/useDismissableTutorialMessage';
-// @ts-expect-error - TS6142 - Module './AssetStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreContext.tsx', but '--jsx' is not set.
+
 import { AssetStoreContext } from './AssetStoreContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/Extension/ExtensionCategories'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/Extension/ExtensionCategories.js' implicitly has an 'any' type.
+
 import { translateExtensionCategory } from '../Utils/Extension/ExtensionCategories';
-// @ts-expect-error - TS6142 - Module '../UI/Search/FiltersChooser' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/FiltersChooser.tsx', but '--jsx' is not set.
+
 import { ChosenCategory } from '../UI/Search/FiltersChooser';
 import { AssetShortHeader } from '../Utils/GDevelopServices/Asset';
-// @ts-expect-error - TS6142 - Module '../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../UI/TextButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t, Trans } from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module '../UI/LoaderModal' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LoaderModal.tsx', but '--jsx' is not set.
+
 import LoaderModal from '../UI/LoaderModal';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ChevronArrowLeft'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowLeft.js' implicitly has an 'any' type.
+
 import ChevronArrowLeft from '../UI/CustomSvgIcons/ChevronArrowLeft';
-// @ts-expect-error - TS6142 - Module './AssetsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetsList.tsx', but '--jsx' is not set.
+
 import AssetsList from './AssetsList';
 
 const ObjectListItem = ({
@@ -41,9 +40,9 @@ const ObjectListItem = ({
   onClick,
   id,
 }: {
-  enumeratedObjectMetadata: EnumeratedObjectMetadata,
-  onClick: () => void,
-  id?: string
+  enumeratedObjectMetadata: EnumeratedObjectMetadata;
+  onClick: () => void;
+  id?: string;
 }) => {
   if (enumeratedObjectMetadata.name === '') {
     // Base object is an "abstract" object
@@ -54,10 +53,8 @@ const ObjectListItem = ({
   const iconFilename = enumeratedObjectMetadata.iconFilename || '';
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ListItem
       id={id}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       leftIcon={<ListIcon src={iconFilename} iconSize={40} isGDevelopIcon />}
       key={enumeratedObjectMetadata.name}
       primaryText={enumeratedObjectMetadata.fullName}
@@ -69,10 +66,10 @@ const ObjectListItem = ({
 };
 
 type CustomObjectPackResultsProps = {
-  packTag: string,
-  onAssetSelect: (assetShortHeader: AssetShortHeader) => Promise<void>,
-  onBack: () => void,
-  isAssetBeingInstalled: boolean
+  packTag: string;
+  onAssetSelect: (assetShortHeader: AssetShortHeader) => Promise<void>;
+  onBack: () => void;
+  isAssetBeingInstalled: boolean;
 };
 
 export const CustomObjectPackResults = ({
@@ -103,49 +100,38 @@ export const CustomObjectPackResults = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <TextButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             icon={<ChevronArrowLeft />}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Back</Trans>}
             onClick={onBack}
             disabled={isAssetBeingInstalled}
           />
         </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <AssetsList
           assetShortHeaders={selectedAssetPackSearchResults}
           error={error}
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
-          onOpenDetails={assetShortHeader => {
+          onOpenDetails={(assetShortHeader) => {
             if (isAssetBeingInstalled) return;
             onAssetSelect(assetShortHeader);
           }}
         />
       </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LoaderModal show={isAssetBeingInstalled} />
     </>
   );
 };
 
-const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
-  {
-    i18n,
-    project,
-  }: {
-    i18n: I18nType,
-    project: gdProject
-  },
-): {
-  [key: string]: Array<EnumeratedObjectMetadata>
+const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = ({
+  i18n,
+  project,
+}: {
+  i18n: I18nType;
+  project: gd.Project;
+}): {
+  [key: string]: Array<EnumeratedObjectMetadata>;
 } => {
   const installedEnumeratedObjectMetadatas = enumerateObjectTypes(project);
 
@@ -177,7 +163,7 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
         fullName: i18n._(t`Multitouch Joystick`),
         description: i18n._(t`Joystick for touchscreens.`),
         iconFilename:
-          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMTYiIGN5PSIxNiIgcj0iMTMiLz4NCjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjI4LjQsMTIgMjAsMTIgMjAsMy42ICIvPg0KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMjAsMjguNCAyMCwyMCAyOC40LDIwICIvPg0KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMy42LDIwIDEyLDIwIDEyLDI4LjQgIi8+DQo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMiwzLjYgMTIsMTIgMy42LDEyICIvPg0KPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxNiw2IDE2LjcsNyAxNS4zLDcgIi8+DQo8cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjE2LDI2IDE1LjMsMjUgMTYuNywyNSAiLz4NCjxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iNiwxNiA3LDE1LjMgNywxNi43ICIvPg0KPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIyNiwxNiAyNSwxNi43IDI1LDE1LjMgIi8+DQo8L3N2Zz4NCg==',
+          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgd.HlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMTYiIGN5PSIxNiIgcj0iMTMiLz4NCjxwb2x5bGluZSBjbGFzcz0ic3QwIiBwb2ludHM9IjI4LjQsMTIgMjAsMTIgMjAsMy42ICIvPg0KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMjAsMjguNCAyMCwyMCAyOC40LDIwICIvPg0KPHBvbHlsaW5lIGNsYXNzPSJzdDAiIHBvaW50cz0iMy42LDIwIDEyLDIwIDEyLDI4LjQgIi8+DQo8cG9seWxpbmUgY2xhc3M9InN0MCIgcG9pbnRzPSIxMiwzLjYgMTIsMTIgMy42LDEyICIvPg0KPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxNiw2IDE2LjcsNyAxNS4zLDcgIi8+DQo8cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjE2LDI2IDE1LjMsMjUgMTYuNywyNSAiLz4NCjxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iNiwxNiA3LDE1LjMgNywxNi43ICIvPg0KPHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIyNiwxNiAyNSwxNi43IDI1LDE1LjMgIi8+DQo8L3N2Zz4NCg==',
         assetStorePackTag: 'multitouch joysticks',
         requiredExtensions: [
           {
@@ -204,7 +190,7 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
         fullName: i18n._(t`Panel sprite button`),
         description: i18n._(t`Resizable button with text customization.`),
         iconFilename:
-          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI5LDIzSDNjLTEuMSwwLTItMC45LTItMlYxMWMwLTEuMSwwLjktMiwyLTJoMjZjMS4xLDAsMiwwLjksMiwydjEwQzMxLDIyLjEsMzAuMSwyMywyOSwyM3oiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMywxOUwxMywxOWMtMS4xLDAtMi0wLjktMi0ydi0yYzAtMS4xLDAuOS0yLDItMmgwYzEuMSwwLDIsMC45LDIsMnYyQzE1LDE4LjEsMTQuMSwxOSwxMywxOXoiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxOCIgeTE9IjEzIiB4Mj0iMTgiIHkyPSIxOSIvPg0KPGxpbmUgY2xhc3M9InN0MCIgeDE9IjIxIiB5MT0iMTMiIHgyPSIxOCIgeTI9IjE3Ii8+DQo8bGluZSBjbGFzcz0ic3QwIiB4MT0iMjEiIHkxPSIxOSIgeDI9IjE5IiB5Mj0iMTYiLz4NCjwvc3ZnPg0K',
+          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgd.HlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTI5LDIzSDNjLTEuMSwwLTItMC45LTItMlYxMWMwLTEuMSwwLjktMiwyLTJoMjZjMS4xLDAsMiwwLjksMiwydjEwQzMxLDIyLjEsMzAuMSwyMywyOSwyM3oiLz4NCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMywxOUwxMywxOWMtMS4xLDAtMi0wLjktMi0ydi0yYzAtMS4xLDAuOS0yLDItMmgwYzEuMSwwLDIsMC45LDIsMnYyQzE1LDE4LjEsMTQuMSwxOSwxMywxOXoiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIxOCIgeTE9IjEzIiB4Mj0iMTgiIHkyPSIxOSIvPg0KPGxpbmUgY2xhc3M9InN0MCIgeDE9IjIxIiB5MT0iMTMiIHgyPSIxOCIgeTI9IjE3Ii8+DQo8bGluZSBjbGFzcz0ic3QwIiB4MT0iMjEiIHkxPSIxOSIgeDI9IjE5IiB5Mj0iMTYiLz4NCjwvc3ZnPg0K',
         assetStorePackTag: 'menu buttons',
         requiredExtensions: [
           {
@@ -220,7 +206,7 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
           t`Let users select a numerical value by dragging a slider.`
         ),
         iconFilename:
-          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMjMiIGN5PSI3IiByPSIzIi8+DQo8bGluZSBjbGFzcz0ic3QwIiB4MT0iMyIgeTE9IjciIHgyPSIyMCIgeTI9IjciLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjciIHgyPSIyNiIgeTI9IjciLz4NCjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjEyIiBjeT0iMTYiIHI9IjMiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIzIiB5MT0iMTYiIHgyPSI5IiB5Mj0iMTYiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjE2IiB4Mj0iMTUiIHkyPSIxNiIvPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMjMiIGN5PSIyNSIgcj0iMyIvPg0KPGxpbmUgY2xhc3M9InN0MCIgeDE9IjMiIHkxPSIyNSIgeDI9IjIwIiB5Mj0iMjUiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjI1IiB4Mj0iMjYiIHkyPSIyNSIvPg0KPC9zdmc+DQo=',
+          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgd.HlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMjMiIGN5PSI3IiByPSIzIi8+DQo8bGluZSBjbGFzcz0ic3QwIiB4MT0iMyIgeTE9IjciIHgyPSIyMCIgeTI9IjciLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjciIHgyPSIyNiIgeTI9IjciLz4NCjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjEyIiBjeT0iMTYiIHI9IjMiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIzIiB5MT0iMTYiIHgyPSI5IiB5Mj0iMTYiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjE2IiB4Mj0iMTUiIHkyPSIxNiIvPg0KPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMjMiIGN5PSIyNSIgcj0iMyIvPg0KPGxpbmUgY2xhc3M9InN0MCIgeDE9IjMiIHkxPSIyNSIgeDI9IjIwIiB5Mj0iMjUiLz4NCjxsaW5lIGNsYXNzPSJzdDAiIHgxPSIyOSIgeTE9IjI1IiB4Mj0iMjYiIHkyPSIyNSIvPg0KPC9zdmc+DQo=',
         assetStorePackTag: 'settings ui',
         requiredExtensions: [
           {
@@ -234,7 +220,7 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
         fullName: i18n._(t`Toggle switch`),
         description: i18n._(t`A toggle switch that users can click or touch.`),
         iconFilename:
-          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTIzLDIzSDljLTMuOSwwLTctMy4xLTctN3YwYzAtMy45LDMuMS03LDctN2gxNGMzLjksMCw3LDMuMSw3LDd2MEMzMCwxOS45LDI2LjksMjMsMjMsMjN6Ii8+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI5IiBjeT0iMTYiIHI9IjQiLz4NCjwvc3ZnPg0K',
+          'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyMy4wLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iSWNvbnMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyIDMyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgd.HlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTIzLDIzSDljLTMuOSwwLTctMy4xLTctN3YwYzAtMy45LDMuMS03LDctN2gxNGMzLjksMCw3LDMuMSw3LDd2MEMzMCwxOS45LDI2LjksMjMsMjMsMjN6Ii8+DQo8Y2lyY2xlIGNsYXNzPSJzdDAiIGN4PSI5IiBjeT0iMTYiIHI9IjQiLz4NCjwvc3ZnPg0K',
         assetStorePackTag: 'settings ui',
         requiredExtensions: [
           {
@@ -321,18 +307,18 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
     ],
   } as const;
   installedEnumeratedObjectMetadatas.forEach(
-    installedEnumeratedObjectMetadata => {
+    (installedEnumeratedObjectMetadata) => {
       const category = translateExtensionCategory(
         installedEnumeratedObjectMetadata.categoryFullName,
         i18n
       );
-// @ts-expect-error - TS2542 - Index signature in type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' only permits reading.
+      // @ts-expect-error - TS2542 - Index signature in type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' only permits reading.
       defaultEnumeratedObjectMetadatasByCategory[category] =
         defaultEnumeratedObjectMetadatasByCategory[category] || [];
       const objectIndex = defaultEnumeratedObjectMetadatasByCategory[
         category
       ].findIndex(
-        enumeratedObjectMetadata =>
+        (enumeratedObjectMetadata) =>
           enumeratedObjectMetadata.name ===
           installedEnumeratedObjectMetadata.name
       );
@@ -340,34 +326,36 @@ const getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory = (
       if (objectIndex !== -1) {
         const currentEnumeratedObjectMetadata =
           defaultEnumeratedObjectMetadatasByCategory[category][objectIndex];
-// @ts-expect-error - TS2322 - Type '{ extension: gdPlatformExtension; objectMetadata: gdObjectMetadata; name: string; fullName: string; description: string; iconFilename: string; categoryFullName: string; assetStorePackTag?: string | undefined; requiredExtensions?: RequiredExtension[] | undefined; } | ... 20 more ... | { ...; }' is not assignable to type '{ readonly name: "Sprite"; } | { readonly name: "TiledSpriteObject::TiledSprite"; } | { readonly name: "PanelSpriteObject::PanelSprite"; } | { readonly name: "Scene3D::Cube3DObject"; } | ... 17 more ... | { ...; }'. | TS2542 - Index signature in type 'readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]' only permits reading.
+        // @ts-expect-error - TS2322 - Type '{ extension: gd.PlatformExtension; objectMetadata: gd.ObjectMetadata; name: string; fullName: string; description: string; iconFilename: string; categoryFullName: string; assetStorePackTag?: string | undefined; requiredExtensions?: RequiredExtension[] | undefined; } | ... 20 more ... | { ...; }' is not assignable to type '{ readonly name: "Sprite"; } | { readonly name: "TiledSpriteObject::TiledSprite"; } | { readonly name: "PanelSpriteObject::PanelSprite"; } | { readonly name: "Scene3D::Cube3DObject"; } | ... 17 more ... | { ...; }'. | TS2542 - Index signature in type 'readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]' only permits reading.
         defaultEnumeratedObjectMetadatasByCategory[category][objectIndex] = {
           ...currentEnumeratedObjectMetadata,
           ...installedEnumeratedObjectMetadata,
         };
       } else {
-// @ts-expect-error - TS2542 - Index signature in type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' only permits reading.
+        // @ts-expect-error - TS2542 - Index signature in type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' only permits reading.
         defaultEnumeratedObjectMetadatasByCategory[category] = [
           ...defaultEnumeratedObjectMetadatasByCategory[category],
-// @ts-expect-error - TS2322 - Type 'EnumeratedObjectMetadata' is not assignable to type '{ readonly name: "TiledSpriteObject::TiledSprite"; } | { readonly name: "BBText::BBText"; } | { readonly name: "PanelSpriteSlider::PanelSpriteSlider"; readonly fullName: any; readonly description: any; readonly iconFilename: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZ...'.
+          // @ts-expect-error - TS2322 - Type 'EnumeratedObjectMetadata' is not assignable to type '{ readonly name: "TiledSpriteObject::TiledSprite"; } | { readonly name: "BBText::BBText"; } | { readonly name: "PanelSpriteSlider::PanelSpriteSlider"; readonly fullName: any; readonly description: any; readonly iconFilename: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZ...'.
           installedEnumeratedObjectMetadata,
         ];
       }
     }
   );
 
-// @ts-expect-error - TS2322 - Type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' is not assignable to type '{ [key: string]: EnumeratedObjectMetadata[]; }'.
+  // @ts-expect-error - TS2322 - Type '{ readonly [x: number]: readonly [{ readonly name: "Sprite"; }, { readonly name: "TiledSpriteObject::TiledSprite"; }, { readonly name: "PanelSpriteObject::PanelSprite"; }, { readonly name: "Scene3D::Cube3DObject"; }, { ...; }] | ... 4 more ... | readonly [...]; }' is not assignable to type '{ [key: string]: EnumeratedObjectMetadata[]; }'.
   return defaultEnumeratedObjectMetadatasByCategory;
 };
 
 type Props = {
-  project: gdProject,
-  onCreateNewObject: (type: string) => void,
-  onCustomObjectSelected: (arg1?: EnumeratedObjectMetadata | null | undefined) => void,
-  selectedCustomObject: EnumeratedObjectMetadata | null | undefined,
-  onInstallAsset: (assetShortHeader: AssetShortHeader) => Promise<void>,
-  isAssetBeingInstalled: boolean,
-  i18n: I18nType
+  project: gd.Project;
+  onCreateNewObject: (type: string) => void;
+  onCustomObjectSelected: (
+    arg1?: EnumeratedObjectMetadata | null | undefined
+  ) => void;
+  selectedCustomObject: EnumeratedObjectMetadata | null | undefined;
+  onInstallAsset: (assetShortHeader: AssetShortHeader) => Promise<void>;
+  isAssetBeingInstalled: boolean;
+  i18n: I18nType;
 };
 
 export default function NewObjectFromScratch({
@@ -380,7 +368,7 @@ export default function NewObjectFromScratch({
   i18n,
 }: Props) {
   const enumeratedObjectMetadatasByCategory: {
-    [key: string]: Array<EnumeratedObjectMetadata>
+    [key: string]: Array<EnumeratedObjectMetadata>;
   } = React.useMemo(
     () =>
       getMergedInstalledWithDefaultEnumeratedObjectMetadataByCategory({
@@ -390,39 +378,32 @@ export default function NewObjectFromScratch({
     [project, i18n]
   );
 
-  const { DismissableTutorialMessage } = useDismissableTutorialMessage(
-    'intro-object-types'
-  );
+  const { DismissableTutorialMessage } =
+    useDismissableTutorialMessage('intro-object-types');
 
   return !selectedCustomObject || !selectedCustomObject.assetStorePackTag ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ScrollView>
       {DismissableTutorialMessage && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand>{DismissableTutorialMessage}</Column>
         </Line>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <List>
-        {Object.keys(enumeratedObjectMetadatasByCategory).map(category => {
+        {Object.keys(enumeratedObjectMetadatasByCategory).map((category) => {
           const categoryEnumeratedObjectMetadatas =
             enumeratedObjectMetadatasByCategory[category];
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <React.Fragment key={category}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Subheader>{category}</Subheader>
               {categoryEnumeratedObjectMetadatas.map(
-                enumeratedObjectMetadata => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                (enumeratedObjectMetadata) => (
                   <ObjectListItem
                     key={enumeratedObjectMetadata.name}
                     enumeratedObjectMetadata={enumeratedObjectMetadata}
-                    id={`object-category-${
-                      enumeratedObjectMetadata.name
-                    }`.replace(/:/g, '-')}
+                    id={`object-category-${enumeratedObjectMetadata.name}`.replace(
+                      /:/g,
+                      '-'
+                    )}
                     onClick={() => {
                       sendNewObjectCreated(enumeratedObjectMetadata.name);
                       if (enumeratedObjectMetadata.assetStorePackTag) {
@@ -442,7 +423,6 @@ export default function NewObjectFromScratch({
       </List>
     </ScrollView>
   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CustomObjectPackResults
       packTag={selectedCustomObject.assetStorePackTag}
       onAssetSelect={onInstallAsset}

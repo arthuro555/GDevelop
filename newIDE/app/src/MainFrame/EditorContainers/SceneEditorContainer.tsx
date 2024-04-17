@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { prepareInstancesEditorSettings } from '../../InstancesEditor/InstancesEditorSettings';
-// @ts-expect-error - TS6142 - Module '../../SceneEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/index.tsx', but '--jsx' is not set.
+
 import SceneEditor from '../../SceneEditor';
 import {
   serializeToJSObject,
@@ -14,7 +14,7 @@ import {
 export class SceneEditorContainer extends React.Component<RenderEditorContainerProps> {
   editor: SceneEditor | null | undefined;
 
-  getProject(): gdProject | null | undefined {
+  getProject(): gd.Project | null | undefined {
     return this.props.project;
   }
 
@@ -53,7 +53,7 @@ export class SceneEditorContainer extends React.Component<RenderEditorContainerP
     }
   }
 
-  getLayout(): gdLayout | null | undefined {
+  getLayout(): gd.Layout | null | undefined {
     const { project, projectItemName } = this.props;
     if (
       !project ||
@@ -82,19 +82,17 @@ export class SceneEditorContainer extends React.Component<RenderEditorContainerP
     const layout = this.getLayout();
     if (!layout || !project) {
       //TODO: Error component
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       return <div>No layout called {projectItemName} found!</div>;
     }
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <SceneEditor
         setToolbar={this.props.setToolbar}
         resourceManagementProps={this.props.resourceManagementProps}
         canInstallPrivateAsset={this.props.canInstallPrivateAsset}
         unsavedChanges={this.props.unsavedChanges}
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-        ref={editor => (this.editor = editor)}
+        ref={(editor) => (this.editor = editor)}
         project={project}
         layout={layout}
         initialInstances={layout.getInitialInstances()}
@@ -118,5 +116,4 @@ export class SceneEditorContainer extends React.Component<RenderEditorContainerP
 
 export const renderSceneEditorContainer = (
   props: RenderEditorContainerPropsWithRef
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 ) => <SceneEditorContainer {...props} />;

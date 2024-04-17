@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../Profile/ProfileDetails' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/ProfileDetails.tsx', but '--jsx' is not set.
 import ProfileDetails from '../../Profile/ProfileDetails';
 import {
   indieUserProfile,
@@ -12,7 +10,7 @@ import {
   subscriptionForSilverUser,
 } from '../../fixtures/GDevelopServicesTestData';
 import { Profile } from '../../Utils/GDevelopServices/Authentication';
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { PrivateAssetPackListingData } from '../../Utils/GDevelopServices/Shop';
 
 const indieUserWithoutUsernameNorDescriptionProfile: Profile = {
@@ -28,7 +26,9 @@ export default {
   decorators: [paperDecorator],
 };
 
-const getAssetPacksListingData = (userId: string): Array<PrivateAssetPackListingData> => [
+const getAssetPacksListingData = (
+  userId: string
+): Array<PrivateAssetPackListingData> => [
   {
     id: 'assetPackId',
     sellerId: userId,
@@ -65,12 +65,10 @@ const getAssetPacksListingData = (userId: string): Array<PrivateAssetPackListing
 ];
 
 export const MyCompleteProfileWithoutSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails profile={indieUserProfile} isAuthenticatedUserProfile />
 );
 
 export const MyCompleteProfileWithSilverSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={indieUserProfile}
     isAuthenticatedUserProfile
@@ -79,7 +77,6 @@ export const MyCompleteProfileWithSilverSubscription = () => (
 );
 
 export const MyCompleteProfileWithBusinessSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={indieUserProfile}
     isAuthenticatedUserProfile
@@ -88,7 +85,6 @@ export const MyCompleteProfileWithBusinessSubscription = () => (
 );
 
 export const MyProfileWithoutDiscordUsernameNorSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={{ ...indieUserProfile, discordUsername: '' }}
     isAuthenticatedUserProfile
@@ -96,7 +92,6 @@ export const MyProfileWithoutDiscordUsernameNorSubscription = () => (
 );
 
 export const MyProfileWithoutDiscordUsernameWithStartupSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={{ ...indieUserProfile, discordUsername: '' }}
     isAuthenticatedUserProfile
@@ -105,12 +100,10 @@ export const MyProfileWithoutDiscordUsernameWithStartupSubscription = () => (
 );
 
 export const OtherUserProfile = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails profile={indieUserProfile} assetPacksListingDatas={[]} />
 );
 
 export const OtherUserIncompleteProfile = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={{
       ...indieUserWithoutUsernameNorDescriptionProfile,
@@ -121,7 +114,6 @@ export const OtherUserIncompleteProfile = () => (
 );
 
 export const OtherUserProfileWithPremiumAssetPacks = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={indieUserProfile}
     assetPacksListingDatas={getAssetPacksListingData(indieUserProfile.id)}
@@ -129,11 +121,9 @@ export const OtherUserProfileWithPremiumAssetPacks = () => (
   />
 );
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 export const Loading = () => <ProfileDetails profile={null} />;
 
 export const Errored = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ProfileDetails
     profile={null}
     error={new Error('Connectivity Problems')}

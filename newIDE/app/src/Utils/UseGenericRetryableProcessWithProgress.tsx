@@ -1,13 +1,13 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {Trans} from '@lingui/macro';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
 import {
   Table,
@@ -16,11 +16,11 @@ import {
   TableHeaderColumn,
   TableRow,
   TableRowColumn,
-// @ts-expect-error - TS6142 - Module '../UI/Table' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Table.tsx', but '--jsx' is not set.
+
 } from '../UI/Table';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../UI/LinearProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LinearProgress.tsx', but '--jsx' is not set.
+
 import LinearProgress from '../UI/LinearProgress';
 
 export type GenericRetryableProcessWithProgressResults = {
@@ -56,15 +56,15 @@ export const GenericRetryableProcessWithProgressDialog = ({
     (result && result.erroredResources.length > 0) || !!genericError;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       title={<Trans>Importing project resources</Trans>}
       actions={[
         onAbandon ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             label={<Trans>Ignore</Trans>}
             disabled={!onAbandon}
             onClick={onAbandon}
@@ -72,9 +72,9 @@ export const GenericRetryableProcessWithProgressDialog = ({
           />
         ) : null,
         onRetry ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <DialogPrimaryButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             label={<Trans>Retry</Trans>}
             primary
             onClick={onRetry}
@@ -87,12 +87,10 @@ export const GenericRetryableProcessWithProgressDialog = ({
       open
       maxWidth="sm"
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ColumnStackLayout noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text>
           {hasErrors ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <Trans>
               There were errors when importing resources for the project. You
               can retry (recommended) or continue despite the errors. In this
@@ -100,44 +98,33 @@ export const GenericRetryableProcessWithProgressDialog = ({
             </Trans>
           ) : null}
         </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <LinearProgress
             variant={progress > 0 ? 'determinate' : 'indeterminate'}
             value={progress}
           />
         </Line>
         {hasErrors ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <Table>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <TableHeader>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TableRow>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <TableHeaderColumn>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>Resource name</Trans>
                 </TableHeaderColumn>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <TableHeaderColumn>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>Error</Trans>
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <TableBody>
               {result
                 ? result.erroredResources.map(({ resourceName, error }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <TableRow key={resourceName}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <TableRowColumn style={styles.tableCell}>
                         {resourceName}
                       </TableRowColumn>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <TableRowColumn style={styles.tableCell}>
                         {error.toString()}
                       </TableRowColumn>
@@ -145,11 +132,9 @@ export const GenericRetryableProcessWithProgressDialog = ({
                   ))
                 : null}
               {genericError ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <TableRow>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <TableRowColumn style={styles.tableCell}>-</TableRowColumn>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <TableRowColumn style={styles.tableCell}>
                     {genericError.toString()}
                   </TableRowColumn>
@@ -253,12 +238,12 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
         // Display the errors to the user:
         setResult(newResult);
         setIsFetching(false);
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
       });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     },
     [onDoProcess]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   const renderProcessDialog = React.useCallback(
@@ -268,7 +253,7 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
       if (!isFetching && !hasErrors) return null;
 
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <GenericRetryableProcessWithProgressDialog
           progress={progress}
           result={result}
@@ -288,5 +273,5 @@ export const useGenericRetryableProcessWithProgress = <DoProcessOptions extends 
     }),
     [ensureProcessIsDone, renderProcessDialog]
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };

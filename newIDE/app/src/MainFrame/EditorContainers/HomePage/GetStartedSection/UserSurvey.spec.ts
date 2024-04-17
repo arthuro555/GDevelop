@@ -1,9 +1,6 @@
-// @ts-expect-error - TS6142 - Module './UserSurvey' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/GetStartedSection/UserSurvey.tsx', but '--jsx' is not set.
-import {formatUserAnswers} from './UserSurvey';
+import { formatUserAnswers } from './UserSurvey';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('formatUserAnswers', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('it sets projectDescription as string even if user answer is empty', () => {
     const userAnswers = [
       {
@@ -18,7 +15,6 @@ describe('formatUserAnswers', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('it removes creationGoal answer when choosing other at first question', () => {
     const userAnswers = [
       {
@@ -32,7 +28,7 @@ describe('formatUserAnswers', () => {
       creationGoalInput: 'Bonjour',
     });
   });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   test('it does not set input if value is spaces only', () => {
     const userAnswers = [
       {
@@ -47,7 +43,6 @@ describe('formatUserAnswers', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('it formats a complex user answers', () => {
     const userAnswers = [
       {

@@ -3,8 +3,8 @@ import ViewPosition from './ViewPosition';
 import { InstancesEditorSettings } from './InstancesEditorSettings';
 
 type Props = {
-  viewPosition: ViewPosition,
-  instancesEditorSettings: InstancesEditorSettings
+  viewPosition: ViewPosition;
+  instancesEditorSettings: InstancesEditorSettings;
 };
 
 export default class Grid {
@@ -12,10 +12,7 @@ export default class Grid {
   instancesEditorSettings: InstancesEditorSettings;
   viewPosition: ViewPosition;
 
-  constructor({
-    viewPosition,
-    instancesEditorSettings,
-  }: Props) {
+  constructor({ viewPosition, instancesEditorSettings }: Props) {
     this.viewPosition = viewPosition;
     this.instancesEditorSettings = instancesEditorSettings;
 

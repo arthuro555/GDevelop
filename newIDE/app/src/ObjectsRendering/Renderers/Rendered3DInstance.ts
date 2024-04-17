@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import * as PIXI from 'pixi.js-legacy';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/build/three.js' implicitly has an 'any' type.
 import * as THREE from 'three';
@@ -11,10 +11,10 @@ import PixiResourcesLoader from '../PixiResourcesLoader';
  * It can also display 2D artifacts on Pixi 2D plane (3D object shadow projected on the plane for instance).
  */
 export default class Rendered3DInstance {
-  _project: gdProject;
-  _layout: gdLayout;
-  _instance: gdInitialInstance;
-  _associatedObjectConfiguration: gdObjectConfiguration;
+  _project: gd.Project;
+  _layout: gd.Layout;
+  _instance: gd.InitialInstance;
+  _associatedObjectConfiguration: gd.ObjectConfiguration;
   _pixiContainer: PIXI.Container;
   _threeGroup: THREE.Group;
   _pixiResourcesLoader: Flow.Class<PixiResourcesLoader>;
@@ -23,15 +23,15 @@ export default class Rendered3DInstance {
   wasUsed: boolean;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     threeGroup: THREE.Group,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'DisplayObject'.
+    // @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'DisplayObject'.
     this._pixiObject = null;
     this._threeObject = null;
     this._instance = instance;
@@ -54,17 +54,15 @@ export default class Rendered3DInstance {
   /**
    * Applies ratio to value without intermediary value to avoid precision issues.
    */
-  static applyRatio(
-    {
-      oldReferenceValue,
-      newReferenceValue,
-      valueToApplyTo,
-    }: {
-      oldReferenceValue: number,
-      newReferenceValue: number,
-      valueToApplyTo: number
-    },
-  ): number {
+  static applyRatio({
+    oldReferenceValue,
+    newReferenceValue,
+    valueToApplyTo,
+  }: {
+    oldReferenceValue: number;
+    newReferenceValue: number;
+    valueToApplyTo: number;
+  }): number {
     return (newReferenceValue / oldReferenceValue) * valueToApplyTo;
   }
 

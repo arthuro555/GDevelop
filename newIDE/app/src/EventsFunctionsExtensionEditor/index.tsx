@@ -1,104 +1,109 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../EventsSheet' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/index.tsx', but '--jsx' is not set.
+
 import EventsSheet, { EventsSheetInterface } from '../EventsSheet';
 import EditorMosaic, {
   EditorMosaicInterface,
   mosaicContainsNode,
-// @ts-expect-error - TS6142 - Module '../UI/EditorMosaic' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/index.tsx', but '--jsx' is not set.
 } from '../UI/EditorMosaic';
-// @ts-expect-error - TS6142 - Module '../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../UI/EmptyMessage';
-// @ts-expect-error - TS6142 - Module './EventsFunctionConfigurationEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/index.tsx', but '--jsx' is not set.
+
 import EventsFunctionConfigurationEditor from './EventsFunctionConfigurationEditor';
 import EventsFunctionsListWithErrorBoundary, {
   EventsFunctionsListInterface,
-// @ts-expect-error - TS6142 - Module '../EventsFunctionsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsList/index.tsx', but '--jsx' is not set.
 } from '../EventsFunctionsList';
-// @ts-expect-error - TS6142 - Module '../EventsFunctionsList/EventsFunctionTreeViewItemContent' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsList/EventsFunctionTreeViewItemContent.tsx', but '--jsx' is not set.
+
 import { EventsFunctionCreationParameters } from '../EventsFunctionsList/EventsFunctionTreeViewItemContent';
-// @ts-expect-error - TS6142 - Module '../UI/Background' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Background.tsx', but '--jsx' is not set.
+
 import Background from '../UI/Background';
-// @ts-expect-error - TS6142 - Module './OptionsEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/OptionsEditorDialog/index.tsx', but '--jsx' is not set.
+
 import OptionsEditorDialog from './OptionsEditorDialog';
-// @ts-expect-error - TS6142 - Module '../EventsBasedBehaviorEditor/EventsBasedBehaviorEditorPanel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsBasedBehaviorEditor/EventsBasedBehaviorEditorPanel.tsx', but '--jsx' is not set.
+
 import EventsBasedBehaviorEditorPanel from '../EventsBasedBehaviorEditor/EventsBasedBehaviorEditorPanel';
-// @ts-expect-error - TS6142 - Module '../EventsBasedObjectEditor/EventsBasedObjectEditorPanel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsBasedObjectEditor/EventsBasedObjectEditorPanel.tsx', but '--jsx' is not set.
+
 import EventsBasedObjectEditorPanel from '../EventsBasedObjectEditor/EventsBasedObjectEditorPanel';
 import { ResourceManagementProps } from '../ResourcesList/ResourceSource';
-// @ts-expect-error - TS6142 - Module './BehaviorMethodSelectorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/BehaviorMethodSelectorDialog.tsx', but '--jsx' is not set.
+
 import BehaviorMethodSelectorDialog from './BehaviorMethodSelectorDialog';
-// @ts-expect-error - TS6142 - Module './ObjectMethodSelectorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/ObjectMethodSelectorDialog.tsx', but '--jsx' is not set.
+
 import ObjectMethodSelectorDialog from './ObjectMethodSelectorDialog';
-// @ts-expect-error - TS6142 - Module './ExtensionFunctionSelectorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/ExtensionFunctionSelectorDialog.tsx', but '--jsx' is not set.
+
 import ExtensionFunctionSelectorDialog from './ExtensionFunctionSelectorDialog';
 import { ResponsiveWindowMeasurer } from '../UI/Responsive/ResponsiveWindowMeasurer';
 import EditorNavigator, {
   EditorNavigatorInterface,
-// @ts-expect-error - TS6142 - Module '../UI/EditorMosaic/EditorNavigator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/EditorNavigator.tsx', but '--jsx' is not set.
 } from '../UI/EditorMosaic/EditorNavigator';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import { UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import { ParametersIndexOffsets } from '../EventsFunctionsExtensionsLoader';
 import { sendEventsExtractedAsFunction } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS6142 - Module '../UI/Toolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Toolbar.tsx', but '--jsx' is not set.
+
 import { ToolbarGroup } from '../UI/Toolbar';
-// @ts-expect-error - TS6142 - Module '../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../UI/IconButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ExtensionEdit'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ExtensionEdit.js' implicitly has an 'any' type.
+
 import ExtensionEditIcon from '../UI/CustomSvgIcons/ExtensionEdit';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Tune'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Tune.js' implicitly has an 'any' type.
+
 import Tune from '../UI/CustomSvgIcons/Tune';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Mark'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Mark.js' implicitly has an 'any' type.
+
 import Mark from '../UI/CustomSvgIcons/Mark';
 import newNameGenerator from '../Utils/NewNameGenerator';
-const gd: libGDevelop = global.gd;
 
-export type ExtensionItemConfigurationAttribute = 'type' | 'isPrivate' | 'isAsync';
+export type ExtensionItemConfigurationAttribute =
+  | 'type'
+  | 'isPrivate'
+  | 'isAsync';
 
 type Props = {
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  setToolbar: (arg1?: React.ReactNode | null | undefined) => void,
-  resourceManagementProps: ResourceManagementProps,
-  openInstructionOrExpression: (extension: gdPlatformExtension, type: string) => void,
+  project: gd.Project;
+  eventsFunctionsExtension: gd.EventsFunctionsExtension;
+  setToolbar: (arg1?: React.ReactNode | null | undefined) => void;
+  resourceManagementProps: ResourceManagementProps;
+  openInstructionOrExpression: (
+    extension: gd.PlatformExtension,
+    type: string
+  ) => void;
   onCreateEventsFunction: (
     extensionName: string,
-    eventsFunction: gdEventsFunction,
-    editorIdentifier: 'scene-events-editor' | 'extension-events-editor' | 'external-events-editor',
-  ) => void,
-  onBehaviorEdited?: () => void,
-  onObjectEdited?: () => void,
-  onFunctionEdited?: () => void,
-  initiallyFocusedFunctionName: string | null | undefined,
-  initiallyFocusedBehaviorName: string | null | undefined,
-  unsavedChanges?: UnsavedChanges | null | undefined
+    eventsFunction: gd.EventsFunction,
+    editorIdentifier:
+      | 'scene-events-editor'
+      | 'extension-events-editor'
+      | 'external-events-editor'
+  ) => void;
+  onBehaviorEdited?: () => void;
+  onObjectEdited?: () => void;
+  onFunctionEdited?: () => void;
+  initiallyFocusedFunctionName: string | null | undefined;
+  initiallyFocusedBehaviorName: string | null | undefined;
+  unsavedChanges?: UnsavedChanges | null | undefined;
 };
 
 type State = {
-  selectedEventsFunction: gdEventsFunction | null | undefined,
-  selectedEventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-  editedEventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-  selectedEventsBasedObject: gdEventsBasedObject | null | undefined,
-  editedEventsBasedObject: gdEventsBasedObject | null | undefined,
-  editOptionsDialogOpen: boolean,
-  behaviorMethodSelectorDialogOpen: boolean,
-  objectMethodSelectorDialogOpen: boolean,
-  extensionFunctionSelectorDialogOpen: boolean,
-  onAddEventsFunctionCb: (parameters?: EventsFunctionCreationParameters | null | undefined) => void | null | undefined
+  selectedEventsFunction: gd.EventsFunction | null | undefined;
+  selectedEventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+  editedEventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+  selectedEventsBasedObject: gd.EventsBasedObject | null | undefined;
+  editedEventsBasedObject: gd.EventsBasedObject | null | undefined;
+  editOptionsDialogOpen: boolean;
+  behaviorMethodSelectorDialogOpen: boolean;
+  objectMethodSelectorDialogOpen: boolean;
+  extensionFunctionSelectorDialogOpen: boolean;
+  onAddEventsFunctionCb: (
+    parameters?: EventsFunctionCreationParameters | null | undefined
+  ) => void | null | undefined;
 };
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 const extensionEditIconReactNode = <ExtensionEditIcon />;
 
 // The event based object editor is hidden in releases
@@ -115,8 +120,11 @@ const getInitialMosaicEditorNodes = () => ({
   splitPercentage: 25,
 });
 
-export default class EventsFunctionsExtensionEditor extends React.Component<Props, State> {
-// @ts-expect-error - TS2416 - Property 'state' in type 'EventsFunctionsExtensionEditor' is not assignable to the same property in base type 'Component<Props, State, any>'.
+export default class EventsFunctionsExtensionEditor extends React.Component<
+  Props,
+  State
+> {
+  // @ts-expect-error - TS2416 - Property 'state' in type 'EventsFunctionsExtensionEditor' is not assignable to the same property in base type 'Component<Props, State, any>'.
   state = {
     selectedEventsFunction: null,
     selectedEventsBasedBehavior: null,
@@ -137,8 +145,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   // Avoid recreating containers if they were already created, so that
   // we keep the same objects in memory and avoid remounting components
   // (like ObjectGroupsList) because objects "ptr" changed.
-  _globalObjectsContainer: gdObjectsContainer = new gd.ObjectsContainer();
-  _objectsContainer: gdObjectsContainer = new gd.ObjectsContainer();
+  _globalObjectsContainer: gd.ObjectsContainer = new gd.ObjectsContainer();
+  _objectsContainer: gd.ObjectsContainer = new gd.ObjectsContainer();
 
   componentDidMount() {
     if (this.props.initiallyFocusedFunctionName) {
@@ -159,11 +167,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   }
 
   _loadEventsFunctionFrom = (
-    project: gdProject,
-    eventsFunction: gdEventsFunction,
-    eventsBasedBehavior?: gdEventsBasedBehavior | null,
-    eventsBasedObject?: gdEventsBasedObject | null,
-    eventsFunctionsExtension?: gdEventsFunctionsExtension | null
+    project: gd.Project,
+    eventsFunction: gd.EventsFunction,
+    eventsBasedBehavior?: gd.EventsBasedBehavior | null,
+    eventsBasedObject?: gd.EventsBasedObject | null,
+    eventsFunctionsExtension?: gd.EventsFunctionsExtension | null
   ) => {
     // Initialize this "context" of objects with the function
     // (as done during code generation).
@@ -205,16 +213,13 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     } else {
       // Otherwise, show the extension settings buttons.
       this.props.setToolbar(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ToolbarGroup lastChild>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <IconButton
             size="small"
             color="default"
             onClick={this._editOptions}
             tooltip={t`Open extension settings`}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ExtensionEditIcon />
           </IconButton>
         </ToolbarGroup>
@@ -230,10 +235,12 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
     if (behaviorName) {
       // Behavior function
-      const eventsBasedBehaviors = eventsFunctionsExtension.getEventsBasedBehaviors();
+      const eventsBasedBehaviors =
+        eventsFunctionsExtension.getEventsBasedBehaviors();
       if (eventsBasedBehaviors.has(behaviorName)) {
         const eventsBasedBehavior = eventsBasedBehaviors.get(behaviorName);
-        const behaviorEventsFunctions = eventsBasedBehavior.getEventsFunctions();
+        const behaviorEventsFunctions =
+          eventsBasedBehavior.getEventsFunctions();
         if (behaviorEventsFunctions.hasEventsFunctionNamed(functionName)) {
           this._selectEventsFunction(
             behaviorEventsFunctions.getEventsFunction(functionName),
@@ -253,9 +260,9 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _selectEventsFunction = (
-    selectedEventsFunction?: gdEventsFunction | null,
-    selectedEventsBasedBehavior?: gdEventsBasedBehavior | null,
-    selectedEventsBasedObject?: gdEventsBasedObject | null
+    selectedEventsFunction?: gd.EventsFunction | null,
+    selectedEventsBasedBehavior?: gd.EventsBasedBehavior | null,
+    selectedEventsBasedObject?: gd.EventsBasedObject | null
   ) => {
     this.onSelectionChanged(null, null);
     if (!selectedEventsFunction) {
@@ -310,37 +317,39 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     );
   };
 
-  _makeRenameEventsFunction = (i18n: I18nType) => (
-    eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-    eventsBasedObject: gdEventsBasedObject | null | undefined,
-    eventsFunction: gdEventsFunction,
-    newName: string,
-    done: (arg1: boolean) => void
-  ) => {
-    if (eventsBasedBehavior) {
-      this._renameBehaviorEventsFunction(
-        i18n,
-        eventsBasedBehavior,
-        eventsFunction,
-        newName,
-        done
-      );
-    } else if (eventsBasedObject) {
-      this._renameObjectEventsFunction(
-        i18n,
-        eventsBasedObject,
-        eventsFunction,
-        newName,
-        done
-      );
-    } else {
-      this._renameFreeEventsFunction(i18n, eventsFunction, newName, done);
-    }
-  };
+  _makeRenameEventsFunction =
+    (i18n: I18nType) =>
+    (
+      eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
+      eventsBasedObject: gd.EventsBasedObject | null | undefined,
+      eventsFunction: gd.EventsFunction,
+      newName: string,
+      done: (arg1: boolean) => void
+    ) => {
+      if (eventsBasedBehavior) {
+        this._renameBehaviorEventsFunction(
+          i18n,
+          eventsBasedBehavior,
+          eventsFunction,
+          newName,
+          done
+        );
+      } else if (eventsBasedObject) {
+        this._renameObjectEventsFunction(
+          i18n,
+          eventsBasedObject,
+          eventsFunction,
+          newName,
+          done
+        );
+      } else {
+        this._renameFreeEventsFunction(i18n, eventsFunction, newName, done);
+      }
+    };
 
   _renameFreeEventsFunction = (
     i18n: I18nType,
-    eventsFunction: gdEventsFunction,
+    eventsFunction: gd.EventsFunction,
     newName: string,
     done: (arg1: boolean) => void
   ) => {
@@ -348,7 +357,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         if (
           gd.MetadataDeclarationHelper.isExtensionLifecycleEventsFunction(
             tentativeNewName
@@ -378,14 +387,14 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
   _renameBehaviorEventsFunction = (
     i18n: I18nType,
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    eventsFunction: gdEventsFunction,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    eventsFunction: gd.EventsFunction,
     newName: string,
     done: (arg1: boolean) => void
   ) => {
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         if (
           gd.MetadataDeclarationHelper.isBehaviorLifecycleEventsFunction(
             tentativeNewName
@@ -419,14 +428,14 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
   _renameObjectEventsFunction = (
     i18n: I18nType,
-    eventsBasedObject: gdEventsBasedObject,
-    eventsFunction: gdEventsFunction,
+    eventsBasedObject: gd.EventsBasedObject,
+    eventsFunction: gd.EventsFunction,
     newName: string,
     done: (arg1: boolean) => void
   ) => {
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         if (
           gd.MetadataDeclarationHelper.isObjectLifecycleEventsFunction(
             tentativeNewName
@@ -458,72 +467,78 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     }
   };
 
-  _makeMoveFreeEventsParameter = (i18n: I18nType) => (
-    eventsFunction: gdEventsFunction,
-    oldIndex: number,
-    newIndex: number,
-    done: (arg1: boolean) => void
-  ) => {
-    // Don't ask for user confirmation as this change is easy to revert.
+  _makeMoveFreeEventsParameter =
+    (i18n: I18nType) =>
+    (
+      eventsFunction: gd.EventsFunction,
+      oldIndex: number,
+      newIndex: number,
+      done: (arg1: boolean) => void
+    ) => {
+      // Don't ask for user confirmation as this change is easy to revert.
 
-    const { project, eventsFunctionsExtension } = this.props;
-    gd.WholeProjectRefactorer.moveEventsFunctionParameter(
-      project,
-      eventsFunctionsExtension,
-      eventsFunction.getName(),
-      oldIndex + ParametersIndexOffsets.FreeFunction,
-      newIndex + ParametersIndexOffsets.FreeFunction
-    );
+      const { project, eventsFunctionsExtension } = this.props;
+      gd.WholeProjectRefactorer.moveEventsFunctionParameter(
+        project,
+        eventsFunctionsExtension,
+        eventsFunction.getName(),
+        oldIndex + ParametersIndexOffsets.FreeFunction,
+        newIndex + ParametersIndexOffsets.FreeFunction
+      );
 
-    done(true);
-  };
+      done(true);
+    };
 
-  _makeMoveBehaviorEventsParameter = (i18n: I18nType) => (
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    eventsFunction: gdEventsFunction,
-    oldIndex: number,
-    newIndex: number,
-    done: (arg1: boolean) => void
-  ) => {
-    // Don't ask for user confirmation as this change is easy to revert.
+  _makeMoveBehaviorEventsParameter =
+    (i18n: I18nType) =>
+    (
+      eventsBasedBehavior: gd.EventsBasedBehavior,
+      eventsFunction: gd.EventsFunction,
+      oldIndex: number,
+      newIndex: number,
+      done: (arg1: boolean) => void
+    ) => {
+      // Don't ask for user confirmation as this change is easy to revert.
 
-    const { project, eventsFunctionsExtension } = this.props;
-    gd.WholeProjectRefactorer.moveBehaviorEventsFunctionParameter(
-      project,
-      eventsFunctionsExtension,
-      eventsBasedBehavior,
-      eventsFunction.getName(),
-      oldIndex,
-      newIndex
-    );
+      const { project, eventsFunctionsExtension } = this.props;
+      gd.WholeProjectRefactorer.moveBehaviorEventsFunctionParameter(
+        project,
+        eventsFunctionsExtension,
+        eventsBasedBehavior,
+        eventsFunction.getName(),
+        oldIndex,
+        newIndex
+      );
 
-    done(true);
-  };
+      done(true);
+    };
 
-  _makeMoveObjectEventsParameter = (i18n: I18nType) => (
-    eventsBasedObject: gdEventsBasedObject,
-    eventsFunction: gdEventsFunction,
-    oldIndex: number,
-    newIndex: number,
-    done: (arg1: boolean) => void
-  ) => {
-    // Don't ask for user confirmation as this change is easy to revert.
+  _makeMoveObjectEventsParameter =
+    (i18n: I18nType) =>
+    (
+      eventsBasedObject: gd.EventsBasedObject,
+      eventsFunction: gd.EventsFunction,
+      oldIndex: number,
+      newIndex: number,
+      done: (arg1: boolean) => void
+    ) => {
+      // Don't ask for user confirmation as this change is easy to revert.
 
-    const { project, eventsFunctionsExtension } = this.props;
-    gd.WholeProjectRefactorer.moveObjectEventsFunctionParameter(
-      project,
-      eventsFunctionsExtension,
-      eventsBasedObject,
-      eventsFunction.getName(),
-      oldIndex,
-      newIndex
-    );
+      const { project, eventsFunctionsExtension } = this.props;
+      gd.WholeProjectRefactorer.moveObjectEventsFunctionParameter(
+        project,
+        eventsFunctionsExtension,
+        eventsBasedObject,
+        eventsFunction.getName(),
+        oldIndex,
+        newIndex
+      );
 
-    done(true);
-  };
+      done(true);
+    };
 
   _onDeleteEventsFunction = (
-    eventsFunction: gdEventsFunction,
+    eventsFunction: gd.EventsFunction,
     cb: (arg1: boolean) => void
   ) => {
     if (
@@ -538,7 +553,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
   selectEventsBasedBehaviorByName = (behaviorName: string) => {
     const { eventsFunctionsExtension } = this.props;
-    const eventsBasedBehaviorsList = eventsFunctionsExtension.getEventsBasedBehaviors();
+    const eventsBasedBehaviorsList =
+      eventsFunctionsExtension.getEventsBasedBehaviors();
     if (eventsBasedBehaviorsList.has(behaviorName)) {
       this._selectEventsBasedBehavior(
         eventsBasedBehaviorsList.get(behaviorName)
@@ -547,15 +563,15 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   onSelectionChanged = (
-    selectedEventsBasedBehavior?: gdEventsBasedBehavior | null,
-    selectedEventsBasedObject?: gdEventsBasedObject | null
+    selectedEventsBasedBehavior?: gd.EventsBasedBehavior | null,
+    selectedEventsBasedObject?: gd.EventsBasedObject | null
   ) => {
     this._editBehavior(selectedEventsBasedBehavior);
     this._editObject(selectedEventsBasedObject);
   };
 
   _selectEventsBasedBehavior = (
-    selectedEventsBasedBehavior?: gdEventsBasedBehavior | null
+    selectedEventsBasedBehavior?: gd.EventsBasedBehavior | null
   ) => {
     this.onSelectionChanged(selectedEventsBasedBehavior, null);
     this.setState(
@@ -579,7 +595,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _selectEventsBasedObject = (
-    selectedEventsBasedObject?: gdEventsBasedObject | null
+    selectedEventsBasedObject?: gd.EventsBasedObject | null
   ) => {
     this.onSelectionChanged(null, selectedEventsBasedObject);
     this.setState(
@@ -601,70 +617,76 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     );
   };
 
-  _makeRenameEventsBasedBehavior = (i18n: I18nType) => (
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    newName: string,
-    done: (arg1: boolean) => void
-  ) => {
-    const { project, eventsFunctionsExtension } = this.props;
-    const safeAndUniqueNewName = newNameGenerator(
-      gd.Project.getSafeName(newName),
-      tentativeNewName => {
-        if (
-          eventsFunctionsExtension
-            .getEventsBasedBehaviors()
-            .has(tentativeNewName)
-        ) {
-          return true;
+  _makeRenameEventsBasedBehavior =
+    (i18n: I18nType) =>
+    (
+      eventsBasedBehavior: gd.EventsBasedBehavior,
+      newName: string,
+      done: (arg1: boolean) => void
+    ) => {
+      const { project, eventsFunctionsExtension } = this.props;
+      const safeAndUniqueNewName = newNameGenerator(
+        gd.Project.getSafeName(newName),
+        (tentativeNewName) => {
+          if (
+            eventsFunctionsExtension
+              .getEventsBasedBehaviors()
+              .has(tentativeNewName)
+          ) {
+            return true;
+          }
+
+          return false;
         }
+      );
 
-        return false;
-      }
-    );
+      gd.WholeProjectRefactorer.renameEventsBasedBehavior(
+        project,
+        eventsFunctionsExtension,
+        eventsBasedBehavior.getName(),
+        safeAndUniqueNewName
+      );
+      eventsBasedBehavior.setName(safeAndUniqueNewName);
 
-    gd.WholeProjectRefactorer.renameEventsBasedBehavior(
-      project,
-      eventsFunctionsExtension,
-      eventsBasedBehavior.getName(),
-      safeAndUniqueNewName
-    );
-    eventsBasedBehavior.setName(safeAndUniqueNewName);
+      done(true);
+    };
 
-    done(true);
-  };
+  _makeRenameEventsBasedObject =
+    (i18n: I18nType) =>
+    (
+      eventsBasedObject: gd.EventsBasedObject,
+      newName: string,
+      done: (arg1: boolean) => void
+    ) => {
+      const { project, eventsFunctionsExtension } = this.props;
+      const safeAndUniqueNewName = newNameGenerator(
+        gd.Project.getSafeName(newName),
+        (tentativeNewName) => {
+          if (
+            eventsFunctionsExtension
+              .getEventsBasedObjects()
+              .has(tentativeNewName)
+          ) {
+            return true;
+          }
 
-  _makeRenameEventsBasedObject = (i18n: I18nType) => (
-    eventsBasedObject: gdEventsBasedObject,
-    newName: string,
-    done: (arg1: boolean) => void
-  ) => {
-    const { project, eventsFunctionsExtension } = this.props;
-    const safeAndUniqueNewName = newNameGenerator(
-      gd.Project.getSafeName(newName),
-      tentativeNewName => {
-        if (
-          eventsFunctionsExtension.getEventsBasedObjects().has(tentativeNewName)
-        ) {
-          return true;
+          return false;
         }
+      );
 
-        return false;
-      }
-    );
+      gd.WholeProjectRefactorer.renameEventsBasedObject(
+        project,
+        eventsFunctionsExtension,
+        eventsBasedObject.getName(),
+        safeAndUniqueNewName
+      );
+      eventsBasedObject.setName(safeAndUniqueNewName);
 
-    gd.WholeProjectRefactorer.renameEventsBasedObject(
-      project,
-      eventsFunctionsExtension,
-      eventsBasedObject.getName(),
-      safeAndUniqueNewName
-    );
-    eventsBasedObject.setName(safeAndUniqueNewName);
-
-    done(true);
-  };
+      done(true);
+    };
 
   _onEventsBasedBehaviorPasted = (
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     sourceExtensionName: string
   ) => {
     const { project, eventsFunctionsExtension } = this.props;
@@ -724,7 +746,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onDeleteEventsBasedBehavior = (
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     cb: (arg1: boolean) => void
   ) => {
     if (
@@ -738,7 +760,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onDeleteEventsBasedObject = (
-    eventsBasedObject: gdEventsBasedObject,
+    eventsBasedObject: gd.EventsBasedObject,
     cb: (arg1: boolean) => void
   ) => {
     if (
@@ -758,20 +780,22 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     this.setState(
       {
         extensionFunctionSelectorDialogOpen: false,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
         onAddEventsFunctionCb: null,
       },
       () => {
-// @ts-expect-error - TS2349 - This expression is not callable.
+        // @ts-expect-error - TS2349 - This expression is not callable.
         if (onAddEventsFunctionCb) onAddEventsFunctionCb(parameters);
       }
     );
   };
 
   _onAddEventsFunction = (
-    eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-    eventsBasedObject: gdEventsBasedObject | null | undefined,
-    onAddEventsFunctionCb: (parameters?: EventsFunctionCreationParameters | null | undefined) => void
+    eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
+    eventsBasedObject: gd.EventsBasedObject | null | undefined,
+    onAddEventsFunctionCb: (
+      parameters?: EventsFunctionCreationParameters | null | undefined
+    ) => void
   ) => {
     if (eventsBasedBehavior) {
       this._onAddBehaviorEventsFunction(onAddEventsFunctionCb);
@@ -783,7 +807,9 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onAddFreeEventsFunction = (
-    onAddEventsFunctionCb: (parameters?: EventsFunctionCreationParameters | null | undefined) => void
+    onAddEventsFunctionCb: (
+      parameters?: EventsFunctionCreationParameters | null | undefined
+    ) => void
   ) => {
     this.setState({
       extensionFunctionSelectorDialogOpen: true,
@@ -792,7 +818,9 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onAddBehaviorEventsFunction = (
-    onAddEventsFunctionCb: (parameters?: EventsFunctionCreationParameters | null | undefined) => void
+    onAddEventsFunctionCb: (
+      parameters?: EventsFunctionCreationParameters | null | undefined
+    ) => void
   ) => {
     this.setState({
       behaviorMethodSelectorDialogOpen: true,
@@ -801,7 +829,9 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onAddObjectEventsFunction = (
-    onAddEventsFunctionCb: (parameters?: EventsFunctionCreationParameters | null | undefined) => void
+    onAddEventsFunctionCb: (
+      parameters?: EventsFunctionCreationParameters | null | undefined
+    ) => void
   ) => {
     this.setState({
       objectMethodSelectorDialogOpen: true,
@@ -816,11 +846,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     this.setState(
       {
         behaviorMethodSelectorDialogOpen: false,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
         onAddEventsFunctionCb: null,
       },
       () => {
-// @ts-expect-error - TS2349 - This expression is not callable.
+        // @ts-expect-error - TS2349 - This expression is not callable.
         if (onAddEventsFunctionCb) onAddEventsFunctionCb(parameters);
       }
     );
@@ -833,19 +863,19 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     this.setState(
       {
         objectMethodSelectorDialogOpen: false,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
+        // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '(parameters?: any) => void | null | undefined'.
         onAddEventsFunctionCb: null,
       },
       () => {
-// @ts-expect-error - TS2349 - This expression is not callable.
+        // @ts-expect-error - TS2349 - This expression is not callable.
         if (onAddEventsFunctionCb) onAddEventsFunctionCb(parameters);
       }
     );
   };
 
   _onBehaviorEventsFunctionAdded = (
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    eventsFunction: gdEventsFunction
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    eventsFunction: gd.EventsFunction
   ) => {
     // This will create the mandatory parameters for the newly added function.
     gd.WholeProjectRefactorer.ensureBehaviorEventsFunctionsProperParameters(
@@ -855,8 +885,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onObjectEventsFunctionAdded = (
-    eventsBasedObject: gdEventsBasedObject,
-    eventsFunction: gdEventsFunction
+    eventsBasedObject: gd.EventsBasedObject,
+    eventsFunction: gd.EventsFunction
   ) => {
     // This will create the mandatory parameters for the newly added function.
     gd.WholeProjectRefactorer.ensureObjectEventsFunctionsProperParameters(
@@ -866,7 +896,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onBehaviorPropertyRenamed = (
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     oldName: string,
     newName: string
   ) => {
@@ -881,7 +911,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onBehaviorSharedPropertyRenamed = (
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     oldName: string,
     newName: string
   ) => {
@@ -896,7 +926,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
   };
 
   _onObjectPropertyRenamed = (
-    eventsBasedObject: gdEventsBasedObject,
+    eventsBasedObject: gd.EventsBasedObject,
     oldName: string,
     newName: string
   ) => {
@@ -916,9 +946,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     });
   };
 
-  _editBehavior = (editedEventsBasedBehavior?: gdEventsBasedBehavior | null) => {
+  _editBehavior = (
+    editedEventsBasedBehavior?: gd.EventsBasedBehavior | null
+  ) => {
     this.setState(
-      state => {
+      (state) => {
         // If we're closing the properties of a behavior, ensure parameters
         // are up-to-date in all event functions of the behavior (the object
         // type might have changed).
@@ -970,9 +1002,9 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     );
   };
 
-  _editObject = (editedEventsBasedObject?: gdEventsBasedObject | null) => {
+  _editObject = (editedEventsBasedObject?: gd.EventsBasedObject | null) => {
     this.setState(
-      state => {
+      (state) => {
         // If we're closing the properties of an object, ensure parameters
         // are up-to-date in all event functions of the object.
         if (state.editedEventsBasedObject && !editedEventsBasedObject) {
@@ -1037,13 +1069,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     // functions from the extension or different behaviors
     // won't use the same groups names.
     // An independent autocompletion is done for each of them.
-    const {
-      selectedEventsBasedBehavior,
-      selectedEventsBasedObject,
-    } = this.state;
+    const { selectedEventsBasedBehavior, selectedEventsBasedObject } =
+      this.state;
     if (selectedEventsBasedBehavior) {
-// @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
-      const eventFunctionContainer = selectedEventsBasedBehavior.getEventsFunctions();
+      const eventFunctionContainer =
+        selectedEventsBasedBehavior.getEventsFunctions();
       for (
         let index = 0;
         index < eventFunctionContainer.getEventsFunctionsCount();
@@ -1057,8 +1087,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
         }
       }
     } else if (selectedEventsBasedObject) {
-// @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
-      const eventFunctionContainer = selectedEventsBasedObject.getEventsFunctions();
+      const eventFunctionContainer =
+        selectedEventsBasedObject.getEventsFunctions();
       for (
         let index = 0;
         index < eventFunctionContainer.getEventsFunctionsCount();
@@ -1113,7 +1143,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
 
   onCreateEventsFunction = (
     extensionName: string,
-    eventsFunction: gdEventsFunction
+    eventsFunction: gd.EventsFunction
   ) => {
     this.props.onCreateEventsFunction(
       extensionName,
@@ -1143,16 +1173,12 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
         title: t`Function Configuration`,
         toolbarControls: [],
         renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
             {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Background maxWidth>
                 {selectedEventsFunction &&
                 this._globalObjectsContainer &&
                 this._objectsContainer ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <EventsFunctionConfigurationEditor
                     project={project}
                     eventsFunction={selectedEventsFunction}
@@ -1160,7 +1186,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                     eventsBasedObject={selectedEventsBasedObject}
                     eventsFunctionsContainer={
                       (selectedEventsBasedEntity &&
-// @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
+                        // @ts-expect-error - TS2339 - Property 'getEventsFunctions' does not exist on type 'never'.
                         selectedEventsBasedEntity.getEventsFunctions()) ||
                       eventsFunctionsExtension
                     }
@@ -1171,8 +1197,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                       selectedEventsBasedObject
                         ? '/behaviors/events-based-objects'
                         : selectedEventsBasedBehavior
-                        ? '/behaviors/events-based-behaviors'
-                        : '/events/functions'
+                          ? '/behaviors/events-based-behaviors'
+                          : '/events/functions'
                     }
                     onParametersOrGroupsUpdated={() => {
                       this._loadEventsFunctionFrom(
@@ -1197,9 +1223,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                     getFunctionGroupNames={this._getFunctionGroupNames}
                   />
                 ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       Choose a function, or a function of a behavior, to set the
                       parameters that it accepts.
@@ -1220,21 +1244,18 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
         title: selectedEventsBasedBehavior
           ? t`Behavior Configuration`
           : selectedEventsBasedObject
-          ? t`Object Configuration`
-          : null,
+            ? t`Object Configuration`
+            : null,
         toolbarControls: [],
         renderEditor: () =>
           selectedEventsFunction &&
           this._globalObjectsContainer &&
           this._objectsContainer ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Background>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EventsSheet
-// @ts-expect-error - TS2339 - Property 'ptr' does not exist on type 'never'.
+                // @ts-expect-error - TS2339 - Property 'ptr' does not exist on type 'never'.
                 key={selectedEventsFunction.ptr}
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-                ref={editor => (this.editor = editor)}
+                ref={(editor) => (this.editor = editor)}
                 project={project}
                 scope={{
                   project,
@@ -1247,7 +1268,7 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                 }}
                 globalObjectsContainer={this._globalObjectsContainer}
                 objectsContainer={this._objectsContainer}
-// @ts-expect-error - TS2339 - Property 'getEvents' does not exist on type 'never'.
+                // @ts-expect-error - TS2339 - Property 'getEvents' does not exist on type 'never'.
                 events={selectedEventsFunction.getEvents()}
                 onOpenExternalEvents={() => {}}
                 onOpenLayout={() => {}}
@@ -1265,13 +1286,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
               />
             </Background>
           ) : selectedEventsBasedBehavior ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <EventsBasedBehaviorEditorPanel
               project={project}
               eventsFunctionsExtension={eventsFunctionsExtension}
               eventsBasedBehavior={selectedEventsBasedBehavior}
               unsavedChanges={this.props.unsavedChanges}
-// @ts-expect-error - TS7006 - Parameter 'oldName' implicitly has an 'any' type. | TS7006 - Parameter 'newName' implicitly has an 'any' type.
               onRenameProperty={(oldName, newName) =>
                 this._onBehaviorPropertyRenamed(
                   selectedEventsBasedBehavior,
@@ -1279,7 +1298,6 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                   newName
                 )
               }
-// @ts-expect-error - TS7006 - Parameter 'oldName' implicitly has an 'any' type. | TS7006 - Parameter 'newName' implicitly has an 'any' type.
               onRenameSharedProperty={(oldName, newName) =>
                 this._onBehaviorSharedPropertyRenamed(
                   selectedEventsBasedBehavior,
@@ -1295,14 +1313,12 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
               onConfigurationUpdated={this._onConfigurationUpdated}
             />
           ) : selectedEventsBasedObject && this._globalObjectsContainer ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <EventsBasedObjectEditorPanel
               project={project}
               globalObjectsContainer={this._globalObjectsContainer}
               eventsFunctionsExtension={eventsFunctionsExtension}
               eventsBasedObject={selectedEventsBasedObject}
               unsavedChanges={this.props.unsavedChanges}
-// @ts-expect-error - TS7006 - Parameter 'oldName' implicitly has an 'any' type. | TS7006 - Parameter 'newName' implicitly has an 'any' type.
               onRenameProperty={(oldName, newName) =>
                 this._onObjectPropertyRenamed(
                   selectedEventsBasedObject,
@@ -1317,11 +1333,8 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
               }}
             />
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Background>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   Choose a function, or a function of a behavior, to edit its
                   events.
@@ -1335,14 +1348,10 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
         title: t`Functions`,
         toolbarControls: [],
         renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
             {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <EventsFunctionsListWithErrorBoundary
-// @ts-expect-error - TS7006 - Parameter 'eventsFunctionList' implicitly has an 'any' type.
-                ref={eventsFunctionList =>
+                ref={(eventsFunctionList) =>
                   (this.eventsFunctionList = eventsFunctionList)
                 }
                 project={project}
@@ -1352,11 +1361,11 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                 // Free functions
                 selectedEventsFunction={selectedEventsFunction}
                 onSelectEventsFunction={(
-// @ts-expect-error - TS7006 - Parameter 'selectedEventsFunction' implicitly has an 'any' type.
+                  // @ts-expect-error - TS7006 - Parameter 'selectedEventsFunction' implicitly has an 'any' type.
                   selectedEventsFunction,
-// @ts-expect-error - TS7006 - Parameter 'selectedEventsBasedBehavior' implicitly has an 'any' type.
+                  // @ts-expect-error - TS7006 - Parameter 'selectedEventsBasedBehavior' implicitly has an 'any' type.
                   selectedEventsBasedBehavior,
-// @ts-expect-error - TS7006 - Parameter 'selectedEventsBasedObject' implicitly has an 'any' type.
+                  // @ts-expect-error - TS7006 - Parameter 'selectedEventsBasedObject' implicitly has an 'any' type.
                   selectedEventsBasedObject
                 ) =>
                   this._selectEventsFunction(
@@ -1396,33 +1405,27 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
     } as const;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ResponsiveWindowMeasurer>
           {({ isMobile }) =>
             isMobile ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <EditorNavigator
-// @ts-expect-error - TS7006 - Parameter 'editorNavigator' implicitly has an 'any' type.
-                ref={editorNavigator =>
+                ref={(editorNavigator) =>
                   (this._editorNavigator = editorNavigator)
                 }
                 editors={editors}
                 initialEditorName={'functions-list'}
                 transitions={{
                   'events-sheet': {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     nextIcon: <Tune />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     nextLabel: <Trans>Parameters</Trans>,
                     nextEditor: 'parameters',
                     previousEditor: () => 'functions-list',
                   },
                   parameters: {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     nextIcon: <Mark />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     nextLabel: <Trans>Validate these parameters</Trans>,
                     nextEditor: 'events-sheet',
                   },
@@ -1436,21 +1439,16 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
                 }
               />
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <PreferencesContext.Consumer>
                 {({
-// @ts-expect-error - TS7031 - Binding element 'getDefaultEditorMosaicNode' implicitly has an 'any' type.
                   getDefaultEditorMosaicNode,
-// @ts-expect-error - TS7031 - Binding element 'setDefaultEditorMosaicNode' implicitly has an 'any' type.
+
                   setDefaultEditorMosaicNode,
                 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <EditorMosaic
-// @ts-expect-error - TS7006 - Parameter 'editorMosaic' implicitly has an 'any' type.
-                    ref={editorMosaic => (this._editorMosaic = editorMosaic)}
+                    ref={(editorMosaic) => (this._editorMosaic = editorMosaic)}
                     editors={editors}
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-                    onPersistNodes={node =>
+                    onPersistNodes={(node) =>
                       setDefaultEditorMosaicNode(
                         'events-functions-extension-editor',
                         node
@@ -1478,7 +1476,6 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
           }
         </ResponsiveWindowMeasurer>
         {editOptionsDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <OptionsEditorDialog
             eventsFunctionsExtension={eventsFunctionsExtension}
             open
@@ -1486,34 +1483,28 @@ export default class EventsFunctionsExtensionEditor extends React.Component<Prop
           />
         )}
         {objectMethodSelectorDialogOpen && selectedEventsBasedObject && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ObjectMethodSelectorDialog
             eventsBasedObject={selectedEventsBasedObject}
             onCancel={() => this._onCloseObjectMethodSelectorDialog(null)}
-// @ts-expect-error - TS7006 - Parameter 'parameters' implicitly has an 'any' type.
-            onChoose={parameters =>
+            onChoose={(parameters) =>
               this._onCloseObjectMethodSelectorDialog(parameters)
             }
           />
         )}
         {behaviorMethodSelectorDialogOpen && selectedEventsBasedBehavior && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <BehaviorMethodSelectorDialog
             eventsBasedBehavior={selectedEventsBasedBehavior}
             onCancel={() => this._onCloseBehaviorMethodSelectorDialog(null)}
-// @ts-expect-error - TS7006 - Parameter 'parameters' implicitly has an 'any' type.
-            onChoose={parameters =>
+            onChoose={(parameters) =>
               this._onCloseBehaviorMethodSelectorDialog(parameters)
             }
           />
         )}
         {extensionFunctionSelectorDialogOpen && eventsFunctionsExtension && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ExtensionFunctionSelectorDialog
             eventsFunctionsExtension={eventsFunctionsExtension}
             onCancel={() => this._onCloseExtensionFunctionSelectorDialog(null)}
-// @ts-expect-error - TS7006 - Parameter 'parameters' implicitly has an 'any' type.
-            onChoose={parameters =>
+            onChoose={(parameters) =>
               this._onCloseExtensionFunctionSelectorDialog(parameters)
             }
           />

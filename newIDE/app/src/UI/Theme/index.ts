@@ -1,8 +1,8 @@
-import {createMuiTheme} from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import { isLtr } from '../../Utils/i18n/RtlLanguages';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './DefaultLightTheme'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Theme/DefaultLightTheme/index.js' implicitly has an 'any' type.
+
 import DefaultLightTheme from './DefaultLightTheme';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './ThemeRegistry'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Theme/ThemeRegistry.js' implicitly has an 'any' type.
+
 import { themes } from './ThemeRegistry';
 import { rtlMuiOverrides, smallScreenMuiOverrides } from './CreateTheme';
 
@@ -20,22 +20,20 @@ import './Global/Font.css';
 type Theme = typeof DefaultLightTheme;
 export type GDevelopTheme = Theme['gdevelopTheme'];
 type FullTheme = {
-  gdevelopTheme: GDevelopTheme,
-  muiTheme: any
+  gdevelopTheme: GDevelopTheme;
+  muiTheme: any;
 };
 const defaultThemeName = 'GDevelop default Dark';
 
-export function getFullTheme(
-  {
-    themeName,
-    language,
-    isMobile,
-  }: {
-    themeName: string,
-    language: string,
-    isMobile: boolean
-  },
-): FullTheme {
+export function getFullTheme({
+  themeName,
+  language,
+  isMobile,
+}: {
+  themeName: string;
+  language: string;
+  isMobile: boolean;
+}): FullTheme {
   let theme: Theme = themes[themeName];
 
   if (!theme) {

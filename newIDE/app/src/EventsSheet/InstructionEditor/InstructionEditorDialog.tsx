@@ -1,37 +1,34 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
 import { ResourceManagementProps } from '../../ResourcesList/ResourceSource';
 import InstructionParametersEditor, {
   InstructionParametersEditorInterface,
-// @ts-expect-error - TS6142 - Module './InstructionParametersEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionParametersEditor.tsx', but '--jsx' is not set.
 } from './InstructionParametersEditor';
 import InstructionOrObjectSelector, {
   TabName,
-// @ts-expect-error - TS6142 - Module './InstructionOrObjectSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionOrObjectSelector.tsx', but '--jsx' is not set.
 } from './InstructionOrObjectSelector';
-// @ts-expect-error - TS6142 - Module './InstructionOrExpressionSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionOrExpressionSelector/index.tsx', but '--jsx' is not set.
+
 import InstructionOrExpressionSelector from './InstructionOrExpressionSelector';
-// @ts-expect-error - TS6142 - Module '../../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../../UI/HelpButton';
 import { EventsScope } from '../../InstructionOrExpression/EventsScope.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/Responsive/SelectColumns' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Responsive/SelectColumns.tsx', but '--jsx' is not set.
+
 import { SelectColumns } from '../../UI/Responsive/SelectColumns';
 import { useResponsiveWindowSize } from '../../UI/Responsive/ResponsiveWindowMeasurer';
 import {
   useInstructionEditor,
   getInstructionMetadata,
 } from './InstructionEditor';
-// @ts-expect-error - TS6142 - Module '../../BehaviorsEditor/NewBehaviorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/BehaviorsEditor/NewBehaviorDialog.tsx', but '--jsx' is not set.
+
 import NewBehaviorDialog from '../../BehaviorsEditor/NewBehaviorDialog';
 import useForceUpdate from '../../Utils/UseForceUpdate';
 import getObjectByName from '../../Utils/GetObjectByName';
@@ -39,11 +36,11 @@ import {
   addBehaviorToObject,
   listObjectBehaviorsTypes,
 } from '../../Utils/Behavior';
-// @ts-expect-error - TS6142 - Module '../../AssetStore/ExtensionStore/ExtensionsSearchDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExtensionStore/ExtensionsSearchDialog.tsx', but '--jsx' is not set.
+
 import ExtensionsSearchDialog from '../../AssetStore/ExtensionStore/ExtensionsSearchDialog';
 import { sendBehaviorAdded } from '../../Utils/Analytics/EventSender';
 import { useShouldAutofocusInput } from '../../UI/Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module '../../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../../UI/ErrorBoundary';
 
 const styles = {
@@ -54,26 +51,32 @@ const styles = {
   },
 } as const;
 
-type StepName = 'object-or-free-instructions' | 'object-instructions' | 'parameters';
+type StepName =
+  | 'object-or-free-instructions'
+  | 'object-instructions'
+  | 'parameters';
 
 type Props = {
-  project: gdProject,
-  scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  instruction: gdInstruction,
-  isCondition: boolean,
-  resourceManagementProps: ResourceManagementProps,
-  style?: any,
-  isNewInstruction: boolean,
-  onCancel: () => void,
-  onSubmit: () => void,
-  open: boolean,
-  openInstructionOrExpression: (extension: gdPlatformExtension, type: string) => void,
-  i18n: I18nType,
-  anchorEl?: any // Unused,
-  canPasteInstructions: boolean // Unused,
-  onPasteInstructions: () => void // Unused
+  project: gd.Project;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  instruction: gd.Instruction;
+  isCondition: boolean;
+  resourceManagementProps: ResourceManagementProps;
+  style?: any;
+  isNewInstruction: boolean;
+  onCancel: () => void;
+  onSubmit: () => void;
+  open: boolean;
+  openInstructionOrExpression: (
+    extension: gd.PlatformExtension,
+    type: string
+  ) => void;
+  i18n: I18nType;
+  anchorEl?: any; // Unused,
+  canPasteInstructions: boolean; // Unused,
+  onPasteInstructions: () => void; // Unused
 };
 
 const getInitialStepName = (isNewInstruction: boolean): StepName => {
@@ -81,7 +84,10 @@ const getInitialStepName = (isNewInstruction: boolean): StepName => {
   return 'parameters';
 };
 
-const getInitialTab = (isNewInstruction: boolean, hasObjectChosen: boolean): TabName => {
+const getInitialTab = (
+  isNewInstruction: boolean,
+  hasObjectChosen: boolean
+): TabName => {
   if (isNewInstruction) return 'objects';
   return hasObjectChosen ? 'objects' : 'free-instructions';
 };
@@ -106,35 +112,32 @@ const InstructionEditorDialog = ({
   i18n,
 }: Props) => {
   const forceUpdate = useForceUpdate();
-  const [
-    instructionEditorState,
-    instructionEditorSetters,
-  ] = useInstructionEditor({
-    instruction,
-    isCondition,
-    project,
-    isNewInstruction,
-    scope,
-    globalObjectsContainer,
-    objectsContainer,
-    i18n,
-  });
+  const [instructionEditorState, instructionEditorSetters] =
+    useInstructionEditor({
+      instruction,
+      isCondition,
+      project,
+      isNewInstruction,
+      scope,
+      globalObjectsContainer,
+      objectsContainer,
+      i18n,
+    });
   const {
     chosenObjectName,
     chosenObjectInstructionsInfo,
     chosenObjectInstructionsInfoTree,
   } = instructionEditorState;
-  const {
-    chooseInstruction,
-    chooseObject,
-    chooseObjectInstruction,
-  } = instructionEditorSetters;
+  const { chooseInstruction, chooseObject, chooseObjectInstruction } =
+    instructionEditorSetters;
   const hasObjectChosen =
     !!chosenObjectInstructionsInfo && !!chosenObjectInstructionsInfoTree;
   const chosenObject = chosenObjectName
     ? getObjectByName(project, scope.layout, chosenObjectName)
     : null;
-  const freeInstructionComponentRef = React.useRef<InstructionOrObjectSelector | null | undefined>(null);
+  const freeInstructionComponentRef = React.useRef<
+    InstructionOrObjectSelector | null | undefined
+  >(null);
   const [step, setStep] = React.useState(() =>
     getInitialStepName(isNewInstruction)
   );
@@ -145,14 +148,10 @@ const InstructionEditorDialog = ({
   const { isMobile, windowSize, isMediumScreen } = useResponsiveWindowSize();
   const isLargeScreen = windowSize === 'large' || windowSize === 'xlarge';
   const instructionType: string = instruction.getType();
-  const [
-    newBehaviorDialogOpen,
-    setNewBehaviorDialogOpen,
-  ] = React.useState<boolean>(false);
-  const [
-    newExtensionDialogOpen,
-    setNewExtensionDialogOpen,
-  ] = React.useState<boolean>(false);
+  const [newBehaviorDialogOpen, setNewBehaviorDialogOpen] =
+    React.useState<boolean>(false);
+  const [newExtensionDialogOpen, setNewExtensionDialogOpen] =
+    React.useState<boolean>(false);
   const shouldAutofocusInput = useShouldAutofocusInput();
 
   // Handle the back button
@@ -197,18 +196,17 @@ const InstructionEditorDialog = ({
       freeInstructionComponentRef.current.reEnumerateInstructions(i18n);
   };
 
-  const instructionParametersEditor = React.useRef<InstructionParametersEditorInterface | null | undefined>(null);
+  const instructionParametersEditor = React.useRef<
+    InstructionParametersEditorInterface | null | undefined
+  >(null);
   // Focus the parameters when showing them
-  React.useEffect(
-    () => {
-      if (shouldAutofocusInput && step === 'parameters') {
-        if (instructionParametersEditor.current) {
-          instructionParametersEditor.current.focus();
-        }
+  React.useEffect(() => {
+    if (shouldAutofocusInput && step === 'parameters') {
+      if (instructionParametersEditor.current) {
+        instructionParametersEditor.current.focus();
       }
-    },
-    [step, shouldAutofocusInput]
-  );
+    }
+  }, [step, shouldAutofocusInput]);
 
   const instructionMetadata = getInstructionMetadata({
     instructionType,
@@ -220,11 +218,8 @@ const InstructionEditorDialog = ({
     : undefined;
 
   const renderInstructionOrObjectSelector = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <InstructionOrObjectSelector
           key="instruction-or-object-selector"
           style={styles.fullHeightSelector}
@@ -258,7 +253,6 @@ const InstructionEditorDialog = ({
   );
 
   const renderParameters = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <InstructionParametersEditor
       key="parameters"
       project={project}
@@ -278,7 +272,6 @@ const InstructionEditorDialog = ({
 
   const renderObjectInstructionSelector = () =>
     chosenObjectInstructionsInfoTree && chosenObjectInstructionsInfo ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <InstructionOrExpressionSelector
         key="object-instruction-selector"
         style={styles.fullHeightSelector}
@@ -300,24 +293,18 @@ const InstructionEditorDialog = ({
     ) : null;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         title={isCondition ? <Trans>Condition</Trans> : <Trans>Action</Trans>}
         actions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Cancel</Trans>}
             primary={false}
             onClick={onCancel}
             key="cancel"
           />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <DialogPrimaryButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Ok</Trans>}
             primary={true}
             disabled={!instructionType}
@@ -329,29 +316,25 @@ const InstructionEditorDialog = ({
         secondaryActions={[
           (isMobile || isMediumScreen) &&
           step !== 'object-or-free-instructions' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               label={<Trans>Back</Trans>}
               primary={false}
               onClick={() => stepBackFrom(step)}
               key="back"
             />
           ) : null,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <HelpButton
             key="help"
             helpPagePath={instructionHelpPage || '/events'}
             label={
               !instructionHelpPage ||
-              (isMobile || step === 'object-or-free-instructions') ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+              isMobile ||
+              step === 'object-or-free-instructions' ? (
                 <Trans>Help</Trans>
               ) : isCondition ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Trans>Help for this condition</Trans>
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Trans>Help for this action</Trans>
               )
             }
@@ -367,7 +350,6 @@ const InstructionEditorDialog = ({
         }
         id="instruction-editor-dialog"
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SelectColumns
           columnsRenderer={{
             'instruction-or-object-selector': renderInstructionOrObjectSelector,
@@ -431,7 +413,6 @@ const InstructionEditorDialog = ({
         />
       </Dialog>
       {newBehaviorDialogOpen && chosenObject && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <NewBehaviorDialog
           project={project}
           eventsFunctionsExtension={scope.eventsFunctionsExtension}
@@ -443,11 +424,8 @@ const InstructionEditorDialog = ({
         />
       )}
       {newExtensionDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
           {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ExtensionsSearchDialog
               project={project}
               onClose={() => setNewExtensionDialogOpen(false)}
@@ -462,14 +440,11 @@ const InstructionEditorDialog = ({
 };
 
 const InstructionEditorDialogWithErrorBoundary = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     componentTitle={<Trans>Instruction editor</Trans>}
     scope="scene-events-instruction-editor"
     onClose={props.onCancel}
   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <InstructionEditorDialog {...props} />
   </ErrorBoundary>
 );

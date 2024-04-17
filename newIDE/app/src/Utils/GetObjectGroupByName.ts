@@ -1,8 +1,8 @@
 export default function getObjectGroupByName(
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer | null | undefined,
-  objectGroupName: string,
-): gdObjectGroup | null | undefined {
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer | null | undefined,
+  objectGroupName: string
+): gd.ObjectGroup | null | undefined {
   if (
     objectsContainer &&
     objectsContainer.getObjectGroups().has(objectGroupName)

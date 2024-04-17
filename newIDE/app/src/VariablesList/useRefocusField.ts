@@ -1,20 +1,23 @@
 import React from 'react';
 
 type FocusOptions = {
-  identifier: number,
-  caretPosition?: number | null | undefined
+  identifier: number;
+  caretPosition?: number | null | undefined;
 };
 
 const useRefocusField = (fieldRefs: {
   current: {
     [identifier: number]: {
       readonly focus: (
-        arg1?: {
-          caretPosition: 'end' | number | null | undefined
-        } | null | undefined,
-      ) => void
-    }
-  }
+        arg1?:
+          | {
+              caretPosition: 'end' | number | null | undefined;
+            }
+          | null
+          | undefined
+      ) => void;
+    };
+  };
 }) => {
   const fieldToFocus = React.useRef<FocusOptions | null>(null);
 

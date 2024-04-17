@@ -6,78 +6,86 @@ export const client = Axios.create({
 });
 
 type NotificationBaseAttributes = {
-  id: string,
-  userId: string,
-  createdAt: number,
-  seenAt?: number
+  id: string;
+  userId: string;
+  createdAt: number;
+  seenAt?: number;
 };
 
-type CreditsDropNotification = (NotificationBaseAttributes) & {
-  type: 'credits-drop',
+type CreditsDropNotification = NotificationBaseAttributes & {
+  type: 'credits-drop';
   data: {
-    creditsAmount: number,
-    reason: 'subscription-monthly-drop' | 'subscription-creation'
-  }
+    creditsAmount: number;
+    reason: 'subscription-monthly-drop' | 'subscription-creation';
+  };
 };
 
-type OneGameFeedbackReceivedNotification = (NotificationBaseAttributes) & {
-  type: 'one-game-feedback-received',
+type OneGameFeedbackReceivedNotification = NotificationBaseAttributes & {
+  type: 'one-game-feedback-received';
   data: {
-    gameId: string,
-    gameName: string,
-    playerName?: string,
-    comment: string
-  }
+    gameId: string;
+    gameName: string;
+    playerName?: string;
+    comment: string;
+  };
 };
 
-type MultipleGameFeedbackReceivedNotification = (NotificationBaseAttributes) & {
-  type: 'multiple-game-feedback-received',
+type MultipleGameFeedbackReceivedNotification = NotificationBaseAttributes & {
+  type: 'multiple-game-feedback-received';
   data: {
-    gameId: string,
-    gameName: string,
-    count: number
-  }
+    gameId: string;
+    gameName: string;
+    count: number;
+  };
 };
 
-type ClaimableAssetPackNotification = (NotificationBaseAttributes) & {
-  type: 'claimable-asset-pack',
+type ClaimableAssetPackNotification = NotificationBaseAttributes & {
+  type: 'claimable-asset-pack';
   data: {
-    privateAssetPackId: string,
-    privateAssetPackName: string
-  }
+    privateAssetPackId: string;
+    privateAssetPackName: string;
+  };
 };
 
-type GameSessionsAchievementNotification = (NotificationBaseAttributes) & {
-  type: 'game-sessions-achievement',
-  data: {
-    achievementId: string,
-    sessionsCount: number,
-    gameCount: 1,
-    period: 'year',
-    gameId: string,
-    gameName: string
-  } | {
-    achievementId: string,
-    sessionsCount: number,
-    gameCount: number,
-    period: 'year'
-  } | {
-    achievementId: string,
-    sessionsCount: number,
-    allGames: true,
-    period: 'year'
-  }
+type GameSessionsAchievementNotification = NotificationBaseAttributes & {
+  type: 'game-sessions-achievement';
+  data:
+    | {
+        achievementId: string;
+        sessionsCount: number;
+        gameCount: 1;
+        period: 'year';
+        gameId: string;
+        gameName: string;
+      }
+    | {
+        achievementId: string;
+        sessionsCount: number;
+        gameCount: number;
+        period: 'year';
+      }
+    | {
+        achievementId: string;
+        sessionsCount: number;
+        allGames: true;
+        period: 'year';
+      };
 };
 
-export type Notification = CreditsDropNotification | ClaimableAssetPackNotification | OneGameFeedbackReceivedNotification | MultipleGameFeedbackReceivedNotification | GameSessionsAchievementNotification;
+export type Notification =
+  | CreditsDropNotification
+  | ClaimableAssetPackNotification
+  | OneGameFeedbackReceivedNotification
+  | MultipleGameFeedbackReceivedNotification
+  | GameSessionsAchievementNotification;
 
 export const listNotifications = async (
   getAuthorizationHeader: () => Promise<string>,
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<Array<Notification>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.get('/notification', {
@@ -94,16 +102,16 @@ export const markNotificationsAsSeen = async (
     notificationIds,
     allStartingFromNotificationId,
   }: {
-    userId: string,
-    notificationIds?: string[],
-    allStartingFromNotificationId?: string
-  },
+    userId: string;
+    notificationIds?: string[];
+    allStartingFromNotificationId?: string;
+  }
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   let payload;
   if (notificationIds) {
     payload = {
-      notifications: notificationIds.map(notificationId => ({
+      notifications: notificationIds.map((notificationId) => ({
         notificationId,
         seen: true,
       })),

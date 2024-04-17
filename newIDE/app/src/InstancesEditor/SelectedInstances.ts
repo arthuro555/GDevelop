@@ -1,4 +1,4 @@
-import panable, {PanMoveEvent} from '../Utils/PixiSimpleGesture/pan';
+import panable, { PanMoveEvent } from '../Utils/PixiSimpleGesture/pan';
 import transformRect from '../Utils/TransformRect';
 import * as PIXI from 'pixi.js-legacy';
 import { ScreenType } from '../UI/Responsive/ScreenTypeMeasurer';
@@ -15,17 +15,21 @@ import Rectangle from '../Utils/Rectangle';
 import KeyboardShortcuts from '../UI/KeyboardShortcuts';
 
 type Props = {
-  instancesSelection: InstancesSelection,
-  instanceMeasurer: InstanceMeasurer,
-  onResize: (deltaX: number, deltaY: number, grabbingLocation: ResizeGrabbingLocation) => void,
-  onResizeEnd: () => void,
-  onRotate: (arg1: number, arg2: number) => void,
-  onRotateEnd: () => void,
-  toCanvasCoordinates: (x: number, y: number) => [number, number],
-  screenType: ScreenType,
-  keyboardShortcuts: KeyboardShortcuts,
-  onPanMove: (deltaX: number, deltaY: number, x: number, y: number) => void,
-  onPanEnd: () => void
+  instancesSelection: InstancesSelection;
+  instanceMeasurer: InstanceMeasurer;
+  onResize: (
+    deltaX: number,
+    deltaY: number,
+    grabbingLocation: ResizeGrabbingLocation
+  ) => void;
+  onResizeEnd: () => void;
+  onRotate: (arg1: number, arg2: number) => void;
+  onRotateEnd: () => void;
+  toCanvasCoordinates: (x: number, y: number) => [number, number];
+  screenType: ScreenType;
+  keyboardShortcuts: KeyboardShortcuts;
+  onPanMove: (deltaX: number, deltaY: number, x: number, y: number) => void;
+  onPanEnd: () => void;
 };
 
 const getButtonSizes = (screenType: ScreenType) => {
@@ -66,7 +70,11 @@ const resizeGrabbingIconNames = {
 export default class SelectedInstances {
   instancesSelection: InstancesSelection;
   instanceMeasurer: InstanceMeasurer;
-  onResize: (deltaX: number, deltaY: number, grabbingLocation: ResizeGrabbingLocation) => void;
+  onResize: (
+    deltaX: number,
+    deltaY: number,
+    grabbingLocation: ResizeGrabbingLocation
+  ) => void;
   onResizeEnd: () => void;
   onRotate: (arg1: number, arg2: number) => void;
   onRotateEnd: () => void;
@@ -123,13 +131,13 @@ export default class SelectedInstances {
       this.resizeButtons[resizeGrabbingLocation] = resizeButton;
       this._makeButton({
         objectButton: resizeButton,
-        onMove: event => {
+        onMove: (event) => {
           this.onResize(event.deltaX, event.deltaY, resizeGrabbingLocation);
         },
         onEnd: () => {
           this.onResizeEnd();
         },
-        onPanMove: event => {
+        onPanMove: (event) => {
           this.onPanMove(
             event.deltaX,
             event.deltaY,
@@ -145,13 +153,13 @@ export default class SelectedInstances {
     }
     this._makeButton({
       objectButton: this.rotateButton,
-      onMove: event => {
+      onMove: (event) => {
         this.onRotate(event.deltaX, event.deltaY);
       },
       onEnd: () => {
         this.onRotateEnd();
       },
-      onPanMove: event => {
+      onPanMove: (event) => {
         this.onPanMove(
           event.deltaX,
           event.deltaY,
@@ -178,21 +186,21 @@ export default class SelectedInstances {
     onPanEnd,
     cursor,
   }: {
-    objectButton: PIXI.Graphics,
-    onMove: (event: PanMoveEvent) => void,
-    onEnd: () => void,
-    onPanMove: (event: PanMoveEvent) => void,
-    onPanEnd: () => void,
-    cursor: string
+    objectButton: PIXI.Graphics;
+    onMove: (event: PanMoveEvent) => void;
+    onEnd: () => void;
+    onPanMove: (event: PanMoveEvent) => void;
+    onPanEnd: () => void;
+    cursor: string;
   }) {
     objectButton.eventMode = 'static';
-// @ts-expect-error - TS2339 - Property 'buttonMode' does not exist on type 'Graphics'.
+    // @ts-expect-error - TS2339 - Property 'buttonMode' does not exist on type 'Graphics'.
     objectButton.buttonMode = true;
     objectButton.cursor = cursor;
     panable(objectButton);
 
     // change cursor style if space is pressed
-    objectButton.addEventListener('mousemove', event => {
+    objectButton.addEventListener('mousemove', (event) => {
       if (this.keyboardShortcuts.shouldMoveView()) {
         objectButton.cursor = 'grab';
       } else {
@@ -200,22 +208,22 @@ export default class SelectedInstances {
       }
     });
 
-    objectButton.addEventListener('panmove', event => {
+    objectButton.addEventListener('panmove', (event) => {
       if (this.keyboardShortcuts.shouldMoveView()) {
         if (this._currentPanMovingGoal === 'buttonInteraction') {
           onEnd();
         }
-// @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'PanMoveEvent'.
+        // @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'PanMoveEvent'.
         onPanMove(event);
         this._currentPanMovingGoal = 'viewMoving';
       } else {
-// @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'PanMoveEvent'.
+        // @ts-expect-error - TS2345 - Argument of type 'Event' is not assignable to parameter of type 'PanMoveEvent'.
         onMove(event);
         this._currentPanMovingGoal = 'buttonInteraction';
       }
     });
 
-    objectButton.addEventListener('panend', event => {
+    objectButton.addEventListener('panend', (event) => {
       if (this.keyboardShortcuts.shouldMoveView()) {
         onPanEnd();
       } else {
@@ -287,12 +295,8 @@ export default class SelectedInstances {
   };
 
   render() {
-    const {
-      bigButtonSize,
-      smallButtonSize,
-      buttonPadding,
-      hitAreaPadding,
-    } = getButtonSizes(this._screenType);
+    const { bigButtonSize, smallButtonSize, buttonPadding, hitAreaPadding } =
+      getButtonSizes(this._screenType);
     const selection = this.instancesSelection.getSelectedInstances();
     let x1 = 0;
     let y1 = 0;
@@ -305,7 +309,7 @@ export default class SelectedInstances {
       if (this.selectedRectangles.length === i) {
         const newRectangle = new PIXI.Graphics();
         newRectangle.hitArea = new PIXI.Rectangle(0, 0, 0, 0);
-// @ts-expect-error - TS2345 - Argument of type 'Graphics' is not assignable to parameter of type 'never'.
+        // @ts-expect-error - TS2345 - Argument of type 'Graphics' is not assignable to parameter of type 'never'.
         this.selectedRectangles.push(newRectangle);
         this.rectanglesContainer.addChild(newRectangle);
       }
@@ -320,25 +324,25 @@ export default class SelectedInstances {
         instanceRect
       );
 
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'never'.
       this.selectedRectangles[i].clear();
       const selectionRectangleColor = instance.isLocked() ? 0xbc5753 : 0x6868e8;
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'never'.
       this.selectedRectangles[i].beginFill(selectionRectangleColor);
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'never'.
       this.selectedRectangles[i].lineStyle(1, selectionRectangleColor, 1);
-// @ts-expect-error - TS2339 - Property 'fill' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'fill' does not exist on type 'never'.
       this.selectedRectangles[i].fill.alpha = 0.3;
-// @ts-expect-error - TS2339 - Property 'alpha' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'alpha' does not exist on type 'never'.
       this.selectedRectangles[i].alpha = 0.8;
-// @ts-expect-error - TS2339 - Property 'drawRect' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'drawRect' does not exist on type 'never'.
       this.selectedRectangles[i].drawRect(
         selectionRectangle.left,
         selectionRectangle.top,
         selectionRectangle.width(),
         selectionRectangle.height()
       );
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'never'.
       this.selectedRectangles[i].endFill();
 
       if (instance.isLocked()) {
@@ -361,13 +365,13 @@ export default class SelectedInstances {
     }
 
     while (this.selectedRectangles.length > selection.length) {
-// @ts-expect-error - TS2345 - Argument of type 'undefined' is not assignable to parameter of type 'DisplayObject'.
+      // @ts-expect-error - TS2345 - Argument of type 'undefined' is not assignable to parameter of type 'DisplayObject'.
       this.rectanglesContainer.removeChild(this.selectedRectangles.pop());
     }
 
     // If there are no unlocked instances, hide the resize buttons.
     const show =
-      selection.filter(instance => !instance.isLocked()).length !== 0;
+      selection.filter((instance) => !instance.isLocked()).length !== 0;
 
     // Position the resize buttons.
     for (const grabbingLocation of resizeGrabbingLocationValues) {
@@ -390,7 +394,7 @@ export default class SelectedInstances {
 
       this._renderButton(
         show,
-// @ts-expect-error - TS2345 - Argument of type 'Graphics | undefined' is not assignable to parameter of type 'Graphics'.
+        // @ts-expect-error - TS2345 - Argument of type 'Graphics | undefined' is not assignable to parameter of type 'Graphics'.
         resizeButton,
         resizeButtonPos,
         buttonSize,

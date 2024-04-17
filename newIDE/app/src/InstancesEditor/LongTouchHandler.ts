@@ -1,13 +1,13 @@
 type CallbackEvent = {
   /* The X position, relative to the viewport, not including scroll offset, of the long touch */
-  clientX: number,
+  clientX: number;
   /* The Y position, relative to the viewport, not including scroll offset, of the long touch */
-  clientY: number
+  clientY: number;
 };
 
 type Props = {
-  canvas: HTMLCanvasElement,
-  onLongTouch: (event: CallbackEvent) => void
+  canvas: HTMLCanvasElement;
+  onLongTouch: (event: CallbackEvent) => void;
 };
 
 const delay = 600; // ms
@@ -22,15 +22,12 @@ const moveTolerance = 10; // px
 export default class LongTouchHandler {
   _lastTouchX: number = 0;
   _lastTouchY: number = 0;
-// @ts-expect-error - TS2564 - Property '_longTouchTimeoutID' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_longTouchTimeoutID' has no initializer and is not definitely assigned in the constructor.
   _longTouchTimeoutID: number;
   _canvas: HTMLCanvasElement;
   _onLongTouch: (event: CallbackEvent) => void | null | undefined;
 
-  constructor({
-    canvas,
-    onLongTouch,
-  }: Props) {
+  constructor({ canvas, onLongTouch }: Props) {
     this._canvas = canvas;
     this._onLongTouch = onLongTouch;
 
@@ -51,7 +48,7 @@ export default class LongTouchHandler {
     // Ensure we're tracking a single long press, as sometimes
     // the 'touchstart' event is called more than once.
     this._clear();
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+    // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
     this._longTouchTimeoutID = setTimeout(() => {
       if (this._onLongTouch)
         this._onLongTouch({

@@ -1,33 +1,29 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
-import {I18n} from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { I18n } from '@lingui/react';
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-virtualized'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-virtualized/dist/commonjs/index.js' implicitly has an 'any' type.
+
 import { AutoSizer } from 'react-virtualized';
-// @ts-expect-error - TS6142 - Module '../UI/SortableVirtualizedItemList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SortableVirtualizedItemList/index.tsx', but '--jsx' is not set.
+
 import SortableVirtualizedItemList from '../UI/SortableVirtualizedItemList';
-// @ts-expect-error - TS6142 - Module '../UI/Background' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Background.tsx', but '--jsx' is not set.
+
 import Background from '../UI/Background';
-// @ts-expect-error - TS6142 - Module '../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar from '../UI/SearchBar';
 import { showWarningBox } from '../UI/Messages/MessageBox';
 import { filterResourcesList } from './EnumerateResources';
 import { getResourceFilePathStatus } from './ResourceUtils';
-import { MenuItemTemplate } from '../UI/Menu/Menu.flow';
-import {
-  ResourceKind,
-  allResourceKindsAndMetadata,
-} from './ResourceSource';
+import { MenuItemTemplate } from '../UI/Menu/Menu';
+import { ResourceKind, allResourceKindsAndMetadata } from './ResourceSource';
 import { FileMetadata } from '../ProjectsStorage';
 import ResourcesLoader from '../ResourcesLoader';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
 import { ResourcesActionsMenuBuilder } from '../ProjectsStorage';
-// @ts-expect-error - TS6142 - Module '../UI/Messages/InfoBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Messages/InfoBar.tsx', but '--jsx' is not set.
+
 import InfoBar from '../UI/Messages/InfoBar';
 
 const styles = {
@@ -36,31 +32,41 @@ const styles = {
   },
 } as const;
 
-const getResourceName = (resource: gdResource) => resource.getName();
+const getResourceName = (resource: gd.Resource) => resource.getName();
 
 type State = {
-  renamedResource: gdResource | null | undefined,
-  searchText: string,
+  renamedResource: gd.Resource | null | undefined;
+  searchText: string;
   resourcesWithErrors: {
-    [key: string]: '' | 'error' | 'warning'
-  },
-  infoBarContent: {
-    message: React.ReactNode,
-    actionLabel?: React.ReactNode,
-    onActionClick?: () => void
-  } | null | undefined
+    [key: string]: '' | 'error' | 'warning';
+  };
+  infoBarContent:
+    | {
+        message: React.ReactNode;
+        actionLabel?: React.ReactNode;
+        onActionClick?: () => void;
+      }
+    | null
+    | undefined;
 };
 
 type Props = {
-  project: gdProject,
-  selectedResource: gdResource | null | undefined,
-  onSelectResource: (resource?: gdResource | null | undefined) => void,
-  onDeleteResource: (resource: gdResource) => void,
-  onRenameResource: (resource: gdResource, newName: string, cb: (arg1: boolean) => void) => void,
-  fileMetadata: FileMetadata | null | undefined,
-  onRemoveUnusedResources: (arg1: ResourceKind) => void,
-  onRemoveAllResourcesWithInvalidPath: () => void,
-  getResourceActionsSpecificToStorageProvider?: ResourcesActionsMenuBuilder | null | undefined
+  project: gd.Project;
+  selectedResource: gd.Resource | null | undefined;
+  onSelectResource: (resource?: gd.Resource | null | undefined) => void;
+  onDeleteResource: (resource: gd.Resource) => void;
+  onRenameResource: (
+    resource: gd.Resource,
+    newName: string,
+    cb: (arg1: boolean) => void
+  ) => void;
+  fileMetadata: FileMetadata | null | undefined;
+  onRemoveUnusedResources: (arg1: ResourceKind) => void;
+  onRemoveAllResourcesWithInvalidPath: () => void;
+  getResourceActionsSpecificToStorageProvider?:
+    | ResourcesActionsMenuBuilder
+    | null
+    | undefined;
 };
 
 export default class ResourcesList extends React.Component<Props, State> {
@@ -96,11 +102,11 @@ export default class ResourcesList extends React.Component<Props, State> {
     return false;
   }
 
-  _deleteResource = (resource: gdResource) => {
+  _deleteResource = (resource: gd.Resource) => {
     this.props.onDeleteResource(resource);
   };
 
-  _editName = (resource?: gdResource | null) => {
+  _editName = (resource?: gd.Resource | null) => {
     this.setState(
       {
         renamedResource: resource,
@@ -111,7 +117,7 @@ export default class ResourcesList extends React.Component<Props, State> {
     );
   };
 
-  _getResourceThumbnail = (resource: gdResource) => {
+  _getResourceThumbnail = (resource: gd.Resource) => {
     switch (resource.getKind()) {
       case 'image':
         return ResourcesLoader.getResourceFullUrl(
@@ -139,7 +145,7 @@ export default class ResourcesList extends React.Component<Props, State> {
     }
   };
 
-  _rename = (resource: gdResource, newName: string) => {
+  _rename = (resource: gd.Resource, newName: string) => {
     const { project } = this.props;
     this.setState({
       renamedResource: null,
@@ -154,14 +160,14 @@ export default class ResourcesList extends React.Component<Props, State> {
       return;
     }
 
-    this.props.onRenameResource(resource, newName, doRename => {
+    this.props.onRenameResource(resource, newName, (doRename) => {
       if (!doRename) return;
       resource.setName(newName);
       this.forceUpdate();
     });
   };
 
-  _moveSelectionTo = (destinationResource: gdResource) => {
+  _moveSelectionTo = (destinationResource: gd.Resource) => {
     const { project, selectedResource } = this.props;
     if (!selectedResource) return;
 
@@ -178,71 +184,73 @@ export default class ResourcesList extends React.Component<Props, State> {
     if (this.sortableList) this.sortableList.forceUpdateGrid();
   };
 
-  _renderResourceMenuTemplate = (i18n: I18nType) => (resource: gdResource, _index: number): Array<MenuItemTemplate> => {
-    const {
-      getResourceActionsSpecificToStorageProvider,
-      fileMetadata,
-    } = this.props;
-    let menu = [
-      {
-        label: i18n._(t`Rename`),
-        click: () => this._editName(resource),
-      },
-      {
-        label: i18n._(t`Delete`),
-        click: () => this._deleteResource(resource),
-      },
-      { type: 'separator' },
-      {
-        label: i18n._(t`Remove unused...`),
-        submenu: allResourceKindsAndMetadata
-          .map(({ displayName, kind }) => ({
-            label: i18n._(displayName),
-            click: () => {
-              this.props.onRemoveUnusedResources(kind);
-            },
-          }))
-          .concat([
-            {
-              label: i18n._(t`Resources (any kind)`),
+  _renderResourceMenuTemplate =
+    (i18n: I18nType) =>
+    (resource: gd.Resource, _index: number): Array<MenuItemTemplate> => {
+      const { getResourceActionsSpecificToStorageProvider, fileMetadata } =
+        this.props;
+      let menu = [
+        {
+          label: i18n._(t`Rename`),
+          click: () => this._editName(resource),
+        },
+        {
+          label: i18n._(t`Delete`),
+          click: () => this._deleteResource(resource),
+        },
+        { type: 'separator' },
+        {
+          label: i18n._(t`Remove unused...`),
+          submenu: allResourceKindsAndMetadata
+            .map(({ displayName, kind }) => ({
+              label: i18n._(displayName),
               click: () => {
-                allResourceKindsAndMetadata.forEach(resourceKindAndMetadata => {
-                  this.props.onRemoveUnusedResources(
-                    resourceKindAndMetadata.kind
-                  );
-                });
+                this.props.onRemoveUnusedResources(kind);
               },
-            },
-          ]),
-      },
-    ];
-    if (getResourceActionsSpecificToStorageProvider && fileMetadata) {
-      menu.push({ type: 'separator' });
-      menu = menu.concat(
-// @ts-expect-error - TS2769 - No overload matches this call.
-        getResourceActionsSpecificToStorageProvider({
-          project: this.props.project,
-          fileMetadata,
-          resource,
-          i18n,
-          informUser: this.openInfoBar,
-          updateInterface: () => this.forceUpdateList(),
-          cleanUserSelectionOfResources: () =>
-            this.props.onSelectResource(null),
-        })
-      );
-    }
-// @ts-expect-error - TS2322 - Type '({ label: any; click: () => void; type?: undefined; submenu?: undefined; } | { type: string; label?: undefined; click?: undefined; submenu?: undefined; } | { label: any; submenu: { label: any; click: () => void; }[]; click?: undefined; type?: undefined; })[]' is not assignable to type 'MenuItemTemplate[]'.
-    return menu;
-  };
+            }))
+            .concat([
+              {
+                label: i18n._(t`Resources (any kind)`),
+                click: () => {
+                  allResourceKindsAndMetadata.forEach(
+                    (resourceKindAndMetadata) => {
+                      this.props.onRemoveUnusedResources(
+                        resourceKindAndMetadata.kind
+                      );
+                    }
+                  );
+                },
+              },
+            ]),
+        },
+      ];
+      if (getResourceActionsSpecificToStorageProvider && fileMetadata) {
+        menu.push({ type: 'separator' });
+        menu = menu.concat(
+          // @ts-expect-error - TS2769 - No overload matches this call.
+          getResourceActionsSpecificToStorageProvider({
+            project: this.props.project,
+            fileMetadata,
+            resource,
+            i18n,
+            informUser: this.openInfoBar,
+            updateInterface: () => this.forceUpdateList(),
+            cleanUserSelectionOfResources: () =>
+              this.props.onSelectResource(null),
+          })
+        );
+      }
+      // @ts-expect-error - TS2322 - Type '({ label: any; click: () => void; type?: undefined; submenu?: undefined; } | { type: string; label?: undefined; click?: undefined; submenu?: undefined; } | { label: any; submenu: { label: any; click: () => void; }[]; click?: undefined; type?: undefined; })[]' is not assignable to type 'MenuItemTemplate[]'.
+      return menu;
+    };
 
   checkMissingPaths = () => {
     const { project } = this.props;
     const resourcesManager = project.getResourcesManager();
     const resourceNames = resourcesManager.getAllResourceNames().toJSArray();
     const resourcesWithErrors: Record<string, any> = {};
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-    resourceNames.forEach(resourceName => {
+    // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+    resourceNames.forEach((resourceName) => {
       resourcesWithErrors[resourceName] = getResourceFilePathStatus(
         project,
         resourceName
@@ -254,9 +262,9 @@ export default class ResourcesList extends React.Component<Props, State> {
 
   openInfoBar = (
     infoBarContent?: {
-      message: React.ReactNode,
-      actionLabel?: React.ReactNode,
-      onActionClick?: () => void
+      message: React.ReactNode;
+      actionLabel?: React.ReactNode;
+      onActionClick?: () => void;
     } | null
   ) => {
     this.setState({ infoBarContent });
@@ -274,8 +282,8 @@ export default class ResourcesList extends React.Component<Props, State> {
     const allResourcesList = resourcesManager
       .getAllResourceNames()
       .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-      .map(resourceName => resourcesManager.getResource(resourceName));
+      // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+      .map((resourceName) => resourcesManager.getResource(resourceName));
     const filteredList = filterResourcesList(allResourcesList, searchText);
 
     // Force List component to be mounted again if project
@@ -284,18 +292,13 @@ export default class ResourcesList extends React.Component<Props, State> {
     const listKey = project.ptr;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Background>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SearchBar
               value={searchText}
               onRequestSearch={() => {}}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-              onChange={text =>
+              onChange={(text) =>
                 this.setState({
                   searchText: text,
                 })
@@ -304,21 +307,14 @@ export default class ResourcesList extends React.Component<Props, State> {
             />
           </Column>
         </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div style={styles.listContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <AutoSizer>
-{ /* @ts-expect-error - TS7031 - Binding element 'height' implicitly has an 'any' type. | TS7031 - Binding element 'width' implicitly has an 'any' type. */}
             {({ height, width }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
                 {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <SortableVirtualizedItemList
                     key={listKey}
-// @ts-expect-error - TS7006 - Parameter 'sortableList' implicitly has an 'any' type.
-                    ref={sortableList => (this.sortableList = sortableList)}
+                    ref={(sortableList) => (this.sortableList = sortableList)}
                     fullList={filteredList}
                     width={width}
                     height={height}
@@ -339,7 +335,7 @@ export default class ResourcesList extends React.Component<Props, State> {
           </AutoSizer>
         </div>
         {!!infoBarContent && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <InfoBar
             duration={7000}
             visible

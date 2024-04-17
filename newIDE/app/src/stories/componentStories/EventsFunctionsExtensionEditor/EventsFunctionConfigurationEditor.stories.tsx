@@ -2,14 +2,13 @@ import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
 // Keep first as it creates the `global.gd` object:
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
+
 import { testProject } from '../../GDevelopJsInitializerDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
-// @ts-expect-error - TS6142 - Module '../../../EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/index.tsx', but '--jsx' is not set.
+
 import EventsFunctionConfigurationEditor from '../../../EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor';
 
 export default {
@@ -19,9 +18,7 @@ export default {
 };
 
 export const DefaultFreeFunction = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <EventsFunctionConfigurationEditor
       project={testProject.project}
       globalObjectsContainer={testProject.project}
@@ -37,9 +34,7 @@ export const DefaultFreeFunction = () => (
 );
 
 export const DefaultBehaviorFunction = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <EventsFunctionConfigurationEditor
       project={testProject.project}
       globalObjectsContainer={testProject.project}
@@ -55,9 +50,7 @@ export const DefaultBehaviorFunction = () => (
 );
 
 export const DefaultBehaviorLifecycleFunction = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <EventsFunctionConfigurationEditor
       project={testProject.project}
       globalObjectsContainer={testProject.project}
@@ -73,9 +66,7 @@ export const DefaultBehaviorLifecycleFunction = () => (
 );
 
 export const DefaultObjectFunction = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <EventsFunctionConfigurationEditor
       project={testProject.project}
       globalObjectsContainer={testProject.project}

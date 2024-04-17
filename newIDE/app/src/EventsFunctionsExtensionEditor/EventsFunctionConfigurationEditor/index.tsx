@@ -1,75 +1,77 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../ObjectGroupsList/ObjectGroupsListWithObjectGroupEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectGroupsList/ObjectGroupsListWithObjectGroupEditor.tsx', but '--jsx' is not set.
+
 import ObjectGroupsListWithObjectGroupEditor from '../../ObjectGroupsList/ObjectGroupsListWithObjectGroupEditor';
-// @ts-expect-error - TS6142 - Module '../../UI/Tabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Tabs.tsx', but '--jsx' is not set.
+
 import { Tabs } from '../../UI/Tabs';
-// @ts-expect-error - TS6142 - Module './EventsFunctionParametersEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/EventsFunctionParametersEditor.tsx', but '--jsx' is not set.
+
 import { EventsFunctionParametersEditor } from './EventsFunctionParametersEditor';
-// @ts-expect-error - TS6142 - Module './EventsFunctionPropertiesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/EventsFunctionConfigurationEditor/EventsFunctionPropertiesEditor.tsx', but '--jsx' is not set.
+
 import { EventsFunctionPropertiesEditor } from './EventsFunctionPropertiesEditor';
-// @ts-expect-error - TS6142 - Module '../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../../UI/ScrollView';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 import Window from '../../Utils/Window';
 import { GroupWithContext } from '../../ObjectsList/EnumerateObjects';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import { UnsavedChanges } from '../../MainFrame/UnsavedChangesContext';
 import newNameGenerator from '../../Utils/NewNameGenerator';
-// @ts-expect-error - TS6142 - Module '../../EventsFunctionsExtensionEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/index.tsx', but '--jsx' is not set.
+
 import { ExtensionItemConfigurationAttribute } from '../../EventsFunctionsExtensionEditor';
 
-const gd: libGDevelop = global.gd;
-
 type Props = {
-  project: gdProject,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  eventsFunction: gdEventsFunction,
-  eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-  eventsBasedObject: gdEventsBasedObject | null | undefined,
-  eventsFunctionsContainer: gdEventsFunctionsContainer,
-  onParametersOrGroupsUpdated: () => void,
-  helpPagePath?: string,
-  onConfigurationUpdated?: (arg1?: ExtensionItemConfigurationAttribute | null | undefined) => void,
-  renderConfigurationHeader?: () => React.ReactElement,
-  freezeParameters?: boolean,
-  freezeEventsFunctionType?: boolean,
+  project: gd.Project;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  eventsFunction: gd.EventsFunction;
+  eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+  eventsBasedObject: gd.EventsBasedObject | null | undefined;
+  eventsFunctionsContainer: gd.EventsFunctionsContainer;
+  onParametersOrGroupsUpdated: () => void;
+  helpPagePath?: string;
+  onConfigurationUpdated?: (
+    arg1?: ExtensionItemConfigurationAttribute | null | undefined
+  ) => void;
+  renderConfigurationHeader?: () => React.ReactElement;
+  freezeParameters?: boolean;
+  freezeEventsFunctionType?: boolean;
   onMoveFreeEventsParameter?: (
-    eventsFunction: gdEventsFunction,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: (arg1: boolean) => void,
-  ) => void,
+    done: (arg1: boolean) => void
+  ) => void;
   onMoveBehaviorEventsParameter?: (
-    eventsBasedBehavior: gdEventsBasedBehavior,
-    eventsFunction: gdEventsFunction,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: (arg1: boolean) => void,
-  ) => void,
+    done: (arg1: boolean) => void
+  ) => void;
   onMoveObjectEventsParameter?: (
-    eventsBasedObject: gdEventsBasedObject,
-    eventsFunction: gdEventsFunction,
+    eventsBasedObject: gd.EventsBasedObject,
+    eventsFunction: gd.EventsFunction,
     oldIndex: number,
     newIndex: number,
-    done: (arg1: boolean) => void,
-  ) => void,
-  unsavedChanges?: UnsavedChanges | null | undefined,
-  getFunctionGroupNames?: () => string[]
+    done: (arg1: boolean) => void
+  ) => void;
+  unsavedChanges?: UnsavedChanges | null | undefined;
+  getFunctionGroupNames?: () => string[];
 };
 
 type TabNames = 'config' | 'parameters' | 'groups';
 
 type State = {
-  currentTab: TabNames
+  currentTab: TabNames;
 };
 
-export default class EventsFunctionConfigurationEditor extends React.Component<Props, State> {
-// @ts-expect-error - TS2416 - Property 'state' in type 'EventsFunctionConfigurationEditor' is not assignable to the same property in base type 'Component<Props, State, any>'.
+export default class EventsFunctionConfigurationEditor extends React.Component<
+  Props,
+  State
+> {
+  // @ts-expect-error - TS2416 - Property 'state' in type 'EventsFunctionConfigurationEditor' is not assignable to the same property in base type 'Component<Props, State, any>'.
   state = {
     currentTab: 'config',
   };
@@ -79,7 +81,7 @@ export default class EventsFunctionConfigurationEditor extends React.Component<P
 
     const safeAndUniqueNewName = newNameGenerator(
       gd.Project.getSafeName(newName),
-      tentativeNewName => {
+      (tentativeNewName) => {
         if (
           objectsContainer.hasObjectNamed(tentativeNewName) ||
           globalObjectsContainer.hasObjectNamed(tentativeNewName) ||
@@ -182,30 +184,26 @@ export default class EventsFunctionConfigurationEditor extends React.Component<P
     } = this.props;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Column expand useFullHeight noOverflowParent>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand noOverflowParent>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Tabs
               value={this.state.currentTab}
               onChange={this._chooseTab}
               options={[
                 {
-                  value: ('config' as TabNames),
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                  value: 'config' as TabNames,
+
                   label: <Trans>Configuration</Trans>,
                 },
                 {
-                  value: ('parameters' as TabNames),
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                  value: 'parameters' as TabNames,
+
                   label: <Trans>Parameters</Trans>,
                 },
                 {
-                  value: ('groups' as TabNames),
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                  value: 'groups' as TabNames,
+
                   label: <Trans>Object groups</Trans>,
                 },
               ]}
@@ -213,11 +211,8 @@ export default class EventsFunctionConfigurationEditor extends React.Component<P
           </Column>
         </Line>
         {this.state.currentTab === 'config' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ScrollView>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EventsFunctionPropertiesEditor
                 project={project}
                 eventsFunction={eventsFunction}
@@ -234,11 +229,9 @@ export default class EventsFunctionConfigurationEditor extends React.Component<P
           </ScrollView>
         ) : null}
         {this.state.currentTab === 'parameters' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ScrollView>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <EventsFunctionParametersEditor
                 project={project}
                 eventsFunction={eventsFunction}
@@ -257,7 +250,6 @@ export default class EventsFunctionConfigurationEditor extends React.Component<P
           </ScrollView>
         ) : null}
         {this.state.currentTab === 'groups' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ObjectGroupsListWithObjectGroupEditor
             project={project}
             globalObjectsContainer={globalObjectsContainer}

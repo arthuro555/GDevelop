@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './BrowserPreviewErrorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/BrowserExporters/BrowserS3PreviewLauncher/BrowserPreviewErrorDialog.tsx', but '--jsx' is not set.
+
 import BrowserPreviewErrorDialog from './BrowserPreviewErrorDialog';
 import BrowserS3FileSystem from '../BrowserS3FileSystem';
 import { findGDJS } from '../../../GameEngineFinder/BrowserS3GDJSFinder';
@@ -15,17 +15,16 @@ import {
 import Window from '../../../Utils/Window';
 import { displayBlackLoadingScreen } from '../../../Utils/BrowserExternalWindowUtils';
 import { getGDevelopResourceJwtToken } from '../../../Utils/GDevelopServices/Project';
-const gd: libGDevelop = global.gd;
 
 type State = {
-  error: Error | null | undefined
+  error: Error | null | undefined;
 };
 
 type Props = {
   getIncludeFileHashs: () => {
-    [key: string]: number
-  },
-  onExport?: () => void
+    [key: string]: number;
+  };
+  onExport?: () => void;
 };
 
 let nextPreviewWindowId = 0;
@@ -35,7 +34,9 @@ let nextPreviewWindowId = 0;
  * NOT in an asynchronous way but JUST after a click. Otherwise, browsers like Safari
  * will block the window opening.
  */
-export const immediatelyOpenNewPreviewWindow = (project: gdProject): WindowProxy => {
+export const immediatelyOpenNewPreviewWindow = (
+  project: gd.Project
+): WindowProxy => {
   const width = project.getGameResolutionWidth();
   const height = project.getGameResolutionHeight();
   const left = window.screenX + window.innerWidth / 2 - width / 2;
@@ -48,14 +49,17 @@ export const immediatelyOpenNewPreviewWindow = (project: gdProject): WindowProxy
     `width=${width},height=${height},left=${left},top=${top}`
   );
 
-// @ts-expect-error - TS2345 - Argument of type 'Window | null' is not assignable to parameter of type 'Window'.
+  // @ts-expect-error - TS2345 - Argument of type 'Window | null' is not assignable to parameter of type 'Window'.
   displayBlackLoadingScreen(previewWindow);
 
-// @ts-expect-error - TS2322 - Type 'Window | null' is not assignable to type 'Window'.
+  // @ts-expect-error - TS2322 - Type 'Window | null' is not assignable to type 'Window'.
   return previewWindow;
 };
 
-export default class BrowserS3PreviewLauncher extends React.Component<Props, State> {
+export default class BrowserS3PreviewLauncher extends React.Component<
+  Props,
+  State
+> {
   canDoNetworkPreview = () => false;
   canDoHotReload = () => false;
 
@@ -64,9 +68,9 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
   };
 
   _prepareExporter = (): Promise<{
-    outputDir: string,
-    exporter: gdjsExporter,
-    browserS3FileSystem: BrowserS3FileSystem
+    outputDir: string;
+    exporter: gdjsExporter;
+    browserS3FileSystem: BrowserS3FileSystem;
   }> => {
     return findGDJS('preview').then(({ gdjsRoot, filesContent }) => {
       console.info('GDJS found in ', gdjsRoot);
@@ -100,7 +104,8 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
       error: null,
     });
 
-    const debuggerIds = this.getPreviewDebuggerServer().getExistingDebuggerIds();
+    const debuggerIds =
+      this.getPreviewDebuggerServer().getExistingDebuggerIds();
     const lastDebuggerId = debuggerIds.length
       ? debuggerIds[debuggerIds.length - 1]
       : null;
@@ -119,7 +124,7 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
 
     try {
       await this.getPreviewDebuggerServer().startServer();
-    } catch (err: any) {
+    } catch (err) {
       // Ignore any error when running the debugger server - the preview
       // can still work without it.
       console.error(
@@ -129,11 +134,8 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
     }
 
     try {
-      const {
-        exporter,
-        outputDir,
-        browserS3FileSystem,
-      } = await this._prepareExporter();
+      const { exporter, outputDir, browserS3FileSystem } =
+        await this._prepareExporter();
 
       const previewExportOptions = new gd.PreviewExportOptions(
         project,
@@ -183,7 +185,7 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
       if (!existingPreviewWindow) {
         registerNewPreviewWindow(previewWindow);
       }
-    } catch (error: any) {
+    } catch (error) {
       this.setState({
         error,
       });
@@ -199,7 +201,6 @@ export default class BrowserS3PreviewLauncher extends React.Component<Props, Sta
 
     if (error) {
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <BrowserPreviewErrorDialog
           error={error}
           onClose={() =>

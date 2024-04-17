@@ -1,13 +1,10 @@
-import {enumerateAssetStoreIds} from './EnumerateAssetStoreIds';
+import { enumerateAssetStoreIds } from './EnumerateAssetStoreIds';
 
-const gd: libGDevelop = global.gd;
-
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('enumerateAssetStoreIds', () => {
   const makeNewTestProject = (): {
-    project: gdProject,
-    scene1: gdLayout,
-    scene2: gdLayout
+    project: gd.Project;
+    scene1: gd.Layout;
+    scene2: gd.Layout;
   } => {
     const project = gd.ProjectHelper.createNewGDJSProject();
 
@@ -41,7 +38,6 @@ describe('enumerateAssetStoreIds', () => {
     return { project, scene1, scene2 };
   };
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('enumerate asset store ids for a full project', () => {
     const { project } = makeNewTestProject();
     expect([...enumerateAssetStoreIds(project, null)].sort()).toEqual(
@@ -51,7 +47,6 @@ describe('enumerateAssetStoreIds', () => {
     project.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('enumerate asset store ids for a specific scene', () => {
     const { project, scene1, scene2 } = makeNewTestProject();
 

@@ -1,4 +1,4 @@
-import {loadScript} from '../LoadScript';
+import { loadScript } from '../LoadScript';
 
 const PUBLIC_URL: string = process.env.PUBLIC_URL || '';
 const ZIPJS_EXTERNAL_PATH = '/external/zip.js/WebContent';

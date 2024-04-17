@@ -1,35 +1,35 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {t, Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 import Timer from '@material-ui/icons/Timer';
-// @ts-expect-error - TS6142 - Module '../../../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../../../UI/TextButton';
-// @ts-expect-error - TS6142 - Module '../../../UI/InlineCheckbox' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/InlineCheckbox.tsx', but '--jsx' is not set.
+
 import InlineCheckbox from '../../../UI/InlineCheckbox';
-// @ts-expect-error - TS6142 - Module '../../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../../UI/SemiControlledTextField';
-// @ts-expect-error - TS6142 - Module '../../../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../../../UI/Dialog';
-// @ts-expect-error - TS6142 - Module './AnimationPreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/AnimationPreview.tsx', but '--jsx' is not set.
+
 import AnimationPreview from './AnimationPreview';
 import ResourcesLoader from '../../../ResourcesLoader';
 import { ResourceExternalEditor } from '../../../ResourcesList/ResourceExternalEditor';
 import { useResponsiveWindowSize } from '../../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../../ResourcesList/ResourcePreview/ImagePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourcePreview/ImagePreview.tsx', but '--jsx' is not set.
+
 import { isProjectImageResourceSmooth } from '../../../ResourcesList/ResourcePreview/ImagePreview';
 import useForceUpdate from '../../../Utils/UseForceUpdate';
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { LineStackLayout, ResponsiveLineStackLayout } from '../../../UI/Layout';
 import { Tooltip } from '@material-ui/core';
-// @ts-expect-error - TS6142 - Module '../../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../../UI/Text';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/Edit'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Edit.js' implicitly has an 'any' type.
+
 import Edit from '../../../UI/CustomSvgIcons/Edit';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/Play'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Play.js' implicitly has an 'any' type.
+
 import Play from '../../../UI/CustomSvgIcons/Play';
 import { toFixedWithoutTrailingZeros } from '../../../Utils/Mathematics';
 import GDevelopThemeContext from '../../../UI/Theme/GDevelopThemeContext';
@@ -56,9 +56,9 @@ const styles = {
 
 type Props = {
   animationName: string,
-  direction: gdDirection,
+  direction: gd.Direction,
   resourcesLoader: typeof ResourcesLoader,
-  project: gdProject,
+  project: gd.Project,
   resourceExternalEditors: Array<ResourceExternalEditor>,
   onEditWith: (i18n: I18nType, arg2: ResourceExternalEditor) => Promise<void>,
   onDirectionUpdated?: () => void
@@ -233,7 +233,7 @@ const DirectionTools = ({
       )}
     </I18n>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default DirectionTools;

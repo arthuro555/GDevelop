@@ -4,7 +4,7 @@ import { StoryDecorator } from '@storybook/react';
 import WindowUtils from '../Utils/Window';
 
 type GDevelopJsInitializerProps = {
-  children: () => React.ReactElement
+  children: () => React.ReactElement;
 };
 
 const BrowserDropDownMenuDisabler = ({
@@ -18,12 +18,11 @@ const BrowserDropDownMenuDisabler = ({
 };
 
 const BrowserDropDownMenuDisablerDecorator: StoryDecorator = (
-// @ts-expect-error - TS7006 - Parameter 'Story' implicitly has an 'any' type.
+  // @ts-expect-error - TS7006 - Parameter 'Story' implicitly has an 'any' type.
   Story,
-// @ts-expect-error - TS7006 - Parameter 'context' implicitly has an 'any' type.
+  // @ts-expect-error - TS7006 - Parameter 'context' implicitly has an 'any' type.
   context
 ) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <BrowserDropDownMenuDisabler>{() => <Story />}</BrowserDropDownMenuDisabler>
 );
 

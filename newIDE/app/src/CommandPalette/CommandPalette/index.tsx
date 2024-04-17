@@ -1,11 +1,11 @@
 import React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import Dialog from '@material-ui/core/Dialog';
 import { makeStyles } from '@material-ui/core/styles';
-// @ts-expect-error - TS6142 - Module '../CommandsContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandsContext.tsx', but '--jsx' is not set.
+
 import CommandsContext from '../CommandsContext';
 import {
   NamedCommand,
@@ -13,11 +13,11 @@ import {
   NamedCommandWithOptions,
   CommandOption,
 } from '../CommandManager';
-// @ts-expect-error - TS6142 - Module './AutocompletePicker' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandPalette/AutocompletePicker.tsx', but '--jsx' is not set.
+
 import AutocompletePicker from './AutocompletePicker';
 import commandsList, { CommandName } from '../CommandsList';
 import Window from '../../Utils/Window';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Command'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Command.js' implicitly has an 'any' type.
+
 import Command from '../../UI/CustomSvgIcons/Command';
 import {
   searchClient,
@@ -48,40 +48,36 @@ const useStylesForPaper = makeStyles({
 });
 
 export type CommandPaletteInterface = {
-  open: (open?: boolean) => void,
-  launchCommand: (commandName: CommandName) => void
+  open: (open?: boolean) => void;
+  launchCommand: (commandName: CommandName) => void;
 };
 
 type PaletteMode = 'closed' | 'command' | 'option';
 
-const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterface>((props, ref) => {
+const CommandPalette = React.forwardRef<
+  Record<any, any>,
+  CommandPaletteInterface
+>((props, ref) => {
   const classes = useStyles();
   const paperClasses = useStylesForPaper();
   const { isMobile } = useResponsiveWindowSize();
   const [searchText, setSearchText] = React.useState<string>('');
   const commandManager = React.useContext(CommandsContext);
   const [mode, setMode] = React.useState<PaletteMode>('closed');
-  const [
-    selectedCommand,
-    selectCommand,
-  ] = React.useState<null | NamedCommandWithOptions>(null);
+  const [selectedCommand, selectCommand] =
+    React.useState<null | NamedCommandWithOptions>(null);
   const { results, status } = useInstantSearch();
   const { refine } = useSearchBox();
-  const [
-    algoliaSearchStableStatus,
-    setAlgoliaSearchStableStatus,
-  ] = React.useState<'error' | 'ok'>('ok');
+  const [algoliaSearchStableStatus, setAlgoliaSearchStableStatus] =
+    React.useState<'error' | 'ok'>('ok');
 
-  React.useEffect(
-    () => {
-      if (algoliaSearchStableStatus === 'ok' && status === 'error') {
-        setAlgoliaSearchStableStatus('error');
-      } else if (algoliaSearchStableStatus === 'error' && status === 'idle') {
-        setAlgoliaSearchStableStatus('ok');
-      }
-    },
-    [status, algoliaSearchStableStatus]
-  );
+  React.useEffect(() => {
+    if (algoliaSearchStableStatus === 'ok' && status === 'error') {
+      setAlgoliaSearchStableStatus('error');
+    } else if (algoliaSearchStableStatus === 'error' && status === 'idle') {
+      setAlgoliaSearchStableStatus('ok');
+    }
+  }, [status, algoliaSearchStableStatus]);
   const shouldHideAlgoliaSearchResults =
     !searchText || algoliaSearchStableStatus === 'error';
   /**
@@ -90,19 +86,19 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
    */
   const handleCommandChoose = React.useCallback(
     (command: NamedCommand | GoToWikiCommand) => {
-// @ts-expect-error - TS2339 - Property 'handler' does not exist on type 'GoToWikiCommand | NamedCommand'.
+      // @ts-expect-error - TS2339 - Property 'handler' does not exist on type 'GoToWikiCommand | NamedCommand'.
       if (command.handler) {
         // Simple command
-// @ts-expect-error - TS2339 - Property 'handler' does not exist on type 'GoToWikiCommand | NamedCommand'.
+        // @ts-expect-error - TS2339 - Property 'handler' does not exist on type 'GoToWikiCommand | NamedCommand'.
         command.handler();
-// @ts-expect-error - TS2339 - Property 'name' does not exist on type 'GoToWikiCommand | NamedCommand'.
+        // @ts-expect-error - TS2339 - Property 'name' does not exist on type 'GoToWikiCommand | NamedCommand'.
         if (command.name !== 'OPEN_COMMAND_PALETTE') {
           // Don't close palette if the command is for opening it
           setMode('closed');
         }
       } else {
         // Command with options
-// @ts-expect-error - TS2345 - Argument of type 'GoToWikiCommand | NamedCommand' is not assignable to parameter of type 'SetStateAction<NamedCommandWithOptions | null>'.
+        // @ts-expect-error - TS2345 - Argument of type 'GoToWikiCommand | NamedCommand' is not assignable to parameter of type 'SetStateAction<NamedCommandWithOptions | null>'.
         selectCommand(command);
         setMode('option');
       }
@@ -128,9 +124,7 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
    * manager and launches command accordingly
    */
   const launchCommand = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'commandName' implicitly has an 'any' type.
-    commandName => {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+    (commandName) => {
       const command = commandManager.getNamedCommand(commandName);
       if (!command) return;
       handleCommandChoose(command);
@@ -151,19 +145,18 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
 
   React.useEffect(launchSearch, [searchText, launchSearch]);
 
-  const allCommands: Array<NamedCommand | GoToWikiCommand> = React.useMemo(
-    () => {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+  const allCommands: Array<NamedCommand | GoToWikiCommand> =
+    React.useMemo(() => {
       const namedCommands = commandManager
         .getAllNamedCommands()
-// @ts-expect-error - TS7006 - Parameter 'command' implicitly has an 'any' type. | TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type 'Partial<Record<CommandName, CommandMetadata>>'.
-        .filter(command => !commandsList[command.name].ghost)
+        // @ts-expect-error - TS7006 - Parameter 'command' implicitly has an 'any' type. | TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type 'Partial<Record<CommandName, CommandMetadata>>'.
+        .filter((command) => !commandsList[command.name].ghost)
         // $FlowFixMe[incompatible-type]
-// @ts-expect-error - TS7006 - Parameter 'command' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        .map(command => ({ ...command, icon: <Command /> }));
+
+        .map((command) => ({ ...command, icon: <Command /> }));
       if (shouldHideAlgoliaSearchResults) return namedCommands;
 
-// @ts-expect-error - TS2322 - Type '{ hit: AlgoliaSearchHit; handler: () => void; }[]' is not assignable to type 'GoToWikiCommand[]'.
+      // @ts-expect-error - TS2322 - Type '{ hit: AlgoliaSearchHit; handler: () => void; }[]' is not assignable to type 'GoToWikiCommand[]'.
       const algoliaCommands: Array<GoToWikiCommand> = results.hits.map(
         (hit: AlgoliaSearchHit) => {
           return {
@@ -173,20 +166,15 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
         }
       );
       return namedCommands.concat(algoliaCommands);
-    },
-    [commandManager, results.hits, shouldHideAlgoliaSearchResults]
-  );
+    }, [commandManager, results.hits, shouldHideAlgoliaSearchResults]);
 
   const closeDialog = React.useCallback(() => {
     setMode('closed');
   }, []);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Dialog
           onClose={closeDialog}
           aria-label="command-palette"
@@ -200,7 +188,7 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
         >
           {mode === 'command' && (
             // Command picker
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <AutocompletePicker
               i18n={i18n}
               onInputChange={setSearchText}
@@ -216,7 +204,7 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
           )}
           {mode === 'option' && selectedCommand && (
             // Command options picker
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <AutocompletePicker
               i18n={i18n}
               items={selectedCommand.generateOptions()}
@@ -231,10 +219,12 @@ const CommandPalette = React.forwardRef<Record<any, any>, CommandPaletteInterfac
   );
 });
 
-export const CommandPaletteWithAlgoliaSearch = React.forwardRef<Record<any, any>, CommandPaletteInterface>((props, ref) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+export const CommandPaletteWithAlgoliaSearch = React.forwardRef<
+  Record<any, any>,
+  CommandPaletteInterface
+>((props, ref) => (
   <InstantSearch searchClient={searchClient} indexName={indexName}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2739 - Type '{ ref: ForwardedRef<Record<any, any>>; }' is missing the following properties from type 'CommandPaletteInterface': open, launchCommand */}
+    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2739 - Type '{ ref: ForwardedRef<Record<any, any>>; }' is missing the following properties from type 'CommandPaletteInterface': open, launchCommand */}
     <CommandPalette ref={ref} />
   </InstantSearch>
 ));

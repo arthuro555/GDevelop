@@ -3,24 +3,24 @@ import { GDevelopReleaseApi } from './ApiConfigs';
 import { MessageByLocale } from '../i18n/MessageByLocale';
 
 export type Announcement = {
-  id: string,
-  titleByLocale: MessageByLocale,
-  markdownMessageByLocale: MessageByLocale,
-  mobileMarkdownMessageByLocale?: MessageByLocale,
-  type?: 'info' | 'warning',
-  level: 'normal' | 'urgent',
-  buttonUrl?: string,
-  buttonLabelByLocale?: MessageByLocale
+  id: string;
+  titleByLocale: MessageByLocale;
+  markdownMessageByLocale: MessageByLocale;
+  mobileMarkdownMessageByLocale?: MessageByLocale;
+  type?: 'info' | 'warning';
+  level: 'normal' | 'urgent';
+  buttonUrl?: string;
+  buttonLabelByLocale?: MessageByLocale;
 };
 
 export type Promotion = {
-  id: string,
-  imageUrl: string,
-  mobileImageUrl: string,
-  display: 'all' | 'non-native-mobile',
-  type: 'game-template' | 'asset-pack' | 'game',
-  linkUrl?: string,
-  productId?: string
+  id: string;
+  imageUrl: string;
+  mobileImageUrl: string;
+  display: 'all' | 'non-native-mobile';
+  type: 'game-template' | 'asset-pack' | 'game';
+  linkUrl?: string;
+  productId?: string;
 };
 
 export const listAllAnnouncements = async (): Promise<Array<Announcement>> => {

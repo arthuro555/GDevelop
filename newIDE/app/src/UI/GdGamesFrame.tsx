@@ -1,8 +1,8 @@
 import * as React from 'react';
 import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../UI/PlaceholderLoader';
-// @ts-expect-error - TS6142 - Module '../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../UI/PlaceholderError';
 import useForceUpdate from '../Utils/UseForceUpdate';
 import { delay } from '../Utils/Delay';
@@ -10,7 +10,7 @@ import { useIsMounted } from '../Utils/UseIsMounted';
 import {
   PrivateGameTemplateListingData,
   PrivateAssetPackListingData,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 } from '../Utils/GDevelopServices/Shop';
 
 export type GdGamesMessageEventData = Readonly<{
@@ -33,8 +33,8 @@ const styles = {
   },
 } as const;
 
-const gdGamesHost = 'https://gd.games';
-// const gdGamesHost = 'http://localhost:4000';
+const gd.GamesHost = 'https://gd.games';
+// const gd.GamesHost = 'http://localhost:4000';
 
 export const GdGamesFrame = ({
   loadErrorMessage,
@@ -49,7 +49,7 @@ export const GdGamesFrame = ({
   const isMounted = useIsMounted();
   const forceUpdate = useForceUpdate();
 
-  const url = new URL(path, gdGamesHost);
+  const url = new URL(path, gd.GamesHost);
   url.searchParams.set('supportedMessageIds', supportedMessageIds.join(','));
   url.searchParams.set('theme', paletteType);
 
@@ -57,7 +57,7 @@ export const GdGamesFrame = ({
     () => {
       const callback = (event: MessageEvent) => {
         if (
-          event.origin === gdGamesHost &&
+          event.origin === gd.GamesHost &&
           event.data &&
           typeof event.data === 'object'
         ) {
@@ -94,10 +94,10 @@ export const GdGamesFrame = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <>
       {loadState.current !== 'errored' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <iframe
           src={url.toString()}
           title="gdgames"
@@ -108,19 +108,18 @@ export const GdGamesFrame = ({
         />
       )}
       {loadState.current === 'loading' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <div
           style={{
             position: 'absolute',
             inset: 30,
           }}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <PlaceholderLoader style={{ width: '100%', height: '100%' }} />
         </div>
       )}
       {loadState.current === 'errored' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <PlaceholderError
           onRetry={() => {
             loadState.current = 'loading';

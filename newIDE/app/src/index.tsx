@@ -1,27 +1,29 @@
 import 'element-closest';
-// @ts-expect-error - TS2724 - '"react"' has no exported member named 'Element'. Did you mean 'CElement'?
-import React, { Component, Element } from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-dom'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-dom/index.js' implicitly has an 'any' type.
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Authentication from './Utils/GDevelopServices/Authentication';
 import {
   sendProgramOpening,
   installAnalyticsEvents,
 } from './Utils/Analytics/EventSender';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './serviceWorker'. '/home/arthuro555/code/GDevelop/newIDE/app/src/serviceWorker.js' implicitly has an 'any' type.
 import { register } from './serviceWorker';
 import './UI/icomoon-font.css'; // Styles for Icomoon font.
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from './Utils/OptionalRequire';
 import { loadScript } from './Utils/LoadScript';
 import { showErrorBox } from './UI/Messages/MessageBox';
 import VersionMetadata from './Version/VersionMetadata';
-// @ts-expect-error - TS6142 - Module './MainFrame/Preferences/PreferencesProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesProvider.tsx', but '--jsx' is not set.
 import { loadPreferencesFromLocalStorage } from './MainFrame/Preferences/PreferencesProvider';
 import { getFullTheme } from './UI/Theme';
 
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
-const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
+type Timings = [string, number][];
+declare global {
+  var GD_STARTUP_TIMES: Timings;
+  var initializeGDevelopJs: (
+    options: { locateFile: (path: string, prefix: string) => string }
+  ) => Promise<typeof gd>;
+}
+
+const GD_STARTUP_TIMES: Timings = global.GD_STARTUP_TIMES || [];
 
 // No i18n in this file
 
@@ -69,8 +71,8 @@ const styles = {
 } as const;
 
 type State = {
-  loadingMessage: string,
-  App: Element<any> | null | undefined
+  loadingMessage: string;
+  App: JSX.Element | null | undefined;
 };
 
 class Bootstrapper extends Component<Record<any, any>, State> {
@@ -89,7 +91,6 @@ class Bootstrapper extends Component<Record<any, any>, State> {
       `./libGD.js?cache-buster=${VersionMetadata.versionWithHash}`
     ).then(() => {
       GD_STARTUP_TIMES.push(['libGDLoadedTime', performance.now()]);
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
       const initializeGDevelopJs = global.initializeGDevelopJs;
       if (!initializeGDevelopJs) {
         this.handleEditorLoadError(
@@ -109,9 +110,8 @@ class Bootstrapper extends Component<Record<any, any>, State> {
           // app.asar archive, which is completely wrong.
           return path + `?cache-buster=${VersionMetadata.versionWithHash}`;
         },
-// @ts-expect-error - TS7006 - Parameter 'gd' implicitly has an 'any' type.
       }).then(gd => {
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+        //@ts-expect-error Reassigning a "constant".
         global.gd = gd;
         GD_STARTUP_TIMES.push([
           'libGD.js initialization done',
@@ -120,7 +120,6 @@ class Bootstrapper extends Component<Record<any, any>, State> {
         sendProgramOpening();
 
         if (electron) {
-// @ts-expect-error - TS6142 - Module './LocalApp' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/LocalApp.tsx', but '--jsx' is not set.
           import(/* webpackChunkName: "local-app" */ './LocalApp')
             .then(module =>
               this.setState({
@@ -130,7 +129,6 @@ class Bootstrapper extends Component<Record<any, any>, State> {
             )
             .catch(this.handleEditorLoadError);
         } else {
-// @ts-expect-error - TS6142 - Module './BrowserApp' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/BrowserApp.tsx', but '--jsx' is not set.
           import(/* webpackChunkName: "browser-app" */ './BrowserApp')
             .then(module =>
               this.setState({
@@ -144,7 +142,7 @@ class Bootstrapper extends Component<Record<any, any>, State> {
     }, this.handleEditorLoadError);
   }
 
-// @ts-expect-error - TS7006 - Parameter 'rawError' implicitly has an 'any' type.
+  // @ts-expect-error - TS7006 - Parameter 'rawError' implicitly has an 'any' type.
   handleEditorLoadError = rawError => {
     const message = !electron
       ? 'Please check your internet connectivity, close the tab and reopen it.'
@@ -164,14 +162,12 @@ class Bootstrapper extends Component<Record<any, any>, State> {
     const { App, loadingMessage } = this.state;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-      <React.Fragment>
+      <>
         {App}
         {loadingMessage && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div style={styles.loadingMessage}>{loadingMessage}</div>
         )}
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -179,7 +175,7 @@ class Bootstrapper extends Component<Record<any, any>, State> {
 const rootElement = document.getElementById('root');
 if (rootElement) {
   GD_STARTUP_TIMES.push(['reactDOMRenderCall', performance.now()]);
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   ReactDOM.render(<Bootstrapper />, rootElement);
 } else console.error('No root element defined in index.html');
 

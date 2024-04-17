@@ -1,7 +1,7 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import {
   createNewEmptyProject,
@@ -12,9 +12,9 @@ import {
   createNewProjectWithDefaultLogin,
   NewProjectSource,
 } from '../ProjectCreation/CreateProject';
-// @ts-expect-error - TS6142 - Module '../ProjectCreation/NewProjectSetupDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/NewProjectSetupDialog.tsx', but '--jsx' is not set.
+
 import { NewProjectSetup } from '../ProjectCreation/NewProjectSetupDialog';
-// @ts-expect-error - TS6142 - Module '../MainFrame' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/index.tsx', but '--jsx' is not set.
+
 import { State } from '../MainFrame';
 import {
   StorageProvider,
@@ -25,9 +25,9 @@ import { ExampleShortHeader } from '../Utils/GDevelopServices/Example';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
 import { registerGame } from './GDevelopServices/Game';
 import { MoveAllProjectResourcesOptionsWithoutProgress } from '../ProjectsStorage/ResourceMover';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import UnsavedChangesContext from '../MainFrame/UnsavedChangesContext';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import useAlertDialog from '../UI/Alert/useAlertDialog';
 import { EditorTabsState } from '../MainFrame/EditorTabs/EditorTabsHandler';
@@ -35,26 +35,32 @@ import InAppTutorialContext from '../InAppTutorial/InAppTutorialContext';
 import {
   getAuthorizationTokenForPrivateGameTemplates,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module './GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from './GDevelopServices/Shop';
 import { createPrivateGameTemplateUrl } from './GDevelopServices/Asset';
 
 type Props = {
-  beforeCreatingProject: () => void,
-  afterCreatingProject: (
-    arg1: {
-      project: gdProject,
-      editorTabs: EditorTabsState,
-      oldProjectId: string
-    },
-  ) => Promise<void>,
-  onError: () => void,
-  onSuccessOrError: () => void,
-  getStorageProviderOperations: (storageProvider?: StorageProvider | null | undefined) => StorageProviderOperations,
-  loadFromProject: (project: gdProject, fileMetadata?: FileMetadata | null | undefined) => Promise<State>,
-  openFromFileMetadata: (fileMetadata: FileMetadata) => Promise<State | null | undefined>,
-  onProjectSaved: (fileMetadata?: FileMetadata | null | undefined) => void,
-  ensureResourcesAreMoved: (options: MoveAllProjectResourcesOptionsWithoutProgress) => Promise<void>
+  beforeCreatingProject: () => void;
+  afterCreatingProject: (arg1: {
+    project: gd.Project;
+    editorTabs: EditorTabsState;
+    oldProjectId: string;
+  }) => Promise<void>;
+  onError: () => void;
+  onSuccessOrError: () => void;
+  getStorageProviderOperations: (
+    storageProvider?: StorageProvider | null | undefined
+  ) => StorageProviderOperations;
+  loadFromProject: (
+    project: gd.Project,
+    fileMetadata?: FileMetadata | null | undefined
+  ) => Promise<State>;
+  openFromFileMetadata: (
+    fileMetadata: FileMetadata
+  ) => Promise<State | null | undefined>;
+  onProjectSaved: (fileMetadata?: FileMetadata | null | undefined) => void;
+  ensureResourcesAreMoved: (
+    options: MoveAllProjectResourcesOptionsWithoutProgress
+  ) => Promise<void>;
 };
 
 /**
@@ -75,14 +81,13 @@ const useCreateProject = ({
   const profile = authenticatedUser.profile;
   const unsavedChanges = React.useContext(UnsavedChangesContext);
   const preferences = React.useContext(PreferencesContext);
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
-  const { getInAppTutorialShortHeader } = React.useContext(
-    InAppTutorialContext
-  );
+  const { getInAppTutorialShortHeader } =
+    React.useContext(InAppTutorialContext);
 
   const initialiseProjectProperties = (
-    project: gdProject,
+    project: gd.Project,
     newProjectSetup: NewProjectSetup
   ) => {
     project.resetProjectUuid();
@@ -158,7 +163,7 @@ const useCreateProject = ({
                 templateSlug: currentProject.getTemplateSlug(),
               }
             );
-          } catch (error: any) {
+          } catch (error) {
             // Do not prevent the user from opening the game if the registration failed.
             console.error(
               'Unable to register the game to the user profile, the game will not be listed in the user profile.',
@@ -167,9 +172,8 @@ const useCreateProject = ({
           }
         }
 
-        const destinationStorageProviderOperations = getStorageProviderOperations(
-          newProjectSetup.storageProvider
-        );
+        const destinationStorageProviderOperations =
+          getStorageProviderOperations(newProjectSetup.storageProvider);
 
         const { onSaveProjectAs } = destinationStorageProviderOperations;
 
@@ -198,7 +202,8 @@ const useCreateProject = ({
                   project: currentProject,
                   newFileMetadata,
                   newStorageProvider: newProjectSetup.storageProvider,
-                  newStorageProviderOperations: destinationStorageProviderOperations,
+                  newStorageProviderOperations:
+                    destinationStorageProviderOperations,
                   oldFileMetadata: newProjectSource.fileMetadata,
                   oldStorageProvider: sourceStorageProvider,
                   oldStorageProviderOperations: sourceStorageProviderOperations,
@@ -210,10 +215,9 @@ const useCreateProject = ({
 
           if (wasSaved) {
             onProjectSaved(fileMetadata);
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
             unsavedChanges.sealUnsavedChanges();
             if (newProjectSetup.storageProvider.internalName === 'LocalFile') {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
               preferences.setHasProjectOpened(true);
             }
           }
@@ -226,7 +230,7 @@ const useCreateProject = ({
           editorTabs,
           oldProjectId,
         });
-      } catch (rawError: any) {
+      } catch (rawError) {
         const { getWriteErrorMessage } = getStorageProviderOperations();
         const errorMessage = getWriteErrorMessage
           ? getWriteErrorMessage(rawError)
@@ -321,9 +325,8 @@ const useCreateProject = ({
   const createProjectFromInAppTutorial = React.useCallback(
     async (tutorialId: string, newProjectSetup: NewProjectSetup) => {
       beforeCreatingProject();
-      const selectedInAppTutorialShortHeader = getInAppTutorialShortHeader(
-        tutorialId
-      );
+      const selectedInAppTutorialShortHeader =
+        getInAppTutorialShortHeader(tutorialId);
       if (!selectedInAppTutorialShortHeader) {
         throw new Error(`No in app tutorial found for id "${tutorialId}"`);
       }
@@ -354,9 +357,8 @@ const useCreateProject = ({
   const createProjectFromAIGeneration = React.useCallback(
     async (projectFileUrl: string, newProjectSetup: NewProjectSetup) => {
       beforeCreatingProject();
-      const newProjectSource = createNewProjectFromAIGeneratedProject(
-        projectFileUrl
-      );
+      const newProjectSource =
+        createNewProjectFromAIGeneratedProject(projectFileUrl);
       await createProject(newProjectSource, newProjectSetup);
     },
     [beforeCreatingProject, createProject]

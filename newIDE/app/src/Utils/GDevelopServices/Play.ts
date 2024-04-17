@@ -6,24 +6,33 @@ import { rgbOrHexToRGBString } from '../ColorTransformer';
 
 export type LeaderboardSortOption = 'ASC' | 'DESC';
 export type LeaderboardVisibilityOption = 'HIDDEN' | 'PUBLIC';
-export type LeaderboardPlayerUnicityDisplayOption = 'FREE' | 'PREFER_UNIQUE' | 'PREFER_NON_UNIQUE';
+export type LeaderboardPlayerUnicityDisplayOption =
+  | 'FREE'
+  | 'PREFER_UNIQUE'
+  | 'PREFER_NON_UNIQUE';
 
 export type LeaderboardScoreFormattingCustom = {
-  type: 'custom',
-  prefix: string,
-  suffix: string,
-  precision: number
+  type: 'custom';
+  prefix: string;
+  suffix: string;
+  precision: number;
 };
 
-export type LeaderboardScoreFormattingTimeUnit = 'hour' | 'minute' | 'second' | 'millisecond';
+export type LeaderboardScoreFormattingTimeUnit =
+  | 'hour'
+  | 'minute'
+  | 'second'
+  | 'millisecond';
 
 export type LeaderboardScoreFormattingTime = {
-  type: 'time',
-  smallestUnit: LeaderboardScoreFormattingTimeUnit,
-  biggestUnit: LeaderboardScoreFormattingTimeUnit
+  type: 'time';
+  smallestUnit: LeaderboardScoreFormattingTimeUnit;
+  biggestUnit: LeaderboardScoreFormattingTimeUnit;
 };
 
-export type LeaderboardScoreFormatting = LeaderboardScoreFormattingCustom | LeaderboardScoreFormattingTime;
+export type LeaderboardScoreFormatting =
+  | LeaderboardScoreFormattingCustom
+  | LeaderboardScoreFormattingTime;
 
 export interface LeaderboardTheme {
   backgroundColor: string;
@@ -33,55 +42,59 @@ export interface LeaderboardTheme {
 }
 
 export type LeaderboardCustomizationSettings = {
-  defaultDisplayedEntriesNumber?: number,
-  scoreTitle: string,
-  scoreFormatting: LeaderboardScoreFormatting,
-  theme?: LeaderboardTheme,
-  useCustomCss?: boolean,
-  customCss?: string
+  defaultDisplayedEntriesNumber?: number;
+  scoreTitle: string;
+  scoreFormatting: LeaderboardScoreFormatting;
+  theme?: LeaderboardTheme;
+  useCustomCss?: boolean;
+  customCss?: string;
 };
 
 export type Leaderboard = {
-  id: string,
-  gameId: string,
-  name: string,
-  sort: LeaderboardSortOption,
-  startDatetime: string,
-  deletedAt?: string,
-  playerUnicityDisplayChoice: LeaderboardPlayerUnicityDisplayOption,
-  visibility: LeaderboardVisibilityOption,
-  customizationSettings?: LeaderboardCustomizationSettings,
-  primary?: boolean,
-  resetLaunchedAt?: string,
-  extremeAllowedScore?: number,
-  ignoreCustomPlayerNames?: boolean,
-  autoPlayerNamePrefix?: string
+  id: string;
+  gameId: string;
+  name: string;
+  sort: LeaderboardSortOption;
+  startDatetime: string;
+  deletedAt?: string;
+  playerUnicityDisplayChoice: LeaderboardPlayerUnicityDisplayOption;
+  visibility: LeaderboardVisibilityOption;
+  customizationSettings?: LeaderboardCustomizationSettings;
+  primary?: boolean;
+  resetLaunchedAt?: string;
+  extremeAllowedScore?: number;
+  ignoreCustomPlayerNames?: boolean;
+  autoPlayerNamePrefix?: string;
 };
 
 export type LeaderboardUpdatePayload = {
-  name?: string,
-  sort?: LeaderboardSortOption,
-  playerUnicityDisplayChoice?: LeaderboardPlayerUnicityDisplayOption,
-  visibility?: LeaderboardVisibilityOption,
-  customizationSettings?: LeaderboardCustomizationSettings,
-  primary?: boolean,
-  extremeAllowedScore?: number | null,
-  ignoreCustomPlayerNames?: boolean,
-  autoPlayerNamePrefix?: string
+  name?: string;
+  sort?: LeaderboardSortOption;
+  playerUnicityDisplayChoice?: LeaderboardPlayerUnicityDisplayOption;
+  visibility?: LeaderboardVisibilityOption;
+  customizationSettings?: LeaderboardCustomizationSettings;
+  primary?: boolean;
+  extremeAllowedScore?: number | null;
+  ignoreCustomPlayerNames?: boolean;
+  autoPlayerNamePrefix?: string;
 };
 
 export type LeaderboardEntry = {
-  id: string,
-  leaderboardId: string,
-  playerId?: string,
-  playerName: string,
-  createdAt: string,
-  score: number
+  id: string;
+  leaderboardId: string;
+  playerId?: string;
+  playerName: string;
+  createdAt: string;
+  score: number;
 };
 
-export const shortenUuidForDisplay = (uuid: string): string => `${uuid.split('-')[0]}-...`;
+export const shortenUuidForDisplay = (uuid: string): string =>
+  `${uuid.split('-')[0]}-...`;
 
-export const listGameActiveLeaderboards = async (authenticatedUser: AuthenticatedUser, gameId: string): Promise<Array<Leaderboard> | null | undefined> => {
+export const listGameActiveLeaderboards = async (
+  authenticatedUser: AuthenticatedUser,
+  gameId: string
+): Promise<Array<Leaderboard> | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
 
@@ -97,8 +110,10 @@ export const listGameActiveLeaderboards = async (authenticatedUser: Authenticate
   return response.data;
 };
 
-export const extractNextPageUriFromLinkHeader = (linkHeader: string): string | null | undefined => {
-  const links = linkHeader.split(',').map(link => link.trim());
+export const extractNextPageUriFromLinkHeader = (
+  linkHeader: string
+): string | null | undefined => {
+  const links = linkHeader.split(',').map((link) => link.trim());
   const mapRelationToUri = links.reduce<Record<string, any>>((acc, link) => {
     const relationRegexMatch = link.match(/;\srel="(\w*)"/);
     const uriMatch = link.match(/^<(.*)>/);
@@ -117,13 +132,13 @@ export const listLeaderboardEntries = async (
   gameId: string,
   leaderboardId: string,
   options: {
-    pageSize: number,
-    onlyBestEntry: boolean,
-    forceUri: string | null | undefined
-  },
+    pageSize: number;
+    onlyBestEntry: boolean;
+    forceUri: string | null | undefined;
+  }
 ): Promise<{
-  entries: LeaderboardEntry[],
-  nextPageUri: string | null | undefined
+  entries: LeaderboardEntry[];
+  nextPageUri: string | null | undefined;
 }> => {
   const uri =
     options.forceUri || `/game/${gameId}/leaderboard/${leaderboardId}/entry`;
@@ -151,9 +166,9 @@ export const createLeaderboard = async (
     name,
     sort,
   }: {
-    name: string,
-    sort: LeaderboardSortOption
-  },
+    name: string;
+    sort: LeaderboardSortOption;
+  }
 ): Promise<Leaderboard | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -175,14 +190,14 @@ export const createLeaderboard = async (
 };
 
 type LeaderboardDuplicationPayload = {
-  sourceLeaderboardId: string,
-  sourceGameId: string
+  sourceLeaderboardId: string;
+  sourceGameId: string;
 };
 
 export const duplicateLeaderboard = async (
   authenticatedUser: AuthenticatedUser,
   gameId: string,
-  payload: LeaderboardDuplicationPayload,
+  payload: LeaderboardDuplicationPayload
 ): Promise<Leaderboard> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) throw new Error('User is not authenticated.');
@@ -204,7 +219,7 @@ export const updateLeaderboard = async (
   authenticatedUser: AuthenticatedUser,
   gameId: string,
   leaderboardId: string,
-  payload: LeaderboardUpdatePayload,
+  payload: LeaderboardUpdatePayload
 ): Promise<Leaderboard | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -225,7 +240,7 @@ export const updateLeaderboard = async (
 export const resetLeaderboard = async (
   authenticatedUser: AuthenticatedUser,
   gameId: string,
-  leaderboardId: string,
+  leaderboardId: string
 ): Promise<Leaderboard | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -233,9 +248,7 @@ export const resetLeaderboard = async (
   const { uid: userId } = firebaseUser;
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.put(
-    `${
-      GDevelopPlayApi.baseUrl
-    }/game/${gameId}/leaderboard/${leaderboardId}/reset`,
+    `${GDevelopPlayApi.baseUrl}/game/${gameId}/leaderboard/${leaderboardId}/reset`,
     {},
     {
       headers: { Authorization: authorizationHeader },
@@ -248,7 +261,7 @@ export const resetLeaderboard = async (
 export const deleteLeaderboard = async (
   authenticatedUser: AuthenticatedUser,
   gameId: string,
-  leaderboardId: string,
+  leaderboardId: string
 ): Promise<Leaderboard | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -269,7 +282,7 @@ export const deleteLeaderboardEntry = async (
   authenticatedUser: AuthenticatedUser,
   gameId: string,
   leaderboardId: string,
-  entryId: string,
+  entryId: string
 ): Promise<Leaderboard | null | undefined> => {
   const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
   if (!firebaseUser) return;
@@ -277,9 +290,7 @@ export const deleteLeaderboardEntry = async (
   const { uid: userId } = firebaseUser;
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.delete(
-    `${
-      GDevelopPlayApi.baseUrl
-    }/game/${gameId}/leaderboard/${leaderboardId}/entry/${entryId}`,
+    `${GDevelopPlayApi.baseUrl}/game/${gameId}/leaderboard/${leaderboardId}/entry/${entryId}`,
     {
       headers: { Authorization: authorizationHeader },
       params: { userId },
@@ -292,29 +303,29 @@ export const deleteLeaderboardEntry = async (
 export type CommentType = 'FEEDBACK' | 'REVIEW';
 
 export type GameRatings = {
-  version: number,
-  visuals: number,
-  sound: number,
-  fun: number,
-  easeOfUse: number
+  version: number;
+  visuals: number;
+  sound: number;
+  fun: number;
+  easeOfUse: number;
 };
 
 export type Comment = {
-  id: string,
-  type: CommentType,
-  gameId: string,
-  buildId?: string,
-  text: string,
-  ratings?: GameRatings,
-  playerId?: string,
-  playerName?: string,
-  contact?: string,
-  createdAt: number,
-  processedAt?: number,
-  updatedAt: number,
+  id: string;
+  type: CommentType;
+  gameId: string;
+  buildId?: string;
+  text: string;
+  ratings?: GameRatings;
+  playerId?: string;
+  playerName?: string;
+  contact?: string;
+  createdAt: number;
+  processedAt?: number;
+  updatedAt: number;
   qualityRatingPerRole?: {
-    owner?: string
-  }
+    owner?: string;
+  };
 };
 
 export const listComments = async (
@@ -324,12 +335,12 @@ export const listComments = async (
     gameId,
     type,
   }: {
-    gameId: string,
-    type: 'FEEDBACK' | 'REVIEW'
-  },
+    gameId: string;
+    type: 'FEEDBACK' | 'REVIEW';
+  }
 ): Promise<Array<Comment>> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.get(`${GDevelopPlayApi.baseUrl}/game/${gameId}/comment`, {
         params: {
           userId,
@@ -340,7 +351,7 @@ export const listComments = async (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const updateComment = async (
@@ -352,14 +363,14 @@ export const updateComment = async (
     processed,
     qualityRating,
   }: {
-    gameId: string,
-    commentId: string,
-    processed?: boolean,
-    qualityRating?: string
+    gameId: string;
+    commentId: string;
+    processed?: boolean;
+    qualityRating?: string;
   }
 ) => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.patch(
         `${GDevelopPlayApi.baseUrl}/game/${gameId}/comment/${commentId}`,
         { processed, qualityRating },
@@ -371,12 +382,14 @@ export const updateComment = async (
         }
       )
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
-export const canUserCustomizeLeaderboardTheme = (authenticatedUser: AuthenticatedUser): {
-  canUseTheme: boolean,
-  canUseCustomCss: boolean
+export const canUserCustomizeLeaderboardTheme = (
+  authenticatedUser: AuthenticatedUser
+): {
+  canUseTheme: boolean;
+  canUseCustomCss: boolean;
 } => {
   const { limits } = authenticatedUser;
   return {
@@ -394,7 +407,9 @@ export const canUserCustomizeLeaderboardTheme = (authenticatedUser: Authenticate
   };
 };
 
-export const getRGBLeaderboardTheme = (leaderboardCustomizationSettings?: LeaderboardCustomizationSettings | null): LeaderboardTheme => {
+export const getRGBLeaderboardTheme = (
+  leaderboardCustomizationSettings?: LeaderboardCustomizationSettings | null
+): LeaderboardTheme => {
   const defaultBackgroundColor = '#d0d1ff';
   const defaultTextColor = '#000000';
   const defaultHighlightBackgroundColor = '#5763dd';

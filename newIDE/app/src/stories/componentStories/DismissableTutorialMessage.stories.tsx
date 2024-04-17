@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import paperDecorator from '../PaperDecorator';
 
 import DismissableTutorialMessage from '../../Hints/DismissableTutorialMessage';
@@ -7,11 +7,10 @@ import { Tutorial } from '../../Utils/GDevelopServices/Tutorial';
 import {
   initialPreferences,
   Preferences,
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
 } from '../../MainFrame/Preferences/PreferencesContext';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../../MainFrame/Preferences/PreferencesContext';
-// @ts-expect-error - TS6142 - Module '../../Tutorial/TutorialContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Tutorial/TutorialContext.tsx', but '--jsx' is not set.
+
 import { TutorialContext } from '../../Tutorial/TutorialContext';
 
 const defaultTutorials = [
@@ -36,20 +35,18 @@ const defaultTutorials = [
 ];
 
 type Props = {
-  tutorials?: Array<Tutorial> | null | undefined,
-  preferences?: Preferences,
-  tutorialId: string
+  tutorials?: Array<Tutorial> | null | undefined;
+  preferences?: Preferences;
+  tutorialId: string;
 };
 
 const WrappedDismissableTutorialMessage = ({
-// @ts-expect-error - TS2322 - Type '{ id: string; title: string; description: string; thumbnailUrl: string; link: string; type: string; }[]' is not assignable to type 'Tutorial[]'.
+  // @ts-expect-error - TS2322 - Type '{ id: string; title: string; description: string; thumbnailUrl: string; link: string; type: string; }[]' is not assignable to type 'Tutorial[]'.
   tutorials = defaultTutorials,
   preferences = initialPreferences,
   tutorialId,
 }: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PreferencesContext.Provider value={preferences}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <TutorialContext.Provider
       value={{
         tutorials,
@@ -57,7 +54,6 @@ const WrappedDismissableTutorialMessage = ({
         error: null,
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DismissableTutorialMessage tutorialId={tutorialId} />
     </TutorialContext.Provider>
   </PreferencesContext.Provider>
@@ -70,17 +66,14 @@ export default {
 };
 
 export const NoTutorialsLoaded = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage tutorials={null} tutorialId="tutorial-1" />
 );
 
 export const NoTutorialsFound = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage tutorials={[]} tutorialId="tutorial-1" />
 );
 
 export const HiddenTutorial = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage
     tutorialId="tutorial-1"
     preferences={{
@@ -94,16 +87,13 @@ export const HiddenTutorial = () => (
 );
 
 export const TutorialNotInList = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage tutorialId="tutorial-3" />
 );
 
 export const DefaultVideo = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage tutorialId="tutorial-1" />
 );
 
 export const DefaultText = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedDismissableTutorialMessage tutorialId="tutorial-2" />
 );

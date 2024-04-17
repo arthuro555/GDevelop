@@ -1,27 +1,26 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column } from '../../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { LineStackLayout, ResponsiveLineStackLayout } from '../../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../../ResourcesList/ResourcePreview/ImagePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourcePreview/ImagePreview.tsx', but '--jsx' is not set.
+
 import ImagePreview from '../../../ResourcesList/ResourcePreview/ImagePreview';
 import Replay from '@material-ui/icons/Replay';
 import Timer from '@material-ui/icons/Timer';
-// @ts-expect-error - TS6142 - Module '../../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../../UI/SemiControlledTextField';
-// @ts-expect-error - TS6142 - Module '../../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../../UI/Text';
 import useForceUpdate from '../../../Utils/UseForceUpdate';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../../../UI/PlaceholderLoader';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/Play'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Play.js' implicitly has an 'any' type.
+
 import Play from '../../../UI/CustomSvgIcons/Play';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/Pause'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Pause.js' implicitly has an 'any' type.
+
 import Pause from '../../../UI/CustomSvgIcons/Pause';
 import { toFixedWithoutTrailingZeros } from '../../../Utils/Mathematics';
 
@@ -49,20 +48,20 @@ const styles = {
 } as const;
 
 type Props = {
-  animationName: string,
-  resourceNames: string[],
-  getImageResourceSource: (resourceName: string) => string,
-  isImageResourceSmooth: (resourceName: string) => boolean,
-  timeBetweenFrames: number,
-  onChangeTimeBetweenFrames?: (arg1: number) => void,
-  isLooping: boolean,
-  hideCheckeredBackground?: boolean,
-  deactivateControls?: boolean,
-  displaySpacedView?: boolean,
-  fixedHeight?: number,
-  fixedWidth?: number,
-  isAssetPrivate?: boolean,
-  hideAnimationLoader?: boolean
+  animationName: string;
+  resourceNames: string[];
+  getImageResourceSource: (resourceName: string) => string;
+  isImageResourceSmooth: (resourceName: string) => boolean;
+  timeBetweenFrames: number;
+  onChangeTimeBetweenFrames?: (arg1: number) => void;
+  isLooping: boolean;
+  hideCheckeredBackground?: boolean;
+  deactivateControls?: boolean;
+  displaySpacedView?: boolean;
+  fixedHeight?: number;
+  fixedWidth?: number;
+  isAssetPrivate?: boolean;
+  hideAnimationLoader?: boolean;
 };
 
 const AnimationPreview = ({
@@ -101,23 +100,19 @@ const AnimationPreview = ({
   );
   const loaderTimeout = React.useRef<number | null | undefined>(null);
 
-  const [isStillLoadingResources, setIsStillLoadingResources] = React.useState(
-    true
-  );
+  const [isStillLoadingResources, setIsStillLoadingResources] =
+    React.useState(true);
 
   // When outside variables change, we need to update the animation callback.
-  React.useEffect(
-    () => {
-      if (isLooping !== isLoopingRef.current) {
-        isLoopingRef.current = isLooping;
-      }
-      if (animationName !== animationNameRef.current) {
-        animationNameRef.current = animationName;
-        imagesLoadedArray.current = new Array(resourceNames.length).fill(false);
-      }
-    },
-    [timeBetweenFrames, isLooping, animationName, resourceNames]
-  );
+  React.useEffect(() => {
+    if (isLooping !== isLoopingRef.current) {
+      isLoopingRef.current = isLooping;
+    }
+    if (animationName !== animationNameRef.current) {
+      animationNameRef.current = animationName;
+      imagesLoadedArray.current = new Array(resourceNames.length).fill(false);
+    }
+  }, [timeBetweenFrames, isLooping, animationName, resourceNames]);
 
   const replay = () => {
     currentFrameIndexRef.current = 0;
@@ -184,7 +179,7 @@ const AnimationPreview = ({
           } else {
             imagesLoadedArray.current[currentFrameIndexRef.current] = false;
             // When the array of loaders changes, wait a bit to display the loader to avoid flickering.
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
+            // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'number'.
             loaderTimeout.current = setTimeout(() => {
               console.warn(
                 'The image took too long to load, displaying a loader.'
@@ -196,45 +191,39 @@ const AnimationPreview = ({
           forceUpdate();
         }
       }
-// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
+      // @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
       requestRef.current = requestAnimationFrame(updateAnimation);
-// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
+      // @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
       previousTimeRef.current = updateTimeInMs;
     },
     [forceUpdate, resourceNames]
   );
 
-  React.useEffect(
-    () => {
-// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
-      requestRef.current = requestAnimationFrame(updateAnimation);
-      return () => {
-        if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      };
-    },
-    [updateAnimation]
-  );
+  React.useEffect(() => {
+    // @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'undefined'.
+    requestRef.current = requestAnimationFrame(updateAnimation);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [updateAnimation]);
 
-  const onImageLoaded = React.useCallback(
-    () => {
-      imagesLoadedArray.current[currentFrameIndexRef.current] = true;
-      // When the array of loaders changes, decide if we display the loader or not.
-      // If all images are loaded, then hide loader for instant display.
-      const hasFinishedLoadingAllResources = !imagesLoadedArray.current.some(
-        hasImageLoaded => !hasImageLoaded
-      );
-      if (hasFinishedLoadingAllResources) {
-        setIsStillLoadingResources(false);
-      }
-      // Image has loaded, so cancel the timeout if it was set.
-      if (loaderTimeout.current) {
-        clearTimeout(loaderTimeout.current);
-        loaderTimeout.current = null;
-      }
-      forceUpdate();
-    },
-    [forceUpdate]
-  );
+  const onImageLoaded = React.useCallback(() => {
+    imagesLoadedArray.current[currentFrameIndexRef.current] = true;
+    // When the array of loaders changes, decide if we display the loader or not.
+    // If all images are loaded, then hide loader for instant display.
+    const hasFinishedLoadingAllResources = !imagesLoadedArray.current.some(
+      (hasImageLoaded) => !hasImageLoaded
+    );
+    if (hasFinishedLoadingAllResources) {
+      setIsStillLoadingResources(false);
+    }
+    // Image has loaded, so cancel the timeout if it was set.
+    if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
+    }
+    forceUpdate();
+  }, [forceUpdate]);
 
   // When changing animation, the index can be out of bounds, so reset the animation.
   if (currentFrameIndexRef.current >= resourceNames.length) {
@@ -244,11 +233,8 @@ const AnimationPreview = ({
   const resourceName = resourceNames[currentFrameIndexRef.current];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column expand noOverflowParent noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.imageContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ImagePreview
           resourceName={resourceName}
           imageResourceSource={getImageResourceSource(resourceName)}
@@ -263,37 +249,29 @@ const AnimationPreview = ({
           hideLoader // Handled by the animation preview, important to let the browser cache the image.
         />
         {!hideAnimationLoader && isStillLoadingResources && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div style={styles.loaderContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PlaceholderLoader />
           </div>
         )}
       </div>
       {!deactivateControls && (
         // Column used to not have the expand behavior when responsive line stack layout is a column
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ResponsiveLineStackLayout alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <LineStackLayout
               alignItems="center"
               justifyContent="center"
               noMargin
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>FPS:</Trans>
               </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SemiControlledTextField
                 commitOnBlur
                 margin="none"
                 value={fps.toString()}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-                onChange={text => {
+                onChange={(text) => {
                   if (!text) return;
                   const newFps = Number.parseFloat(text);
                   if (newFps > 0) {
@@ -311,9 +289,7 @@ const AnimationPreview = ({
                 max={100}
                 style={styles.timeField}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Timer style={styles.timeIcon} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SemiControlledTextField
                 commitOnBlur
                 margin="none"
@@ -321,8 +297,7 @@ const AnimationPreview = ({
                   timeBetweenFramesRef.current,
                   6
                 )}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-                onChange={text => {
+                onChange={(text) => {
                   if (!text) return;
                   const time = Number.parseFloat(text);
                   if (time > 0) {
@@ -342,23 +317,17 @@ const AnimationPreview = ({
                 style={styles.timeField}
               />
             </LineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <LineStackLayout
               alignItems="center"
               justifyContent="center"
               noMargin
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 leftIcon={<Replay />}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Replay</Trans>}
                 onClick={replay}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 leftIcon={!!pausedRef.current ? <Play /> : <Pause />}
                 label={!!pausedRef.current ? 'Play' : 'Pause'}
                 onClick={() => {

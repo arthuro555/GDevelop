@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../../../Profile/RedeemCodeDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/RedeemCodeDialog.tsx', but '--jsx' is not set.
+
 import RedeemCodeDialog from '../../../Profile/RedeemCodeDialog';
 import { fakeSilverAuthenticatedUser } from '../../../fixtures/GDevelopServicesTestData';
 import MockAdapter from 'axios-mock-adapter';
@@ -18,13 +18,12 @@ export const WorkingCode = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(200)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
       onClose={action('onClose')}
@@ -38,13 +37,12 @@ export const CodeDoesNotExist = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(404)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
       onClose={action('onClose')}
@@ -58,13 +56,12 @@ export const UnknownError = () => {
     .onPost(`${GDevelopUsageApi.baseUrl}/redemption-code/action/redeem-code`)
     .reply(500)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
       onClose={action('onClose')}
@@ -80,13 +77,12 @@ export const CannotBeRedeemedAnymoreError = () => {
       code: 'redemption-code/cannot-be-redeemed-anymore',
     })
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
       onClose={action('onClose')}
@@ -102,13 +98,12 @@ export const AlreadyRedeemedByUser = () => {
       code: 'user-redeemed-code/already-redeemed-by-user',
     })
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <RedeemCodeDialog
       authenticatedUser={fakeSilverAuthenticatedUser}
       onClose={action('onClose')}

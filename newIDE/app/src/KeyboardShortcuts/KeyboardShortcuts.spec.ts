@@ -14,9 +14,9 @@ const makeKeyEvent = (
   shiftKey: boolean,
   altKey: boolean,
   code: string,
-  which: number | string,
+  which: number | string
 ): KeyboardEvent => {
-// @ts-expect-error - TS2322 - Type 'string | number' is not assignable to type 'number'.
+  // @ts-expect-error - TS2322 - Type 'string | number' is not assignable to type 'number'.
   return { ctrlKey, shiftKey, altKey, code, which };
 };
 
@@ -56,9 +56,7 @@ const shiftSpace = makeKeyEvent(false, true, false, 'Space', ' '); // Shift+Spac
 const ctrlSpace = makeKeyEvent(true, false, false, 'Space', ' '); // Ctrl+Space
 const altSpace = makeKeyEvent(false, false, true, 'Space', ' '); // Alt+Space
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('KeyboardShortcuts', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('creates shortcut strings from events correctly', () => {
     // Action key, with modifiers
     expect(getShortcutStringFromEvent(keyA)).toBe('KeyA');
@@ -135,7 +133,6 @@ describe('KeyboardShortcuts', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('validates shortcut presses correctly', () => {
     // Action key, with modifiers
     expect(isValidShortcutEvent(keyA)).toBe(true);
@@ -156,7 +153,6 @@ describe('KeyboardShortcuts', () => {
     expect(isValidShortcutEvent(altSpace)).toBe(true);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('converts shortcut strings to Electron accelerators correctly', () => {
     // Conversion of action keys...
     expect(getElectronAccelerator('KeyA')).toBe('A');

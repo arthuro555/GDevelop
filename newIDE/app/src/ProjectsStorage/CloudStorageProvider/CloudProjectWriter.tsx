@@ -11,9 +11,9 @@ import {
 import type { $AxiosError } from 'axios';
 import type { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow';
 import { serializeToJSON } from '../../Utils/Serializer';
-// @ts-expect-error - TS6142 - Module './CloudSaveAsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudSaveAsDialog.tsx', but '--jsx' is not set.
+
 import CloudSaveAsDialog from './CloudSaveAsDialog';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import {
   createZipWithSingleTextFile,
@@ -24,7 +24,7 @@ import { getProjectCache } from './CloudProjectOpener';
 import { retryIfFailed } from '../../Utils/RetryIfFailed';
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
 
-const zipProject = async (project: gdProject): Promise<[Blob, string]> => {
+const zipProject = async (project: gd.Project): Promise<[Blob, string]> => {
   const projectJson = serializeToJSON(project);
   const zippedProject = await createZipWithSingleTextFile(
     projectJson,
@@ -53,7 +53,7 @@ const zipProjectAndCommitVersion = async (
     options,
   }: {
     authenticatedUser: AuthenticatedUser,
-    project: gdProject,
+    project: gd.Project,
     cloudProjectId: string,
     options?: {
       previousVersion?: string,
@@ -82,7 +82,7 @@ const zipProjectAndCommitVersion = async (
 export const generateOnSaveProject = (
   authenticatedUser: AuthenticatedUser
 ) => async (
-  project: gdProject,
+  project: gd.Project,
   fileMetadata: FileMetadata,
   options?: {
     previousVersion?: string,
@@ -136,7 +136,7 @@ export const generateOnSaveProject = (
 export const generateOnChangeProjectProperty = (
   authenticatedUser: AuthenticatedUser
 ) => async (
-  project: gdProject,
+  project: gd.Project,
   fileMetadata: FileMetadata,
   properties: {
     name?: string,
@@ -197,7 +197,7 @@ export const generateOnChooseSaveProjectAsLocation = ({
     project,
     fileMetadata,
   }: {
-    project: gdProject,
+    project: gd.Project,
     fileMetadata: FileMetadata | null | undefined
   },
 // @ts-expect-error - TS2366 - Function lacks ending return statement and return type does not include 'undefined'.
@@ -210,7 +210,7 @@ export const generateOnChooseSaveProjectAsLocation = ({
 
   const name = await new Promise(resolve: (result: Promise<null | string> | null | string) => void => {
     setDialog(() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <CloudSaveAsDialog
         onCancel={() => {
           closeDialog();
@@ -223,7 +223,7 @@ export const generateOnChooseSaveProjectAsLocation = ({
         }}
       />
     ));
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   });
 
 // @ts-expect-error - TS1345 - An expression of type 'void' cannot be tested for truthiness.
@@ -234,7 +234,7 @@ export const generateOnChooseSaveProjectAsLocation = ({
       name,
     },
   };
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export const generateOnSaveProjectAs = (
@@ -242,7 +242,7 @@ export const generateOnSaveProjectAs = (
   setDialog: (arg1: () => React.ReactElement) => void,
   closeDialog: () => void
 ) => async (
-  project: gdProject,
+  project: gd.Project,
   saveAsLocation: SaveAsLocation | null | undefined,
   options: {
     onStartSaving: () => void,
@@ -348,7 +348,7 @@ export const generateOnAutoSaveProject = (
   authenticatedUser: AuthenticatedUser
 ) =>
   ProjectCache.isAvailable()
-    ? async (project: gdProject, fileMetadata: FileMetadata): Promise<void> => {
+    ? async (project: gd.Project, fileMetadata: FileMetadata): Promise<void> => {
         const { profile } = authenticatedUser;
         if (!profile) return;
         const cloudProjectId = fileMetadata.fileIdentifier;

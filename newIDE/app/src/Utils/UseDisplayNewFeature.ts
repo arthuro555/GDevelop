@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import { getProgramOpeningCount } from './Analytics/LocalStats';
 
@@ -27,15 +27,9 @@ const useDisplayNewFeature = () => {
   } = React.useContext(PreferencesContext);
 
   const shouldDisplayNewFeatureHighlighting = React.useCallback(
-    (
-      {
-        featureId,
-      }: {
-        featureId: Feature
-      },
-    ): boolean => {
+    ({ featureId }: { featureId: Feature }): boolean => {
       const programOpeningCount = getProgramOpeningCount();
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly gamesDashboardInProjectManager: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; readonly gamesDashboardInHomePage: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; }'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly gamesDashboardInProjectManager: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; readonly gamesDashboardInHomePage: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; }'.
       const settings = featuresDisplaySettings[featureId];
       if (!settings) return false;
 
@@ -59,12 +53,8 @@ const useDisplayNewFeature = () => {
   );
 
   const acknowledgeNewFeature = React.useCallback(
-    ({
-      featureId,
-    }: {
-      featureId: Feature
-    }) => {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly gamesDashboardInProjectManager: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; readonly gamesDashboardInHomePage: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; }'.
+    ({ featureId }: { featureId: Feature }) => {
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly gamesDashboardInProjectManager: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; readonly gamesDashboardInHomePage: { readonly count: 2; readonly intervalInDays: 7; readonly minimumProgramOpeningCount: 10; }; }'.
       if (!featuresDisplaySettings[featureId]) return;
 
       const acknowledgments = newFeaturesAcknowledgements[featureId];

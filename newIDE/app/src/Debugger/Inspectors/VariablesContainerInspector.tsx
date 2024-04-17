@@ -1,31 +1,27 @@
 import * as React from 'react';
 import ReactJsonView from 'react-json-view';
-import {
-  EditFunction,
-  CallFunction,
-// @ts-expect-error - TS6142 - Module '../GDJSInspectorDescriptions' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Debugger/GDJSInspectorDescriptions.tsx', but '--jsx' is not set.
-} from '../GDJSInspectorDescriptions';
+import { EditFunction, CallFunction } from '../GDJSInspectorDescriptions';
 import mapValues from 'lodash/mapValues';
 
 // This mirrors the internals of gdjs.Variable.
 type Variable = {
-  _type: 'string' | 'number' | 'boolean' | 'structure' | 'array',
-  _str: string,
-  _value: number,
-  _bool: boolean,
+  _type: 'string' | 'number' | 'boolean' | 'structure' | 'array';
+  _str: string;
+  _value: number;
+  _bool: boolean;
   _children: {
-    [key: string]: Variable
-  },
-  _childrenArray: Array<Variable>
+    [key: string]: Variable;
+  };
+  _childrenArray: Array<Variable>;
 };
 
 // This mirrors the internals of gdjs.VariablesContainer.
 type VariablesContainer = {
   _variables: {
     items: {
-      [key: string]: Variable
-    }
-  }
+      [key: string]: Variable;
+    };
+  };
 };
 
 const transformVariable = (variable: Variable) => {
@@ -67,13 +63,16 @@ const transform = (variablesContainer: VariablesContainer) => {
  * Returns the list of properties to access the variable at the specified path in the specified variables container.
  * Also returns the variable already living there.
  */
-const constructPathToVariable = (editPath: Array<string>, variablesContainer: VariablesContainer): {
-  path: Array<string> | null | undefined,
-  variable: Variable | null | undefined
+const constructPathToVariable = (
+  editPath: Array<string>,
+  variablesContainer: VariablesContainer
+): {
+  path: Array<string> | null | undefined;
+  variable: Variable | null | undefined;
 } => {
   const variableInContainerName = editPath.shift();
   const path = ['_variables', 'items', variableInContainerName];
-// @ts-expect-error - TS2538 - Type 'undefined' cannot be used as an index type.
+  // @ts-expect-error - TS2538 - Type 'undefined' cannot be used as an index type.
   let variable = variablesContainer._variables.items[variableInContainerName];
   let skip = false;
 
@@ -96,15 +95,14 @@ const constructPathToVariable = (editPath: Array<string>, variablesContainer: Va
     else return { path: null, variable: null };
   }
 
-// @ts-expect-error - TS2322 - Type '(string | undefined)[]' is not assignable to type 'string[]'.
+  // @ts-expect-error - TS2322 - Type '(string | undefined)[]' is not assignable to type 'string[]'.
   return { path, variable };
 };
 
-const handleEdit = (edit: any, {
-  onCall,
-  onEdit,
-  variablesContainer,
-}: Props) => {
+const handleEdit = (
+  edit: any,
+  { onCall, onEdit, variablesContainer }: Props
+) => {
   if (!variablesContainer) return;
 
   // Reconstruct the variable to edit from the path
@@ -169,22 +167,21 @@ const handleEdit = (edit: any, {
 };
 
 type Props = {
-  variablesContainer: VariablesContainer | null | undefined,
-  onCall: CallFunction,
-  onEdit: EditFunction
+  variablesContainer: VariablesContainer | null | undefined;
+  onCall: CallFunction;
+  onEdit: EditFunction;
 };
 
 const VariablesContainerInspector = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ReactJsonView
     collapsed={false}
     name={false}
-// @ts-expect-error - TS2322 - Type '{ [x: string]: any; } | null' is not assignable to type 'object'.
+    // @ts-expect-error - TS2322 - Type '{ [x: string]: any; } | null' is not assignable to type 'object'.
     src={props.variablesContainer ? transform(props.variablesContainer) : null}
     enableClipboard={false}
     displayDataTypes={false}
     displayObjectSize={false}
-    onEdit={edit => handleEdit(edit, props)}
+    onEdit={(edit) => handleEdit(edit, props)}
     groupArraysAfterLength={50}
     theme="monokai"
     validationMessage="Invalid value"

@@ -1,35 +1,34 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { MessageDescriptor } from '../../../../Utils/i18n/MessageDescriptor.flow';
 
 export const firstQuestion = 'creationGoal';
 
 export type FreeAnswerData = {
-  text: MessageDescriptor,
-  id: string,
-  imageSource?: string,
-  isFree: true
+  text: MessageDescriptor;
+  id: string;
+  imageSource?: string;
+  isFree: true;
 };
 
 export type ChoiceAnswerData = {
-  text: MessageDescriptor,
-  id: string,
-  nextQuestion?: string,
-  imageSource: string
+  text: MessageDescriptor;
+  id: string;
+  nextQuestion?: string;
+  imageSource: string;
 };
 
 export type AnswerData = ChoiceAnswerData | FreeAnswerData;
 
 export type QuestionData = {
-  text: MessageDescriptor,
-  nextQuestion?: string,
-  getNextQuestion?: (arg1?: any) => string | null,
-  multi?: boolean,
-  answers: Array<AnswerData>
+  text: MessageDescriptor;
+  nextQuestion?: string;
+  getNextQuestion?: (arg1?: any) => string | null;
+  multi?: boolean;
+  answers: Array<AnswerData>;
 };
 
 export type Questionnaire = {
-  [questionId: string]: QuestionData
+  [questionId: string]: QuestionData;
 };
 
 const questionnaire: Questionnaire = {
@@ -255,12 +254,12 @@ const questionnaire: Questionnaire = {
     text: t`Do you have game development experience?`,
     getNextQuestion: (
       userAnswers: Array<{
-        questionId: string,
-        answers: string[]
+        questionId: string;
+        answers: string[];
       }>
     ) =>
       userAnswers.some(
-        answer =>
+        (answer) =>
           answer.questionId === 'targetDate' ||
           (answer.questionId === 'learningKindOfProjects' &&
             answer.answers.includes('interactiveService'))

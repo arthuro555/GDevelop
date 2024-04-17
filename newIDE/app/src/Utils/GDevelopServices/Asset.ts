@@ -12,7 +12,7 @@ import {
   PrivateGameTemplateListingData,
   createProductAuthorizedUrl,
   isPrivateAssetResourceAuthorizedUrl,
-// @ts-expect-error - TS6142 - Module './Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 } from './Shop';
 
 export type License = {
@@ -42,9 +42,9 @@ export type ExtensionDependency = {
 };
 
 export type ObjectAsset = {
-  object: any /*(serialized gdObjectConfiguration)*/,
+  object: any /*(serialized gd.ObjectConfiguration)*/,
   resources: Array<
-  any /*(serialized gdResource)*/>,
+  any /*(serialized gd.Resource)*/>,
   // TODO This can become mandatory after the migration of the asset repository.
   requiredExtensions?: Array<ExtensionDependency>
 };

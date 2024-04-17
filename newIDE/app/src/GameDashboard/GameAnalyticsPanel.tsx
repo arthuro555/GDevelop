@@ -1,30 +1,30 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {Trans, t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 import * as React from 'react';
 import { formatISO, subDays } from 'date-fns';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
 import { Game } from '../Utils/GDevelopServices/Game';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
 import {
   GameMetrics,
   getGameMetricsFrom,
 } from '../Utils/GDevelopServices/Analytics';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../UI/PlaceholderError';
-// @ts-expect-error - TS6142 - Module '../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField from '../UI/SelectField';
-// @ts-expect-error - TS6142 - Module '../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../UI/SelectOption';
-// @ts-expect-error - TS6142 - Module '../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ResponsiveLineStackLayout } from '../UI/Layout';
 import {
   ResponsiveContainer,
@@ -38,14 +38,14 @@ import {
   Area,
 } from 'recharts';
 import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import {
   buildChartData,
   daysShownForYear,
   durationValues,
 } from './GameAnalyticsEvaluator';
-// @ts-expect-error - TS6142 - Module '../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../UI/Paper';
 
 const chartMargins = {
@@ -81,11 +81,9 @@ const CustomTooltip = ({
   customStyle: any
 }) =>
   payload ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <Paper style={customStyle} background="light">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text size="sub-title" noMargin>
           {label}
         </Text>
@@ -103,7 +101,7 @@ const CustomTooltip = ({
               },
               index
             ) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <Text noMargin key={index}>{`${name}: ${
                 Number.isInteger(value) ? value.toString() : value.toFixed(2)
               }${unit ? ` ${unit}` : ''}`}</Text>
@@ -187,51 +185,41 @@ export const GameAnalyticsPanel = ({
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) =>
         gameRollingMetricsError ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <PlaceholderError
             onRetry={() => {
               loadGameMetrics();
             }}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>There was an issue getting the game analytics.</Trans>{' '}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>Verify your internet connection or try again later.</Trans>
           </PlaceholderError>
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <ColumnStackLayout expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {isGameMetricsLoading && <PlaceholderLoader />}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Line noMargin justifyContent="flex-end">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <SelectField
                   value={dataPeriod}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
+
                   onChange={(e, i, period: string) => {
                     setDataPeriod(period);
                   }}
                   disableUnderline
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <SelectOption key="month" value="month" label={t`Month`} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <SelectOption key="year" value="year" label={t`Year`} />
                 </SelectField>
               </Line>
               {!isGameMetricsLoading &&
               (!gameRollingMetrics || gameRollingMetrics.length === 0) ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <AlertMessage kind="warning">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>
                     There were no players or stored metrics for this period. Be
                     sure to publish your game and get players to try it to see
@@ -239,24 +227,17 @@ export const GameAnalyticsPanel = ({
                   </Trans>
                 </AlertMessage>
               ) : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ResponsiveLineStackLayout
                 expand
                 noMargin
                 justifyContent="center"
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column noMargin alignItems="center" expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="block-title" align="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>{chartData.overview.playersCount} sessions</Trans>
                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ResponsiveContainer width={chartWidth} height={chartHeight}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <AreaChart data={chartData.overTime} margin={chartMargins}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Viewers`)}
                         type="monotone"
@@ -266,7 +247,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.125}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Players`)}
                         type="monotone"
@@ -276,24 +256,20 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.25}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CartesianGrid
                         stroke={gdevelopTheme.chart.gridColor}
                         strokeDasharray="3 3"
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <XAxis
                         dataKey="date"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <YAxis
                         dataKey="viewersCount"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Tooltip
                         content={props =>
 // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
@@ -306,21 +282,15 @@ export const GameAnalyticsPanel = ({
                     </AreaChart>
                   </ResponsiveContainer>
                 </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column noMargin alignItems="center" expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="block-title" align="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       {Math.round(chartData.overview.bounceRatePercent)}% bounce
                       rate
                     </Trans>
                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ResponsiveContainer width={chartWidth} height={chartHeight}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <LineChart data={chartData.overTime} margin={chartMargins}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <RechartsLine
                         name={i18n._(t`Bounce rate`)}
                         unit="%"
@@ -332,24 +302,20 @@ export const GameAnalyticsPanel = ({
                         dot={styles.chartLineDot}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CartesianGrid
                         stroke={gdevelopTheme.chart.gridColor}
                         strokeDasharray="3 3"
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <XAxis
                         dataKey="date"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <YAxis
                         dataKey="bounceRatePercent"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Tooltip
                         content={props =>
 // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
@@ -363,17 +329,13 @@ export const GameAnalyticsPanel = ({
                   </ResponsiveContainer>
                 </Column>
               </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ResponsiveLineStackLayout
                 expand
                 noMargin
                 justifyContent="center"
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column expand noMargin alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="block-title" align="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       {Math.round(
                         chartData.overview.meanPlayedDurationInMinutes
@@ -381,11 +343,8 @@ export const GameAnalyticsPanel = ({
                       minutes per player
                     </Trans>
                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ResponsiveContainer width={chartWidth} height={chartHeight}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <LineChart data={chartData.overTime} margin={chartMargins}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <RechartsLine
                         name={i18n._(t`Mean played time`)}
                         unit={' ' + i18n._(t`minutes`)}
@@ -397,24 +356,20 @@ export const GameAnalyticsPanel = ({
                         dot={styles.chartLineDot}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CartesianGrid
                         stroke={gdevelopTheme.chart.gridColor}
                         strokeDasharray="3 3"
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <XAxis
                         dataKey="date"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <YAxis
                         dataKey="meanPlayedDurationInMinutes"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Tooltip
                         content={props =>
 // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
@@ -427,11 +382,8 @@ export const GameAnalyticsPanel = ({
                     </LineChart>
                   </ResponsiveContainer>
                 </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column expand noMargin alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="block-title" align="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       {
                         chartData.overview.greaterDurationPlayerSurface
@@ -445,14 +397,11 @@ export const GameAnalyticsPanel = ({
                       minutes
                     </Trans>
                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ResponsiveContainer width={chartWidth} height={chartHeight}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <AreaChart
                       data={chartData.overPlayedDuration}
                       margin={chartMargins}
                     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Players`)}
                         type="monotone"
@@ -462,7 +411,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.25}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <XAxis
                         name={i18n._(t`Played time`)}
                         dataKey="duration"
@@ -473,19 +421,16 @@ export const GameAnalyticsPanel = ({
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <YAxis
                         dataKey="playersCount"
                         stroke="#f5f5f5"
                         style={styles.tickLabel}
                         domain={[0, 'dataMax']}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CartesianGrid
                         stroke={gdevelopTheme.chart.gridColor}
                         strokeDasharray="3 3"
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Tooltip
                         content={props =>
 // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.
@@ -499,17 +444,13 @@ export const GameAnalyticsPanel = ({
                   </ResponsiveContainer>
                 </Column>
               </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ResponsiveLineStackLayout
                 expand
                 noMargin
                 justifyContent="center"
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column expand noMargin alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="block-title" align="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       {Math.round(
                         chartData.overview.nearestToMedianDuration
@@ -523,11 +464,8 @@ export const GameAnalyticsPanel = ({
                       minutes
                     </Trans>
                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ResponsiveContainer width={chartWidth} height={chartHeight}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <AreaChart data={chartData.overTime} margin={chartMargins}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Players`)}
                         type="monotone"
@@ -540,7 +478,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.15}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Played > 3 minutes`)}
                         type="monotone"
@@ -553,7 +490,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.15}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Played > 5 minutes`)}
                         type="monotone"
@@ -566,7 +502,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.15}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Played > 10 minutes`)}
                         type="monotone"
@@ -579,7 +514,6 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.15}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Area
                         name={i18n._(t`Played > 15 minutes`)}
                         type="monotone"
@@ -592,25 +526,21 @@ export const GameAnalyticsPanel = ({
                         fillOpacity={0.15}
                         yAxisId={0}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CartesianGrid
                         stroke={gdevelopTheme.chart.gridColor}
                         strokeDasharray="3 3"
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <XAxis
                         dataKey="date"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <YAxis
                         dataKey="over60sPlayersPercent"
                         stroke={gdevelopTheme.chart.textColor}
                         style={styles.tickLabel}
                         unit={' %'}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Tooltip
                         content={props =>
 // @ts-expect-error - TS2345 - Argument of type '{ customStyle: { readonly color: any; readonly padding: 10; }; separator?: string | undefined; wrapperClassName?: string | undefined; labelClassName?: string | undefined; formatter?: Formatter<...> | undefined; ... 27 more ...; wrapperStyle?: React.CSSProperties | undefined; }' is not assignable to parameter of type '{ payload: any[] | null | undefined; label: string; customStyle: any; }'.

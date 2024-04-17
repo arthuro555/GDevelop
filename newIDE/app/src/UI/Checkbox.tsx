@@ -48,7 +48,7 @@ const Checkbox = (props: Props) => {
   const classes = useStyles();
   const formGroupClasses = useFormGroupStyles();
   const checkbox = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <MUICheckbox
       className={classes.root}
       disabled={props.disabled}
@@ -57,15 +57,15 @@ const Checkbox = (props: Props) => {
       onChange={
 // @ts-expect-error - TS2722 - Cannot invoke an object which is possibly 'undefined'. | TS2532 - Object is possibly 'undefined'. | TS2531 - Object is possibly 'null'. | TS2339 - Property 'checked' does not exist on type 'EventTarget'. | TS1005 - '}' expected.
         onCheck ? event: any => onCheck(event, event.target.checked) : undefined
-// @ts-expect-error - TS1003 - Identifier expected.
+
       }
       icon={props.uncheckedIcon}
       checkedIcon={props.checkedIcon}
       style={props.label ? undefined : props.style}
       id={props.id}
-// @ts-expect-error - TS1109 - Expression expected.
+
     />
-// @ts-expect-error - TS1109 - Expression expected.
+
   );
   return props.label ? (
     <FormGroup classes={formGroupClasses}>
@@ -84,7 +84,7 @@ const Checkbox = (props: Props) => {
   ) : (
     checkbox
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default Checkbox;

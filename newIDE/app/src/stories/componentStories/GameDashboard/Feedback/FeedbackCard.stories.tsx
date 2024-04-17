@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../../GameDashboard/Feedbacks/FeedbackCard' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/Feedbacks/FeedbackCard.tsx', but '--jsx' is not set.
 import FeedbackCard from '../../../../GameDashboard/Feedbacks/FeedbackCard';
 
 import {
@@ -21,7 +19,6 @@ export default {
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={commentUnprocessed}
     authenticatedUser={fakeSilverAuthenticatedUser}
@@ -30,7 +27,6 @@ export const Default = () => (
 );
 
 export const Processed = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={commentProcessed}
     authenticatedUser={fakeSilverAuthenticatedUser}
@@ -39,7 +35,6 @@ export const Processed = () => (
 );
 
 export const WithContact = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={{
       ...commentUnprocessed,
@@ -51,7 +46,6 @@ export const WithContact = () => (
 );
 
 export const WithNamedBuild = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={commentUnprocessed}
     buildProperties={{
@@ -65,7 +59,6 @@ export const WithNamedBuild = () => (
 );
 
 export const WithAuthenticatedPlayer = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={{
       ...commentUnprocessed,
@@ -77,7 +70,6 @@ export const WithAuthenticatedPlayer = () => (
 );
 
 export const WithAuthenticatedPlayerAndContact = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={{
       ...commentUnprocessed,
@@ -90,7 +82,6 @@ export const WithAuthenticatedPlayerAndContact = () => (
 );
 
 export const FeedbackCardWithUnnamedBuild = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={commentUnprocessed}
     buildProperties={{ id: 'build-id', isDeleted: false }}
@@ -100,7 +91,6 @@ export const FeedbackCardWithUnnamedBuild = () => (
 );
 
 export const FeedbackCardWithDeletedBuild = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FeedbackCard
     comment={commentUnprocessed}
     buildProperties={{ id: 'build-id', isDeleted: true }}

@@ -1,27 +1,26 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t, Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import { t, Trans } from '@lingui/macro';
+
 import { I18n } from '@lingui/react';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog from '../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../UI/HelpButton';
-// @ts-expect-error - TS6142 - Module '../UI/Tabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Tabs.tsx', but '--jsx' is not set.
+
 import { Tabs } from '../UI/Tabs';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/index.tsx', but '--jsx' is not set.
+
 import { AssetStore, AssetStoreInterface } from '.';
 import { ResourceManagementProps } from '../ResourcesList/ResourceSource';
 import { sendAssetAddedToProject } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
-// @ts-expect-error - TS6142 - Module '../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module './AssetStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreContext.tsx', but '--jsx' is not set.
+
 import { AssetStoreContext } from './AssetStoreContext';
-// @ts-expect-error - TS6142 - Module './AssetPackInstallDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetPackInstallDialog.tsx', but '--jsx' is not set.
+
 import AssetPackInstallDialog from './AssetPackInstallDialog';
 import { EnumeratedObjectMetadata } from '../ObjectsList/EnumerateObjects';
 import {
@@ -44,26 +43,30 @@ import useAlertDialog from '../UI/Alert/useAlertDialog';
 import { useResponsiveWindowSize } from '../UI/Responsive/ResponsiveWindowMeasurer';
 import { enumerateAssetStoreIds } from './EnumerateAssetStoreIds';
 import PromisePool from '@supercharge/promise-pool';
-// @ts-expect-error - TS6142 - Module './NewObjectFromScratch' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/NewObjectFromScratch.tsx', but '--jsx' is not set.
+
 import NewObjectFromScratch from './NewObjectFromScratch';
-// @ts-expect-error - TS6142 - Module './AssetsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetsList.tsx', but '--jsx' is not set.
+
 import { getAssetShortHeadersToDisplay } from './AssetsList';
-// @ts-expect-error - TS6142 - Module '../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../UI/ErrorBoundary';
 
 const isDev = Window.isDev();
 
 export const useExtensionUpdateAlertDialog = () => {
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'.
   const { showConfirmation } = useAlertDialog();
-  return async (outOfDateExtensionShortHeaders: Array<ExtensionShortHeader>): Promise<boolean> => {
+  return async (
+    outOfDateExtensionShortHeaders: Array<ExtensionShortHeader>
+  ): Promise<boolean> => {
     return await showConfirmation({
       title: t`Extension update`,
-      message: t`Before installing this asset, it's strongly recommended to update these extensions${'\n\n - ' +
+      message: t`Before installing this asset, it's strongly recommended to update these extensions${
+        '\n\n - ' +
         outOfDateExtensionShortHeaders
-          .map(extension => extension.fullName)
+          .map((extension) => extension.fullName)
           .join('\n\n - ') +
-        '\n\n'}Do you want to update it now ?`,
+        '\n\n'
+      }Do you want to update it now ?`,
       confirmButtonLabel: t`Update the extension`,
       dismissButtonLabel: t`Skip the update`,
     });
@@ -77,10 +80,12 @@ export const useFetchAssets = () => {
     PrivateAssetsAuthorizationContext
   );
 
-  return async (assetShortHeaders: Array<AssetShortHeader>): Promise<Array<Asset>> => {
+  return async (
+    assetShortHeaders: Array<AssetShortHeader>
+  ): Promise<Array<Asset>> => {
     const fetchedAssets = await PromisePool.withConcurrency(6)
       .for(assetShortHeaders)
-      .process<Asset>(async assetShortHeader => {
+      .process<Asset>(async (assetShortHeader) => {
         const asset = isPrivateAsset(assetShortHeader)
           ? await fetchPrivateAsset(assetShortHeader, {
               environment,
@@ -105,14 +110,14 @@ export const useFetchAssets = () => {
 };
 
 type Props = {
-  project: gdProject,
-  layout: gdLayout | null | undefined,
-  objectsContainer: gdObjectsContainer,
-  resourceManagementProps: ResourceManagementProps,
-  onClose: () => void,
-  onCreateNewObject: (type: string) => void,
-  onObjectsAddedFromAssets: (arg1: Array<gdObject>) => void,
-  canInstallPrivateAsset: () => boolean
+  project: gd.Project;
+  layout: gd.Layout | null | undefined;
+  objectsContainer: gd.ObjectsContainer;
+  resourceManagementProps: ResourceManagementProps;
+  onClose: () => void;
+  onCreateNewObject: (type: string) => void;
+  onObjectsAddedFromAssets: (arg1: Array<gd.Object>) => void;
+  canInstallPrivateAsset: () => boolean;
 };
 
 function NewObjectDialog({
@@ -126,18 +131,16 @@ function NewObjectDialog({
   canInstallPrivateAsset,
 }: Props) {
   const { isMobile } = useResponsiveWindowSize();
-  const {
-    setNewObjectDialogDefaultTab,
-    getNewObjectDialogDefaultTab,
-  } = React.useContext(PreferencesContext);
+  const { setNewObjectDialogDefaultTab, getNewObjectDialogDefaultTab } =
+    React.useContext(PreferencesContext);
   const [currentTab, setCurrentTab] = React.useState(
     getNewObjectDialogDefaultTab()
   );
 
-  React.useEffect(() => setNewObjectDialogDefaultTab(currentTab), [
-    setNewObjectDialogDefaultTab,
-    currentTab,
-  ]);
+  React.useEffect(
+    () => setNewObjectDialogDefaultTab(currentTab),
+    [setNewObjectDialogDefaultTab, currentTab]
+  );
 
   const {
     assetShortHeadersSearchResults,
@@ -145,25 +148,18 @@ function NewObjectDialog({
     environment,
     setEnvironment,
   } = React.useContext(AssetStoreContext);
-  const {
-    openedAssetPack,
-    openedAssetShortHeader,
-    selectedFolders,
-  } = shopNavigationState.getCurrentPage();
-  const [
-    isAssetPackDialogInstallOpen,
-    setIsAssetPackDialogInstallOpen,
-  ] = React.useState(false);
+  const { openedAssetPack, openedAssetShortHeader, selectedFolders } =
+    shopNavigationState.getCurrentPage();
+  const [isAssetPackDialogInstallOpen, setIsAssetPackDialogInstallOpen] =
+    React.useState(false);
   // Avoid memoizing the result of enumerateAssetStoreIds, as it does not get updated
   // when adding assets.
   const existingAssetStoreIds = enumerateAssetStoreIds(
     project,
     objectsContainer
   );
-  const [
-    isAssetBeingInstalled,
-    setIsAssetBeingInstalled,
-  ] = React.useState<boolean>(false);
+  const [isAssetBeingInstalled, setIsAssetBeingInstalled] =
+    React.useState<boolean>(false);
   const [
     selectedCustomObjectEnumeratedMetadata,
     setSelectedCustomObjectEnumeratedMetadata,
@@ -177,14 +173,13 @@ function NewObjectDialog({
   const { installPrivateAsset } = React.useContext(
     PrivateAssetsAuthorizationContext
   );
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
 
   const fetchAssets = useFetchAssets();
   const showExtensionUpdateConfirmation = useExtensionUpdateAlertDialog();
 
   const onInstallAsset = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
     async (assetShortHeader): Promise<boolean> => {
       if (!assetShortHeader) return false;
       setIsAssetBeingInstalled(true);
@@ -203,12 +198,11 @@ function NewObjectDialog({
         }
         const assets = await fetchAssets([assetShortHeader]);
         const asset = assets[0];
-        const requiredExtensionInstallation = await checkRequiredExtensionsUpdateForAssets(
-          {
+        const requiredExtensionInstallation =
+          await checkRequiredExtensionsUpdateForAssets({
             assets,
             project,
-          }
-        );
+          });
         const shouldUpdateExtension =
           requiredExtensionInstallation.outOfDateExtensionShortHeaders.length >
             0 &&
@@ -250,13 +244,11 @@ function NewObjectDialog({
         await resourceManagementProps.onFetchNewlyAddedResources();
         setIsAssetBeingInstalled(false);
         return true;
-      } catch (error: any) {
+      } catch (error) {
         console.error('Error while installing the asset:', error);
         showAlert({
           title: t`Could not install the asset`,
-          message: t`There was an error while installing the asset "${
-            assetShortHeader.name
-          }". Verify your internet connection or try again later.`,
+          message: t`There was an error while installing the asset "${assetShortHeader.name}". Verify your internet connection or try again later.`,
         });
         setIsAssetBeingInstalled(false);
         return false;
@@ -277,82 +269,70 @@ function NewObjectDialog({
     ]
   );
 
-  const onInstallEmptyCustomObject = React.useCallback(
-    async () => {
-      const requiredExtensions =
-        selectedCustomObjectEnumeratedMetadata &&
-        selectedCustomObjectEnumeratedMetadata.requiredExtensions;
-      if (!selectedCustomObjectEnumeratedMetadata || !requiredExtensions)
-        return;
-      try {
-        setIsAssetBeingInstalled(true);
-        const requiredExtensionInstallation = await checkRequiredExtensionsUpdate(
-          {
-            requiredExtensions,
-            project,
-          }
-        );
-        const shouldUpdateExtension =
-          requiredExtensionInstallation.outOfDateExtensionShortHeaders.length >
-            0 &&
-          (await showExtensionUpdateConfirmation(
-            requiredExtensionInstallation.outOfDateExtensionShortHeaders
-          ));
-        await installRequiredExtensions({
-          requiredExtensionInstallation,
-          shouldUpdateExtension,
-          eventsFunctionsExtensionsState,
+  const onInstallEmptyCustomObject = React.useCallback(async () => {
+    const requiredExtensions =
+      selectedCustomObjectEnumeratedMetadata &&
+      selectedCustomObjectEnumeratedMetadata.requiredExtensions;
+    if (!selectedCustomObjectEnumeratedMetadata || !requiredExtensions) return;
+    try {
+      setIsAssetBeingInstalled(true);
+      const requiredExtensionInstallation = await checkRequiredExtensionsUpdate(
+        {
+          requiredExtensions,
           project,
-        });
+        }
+      );
+      const shouldUpdateExtension =
+        requiredExtensionInstallation.outOfDateExtensionShortHeaders.length >
+          0 &&
+        (await showExtensionUpdateConfirmation(
+          requiredExtensionInstallation.outOfDateExtensionShortHeaders
+        ));
+      await installRequiredExtensions({
+        requiredExtensionInstallation,
+        shouldUpdateExtension,
+        eventsFunctionsExtensionsState,
+        project,
+      });
 
-        onCreateNewObject(selectedCustomObjectEnumeratedMetadata.name);
-      } catch (error: any) {
-        console.error('Error while creating the object:', error);
-        showAlert({
-          title: t`Could not create the object`,
-          message: t`There was an error while creating the object "${
-            selectedCustomObjectEnumeratedMetadata.fullName
-          }". Verify your internet connection or try again later.`,
-        });
-      } finally {
-        setIsAssetBeingInstalled(false);
-      }
-    },
-    [
-      selectedCustomObjectEnumeratedMetadata,
-      onCreateNewObject,
-      project,
-      showExtensionUpdateConfirmation,
-      eventsFunctionsExtensionsState,
-      showAlert,
-    ]
-  );
+      onCreateNewObject(selectedCustomObjectEnumeratedMetadata.name);
+    } catch (error) {
+      console.error('Error while creating the object:', error);
+      showAlert({
+        title: t`Could not create the object`,
+        message: t`There was an error while creating the object "${selectedCustomObjectEnumeratedMetadata.fullName}". Verify your internet connection or try again later.`,
+      });
+    } finally {
+      setIsAssetBeingInstalled(false);
+    }
+  }, [
+    selectedCustomObjectEnumeratedMetadata,
+    onCreateNewObject,
+    project,
+    showExtensionUpdateConfirmation,
+    eventsFunctionsExtensionsState,
+    showAlert,
+  ]);
 
-  const displayedAssetShortHeaders = React.useMemo(
-    () => {
-      return assetShortHeadersSearchResults
-        ? getAssetShortHeadersToDisplay(
-            assetShortHeadersSearchResults,
-            selectedFolders
-          )
-        : [];
-    },
-    [assetShortHeadersSearchResults, selectedFolders]
-  );
+  const displayedAssetShortHeaders = React.useMemo(() => {
+    return assetShortHeadersSearchResults
+      ? getAssetShortHeadersToDisplay(
+          assetShortHeadersSearchResults,
+          selectedFolders
+        )
+      : [];
+  }, [assetShortHeadersSearchResults, selectedFolders]);
 
   const mainAction =
     currentTab === 'asset-store' ? (
       openedAssetPack ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <RaisedButton
           key="add-all-assets"
           primary
           label={
             displayedAssetShortHeaders.length === 1 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Add this asset to my scene</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Add these assets to my scene</Trans>
             )
           }
@@ -363,19 +343,15 @@ function NewObjectDialog({
           }
         />
       ) : openedAssetShortHeader ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <RaisedButton
           key="add-asset"
           primary={!isAssetAddedToScene}
           label={
             isAssetBeingInstalled ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Adding...</Trans>
             ) : isAssetAddedToScene ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Add again</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Add to the scene</Trans>
             )
           }
@@ -386,15 +362,12 @@ function NewObjectDialog({
           id="add-asset-button"
         />
       ) : isDev ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <RaisedButton
           key="show-dev-assets"
           label={
             environment === 'staging' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Show live assets</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Show staging assets</Trans>
             )
           }
@@ -405,15 +378,12 @@ function NewObjectDialog({
       ) : null
     ) : !!selectedCustomObjectEnumeratedMetadata &&
       currentTab === 'new-object' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <RaisedButton
         key="skip-and-create"
         label={
           !isAssetBeingInstalled ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>Skip and create from scratch</Trans>
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>Adding...</Trans>
           )
         }
@@ -425,34 +395,23 @@ function NewObjectDialog({
     ) : null;
 
   const assetStore = React.useRef<AssetStoreInterface | null | undefined>(null);
-  const handleClose = React.useCallback(
-    () => {
-      assetStore.current && assetStore.current.onClose();
-      onClose();
-    },
-    [onClose]
-  );
+  const handleClose = React.useCallback(() => {
+    assetStore.current && assetStore.current.onClose();
+    onClose();
+  }, [onClose]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             title={<Trans>New object</Trans>}
             secondaryActions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <HelpButton helpPagePath="/objects" key="help" />,
             ]}
             actions={[
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <FlatButton
                 key="close"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Close</Trans>}
                 primary={false}
                 onClick={handleClose}
@@ -465,29 +424,26 @@ function NewObjectDialog({
               openedAssetPack
                 ? () => setIsAssetPackDialogInstallOpen(true)
                 : openedAssetShortHeader
-                ? async () => {
-                    await onInstallAsset(openedAssetShortHeader);
-                  }
-                : undefined
+                  ? async () => {
+                      await onInstallAsset(openedAssetShortHeader);
+                    }
+                  : undefined
             }
             open
             flexBody
             fullHeight
             id="new-object-dialog"
             fixedContent={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Tabs
                 value={currentTab}
                 onChange={setCurrentTab}
                 options={[
                   {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     label: <Trans>Asset Store</Trans>,
                     value: 'asset-store',
                     id: 'asset-store-tab',
                   },
                   {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     label: <Trans>New object from scratch</Trans>,
                     value: 'new-object',
                     id: 'new-object-from-scratch-tab',
@@ -499,19 +455,17 @@ function NewObjectDialog({
             }
           >
             {currentTab === 'asset-store' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <AssetStore ref={assetStore} hideGameTemplates />
             )}
             {currentTab === 'new-object' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <NewObjectFromScratch
                 onCreateNewObject={onCreateNewObject}
                 onCustomObjectSelected={
                   setSelectedCustomObjectEnumeratedMetadata
                 }
                 selectedCustomObject={selectedCustomObjectEnumeratedMetadata}
-// @ts-expect-error - TS7006 - Parameter 'assetShortHeader' implicitly has an 'any' type.
-                onInstallAsset={async assetShortHeader => {
+                onInstallAsset={async (assetShortHeader) => {
                   const result = await onInstallAsset(assetShortHeader);
                   if (result) {
                     handleClose();
@@ -526,7 +480,6 @@ function NewObjectDialog({
           {isAssetPackDialogInstallOpen &&
             displayedAssetShortHeaders &&
             openedAssetPack && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <AssetPackInstallDialog
                 assetPack={openedAssetPack}
                 assetShortHeaders={displayedAssetShortHeaders}
@@ -549,14 +502,11 @@ function NewObjectDialog({
 }
 
 const NewObjectDialogWithErrorBoundary = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     componentTitle={<Trans>New Object dialog</Trans>}
     scope="new-object-dialog"
     onClose={props.onClose}
   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <NewObjectDialog {...props} />
   </ErrorBoundary>
 );

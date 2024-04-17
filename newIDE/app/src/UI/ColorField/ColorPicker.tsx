@@ -8,18 +8,18 @@ import muiZIndex from '@material-ui/core/styles/zIndex';
 import { RGBColor } from '../../Utils/ColorTransformer';
 
 export type ColorResult = {
-  rgb: RGBColor
+  rgb: RGBColor;
 };
 
 type ColorChangeHandler = (color: ColorResult) => void;
 
 type Props = {
-  color: RGBColor | null | undefined,
-  style?: any,
-  onChange?: ColorChangeHandler,
-  onChangeComplete?: ColorChangeHandler,
-  disableAlpha?: boolean,
-  disabled?: boolean
+  color: RGBColor | null | undefined;
+  style?: any;
+  onChange?: ColorChangeHandler;
+  onChangeComplete?: ColorChangeHandler;
+  disableAlpha?: boolean;
+  disabled?: boolean;
 };
 
 const styles = {
@@ -80,19 +80,16 @@ const ColorPicker = ({
       };
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={style}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         style={{
           ...styles.swatch,
           ...(disabled ? styles.disabled : {}),
         }}
         onClick={handleClick}
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+        // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
         ref={swatchRef}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div
           style={{
             ...styles.color,
@@ -105,14 +102,12 @@ const ColorPicker = ({
         </div>
       </div>
       {displayColorPicker && swatchRef.current ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Popover
           open
           onClose={handleClose}
           anchorEl={swatchRef.current}
           style={styles.popover}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SketchPicker
             color={displayedColor}
             onChange={onChange}

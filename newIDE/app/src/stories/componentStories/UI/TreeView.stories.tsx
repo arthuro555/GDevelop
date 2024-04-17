@@ -1,27 +1,25 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import { getPaperDecorator } from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/DragAndDrop/DragAndDropContextProvider'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragAndDropContextProvider.js' implicitly has an 'any' type.
+
 import DragAndDropContextProvider from '../../../UI/DragAndDrop/DragAndDropContextProvider';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-virtualized'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-virtualized/dist/commonjs/index.js' implicitly has an 'any' type.
+
 import { AutoSizer } from 'react-virtualized';
 
-// @ts-expect-error - TS6142 - Module '../../../UI/TreeView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TreeView/index.tsx', but '--jsx' is not set.
 import TreeView from '../../../UI/TreeView';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../../UI/TextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextField.tsx', but '--jsx' is not set.
+
 import TextField from '../../../UI/TextField';
 import sample from 'lodash/sample';
-// @ts-expect-error - TS6142 - Module '../../../UI/Toggle' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Toggle.tsx', but '--jsx' is not set.
+
 import Toggle from '../../../UI/Toggle';
-// @ts-expect-error - TS6142 - Module '../../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ResponsiveLineStackLayout } from '../../../UI/Layout';
 
 export default {
@@ -31,10 +29,10 @@ export default {
 };
 
 type Node = {
-  name: string,
-  id: string,
-  isRoot?: boolean,
-  children?: Node[]
+  name: string;
+  id: string;
+  isRoot?: boolean;
+  children?: Node[];
 };
 
 const nodes: Node[] = [
@@ -461,34 +459,25 @@ export const Default = () => {
   const [multiSelect, setMultiSelect] = React.useState<boolean>(true);
   const [selectedItems, setSelectedItems] = React.useState<Node[]>([]);
   const onSelectItems = (items: Node[]) => {
-    setSelectedItems(items.filter(item => !item.isRoot));
+    setSelectedItems(items.filter((item) => !item.isRoot));
   };
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ResponsiveLineStackLayout expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Line expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <TextField
               fullWidth
               type="text"
               value={searchText}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
               onChange={(e, text) => {
                 setSearchText(text);
               }}
               hintText={'Filter'}
             />
           </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Line noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Toggle
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               label={<Text>Allow multi selection</Text>}
               labelPosition="right"
               toggled={multiSelect}
@@ -496,33 +485,26 @@ export const Default = () => {
             />
           </Line>
         </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <FixedHeightFlexContainer height={400}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <AutoSizer>
-{ /* @ts-expect-error - TS7031 - Binding element 'height' implicitly has an 'any' type. | TS7031 - Binding element 'width' implicitly has an 'any' type. */}
             {({ height, width }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Line expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <TreeView
                     multiSelect={multiSelect}
                     height={height}
                     width={width}
                     items={nodes}
                     searchText={searchText}
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-                    getItemId={node => node.id}
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-                    getItemName={node => node.name}
+                    // @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
+                    getItemId={(node) => node.id}
+                    // @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
+                    getItemName={(node) => node.name}
                     onEditItem={action('Edit item')}
                     selectedItems={selectedItems}
                     onSelectItems={onSelectItems}
                     onRenameItem={action('Rename item')}
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-                    getItemThumbnail={node =>
+                    getItemThumbnail={(node) =>
                       node.children
                         ? null
                         : sample([
@@ -533,8 +515,8 @@ export const Default = () => {
                           ])
                     }
                     // $FlowIgnore
-// @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
-                    getItemChildren={node => node.children}
+                    // @ts-expect-error - TS7006 - Parameter 'node' implicitly has an 'any' type.
+                    getItemChildren={(node) => node.children}
                     buildMenuTemplate={() => [{ label: 'salut' }]}
                     onMoveSelectionToItem={action('Drop selection on item')}
                     canMoveSelectionToItem={() => Math.random() > 0.2}

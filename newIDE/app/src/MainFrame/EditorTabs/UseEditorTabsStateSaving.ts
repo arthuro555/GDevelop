@@ -10,21 +10,19 @@ import {
   isStartPageTabPresent,
   closeAllEditorTabs,
 } from './EditorTabsHandler';
-// @ts-expect-error - TS6142 - Module '../Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../Preferences/PreferencesContext';
 import { useDebounce } from '../../Utils/UseDebounce';
 
 type Props = {
-  editorTabs: EditorTabsState,
-  setEditorTabs: (arg1: EditorTabsState) => void,
-  currentProjectId: string | null,
-  getEditorOpeningOptions: (
-    arg1: {
-      kind: EditorKind,
-      name: string,
-      dontFocusTab?: boolean
-    },
-  ) => EditorOpeningOptions
+  editorTabs: EditorTabsState;
+  setEditorTabs: (arg1: EditorTabsState) => void;
+  currentProjectId: string | null;
+  getEditorOpeningOptions: (arg1: {
+    kind: EditorKind;
+    name: string;
+    dontFocusTab?: boolean;
+  }) => EditorOpeningOptions;
 };
 
 const projectHasItem = ({
@@ -32,9 +30,9 @@ const projectHasItem = ({
   kind,
   name,
 }: {
-  project: gdProject,
-  kind: EditorKind,
-  name: string
+  project: gd.Project;
+  kind: EditorKind;
+  name: string;
 }) => {
   if (['debugger', 'start page', 'resources'].includes(kind)) return true;
   switch (kind) {
@@ -59,30 +57,23 @@ const useEditorTabsStateSaving = ({
   getEditorOpeningOptions,
   setEditorTabs,
 }: Props) => {
-  const {
-    setEditorStateForProject,
-    getEditorStateForProject,
-  } = React.useContext(PreferencesContext);
-  const saveEditorState = React.useCallback(
-    () => {
-      // Do not save the state if the user is on the start page
-      if (!currentProjectId || editorTabs.currentTab === 0) return;
-      const editorState = {
-        currentTab: editorTabs.currentTab,
-        editors: editorTabs.editors
-          .filter(editor => editor.key !== 'start page')
-          .map(getEditorTabMetadata),
-      } as const;
+  const { setEditorStateForProject, getEditorStateForProject } =
+    React.useContext(PreferencesContext);
+  const saveEditorState = React.useCallback(() => {
+    // Do not save the state if the user is on the start page
+    if (!currentProjectId || editorTabs.currentTab === 0) return;
+    const editorState = {
+      currentTab: editorTabs.currentTab,
+      editors: editorTabs.editors
+        .filter((editor) => editor.key !== 'start page')
+        .map(getEditorTabMetadata),
+    } as const;
 
-      setEditorStateForProject(
-        currentProjectId,
-        editorState.editors.length === 0
-          ? undefined
-          : { editorTabs: editorState }
-      );
-    },
-    [currentProjectId, editorTabs, setEditorStateForProject]
-  );
+    setEditorStateForProject(
+      currentProjectId,
+      editorState.editors.length === 0 ? undefined : { editorTabs: editorState }
+    );
+  }, [currentProjectId, editorTabs, setEditorStateForProject]);
 
   const saveEditorStateDebounced = useDebounce(
     saveEditorState,
@@ -93,20 +84,17 @@ const useEditorTabsStateSaving = ({
     !!currentProjectId ? 1000 : 0
   );
 
-  React.useEffect(
-    () => {
-      saveEditorStateDebounced();
-    },
-    [
-      saveEditorStateDebounced,
-      currentProjectId,
-      editorTabs,
-      setEditorStateForProject,
-    ]
-  );
+  React.useEffect(() => {
+    saveEditorStateDebounced();
+  }, [
+    saveEditorStateDebounced,
+    currentProjectId,
+    editorTabs,
+    setEditorStateForProject,
+  ]);
 
   const hasAPreviousSaveForEditorTabsState = React.useCallback(
-    (project: gdProject) => {
+    (project: gd.Project) => {
       const projectId = project.getProjectUuid();
       return !!getEditorStateForProject(projectId);
     },
@@ -114,15 +102,15 @@ const useEditorTabsStateSaving = ({
   );
 
   const openEditorTabsFromPersistedState = React.useCallback(
-    (project: gdProject): number => {
+    (project: gd.Project): number => {
       const projectId = project.getProjectUuid();
       const editorState = getEditorStateForProject(projectId);
       if (!editorState) return 0;
       let shouldOpenSavedCurrentTab = true;
 
       const editorsOpeningOptions = editorState.editorTabs.editors
-// @ts-expect-error - TS7006 - Parameter 'editorMetadata' implicitly has an 'any' type.
-        .map(editorMetadata => {
+
+        .map((editorMetadata) => {
           if (
             projectHasItem({
               project,
@@ -166,8 +154,8 @@ const useEditorTabsStateSaving = ({
         shouldOpenSavedCurrentTab
           ? editorState.editorTabs.currentTab
           : newEditorTabs.editors.length >= 1
-          ? 1
-          : 0
+            ? 1
+            : 0
       );
       setEditorTabs(newEditorTabs);
       return editorsOpeningOptions.length;

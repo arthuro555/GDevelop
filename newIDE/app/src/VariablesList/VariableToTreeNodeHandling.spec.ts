@@ -6,30 +6,27 @@ import {
   updateListOfNodesFollowingChangeName,
 } from './VariableToTreeNodeHandling';
 
-const gd: libGDevelop = global.gd;
-
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('VariableToTreeNodeHandling', () => {
-// @ts-expect-error - TS7034 - Variable 'variablesContainer' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'variablesContainer' implicitly has type 'any' in some locations where its type cannot be determined.
   let variablesContainer;
-// @ts-expect-error - TS7034 - Variable 'parent' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'parent' implicitly has type 'any' in some locations where its type cannot be determined.
   let parent;
-// @ts-expect-error - TS7034 - Variable 'stringChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'stringChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let stringChild;
-// @ts-expect-error - TS7034 - Variable 'arrayChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'arrayChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let arrayChild;
   let firstArrayChild;
-// @ts-expect-error - TS7034 - Variable 'secondArrayChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'secondArrayChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let secondArrayChild;
-// @ts-expect-error - TS7034 - Variable 'parent2' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'parent2' implicitly has type 'any' in some locations where its type cannot be determined.
   let parent2;
-// @ts-expect-error - TS7034 - Variable 'boolChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'boolChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let boolChild;
-// @ts-expect-error - TS7034 - Variable 'structureChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'structureChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let structureChild;
-// @ts-expect-error - TS7034 - Variable 'firstStructureChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'firstStructureChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let firstStructureChild;
-// @ts-expect-error - TS7034 - Variable 'secondStructureChild' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'secondStructureChild' implicitly has type 'any' in some locations where its type cannot be determined.
   let secondStructureChild;
   beforeEach(() => {
     /*
@@ -88,13 +85,11 @@ describe('VariableToTreeNodeHandling', () => {
     variablesContainer.insert('parent2', parent2, 1);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('getVariableContextFromNodeId', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('Variable context is correctly given for array element', () => {
       const { variable, lineage, depth, name } = getVariableContextFromNodeId(
         `parent${separator}arrayChild${separator}1`,
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+        // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
         variablesContainer
       );
       if (!variable || !name) throw new Error('Variable could not be found');
@@ -116,11 +111,10 @@ describe('VariableToTreeNodeHandling', () => {
       expect(variable.getBool()).toBe(secondArrayChild.getBool());
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('Variable context is correctly given for structure element', () => {
       const { variable, lineage, depth, name } = getVariableContextFromNodeId(
         `parent2${separator}structureChild${separator}firstStructureChild`,
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+        // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
         variablesContainer
       );
       if (!variable || !name) throw new Error('Variable could not be found');
@@ -143,9 +137,7 @@ describe('VariableToTreeNodeHandling', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('updateListOfNodesFollowingChangeName', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('Concerned variable node id is modified in the list', () => {
       expect(
         updateListOfNodesFollowingChangeName(
@@ -164,7 +156,6 @@ describe('VariableToTreeNodeHandling', () => {
       ]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test("Concerned variable's children node ids are modified in the list", () => {
       expect(
         updateListOfNodesFollowingChangeName(
@@ -184,13 +175,11 @@ describe('VariableToTreeNodeHandling', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('generateListOfNodesMatchingSearchInVariable', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('First variable should be included if name matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariable({
-// @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
           variable: parent,
           variableName: 'parent',
           nodeId: 'parent',
@@ -200,7 +189,7 @@ describe('VariableToTreeNodeHandling', () => {
       ).toEqual(['parent']);
       expect(
         generateListOfNodesMatchingSearchInVariable({
-// @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
           variable: parent2,
           variableName: 'parent2',
           nodeId: 'parent2',
@@ -209,11 +198,11 @@ describe('VariableToTreeNodeHandling', () => {
         })
       ).toEqual(['parent2']);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('Leaf variable in array should be included if value matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariable({
-// @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
           variable: parent,
           variableName: 'parent',
           nodeId: 'parent',
@@ -222,11 +211,11 @@ describe('VariableToTreeNodeHandling', () => {
         })
       ).toEqual([`parent${separator}arrayChild${separator}0`]);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('Leaf variable in structure should be included if value matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariable({
-// @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
           variable: parent2,
           variableName: 'parent2',
           nodeId: 'parent2',
@@ -237,11 +226,11 @@ describe('VariableToTreeNodeHandling', () => {
         `parent2${separator}structureChild${separator}firstStructureChild`,
       ]);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('All branches should be included if each variable matches by the name and/or the value', () => {
       expect(
         generateListOfNodesMatchingSearchInVariable({
-// @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
           variable: parent2,
           variableName: 'parent2',
           nodeId: 'parent2',
@@ -256,33 +245,31 @@ describe('VariableToTreeNodeHandling', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('generateListOfNodesMatchingSearchInVariablesContainer', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('First variable should be included if name matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariablesContainer(
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
           variablesContainer,
           'parent'
         )
       ).toEqual(['parent', 'parent2']);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('Leaf variable in array should be included if value matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariablesContainer(
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
           variablesContainer,
           '35'
         )
       ).toEqual([`parent${separator}arrayChild${separator}0`]);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('Leaf variable in structure should be included if value matches', () => {
       expect(
         generateListOfNodesMatchingSearchInVariablesContainer(
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
           variablesContainer,
           'danger'
         )
@@ -290,11 +277,11 @@ describe('VariableToTreeNodeHandling', () => {
         `parent2${separator}structureChild${separator}firstStructureChild`,
       ]);
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('All branches should be included if each variable matches by the name and/or the value', () => {
       expect(
         generateListOfNodesMatchingSearchInVariablesContainer(
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
           variablesContainer,
           'child'
         )
@@ -310,23 +297,23 @@ describe('VariableToTreeNodeHandling', () => {
   });
 
   afterEach(() => {
-// @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'variablesContainer' implicitly has an 'any' type.
     variablesContainer.delete();
-// @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'parent' implicitly has an 'any' type.
     parent.delete();
-// @ts-expect-error - TS7005 - Variable 'stringChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'stringChild' implicitly has an 'any' type.
     stringChild.delete();
-// @ts-expect-error - TS7005 - Variable 'arrayChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'arrayChild' implicitly has an 'any' type.
     arrayChild.delete();
-// @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'parent2' implicitly has an 'any' type.
     parent2.delete();
-// @ts-expect-error - TS7005 - Variable 'boolChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'boolChild' implicitly has an 'any' type.
     boolChild.delete();
-// @ts-expect-error - TS7005 - Variable 'structureChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'structureChild' implicitly has an 'any' type.
     structureChild.delete();
-// @ts-expect-error - TS7005 - Variable 'firstStructureChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'firstStructureChild' implicitly has an 'any' type.
     firstStructureChild.delete();
-// @ts-expect-error - TS7005 - Variable 'secondStructureChild' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'secondStructureChild' implicitly has an 'any' type.
     secondStructureChild.delete();
   });
 });

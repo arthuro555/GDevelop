@@ -4,10 +4,12 @@ import classNames from 'classnames';
 import { largeSelectedArea, largeSelectableArea } from '../ClassNames';
 import { EventRendererProps } from './EventRenderer';
 
-export default class UnknownEvent extends React.Component<EventRendererProps, any> {
+export default class UnknownEvent extends React.Component<
+  EventRendererProps,
+  any
+> {
   render() {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <p
         className={classNames({
           [largeSelectableArea]: true,

@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
 import { testProject } from '../../GDevelopJsInitializerDecorator';
-// @ts-expect-error - TS6142 - Module '../../../EventsSheet/ParameterFields/LeaderboardIdField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/LeaderboardIdField.tsx', but '--jsx' is not set.
+
 import LeaderboardIdField from '../../../EventsSheet/ParameterFields/LeaderboardIdField';
 import ValueStateHolder from '../../ValueStateHolder';
 
@@ -42,56 +40,58 @@ const mockedEntries = Array(8)
     ).toISOString(),
   }))
   .sort((a, b) => a.score - b.score);
-const leaderboardsByIds = mockedLeaderboards.reduce<Record<string, any>>((acc, leaderboard) => {
-  acc[leaderboard.id] = leaderboard;
-  return acc;
-}, {});
+const leaderboardsByIds = mockedLeaderboards.reduce<Record<string, any>>(
+  (acc, leaderboard) => {
+    acc[leaderboard.id] = leaderboard;
+    return acc;
+  },
+  {}
+);
 
 const MockLeaderboardProvider = ({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) => {
   const [
     currentLeaderboard,
     setCurrentLeaderboard,
-// @ts-expect-error - TS2345 - Argument of type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; }' is not assignable to parameter of type 'Leaderboard | (() => Leaderboard)'.
+    // @ts-expect-error - TS2345 - Argument of type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; }' is not assignable to parameter of type 'Leaderboard | (() => Leaderboard)'.
   ] = React.useState<Leaderboard>(mockedLeaderboards[3]);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LeaderboardContext.Provider
       value={{
-// @ts-expect-error - TS2322 - Type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; }[]' is not assignable to type 'Leaderboard[]'.
+        // @ts-expect-error - TS2322 - Type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; }[]' is not assignable to type 'Leaderboard[]'.
         leaderboards: mockedLeaderboards,
         currentLeaderboard,
         displayOnlyBestEntry:
           currentLeaderboard.playerUnicityDisplayChoice === 'PREFER_UNIQUE',
         browsing: {
           entries: mockedEntries,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToNextPage: null,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToPreviousPage: null,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToFirstPage: null,
         },
         setDisplayOnlyBestEntry: action('setDisplayOnlyBestEntry'),
-// @ts-expect-error - TS2739 - Type 'HandlerFunction' is missing the following properties from type 'Promise<Leaderboard | null | undefined>': then, catch, finally, [Symbol.toStringTag]
+        // @ts-expect-error - TS2739 - Type 'HandlerFunction' is missing the following properties from type 'Promise<Leaderboard | null | undefined>': then, catch, finally, [Symbol.toStringTag]
         createLeaderboard: () => action('createLeaderboard'),
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1?: { shouldClearBeforeFetching?: boolean | undefined; } | null | undefined) => Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1?: { shouldClearBeforeFetching?: boolean | undefined; } | null | undefined) => Promise<void>'.
         listLeaderboards: action('listLeaderboards'),
-        selectLeaderboard: leaderboardId => {
+        selectLeaderboard: (leaderboardId) => {
           setCurrentLeaderboard(leaderboardsByIds[leaderboardId]);
         },
-// @ts-expect-error - TS2739 - Type 'HandlerFunction' is missing the following properties from type 'Promise<void>': then, catch, finally, [Symbol.toStringTag]
+        // @ts-expect-error - TS2739 - Type 'HandlerFunction' is missing the following properties from type 'Promise<void>': then, catch, finally, [Symbol.toStringTag]
         updateLeaderboard: () => action('updateLeaderboard'),
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
         resetLeaderboard: () => action('resetLeaderboard'),
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
         deleteLeaderboard: () => action('deleteLeaderboard'),
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
         deleteLeaderboardEntry: () => action('deleteLeaderboardEntry'),
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type 'Promise<void>'.
         fetchLeaderboardEntries: () => action('fetchLeaderboardEntries'),
       }}
     >
@@ -101,13 +101,10 @@ const MockLeaderboardProvider = ({
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockLeaderboardProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <ValueStateHolder
       initialValue={''}
       render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LeaderboardIdField
           project={testProject.project}
           scope={{
@@ -125,13 +122,10 @@ export const Default = () => (
 );
 
 export const InitialValidLeaderboard = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockLeaderboardProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <ValueStateHolder
       initialValue={'"489165zad49-a8ad6-4a984-dcz8da-hjqn983qh2"'}
       render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LeaderboardIdField
           project={testProject.project}
           scope={{
@@ -149,13 +143,10 @@ export const InitialValidLeaderboard = () => (
 );
 
 export const InitialInvalidLeaderboard = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockLeaderboardProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <ValueStateHolder
       initialValue={'5032ff25-6cd7-4adb-978d-8d2e532b16cf'}
       render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LeaderboardIdField
           project={testProject.project}
           scope={{

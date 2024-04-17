@@ -18,28 +18,28 @@ const useAlertDialog = () => {
   const showAlert = React.useCallback(
     (options: ShowAlertDialogOptions): Promise<void> => new Promise(resolve: (result: Promise<never>) => void => {
       showAlertDialog({ callback: resolve, ...options });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     }),
     [showAlertDialog]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   const showConfirmation = React.useCallback(
     (options: ShowConfirmDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
       showConfirmDialog({ callback: resolve, ...options });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     }),
     [showConfirmDialog]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   const showDeleteConfirmation = React.useCallback(
     (options: ShowConfirmDeleteDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
       showConfirmDeleteDialog({ callback: resolve, ...options });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     }),
     [showConfirmDeleteDialog]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   /**
@@ -52,10 +52,10 @@ const useAlertDialog = () => {
   const showYesNoCancel = React.useCallback(
     (options: ShowYesNoCancelDialogOptions): Promise<boolean> => new Promise(resolve: (result: Promise<never>) => void => {
       showYesNoCancelDialog({ callback: resolve, ...options });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     }),
     [showYesNoCancelDialog]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   return {
@@ -64,7 +64,7 @@ const useAlertDialog = () => {
     showDeleteConfirmation,
     showYesNoCancel,
   };
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default useAlertDialog;

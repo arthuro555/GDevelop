@@ -3,19 +3,19 @@ import Rectangle from '../Utils/Rectangle';
 import useOnResize from '../Utils/UseOnResize';
 import useForceUpdate from '../Utils/UseForceUpdate';
 import { getDisplayZIndexForHighlighter, getScrollParent } from './HTMLUtils';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ArrowTop'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowTop.js' implicitly has an 'any' type.
+
 import ArrowTop from '../UI/CustomSvgIcons/ArrowTop';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ArrowBottom'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowBottom.js' implicitly has an 'any' type.
+
 import ArrowBottom from '../UI/CustomSvgIcons/ArrowBottom';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ArrowLeft'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowLeft.js' implicitly has an 'any' type.
+
 import ArrowLeft from '../UI/CustomSvgIcons/ArrowLeft';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ArrowRight'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ArrowRight.js' implicitly has an 'any' type.
+
 import ArrowRight from '../UI/CustomSvgIcons/ArrowRight';
 import useIsElementVisibleInScroll from '../Utils/UseIsElementVisibleInScroll';
 import { aboveMaterialUiMaxZIndex } from '../UI/MaterialUISpecificUtil';
 
 type Props = {
-  element: HTMLElement
+  element: HTMLElement;
 };
 
 const highlighterPrimaryColor = '#FF8629';
@@ -42,9 +42,7 @@ const styles = {
   },
 } as const;
 
-function InAppTutorialElementHighlighter({
-  element,
-}: Props) {
+function InAppTutorialElementHighlighter({ element }: Props) {
   const forceUpdate = useForceUpdate();
   useOnResize(forceUpdate);
   const [showHighlighter, setShowHighlighter] = React.useState<boolean>(true);
@@ -60,24 +58,23 @@ function InAppTutorialElementHighlighter({
   // We look at both the scrollable parent position and the element to highlight's position.
   // If one of the element's boundaries is outside of the scrollable parent's boundaries,
   // we indicate this direction as the first direction to scroll to.
-  const computeScrollDirection = React.useCallback(
-    () => {
-      if (!scrollParentRectangle) return null;
-      if (elementRectangle.left < scrollParentRectangle.left) {
-        return 'left';
-      } else if (elementRectangle.right > scrollParentRectangle.right) {
-        return 'right';
-      } else if (elementRectangle.top < scrollParentRectangle.top) {
-        return 'top';
-      } else if (elementRectangle.bottom > scrollParentRectangle.bottom) {
-        return 'bottom';
-      }
-      return null;
-    },
-    [scrollParentRectangle, elementRectangle]
-  );
+  const computeScrollDirection = React.useCallback(() => {
+    if (!scrollParentRectangle) return null;
+    if (elementRectangle.left < scrollParentRectangle.left) {
+      return 'left';
+    } else if (elementRectangle.right > scrollParentRectangle.right) {
+      return 'right';
+    } else if (elementRectangle.top < scrollParentRectangle.top) {
+      return 'top';
+    } else if (elementRectangle.bottom > scrollParentRectangle.bottom) {
+      return 'bottom';
+    }
+    return null;
+  }, [scrollParentRectangle, elementRectangle]);
 
-  const [scrollDirection, setScrollDirection] = React.useState<'top' | 'bottom' | 'left' | 'right' | null>(computeScrollDirection());
+  const [scrollDirection, setScrollDirection] = React.useState<
+    'top' | 'bottom' | 'left' | 'right' | null
+  >(computeScrollDirection());
 
   const updateHighlighterVisibility = React.useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -93,56 +90,46 @@ function InAppTutorialElementHighlighter({
 
   useIsElementVisibleInScroll(element, updateHighlighterVisibility);
 
-  React.useEffect(
-    () => {
-      if (scrollParent) {
-        scrollParent.addEventListener('scroll', forceUpdate);
-        return () => {
-          scrollParent.removeEventListener('scroll', forceUpdate);
-        };
-      }
-    },
-    [scrollParent, forceUpdate]
-  );
+  React.useEffect(() => {
+    if (scrollParent) {
+      scrollParent.addEventListener('scroll', forceUpdate);
+      return () => {
+        scrollParent.removeEventListener('scroll', forceUpdate);
+      };
+    }
+  }, [scrollParent, forceUpdate]);
   const elementComputedStyle = getComputedStyle(element);
 
-  const Icon = React.useMemo(
-    () => {
-      switch (scrollDirection) {
-        case 'top':
-          return ArrowTop;
-        case 'bottom':
-          return ArrowBottom;
-        case 'left':
-          return ArrowLeft;
-        case 'right':
-          return ArrowRight;
-        default:
-          return null;
-      }
-    },
-    [scrollDirection]
-  );
+  const Icon = React.useMemo(() => {
+    switch (scrollDirection) {
+      case 'top':
+        return ArrowTop;
+      case 'bottom':
+        return ArrowBottom;
+      case 'left':
+        return ArrowLeft;
+      case 'right':
+        return ArrowRight;
+      default:
+        return null;
+    }
+  }, [scrollDirection]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
       {showHighlighter && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div
           id="in-app-tutorial-element-highlighter"
           style={{
             ...styles.rectangleHighlight,
             ...elementRectangle.toCSSPosition(),
-            borderRadius: elementComputedStyle.getPropertyValue(
-              'border-radius'
-            ),
+            borderRadius:
+              elementComputedStyle.getPropertyValue('border-radius'),
             zIndex: getDisplayZIndexForHighlighter(element),
           }}
         />
       )}
       {!showHighlighter && scrollParentRectangle && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div
           id="in-app-tutorial-scroll-indicator"
           style={{
@@ -156,19 +143,17 @@ function InAppTutorialElementHighlighter({
               scrollDirection === 'top'
                 ? scrollParentRectangle.top + 15
                 : scrollDirection === 'bottom'
-                ? scrollParentRectangle.bottom - 50
-                : elementRectangle.centerY() - 15,
+                  ? scrollParentRectangle.bottom - 50
+                  : elementRectangle.centerY() - 15,
             left:
               scrollDirection === 'left'
                 ? scrollParentRectangle.left + 15
                 : scrollDirection === 'right'
-                ? scrollParentRectangle.right - 50
-                : elementRectangle.centerX() - 15,
+                  ? scrollParentRectangle.right - 50
+                  : elementRectangle.centerX() - 15,
           }}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <div style={styles.scrollDirectionArrow}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             {Icon && <Icon fontSize="large" />}
           </div>
         </div>

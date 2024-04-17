@@ -2,9 +2,9 @@ import * as React from 'react';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
-// @ts-expect-error - TS6142 - Module '../../InlinePopover' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InlinePopover.tsx', but '--jsx' is not set.
+
 import InlinePopover from '../../InlinePopover';
-// @ts-expect-error - TS6142 - Module '../../ParameterFields/ObjectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/ObjectField.tsx', but '--jsx' is not set.
+
 import ObjectField from '../../ParameterFields/ObjectField';
 import {
   largeSelectedArea,
@@ -13,19 +13,18 @@ import {
 } from '../ClassNames';
 import { getHelpLink } from '../../../Utils/HelpLink';
 import { EventRendererProps } from './EventRenderer';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-measure'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-measure/dist/index.cjs.js' implicitly has an 'any' type.
+
 import Measure from 'react-measure';
-// @ts-expect-error - TS6142 - Module '../../../CodeEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CodeEditor/index.tsx', but '--jsx' is not set.
+
 import { CodeEditor } from '../../../CodeEditor';
 import { shouldActivate } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 import { ParameterFieldInterface } from '../../ParameterFields/ParameterFieldCommons';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/ChevronArrowTop'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowTop.js' implicitly has an 'any' type.
+
 import ChevronArrowTop from '../../../UI/CustomSvgIcons/ChevronArrowTop';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/CustomSvgIcons/ChevronArrowBottom'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowBottom.js' implicitly has an 'any' type.
+
 import ChevronArrowBottom from '../../../UI/CustomSvgIcons/ChevronArrowBottom';
-const gd: libGDevelop = global.gd;
 
 const fontFamily = '"Lucida Console", Monaco, monospace';
 const MINIMUM_EDITOR_HEIGHT = 200;
@@ -68,12 +67,15 @@ const styles = {
 } as const;
 
 type State = {
-  editingObject: boolean,
-  editingPreviousValue: string | null | undefined,
-  anchorEl: any | null | undefined
+  editingObject: boolean;
+  editingPreviousValue: string | null | undefined;
+  anchorEl: any | null | undefined;
 };
 
-export default class JsCodeEvent extends React.Component<EventRendererProps, State> {
+export default class JsCodeEvent extends React.Component<
+  EventRendererProps,
+  State
+> {
   _objectField: ParameterFieldInterface | null | undefined = null;
   state = {
     editingObject: false,
@@ -145,7 +147,7 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
 
     // Put back the focus after closing the inline popover.
     if (anchorEl)
-// @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
       anchorEl.focus();
     const jsCodeEvent = gd.asJsCodeEvent(this.props.event);
     const { editingPreviousValue } = this.state;
@@ -184,13 +186,12 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
     const textStyle = this.props.disabled ? styles.comment : undefined;
 
     const objects = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <span
         className={classNames({
           [selectableArea]: true,
         })}
         onClick={this.editObject}
-        onKeyPress={event => {
+        onKeyPress={(event) => {
           if (shouldActivate(event)) {
             this.editObject(event);
           }
@@ -199,13 +200,10 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
         style={textStyle}
       >
         {parameterObjects ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>, objects /*{parameterObjects}*/</Trans>
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <>
             {' '}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>
               {'/* Click here to choose objects to pass to JavaScript */'}
             </Trans>
@@ -215,40 +213,31 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
     );
 
     const eventsFunctionContext = this.props.scope.eventsFunction ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <span style={textStyle}>, eventsFunctionContext</span>
     ) : null;
 
     const functionStart = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <p style={styles.wrappingText}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <span style={textStyle}>
           {this.props.disabled ? '/*' : ''}
           {'(function(runtimeScene'}
         </span>
         {objects}
         {eventsFunctionContext}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <span style={textStyle}>{') {'}</span>
       </p>
     );
     const functionEnd = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <p style={styles.wrappingText}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <span style={textStyle}>{'})(runtimeScene'}</span>
         {objects}
         {eventsFunctionContext}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <span style={textStyle}>
           {');'}
           {this.props.disabled ? '*/' : ''}
         </span>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <span style={styles.comment}>
           {' // '}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <a
             href={getHelpLink('/events/js-code')}
             target="_blank"
@@ -262,24 +251,18 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
     );
 
     const expandIcon = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div style={styles.expandIcon}>
         {jsCodeEvent.isEventsSheetExpanded() ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ChevronArrowTop fontSize="small" color="inherit" />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ChevronArrowBottom fontSize="small" color="inherit" />
         )}
       </div>
     );
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Measure bounds>
-{ /* @ts-expect-error - TS7031 - Binding element 'measureRef' implicitly has an 'any' type. | TS7031 - Binding element 'contentRect' implicitly has an 'any' type. */}
         {({ measureRef, contentRect }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div
             style={styles.container}
             className={classNames({
@@ -290,7 +273,6 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
             id={`${this.props.idPrefix}-js-code`}
           >
             {functionStart}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <CodeEditor
               value={jsCodeEvent.getInlineCode()}
               onChange={this.onChange}
@@ -303,34 +285,29 @@ export default class JsCodeEvent extends React.Component<EventRendererProps, Sta
               onBlur={this.onBlur}
             />
             {functionEnd}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Button onClick={this.toggleExpanded} fullWidth size="small">
               {expandIcon}
             </Button>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <InlinePopover
               open={this.state.editingObject}
               anchorEl={this.state.anchorEl}
               onRequestClose={this.cancelObjectEditing}
               onApply={this.endObjectEditing}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ObjectField
                 project={this.props.project}
                 scope={this.props.scope}
                 globalObjectsContainer={this.props.globalObjectsContainer}
                 objectsContainer={this.props.objectsContainer}
                 value={parameterObjects}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-                onChange={text => {
+                onChange={(text) => {
                   jsCodeEvent.setParameterObjects(text);
                   this.props.onUpdate();
                 }}
                 isInline
                 onRequestClose={this.cancelObjectEditing}
                 onApply={this.endObjectEditing}
-// @ts-expect-error - TS7006 - Parameter 'objectField' implicitly has an 'any' type.
-                ref={objectField => (this._objectField = objectField)}
+                ref={(objectField) => (this._objectField = objectField)}
               />
             </InlinePopover>
           </div>

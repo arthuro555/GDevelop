@@ -21,31 +21,28 @@ import {
   extractDecodedFilenameWithExtensionFromProductAuthorizedUrl,
   fetchTokenForPrivateGameTemplateAuthorizationIfNeeded,
   isPrivateGameTemplateResourceAuthorizedUrl,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/Shop';
 
 // This mover can be used for both public URLs and Cloud project resources.
-export const moveUrlResourcesToCloudProject = async (
-  {
-    project,
-    authenticatedUser,
-    oldFileMetadata,
-    newFileMetadata,
-    oldStorageProvider,
-    oldStorageProviderOperations,
-    newStorageProvider,
-    newStorageProviderOperations,
-    onProgress,
-  }: MoveAllProjectResourcesOptions,
-): Promise<MoveAllProjectResourcesResult> => {
+export const moveUrlResourcesToCloudProject = async ({
+  project,
+  authenticatedUser,
+  oldFileMetadata,
+  newFileMetadata,
+  oldStorageProvider,
+  oldStorageProviderOperations,
+  newStorageProvider,
+  newStorageProviderOperations,
+  onProgress,
+}: MoveAllProjectResourcesOptions): Promise<MoveAllProjectResourcesResult> => {
   const result: MoveAllProjectResourcesResult = {
     erroredResources: [],
   };
 
   type ResourceToFetchAndUpload = {
-    resource: gdResource,
-    url: string,
-    filename: string
+    resource: gd.Resource;
+    url: string;
+    filename: string;
   };
 
   const newCloudProjectId = newFileMetadata.fileIdentifier;
@@ -54,25 +51,26 @@ export const moveUrlResourcesToCloudProject = async (
    * Find the resources stored on GDevelop Cloud that must be downloaded and
    * uploaded into the new project.
    */
-  const getResourcesToFetchAndUpload = async (project: gdProject): Promise<Array<ResourceToFetchAndUpload>> => {
+  const getResourcesToFetchAndUpload = async (
+    project: gd.Project
+  ): Promise<Array<ResourceToFetchAndUpload>> => {
     const resourcesManager = project.getResourcesManager();
     const allResourceNames = resourcesManager.getAllResourceNames().toJSArray();
     const resourceToFetchAndUpload: Array<ResourceToFetchAndUpload> = [];
 
-    const tokenForPrivateGameTemplateAuthorization = await fetchTokenForPrivateGameTemplateAuthorizationIfNeeded(
-      {
+    const tokenForPrivateGameTemplateAuthorization =
+      await fetchTokenForPrivateGameTemplateAuthorizationIfNeeded({
         authenticatedUser,
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-        allResourcePaths: allResourceNames.map(resourceName => {
+        // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+        allResourcePaths: allResourceNames.map((resourceName) => {
           const resource = resourcesManager.getResource(resourceName);
           return resource.getFile();
         }),
-      }
-    );
+      });
 
     await PromisePool.withConcurrency(50)
       .for(allResourceNames)
-// @ts-expect-error - TS2345 - Argument of type '(resourceName: string) => Promise<void>' is not assignable to parameter of type 'ProcessHandler<unknown, void>'.
+      // @ts-expect-error - TS2345 - Argument of type '(resourceName: string) => Promise<void>' is not assignable to parameter of type 'ProcessHandler<unknown, void>'.
       .process(async (resourceName: string) => {
         const resource = resourcesManager.getResource(resourceName);
         const resourceFile = resource.getFile();
@@ -93,9 +91,8 @@ export const moveUrlResourcesToCloudProject = async (
             resourceToFetchAndUpload.push({
               resource,
               url: resourceFile,
-              filename: extractDecodedFilenameFromProjectResourceUrl(
-                resourceFile
-              ),
+              filename:
+                extractDecodedFilenameFromProjectResourceUrl(resourceFile),
             });
           } else if (
             isPrivateGameTemplateResourceAuthorizedUrl(resourceFile) &&
@@ -112,9 +109,10 @@ export const moveUrlResourcesToCloudProject = async (
             resourceToFetchAndUpload.push({
               resource,
               url: encodedResourceUrl,
-              filename: extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(
-                resourceFile
-              ),
+              filename:
+                extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(
+                  resourceFile
+                ),
             });
           } else if (isBlobURL(resourceFile)) {
             result.erroredResources.push({
@@ -149,7 +147,9 @@ export const moveUrlResourcesToCloudProject = async (
     );
 
   // Download all the project resources as blob (much like what is done during an export).
-  const downloadedBlobsAndResourcesToUpload: Array<ItemResult<ResourceToFetchAndUpload>> = await downloadUrlsToBlobs({
+  const downloadedBlobsAndResourcesToUpload: Array<
+    ItemResult<ResourceToFetchAndUpload>
+  > = await downloadUrlsToBlobs({
     urlContainers: resourcesToFetchAndUpload,
     onProgress: (count, total) => {
       onProgress(count, total * 2);
@@ -172,14 +172,15 @@ export const moveUrlResourcesToCloudProject = async (
 
   // Upload the files just downloaded, for the new project.
   await getCredentialsForCloudProject(authenticatedUser, newCloudProjectId);
-  const uploadedProjectResourceFiles: UploadedProjectResourceFiles = await uploadProjectResourceFiles(
-    authenticatedUser,
-    newCloudProjectId,
-    downloadedFilesAndResourcesToUpload.map(({ file }) => file),
-    (count, total) => {
-      onProgress(total + count, total * 2);
-    }
-  );
+  const uploadedProjectResourceFiles: UploadedProjectResourceFiles =
+    await uploadProjectResourceFiles(
+      authenticatedUser,
+      newCloudProjectId,
+      downloadedFilesAndResourcesToUpload.map(({ file }) => file),
+      (count, total) => {
+        onProgress(total + count, total * 2);
+      }
+    );
 
   // Update resources with the newly created URLs.
   uploadedProjectResourceFiles.forEach(({ url, error }, index) => {
@@ -198,11 +199,9 @@ export const moveUrlResourcesToCloudProject = async (
   return result;
 };
 
-export const ensureNoCloudProjectResources = async (
-  {
-    project,
-  }: MoveAllProjectResourcesOptions,
-): Promise<MoveAllProjectResourcesResult> => {
+export const ensureNoCloudProjectResources = async ({
+  project,
+}: MoveAllProjectResourcesOptions): Promise<MoveAllProjectResourcesResult> => {
   const result: MoveAllProjectResourcesResult = {
     erroredResources: [],
   };

@@ -7,46 +7,40 @@ const styles = {
 } as const;
 
 type Props = {
-  url: string,
-  size?: number
+  url: string;
+  size?: number;
 };
 
-const QrCode = ({
-  url,
-  size = 128,
-}: Props) => {
+const QrCode = ({ url, size = 128 }: Props) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
 
   const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
-  React.useEffect(
-    () => {
-      const containerElement = containerRef.current;
+  React.useEffect(() => {
+    const containerElement = containerRef.current;
 
-      if (!containerElement) return;
+    if (!containerElement) return;
 
-      QrCreator.render(
-        {
-          text: url,
-          radius: 0,
-          // See https://www.qrcode.com/en/about/error_correction.html.
-          // The lower the level, the smaller the image. We don't need high level
-          // because it won't be damaged.
-          ecLevel: 'L',
-          fill: gdevelopTheme.palette.secondary,
-          background: null, // color or null for transparent
-          size, // in pixels
-        },
-        containerElement
-      );
-      return () => {
-        if (containerElement.firstChild) {
-          containerElement.removeChild(containerElement.firstChild);
-        }
-      };
-    },
-    [url, size, gdevelopTheme]
-  );
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+    QrCreator.render(
+      {
+        text: url,
+        radius: 0,
+        // See https://www.qrcode.com/en/about/error_correction.html.
+        // The lower the level, the smaller the image. We don't need high level
+        // because it won't be damaged.
+        ecLevel: 'L',
+        fill: gdevelopTheme.palette.secondary,
+        background: null, // color or null for transparent
+        size, // in pixels
+      },
+      containerElement
+    );
+    return () => {
+      if (containerElement.firstChild) {
+        containerElement.removeChild(containerElement.firstChild);
+      }
+    };
+  }, [url, size, gdevelopTheme]);
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
   return <div ref={containerRef} style={styles.qrCodeContainer} />;
 };
 

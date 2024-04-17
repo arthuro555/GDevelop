@@ -1,54 +1,51 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import { mapVector, mapFor } from '../Utils/MapFor';
 
-const gd: libGDevelop = global.gd;
-
 export type EventsFunctionCodeWriter = {
-  getIncludeFileFor: (functionName: string) => string,
-  writeFunctionCode: (functionName: string, code: string) => Promise<void>,
-  writeBehaviorCode: (behaviorName: string, code: string) => Promise<void>,
-  writeObjectCode: (objectName: string, code: string) => Promise<void>
+  getIncludeFileFor: (functionName: string) => string;
+  writeFunctionCode: (functionName: string, code: string) => Promise<void>;
+  writeBehaviorCode: (behaviorName: string, code: string) => Promise<void>;
+  writeObjectCode: (objectName: string, code: string) => Promise<void>;
 };
 
 export type IncludeFileContent = {
-  includeFile: string,
-  content: string
+  includeFile: string;
+  content: string;
 };
 
 export type EventsFunctionCodeWriterCallbacks = {
-  onWriteFile: (arg1: IncludeFileContent) => void
+  onWriteFile: (arg1: IncludeFileContent) => void;
 };
 
 type Options = {
-  eventsFunctionCodeWriter: EventsFunctionCodeWriter,
-  i18n: I18nType
+  eventsFunctionCodeWriter: EventsFunctionCodeWriter;
+  i18n: I18nType;
 };
 
-type OptionsForGeneration = (Options) & {
-  skipCodeGeneration?: boolean
+type OptionsForGeneration = Options & {
+  skipCodeGeneration?: boolean;
 };
 
 type CodeGenerationContext = {
-  codeNamespacePrefix: string // TODO: could this reworked to avoid this entirely?,
-  extensionIncludeFiles: Array<string>
+  codeNamespacePrefix: string; // TODO: could this reworked to avoid this entirely?,
+  extensionIncludeFiles: Array<string>;
 };
 
 /**
  * Load all events functions of a project in extensions
  */
 export const loadProjectEventsFunctionsExtensions = (
-  project: gdProject,
+  project: gd.Project,
   eventsFunctionCodeWriter: EventsFunctionCodeWriter,
-  i18n: I18nType,
+  i18n: I18nType
 ): Promise<Array<void>> => {
   return Promise.all(
     // First pass: generate extensions from the events functions extensions,
     // without writing code for the functions. This is useful as events in functions
     // could be using other functions, which would not yet be available as
     // extensions.
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, project.getEventsFunctionsExtensionsCount(), i => {
+
+    mapFor(0, project.getEventsFunctionsExtensionsCount(), (i) => {
       return loadProjectEventsFunctionsExtension(
         project,
         project.getEventsFunctionsExtensionAt(i),
@@ -58,8 +55,8 @@ export const loadProjectEventsFunctionsExtensions = (
   ).then(() =>
     Promise.all(
       // Second pass: generate extensions, including code.
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-      mapFor(0, project.getEventsFunctionsExtensionsCount(), i => {
+
+      mapFor(0, project.getEventsFunctionsExtensionsCount(), (i) => {
         return loadProjectEventsFunctionsExtension(
           project,
           project.getEventsFunctionsExtensionAt(i),
@@ -78,10 +75,10 @@ export const loadProjectEventsFunctionsExtensions = (
  * Load an event-function extension metadata without generating the code.
  */
 export const reloadProjectEventsFunctionsExtensionMetadata = (
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
+  project: gd.Project,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
   eventsFunctionCodeWriter: EventsFunctionCodeWriter,
-  i18n: I18nType,
+  i18n: I18nType
 ): void => {
   const extension = generateEventsFunctionExtensionMetadata(
     project,
@@ -93,15 +90,15 @@ export const reloadProjectEventsFunctionsExtensionMetadata = (
 };
 
 const loadProjectEventsFunctionsExtension = (
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  options: OptionsForGeneration,
+  project: gd.Project,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  options: OptionsForGeneration
 ): Promise<void> => {
   return generateEventsFunctionExtension(
     project,
     eventsFunctionsExtension,
     options
-  ).then(extension => {
+  ).then((extension) => {
     gd.JsPlatform.get().addNewExtension(extension);
     extension.delete();
   });
@@ -112,12 +109,11 @@ const loadProjectEventsFunctionsExtension = (
  * extension.
  */
 const getExtensionIncludeFiles = (
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  options: Options,
+  project: gd.Project,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  options: Options
 ): Array<string> => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  return mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), i => {
+  return mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), (i) => {
     const eventsFunction = eventsFunctionsExtension.getEventsFunctionAt(i);
 
     const functionName = gd.MetadataDeclarationHelper.getFreeFunctionCodeName(
@@ -133,19 +129,20 @@ const getExtensionIncludeFiles = (
  * Generate the code for the events based extension
  */
 const generateEventsFunctionExtension = (
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  options: OptionsForGeneration,
-): Promise<gdPlatformExtension> => {
+  project: gd.Project,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  options: OptionsForGeneration
+): Promise<gd.PlatformExtension> => {
   const extension = new gd.PlatformExtension();
   gd.MetadataDeclarationHelper.declareExtension(
     extension,
     eventsFunctionsExtension
   );
 
-  const codeNamespacePrefix = gd.MetadataDeclarationHelper.getExtensionCodeNamespacePrefix(
-    eventsFunctionsExtension
-  );
+  const codeNamespacePrefix =
+    gd.MetadataDeclarationHelper.getExtensionCodeNamespacePrefix(
+      eventsFunctionsExtension
+    );
 
   const extensionIncludeFiles = getExtensionIncludeFiles(
     project,
@@ -161,8 +158,8 @@ const generateEventsFunctionExtension = (
     // Generate all behaviors and their functions
     mapVector(
       eventsFunctionsExtension.getEventsBasedBehaviors(),
-// @ts-expect-error - TS7006 - Parameter 'eventsBasedBehavior' implicitly has an 'any' type.
-      eventsBasedBehavior => {
+
+      (eventsBasedBehavior) => {
         return generateBehavior(
           project,
           extension,
@@ -179,8 +176,8 @@ const generateEventsFunctionExtension = (
       Promise.all(
         mapVector(
           eventsFunctionsExtension.getEventsBasedObjects(),
-// @ts-expect-error - TS7006 - Parameter 'eventsBasedObject' implicitly has an 'any' type.
-          eventsBasedObject => {
+
+          (eventsBasedObject) => {
             return generateObject(
               project,
               extension,
@@ -196,11 +193,9 @@ const generateEventsFunctionExtension = (
     .then(() =>
       // Generate all free functions
       Promise.all(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-        mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), i => {
-          const eventsFunction = eventsFunctionsExtension.getEventsFunctionAt(
-            i
-          );
+        mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), (i) => {
+          const eventsFunction =
+            eventsFunctionsExtension.getEventsFunctionAt(i);
           return generateFreeFunction(
             project,
             extension,
@@ -212,7 +207,7 @@ const generateEventsFunctionExtension = (
         })
       )
     )
-    .then(functionInfos => {
+    .then((functionInfos) => {
       return extension;
     });
 };
@@ -221,19 +216,20 @@ const generateEventsFunctionExtension = (
  * Generate the metadata for the events based extension
  */
 const generateEventsFunctionExtensionMetadata = (
-  project: gdProject,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  options: Options,
-): gdPlatformExtension => {
+  project: gd.Project,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  options: Options
+): gd.PlatformExtension => {
   const extension = new gd.PlatformExtension();
   gd.MetadataDeclarationHelper.declareExtension(
     extension,
     eventsFunctionsExtension
   );
 
-  const codeNamespacePrefix = gd.MetadataDeclarationHelper.getExtensionCodeNamespacePrefix(
-    eventsFunctionsExtension
-  );
+  const codeNamespacePrefix =
+    gd.MetadataDeclarationHelper.getExtensionCodeNamespacePrefix(
+      eventsFunctionsExtension
+    );
 
   const extensionIncludeFiles = getExtensionIncludeFiles(
     project,
@@ -248,8 +244,8 @@ const generateEventsFunctionExtensionMetadata = (
   // Generate all behaviors and their functions
   mapVector(
     eventsFunctionsExtension.getEventsBasedBehaviors(),
-// @ts-expect-error - TS7006 - Parameter 'eventsBasedBehavior' implicitly has an 'any' type.
-    eventsBasedBehavior => {
+
+    (eventsBasedBehavior) => {
       const behaviorMethodMangledNames = new gd.MapStringString();
       generateBehaviorMetadata(
         project,
@@ -267,8 +263,8 @@ const generateEventsFunctionExtensionMetadata = (
   // Generate all objects and their functions
   mapVector(
     eventsFunctionsExtension.getEventsBasedObjects(),
-// @ts-expect-error - TS7006 - Parameter 'eventsBasedObject' implicitly has an 'any' type.
-    eventsBasedObject => {
+
+    (eventsBasedObject) => {
       const objectMethodMangledNames = new gd.MapStringString();
       generateObjectMetadata(
         project,
@@ -285,8 +281,8 @@ const generateEventsFunctionExtensionMetadata = (
   );
   // Generate all free functions
   const metadataDeclarationHelper = new gd.MetadataDeclarationHelper();
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), i => {
+
+  mapFor(0, eventsFunctionsExtension.getEventsFunctionsCount(), (i) => {
     const eventsFunction = eventsFunctionsExtension.getEventsFunctionAt(i);
     return generateFreeFunctionMetadata(
       project,
@@ -304,12 +300,12 @@ const generateEventsFunctionExtensionMetadata = (
 };
 
 const generateFreeFunction = (
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsFunction: gdEventsFunction,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsFunction: gd.EventsFunction,
   options: OptionsForGeneration,
-  codeGenerationContext: CodeGenerationContext,
+  codeGenerationContext: CodeGenerationContext
 ): Promise<void> => {
   const metadataDeclarationHelper = new gd.MetadataDeclarationHelper();
   const { functionMetadata } = generateFreeFunctionMetadata(
@@ -324,23 +320,24 @@ const generateFreeFunction = (
 
   if (!options.skipCodeGeneration) {
     const includeFiles = new gd.SetString();
-    const eventsFunctionsExtensionCodeGenerator = new gd.EventsFunctionsExtensionCodeGenerator(
-      project
-    );
-    const codeNamespace = gd.MetadataDeclarationHelper.getFreeFunctionCodeNamespace(
-      eventsFunction,
-      codeGenerationContext.codeNamespacePrefix
-    );
-    const code = eventsFunctionsExtensionCodeGenerator.generateFreeEventsFunctionCompleteCode(
-      eventsFunctionsExtension,
-      eventsFunction,
-      codeNamespace,
-      includeFiles,
-      // For now, always generate functions for runtime (this disables
-      // generation of profiling for groups (see EventsCodeGenerator))
-      // as extensions generated can be used either for preview or export.
-      true
-    );
+    const eventsFunctionsExtensionCodeGenerator =
+      new gd.EventsFunctionsExtensionCodeGenerator(project);
+    const codeNamespace =
+      gd.MetadataDeclarationHelper.getFreeFunctionCodeNamespace(
+        eventsFunction,
+        codeGenerationContext.codeNamespacePrefix
+      );
+    const code =
+      eventsFunctionsExtensionCodeGenerator.generateFreeEventsFunctionCompleteCode(
+        eventsFunctionsExtension,
+        eventsFunction,
+        codeNamespace,
+        includeFiles,
+        // For now, always generate functions for runtime (this disables
+        // generation of profiling for groups (see EventsCodeGenerator))
+        // as extensions generated can be used either for preview or export.
+        true
+      );
 
     // Add any include file required by the function to the list
     // of include files for this function (so that when used, the "dependencies"
@@ -373,34 +370,34 @@ const generateFreeFunction = (
 };
 
 const generateFreeFunctionMetadata = (
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsFunction: gdEventsFunction,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsFunction: gd.EventsFunction,
   options: Options,
   codeGenerationContext: CodeGenerationContext,
-  metadataDeclarationHelper: gdMetadataDeclarationHelper,
+  metadataDeclarationHelper: gd.MetadataDeclarationHelper
 ): {
-  functionFile: string,
-  functionMetadata: gdAbstractFunctionMetadata
+  functionFile: string;
+  functionMetadata: gd.AbstractFunctionMetadata;
 } => {
-  const instructionOrExpression = metadataDeclarationHelper.generateFreeFunctionMetadata(
-    project,
-    extension,
-    eventsFunctionsExtension,
-    eventsFunction
-  );
+  const instructionOrExpression =
+    metadataDeclarationHelper.generateFreeFunctionMetadata(
+      project,
+      extension,
+      eventsFunctionsExtension,
+      eventsFunction
+    );
   const functionName = gd.MetadataDeclarationHelper.getFreeFunctionCodeName(
     eventsFunctionsExtension,
     eventsFunction
   );
-  const functionFile = options.eventsFunctionCodeWriter.getIncludeFileFor(
-    functionName
-  );
+  const functionFile =
+    options.eventsFunctionCodeWriter.getIncludeFileFor(functionName);
   instructionOrExpression.addIncludeFile(functionFile);
 
   // Always include the extension include files when using a free function.
-  codeGenerationContext.extensionIncludeFiles.forEach(includeFile => {
+  codeGenerationContext.extensionIncludeFiles.forEach((includeFile) => {
     instructionOrExpression.addIncludeFile(includeFile);
   });
 
@@ -415,12 +412,12 @@ const generateFreeFunctionMetadata = (
 };
 
 function generateBehavior(
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsBasedBehavior: gdEventsBasedBehavior,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsBasedBehavior: gd.EventsBasedBehavior,
   options: OptionsForGeneration,
-  codeGenerationContext: CodeGenerationContext,
+  codeGenerationContext: CodeGenerationContext
 ): Promise<void> {
   return Promise.resolve().then(() => {
     const behaviorMethodMangledNames = new gd.MapStringString();
@@ -436,10 +433,11 @@ function generateBehavior(
 
     // Generate code for the behavior and its methods
     if (!options.skipCodeGeneration) {
-      const codeNamespace = gd.MetadataDeclarationHelper.getBehaviorFunctionCodeNamespace(
-        eventsBasedBehavior,
-        codeGenerationContext.codeNamespacePrefix
-      );
+      const codeNamespace =
+        gd.MetadataDeclarationHelper.getBehaviorFunctionCodeNamespace(
+          eventsBasedBehavior,
+          codeGenerationContext.codeNamespacePrefix
+        );
       const includeFiles = new gd.SetString();
       const behaviorCodeGenerator = new gd.BehaviorCodeGenerator(project);
       const code = behaviorCodeGenerator.generateRuntimeBehaviorCompleteCode(
@@ -482,34 +480,35 @@ function generateBehavior(
 }
 
 function generateBehaviorMetadata(
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsBasedBehavior: gdEventsBasedBehavior,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsBasedBehavior: gd.EventsBasedBehavior,
   options: Options,
   codeGenerationContext: CodeGenerationContext,
-  behaviorMethodMangledNames: gdMapStringString,
-): gdBehaviorMetadata {
-  const behaviorMetadata = gd.MetadataDeclarationHelper.generateBehaviorMetadata(
-    project,
-    extension,
-    eventsFunctionsExtension,
-    eventsBasedBehavior,
-    behaviorMethodMangledNames
-  );
+  behaviorMethodMangledNames: gd.MapStringString
+): gd.BehaviorMetadata {
+  const behaviorMetadata =
+    gd.MetadataDeclarationHelper.generateBehaviorMetadata(
+      project,
+      extension,
+      eventsFunctionsExtension,
+      eventsBasedBehavior,
+      behaviorMethodMangledNames
+    );
 
-  const codeNamespace = gd.MetadataDeclarationHelper.getBehaviorFunctionCodeNamespace(
-    eventsBasedBehavior,
-    codeGenerationContext.codeNamespacePrefix
-  );
-  const includeFile = options.eventsFunctionCodeWriter.getIncludeFileFor(
-    codeNamespace
-  );
+  const codeNamespace =
+    gd.MetadataDeclarationHelper.getBehaviorFunctionCodeNamespace(
+      eventsBasedBehavior,
+      codeGenerationContext.codeNamespacePrefix
+    );
+  const includeFile =
+    options.eventsFunctionCodeWriter.getIncludeFileFor(codeNamespace);
 
   behaviorMetadata.addIncludeFile(includeFile);
 
   // Always include the extension include files when using a behavior.
-  codeGenerationContext.extensionIncludeFiles.forEach(includeFile => {
+  codeGenerationContext.extensionIncludeFiles.forEach((includeFile) => {
     behaviorMetadata.addIncludeFile(includeFile);
   });
 
@@ -517,12 +516,12 @@ function generateBehaviorMetadata(
 }
 
 function generateObject(
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsBasedObject: gdEventsBasedObject,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsBasedObject: gd.EventsBasedObject,
   options: OptionsForGeneration,
-  codeGenerationContext: CodeGenerationContext,
+  codeGenerationContext: CodeGenerationContext
 ): Promise<void> {
   return Promise.resolve().then(() => {
     const objectMethodMangledNames = new gd.MapStringString();
@@ -538,10 +537,11 @@ function generateObject(
 
     // Generate code for the object and its methods
     if (!options.skipCodeGeneration) {
-      const codeNamespace = gd.MetadataDeclarationHelper.getObjectFunctionCodeNamespace(
-        eventsBasedObject,
-        codeGenerationContext.codeNamespacePrefix
-      );
+      const codeNamespace =
+        gd.MetadataDeclarationHelper.getObjectFunctionCodeNamespace(
+          eventsBasedObject,
+          codeGenerationContext.codeNamespacePrefix
+        );
       const includeFiles = new gd.SetString();
       const objectCodeGenerator = new gd.ObjectCodeGenerator(project);
       const code = objectCodeGenerator.generateRuntimeObjectCompleteCode(
@@ -584,14 +584,14 @@ function generateObject(
 }
 
 function generateObjectMetadata(
-  project: gdProject,
-  extension: gdPlatformExtension,
-  eventsFunctionsExtension: gdEventsFunctionsExtension,
-  eventsBasedObject: gdEventsBasedObject,
+  project: gd.Project,
+  extension: gd.PlatformExtension,
+  eventsFunctionsExtension: gd.EventsFunctionsExtension,
+  eventsBasedObject: gd.EventsBasedObject,
   options: Options,
   codeGenerationContext: CodeGenerationContext,
-  objectMethodMangledNames: gdMapStringString,
-): gdObjectMetadata {
+  objectMethodMangledNames: gd.MapStringString
+): gd.ObjectMetadata {
   const objectMetadata = gd.MetadataDeclarationHelper.generateObjectMetadata(
     project,
     extension,
@@ -600,19 +600,19 @@ function generateObjectMetadata(
     objectMethodMangledNames
   );
 
-  const codeNamespace = gd.MetadataDeclarationHelper.getObjectFunctionCodeNamespace(
-    eventsBasedObject,
-    codeGenerationContext.codeNamespacePrefix
-  );
+  const codeNamespace =
+    gd.MetadataDeclarationHelper.getObjectFunctionCodeNamespace(
+      eventsBasedObject,
+      codeGenerationContext.codeNamespacePrefix
+    );
   // TODO EBO Handle name collision between objects and behaviors.
-  const includeFile = options.eventsFunctionCodeWriter.getIncludeFileFor(
-    codeNamespace
-  );
+  const includeFile =
+    options.eventsFunctionCodeWriter.getIncludeFileFor(codeNamespace);
   // Objects may already have included files for 3D for instance.
   objectMetadata.addIncludeFile(includeFile);
 
   // Always include the extension include files when using an object.
-  codeGenerationContext.extensionIncludeFiles.forEach(includeFile => {
+  codeGenerationContext.extensionIncludeFiles.forEach((includeFile) => {
     objectMetadata.addIncludeFile(includeFile);
   });
 
@@ -622,10 +622,11 @@ function generateObjectMetadata(
 /**
  * Unload all extensions providing events functions of a project
  */
-export const unloadProjectEventsFunctionsExtensions = (project: gdProject): Promise<Array<void>> => {
+export const unloadProjectEventsFunctionsExtensions = (
+  project: gd.Project
+): Promise<Array<void>> => {
   return Promise.all(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, project.getEventsFunctionsExtensionsCount(), i => {
+    mapFor(0, project.getEventsFunctionsExtensionsCount(), (i) => {
       gd.JsPlatform.get().removeExtension(
         project.getEventsFunctionsExtensionAt(i).getName()
       );
@@ -636,7 +637,10 @@ export const unloadProjectEventsFunctionsExtensions = (project: gdProject): Prom
 /**
  * Unload a single extension providing events functions of a project
  */
-export const unloadProjectEventsFunctionsExtension = (project: gdProject, extensionName: string): void => {
+export const unloadProjectEventsFunctionsExtension = (
+  project: gd.Project,
+  extensionName: string
+): void => {
   gd.JsPlatform.get().removeExtension(extensionName);
 };
 
@@ -645,7 +649,7 @@ export const unloadProjectEventsFunctionsExtension = (project: gdProject, extens
  * from an event function.
  */
 export const isAnEventFunctionMetadata = (
-  instructionOrExpression: gdInstructionMetadata | gdExpressionMetadata
+  instructionOrExpression: gd.InstructionMetadata | gd.ExpressionMetadata
 ) => {
   const parametersCount = instructionOrExpression.getParametersCount();
   if (parametersCount <= 0) return false;
@@ -682,7 +686,7 @@ export const getFunctionNameFromType = (type: string) => {
  */
 export const getFreeEventsFunctionType = (
   extensionName: string,
-  eventsFunction: gdEventsFunction
+  eventsFunction: gd.EventsFunction
 ) => {
   return extensionName + '::' + eventsFunction.getName();
 };

@@ -1,12 +1,12 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, marginsSize } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../UI/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useResponsiveWindowSize } from '../../UI/Responsive/ResponsiveWindowMeasurer';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-// @ts-expect-error - TS6142 - Module './SlideshowArrow' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Slideshow/SlideshowArrow.tsx', but '--jsx' is not set.
+
 import SlideshowArrow, { useStylesForArrowButtons } from './SlideshowArrow';
 import { useScreenType } from '../Responsive/ScreenTypeMeasurer';
 import { shouldValidate } from '../KeyboardShortcuts/InteractionKeys';
@@ -51,10 +51,10 @@ const getItemLineHeight = ({
   itemDesktopRatio,
   itemMobileRatio,
 }: {
-  useMobileImage: boolean,
-  componentWidth: number,
-  itemDesktopRatio: number,
-  itemMobileRatio: number
+  useMobileImage: boolean;
+  componentWidth: number;
+  itemDesktopRatio: number;
+  itemMobileRatio: number;
 }) => {
   const containerWidth = componentWidth - 2 * marginsSize;
   const lineHeight = useMobileImage
@@ -65,7 +65,7 @@ const getItemLineHeight = ({
 };
 
 const useStylesForContainer = () =>
-  makeStyles(theme =>
+  makeStyles((theme) =>
     createStyles({
       root: {
         '&:hover img': {
@@ -83,15 +83,18 @@ const useStylesForContainer = () =>
   )();
 
 type SlideshowProps = {
-  items: Array<{
-    id: string,
-    imageUrl: string,
-    mobileImageUrl: string,
-    onClick: () => void | null | undefined
-  }> | null | undefined,
-  itemDesktopRatio: number,
-  itemMobileRatio: number,
-  additionalMarginForWidthCalculation?: number
+  items:
+    | Array<{
+        id: string;
+        imageUrl: string;
+        mobileImageUrl: string;
+        onClick: () => void | null | undefined;
+      }>
+    | null
+    | undefined;
+  itemDesktopRatio: number;
+  itemMobileRatio: number;
+  additionalMarginForWidthCalculation?: number;
 };
 
 const Slideshow = ({
@@ -122,54 +125,47 @@ const Slideshow = ({
     itemMobileRatio,
   });
   const classesForContainer = useStylesForContainer();
-  const [isFocusingOrOverContainer, setIsFocusingContainer] = React.useState(
-    false
-  );
+  const [isFocusingOrOverContainer, setIsFocusingContainer] =
+    React.useState(false);
   const leftImageRecentlyTimeoutId = React.useRef(null);
   const nextSlideTimeoutId = React.useRef(null);
 
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
-  const handleLeftArrowClick = React.useCallback(
-    () => {
-      if (!items || items.length === 1) return;
+  const handleLeftArrowClick = React.useCallback(() => {
+    if (!items || items.length === 1) return;
 
-      // Clear the timeout to avoid changing the slide while the user
-      // is interacting with the slideshow.
-      if (nextSlideTimeoutId.current) {
-        clearTimeout(nextSlideTimeoutId.current);
-        nextSlideTimeoutId.current = null;
-      }
+    // Clear the timeout to avoid changing the slide while the user
+    // is interacting with the slideshow.
+    if (nextSlideTimeoutId.current) {
+      clearTimeout(nextSlideTimeoutId.current);
+      nextSlideTimeoutId.current = null;
+    }
 
-      setCurrentSlide(currentSlide === 0 ? items.length - 1 : currentSlide - 1);
-    },
-    [items, currentSlide]
-  );
+    setCurrentSlide(currentSlide === 0 ? items.length - 1 : currentSlide - 1);
+  }, [items, currentSlide]);
 
-  const handleRightArrowClick = React.useCallback(
-    () => {
-      if (!items || items.length === 1) return;
+  const handleRightArrowClick = React.useCallback(() => {
+    if (!items || items.length === 1) return;
 
-      // Clear the timeout to avoid changing the slide while the user
-      // is interacting with the slideshow.
-      if (nextSlideTimeoutId.current) {
-        clearTimeout(nextSlideTimeoutId.current);
-        nextSlideTimeoutId.current = null;
-      }
+    // Clear the timeout to avoid changing the slide while the user
+    // is interacting with the slideshow.
+    if (nextSlideTimeoutId.current) {
+      clearTimeout(nextSlideTimeoutId.current);
+      nextSlideTimeoutId.current = null;
+    }
 
-      setCurrentSlide(currentSlide === items.length - 1 ? 0 : currentSlide + 1);
-    },
-    [items, currentSlide]
-  );
+    setCurrentSlide(currentSlide === items.length - 1 ? 0 : currentSlide + 1);
+  }, [items, currentSlide]);
 
   React.useEffect(
     () => {
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'null'.
+      // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'null'.
       nextSlideTimeoutId.current = setTimeout(() => {
         handleRightArrowClick();
       }, 5000);
       return () => {
-// @ts-expect-error - TS2769 - No overload matches this call.
+        // @ts-expect-error - TS2769 - No overload matches this call.
         clearTimeout(nextSlideTimeoutId.current);
         nextSlideTimeoutId.current = null;
       };
@@ -179,43 +175,33 @@ const Slideshow = ({
     [handleRightArrowClick]
   );
 
-  const handleOverOrFocusContainer = React.useCallback(
-    () => {
-      // If the user was going out just before, cancel the timeout.
-      if (leftImageRecentlyTimeoutId.current) {
-        clearTimeout(leftImageRecentlyTimeoutId.current);
-        leftImageRecentlyTimeoutId.current = null;
-      }
-      if (isFocusingOrOverContainer) return;
-      setIsFocusingContainer(true);
-    },
-    [isFocusingOrOverContainer]
-  );
+  const handleOverOrFocusContainer = React.useCallback(() => {
+    // If the user was going out just before, cancel the timeout.
+    if (leftImageRecentlyTimeoutId.current) {
+      clearTimeout(leftImageRecentlyTimeoutId.current);
+      leftImageRecentlyTimeoutId.current = null;
+    }
+    if (isFocusingOrOverContainer) return;
+    setIsFocusingContainer(true);
+  }, [isFocusingOrOverContainer]);
 
-  const handleLeaveOrBlurContainer = React.useCallback(
-    () => {
-      // If this event is triggered multiple times, there already is a timeout
-      // so just return.
-      if (!isFocusingOrOverContainer || leftImageRecentlyTimeoutId.current)
-        return;
-// @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'null'.
-      leftImageRecentlyTimeoutId.current = setTimeout(() => {
-        setIsFocusingContainer(false);
-      }, 1000);
-    },
-    [isFocusingOrOverContainer]
-  );
+  const handleLeaveOrBlurContainer = React.useCallback(() => {
+    // If this event is triggered multiple times, there already is a timeout
+    // so just return.
+    if (!isFocusingOrOverContainer || leftImageRecentlyTimeoutId.current)
+      return;
+    // @ts-expect-error - TS2322 - Type 'Timeout' is not assignable to type 'null'.
+    leftImageRecentlyTimeoutId.current = setTimeout(() => {
+      setIsFocusingContainer(false);
+    }, 1000);
+  }, [isFocusingOrOverContainer]);
 
   if (!items) {
     // If they're loading, display a skeleton so that it doesn't jump when loaded.
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Paper square background="dark">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Skeleton
               variant="rect"
               height={itemLineHeight}
@@ -234,9 +220,7 @@ const Slideshow = ({
     (isFocusingOrOverContainer || isMobile || isTouchScreen);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Paper square background="dark">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         style={{
           ...styles.slidesContainer,
@@ -245,7 +229,7 @@ const Slideshow = ({
         onPointerOver={handleOverOrFocusContainer}
         onPointerLeave={handleLeaveOrBlurContainer}
         tabIndex={0}
-// @ts-expect-error - TS2322 - Type '(event: React.KeyboardEvent<HTMLLIElement>) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+        // @ts-expect-error - TS2322 - Type '(event: React.KeyboardEvent<HTMLLIElement>) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
         onKeyUp={(event: React.KeyboardEvent<HTMLLIElement>): void => {
           if (shouldValidate(event)) {
             const item = items[currentSlide];
@@ -261,7 +245,6 @@ const Slideshow = ({
         className={classesForContainer.root}
       >
         {shouldDisplayArrows && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SlideshowArrow
             onClick={handleLeftArrowClick}
             position="left"
@@ -270,7 +253,6 @@ const Slideshow = ({
         )}
         {items.map((item, index) => {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <img
               src={shouldUseMobileImage ? item.mobileImageUrl : item.imageUrl}
               alt={`Slideshow item for ${item.id}`}
@@ -289,7 +271,6 @@ const Slideshow = ({
           );
         })}
         {shouldDisplayArrows && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SlideshowArrow
             onClick={handleRightArrowClick}
             position="right"

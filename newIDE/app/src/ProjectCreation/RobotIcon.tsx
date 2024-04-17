@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/RobotFace'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/RobotFace.js' implicitly has an 'any' type.
+
 import RobotFace from '../UI/CustomSvgIcons/RobotFace';
 import { makeStyles } from '@material-ui/core';
 
@@ -54,11 +54,9 @@ export default function RobotIcon({
 }: Props) {
   const classes = useClasses(rotating);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <div className={classes.container}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div className={classes.svgContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <RobotFace />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { useTimeout } from '../../Utils/UseTimeout';
-// @ts-expect-error - TS6142 - Module '../../UI/LoaderModal' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LoaderModal.tsx', but '--jsx' is not set.
+
 import LoaderModal from '../../UI/LoaderModal';
 
 export default {
@@ -9,7 +9,6 @@ export default {
   component: LoaderModal,
 };
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 export const Default = () => <LoaderModal show />;
 
 const STEP_COUNT = 4;
@@ -26,7 +25,6 @@ export const WithProgress = () => {
     'Drumrolls',
   ];
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LoaderModal
       show
       message={messages[Math.min(step, messages.length - 1)]}

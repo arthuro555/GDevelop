@@ -1,4 +1,3 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from './OptionalRequire';
 
 /**
@@ -10,11 +9,11 @@ import optionalRequire from './OptionalRequire';
  */
 export default function optionalLazyRequire(moduleName: string) {
   let moduleLoaded = false;
-// @ts-expect-error - TS7034 - Variable 'module' implicitly has type 'any' in some locations where its type cannot be determined.
+  // @ts-expect-error - TS7034 - Variable 'module' implicitly has type 'any' in some locations where its type cannot be determined.
   let module = undefined;
   return (): any | null | undefined => {
     if (moduleLoaded) {
-// @ts-expect-error - TS7005 - Variable 'module' implicitly has an 'any' type.
+      // @ts-expect-error - TS7005 - Variable 'module' implicitly has an 'any' type.
       return module;
     }
 

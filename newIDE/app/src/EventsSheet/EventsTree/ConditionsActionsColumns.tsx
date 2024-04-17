@@ -7,20 +7,14 @@ import {
 } from './ClassNames';
 
 type Props = {
-  renderConditionsList: (
-    arg1: {
-      style: any,
-      className: string
-    },
-  ) => React.ReactElement,
-  renderActionsList: (
-    arg1: {
-      className: string
-    },
-  ) => React.ReactElement,
-  windowSize: WindowSizeType,
-  className?: string,
-  leftIndentWidth: number
+  renderConditionsList: (arg1: {
+    style: any;
+    className: string;
+  }) => React.ReactElement;
+  renderActionsList: (arg1: { className: string }) => React.ReactElement;
+  windowSize: WindowSizeType;
+  className?: string;
+  leftIndentWidth: number;
 };
 
 const styles = {
@@ -42,14 +36,13 @@ const ConditionsActionsColumns = (props: Props) => {
   const isMobile = props.windowSize === 'small';
   if (isMobile) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div style={styles.oneColumnContainer} className={props.className}>
         {props.renderConditionsList({
           style: {},
           className: `${conditionsContainer} ${smallWidthContainer}`,
         })}
         {props.renderActionsList({
-// @ts-expect-error - TS2345 - Argument of type '{ style: {}; className: string; }' is not assignable to parameter of type '{ className: string; }'.
+          // @ts-expect-error - TS2345 - Argument of type '{ style: {}; className: string; }' is not assignable to parameter of type '{ className: string; }'.
           style: {},
           className: `${actionsContainer} ${smallWidthContainer}`,
         })}
@@ -58,7 +51,6 @@ const ConditionsActionsColumns = (props: Props) => {
   }
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={styles.twoColumnsContainer} className={props.className}>
       {props.renderConditionsList({
         style: {

@@ -9,45 +9,44 @@ import useClickDragAsControl from './UseClickDragAsControl';
 import { makeTimestampedId } from '../../Utils/TimestampedId';
 import { toFixedWithoutTrailingZeros } from '../../Utils/Mathematics';
 
-type ValueProps = {
-  type?: 'text',
-  value: string,
-  onChange: (newValue: string, reason: 'keyInput') => void
-} | {
-  type: 'number',
-  value: number | null | undefined // null value corresponds to an empty input.,
-  onChange: (newValue: number, reason: 'keyInput' | 'iconControl') => void
-};
+type ValueProps =
+  | {
+      type?: 'text';
+      value: string;
+      onChange: (newValue: string, reason: 'keyInput') => void;
+    }
+  | {
+      type: 'number';
+      value: number | null | undefined; // null value corresponds to an empty input.,
+      onChange: (newValue: number, reason: 'keyInput' | 'iconControl') => void;
+    };
 
 type OtherProps = {
-  onBlur?: (
-    arg1: {
-      currentTarget: {
-        value: string
-      }
-    },
-  ) => void,
-  onFocus?: (
-    arg1: {
-      currentTarget: {
-        value: string
-      },
-      preventDefault: () => void
-    },
-  ) => void
+  onBlur?: (arg1: {
+    currentTarget: {
+      value: string;
+    };
+  }) => void;
+  onFocus?: (arg1: {
+    currentTarget: {
+      value: string;
+    };
+    preventDefault: () => void;
+  }) => void;
 };
 
-export type CompactTextFieldProps = (ValueProps) & (OtherProps) & {
-  id?: string,
-  disabled?: boolean,
-  errored?: boolean,
-  placeholder?: string,
-  renderLeftIcon?: (className: string) => React.ReactElement,
-  leftIconTooltip?: React.ReactNode,
-  useLeftIconAsNumberControl?: boolean,
-  renderEndAdornmentOnHover?: (className: string) => React.ReactElement,
-  onClickEndAdornment?: () => void
-};
+export type CompactTextFieldProps = ValueProps &
+  OtherProps & {
+    id?: string;
+    disabled?: boolean;
+    errored?: boolean;
+    placeholder?: string;
+    renderLeftIcon?: (className: string) => React.ReactElement;
+    leftIconTooltip?: React.ReactNode;
+    useLeftIconAsNumberControl?: boolean;
+    renderEndAdornmentOnHover?: (className: string) => React.ReactElement;
+    onClickEndAdornment?: () => void;
+  };
 
 const CompactTextField = ({
   type,
@@ -68,30 +67,27 @@ const CompactTextField = ({
   const idToUse = React.useRef<string>(id || makeTimestampedId());
   const controlProps = useClickDragAsControl({
     // $FlowExpectedError - Click drag controls should not be used if value type is not number.
-// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'never'.
-    onChange: value => onChange(value, 'iconControl'),
+    // @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'never'.
+    onChange: (value) => onChange(value, 'iconControl'),
     // $FlowExpectedError
-// @ts-expect-error - TS2322 - Type 'string | number | null | undefined' is not assignable to type 'number'.
+    // @ts-expect-error - TS2322 - Type 'string | number | null | undefined' is not assignable to type 'number'.
     onGetInitialValue: () => value,
   });
 
   const onBlurInput = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-    event => {
+    (event) => {
       if (onBlur) onBlur(event);
     },
     [onBlur]
   );
   const onFocusInput = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-    event => {
+    (event) => {
       if (onFocus) onFocus(event);
     },
     [onFocus]
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       className={classNames({
         [classes.container]: true,
@@ -100,7 +96,6 @@ const CompactTextField = ({
       })}
     >
       {renderLeftIcon && leftIconTooltip && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           title={leftIconTooltip}
           enterDelay={tooltipEnterDelay}
@@ -118,7 +113,7 @@ const CompactTextField = ({
             },
           }}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: Element; onMouseDown?: ((e: MouseEvent) => void) | undefined; onMouseMove?: ((e: MouseEvent) => void) | undefined; onMouseUp?: (() => void) | undefined; className: any; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'. */}
+          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: Element; onMouseDown?: ((e: MouseEvent) => void) | undefined; onMouseMove?: ((e: MouseEvent) => void) | undefined; onMouseUp?: (() => void) | undefined; className: any; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'. */}
           <div
             className={classNames({
               [classes.leftIconContainer]: true,
@@ -126,21 +121,18 @@ const CompactTextField = ({
             })}
             {...(useLeftIconAsNumberControl ? controlProps : {})}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <label htmlFor={idToUse.current} className={classes.label}>
               {renderLeftIcon(classes.leftIcon)}
             </label>
           </div>
         </Tooltip>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         className={classNames({
           [classes.compactTextField]: true,
           [classes.withEndAdornment]: !!renderEndAdornmentOnHover,
         })}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <input
           id={idToUse.current}
           type={type || 'text'}
@@ -149,17 +141,16 @@ const CompactTextField = ({
             value === null
               ? ''
               : typeof value === 'number'
-              ? toFixedWithoutTrailingZeros(value, 2)
-              : value
+                ? toFixedWithoutTrailingZeros(value, 2)
+                : value
           }
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'never'.
-          onChange={e => onChange(e.currentTarget.value, 'keyInput')}
+          // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'never'.
+          onChange={(e) => onChange(e.currentTarget.value, 'keyInput')}
           placeholder={placeholder}
           onBlur={onBlurInput}
           onFocus={onFocusInput}
         />
         {renderEndAdornmentOnHover && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <button
             onClick={onClickEndAdornment}
             className={classes.endAdornmentButton}

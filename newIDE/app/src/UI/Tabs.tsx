@@ -37,12 +37,12 @@ const useStylesForTab = makeStyles({
 // We support a subset of the props supported by Material-UI v0.x Tabs
 // They should be self descriptive - refer to Material UI docs otherwise.
 type TabProps<TabName> = {
-  label: React.ReactNode,
-  value: TabName,
-  tabIndex: number,
-  disabled?: boolean,
-  id?: string | null | undefined,
-  style: any // Allow additional style from the Tabs component.
+  label: React.ReactNode;
+  value: TabName;
+  tabIndex: number;
+  disabled?: boolean;
+  id?: string | null | undefined;
+  style: any; // Allow additional style from the Tabs component.
 };
 
 /**
@@ -50,37 +50,35 @@ type TabProps<TabName> = {
  */
 function Tab<TabName>(props: TabProps<TabName>) {
   const classes = useStylesForTab();
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2769 - No overload matches this call.
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2769 - No overload matches this call.
   return <MUITab classes={classes} {...props} />;
 }
 
 export type TabOptions<TabName> = Array<{
-  label: React.ReactNode,
-  value: TabName,
-  id?: string,
-  disabled?: boolean
+  label: React.ReactNode;
+  value: TabName;
+  id?: string;
+  disabled?: boolean;
 }>;
 
 // We support a subset of the props supported by Material-UI v0.x Tabs
 // They should be self descriptive - refer to Material UI docs otherwise.
 type TabsProps<TabName> = {
-  value?: TabName,
-  onChange: (arg1: TabName) => void,
-  options: TabOptions<TabName>,
-  variant?: 'scrollable' // Allow overriding the scrollable variant for specific cases.
+  value?: TabName;
+  onChange: (arg1: TabName) => void;
+  options: TabOptions<TabName>;
+  variant?: 'scrollable'; // Allow overriding the scrollable variant for specific cases.
 };
 
 /**
  * Tabs based on Material-UI Tabs.
  */
-export function Tabs<TabName>(
-  {
-    value,
-    onChange,
-    options,
-    variant,
-  }: TabsProps<TabName>,
-) {
+export function Tabs<TabName>({
+  value,
+  onChange,
+  options,
+  variant,
+}: TabsProps<TabName>) {
   const { windowSize } = useResponsiveWindowSize();
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
 
@@ -92,7 +90,6 @@ export function Tabs<TabName>(
     (windowSize === 'xlarge' && options.length >= 8);
   const automaticScreenVariant = shouldScroll ? 'scrollable' : 'fullWidth';
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <MUITabs
       variant={variant || automaticScreenVariant}
       textColor="primary"
@@ -113,7 +110,7 @@ export function Tabs<TabName>(
       {options.map((option, index) => {
         const isTabSelected = option.value === value;
         const selectedTabIndex = options.findIndex(
-          option => option.value === value
+          (option) => option.value === value
         );
         // Apply a specific style if it's far from the selected tab.
         // 2 to the right, 1 to the left, as we apply a border on the left of the tab.
@@ -121,7 +118,6 @@ export function Tabs<TabName>(
           index !== 0 &&
           (index - selectedTabIndex >= 2 || selectedTabIndex - index >= 1);
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Tab
             value={option.value}
             disabled={option.disabled}
@@ -134,12 +130,10 @@ export function Tabs<TabName>(
               ...(isTabSelected
                 ? styles.selectedTab
                 : isTabDistant
-                ? {
-                    borderLeft: `1px solid ${
-                      gdevelopTheme.tabs.separator.color
-                    }`,
-                  }
-                : {}),
+                  ? {
+                      borderLeft: `1px solid ${gdevelopTheme.tabs.separator.color}`,
+                    }
+                  : {}),
             }}
           />
         );

@@ -1,56 +1,62 @@
-import {EventsScope} from './EventsScope.flow';
-const gd: libGDevelop = global.gd;
+import { EventsScope } from './EventsScope.flow';
 
 export type InstructionOrExpressionScope = {
-  extension: gdPlatformExtension,
-  objectMetadata?: gdObjectMetadata | null | undefined,
-  behaviorMetadata?: gdBehaviorMetadata | null | undefined
+  extension: gd.PlatformExtension;
+  objectMetadata?: gd.ObjectMetadata | null | undefined;
+  behaviorMetadata?: gd.BehaviorMetadata | null | undefined;
 };
 
 export type EnumeratedInstructionMetadata = {
-  type: string,
-  displayedName: string,
-  description: string,
-  fullGroupName: string,
-  iconFilename: string,
-  metadata: gdInstructionMetadata,
-  scope: InstructionOrExpressionScope,
-  isPrivate: boolean,
-  isRelevantForLayoutEvents: boolean,
-  isRelevantForFunctionEvents: boolean,
-  isRelevantForAsynchronousFunctionEvents: boolean,
-  isRelevantForCustomObjectEvents: boolean
+  type: string;
+  displayedName: string;
+  description: string;
+  fullGroupName: string;
+  iconFilename: string;
+  metadata: gd.InstructionMetadata;
+  scope: InstructionOrExpressionScope;
+  isPrivate: boolean;
+  isRelevantForLayoutEvents: boolean;
+  isRelevantForFunctionEvents: boolean;
+  isRelevantForAsynchronousFunctionEvents: boolean;
+  isRelevantForCustomObjectEvents: boolean;
 };
 
 export type EnumeratedExpressionMetadata = {
-  type: string,
-  displayedName: string,
-  fullGroupName: string,
-  iconFilename: string,
-  metadata: gdExpressionMetadata,
-  scope: InstructionOrExpressionScope,
-  isPrivate: boolean,
-  isRelevantForLayoutEvents: boolean,
-  isRelevantForFunctionEvents: boolean,
-  isRelevantForAsynchronousFunctionEvents: boolean,
-  isRelevantForCustomObjectEvents: boolean,
-  name: string,
+  type: string;
+  displayedName: string;
+  fullGroupName: string;
+  iconFilename: string;
+  metadata: gd.ExpressionMetadata;
+  scope: InstructionOrExpressionScope;
+  isPrivate: boolean;
+  isRelevantForLayoutEvents: boolean;
+  isRelevantForFunctionEvents: boolean;
+  isRelevantForAsynchronousFunctionEvents: boolean;
+  isRelevantForCustomObjectEvents: boolean;
+  name: string;
   /** Represents only the visible parameters in the parentheses of the expression. */
-  parameters: Array<gdParameterMetadata>
+  parameters: Array<gd.ParameterMetadata>;
 };
 
 // An object representing InstructionMetadata or ExpressionMetadata.
 // Allow to use most information without paying the cost to call the
 // InstructionMetadata/ExpressionMetadata methods. In theory,
 // this type and objects are redundant with InstructionMetadata and ExpressionMetadata.
-export type EnumeratedInstructionOrExpressionMetadata = EnumeratedInstructionMetadata | EnumeratedExpressionMetadata;
+export type EnumeratedInstructionOrExpressionMetadata =
+  | EnumeratedInstructionMetadata
+  | EnumeratedExpressionMetadata;
 
 /**
  * Given a list of expression or instructions that were previously enumerated,
  * filter the ones that are not usable from the current "scope".
  */
-export const filterEnumeratedInstructionOrExpressionMetadataByScope = <T extends EnumeratedInstructionOrExpressionMetadata>(list: Array<T>, scope: EventsScope): Array<T> => {
-  return list.filter(enumeratedInstructionOrExpressionMetadata =>
+export const filterEnumeratedInstructionOrExpressionMetadataByScope = <
+  T extends EnumeratedInstructionOrExpressionMetadata,
+>(
+  list: Array<T>,
+  scope: EventsScope
+): Array<T> => {
+  return list.filter((enumeratedInstructionOrExpressionMetadata) =>
     isFunctionVisibleInGivenScope(
       enumeratedInstructionOrExpressionMetadata,
       scope
@@ -60,12 +66,10 @@ export const filterEnumeratedInstructionOrExpressionMetadataByScope = <T extends
 
 const isFunctionVisibleInGivenScope = (
   enumeratedInstructionOrExpressionMetadata: EnumeratedInstructionOrExpressionMetadata,
-  scope: EventsScope,
+  scope: EventsScope
 ): boolean => {
-  const {
-    behaviorMetadata,
-    extension,
-  } = enumeratedInstructionOrExpressionMetadata.scope;
+  const { behaviorMetadata, extension } =
+    enumeratedInstructionOrExpressionMetadata.scope;
   const { eventsBasedBehavior, eventsFunctionsExtension } = scope;
 
   return !!(

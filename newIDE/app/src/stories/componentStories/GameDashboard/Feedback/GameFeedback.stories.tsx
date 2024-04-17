@@ -1,8 +1,7 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 
-// @ts-expect-error - TS6142 - Module '../../../../GameDashboard/Feedbacks/GameFeedback' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/Feedbacks/GameFeedback.tsx', but '--jsx' is not set.
 import GameFeedback from '../../../../GameDashboard/Feedbacks/GameFeedback';
 
 import {
@@ -18,7 +17,7 @@ import {
   GDevelopBuildApi,
   GDevelopPlayApi,
 } from '../../../../Utils/GDevelopServices/ApiConfigs';
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
+
 import { getPaperDecorator } from '../../../PaperDecorator';
 
 export default {
@@ -35,16 +34,13 @@ export const DefaultGameFeedback = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <GameFeedback
           i18n={i18n}
           authenticatedUser={fakeSilverAuthenticatedUser}
@@ -63,16 +59,13 @@ export const GameFeedbackOneSolvedComment = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <GameFeedback
           i18n={i18n}
           authenticatedUser={fakeSilverAuthenticatedUser}
@@ -91,16 +84,13 @@ export const GameFeedbackWithError = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <GameFeedback
           i18n={i18n}
           authenticatedUser={fakeSilverAuthenticatedUser}
@@ -119,16 +109,13 @@ export const GameFeedbackEmpty = () => {
     .onGet(`${GDevelopBuildApi.baseUrl}/build`)
     .reply(200, [completeWebBuild])
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <GameFeedback
           i18n={i18n}
           authenticatedUser={fakeSilverAuthenticatedUser}

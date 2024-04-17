@@ -2,7 +2,7 @@
 let isWebGLAvailable = null;
 
 export const isWebGLSupported = (): boolean => {
-// @ts-expect-error - TS7005 - Variable 'isWebGLAvailable' implicitly has an 'any' type. | TS7005 - Variable 'isWebGLAvailable' implicitly has an 'any' type.
+  // @ts-expect-error - TS7005 - Variable 'isWebGLAvailable' implicitly has an 'any' type. | TS7005 - Variable 'isWebGLAvailable' implicitly has an 'any' type.
   if (isWebGLAvailable !== null) return isWebGLAvailable;
   try {
     const canvas = document.createElement('canvas');
@@ -11,7 +11,7 @@ export const isWebGLSupported = (): boolean => {
       !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
 
     return isWebGLAvailable;
-  } catch (e: any) {
+  } catch (e) {
     isWebGLAvailable = false;
     return false;
   }

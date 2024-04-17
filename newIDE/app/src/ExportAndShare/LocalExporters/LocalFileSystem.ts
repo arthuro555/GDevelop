@@ -1,4 +1,3 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from '../../Utils/OptionalRequire';
 import { getUID } from '../../Utils/LocalUserInfo';
 import { isURL } from '../../ResourcesList/ResourceUtils';
@@ -6,11 +5,9 @@ const fs = optionalRequire('fs-extra');
 const path = optionalRequire('path');
 const os = optionalRequire('os');
 
-const gd: libGDevelop = global.gd;
-
 export type UrlFileDescriptor = {
-  filePath: string,
-  url: string
+  filePath: string;
+  url: string;
 };
 
 // For some reason, `path.posix` is undefined when packaged
@@ -38,12 +35,12 @@ class LocalFileSystem {
    * @private
    */
   _filesToDownload: {
-    [key: string]: string
+    [key: string]: string;
   } = {};
 
   constructor(
     options?: {
-      downloadUrlsToLocalFiles: boolean
+      downloadUrlsToLocalFiles: boolean;
     } | null
   ) {
     this._downloadUrlsToLocalFiles =
@@ -62,8 +59,8 @@ class LocalFileSystem {
       .replace(/\\/g, '/');
 
     return Object.keys(this._filesToDownload)
-      .filter(filePath => filePath.indexOf(normalizedPathPrefix) === 0)
-      .map(filePath => ({
+      .filter((filePath) => filePath.indexOf(normalizedPathPrefix) === 0)
+      .map((filePath) => ({
         filePath,
         url: this._filesToDownload[filePath],
       }));
@@ -77,7 +74,7 @@ class LocalFileSystem {
 
     try {
       fs.mkdirsSync(path);
-    } catch (e: any) {
+    } catch (e) {
       console.error('mkDir(' + path + ') failed: ' + e);
       return false;
     }
@@ -94,7 +91,7 @@ class LocalFileSystem {
   clearDir = (path: string) => {
     try {
       fs.emptyDirSync(path);
-    } catch (e: any) {
+    } catch (e) {
       console.error('clearDir(' + path + ') failed: ' + e);
     }
   };
@@ -154,7 +151,7 @@ class LocalFileSystem {
 
     try {
       if (source !== dest) fs.copySync(source, dest);
-    } catch (e: any) {
+    } catch (e) {
       console.error('copyFile(' + source + ', ' + dest + ') failed: ' + e);
       return false;
     }
@@ -163,7 +160,7 @@ class LocalFileSystem {
   writeToFile = (file: string, contents: string) => {
     try {
       fs.outputFileSync(file, contents);
-    } catch (e: any) {
+    } catch (e) {
       console.error('writeToFile(' + file + ', ...) failed: ' + e);
       return false;
     }
@@ -173,7 +170,7 @@ class LocalFileSystem {
     try {
       var contents = fs.readFileSync(file);
       return contents.toString();
-    } catch (e: any) {
+    } catch (e) {
       console.error('readFile(' + file + ') failed: ' + e);
       return '';
     }
@@ -185,8 +182,8 @@ class LocalFileSystem {
       var files = [];
       if (fs.existsSync(path)) {
         files = fs.readdirSync(path);
-// @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
-        files.forEach(function(file) {
+        // @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
+        files.forEach(function (file) {
           if (
             ext.length === 0 ||
             file.toUpperCase().indexOf(ext, file.length - ext.length) !== -1
@@ -195,7 +192,7 @@ class LocalFileSystem {
           }
         });
       }
-    } catch (e: any) {
+    } catch (e) {
       console.error('readDir(' + path + ',' + ext + ') failed: ' + e);
     }
 
@@ -204,9 +201,8 @@ class LocalFileSystem {
   fileExists = (filePath: string) => {
     // Check if a file WILL exists once downloaded.
     const normalizedFilePath = pathPosix.normalize(filePath);
-    const shouldTheFileBeDownloaded = !!this._filesToDownload[
-      normalizedFilePath
-    ];
+    const shouldTheFileBeDownloaded =
+      !!this._filesToDownload[normalizedFilePath];
     if (shouldTheFileBeDownloaded) {
       return true;
     }
@@ -215,7 +211,7 @@ class LocalFileSystem {
     try {
       const stat = fs.statSync(filePath);
       return stat.isFile();
-    } catch (e: any) {
+    } catch (e) {
       return false;
     }
   };

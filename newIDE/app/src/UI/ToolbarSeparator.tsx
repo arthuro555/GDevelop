@@ -4,7 +4,6 @@ import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
 const ToolbarSeparator = () => {
   const theme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <span
       style={{
         height: 32,

@@ -7,16 +7,15 @@ export const marginsSize = 8;
  * specifically for your components (like `TextFieldWithButton`).
  */
 export const Line = (props: {
-  children?: React.ReactNode,
-  noMargin?: boolean,
-  alignItems?: string,
-  justifyContent?: string,
-  expand?: boolean,
-  overflow?: string,
-  useFullHeight?: boolean,
-  id?: string
+  children?: React.ReactNode;
+  noMargin?: boolean;
+  alignItems?: string;
+  justifyContent?: string;
+  expand?: boolean;
+  overflow?: string;
+  useFullHeight?: boolean;
+  id?: string;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <div
     id={props.id}
     style={{
@@ -47,16 +46,15 @@ export const Line = (props: {
  * specifically for your components (like `TextFieldWithButton`).
  */
 export const Column = (props: {
-  children?: React.ReactNode,
-  noMargin?: boolean,
-  alignItems?: string,
-  justifyContent?: string,
-  expand?: boolean,
-  useFullHeight?: boolean,
-  noOverflowParent?: boolean,
-  id?: string
+  children?: React.ReactNode;
+  noMargin?: boolean;
+  alignItems?: string;
+  justifyContent?: string;
+  expand?: boolean;
+  useFullHeight?: boolean;
+  noOverflowParent?: boolean;
+  id?: string;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <div
     id={props.id}
     style={{
@@ -95,7 +93,7 @@ const spacerStyle = {
  * Check `Layout` first to see if there is already a layout made
  * specifically for your components (like `TextFieldWithButton`).
  */
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
 export const Spacer = React.memo<NoProps>(() => <span style={spacerStyle} />);
 
 const largeSpacerStyle = {
@@ -106,6 +104,5 @@ const largeSpacerStyle = {
 
 /** A large spacer that is 24px width. */
 export const LargeSpacer = React.memo<NoProps>(() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <span style={largeSpacerStyle} />
 ));

@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import Rendered3DInstance from './Rendered3DInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
@@ -21,28 +21,31 @@ import * as PIXI from 'pixi.js-legacy';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/build/three.js' implicitly has an 'any' type.
 import * as THREE from 'three';
 
-const gd: libGDevelop = global.gd;
-
 /**
  * Renderer for gd.CustomObject (the class is not exposed to newIDE)
  */
-export default class RenderedCustomObjectInstance extends Rendered3DInstance
-// @ts-expect-error - TS2344 - Type 'RenderedInstance | Rendered3DInstance' does not satisfy the constraint 'ChildRenderedInstance'.
-  implements LayoutedParent<RenderedInstance | Rendered3DInstance> {
+export default class RenderedCustomObjectInstance
+  extends Rendered3DInstance
+  // @ts-expect-error - TS2344 - Type 'RenderedInstance | Rendered3DInstance' does not satisfy the constraint 'ChildRenderedInstance'.
+  implements LayoutedParent<RenderedInstance | Rendered3DInstance>
+{
   childrenInstances: ChildInstance[];
   childrenLayouts: ChildLayout[];
   childrenRenderedInstances: Array<RenderedInstance | Rendered3DInstance>;
-  childrenRenderedInstanceByNames: Map<string, RenderedInstance | Rendered3DInstance>;
+  childrenRenderedInstanceByNames: Map<
+    string,
+    RenderedInstance | Rendered3DInstance
+  >;
   _proportionalOriginX: number;
   _proportionalOriginY: number;
   _proportionalOriginZ: number;
   _threeObjectPivot: THREE.Group | null;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     threeGroup: THREE.Group,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
@@ -118,7 +121,10 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
     this.childrenInstances = [];
     this.childrenLayouts = [];
     this.childrenRenderedInstances = [];
-    this.childrenRenderedInstanceByNames = new Map<string, RenderedInstance | Rendered3DInstance>();
+    this.childrenRenderedInstanceByNames = new Map<
+      string,
+      RenderedInstance | Rendered3DInstance
+    >();
 
     if (!eventBasedObject) {
       return;
@@ -129,8 +135,7 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
       customObjectConfiguration
     );
 
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapReverseFor(0, eventBasedObject.getObjectsCount(), i => {
+    mapReverseFor(0, eventBasedObject.getObjectsCount(), (i) => {
       const childObject = eventBasedObject.getObjectAt(i);
 
       const childLayout = childLayouts.get(childObject.getName()) || {
@@ -140,9 +145,10 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
         depthLayout: {},
       };
 
-      const childObjectConfiguration = customObjectConfiguration.getChildObjectConfiguration(
-        childObject.getName()
-      );
+      const childObjectConfiguration =
+        customObjectConfiguration.getChildObjectConfiguration(
+          childObject.getName()
+        );
       const childInstance = new ChildInstance();
       const renderer = ObjectsRenderingService.createNewInstanceRenderer(
         project,
@@ -162,7 +168,7 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
 
       if (renderer instanceof RenderedTextInstance) {
         // TODO EBO Remove this line when an alignment property is added to the text object.
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'DisplayObject'.
+        // @ts-expect-error - TS2339 - Property 'style' does not exist on type 'DisplayObject'.
         renderer._pixiObject.style.align = 'center';
       }
       this.childrenInstances.push(childInstance);
@@ -191,15 +197,14 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
   /**
    * Return a URL for thumbnail of the specified object.
    */
-// @ts-expect-error - TS7023 - 'getThumbnail' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+  // @ts-expect-error - TS7023 - 'getThumbnail' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
-    const customObjectConfiguration = gd.asCustomObjectConfiguration(
-      objectConfiguration
-    );
+    const customObjectConfiguration =
+      gd.asCustomObjectConfiguration(objectConfiguration);
 
     const eventBasedObject = project.hasEventsBasedObject(
       customObjectConfiguration.getType()
@@ -215,10 +220,7 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
       if (
         animations.getAnimationsCount() > 0 &&
         animations.getAnimation(0).getDirectionsCount() > 0 &&
-        animations
-          .getAnimation(0)
-          .getDirection(0)
-          .getSpritesCount() > 0
+        animations.getAnimation(0).getDirection(0).getSpritesCount() > 0
       ) {
         const imageName = animations
           .getAnimation(0)
@@ -232,9 +234,10 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
 
     for (let i = 0; i < eventBasedObject.getObjectsCount(); i++) {
       const childObject = eventBasedObject.getObjectAt(i);
-      const childObjectConfiguration = customObjectConfiguration.getChildObjectConfiguration(
-        childObject.getName()
-      );
+      const childObjectConfiguration =
+        customObjectConfiguration.getChildObjectConfiguration(
+          childObject.getName()
+        );
       const childType = childObjectConfiguration.getType();
       if (
         childType === 'Sprite' ||
@@ -242,7 +245,7 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
         childType === 'PanelSpriteObject::PanelSprite' ||
         childType === 'Scene3D::Cube3DObject'
       ) {
-// @ts-expect-error - TS7022 - 'thumbnail' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+        // @ts-expect-error - TS7022 - 'thumbnail' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
         const thumbnail = ObjectsRenderingService.getThumbnail(
           project,
           childObjectConfiguration
@@ -257,7 +260,7 @@ export default class RenderedCustomObjectInstance extends Rendered3DInstance
     // TODO For animatable custom objects, change the texture used by the child
     // according to the current animation.
 
-// @ts-expect-error - TS2345 - Argument of type 'this' is not assignable to parameter of type 'LayoutedParent<ChildRenderedInstance>'.
+    // @ts-expect-error - TS2345 - Argument of type 'this' is not assignable to parameter of type 'LayoutedParent<ChildRenderedInstance>'.
     applyChildLayouts(this);
 
     const originX = this.getOriginX();

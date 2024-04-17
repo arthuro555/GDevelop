@@ -1,10 +1,6 @@
-import {groupMembersByGroupId} from './utils';
+import { groupMembersByGroupId } from './utils';
 
-const getDefaultUser = ({
-  id,
-}: {
-  id: string
-}) => ({
+const getDefaultUser = ({ id }: { id: string }) => ({
   id,
   appLanguage: 'en',
   createdAt: 16798698390,
@@ -27,8 +23,8 @@ const getDefaultMembership = ({
   userId,
   groups,
 }: {
-  userId: string,
-  groups: string[] | null | undefined
+  userId: string;
+  groups: string[] | null | undefined;
 }) => ({
   userId,
   teamId: 'team-id',
@@ -36,18 +32,12 @@ const getDefaultMembership = ({
   createdAt: 16798698390,
 });
 
-const getDefaultGroup = ({
-  id,
-}: {
-  id: string
-}) => ({
+const getDefaultGroup = ({ id }: { id: string }) => ({
   id,
   name: 'Group',
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('groupMembersByGroupId', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test("All members are returned in the NONE group if they don't have a group yet", () => {
     const user1 = getDefaultUser({ id: 'user-id-1' });
     const user2 = getDefaultUser({ id: 'user-id-2' });
@@ -65,7 +55,6 @@ describe('groupMembersByGroupId', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('All members are returned in their groups and the ones without a group are put in the NONE group', () => {
     const user1 = getDefaultUser({ id: 'user-id-1' });
     const user2 = getDefaultUser({ id: 'user-id-2' });
@@ -93,7 +82,6 @@ describe('groupMembersByGroupId', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('All members are returned in their groups and the groups without members are present in the result', () => {
     const user1 = getDefaultUser({ id: 'user-id-1' });
     const user2 = getDefaultUser({ id: 'user-id-2' });

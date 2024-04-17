@@ -1,8 +1,68 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
 
-export type CommandName = 'QUIT_APP' | 'OPEN_PROJECT_MANAGER' | 'LAUNCH_NEW_PREVIEW' | 'LAUNCH_DEBUG_PREVIEW' | 'LAUNCH_NETWORK_PREVIEW' | 'HOT_RELOAD_PREVIEW' | 'OPEN_HOME_PAGE' | 'CREATE_NEW_PROJECT' | 'OPEN_PROJECT' | 'SAVE_PROJECT' | 'SAVE_PROJECT_AS' | 'CLOSE_PROJECT' | 'EXPORT_GAME' | 'INVITE_COLLABORATORS' | 'OPEN_RECENT_PROJECT' | 'OPEN_COMMAND_PALETTE' | 'OPEN_PROJECT_PROPERTIES' | 'OPEN_PROJECT_LOADING_SCREEN' | 'OPEN_PROJECT_VARIABLES' | 'OPEN_PLATFORM_SPECIFIC_ASSETS_DIALOG' | 'OPEN_PROJECT_RESOURCES' | 'OPEN_SEARCH_EXTENSIONS_DIALOG' | 'OPEN_LAYOUT' | 'OPEN_EXTERNAL_EVENTS' | 'OPEN_EXTERNAL_LAYOUT' | 'OPEN_EXTENSION' | 'OPEN_SCENE_PROPERTIES' | 'OPEN_SCENE_VARIABLES' | 'OPEN_OBJECTS_PANEL' | 'OPEN_OBJECT_GROUPS_PANEL' | 'OPEN_PROPERTIES_PANEL' | 'TOGGLE_INSTANCES_PANEL' | 'TOGGLE_LAYERS_PANEL' | 'SCENE_EDITOR_UNDO' | 'SCENE_EDITOR_REDO' | 'RENAME_SCENE_OBJECT' | 'DELETE_INSTANCES' | 'TOGGLE_WINDOW_MASK' | 'TOGGLE_GRID' | 'OPEN_SETUP_GRID' | 'EDIT_LAYER_EFFECTS' | 'EDIT_LAYER' | 'EDIT_NETWORK_PREVIEW' | 'EDIT_OBJECT' | 'EDIT_OBJECT_BEHAVIORS' | 'EDIT_OBJECT_EFFECTS' | 'EDIT_OBJECT_VARIABLES' | 'EDIT_OBJECT_GROUP' | 'ADD_STANDARD_EVENT' | 'ADD_SUBEVENT' | 'ADD_COMMENT_EVENT' | 'TOGGLE_EVENT_DISABLED' | 'TOGGLE_CONDITION_INVERTED' | 'CHOOSE_AND_ADD_EVENT' | 'MOVE_EVENTS_IN_NEW_GROUP' | 'EVENTS_EDITOR_UNDO' | 'EVENTS_EDITOR_REDO' | 'DELETE_SELECTION' | 'SEARCH_EVENTS' | 'OPEN_EXTENSION_SETTINGS' | 'OPEN_PROFILE';
+export type CommandName =
+  | 'QUIT_APP'
+  | 'OPEN_PROJECT_MANAGER'
+  | 'LAUNCH_NEW_PREVIEW'
+  | 'LAUNCH_DEBUG_PREVIEW'
+  | 'LAUNCH_NETWORK_PREVIEW'
+  | 'HOT_RELOAD_PREVIEW'
+  | 'OPEN_HOME_PAGE'
+  | 'CREATE_NEW_PROJECT'
+  | 'OPEN_PROJECT'
+  | 'SAVE_PROJECT'
+  | 'SAVE_PROJECT_AS'
+  | 'CLOSE_PROJECT'
+  | 'EXPORT_GAME'
+  | 'INVITE_COLLABORATORS'
+  | 'OPEN_RECENT_PROJECT'
+  | 'OPEN_COMMAND_PALETTE'
+  | 'OPEN_PROJECT_PROPERTIES'
+  | 'OPEN_PROJECT_LOADING_SCREEN'
+  | 'OPEN_PROJECT_VARIABLES'
+  | 'OPEN_PLATFORM_SPECIFIC_ASSETS_DIALOG'
+  | 'OPEN_PROJECT_RESOURCES'
+  | 'OPEN_SEARCH_EXTENSIONS_DIALOG'
+  | 'OPEN_LAYOUT'
+  | 'OPEN_EXTERNAL_EVENTS'
+  | 'OPEN_EXTERNAL_LAYOUT'
+  | 'OPEN_EXTENSION'
+  | 'OPEN_SCENE_PROPERTIES'
+  | 'OPEN_SCENE_VARIABLES'
+  | 'OPEN_OBJECTS_PANEL'
+  | 'OPEN_OBJECT_GROUPS_PANEL'
+  | 'OPEN_PROPERTIES_PANEL'
+  | 'TOGGLE_INSTANCES_PANEL'
+  | 'TOGGLE_LAYERS_PANEL'
+  | 'SCENE_EDITOR_UNDO'
+  | 'SCENE_EDITOR_REDO'
+  | 'RENAME_SCENE_OBJECT'
+  | 'DELETE_INSTANCES'
+  | 'TOGGLE_WINDOW_MASK'
+  | 'TOGGLE_GRID'
+  | 'OPEN_SETUP_GRID'
+  | 'EDIT_LAYER_EFFECTS'
+  | 'EDIT_LAYER'
+  | 'EDIT_NETWORK_PREVIEW'
+  | 'EDIT_OBJECT'
+  | 'EDIT_OBJECT_BEHAVIORS'
+  | 'EDIT_OBJECT_EFFECTS'
+  | 'EDIT_OBJECT_VARIABLES'
+  | 'EDIT_OBJECT_GROUP'
+  | 'ADD_STANDARD_EVENT'
+  | 'ADD_SUBEVENT'
+  | 'ADD_COMMENT_EVENT'
+  | 'TOGGLE_EVENT_DISABLED'
+  | 'TOGGLE_CONDITION_INVERTED'
+  | 'CHOOSE_AND_ADD_EVENT'
+  | 'MOVE_EVENTS_IN_NEW_GROUP'
+  | 'EVENTS_EDITOR_UNDO'
+  | 'EVENTS_EDITOR_REDO'
+  | 'DELETE_SELECTION'
+  | 'SEARCH_EVENTS'
+  | 'OPEN_EXTENSION_SETTINGS'
+  | 'OPEN_PROFILE';
 
 export const commandAreas = {
   GENERAL: t`General`,
@@ -15,11 +75,11 @@ export const commandAreas = {
 type CommandArea = keyof typeof commandAreas;
 
 type CommandMetadata = {
-  area: CommandArea,
-  displayText: MessageDescriptor,
-  noShortcut?: boolean // If true, command won't show up in shortcuts list,
-  ghost?: boolean // If true, command won't show up in palette,
-  handledByElectron?: boolean // If true, command shortcut is handled by Electron in desktop app
+  area: CommandArea;
+  displayText: MessageDescriptor;
+  noShortcut?: boolean; // If true, command won't show up in shortcuts list,
+  ghost?: boolean; // If true, command won't show up in palette,
+  handledByElectron?: boolean; // If true, command shortcut is handled by Electron in desktop app
 };
 
 const commandsList: Partial<Record<CommandName, CommandMetadata>> = {

@@ -1,34 +1,33 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { t } from '@lingui/macro';
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module '../../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../../UI/IconButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-measure'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-measure/dist/index.cjs.js' implicitly has an 'any' type.
+
 import Measure from 'react-measure';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/MiniToolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/MiniToolbar.tsx', but '--jsx' is not set.
+
 import MiniToolbar from '../../UI/MiniToolbar';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/ZoomIn'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ZoomIn.js' implicitly has an 'any' type.
+
 import ZoomIn from '../../UI/CustomSvgIcons/ZoomIn';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/ZoomOut'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ZoomOut.js' implicitly has an 'any' type.
+
 import ZoomOut from '../../UI/CustomSvgIcons/ZoomOut';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Maximize'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Maximize.js' implicitly has an 'any' type.
+
 import Maximize from '../../UI/CustomSvgIcons/Maximize';
-// @ts-expect-error - TS6142 - Module '../../UI/PlaceholderMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderMessage.tsx', but '--jsx' is not set.
+
 import PlaceholderMessage from '../../UI/PlaceholderMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../UI/CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from '../../UI/CorsAwareImage';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS6142 - Module '../CheckeredBackground' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/CheckeredBackground.tsx', but '--jsx' is not set.
+
 import CheckeredBackground from '../CheckeredBackground';
 import { getPixelatedImageRendering } from '../../Utils/CssHelpers';
 import { shouldZoom } from '../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module '../../UI/Slider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Slider.tsx', but '--jsx' is not set.
+
 import Slider from '../../UI/Slider';
-// @ts-expect-error - TS6142 - Module '../../AssetStore/PrivateAssets/AuthorizedAssetImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateAssets/AuthorizedAssetImage.tsx', but '--jsx' is not set.
+
 import AuthorizedAssetImage from '../../AssetStore/PrivateAssets/AuthorizedAssetImage';
 import {
   getWheelStepZoomFactor,
@@ -37,14 +36,12 @@ import {
 } from '../../Utils/ZoomUtils';
 import KeyboardShortcuts from '../../UI/KeyboardShortcuts';
 
-const gd: libGDevelop = global.gd;
-
 const imagePreviewMaxZoom = 4;
 const imagePreviewMinZoom = 1 / 4;
 
 type Point = {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 };
 
 const getDistanceBetweenPoints = (point1: Point, point2: Point) => {
@@ -94,32 +91,33 @@ const styles = {
 } as const;
 
 type Props = {
-  resourceName: string,
-  imageResourceSource: string,
-  isImageResourceSmooth: boolean,
-  displaySpacedView?: boolean,
-  fixedHeight?: number,
-  fixedWidth?: number,
-  renderOverlay?: (
-    arg1: {
-      imageWidth: number,
-      imageHeight: number,
-      imageOffsetTop: number,
-      imageOffsetLeft: number,
-      imageZoomFactor: number,
-      forcedCursor: string | null,
-      deactivateControls?: boolean
-    },
-  ) => React.ReactElement,
-  onImageSize?: (arg1: [number, number]) => void,
-  hideCheckeredBackground?: boolean,
-  deactivateControls?: boolean,
-  isImagePrivate?: boolean,
-  onImageLoaded?: () => void,
-  hideLoader?: boolean
+  resourceName: string;
+  imageResourceSource: string;
+  isImageResourceSmooth: boolean;
+  displaySpacedView?: boolean;
+  fixedHeight?: number;
+  fixedWidth?: number;
+  renderOverlay?: (arg1: {
+    imageWidth: number;
+    imageHeight: number;
+    imageOffsetTop: number;
+    imageOffsetLeft: number;
+    imageZoomFactor: number;
+    forcedCursor: string | null;
+    deactivateControls?: boolean;
+  }) => React.ReactElement;
+  onImageSize?: (arg1: [number, number]) => void;
+  hideCheckeredBackground?: boolean;
+  deactivateControls?: boolean;
+  isImagePrivate?: boolean;
+  onImageLoaded?: () => void;
+  hideLoader?: boolean;
 };
 
-export const isProjectImageResourceSmooth = (project: gdProject, resourceName: string): boolean => {
+export const isProjectImageResourceSmooth = (
+  project: gd.Project,
+  resourceName: string
+): boolean => {
   const resource = project.getResourcesManager().getResource(resourceName);
   if (resource.getKind() !== 'image') return false;
 
@@ -128,9 +126,9 @@ export const isProjectImageResourceSmooth = (project: gdProject, resourceName: s
 };
 
 type ZoomState = {
-  factor: number,
-  xOffset: number,
-  yOffset: number
+  factor: number;
+  xOffset: number;
+  yOffset: number;
 };
 
 /**
@@ -152,10 +150,18 @@ const ImagePreview = ({
   hideLoader,
 }: Props) => {
   const [errored, setErrored] = React.useState<boolean>(false);
-  const [imageWidth, setImageWidth] = React.useState<number | null | undefined>(null);
-  const [imageHeight, setImageHeight] = React.useState<number | null | undefined>(null);
-  const [containerWidth, setContainerWidth] = React.useState<number | null | undefined>(null);
-  const [containerHeight, setContainerHeight] = React.useState<number | null | undefined>(null);
+  const [imageWidth, setImageWidth] = React.useState<number | null | undefined>(
+    null
+  );
+  const [imageHeight, setImageHeight] = React.useState<
+    number | null | undefined
+  >(null);
+  const [containerWidth, setContainerWidth] = React.useState<
+    number | null | undefined
+  >(null);
+  const [containerHeight, setContainerHeight] = React.useState<
+    number | null | undefined
+  >(null);
   const [zoomState, setZoomState] = React.useState<ZoomState>({
     factor: 1,
     xOffset: 0,
@@ -163,67 +169,67 @@ const ImagePreview = ({
   });
   const { xOffset, yOffset, factor: imageZoomFactor } = zoomState;
   const previousDoubleTouchInfo = React.useRef<any>(null);
-  const previousSingleTouchCoordinates = React.useRef<[number, number] | null | undefined>(null);
-  const previousPointerCoordinates = React.useRef<[number, number] | null | undefined>(null);
+  const previousSingleTouchCoordinates = React.useRef<
+    [number, number] | null | undefined
+  >(null);
+  const previousPointerCoordinates = React.useRef<
+    [number, number] | null | undefined
+  >(null);
   const hasZoomBeenAdaptedToImageRef = React.useRef<boolean>(false);
   const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
   const handleImageError = () => {
     setErrored(true);
   };
   const [shouldMoveView, setShouldMoveView] = React.useState<boolean>(false);
-  const keyboardShortcuts = React.useRef<KeyboardShortcuts>(new KeyboardShortcuts({
-    isActive: () => !deactivateControls,
-    shortcutCallbacks: {
-// @ts-expect-error - TS2322 - Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type '(isEnabled: boolean) => Promise<undefined> | undefined'.
-      onToggleGrabbingTool: setShouldMoveView,
-    },
-  }));
-
-  const getZoomFactorToFitImage = React.useCallback(
-    () => {
-      if (!imageWidth || !imageHeight || !containerHeight || !containerWidth) {
-        return 1;
-      }
-      const zoomFactor = Math.min(
-        containerWidth / imageWidth,
-        containerHeight / imageHeight
-      );
-      let zoomFactorWithMargins = zoomFactor * (displaySpacedView ? 0.7 : 0.95);
-      if (zoomFactorWithMargins > 1) {
-        zoomFactorWithMargins = Math.floor(zoomFactorWithMargins);
-      }
-      return zoomFactorWithMargins;
-    },
-    [
-      imageWidth,
-      imageHeight,
-      containerHeight,
-      containerWidth,
-      displaySpacedView,
-    ]
+  const keyboardShortcuts = React.useRef<KeyboardShortcuts>(
+    new KeyboardShortcuts({
+      isActive: () => !deactivateControls,
+      shortcutCallbacks: {
+        // @ts-expect-error - TS2322 - Type 'Dispatch<SetStateAction<boolean>>' is not assignable to type '(isEnabled: boolean) => Promise<undefined> | undefined'.
+        onToggleGrabbingTool: setShouldMoveView,
+      },
+    })
   );
 
-  const adaptZoomFactorToImage = React.useCallback(
-    () => {
-      if (!imageWidth || !imageHeight || !containerHeight || !containerWidth) {
-        return false;
-      }
-      const zoomFactorWithMargins = getZoomFactorToFitImage();
-      setZoomState({
-        factor: zoomFactorWithMargins,
-        xOffset: (containerWidth - imageWidth * zoomFactorWithMargins) / 2,
-        yOffset: (containerHeight - imageHeight * zoomFactorWithMargins) / 2,
-      });
-      return true;
-    },
-    [
-      imageWidth,
-      imageHeight,
-      containerHeight,
-      containerWidth,
-      getZoomFactorToFitImage,
-    ]
-  );
+  const getZoomFactorToFitImage = React.useCallback(() => {
+    if (!imageWidth || !imageHeight || !containerHeight || !containerWidth) {
+      return 1;
+    }
+    const zoomFactor = Math.min(
+      containerWidth / imageWidth,
+      containerHeight / imageHeight
+    );
+    let zoomFactorWithMargins = zoomFactor * (displaySpacedView ? 0.7 : 0.95);
+    if (zoomFactorWithMargins > 1) {
+      zoomFactorWithMargins = Math.floor(zoomFactorWithMargins);
+    }
+    return zoomFactorWithMargins;
+  }, [
+    imageWidth,
+    imageHeight,
+    containerHeight,
+    containerWidth,
+    displaySpacedView,
+  ]);
+
+  const adaptZoomFactorToImage = React.useCallback(() => {
+    if (!imageWidth || !imageHeight || !containerHeight || !containerWidth) {
+      return false;
+    }
+    const zoomFactorWithMargins = getZoomFactorToFitImage();
+    setZoomState({
+      factor: zoomFactorWithMargins,
+      xOffset: (containerWidth - imageWidth * zoomFactorWithMargins) / 2,
+      yOffset: (containerHeight - imageHeight * zoomFactorWithMargins) / 2,
+    });
+    return true;
+  }, [
+    imageWidth,
+    imageHeight,
+    containerHeight,
+    containerWidth,
+    getZoomFactorToFitImage,
+  ]);
 
   const clampZoomFactor = React.useCallback(
     (zoom: number) => {
@@ -242,7 +248,7 @@ const ImagePreview = ({
         imageZoomFactor * imageZoomFactorMultiplier
       );
       if (zoomState.factor !== newFactor) {
-        setZoomState(zoomState => ({
+        setZoomState((zoomState) => ({
           xOffset:
             zoomState.xOffset +
             (point[0] - zoomState.xOffset) * (1 - newFactor / zoomState.factor),
@@ -258,7 +264,7 @@ const ImagePreview = ({
 
   const zoomAroundPointTo = React.useCallback(
     async (factor: number, point: [number, number]) => {
-      setZoomState(zoomState => ({
+      setZoomState((zoomState) => ({
         xOffset:
           zoomState.xOffset +
           (point[0] - zoomState.xOffset) * (1 - factor / zoomState.factor),
@@ -283,7 +289,7 @@ const ImagePreview = ({
           clientY - containerRect.top,
         ]);
       } else {
-        setZoomState(zoomState => ({
+        setZoomState((zoomState) => ({
           ...zoomState,
           xOffset: zoomState.xOffset - deltaX / 4,
           yOffset: zoomState.yOffset - deltaY / 4,
@@ -300,14 +306,10 @@ const ImagePreview = ({
 
         event.preventDefault();
         event.stopPropagation();
-        const {
-          clientX: touch1clientX,
-          clientY: touch1clientY,
-        } = event.touches[0];
-        const {
-          clientX: touch2clientX,
-          clientY: touch2clientY,
-        } = event.touches[1];
+        const { clientX: touch1clientX, clientY: touch1clientY } =
+          event.touches[0];
+        const { clientX: touch2clientX, clientY: touch2clientY } =
+          event.touches[1];
         const newDistance = getDistanceBetweenPoints(
           { x: touch1clientX, y: touch1clientY },
           { x: touch2clientX, y: touch2clientY }
@@ -323,7 +325,7 @@ const ImagePreview = ({
           }
         );
         if (previousDoubleTouchInfo.current) {
-          setZoomState(zoomState => ({
+          setZoomState((zoomState) => ({
             ...zoomState,
             xOffset:
               zoomState.xOffset +
@@ -335,7 +337,7 @@ const ImagePreview = ({
 
           zoomAroundPointBy(
             newDistance / previousDoubleTouchInfo.current.distance,
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+            // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
             newCenter
           );
         }
@@ -361,7 +363,7 @@ const ImagePreview = ({
 
       if (previousSingleTouchCoordinates.current) {
         const [previousX, previousY] = previousSingleTouchCoordinates.current;
-        setZoomState(zoomState => ({
+        setZoomState((zoomState) => ({
           ...zoomState,
           xOffset: zoomState.xOffset + (clientX - previousX),
           yOffset: zoomState.yOffset + (clientY - previousY),
@@ -375,32 +377,26 @@ const ImagePreview = ({
   // Add event listener with `passive: false` in order to be able to prevent
   // the default behavior when swiping from left to right on a trackpad that
   // triggers a back navigation.
-  React.useEffect(
-    () => {
-      if (deactivateControls) return;
-      if (containerRef.current) {
-        containerRef.current.addEventListener('wheel', handleWheel, {
-          passive: false,
-        });
-        return () => {
-          containerRef.current &&
-// @ts-expect-error - TS2769 - No overload matches this call.
-            containerRef.current.removeEventListener('wheel', handleWheel, {
-              passive: false,
-            });
-        };
-      }
-    },
-    [handleWheel, deactivateControls]
-  );
+  React.useEffect(() => {
+    if (deactivateControls) return;
+    if (containerRef.current) {
+      containerRef.current.addEventListener('wheel', handleWheel, {
+        passive: false,
+      });
+      return () => {
+        containerRef.current &&
+          // @ts-expect-error - TS2769 - No overload matches this call.
+          containerRef.current.removeEventListener('wheel', handleWheel, {
+            passive: false,
+          });
+      };
+    }
+  }, [handleWheel, deactivateControls]);
 
   // Reset ref to adapt zoom when image changes
-  React.useEffect(
-    () => {
-      hasZoomBeenAdaptedToImageRef.current = false;
-    },
-    [imageResourceSource]
-  );
+  React.useEffect(() => {
+    hasZoomBeenAdaptedToImageRef.current = false;
+  }, [imageResourceSource]);
 
   const containerCenter = React.useMemo(
     () => [(containerWidth || 0) / 2, (containerHeight || 0) / 2],
@@ -410,17 +406,14 @@ const ImagePreview = ({
   // A change of adaptZoomFactorToImage means a change in one of its dependencies,
   // so it means the container or image size has changed and we should try to adapt
   // the zoom factor to the image.
-  React.useEffect(
-    () => {
-      if (hasZoomBeenAdaptedToImageRef.current) {
-        // Do not adapt zoom to image if a zoom as been provided in the props
-        // or if the zoom has already been adapted.
-        return;
-      }
-      hasZoomBeenAdaptedToImageRef.current = adaptZoomFactorToImage();
-    },
-    [adaptZoomFactorToImage]
-  );
+  React.useEffect(() => {
+    if (hasZoomBeenAdaptedToImageRef.current) {
+      // Do not adapt zoom to image if a zoom as been provided in the props
+      // or if the zoom has already been adapted.
+      return;
+    }
+    hasZoomBeenAdaptedToImageRef.current = adaptZoomFactorToImage();
+  }, [adaptZoomFactorToImage]);
 
   const handleImageLoaded = React.useCallback(
     (e: any) => {
@@ -477,9 +470,9 @@ const ImagePreview = ({
       if (shouldMoveView && previousPointerCoordinates.current) {
         const [previousX, previousY] = previousPointerCoordinates.current;
         const newPosition = [event.clientX, event.clientY];
-// @ts-expect-error - TS2322 - Type 'number[]' is not assignable to type '[number, number]'.
+        // @ts-expect-error - TS2322 - Type 'number[]' is not assignable to type '[number, number]'.
         previousPointerCoordinates.current = newPosition;
-        setZoomState(zoomState => ({
+        setZoomState((zoomState) => ({
           ...zoomState,
           xOffset: zoomState.xOffset + (newPosition[0] - previousX),
           yOffset: zoomState.yOffset + (newPosition[1] - previousY),
@@ -550,37 +543,28 @@ const ImagePreview = ({
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Measure
       bounds
-// @ts-expect-error - TS7006 - Parameter 'contentRect' implicitly has an 'any' type.
-      onResize={contentRect => {
+      onResize={(contentRect) => {
         setContainerWidth(contentRect.bounds.width);
         setContainerHeight(contentRect.bounds.height);
       }}
     >
-{ /* @ts-expect-error - TS7031 - Binding element 'measureRef' implicitly has an 'any' type. */}
       {({ measureRef }) => {
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div style={styles.container}>
             {!deactivateControls && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <MiniToolbar noPadding>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <IconButton
                   onClick={() =>
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+                    // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
                     zoomAroundPointBy(zoomOutFactor, containerCenter)
                   }
                   tooltip={t`Zoom out (you can also use Ctrl + Mouse wheel)`}
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ZoomOut />
                 </IconButton>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <div style={styles.sliderContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Slider
                     min={Math.log2(
                       getZoomFactorToFitImage() * imagePreviewMinZoom
@@ -590,37 +574,31 @@ const ImagePreview = ({
                     )}
                     step={1 / 16}
                     value={Math.log2(imageZoomFactor)}
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-                    onChange={value => {
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+                    onChange={(value) => {
+                      // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
                       zoomAroundPointTo(Math.pow(2, value), containerCenter);
                     }}
                   />
                 </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <IconButton
                   onClick={() =>
-// @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
+                    // @ts-expect-error - TS2345 - Argument of type 'number[]' is not assignable to parameter of type '[number, number]'.
                     zoomAroundPointBy(zoomInFactor, containerCenter)
                   }
                   tooltip={t`Zoom in (you can also use Ctrl + Mouse wheel)`}
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <ZoomIn />
                 </IconButton>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <IconButton
                   onClick={() => {
                     adaptZoomFactorToImage();
                   }}
                   tooltip={t`Fit content to window`}
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Maximize />
                 </IconButton>
               </MiniToolbar>
             )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <div
               style={{
                 ...styles.contentContainer,
@@ -628,9 +606,7 @@ const ImagePreview = ({
                 width: fixedWidth,
               }}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               {!hideCheckeredBackground && <CheckeredBackground />}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 dir={
                   'ltr' /* Force LTR layout to avoid issues with image positioning */
@@ -640,53 +616,49 @@ const ImagePreview = ({
                   overflow: containerLoaded ? 'unset' : 'hidden',
                   ...forcedCursorStyle,
                 }}
-                ref={ref => {
+                ref={(ref) => {
                   measureRef(ref);
                   containerRef.current = ref;
                 }}
-// @ts-expect-error - TS2322 - Type '((event: TouchEvent) => void) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: TouchEvent) => void) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
                 onTouchStart={deactivateControls ? null : onTouchStart}
-// @ts-expect-error - TS2322 - Type '((event: TouchEvent) => Promise<void>) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: TouchEvent) => Promise<void>) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
                 onTouchMove={deactivateControls ? null : handleTouchMove}
-// @ts-expect-error - TS2322 - Type '((event: TouchEvent) => void) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: TouchEvent) => void) | null' is not assignable to type 'TouchEventHandler<HTMLDivElement> | undefined'.
                 onTouchEnd={deactivateControls ? null : onTouchEnd}
                 tabIndex={0}
-// @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
                 onPointerDown={deactivateControls ? null : onPointerDown}
-// @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
                 onPointerMove={deactivateControls ? null : onPointerMove}
-// @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
                 onPointerUp={deactivateControls ? null : onPointerUp}
-// @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((event: PointerEvent) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
                 onPointerLeave={deactivateControls ? null : onPointerLeave}
-// @ts-expect-error - TS2322 - Type '((evt: KeyboardEvent) => void) | null' is not assignable to type 'KeyboardEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((evt: KeyboardEvent) => void) | null' is not assignable to type 'KeyboardEventHandler<HTMLDivElement> | undefined'.
                 onKeyDown={
                   deactivateControls
                     ? null
                     : keyboardShortcuts.current.onKeyDown
                 }
-// @ts-expect-error - TS2322 - Type '((evt: KeyboardEvent) => void) | null' is not assignable to type 'KeyboardEventHandler<HTMLDivElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '((evt: KeyboardEvent) => void) | null' is not assignable to type 'KeyboardEventHandler<HTMLDivElement> | undefined'.
                 onKeyUp={
                   deactivateControls ? null : keyboardShortcuts.current.onKeyUp
                 }
               >
                 {!!errored && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <PlaceholderMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Trans>Unable to load the image</Trans>
                     </Text>
                   </PlaceholderMessage>
                 )}
                 {!errored && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ readonly transform: `translate(${number}px, ${number}px)`; readonly outline: string | undefined; readonly width: number | null; readonly height: number | null; readonly transformOrigin: "0 0"; }' is not assignable to type 'Properties<string | number, string & {}>'.
+                  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ readonly transform: `translate(${number}px, ${number}px)`; readonly outline: string | undefined; readonly width: number | null; readonly height: number | null; readonly transformOrigin: "0 0"; }' is not assignable to type 'Properties<string | number, string & {}>'.
                   <div style={imageContainerBorderStyle}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ readonly transform: `scale(${number})`; readonly width: number | null | undefined; readonly height: number | null | undefined; readonly transformOrigin: "0 0"; readonly display: "flex"; }' is not assignable to type 'Properties<string | number, string & {}>'. */}
+                    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ readonly transform: `scale(${number})`; readonly width: number | null | undefined; readonly height: number | null | undefined; readonly transformOrigin: "0 0"; readonly display: "flex"; }' is not assignable to type 'Properties<string | number, string & {}>'. */}
                     <div style={imageContainerStyle}>
                       {isImagePrivate ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <AuthorizedAssetImage
                           style={imageStyle}
                           alt={resourceName}
@@ -696,7 +668,6 @@ const ImagePreview = ({
                           hideLoader={hideLoader}
                         />
                       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <CorsAwareImage
                           style={imageStyle}
                           alt={resourceName}
@@ -709,7 +680,6 @@ const ImagePreview = ({
                   </div>
                 )}
                 {imageLoaded && renderOverlay && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <div style={overlayStyle}>
                     {renderOverlay({
                       imageWidth: imageWidth || 0,

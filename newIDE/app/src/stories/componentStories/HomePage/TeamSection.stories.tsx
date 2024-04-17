@@ -1,27 +1,24 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/DragAndDrop/DragAndDropContextProvider'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragAndDropContextProvider.js' implicitly has an 'any' type.
+
 import DragAndDropContextProvider from '../../../UI/DragAndDrop/DragAndDropContextProvider';
 import {
   Team,
   TeamGroup,
   TeamMembership,
   User,
-// @ts-expect-error - TS6142 - Module '../../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../../../Utils/GDevelopServices/User';
 import { CloudProjectWithUserAccessInfo } from '../../../Utils/GDevelopServices/Project';
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
+
 import { testProject } from '../../GDevelopJsInitializerDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
 import TeamContext from '../../../Profile/Team/TeamContext';
-// @ts-expect-error - TS6142 - Module '../../../MainFrame/EditorContainers/HomePage/TeamSection' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/TeamSection/index.tsx', but '--jsx' is not set.
+
 import TeamSection from '../../../MainFrame/EditorContainers/HomePage/TeamSection';
-// @ts-expect-error - TS6142 - Module '../../../ProjectsStorage/CloudStorageProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/index.tsx', but '--jsx' is not set.
+
 import CloudStorageProvider from '../../../ProjectsStorage/CloudStorageProvider';
 import AuthenticatedUserContext from '../../../Profile/AuthenticatedUserContext';
 import { fakeAuthenticatedUserWithEducationPlan } from '../../../fixtures/GDevelopServicesTestData';
@@ -140,23 +137,31 @@ const MockTeamProvider = ({
   loading,
   noGroups,
 }: {
-  children: React.ReactNode,
-  loading: boolean,
-  noGroups?: boolean
+  children: React.ReactNode;
+  loading: boolean;
+  noGroups?: boolean;
 }) => {
   const [nameChangeTryCount, setNameChangeTryCount] = React.useState<number>(0);
   const [userChangeTryCount, setUserChangeTryCount] = React.useState<number>(0);
-  const [members, setMembers] = React.useState<User[] | null | undefined>(initialMembers);
-  const [memberships, setMemberships] = React.useState<Array<TeamMembership>>(noGroups
-    ? initialMemberships.map(membership => ({
-        userId: membership.userId,
-        teamId: membership.teamId,
-        createdAt: membership.createdAt,
-      }))
-    : initialMemberships);
-  const [groups, setGroups] = React.useState<Array<TeamGroup>>(noGroups ? [] : initialGroups);
+  const [members, setMembers] = React.useState<User[] | null | undefined>(
+    initialMembers
+  );
+  const [memberships, setMemberships] = React.useState<Array<TeamMembership>>(
+    noGroups
+      ? initialMemberships.map((membership) => ({
+          userId: membership.userId,
+          teamId: membership.teamId,
+          createdAt: membership.createdAt,
+        }))
+      : initialMemberships
+  );
+  const [groups, setGroups] = React.useState<Array<TeamGroup>>(
+    noGroups ? [] : initialGroups
+  );
 
-  const listUserProjects = async (user: User): Promise<CloudProjectWithUserAccessInfo[]> => {
+  const listUserProjects = async (
+    user: User
+  ): Promise<CloudProjectWithUserAccessInfo[]> => {
     await delay(1000);
     return [
       {
@@ -191,7 +196,9 @@ const MockTeamProvider = ({
       throw new Error('Group name change error');
     }
     const newGroups = [...groups];
-    const foundGroupIndex = groups.findIndex(_group => _group.id === group.id);
+    const foundGroupIndex = groups.findIndex(
+      (_group) => _group.id === group.id
+    );
     if (foundGroupIndex === -1) return;
     await delay(1000);
     newGroups[foundGroupIndex].name = newName;
@@ -205,7 +212,7 @@ const MockTeamProvider = ({
       throw new Error('User group change error');
     }
     const membershipToChangeIndex = memberships.findIndex(
-      membership => membership.userId === user.id
+      (membership) => membership.userId === user.id
     );
     if (
       membershipToChangeIndex === -1 ||
@@ -222,20 +229,21 @@ const MockTeamProvider = ({
 
   const deleteGroup = async (group: TeamGroup) => {
     await delay(1000);
-    setGroups(groups => groups.filter(group_ => group_.id !== group.id));
+    setGroups((groups) => groups.filter((group_) => group_.id !== group.id));
   };
 
-  const createGroup = async (attributes: {
-    name: string
-  }) => {
+  const createGroup = async (attributes: { name: string }) => {
     await delay(1000);
-    const newGroup = { ...attributes, id: `group${random(100, 10000)}` } as const;
+    const newGroup = {
+      ...attributes,
+      id: `group${random(100, 10000)}`,
+    } as const;
     setGroups([...groups, newGroup]);
   };
 
   const refreshMembers = async () => {
     await delay(800);
-    setMembers(members => {
+    setMembers((members) => {
       if (!members) return members;
       const chosenMemberIndex = Math.floor(Math.random() * members.length);
       const newMembers = [...members];
@@ -252,13 +260,10 @@ const MockTeamProvider = ({
   };
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AuthenticatedUserContext.Provider
         value={fakeAuthenticatedUserWithEducationPlan}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <TeamContext.Provider
           value={{
             team: loading ? null : team,
@@ -281,11 +286,8 @@ const MockTeamProvider = ({
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockTeamProvider loading={false}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <FixedHeightFlexContainer height={600}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}
@@ -297,11 +299,8 @@ export const Default = () => (
 );
 
 export const WithNoGroupsYet = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockTeamProvider loading={false} noGroups>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <FixedHeightFlexContainer height={600}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}
@@ -313,11 +312,8 @@ export const WithNoGroupsYet = () => (
 );
 
 export const Loading = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockTeamProvider loading={true}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <FixedHeightFlexContainer height={600}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <TeamSection
         project={testProject.project}
         currentFileMetadata={null}

@@ -15,7 +15,6 @@ const styles = {
 export function ColumnDropIndicator() {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         ...styles.columnDropIndicator,

@@ -1,4 +1,3 @@
-const gd: libGDevelop = global.gd;
 
 /** Naive way to check if a variable expression is not using a structure/array. */
 const isRootVariableName = fullName: string =>
@@ -15,7 +14,7 @@ const isRootVariableName = fullName: string =>
  * "shape"/"types" of identified variables (especially for structures/arrays).
  */
 export default class EventsRootVariablesFinder {
-  static findAllGlobalVariables(platform: gdPlatform, project: gdProject): string[] {
+  static findAllGlobalVariables(platform: gd.Platform, project: gd.Project): string[] {
     return (
       gd.EventsVariablesFinder.findAllGlobalVariables(platform, project)
         .toNewVectorString()
@@ -25,7 +24,7 @@ export default class EventsRootVariablesFinder {
     );
   }
 
-  static findAllLayoutVariables(platform: gdPlatform, project: gdProject, layout: gdLayout): string[] {
+  static findAllLayoutVariables(platform: gd.Platform, project: gd.Project, layout: gd.Layout): string[] {
     return gd.EventsVariablesFinder.findAllLayoutVariables(
       project.getCurrentPlatform(),
       project,
@@ -37,10 +36,10 @@ export default class EventsRootVariablesFinder {
   }
 
   static findAllObjectVariables(
-    platform: gdPlatform,
-    project: gdProject,
-    layout: gdLayout,
-    object: gdObject,
+    platform: gd.Platform,
+    project: gd.Project,
+    layout: gd.Layout,
+    object: gd.Object,
   ): string[] {
     return gd.EventsVariablesFinder.findAllObjectVariables(
       project.getCurrentPlatform(),

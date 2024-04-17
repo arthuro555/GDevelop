@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module './BuildsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/Builds/BuildsList.tsx', but '--jsx' is not set.
+
 import BuildsList from './BuildsList';
 import { getBuilds, Build } from '../../Utils/GDevelopServices/Build';
 import { Game } from '../../Utils/GDevelopServices/Game';
 import BuildsWatcher from './BuildsWatcher';
 
 type Props = {
-  onBuildsUpdated?: () => void,
-  authenticatedUser: AuthenticatedUser,
-  game: Game,
-  onGameUpdated?: () => Promise<void>
+  onBuildsUpdated?: () => void;
+  authenticatedUser: AuthenticatedUser;
+  game: Game;
+  onGameUpdated?: () => Promise<void>;
 };
 type State = {
-  builds: Array<Build> | null | undefined,
-  error: Error | null | undefined
+  builds: Array<Build> | null | undefined;
+  error: Error | null | undefined;
 };
 
 export default class Builds extends Component<Props, State> {
@@ -42,7 +42,7 @@ export default class Builds extends Component<Props, State> {
         if (!this.state.builds) return;
 
         this.setState({
-// @ts-expect-error - TS2339 - Property 'map' does not exist on type 'never'.
+          // @ts-expect-error - TS2339 - Property 'map' does not exist on type 'never'.
           builds: this.state.builds.map((oldBuild: Build) => {
             if (newBuild.id === oldBuild.id) return newBuild;
 
@@ -54,17 +54,15 @@ export default class Builds extends Component<Props, State> {
   };
 
   _refreshBuilds = () => {
-    const {
-      getAuthorizationHeader,
-      firebaseUser,
-    } = this.props.authenticatedUser;
+    const { getAuthorizationHeader, firebaseUser } =
+      this.props.authenticatedUser;
     if (!firebaseUser) return;
     // Game is not registered yet so return an empty list of builds.
     const gameId = this.props.game.id;
     this.setState({ builds: null, error: null });
 
     getBuilds(getAuthorizationHeader, firebaseUser.uid, gameId).then(
-      builds => {
+      (builds) => {
         this.setState(
           {
             builds,
@@ -86,7 +84,7 @@ export default class Builds extends Component<Props, State> {
   };
 
   _onBuildUpdated = (build: Build) => {
-// @ts-expect-error - TS2345 - Argument of type '(previousState: State) => { builds: Build[]; error: Error | null | undefined; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "error" | "builds"> | null) | Pick<...> | null'.
+    // @ts-expect-error - TS2345 - Argument of type '(previousState: State) => { builds: Build[]; error: Error | null | undefined; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "error" | "builds"> | null) | Pick<...> | null'.
     this.setState((previousState: State) => {
       if (!previousState.builds) return;
       return {
@@ -100,7 +98,7 @@ export default class Builds extends Component<Props, State> {
   };
 
   _onBuildDeleted = (build: Build) => {
-// @ts-expect-error - TS2345 - Argument of type '(previousState: State) => { builds: Build[]; error: Error | null | undefined; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "error" | "builds"> | null) | Pick<...> | null'.
+    // @ts-expect-error - TS2345 - Argument of type '(previousState: State) => { builds: Build[]; error: Error | null | undefined; } | undefined' is not assignable to parameter of type 'State | ((prevState: Readonly<State>, props: Readonly<Props>) => State | Pick<State, "error" | "builds"> | null) | Pick<...> | null'.
     this.setState((previousState: State) => {
       if (!previousState.builds) return;
       return {
@@ -114,7 +112,6 @@ export default class Builds extends Component<Props, State> {
 
   render() {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <BuildsList
         builds={this.state.builds}
         authenticatedUser={this.props.authenticatedUser}

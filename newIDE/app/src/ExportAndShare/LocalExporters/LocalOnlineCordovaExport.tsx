@@ -9,7 +9,7 @@ import { uploadLocalFile } from './LocalFileUploader';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
 import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
 import { archiveLocalFolder } from '../../Utils/LocalArchiver';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../Utils/OptionalRequire';
 import LocalFileSystem, { UrlFileDescriptor } from './LocalFileSystem';
 import {
@@ -21,34 +21,38 @@ import {
   ExportState,
   SetupExportHeader,
   ExportFlow,
-// @ts-expect-error - TS6142 - Module '../GenericExporters/OnlineCordovaExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/OnlineCordovaExport.tsx', but '--jsx' is not set.
 } from '../GenericExporters/OnlineCordovaExport';
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 
 const path = optionalRequire('path');
 const os = optionalRequire('os');
-const gd: libGDevelop = global.gd;
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  localFileSystem: LocalFileSystem,
-  temporaryOutputDir: string
+  exporter: gdjsExporter;
+  localFileSystem: LocalFileSystem;
+  temporaryOutputDir: string;
 };
 
 type ExportOutput = {
-  temporaryOutputDir: string,
-  urlFiles: Array<UrlFileDescriptor>
+  temporaryOutputDir: string;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  temporaryOutputDir: string
+  temporaryOutputDir: string;
 };
 
 type CompressionOutput = string;
 
 const exportPipelineName = 'local-online-cordova';
 
-export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const localOnlineCordovaExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
   onlineBuildType: 'cordova-build',
   limitedBuilds: true,
@@ -71,18 +75,18 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
       exportStep
     ),
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderHeader: props => <SetupExportHeader {...props} />,
+  renderHeader: (props) => <SetupExportHeader {...props} />,
 
   shouldSuggestBumpingVersionNumber: () => true,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
-// @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
+    // @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -111,15 +115,11 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
 
   launchExport: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      localFileSystem,
-      temporaryOutputDir,
-    }: PreparedExporter,
+    { exporter, localFileSystem, temporaryOutputDir }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const exportOptions = new gd.ExportOptions(
       context.project,
@@ -144,10 +144,7 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
 
   launchResourcesDownload: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      temporaryOutputDir,
-      urlFiles,
-    }: ExportOutput,
+    { temporaryOutputDir, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     await downloadUrlsToLocalFiles({
       urlContainers: urlFiles,
@@ -160,9 +157,7 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    {
-      temporaryOutputDir,
-    }: ResourcesDownloadOutput,
+    { temporaryOutputDir }: ResourcesDownloadOutput
   ): Promise<CompressionOutput> => {
     const archiveOutputDir = os.tmpdir();
     return archiveLocalFolder({
@@ -171,8 +166,11 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
     });
   },
 
-  launchUpload: (context: ExportPipelineContext<ExportState>, outputFile: CompressionOutput): Promise<string> => {
-    return getBuildFileUploadOptions().then(uploadOptions => {
+  launchUpload: (
+    context: ExportPipelineContext<ExportState>,
+    outputFile: CompressionOutput
+  ): Promise<string> => {
+    return getBuildFileUploadOptions().then((uploadOptions) => {
       return uploadLocalFile(
         outputFile,
         uploadOptions,
@@ -187,10 +185,10 @@ export const localOnlineCordovaExportPipeline: ExportPipeline<ExportState, Prepa
     uploadBucketKey: string,
     gameId: string,
     options: {
-      gameName: string,
-      gameVersion: string
+      gameName: string;
+      gameVersion: string;
     },
-    payWithCredits: boolean,
+    payWithCredits: boolean
   ): Promise<Build> => {
     const { getAuthorizationHeader, firebaseUser } = authenticatedUser;
     if (!firebaseUser)

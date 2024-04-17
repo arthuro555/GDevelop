@@ -1,23 +1,23 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-measure'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-measure/dist/index.cjs.js' implicitly has an 'any' type.
+
 import Measure from 'react-measure';
 import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
-// @ts-expect-error - TS6142 - Module './CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+
 import { CorsAwareImage } from './CorsAwareImage';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from './Grid';
 import { shouldValidate } from './KeyboardShortcuts/InteractionKeys';
 import { useResponsiveWindowSize } from './Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
-// @ts-expect-error - TS6142 - Module './Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from './Layout';
 
 type MediaItem = {
-  kind: 'audio' | 'image',
-  url: string
+  kind: 'audio' | 'image';
+  url: string;
 };
 
 const styles = {
@@ -75,14 +75,14 @@ const styles = {
 const GRID_SPACING = 1;
 
 type Props = {
-  mediaItems: Array<MediaItem>,
+  mediaItems: Array<MediaItem>;
   /**
    * Alt text inserted for each image tag.
    * The string `{mediaIndex}` will be replaced with media actual index.
    * For instance: "Asset pack preview image {mediaIndex}"
    */
-  altTextTemplate: string,
-  horizontalOuterMarginToEatOnMobile?: number
+  altTextTemplate: string;
+  horizontalOuterMarginToEatOnMobile?: number;
 };
 
 const ResponsiveMediaGallery = ({
@@ -111,7 +111,7 @@ const ResponsiveMediaGallery = ({
             paddingRight: mobileExtremeItemsPadding,
           },
         },
-// @ts-expect-error - TS2769 - No overload matches this call.
+        // @ts-expect-error - TS2769 - No overload matches this call.
         root: isMobile
           ? {
               scrollbarHeight: 'none' /* For Firefox */,
@@ -125,41 +125,33 @@ const ResponsiveMediaGallery = ({
     [mobileExtremeItemsPadding, isMobile]
   )();
 
-  const [
-    mobileGridClientWidth,
-    setMobileGridClientWidth,
-  ] = React.useState<number>(0);
+  const [mobileGridClientWidth, setMobileGridClientWidth] =
+    React.useState<number>(0);
   const [mobileGridScrollX, setMobileGridScrollX] = React.useState(0);
-  const [
-    currentlyViewedImageIndex,
-    setCurrentlyViewedImageIndex,
-  ] = React.useState<number>(0);
+  const [currentlyViewedImageIndex, setCurrentlyViewedImageIndex] =
+    React.useState<number>(0);
 
   const mobileImageWidth =
     Math.max(
       mobileGridClientWidth -
-      30 - // Width kept for user to see that there's an image after or before
+        30 - // Width kept for user to see that there's an image after or before
         (horizontalOuterMarginToEatOnMobile || 0),
       0
     ) || 320; // Set a default width if the component is not yet measured, to avoid layout shift and a scroll to trigger.
 
-  React.useEffect(
-    () => {
-      if (mobileImageWidth && mobileGridScrollX) {
-        const newCurrentlyViewedImageIndex = Math.round(
-          mobileGridScrollX / (mobileImageWidth + GRID_SPACING)
-        );
-        setCurrentlyViewedImageIndex(newCurrentlyViewedImageIndex);
-      }
-    },
-    [mobileImageWidth, mobileGridScrollX]
-  );
+  React.useEffect(() => {
+    if (mobileImageWidth && mobileGridScrollX) {
+      const newCurrentlyViewedImageIndex = Math.round(
+        mobileGridScrollX / (mobileImageWidth + GRID_SPACING)
+      );
+      setCurrentlyViewedImageIndex(newCurrentlyViewedImageIndex);
+    }
+  }, [mobileImageWidth, mobileGridScrollX]);
 
   const selectedMedia = mediaItems[selectedMediaIndex];
 
   if (isMobile) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         style={{
           ...styles.flexColumn,
@@ -171,19 +163,14 @@ const ResponsiveMediaGallery = ({
             : 0,
         }}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Measure
           bounds
-// @ts-expect-error - TS7006 - Parameter 'contentRect' implicitly has an 'any' type.
-          onResize={contentRect => {
+          onResize={(contentRect) => {
             setMobileGridClientWidth(contentRect.bounds.width);
           }}
         >
-{ /* @ts-expect-error - TS7031 - Binding element 'contentRect' implicitly has an 'any' type. | TS7031 - Binding element 'measureRef' implicitly has an 'any' type. */}
           {({ contentRect, measureRef }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <div style={styles.flex} ref={measureRef}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Grid
                 classes={classesForGridContainer}
                 container
@@ -195,7 +182,6 @@ const ResponsiveMediaGallery = ({
                 }
               >
                 {mediaItems.map(({ kind, url }, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Grid
                     item
                     key={url}
@@ -205,10 +191,8 @@ const ResponsiveMediaGallery = ({
                         : 'start',
                     }}
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <CardMedia>
                       {kind === 'image' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <CorsAwareImage
                           src={url}
                           style={{
@@ -221,9 +205,7 @@ const ResponsiveMediaGallery = ({
                           )}
                         />
                       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <div style={styles.mobileImageCarouselItem}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                           <audio controls src={url}>
                             Audio preview is unsupported.
                           </audio>
@@ -236,9 +218,7 @@ const ResponsiveMediaGallery = ({
             </div>
           )}
         </Measure>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text noMargin size="body2" style={styles.disabledText}>
             {currentlyViewedImageIndex + 1}/{mediaItems.length}
           </Text>
@@ -247,10 +227,8 @@ const ResponsiveMediaGallery = ({
     );
   }
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ColumnStackLayout noMargin>
       {selectedMedia.kind === 'image' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <CorsAwareImage
           style={styles.selectedMedia}
           src={selectedMedia.url}
@@ -260,18 +238,14 @@ const ResponsiveMediaGallery = ({
           )}
         />
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <div style={styles.selectedMedia}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <audio controls src={selectedMedia.url}>
             Audio preview is unsupported.
           </audio>
         </div>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.desktopGallery}>
         {mediaItems.map(({ kind, url }, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div
             key={url}
             onClick={() => setSelectedMediaIndex(index)}
@@ -281,7 +255,7 @@ const ResponsiveMediaGallery = ({
               outline:
                 index === selectedMediaIndex ? 'solid 1px white' : undefined,
             }}
-// @ts-expect-error - TS2322 - Type '(event: React.KeyboardEvent<HTMLLIElement>) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+            // @ts-expect-error - TS2322 - Type '(event: React.KeyboardEvent<HTMLLIElement>) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
             onKeyPress={(event: React.KeyboardEvent<HTMLLIElement>): void => {
               if (shouldValidate(event)) {
                 setSelectedMediaIndex(index);
@@ -289,7 +263,6 @@ const ResponsiveMediaGallery = ({
             }}
           >
             {kind === 'image' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <CorsAwareImage
                 src={url}
                 style={styles.imageCarouselItem}
@@ -299,7 +272,6 @@ const ResponsiveMediaGallery = ({
                 )}
               />
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <img
                 src="res/audio-placeholder.jpg"
                 style={styles.imageCarouselItem}

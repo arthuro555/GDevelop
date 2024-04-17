@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
 import { testProject } from '../../GDevelopJsInitializerDecorator';
-// @ts-expect-error - TS6142 - Module '../../../EventsSheet/ParameterFields/ObjectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/ObjectField.tsx', but '--jsx' is not set.
+
 import ObjectField from '../../../EventsSheet/ParameterFields/ObjectField';
 import ValueStateHolder from '../../ValueStateHolder';
-
-const gd: libGDevelop = global.gd;
 
 export default {
   title: 'ParameterFields/ObjectField',
@@ -19,11 +15,9 @@ export default {
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ValueStateHolder
     initialValue={'MySpriteObject'}
     render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ObjectField
         project={testProject.project}
         scope={{ project: testProject.project, layout: testProject.testLayout }}
@@ -37,11 +31,9 @@ export const Default = () => (
 );
 
 export const NonExistingObject = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ValueStateHolder
     initialValue={'ThisObjectDoesNotExist'}
     render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ObjectField
         project={testProject.project}
         scope={{ project: testProject.project, layout: testProject.testLayout }}
@@ -68,11 +60,9 @@ export const WrongObjectType = () => {
   const parameterMetadata = instructionMetadata.getParameter(0);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ValueStateHolder
       initialValue={'MyTextObject'}
       render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ObjectField
           project={testProject.project}
           scope={{
@@ -100,11 +90,9 @@ export const WithRequiredBehavior = () => {
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ValueStateHolder
       initialValue={'MyFakeObjectWithUnsupportedCapability'}
       render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ObjectField
           project={testProject.project}
           scope={{

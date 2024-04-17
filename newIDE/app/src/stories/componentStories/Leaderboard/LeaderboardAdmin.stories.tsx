@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../GameDashboard/LeaderboardAdmin' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/LeaderboardAdmin/index.tsx', but '--jsx' is not set.
+
 import { LeaderboardAdmin } from '../../../GameDashboard/LeaderboardAdmin';
 import LeaderboardContext from '../../../Leaderboard/LeaderboardContext';
 import { Leaderboard } from '../../../Utils/GDevelopServices/Play';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
 
 export default {
@@ -42,46 +41,48 @@ const mockedEntries = Array(8)
     ).toISOString(),
   }))
   .sort((a, b) => a.score - b.score);
-const leaderboardsByIds = mockedLeaderboards.reduce<Record<string, any>>((acc, leaderboard) => {
-  acc[leaderboard.id] = leaderboard;
-  return acc;
-}, {});
+const leaderboardsByIds = mockedLeaderboards.reduce<Record<string, any>>(
+  (acc, leaderboard) => {
+    acc[leaderboard.id] = leaderboard;
+    return acc;
+  },
+  {}
+);
 
 const MockLeaderboardProvider = ({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) => {
   const [
     currentLeaderboard,
     setCurrentLeaderboard,
-// @ts-expect-error - TS2345 - Argument of type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; primary: boolean | undefined; extremeAllowedScore: number | undefined; }' is not assignable to parameter of type 'Leaderboard | (() => Leaderboard)'.
+    // @ts-expect-error - TS2345 - Argument of type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; primary: boolean | undefined; extremeAllowedScore: number | undefined; }' is not assignable to parameter of type 'Leaderboard | (() => Leaderboard)'.
   ] = React.useState<Leaderboard>(mockedLeaderboards[3]);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LeaderboardContext.Provider
       value={{
-// @ts-expect-error - TS2322 - Type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; primary: boolean | undefined; extremeAllowedScore: number | undefined; }[]' is not assignable to type 'Leaderboard[]'.
+        // @ts-expect-error - TS2322 - Type '{ id: string; name: string; sort: string; gameId: string; startDatetime: string; playerUnicityDisplayChoice: string; visibility: string; primary: boolean | undefined; extremeAllowedScore: number | undefined; }[]' is not assignable to type 'Leaderboard[]'.
         leaderboards: mockedLeaderboards,
         currentLeaderboard,
         displayOnlyBestEntry:
           currentLeaderboard.playerUnicityDisplayChoice === 'PREFER_UNIQUE',
         browsing: {
           entries: mockedEntries,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToNextPage: null,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToPreviousPage: null,
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
+          // @ts-expect-error - TS2322 - Type 'null' is not assignable to type '() => Promise<void> | null | undefined'.
           goToFirstPage: null,
         },
         setDisplayOnlyBestEntry: action('setDisplayOnlyBestEntry'),
         createLeaderboard: () => {
           throw new Error('createLeaderboard');
         },
-// @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1?: { shouldClearBeforeFetching?: boolean | undefined; } | null | undefined) => Promise<void>'.
+        // @ts-expect-error - TS2322 - Type 'HandlerFunction' is not assignable to type '(arg1?: { shouldClearBeforeFetching?: boolean | undefined; } | null | undefined) => Promise<void>'.
         listLeaderboards: action('listLeaderboards'),
-        selectLeaderboard: leaderboardId => {
+        selectLeaderboard: (leaderboardId) => {
           setCurrentLeaderboard(leaderboardsByIds[leaderboardId]);
         },
         updateLeaderboard: () => {
@@ -107,11 +108,8 @@ const MockLeaderboardProvider = ({
 };
 
 export const WithErrors = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <MockLeaderboardProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <FixedHeightFlexContainer height={600}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LeaderboardAdmin onLoading={() => action('onLoading')} />
     </FixedHeightFlexContainer>
   </MockLeaderboardProvider>

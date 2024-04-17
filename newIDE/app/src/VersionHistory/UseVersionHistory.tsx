@@ -1,8 +1,8 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t, Trans } from '@lingui/macro';
 import Drawer from '@material-ui/core/Drawer';
-// @ts-expect-error - TS6142 - Module '../UI/DrawerTopBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DrawerTopBar.tsx', but '--jsx' is not set.
+
 import DrawerTopBar from '../UI/DrawerTopBar';
 import {
   listVersionsOfProject,
@@ -12,27 +12,27 @@ import {
 import type { FileMetadata, StorageProvider } from '../ProjectsStorage';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
 import { canUseCloudProjectHistory } from '../Utils/GDevelopServices/Usage';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VersionHistory/index.tsx', but '--jsx' is not set.
+
 import VersionHistory, { OpenedVersionStatus } from '.';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import UnsavedChangesContext from '../MainFrame/UnsavedChangesContext';
-// @ts-expect-error - TS6142 - Module '../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../Profile/Subscription/SubscriptionSuggestionContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionSuggestionContext.tsx', but '--jsx' is not set.
+
 import { SubscriptionSuggestionContext } from '../Profile/Subscription/SubscriptionSuggestionContext';
 import useAlertDialog from '../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../UI/PlaceholderLoader';
 import type { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
-// @ts-expect-error - TS6142 - Module '../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../UI/PlaceholderError';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/CloudStorageProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/index.tsx', but '--jsx' is not set.
+
 import CloudStorageProvider from '../ProjectsStorage/CloudStorageProvider';
 
 const getCloudProjectFileMetadataIdentifier = (
@@ -71,14 +71,14 @@ const mergeVersionsLists = (
 ) => {
   const mostRecentVersionDateInList2 = Date.parse(list2[0].createdAt);
   const moreRecentVersionsInList1 = list1.filter(
-    version => Date.parse(version.createdAt) > mostRecentVersionDateInList2
+    (version) => Date.parse(version.createdAt) > mostRecentVersionDateInList2
   );
   return [...moreRecentVersionsInList1, ...list2];
 };
 
 type PaginationState = {
-  versions: ExpandedCloudProjectVersion[] | null | undefined,
-  nextPageUri: any | null | undefined
+  versions: ExpandedCloudProjectVersion[] | null | undefined;
+  nextPageUri: any | null | undefined;
 };
 
 const emptyPaginationState: PaginationState = {
@@ -87,17 +87,15 @@ const emptyPaginationState: PaginationState = {
 };
 
 type Props = {
-  getStorageProvider: () => StorageProvider,
-  fileMetadata: FileMetadata | null | undefined,
-  isSavingProject: boolean,
-  onOpenCloudProjectOnSpecificVersion: (
-    arg1: {
-      fileMetadata: FileMetadata,
-      versionId: string,
-      ignoreUnsavedChanges: boolean,
-      openingMessage: MessageDescriptor
-    },
-  ) => Promise<void>
+  getStorageProvider: () => StorageProvider;
+  fileMetadata: FileMetadata | null | undefined;
+  isSavingProject: boolean;
+  onOpenCloudProjectOnSpecificVersion: (arg1: {
+    fileMetadata: FileMetadata;
+    versionId: string;
+    ignoreUnsavedChanges: boolean;
+    openingMessage: MessageDescriptor;
+  }) => Promise<void>;
 };
 
 const useVersionHistory = ({
@@ -107,43 +105,43 @@ const useVersionHistory = ({
   onOpenCloudProjectOnSpecificVersion,
 }: Props) => {
   const { hasUnsavedChanges } = React.useContext(UnsavedChangesContext);
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
   const { openSubscriptionDialog } = React.useContext(
     SubscriptionSuggestionContext
   );
-  const [
-    versionsFetchingError,
-    setVersionsFetchingError,
-  ] = React.useState<React.ReactNode | null | undefined>(null);
+  const [versionsFetchingError, setVersionsFetchingError] = React.useState<
+    React.ReactNode | null | undefined
+  >(null);
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
   const ignoreFileMetadataChangesRef = React.useRef<boolean>(false);
   const freezeWhileLoadingSpecificVersionRef = React.useRef<boolean>(false);
   const { subscription, getAuthorizationHeader, profile } = authenticatedUser;
   const storageProvider = getStorageProvider();
-  const [state, setState] = React.useState<PaginationState>(emptyPaginationState);
-  const [
-    checkedOutVersionStatus,
-    setCheckedOutVersionStatus,
-  ] = React.useState<OpenedVersionStatus | null | undefined>(null);
-  const [
-    versionHistoryPanelOpen,
-    setVersionHistoryPanelOpen,
-  ] = React.useState<boolean>(false);
+  const [state, setState] =
+    React.useState<PaginationState>(emptyPaginationState);
+  const [checkedOutVersionStatus, setCheckedOutVersionStatus] = React.useState<
+    OpenedVersionStatus | null | undefined
+  >(null);
+  const [versionHistoryPanelOpen, setVersionHistoryPanelOpen] =
+    React.useState<boolean>(false);
   const storageProviderInternalName = storageProvider.internalName;
   const isCloudProject =
     storageProviderInternalName === CloudStorageProvider.internalName;
-  const isUserAllowedToSeeVersionHistory = canUseCloudProjectHistory(
-    subscription
+  const isUserAllowedToSeeVersionHistory =
+    canUseCloudProjectHistory(subscription);
+  const [cloudProjectId, setCloudProjectId] = React.useState<
+    string | null | undefined
+  >(
+    getCloudProjectFileMetadataIdentifier(
+      storageProviderInternalName,
+      fileMetadata
+    )
   );
-  const [cloudProjectId, setCloudProjectId] = React.useState<string | null | undefined>(getCloudProjectFileMetadataIdentifier(
-    storageProviderInternalName,
-    fileMetadata
-  ));
-  const [
-    cloudProjectLastModifiedDate,
-    setCloudProjectLastModifiedDate,
-  ] = React.useState<number | null | undefined>(isCloudProject && fileMetadata ? fileMetadata.lastModifiedDate : null);
+  const [cloudProjectLastModifiedDate, setCloudProjectLastModifiedDate] =
+    React.useState<number | null | undefined>(
+      isCloudProject && fileMetadata ? fileMetadata.lastModifiedDate : null
+    );
   const shouldFetchVersions =
     isCloudProject && isUserAllowedToSeeVersionHistory;
   const latestVersionId =
@@ -153,214 +151,190 @@ const useVersionHistory = ({
   // This effect is used to avoid having cloudProjectId and cloudProjectLastModifiedDate
   // set to null when checking out a version, unmounting the VersionHistory component,
   // making it lose its state (fetched versions and collapse states).
-  React.useEffect(
-    () => {
-      if (ignoreFileMetadataChangesRef.current) return;
-      setCloudProjectId(
-        getCloudProjectFileMetadataIdentifier(
-          storageProviderInternalName,
-          fileMetadata
-        )
-      );
-      setCloudProjectLastModifiedDate(
-        isCloudProject && fileMetadata ? fileMetadata.lastModifiedDate : null
-      );
-    },
-    [storageProviderInternalName, isCloudProject, fileMetadata]
-  );
+  React.useEffect(() => {
+    if (ignoreFileMetadataChangesRef.current) return;
+    setCloudProjectId(
+      getCloudProjectFileMetadataIdentifier(
+        storageProviderInternalName,
+        fileMetadata
+      )
+    );
+    setCloudProjectLastModifiedDate(
+      isCloudProject && fileMetadata ? fileMetadata.lastModifiedDate : null
+    );
+  }, [storageProviderInternalName, isCloudProject, fileMetadata]);
 
   // This effect is run in 2 cases:
   // - at start up to list the versions (when both cloudProjectId and
   //   cloudProjectLastModifiedDate are set at the same time)
   // - when a new save is done (cloudProjectLastModifiedDate is updated)
-  React.useEffect(
-    () => {
-      (async () => {
-        if (freezeWhileLoadingSpecificVersionRef.current) return;
-        if (!cloudProjectId || !shouldFetchVersions) {
-          setState(emptyPaginationState);
-          return;
-        }
-        setVersionsFetchingError(null);
-        try {
-          const listing = await listVersionsOfProject(
-            getAuthorizationHeader,
-            authenticatedUserId,
-            cloudProjectId,
-            // This effect should only run when the project changes, or the user subscription.
-            // So we fetch the first page of versions.
-            { forceUri: null }
-          );
-          if (!listing) return;
-
-          setState(currentState => {
-            if (!currentState.versions) {
-              // Initial loading of versions.
-              return {
-                versions: listing.versions,
-                nextPageUri: listing.nextPageUri,
-              };
-            }
-            // From here, we're in the case where some versions were already loaded
-            // so the effect is triggered by a modification of cloudProjectLastModifiedDate.
-            // So the versions that are fetched should not replace the whole history that
-            // the user maybe spent time to load.
-            return {
-              versions: mergeVersionsLists(
-                listing.versions,
-                currentState.versions
-              ),
-              // Do not change next page URI.
-              nextPageUri: currentState.nextPageUri,
-            };
-          });
-        } catch (error: any) {
-          console.error(
-            'An error occurred while fetching project versions:',
-            error
-          );
-          setVersionsFetchingError(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-            <Trans>
-              Could not load the project versions. Verify your internet
-              connection or try again later.
-            </Trans>
-          );
-        }
-      })();
-    },
-    [
-      storageProvider,
-      getAuthorizationHeader,
-      authenticatedUserId,
-      cloudProjectId,
-      shouldFetchVersions,
-      cloudProjectLastModifiedDate,
-    ]
-  );
-
-  // This effect watches the unsavedChanges instance to change the opened version status.
-  React.useEffect(
-    () => {
+  React.useEffect(() => {
+    (async () => {
       if (freezeWhileLoadingSpecificVersionRef.current) return;
-// @ts-expect-error - TS7006 - Parameter 'currentCheckedOutVersionStatus' implicitly has an 'any' type.
-      setCheckedOutVersionStatus(currentCheckedOutVersionStatus => {
-        if (
-          !currentCheckedOutVersionStatus ||
-          (hasUnsavedChanges &&
-            currentCheckedOutVersionStatus.status === 'unsavedChanges')
-        ) {
-          return currentCheckedOutVersionStatus;
-        }
-
-        return {
-          version: currentCheckedOutVersionStatus.version,
-          status: 'unsavedChanges',
-        };
-      });
-    },
-    [hasUnsavedChanges]
-  );
-
-  // This effect watches the isSavingProject flag to change the opened version status.
-  React.useEffect(
-    () => {
-      if (freezeWhileLoadingSpecificVersionRef.current) return;
-// @ts-expect-error - TS7006 - Parameter 'currentCheckedOutVersionStatus' implicitly has an 'any' type.
-      setCheckedOutVersionStatus(currentCheckedOutVersionStatus => {
-        if (
-          !currentCheckedOutVersionStatus ||
-          (isSavingProject &&
-            currentCheckedOutVersionStatus.status === 'saving')
-        ) {
-          return currentCheckedOutVersionStatus;
-        }
-
-        return isSavingProject
-          ? {
-              version: currentCheckedOutVersionStatus.version,
-              status: 'saving',
-            }
-          : null;
-      });
-    },
-    [isSavingProject]
-  );
-
-  // This effect watches the project file metadata to reset the opened version
-  // if the project is closed.
-  React.useEffect(
-    () => {
-      if (!fileMetadata) {
-        setCheckedOutVersionStatus(null);
+      if (!cloudProjectId || !shouldFetchVersions) {
+        setState(emptyPaginationState);
+        return;
       }
-    },
-    [fileMetadata]
-  );
-
-  const onLoadMoreVersions = React.useCallback(
-    async () => {
-      if (!cloudProjectId) return;
-
       setVersionsFetchingError(null);
       try {
         const listing = await listVersionsOfProject(
           getAuthorizationHeader,
           authenticatedUserId,
           cloudProjectId,
-          { forceUri: state.nextPageUri }
+          // This effect should only run when the project changes, or the user subscription.
+          // So we fetch the first page of versions.
+          { forceUri: null }
         );
         if (!listing) return;
-        setState({
-          versions: [...(state.versions || []), ...listing.versions],
-          nextPageUri: listing.nextPageUri,
+
+        setState((currentState) => {
+          if (!currentState.versions) {
+            // Initial loading of versions.
+            return {
+              versions: listing.versions,
+              nextPageUri: listing.nextPageUri,
+            };
+          }
+          // From here, we're in the case where some versions were already loaded
+          // so the effect is triggered by a modification of cloudProjectLastModifiedDate.
+          // So the versions that are fetched should not replace the whole history that
+          // the user maybe spent time to load.
+          return {
+            versions: mergeVersionsLists(
+              listing.versions,
+              currentState.versions
+            ),
+            // Do not change next page URI.
+            nextPageUri: currentState.nextPageUri,
+          };
         });
       } catch (error: any) {
         console.error(
-          'An error occurred while fetching more project versions:',
+          'An error occurred while fetching project versions:',
           error
         );
         setVersionsFetchingError(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>
             Could not load the project versions. Verify your internet connection
             or try again later.
           </Trans>
         );
       }
-    },
-    [getAuthorizationHeader, authenticatedUserId, cloudProjectId, state]
-  );
+    })();
+  }, [
+    storageProvider,
+    getAuthorizationHeader,
+    authenticatedUserId,
+    cloudProjectId,
+    shouldFetchVersions,
+    cloudProjectLastModifiedDate,
+  ]);
+
+  // This effect watches the unsavedChanges instance to change the opened version status.
+  React.useEffect(() => {
+    if (freezeWhileLoadingSpecificVersionRef.current) return;
+
+    setCheckedOutVersionStatus((currentCheckedOutVersionStatus) => {
+      if (
+        !currentCheckedOutVersionStatus ||
+        (hasUnsavedChanges &&
+          currentCheckedOutVersionStatus.status === 'unsavedChanges')
+      ) {
+        return currentCheckedOutVersionStatus;
+      }
+
+      return {
+        version: currentCheckedOutVersionStatus.version,
+        status: 'unsavedChanges',
+      };
+    });
+  }, [hasUnsavedChanges]);
+
+  // This effect watches the isSavingProject flag to change the opened version status.
+  React.useEffect(() => {
+    if (freezeWhileLoadingSpecificVersionRef.current) return;
+
+    setCheckedOutVersionStatus((currentCheckedOutVersionStatus) => {
+      if (
+        !currentCheckedOutVersionStatus ||
+        (isSavingProject && currentCheckedOutVersionStatus.status === 'saving')
+      ) {
+        return currentCheckedOutVersionStatus;
+      }
+
+      return isSavingProject
+        ? {
+            version: currentCheckedOutVersionStatus.version,
+            status: 'saving',
+          }
+        : null;
+    });
+  }, [isSavingProject]);
+
+  // This effect watches the project file metadata to reset the opened version
+  // if the project is closed.
+  React.useEffect(() => {
+    if (!fileMetadata) {
+      setCheckedOutVersionStatus(null);
+    }
+  }, [fileMetadata]);
+
+  const onLoadMoreVersions = React.useCallback(async () => {
+    if (!cloudProjectId) return;
+
+    setVersionsFetchingError(null);
+    try {
+      const listing = await listVersionsOfProject(
+        getAuthorizationHeader,
+        authenticatedUserId,
+        cloudProjectId,
+        { forceUri: state.nextPageUri }
+      );
+      if (!listing) return;
+      setState({
+        versions: [...(state.versions || []), ...listing.versions],
+        nextPageUri: listing.nextPageUri,
+      });
+    } catch (error: any) {
+      console.error(
+        'An error occurred while fetching more project versions:',
+        error
+      );
+      setVersionsFetchingError(
+        <Trans>
+          Could not load the project versions. Verify your internet connection
+          or try again later.
+        </Trans>
+      );
+    }
+  }, [getAuthorizationHeader, authenticatedUserId, cloudProjectId, state]);
 
   const openVersionHistoryPanel = React.useCallback(() => {
     setVersionHistoryPanelOpen(true);
   }, []);
 
-  const onQuitVersionHistory = React.useCallback(
-    async () => {
-      if (!fileMetadata || !checkedOutVersionStatus || !latestVersionId) return;
-      freezeWhileLoadingSpecificVersionRef.current = true;
-      ignoreFileMetadataChangesRef.current = true;
-      try {
-        await onOpenCloudProjectOnSpecificVersion({
-          fileMetadata,
-          versionId: latestVersionId,
-          ignoreUnsavedChanges: true,
-          openingMessage: t`Opening latest save...`,
-        });
-        setCheckedOutVersionStatus(null);
-      } finally {
-        freezeWhileLoadingSpecificVersionRef.current = false;
-        ignoreFileMetadataChangesRef.current = false;
-      }
-    },
-    [
-      fileMetadata,
-      onOpenCloudProjectOnSpecificVersion,
-      checkedOutVersionStatus,
-      latestVersionId,
-    ]
-  );
+  const onQuitVersionHistory = React.useCallback(async () => {
+    if (!fileMetadata || !checkedOutVersionStatus || !latestVersionId) return;
+    freezeWhileLoadingSpecificVersionRef.current = true;
+    ignoreFileMetadataChangesRef.current = true;
+    try {
+      await onOpenCloudProjectOnSpecificVersion({
+        fileMetadata,
+        versionId: latestVersionId,
+        ignoreUnsavedChanges: true,
+        openingMessage: t`Opening latest save...`,
+      });
+      setCheckedOutVersionStatus(null);
+    } finally {
+      freezeWhileLoadingSpecificVersionRef.current = false;
+      ignoreFileMetadataChangesRef.current = false;
+    }
+  }, [
+    fileMetadata,
+    onOpenCloudProjectOnSpecificVersion,
+    checkedOutVersionStatus,
+    latestVersionId,
+  ]);
 
   const onCheckoutVersion = React.useCallback(
     async (version: ExpandedCloudProjectVersion) => {
@@ -407,7 +381,7 @@ const useVersionHistory = ({
     async (
       version: ExpandedCloudProjectVersion,
       attributes: {
-        label: string
+        label: string;
       }
     ) => {
       if (!cloudProjectId) return;
@@ -418,10 +392,10 @@ const useVersionHistory = ({
         attributes
       );
       if (!updatedVersion) return;
-      setState(currentState => {
+      setState((currentState) => {
         if (!currentState.versions) return currentState;
         return {
-          versions: currentState.versions.map(version =>
+          versions: currentState.versions.map((version) =>
             version.id === updatedVersion.id
               ? { ...version, label: updatedVersion.label }
               : version
@@ -435,7 +409,6 @@ const useVersionHistory = ({
 
   const renderVersionHistoryPanel = () => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Drawer
         open={versionHistoryPanelOpen}
         PaperProps={{
@@ -447,21 +420,15 @@ const useVersionHistory = ({
         }}
         onClose={() => setVersionHistoryPanelOpen(false)}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <DrawerTopBar
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>File history</Trans>}
           onClose={() => setVersionHistoryPanelOpen(false)}
           id="version-history-drawer"
         />
         {!cloudProjectId ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Line expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AlertMessage kind="info">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   The version history is available for cloud projects only.
                 </Trans>
@@ -469,24 +436,17 @@ const useVersionHistory = ({
             </Column>
           </Line>
         ) : !isUserAllowedToSeeVersionHistory ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Line expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AlertMessage kind="info">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   Access project history, name saves, restore older versions.
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <br />
                   Upgrade to a Pro plan to get started!
                 </Trans>
               </AlertMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <RaisedButton
                 primary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Upgrade my subscription</Trans>}
                 onClick={() =>
                   openSubscriptionDialog({
@@ -498,18 +458,15 @@ const useVersionHistory = ({
             </ColumnStackLayout>
           </Line>
         ) : !state.versions && versionsFetchingError ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Line expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <PlaceholderError onRetry={onLoadMoreVersions}>
                 {versionsFetchingError}
               </PlaceholderError>
             </Column>
           </Line>
         ) : state.versions ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <VersionHistory
             authenticatedUserId={
               authenticatedUser.profile ? authenticatedUser.profile.id : ''
@@ -524,7 +481,6 @@ const useVersionHistory = ({
             versions={state.versions}
           />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderLoader />
         )}
       </Drawer>

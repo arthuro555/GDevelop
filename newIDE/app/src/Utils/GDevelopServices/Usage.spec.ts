@@ -1,16 +1,12 @@
-import {canBenefitFromDiscordRole, Subscription} from './Usage';
+import { canBenefitFromDiscordRole, Subscription } from './Usage';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('Usage service', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('canBenefitFromDiscordRole', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return false when subscription is null', () => {
       const result = canBenefitFromDiscordRole(null);
       expect(result).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return false when subscription does not have a planId', () => {
       const subscription: Subscription = {
         planId: null,
@@ -23,7 +19,6 @@ describe('Usage service', () => {
       expect(result).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return false for silver subscription', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_silver',
@@ -36,7 +31,6 @@ describe('Usage service', () => {
       expect(result).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return false for legacy sub', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_pro',
@@ -49,7 +43,6 @@ describe('Usage service', () => {
       expect(result).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return false when subscription benefits from education plan', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_gold',
@@ -63,7 +56,6 @@ describe('Usage service', () => {
       expect(result).toBe(false);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return true for education subscription', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_education',
@@ -76,7 +68,6 @@ describe('Usage service', () => {
       expect(result).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return true for gold subscription', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_gold',
@@ -89,7 +80,6 @@ describe('Usage service', () => {
       expect(result).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('should return true for startup subscription', () => {
       const subscription: Subscription = {
         planId: 'gdevelop_startup',

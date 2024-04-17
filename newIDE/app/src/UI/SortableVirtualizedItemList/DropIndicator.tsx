@@ -14,17 +14,13 @@ const styles = {
 } as const;
 
 type Props = {
-  canDrop: boolean,
-  zIndex?: 1
+  canDrop: boolean;
+  zIndex?: 1;
 };
 
-export default function DropIndicator({
-  canDrop,
-  zIndex,
-}: Props) {
+export default function DropIndicator({ canDrop, zIndex }: Props) {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         ...styles.dropIndicator,

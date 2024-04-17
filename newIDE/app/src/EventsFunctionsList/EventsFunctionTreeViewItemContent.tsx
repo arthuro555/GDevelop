@@ -1,8 +1,7 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
@@ -19,14 +18,11 @@ import {
   extensionFunctionsRootFolderId,
   extensionBehaviorsRootFolderId,
   extensionObjectsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsList/index.tsx', but '--jsx' is not set.
 } from '.';
 import Tooltip from '@material-ui/core/Tooltip';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/VisibilityOff'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/VisibilityOff.js' implicitly has an 'any' type.
+
 import VisibilityOff from '../UI/CustomSvgIcons/VisibilityOff';
 import AsyncIcon from '@material-ui/icons/SyncAlt';
-
-const gd: libGDevelop = global.gd;
 
 const EVENTS_FUNCTION_CLIPBOARD_KIND = 'Events Function';
 
@@ -35,48 +31,55 @@ const styles = {
 } as const;
 
 export type EventsFunctionCreationParameters = {
-  functionType: 0 | 1 | 2,
-  name: string | null | undefined
+  functionType: 0 | 1 | 2;
+  name: string | null | undefined;
 };
 
 export type EventsFunctionCallbacks = {
   onSelectEventsFunction: (
-    selectedEventsFunction?: gdEventsFunction | null | undefined,
-    selectedEventsBasedBehavior?: gdEventsBasedBehavior | null | undefined,
-    selectedEventsBasedObject?: gdEventsBasedObject | null | undefined,
-  ) => void,
-  onDeleteEventsFunction: (eventsFunction: gdEventsFunction, cb: (arg1: boolean) => void) => void,
+    selectedEventsFunction?: gd.EventsFunction | null | undefined,
+    selectedEventsBasedBehavior?: gd.EventsBasedBehavior | null | undefined,
+    selectedEventsBasedObject?: gd.EventsBasedObject | null | undefined
+  ) => void;
+  onDeleteEventsFunction: (
+    eventsFunction: gd.EventsFunction,
+    cb: (arg1: boolean) => void
+  ) => void;
   onRenameEventsFunction: (
-    eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-    eventsBasedObject: gdEventsBasedObject | null | undefined,
-    eventsFunction: gdEventsFunction,
+    eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
+    eventsBasedObject: gd.EventsBasedObject | null | undefined,
+    eventsFunction: gd.EventsFunction,
     newName: string,
-    cb: (arg1: boolean) => void,
-  ) => void,
+    cb: (arg1: boolean) => void
+  ) => void;
   onAddEventsFunction: (
-    eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-    eventsBasedObject: gdEventsBasedObject | null | undefined,
-    arg3: (parameters?: EventsFunctionCreationParameters | null | undefined) => void,
-  ) => void,
-  onEventsFunctionAdded: (eventsFunction: gdEventsFunction) => void
+    eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined,
+    eventsBasedObject: gd.EventsBasedObject | null | undefined,
+    arg3: (
+      parameters?: EventsFunctionCreationParameters | null | undefined
+    ) => void
+  ) => void;
+  onEventsFunctionAdded: (eventsFunction: gd.EventsFunction) => void;
 };
 
-export type EventFunctionCommonProps = (TreeItemProps) & (EventsFunctionCallbacks);
+export type EventFunctionCommonProps = TreeItemProps & EventsFunctionCallbacks;
 
-export type EventsFunctionProps = (EventFunctionCommonProps) & {
-  eventsFunctionsContainer: gdEventsFunctionsContainer,
-  eventsBasedBehavior?: gdEventsBasedBehavior | null | undefined,
-  eventsBasedObject?: gdEventsBasedObject | null | undefined
+export type EventsFunctionProps = EventFunctionCommonProps & {
+  eventsFunctionsContainer: gd.EventsFunctionsContainer;
+  eventsBasedBehavior?: gd.EventsBasedBehavior | null | undefined;
+  eventsBasedObject?: gd.EventsBasedObject | null | undefined;
 };
 
-export const getEventsFunctionTreeViewItemId = (eventFunction: gdEventsFunction): string => {
+export const getEventsFunctionTreeViewItemId = (
+  eventFunction: gd.EventsFunction
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return `function-${eventFunction.ptr}`;
 };
 
 export const canFunctionBeRenamed = (
-  eventsFunction: gdEventsFunction,
+  eventsFunction: gd.EventsFunction,
   containerType: 'extension' | 'behavior' | 'object'
 ) => {
   const name = eventsFunction.getName();
@@ -92,27 +95,27 @@ export const canFunctionBeRenamed = (
 };
 
 export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
-  eventsFunction: gdEventsFunction;
+  eventsFunction: gd.EventsFunction;
   props: EventsFunctionProps;
 
-  constructor(eventsFunction: gdEventsFunction, props: EventsFunctionProps) {
+  constructor(eventsFunction: gd.EventsFunction, props: EventsFunctionProps) {
     this.eventsFunction = eventsFunction;
     this.props = props;
   }
 
-  getEventsFunctionsContainer(): gdEventsFunctionsContainer {
+  getEventsFunctionsContainer(): gd.EventsFunctionsContainer {
     return this.props.eventsFunctionsContainer;
   }
 
-  getEventsFunction(): gdEventsFunction | null | undefined {
+  getEventsFunction(): gd.EventsFunction | null | undefined {
     return this.eventsFunction;
   }
 
-  getEventsBasedBehavior(): gdEventsBasedBehavior | null | undefined {
+  getEventsBasedBehavior(): gd.EventsBasedBehavior | null | undefined {
     return this.props.eventsBasedBehavior;
   }
 
-  getEventsBasedObject(): gdEventsBasedObject | null | undefined {
+  getEventsBasedObject(): gd.EventsBasedObject | null | undefined {
     return this.props.eventsBasedObject;
   }
 
@@ -205,8 +208,8 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
       this.props.eventsBasedObject,
       this.eventsFunction,
       newName,
-// @ts-expect-error - TS7006 - Parameter 'doRename' implicitly has an 'any' type.
-      doRename => {
+
+      (doRename) => {
         if (!doRename) return;
         this._onEventsFunctionModified();
       }
@@ -225,8 +228,8 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
       this.getEventsBasedBehavior()
         ? 'behavior'
         : this.getEventsBasedObject()
-        ? 'object'
-        : 'extension'
+          ? 'object'
+          : 'extension'
     );
   }
 
@@ -285,15 +288,12 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
     const icons: Array<React.ReactElement<any>> = [];
     if (this.eventsFunction.isPrivate()) {
       icons.push(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           key="visibility"
           title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>This function won't be visible in the events editor.</Trans>
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <VisibilityOff
             fontSize="small"
             style={{
@@ -306,11 +306,9 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
     }
     if (this.eventsFunction.isAsync()) {
       icons.push(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           key="async"
           title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>
               This function is asynchronous - it will only allow subsequent
               events to run after calling the action "End asynchronous task"
@@ -318,7 +316,6 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
             </Trans>
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <AsyncIcon
             fontSize="small"
             style={{
@@ -348,13 +345,11 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
     });
   }
 
-  async _deleteEventsFunction(
-    {
-      askForConfirmation,
-    }: {
-      askForConfirmation: boolean
-    },
-  ): Promise<void> {
+  async _deleteEventsFunction({
+    askForConfirmation,
+  }: {
+    askForConfirmation: boolean;
+  }): Promise<void> {
     const { eventsFunctionsContainer } = this.props;
 
     if (askForConfirmation) {
@@ -365,8 +360,7 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
       if (!answer) return;
     }
 
-// @ts-expect-error - TS7006 - Parameter 'doRemove' implicitly has an 'any' type.
-    this.props.onDeleteEventsFunction(this.eventsFunction, doRemove => {
+    this.props.onDeleteEventsFunction(this.eventsFunction, (doRemove) => {
       if (!doRemove) return;
 
       eventsFunctionsContainer.removeEventsFunction(
@@ -416,7 +410,7 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
 
     const { project, eventsFunctionsContainer } = this.props;
 
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       eventsFunctionsContainer.hasEventsFunctionNamed(name)
     );
 
@@ -445,7 +439,7 @@ export class EventsFunctionTreeViewItemContent implements TreeViewItemContent {
 
   _duplicateEventsFunction(): void {
     const { eventsFunctionsContainer } = this.props;
-    const newName = newNameGenerator(this.eventsFunction.getName(), name =>
+    const newName = newNameGenerator(this.eventsFunction.getName(), (name) =>
       eventsFunctionsContainer.hasEventsFunctionNamed(name)
     );
     const newEventsFunction = eventsFunctionsContainer.insertEventsFunction(

@@ -1,9 +1,8 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
 import { serializeToJSObject, serializeToJSON } from '../../Utils/Serializer';
 import { FileMetadata, SaveAsLocation } from '../index';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../Utils/OptionalRequire';
 import {
   split,
@@ -11,7 +10,7 @@ import {
   getSlugifiedUniqueNameFromProperty,
 } from '../../Utils/ObjectSplitter';
 import type { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/LocalFolderPicker' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LocalFolderPicker/index.tsx', but '--jsx' is not set.
+
 import LocalFolderPicker from '../../UI/LocalFolderPicker';
 
 const fs = optionalRequire('fs-extra');
@@ -28,32 +27,40 @@ export const splittedProjectFolderNames = [
 
 const checkFileContent = (filePath: string, expectedContent: string) => {
   const time = performance.now();
-  return new Promise((resolve: (result: Promise<undefined> | undefined) => void, reject: (error?: any) => void) => {
-// @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'content' implicitly has an 'any' type.
-    fs.readFile(filePath, { encoding: 'utf8' }, (err, content) => {
-      if (err) return reject(err);
+  return new Promise(
+    (
+      resolve: (result: Promise<undefined> | undefined) => void,
+      reject: (error?: any) => void
+    ) => {
+      // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'content' implicitly has an 'any' type.
+      fs.readFile(filePath, { encoding: 'utf8' }, (err, content) => {
+        if (err) return reject(err);
 
-      if (content === '') {
-        reject(new Error(`Written file is empty, did the write fail?`));
-      }
-      if (content !== expectedContent) {
-        reject(
-          new Error(
-            `Written file is not containing the expected content, did the write fail?`
-          )
+        if (content === '') {
+          reject(new Error(`Written file is empty, did the write fail?`));
+        }
+        if (content !== expectedContent) {
+          reject(
+            new Error(
+              `Written file is not containing the expected content, did the write fail?`
+            )
+          );
+        }
+        const verificationTime = performance.now() - time;
+        console.info(
+          `Verified ${filePath} content in ${verificationTime.toFixed()}ms.`
         );
-      }
-      const verificationTime = performance.now() - time;
-      console.info(
-        `Verified ${filePath} content in ${verificationTime.toFixed()}ms.`
-      );
-// @ts-expect-error - TS2794 - Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?
-      resolve();
-    });
-  });
+        // @ts-expect-error - TS2794 - Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?
+        resolve();
+      });
+    }
+  );
 };
 
-const writeAndCheckFile = async (content: string, filePath: string): Promise<void> => {
+const writeAndCheckFile = async (
+  content: string,
+  filePath: string
+): Promise<void> => {
   if (!fs) throw new Error('Filesystem is not supported.');
   if (content === '')
     throw new Error('The content to save on disk is empty. Aborting.');
@@ -64,12 +71,19 @@ const writeAndCheckFile = async (content: string, filePath: string): Promise<voi
   await checkFileContent(filePath, content);
 };
 
-const writeAndCheckFormattedJSONFile = async (object: any, filePath: string): Promise<void> => {
+const writeAndCheckFormattedJSONFile = async (
+  object: any,
+  filePath: string
+): Promise<void> => {
   const content = JSON.stringify(object, null, 2);
   await writeAndCheckFile(content, filePath);
 };
 
-const writeProjectFiles = (project: gdProject, filePath: string, projectPath: string): Promise<void> => {
+const writeProjectFiles = (
+  project: gd.Project,
+  filePath: string,
+  projectPath: string
+): Promise<void> => {
   const serializedProjectObject = serializeToJSObject(project);
   if (project.isFolderProject()) {
     const partialObjects = split(serializedProjectObject, {
@@ -77,18 +91,18 @@ const writeProjectFiles = (project: gdProject, filePath: string, projectPath: st
       getArrayItemReferenceName: getSlugifiedUniqueNameFromProperty('name'),
       shouldSplit: splitPaths(
         new Set(
-          splittedProjectFolderNames.map(folderName => `/${folderName}/*`)
+          splittedProjectFolderNames.map((folderName) => `/${folderName}/*`)
         )
       ),
       isReferenceMagicPropertyName: '__REFERENCE_TO_SPLIT_OBJECT',
     });
 
     return Promise.all(
-      partialObjects.map(partialObject => {
+      partialObjects.map((partialObject) => {
         return writeAndCheckFormattedJSONFile(
           partialObject.object,
           path.join(projectPath, partialObject.reference) + '.json'
-        ).catch(err => {
+        ).catch((err) => {
           console.error('Unable to write a partial file:', err);
           throw err;
         });
@@ -97,7 +111,7 @@ const writeProjectFiles = (project: gdProject, filePath: string, projectPath: st
       return writeAndCheckFormattedJSONFile(
         serializedProjectObject,
         filePath
-      ).catch(err => {
+      ).catch((err) => {
         console.error('Unable to write the split project:', err);
         throw err;
       });
@@ -106,16 +120,19 @@ const writeProjectFiles = (project: gdProject, filePath: string, projectPath: st
     return writeAndCheckFormattedJSONFile(
       serializedProjectObject,
       filePath
-    ).catch(err => {
+    ).catch((err) => {
       console.error('Unable to write the project:', err);
       throw err;
     });
   }
 };
 
-export const onSaveProject = (project: gdProject, fileMetadata: FileMetadata): Promise<{
-  wasSaved: boolean,
+export const onSaveProject = (
+  project: gd.Project,
   fileMetadata: FileMetadata
+): Promise<{
+  wasSaved: boolean;
+  fileMetadata: FileMetadata;
 }> => {
   const filePath = fileMetadata.fileIdentifier;
   const now = Date.now();
@@ -138,16 +155,14 @@ export const onSaveProject = (project: gdProject, fileMetadata: FileMetadata): P
   });
 };
 
-export const onChooseSaveProjectAsLocation = async (
-  {
-    project,
-    fileMetadata,
-  }: {
-    project: gdProject,
-    fileMetadata: FileMetadata | null | undefined // This is the current location.
-  },
-): Promise<{
-  saveAsLocation: SaveAsLocation | null | undefined // This is the newly chosen location (or null if cancelled).
+export const onChooseSaveProjectAsLocation = async ({
+  project,
+  fileMetadata,
+}: {
+  project: gd.Project;
+  fileMetadata: FileMetadata | null | undefined; // This is the current location.
+}): Promise<{
+  saveAsLocation: SaveAsLocation | null | undefined; // This is the newly chosen location (or null if cancelled).
 }> => {
   const defaultPath = fileMetadata ? fileMetadata.fileIdentifier : '';
   const browserWindow = remote.getCurrentWindow();
@@ -172,19 +187,15 @@ export const onChooseSaveProjectAsLocation = async (
 };
 
 export const onSaveProjectAs = async (
-  project: gdProject,
+  project: gd.Project,
   saveAsLocation: SaveAsLocation | null | undefined,
   options: {
-    onStartSaving: () => void,
-    onMoveResources: (
-      arg1: {
-        newFileMetadata: FileMetadata
-      },
-    ) => Promise<void>
-  },
+    onStartSaving: () => void;
+    onMoveResources: (arg1: { newFileMetadata: FileMetadata }) => Promise<void>;
+  }
 ): Promise<{
-  wasSaved: boolean,
-  fileMetadata: FileMetadata | null | undefined
+  wasSaved: boolean;
+  fileMetadata: FileMetadata | null | undefined;
 }> => {
   if (!saveAsLocation)
     throw new Error('A location was not chosen before saving as.');
@@ -215,17 +226,21 @@ export const onSaveProjectAs = async (
   };
 };
 
-export const onAutoSaveProject = (project: gdProject, fileMetadata: FileMetadata): Promise<void> => {
+export const onAutoSaveProject = (
+  project: gd.Project,
+  fileMetadata: FileMetadata
+): Promise<void> => {
   const autoSavePath = fileMetadata.fileIdentifier + '.autosave';
   return writeAndCheckFile(serializeToJSON(project), autoSavePath).catch(
-    err => {
+    (err) => {
       console.error(`Unable to write ${autoSavePath}:`, err);
       throw err;
     }
   );
 };
 
-export const getWriteErrorMessage = (error: Error): MessageDescriptor => t`An error occurred when saving the project. Please try again by choosing another location.`;
+export const getWriteErrorMessage = (error: Error): MessageDescriptor =>
+  t`An error occurred when saving the project. Please try again by choosing another location.`;
 
 // See https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 const forbiddenCharacterRegex = /\\ | \/ | : | \* | \? | " | < | > | \|/g;
@@ -239,22 +254,20 @@ const cleanUpProjectFileName = (projectFileName: string) =>
     .replace(consecutiveSpacesRegex, ' ')
     .trim();
 
-export const getProjectLocation = (
-  {
-    projectName,
-    saveAsLocation,
-    newProjectsDefaultFolder,
-  }: {
-    projectName: string,
-    saveAsLocation: SaveAsLocation | null | undefined,
-    newProjectsDefaultFolder?: string
-  },
-): SaveAsLocation => {
+export const getProjectLocation = ({
+  projectName,
+  saveAsLocation,
+  newProjectsDefaultFolder,
+}: {
+  projectName: string;
+  saveAsLocation: SaveAsLocation | null | undefined;
+  newProjectsDefaultFolder?: string;
+}): SaveAsLocation => {
   const outputPath = saveAsLocation
     ? path.dirname(saveAsLocation.fileIdentifier)
     : newProjectsDefaultFolder
-    ? newProjectsDefaultFolder
-    : '';
+      ? newProjectsDefaultFolder
+      : '';
   const projectFileName = projectName
     ? cleanUpProjectFileName(projectName) + '.json'
     : 'game.json';
@@ -269,10 +282,10 @@ export const renderNewProjectSaveAsLocationChooser = ({
   setSaveAsLocation,
   newProjectsDefaultFolder,
 }: {
-  projectName: string,
-  saveAsLocation: SaveAsLocation | null | undefined,
-  setSaveAsLocation: (arg1?: SaveAsLocation | null | undefined) => void,
-  newProjectsDefaultFolder?: string
+  projectName: string;
+  saveAsLocation: SaveAsLocation | null | undefined;
+  setSaveAsLocation: (arg1?: SaveAsLocation | null | undefined) => void;
+  newProjectsDefaultFolder?: string;
 }) => {
   const projectLocation = getProjectLocation({
     projectName,
@@ -280,12 +293,10 @@ export const renderNewProjectSaveAsLocationChooser = ({
     newProjectsDefaultFolder,
   });
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LocalFolderPicker
       fullWidth
       value={path.dirname(projectLocation.fileIdentifier)}
-// @ts-expect-error - TS7006 - Parameter 'newOutputPath' implicitly has an 'any' type.
-      onChange={newOutputPath => {
+      onChange={(newOutputPath) => {
         const newOutputFileIdentifier = path.join(
           newOutputPath,
           path.basename(projectLocation.fileIdentifier)

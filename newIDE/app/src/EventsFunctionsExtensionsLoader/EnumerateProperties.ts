@@ -1,19 +1,19 @@
-/** The JS equivalent of gdPropertyDescriptor */
+/** The JS equivalent of gd.PropertyDescriptor */
 type EnumeratedProperty = {
-  name: string,
-  type: string,
-  description: string,
-  group: string,
-  label: string,
-  value: string,
-  extraInfo: Array<string>,
-  isHidden: boolean
+  name: string;
+  type: string;
+  description: string;
+  group: string;
+  label: string;
+  value: string;
+  extraInfo: Array<string>;
+  isHidden: boolean;
 };
 
 export const toGdPropertyDescriptor = (
   enumeratedProperty: EnumeratedProperty,
-  propertyDescriptor: gdPropertyDescriptor,
-): gdPropertyDescriptor => {
+  propertyDescriptor: gd.PropertyDescriptor
+): gd.PropertyDescriptor => {
   propertyDescriptor
     .setType(enumeratedProperty.type)
     .setDescription(enumeratedProperty.description)
@@ -22,7 +22,7 @@ export const toGdPropertyDescriptor = (
     .setValue(enumeratedProperty.value)
     .setHidden(enumeratedProperty.isHidden);
 
-  enumeratedProperty.extraInfo.forEach(extraInfo => {
+  enumeratedProperty.extraInfo.forEach((extraInfo) => {
     propertyDescriptor.addExtraInfo(extraInfo);
   });
 

@@ -1,11 +1,14 @@
-import {showErrorBox} from '../UI/Messages/MessageBox';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { showErrorBox } from '../UI/Messages/MessageBox';
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
-export default function verifyProjectContent(i18n: I18nType, content: any): boolean {
-  if (!content.gdVersion && content.eventsFunctions) {
+export default function verifyProjectContent(
+  i18n: I18nType,
+  content: any
+): boolean {
+  if (!content.gd.Version && content.eventsFunctions) {
     showErrorBox({
       message: [
         i18n._(t`Unable to open this file.`),
@@ -20,7 +23,7 @@ export default function verifyProjectContent(i18n: I18nType, content: any): bool
     return false;
   }
 
-  if (!content.gdVersion && !content.eventsFunctions) {
+  if (!content.gd.Version && !content.eventsFunctions) {
     showErrorBox({
       message: [
         i18n._(t`Unable to open this file.`),

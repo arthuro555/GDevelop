@@ -1,32 +1,29 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
-import {I18n} from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { I18n } from '@lingui/react';
+
 import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
 import Popper from '@material-ui/core/Popper';
 import muiZIndex from '@material-ui/core/styles/zIndex';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { ExpressionAutocompletion } from '../../../ExpressionAutocompletion';
-// @ts-expect-error - TS6142 - Module '../../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView, { ScrollViewInterface } from '../../../UI/ScrollView';
 import { getVisibleParameterTypes } from './FormatExpressionCall';
 import { ParameterRenderingServiceType } from '../ParameterFieldCommons';
 import { EnumeratedInstructionOrExpressionMetadata } from '../../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from '../../../UI/Grid';
 import ObjectsRenderingService from '../../../ObjectsRendering/ObjectsRenderingService';
-// @ts-expect-error - TS6142 - Module '../../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../../UI/Paper';
 import { mapVector } from '../../../Utils/MapFor';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import GDevelopThemeContext from '../../../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS6142 - Module '../../../VariablesList/VariableTypeSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VariablesList/VariableTypeSelector.tsx', but '--jsx' is not set.
-import { getVariableTypeToIcon } from '../../../VariablesList/VariableTypeSelector';
 
-const gd: libGDevelop = global.gd;
+import { getVariableTypeToIcon } from '../../../VariablesList/VariableTypeSelector';
 
 const defaultTextStyle = {
   // Break words if they are too long to fit on a single line.
@@ -60,7 +57,6 @@ const AutocompletionIcon = React.memo(({ src }) => {
     paletteType === 'dark' &&
     (src.startsWith('data:image/svg+xml') || src.includes('_black'));
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <img
       src={src}
       alt=""
@@ -78,10 +74,9 @@ const formatParameterTypesString = (
   enumeratedExpressionMetadata: EnumeratedInstructionOrExpressionMetadata
 ) => {
   return getVisibleParameterTypes(enumeratedExpressionMetadata)
-    .map(type => {
-      const userFriendlyName = parameterRenderingService.getUserFriendlyTypeName(
-        type
-      );
+    .map((type) => {
+      const userFriendlyName =
+        parameterRenderingService.getUserFriendlyTypeName(type);
 
       return userFriendlyName ? i18n._(userFriendlyName) : type;
     })
@@ -98,22 +93,22 @@ const AutocompletionRow = React.forwardRef(
       isSelected,
       onClick,
     }: {
-      icon: React.ReactNode | null,
-      iconSrc: string | null,
-      label: string,
-      parametersLabel: string | null,
-      isSelected: boolean,
-      onClick: () => void
+      icon: React.ReactNode | null;
+      iconSrc: string | null;
+      label: string;
+      parametersLabel: string | null;
+      isSelected: boolean;
+      onClick: () => void;
     },
     ref
   ) => {
     const trimmedLabel = label.length > 46 ? label.substr(0, 46) + '…' : label;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2769 - No overload matches this call.
+      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2769 - No overload matches this call.
       <ButtonBase
         style={styles.button}
-        onPointerDown={e =>
+        onPointerDown={(e) =>
           // Prevent default behavior that gives the focus to the button and makes
           // the field lose focus, hence closing the autocompletion displayer.
           e.preventDefault()
@@ -121,18 +116,13 @@ const AutocompletionRow = React.forwardRef(
         onClick={onClick}
         ref={ref}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ src: string; }' is not assignable to type 'IntrinsicAttributes & object'. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ src: string; }' is not assignable to type 'IntrinsicAttributes & object'. */}
         {icon || (iconSrc ? <AutocompletionIcon src={iconSrc} /> : null)}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text style={defaultTextStyle} noMargin align="left">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           {isSelected ? <b>{trimmedLabel}</b> : trimmedLabel}
           {parametersLabel && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               (<i>{parametersLabel}</i>)
             </>
           )}
@@ -142,7 +132,10 @@ const AutocompletionRow = React.forwardRef(
   }
 );
 
-const isParameterVisible = (expressionMetadata: gdExpressionMetadata, parameterIndex: number): boolean => {
+const isParameterVisible = (
+  expressionMetadata: gd.ExpressionMetadata,
+  parameterIndex: number
+): boolean => {
   const parameter = expressionMetadata.getParameter(parameterIndex);
   return (
     !parameter.isCodeOnly() &&
@@ -156,9 +149,9 @@ const isParameterVisible = (expressionMetadata: gdExpressionMetadata, parameterI
 };
 
 type ExpressionDocumentationProps = {
-  expressionMetadata: gdExpressionMetadata,
-  i18n: I18nType,
-  parameterRenderingService: ParameterRenderingServiceType
+  expressionMetadata: gd.ExpressionMetadata;
+  i18n: I18nType;
+  parameterRenderingService: ParameterRenderingServiceType;
 };
 
 const ExpressionDocumentation = ({
@@ -167,20 +160,16 @@ const ExpressionDocumentation = ({
   parameterRenderingService,
 }: ExpressionDocumentationProps) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text style={defaultTextStyle} size="body2">
         {expressionMetadata.getDescription()}
       </Text>
       {mapVector(
         expressionMetadata.getParameters(),
-// @ts-expect-error - TS7006 - Parameter 'parameter' implicitly has an 'any' type. | TS7006 - Parameter 'parameterIndex' implicitly has an 'any' type.
+
         (parameter, parameterIndex) =>
           isParameterVisible(expressionMetadata, parameterIndex) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Text style={defaultTextStyle} size="body2" key={parameterIndex}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <i>
                 {i18n._(
                   parameterRenderingService.getUserFriendlyTypeName(
@@ -197,14 +186,14 @@ const ExpressionDocumentation = ({
 };
 
 type Props = {
-  project: gdProject | null | undefined,
-  expressionAutocompletions: Array<ExpressionAutocompletion>,
-  remainingCount: number,
-  selectedCompletionIndex: number,
-  anchorEl: Element,
-  onChoose: (chosenExpressionAutocompletion: ExpressionAutocompletion) => void,
-  onScroll: () => void,
-  parameterRenderingService: ParameterRenderingServiceType
+  project: gd.Project | null | undefined;
+  expressionAutocompletions: Array<ExpressionAutocompletion>;
+  remainingCount: number;
+  selectedCompletionIndex: number;
+  anchorEl: Element;
+  onChoose: (chosenExpressionAutocompletion: ExpressionAutocompletion) => void;
+  onScroll: () => void;
+  parameterRenderingService: ParameterRenderingServiceType;
 };
 
 const styles = {
@@ -244,27 +233,23 @@ export default function ExpressionAutocompletionsDisplayer({
   onScroll,
   parameterRenderingService,
 }: Props) {
-  const scrollView = React.useRef((null as ScrollViewInterface | null | undefined));
+  const scrollView = React.useRef(
+    null as ScrollViewInterface | null | undefined
+  );
   const selectedAutocompletionElement = React.useRef(
-    (null as React.Component<any, any> | null | undefined)
+    null as React.Component<any, any> | null | undefined
   );
-  React.useEffect(
-    () => {
-      if (scrollView.current && selectedAutocompletionElement.current) {
-        scrollView.current.scrollTo(selectedAutocompletionElement.current);
-      }
-    },
-    [scrollView, selectedAutocompletionElement, selectedCompletionIndex]
-  );
+  React.useEffect(() => {
+    if (scrollView.current && selectedAutocompletionElement.current) {
+      scrollView.current.scrollTo(selectedAutocompletionElement.current);
+    }
+  }, [scrollView, selectedAutocompletionElement, selectedCompletionIndex]);
 
   if (expressionAutocompletions.length === 0) return null;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Popper
           style={styles.popperStyle}
           open
@@ -277,14 +262,13 @@ export default function ExpressionAutocompletionsDisplayer({
             false
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Paper
             variant="outlined"
             square
             style={styles.container}
             background="light"
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ScrollView ref={scrollView} onScroll={onScroll}>
               {expressionAutocompletions.map(
                 (expressionAutocompletion, index) => {
@@ -293,15 +277,15 @@ export default function ExpressionAutocompletionsDisplayer({
                     ? selectedAutocompletionElement
                     : undefined;
 
-// @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
-                  const parametersLabel = expressionAutocompletion.enumeratedExpressionMetadata
-                    ? formatParameterTypesString(
-                        parameterRenderingService,
-                        i18n,
-// @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
-                        expressionAutocompletion.enumeratedExpressionMetadata
-                      )
-                    : null;
+                  const parametersLabel =
+                    expressionAutocompletion.enumeratedExpressionMetadata
+                      ? formatParameterTypesString(
+                          parameterRenderingService,
+                          i18n,
+                          // @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
+                          expressionAutocompletion.enumeratedExpressionMetadata
+                        )
+                      : null;
 
                   const label = expressionAutocompletion.completion;
                   const iconSrc =
@@ -309,20 +293,21 @@ export default function ExpressionAutocompletionsDisplayer({
                       ? expressionAutocompletion.enumeratedExpressionMetadata
                           .iconFilename
                       : expressionAutocompletion.kind === 'Object'
-                      ? project && expressionAutocompletion.objectConfiguration
-                        ? ObjectsRenderingService.getThumbnail(
-                            project,
-                            expressionAutocompletion.objectConfiguration
-                          )
-                        : 'res/types/object.png'
-                      : expressionAutocompletion.kind === 'Behavior'
-                      ? project && expressionAutocompletion.behaviorType
-                        ? gd.MetadataProvider.getBehaviorMetadata(
-                            project.getCurrentPlatform(),
-                            expressionAutocompletion.behaviorType
-                          ).getIconFilename()
-                        : 'res/types/behavior.png'
-                      : null;
+                        ? project &&
+                          expressionAutocompletion.objectConfiguration
+                          ? ObjectsRenderingService.getThumbnail(
+                              project,
+                              expressionAutocompletion.objectConfiguration
+                            )
+                          : 'res/types/object.png'
+                        : expressionAutocompletion.kind === 'Behavior'
+                          ? project && expressionAutocompletion.behaviorType
+                            ? gd.MetadataProvider.getBehaviorMetadata(
+                                project.getCurrentPlatform(),
+                                expressionAutocompletion.behaviorType
+                              ).getIconFilename()
+                            : 'res/types/behavior.png'
+                          : null;
 
                   const IconComponent =
                     expressionAutocompletion.kind === 'Variable'
@@ -330,22 +315,21 @@ export default function ExpressionAutocompletionsDisplayer({
                           expressionAutocompletion.variableType
                         ]
                       : expressionAutocompletion.kind === 'Property'
-                      ? getTypeToIcon(
-                          gd.ValueTypeMetadata.getPrimitiveValueType(
-                            gd.ValueTypeMetadata.convertPropertyTypeToValueType(
-                              expressionAutocompletion.propertyType
+                        ? getTypeToIcon(
+                            gd.ValueTypeMetadata.getPrimitiveValueType(
+                              gd.ValueTypeMetadata.convertPropertyTypeToValueType(
+                                expressionAutocompletion.propertyType
+                              )
                             )
                           )
-                        )
-                      : expressionAutocompletion.kind === 'Parameter'
-                      ? getTypeToIcon(
-                          gd.ValueTypeMetadata.getPrimitiveValueType(
-                            expressionAutocompletion.parameterType
-                          )
-                        )
-                      : null;
+                        : expressionAutocompletion.kind === 'Parameter'
+                          ? getTypeToIcon(
+                              gd.ValueTypeMetadata.getPrimitiveValueType(
+                                expressionAutocompletion.parameterType
+                              )
+                            )
+                          : null;
                   const icon = IconComponent ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <IconComponent style={autocompletionIconSizeStyle} />
                   ) : null;
 
@@ -354,7 +338,6 @@ export default function ExpressionAutocompletionsDisplayer({
                   }
 
                   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <AutocompletionRow
                       key={index}
                       icon={icon}
@@ -369,11 +352,8 @@ export default function ExpressionAutocompletionsDisplayer({
                 }
               )}
               {remainingCount > 0 && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Column justifyContent="flex-start">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>And others...</Trans>
                   </Text>
                 </Column>
@@ -384,24 +364,18 @@ export default function ExpressionAutocompletionsDisplayer({
             expressionAutocompletions[selectedCompletionIndex].kind ===
               'Expression' &&
             !expressionAutocompletions[selectedCompletionIndex].isExact && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Paper
                 variant="outlined"
                 square
                 style={styles.container}
                 background="light"
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ScrollView autoHideScrollbar>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Line noMargin expand alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <ExpressionDocumentation
                         expressionMetadata={
                           expressionAutocompletions[selectedCompletionIndex]
-// @ts-expect-error - TS2339 - Property 'enumeratedExpressionMetadata' does not exist on type 'ExpressionAutocompletion'.
                             .enumeratedExpressionMetadata.metadata
                         }
                         i18n={i18n}

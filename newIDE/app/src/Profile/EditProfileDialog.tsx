@@ -1,14 +1,13 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans, t} from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
 import {
   EditForm,
@@ -21,43 +20,41 @@ import {
   discordUsernameConfig,
   UsernameAvailability,
   CommunityLinkType,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../Utils/GDevelopServices/User';
 import {
   hasValidSubscriptionPlan,
   Subscription,
 } from '../Utils/GDevelopServices/Usage';
-// @ts-expect-error - TS6142 - Module '../UI/LeftLoader' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LeftLoader.tsx', but '--jsx' is not set.
+
 import LeftLoader from '../UI/LeftLoader';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout, LineStackLayout } from '../UI/Layout';
 import {
   isUsernameValid,
   UsernameField,
   usernameFormatErrorMessage,
   usernameAvailabilityErrorMessage,
-// @ts-expect-error - TS6142 - Module './UsernameField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/UsernameField.tsx', but '--jsx' is not set.
 } from './UsernameField';
-// @ts-expect-error - TS6142 - Module '../UI/TextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextField.tsx', but '--jsx' is not set.
+
 import TextField from '../UI/TextField';
-// @ts-expect-error - TS6142 - Module '../UI/Checkbox' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Checkbox.tsx', but '--jsx' is not set.
+
 import Checkbox from '../UI/Checkbox';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
-// @ts-expect-error - TS6142 - Module '../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../UI/TextButton';
 import useAlertDialog from '../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS6142 - Module '../UI/Form' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Form.tsx', but '--jsx' is not set.
+
 import Form from '../UI/Form';
 
 type Props = {
-  profile: Profile,
-  subscription: Subscription | null | undefined,
-  onClose: () => void,
-  onEdit: (form: EditForm) => Promise<void>,
-  onDelete: () => Promise<void>,
-  actionInProgress: boolean,
-  error: AuthError | null | undefined
+  profile: Profile;
+  subscription: Subscription | null | undefined;
+  onClose: () => void;
+  onEdit: (form: EditForm) => Promise<void>;
+  onDelete: () => Promise<void>;
+  actionInProgress: boolean;
+  error: AuthError | null | undefined;
 };
 
 export const getUsernameErrorText = (error?: AuthError | null) => {
@@ -77,19 +74,17 @@ const CommunityLinkLine = ({
   disabled,
   translatableHintText,
 }: {
-  id: CommunityLinkType,
-  value: string,
-  onChange: (e: any, value: string) => void,
-  disabled: boolean,
-  translatableHintText?: string
+  id: CommunityLinkType;
+  value: string;
+  onChange: (e: any, value: string) => void;
+  disabled: boolean;
+  translatableHintText?: string;
 }) => {
   const config = communityLinksConfig[id];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <LineStackLayout noMargin alignItems="center">
       {config.icon}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <TextField
         value={value}
         fullWidth
@@ -103,7 +98,7 @@ const CommunityLinkLine = ({
         }
         maxLength={config.maxLength}
         startAdornment={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           config.prefix ? <Text noMargin>{config.prefix}</Text> : undefined
         }
       />
@@ -120,7 +115,7 @@ const EditProfileDialog = ({
   actionInProgress,
   error,
 }: Props) => {
-// @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showDeleteConfirmation, showAlert } = useAlertDialog();
 
   const communityLinks = profile.communityLinks || {};
@@ -168,28 +163,27 @@ const EditProfileDialog = ({
   const [getNewsletterEmail, setGetNewsletterEmail] = React.useState(
     !!profile.getNewsletterEmail
   );
-  const [
-    usernameAvailability,
-    setUsernameAvailability,
-  ] = React.useState<UsernameAvailability | null | undefined>(null);
-  const [
-    isValidatingUsername,
-    setIsValidatingUsername,
-  ] = React.useState<boolean>(false);
+  const [usernameAvailability, setUsernameAvailability] = React.useState<
+    UsernameAvailability | null | undefined
+  >(null);
+  const [isValidatingUsername, setIsValidatingUsername] =
+    React.useState<boolean>(false);
 
-  const personalWebsiteError = communityLinksConfig.personalWebsiteLink.getFormattingError(
-    personalWebsiteLink
-  );
-  const personalWebsite2Error = communityLinksConfig.personalWebsite2Link.getFormattingError(
-    personalWebsite2Link
-  );
-  const discordServerLinkError = communityLinksConfig.discordServerLink.getFormattingError(
-    discordServerLink
-  );
+  const personalWebsiteError =
+    communityLinksConfig.personalWebsiteLink.getFormattingError(
+      personalWebsiteLink
+    );
+  const personalWebsite2Error =
+    communityLinksConfig.personalWebsite2Link.getFormattingError(
+      personalWebsite2Link
+    );
+  const discordServerLinkError =
+    communityLinksConfig.discordServerLink.getFormattingError(
+      discordServerLink
+    );
   const donateLinkError = donateLinkConfig.getFormattingError(donateLink);
-  const tiktokUsernameError = communityLinksConfig.tiktokUsername.getFormattingError(
-    tiktokUsername
-  );
+  const tiktokUsernameError =
+    communityLinksConfig.tiktokUsername.getFormattingError(tiktokUsername);
 
   const hasFormattingError =
     personalWebsiteError ||
@@ -264,20 +258,16 @@ const EditProfileDialog = ({
   );
 
   const actions = [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Back</Trans>}
       disabled={actionInProgress}
       key="back"
       primary={false}
       onClick={onClose}
     />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <LeftLoader isLoading={actionInProgress} key="edit">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <DialogPrimaryButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         label={<Trans>Save</Trans>}
         primary
         disabled={!canEdit}
@@ -287,9 +277,7 @@ const EditProfileDialog = ({
   ];
 
   const secondaryActions = [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <TextButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Delete my account</Trans>}
       disabled={actionInProgress}
       key="delete"
@@ -298,13 +286,9 @@ const EditProfileDialog = ({
   ];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Dialog
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>Edit your GDevelop profile</Trans>}
           actions={actions}
           secondaryActions={secondaryActions}
@@ -314,15 +298,12 @@ const EditProfileDialog = ({
           onApply={edit}
           open
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+          {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Form onSubmit={edit} autoComplete="on" name="editProfile">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <UsernameField
                 initialUsername={profile.username}
                 value={username}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onChange={(e, value) => {
                   setUsername(value);
                 }}
@@ -332,14 +313,12 @@ const EditProfileDialog = ({
                 isValidatingUsername={isValidatingUsername}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TextField
                 value={discordUsername}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 floatingLabelText={<Trans>Discord username</Trans>}
                 fullWidth
                 translatableHintText={t`Your Discord username`}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onChange={(e, value) => {
                   setDiscordUsername(value);
                 }}
@@ -349,17 +328,15 @@ const EditProfileDialog = ({
                   t`Add your Discord username to get access to a dedicated channel if you have a Gold or Pro subscription! Join the [GDevelop Discord](https://discord.gg/gdevelop).`
                 )}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TextField
                 value={description}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 floatingLabelText={<Trans>Bio</Trans>}
                 fullWidth
                 multiline
                 rows={3}
                 rowsMax={5}
                 translatableHintText={t`What are you using GDevelop for?`}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onChange={(e, value) => {
                   setDescription(value);
                 }}
@@ -367,7 +344,6 @@ const EditProfileDialog = ({
                 floatingLabelFixed
                 maxLength={10000}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="personalWebsiteLink"
                 value={personalWebsiteLink}
@@ -377,7 +353,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="personalWebsite2Link"
                 value={personalWebsite2Link}
@@ -387,7 +362,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="twitterUsername"
                 value={twitterUsername}
@@ -397,7 +371,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="facebookUsername"
                 value={facebookUsername}
@@ -407,7 +380,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="youtubeUsername"
                 value={youtubeUsername}
@@ -417,7 +389,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="tiktokUsername"
                 value={tiktokUsername}
@@ -427,7 +398,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="instagramUsername"
                 value={instagramUsername}
@@ -437,7 +407,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="redditUsername"
                 value={redditUsername}
@@ -447,7 +416,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="snapchatUsername"
                 value={snapchatUsername}
@@ -457,7 +425,6 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CommunityLinkLine
                 id="discordServerLink"
                 value={discordServerLink}
@@ -467,14 +434,12 @@ const EditProfileDialog = ({
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <TextField
                 value={donateLink}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 floatingLabelText={<Trans>Donate link</Trans>}
                 fullWidth
                 translatableHintText={t`Do you have a Patreon? Ko-fi? Paypal?`}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onChange={(e, value) => {
                   setDonateLink(value);
                 }}
@@ -486,25 +451,23 @@ const EditProfileDialog = ({
                 errorText={donateLinkError}
                 maxLength={donateLinkConfig.maxLength}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>I want to receive the GDevelop Newsletter</Trans>}
                 checked={getNewsletterEmail}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(e, value) => {
                   setGetNewsletterEmail(value);
                 }}
                 disabled={actionInProgress}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+              {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Checkbox
                 label={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Trans>I want to receive weekly stats about my games</Trans>
                 }
                 checked={getGameStatsEmail}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
+                // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                 onCheck={(e, value) => {
                   setGetGameStatsEmail(value);
                 }}

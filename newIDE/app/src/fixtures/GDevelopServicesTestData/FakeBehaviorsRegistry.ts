@@ -1,13 +1,15 @@
-import {BehaviorsRegistry} from '../../Utils/GDevelopServices/Extension';
+import { BehaviorsRegistry } from '../../Utils/GDevelopServices/Extension';
 import { BehaviorShortHeader } from '../../Utils/GDevelopServices/Extension';
 
 export const fakeBehaviorsRegistry: BehaviorsRegistry & {
   // The service gives CSV but it's converted on the fly to an array.
   // The type attribute is evaluated from extensionName and name.
-  headers: Array<BehaviorShortHeader & {
-    tags: any,
-    type: any
-  }>
+  headers: Array<
+    BehaviorShortHeader & {
+      tags: any;
+      type: any;
+    }
+  >;
 } = {
   views: {
     default: {
@@ -24,7 +26,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
     },
   },
   headers: [
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 4 more ...; type: null; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 4 more ...; type: null; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['IWykYNRvhCZBN3vEgKEbBPOR3Oc2'],
@@ -46,7 +48,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       allRequiredBehaviorTypes: [],
       type: null,
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['wWP8BSlAW0UP4NeaHa2LcmmDzmH2'],
@@ -79,7 +81,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [
@@ -123,7 +125,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 4 more ...; type: null; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 4 more ...; type: null; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['wWP8BSlAW0UP4NeaHa2LcmmDzmH2'],
@@ -145,7 +147,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       allRequiredBehaviorTypes: [],
       type: null,
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['2OwwM8ToR9dx9RJ2sAKTcrLmCB92'],
@@ -177,7 +179,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['2OwwM8ToR9dx9RJ2sAKTcrLmCB92'],
@@ -209,7 +211,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [
@@ -254,7 +256,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['IWykYNRvhCZBN3vEgKEbBPOR3Oc2'],
@@ -286,7 +288,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: ['IWykYNRvhCZBN3vEgKEbBPOR3Oc2'],
@@ -319,7 +321,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [
@@ -330,12 +332,10 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       fullName: 'Platformer multitouch controller mapper',
       name: 'PlatformerMultitouchMapper',
       version: '1.2.2',
-      url:
-        'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick.json',
+      url: 'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick.json',
       headerUrl:
         'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick-header.json',
-      tags:
-        'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
+      tags: 'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
       category: 'Input',
       previewIconUrl:
         'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Videogames/Videogames_controller_joystick_arrows_direction.svg',
@@ -366,7 +366,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [
@@ -377,12 +377,10 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       fullName: 'Top-down multitouch controller mapper',
       name: 'TopDownMultitouchMapper',
       version: '1.2.2',
-      url:
-        'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick.json',
+      url: 'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick.json',
       headerUrl:
         'https://resources.gdevelop-app.com/extensions/SpriteMultitouchJoystick-header.json',
-      tags:
-        'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
+      tags: 'multitouch,joystick,thumbstick,controller,touchscreen,twin stick,shooter,virtual',
       category: 'Input',
       previewIconUrl:
         'https://resources.gdevelop-app.com/assets/Icons/Line Hero Pack/Master/SVG/Videogames/Videogames_controller_joystick_arrows_direction.svg',
@@ -412,7 +410,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [
@@ -457,7 +455,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: never[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: never[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "reviewed"; authorIds: never[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: never[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'reviewed',
       authorIds: [],
@@ -480,7 +478,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
       type: null,
       authors: [],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'community',
       authorIds: [
@@ -525,7 +523,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'community',
       authorIds: [
@@ -570,7 +568,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'community',
       authorIds: [
@@ -615,7 +613,7 @@ export const fakeBehaviorsRegistry: BehaviorsRegistry & {
         },
       ],
     },
-// @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
+    // @ts-expect-error - TS2322 - Type '{ tier: "community"; authorIds: string[]; extensionNamespace: string; fullName: string; name: string; version: string; url: string; headerUrl: string; tags: string; category: string; previewIconUrl: string; ... 5 more ...; authors: { ...; }[]; }' is not assignable to type 'ExtensionRegistryItemHeader & { description: string; extensionName: string; objectType: string; allRequiredBehaviorTypes: string[]; type: string; } & { ...; }'.
     {
       tier: 'community',
       authorIds: [

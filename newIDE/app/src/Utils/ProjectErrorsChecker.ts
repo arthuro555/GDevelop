@@ -1,19 +1,17 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { t } from '@lingui/macro';
+
 import { I18n as I18nType } from '@lingui/core';
 import { showErrorBox } from '../UI/Messages/MessageBox';
 import values from 'lodash/values';
-const gd: libGDevelop = global.gd;
 
 export type ProjectError = {
-  type: 'error' | 'warning',
-  message: string,
-  extraExplanation: string
+  type: 'error' | 'warning';
+  message: string;
+  extraExplanation: string;
 };
 
 export type ProjectErrors = {
-  [key: string]: Array<ProjectError>
+  [key: string]: Array<ProjectError>;
 };
 
 export const validatePackageName = (packageName: string) => {
@@ -25,7 +23,10 @@ export const validatePackageName = (packageName: string) => {
 /**
  * Check if there is any blocking error in the project properties.
  */
-export const getProjectPropertiesErrors = (i18n: I18nType, project: gdProject): ProjectErrors => {
+export const getProjectPropertiesErrors = (
+  i18n: I18nType,
+  project: gd.Project
+): ProjectErrors => {
   const errors: ProjectErrors = {};
 
   const addError = (
@@ -89,7 +90,10 @@ export const getProjectPropertiesErrors = (i18n: I18nType, project: gdProject): 
   return errors;
 };
 
-export const displayProjectErrorsBox = (i18n: I18nType, errors: ProjectErrors): boolean => {
+export const displayProjectErrorsBox = (
+  i18n: I18nType,
+  errors: ProjectErrors
+): boolean => {
   if (!Object.keys(errors).length) return true;
 
   showErrorBox({
@@ -99,7 +103,7 @@ export const displayProjectErrorsBox = (i18n: I18nType, errors: ProjectErrors): 
       ) +
       '\n\n' +
       values(errors)
-        .map(errors =>
+        .map((errors) =>
           errors.map((error: ProjectError) => `- ${error.message}`).join('\n')
         )
         .join('\n'),
@@ -119,17 +123,17 @@ export const displayProjectErrorsBox = (i18n: I18nType, errors: ProjectErrors): 
  * be stored and shown in the editor).
  * See https://trello.com/c/IiLgNR16/462-add-a-diagnostic-report-to-warn-about-potential-issues-in-the-game-and-show-them-in-the-events-sheet
  */
-export const findAndLogProjectPreviewErrors = (project: gdProject) => {
-  const problems = gd.WholeProjectRefactorer.findInvalidRequiredBehaviorProperties(
-    project
-  );
+export const findAndLogProjectPreviewErrors = (project: gd.Project) => {
+  const problems =
+    gd.WholeProjectRefactorer.findInvalidRequiredBehaviorProperties(project);
   for (let index = 0; index < problems.size(); index++) {
     const problem = problems.at(index);
 
-    const suggestedBehaviorNames = gd.WholeProjectRefactorer.getBehaviorsWithType(
-      problem.getSourceObject(),
-      problem.getExpectedBehaviorTypeName()
-    ).toJSArray();
+    const suggestedBehaviorNames =
+      gd.WholeProjectRefactorer.getBehaviorsWithType(
+        problem.getSourceObject(),
+        problem.getExpectedBehaviorTypeName()
+      ).toJSArray();
 
     console.error(
       `Invalid value for required behavior property "${problem.getSourcePropertyName()}" in object ${problem
@@ -139,9 +143,9 @@ export const findAndLogProjectPreviewErrors = (project: gdProject) => {
         .getName()}.`
     );
     console.info(
-      `Expected behavior of type ${problem.getExpectedBehaviorTypeName()}. Possibles values are: ${suggestedBehaviorNames.join(
-        ', '
-      ) || '(none)'}.`
+      `Expected behavior of type ${problem.getExpectedBehaviorTypeName()}. Possibles values are: ${
+        suggestedBehaviorNames.join(', ') || '(none)'
+      }.`
     );
   }
 };

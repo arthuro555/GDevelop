@@ -1,11 +1,17 @@
-import {formatISO, parseISO, differenceInCalendarDays, subDays, addDays} from 'date-fns';
+import {
+  formatISO,
+  parseISO,
+  differenceInCalendarDays,
+  subDays,
+  addDays,
+} from 'date-fns';
 import { GameMetrics } from '../Utils/GDevelopServices/Analytics';
 
 export type MergedGameMetrics = GameMetrics & {
   /**
    * The start date is not defined when only one day is merged.
    */
-  startDate: string | null
+  startDate: string | null;
 };
 
 /**
@@ -18,27 +24,27 @@ export const daysShownForYear = 364;
  */
 type ChartData = {
   overview: {
-    viewersCount: number,
-    playersCount: number,
-    bounceRatePercent: number,
-    meanPlayedDurationInMinutes: number,
+    viewersCount: number;
+    playersCount: number;
+    bounceRatePercent: number;
+    meanPlayedDurationInMinutes: number;
     /**
      * @see findNearestToMedianDurationIndex
      */
     nearestToMedianDuration: {
-      playersCount: number,
-      playersPercent: number,
-      durationInMinutes: number
-    },
+      playersCount: number;
+      playersPercent: number;
+      durationInMinutes: number;
+    };
     /**
      * @see findGreaterDurationPlayerIndex
      */
     greaterDurationPlayerSurface: {
-      playersCount: number,
-      playersPercent: number,
-      durationInMinutes: number
-    }
-  },
+      playersCount: number;
+      playersPercent: number;
+      durationInMinutes: number;
+    };
+  };
   /**
    * Metrics for each day of a month or each week of a year.
    */
@@ -46,43 +52,43 @@ type ChartData = {
     /**
      * It's used to sort the data.
      */
-    timestamp: number,
-    date: string,
-    playersCount: number,
-    viewersCount: number,
-    meanPlayedDurationInMinutes: number,
-    bounceRatePercent: number,
-    over60sPlayersCount: number,
-    over180sPlayersCount: number,
-    over300sPlayersCount: number,
-    over600sPlayersCount: number,
-    over900sPlayersCount: number,
-    below60sPlayersCount: number,
-    from60sTo180sPlayersCount: number,
-    from180sTo300sPlayersCount: number,
-    from300sTo600sPlayersCount: number,
-    from600sTo900sPlayersCount: number,
-    from900sToInfinityPlayersCount: number,
-    over0sPlayersPercent: number,
-    over60sPlayersPercent: number,
-    over180sPlayersPercent: number,
-    over300sPlayersPercent: number,
-    over600sPlayersPercent: number,
-    over900sPlayersPercent: number,
-    below60sPlayersPercent: number,
-    from60sTo180sPlayersPercent: number,
-    from180sTo300sPlayersPercent: number,
-    from300sTo600sPlayersPercent: number,
-    from600sTo900sPlayersPercent: number,
-    from900sToInfinityPlayersPercent: number
-  }[],
+    timestamp: number;
+    date: string;
+    playersCount: number;
+    viewersCount: number;
+    meanPlayedDurationInMinutes: number;
+    bounceRatePercent: number;
+    over60sPlayersCount: number;
+    over180sPlayersCount: number;
+    over300sPlayersCount: number;
+    over600sPlayersCount: number;
+    over900sPlayersCount: number;
+    below60sPlayersCount: number;
+    from60sTo180sPlayersCount: number;
+    from180sTo300sPlayersCount: number;
+    from300sTo600sPlayersCount: number;
+    from600sTo900sPlayersCount: number;
+    from900sToInfinityPlayersCount: number;
+    over0sPlayersPercent: number;
+    over60sPlayersPercent: number;
+    over180sPlayersPercent: number;
+    over300sPlayersPercent: number;
+    over600sPlayersPercent: number;
+    over900sPlayersPercent: number;
+    below60sPlayersPercent: number;
+    from60sTo180sPlayersPercent: number;
+    from180sTo300sPlayersPercent: number;
+    from300sTo600sPlayersPercent: number;
+    from600sTo900sPlayersPercent: number;
+    from900sToInfinityPlayersPercent: number;
+  }[];
   /**
    * A funnel of the remaining players after a given played duration.
    */
   overPlayedDuration: {
-    duration: number,
-    playersCount: number
-  }[]
+    duration: number;
+    playersCount: number;
+  }[];
 };
 
 const emptyChartData: ChartData = {
@@ -107,7 +113,7 @@ const emptyChartData: ChartData = {
 };
 
 const durationIndexes: {
-  [key: string]: number
+  [key: string]: number;
 } = {
   for1Minute: 0,
   for3Minutes: 1,
@@ -143,7 +149,10 @@ const createZeroesMetric = (date: Date): GameMetrics => {
  * @param gameMetrics concise game metrics from the backend (today first)
  * @returns game metrics with a metric for each 364 past days (today first).
  */
-const fillMissingDays = (gameMetrics: Array<GameMetrics>, todayDate: Date): Array<GameMetrics> => {
+const fillMissingDays = (
+  gameMetrics: Array<GameMetrics>,
+  todayDate: Date
+): Array<GameMetrics> => {
   const filledGameMetrics: Array<GameMetrics> = [];
   // TODO In some timezones, it might start the wrong day.
   let previousMetricDate = addDays(todayDate, 1);
@@ -181,7 +190,10 @@ const fillMissingDays = (gameMetrics: Array<GameMetrics>, todayDate: Date): Arra
  * @param b
  * @returns the sum for each metric or `undefined` when one side is `undefined`
  */
-const mergeGameMetrics = (a: GameMetrics, b: GameMetrics): MergedGameMetrics => {
+const mergeGameMetrics = (
+  a: GameMetrics,
+  b: GameMetrics
+): MergedGameMetrics => {
   return {
     date: a.date,
     startDate: b.date,
@@ -238,7 +250,9 @@ const mergeGameMetrics = (a: GameMetrics, b: GameMetrics): MergedGameMetrics => 
  * @returns metrics summed by weeks
  * @see mergeGameMetrics
  */
-const mergeGameMetricsByWeek = (gameMetrics: GameMetrics[]): MergedGameMetrics[] => {
+const mergeGameMetricsByWeek = (
+  gameMetrics: GameMetrics[]
+): MergedGameMetrics[] => {
   const mergedGameMetrics: Array<MergedGameMetrics> = [];
   for (let weekIndex = 0; weekIndex < gameMetrics.length; weekIndex += 7) {
     let mergedGameMetric = gameMetrics[weekIndex];
@@ -249,7 +263,7 @@ const mergeGameMetricsByWeek = (gameMetrics: GameMetrics[]): MergedGameMetrics[]
     ) {
       mergedGameMetric = mergeGameMetrics(mergedGameMetric, gameMetrics[index]);
     }
-    mergedGameMetrics.push((mergedGameMetric as MergedGameMetrics));
+    mergedGameMetrics.push(mergedGameMetric as MergedGameMetrics);
   }
   return mergedGameMetrics;
 };
@@ -261,7 +275,10 @@ const mergeGameMetricsByWeek = (gameMetrics: GameMetrics[]): MergedGameMetrics[]
  * The real median would be hard to process for the backend,
  * so we rely on this.
  */
-const findNearestToMedianDurationIndex = (playersBelowSums: Array<number>, playersCount: number): number => {
+const findNearestToMedianDurationIndex = (
+  playersBelowSums: Array<number>,
+  playersCount: number
+): number => {
   const overMedianDurationIndex = playersBelowSums.findIndex(
     (value, index) => index > 0 && value > playersCount / 2
   );
@@ -281,7 +298,10 @@ const findNearestToMedianDurationIndex = (playersBelowSums: Array<number>, playe
  * It allows to know which point of the curve from
  * `ChartData.overPlayedDuration` is the most impressive one.
  */
-const findGreaterDurationPlayerIndex = (playersBelowSums: Array<number>, viewersCount: number): number => {
+const findGreaterDurationPlayerIndex = (
+  playersBelowSums: Array<number>,
+  viewersCount: number
+): number => {
   let durationPlayerMax = 0;
   let greaterDurationPlayerIndex = 0;
   for (let index = 0; index < playersBelowSums.length; index++) {
@@ -297,7 +317,10 @@ const findGreaterDurationPlayerIndex = (playersBelowSums: Array<number>, viewers
   return greaterDurationPlayerIndex;
 };
 
-const evaluatePlayersOverDurationPercent = (playersBelowDuration: number | null | undefined, playersCount: number): number => {
+const evaluatePlayersOverDurationPercent = (
+  playersBelowDuration: number | null | undefined,
+  playersCount: number
+): number => {
   return playersBelowDuration != null && playersCount > 0
     ? (100 * (playersCount - playersBelowDuration)) / playersCount
     : 0;
@@ -306,7 +329,7 @@ const evaluatePlayersOverDurationPercent = (playersBelowDuration: number | null 
 const evaluatePlayersBetweenDurationPercent = (
   playersBelowUpperDuration: number | null | undefined,
   playersBelowLowerDuration: number | null | undefined,
-  playersCount: number,
+  playersCount: number
 ): number => {
   return playersBelowUpperDuration != null &&
     playersBelowLowerDuration != null &&
@@ -332,7 +355,7 @@ const evaluateChartData = (metrics: MergedGameMetrics[]): ChartData => {
   let onlyFullyDefinedPlayersSum = 0;
   let playedDurationSumInMinutes = 0;
 
-  metrics.forEach(metric => {
+  metrics.forEach((metric) => {
     const d0SessionsDurationTotal =
       metric.sessions && metric.sessions.d0SessionsDurationTotal !== null
         ? metric.sessions.d0SessionsDurationTotal
@@ -448,7 +471,7 @@ const evaluateChartData = (metrics: MergedGameMetrics[]): ChartData => {
       },
     },
     overTime: metrics
-      .map(metric => {
+      .map((metric) => {
         const d0SessionsDurationTotal =
           metric.sessions && metric.sessions.d0SessionsDurationTotal !== null
             ? metric.sessions.d0SessionsDurationTotal
@@ -565,18 +588,19 @@ const evaluateChartData = (metrics: MergedGameMetrics[]): ChartData => {
             d0PlayersBelow600s,
             d0Players
           ),
-          from900sToInfinityPlayersPercent: evaluatePlayersBetweenDurationPercent(
-            d0Players,
-            d0PlayersBelow900s,
-            d0Players
-          ),
+          from900sToInfinityPlayersPercent:
+            evaluatePlayersBetweenDurationPercent(
+              d0Players,
+              d0PlayersBelow900s,
+              d0Players
+            ),
         };
       })
       .sort((a, b) => a.timestamp - b.timestamp),
     overPlayedDuration: [
       { duration: 0, playersCount: onlyFullyDefinedPlayersSum },
     ].concat(
-      Object.keys(durationIndexes).map(name => {
+      Object.keys(durationIndexes).map((name) => {
         const durationIndex = durationIndexes[name];
         return {
           duration: durationValues[durationIndex],
@@ -593,9 +617,12 @@ const evaluateChartData = (metrics: MergedGameMetrics[]): ChartData => {
  * @returns enriched game metrics that are ready to be used in a chart
  * (today at last).
  */
-export const buildChartData = (gameMetrics?: Array<GameMetrics> | null, todayDate: Date = new Date()): {
-  yearChartData: ChartData,
-  monthChartData: ChartData
+export const buildChartData = (
+  gameMetrics?: Array<GameMetrics> | null,
+  todayDate: Date = new Date()
+): {
+  yearChartData: ChartData;
+  monthChartData: ChartData;
 } => {
   if (!gameMetrics) {
     return {
@@ -616,7 +643,7 @@ export const buildChartData = (gameMetrics?: Array<GameMetrics> | null, todayDat
     monthChartData: evaluateChartData(
       filledGameRollingMetrics
         .slice(0, 30)
-        .map(metric => (({ ...metric, startDate: null } as MergedGameMetrics)))
+        .map((metric) => ({ ...metric, startDate: null }) as MergedGameMetrics)
     ),
   };
 };

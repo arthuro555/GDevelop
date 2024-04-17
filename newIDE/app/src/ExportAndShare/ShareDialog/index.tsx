@@ -1,43 +1,55 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans, t} from '@lingui/macro';
+import { Trans, t } from '@lingui/macro';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog from '../../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../../UI/HelpButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/HelpButton/index.tsx', but '--jsx' is not set.
+
 import HelpButton from '../../UI/HelpButton';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../Builds/BuildsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/Builds/BuildsDialog.tsx', but '--jsx' is not set.
+
 import BuildsDialog from '../Builds/BuildsDialog';
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module './PublishHome' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/ShareDialog/PublishHome.tsx', but '--jsx' is not set.
+
 import PublishHome from './PublishHome';
 import { ExportPipeline } from '../ExportPipeline.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/Tabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Tabs.tsx', but '--jsx' is not set.
+
 import { Tabs } from '../../UI/Tabs';
-// @ts-expect-error - TS6142 - Module './InviteHome' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/ShareDialog/InviteHome.tsx', but '--jsx' is not set.
+
 import InviteHome from './InviteHome';
 import { getGame, Game } from '../../Utils/GDevelopServices/Game';
 import { useResponsiveWindowSize } from '../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../../UI/TextButton';
 import useAlertDialog from '../../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS6142 - Module '../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../../MainFrame/Preferences/PreferencesContext';
 import { FileMetadata, StorageProvider } from '../../ProjectsStorage';
 import { useOnlineStatus } from '../../Utils/OnlineStatus';
-// @ts-expect-error - TS6142 - Module '../../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../../UI/ErrorBoundary';
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
-// @ts-expect-error - TS6142 - Module '../../GameDashboard/GameRegistration' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/GameRegistration.tsx', but '--jsx' is not set.
+
 import { GameAvailabilityError } from '../../GameDashboard/GameRegistration';
 
 export type ShareTab = 'invite' | 'publish';
 export type ExporterSection = 'browser' | 'desktop' | 'android' | 'ios';
 export type ExporterSubSection = 'online' | 'offline' | 'facebook';
-export type ExporterKey = 'onlinewebexport' | 'onlineelectronexport' | 'onlinecordovaexport' | 'onlinecordovaiosexport' | 'webexport' | 'facebookinstantgamesexport' | 'electronexport' | 'cordovaexport';
+export type ExporterKey =
+  | 'onlinewebexport'
+  | 'onlineelectronexport'
+  | 'onlinecordovaexport'
+  | 'onlinecordovaiosexport'
+  | 'webexport'
+  | 'facebookinstantgamesexport'
+  | 'electronexport'
+  | 'cordovaexport';
 
-const exporterSectionMapping: Partial<Record<ExporterSection, Partial<Record<ExporterSubSection, ExporterKey | null | undefined>>>> = {
+const exporterSectionMapping: Partial<
+  Record<
+    ExporterSection,
+    Partial<Record<ExporterSubSection, ExporterKey | null | undefined>>
+  >
+> = {
   browser: {
     online: 'onlinewebexport',
     offline: 'webexport',
@@ -61,44 +73,44 @@ const exporterSectionMapping: Partial<Record<ExporterSection, Partial<Record<Exp
 };
 
 export type Exporter = {
-  name: React.ReactNode,
-  tabName: React.ReactNode,
-  helpPage: string,
-  disabled?: boolean,
-  key: ExporterKey,
-  exportPipeline: ExportPipeline<any, any, any, any, any>
+  name: React.ReactNode;
+  tabName: React.ReactNode;
+  helpPage: string;
+  disabled?: boolean;
+  key: ExporterKey;
+  exportPipeline: ExportPipeline<any, any, any, any, any>;
 };
 
 export type ShareDialogWithoutExportsProps = {
-  project: gdProject | null | undefined,
-  onSaveProject: () => Promise<void>,
-  isSavingProject: boolean,
-  onClose: () => void,
-  onChangeSubscription: () => void,
-  initialTab: ShareTab | null | undefined,
-  fileMetadata: FileMetadata | null | undefined,
-  storageProvider: StorageProvider
+  project: gd.Project | null | undefined;
+  onSaveProject: () => Promise<void>;
+  isSavingProject: boolean;
+  onClose: () => void;
+  onChangeSubscription: () => void;
+  initialTab: ShareTab | null | undefined;
+  fileMetadata: FileMetadata | null | undefined;
+  storageProvider: StorageProvider;
 };
 
-type Props = (ShareDialogWithoutExportsProps) & {
+type Props = ShareDialogWithoutExportsProps & {
   /**
    * Use `null` to hide automated exporters.
    * It should be used with manualExporters set to `null` as well.
    */
-  automatedExporters: Array<Exporter> | null | undefined,
+  automatedExporters: Array<Exporter> | null | undefined;
   /**
    * Use `null` to hide manual exporters.
    * It should be used with automatedExporters set to `null` as well.
    */
-  manualExporters: Array<Exporter> | null | undefined,
+  manualExporters: Array<Exporter> | null | undefined;
   // GDevelop's game platform exporter.
-  onlineWebExporter: Exporter,
+  onlineWebExporter: Exporter;
   /**
    * If true, all exporters will be disabled if the user is offline.
    * This is mainly helpful on browser, where we need to download resources
    * before exporting.
    */
-  allExportersRequireOnline?: boolean
+  allExportersRequireOnline?: boolean;
 };
 
 const ShareDialog = ({
@@ -116,40 +128,37 @@ const ShareDialog = ({
   storageProvider,
 }: Props) => {
   const { isMobile } = useResponsiveWindowSize();
-  const {
-    setShareDialogDefaultTab,
-    getShareDialogDefaultTab,
-  } = React.useContext(PreferencesContext);
-  const [currentTab, setCurrentTab] = React.useState<ShareTab>(initialTab || getShareDialogDefaultTab());
+  const { setShareDialogDefaultTab, getShareDialogDefaultTab } =
+    React.useContext(PreferencesContext);
+  const [currentTab, setCurrentTab] = React.useState<ShareTab>(
+    initialTab || getShareDialogDefaultTab()
+  );
   const showOnlineWebExporterOnly = !automatedExporters && !manualExporters;
-  const [
-    chosenExporterSection,
-    setChosenExporterSection,
-  ] = React.useState<ExporterSection | null | undefined>(showOnlineWebExporterOnly ? 'browser' : null);
-  const [
-    chosenExporterSubSection,
-    setChosenExporterSubSection,
-  ] = React.useState<ExporterSubSection | null | undefined>(showOnlineWebExporterOnly ? 'online' : null);
+  const [chosenExporterSection, setChosenExporterSection] = React.useState<
+    ExporterSection | null | undefined
+  >(showOnlineWebExporterOnly ? 'browser' : null);
+  const [chosenExporterSubSection, setChosenExporterSubSection] =
+    React.useState<ExporterSubSection | null | undefined>(
+      showOnlineWebExporterOnly ? 'online' : null
+    );
 
-  React.useEffect(() => setShareDialogDefaultTab(currentTab), [
-    setShareDialogDefaultTab,
-    currentTab,
-  ]);
+  React.useEffect(
+    () => setShareDialogDefaultTab(currentTab),
+    [setShareDialogDefaultTab, currentTab]
+  );
   const isOnline = useOnlineStatus();
 
-  const [buildsDialogOpen, setBuildsDialogOpen] = React.useState<boolean>(false);
-  const [
-    isNavigationDisabled,
-    setIsNavigationDisabled,
-  ] = React.useState<boolean>(false);
+  const [buildsDialogOpen, setBuildsDialogOpen] =
+    React.useState<boolean>(false);
+  const [isNavigationDisabled, setIsNavigationDisabled] =
+    React.useState<boolean>(false);
   const [game, setGame] = React.useState<Game | null | undefined>(null);
-  const [
-    gameAvailabilityError,
-    setGameAvailabilityError,
-  ] = React.useState<GameAvailabilityError | null | undefined>(null);
+  const [gameAvailabilityError, setGameAvailabilityError] = React.useState<
+    GameAvailabilityError | null | undefined
+  >(null);
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
   const { profile, getAuthorizationHeader } = authenticatedUser;
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
 
   const openBuildDialog = () => {
@@ -159,8 +168,8 @@ const ShareDialog = ({
         gameAvailabilityError === 'not-found'
           ? t`Register or publish your game first to see its exports.`
           : gameAvailabilityError === 'not-owned'
-          ? t`You are not the owner of this game, ask the owner to add you as an owner to see its exports.`
-          : t`Either this game is not registered or you are not its owner, so you cannot see its builds.`;
+            ? t`You are not the owner of this game, ask the owner to add you as an owner to see its exports.`
+            : t`Either this game is not registered or you are not its owner, so you cannot see its builds.`;
 
       showAlert({
         title,
@@ -171,47 +180,40 @@ const ShareDialog = ({
     setBuildsDialogOpen(true);
   };
 
-  const loadGame = React.useCallback(
-    async () => {
-      if (!profile || !project) return;
+  const loadGame = React.useCallback(async () => {
+    if (!profile || !project) return;
 
-      const { id } = profile;
-      try {
-        setGameAvailabilityError(null);
-        const game = await getGame(
-          getAuthorizationHeader,
-          id,
-          project.getProjectUuid()
-        );
-        setGame(game);
-      } catch (error: any) {
-        console.error('Unable to load the game', error);
-        const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-          error
-        );
-        if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
-          setGameAvailabilityError('not-found');
-          return;
-        }
-        if (extractedStatusAndCode && extractedStatusAndCode.status === 403) {
-          setGameAvailabilityError('not-owned');
-          return;
-        }
-        setGameAvailabilityError('unexpected');
+    const { id } = profile;
+    try {
+      setGameAvailabilityError(null);
+      const game = await getGame(
+        getAuthorizationHeader,
+        id,
+        project.getProjectUuid()
+      );
+      setGame(game);
+    } catch (error) {
+      console.error('Unable to load the game', error);
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(error);
+      if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
+        setGameAvailabilityError('not-found');
+        return;
       }
-    },
-    [project, getAuthorizationHeader, profile]
-  );
+      if (extractedStatusAndCode && extractedStatusAndCode.status === 403) {
+        setGameAvailabilityError('not-owned');
+        return;
+      }
+      setGameAvailabilityError('unexpected');
+    }
+  }, [project, getAuthorizationHeader, profile]);
 
-  React.useEffect(
-    () => {
-      // Load game only once.
-      if (!game) {
-        loadGame();
-      }
-    },
-    [loadGame, game]
-  );
+  React.useEffect(() => {
+    // Load game only once.
+    if (!game) {
+      loadGame();
+    }
+  }, [loadGame, game]);
 
   const exporters = React.useMemo(
     () => [
@@ -222,29 +224,24 @@ const ShareDialog = ({
     [automatedExporters, manualExporters, onlineWebExporter]
   );
 
-  const exporter: Exporter | null | undefined = React.useMemo(
-    () => {
-      if (!chosenExporterSection) return null;
-      if (!chosenExporterSubSection) return null;
+  const exporter: Exporter | null | undefined = React.useMemo(() => {
+    if (!chosenExporterSection) return null;
+    if (!chosenExporterSubSection) return null;
 
-      const exporterKey =
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'.
-        exporterSectionMapping[chosenExporterSection][chosenExporterSubSection];
-      const chosenExporter = exporters.find(
-        exporter => exporter.key === exporterKey
-      );
+    const exporterKey =
+      // @ts-expect-error - TS2532 - Object is possibly 'undefined'.
+      exporterSectionMapping[chosenExporterSection][chosenExporterSubSection];
+    const chosenExporter = exporters.find(
+      (exporter) => exporter.key === exporterKey
+    );
 
-      return chosenExporter || null;
-    },
-    [chosenExporterSection, chosenExporterSubSection, exporters]
-  );
+    return chosenExporter || null;
+  }, [chosenExporterSection, chosenExporterSubSection, exporters]);
 
   if (!project) return null;
 
   const mainActions = [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Close</Trans>}
       key="close"
       primary={false}
@@ -257,14 +254,12 @@ const ShareDialog = ({
     currentTab === 'publish'
       ? [
           exporter ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <HelpButton key="help" helpPagePath={exporter.helpPage} />
           ) : null,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <TextButton
             key="exports"
             label={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               isMobile ? <Trans>Exports</Trans> : <Trans>See all exports</Trans>
             }
             onClick={openBuildDialog}
@@ -272,7 +267,6 @@ const ShareDialog = ({
           />,
         ].filter(Boolean)
       : [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <HelpButton
             key="help"
             helpPagePath="/collaboration/invite-collaborators"
@@ -280,34 +274,31 @@ const ShareDialog = ({
         ];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Dialog
       // Keep ID for backward compatibility with guided lessons.
       id="export-dialog"
       maxWidth={'md'}
       minHeight={'lg'}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>Share</Trans>}
       actions={mainActions}
       secondaryActions={secondaryActions}
       onRequestClose={onClose}
       open
       fixedContent={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tabs
           value={currentTab}
           onChange={setCurrentTab}
           options={[
             {
               value: 'publish',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               label: <Trans>Publish</Trans>,
               id: 'publish-tab',
               disabled: isNavigationDisabled,
             },
             {
               value: 'invite',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               label: <Trans>Invite</Trans>,
               id: 'invite-tab',
               disabled: isNavigationDisabled,
@@ -318,7 +309,6 @@ const ShareDialog = ({
       flexColumnBody
     >
       {currentTab === 'invite' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <InviteHome
           cloudProjectId={
             storageProvider.internalName === 'Cloud' && fileMetadata
@@ -328,7 +318,6 @@ const ShareDialog = ({
         />
       )}
       {currentTab === 'publish' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <PublishHome
           project={project}
           onSaveProject={onSaveProject}
@@ -349,7 +338,6 @@ const ShareDialog = ({
         />
       )}
       {game && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <BuildsDialog
           open={buildsDialogOpen}
           onClose={() => setBuildsDialogOpen(false)}
@@ -363,14 +351,11 @@ const ShareDialog = ({
 };
 
 const ShareDialogWithErrorBoundary = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     componentTitle={<Trans>Share dialog</Trans>}
     scope="export-and-share"
     onClose={props.onClose}
   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <ShareDialog {...props} />
   </ErrorBoundary>
 );

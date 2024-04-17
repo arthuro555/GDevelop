@@ -1,4 +1,3 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from './OptionalRequire';
 const remote = optionalRequire('@electron/remote');
 const process = optionalRequire('process');
@@ -13,9 +12,10 @@ const _isMacLike =
     ? true
     : false;
 
-const _isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-  typeof navigator !== 'undefined' ? navigator.userAgent : ''
-);
+const _isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    typeof navigator !== 'undefined' ? navigator.userAgent : ''
+  );
 
 export const getUserAgent = (): string => {
   return typeof navigator !== 'undefined'

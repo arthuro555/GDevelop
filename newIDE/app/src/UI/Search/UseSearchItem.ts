@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './FiltersChooser' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/FiltersChooser.tsx', but '--jsx' is not set.
+
 import { ChosenCategory } from './FiltersChooser';
 import shuffle from 'lodash/shuffle';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'js-worker-search'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/js-worker-search/dist/js-worker-search.js' implicitly has an 'any' type.
@@ -12,17 +12,23 @@ import {
 import {
   PrivateAssetPackListingData,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/Shop';
 
-type SearchableItem = AssetShortHeader | PublicAssetPack | Resource | PrivateAssetPackListingData | PrivateGameTemplateListingData;
+type SearchableItem =
+  | AssetShortHeader
+  | PublicAssetPack
+  | Resource
+  | PrivateAssetPackListingData
+  | PrivateGameTemplateListingData;
 
 export interface SearchFilter<SearchItem> {
   getPertinence(searchItem: SearchItem): number;
   hasFilters(): boolean;
 }
 
-export class TagSearchFilter<SearchItem extends AssetShortHeader | Resource> implements SearchFilter<SearchItem> {
+export class TagSearchFilter<SearchItem extends AssetShortHeader | Resource>
+  implements SearchFilter<SearchItem>
+{
   tags: Set<string>;
 
   constructor(tags: Set<string> = new Set()) {
@@ -31,7 +37,7 @@ export class TagSearchFilter<SearchItem extends AssetShortHeader | Resource> imp
 
   getPertinence(searchItem: SearchItem): number {
     return this.tags.size === 0 ||
-      searchItem.tags.some(tag => this.tags.has(tag))
+      searchItem.tags.some((tag) => this.tags.has(tag))
       ? 1
       : 0;
   }
@@ -54,7 +60,7 @@ export const partialQuickSort = <Element extends any>(
   searchItems: Array<Element>,
   getValue: (a: Element) => number,
   valueMin: number,
-  valueMax: number,
+  valueMax: number
 ): void => {
   if (valueMin >= valueMax) {
     // All values are the same.
@@ -118,16 +124,16 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
   searchItems?: Array<SearchItem> | null,
   chosenCategory?: ChosenCategory | null,
   chosenFilters?: Set<string> | null,
-  searchFilters?: Array<SearchFilter<SearchItem>>,
+  searchFilters?: Array<SearchFilter<SearchItem>>
 ): Array<SearchItem> | null | undefined => {
   if (!searchItems) return null;
 
   const startTime = performance.now();
   // TODO do only one call to filter for efficiency.
   const filteredSearchItems = searchItems
-    .filter(searchItem => {
+    .filter((searchItem) => {
       if (!chosenCategory) return true;
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
+      // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
       if (chosenCategory && !searchItem.tags) {
         // TODO: If the item has no tags, it's a Public or Private pack.
         // We don't have information about the tags present in the pack yet, so
@@ -139,10 +145,10 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
         // If the chosen category is a container of tags, not a real tag, then
         // skip checking if the item has it.
         chosenCategory.node.isTagContainerOnly ||
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
+        // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
         (searchItem.tags &&
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
-          searchItem.tags.some(tag => tag === chosenCategory.node.name));
+          // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
+          searchItem.tags.some((tag) => tag === chosenCategory.node.name));
       if (!hasChosenCategoryTag) return false; // Item is not in the selected category
       for (const parentNode of chosenCategory.parentNodes) {
         if (parentNode.isTagContainerOnly) {
@@ -152,27 +158,27 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
         }
 
         const hasParentCategoryTag =
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
+          // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
           searchItem.tags &&
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
-          searchItem.tags.some(tag => tag === parentNode.name);
+          // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
+          searchItem.tags.some((tag) => tag === parentNode.name);
         if (!hasParentCategoryTag) return false; // Item is not in the parent(s) of the selected category
       }
 
       return true;
     })
-    .filter(searchItem => {
+    .filter((searchItem) => {
       return (
         !chosenFilters ||
         chosenFilters.size === 0 ||
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
+        // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'.
         (searchItem.tags &&
-// @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
-          searchItem.tags.some(tag => chosenFilters.has(tag))) ||
-// @ts-expect-error - TS2339 - Property 'categories' does not exist on type 'SearchItem'.
+          // @ts-expect-error - TS2339 - Property 'tags' does not exist on type 'SearchItem'. | TS7006 - Parameter 'tag' implicitly has an 'any' type.
+          searchItem.tags.some((tag) => chosenFilters.has(tag))) ||
+        // @ts-expect-error - TS2339 - Property 'categories' does not exist on type 'SearchItem'.
         (searchItem.categories &&
-// @ts-expect-error - TS2339 - Property 'categories' does not exist on type 'SearchItem'. | TS7006 - Parameter 'category' implicitly has an 'any' type.
-          searchItem.categories.some(category => chosenFilters.has(category)))
+          // @ts-expect-error - TS2339 - Property 'categories' does not exist on type 'SearchItem'. | TS7006 - Parameter 'category' implicitly has an 'any' type.
+          searchItem.categories.some((category) => chosenFilters.has(category)))
       );
     });
 
@@ -181,7 +187,7 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
     let pertinenceMin = 1;
     let pertinenceMax = 0;
     const weightedSearchItems = filteredSearchItems
-      .map(searchItem => {
+      .map((searchItem) => {
         let pertinence = 1;
         for (const searchFilter of searchFilters) {
           pertinence *= searchFilter.getPertinence(searchItem);
@@ -196,12 +202,12 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
       .filter(Boolean);
     partialQuickSort(
       weightedSearchItems,
-      weightedSearchItem => weightedSearchItem.pertinence,
+      (weightedSearchItem) => weightedSearchItem.pertinence,
       pertinenceMin,
       pertinenceMax
     );
     sortedSearchItems = weightedSearchItems.map(
-      weightedSearchItem => weightedSearchItem.searchItem
+      (weightedSearchItem) => weightedSearchItem.searchItem
     );
   }
 
@@ -223,147 +229,142 @@ export const filterSearchItems = <SearchItem extends SearchableItem>(
  * won't block the main thread.
  */
 export const useSearchItem = <SearchItem extends SearchableItem>(
-  searchItemsById: {
-    [key: string]: SearchItem
-  } | null | undefined,
+  searchItemsById:
+    | {
+        [key: string]: SearchItem;
+      }
+    | null
+    | undefined,
   getItemDescription: (arg1: SearchItem) => string,
   searchText: string,
   chosenCategory?: ChosenCategory | null,
   chosenFilters?: Set<string> | null,
-  searchFilters?: Array<SearchFilter<SearchItem>>,
+  searchFilters?: Array<SearchFilter<SearchItem>>
 ): Array<SearchItem> | null | undefined => {
   const searchApiRef = React.useRef<any | null | undefined>(null);
-  const [searchResults, setSearchResults] = React.useState<Array<SearchItem> | null | undefined>(null);
+  const [searchResults, setSearchResults] = React.useState<
+    Array<SearchItem> | null | undefined
+  >(null);
 
   // Keep in memory a list of all the items, shuffled for
   // easing random discovery of items when no search is done.
-  const shuffledSearchItems: Array<SearchItem> | null | undefined = React.useMemo(
-    () => {
+  const shuffledSearchItems: Array<SearchItem> | null | undefined =
+    React.useMemo(() => {
       if (!searchItemsById) return null;
 
       return shuffle(
-        Object.keys(searchItemsById).map(id => searchItemsById[id])
+        Object.keys(searchItemsById).map((id) => searchItemsById[id])
       );
-    },
-    [searchItemsById]
-  );
-  const sortedSearchItems: Array<SearchItem> | null | undefined = React.useMemo(
-    () => {
+    }, [searchItemsById]);
+  const sortedSearchItems: Array<SearchItem> | null | undefined =
+    React.useMemo(() => {
       if (!searchItemsById) return null;
 
-      return Object.keys(searchItemsById).map(id => searchItemsById[id]);
-    },
-    [searchItemsById]
-  );
+      return Object.keys(searchItemsById).map((id) => searchItemsById[id]);
+    }, [searchItemsById]);
 
   // Index items that have been loaded.
-  React.useEffect(
-    () => {
-      if (!searchItemsById) {
-        // Nothing to index - yet.
-        return;
-      }
+  React.useEffect(() => {
+    if (!searchItemsById) {
+      // Nothing to index - yet.
+      return;
+    }
 
-      const startTime = performance.now();
-      if (searchApiRef.current) {
-        searchApiRef.current.terminate();
-        searchApiRef.current = null;
-      }
+    const startTime = performance.now();
+    if (searchApiRef.current) {
+      searchApiRef.current.terminate();
+      searchApiRef.current = null;
+    }
 
-      try {
-        const newSearchApi = new SearchApi();
-        const allIds = Object.keys(searchItemsById);
+    try {
+      const newSearchApi = new SearchApi();
+      const allIds = Object.keys(searchItemsById);
 
-        allIds.forEach(id => {
-          const searchItem = searchItemsById[id];
-          newSearchApi.indexDocument(id, getItemDescription(searchItem));
-        });
+      allIds.forEach((id) => {
+        const searchItem = searchItemsById[id];
+        newSearchApi.indexDocument(id, getItemDescription(searchItem));
+      });
 
-        const totalTime = performance.now() - startTime;
-        console.info(
-          `Indexed ${allIds.length} items in ${totalTime.toFixed(3)}ms.`
-        );
-        searchApiRef.current = newSearchApi;
-      } catch (error: any) {
-        console.error('Error while indexing items: ', error);
-      }
-    },
-    [searchItemsById, getItemDescription]
-  );
+      const totalTime = performance.now() - startTime;
+      console.info(
+        `Indexed ${allIds.length} items in ${totalTime.toFixed(3)}ms.`
+      );
+      searchApiRef.current = newSearchApi;
+    } catch (error) {
+      console.error('Error while indexing items: ', error);
+    }
+  }, [searchItemsById, getItemDescription]);
 
   // Update the search results according to the items, search term
   // chosen category and chosen filters.
   const searchApi = searchApiRef.current;
-  React.useEffect(
-    () => {
-      let discardSearch = false;
-      if (!searchText) {
-        setSearchResults(
-          filterSearchItems(
-            chosenCategory ? sortedSearchItems : shuffledSearchItems,
-            chosenCategory,
-            chosenFilters,
-            searchFilters
-          )
+  React.useEffect(() => {
+    let discardSearch = false;
+    if (!searchText) {
+      setSearchResults(
+        filterSearchItems(
+          chosenCategory ? sortedSearchItems : shuffledSearchItems,
+          chosenCategory,
+          chosenFilters,
+          searchFilters
+        )
+      );
+    } else {
+      if (!searchItemsById || !searchApi) {
+        console.info(
+          'Search for items skipped because items are not ready - will be retried when ready'
         );
-      } else {
-        if (!searchItemsById || !searchApi) {
-          console.info(
-            'Search for items skipped because items are not ready - will be retried when ready'
-          );
-          return;
-        }
-
-        const startTime = performance.now();
-        searchApi
-          .search(searchText)
-          .then((partialSearchResultIds: Array<string>) => {
-            if (discardSearch) {
-              console.info(
-                'Discarding search results as a new search was launched.'
-              );
-              return;
-            }
-
-            const partialSearchResults = partialSearchResultIds
-              .map(id => searchItemsById[id])
-              .filter(Boolean);
-
-            const totalTime = performance.now() - startTime;
-            console.info(
-              `Found ${
-                partialSearchResults.length
-              } items in ${totalTime.toFixed(3)}ms.`
-            );
-
-            setSearchResults(
-              filterSearchItems(
-                partialSearchResults,
-                chosenCategory,
-                chosenFilters,
-                searchFilters
-              )
-            );
-          });
+        return;
       }
 
-      return () => {
-        // Effect is being destroyed - meaning that a new search was launched.
-        // Cancel this one.
-        discardSearch = true;
-      };
-    },
-    [
-      shuffledSearchItems,
-      sortedSearchItems,
-      searchItemsById,
-      searchText,
-      chosenCategory,
-      chosenFilters,
-      searchFilters,
-      searchApi,
-    ]
-  );
+      const startTime = performance.now();
+      searchApi
+        .search(searchText)
+        .then((partialSearchResultIds: Array<string>) => {
+          if (discardSearch) {
+            console.info(
+              'Discarding search results as a new search was launched.'
+            );
+            return;
+          }
+
+          const partialSearchResults = partialSearchResultIds
+            .map((id) => searchItemsById[id])
+            .filter(Boolean);
+
+          const totalTime = performance.now() - startTime;
+          console.info(
+            `Found ${
+              partialSearchResults.length
+            } items in ${totalTime.toFixed(3)}ms.`
+          );
+
+          setSearchResults(
+            filterSearchItems(
+              partialSearchResults,
+              chosenCategory,
+              chosenFilters,
+              searchFilters
+            )
+          );
+        });
+    }
+
+    return () => {
+      // Effect is being destroyed - meaning that a new search was launched.
+      // Cancel this one.
+      discardSearch = true;
+    };
+  }, [
+    shuffledSearchItems,
+    sortedSearchItems,
+    searchItemsById,
+    searchText,
+    chosenCategory,
+    chosenFilters,
+    searchFilters,
+    searchApi,
+  ]);
 
   return searchResults;
 };

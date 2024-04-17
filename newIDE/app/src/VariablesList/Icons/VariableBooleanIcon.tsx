@@ -3,10 +3,8 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 type Props = Record<any, any>;
 
-export default React.memo<Props>(props => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+export default React.memo<Props>((props) => (
   <SvgIcon {...props} viewBox="0 0 17 7">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <path
       fill="none"
       d="M9.5 3.5L11.8824 6L16 1"
@@ -15,7 +13,6 @@ export default React.memo<Props>(props => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <path
       fill="none"
       d="M1 1L6 6M6 1L1 6"

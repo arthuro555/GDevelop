@@ -1,5 +1,4 @@
-// @ts-expect-error - TS6142 - Module './UserSurvey' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/GetStartedSection/UserSurvey.tsx', but '--jsx' is not set.
-import {UserAnswers} from './UserSurvey';
+import { UserAnswers } from './UserSurvey';
 const localStoreUserSurveyKey = 'gd-user-survey';
 const TEN_MINUTES = 10 * 60 * 1000;
 
@@ -17,15 +16,15 @@ export const getRecentPersistedState = () => {
       return null;
     }
     return state;
-  } catch (error: any) {
+  } catch (error) {
     console.log('An error occurred when reading local storage:', error);
     return null;
   }
 };
 
 export const persistState = (state: {
-  userAnswers: UserAnswers,
-  questionId: string
+  userAnswers: UserAnswers;
+  questionId: string;
 }) => {
   try {
     localStorage.setItem(
@@ -35,7 +34,7 @@ export const persistState = (state: {
         lastModifiedAt: Date.now(),
       })
     );
-  } catch (error: any) {
+  } catch (error) {
     console.log(
       'An error occurred when storing user survey in local storage:',
       error
@@ -46,7 +45,7 @@ export const persistState = (state: {
 export const clearUserSurveyPersistedState = () => {
   try {
     localStorage.removeItem(localStoreUserSurveyKey);
-  } catch (error: any) {
+  } catch (error) {
     console.log(
       'An error occurred when clearing user survey in local storage:',
       error
@@ -57,7 +56,7 @@ export const clearUserSurveyPersistedState = () => {
 export const hasStartedUserSurvey = () => {
   try {
     return localStorage.hasOwnProperty(localStoreUserSurveyKey);
-  } catch (error: any) {
+  } catch (error) {
     console.log(
       'An error occurred when checking for user survey persisted state in local storage:',
       error

@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar from '../../UI/SearchBar';
-// @ts-expect-error - TS6142 - Module '../../UI/Search/FiltersChooser' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/FiltersChooser.tsx', but '--jsx' is not set.
+
 import { useFilters } from '../../UI/Search/FiltersChooser';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout } from '../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
 
 export default {
@@ -21,11 +20,8 @@ export default {
 const Vanilla = () => {
   const [value, setValue] = React.useState<string>('');
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -38,11 +34,8 @@ const Vanilla = () => {
 const WithPlaceholder = () => {
   const [value, setValue] = React.useState<string>('');
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -54,13 +47,12 @@ const WithPlaceholder = () => {
 };
 
 const Disabled = () => {
-  const [value, setValue] = React.useState<string>('something typed in disabled field');
+  const [value, setValue] = React.useState<string>(
+    'something typed in disabled field'
+  );
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -74,11 +66,8 @@ const Disabled = () => {
 const Integrated = () => {
   const [value, setValue] = React.useState<string>('');
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -93,11 +82,8 @@ const Integrated = () => {
 const WithHelpIcon = () => {
   const [value, setValue] = React.useState<string>('');
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -112,11 +98,8 @@ const WithHelpIcon = () => {
 const WithMenu = () => {
   const [value, setValue] = React.useState<string>('');
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -151,11 +134,8 @@ const WithTags = () => {
   const [value, setValue] = React.useState<string>('');
   const filtersState = useFilters();
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -176,11 +156,8 @@ const WithTagsAndHelp = () => {
   const [value, setValue] = React.useState<string>('');
   const filtersState = useFilters();
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Text>Value in state is: "{value}".</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SearchBar
         value={value}
         onChange={setValue}
@@ -199,23 +176,14 @@ const WithTagsAndHelp = () => {
 };
 
 export const AllOptions = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Vanilla />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <WithPlaceholder />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Disabled />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Integrated />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <WithHelpIcon />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <WithMenu />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <WithTags />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <WithTagsAndHelp />
   </ColumnStackLayout>
 );

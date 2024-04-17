@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import assignIn from 'lodash/assignIn';
 import { findGDJS } from '../../GameEngineFinder/BrowserS3GDJSFinder';
@@ -16,7 +16,7 @@ import {
   ExportPipeline,
   ExportPipelineContext,
 } from '../ExportPipeline.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
 import {
   BlobDownloadUrlHolder,
@@ -26,34 +26,37 @@ import {
   ExplanationHeader,
   DoneFooter,
   ExportFlow,
-// @ts-expect-error - TS6142 - Module '../GenericExporters/FacebookInstantGamesExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/FacebookInstantGamesExport.tsx', but '--jsx' is not set.
 } from '../GenericExporters/FacebookInstantGamesExport';
-
-const gd: libGDevelop = global.gd;
 
 type ExportState = null;
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  abstractFileSystem: BrowserFileSystem,
-  outputDir: string
+  exporter: gdjsExporter;
+  abstractFileSystem: BrowserFileSystem;
+  outputDir: string;
 };
 
 type ExportOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  urlFiles: Array<UrlFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  blobFiles: Array<BlobFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  blobFiles: Array<BlobFileDescriptor>;
 };
 
 type CompressionOutput = Blob;
 
 const exportPipelineName = 'browser-facebook-instant-games';
 
-export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const browserFacebookInstantGamesExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
 
   getInitialExportState: () => null,
@@ -62,15 +65,15 @@ export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportSta
 
   isNavigationDisabled: () => false,
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   renderHeader: () => <ExplanationHeader />,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
     return findGDJS('facebook-instant-games').then(
       ({ gdjsRoot, filesContent }) => {
         console.info('GDJS found in ', gdjsRoot);
@@ -97,15 +100,11 @@ export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportSta
 
   launchExport: (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      outputDir,
-      abstractFileSystem,
-    }: PreparedExporter,
+    { exporter, outputDir, abstractFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const { project } = context;
     const exportOptions = new gd.ExportOptions(project, outputDir);
@@ -128,15 +127,12 @@ export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportSta
 
   launchResourcesDownload: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      urlFiles,
-    }: ExportOutput,
+    { textFiles, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     return downloadUrlFilesToBlobFiles({
       urlFiles,
       onProgress: context.updateStepProgress,
-    }).then(blobFiles => ({
+    }).then((blobFiles) => ({
       blobFiles,
       textFiles,
     }));
@@ -144,10 +140,7 @@ export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportSta
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      blobFiles,
-    }: ResourcesDownloadOutput,
+    { textFiles, blobFiles }: ResourcesDownloadOutput
   ): Promise<Blob> => {
     return archiveFiles({
       blobFiles,
@@ -159,19 +152,15 @@ export const browserFacebookInstantGamesExportPipeline: ExportPipeline<ExportSta
 
   renderDoneFooter: ({ compressionOutput, exportState }) => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DoneFooter
         renderGameButton={() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <BlobDownloadUrlHolder blob={compressionOutput}>
-            {blobDownloadUrl => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            {(blobDownloadUrl) => (
               <RaisedButton
                 primary
                 onClick={() =>
                   openBlobDownloadUrl(blobDownloadUrl, 'fb-instant-game.zip')
                 }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Download the Instant Game archive</Trans>}
               />
             )}

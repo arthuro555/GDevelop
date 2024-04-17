@@ -1,18 +1,18 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {Trans, t} from '@lingui/macro';
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../../../../UI/EmptyMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyMessage.tsx', but '--jsx' is not set.
+
 import EmptyMessage from '../../../../UI/EmptyMessage';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line, Column } from '../../../../UI/Grid';
 import { mapFor } from '../../../../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module './PointsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/PointsEditor/PointsList.tsx', but '--jsx' is not set.
+
 import PointsList from './PointsList';
-// @ts-expect-error - TS6142 - Module './PointsPreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/PointsEditor/PointsPreview.tsx', but '--jsx' is not set.
+
 import PointsPreview from './PointsPreview';
 import ImagePreview, {
   isProjectImageResourceSmooth,
-// @ts-expect-error - TS6142 - Module '../../../../ResourcesList/ResourcePreview/ImagePreview' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourcePreview/ImagePreview.tsx', but '--jsx' is not set.
+
 } from '../../../../ResourcesList/ResourcePreview/ImagePreview';
 import {
   getCurrentElements,
@@ -20,19 +20,19 @@ import {
   copyAnimationsSpritePoints,
   allObjectSpritesHaveSamePointsAs,
 } from '../Utils/SpriteObjectHelper';
-// @ts-expect-error - TS6142 - Module '../Utils/SpriteSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/SpriteEditor/Utils/SpriteSelector.tsx', but '--jsx' is not set.
+
 import SpriteSelector from '../Utils/SpriteSelector';
 import ResourcesLoader from '../../../../ResourcesLoader';
 import useForceUpdate from '../../../../Utils/UseForceUpdate';
 import EditorMosaic, {
   Editor,
   EditorMosaicNode,
-// @ts-expect-error - TS6142 - Module '../../../../UI/EditorMosaic' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/index.tsx', but '--jsx' is not set.
+
 } from '../../../../UI/EditorMosaic';
 import { useResponsiveWindowSize } from '../../../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../../../../UI/ScrollView';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../../../UI/Paper';
 import useAlertDialog from '../../../../UI/Alert/useAlertDialog';
 
@@ -62,9 +62,9 @@ const verticalMosaicNodes: EditorMosaicNode = {
 };
 
 type Props = {
-  animations: gdSpriteAnimationList,
+  animations: gd.SpriteAnimationList,
   resourcesLoader: typeof ResourcesLoader,
-  project: gdProject,
+  project: gd.Project,
   onPointsUpdated?: () => void,
   onRenamedPoint: (oldName: string, newName: string) => void
 };
@@ -113,7 +113,7 @@ const PointsEditor = ({
     (samePointsForAnimations: boolean, samePointsForSprites: boolean) => {
       if (animation && sprite) {
         if (samePointsForAnimations) {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
+
           mapFor(0, animations.getAnimationsCount(), i => {
             const otherAnimation = animations.getAnimation(i);
             copyAnimationsSpritePoints(sprite, otherAnimation);
@@ -220,11 +220,9 @@ const PointsEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Paper background="medium" style={styles.leftContainer} square>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand useFullHeight>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ImagePreview
               resourceName={resourceName}
               imageResourceSource={resourcesLoader.getResourceFullUrl(
@@ -237,10 +235,10 @@ const PointsEditor = ({
                 resourceName
               )}
               onImageSize={setCurrentSpriteSize}
-// @ts-expect-error - TS7006 - Parameter 'overlayProps' implicitly has an 'any' type.
+
               renderOverlay={overlayProps =>
                 sprite && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <PointsPreview
                     {...overlayProps}
                     pointsContainer={sprite}
@@ -266,15 +264,11 @@ const PointsEditor = ({
       noTitleBar: true,
       noSoftKeyboardAvoidance: true,
       renderEditor: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <Paper background="medium" style={styles.rightContainer} square>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <SpriteSelector
                   animations={animations}
                   animationIndex={animationIndex}
@@ -288,11 +282,11 @@ const PointsEditor = ({
                   setSameForAllAnimations={setSamePointsForAllAnimations}
                   setSameForAllSprites={setSamePointsForAllSprites}
                   setSameForAllAnimationsLabel={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <Trans>Share same points for all animations</Trans>
                   }
                   setSameForAllSpritesLabel={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <Trans>
                       Share same points for all sprites of this animation
                     </Trans>
@@ -300,10 +294,9 @@ const PointsEditor = ({
                 />
               </Column>
             </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ScrollView>
               {!!sprite && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <PointsList
                   pointsContainer={sprite}
                   onPointsUpdated={() =>
@@ -317,9 +310,8 @@ const PointsEditor = ({
                 />
               )}
               {!sprite && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <EmptyMessage>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Trans>
                     Choose an animation and frame to edit the points
                   </Trans>
@@ -337,7 +329,7 @@ const PointsEditor = ({
       <EditorMosaic editors={editors} initialNodes={editorNodes} />
     </div>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default PointsEditor;

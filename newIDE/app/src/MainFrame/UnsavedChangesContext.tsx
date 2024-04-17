@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 export type UnsavedChanges = {
-  hasUnsavedChanges: boolean,
-  sealUnsavedChanges: () => void,
-  triggerUnsavedChanges: () => void
+  hasUnsavedChanges: boolean;
+  sealUnsavedChanges: () => void;
+  triggerUnsavedChanges: () => void;
 };
 
 const initialState: UnsavedChanges = {
@@ -17,11 +17,12 @@ const UnsavedChangesContext = React.createContext<UnsavedChanges>(initialState);
 export default UnsavedChangesContext;
 
 type Props = {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 };
 
 export const UnsavedChangesContextProvider = (props: Props) => {
-  const [hasUnsavedChanges, setHasUnsavedChanges] = React.useState<boolean>(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] =
+    React.useState<boolean>(false);
   const triggerUnsavedChanges = (): void => {
     if (!hasUnsavedChanges) setHasUnsavedChanges(true);
   };
@@ -31,7 +32,6 @@ export const UnsavedChangesContextProvider = (props: Props) => {
   };
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <UnsavedChangesContext.Provider
       value={{
         hasUnsavedChanges,

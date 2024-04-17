@@ -1,15 +1,15 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t, Trans } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/ChevronArrowLeft'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowLeft.js' implicitly has an 'any' type.
+
 import ChevronArrowLeft from '../UI/CustomSvgIcons/ChevronArrowLeft';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Tune'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Tune.js' implicitly has an 'any' type.
+
 import Tune from '../UI/CustomSvgIcons/Tune';
-// @ts-expect-error - TS6142 - Module '../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar from '../UI/SearchBar';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../UI/ScrollView';
 import Window from '../Utils/Window';
 import {
@@ -29,56 +29,56 @@ import {
 import {
   PrivateAssetPackListingData,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 } from '../Utils/GDevelopServices/Shop';
-// @ts-expect-error - TS6142 - Module '../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import { SearchBarInterface } from '../UI/SearchBar';
-// @ts-expect-error - TS6142 - Module './AssetStoreFilterPanel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreFilterPanel.tsx', but '--jsx' is not set.
+
 import { AssetStoreFilterPanel } from './AssetStoreFilterPanel';
-// @ts-expect-error - TS6142 - Module './AssetStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreContext.tsx', but '--jsx' is not set.
+
 import { AssetStoreContext } from './AssetStoreContext';
 import { useResponsiveWindowSize } from '../UI/Responsive/ResponsiveWindowMeasurer';
 import { useShouldAutofocusInput } from '../UI/Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module '../UI/Subheader' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Subheader.tsx', but '--jsx' is not set.
+
 import Subheader from '../UI/Subheader';
-// @ts-expect-error - TS6142 - Module './AssetsHome' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetsHome.tsx', but '--jsx' is not set.
+
 import { AssetsHome, AssetsHomeInterface } from './AssetsHome';
-// @ts-expect-error - TS6142 - Module '../UI/TextButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextButton.tsx', but '--jsx' is not set.
+
 import TextButton from '../UI/TextButton';
-// @ts-expect-error - TS6142 - Module '../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../UI/IconButton';
-// @ts-expect-error - TS6142 - Module './AssetDetails' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetDetails.tsx', but '--jsx' is not set.
+
 import { AssetDetails, AssetDetailsInterface } from './AssetDetails';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../UI/PlaceholderLoader';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Home'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Home.js' implicitly has an 'any' type.
+
 import Home from '../UI/CustomSvgIcons/Home';
-// @ts-expect-error - TS6142 - Module './PrivateAssets/PrivateAssetPackInformationPage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateAssets/PrivateAssetPackInformationPage.tsx', but '--jsx' is not set.
+
 import PrivateAssetPackInformationPage from './PrivateAssets/PrivateAssetPackInformationPage';
-// @ts-expect-error - TS6142 - Module '../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../UI/PlaceholderError';
-// @ts-expect-error - TS6142 - Module '../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../UI/AlertMessage';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { LineStackLayout } from '../UI/Layout';
 import {
   isHomePage,
   isSearchResultPage,
   AssetStorePageState,
 } from './AssetStoreNavigator';
-// @ts-expect-error - TS6142 - Module '../UI/ResponsivePaperOrDrawer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ResponsivePaperOrDrawer.tsx', but '--jsx' is not set.
+
 import { ResponsivePaperOrDrawer } from '../UI/ResponsivePaperOrDrawer';
-// @ts-expect-error - TS6142 - Module './AssetsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetsList.tsx', but '--jsx' is not set.
+
 import AssetsList, { AssetsListInterface } from './AssetsList';
-// @ts-expect-error - TS6142 - Module './PrivateAssets/PrivateAssetPackAudioFilesDownloadButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateAssets/PrivateAssetPackAudioFilesDownloadButton.tsx', but '--jsx' is not set.
+
 import PrivateAssetPackAudioFilesDownloadButton from './PrivateAssets/PrivateAssetPackAudioFilesDownloadButton';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
 import { capitalize } from 'lodash';
-// @ts-expect-error - TS6142 - Module './PrivateGameTemplates/PrivateGameTemplateInformationPage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateInformationPage.tsx', but '--jsx' is not set.
+
 import PrivateGameTemplateInformationPage from './PrivateGameTemplates/PrivateGameTemplateInformationPage';
-// @ts-expect-error - TS6142 - Module './PrivateGameTemplates/PrivateGameTemplateStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateStoreContext.tsx', but '--jsx' is not set.
+
 import { PrivateGameTemplateStoreContext } from './PrivateGameTemplates/PrivateGameTemplateStoreContext';
 
 type Props = {
@@ -118,8 +118,8 @@ const identifyAssetPackKind = ({
     : 'unknown';
 };
 
-// @ts-expect-error - TS2345 - Argument of type '({ hideGameTemplates, displayPromotions, onOpenPrivateGameTemplateListingData, }: Props, ref: ForwardedRef<Props>) => Element' is not assignable to parameter of type 'ForwardRefRenderFunction<Props, AssetStoreInterface>'.
-export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
+
+export const AssetStore = React.forwardRef<AssetStoreInterface, Props>((
   {
     hideGameTemplates,
     displayPromotions,
@@ -293,7 +293,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
     [isOnHomePage, applyBackScrollPosition, currentPage]
   );
 
-// @ts-expect-error - TS2559 - Type '{ onClose: () => void; }' has no properties in common with type 'Props'.
+
   React.useImperativeHandle(ref, () => ({
     onClose: saveScrollPosition,
   }));
@@ -477,7 +477,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
         receivedAssetPacks.find(pack => pack.tag === tag);
       const publicAssetPack =
         publicAssetPacks &&
-// @ts-expect-error - TS7006 - Parameter 'pack' implicitly has an 'any' type.
+
         publicAssetPacks.starterPacks.find(pack => pack.tag === tag);
       saveScrollPosition();
       setSearchText('');
@@ -530,12 +530,12 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
 
       return privateAssetPackListingDatas
         .filter(
-// @ts-expect-error - TS7006 - Parameter 'pack' implicitly has an 'any' type.
+
           pack =>
             pack.sellerId === openedPrivateAssetPackListingData.sellerId &&
             !receivedAssetPackIds.includes(pack.sellerId)
         )
-// @ts-expect-error - TS7006 - Parameter 'pack1' implicitly has an 'any' type. | TS7006 - Parameter 'pack2' implicitly has an 'any' type.
+
         .sort((pack1, pack2) => pack1.name.localeCompare(pack2.name));
     },
     [
@@ -560,13 +560,13 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
 
       return privateGameTemplateListingDatas
         .filter(
-// @ts-expect-error - TS7006 - Parameter 'template' implicitly has an 'any' type.
+
           template =>
             template.sellerId ===
               openedPrivateGameTemplateListingData.sellerId &&
             !receivedGameTemplateIds.includes(template.sellerId)
         )
-// @ts-expect-error - TS7006 - Parameter 'template1' implicitly has an 'any' type. | TS7006 - Parameter 'template2' implicitly has an 'any' type.
+
         .sort((template1, template2) =>
           template1.name.localeCompare(template2.name)
         );
@@ -579,11 +579,9 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <Column expand noMargin useFullHeight noOverflowParent id="asset-store">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <IconButton
           id="home-button"
           key="back-discover"
@@ -597,12 +595,9 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
           }}
           size="small"
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Home />
         </IconButton>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Column expand useFullHeight noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SearchBar
             placeholder={
               hideGameTemplates ? t`Search assets` : `Search the shop`
@@ -630,33 +625,26 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
             id="asset-store-search-bar"
           />
         </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <IconButton
           onClick={() => setIsFiltersPanelOpen(!isFiltersPanelOpen)}
           disabled={!canShowFiltersPanel}
           selected={canShowFiltersPanel && isFiltersPanelOpen}
           size="small"
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Tune />
         </IconButton>
       </LineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line justifyContent="space-between" noMargin alignItems="center">
           {(!isOnHomePage || !!openedShopCategory) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column expand alignItems="flex-start" noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <TextButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   icon={<ChevronArrowLeft />}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   label={<Trans>Back</Trans>}
                   onClick={async () => {
                     const page = shopNavigationState.backToPreviousPage();
@@ -678,13 +666,12 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
               {(openedAssetPack ||
                 openedPrivateAssetPackListingData ||
                 filtersState.chosenCategory) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <>
                   {!openedAssetPack && !openedPrivateAssetPackListingData && (
                     // Only show the category name if we're not on an asset pack page.
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                     <Column expand alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Text size="block-title" noMargin>
                         {filtersState.chosenCategory
                           ? capitalize(filtersState.chosenCategory.node.name)
@@ -692,7 +679,6 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
                       </Text>
                     </Column>
                   )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Column
                     expand
                     alignItems="flex-end"
@@ -703,7 +689,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
                     openedAssetPack.content &&
                     doesAssetPackContainAudio(openedAssetPack) &&
                     !isAssetPackAudioOnly(openedAssetPack) ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       <PrivateAssetPackAudioFilesDownloadButton
                         assetPack={openedAssetPack}
                       />
@@ -715,7 +701,6 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
           )}
         </Line>
       </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Line
         expand
         noMargin
@@ -727,9 +712,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
           storeError ? (
 // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <PlaceholderError onRetry={fetchAssetsAndGameTemplates}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AlertMessage kind="error">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   An error occurred when fetching the store content. Please
                   try again later.
@@ -739,7 +722,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
           ) : publicAssetPacks &&
             privateAssetPackListingDatas &&
             privateGameTemplateListingDatas ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <AssetsHome
               ref={assetsHome}
               publicAssetPacks={publicAssetPacks}
@@ -756,11 +739,11 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
               displayPromotions={displayPromotions}
             />
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <PlaceholderLoader />
           )
         ) : isOnSearchResultPage ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <AssetsList
             publicAssetPacks={publicAssetPacksSearchResults}
             privateAssetPackListingDatas={
@@ -781,7 +764,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
             currentPage={shopNavigationState.getCurrentPage()}
           />
         ) : openedAssetShortHeader ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <AssetDetails
             ref={assetDetails}
             onTagSelection={selectTag}
@@ -792,7 +775,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
             onPrivateGameTemplateSelection={selectPrivateGameTemplate}
           />
         ) : !!openedPrivateAssetPackListingData ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <PrivateAssetPackInformationPage
             privateAssetPackListingData={openedPrivateAssetPackListingData}
             onAssetPackOpen={selectPrivateAssetPack}
@@ -802,7 +785,7 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
             }
           />
         ) : !!openedPrivateGameTemplateListingData ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <PrivateGameTemplateInformationPage
             privateGameTemplateListingData={
               openedPrivateGameTemplateListingData
@@ -821,31 +804,22 @@ export const AssetStore = React.forwardRef<Props, AssetStoreInterface>((
           />
         ) : null}
         {canShowFiltersPanel && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <ResponsivePaperOrDrawer
             onClose={() => setIsFiltersPanelOpen(false)}
             open={isFiltersPanelOpen}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ScrollView>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Line alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Tune />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Subheader>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Trans>Object filters</Trans>
                     </Subheader>
                   </Line>
                 </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Line justifyContent="space-between" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <AssetStoreFilterPanel />
                 </Line>
               </Column>

@@ -75,7 +75,8 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       .addIncludeFile(
         'Extensions/Effects/fake-effect-with-various-parameters.js'
       );
-    const variousParametersEffectProperties = variousParametersEffect.getProperties();
+    const variousParametersEffectProperties =
+      variousParametersEffect.getProperties();
     variousParametersEffectProperties
       .getOrCreate('intensity')
       .setValue('1')
@@ -161,7 +162,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       'MIT'
     );
     const fakeBehavior = new gd.BehaviorJsImplementation();
-    fakeBehavior.updateProperty = function(
+    fakeBehavior.updateProperty = function (
       behaviorContent: any,
       propertyName: any,
       newValue: any
@@ -177,7 +178,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
 
       return false;
     };
-    fakeBehavior.getProperties = function(behaviorContent: any) {
+    fakeBehavior.getProperties = function (behaviorContent: any) {
       var behaviorProperties = new gd.MapStringPropertyDescriptor();
 
       behaviorProperties
@@ -192,7 +193,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
 
       return behaviorProperties;
     };
-    fakeBehavior.initializeContent = function(behaviorContent: any) {
+    fakeBehavior.initializeContent = function (behaviorContent: any) {
       behaviorContent.setStringAttribute('property1', 'Initial value 1');
       behaviorContent.setBoolAttribute('property2', true);
     };
@@ -240,18 +241,18 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       'MIT'
     );
     const fakeBehavior = new gd.BehaviorJsImplementation();
-    fakeBehavior.updateProperty = function(
+    fakeBehavior.updateProperty = function (
       behaviorContent: any,
       propertyName: any,
       newValue: any
     ) {
       return false;
     };
-    fakeBehavior.getProperties = function(behaviorContent: any) {
+    fakeBehavior.getProperties = function (behaviorContent: any) {
       var behaviorProperties = new gd.MapStringPropertyDescriptor();
       return behaviorProperties;
     };
-    fakeBehavior.initializeContent = function(behaviorContent: any) {};
+    fakeBehavior.initializeContent = function (behaviorContent: any) {};
 
     extension
       .addBehavior(
@@ -281,14 +282,14 @@ export const makeTestExtensions = (gd: libGDevelop) => {
     );
     const fakeObject = new gd.ObjectJsImplementation();
 
-    fakeObject.updateProperty = function(
+    fakeObject.updateProperty = function (
       objectContent: any,
       propertyName: any,
       newValue: any
     ) {
       return false;
     };
-    fakeObject.getProperties = function(objectContent: any) {
+    fakeObject.getProperties = function (objectContent: any) {
       const objectProperties = new gd.MapStringPropertyDescriptor();
 
       objectProperties
@@ -305,7 +306,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       })
     );
 
-    fakeObject.updateInitialInstanceProperty = function(
+    fakeObject.updateInitialInstanceProperty = function (
       objectContent: any,
       instance: any,
       propertyName: any,
@@ -315,7 +316,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
     ) {
       return false;
     };
-    fakeObject.getInitialInstanceProperties = function(
+    fakeObject.getInitialInstanceProperties = function (
       content: any,
       instance: any,
       project: any,
@@ -355,11 +356,11 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       .addInstructionOrExpressionGroupMetadata('3D')
       .setIcon('res/conditions/3d_box.svg');
     const Cube3DObject = new gd.ObjectJsImplementation();
-    Cube3DObject.getProperties = function(objectContent: any) {
+    Cube3DObject.getProperties = function (objectContent: any) {
       const objectProperties = new gd.MapStringPropertyDescriptor();
       return objectProperties;
     };
-    Cube3DObject.getInitialInstanceProperties = function(
+    Cube3DObject.getInitialInstanceProperties = function (
       content: any,
       instance: any,
       project: any,
@@ -398,12 +399,12 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       .setIcon('JsPlatform/Extensions/text_input.svg');
 
     const textInputObject = new gd.ObjectJsImplementation();
-    textInputObject.getProperties = function(objectContent: any) {
+    textInputObject.getProperties = function (objectContent: any) {
       const objectProperties = new gd.MapStringPropertyDescriptor();
       return objectProperties;
     };
 
-    textInputObject.getInitialInstanceProperties = function(
+    textInputObject.getInitialInstanceProperties = function (
       content: any,
       instance: any,
       project: any,
@@ -426,7 +427,7 @@ export const makeTestExtensions = (gd: libGDevelop) => {
       return instanceProperties;
     };
 
-    textInputObject.updateInitialInstanceProperty = function(
+    textInputObject.updateInitialInstanceProperty = function (
       objectContent: any,
       instance: any,
       propertyName: any,

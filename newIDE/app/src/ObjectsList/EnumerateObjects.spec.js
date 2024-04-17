@@ -6,7 +6,6 @@ import {
   type GroupWithContextList,
 } from './EnumerateObjects';
 import { makeTestProject } from '../fixtures/TestProject';
-const gd: libGDevelop = global.gd;
 
 describe('EnumerateObjects', () => {
   it('can enumerate objects from a project and scene', () => {

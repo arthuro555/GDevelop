@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
 import {
   subscriptionPlansWithPricingSystems,
@@ -17,11 +16,11 @@ import {
   fakeAuthenticatedUserWithLegacyProSubscription,
   fakeGoldWithPurchaselyAuthenticatedUser,
 } from '../../../../fixtures/GDevelopServicesTestData';
-// @ts-expect-error - TS6142 - Module '../../../SubscriptionSuggestionDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/SubscriptionSuggestionDecorator.tsx', but '--jsx' is not set.
+
 import subscriptionSuggestionDecorator from '../../../SubscriptionSuggestionDecorator';
-// @ts-expect-error - TS6142 - Module '../../../../Profile/Subscription/SubscriptionDetails' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionDetails.tsx', but '--jsx' is not set.
+
 import SubscriptionDetails from '../../../../Profile/Subscription/SubscriptionDetails';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Alert/AlertProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/AlertProvider.tsx', but '--jsx' is not set.
+
 import AlertProvider from '../../../../UI/Alert/AlertProvider';
 
 export default {
@@ -77,37 +76,52 @@ export const Default = ({
   userSubscriptionId,
   pricingSystem,
 }: {
-  authenticated?: 'no' | 'loading' | 'yes',
-  willCancelAtPeriodEndOrIsExpired?: boolean,
-  loading?: boolean,
-  simulateNativeMobileApp?: boolean,
-  userSubscriptionId?: 'none' | 'gdevelop_silver' | 'gdevelop_gold' | 'gdevelop_gold benefitting from education plan' | 'gdevelop_startup' | 'gdevelop_education' | 'gdevelop_indie' | 'gdevelop_pro' | 'gold purchasely subscription',
-  pricingSystem?: 'monthly' | 'yearly' | 'redeemed' | 'team member' | 'manually added'
+  authenticated?: 'no' | 'loading' | 'yes';
+  willCancelAtPeriodEndOrIsExpired?: boolean;
+  loading?: boolean;
+  simulateNativeMobileApp?: boolean;
+  userSubscriptionId?:
+    | 'none'
+    | 'gdevelop_silver'
+    | 'gdevelop_gold'
+    | 'gdevelop_gold benefitting from education plan'
+    | 'gdevelop_startup'
+    | 'gdevelop_education'
+    | 'gdevelop_indie'
+    | 'gdevelop_pro'
+    | 'gold purchasely subscription';
+  pricingSystem?:
+    | 'monthly'
+    | 'yearly'
+    | 'redeemed'
+    | 'team member'
+    | 'manually added';
 }) => {
   const authenticatedUser =
     authenticated === 'no'
       ? fakeNotAuthenticatedUser
       : authenticated === 'loading'
-      ? fakeAuthenticatedUserLoggingIn
-      : userSubscriptionId === 'none'
-      ? fakeAuthenticatedUserWithNoSubscription
-      : userSubscriptionId === 'gdevelop_silver'
-      ? fakeSilverAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_gold'
-      ? fakeGoldAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_gold benefitting from education plan'
-      ? fakeAuthenticatedGoldUserFromEducationPlan
-      : userSubscriptionId === 'gdevelop_startup'
-      ? fakeStartupAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_education'
-      ? fakeAuthenticatedUserWithEducationPlan
-      : userSubscriptionId === 'gdevelop_indie'
-      ? fakeAuthenticatedUserWithLegacyIndieSubscription
-      : userSubscriptionId === 'gdevelop_pro'
-      ? fakeAuthenticatedUserWithLegacyProSubscription
-      : userSubscriptionId === 'gold purchasely subscription'
-      ? fakeGoldWithPurchaselyAuthenticatedUser
-      : fakeNotAuthenticatedUser;
+        ? fakeAuthenticatedUserLoggingIn
+        : userSubscriptionId === 'none'
+          ? fakeAuthenticatedUserWithNoSubscription
+          : userSubscriptionId === 'gdevelop_silver'
+            ? fakeSilverAuthenticatedUser
+            : userSubscriptionId === 'gdevelop_gold'
+              ? fakeGoldAuthenticatedUser
+              : userSubscriptionId ===
+                  'gdevelop_gold benefitting from education plan'
+                ? fakeAuthenticatedGoldUserFromEducationPlan
+                : userSubscriptionId === 'gdevelop_startup'
+                  ? fakeStartupAuthenticatedUser
+                  : userSubscriptionId === 'gdevelop_education'
+                    ? fakeAuthenticatedUserWithEducationPlan
+                    : userSubscriptionId === 'gdevelop_indie'
+                      ? fakeAuthenticatedUserWithLegacyIndieSubscription
+                      : userSubscriptionId === 'gdevelop_pro'
+                        ? fakeAuthenticatedUserWithLegacyProSubscription
+                        : userSubscriptionId === 'gold purchasely subscription'
+                          ? fakeGoldWithPurchaselyAuthenticatedUser
+                          : fakeNotAuthenticatedUser;
 
   if (authenticatedUser.subscription) {
     if (pricingSystem === 'redeemed') {
@@ -121,7 +135,8 @@ export const Default = ({
     } else if (pricingSystem === 'manually added') {
       authenticatedUser.subscription.pricingSystemId = 'MANUALLY_ADDED';
     } else {
-      authenticatedUser.subscription.cancelAtPeriodEnd = !!willCancelAtPeriodEndOrIsExpired;
+      authenticatedUser.subscription.cancelAtPeriodEnd =
+        !!willCancelAtPeriodEndOrIsExpired;
       if (userSubscriptionId === 'gdevelop_silver') {
         if (pricingSystem === 'yearly') {
           authenticatedUser.subscription.pricingSystemId =
@@ -132,7 +147,7 @@ export const Default = ({
         }
       } else if (
         userSubscriptionId === 'gdevelop_gold' &&
-// @ts-expect-error - TS2367 - This condition will always return 'true' since the types '"gdevelop_gold"' and '"gold purchasely subscription"' have no overlap.
+        // @ts-expect-error - TS2367 - This condition will always return 'true' since the types '"gdevelop_gold"' and '"gold purchasely subscription"' have no overlap.
         userSubscriptionId !== 'gold purchasely subscription'
       ) {
         if (pricingSystem === 'yearly') {
@@ -167,9 +182,7 @@ export const Default = ({
   const { subscription: userSubscription } = authenticatedUser;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AlertProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SubscriptionDetails
         subscriptionPlansWithPricingSystems={
           subscriptionPlansWithPricingSystems

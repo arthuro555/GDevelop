@@ -1,8 +1,7 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 
 import * as React from 'react';
@@ -17,12 +16,11 @@ import {
   TreeViewItemContent,
   TreeItemProps,
   extensionBehaviorsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsList/index.tsx', but '--jsx' is not set.
 } from '.';
 import Tooltip from '@material-ui/core/Tooltip';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/VisibilityOff'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/VisibilityOff.js' implicitly has an 'any' type.
+
 import VisibilityOff from '../UI/CustomSvgIcons/VisibilityOff';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Add'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Add.js' implicitly has an 'any' type.
+
 import Add from '../UI/CustomSvgIcons/Add';
 
 const EVENTS_BASED_BEHAVIOR_CLIPBOARD_KIND = 'Events Based Behavior';
@@ -31,62 +29,74 @@ const styles = {
   tooltip: { marginRight: 5, verticalAlign: 'bottom' },
 } as const;
 
-export const getEventsBasedBehaviorTreeViewItemId = (eventsBasedBehavior: gdEventsBasedBehavior): string => {
+export const getEventsBasedBehaviorTreeViewItemId = (
+  eventsBasedBehavior: gd.EventsBasedBehavior
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return 'behavior-' + eventsBasedBehavior.ptr;
 };
 
 export type EventsBasedBehaviorCallbacks = {
-  onSelectEventsBasedBehavior: (eventsBasedBehavior?: gdEventsBasedBehavior | null | undefined) => void,
-  onDeleteEventsBasedBehavior: (eventsBasedBehavior: gdEventsBasedBehavior, cb: (arg1: boolean) => void) => void,
+  onSelectEventsBasedBehavior: (
+    eventsBasedBehavior?: gd.EventsBasedBehavior | null | undefined
+  ) => void;
+  onDeleteEventsBasedBehavior: (
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    cb: (arg1: boolean) => void
+  ) => void;
   onRenameEventsBasedBehavior: (
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     newName: string,
-    cb: (arg1: boolean) => void,
-  ) => void,
-  onEventsBasedBehaviorRenamed: (eventsBasedBehavior: gdEventsBasedBehavior) => void,
-  onEventsBasedBehaviorPasted: (eventsBasedBehavior: gdEventsBasedBehavior, sourceExtensionName: string) => void
+    cb: (arg1: boolean) => void
+  ) => void;
+  onEventsBasedBehaviorRenamed: (
+    eventsBasedBehavior: gd.EventsBasedBehavior
+  ) => void;
+  onEventsBasedBehaviorPasted: (
+    eventsBasedBehavior: gd.EventsBasedBehavior,
+    sourceExtensionName: string
+  ) => void;
 };
 
-export type EventsBasedBehaviorProps = (TreeItemProps) & (EventsBasedBehaviorCallbacks) & {
-  addNewEventsFunction: (
-    arg1: {
-      itemContent: TreeViewItemContent | null | undefined,
-      eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-      eventsBasedObject: gdEventsBasedObject | null | undefined,
-      index: number
-    },
-  ) => void,
-  eventsBasedBehaviorsList: gdEventsBasedBehaviorsList
-};
+export type EventsBasedBehaviorProps = TreeItemProps &
+  EventsBasedBehaviorCallbacks & {
+    addNewEventsFunction: (arg1: {
+      itemContent: TreeViewItemContent | null | undefined;
+      eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+      eventsBasedObject: gd.EventsBasedObject | null | undefined;
+      index: number;
+    }) => void;
+    eventsBasedBehaviorsList: gd.EventsBasedBehaviorsList;
+  };
 
 export class EventsBasedBehaviorTreeViewItemContent
-  implements TreeViewItemContent {
-  eventsBasedBehavior: gdEventsBasedBehavior;
+  implements TreeViewItemContent
+{
+  eventsBasedBehavior: gd.EventsBasedBehavior;
   props: EventsBasedBehaviorProps;
 
   constructor(
-    eventsBasedBehavior: gdEventsBasedBehavior,
+    eventsBasedBehavior: gd.EventsBasedBehavior,
     props: EventsBasedBehaviorProps
   ) {
     this.eventsBasedBehavior = eventsBasedBehavior;
     this.props = props;
   }
 
-  getEventsFunctionsContainer(): gdEventsFunctionsContainer {
+  getEventsFunctionsContainer(): gd.EventsFunctionsContainer {
     return this.eventsBasedBehavior.getEventsFunctions();
   }
 
-  getEventsFunction(): gdEventsFunction | null | undefined {
+  getEventsFunction(): gd.EventsFunction | null | undefined {
     return null;
   }
 
-  getEventsBasedBehavior(): gdEventsBasedBehavior | null | undefined {
+  getEventsBasedBehavior(): gd.EventsBasedBehavior | null | undefined {
     return this.eventsBasedBehavior;
   }
 
-  getEventsBasedObject(): gdEventsBasedObject | null | undefined {
+  getEventsBasedObject(): gd.EventsBasedObject | null | undefined {
     return null;
   }
 
@@ -124,8 +134,8 @@ export class EventsBasedBehaviorTreeViewItemContent
     this.props.onRenameEventsBasedBehavior(
       this.eventsBasedBehavior,
       newName,
-// @ts-expect-error - TS7006 - Parameter 'doRename' implicitly has an 'any' type.
-      doRename => {
+
+      (doRename) => {
         if (!doRename) return;
 
         this._onEventsBasedBehaviorModified();
@@ -187,14 +197,11 @@ export class EventsBasedBehaviorTreeViewItemContent
 
   renderRightComponent(i18n: I18nType): React.ReactNode | null | undefined {
     return this.eventsBasedBehavior.isPrivate() ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Tooltip
         title={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>This behavior won't be visible in the events editor.</Trans>
         }
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <VisibilityOff
           fontSize="small"
           style={{
@@ -212,13 +219,11 @@ export class EventsBasedBehaviorTreeViewItemContent
     });
   }
 
-  async _deleteEventsBasedBehavior(
-    {
-      askForConfirmation,
-    }: {
-      askForConfirmation: boolean
-    },
-  ): Promise<void> {
+  async _deleteEventsBasedBehavior({
+    askForConfirmation,
+  }: {
+    askForConfirmation: boolean;
+  }): Promise<void> {
     const { eventsBasedBehaviorsList } = this.props;
 
     if (askForConfirmation) {
@@ -231,8 +236,8 @@ export class EventsBasedBehaviorTreeViewItemContent
 
     this.props.onDeleteEventsBasedBehavior(
       this.eventsBasedBehavior,
-// @ts-expect-error - TS7006 - Parameter 'doRemove' implicitly has an 'any' type.
-      doRemove => {
+
+      (doRemove) => {
         if (!doRemove) return;
 
         eventsBasedBehaviorsList.remove(this.eventsBasedBehavior.getName());
@@ -291,7 +296,7 @@ export class EventsBasedBehaviorTreeViewItemContent
 
     const { project, eventsBasedBehaviorsList } = this.props;
 
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       eventsBasedBehaviorsList.has(name)
     );
 
@@ -329,7 +334,7 @@ export class EventsBasedBehaviorTreeViewItemContent
   _addNewEventsBasedBehavior(): void {
     const { eventsBasedBehaviorsList } = this.props;
 
-    const name = newNameGenerator('MyBehavior', name =>
+    const name = newNameGenerator('MyBehavior', (name) =>
       eventsBasedBehaviorsList.has(name)
     );
     const newEventsBasedBehavior = eventsBasedBehaviorsList.insertNew(
@@ -362,7 +367,6 @@ export class EventsBasedBehaviorTreeViewItemContent
 
   getRightButton(i18n: I18nType) {
     return {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       icon: <Add />,
       label: i18n._(t`Add a function`),
       click: () => this.addFunctionAtSelection(),
@@ -371,7 +375,8 @@ export class EventsBasedBehaviorTreeViewItemContent
 
   addFunctionAtSelection(): void {
     const { selectedEventsFunction, selectedEventsBasedBehavior } = this.props;
-    const eventsFunctionsContainer = this.eventsBasedBehavior.getEventsFunctions();
+    const eventsFunctionsContainer =
+      this.eventsBasedBehavior.getEventsFunctions();
     // When the selected item is inside the behavior, the new function is
     // added below it.
     const index =

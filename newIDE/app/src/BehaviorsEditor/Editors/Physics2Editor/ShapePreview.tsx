@@ -1,28 +1,28 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './PolygonEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/BehaviorsEditor/Editors/Physics2Editor/PolygonEditor.tsx', but '--jsx' is not set.
+
 import { Vertex } from './PolygonEditor';
 
 type Props = {
-  shape: string,
-  dimensionA: number,
-  dimensionB: number,
-  offsetX: number,
-  offsetY: number,
-  polygonOrigin: string,
-  vertices: Array<Vertex>,
-  imageWidth: number,
-  imageHeight: number,
-  imageOffsetTop: number,
-  imageOffsetLeft: number,
-  imageZoomFactor: number,
-  onMoveVertex: (index: number, newX: number, newY: number) => void,
-  forcedCursor: string | null,
-  deactivateControls?: boolean
+  shape: string;
+  dimensionA: number;
+  dimensionB: number;
+  offsetX: number;
+  offsetY: number;
+  polygonOrigin: string;
+  vertices: Array<Vertex>;
+  imageWidth: number;
+  imageHeight: number;
+  imageOffsetTop: number;
+  imageOffsetLeft: number;
+  imageZoomFactor: number;
+  onMoveVertex: (index: number, newX: number, newY: number) => void;
+  forcedCursor: string | null;
+  deactivateControls?: boolean;
 };
 
 type State = {
-  draggedVertex: Vertex | null | undefined,
-  draggedIndex: number
+  draggedVertex: Vertex | null | undefined;
+  draggedIndex: number;
 };
 
 const ShapePreview = (props: Props) => {
@@ -65,11 +65,11 @@ const ShapePreview = (props: Props) => {
     const { draggedVertex, draggedIndex } = state;
     if (!draggedVertex) return;
 
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+    // @ts-expect-error - TS2531 - Object is possibly 'null'.
     const pointOnScreen = svgRef.current.createSVGPoint();
     pointOnScreen.x = event.clientX;
     pointOnScreen.y = event.clientY;
-// @ts-expect-error - TS2531 - Object is possibly 'null'. | TS2531 - Object is possibly 'null'.
+    // @ts-expect-error - TS2531 - Object is possibly 'null'. | TS2531 - Object is possibly 'null'.
     const screenToSvgMatrix = svgRef.current.getScreenCTM().inverse();
     const pointOnSvg = pointOnScreen.matrixTransform(screenToSvgMatrix);
 
@@ -131,7 +131,6 @@ const ShapePreview = (props: Props) => {
       dimensionB > 0 ? dimensionB : imageHeight > 0 ? imageHeight : 1;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <rect
         key={'boxShape'}
         style={boxStyle}
@@ -160,7 +159,6 @@ const ShapePreview = (props: Props) => {
     } = props;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <circle
         key={'circleShape'}
         style={circleStyle}
@@ -172,8 +170,8 @@ const ShapePreview = (props: Props) => {
           (dimensionA > 0
             ? dimensionA
             : imageWidth + imageHeight > 0
-            ? (imageWidth + imageHeight) / 4
-            : 1) * imageZoomFactor
+              ? (imageWidth + imageHeight) / 4
+              : 1) * imageZoomFactor
         }
       />
     );
@@ -200,7 +198,6 @@ const ShapePreview = (props: Props) => {
     const sin = Math.sin((dimensionB * Math.PI) / 180);
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <line
         key={'edgeShape'}
         style={edgeStyle}
@@ -234,9 +231,7 @@ const ShapePreview = (props: Props) => {
     } as const;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <polygon
           key={'polygonShape'}
           style={polygonStyle}
@@ -245,19 +240,22 @@ const ShapePreview = (props: Props) => {
           fillRule="evenodd"
           points={vertices
             .map(
-              vertex =>
-                `${(vertex.x +
-                  offsetX +
-                  (polygonOrigin === 'Center' ? imageWidth / 2 : 0)) *
-                  imageZoomFactor},${(vertex.y +
-                  offsetY +
-                  (polygonOrigin === 'Center' ? imageHeight / 2 : 0)) *
-                  imageZoomFactor}`
+              (vertex) =>
+                `${
+                  (vertex.x +
+                    offsetX +
+                    (polygonOrigin === 'Center' ? imageWidth / 2 : 0)) *
+                  imageZoomFactor
+                },${
+                  (vertex.y +
+                    offsetY +
+                    (polygonOrigin === 'Center' ? imageHeight / 2 : 0)) *
+                  imageZoomFactor
+                }`
             )
             .join(' ')}
         />
         {vertices.map((vertex, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <circle
             onPointerDown={() => onVertexDown(vertex, index)}
             key={`vertex-${index}`}
@@ -301,15 +299,13 @@ const ShapePreview = (props: Props) => {
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={containerStyle}
-// @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
       onPointerMove={deactivateControls ? null : onMouseMove}
-// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
       onPointerUp={deactivateControls ? null : onMouseUp}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <svg style={frameStyle} ref={svgRef}>
         {props.shape === 'Box' && renderBox()}
         {props.shape === 'Circle' && renderCircle()}

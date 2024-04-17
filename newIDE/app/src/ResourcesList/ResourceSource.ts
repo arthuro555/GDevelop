@@ -1,8 +1,8 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import {
   StorageProvider,
@@ -12,11 +12,20 @@ import {
 import { ResourceExternalEditor } from './ResourceExternalEditor';
 import { OnFetchNewlyAddedResourcesFunction } from '../ProjectsStorage/ResourceFetcher';
 
-const gd: libGDevelop = global.gd;
-
 // These are all the kind of resources that can be found in
 // Core/GDCore/Project/ResourcesManager.h
-export type ResourceKind = 'image' | 'audio' | 'font' | 'video' | 'json' | 'tilemap' | 'tileset' | 'bitmapFont' | 'model3D' | 'atlas' | 'spine';
+export type ResourceKind =
+  | 'image'
+  | 'audio'
+  | 'font'
+  | 'video'
+  | 'json'
+  | 'tilemap'
+  | 'tileset'
+  | 'bitmapFont'
+  | 'model3D'
+  | 'atlas'
+  | 'spine';
 
 export const allResourceKindsAndMetadata = [
   {
@@ -96,51 +105,64 @@ for (const { kind, createNewResource } of allResourceKindsAndMetadata) {
   constructors[kind] = createNewResource;
 }
 
-export function createNewResource(kind: string): gdResource | null | undefined {
+export function createNewResource(
+  kind: string
+): gd.Resource | null | undefined {
   return constructors[kind] ? constructors[kind]() : null;
 }
 
 export type ChooseResourceOptions = {
-  initialSourceName: string,
-  multiSelection: boolean,
-  resourceKind: ResourceKind
+  initialSourceName: string;
+  multiSelection: boolean;
+  resourceKind: ResourceKind;
 };
 
 export type ResourceImportationBehavior = 'import' | 'relative' | 'ask';
 
 export type ChooseResourceProps = {
-  i18n: I18nType,
-  project: gdProject,
-  fileMetadata: FileMetadata | null | undefined,
-  getStorageProvider: () => StorageProvider,
-  getLastUsedPath: (project: gdProject, kind: ResourceKind) => string,
-  setLastUsedPath: (project: gdProject, kind: ResourceKind, path: string) => void,
-  options: ChooseResourceOptions,
-  automaticallyOpenIfPossible?: boolean,
-  resourcesImporationBehavior: ResourceImportationBehavior
+  i18n: I18nType;
+  project: gd.Project;
+  fileMetadata: FileMetadata | null | undefined;
+  getStorageProvider: () => StorageProvider;
+  getLastUsedPath: (project: gd.Project, kind: ResourceKind) => string;
+  setLastUsedPath: (
+    project: gd.Project,
+    kind: ResourceKind,
+    path: string
+  ) => void;
+  options: ChooseResourceOptions;
+  automaticallyOpenIfPossible?: boolean;
+  resourcesImporationBehavior: ResourceImportationBehavior;
 };
 
-export type ResourceSourceComponentProps = (ChooseResourceProps) & {
-  onChooseResources: (arg1: Array<gdResource>) => void
+export type ResourceSourceComponentProps = ChooseResourceProps & {
+  onChooseResources: (arg1: Array<gd.Resource>) => void;
 };
 
 export type ResourceSource = {
-  name: string,
-  displayName: MessageDescriptor,
-  displayTab: 'standalone' | 'import' | 'import-advanced',
-  onlyForStorageProvider?: string | null | undefined,
-  kind: ResourceKind,
-  selectResourcesHeadless?: (arg1: ChooseResourceProps) => Promise<Array<gdResource>> | null | undefined,
-  renderComponent: (arg1: ResourceSourceComponentProps) => React.ReactElement
+  name: string;
+  displayName: MessageDescriptor;
+  displayTab: 'standalone' | 'import' | 'import-advanced';
+  onlyForStorageProvider?: string | null | undefined;
+  kind: ResourceKind;
+  selectResourcesHeadless?: (
+    arg1: ChooseResourceProps
+  ) => Promise<Array<gd.Resource>> | null | undefined;
+  renderComponent: (arg1: ResourceSourceComponentProps) => React.ReactElement;
 };
 
-export type ChooseResourceFunction = (options: ChooseResourceOptions) => Promise<Array<gdResource>>;
+export type ChooseResourceFunction = (
+  options: ChooseResourceOptions
+) => Promise<Array<gd.Resource>>;
 
 export type ResourceManagementProps = {
-  resourceSources: Array<ResourceSource>,
-  resourceExternalEditors: Array<ResourceExternalEditor>,
-  onChooseResource: ChooseResourceFunction,
-  getStorageProvider: () => StorageProvider,
-  onFetchNewlyAddedResources: OnFetchNewlyAddedResourcesFunction,
-  getStorageProviderResourceOperations: () => ResourcesActionsMenuBuilder | null | undefined
+  resourceSources: Array<ResourceSource>;
+  resourceExternalEditors: Array<ResourceExternalEditor>;
+  onChooseResource: ChooseResourceFunction;
+  getStorageProvider: () => StorageProvider;
+  onFetchNewlyAddedResources: OnFetchNewlyAddedResourcesFunction;
+  getStorageProviderResourceOperations: () =>
+    | ResourcesActionsMenuBuilder
+    | null
+    | undefined;
 };

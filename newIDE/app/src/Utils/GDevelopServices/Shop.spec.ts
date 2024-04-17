@@ -1,11 +1,7 @@
-// @ts-expect-error - TS6142 - Module './Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
-import {extractDecodedFilenameWithExtensionFromProductAuthorizedUrl} from './Shop';
+import { extractDecodedFilenameWithExtensionFromProductAuthorizedUrl } from './Shop';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('Shop service', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('extractDecodedFilenameFromProductAuthorizedUrl', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('works if asset file has an extension', () => {
       expect(
         extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(
@@ -13,7 +9,7 @@ describe('Shop service', () => {
         )
       ).toStrictEqual('file-to-download.png');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if game template file has an extension', () => {
       expect(
         extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(
@@ -21,7 +17,7 @@ describe('Shop service', () => {
         )
       ).toStrictEqual('file-to-download.png');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if file has no extension', () => {
       expect(
         extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(
@@ -29,7 +25,7 @@ describe('Shop service', () => {
         )
       ).toStrictEqual('file-to-download');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if url is encoded', () => {
       expect(
         extractDecodedFilenameWithExtensionFromProductAuthorizedUrl(

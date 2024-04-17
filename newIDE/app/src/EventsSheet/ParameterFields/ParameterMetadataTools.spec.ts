@@ -1,9 +1,8 @@
 import {getLastObjectParameterValue} from './ParameterMetadataTools';
-const gd: libGDevelop = global.gd;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
 describe('getLastObjectParameterValue', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('returns null if no parameter index passed', () => {
     expect(
       getLastObjectParameterValue({
@@ -16,7 +15,7 @@ describe('getLastObjectParameterValue', () => {
     ).toBe(null);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('returns the object if there is one before the requested parameter index', () => {
     const instructionMetadata = new gd.InstructionMetadata();
 
@@ -45,7 +44,7 @@ describe('getLastObjectParameterValue', () => {
     expect(getValueForParameter(2)).toBe('MyObject');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('returns the object, even if other parameters exist in between', () => {
     const instructionMetadata = new gd.InstructionMetadata();
 

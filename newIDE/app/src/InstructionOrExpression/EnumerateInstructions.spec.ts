@@ -1,22 +1,19 @@
-import {makeTestExtensions} from '../fixtures/TestExtensions';
+import { makeTestExtensions } from '../fixtures/TestExtensions';
 import { createTree } from './CreateTree';
 import {
   enumerateAllInstructions,
   enumerateObjectAndBehaviorsInstructions,
   getObjectParameterIndex,
 } from './EnumerateInstructions';
-const gd: libGDevelop = global.gd;
 
 const makeFakeI18n = (fakeI18n: undefined): I18nType => ({
-// @ts-expect-error - TS2698 - Spread types may only be created from object types.
+  // @ts-expect-error - TS2698 - Spread types may only be created from object types.
   ...fakeI18n,
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('EnumerateInstructions', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate instructions being conditions', () => {
     const instructions = enumerateAllInstructions(
       true,
@@ -27,7 +24,7 @@ describe('EnumerateInstructions', () => {
     // Test for the proper presence of a few conditions
     expect(
       instructions.find(
-        instruction =>
+        (instruction) =>
           instruction.type ===
           'AnimatableCapability::AnimatableBehavior::HasAnimationEnded'
       )
@@ -39,7 +36,7 @@ describe('EnumerateInstructions', () => {
       })
     );
     expect(
-      instructions.find(instruction => instruction.type === 'Sprite')
+      instructions.find((instruction) => instruction.type === 'Sprite')
     ).toEqual(
       expect.objectContaining({
         displayedName: 'Current frame',
@@ -49,7 +46,7 @@ describe('EnumerateInstructions', () => {
     );
     expect(
       instructions.find(
-        instruction => instruction.type === 'BuiltinCommonInstructions::Once'
+        (instruction) => instruction.type === 'BuiltinCommonInstructions::Once'
       )
     ).toEqual(
       expect.objectContaining({
@@ -59,7 +56,7 @@ describe('EnumerateInstructions', () => {
       })
     );
     expect(
-      instructions.find(instruction => instruction.type === 'SourisSurObjet')
+      instructions.find((instruction) => instruction.type === 'SourisSurObjet')
     ).toEqual(
       expect.objectContaining({
         displayedName: 'The cursor/touch is on an object',
@@ -69,7 +66,6 @@ describe('EnumerateInstructions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate instructions being actions', () => {
     const instructions = enumerateAllInstructions(
       false,
@@ -94,9 +90,8 @@ describe('EnumerateInstructions', () => {
     );
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can create the tree of instructions', () => {
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+    // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
     const instructions = enumerateAllInstructions(true, makeFakeI18n());
     const tree = createTree(instructions);
     expect(tree).toHaveProperty('Advanced');
@@ -123,11 +118,10 @@ describe('EnumerateInstructions', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can find the object parameter, if any', () => {
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+    // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
     const actions = enumerateAllInstructions(false, makeFakeI18n());
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+    // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
     const conditions = enumerateAllInstructions(true, makeFakeI18n());
 
     const createInstruction = actions.filter(
@@ -158,7 +152,6 @@ describe('EnumerateInstructions', () => {
     expect(getObjectParameterIndex(spriteAnimationEnded.metadata)).toBe(0);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate instructions for an object (Sprite)', () => {
     makeTestExtensions(gd);
     const project = new gd.ProjectHelper.createNewGDJSProject();
@@ -171,7 +164,7 @@ describe('EnumerateInstructions', () => {
       project,
       layout,
       'MySpriteObject',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     expect(spriteInstructions).toEqual(

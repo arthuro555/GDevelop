@@ -1,29 +1,29 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar, { SearchBarInterface } from '../../UI/SearchBar';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 import { ExampleShortHeader } from '../../Utils/GDevelopServices/Example';
-// @ts-expect-error - TS6142 - Module './ExampleStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExampleStore/ExampleStoreContext.tsx', but '--jsx' is not set.
+
 import { ExampleStoreContext } from './ExampleStoreContext';
-// @ts-expect-error - TS6142 - Module '../../UI/Search/ListSearchResults' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/ListSearchResults.tsx', but '--jsx' is not set.
+
 import { ListSearchResults } from '../../UI/Search/ListSearchResults';
-// @ts-expect-error - TS6142 - Module './ExampleListItem' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExampleStore/ExampleListItem.tsx', but '--jsx' is not set.
+
 import ExampleListItem from './ExampleListItem';
 import { SearchMatch } from '../../UI/Search/UseSearchStructuredItem';
 import {
   sendExampleDetailsOpened,
   sendGameTemplateInformationOpened,
 } from '../../Utils/Analytics/EventSender';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import { useShouldAutofocusInput } from '../../UI/Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { PrivateGameTemplateListingData } from '../../Utils/GDevelopServices/Shop';
-// @ts-expect-error - TS6142 - Module '../PrivateGameTemplates/PrivateGameTemplateListItem' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateListItem.tsx', but '--jsx' is not set.
+
 import PrivateGameTemplateListItem from '../PrivateGameTemplates/PrivateGameTemplateListItem';
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../PrivateGameTemplates/PrivateGameTemplateStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateStoreContext.tsx', but '--jsx' is not set.
+
 import { PrivateGameTemplateStoreContext } from '../PrivateGameTemplates/PrivateGameTemplateStoreContext';
 
 const getItemUniqueId = (
@@ -31,13 +31,20 @@ const getItemUniqueId = (
 ) => item.id;
 
 type Props = {
-  isOpening: boolean,
-  onOpenNewProjectSetupDialog: () => void,
-  focusOnMount?: boolean,
-  selectedExampleShortHeader: ExampleShortHeader | null | undefined,
-  onSelectExampleShortHeader: (arg1?: ExampleShortHeader | null | undefined) => void,
-  selectedPrivateGameTemplateListingData: PrivateGameTemplateListingData | null | undefined,
-  onSelectPrivateGameTemplateListingData: (arg1?: PrivateGameTemplateListingData | null | undefined) => void
+  isOpening: boolean;
+  onOpenNewProjectSetupDialog: () => void;
+  focusOnMount?: boolean;
+  selectedExampleShortHeader: ExampleShortHeader | null | undefined;
+  onSelectExampleShortHeader: (
+    arg1?: ExampleShortHeader | null | undefined
+  ) => void;
+  selectedPrivateGameTemplateListingData:
+    | PrivateGameTemplateListingData
+    | null
+    | undefined;
+  onSelectPrivateGameTemplateListingData: (
+    arg1?: PrivateGameTemplateListingData | null | undefined
+  ) => void;
 };
 
 export const ExampleStore = ({
@@ -75,15 +82,14 @@ export const ExampleStore = ({
   } = React.useContext(PrivateGameTemplateStoreContext);
 
   const shouldAutofocusSearchbar = useShouldAutofocusInput();
-  const searchBarRef = React.useRef<SearchBarInterface | null | undefined>(null);
-
-  React.useEffect(
-    () => {
-      if (focusOnMount && shouldAutofocusSearchbar && searchBarRef.current)
-        searchBarRef.current.focus();
-    },
-    [shouldAutofocusSearchbar, focusOnMount]
+  const searchBarRef = React.useRef<SearchBarInterface | null | undefined>(
+    null
   );
+
+  React.useEffect(() => {
+    if (focusOnMount && shouldAutofocusSearchbar && searchBarRef.current)
+      searchBarRef.current.focus();
+  }, [shouldAutofocusSearchbar, focusOnMount]);
 
   // Tags are applied to both examples and game templates.
   const tagsHandler = React.useMemo(
@@ -112,49 +118,47 @@ export const ExampleStore = ({
     [setExampleStoreSearchText, setGameTemplateStoreSearchText]
   );
 
-  const fetchGameTemplatesAndExamples = React.useCallback(
-    () => {
-      fetchGameTemplates();
-      fetchExamplesAndFilters();
-    },
-    [fetchGameTemplates, fetchExamplesAndFilters]
-  );
+  const fetchGameTemplatesAndExamples = React.useCallback(() => {
+    fetchGameTemplates();
+    fetchExamplesAndFilters();
+  }, [fetchGameTemplates, fetchExamplesAndFilters]);
 
   // Load examples and game templates on mount.
-  React.useEffect(
-    () => {
-      fetchGameTemplatesAndExamples();
-    },
-    [fetchGameTemplatesAndExamples]
-  );
+  React.useEffect(() => {
+    fetchGameTemplatesAndExamples();
+  }, [fetchGameTemplatesAndExamples]);
 
-  const getExampleShortHeaderMatches = (exampleShortHeader: ExampleShortHeader): SearchMatch[] => {
+  const getExampleShortHeaderMatches = (
+    exampleShortHeader: ExampleShortHeader
+  ): SearchMatch[] => {
     if (!exampleShortHeadersSearchResults) return [];
     const exampleMatches = exampleShortHeadersSearchResults.find(
-// @ts-expect-error - TS7006 - Parameter 'result' implicitly has an 'any' type.
-      result => result.item.id === exampleShortHeader.id
+      (result) => result.item.id === exampleShortHeader.id
     );
     return exampleMatches ? exampleMatches.matches : [];
   };
 
-  const getPrivateAssetPackListingDataMatches = (privateGameTemplateListingData: PrivateGameTemplateListingData): SearchMatch[] => {
+  const getPrivateAssetPackListingDataMatches = (
+    privateGameTemplateListingData: PrivateGameTemplateListingData
+  ): SearchMatch[] => {
     if (!privateGameTemplateListingDatasSearchResults) return [];
-    const gameTemplateMatches = privateGameTemplateListingDatasSearchResults.find(
-// @ts-expect-error - TS7006 - Parameter 'result' implicitly has an 'any' type.
-      result => result.item.id === privateGameTemplateListingData.id
-    );
+    const gameTemplateMatches =
+      privateGameTemplateListingDatasSearchResults.find(
+        (result) => result.item.id === privateGameTemplateListingData.id
+      );
     return gameTemplateMatches ? gameTemplateMatches.matches : [];
   };
 
-  const searchItems: ExampleShortHeader | PrivateGameTemplateListingData[] = React.useMemo(
-    () => {
-      const searchItems: Array<ExampleShortHeader | PrivateGameTemplateListingData> = [];
-      const privateGameTemplateItems = privateGameTemplateListingDatasSearchResults
-// @ts-expect-error - TS7031 - Binding element 'item' implicitly has an 'any' type.
-        ? privateGameTemplateListingDatasSearchResults.map(({ item }) => item)
-        : [];
+  const searchItems: ExampleShortHeader | PrivateGameTemplateListingData[] =
+    React.useMemo(() => {
+      const searchItems: Array<
+        ExampleShortHeader | PrivateGameTemplateListingData
+      > = [];
+      const privateGameTemplateItems =
+        privateGameTemplateListingDatasSearchResults
+          ? privateGameTemplateListingDatasSearchResults.map(({ item }) => item)
+          : [];
       const exampleShortHeaderItems = exampleShortHeadersSearchResults
-// @ts-expect-error - TS7031 - Binding element 'item' implicitly has an 'any' type.
         ? exampleShortHeadersSearchResults.map(({ item }) => item)
         : [];
 
@@ -174,37 +178,27 @@ export const ExampleStore = ({
       }
 
       return searchItems;
-    },
-    [
+    }, [
       exampleShortHeadersSearchResults,
       privateGameTemplateListingDatasSearchResults,
       searchText,
       tagsHandler,
-    ]
-  );
+    ]);
 
-  const defaultTags = React.useMemo(
-    () => {
-      const allDefaultTags = [
-        ...(exampleFilters ? exampleFilters.defaultTags : []),
-        ...(gameTemplateFilters ? gameTemplateFilters.defaultTags : []),
-      ];
-      const uniqueTags = new Set(allDefaultTags);
-      return Array.from(uniqueTags);
-    },
-    [exampleFilters, gameTemplateFilters]
-  );
+  const defaultTags = React.useMemo(() => {
+    const allDefaultTags = [
+      ...(exampleFilters ? exampleFilters.defaultTags : []),
+      ...(gameTemplateFilters ? gameTemplateFilters.defaultTags : []),
+    ];
+    const uniqueTags = new Set(allDefaultTags);
+    return Array.from(uniqueTags);
+  }, [exampleFilters, gameTemplateFilters]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column expand noMargin useFullHeight>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SearchBar
               value={searchText}
               onChange={setSearchText}
@@ -216,7 +210,6 @@ export const ExampleStore = ({
             />
           </Column>
         </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line
           expand
           overflow={
@@ -224,19 +217,17 @@ export const ExampleStore = ({
           }
           noMargin
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ListSearchResults
             disableAutoTranslate // Search results text highlighting conflicts with dom handling by browser auto-translations features. Disables auto translation to prevent crashes.
             onRetry={fetchGameTemplatesAndExamples}
             error={gameTemplateStoreError || exampleStoreError}
             searchItems={searchItems}
             getSearchItemUniqueId={getItemUniqueId}
-// @ts-expect-error - TS7006 - Parameter 'item' implicitly has an 'any' type. | TS7006 - Parameter 'onHeightComputed' implicitly has an 'any' type.
+            // @ts-expect-error - TS7006 - Parameter 'item' implicitly has an 'any' type. | TS7006 - Parameter 'onHeightComputed' implicitly has an 'any' type.
             renderSearchItem={(item, onHeightComputed) => {
               if (item.authorIds) {
                 // This is an ExampleShortHeader.
                 return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <ExampleListItem
                     isOpening={isOpening}
                     onHeightComputed={onHeightComputed}
@@ -258,10 +249,9 @@ export const ExampleStore = ({
                 const isTemplateOwned =
                   !!receivedGameTemplates &&
                   !!receivedGameTemplates.find(
-                    template => template.id === item.id
+                    (template) => template.id === item.id
                   );
                 return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <PrivateGameTemplateListItem
                     isOpening={isOpening}
                     onHeightComputed={onHeightComputed}

@@ -1,10 +1,9 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 import * as React from 'react';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
-// @ts-expect-error - TS6142 - Module '../../../UI/TextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextField.tsx', but '--jsx' is not set.
+
 import TextField, { TextFieldInterface } from '../../../UI/TextField';
 import {
   largeSelectedArea,
@@ -19,10 +18,9 @@ import {
   shouldSubmit,
   shouldValidate,
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import { dataObjectToProps } from '../../../Utils/HTMLDataset';
-const gd: libGDevelop = global.gd;
 
 const styles = {
   container: {
@@ -38,7 +36,10 @@ const styles = {
   },
 } as const;
 
-export default class GroupEvent extends React.Component<EventRendererProps, any> {
+export default class GroupEvent extends React.Component<
+  EventRendererProps,
+  any
+> {
   state = {
     editing: false,
     editingPreviousValue: null,
@@ -82,7 +83,6 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
     const textColor = (r + g + b) / 3 > 200 ? 'black' : 'white';
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         className={classNames({
           [largeSelectableArea]: true,
@@ -93,7 +93,7 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
           backgroundColor: `rgb(${r}, ${g}, ${b})`,
         }}
         onClick={this.edit}
-        onKeyUp={event => {
+        onKeyUp={(event) => {
           if (shouldActivate(event)) {
             this.edit();
           }
@@ -104,15 +104,13 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
         }`}
       >
         {this.state.editing ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <TextField
             margin="none"
-// @ts-expect-error - TS7006 - Parameter 'textField' implicitly has an 'any' type.
-            ref={textField => (this._textField = textField)}
+            ref={(textField) => (this._textField = textField)}
             value={groupEvent.getName()}
             translatableHintText={t`<Enter group name>`}
             onBlur={this.endEditing}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
+            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
             onChange={(e, text) => {
               groupEvent.setName(text);
               this.forceUpdate();
@@ -123,14 +121,12 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
               WebkitTextFillColor: textColor,
             }}
             fullWidth
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onKeyUp={event => {
+            onKeyUp={(event) => {
               if (shouldCloseOrCancel(event)) {
                 this.endEditing();
               }
             }}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onKeyDown={event => {
+            onKeyDown={(event) => {
               if (shouldValidate(event) || shouldSubmit(event)) {
                 this.endEditing();
               }
@@ -138,7 +134,6 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
             underlineShow={false}
           />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <span
             className={classNames({
               [selectableArea]: true,
@@ -150,7 +145,6 @@ export default class GroupEvent extends React.Component<EventRendererProps, any>
             {groupEvent.getName() ? (
               groupEvent.getName()
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>{`<Enter group name>`}</Trans>
             )}
           </span>

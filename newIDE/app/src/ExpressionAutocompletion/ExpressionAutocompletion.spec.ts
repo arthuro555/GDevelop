@@ -1,11 +1,13 @@
-import {getAutocompletionsFromDescriptions, insertAutocompletionInExpression} from '.';
-const gd: libGDevelop = global.gd;
+import {
+  getAutocompletionsFromDescriptions,
+  insertAutocompletionInExpression,
+} from '.';
 
 const makeFakeI18n = (fakeI18n: undefined): I18nType => ({
-// @ts-expect-error - TS2698 - Spread types may only be created from object types.
+  // @ts-expect-error - TS2698 - Spread types may only be created from object types.
   ...fakeI18n,
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
 });
 
 const makeTestContext = () => {
@@ -61,27 +63,26 @@ const makeTestContext = () => {
   };
 };
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('ExpressionAutocompletion', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('It can suggest autocompletion', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete objects', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
 
       const expressionNode = parser.parseExpression('My').get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode,
-        1
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode,
+          1
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -90,7 +91,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toHaveLength(2);
@@ -110,13 +111,14 @@ describe('ExpressionAutocompletion', () => {
       );
 
       const expressionNode2 = parser.parseExpression('MySpriteObjectW').get();
-      const completionDescriptions2 = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode2,
-        1
-      );
+      const completionDescriptions2 =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode2,
+          1
+        );
       const autocompletions2 = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -125,7 +127,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions2,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions2).toHaveLength(1);
@@ -140,23 +142,24 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete free expressions', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
 
       const expressionNode = parser.parseExpression('To').get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'string',
-        expressionNode,
-        1
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'string',
+          expressionNode,
+          1
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -165,7 +168,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -198,23 +201,24 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete layer parameters', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
 
       const expressionNode = parser.parseExpression('MouseX("Ba').get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode,
-        9
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode,
+          9
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -223,7 +227,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -236,23 +240,24 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete object expressions', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
 
       const expressionNode = parser.parseExpression('MySpriteObject.Ani').get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'string',
-        expressionNode,
-        16
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'string',
+          expressionNode,
+          16
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -261,7 +266,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -276,7 +281,6 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete behavior expressions directly from object', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
@@ -284,17 +288,19 @@ describe('ExpressionAutocompletion', () => {
       const expressionNode = parser
         .parseExpression('MySpriteObjectWithBehaviors.Speed')
         .get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'string',
-        expressionNode,
-        'MySpriteObjectWithBehaviors.Speed'.length - 1
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'string',
+          expressionNode,
+          'MySpriteObjectWithBehaviors.Speed'.length - 1
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -303,7 +309,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -328,7 +334,6 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete object points', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
@@ -336,17 +341,19 @@ describe('ExpressionAutocompletion', () => {
       const expressionNode = parser
         .parseExpression('MySpriteObject.PointX("He')
         .get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode,
-        24
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode,
+          24
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -355,7 +362,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -368,7 +375,6 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete behaviors (1)', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
@@ -376,17 +382,19 @@ describe('ExpressionAutocompletion', () => {
       const expressionNode = parser
         .parseExpression('MySpriteObjectWithBehaviors.Plat')
         .get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode,
-        28
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode,
+          28
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -395,7 +403,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -409,7 +417,6 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete behaviors (2)', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
@@ -417,17 +424,19 @@ describe('ExpressionAutocompletion', () => {
       const expressionNode = parser
         .parseExpression('MySpriteObjectWithBehaviors.a')
         .get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'number',
-        expressionNode,
-        28
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'number',
+          expressionNode,
+          28
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -436,7 +445,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -455,7 +464,6 @@ describe('ExpressionAutocompletion', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can autocomplete behavior expressions', () => {
       const { project, testLayout, parser } = makeTestContext();
       const scope = { project, layout: testLayout } as const;
@@ -463,17 +471,19 @@ describe('ExpressionAutocompletion', () => {
       const expressionNode = parser
         .parseExpression('MySpriteObjectWithBehaviors.PlatformerObject::Jum')
         .get();
-      const projectScopedContainers = gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
-        project,
-        testLayout
-      );
-      const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-        gd.JsPlatform.get(),
-        projectScopedContainers,
-        'string',
-        expressionNode,
-        47
-      );
+      const projectScopedContainers =
+        gd.ProjectScopedContainers.makeNewProjectScopedContainersForProjectAndLayout(
+          project,
+          testLayout
+        );
+      const completionDescriptions =
+        gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+          gd.JsPlatform.get(),
+          projectScopedContainers,
+          'string',
+          expressionNode,
+          47
+        );
       const autocompletions = getAutocompletionsFromDescriptions(
         {
           gd,
@@ -482,7 +492,7 @@ describe('ExpressionAutocompletion', () => {
           scope,
         },
         completionDescriptions,
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+        // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
         makeFakeI18n()
       );
       expect(autocompletions).toEqual(
@@ -498,9 +508,7 @@ describe('ExpressionAutocompletion', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('can insert autocompletion', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('Check empty string/over limit.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -523,7 +531,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: 'HelloWorld' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check inserting suffixes.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -569,7 +577,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: '123 + HelloWorld()' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check already existing suffixes.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -606,7 +614,6 @@ describe('ExpressionAutocompletion', () => {
       ).toMatchObject({ expression: '123 + HelloWorld(' });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('Check word limits.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -660,7 +667,6 @@ describe('ExpressionAutocompletion', () => {
       ).toMatchObject({ expression: '123 + HelloWorld + 456' });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('Check word limits with separators.', () => {
       // Check word limits with separators.
       expect(
@@ -745,7 +751,6 @@ describe('ExpressionAutocompletion', () => {
       ).toMatchObject({ expression: '123 + Hello.World:+ 456' });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('Check word limits with separators and suffixes.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -848,7 +853,6 @@ describe('ExpressionAutocompletion', () => {
       ).toMatchObject({ expression: '123 + Hello.World(+ 456' });
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('Check ToString conversion for simple insertions.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -886,7 +890,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: 'ToString(World())' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check ToString conversion wraps the whole expression.', () => {
       // Check that the beginning of the expression is wrapped in ToString.
       expect(
@@ -926,7 +930,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: 'ToString(Object::World())' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check ToString wraps only the autocompleted expression.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -962,7 +966,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: 'Expression(Parameter1,ToString(World))' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check that ToString is added in the middle of the expression.', () => {
       expect(
         insertAutocompletionInExpression(
@@ -999,7 +1003,7 @@ describe('ExpressionAutocompletion', () => {
         )
       ).toMatchObject({ expression: '"a" + ToString(Object::World()) + "b"' });
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('Check insertion of ToString with existing suffix.', () => {
       expect(
         insertAutocompletionInExpression(

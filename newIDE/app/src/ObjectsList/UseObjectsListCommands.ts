@@ -5,13 +5,13 @@ import { CommandOption } from '../CommandPalette/CommandManager';
 import ObjectsRenderingService from '../ObjectsRendering/ObjectsRenderingService';
 
 const generateLayoutObjectsOptions = (
-  project: gdProject,
-  layout: gdLayout,
-  onChoose: (object: gdObject, arg?: string | null | undefined) => void,
-  onChooseArg?: string | null,
+  project: gd.Project,
+  layout: gd.Layout,
+  onChoose: (object: gd.Object, arg?: string | null | undefined) => void,
+  onChooseArg?: string | null
 ): Array<CommandOption> => {
-// @ts-expect-error - TS2322 - Type '{ text: any; handler: () => void; iconSrc: any; }[]' is not assignable to type 'CommandOption[]'.
-  return enumerateObjects(project, layout).containerObjectsList.map(item => ({
+  // @ts-expect-error - TS2322 - Type '{ text: any; handler: () => void; iconSrc: any; }[]' is not assignable to type 'CommandOption[]'.
+  return enumerateObjects(project, layout).containerObjectsList.map((item) => ({
     text: item.object.getName(),
     handler: () => onChoose(item.object, onChooseArg),
     iconSrc: ObjectsRenderingService.getThumbnail.bind(ObjectsRenderingService)(
@@ -22,10 +22,13 @@ const generateLayoutObjectsOptions = (
 };
 
 type Props = {
-  project: gdProject,
-  layout: gdLayout,
-  onEditObject: (object: gdObject, initialTab?: string | null | undefined) => void,
-  onEditObjectVariables: (object: gdObject) => void
+  project: gd.Project;
+  layout: gd.Layout;
+  onEditObject: (
+    object: gd.Object,
+    initialTab?: string | null | undefined
+  ) => void;
+  onEditObjectVariables: (object: gd.Object) => void;
 };
 
 const useObjectsListCommands = (props: Props) => {

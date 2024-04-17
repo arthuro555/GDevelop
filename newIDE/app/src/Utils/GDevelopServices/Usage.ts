@@ -5,37 +5,42 @@ import { MessageByLocale } from '../i18n/MessageByLocale';
 import { extractGDevelopApiErrorStatusAndCode } from './Errors';
 
 export type Usage = {
-  id: string,
-  userId: string,
-  type: string,
-  createdAt: number
+  id: string;
+  userId: string;
+  type: string;
+  createdAt: number;
 };
 export type Usages = Array<Usage>;
 
 export type CancelReasons = {
-  [key: string]: boolean | string
+  [key: string]: boolean | string;
 };
 
 export type Subscription = {
-  userId: string,
-  planId: string | null,
-  createdAt: number,
-  updatedAt: number,
+  userId: string;
+  planId: string | null;
+  createdAt: number;
+  updatedAt: number;
   /**
    * Id of the pricing system.
    * null when subscription is empty.
    */
-  pricingSystemId: 'REDEMPTION_CODE' | 'MANUALLY_ADDED' | 'TEAM_MEMBER' | string | null,
-  stripeSubscriptionId?: string,
-  stripeCustomerId?: string,
-  paypalSubscriptionId?: string,
-  paypalPayerId?: string,
-  cancelAtPeriodEnd?: boolean,
-  cancelReasons?: CancelReasons,
-  purchaselyPlan?: string,
-  redemptionCode?: string | null,
-  redemptionCodeValidUntil?: number | null,
-  benefitsFromEducationPlan?: boolean
+  pricingSystemId:
+    | 'REDEMPTION_CODE'
+    | 'MANUALLY_ADDED'
+    | 'TEAM_MEMBER'
+    | string
+    | null;
+  stripeSubscriptionId?: string;
+  stripeCustomerId?: string;
+  paypalSubscriptionId?: string;
+  paypalPayerId?: string;
+  cancelAtPeriodEnd?: boolean;
+  cancelReasons?: CancelReasons;
+  purchaselyPlan?: string;
+  redemptionCode?: string | null;
+  redemptionCodeValidUntil?: number | null;
+  benefitsFromEducationPlan?: boolean;
 };
 
 /**
@@ -43,41 +48,41 @@ export type Subscription = {
  */
 export type Capabilities = {
   analytics: {
-    sessions: boolean,
-    players: boolean,
-    retention: boolean,
-    sessionsTimeStats: boolean,
-    platforms: boolean
-  },
+    sessions: boolean;
+    players: boolean;
+    retention: boolean;
+    sessionsTimeStats: boolean;
+    platforms: boolean;
+  };
   cloudProjects: {
-    maximumCount: number,
-    canMaximumCountBeIncreased: boolean,
-    maximumGuestCollaboratorsPerProject: number
-  },
+    maximumCount: number;
+    canMaximumCountBeIncreased: boolean;
+    maximumGuestCollaboratorsPerProject: number;
+  };
   leaderboards: {
-    maximumCountPerGame: number,
-    canMaximumCountPerGameBeIncreased: boolean,
-    themeCustomizationCapabilities: 'NONE' | 'BASIC' | 'FULL',
-    canUseCustomCss: boolean
-  }
+    maximumCountPerGame: number;
+    canMaximumCountPerGameBeIncreased: boolean;
+    themeCustomizationCapabilities: 'NONE' | 'BASIC' | 'FULL';
+    canUseCustomCss: boolean;
+  };
 };
 
 export type UsagePrice = {
-  priceInCredits: number
+  priceInCredits: number;
 };
 
 export type UsagePrices = {
-  [key: string]: UsagePrice
+  [key: string]: UsagePrice;
 };
 
 export type UsagePurchasableQuantities = {
   [key: string]: {
-    purchasableQuantity: number
-  }
+    purchasableQuantity: number;
+  };
 };
 
 export type UserBalance = {
-  amount: number
+  amount: number;
 };
 
 /**
@@ -85,83 +90,83 @@ export type UserBalance = {
  * Typically: the number of remaining builds for a user.
  */
 export type Quota = {
-  limitReached: boolean,
-  current: number,
-  max: number,
-  period?: '1day' | '30days'
+  limitReached: boolean;
+  current: number;
+  max: number;
+  period?: '1day' | '30days';
 };
 
 export type Quotas = {
-  [key: string]: Quota
+  [key: string]: Quota;
 };
 
 /**
  * The limits communicated by the API for a user.
  */
 export type Limits = {
-  quotas: Quotas,
-  capabilities: Capabilities,
+  quotas: Quotas;
+  capabilities: Capabilities;
   credits: {
-    userBalance: UserBalance,
-    prices: UsagePrices,
-    purchasableQuantities: UsagePurchasableQuantities
-  },
-  message: string | typeof undefined
+    userBalance: UserBalance;
+    prices: UsagePrices;
+    purchasableQuantities: UsagePurchasableQuantities;
+  };
+  message: string | typeof undefined;
 };
 
 export type PlanDetails = {
-  planId: string | null,
-  legacyPlanId?: string,
-  name: string,
-  monthlyPriceInEuros: number | null,
-  yearlyPriceInEuros?: number | null,
-  isPerUser?: true,
-  smallDescription?: MessageDescriptor,
-  hideInSubscriptionDialog?: boolean,
+  planId: string | null;
+  legacyPlanId?: string;
+  name: string;
+  monthlyPriceInEuros: number | null;
+  yearlyPriceInEuros?: number | null;
+  isPerUser?: true;
+  smallDescription?: MessageDescriptor;
+  hideInSubscriptionDialog?: boolean;
   descriptionBullets: Array<{
-    message: MessageDescriptor
-  }>
+    message: MessageDescriptor;
+  }>;
 };
 
 export type SubscriptionPlanPricingSystem = {
-  id: string,
-  planId: string,
-  period: 'week' | 'month' | 'year',
-  isPerUser?: true,
-  currency: 'EUR' | 'USD',
-  region: string,
-  amountInCents: number,
-  periodCount: number
+  id: string;
+  planId: string;
+  period: 'week' | 'month' | 'year';
+  isPerUser?: true;
+  currency: 'EUR' | 'USD';
+  region: string;
+  amountInCents: number;
+  periodCount: number;
 };
 
 export type SubscriptionPlan = {
-  id: string,
-  isLegacy: boolean,
-  nameByLocale: MessageByLocale,
-  descriptionByLocale: MessageByLocale,
-  bulletPointsByLocale: Array<MessageByLocale>,
-  specificRequirementByLocale?: MessageByLocale,
-  targetAudiences: Array<'CASUAL' | 'PRO' | 'EDUCATION'>,
+  id: string;
+  isLegacy: boolean;
+  nameByLocale: MessageByLocale;
+  descriptionByLocale: MessageByLocale;
+  bulletPointsByLocale: Array<MessageByLocale>;
+  specificRequirementByLocale?: MessageByLocale;
+  targetAudiences: Array<'CASUAL' | 'PRO' | 'EDUCATION'>;
   fullFeatures: Array<{
-    featureName: string,
-    pillarName: string,
-    descriptionByLocale?: MessageByLocale,
-    tooltipByLocale?: MessageByLocale,
-    enabled?: 'yes' | 'no',
-    unlimited?: true,
-    upcoming?: true,
-    trialLike?: true
-  }>,
+    featureName: string;
+    pillarName: string;
+    descriptionByLocale?: MessageByLocale;
+    tooltipByLocale?: MessageByLocale;
+    enabled?: 'yes' | 'no';
+    unlimited?: true;
+    upcoming?: true;
+    trialLike?: true;
+  }>;
   pillarNamesPerLocale: {
-    [key: string]: MessageByLocale
-  },
+    [key: string]: MessageByLocale;
+  };
   featureNamesByLocale: {
-    [key: string]: MessageByLocale
-  }
+    [key: string]: MessageByLocale;
+  };
 };
 
-export type SubscriptionPlanWithPricingSystems = (SubscriptionPlan) & {
-  pricingSystems: SubscriptionPlanPricingSystem[]
+export type SubscriptionPlanWithPricingSystems = SubscriptionPlan & {
+  pricingSystems: SubscriptionPlanPricingSystem[];
 };
 
 export const EDUCATION_PLAN_MIN_SEATS = 5;
@@ -170,7 +175,9 @@ export const apiClient = axios.create({
   baseURL: GDevelopUsageApi.baseUrl,
 });
 
-export const canPriceBeFoundInGDevelopPrices = (pricingSystemId: string): boolean => {
+export const canPriceBeFoundInGDevelopPrices = (
+  pricingSystemId: string
+): boolean => {
   if (
     ['REDEMPTION_CODE', 'MANUALLY_ADDED', 'TEAM_MEMBER'].includes(
       pricingSystemId
@@ -182,24 +189,24 @@ export const canPriceBeFoundInGDevelopPrices = (pricingSystemId: string): boolea
   return true;
 };
 
-export const listSubscriptionPlans = async (
-  options: {
-    includeLegacy: boolean
-  },
-): Promise<SubscriptionPlan[]> => {
+export const listSubscriptionPlans = async (options: {
+  includeLegacy: boolean;
+}): Promise<SubscriptionPlan[]> => {
   const response = await apiClient.get('/subscription-plan', {
     params: { includeLegacy: options.includeLegacy ? 'true' : 'false' },
   });
   return response.data;
 };
 
-export const getSubscriptionPlanPricingSystem = async (pricingSystemId: string): Promise<SubscriptionPlanPricingSystem | null | undefined> => {
+export const getSubscriptionPlanPricingSystem = async (
+  pricingSystemId: string
+): Promise<SubscriptionPlanPricingSystem | null | undefined> => {
   try {
     const response = await apiClient.get(
       `/subscription-plan-pricing-system/${pricingSystemId}`
     );
     return response.data;
-  } catch (error: any) {
+  } catch (error) {
     const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(error);
     if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
       return null;
@@ -208,15 +215,13 @@ export const getSubscriptionPlanPricingSystem = async (pricingSystemId: string):
   }
 };
 
-export const listSubscriptionPlanPricingSystems = async (
-  options: {
-    subscriptionPlanIds?: string[] | null | undefined,
-    includeLegacy: boolean
-  },
-): Promise<SubscriptionPlanPricingSystem[]> => {
+export const listSubscriptionPlanPricingSystems = async (options: {
+  subscriptionPlanIds?: string[] | null | undefined;
+  includeLegacy: boolean;
+}): Promise<SubscriptionPlanPricingSystem[]> => {
   const params: {
-    includeLegacy: string,
-    subscriptionPlanIds?: string
+    includeLegacy: string;
+    subscriptionPlanIds?: string;
   } = {
     includeLegacy: options.includeLegacy ? 'true' : 'false',
   };
@@ -229,7 +234,10 @@ export const listSubscriptionPlanPricingSystems = async (
   return response.data;
 };
 
-export const getUserUsages = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Usages> => {
+export const getUserUsages = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Usages> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await apiClient.get('/usage', {
@@ -243,7 +251,10 @@ export const getUserUsages = async (getAuthorizationHeader: () => Promise<string
   return response.data;
 };
 
-export const getUserLimits = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Limits> => {
+export const getUserLimits = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Limits> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await apiClient.get('/limits', {
@@ -257,7 +268,10 @@ export const getUserLimits = async (getAuthorizationHeader: () => Promise<string
   return response.data;
 };
 
-export const getUserSubscription = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Subscription> => {
+export const getUserSubscription = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Subscription> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await apiClient.get('/subscription-v2', {
@@ -275,12 +289,12 @@ export const changeUserSubscription = async (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
   newSubscriptionDetails: {
-    planId: string | null
+    planId: string | null;
   },
   options: {
-    cancelImmediately: boolean,
-    cancelReasons: CancelReasons
-  },
+    cancelImmediately: boolean;
+    cancelReasons: CancelReasons;
+  }
 ): Promise<Subscription> => {
   const authorizationHeader = await getAuthorizationHeader();
 
@@ -324,15 +338,21 @@ export const canCancelAtEndOfPeriod = (subscription: Subscription) => {
   return !!subscription.stripeSubscriptionId;
 };
 
-export const hasMobileAppStoreSubscriptionPlan = (subscription?: Subscription | null): boolean => {
+export const hasMobileAppStoreSubscriptionPlan = (
+  subscription?: Subscription | null
+): boolean => {
   return !!subscription && !!subscription.purchaselyPlan;
 };
 
-export const hasSubscriptionBeenManuallyAdded = (subscription?: Subscription | null): boolean => {
+export const hasSubscriptionBeenManuallyAdded = (
+  subscription?: Subscription | null
+): boolean => {
   return !!subscription && subscription.pricingSystemId === 'MANUALLY_ADDED';
 };
 
-export const hasValidSubscriptionPlan = (subscription?: Subscription | null) => {
+export const hasValidSubscriptionPlan = (
+  subscription?: Subscription | null
+) => {
   const hasValidSubscription =
     !!subscription &&
     !!subscription.planId &&
@@ -349,20 +369,21 @@ export const hasValidSubscriptionPlan = (subscription?: Subscription | null) => 
 
 type UploadType = 'build' | 'preview';
 
-export const getSignedUrl = async (
-  params: {
-    uploadType: UploadType,
-    key: string,
-    contentType: string
-  },
-): Promise<{
-  signedUrl: string
+export const getSignedUrl = async (params: {
+  uploadType: UploadType;
+  key: string;
+  contentType: string;
+}): Promise<{
+  signedUrl: string;
 }> => {
   const response = await apiClient.post('/upload-options/signed-url', params);
   return response.data;
 };
 
-export const getRedirectToSubscriptionPortalUrl = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<string> => {
+export const getRedirectToSubscriptionPortalUrl = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<string> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await apiClient.post(
@@ -385,19 +406,17 @@ export const getRedirectToSubscriptionPortalUrl = async (getAuthorizationHeader:
   return sessionPortalUrl;
 };
 
-export const getRedirectToCheckoutUrl = (
-  {
-    pricingSystemId,
-    userId,
-    userEmail,
-    quantity,
-  }: {
-    pricingSystemId: string,
-    userId: string,
-    userEmail: string,
-    quantity?: number
-  },
-): string => {
+export const getRedirectToCheckoutUrl = ({
+  pricingSystemId,
+  userId,
+  userEmail,
+  quantity,
+}: {
+  pricingSystemId: string;
+  userId: string;
+  userEmail: string;
+  quantity?: number;
+}): string => {
   const url = new URL(
     `${GDevelopUsageApi.baseUrl}/subscription-v2/action/redirect-to-checkout-v2`
   );
@@ -409,10 +428,12 @@ export const getRedirectToCheckoutUrl = (
   return url.toString();
 };
 
-export const canUseCloudProjectHistory = (subscription?: Subscription | null): boolean => {
+export const canUseCloudProjectHistory = (
+  subscription?: Subscription | null
+): boolean => {
   if (!subscription) return false;
   return (
-// @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
     ['gdevelop_startup', 'gdevelop_education'].includes(subscription.planId) ||
     (subscription.planId === 'gdevelop_gold' &&
       !!subscription.benefitsFromEducationPlan)
@@ -422,7 +443,7 @@ export const canUseCloudProjectHistory = (subscription?: Subscription | null): b
 export const redeemCode = async (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  code: string,
+  code: string
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
 
@@ -442,11 +463,13 @@ export const redeemCode = async (
   );
 };
 
-export const canBenefitFromDiscordRole = (subscription?: Subscription | null) => {
+export const canBenefitFromDiscordRole = (
+  subscription?: Subscription | null
+) => {
   return (
     !!subscription &&
     ['gdevelop_education', 'gdevelop_startup', 'gdevelop_gold'].includes(
-// @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      // @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
       subscription.planId
     ) &&
     !subscription.benefitsFromEducationPlan
@@ -456,7 +479,7 @@ export const canBenefitFromDiscordRole = (subscription?: Subscription | null) =>
 export const canUpgradeSubscription = (subscription?: Subscription | null) => {
   return (
     !!subscription &&
-// @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
+    // @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
     !['gdevelop_education', 'gdevelop_startup'].includes(subscription.planId) &&
     !subscription.benefitsFromEducationPlan
   );

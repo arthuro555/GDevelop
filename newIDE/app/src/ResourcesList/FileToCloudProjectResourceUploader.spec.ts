@@ -1,9 +1,6 @@
-// @ts-expect-error - TS6142 - Module './FileToCloudProjectResourceUploader' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/FileToCloudProjectResourceUploader.tsx', but '--jsx' is not set.
-import {getInputAcceptedMimesAndExtensions} from './FileToCloudProjectResourceUploader';
+import { getInputAcceptedMimesAndExtensions } from './FileToCloudProjectResourceUploader';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('FileToCloudProjectResourceUploader', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('gives the accepted mime/extensions for an input', () => {
     expect(getInputAcceptedMimesAndExtensions('audio')).toMatchInlineSnapshot(
       `"audio/aac,audio/x-wav,audio/mpeg,audio/mp3,audio/ogg,.aac,.wav,.mp3,.ogg"`

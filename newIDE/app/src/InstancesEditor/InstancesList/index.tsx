@@ -1,4 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import {t, Trans} from '@lingui/macro';
 import React, { Component } from 'react';
 import {
@@ -6,25 +6,25 @@ import {
   Table as RVTable,
   Column as RVColumn,
   SortDirection,
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-virtualized'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-virtualized/dist/commonjs/index.js' implicitly has an 'any' type.
+
 } from 'react-virtualized';
-// @ts-expect-error - TS6142 - Module '../../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../../UI/IconButton';
 import KeyboardShortcuts from '../../UI/KeyboardShortcuts';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS6142 - Module '../../UI/SearchBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SearchBar.tsx', but '--jsx' is not set.
+
 import SearchBar, { SearchBarInterface } from '../../UI/SearchBar';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/RemoveCircle'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/RemoveCircle.js' implicitly has an 'any' type.
+
 import RemoveCircle from '../../UI/CustomSvgIcons/RemoveCircle';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Lock'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Lock.js' implicitly has an 'any' type.
+
 import Lock from '../../UI/CustomSvgIcons/Lock';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/LockOpen'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/LockOpen.js' implicitly has an 'any' type.
+
 import LockOpen from '../../UI/CustomSvgIcons/LockOpen';
 import { toFixedWithoutTrailingZeros } from '../../Utils/Mathematics';
-// @ts-expect-error - TS6142 - Module '../../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import ErrorBoundary from '../../UI/ErrorBoundary';
 import useForceUpdate from '../../Utils/UseForceUpdate';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
 const gd = global.gd;
@@ -38,7 +38,7 @@ const minimumWidths = {
 } as const;
 
 type RenderedRowInfo = {
-  instance: gdInitialInstance,
+  instance: gd.InitialInstance,
   name: string,
   locked: boolean,
   x: string,
@@ -82,9 +82,9 @@ type State = {
 };
 
 type Props = {
-  instances: gdInitialInstancesContainer,
-  selectedInstances: Array<gdInitialInstance>,
-  onSelectInstances: (arg1: Array<gdInitialInstance>, arg2: boolean) => void
+  instances: gd.InitialInstancesContainer,
+  selectedInstances: Array<gd.InitialInstance>,
+  onSelectInstances: (arg1: Array<gd.InitialInstance>, arg2: boolean) => void
 };
 
 class InstancesList extends Component<Props, State> {
@@ -176,7 +176,7 @@ class InstancesList extends Component<Props, State> {
     rowData: RenderedRowInfo
   }) => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <IconButton
         size="small"
         onClick={() => {
@@ -193,13 +193,13 @@ class InstancesList extends Component<Props, State> {
         }}
       >
         {instance.isLocked() && instance.isSealed() ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <RemoveCircle />
         ) : instance.isLocked() ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <Lock />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <LockOpen />
         )}
       </IconButton>
@@ -267,19 +267,16 @@ class InstancesList extends Component<Props, State> {
     const tableKey = instances.ptr;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <GDevelopThemeContext.Consumer>
         {gdevelopTheme => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <div style={styles.container}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <SearchBar
                   value={searchText}
-// @ts-expect-error - TS7006 - Parameter 'searchText' implicitly has an 'any' type.
+
                   onChange={searchText =>
                     this.setState({
                       searchText,
@@ -292,7 +289,6 @@ class InstancesList extends Component<Props, State> {
                 />
               </Column>
             </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <div
               style={styles.tableContainer}
 // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
@@ -300,11 +296,9 @@ class InstancesList extends Component<Props, State> {
 // @ts-expect-error - TS2322 - Type '(evt: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
               onKeyUp={this._keyboardShortcuts.onKeyUp}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <AutoSizer>
-{ /* @ts-expect-error - TS7031 - Binding element 'height' implicitly has an 'any' type. | TS7031 - Binding element 'width' implicitly has an 'any' type. */}
                 {({ height, width }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <RVTable
 // @ts-expect-error - TS7006 - Parameter 'table' implicitly has an 'any' type.
                     ref={table => (this.table = table)}
@@ -323,15 +317,13 @@ class InstancesList extends Component<Props, State> {
                     sortDirection={sortDirection}
                     width={Math.max(width, minimumWidths.table)}
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Object name</Trans>}
                       dataKey="name"
                       width={Math.max(width * 0.35, minimumWidths.objectName)}
                       className={'tableColumn'}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
                       label=""
                       dataKey="locked"
@@ -342,9 +334,8 @@ class InstancesList extends Component<Props, State> {
                       className={'tableColumn'}
                       cellRenderer={this._renderLockCell}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>X</Trans>}
                       dataKey="x"
                       width={Math.max(
@@ -353,9 +344,8 @@ class InstancesList extends Component<Props, State> {
                       )}
                       className={'tableColumn'}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Y</Trans>}
                       dataKey="y"
                       width={Math.max(
@@ -364,9 +354,8 @@ class InstancesList extends Component<Props, State> {
                       )}
                       className={'tableColumn'}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Angle</Trans>}
                       dataKey="angle"
                       width={Math.max(
@@ -375,17 +364,15 @@ class InstancesList extends Component<Props, State> {
                       )}
                       className={'tableColumn'}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Layer</Trans>}
                       dataKey="layer"
                       width={Math.max(width * 0.2, minimumWidths.layerName)}
                       className={'tableColumn'}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <RVColumn
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                       label={<Trans>Z Order</Trans>}
                       dataKey="zOrder"
                       width={Math.max(
@@ -405,21 +392,20 @@ class InstancesList extends Component<Props, State> {
   }
 }
 
-const InstancesListWithErrorBoundary = React.forwardRef<Props, InstancesListInterface>((props, ref) => {
+const InstancesListWithErrorBoundary = React.forwardRef<InstancesListInterface, Props>((props, ref) => {
   const forceUpdate = useForceUpdate();
-// @ts-expect-error - TS2739 - Type '{ forceUpdate: () => void; }' is missing the following properties from type 'Props': instances, selectedInstances, onSelectInstances
+
   React.useImperativeHandle(ref, () => ({
     forceUpdate,
   }));
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <ErrorBoundary
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       componentTitle={<Trans>Instances list</Trans>}
       scope="scene-editor-instances-list"
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2769 - No overload matches this call. */}
       <InstancesList {...props} />
     </ErrorBoundary>
   );

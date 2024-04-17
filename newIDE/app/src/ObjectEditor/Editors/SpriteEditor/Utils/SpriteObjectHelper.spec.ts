@@ -9,11 +9,8 @@ import {
 // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
 const gd = global.gd;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('SpriteObjectHelper', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('Points related methods', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can tell if two sprite have the exact same points', () => {
       const sprite1 = new gd.Sprite();
       const sprite2 = new gd.Sprite();
@@ -53,7 +50,6 @@ describe('SpriteObjectHelper', () => {
       expect(haveSamePoints(sprite2, sprite1)).toBe(true);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can tell if all sprites of animations have the exact same points', () => {
       const spriteObject = new gd.SpriteObject();
 
@@ -112,7 +108,6 @@ describe('SpriteObjectHelper', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can copy points of a sprite in all sprites of an animation', () => {
       const animation1 = new gd.Animation();
       animation1.setDirectionsCount(1);
@@ -163,9 +158,7 @@ describe('SpriteObjectHelper', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('Collision masks related methods', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('can tell if two sprite have the exact same collision masks', () => {
       const addVertice = (polygon: any, x: number, y: number) => {
         const vertice = new gd.Vector2f();
@@ -212,29 +205,18 @@ describe('SpriteObjectHelper', () => {
         expect(haveSameCollisionMasks(sprite2, sprite1)).toBe(true);
 
         // Moving a vertice of the polygon makes them different again.
-        sprite2
-          .getCustomCollisionMask()
-          .at(0)
-          .getVertices()
-          .at(1)
-          .set_x(-20);
+        sprite2.getCustomCollisionMask().at(0).getVertices().at(1).set_x(-20);
         expect(haveSameCollisionMasks(sprite1, sprite2)).toBe(false);
         expect(haveSameCollisionMasks(sprite2, sprite1)).toBe(false);
 
         // Moving the same vertice of the other polygon makes them the same again.
-        sprite1
-          .getCustomCollisionMask()
-          .at(0)
-          .getVertices()
-          .at(1)
-          .set_x(-20);
+        sprite1.getCustomCollisionMask().at(0).getVertices().at(1).set_x(-20);
         expect(haveSameCollisionMasks(sprite1, sprite2)).toBe(true);
         expect(haveSameCollisionMasks(sprite2, sprite1)).toBe(true);
       }
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can remove sprites using the sprites pointers', () => {
     const animation1 = new gd.Animation();
     animation1.setUseMultipleDirections(true);
@@ -258,12 +240,9 @@ describe('SpriteObjectHelper', () => {
     });
 
     expect(animation1.getDirection(0).getSpritesCount()).toBe(1);
-    expect(
-      animation1
-        .getDirection(0)
-        .getSprite(0)
-        .getImageName()
-    ).toBe('sprite2.png');
+    expect(animation1.getDirection(0).getSprite(0).getImageName()).toBe(
+      'sprite2.png'
+    );
     expect(animation1.getDirection(1).getSpritesCount()).toBe(2);
   });
 });

@@ -1,6 +1,6 @@
 type Props = {
-  canvas: HTMLDivElement,
-  shouldMoveView: () => boolean
+  canvas: HTMLDivElement;
+  shouldMoveView: () => boolean;
 };
 
 /**
@@ -13,10 +13,7 @@ export default class CanvasCursor {
   canvas: HTMLDivElement;
   shouldMoveView: () => boolean;
 
-  constructor({
-    canvas,
-    shouldMoveView,
-  }: Props) {
+  constructor({ canvas, shouldMoveView }: Props) {
     this.canvas = canvas;
     this.shouldMoveView = shouldMoveView;
   }

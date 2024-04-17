@@ -2,15 +2,15 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core';
 
 type Props = {
-  label: React.ReactNode,
+  label: React.ReactNode;
   /**
    * To be used when the component is over an element for which
    * we don't control the background (e.g. an image).
    */
-  withOverlay?: boolean
+  withOverlay?: boolean;
 };
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   /**
    * Customize component with overlay:
    * - for dark themes (light font color on dark background), theme values are used.
@@ -22,23 +22,23 @@ const useStyles = makeStyles(theme => {
     container: {
       borderRadius: 4,
       padding: '2px 4px',
-      backdropFilter: props =>
-// @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
+      backdropFilter: (props) =>
+        // @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
         props.withOverlay && theme.palette.type === 'light'
           ? 'brightness(40%)'
           : undefined,
-      backgroundColor: props =>
-// @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
+      backgroundColor: (props) =>
+        // @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
         props.withOverlay && theme.palette.type === 'light'
           ? undefined
-// @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
-          : theme.palette.background.alternate.startsWith('#')
-// @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
-          ? theme.palette.background.alternate + 'BB' // manually add opacity to the background hex color
-// @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
-          : theme.palette.background.alternate,
-      color: props =>
-// @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
+          : // @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
+            theme.palette.background.alternate.startsWith('#')
+            ? // @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
+              theme.palette.background.alternate + 'BB' // manually add opacity to the background hex color
+            : // @ts-expect-error - TS2339 - Property 'alternate' does not exist on type 'TypeBackground'.
+              theme.palette.background.alternate,
+      color: (props) =>
+        // @ts-expect-error - TS2339 - Property 'withOverlay' does not exist on type '{}'.
         props.withOverlay && theme.palette.type === 'light'
           ? '#FAFAFA'
           : undefined,
@@ -46,13 +46,9 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-function PriceTag({
-  label,
-  withOverlay,
-}: Props) {
+function PriceTag({ label, withOverlay }: Props) {
   const classes = useStyles({ withOverlay });
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   return <div className={classes.container}>{label}</div>;
 }
 

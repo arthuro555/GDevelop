@@ -1,9 +1,6 @@
-import {cleanNonExistingObjectFolderOrObjectWithContexts} from './ObjectFolderOrObjectsSelection';
-const gd: libGDevelop = global.gd;
+import { cleanNonExistingObjectFolderOrObjectWithContexts } from './ObjectFolderOrObjectsSelection';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('SceneEditor', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('cleanNonExistingObjectFolderOrObjectWithContexts', () => {
     const project = gd.ProjectHelper.createNewGDJSProject();
     const globalObjectsContainer = new gd.ObjectsContainer();

@@ -10,41 +10,41 @@ type AxisLayout = {
    * as a factor of the current object size
    * (0 for left or top, 1 for right or bottom).
    */
-  anchorOrigin?: number,
+  anchorOrigin?: number;
   /**
    * The target of the anchor on the referential object
    * as a factor of the targeted object size
    * (0 for left or top, 1 for right or bottom).
    */
-  anchorTarget?: number,
+  anchorTarget?: number;
   /**
    * The object name to take as referential.
    */
-  anchorTargetObject?: string,
+  anchorTargetObject?: string;
   /**
    * A displacement to add on the anchored object.
    */
-  anchorDelta?: number,
+  anchorDelta?: number;
   /**
    * Scale proportionally to the target when anchored.
    */
-  isScaledProportionally?: boolean,
+  isScaledProportionally?: boolean;
   /**
    * The left or top margin in pixels.
    */
-  minSideAbsoluteMargin?: number,
+  minSideAbsoluteMargin?: number;
   /**
    * The right or bottom margin in pixels.
    */
-  maxSideAbsoluteMargin?: number,
+  maxSideAbsoluteMargin?: number;
   /**
    * The left or top margin as a factor of the parent size.
    */
-  minSideProportionalMargin?: number,
+  minSideProportionalMargin?: number;
   /**
    * The right or bottom margin as a factor of the parent size.
    */
-  maxSideProportionalMargin?: number
+  maxSideProportionalMargin?: number;
 };
 
 /**
@@ -56,10 +56,10 @@ export type ChildLayout = {
    * Some child-object are optional or only displayed according to the parent state.
    * For example, for buttons there is a background for each state.
    */
-  isShown: boolean,
-  horizontalLayout: AxisLayout,
-  verticalLayout: AxisLayout,
-  depthLayout: AxisLayout
+  isShown: boolean;
+  horizontalLayout: AxisLayout;
+  verticalLayout: AxisLayout;
+  depthLayout: AxisLayout;
 };
 
 /**
@@ -90,18 +90,19 @@ const layoutFields = [
  * also values like 'top-left'.
  * @returns a value between 0 and 1.
  */
-export const getProportionalPositionX = (positionName: string): number | null => {
-  const horizontalPositionName = (positionName.includes('-')
-    ? positionName.split('-')[1]
-    : positionName
+export const getProportionalPositionX = (
+  positionName: string
+): number | null => {
+  const horizontalPositionName = (
+    positionName.includes('-') ? positionName.split('-')[1] : positionName
   ).toLowerCase();
   return horizontalPositionName === 'left'
     ? 0
     : horizontalPositionName === 'right'
-    ? 1
-    : horizontalPositionName === 'center'
-    ? 0.5
-    : null;
+      ? 1
+      : horizontalPositionName === 'center'
+        ? 0.5
+        : null;
 };
 
 /**
@@ -109,18 +110,19 @@ export const getProportionalPositionX = (positionName: string): number | null =>
  * also values like 'top-left'.
  * @returns a value between 0 and 1.
  */
-export const getProportionalPositionY = (positionName: string): number | null => {
-  const verticalPositionName = (positionName.includes('-')
-    ? positionName.split('-')[0]
-    : positionName
+export const getProportionalPositionY = (
+  positionName: string
+): number | null => {
+  const verticalPositionName = (
+    positionName.includes('-') ? positionName.split('-')[0] : positionName
   ).toLowerCase();
   return verticalPositionName === 'top'
     ? 0
     : verticalPositionName === 'bottom'
-    ? 1
-    : verticalPositionName === 'center'
-    ? 0.5
-    : null;
+      ? 1
+      : verticalPositionName === 'center'
+        ? 0.5
+        : null;
 };
 
 /**
@@ -128,38 +130,45 @@ export const getProportionalPositionY = (positionName: string): number | null =>
  * also values like 'top-left-Zmin'.
  * @returns a value between 0 and 1.
  */
-export const getProportionalPositionZ = (positionName: string): number | null => {
-  const verticalPositionName = (positionName.includes('-')
-    ? positionName.split('-')[2] || ''
-    : positionName
+export const getProportionalPositionZ = (
+  positionName: string
+): number | null => {
+  const verticalPositionName = (
+    positionName.includes('-') ? positionName.split('-')[2] || '' : positionName
   ).toLowerCase();
   return verticalPositionName === 'Zmin'
     ? 0
     : verticalPositionName === 'Zmax'
-    ? 1
-    : verticalPositionName === 'center'
-    ? 0.5
-    : null;
+      ? 1
+      : verticalPositionName === 'center'
+        ? 0.5
+        : null;
 };
 
-const getHorizontalAnchorValue = (anchorName: string, properties: gdMapStringPropertyDescriptor): number | null => {
+const getHorizontalAnchorValue = (
+  anchorName: string,
+  properties: gd.MapStringPropertyDescriptor
+): number | null => {
   const proportionalX = getProportionalPositionX(anchorName);
   return proportionalX !== null
     ? proportionalX
     : // Reference to another property to allow to expose a Choice property.
-    properties && properties.has(anchorName)
-    ? getProportionalPositionX(properties.get(anchorName).getValue())
-    : null;
+      properties && properties.has(anchorName)
+      ? getProportionalPositionX(properties.get(anchorName).getValue())
+      : null;
 };
 
-const getVerticalAnchorValue = (anchorName: string, properties: gdMapStringPropertyDescriptor): number | null => {
+const getVerticalAnchorValue = (
+  anchorName: string,
+  properties: gd.MapStringPropertyDescriptor
+): number | null => {
   const proportionalY = getProportionalPositionY(anchorName);
   return proportionalY !== null
     ? proportionalY
     : // Reference to another property to allow to expose a Choice property.
-    properties && properties.has(anchorName)
-    ? getProportionalPositionY(properties.get(anchorName).getValue())
-    : null;
+      properties && properties.has(anchorName)
+      ? getProportionalPositionY(properties.get(anchorName).getValue())
+      : null;
 };
 
 /**
@@ -168,18 +177,17 @@ const getVerticalAnchorValue = (anchorName: string, properties: gdMapStringPrope
  */
 const getHorizontalOriginAnchorValue = (
   anchorName: string,
-  properties: gdMapStringPropertyDescriptor,
-  targetAnchorValue: number | null,
+  properties: gd.MapStringPropertyDescriptor,
+  targetAnchorValue: number | null
 ): number | null => {
-  const horizontalAnchorName = (anchorName.includes('-')
-    ? anchorName.split('-')[1]
-    : anchorName
+  const horizontalAnchorName = (
+    anchorName.includes('-') ? anchorName.split('-')[1] : anchorName
   ).toLowerCase();
   return horizontalAnchorName === 'same'
     ? targetAnchorValue
     : horizontalAnchorName === 'opposite' && targetAnchorValue !== null
-    ? 1 - targetAnchorValue
-    : getHorizontalAnchorValue(horizontalAnchorName, properties);
+      ? 1 - targetAnchorValue
+      : getHorizontalAnchorValue(horizontalAnchorName, properties);
 };
 
 /**
@@ -188,30 +196,29 @@ const getHorizontalOriginAnchorValue = (
  */
 const getVerticalOriginAnchorValue = (
   anchorName: string,
-  properties: gdMapStringPropertyDescriptor,
-  targetAnchorValue: number | null,
+  properties: gd.MapStringPropertyDescriptor,
+  targetAnchorValue: number | null
 ): number | null => {
-  const verticalAnchorName = (anchorName.includes('-')
-    ? anchorName.split('-')[0]
-    : anchorName
+  const verticalAnchorName = (
+    anchorName.includes('-') ? anchorName.split('-')[0] : anchorName
   ).toLowerCase();
   return verticalAnchorName === 'same'
     ? targetAnchorValue
     : verticalAnchorName === 'opposite' && targetAnchorValue !== null
-    ? 1 - targetAnchorValue
-    : getVerticalAnchorValue(verticalAnchorName, properties);
+      ? 1 - targetAnchorValue
+      : getVerticalAnchorValue(verticalAnchorName, properties);
 };
 
 export interface PropertiesContainer {
-  getProperties(): gdMapStringPropertyDescriptor;
+  getProperties(): gd.MapStringPropertyDescriptor;
 }
 
 /**
  * Build the layouts description from the custom object properties.
  */
 export const getLayouts = (
-  eventBasedObject: gdEventsBasedObject,
-  customObjectConfiguration: PropertiesContainer,
+  eventBasedObject: gd.EventsBasedObject,
+  customObjectConfiguration: PropertiesContainer
 ): Map<string, ChildLayout> => {
   const layouts: Map<string, ChildLayout> = new Map<string, ChildLayout>();
   const properties = eventBasedObject.getPropertyDescriptors();
@@ -238,7 +245,7 @@ export const getLayouts = (
     const propertyValueString = instanceProperties.get(name).getValue();
     const propertyValueBoolean = propertyValueString === 'true';
     const propertyValueNumber = Number.parseFloat(propertyValueString) || 0;
-    const layoutField = layoutFields.find(field => name.includes(field));
+    const layoutField = layoutFields.find((field) => name.includes(field));
 
     // AnchorTarget extraInfo is not the list of child-object where the layout is applied
     // but the child that is the target of the anchor.
@@ -502,11 +509,11 @@ export class ChildInstance {
   updateCustomProperty(
     name: string,
     value: string,
-    project: gdProject,
-    layout: gdLayout
+    project: gd.Project,
+    layout: gd.Layout
   ) {}
 
-  getCustomProperties(project: gdProject, layout: gdLayout) {
+  getCustomProperties(project: gd.Project, layout: gd.Layout) {
     return null;
   }
 
@@ -526,30 +533,32 @@ export class ChildInstance {
     return [];
   }
 
-  serializeTo(element: gdSerializerElement) {}
+  serializeTo(element: gd.SerializerElement) {}
 
-  unserializeFrom(element: gdSerializerElement) {}
+  unserializeFrom(element: gd.SerializerElement) {}
 }
 
 export type InitialInstanceDimension = {
-  hasCustomSize(): boolean,
-  getCustomWidth(): number,
-  getCustomHeight(): number,
-  getX(): number,
-  getY(): number
+  hasCustomSize(): boolean;
+  getCustomWidth(): number;
+  getCustomHeight(): number;
+  getX(): number;
+  getY(): number;
 };
 
 export interface ChildRenderedInstance {
   readonly _instance: InitialInstanceDimension;
   _pixiObject: {
-    height: number
+    height: number;
   };
   getDefaultWidth(): number;
   getDefaultHeight(): number;
   update(): void;
 }
 
-export interface LayoutedParent<CovariantChildRenderedInstance extends ChildRenderedInstance> {
+export interface LayoutedParent<
+  CovariantChildRenderedInstance extends ChildRenderedInstance,
+> {
   childrenInstances: ChildInstance[];
   childrenLayouts: ChildLayout[];
   childrenRenderedInstances: Array<CovariantChildRenderedInstance>;
@@ -559,7 +568,9 @@ export interface LayoutedParent<CovariantChildRenderedInstance extends ChildRend
   getDepth(): number;
 }
 
-export const applyChildLayouts = <T extends ChildRenderedInstance>(parent: LayoutedParent<T>) => {
+export const applyChildLayouts = <T extends ChildRenderedInstance>(
+  parent: LayoutedParent<T>
+) => {
   const width = parent.getWidth();
   const height = parent.getHeight();
 

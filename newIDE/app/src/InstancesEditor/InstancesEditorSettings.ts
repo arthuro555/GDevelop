@@ -1,21 +1,21 @@
-import {rgbToHexNumber} from '../Utils/ColorTransformer';
+import { rgbToHexNumber } from '../Utils/ColorTransformer';
 
 export type InstancesEditorSettings = {
   /** Is grid shown? */
-  grid: boolean,
-  gridType: 'isometric' | 'rectangular',
-  gridWidth: number,
-  gridHeight: number,
-  gridOffsetX: number,
-  gridOffsetY: number,
-  gridColor: number,
-  gridAlpha: number,
+  grid: boolean;
+  gridType: 'isometric' | 'rectangular';
+  gridWidth: number;
+  gridHeight: number;
+  gridOffsetX: number;
+  gridOffsetY: number;
+  gridColor: number;
+  gridAlpha: number;
   /** Is snap to grid activated? */
-  snap: boolean,
+  snap: boolean;
   /** The zoom of the editor, 1 by default. */
-  zoomFactor: number,
+  zoomFactor: number;
   /** Is the window mask shown? */
-  windowMask: boolean
+  windowMask: boolean;
 };
 
 export const getRecommendedInitialZoomFactor = (
@@ -27,7 +27,10 @@ export const getRecommendedInitialZoomFactor = (
   return 700 / largestSizeInPixels;
 };
 
-export const prepareInstancesEditorSettings = (object: any, projectLargestResolutionSizeInPixels: number): InstancesEditorSettings => {
+export const prepareInstancesEditorSettings = (
+  object: any,
+  projectLargestResolutionSizeInPixels: number
+): InstancesEditorSettings => {
   return {
     grid: object.grid || false,
     gridType: object.gridType || 'rectangular',

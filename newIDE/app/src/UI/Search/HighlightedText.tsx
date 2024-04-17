@@ -7,9 +7,9 @@ const highlightText = (
   start: number,
   end: number | null | undefined,
   styleToApply: {
-    backgroundColor?: string,
-    color?: string
-  },
+    backgroundColor?: string;
+    color?: string;
+  }
 ): React.ReactNode[] => {
   const highlightTextStart = matchCoordinates[0];
   const highlightTextEnd = matchCoordinates[1] + 1;
@@ -26,7 +26,7 @@ const highlightText = (
 
   return [
     beforeText,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <span key={`${highlightedText}${highlightTextStart}`} style={styleToApply}>
       {highlightedText}
     </span>,
@@ -34,15 +34,13 @@ const highlightText = (
   ];
 };
 
-const HighlightedText = (
-  {
-    text,
-    matchesCoordinates,
-  }: {
-    text: string,
-    matchesCoordinates: number[][]
-  },
-): React.ReactNode[] => {
+const HighlightedText = ({
+  text,
+  matchesCoordinates,
+}: {
+  text: string;
+  matchesCoordinates: number[][];
+}): React.ReactNode[] => {
   const theme = React.useContext(GDevelopThemeContext);
 
   if (matchesCoordinates.length === 0) return [text];
@@ -55,7 +53,7 @@ const HighlightedText = (
       : undefined;
     const startIndex = i === 0 ? 0 : matchesCoordinates[i][0];
     returnText.push(
-// @ts-expect-error - TS2345 - Argument of type 'ReactNode[]' is not assignable to parameter of type 'Node[]'.
+      // @ts-expect-error - TS2345 - Argument of type 'ReactNode[]' is not assignable to parameter of type 'Node[]'.
       highlightText(
         text,
         matchesCoordinates[i],
@@ -67,7 +65,6 @@ const HighlightedText = (
   }
 
   return returnText.map((text, i) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type 'Node[]' is not assignable to type 'ReactNode'.
     <React.Fragment key={i}>{text}</React.Fragment>
   ));
 };

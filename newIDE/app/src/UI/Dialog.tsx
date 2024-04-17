@@ -9,26 +9,26 @@ import {
 } from './Responsive/ResponsiveWindowMeasurer';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../MainFrame/Preferences/PreferencesContext';
 import {
   shouldCloseOrCancel,
   shouldSubmit,
 } from './KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module './Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { LineStackLayout } from './Layout';
-// @ts-expect-error - TS6142 - Module './RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from './RaisedButton';
-// @ts-expect-error - TS6142 - Module './Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from './Text';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/Cross'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cross.js' implicitly has an 'any' type.
+
 import Cross from './CustomSvgIcons/Cross';
-// @ts-expect-error - TS6142 - Module './IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from './IconButton';
-// @ts-expect-error - TS6142 - Module './Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from './Grid';
 import GDevelopThemeContext from './Theme/GDevelopThemeContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import useForceUpdate from '../Utils/UseForceUpdate';
 import { useWindowControlsOverlayWatcher } from '../Utils/Window';
@@ -45,7 +45,7 @@ const DRAGGABLE_PART_CLASS_NAME = 'title-bar-draggable-part';
 export const DialogTitleBar = ({
   backgroundColor,
 }: {
-  backgroundColor: string
+  backgroundColor: string;
 }) => {
   // An installed PWA can have window controls displayed as overlay. If supported,
   // we set up a listener to detect any change and force a refresh that will read
@@ -53,14 +53,13 @@ export const DialogTitleBar = ({
   const forceUpdate = useForceUpdate();
   useWindowControlsOverlayWatcher({ onChanged: forceUpdate });
 
-// @ts-expect-error - TS2339 - Property 'windowControlsOverlay' does not exist on type 'Navigator'.
+  // @ts-expect-error - TS2339 - Property 'windowControlsOverlay' does not exist on type 'Navigator'.
   const { windowControlsOverlay } = navigator;
 
   if (!!electron || (windowControlsOverlay && windowControlsOverlay.visible)) {
     // We're on the desktop app, or in an installed PWA with window controls displayed
     // as overlay: we need to display a spacing at the top of the dialog.
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         className={DRAGGABLE_PART_CLASS_NAME}
         style={{ height: 38, backgroundColor, flexShrink: 0 }}
@@ -138,8 +137,8 @@ const styles = {
 } as const;
 
 const useDangerousStylesForDialog = (dangerLevel?: 'warning' | 'danger') =>
-// @ts-expect-error - TS2769 - No overload matches this call.
-  makeStyles(theme => {
+  // @ts-expect-error - TS2769 - No overload matches this call.
+  makeStyles((theme) => {
     if (!dangerLevel) return {};
     const color =
       dangerLevel === 'warning' ? theme.palette.warning : theme.palette.error;
@@ -148,9 +147,7 @@ const useDangerousStylesForDialog = (dangerLevel?: 'warning' | 'danger') =>
         '&:before': {
           content: '""',
           height: 60,
-          background: `repeating-linear-gradient(110deg, ${color.dark}, ${
-            color.dark
-          } 25px, ${color.main} 25px, ${color.main} 40px)`,
+          background: `repeating-linear-gradient(110deg, ${color.dark}, ${color.dark} 25px, ${color.main} 25px, ${color.main} 40px)`,
         },
       },
     };
@@ -178,12 +175,12 @@ const useStylesForDialogContent = makeStyles({
 // We support a subset of the props supported by Material-UI v0.x Dialog
 // They should be self descriptive - refer to Material UI docs otherwise.
 type DialogProps = {
-  open?: boolean,
-  title: React.ReactNode,
-  fixedContent?: React.ReactNode,
-  actions?: Array<React.ReactNode | null | undefined>,
-  secondaryActions?: Array<React.ReactNode | null | undefined>,
-  dangerLevel?: 'warning' | 'danger',
+  open?: boolean;
+  title: React.ReactNode;
+  fixedContent?: React.ReactNode;
+  actions?: Array<React.ReactNode | null | undefined>;
+  secondaryActions?: Array<React.ReactNode | null | undefined>;
+  dangerLevel?: 'warning' | 'danger';
   /**
    * Callback called when the dialog is asking to be closed
    * (either by Escape key or a click outside, according to preferences).
@@ -193,35 +190,35 @@ type DialogProps = {
    * If `onApply` is also specified, this must be interpreted as a "cancelling"
    * of changes.
    */
-  onRequestClose?: () => undefined | Promise<undefined>,
+  onRequestClose?: () => undefined | Promise<undefined>;
   /**
    * If specified, will be called when the dialog is dismissed in a way where changes
    * must be kept or when using the submit keyboard shortcut.
    * This is not applicable to all dialogs. Some dialogs may have no `onApply` and just a
    * single `onRequestClose`.
    */
-  onApply?: () => undefined | Promise<undefined> | null | undefined,
+  onApply?: () => void;
   /**
    * If specified, allows to prevent closing the dialog by clicking outside.
    * This is useful for dialogs that either are in a loading state so we don't want to allow closing it,
    * or for dialogs that may apply significant changes and we don't want the user to misclick.
    */
-  cannotBeDismissed?: boolean,
+  cannotBeDismissed?: boolean;
   /**
    * Indicates that even when this dialog is opened, the instances editor should still continue to render.
    * Useful to see changes in realtime.
    */
-  exceptionallyStillAllowRenderingInstancesEditors?: boolean,
-  children: React.ReactNode // The content of the dialog,
+  exceptionallyStillAllowRenderingInstancesEditors?: boolean;
+  children: React.ReactNode; // The content of the dialog,
   // Display:
-  flexColumnBody?: boolean,
-  flexBody?: boolean,
+  flexColumnBody?: boolean;
+  flexBody?: boolean;
   // Size
-  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
-  minHeight?: 'sm' | 'lg',
-  fullHeight?: boolean,
-  noMobileFullScreen?: boolean,
-  id?: string | null | undefined
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
+  minHeight?: 'sm' | 'lg';
+  fullHeight?: boolean;
+  noMobileFullScreen?: boolean;
+  id?: string | null | undefined;
 };
 
 export const DialogPrimaryButton = RaisedButton;
@@ -252,7 +249,7 @@ const Dialog = ({
 }: DialogProps) => {
   const preferences = React.useContext(PreferencesContext);
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
   const backdropClickBehavior = preferences.values.backdropClickBehavior;
   const { windowSize, isMobile } = useResponsiveWindowSize();
   const hasActions =
@@ -265,16 +262,13 @@ const Dialog = ({
 
   const dialogActions = React.useMemo(
     () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <React.Fragment>
         {secondaryActions && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <LineStackLayout key="secondary-actions" noMargin>
             {secondaryActions}
           </LineStackLayout>
         )}
         {actions && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <LineStackLayout key="actions" noMargin>
             {actions}
           </LineStackLayout>
@@ -287,8 +281,8 @@ const Dialog = ({
   const flexStyle = flexColumnBody
     ? styles.flexColumnBody
     : flexBody
-    ? styles.flexBody
-    : {};
+      ? styles.flexBody
+      : {};
   const additionalPaddingStyle = {
     paddingTop: title ? 0 : dialogTitlePadding, // Ensure the padding is here if there is no title.
     paddingBottom: hasActions ? 0 : dialogActionPadding, // Ensure the padding is here if there are no actions.
@@ -339,7 +333,7 @@ const Dialog = ({
       if (onApply && shouldSubmit(event)) {
         event.stopPropagation();
         const element = document.activeElement;
-// @ts-expect-error - TS2339 - Property 'blur' does not exist on type 'Element'.
+        // @ts-expect-error - TS2339 - Property 'blur' does not exist on type 'Element'.
         if (element) element.blur();
 
         onApply();
@@ -351,30 +345,30 @@ const Dialog = ({
   const softKeyboardBottomOffset = useSoftKeyboardBottomOffset();
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <MuiDialog
       classes={classesForDangerousDialog}
-// @ts-expect-error - TS2322 - Type 'boolean | undefined' is not assignable to type 'boolean'.
+      // @ts-expect-error - TS2322 - Type 'boolean | undefined' is not assignable to type 'boolean'.
       open={open}
       onClose={onCloseDialog}
       fullWidth
       fullScreen={isFullScreen}
       className={classNames({
         'safe-area-aware-container': isFullScreen,
-        [classNameToStillAllowRenderingInstancesEditor]: exceptionallyStillAllowRenderingInstancesEditors,
+        [classNameToStillAllowRenderingInstancesEditor]:
+          exceptionallyStillAllowRenderingInstancesEditors,
       })}
       PaperProps={{
-// @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+        // @ts-expect-error - TS2322 - Type 'string | null | undefined' is not assignable to type 'string | undefined'.
         id,
         style: {
           backgroundColor: gdevelopTheme.dialog.backgroundColor,
           minHeight: fullHeight
             ? styles.minHeightForFullHeightModal
             : minHeight === 'lg'
-            ? styles.minHeightForLargeHeightModal
-            : minHeight === 'sm'
-            ? styles.minHeightForSmallHeightModal
-            : undefined,
+              ? styles.minHeightForLargeHeightModal
+              : minHeight === 'sm'
+                ? styles.minHeightForSmallHeightModal
+                : undefined,
           ...getAvoidSoftKeyboardStyle(softKeyboardBottomOffset),
         },
       }}
@@ -387,49 +381,39 @@ const Dialog = ({
       onKeyDown={handleKeyDown}
     >
       {isFullScreen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <DialogTitleBar
           backgroundColor={gdevelopTheme.titlebar.backgroundColor}
         />
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={dialogContainerStyle}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div
           style={{
             ...styles.titleContainer,
             paddingBottom: title ? dialogTitlePadding : 0, // Keep the title container if there is no title, for the close button to be visible, but don't add padding.
           }}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Line noMargin justifyContent="space-between" alignItems="flex-start">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text noMargin size="section-title">
               {title}
             </Text>
             {onRequestClose && !cannotBeDismissed && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <IconButton
                 onClick={onRequestClose}
                 size="small"
                 disabled={cannotBeDismissed}
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Cross />
               </IconButton>
             )}
           </Line>
         </div>
         {fixedContent && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <div style={styles.fixedContentContainer}>{fixedContent}</div>
         )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <DialogContent classes={classesForDialogContent} style={contentStyle}>
           {children}
         </DialogContent>
         {hasActions && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <DialogActions
             style={{
               ...styles.actionsContainer,

@@ -2,27 +2,25 @@ import * as React from 'react';
 
 import { ExpandedCloudProjectVersion } from '../../../Utils/GDevelopServices/Project';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../VersionHistory' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VersionHistory/index.tsx', but '--jsx' is not set.
+
 import VersionHistory from '../../../VersionHistory';
 import MockAdapter from 'axios-mock-adapter';
-// @ts-expect-error - TS6142 - Module '../../../VersionHistory' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VersionHistory/index.tsx', but '--jsx' is not set.
+
 import type { OpenedVersionStatus } from '../../../VersionHistory';
-// @ts-expect-error - TS6142 - Module '../../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { client as userApiAxiosClient } from '../../../Utils/GDevelopServices/User';
 import { GDevelopUserApi } from '../../../Utils/GDevelopServices/ApiConfigs';
 import { delay } from '../../../Utils/Delay';
 import {
   ColumnStackLayout,
   ResponsiveLineStackLayout,
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
 } from '../../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column } from '../../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../../VersionHistory/OpenedVersionStatusChip' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VersionHistory/OpenedVersionStatusChip.tsx', but '--jsx' is not set.
+
 import OpenedVersionStatusChip from '../../../VersionHistory/OpenedVersionStatusChip';
 
 export default {
@@ -153,11 +151,11 @@ const userPublicProfilesByIds = {
 } as const;
 
 export const Default = () => {
-  const [versions, setVersions] = React.useState<ExpandedCloudProjectVersion[]>(initialVersions);
-  const [
-    openedVersionStatus,
-    setOpenedVersionStatus,
-  ] = React.useState<OpenedVersionStatus | null | undefined>(null);
+  const [versions, setVersions] =
+    React.useState<ExpandedCloudProjectVersion[]>(initialVersions);
+  const [openedVersionStatus, setOpenedVersionStatus] = React.useState<
+    OpenedVersionStatus | null | undefined
+  >(null);
   const projectServiceMock = new MockAdapter(userApiAxiosClient, {
     delayResponse: 1000,
   });
@@ -177,42 +175,38 @@ export const Default = () => {
     [latestVersion.id]
   );
 
-  const onSaveCurrentlyOpenedVersion = React.useCallback(
-    async () => {
-      if (!openedVersionStatus) return;
-      setOpenedVersionStatus({ ...openedVersionStatus, status: 'saving' });
-      await delay(2000);
+  const onSaveCurrentlyOpenedVersion = React.useCallback(async () => {
+    if (!openedVersionStatus) return;
+    setOpenedVersionStatus({ ...openedVersionStatus, status: 'saving' });
+    await delay(2000);
 
-      setOpenedVersionStatus(null);
-    },
-    [openedVersionStatus]
-  );
+    setOpenedVersionStatus(null);
+  }, [openedVersionStatus]);
 
-  const onAddChanges = React.useCallback(
-    () => {
-      if (!openedVersionStatus) return;
-      if (!openedVersionStatus) return;
-      setOpenedVersionStatus({
-        ...openedVersionStatus,
-        status: 'unsavedChanges',
-      });
-    },
-    [openedVersionStatus]
-  );
+  const onAddChanges = React.useCallback(() => {
+    if (!openedVersionStatus) return;
+    if (!openedVersionStatus) return;
+    setOpenedVersionStatus({
+      ...openedVersionStatus,
+      status: 'unsavedChanges',
+    });
+  }, [openedVersionStatus]);
 
   const onRenameVersion = async (
     version: ExpandedCloudProjectVersion,
     {
       label,
     }: {
-      label: string
+      label: string;
     }
   ) => {
     await delay(1500);
     const newVersions = [...versions];
-    const index = newVersions.findIndex(version_ => version_.id === version.id);
+    const index = newVersions.findIndex(
+      (version_) => version_.id === version.id
+    );
     newVersions.splice(index, 1, { ...version, label: label || undefined });
-    newVersions.forEach(version_ => {
+    newVersions.forEach((version_) => {
       if (
         version_.restoredFromVersion &&
         version_.restoredFromVersion.id === version.id
@@ -238,23 +232,20 @@ export const Default = () => {
     setOpenedVersionStatus(null);
   };
 
-  const canLoadMore = versions.every(version => version.previousVersion);
+  const canLoadMore = versions.every((version) => version.previousVersion);
 
   projectServiceMock
     .onGet(`${GDevelopUserApi.baseUrl}/user-public-profile`)
     .reply(200, userPublicProfilesByIds)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <VersionHistory
           isVisible
           authenticatedUserId=""
@@ -268,17 +259,13 @@ export const Default = () => {
         />
       </Column>
       {openedVersionStatus && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ColumnStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <OpenedVersionStatusChip
             openedVersionStatus={openedVersionStatus}
             onQuit={onQuitVersionExploration}
             disableQuitting={false}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <FlatButton label="Save" onClick={onSaveCurrentlyOpenedVersion} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <FlatButton label="Add changes to version" onClick={onAddChanges} />
         </ColumnStackLayout>
       )}

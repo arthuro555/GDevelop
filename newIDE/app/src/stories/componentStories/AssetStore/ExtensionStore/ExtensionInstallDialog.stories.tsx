@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
+
 import { testProject } from '../../../GDevelopJsInitializerDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/ExtensionStore/ExtensionInstallDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExtensionStore/ExtensionInstallDialog.tsx', but '--jsx' is not set.
 import ExtensionInstallDialog from '../../../../AssetStore/ExtensionStore/ExtensionInstallDialog';
 import {
   fireBulletExtensionShortHeader,
@@ -59,7 +57,6 @@ const apiDataFakeCommunityExtension = {
 } as const;
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={fireBulletExtensionShortHeader}
@@ -72,7 +69,6 @@ export const Default = () => (
 Default.parameters = apiDataFakeFireBulletExtension;
 
 export const BeingInstalled = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={fireBulletExtensionShortHeader}
@@ -85,7 +81,6 @@ export const BeingInstalled = () => (
 Default.parameters = apiDataFakeFireBulletExtension;
 
 export const IncompatibleGdevelopVersion = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={uncompatibleFireBulletExtensionShortHeader}
@@ -98,7 +93,6 @@ export const IncompatibleGdevelopVersion = () => (
 IncompatibleGdevelopVersion.parameters = apiDataFakeFireBulletExtension;
 
 export const AlreadyInstalled = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={alreadyInstalledExtensionShortHeader}
@@ -111,7 +105,6 @@ export const AlreadyInstalled = () => (
 AlreadyInstalled.parameters = apiDataFakeFireBulletExtension;
 
 export const Outdated = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={newerVersionExtensionShortHeader}
@@ -124,7 +117,6 @@ export const Outdated = () => (
 Outdated.parameters = apiDataFakeFireBulletExtension;
 
 export const AlreadyInstalledCommunityExtension = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={alreadyInstalledCommunityExtensionShortHeader}
@@ -137,7 +129,6 @@ export const AlreadyInstalledCommunityExtension = () => (
 AlreadyInstalled.parameters = apiDataFakeFireBulletExtension;
 
 export const WithServerSideError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={fireBulletExtensionShortHeader}
@@ -150,7 +141,6 @@ export const WithServerSideError = () => (
 WithServerSideError.parameters = apiDataServerSideError;
 
 export const CommunityExtension = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ExtensionInstallDialog
     project={testProject.project}
     extensionShortHeader={communityTierExtensionShortHeader}

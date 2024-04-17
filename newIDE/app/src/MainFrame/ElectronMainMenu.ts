@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import { useCommandWithOptions } from '../CommandPalette/CommandHooks';
 import {
@@ -9,7 +9,7 @@ import {
   MainMenuExtraCallbacks,
   MainMenuEvent,
 } from './MainMenu';
-// @ts-expect-error - TS6142 - Module './Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from './Preferences/PreferencesContext';
 const electron = optionalRequire('electron');
 const remote = optionalRequire('@electron/remote');
@@ -22,40 +22,34 @@ const useIPCEventListener = ({
   callback,
   shouldApply,
 }: {
-  ipcEvent: MainMenuEvent,
-  callback: any,
-  shouldApply: boolean
+  ipcEvent: MainMenuEvent;
+  callback: any;
+  shouldApply: boolean;
 }) => {
-  React.useEffect(
-    () => {
-      if (!ipcRenderer || !shouldApply) return;
+  React.useEffect(() => {
+    if (!ipcRenderer || !shouldApply) return;
 
-// @ts-expect-error - TS7019 - Rest parameter 'eventArgs' implicitly has an 'any[]' type.
-      const handler = (event: any, ...eventArgs) => callback(...eventArgs);
-      ipcRenderer.on(ipcEvent, handler);
-      return () => ipcRenderer.removeListener(ipcEvent, handler);
-    },
-    [ipcEvent, callback, shouldApply]
-  );
+    // @ts-expect-error - TS7019 - Rest parameter 'eventArgs' implicitly has an 'any[]' type.
+    const handler = (event: any, ...eventArgs) => callback(...eventArgs);
+    ipcRenderer.on(ipcEvent, handler);
+    return () => ipcRenderer.removeListener(ipcEvent, handler);
+  }, [ipcEvent, callback, shouldApply]);
 };
 
 const useAppEventListener = ({
   event,
   callback,
 }: {
-  event: string,
-  callback: any
+  event: string;
+  callback: any;
 }) => {
-  React.useEffect(
-    () => {
-      if (!app) return;
-// @ts-expect-error - TS7019 - Rest parameter 'eventArgs' implicitly has an 'any[]' type.
-      const handler = (event: any, ...eventArgs) => callback(...eventArgs);
-      app.on(event, handler);
-      return () => app.removeListener(event, handler);
-    },
-    [event, callback]
-  );
+  React.useEffect(() => {
+    if (!app) return;
+    // @ts-expect-error - TS7019 - Rest parameter 'eventArgs' implicitly has an 'any[]' type.
+    const handler = (event: any, ...eventArgs) => callback(...eventArgs);
+    app.on(event, handler);
+    return () => app.removeListener(event, handler);
+  }, [event, callback]);
 };
 
 const isMainWindow = (windowTitle: string): boolean => {
@@ -77,9 +71,9 @@ const ElectronMainMenu = ({
   callbacks,
   extraCallbacks,
 }: {
-  props: BuildMainMenuProps,
-  callbacks: MainMenuCallbacks,
-  extraCallbacks: MainMenuExtraCallbacks
+  props: BuildMainMenuProps;
+  callbacks: MainMenuCallbacks;
+  extraCallbacks: MainMenuExtraCallbacks;
 }) => {
   const {
     i18n,
@@ -91,11 +85,11 @@ const ElectronMainMenu = ({
   } = props;
   const { onClosePreview } = extraCallbacks;
   const language = i18n.language;
-  const [
-    isFocusedOnMainWindow,
-    setIsFocusedOnMainWindow,
-  ] = React.useState<boolean>(true);
-  const [focusedWindowId, setFocusedWindowId] = React.useState<number>(remote.getCurrentWindow().id);
+  const [isFocusedOnMainWindow, setIsFocusedOnMainWindow] =
+    React.useState<boolean>(true);
+  const [focusedWindowId, setFocusedWindowId] = React.useState<number>(
+    remote.getCurrentWindow().id
+  );
   const closePreviewWindow =
     !isFocusedOnMainWindow && onClosePreview
       ? () => onClosePreview(focusedWindowId)
@@ -106,16 +100,16 @@ const ElectronMainMenu = ({
 
   useAppEventListener({
     event: 'browser-window-focus',
-// @ts-expect-error - TS7006 - Parameter 'window' implicitly has an 'any' type.
-    callback: window => {
+    // @ts-expect-error - TS7006 - Parameter 'window' implicitly has an 'any' type.
+    callback: (window) => {
       setFocusedWindowId(window.id);
       setIsFocusedOnMainWindow(isMainWindow(window.title));
     },
   });
   useAppEventListener({
     event: 'browser-window-blur',
-// @ts-expect-error - TS7006 - Parameter 'window' implicitly has an 'any' type.
-    callback: window => {
+    // @ts-expect-error - TS7006 - Parameter 'window' implicitly has an 'any' type.
+    callback: (window) => {
       setIsFocusedOnMainWindow(!isMainWindow(window.title));
     },
   });
@@ -224,39 +218,36 @@ const ElectronMainMenu = ({
     shouldApply: true, // Keep logic around app update even if on preview window
   });
 
-  React.useEffect(
-    () => {
-      if (ipcRenderer) {
-        ipcRenderer.send(
-          'set-main-menu',
-          buildMainMenuDeclarativeTemplate({
-            project,
-            canSaveProjectAs,
-            i18n,
-            recentProjectFiles,
-            shortcutMap,
-            isApplicationTopLevelMenu,
-          })
-        );
-      }
-    },
-    [
-      i18n,
-      language,
-      project,
-      canSaveProjectAs,
-      recentProjectFiles,
-      shortcutMap,
-      isApplicationTopLevelMenu,
-    ]
-  );
+  React.useEffect(() => {
+    if (ipcRenderer) {
+      ipcRenderer.send(
+        'set-main-menu',
+        buildMainMenuDeclarativeTemplate({
+          project,
+          canSaveProjectAs,
+          i18n,
+          recentProjectFiles,
+          shortcutMap,
+          isApplicationTopLevelMenu,
+        })
+      );
+    }
+  }, [
+    i18n,
+    language,
+    project,
+    canSaveProjectAs,
+    recentProjectFiles,
+    shortcutMap,
+    isApplicationTopLevelMenu,
+  ]);
 
   const { onOpenRecentFile } = callbacks;
   useCommandWithOptions('OPEN_RECENT_PROJECT', true, {
-// @ts-expect-error - TS2322 - Type '() => { text: string; handler: () => Promise<void>; }[]' is not assignable to type '() => CommandOption[]'.
+    // @ts-expect-error - TS2322 - Type '() => { text: string; handler: () => Promise<void>; }[]' is not assignable to type '() => CommandOption[]'.
     generateOptions: React.useCallback(
       () =>
-        recentProjectFiles.map(item => ({
+        recentProjectFiles.map((item) => ({
           text: item.fileMetadata.fileIdentifier,
           handler: () => onOpenRecentFile(item),
         })),

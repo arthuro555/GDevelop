@@ -1,11 +1,11 @@
 import * as React from 'react';
 import ResourcesLoader from '../ResourcesLoader';
-// @ts-expect-error - TS6142 - Module './Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from './Preferences/PreferencesContext';
 import { StorageProvider, FileMetadata } from '../ProjectsStorage';
 
 const callbacks: {
-  [key: string]: any
+  [key: string]: any;
 } = {};
 
 let callbackId = 1;
@@ -13,9 +13,7 @@ const getNewId = () => {
   return callbackId++;
 };
 
-export const registerOnResourceExternallyChangedCallback = (
-  callback: any
-) => {
+export const registerOnResourceExternallyChangedCallback = (callback: any) => {
   const id = getNewId().toString();
   callbacks[id] = callback;
   return id;
@@ -33,9 +31,9 @@ const useResourcesWatcher = ({
   fileMetadata,
   isProjectSplitInMultipleFiles,
 }: {
-  getStorageProvider: () => StorageProvider,
-  fileMetadata: FileMetadata | null | undefined,
-  isProjectSplitInMultipleFiles: boolean
+  getStorageProvider: () => StorageProvider;
+  fileMetadata: FileMetadata | null | undefined;
+  isProjectSplitInMultipleFiles: boolean;
 }) => {
   const {
     values: { watchProjectFolderFilesForLocalProjects },
@@ -45,44 +43,39 @@ const useResourcesWatcher = ({
   const fileIdentifier = fileMetadata ? fileMetadata.fileIdentifier : null;
 
   const informEditorsResourceExternallyChanged = React.useCallback(
-    (resourceInfo: {
-      identifier: string
-    }) => {
+    (resourceInfo: { identifier: string }) => {
       ResourcesLoader.burstAllUrlsCache();
-      Object.keys(callbacks).forEach(callbackId =>
+      Object.keys(callbacks).forEach((callbackId) =>
         callbacks[callbackId](resourceInfo)
       );
     },
     []
   );
 
-  React.useEffect(
-    () => {
-      const storageProvider = getStorageProvider();
-      if (
-        storageProvider.internalName === 'LocalFile' &&
-        !watchProjectFolderFilesForLocalProjects
-      ) {
-        return;
-      }
-      if (fileIdentifier && storageProvider.setupResourcesWatcher) {
-        const unsubscribe = storageProvider.setupResourcesWatcher({
-          fileIdentifier,
-          callback: informEditorsResourceExternallyChanged,
-          options: {
-            isProjectSplitInMultipleFiles,
-          },
-        });
-        return unsubscribe;
-      }
-    },
-    [
-      fileIdentifier,
-      informEditorsResourceExternallyChanged,
-      getStorageProvider,
-      watchProjectFolderFilesForLocalProjects,
-      isProjectSplitInMultipleFiles,
-    ]
-  );
+  React.useEffect(() => {
+    const storageProvider = getStorageProvider();
+    if (
+      storageProvider.internalName === 'LocalFile' &&
+      !watchProjectFolderFilesForLocalProjects
+    ) {
+      return;
+    }
+    if (fileIdentifier && storageProvider.setupResourcesWatcher) {
+      const unsubscribe = storageProvider.setupResourcesWatcher({
+        fileIdentifier,
+        callback: informEditorsResourceExternallyChanged,
+        options: {
+          isProjectSplitInMultipleFiles,
+        },
+      });
+      return unsubscribe;
+    }
+  }, [
+    fileIdentifier,
+    informEditorsResourceExternallyChanged,
+    getStorageProvider,
+    watchProjectFolderFilesForLocalProjects,
+    isProjectSplitInMultipleFiles,
+  ]);
 };
 export default useResourcesWatcher;

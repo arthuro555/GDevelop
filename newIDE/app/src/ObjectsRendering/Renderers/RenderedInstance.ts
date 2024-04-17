@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import * as PIXI from 'pixi.js-legacy';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 
@@ -8,24 +8,24 @@ import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
  * which display on the scene editor, using Pixi.js, the instance of an object (see InstancesEditor).
  */
 export default class RenderedInstance {
-  _project: gdProject;
-  _layout: gdLayout;
-  _instance: gdInitialInstance;
-  _associatedObjectConfiguration: gdObjectConfiguration;
+  _project: gd.Project;
+  _layout: gd.Layout;
+  _instance: gd.InitialInstance;
+  _associatedObjectConfiguration: gd.ObjectConfiguration;
   _pixiContainer: PIXI.Container;
   _pixiResourcesLoader: Flow.Class<PixiResourcesLoader>;
   _pixiObject: PIXI.DisplayObject;
   wasUsed: boolean;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'DisplayObject'.
+    // @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'DisplayObject'.
     this._pixiObject = null;
     this._instance = instance;
     this._associatedObjectConfiguration = associatedObjectConfiguration;
@@ -54,7 +54,7 @@ export default class RenderedInstance {
     return this._pixiObject;
   }
 
-  getInstance(): gdInitialInstance {
+  getInstance(): gd.InitialInstance {
     return this._instance;
   }
 

@@ -2,21 +2,21 @@ import * as React from 'react';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { shouldValidate } from '../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from '../UI/Grid';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/DesktopHD'. '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/Icons/DesktopHD.js' implicitly has an 'any' type.
+
 import DesktopHD from './Icons/DesktopHD';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/DesktopMobileLandscape'. '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/Icons/DesktopMobileLandscape.js' implicitly has an 'any' type.
+
 import DesktopMobileLandscape from './Icons/DesktopMobileLandscape';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/MobilePortrait'. '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/Icons/MobilePortrait.js' implicitly has an 'any' type.
+
 import MobilePortrait from './Icons/MobilePortrait';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/CustomSize'. '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/Icons/CustomSize.js' implicitly has an 'any' type.
+
 import CustomSize from './Icons/CustomSize';
-// @ts-expect-error - TS6142 - Module '../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../UI/SemiControlledTextField';
 
 const styles = {
@@ -56,47 +56,52 @@ const styles = {
   },
 } as const;
 
-export type ResolutionOption = 'mobilePortrait' | 'desktopMobileLandscape' | 'desktopHD' | 'custom';
+export type ResolutionOption =
+  | 'mobilePortrait'
+  | 'desktopMobileLandscape'
+  | 'desktopHD'
+  | 'custom';
 
-export const resolutionOptions: Partial<Record<ResolutionOption, {
-  label: React.ReactNode,
-  height?: number,
-  width?: number,
-  orientation: 'landscape' | 'portrait' | 'default',
-  icon: React.ReactNode
-}>> = {
+export const resolutionOptions: Partial<
+  Record<
+    ResolutionOption,
+    {
+      label: React.ReactNode;
+      height?: number;
+      width?: number;
+      orientation: 'landscape' | 'portrait' | 'default';
+      icon: React.ReactNode;
+    }
+  >
+> = {
   mobilePortrait: {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     label: <Trans>Mobile portrait</Trans>,
     width: 720,
     height: 1280,
     orientation: 'portrait',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     icon: <MobilePortrait fontSize="large" />,
   },
   desktopMobileLandscape: {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     label: <Trans>Desktop & Mobile landscape</Trans>,
     width: 1280,
     height: 720,
     orientation: 'landscape',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     icon: <DesktopMobileLandscape fontSize="large" />,
   },
   desktopHD: {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     label: <Trans>Desktop Full HD</Trans>,
     width: 1920,
     height: 1080,
     orientation: 'default',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     icon: <DesktopHD fontSize="large" style={styles.largeIcon} />,
   },
   custom: {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     label: <Trans>Custom size</Trans>,
     orientation: 'default',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     icon: <CustomSize fontSize="large" style={styles.largeIcon} />,
   },
 };
@@ -112,20 +117,18 @@ const ResolutionDimensionTextField = ({
   defaultValue,
   disabled,
 }: {
-  value: number | null | undefined,
-  onChange: (value?: number | null | undefined) => void,
-  defaultValue: number,
-  disabled?: boolean
+  value: number | null | undefined;
+  onChange: (value?: number | null | undefined) => void;
+  defaultValue: number;
+  disabled?: boolean;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <SemiControlledTextField
     margin="none"
     style={styles.customSizeField}
     inputStyle={{ padding: 0 }}
     type="number"
     value={value ? value.toString(10) : ''}
-// @ts-expect-error - TS7006 - Parameter 'newValueString' implicitly has an 'any' type.
-    onChange={newValueString => {
+    onChange={(newValueString) => {
       // Allow any value, we will clean the value on blur.
       const newValueInt = parseInt(newValueString, 10);
       // Important to allow null when the user is clearing the field.
@@ -134,7 +137,7 @@ const ResolutionDimensionTextField = ({
     }}
     onBlur={() => {
       const newValueInt = parseInt(
-// @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
+        // @ts-expect-error - TS2345 - Argument of type 'number' is not assignable to parameter of type 'string'.
         value || defaultValue, // Default if empty.
         10
       );
@@ -152,20 +155,20 @@ const ResolutionDimensionTextField = ({
 
 // Styles to give the impression of pressing an element.
 const useStylesForButtonBase = (selected: boolean) =>
-  makeStyles(theme =>
+  makeStyles((theme) =>
     createStyles({
       root: {
         outline: selected
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
-          ? `2px solid ${theme.palette.secondary.dark}`
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
-          : `1px solid ${theme.palette.text.disabled}`,
+          ? // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+            `2px solid ${theme.palette.secondary.dark}`
+          : // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+            `1px solid ${theme.palette.text.disabled}`,
         '&:focus': {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+          // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
           backgroundColor: theme.palette.action.hover,
         },
         '&:hover': {
-// @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
+          // @ts-expect-error - TS2339 - Property 'palette' does not exist on type 'DefaultTheme'.
           backgroundColor: theme.palette.action.hover,
         },
       },
@@ -173,10 +176,10 @@ const useStylesForButtonBase = (selected: boolean) =>
   )();
 
 type Props = {
-  children: React.ReactNode,
-  onClick: () => void,
-  selected: boolean,
-  disabled?: boolean
+  children: React.ReactNode;
+  onClick: () => void;
+  selected: boolean;
+  disabled?: boolean;
 };
 
 const ResolutionOptionButton = ({
@@ -188,7 +191,7 @@ const ResolutionOptionButton = ({
   const classes = useStylesForButtonBase(selected);
 
   return (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ButtonBase
       onClick={onClick}
       elevation={2}
@@ -205,7 +208,6 @@ const ResolutionOptionButton = ({
       disableTouchRipple={selected} // Avoid ripple effect even if already selected.
       disabled={disabled}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.contentWrapper}>{children}</div>
     </ButtonBase>
   );
@@ -220,31 +222,27 @@ const ResolutionOptions = ({
   onCustomWidthChange,
   onCustomHeightChange,
 }: {
-  selectedOption: string,
-  onClick: (arg1: ResolutionOption) => void,
-  disabled?: boolean,
-  customWidth: number | null | undefined,
-  customHeight: number | null | undefined,
-  onCustomWidthChange: (arg1?: number | null | undefined) => void,
-  onCustomHeightChange: (arg1?: number | null | undefined) => void
+  selectedOption: string;
+  onClick: (arg1: ResolutionOption) => void;
+  disabled?: boolean;
+  customWidth: number | null | undefined;
+  customHeight: number | null | undefined;
+  onCustomWidthChange: (arg1?: number | null | undefined) => void;
+  onCustomHeightChange: (arg1?: number | null | undefined) => void;
 }) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={styles.optionsContainer}>
       {Object.keys(resolutionOptions).map((key, index) => {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<ResolutionOption, { label: ReactNode; height?: number | undefined; width?: number | undefined; orientation: "default" | "landscape" | "portrait"; icon: ReactNode; }>>'.
+        // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<ResolutionOption, { label: ReactNode; height?: number | undefined; width?: number | undefined; orientation: "default" | "landscape" | "portrait"; icon: ReactNode; }>>'.
         const { width, height, label, icon } = resolutionOptions[key];
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Column expand noMargin key={key}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ResolutionOptionButton
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'ResolutionOption'.
+              // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'ResolutionOption'.
               onClick={() => onClick(key)}
               selected={selectedOption === key}
               disabled={disabled}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Column
                 expand
                 alignItems="center"
@@ -252,38 +250,29 @@ const ResolutionOptions = ({
                 noMargin
               >
                 {icon}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Text size="body2" noMargin>
                     {label}
                   </Text>
                   {width && height ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Text size="body-small" noMargin color="secondary">
                       {width}x{height}
                     </Text>
                   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Line noMargin alignItems="center" justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Text size="body-small" noMargin color="secondary">
                         W
                       </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <ResolutionDimensionTextField
                         value={customWidth}
                         onChange={onCustomWidthChange}
                         defaultValue={defaultCustomWidth}
                         disabled={disabled}
                       />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Text size="body-small" noMargin color="secondary">
                         H
                       </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <ResolutionDimensionTextField
                         value={customHeight}
                         onChange={onCustomHeightChange}

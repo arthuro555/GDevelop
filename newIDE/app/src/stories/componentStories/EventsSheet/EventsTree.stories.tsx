@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../EventsSheet/EventsTree' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/index.tsx', but '--jsx' is not set.
 import EventsTree from '../../../EventsSheet/EventsTree';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../UI/DragAndDrop/DragAndDropContextProvider'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragAndDropContextProvider.js' implicitly has an 'any' type.
+
 import DragAndDropContextProvider from '../../../UI/DragAndDrop/DragAndDropContextProvider';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
+
 import { testProject } from '../../GDevelopJsInitializerDecorator';
 import { getInitialSelection } from '../../../EventsSheet/SelectionHandler';
-// @ts-expect-error - TS6142 - Module '../../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import { initialPreferences } from '../../../MainFrame/Preferences/PreferencesContext';
 import { Tutorial } from '../../../Utils/GDevelopServices/Tutorial';
 
@@ -29,8 +28,7 @@ const eventsTreeTutorials: Array<Tutorial> = [
     thumbnailUrl:
       'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
     thumbnailUrlByLocale: {
-      en:
-        'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
+      en: 'https://raw.githubusercontent.com/4ian/GDevelop/master/Core/docs/images/gdlogo.png',
     },
     link: 'https://example.com/tutorial.html',
     linkByLocale: { en: 'https://example.com/tutorial.html' },
@@ -40,13 +38,9 @@ const eventsTreeTutorials: Array<Tutorial> = [
 ];
 
 export const DefaultMediumScreenScopeInLayout = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="gd-events-sheet">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EventsTree
           events={testProject.testLayout.getEvents()}
           project={testProject.project}
@@ -88,13 +82,9 @@ export const DefaultMediumScreenScopeInLayout = () => (
 );
 
 export const DefaultSmallScreenScopeInLayout = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="gd-events-sheet">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EventsTree
           events={testProject.testLayout.getEvents()}
           project={testProject.project}
@@ -136,13 +126,9 @@ export const DefaultSmallScreenScopeInLayout = () => (
 );
 
 export const DefaultMediumScreenScopeNotInLayout = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="gd-events-sheet">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EventsTree
           events={testProject.testLayout.getEvents()}
           project={testProject.project}
@@ -181,13 +167,9 @@ export const DefaultMediumScreenScopeNotInLayout = () => (
 );
 
 export const EmptySmallScreenScopeInALayout = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="gd-events-sheet">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <FixedHeightFlexContainer height={500}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EventsTree
           events={testProject.emptyEventsList}
           project={testProject.project}

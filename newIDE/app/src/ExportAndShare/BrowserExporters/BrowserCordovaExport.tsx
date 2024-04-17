@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import assignIn from 'lodash/assignIn';
 import { findGDJS } from '../../GameEngineFinder/BrowserS3GDJSFinder';
@@ -16,7 +16,7 @@ import {
   ExportPipeline,
   ExportPipelineContext,
 } from '../ExportPipeline.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
 import {
   BlobDownloadUrlHolder,
@@ -26,34 +26,37 @@ import {
   ExplanationHeader,
   DoneFooter,
   ExportFlow,
-// @ts-expect-error - TS6142 - Module '../GenericExporters/CordovaExport' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/CordovaExport.tsx', but '--jsx' is not set.
 } from '../GenericExporters/CordovaExport';
-
-const gd: libGDevelop = global.gd;
 
 type ExportState = null;
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  abstractFileSystem: BrowserFileSystem,
-  outputDir: string
+  exporter: gdjsExporter;
+  abstractFileSystem: BrowserFileSystem;
+  outputDir: string;
 };
 
 type ExportOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  urlFiles: Array<UrlFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = {
-  textFiles: Array<TextFileDescriptor>,
-  blobFiles: Array<BlobFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
+  blobFiles: Array<BlobFileDescriptor>;
 };
 
 type CompressionOutput = Blob;
 
 const exportPipelineName = 'browser-cordova';
 
-export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const browserCordovaExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
   packageNameWarningType: 'mobile',
 
@@ -63,15 +66,15 @@ export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedE
 
   isNavigationDisabled: () => false,
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   renderHeader: () => <ExplanationHeader />,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
     return findGDJS('cordova').then(({ gdjsRoot, filesContent }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -96,15 +99,11 @@ export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedE
 
   launchExport: (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      outputDir,
-      abstractFileSystem,
-    }: PreparedExporter,
+    { exporter, outputDir, abstractFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const { project } = context;
     const exportOptions = new gd.ExportOptions(project, outputDir);
@@ -127,15 +126,12 @@ export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedE
 
   launchResourcesDownload: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      urlFiles,
-    }: ExportOutput,
+    { textFiles, urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     return downloadUrlFilesToBlobFiles({
       urlFiles,
       onProgress: context.updateStepProgress,
-    }).then(blobFiles => ({
+    }).then((blobFiles) => ({
       blobFiles,
       textFiles,
     }));
@@ -143,10 +139,7 @@ export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedE
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    {
-      textFiles,
-      blobFiles,
-    }: ResourcesDownloadOutput,
+    { textFiles, blobFiles }: ResourcesDownloadOutput
   ): Promise<Blob> => {
     return archiveFiles({
       blobFiles,
@@ -158,17 +151,13 @@ export const browserCordovaExportPipeline: ExportPipeline<ExportState, PreparedE
 
   renderDoneFooter: ({ compressionOutput, exportState }) => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DoneFooter
         renderGameButton={() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <BlobDownloadUrlHolder blob={compressionOutput}>
-            {blobDownloadUrl => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            {(blobDownloadUrl) => (
               <RaisedButton
                 primary
                 onClick={() => openBlobDownloadUrl(blobDownloadUrl, 'game.zip')}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 label={<Trans>Download the exported game</Trans>}
               />
             )}

@@ -1,4 +1,4 @@
-import {makeTestProject} from '../../fixtures/TestProject';
+import { makeTestProject } from '../../fixtures/TestProject';
 import path from 'path';
 import { moveAllLocalResourcesToCloudResources } from './LocalResourceMover';
 import { readLocalFileToFile } from '../../Utils/LocalFileUploader';
@@ -7,7 +7,6 @@ import {
   uploadProjectResourceFiles,
 } from '../../Utils/GDevelopServices/Project';
 import { MoveAllProjectResourcesOptions } from './index';
-const gd: libGDevelop = global.gd;
 
 jest.mock('../../Utils/LocalFileUploader');
 jest.mock('../../Utils/GDevelopServices/Project');
@@ -15,7 +14,7 @@ jest.mock('../../Utils/GDevelopServices/Project');
 const mockFn = (fn: any): jest.MockedFunction<any> => fn;
 
 const makeTestProjectWithResourcesToUpload = () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
   const { project } = makeTestProject(gd);
 
   {
@@ -45,16 +44,16 @@ const makeTestProjectWithResourcesToUpload = () => {
   return project;
 };
 
-const makeMoveAllLocalResourcesToCloudResourcesOptions = (project: gdProject)// $FlowFixMe - unused property were not mocked.
-// @ts-expect-error - TS2322 - Type '{ project: gdProject; onProgress: any; oldFileMetadata: { fileIdentifier: string; }; newFileMetadata: { fileIdentifier: string; }; }' is not assignable to type 'MoveAllProjectResourcesOptions'.
-: MoveAllProjectResourcesOptions => ({
-    project,
-    onProgress: jest.fn(),
-    oldFileMetadata: { fileIdentifier: 'fake-project-file.json' },
-    newFileMetadata: { fileIdentifier: 'new-fake-identifier' },
-  });
+const makeMoveAllLocalResourcesToCloudResourcesOptions = (
+  project: gd.Project // $FlowFixMe - unused property were not mocked.
+): // @ts-expect-error - TS2322 - Type '{ project: gd.Project; onProgress: any; oldFileMetadata: { fileIdentifier: string; }; newFileMetadata: { fileIdentifier: string; }; }' is not assignable to type 'MoveAllProjectResourcesOptions'.
+MoveAllProjectResourcesOptions => ({
+  project,
+  onProgress: jest.fn(),
+  oldFileMetadata: { fileIdentifier: 'fake-project-file.json' },
+  newFileMetadata: { fileIdentifier: 'new-fake-identifier' },
+});
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('LocalResourceMover', () => {
   beforeEach(() => {
     mockFn(readLocalFileToFile).mockReset();
@@ -62,11 +61,10 @@ describe('LocalResourceMover', () => {
     mockFn(uploadProjectResourceFiles).mockReset();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('load resources and upload them', async () => {
     // Simulate reading and uploading files without issues.
-// @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
-    mockFn(readLocalFileToFile).mockImplementation(async filePath => {
+    // @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
+    mockFn(readLocalFileToFile).mockImplementation(async (filePath) => {
       return {
         name: 'fake-file-for-' + filePath,
         originalFilePath: filePath,
@@ -75,10 +73,10 @@ describe('LocalResourceMover', () => {
     });
     mockFn(getCredentialsForCloudProject).mockResolvedValue(undefined);
     mockFn(uploadProjectResourceFiles).mockImplementation(
-// @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
+      // @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
       async (authenticatedUser, cloudProjectId, files) => {
-// @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
-        return files.map(file => ({
+        // @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
+        return files.map((file) => ({
           url: 'fake-url-for-' + file.name,
           error: null,
         }));
@@ -88,9 +86,8 @@ describe('LocalResourceMover', () => {
     // Launch the resources mover.
     const project = makeTestProjectWithResourcesToUpload();
     const options = makeMoveAllLocalResourcesToCloudResourcesOptions(project);
-    const fetchedResources = await moveAllLocalResourcesToCloudResources(
-      options
-    );
+    const fetchedResources =
+      await moveAllLocalResourcesToCloudResources(options);
 
     // Check local resources were read.
     expect(readLocalFileToFile).toHaveBeenCalledWith(
@@ -124,10 +121,7 @@ describe('LocalResourceMover', () => {
 
     // Check local resources were updated with the URL they were uploaded to.
     expect(
-      project
-        .getResourcesManager()
-        .getResource('MyLocalResource')
-        .getFile()
+      project.getResourcesManager().getResource('MyLocalResource').getFile()
     ).toBe(
       'fake-url-for-fake-file-for-' +
         path.resolve('some-local-file.png').replace(/\\/g, '/')
@@ -149,11 +143,10 @@ describe('LocalResourceMover', () => {
     ).toBe('http://example/file-to-download.png');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('load resources and upload them in chunks if too big', async () => {
     // Simulate reading 300MB files.
-// @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
-    mockFn(readLocalFileToFile).mockImplementation(async filePath => {
+    // @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
+    mockFn(readLocalFileToFile).mockImplementation(async (filePath) => {
       return {
         name: 'fake-file-for-' + filePath,
         originalFilePath: filePath,
@@ -166,10 +159,10 @@ describe('LocalResourceMover', () => {
     });
     mockFn(getCredentialsForCloudProject).mockResolvedValue(undefined);
     mockFn(uploadProjectResourceFiles).mockImplementation(
-// @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
+      // @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
       async (authenticatedUser, cloudProjectId, files) => {
-// @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
-        return files.map(file => ({
+        // @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
+        return files.map((file) => ({
           url: 'fake-url-for-' + file.name,
           error: null,
         }));
@@ -179,9 +172,8 @@ describe('LocalResourceMover', () => {
     // Launch the resources mover.
     const project = makeTestProjectWithResourcesToUpload();
     const options = makeMoveAllLocalResourcesToCloudResourcesOptions(project);
-    const fetchedResources = await moveAllLocalResourcesToCloudResources(
-      options
-    );
+    const fetchedResources =
+      await moveAllLocalResourcesToCloudResources(options);
 
     // Check local resources were read.
     expect(readLocalFileToFile).toHaveBeenCalledWith(
@@ -223,10 +215,7 @@ describe('LocalResourceMover', () => {
 
     // Check local resources were updated with the URL they were uploaded to.
     expect(
-      project
-        .getResourcesManager()
-        .getResource('MyLocalResource')
-        .getFile()
+      project.getResourcesManager().getResource('MyLocalResource').getFile()
     ).toBe(
       'fake-url-for-fake-file-for-' +
         path.resolve('some-local-file.png').replace(/\\/g, '/')
@@ -248,11 +237,10 @@ describe('LocalResourceMover', () => {
     ).toBe('http://example/file-to-download.png');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   test('load resources and report an error if read fails', async () => {
     // Simulate an error when reading a file.
-// @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
-    mockFn(readLocalFileToFile).mockImplementation(async filePath => {
+    // @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
+    mockFn(readLocalFileToFile).mockImplementation(async (filePath) => {
       if (filePath.includes('another-local-file.png'))
         throw new Error('fake-reading-error');
 
@@ -264,10 +252,10 @@ describe('LocalResourceMover', () => {
     });
     mockFn(getCredentialsForCloudProject).mockResolvedValue(undefined);
     mockFn(uploadProjectResourceFiles).mockImplementation(
-// @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
+      // @ts-expect-error - TS7006 - Parameter 'authenticatedUser' implicitly has an 'any' type. | TS7006 - Parameter 'cloudProjectId' implicitly has an 'any' type. | TS7006 - Parameter 'files' implicitly has an 'any' type.
       async (authenticatedUser, cloudProjectId, files) => {
-// @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
-        return files.map(file => {
+        // @ts-expect-error - TS7006 - Parameter 'file' implicitly has an 'any' type.
+        return files.map((file) => {
           return {
             url: 'fake-url-for-' + file.name,
             error: null,
@@ -279,9 +267,8 @@ describe('LocalResourceMover', () => {
     // Launch the resources mover.
     const project = makeTestProjectWithResourcesToUpload();
     const options = makeMoveAllLocalResourcesToCloudResourcesOptions(project);
-    const fetchedResources = await moveAllLocalResourcesToCloudResources(
-      options
-    );
+    const fetchedResources =
+      await moveAllLocalResourcesToCloudResources(options);
 
     // Check local resources were read.
     expect(readLocalFileToFile).toHaveBeenCalledWith(
@@ -312,10 +299,7 @@ describe('LocalResourceMover', () => {
     // Check local resources were updated with the URL they were uploaded to,
     // except if they could not be read.
     expect(
-      project
-        .getResourcesManager()
-        .getResource('MyLocalResource')
-        .getFile()
+      project.getResourcesManager().getResource('MyLocalResource').getFile()
     ).toBe(
       'fake-url-for-fake-file-for-' +
         path.resolve('some-local-file.png').replace(/\\/g, '/')

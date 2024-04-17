@@ -29,8 +29,8 @@ class LocalLoginProvider implements LoginProvider, FirebaseBasedLoginProvider {
     email,
     password,
   }: {
-    email: string,
-    password: string
+    email: string;
+    password: string;
   }) {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
@@ -45,8 +45,8 @@ class LocalLoginProvider implements LoginProvider, FirebaseBasedLoginProvider {
     provider,
     signal,
   }: {
-    provider: IdentityProvider,
-    signal?: AbortSignal
+    provider: IdentityProvider;
+    signal?: AbortSignal;
   }) {
     if (signal && signal.aborted) {
       return Promise.reject(
@@ -55,81 +55,88 @@ class LocalLoginProvider implements LoginProvider, FirebaseBasedLoginProvider {
         )
       );
     }
-    const promise = new Promise((resolve: (result: Promise<undefined> | undefined) => void, reject: (error?: any) => void) => {
-      // Listen for abort event on signal
-      if (signal) {
-        signal.addEventListener('abort', () => {
-          terminateWebSocket();
-          reject(
-            new UserCancellationError(
-              'Login or Signup with provider already aborted.'
-            )
-          );
-        });
-      }
-      setupAuthenticationWebSocket({
-        onConnectionEstablished: connectionId => {
-          if (signal && signal.aborted) return;
-          const url = new URL(authenticationPortalUrl);
-          url.searchParams.set('connection-id', connectionId);
-          url.searchParams.set('provider', provider);
-          url.searchParams.set('env', isDev ? 'dev' : 'live');
-          Window.openExternalURL(url.toString());
-        },
-        onTokenReceived: async ({
-          provider,
-          data,
-        }: {
-          provider: 'apple' | 'google' | 'github',
-          data: any
-        }) => {
-          if (signal && signal.aborted) return;
-          try {
-            const credential =
-              provider === 'google'
-                ? GoogleAuthProvider.credential(data.credential)
-                : provider === 'github'
-                ? GithubAuthProvider.credential(data.accessToken)
-                : new OAuthProvider('apple.com').credential({
-                    idToken: data.id_token,
-                    // Typescript types declaration indicates the parameter `rawNonce` should be
-                    // set but it only works with `nonce`.
-// @ts-expect-error - TS2345 - Argument of type '{ idToken: any; nonce: any; }' is not assignable to parameter of type 'OAuthCredentialOptions'.
-                    nonce: data.raw_nonce,
-                  });
-            await signInWithCredential(this.auth, credential);
-// @ts-expect-error - TS2794 - Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?
-            resolve();
+    const promise = new Promise(
+      (
+        resolve: (result: Promise<undefined> | undefined) => void,
+        reject: (error?: any) => void
+      ) => {
+        // Listen for abort event on signal
+        if (signal) {
+          signal.addEventListener('abort', () => {
             terminateWebSocket();
-          } catch (error: any) {
+            reject(
+              new UserCancellationError(
+                'Login or Signup with provider already aborted.'
+              )
+            );
+          });
+        }
+        setupAuthenticationWebSocket({
+          onConnectionEstablished: (connectionId) => {
+            if (signal && signal.aborted) return;
+            const url = new URL(authenticationPortalUrl);
+            url.searchParams.set('connection-id', connectionId);
+            url.searchParams.set('provider', provider);
+            url.searchParams.set('env', isDev ? 'dev' : 'live');
+            Window.openExternalURL(url.toString());
+          },
+          onTokenReceived: async ({
+            provider,
+            data,
+          }: {
+            provider: 'apple' | 'google' | 'github';
+            data: any;
+          }) => {
+            if (signal && signal.aborted) return;
+            try {
+              const credential =
+                provider === 'google'
+                  ? GoogleAuthProvider.credential(data.credential)
+                  : provider === 'github'
+                    ? GithubAuthProvider.credential(data.accessToken)
+                    : new OAuthProvider('apple.com').credential({
+                        idToken: data.id_token,
+                        // Typescript types declaration indicates the parameter `rawNonce` should be
+                        // set but it only works with `nonce`.
+                        // @ts-expect-error - TS2345 - Argument of type '{ idToken: any; nonce: any; }' is not assignable to parameter of type 'OAuthCredentialOptions'.
+                        nonce: data.raw_nonce,
+                      });
+              await signInWithCredential(this.auth, credential);
+              // @ts-expect-error - TS2794 - Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?
+              resolve();
+              terminateWebSocket();
+            } catch (error: any) {
+              console.error(
+                `An error occurred while logging in with ${provider} token:`,
+                error
+              );
+              reject(error);
+            }
+          },
+          onError: (error) => {
+            if (signal && signal.aborted) return;
+            terminateWebSocket();
             console.error(
-              `An error occurred while logging in with ${provider} token:`,
+              'An error occurred while setting up authentication web socket:',
               error
             );
-            reject(error);
-          }
-        },
-        onError: error => {
-          if (signal && signal.aborted) return;
-          terminateWebSocket();
-          console.error(
-            'An error occurred while setting up authentication web socket:',
-            error
-          );
-          reject(
-            new Error(
-              'An error occurred while setting up authentication web socket.'
-            )
-          );
-        },
-        onTimeout: () => {
-          if (signal && signal.aborted) return;
-          terminateWebSocket();
-          console.error('Connection to authorization websocket timed out.');
-          reject(new Error('Connection to authorization websocket timed out.'));
-        },
-      });
-    });
+            reject(
+              new Error(
+                'An error occurred while setting up authentication web socket.'
+              )
+            );
+          },
+          onTimeout: () => {
+            if (signal && signal.aborted) return;
+            terminateWebSocket();
+            console.error('Connection to authorization websocket timed out.');
+            reject(
+              new Error('Connection to authorization websocket timed out.')
+            );
+          },
+        });
+      }
+    );
     return promise;
   }
 }

@@ -1,68 +1,66 @@
-import {mapFor} from '../Utils/MapFor';
+import { mapFor } from '../Utils/MapFor';
 import flatten from 'lodash/flatten';
 import { RequiredExtension } from '../AssetStore/InstallAsset';
 
-const gd: libGDevelop = global.gd;
-
 export type EnumeratedObjectMetadata = {
-  extension: gdPlatformExtension,
-  objectMetadata: gdObjectMetadata,
-  name: string,
-  fullName: string,
-  description: string,
-  iconFilename: string,
-  categoryFullName: string,
-  assetStorePackTag?: string,
-  requiredExtensions?: Array<RequiredExtension>
+  extension: gd.PlatformExtension;
+  objectMetadata: gd.ObjectMetadata;
+  name: string;
+  fullName: string;
+  description: string;
+  iconFilename: string;
+  categoryFullName: string;
+  assetStorePackTag?: string;
+  requiredExtensions?: Array<RequiredExtension>;
 };
 
 export type ObjectWithContext = {
-  object: gdObject,
-  global: boolean
+  object: gd.Object;
+  global: boolean;
 };
 
 export type GroupWithContext = {
-  group: gdObjectGroup,
-  global: boolean
+  group: gd.ObjectGroup;
+  global: boolean;
 };
 
 export type ObjectWithContextList = Array<ObjectWithContext>;
 export type GroupWithContextList = Array<GroupWithContext>;
 
-export const isSameGroupWithContext = (groupWithContext?: GroupWithContext | null) => (
-  other?: GroupWithContext | null
-) => {
-  return (
-    groupWithContext &&
-    other &&
-    groupWithContext.global === other.global &&
-    groupWithContext.group === other.group
-  );
-};
+export const isSameGroupWithContext =
+  (groupWithContext?: GroupWithContext | null) =>
+  (other?: GroupWithContext | null) => {
+    return (
+      groupWithContext &&
+      other &&
+      groupWithContext.global === other.global &&
+      groupWithContext.group === other.group
+    );
+  };
 
-export const isSameObjectWithContext = (
-  objectWithContext?: ObjectWithContext | null
-) => (other?: ObjectWithContext | null) => {
-  return (
-    objectWithContext &&
-    other &&
-    objectWithContext.global === other.global &&
-    objectWithContext.object === other.object
-  );
-};
+export const isSameObjectWithContext =
+  (objectWithContext?: ObjectWithContext | null) =>
+  (other?: ObjectWithContext | null) => {
+    return (
+      objectWithContext &&
+      other &&
+      objectWithContext.global === other.global &&
+      objectWithContext.object === other.object
+    );
+  };
 
 export const enumerateObjects = (
-  project: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
+  project: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer,
   filters?: {
-    type?: string,
-    names?: Array<string>
+    type?: string;
+    names?: Array<string>;
   } | null
 ) => {
   const typeFilter = (filters && filters.type) || null;
   const namesFilter = (filters && filters.names) || null;
   const filterObjectByType = typeFilter
-    ? (object: gdObject): boolean => {
+    ? (object: gd.Object): boolean => {
         return (
           gd.getTypeOfObject(
             project,
@@ -75,7 +73,7 @@ export const enumerateObjects = (
     : null;
 
   const filterObjectByName = namesFilter
-    ? (object: gdObject): boolean => {
+    ? (object: gd.Object): boolean => {
         return namesFilter.includes(object.getName());
       }
     : null;
@@ -83,8 +81,8 @@ export const enumerateObjects = (
   let containerObjectsList: ObjectWithContextList = mapFor(
     0,
     objectsContainer.getObjectsCount(),
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    i => {
+
+    (i) => {
       const object = objectsContainer.getObjectAt(i);
       if (filterObjectByType && !filterObjectByType(object)) {
         return null;
@@ -96,13 +94,12 @@ export const enumerateObjects = (
     }
   )
     .filter(Boolean)
-    .map((object: gdObject): ObjectWithContext => ({ object, global: false }));
+    .map((object: gd.Object): ObjectWithContext => ({ object, global: false }));
 
   const projectObjectsList: ObjectWithContextList =
     project === objectsContainer
       ? []
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-      : mapFor(0, project.getObjectsCount(), i => {
+      : mapFor(0, project.getObjectsCount(), (i) => {
           const object = project.getObjectAt(i);
           if (filterObjectByType && !filterObjectByType(object)) {
             return null;
@@ -114,15 +111,14 @@ export const enumerateObjects = (
         })
           .filter(Boolean)
           .map(
-            (object: gdObject): ObjectWithContext => ({
+            (object: gd.Object): ObjectWithContext => ({
               object,
               global: true,
             })
           );
 
-  const allObjectsList: ObjectWithContextList = containerObjectsList.concat(
-    projectObjectsList
-  );
+  const allObjectsList: ObjectWithContextList =
+    containerObjectsList.concat(projectObjectsList);
 
   return {
     containerObjectsList,
@@ -131,47 +127,47 @@ export const enumerateObjects = (
   };
 };
 
-export const enumerateObjectTypes = (project: gdProject): Array<EnumeratedObjectMetadata> => {
+export const enumerateObjectTypes = (
+  project: gd.Project
+): Array<EnumeratedObjectMetadata> => {
   const platform = project.getCurrentPlatform();
   const extensionsList = platform.getAllPlatformExtensions();
 
   return flatten(
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    mapFor(0, extensionsList.size(), i => {
+    mapFor(0, extensionsList.size(), (i) => {
       const extension = extensionsList.at(i);
 
-      return extension
-        .getExtensionObjectsTypes()
-        .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'objectType' implicitly has an 'any' type.
-        .map(objectType => extension.getObjectMetadata(objectType))
-// @ts-expect-error - TS7006 - Parameter 'objectMetadata' implicitly has an 'any' type.
-        .filter(objectMetadata => !objectMetadata.isHidden())
-// @ts-expect-error - TS7006 - Parameter 'objectMetadata' implicitly has an 'any' type.
-        .map(objectMetadata => ({
-          extension,
-          objectMetadata,
-          name: objectMetadata.getName(),
-          fullName: objectMetadata.getFullName(),
-          description: objectMetadata.getDescription(),
-          iconFilename: objectMetadata.getIconFilename(),
-          categoryFullName: objectMetadata.getCategoryFullName(),
-        }));
+      return (
+        extension
+          .getExtensionObjectsTypes()
+          .toJSArray()
+          // @ts-expect-error - TS7006 - Parameter 'objectType' implicitly has an 'any' type.
+          .map((objectType) => extension.getObjectMetadata(objectType))
+          // @ts-expect-error - TS7006 - Parameter 'objectMetadata' implicitly has an 'any' type.
+          .filter((objectMetadata) => !objectMetadata.isHidden())
+          // @ts-expect-error - TS7006 - Parameter 'objectMetadata' implicitly has an 'any' type.
+          .map((objectMetadata) => ({
+            extension,
+            objectMetadata,
+            name: objectMetadata.getName(),
+            fullName: objectMetadata.getFullName(),
+            description: objectMetadata.getDescription(),
+            iconFilename: objectMetadata.getIconFilename(),
+            categoryFullName: objectMetadata.getCategoryFullName(),
+          }))
+      );
     })
   );
 };
 
 export type ObjectFilteringOptions = {
-  searchText: string,
-  hideExactMatches?: boolean
+  searchText: string;
+  hideExactMatches?: boolean;
 };
 
 export const filterObjectsList = (
   list: ObjectWithContextList,
-  {
-    searchText,
-    hideExactMatches,
-  }: ObjectFilteringOptions,
+  { searchText, hideExactMatches }: ObjectFilteringOptions
 ): ObjectWithContextList => {
   if (!searchText) return list;
 
@@ -185,16 +181,13 @@ export const filterObjectsList = (
 };
 
 export type GroupFilteringOptions = {
-  searchText: string,
-  hideExactMatches?: boolean
+  searchText: string;
+  hideExactMatches?: boolean;
 };
 
 export const filterGroupsList = (
   list: GroupWithContextList,
-  {
-    searchText,
-    hideExactMatches,
-  }: GroupFilteringOptions,
+  { searchText, hideExactMatches }: GroupFilteringOptions
 ): GroupWithContextList => {
   if (!searchText) return list;
 
@@ -207,21 +200,22 @@ export const filterGroupsList = (
   });
 };
 
-export const enumerateGroups = (objectGroups: gdObjectGroupsContainer): Array<gdObjectGroup> => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-  return mapFor(0, objectGroups.count(), i => {
+export const enumerateGroups = (
+  objectGroups: gd.ObjectGroupsContainer
+): Array<gd.ObjectGroup> => {
+  return mapFor(0, objectGroups.count(), (i) => {
     return objectGroups.getAt(i);
   });
 };
 
 export const enumerateObjectsAndGroups = (
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-// @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type 'string | null'.
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer,
+  // @ts-expect-error - TS2322 - Type 'undefined' is not assignable to type 'string | null'.
   objectType: string | null = undefined,
   requiredBehaviorTypes: Array<string> = []
 ) => {
-  const filterObject = (object: gdObject): boolean => {
+  const filterObject = (object: gd.Object): boolean => {
     return (
       (!objectType ||
         gd.getTypeOfObject(
@@ -231,7 +225,7 @@ export const enumerateObjectsAndGroups = (
           false
         ) === objectType) &&
       requiredBehaviorTypes.every(
-        requiredBehaviorType =>
+        (requiredBehaviorType) =>
           gd
             .getBehaviorNamesInObjectOrGroup(
               globalObjectsContainer,
@@ -244,7 +238,7 @@ export const enumerateObjectsAndGroups = (
       )
     );
   };
-  const filterGroup = (group: gdObjectGroup): boolean => {
+  const filterGroup = (group: gd.ObjectGroup): boolean => {
     return (
       (!objectType ||
         gd.getTypeOfObject(
@@ -254,7 +248,7 @@ export const enumerateObjectsAndGroups = (
           true
         ) === objectType) &&
       requiredBehaviorTypes.every(
-        behaviorType =>
+        (behaviorType) =>
           gd
             .getBehaviorNamesInObjectOrGroup(
               globalObjectsContainer,
@@ -271,30 +265,29 @@ export const enumerateObjectsAndGroups = (
   const containerObjectsList: ObjectWithContextList = mapFor(
     0,
     objectsContainer.getObjectsCount(),
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-    i => objectsContainer.getObjectAt(i)
+
+    (i) => objectsContainer.getObjectAt(i)
   )
     .filter(filterObject)
-// @ts-expect-error - TS7006 - Parameter 'object' implicitly has an 'any' type.
-    .map(object => ({ object, global: false }));
+
+    .map((object) => ({ object, global: false }));
 
   const containerGroups = objectsContainer.getObjectGroups();
   const containerGroupsList: GroupWithContextList = enumerateGroups(
     containerGroups
   )
     .filter(filterGroup)
-    .map(group => ({ group, global: false }));
+    .map((group) => ({ group, global: false }));
 
   const projectObjectsList: ObjectWithContextList =
     globalObjectsContainer === objectsContainer
       ? []
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
-      : mapFor(0, globalObjectsContainer.getObjectsCount(), i =>
+      : mapFor(0, globalObjectsContainer.getObjectsCount(), (i) =>
           globalObjectsContainer.getObjectAt(i)
         )
           .filter(filterObject)
-// @ts-expect-error - TS7006 - Parameter 'object' implicitly has an 'any' type.
-          .map(object => ({ object, global: true }));
+
+          .map((object) => ({ object, global: true }));
 
   const projectGroups = globalObjectsContainer.getObjectGroups();
   const projectGroupsList: GroupWithContextList =
@@ -302,14 +295,12 @@ export const enumerateObjectsAndGroups = (
       ? []
       : enumerateGroups(projectGroups)
           .filter(filterGroup)
-          .map(group => ({ group, global: true }));
+          .map((group) => ({ group, global: true }));
 
-  const allObjectsList: ObjectWithContextList = containerObjectsList.concat(
-    projectObjectsList
-  );
-  const allGroupsList: GroupWithContextList = containerGroupsList.concat(
-    projectGroupsList
-  );
+  const allObjectsList: ObjectWithContextList =
+    containerObjectsList.concat(projectObjectsList);
+  const allGroupsList: GroupWithContextList =
+    containerGroupsList.concat(projectGroupsList);
 
   return {
     allObjectsList,

@@ -25,7 +25,7 @@ export const Toolbar = React.memo<ToolbarProps>(({
 }: ToolbarProps) => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <div
       className="almost-invisible-scrollbar"
 // @ts-expect-error - TS2322 - Type '{ backgroundColor: any; height: number; borderBottom: string | undefined; flexShrink: 0; display: "flex"; overflowX: "overlay"; overflowY: "hidden"; paddingLeft: 8; paddingRight: 8; }' is not assignable to type 'Properties<string | number, string & {}>'.
@@ -49,7 +49,7 @@ const toolbarGroupStyle = props: ToolbarGroupProps | {
   firstChild?: boolean,
 // @ts-expect-error - TS2693 - 'boolean' only refers to a type, but is being used as a value here.
   lastChild?: boolean
-// @ts-expect-error - TS1005 - ';' expected.
+
 } => ({
   flex: 1,
   display: 'flex',
@@ -68,6 +68,6 @@ type ToolbarGroupProps = {
 };
 
 export const ToolbarGroup = React.memo<ToolbarGroupProps>((props: ToolbarGroupProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   <span style={toolbarGroupStyle(props)}>{props.children}</span>
 ));

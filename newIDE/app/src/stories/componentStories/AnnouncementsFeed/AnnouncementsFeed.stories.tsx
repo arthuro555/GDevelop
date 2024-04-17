@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../AnnouncementsFeed' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AnnouncementsFeed/index.tsx', but '--jsx' is not set.
 import { AnnouncementsFeed } from '../../../AnnouncementsFeed';
-// @ts-expect-error - TS6142 - Module '../../../AnnouncementsFeed/AnnouncementsFeedContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AnnouncementsFeed/AnnouncementsFeedContext.tsx', but '--jsx' is not set.
+
 import { AnnouncementsFeedContext } from '../../../AnnouncementsFeed/AnnouncementsFeedContext';
 import {
   fakeAnnouncements,
@@ -21,7 +19,6 @@ export default {
 
 export const Default = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: fakeAnnouncements,
@@ -32,7 +29,6 @@ export const Default = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed />
     </AnnouncementsFeedContext.Provider>
   );
@@ -40,7 +36,6 @@ export const Default = () => {
 
 export const WithClosableItems = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: fakeAnnouncements,
@@ -51,7 +46,6 @@ export const WithClosableItems = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed canClose />
     </AnnouncementsFeedContext.Provider>
   );
@@ -59,7 +53,6 @@ export const WithClosableItems = () => {
 
 export const ErrorLoadingAnnouncements = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: null,
@@ -70,7 +63,6 @@ export const ErrorLoadingAnnouncements = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed />
     </AnnouncementsFeedContext.Provider>
   );
@@ -78,7 +70,6 @@ export const ErrorLoadingAnnouncements = () => {
 
 export const LoadingAnnouncements = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: null,
@@ -89,7 +80,6 @@ export const LoadingAnnouncements = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed />
     </AnnouncementsFeedContext.Provider>
   );
@@ -97,7 +87,6 @@ export const LoadingAnnouncements = () => {
 
 export const DefaultWithMargins = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: fakeAnnouncements,
@@ -108,7 +97,6 @@ export const DefaultWithMargins = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed addMargins />
     </AnnouncementsFeedContext.Provider>
   );
@@ -116,7 +104,6 @@ export const DefaultWithMargins = () => {
 
 export const OnlyUrgent = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider
       value={{
         announcements: fakeAnnouncements,
@@ -127,7 +114,6 @@ export const OnlyUrgent = () => {
         ),
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AnnouncementsFeed level="urgent" />
     </AnnouncementsFeedContext.Provider>
   );

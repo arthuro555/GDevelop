@@ -1,31 +1,31 @@
 import PromisePool from '@supercharge/promise-pool';
 import { retryIfFailed } from './RetryIfFailed';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from './OptionalRequire';
 const electron = optionalRequire('electron');
 const ipcRenderer = electron ? electron.ipcRenderer : null;
 
 type Input<Item> = {
-  urlContainers: Array<Item>,
-  onProgress: (count: number, total: number) => void,
-  throwIfAnyError: boolean
+  urlContainers: Array<Item>;
+  onProgress: (count: number, total: number) => void;
+  throwIfAnyError: boolean;
 };
 
 export type ItemResult<Item> = {
-  item: Item,
-  error?: Error
+  item: Item;
+  error?: Error;
 };
 
-export const downloadUrlsToLocalFiles = async <Item extends {
-  url: string,
-  filePath: string
-}>(
-  {
-    urlContainers,
-    onProgress,
-    throwIfAnyError,
-  }: Input<Item>,
-): Promise<Array<ItemResult<Item>>> => {
+export const downloadUrlsToLocalFiles = async <
+  Item extends {
+    url: string;
+    filePath: string;
+  },
+>({
+  urlContainers,
+  onProgress,
+  throwIfAnyError,
+}: Input<Item>): Promise<Array<ItemResult<Item>>> => {
   let count = 0;
   let firstError = null;
   if (!ipcRenderer)
@@ -33,7 +33,7 @@ export const downloadUrlsToLocalFiles = async <Item extends {
 
   const { results } = await PromisePool.withConcurrency(20)
     .for(urlContainers)
-    .process<ItemResult<Item>>(async urlContainer => {
+    .process<ItemResult<Item>>(async (urlContainer) => {
       const { url, filePath } = urlContainer;
 
       try {
@@ -46,7 +46,7 @@ export const downloadUrlsToLocalFiles = async <Item extends {
           item: urlContainer,
         };
         return result;
-      } catch (error: any) {
+      } catch (error) {
         console.error(`Error while downloading file ${url}:`, error);
         firstError = error;
         const result: ItemResult<Item> = {

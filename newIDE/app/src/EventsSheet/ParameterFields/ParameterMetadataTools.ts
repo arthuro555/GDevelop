@@ -1,6 +1,5 @@
-import {ExpressionParameters} from './ParameterFieldCommons';
+import { ExpressionParameters } from './ParameterFieldCommons';
 import { ExpressionAutocompletion } from '../../ExpressionAutocompletion';
-const gd: libGDevelop = global.gd;
 
 /**
  * Given an instruction or an expression and a parameter number,
@@ -10,21 +9,19 @@ const gd: libGDevelop = global.gd;
  * It's only here to ease to search of the object name in fields like BehaviorField or
  * ObjectVariableField.
  */
-export const getLastObjectParameterValue = (
-  {
-    instructionMetadata,
-    instruction,
-    expressionMetadata,
-    expression,
-    parameterIndex,
-  }: {
-    instructionMetadata: gdInstructionMetadata | null | undefined,
-    instruction: gdInstruction | null | undefined,
-    expressionMetadata: gdExpressionMetadata | null | undefined,
-    expression: ExpressionParameters | null | undefined,
-    parameterIndex: number | null | undefined
-  },
-): string | null | undefined => {
+export const getLastObjectParameterValue = ({
+  instructionMetadata,
+  instruction,
+  expressionMetadata,
+  expression,
+  parameterIndex,
+}: {
+  instructionMetadata: gd.InstructionMetadata | null | undefined;
+  instruction: gd.Instruction | null | undefined;
+  expressionMetadata: gd.ExpressionMetadata | null | undefined;
+  expression: ExpressionParameters | null | undefined;
+  parameterIndex: number | null | undefined;
+}): string | null | undefined => {
   if (parameterIndex === undefined || parameterIndex == null) {
     // No parameter index given: the parameter is not even in a list of parameters
     return null;
@@ -32,10 +29,11 @@ export const getLastObjectParameterValue = (
 
   let objectName = null;
   if (instructionMetadata && instruction) {
-    const objectParameterIndex = gd.ParameterMetadataTools.getObjectParameterIndexFor(
-      instructionMetadata.getParameters(),
-      parameterIndex
-    );
+    const objectParameterIndex =
+      gd.ParameterMetadataTools.getObjectParameterIndexFor(
+        instructionMetadata.getParameters(),
+        parameterIndex
+      );
     if (
       objectParameterIndex >= 0 &&
       objectParameterIndex < instruction.getParametersCount()
@@ -45,10 +43,11 @@ export const getLastObjectParameterValue = (
         .getPlainString();
     }
   } else if (expressionMetadata && expression) {
-    const objectParameterIndex = gd.ParameterMetadataTools.getObjectParameterIndexFor(
-      expressionMetadata.getParameters(),
-      parameterIndex
-    );
+    const objectParameterIndex =
+      gd.ParameterMetadataTools.getObjectParameterIndexFor(
+        expressionMetadata.getParameters(),
+        parameterIndex
+      );
     if (
       objectParameterIndex >= 0 &&
       objectParameterIndex < expression.getParametersCount()
@@ -61,13 +60,14 @@ export const getLastObjectParameterValue = (
 };
 
 export const getLastObjectParameterObjectType = (
-  parameters: gdVectorParameterMetadata,
+  parameters: gd.VectorParameterMetadata,
   parameterIndex: number
 ) => {
-  const objectParameterIndex = gd.ParameterMetadataTools.getObjectParameterIndexFor(
-    parameters,
-    parameterIndex
-  );
+  const objectParameterIndex =
+    gd.ParameterMetadataTools.getObjectParameterIndexFor(
+      parameters,
+      parameterIndex
+    );
   if (objectParameterIndex < 0 || objectParameterIndex >= parameters.size()) {
     return '';
   }
@@ -79,17 +79,15 @@ export const getLastObjectParameterObjectType = (
  * Given an instruction or an expression and a parameter number,
  * return the value of the previous parameter.
  */
-export const getPreviousParameterValue = (
-  {
-    instruction,
-    expression,
-    parameterIndex,
-  }: {
-    instruction: gdInstruction | null | undefined,
-    expression: ExpressionParameters | null | undefined,
-    parameterIndex: number | null | undefined
-  },
-): string | null | undefined => {
+export const getPreviousParameterValue = ({
+  instruction,
+  expression,
+  parameterIndex,
+}: {
+  instruction: gd.Instruction | null | undefined;
+  expression: ExpressionParameters | null | undefined;
+  parameterIndex: number | null | undefined;
+}): string | null | undefined => {
   if (parameterIndex === undefined || parameterIndex == null) {
     // No parameter index given: the parameter is not even in a list of parameters
     return null;
@@ -120,7 +118,9 @@ export const getPreviousParameterValue = (
  * - for `"Hello`, this returns null.
  * - for `"H" + "O"`, this returns `H" + "O`.
  */
-export const tryExtractStringLiteralContent = (parameterValue?: string | null): string | null | undefined => {
+export const tryExtractStringLiteralContent = (
+  parameterValue?: string | null
+): string | null | undefined => {
   if (!parameterValue) return null;
 
   const trimmedParameterValue = parameterValue.trim();
@@ -135,19 +135,24 @@ export const tryExtractStringLiteralContent = (parameterValue?: string | null): 
   return null;
 };
 
-export const getParameterChoiceAutocompletions = (parameterMetadata?: gdParameterMetadata | null): Array<ExpressionAutocompletion> => getParameterChoiceValues(parameterMetadata).map(choice => ({
-  kind: 'Text',
-  completion: `"${choice}"`,
-}));
+export const getParameterChoiceAutocompletions = (
+  parameterMetadata?: gd.ParameterMetadata | null
+): Array<ExpressionAutocompletion> =>
+  getParameterChoiceValues(parameterMetadata).map((choice) => ({
+    kind: 'Text',
+    completion: `"${choice}"`,
+  }));
 
-export const getParameterChoiceValues = (parameterMetadata?: gdParameterMetadata | null): Array<string> => {
+export const getParameterChoiceValues = (
+  parameterMetadata?: gd.ParameterMetadata | null
+): Array<string> => {
   if (!parameterMetadata) {
     return [];
   }
 
   try {
     return JSON.parse(parameterMetadata.getExtraInfo());
-  } catch (exception: any) {
+  } catch (exception) {
     console.error(
       'The parameter seems misconfigured, as an array of choices could not be extracted - verify that your properly wrote a list of choices in JSON format. Full exception is:',
       exception

@@ -7,8 +7,8 @@ const listeners: Set<() => void> = new Set();
 
 // Event listener set-up
 if (typeof window !== 'undefined') {
-  const callListeners = () => listeners.forEach(callback => callback());
-// @ts-expect-error - TS7034 - Variable 'timeout' implicitly has type 'any' in some locations where its type cannot be determined.
+  const callListeners = () => listeners.forEach((callback) => callback());
+  // @ts-expect-error - TS7034 - Variable 'timeout' implicitly has type 'any' in some locations where its type cannot be determined.
   let timeout;
   window.addEventListener('resize', () => {
     const activeElement = document.activeElement;
@@ -27,7 +27,7 @@ if (typeof window !== 'undefined') {
       // for why we cannot have a perfect solution.
       return;
     }
-// @ts-expect-error - TS7005 - Variable 'timeout' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'timeout' implicitly has an 'any' type.
     clearTimeout(timeout);
     timeout = setTimeout(callListeners, 200);
   });
@@ -38,15 +38,12 @@ if (typeof window !== 'undefined') {
  * while having only one resize DOM event handler.
  */
 const useOnResize = (callback: () => void) => {
-  React.useEffect(
-    () => {
-      listeners.add(callback);
-      return () => {
-        listeners.delete(callback);
-      };
-    },
-    [callback]
-  );
+  React.useEffect(() => {
+    listeners.add(callback);
+    return () => {
+      listeners.delete(callback);
+    };
+  }, [callback]);
 };
 
 export default useOnResize;

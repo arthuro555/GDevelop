@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
 
 import {
@@ -9,9 +8,9 @@ import {
   mockSigningCredentials,
 } from '../../../../fixtures/GDevelopServicesTestData';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../../../ExportAndShare/SigningCredentials/SigningCredentialsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/SigningCredentials/SigningCredentialsDialog/index.tsx', but '--jsx' is not set.
+
 import { SigningCredentialsDialog } from '../../../../ExportAndShare/SigningCredentials/SigningCredentialsDialog';
-// @ts-expect-error - TS6142 - Module '../../../AlertDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/AlertDecorator.tsx', but '--jsx' is not set.
+
 import alertDecorator from '../../../AlertDecorator';
 
 export default {
@@ -22,9 +21,7 @@ export default {
 
 export const Loading = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SigningCredentialsDialog
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={null}
@@ -38,9 +35,7 @@ export const Loading = () => {
 
 export const Errored = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SigningCredentialsDialog
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={null}
@@ -54,9 +49,7 @@ export const Errored = () => {
 
 export const Empty = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SigningCredentialsDialog
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={[]}
@@ -70,9 +63,7 @@ export const Empty = () => {
 
 export const WithSigningCredentials = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <SigningCredentialsDialog
         authenticatedUser={fakeSilverAuthenticatedUser}
         signingCredentials={mockSigningCredentials}

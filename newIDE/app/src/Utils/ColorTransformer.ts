@@ -1,8 +1,8 @@
 export type RGBColor = {
-  r: number,
-  g: number,
-  b: number,
-  a?: number
+  r: number;
+  g: number;
+  b: number;
+  a?: number;
 };
 
 /**
@@ -98,7 +98,7 @@ export const hexNumberToRGBString = (hex: number) => {
  * Convert a RGB string ("rrr;ggg;bbb") or a Hex string (#rrggbb) to a RGB string.
  * @param value The color as a RGB string or Hex string
  */
-export const rgbOrHexToRGBString = function(value: string): string {
+export const rgbOrHexToRGBString = function (value: string): string {
   const splitValue = value.split(';');
   // If a RGB string is provided, just return it.
   if (splitValue.length === 3) {
@@ -113,7 +113,10 @@ export const rgbOrHexToRGBString = function(value: string): string {
  * Convert a RGB string ("rrr;ggg;bbb") and an alpha number to a RGB color.
  * If alpha is not defined, defaults to 1 (fully opaque)
  */
-export const rgbStringAndAlphaToRGBColor = (rgbColor: string, alpha?: number): RGBColor | null => {
+export const rgbStringAndAlphaToRGBColor = (
+  rgbColor: string,
+  alpha?: number
+): RGBColor | null => {
   const colors = rgbColor.replace(/"/g, '').split(';');
   if (colors.length !== 3) {
     return null;

@@ -1,4 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { isPathInProjectFolder } from './ResourceUtils';
@@ -28,13 +28,13 @@ export type MappedResources = {
   }
 };
 
-type ParseEmbeddedFiles = (project: gdProject, filePath: string) => Promise<EmbeddedResources | null | undefined>;
+type ParseEmbeddedFiles = (project: gd.Project, filePath: string) => Promise<EmbeddedResources | null | undefined>;
 
 /**
  * Copy the embedded resources inside the project folder
  */
 export async function copyAllEmbeddedResourcesToProjectFolder(
-  project: gdProject,
+  project: gd.Project,
   filesWithEmbeddedResources: Map<string, EmbeddedResources>
 ) {
   if (!fs || !path) {
@@ -88,7 +88,7 @@ export async function copyAllEmbeddedResourcesToProjectFolder(
  * the resource containing the tileset).
  */
 export function createAndMapEmbeddedResources(
-  project: gdProject,
+  project: gd.Project,
   filesWithEmbeddedResources: Map<string, EmbeddedResources>,
 ): Map<string, MappedResources> {
   const projectPath = path.dirname(project.getProjectFile());
@@ -148,7 +148,7 @@ export function createAndMapEmbeddedResources(
  * @param filePath The file path of a resource
  * @returns
  */
-export async function listTileMapEmbeddedResources(project: gdProject, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listTileMapEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) {
     return null;
   }
@@ -220,7 +220,7 @@ export async function listTileMapEmbeddedResources(project: gdProject, filePath:
   }
 }
 
-export async function listSpineEmbeddedResources(project: gdProject, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listSpineEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) return null;
 
   const atlasPath = filePath.replace('.json', '.atlas');
@@ -229,7 +229,7 @@ export async function listSpineEmbeddedResources(project: gdProject, filePath: s
       .access(atlasPath, fs.constants.F_OK)
       .then(() => resolve(true))
       .catch(() => resolve(false));
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   });
 
   // Spine resources usually have the same base names:
@@ -257,7 +257,7 @@ export async function listSpineEmbeddedResources(project: gdProject, filePath: s
   };
 }
 
-export async function listSpineTextureAtlasEmbeddedResources(project: gdProject, filePath: string): Promise<EmbeddedResources | null | undefined> {
+export async function listSpineTextureAtlasEmbeddedResources(project: gd.Project, filePath: string): Promise<EmbeddedResources | null | undefined> {
   if (!fs || !path) return null;
 
   let atlasContent: string | null | undefined = null;

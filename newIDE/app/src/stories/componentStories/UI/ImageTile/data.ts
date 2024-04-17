@@ -1,5 +1,4 @@
-// @ts-expect-error - TS6142 - Module '../../../../UI/ImageTileGrid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ImageTileGrid.tsx', but '--jsx' is not set.
-import {ImageTileComponent} from '../../../../UI/ImageTileGrid';
+import { ImageTileComponent } from '../../../../UI/ImageTileGrid';
 
 export const itemsWithJustImage: Array<ImageTileComponent> = Array(10)
   .fill(0)

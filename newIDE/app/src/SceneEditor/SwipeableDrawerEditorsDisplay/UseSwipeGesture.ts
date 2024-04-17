@@ -1,22 +1,18 @@
 import * as React from 'react';
 
 type Props = {
-  onSwipeUp: () => void,
-  onSwipeDown: () => void,
+  onSwipeUp: () => void;
+  onSwipeDown: () => void;
   containerRef: {
-    current: HTMLDivElement | null | undefined
-  }
+    current: HTMLDivElement | null | undefined;
+  };
 };
 
 const minMovement = 30; // px
 const minSpeed = 200; // px/s
 const absoluteMaxDelta = 30; // px
 
-const useSwipeGesture = ({
-  containerRef,
-  onSwipeDown,
-  onSwipeUp,
-}: Props) => {
+const useSwipeGesture = ({ containerRef, onSwipeDown, onSwipeUp }: Props) => {
   const startTimeRef = React.useRef<number | null | undefined>(null);
   const startYRef = React.useRef<number | null | undefined>(null);
 

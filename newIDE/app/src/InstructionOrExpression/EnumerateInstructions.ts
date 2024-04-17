@@ -1,13 +1,10 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import {
   EnumeratedInstructionMetadata,
   InstructionOrExpressionScope,
 } from './EnumeratedInstructionOrExpressionMetadata';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/Extension/ExtensionCategories.js'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/Extension/ExtensionCategories.js' implicitly has an 'any' type.
-import { translateExtensionCategory } from '../Utils/Extension/ExtensionCategories.js';
 
-const gd: libGDevelop = global.gd;
+import { translateExtensionCategory } from '../Utils/Extension/ExtensionCategories.js';
 
 const GROUP_DELIMITER = '/';
 
@@ -29,9 +26,9 @@ const freeInstructionsToKeep = {
  * @param objectBehaviorTypes The object behaviors
  */
 const isObjectInstruction = (
-  instructionMetadata: gdInstructionMetadata,
+  instructionMetadata: gd.InstructionMetadata,
   objectType?: string,
-  objectBehaviorTypes?: Set<string>,
+  objectBehaviorTypes?: Set<string>
 ): boolean => {
   let firstParameterIndex = -1;
   for (
@@ -82,7 +79,10 @@ const isObjectInstruction = (
   return true;
 };
 
-const isBehaviorInstruction = (instructionMetadata: gdInstructionMetadata, behaviorType?: string): boolean => {
+const isBehaviorInstruction = (
+  instructionMetadata: gd.InstructionMetadata,
+  behaviorType?: string
+): boolean => {
   let firstParameterIndex = -1;
   for (
     let index = 0;
@@ -114,7 +114,10 @@ const isBehaviorInstruction = (instructionMetadata: gdInstructionMetadata, behav
   );
 };
 
-export const getExtensionPrefix = (extension: gdPlatformExtension, i18n: I18nType): string => {
+export const getExtensionPrefix = (
+  extension: gd.PlatformExtension,
+  i18n: I18nType
+): string => {
   return (
     translateExtensionCategory(extension.getCategory(), i18n) +
     GROUP_DELIMITER +
@@ -124,11 +127,11 @@ export const getExtensionPrefix = (extension: gdPlatformExtension, i18n: I18nTyp
 
 const enumerateExtraBehaviorInstructions = (
   isCondition: boolean,
-  extension: gdPlatformExtension,
+  extension: gd.PlatformExtension,
   behaviorType: string,
   prefix: string,
   scope: InstructionOrExpressionScope,
-  i18n: I18nType,
+  i18n: I18nType
 ): Array<EnumeratedInstructionMetadata> => {
   const instructions = isCondition
     ? extension.getAllConditions()
@@ -159,11 +162,11 @@ const enumerateExtraBehaviorInstructions = (
  */
 const enumerateExtraObjectInstructions = (
   isCondition: boolean,
-  extension: gdPlatformExtension,
+  extension: gd.PlatformExtension,
   objectType: string,
   objectBehaviorTypes: Set<string> | null | undefined,
   scope: InstructionOrExpressionScope,
-  i18n: I18nType,
+  i18n: I18nType
 ): Array<EnumeratedInstructionMetadata> => {
   const instructions = isCondition
     ? extension.getAllConditions()
@@ -179,7 +182,7 @@ const enumerateExtraObjectInstructions = (
     const instrMetadata = instructions.get(type);
     if (
       !instrMetadata.isHidden() &&
-// @ts-expect-error - TS2345 - Argument of type 'Set<string> | null | undefined' is not assignable to parameter of type 'Set<string> | undefined'.
+      // @ts-expect-error - TS2345 - Argument of type 'Set<string> | null | undefined' is not assignable to parameter of type 'Set<string> | undefined'.
       isObjectInstruction(instrMetadata, objectType, objectBehaviorTypes)
     ) {
       allInstructions.push(
@@ -196,16 +199,16 @@ const enumerateExtraObjectInstructions = (
  */
 const enumerateFreeInstructionsWithoutExtra = (
   isCondition: boolean,
-  extension: gdPlatformExtension,
+  extension: gd.PlatformExtension,
   scope: InstructionOrExpressionScope,
-  i18n: I18nType,
+  i18n: I18nType
 ): Array<EnumeratedInstructionMetadata> => {
   const instructions = isCondition
     ? extension.getAllConditions()
     : extension.getAllActions();
   const prefix = getExtensionPrefix(extension, i18n);
   const extensionInstructionsToKeep =
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly BuiltinObject: readonly ["Create", "CreateByName"]; readonly BuiltinCamera: readonly ["CentreCamera"]; readonly Scene3D: readonly ["Scene3D::TurnCameraTowardObject"]; }'.
+    // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly BuiltinObject: readonly ["Create", "CreateByName"]; readonly BuiltinCamera: readonly ["CentreCamera"]; readonly Scene3D: readonly ["Scene3D::TurnCameraTowardObject"]; }'.
     freeInstructionsToKeep[extension.getName()];
 
   // Get the map containing the metadata of the instructions provided by the extension...
@@ -245,10 +248,10 @@ const enumerateFreeInstructionsWithoutExtra = (
 const enumerateInstruction = (
   prefix: string,
   type: string,
-  instrMetadata: gdInstructionMetadata,
+  instrMetadata: gd.InstructionMetadata,
   scope: InstructionOrExpressionScope,
   i18n: I18nType,
-  ignoresGroups = false,
+  ignoresGroups = false
 ): EnumeratedInstructionMetadata => {
   const displayedName = instrMetadata.getFullName();
   let description = instrMetadata.getDescription();
@@ -277,18 +280,20 @@ const enumerateInstruction = (
     isPrivate: instrMetadata.isPrivate(),
     isRelevantForLayoutEvents: instrMetadata.isRelevantForLayoutEvents(),
     isRelevantForFunctionEvents: instrMetadata.isRelevantForFunctionEvents(),
-    isRelevantForAsynchronousFunctionEvents: instrMetadata.isRelevantForAsynchronousFunctionEvents(),
-    isRelevantForCustomObjectEvents: instrMetadata.isRelevantForCustomObjectEvents(),
+    isRelevantForAsynchronousFunctionEvents:
+      instrMetadata.isRelevantForAsynchronousFunctionEvents(),
+    isRelevantForCustomObjectEvents:
+      instrMetadata.isRelevantForCustomObjectEvents(),
   };
 };
 
 const enumerateExtensionInstructions = (
   prefix: string,
-  instructions: gdMapStringInstructionMetadata,
+  instructions: gd.MapStringInstructionMetadata,
   scope: InstructionOrExpressionScope,
   i18n: I18nType,
   objectType?: string,
-  objectBehaviorTypes?: Set<string>,
+  objectBehaviorTypes?: Set<string>
 ): Array<EnumeratedInstructionMetadata> => {
   //Get the map containing the metadata of the instructions provided by the extension...
   const instructionsTypes = instructions.keys();
@@ -315,7 +320,10 @@ const enumerateExtensionInstructions = (
 /**
  * List all the instructions available.
  */
-export const enumerateAllInstructions = (isCondition: boolean, i18n: I18nType): Array<EnumeratedInstructionMetadata> => {
+export const enumerateAllInstructions = (
+  isCondition: boolean,
+  i18n: I18nType
+): Array<EnumeratedInstructionMetadata> => {
   let allInstructions: Array<EnumeratedInstructionMetadata> = [];
 
   const allExtensions = gd
@@ -385,10 +393,10 @@ const orderFirstInstructionsWithoutGroup = (
   allInstructions: Array<EnumeratedInstructionMetadata>
 ) => {
   const noGroupInstructions = allInstructions.filter(
-    instructionMetadata => instructionMetadata.fullGroupName.length === 0
+    (instructionMetadata) => instructionMetadata.fullGroupName.length === 0
   );
   const instructionsWithGroups = allInstructions.filter(
-    instructionMetadata => instructionMetadata.fullGroupName.length !== 0
+    (instructionMetadata) => instructionMetadata.fullGroupName.length !== 0
   );
 
   return [...noGroupInstructions, ...instructionsWithGroups];
@@ -401,10 +409,10 @@ const orderFirstInstructionsWithoutGroup = (
  */
 export const enumerateObjectAndBehaviorsInstructions = (
   isCondition: boolean,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer,
   objectName: string,
-  i18n: I18nType,
+  i18n: I18nType
 ): Array<EnumeratedInstructionMetadata> => {
   let allInstructions: Array<EnumeratedInstructionMetadata> = [];
 
@@ -423,7 +431,7 @@ export const enumerateObjectAndBehaviorsInstructions = (
     )
     .toJSArray();
   const objectBehaviorTypes = new Set(
-    objectBehaviorNames.map(behaviorName =>
+    objectBehaviorNames.map((behaviorName) =>
       gd.getTypeOfBehavior(
         globalObjectsContainer,
         objectsContainer,
@@ -434,10 +442,11 @@ export const enumerateObjectAndBehaviorsInstructions = (
   );
 
   // Enumerate instructions of the object.
-  const extensionAndObjectMetadata = gd.MetadataProvider.getExtensionAndObjectMetadata(
-    gd.JsPlatform.get(),
-    objectType
-  );
+  const extensionAndObjectMetadata =
+    gd.MetadataProvider.getExtensionAndObjectMetadata(
+      gd.JsPlatform.get(),
+      objectType
+    );
   const extension = extensionAndObjectMetadata.getExtension();
   const objectMetadata = extensionAndObjectMetadata.getMetadata();
   const scope = { extension, objectMetadata } as const;
@@ -480,10 +489,11 @@ export const enumerateObjectAndBehaviorsInstructions = (
   // Enumerate instructions of the base object that the object "inherits" from.
   const baseObjectType = ''; /* An empty string means the base object */
   if (objectType !== baseObjectType) {
-    const baseExtensionAndObjectMetadata = gd.MetadataProvider.getExtensionAndObjectMetadata(
-      gd.JsPlatform.get(),
-      baseObjectType
-    );
+    const baseExtensionAndObjectMetadata =
+      gd.MetadataProvider.getExtensionAndObjectMetadata(
+        gd.JsPlatform.get(),
+        baseObjectType
+      );
     const baseObjectExtension = baseExtensionAndObjectMetadata.getExtension();
 
     allInstructions = [
@@ -505,12 +515,12 @@ export const enumerateObjectAndBehaviorsInstructions = (
     const behaviorTypes = extension
       .getBehaviorsTypes()
       .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
-      .filter(behaviorType => objectBehaviorTypes.has(behaviorType));
+      // @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
+      .filter((behaviorType) => objectBehaviorTypes.has(behaviorType));
 
     // eslint-disable-next-line
-// @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
-    behaviorTypes.forEach(behaviorType => {
+    // @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
+    behaviorTypes.forEach((behaviorType) => {
       const behaviorMetadata = extension.getBehaviorMetadata(behaviorType);
       const scope = { extension, behaviorMetadata } as const;
 
@@ -558,7 +568,7 @@ export const enumerateObjectAndBehaviorsInstructions = (
     !objectsContainer.getObjectGroups().has(objectName)
   ) {
     allInstructions = allInstructions.filter(
-      instruction => instruction.type !== 'CreateByName'
+      (instruction) => instruction.type !== 'CreateByName'
     );
   }
 
@@ -569,7 +579,10 @@ export const enumerateObjectAndBehaviorsInstructions = (
  * Enumerate all the instructions that are not directly tied
  * to an object.
  */
-export const enumerateFreeInstructions = (isCondition: boolean, i18n: I18nType): Array<EnumeratedInstructionMetadata> => {
+export const enumerateFreeInstructions = (
+  isCondition: boolean,
+  i18n: I18nType
+): Array<EnumeratedInstructionMetadata> => {
   let allFreeInstructions: Array<EnumeratedInstructionMetadata> = [];
 
   const allExtensions = gd
@@ -596,11 +609,11 @@ export const enumerateFreeInstructions = (isCondition: boolean, i18n: I18nType):
 };
 
 export type InstructionFilteringOptions = {
-  searchText: string
+  searchText: string;
 };
 
 export const getObjectParameterIndex = (
-  instructionMetadata: gdInstructionMetadata
+  instructionMetadata: gd.InstructionMetadata
 ) => {
   const parametersCount = instructionMetadata.getParametersCount();
   if (parametersCount >= 1) {

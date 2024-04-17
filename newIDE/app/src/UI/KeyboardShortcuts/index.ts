@@ -1,4 +1,4 @@
-import {isMacLike} from '../../Utils/Platform';
+import { isMacLike } from '../../Utils/Platform';
 
 export const MOVEMENT_BIG_DELTA = 5;
 
@@ -32,28 +32,28 @@ const F2_KEY = 113;
 export const MID_MOUSE_BUTTON = 1;
 
 type ShortcutCallbacks = {
-  onDelete?: () => undefined | Promise<undefined>,
-  onMove?: (arg1: number, arg2: number) => undefined | Promise<undefined>,
-  onCopy?: () => undefined | Promise<undefined>,
-  onCut?: () => undefined | Promise<undefined>,
-  onPaste?: () => undefined | Promise<undefined>,
-  onDuplicate?: () => undefined | Promise<undefined>,
-  onUndo?: () => undefined | Promise<undefined>,
-  onRedo?: () => undefined | Promise<undefined>,
-  onSearch?: () => undefined | Promise<undefined>,
-  onZoomOut?: (arg1: KeyboardEvent) => undefined | Promise<undefined>,
-  onZoomIn?: (arg1: KeyboardEvent) => undefined | Promise<undefined>,
-  onEscape?: () => undefined | Promise<undefined>,
-  onShift1?: () => undefined | Promise<undefined>,
-  onShift2?: () => undefined | Promise<undefined>,
-  onShift3?: () => undefined | Promise<undefined>,
-  onToggleGrabbingTool?: (isEnabled: boolean) => undefined | Promise<undefined>,
-  onRename?: () => undefined | Promise<undefined>
+  onDelete?: () => undefined | Promise<undefined>;
+  onMove?: (arg1: number, arg2: number) => undefined | Promise<undefined>;
+  onCopy?: () => undefined | Promise<undefined>;
+  onCut?: () => undefined | Promise<undefined>;
+  onPaste?: () => undefined | Promise<undefined>;
+  onDuplicate?: () => undefined | Promise<undefined>;
+  onUndo?: () => undefined | Promise<undefined>;
+  onRedo?: () => undefined | Promise<undefined>;
+  onSearch?: () => undefined | Promise<undefined>;
+  onZoomOut?: (arg1: KeyboardEvent) => undefined | Promise<undefined>;
+  onZoomIn?: (arg1: KeyboardEvent) => undefined | Promise<undefined>;
+  onEscape?: () => undefined | Promise<undefined>;
+  onShift1?: () => undefined | Promise<undefined>;
+  onShift2?: () => undefined | Promise<undefined>;
+  onShift3?: () => undefined | Promise<undefined>;
+  onToggleGrabbingTool?: (isEnabled: boolean) => undefined | Promise<undefined>;
+  onRename?: () => undefined | Promise<undefined>;
 };
 
 type ConstructorArgs = {
-  isActive?: () => boolean,
-  shortcutCallbacks: ShortcutCallbacks
+  isActive?: () => boolean;
+  shortcutCallbacks: ShortcutCallbacks;
 };
 
 /**
@@ -77,12 +77,9 @@ export default class KeyboardShortcuts {
   _mouseMidButtonPressed = false;
   _spacePressed = false;
 
-  constructor({
-    isActive,
-    shortcutCallbacks,
-  }: ConstructorArgs) {
+  constructor({ isActive, shortcutCallbacks }: ConstructorArgs) {
     this._shortcutCallbacks = shortcutCallbacks;
-// @ts-expect-error - TS2322 - Type '(() => boolean) | undefined' is not assignable to type '() => boolean | null | undefined'.
+    // @ts-expect-error - TS2322 - Type '(() => boolean) | undefined' is not assignable to type '() => boolean | null | undefined'.
     this._isActive = isActive;
   }
 
@@ -246,7 +243,7 @@ export default class KeyboardShortcuts {
     if (this._isActive && !this._isActive()) return;
 
     const textEditorSelectors = 'textarea, input, [contenteditable="true"]';
-// @ts-expect-error - TS2339 - Property 'closest' does not exist on type 'EventTarget'.
+    // @ts-expect-error - TS2339 - Property 'closest' does not exist on type 'EventTarget'.
     if (evt.target && evt.target.closest(textEditorSelectors)) {
       return; // Something else is currently being edited.
     }

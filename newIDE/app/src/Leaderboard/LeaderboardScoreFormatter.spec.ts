@@ -3,11 +3,8 @@ const {
   formatCustomScore,
 } = require('./LeaderboardScoreFormatter');
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('LeaderboardScoreFormatter', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('formatDuration', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it correctly formats whole seconds', () => {
       expect(
         formatDuration(81, {
@@ -31,7 +28,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats seconds without milliseconds', () => {
       expect(
         formatDuration(81.29, {
@@ -55,7 +52,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats seconds with milliseconds', () => {
       expect(
         formatDuration(81.29, {
@@ -80,7 +77,6 @@ describe('LeaderboardScoreFormatter', () => {
       ).toEqual('08.045');
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it correctly formats whole hours', () => {
       expect(
         formatDuration(39 * 3600, {
@@ -104,7 +100,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats hours without lower units', () => {
       expect(
         formatDuration(39 * 3600 + Math.random() * 15 * 60, {
@@ -128,7 +124,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats hours with minutes', () => {
       expect(
         formatDuration(39 * 3600 + 13 * 60 + 6 + 0.134, {
@@ -152,7 +148,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08:09');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats hours with minutes and seconds', () => {
       expect(
         formatDuration(39 * 3600 + 13 * 60 + 6 + 0.134, {
@@ -176,7 +172,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('08:09:00');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats hours with minutes, seconds and milliseconds', () => {
       expect(
         formatDuration(39 * 3600 + 13 * 60 + 6 + 0.134, {
@@ -202,9 +198,7 @@ describe('LeaderboardScoreFormatter', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('formatCustomScore', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it correctly formats score without prefix nor suffix, with 0 decimal places', () => {
       expect(
         formatCustomScore(39, {
@@ -223,7 +217,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('0');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats score with prefix or suffix, with 0 decimal places', () => {
       expect(
         formatCustomScore(39, {
@@ -242,7 +236,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('0coins');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats score with prefix or suffix, with decimal places', () => {
       expect(
         formatCustomScore(39, {
@@ -269,7 +263,7 @@ describe('LeaderboardScoreFormatter', () => {
         })
       ).toEqual('0.19coins');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it correctly formats score with prefix or suffix, with decimal places', () => {
       expect(
         formatCustomScore(250, {

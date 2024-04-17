@@ -1,11 +1,7 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import { StorageProvider, FileMetadata } from '../index';
 import axios from 'axios';
-import {
-  POSITIONAL_ARGUMENTS_KEY,
-  AppArguments,
-} from '../../Utils/Window';
+import { POSITIONAL_ARGUMENTS_KEY, AppArguments } from '../../Utils/Window';
 
 const isURL = (filename: string) => {
   return (

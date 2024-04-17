@@ -4,24 +4,22 @@ import {
   ClosableTabs,
   ClosableTab,
   TabContentContainer,
-// @ts-expect-error - TS6142 - Module '../../UI/ClosableTabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ClosableTabs.tsx', but '--jsx' is not set.
 } from '../../UI/ClosableTabs';
 import ValueStateHolder from '../ValueStateHolder';
-// @ts-expect-error - TS6142 - Module '../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../FixedHeightFlexContainer';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column } from '../../UI/Grid';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/DragAndDrop/DragAndDropContextProvider'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragAndDropContextProvider.js' implicitly has an 'any' type.
+
 import DragAndDropContextProvider from '../../UI/DragAndDrop/DragAndDropContextProvider';
-// @ts-expect-error - TS6142 - Module '../../ObjectsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsList/index.tsx', but '--jsx' is not set.
+
 import ObjectsList from '../../ObjectsList';
 import GDevelopJsInitializerDecorator, {
   testProject,
-// @ts-expect-error - TS6142 - Module '../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
 } from '../GDevelopJsInitializerDecorator';
-// @ts-expect-error - TS6142 - Module '../../HotReload/HotReloadPreviewButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadPreviewButton.tsx', but '--jsx' is not set.
+
 import { HotReloadPreviewButtonProps } from '../../HotReload/HotReloadPreviewButton';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Home'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Home.js' implicitly has an 'any' type.
+
 import Home from '../../UI/CustomSvgIcons/Home';
 import fakeResourceManagementProps from '../FakeResourceManagement';
 
@@ -32,30 +30,23 @@ export default {
 };
 
 export const ThreeTabs = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ValueStateHolder
     initialValue={0}
     render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <FixedHeightFlexContainer height={400}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ClosableTabs>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 1 activated')}
               closable={false}
               active={value === 0}
               onClick={() => onChange(0)}
               label={null}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               icon={<Home />}
               onClose={action('Close tab 1')}
               onCloseAll={action('Close all')}
               onCloseOthers={action('Close others')}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 2 activated')}
               closable
@@ -67,7 +58,6 @@ export const ThreeTabs = () => (
               onCloseAll={action('Close all')}
               onCloseOthers={action('Close others')}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 3 activated')}
               closable
@@ -81,9 +71,7 @@ export const ThreeTabs = () => (
             />
           </ClosableTabs>
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 0}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -92,9 +80,7 @@ export const ThreeTabs = () => (
             </TabContentContainer>
           }
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 1}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -103,9 +89,7 @@ export const ThreeTabs = () => (
             </TabContentContainer>
           }
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 2}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -120,17 +104,12 @@ export const ThreeTabs = () => (
 );
 
 export const LongLabels = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ValueStateHolder
     initialValue={0}
     render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <FixedHeightFlexContainer height={400}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ClosableTabs>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 1 activated')}
               closable
@@ -142,7 +121,6 @@ export const LongLabels = () => (
               onCloseOthers={action('Close others')}
               onClick={() => onChange(0)}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 2 activated')}
               closable
@@ -154,7 +132,6 @@ export const LongLabels = () => (
               onCloseAll={action('Close all')}
               onCloseOthers={action('Close others')}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 3 activated')}
               closable
@@ -166,7 +143,6 @@ export const LongLabels = () => (
               onCloseAll={action('Close all')}
               onCloseOthers={action('Close others')}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTab
               onActivated={action('Tab 4 activated')}
               closable
@@ -180,9 +156,7 @@ export const LongLabels = () => (
             />
           </ClosableTabs>
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 0}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -191,9 +165,7 @@ export const LongLabels = () => (
             </TabContentContainer>
           }
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 1}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -202,9 +174,7 @@ export const LongLabels = () => (
             </TabContentContainer>
           }
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 2}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -213,9 +183,7 @@ export const LongLabels = () => (
             </TabContentContainer>
           }
           {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <TabContentContainer active={value === 3}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{ backgroundColor: 'green', height: '100%', flex: 1 }}
               >
@@ -238,19 +206,13 @@ const hotReloadPreviewButtonProps: HotReloadPreviewButtonProps = {
 };
 
 export const WithObjectsList = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ValueStateHolder
     initialValue={0}
     render={(value, onChange) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DragAndDropContextProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <FixedHeightFlexContainer height={400}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ClosableTabs>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ClosableTab
                 onActivated={action('Tab 1 activated')}
                 closable
@@ -262,7 +224,6 @@ export const WithObjectsList = () => (
                 onCloseAll={action('Close all')}
                 onCloseOthers={action('Close others')}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ClosableTab
                 onActivated={action('Tab 2 activated')}
                 closable
@@ -274,7 +235,6 @@ export const WithObjectsList = () => (
                 onCloseAll={action('Close all')}
                 onCloseOthers={action('Close others')}
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ClosableTab
                 onActivated={action('Tab 3 activated')}
                 closable
@@ -288,9 +248,7 @@ export const WithObjectsList = () => (
               />
             </ClosableTabs>
             {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <TabContentContainer active={value === 0}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <div
                   style={{
                     backgroundColor: 'green',
@@ -304,9 +262,7 @@ export const WithObjectsList = () => (
               </TabContentContainer>
             }
             {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <TabContentContainer active={value === 1}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ObjectsList
                   getThumbnail={() => 'res/unknown32.png'}
                   project={testProject.project}
@@ -317,16 +273,11 @@ export const WithObjectsList = () => (
                   onExportAssets={action('On export assets')}
                   onAddObjectInstance={action('On add instance to the scene')}
                   selectedObjectFolderOrObjectsWithContext={[]}
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type.
-                  getValidatedObjectOrGroupName={newName => newName}
-// @ts-expect-error - TS7006 - Parameter 'objectsWithContext' implicitly has an 'any' type. | TS7006 - Parameter 'cb' implicitly has an 'any' type.
+                  getValidatedObjectOrGroupName={(newName) => newName}
                   onDeleteObjects={(objectsWithContext, cb) => cb(true)}
                   onRenameObjectFolderOrObjectWithContextFinish={(
-// @ts-expect-error - TS7006 - Parameter 'objectFolderOrObjectWithContext' implicitly has an 'any' type.
                     objectFolderOrObjectWithContext,
-// @ts-expect-error - TS7006 - Parameter 'newName' implicitly has an 'any' type.
                     newName,
-// @ts-expect-error - TS7006 - Parameter 'cb' implicitly has an 'any' type.
                     cb
                   ) => cb(true)}
                   onObjectCreated={() => {}}
@@ -337,9 +288,7 @@ export const WithObjectsList = () => (
               </TabContentContainer>
             }
             {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <TabContentContainer active={value === 2}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <div
                   style={{
                     backgroundColor: 'green',

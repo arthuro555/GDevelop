@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
 import {
@@ -16,9 +15,9 @@ import {
   fakeStartupAuthenticatedUser,
   subscriptionPlansWithPricingSystems,
 } from '../../../../fixtures/GDevelopServicesTestData';
-// @ts-expect-error - TS6142 - Module '../../../../Profile/Subscription/SubscriptionDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionDialog.tsx', but '--jsx' is not set.
+
 import SubscriptionDialog from '../../../../Profile/Subscription/SubscriptionDialog';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Alert/AlertProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/AlertProvider.tsx', but '--jsx' is not set.
+
 import AlertProvider from '../../../../UI/Alert/AlertProvider';
 import { getAvailableSubscriptionPlansWithPrices } from '../../../../Utils/UseSubscriptionPlans';
 
@@ -70,32 +69,44 @@ export const Default = ({
   userSubscriptionId,
   pricingSystem,
 }: {
-  authenticated?: 'no' | 'loading' | 'yes',
-  willCancelAtPeriodEndOrIsExpired?: boolean,
-  filter?: 'none' | 'individual' | 'team' | 'education',
-  userSubscriptionId?: 'none' | 'gdevelop_silver' | 'gdevelop_gold' | 'gdevelop_startup' | 'gdevelop_education' | 'gdevelop_indie' | 'gdevelop_pro',
-  pricingSystem?: 'monthly' | 'yearly' | 'redeemed' | 'team member' | 'manually added'
+  authenticated?: 'no' | 'loading' | 'yes';
+  willCancelAtPeriodEndOrIsExpired?: boolean;
+  filter?: 'none' | 'individual' | 'team' | 'education';
+  userSubscriptionId?:
+    | 'none'
+    | 'gdevelop_silver'
+    | 'gdevelop_gold'
+    | 'gdevelop_startup'
+    | 'gdevelop_education'
+    | 'gdevelop_indie'
+    | 'gdevelop_pro';
+  pricingSystem?:
+    | 'monthly'
+    | 'yearly'
+    | 'redeemed'
+    | 'team member'
+    | 'manually added';
 }) => {
   const authenticatedUser =
     authenticated === 'no'
       ? fakeNotAuthenticatedUser
       : authenticated === 'loading'
-      ? fakeAuthenticatedUserLoggingIn
-      : userSubscriptionId === 'none'
-      ? fakeAuthenticatedUserWithNoSubscription
-      : userSubscriptionId === 'gdevelop_silver'
-      ? fakeSilverAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_gold'
-      ? fakeGoldAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_startup'
-      ? fakeStartupAuthenticatedUser
-      : userSubscriptionId === 'gdevelop_education'
-      ? fakeAuthenticatedUserWithEducationPlan
-      : userSubscriptionId === 'gdevelop_indie'
-      ? fakeAuthenticatedUserWithLegacyIndieSubscription
-      : userSubscriptionId === 'gdevelop_pro'
-      ? fakeAuthenticatedUserWithLegacyProSubscription
-      : fakeNotAuthenticatedUser;
+        ? fakeAuthenticatedUserLoggingIn
+        : userSubscriptionId === 'none'
+          ? fakeAuthenticatedUserWithNoSubscription
+          : userSubscriptionId === 'gdevelop_silver'
+            ? fakeSilverAuthenticatedUser
+            : userSubscriptionId === 'gdevelop_gold'
+              ? fakeGoldAuthenticatedUser
+              : userSubscriptionId === 'gdevelop_startup'
+                ? fakeStartupAuthenticatedUser
+                : userSubscriptionId === 'gdevelop_education'
+                  ? fakeAuthenticatedUserWithEducationPlan
+                  : userSubscriptionId === 'gdevelop_indie'
+                    ? fakeAuthenticatedUserWithLegacyIndieSubscription
+                    : userSubscriptionId === 'gdevelop_pro'
+                      ? fakeAuthenticatedUserWithLegacyProSubscription
+                      : fakeNotAuthenticatedUser;
 
   if (authenticatedUser.subscription) {
     if (pricingSystem === 'redeemed') {
@@ -109,7 +120,8 @@ export const Default = ({
     } else if (pricingSystem === 'manually added') {
       authenticatedUser.subscription.pricingSystemId = 'MANUALLY_ADDED';
     } else {
-      authenticatedUser.subscription.cancelAtPeriodEnd = !!willCancelAtPeriodEndOrIsExpired;
+      authenticatedUser.subscription.cancelAtPeriodEnd =
+        !!willCancelAtPeriodEndOrIsExpired;
       if (userSubscriptionId === 'gdevelop_silver') {
         if (pricingSystem === 'yearly') {
           authenticatedUser.subscription.pricingSystemId =
@@ -151,18 +163,15 @@ export const Default = ({
   const { subscription: userSubscription } = authenticatedUser;
   const userLegacySubscriptionPlanWithPricingSystem = userSubscription
     ? subscriptionPlansWithPricingSystems.find(
-        planWithPricingSystem =>
+        (planWithPricingSystem) =>
           planWithPricingSystem.id === userSubscription.planId &&
           planWithPricingSystem.isLegacy
       )
     : null;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AlertProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AuthenticatedUserContext.Provider value={authenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SubscriptionDialog
           open
           subscriptionPlansWithPricingSystems={getAvailableSubscriptionPlansWithPrices(

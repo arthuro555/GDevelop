@@ -1,23 +1,22 @@
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'path-browserify'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/path-browserify/index.js' implicitly has an 'any' type.
 import path from 'path-browserify';
 import { uploadObject } from '../../Utils/GDevelopServices/Preview';
-const gd: libGDevelop = global.gd;
 
 export type TextFileDescriptor = {
-  filePath: string,
-  text: string
+  filePath: string;
+  text: string;
 };
 
 type PendingUploadFileDescriptor = {
-  Key: string,
-  Body: string,
-  ContentType: 'text/javascript' | 'text/html'
+  Key: string;
+  Body: string;
+  ContentType: 'text/javascript' | 'text/html';
 };
 
 type ConstructorArgs = {
-  filesContent: Array<TextFileDescriptor>,
-  prefix: string,
-  bucketBaseUrl: string
+  filesContent: Array<TextFileDescriptor>;
+  prefix: string;
+  bucketBaseUrl: string;
 };
 
 const isURL = (filename: string) => {
@@ -39,7 +38,7 @@ export default class BrowserS3FileSystem {
 
   // Store the content of some files.
   _indexedFilesContent: {
-    [key: string]: TextFileDescriptor
+    [key: string]: TextFileDescriptor;
   };
 
   // Store all the objects that should be written on the S3 bucket.
@@ -50,29 +49,24 @@ export default class BrowserS3FileSystem {
   // readDir result.
   _allCopiedExternalUrls = new Set<string>();
 
-  constructor({
-    filesContent,
-    prefix,
-    bucketBaseUrl,
-  }: ConstructorArgs) {
+  constructor({ filesContent, prefix, bucketBaseUrl }: ConstructorArgs) {
     this.prefix = prefix;
     this.bucketBaseUrl = bucketBaseUrl;
 
     this._indexedFilesContent = {};
-    filesContent.forEach(textFileDescriptor => {
-      this._indexedFilesContent[
-        textFileDescriptor.filePath
-      ] = textFileDescriptor;
+    filesContent.forEach((textFileDescriptor) => {
+      this._indexedFilesContent[textFileDescriptor.filePath] =
+        textFileDescriptor;
     });
   }
 
   uploadPendingObjects = () => {
     return Promise.all(this._pendingUploadObjects.map(uploadObject)).then(
-      result => {
+      (result) => {
         console.log('Uploaded all objects:', result);
         this._pendingUploadObjects = [];
       },
-      error => {
+      (error) => {
         console.error("Can't upload all objects:", error);
         throw error;
       }
@@ -147,7 +141,7 @@ export default class BrowserS3FileSystem {
     this._pendingUploadObjects.push({
       Key: key,
       Body: contents,
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly '.js': "text/javascript"; readonly '.html': "text/html"; }'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly '.js': "text/javascript"; readonly '.html': "text/html"; }'.
       ContentType: mime[fileExtension],
     });
     return true;
@@ -167,7 +161,7 @@ export default class BrowserS3FileSystem {
 
     // Simulate ReadDir by returning all external URLs
     // with the filename matching the extension.
-    this._allCopiedExternalUrls.forEach(url => {
+    this._allCopiedExternalUrls.forEach((url) => {
       const upperCaseUrl = url.toUpperCase();
       if (upperCaseUrl.indexOf(ext) === upperCaseUrl.length - ext.length) {
         output.push_back(url);

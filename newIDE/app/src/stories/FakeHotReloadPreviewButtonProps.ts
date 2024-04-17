@@ -1,5 +1,5 @@
-import {action} from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../HotReload/HotReloadPreviewButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadPreviewButton.tsx', but '--jsx' is not set.
+import { action } from '@storybook/addon-actions';
+
 import { HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
 
 /**

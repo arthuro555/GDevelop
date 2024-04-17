@@ -1,5 +1,4 @@
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
-import {UserLeaderboard} from '../../Utils/GDevelopServices/User';
+import { UserLeaderboard } from '../../Utils/GDevelopServices/User';
 
 export const fakeUserLeaderboards: UserLeaderboard[] = [
   {

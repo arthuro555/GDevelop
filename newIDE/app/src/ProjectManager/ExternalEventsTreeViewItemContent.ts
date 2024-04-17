@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
@@ -14,35 +13,38 @@ import {
   TreeViewItemContent,
   TreeItemProps,
   externalEventsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/index.tsx', but '--jsx' is not set.
 } from '.';
 
 const EXTERNAL_EVENTS_CLIPBOARD_KIND = 'External events';
 
 export type ExternalEventsTreeViewItemCallbacks = {
-  onDeleteExternalEvents: (arg1: gdExternalEvents) => void,
-  onRenameExternalEvents: (arg1: string, arg2: string) => void,
-  onOpenExternalEvents: (arg1: string) => void
+  onDeleteExternalEvents: (arg1: gd.ExternalEvents) => void;
+  onRenameExternalEvents: (arg1: string, arg2: string) => void;
+  onOpenExternalEvents: (arg1: string) => void;
 };
 
-export type ExternalEventsTreeViewItemCommonProps = (TreeItemProps) & (ExternalEventsTreeViewItemCallbacks);
+export type ExternalEventsTreeViewItemCommonProps = TreeItemProps &
+  ExternalEventsTreeViewItemCallbacks;
 
-export type ExternalEventsTreeViewItemProps = (ExternalEventsTreeViewItemCommonProps) & {
-  project: gdProject
-};
+export type ExternalEventsTreeViewItemProps =
+  ExternalEventsTreeViewItemCommonProps & {
+    project: gd.Project;
+  };
 
-export const getExternalEventsTreeViewItemId = (externalEvents: gdExternalEvents): string => {
+export const getExternalEventsTreeViewItemId = (
+  externalEvents: gd.ExternalEvents
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return `external-events-${externalEvents.ptr}`;
 };
 
 export class ExternalEventsTreeViewItemContent implements TreeViewItemContent {
-  externalEvents: gdExternalEvents;
+  externalEvents: gd.ExternalEvents;
   props: ExternalEventsTreeViewItemProps;
 
   constructor(
-    externalEvents: gdExternalEvents,
+    externalEvents: gd.ExternalEvents,
     props: ExternalEventsTreeViewItemProps
   ) {
     this.externalEvents = externalEvents;
@@ -70,7 +72,7 @@ export class ExternalEventsTreeViewItemContent implements TreeViewItemContent {
   }
 
   getDataSet(): {
-    [key: string]: string
+    [key: string]: string;
   } {
     return {
       'external-events': this.externalEvents.getName(),
@@ -185,7 +187,7 @@ export class ExternalEventsTreeViewItemContent implements TreeViewItemContent {
     if (!name || !copiedExternalEvents) return;
 
     const project = this.props.project;
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       project.hasExternalEventsNamed(name)
     );
 

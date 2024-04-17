@@ -1,30 +1,27 @@
-import React, {Component} from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+import React, { Component } from 'react';
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t, Trans } from '@lingui/macro';
 import { sendExportLaunched } from '../../Utils/Analytics/EventSender';
 import { Build } from '../../Utils/GDevelopServices/Build';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 import { showErrorBox } from '../../UI/Messages/MessageBox';
-// @ts-expect-error - TS6142 - Module '../../Profile/CreateProfile' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/CreateProfile.tsx', but '--jsx' is not set.
+
 import CreateProfile from '../../Profile/CreateProfile';
-// @ts-expect-error - TS6142 - Module '../../Profile/CurrentUsageDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/CurrentUsageDisplayer.tsx', but '--jsx' is not set.
+
 import CurrentUsageDisplayer from '../../Profile/CurrentUsageDisplayer';
 import {
   displayProjectErrorsBox,
   getProjectPropertiesErrors,
 } from '../../Utils/ProjectErrorsChecker';
-import {
-  Quota,
-  UsagePrice,
-} from '../../Utils/GDevelopServices/Usage';
+import { Quota, UsagePrice } from '../../Utils/GDevelopServices/Usage';
 import BuildsWatcher from '../Builds/BuildsWatcher';
-// @ts-expect-error - TS6142 - Module '../Builds/BuildStepsProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/Builds/BuildStepsProgress.tsx', but '--jsx' is not set.
+
 import { BuildStep } from '../Builds/BuildStepsProgress';
 import {
   registerGame,
@@ -34,7 +31,7 @@ import {
   getAclsFromUserIds,
 } from '../../Utils/GDevelopServices/Game';
 import { ExportPipeline } from '../ExportPipeline.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/DismissableAlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DismissableAlertMessage.tsx', but '--jsx' is not set.
+
 import DismissableAlertMessage from '../../UI/DismissableAlertMessage';
 import {
   addCreateBadgePreHookIfNotClaimed,
@@ -43,54 +40,62 @@ import {
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
 import { EventsFunctionsExtensionsState } from '../../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
 import inc from 'semver/functions/inc';
-// @ts-expect-error - TS6142 - Module '../../UI/Toggle' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Toggle.tsx', but '--jsx' is not set.
+
 import Toggle from '../../UI/Toggle';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../../UI/PlaceholderLoader';
-// @ts-expect-error - TS6142 - Module '../../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../../GameDashboard/GameRegistration' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/GameRegistration.tsx', but '--jsx' is not set.
+
 import { GameAvailabilityError } from '../../GameDashboard/GameRegistration';
 
 type State = {
-  exportStep: BuildStep,
-  compressionOutput: any,
-  build: Build | null | undefined,
-  stepCurrentProgress: number,
-  stepMaxProgress: number,
-  errored: boolean,
-  shouldBumpVersionNumber: boolean,
-  exportState: any,
-  doneFooterOpen: boolean
+  exportStep: BuildStep;
+  compressionOutput: any;
+  build: Build | null | undefined;
+  stepCurrentProgress: number;
+  stepMaxProgress: number;
+  errored: boolean;
+  shouldBumpVersionNumber: boolean;
+  exportState: any;
+  doneFooterOpen: boolean;
 };
 
 type Props = {
-  project: gdProject,
-  onSaveProject: () => Promise<void>,
-  isSavingProject: boolean,
-  onChangeSubscription: () => void,
-  authenticatedUser: AuthenticatedUser,
-  eventsFunctionsExtensionsState: EventsFunctionsExtensionsState,
-  exportPipeline: ExportPipeline<any, any, any, any, any>,
-  setIsNavigationDisabled: (isNavigationDisabled: boolean) => void,
-  onGameUpdated: () => Promise<void>,
-  game: Game | null | undefined,
-  gameAvailabilityError: GameAvailabilityError | null | undefined,
-  builds: Array<Build> | null | undefined,
-  onRefreshBuilds: () => Promise<void>
+  project: gd.Project;
+  onSaveProject: () => Promise<void>;
+  isSavingProject: boolean;
+  onChangeSubscription: () => void;
+  authenticatedUser: AuthenticatedUser;
+  eventsFunctionsExtensionsState: EventsFunctionsExtensionsState;
+  exportPipeline: ExportPipeline<any, any, any, any, any>;
+  setIsNavigationDisabled: (isNavigationDisabled: boolean) => void;
+  onGameUpdated: () => Promise<void>;
+  game: Game | null | undefined;
+  gameAvailabilityError: GameAvailabilityError | null | undefined;
+  builds: Array<Build> | null | undefined;
+  onRefreshBuilds: () => Promise<void>;
 };
 
-const getIncrementedVersionNumber = (project: gdProject) => {
+const getIncrementedVersionNumber = (project: gd.Project) => {
   return inc(project.getVersion(), 'patch', { loose: true });
 };
 
-const getBuildQuota = (authenticatedUser: AuthenticatedUser, onlineBuildType?: string | null): Quota | null | undefined => authenticatedUser.limits && onlineBuildType
-  ? authenticatedUser.limits.quotas[onlineBuildType]
-  : null;
+const getBuildQuota = (
+  authenticatedUser: AuthenticatedUser,
+  onlineBuildType?: string | null
+): Quota | null | undefined =>
+  authenticatedUser.limits && onlineBuildType
+    ? authenticatedUser.limits.quotas[onlineBuildType]
+    : null;
 
-const getBuildCreditPrice = (authenticatedUser: AuthenticatedUser, onlineBuildType?: string | null): UsagePrice | null | undefined => authenticatedUser.limits && onlineBuildType
-  ? authenticatedUser.limits.credits.prices[onlineBuildType]
-  : null;
+const getBuildCreditPrice = (
+  authenticatedUser: AuthenticatedUser,
+  onlineBuildType?: string | null
+): UsagePrice | null | undefined =>
+  authenticatedUser.limits && onlineBuildType
+    ? authenticatedUser.limits.credits.prices[onlineBuildType]
+    : null;
 
 /**
  * A generic UI to launch, monitor the progress and get the result
@@ -112,13 +117,11 @@ export default class ExportLauncher extends Component<Props, State> {
   };
   _candidateBumpedVersionNumber = '';
   buildsWatcher = new BuildsWatcher();
-// @ts-expect-error - TS2564 - Property 'launchWholeExport' has no initializer and is not definitely assigned in the constructor.
-  launchWholeExport: (
-    arg1: {
-      i18n: I18nType,
-      payWithCredits?: boolean
-    },
-  ) => Promise<void>;
+  // @ts-expect-error - TS2564 - Property 'launchWholeExport' has no initializer and is not definitely assigned in the constructor.
+  launchWholeExport: (arg1: {
+    i18n: I18nType;
+    payWithCredits?: boolean;
+  }) => Promise<void>;
 
   componentWillMount() {
     // Fetch limits when the export launcher is opened, to ensure we display the
@@ -134,7 +137,7 @@ export default class ExportLauncher extends Component<Props, State> {
     super(props);
     this._setupAchievementHook();
 
-// @ts-expect-error - TS2322 - Type 'string | null' is not assignable to type 'string'.
+    // @ts-expect-error - TS2322 - Type 'string | null' is not assignable to type 'string'.
     this._candidateBumpedVersionNumber = getIncrementedVersionNumber(
       props.project
     );
@@ -211,7 +214,7 @@ export default class ExportLauncher extends Component<Props, State> {
           this.props.project.getProjectUuid(),
           { author: authorAcls }
         );
-      } catch (e: any) {
+      } catch (e) {
         // Best effort call, do not prevent exporting the game.
         console.error(e);
       }
@@ -220,18 +223,17 @@ export default class ExportLauncher extends Component<Props, State> {
 
   registerGameIfNot = async () => {
     const profile = this.props.authenticatedUser.profile;
-    const getAuthorizationHeader = this.props.authenticatedUser
-      .getAuthorizationHeader;
+    const getAuthorizationHeader =
+      this.props.authenticatedUser.getAuthorizationHeader;
     const gameId = this.props.project.getProjectUuid();
     if (profile) {
       const userId = profile.id;
       try {
         // Try to fetch the game to see if it's registered but do not do anything with it.
         await getGame(getAuthorizationHeader, userId, gameId);
-      } catch (error: any) {
-        const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-          error
-        );
+      } catch (error) {
+        const extractedStatusAndCode =
+          extractGDevelopApiErrorStatusAndCode(error);
         if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
           // If the game is not registered, register it before launching the export.
           const authorName =
@@ -252,15 +254,13 @@ export default class ExportLauncher extends Component<Props, State> {
     }
   };
 
-  _launchWholeExport = async (
-    {
-      i18n,
-      payWithCredits,
-    }: {
-      i18n: I18nType,
-      payWithCredits?: boolean
-    },
-  ): Promise<void> => {
+  _launchWholeExport = async ({
+    i18n,
+    payWithCredits,
+  }: {
+    i18n: I18nType;
+    payWithCredits?: boolean;
+  }): Promise<void> => {
     const {
       project,
       exportPipeline,
@@ -326,12 +326,11 @@ export default class ExportLauncher extends Component<Props, State> {
       setStep('register');
       // We await for this call, allowing to link the build to the game just registered.
       await this.registerGameIfNot();
-    } catch (registerError: any) {
+    } catch (registerError) {
       // But if it fails, we don't prevent building the game.
       console.warn('Error while registering the game.');
-      const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-        registerError
-      );
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(registerError);
       if (
         extractedStatusAndCode &&
         extractedStatusAndCode.code === 'game-creation/too-many-games'
@@ -395,10 +394,11 @@ export default class ExportLauncher extends Component<Props, State> {
       setStep('resources-download');
       // TODO: use a GenericRetryableProcessWithProgressDialog to show errors
       // and allow to try again?
-      const resourcesDownloadOutput = await exportPipeline.launchResourcesDownload(
-        exportPipelineContext,
-        exportOutput
-      );
+      const resourcesDownloadOutput =
+        await exportPipeline.launchResourcesDownload(
+          exportPipelineContext,
+          exportOutput
+        );
       setStep('compress');
       const compressionOutput = await exportPipeline.launchCompression(
         exportPipelineContext,
@@ -441,14 +441,14 @@ export default class ExportLauncher extends Component<Props, State> {
         compressionOutput,
         doneFooterOpen: true,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('An error happened during export:', error);
       handleError(error);
     }
   };
 
   _updateExportState = (updater: (arg1?: any) => any) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       exportState: updater(prevState.exportState),
     }));
@@ -492,7 +492,7 @@ export default class ExportLauncher extends Component<Props, State> {
       // We check pending builds that are not more than 10 minutes old,
       // to avoid counting builds that may be stuck.
       return !!builds.filter(
-        build =>
+        (build) =>
           build.status === 'pending' &&
           build.type === exportPipeline.onlineBuildType &&
           build.createdAt &&
@@ -513,12 +513,12 @@ export default class ExportLauncher extends Component<Props, State> {
 
     if (!builds && authenticatedUser.authenticated) {
       // Still loading
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       return <PlaceholderLoader />;
     }
 
     const isExporting = !!exportStep && exportStep !== 'done';
-// @ts-expect-error - TS2339 - Property 'status' does not exist on type 'never'.
+    // @ts-expect-error - TS2339 - Property 'status' does not exist on type 'never'.
     const isBuildRunning = !!build && build.status === 'pending';
     const isExportingOrWaitingForBuild = isExporting || isBuildRunning;
     const isExportAndBuildCompleteOrErrored =
@@ -530,21 +530,15 @@ export default class ExportLauncher extends Component<Props, State> {
     const hasSomeBuildsRunning = hasBuildsCurrentlyRunning();
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
         {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Column noMargin expand justifyContent="center">
             {!isUsingOnlineBuildNonAuthenticated && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Column noMargin>
                 {!!exportPipeline.onlineBuildType &&
                   gameAvailabilityError &&
                   gameAvailabilityError === 'not-owned' && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <AlertMessage kind="warning">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Trans>
                         The project currently opened is registered online but
                         you don't have access to it. A link or file will be
@@ -554,9 +548,7 @@ export default class ExportLauncher extends Component<Props, State> {
                   )}
                 {!!exportPipeline.packageNameWarningType &&
                   project.getPackageName().indexOf('com.example') !== -1 && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <DismissableAlertMessage
                         identifier="project-should-have-unique-package-name"
                         kind="warning"
@@ -577,10 +569,8 @@ export default class ExportLauncher extends Component<Props, State> {
                   exportPipeline.renderTutorial()}
               </Column>
             )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Column expand justifyContent="center">
               {!isUsingOnlineBuildNonAuthenticated && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Line alignItems="center" justifyContent="center">
                   {exportPipeline.renderHeader({
                     project,
@@ -599,20 +589,17 @@ export default class ExportLauncher extends Component<Props, State> {
                 exportPipeline.shouldSuggestBumpingVersionNumber &&
                 exportPipeline.shouldSuggestBumpingVersionNumber() &&
                 !isExportAndBuildCompleteOrErrored && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Line noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Toggle
                       labelPosition="right"
                       toggled={this.state.shouldBumpVersionNumber}
                       label={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <Trans>
                           Increase version number to{' '}
                           {this._candidateBumpedVersionNumber}
                         </Trans>
                       }
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'toggled' implicitly has an 'any' type.
+                      // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'toggled' implicitly has an 'any' type.
                       onToggle={(e, toggled) => {
                         this.setState({
                           shouldBumpVersionNumber: toggled,
@@ -625,11 +612,8 @@ export default class ExportLauncher extends Component<Props, State> {
               {!!exportPipeline.limitedBuilds &&
                 authenticatedUser.authenticated &&
                 !isExportAndBuildCompleteOrErrored && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <CurrentUsageDisplayer
                         subscription={authenticatedUser.subscription}
                         quota={buildQuota}
@@ -650,9 +634,7 @@ export default class ExportLauncher extends Component<Props, State> {
                 authenticatedUser.authenticated &&
                 !build &&
                 hasSomeBuildsRunning && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <AlertMessage kind="info">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Trans>
                       You have a build currently running, you can see its
                       progress via the exports button at the bottom of this
@@ -661,14 +643,12 @@ export default class ExportLauncher extends Component<Props, State> {
                   </AlertMessage>
                 )}
               {isUsingOnlineBuildNonAuthenticated && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <CreateProfile
                   onOpenLoginDialog={authenticatedUser.onOpenLoginDialog}
                   onOpenCreateAccountDialog={
                     authenticatedUser.onOpenCreateAccountDialog
                   }
                   message={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Trans>
                       Create an account or login first to export your game using
                       online services.

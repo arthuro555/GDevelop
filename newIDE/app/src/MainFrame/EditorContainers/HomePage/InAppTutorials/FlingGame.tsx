@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans, t } from '@lingui/macro';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -7,26 +7,26 @@ import {
   useResponsiveWindowSize,
   WindowSizeType,
 } from '../../../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module '../../../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../../../../UI/Grid';
 import InAppTutorialContext from '../../../../InAppTutorial/InAppTutorialContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../../../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../../../../UI/PlaceholderLoader';
-// @ts-expect-error - TS6142 - Module '../CardWidget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/CardWidget.tsx', but '--jsx' is not set.
+
 import { LARGE_WIDGET_SIZE } from '../CardWidget';
-// @ts-expect-error - TS6142 - Module './InAppTutorialPhaseCard' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/InAppTutorials/InAppTutorialPhaseCard.tsx', but '--jsx' is not set.
+
 import InAppTutorialPhaseCard from './InAppTutorialPhaseCard';
-// @ts-expect-error - TS6142 - Module '../../../../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../../../../UI/PlaceholderError';
 import { FLING_GAME_IN_APP_TUTORIAL_ID } from '../../../../Utils/GDevelopServices/InAppTutorial';
-// @ts-expect-error - TS6142 - Module '../../../Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 import PreferencesContext from '../../../Preferences/PreferencesContext';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/Building'. '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/InAppTutorials/Icons/Building.js' implicitly has an 'any' type.
+
 import Building from './Icons/Building';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/Unboxing'. '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/InAppTutorials/Icons/Unboxing.js' implicitly has an 'any' type.
+
 import Unboxing from './Icons/Unboxing';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './Icons/Podium'. '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/InAppTutorials/Icons/Podium.js' implicitly has an 'any' type.
+
 import Podium from './Icons/Podium';
 
 const getColumnsFromWindowSize = (
@@ -62,12 +62,10 @@ const styles = {
 } as const;
 
 type Props = {
-  selectInAppTutorial: (tutorialId: string) => void
+  selectInAppTutorial: (tutorialId: string) => void;
 };
 
-const FlingGame = ({
-  selectInAppTutorial,
-}: Props) => {
+const FlingGame = ({ selectInAppTutorial }: Props) => {
   const {
     inAppTutorialShortHeaders,
     inAppTutorialsFetchingError,
@@ -82,8 +80,8 @@ const FlingGame = ({
     tutorialId,
     part,
   }: {
-    tutorialId: string,
-    part: number
+    tutorialId: string;
+    part: number;
   }) => {
     const tutorialProgress = getTutorialProgress({
       tutorialId,
@@ -99,8 +97,8 @@ const FlingGame = ({
     tutorialId,
     part,
   }: {
-    tutorialId: string,
-    part: number
+    tutorialId: string;
+    part: number;
   }) => {
     return (
       getTutorialPartProgress({
@@ -134,8 +132,8 @@ const FlingGame = ({
         tutorialId: FLING_GAME_IN_APP_TUTORIAL_ID,
         part: 0,
       }),
-// @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-      renderImage: props => <Unboxing {...props} />,
+      // @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      renderImage: (props) => <Unboxing {...props} />,
     },
     {
       key: 'publish',
@@ -164,8 +162,8 @@ const FlingGame = ({
         tutorialId: FLING_GAME_IN_APP_TUTORIAL_ID,
         part: 1,
       }),
-// @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-      renderImage: props => <Building {...props} />,
+      // @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      renderImage: (props) => <Building {...props} />,
     },
     {
       key: 'leaderboards',
@@ -194,8 +192,8 @@ const FlingGame = ({
         tutorialId: FLING_GAME_IN_APP_TUTORIAL_ID,
         part: 2,
       }),
-// @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-      renderImage: props => <Podium {...props} />,
+      // @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      renderImage: (props) => <Podium {...props} />,
     },
   ];
 
@@ -214,25 +212,19 @@ const FlingGame = ({
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.bannerContainer}>
         {inAppTutorialsFetchingError ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderError onRetry={fetchInAppTutorials}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>An error occurred when downloading the tutorials.</Trans>{' '}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>
               Please check your internet connection or try again later.
             </Trans>
           </PlaceholderError>
         ) : inAppTutorialShortHeaders === null ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <PlaceholderLoader />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <GridList
             cols={
               isFlingTutorialComplete
@@ -244,24 +236,17 @@ const FlingGame = ({
             spacing={ITEMS_SPACING * 2}
           >
             {isFlingTutorialComplete ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <GridListTile>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <InAppTutorialPhaseCard
                   title={t`Congratulations! You've finished this tutorial!`}
                   description={t`Find your finished game on the “Build” section. Or restart the tutorial by clicking on the card.`}
                   size="banner"
                   locked={false}
                   disabled={false}
-// @ts-expect-error - TS7006 - Parameter 'props' implicitly has an 'any' type.
-                  renderImage={props => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                  renderImage={(props) => (
                     <Line justifyContent="space-around" expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Unboxing {...props} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Building {...props} />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Podium {...props} />
                     </Line>
                   )}
@@ -271,10 +256,8 @@ const FlingGame = ({
                 />
               </GridListTile>
             ) : (
-              flingInAppTutorialCards.map(item => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+              flingInAppTutorialCards.map((item) => (
                 <GridListTile key={item.key}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <InAppTutorialPhaseCard
                     {...item}
                     onClick={() =>

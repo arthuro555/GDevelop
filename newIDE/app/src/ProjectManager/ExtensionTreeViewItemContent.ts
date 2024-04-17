@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
@@ -10,42 +9,42 @@ import {
   serializeToJSObject,
   unserializeFromJSObject,
 } from '../Utils/Serializer';
-import {
-  TreeViewItemContent,
-  TreeItemProps,
-  extensionsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/index.tsx', but '--jsx' is not set.
-} from '.';
+import { TreeViewItemContent, TreeItemProps, extensionsRootFolderId } from '.';
 import { isExtensionNameTaken } from './EventFunctionExtensionNameVerifier';
 
 const EVENTS_FUNCTIONS_EXTENSION_CLIPBOARD_KIND = 'Events Functions Extension';
 
 export type ExtensionTreeViewItemCallbacks = {
-  onDeleteEventsFunctionsExtension: (arg1: gdEventsFunctionsExtension) => void,
-  onRenameEventsFunctionsExtension: (arg1: string, arg2: string) => void,
-  onOpenEventsFunctionsExtension: (arg1: string) => void,
-  onReloadEventsFunctionsExtensions: () => void
+  onDeleteEventsFunctionsExtension: (arg1: gd.EventsFunctionsExtension) => void;
+  onRenameEventsFunctionsExtension: (arg1: string, arg2: string) => void;
+  onOpenEventsFunctionsExtension: (arg1: string) => void;
+  onReloadEventsFunctionsExtensions: () => void;
 };
 
-export type ExtensionTreeViewItemCommonProps = (TreeItemProps) & (ExtensionTreeViewItemCallbacks);
+export type ExtensionTreeViewItemCommonProps = TreeItemProps &
+  ExtensionTreeViewItemCallbacks;
 
-export type ExtensionTreeViewItemProps = (ExtensionTreeViewItemCommonProps) & {
-  project: gdProject,
-  onEditEventsFunctionExtensionOrSeeDetails: (eventsFunctionsExtension: gdEventsFunctionsExtension) => void
+export type ExtensionTreeViewItemProps = ExtensionTreeViewItemCommonProps & {
+  project: gd.Project;
+  onEditEventsFunctionExtensionOrSeeDetails: (
+    eventsFunctionsExtension: gd.EventsFunctionsExtension
+  ) => void;
 };
 
-export const getExtensionTreeViewItemId = (eventsFunctionsExtension: gdEventsFunctionsExtension): string => {
+export const getExtensionTreeViewItemId = (
+  eventsFunctionsExtension: gd.EventsFunctionsExtension
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return `extension-${eventsFunctionsExtension.ptr}`;
 };
 
 export class ExtensionTreeViewItemContent implements TreeViewItemContent {
-  eventsFunctionsExtension: gdEventsFunctionsExtension;
+  eventsFunctionsExtension: gd.EventsFunctionsExtension;
   props: ExtensionTreeViewItemProps;
 
   constructor(
-    eventsFunctionsExtension: gdEventsFunctionsExtension,
+    eventsFunctionsExtension: gd.EventsFunctionsExtension,
     props: ExtensionTreeViewItemProps
   ) {
     this.eventsFunctionsExtension = eventsFunctionsExtension;
@@ -73,7 +72,7 @@ export class ExtensionTreeViewItemContent implements TreeViewItemContent {
   }
 
   getDataSet(): {
-    [key: string]: string
+    [key: string]: string;
   } {
     return {
       extension: this.eventsFunctionsExtension.getName(),
@@ -197,14 +196,12 @@ export class ExtensionTreeViewItemContent implements TreeViewItemContent {
     if (!name || !copiedEventsFunctionsExtension) return;
 
     const project = this.props.project;
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       isExtensionNameTaken(name, project)
     );
 
-    const newEventsFunctionsExtension = project.insertNewEventsFunctionsExtension(
-      newName,
-      this.getIndex() + 1
-    );
+    const newEventsFunctionsExtension =
+      project.insertNewEventsFunctionsExtension(newName, this.getIndex() + 1);
 
     unserializeFromJSObject(
       newEventsFunctionsExtension,

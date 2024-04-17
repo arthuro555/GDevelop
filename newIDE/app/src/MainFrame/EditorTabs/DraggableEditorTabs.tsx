@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
 import { makeDragSourceAndDropTarget } from '../../UI/DragAndDrop/DragSourceAndDropTarget';
 import { ScreenTypeMeasurer } from '../../UI/Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module './DropIndicator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorTabs/DropIndicator.tsx', but '--jsx' is not set.
+
 import { ColumnDropIndicator } from './DropIndicator';
 import {
   EditorTabsState,
@@ -16,20 +15,21 @@ import {
   ClosableTabs,
   ClosableTab,
   ClosableTabProps,
-// @ts-expect-error - TS6142 - Module '../../UI/ClosableTabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ClosableTabs.tsx', but '--jsx' is not set.
 } from '../../UI/ClosableTabs';
 
-const DragSourceAndDropTarget = makeDragSourceAndDropTarget<EditorTab>('draggable-closable-tab');
+const DragSourceAndDropTarget = makeDragSourceAndDropTarget<EditorTab>(
+  'draggable-closable-tab'
+);
 
 type DraggableEditorTabsProps = {
-  hideLabels?: boolean,
-  editorTabs: EditorTabsState,
-  onClickTab: (index: number) => void,
-  onCloseTab: (editor: EditorTab) => void,
-  onCloseOtherTabs: (editor: EditorTab) => void,
-  onCloseAll: () => void,
-  onTabActivated: (editor: EditorTab) => void,
-  onDropTab: (fromIndex: number, toHoveredIndex: number) => void
+  hideLabels?: boolean;
+  editorTabs: EditorTabsState;
+  onClickTab: (index: number) => void;
+  onCloseTab: (editor: EditorTab) => void;
+  onCloseOtherTabs: (editor: EditorTab) => void;
+  onCloseAll: () => void;
+  onTabActivated: (editor: EditorTab) => void;
+  onDropTab: (fromIndex: number, toHoveredIndex: number) => void;
 };
 
 const getTabId = (editorTab: EditorTab) =>
@@ -49,24 +49,19 @@ export function DraggableEditorTabs({
 
   const currentTab = getCurrentTab(editorTabs);
 
-  React.useEffect(
-    () => {
-      if (!currentTab) return;
-      const tabElement = document.getElementById(getTabId(currentTab));
-      if (tabElement) {
-        tabElement.scrollIntoView();
-      }
-    },
-    [currentTab]
-  );
+  React.useEffect(() => {
+    if (!currentTab) return;
+    const tabElement = document.getElementById(getTabId(currentTab));
+    if (tabElement) {
+      tabElement.scrollIntoView();
+    }
+  }, [currentTab]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ClosableTabs hideLabels={hideLabels}>
       {getEditors(editorTabs).map((editorTab, id) => {
         const isCurrentTab = getCurrentTabIndex(editorTabs) === id;
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <DraggableClosableTab
             index={id}
             label={editorTab.label}
@@ -85,8 +80,7 @@ export function DraggableEditorTabs({
               draggedTabIndex = id;
               return editorTab;
             }}
-// @ts-expect-error - TS7006 - Parameter 'toHoveredIndex' implicitly has an 'any' type.
-            onDrop={toHoveredIndex => {
+            onDrop={(toHoveredIndex) => {
               if (typeof draggedTabIndex === 'number') {
                 onDropTab(draggedTabIndex, id);
                 draggedTabIndex = null;
@@ -100,10 +94,10 @@ export function DraggableEditorTabs({
 }
 
 type DraggableClosableTabProps = {
-  index: number,
-  onBeginDrag: () => EditorTab,
-  onDrop: (toIndex: number) => void
-} & (ClosableTabProps);
+  index: number;
+  onBeginDrag: () => EditorTab;
+  onDrop: (toIndex: number) => void;
+} & ClosableTabProps;
 
 export function DraggableClosableTab({
   index,
@@ -122,10 +116,8 @@ export function DraggableClosableTab({
   onDrop,
 }: DraggableClosableTabProps) {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ScreenTypeMeasurer>
-      {screenType => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      {(screenType) => (
         <DragSourceAndDropTarget
           beginDrag={onBeginDrag}
           canDrag={() => {
@@ -137,19 +129,16 @@ export function DraggableClosableTab({
           canDrop={() => true}
           drop={() => onDrop(index)}
         >
-{ /* @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type. | TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'isOver' implicitly has an 'any' type. | TS7031 - Binding element 'canDrop' implicitly has an 'any' type. */}
           {({ connectDragSource, connectDropTarget, isOver, canDrop }) => {
             // Add an extra div because connectDropTarget/connectDragSource can
             // only be used on native elements.
             const dropTarget = connectDropTarget(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <div
                 style={{
                   display: 'flex',
                   flexShrink: 0,
                 }}
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <ClosableTab
                   id={id}
                   data={data}
@@ -164,7 +153,6 @@ export function DraggableClosableTab({
                   onActivated={onActivated}
                   key={id}
                 />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 {isOver && <ColumnDropIndicator />}
               </div>
             );

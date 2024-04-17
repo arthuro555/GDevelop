@@ -1,46 +1,46 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import { EditorProps } from './EditorProps.flow';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout, ResponsiveLineStackLayout } from '../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
+
 import SemiControlledTextField from '../../UI/SemiControlledTextField';
 import useForceUpdate from '../../Utils/UseForceUpdate';
-// @ts-expect-error - TS6142 - Module '../../UI/Checkbox' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Checkbox.tsx', but '--jsx' is not set.
+
 import Checkbox from '../../UI/Checkbox';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField from '../../UI/SelectField';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../../UI/SelectOption';
-// @ts-expect-error - TS6142 - Module '../../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../../UI/IconButton';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
 import { mapFor } from '../../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module '../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView, { ScrollViewInterface } from '../../UI/ScrollView';
-// @ts-expect-error - TS6142 - Module '../../UI/EmptyPlaceholder' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyPlaceholder.tsx', but '--jsx' is not set.
+
 import { EmptyPlaceholder } from '../../UI/EmptyPlaceholder';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Add'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Add.js' implicitly has an 'any' type.
+
 import Add from '../../UI/CustomSvgIcons/Add';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Trash'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Trash.js' implicitly has an 'any' type.
+
 import Trash from '../../UI/CustomSvgIcons/Trash';
-// @ts-expect-error - TS6142 - Module '../../UI/DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { makeDragSourceAndDropTarget } from '../../UI/DragAndDrop/DragSourceAndDropTarget';
-// @ts-expect-error - TS6142 - Module '../../UI/DragHandle' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragHandle.tsx', but '--jsx' is not set.
+
 import { DragHandleIcon } from '../../UI/DragHandle';
-// @ts-expect-error - TS6142 - Module '../../UI/SortableVirtualizedItemList/DropIndicator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SortableVirtualizedItemList/DropIndicator.tsx', but '--jsx' is not set.
+
 import DropIndicator from '../../UI/SortableVirtualizedItemList/DropIndicator';
 import GDevelopThemeContext from '../../UI/Theme/GDevelopThemeContext';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
@@ -55,10 +55,7 @@ import {
   PropertyCheckbox,
   PropertyField,
   PropertyResourceSelector,
-// @ts-expect-error - TS6142 - Module './PropertyFields' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectEditor/Editors/PropertyFields.tsx', but '--jsx' is not set.
 } from './PropertyFields';
-
-const gd: libGDevelop = global.gd;
 
 const DragSourceAndDropTarget = makeDragSourceAndDropTarget(
   'model3d-animations-list'
@@ -132,27 +129,23 @@ const Model3DEditor = ({
 }: EditorProps) => {
   const scrollView = React.useRef<ScrollViewInterface | null | undefined>(null);
 
-  const [
-    justAddedAnimationName,
-    setJustAddedAnimationName,
-  ] = React.useState<string | null | undefined>(null);
+  const [justAddedAnimationName, setJustAddedAnimationName] = React.useState<
+    string | null | undefined
+  >(null);
   const justAddedAnimationElement = React.useRef<any | null | undefined>(null);
 
-  React.useEffect(
-    () => {
-      if (
-        scrollView.current &&
-        justAddedAnimationElement.current &&
-        justAddedAnimationName
-      ) {
-        scrollView.current.scrollTo(justAddedAnimationElement.current);
-        setJustAddedAnimationName(null);
-        justAddedAnimationElement.current = null;
-      }
-    },
-    [justAddedAnimationName]
-  );
-// @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
+  React.useEffect(() => {
+    if (
+      scrollView.current &&
+      justAddedAnimationElement.current &&
+      justAddedAnimationName
+    ) {
+      scrollView.current.scrollTo(justAddedAnimationElement.current);
+      setJustAddedAnimationName(null);
+      justAddedAnimationElement.current = null;
+    }
+  }, [justAddedAnimationName]);
+  // @ts-expect-error - TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showAlert } = useAlertDialog();
 
   const draggedAnimationIndex = React.useRef<number | null>(null);
@@ -164,7 +157,7 @@ const Model3DEditor = ({
   const properties = objectConfiguration.getProperties();
 
   const [nameErrors, setNameErrors] = React.useState<{
-    [key: number]: React.ReactNode
+    [key: number]: React.ReactNode;
   }>({});
 
   const onChangeProperty = React.useCallback(
@@ -202,9 +195,9 @@ const Model3DEditor = ({
   }, [gltf]);
 
   const [originLocation, setOriginLocation] = React.useState<string>(() =>
-    properties.get('originLocation').getValue());
+    properties.get('originLocation').getValue()
+  );
   const onOriginLocationChange = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
     (event, index: number, newValue: string) => {
       onChangeProperty('originLocation', newValue);
       setOriginLocation(newValue);
@@ -212,21 +205,24 @@ const Model3DEditor = ({
     [onChangeProperty]
   );
 
-  const [rotationX, setRotationX] = React.useState<number>(() => parseFloat(properties.get('rotationX').getValue()) || 0);
-  const [rotationY, setRotationY] = React.useState<number>(() => parseFloat(properties.get('rotationY').getValue()) || 0);
-  const [rotationZ, setRotationZ] = React.useState<number>(() => parseFloat(properties.get('rotationZ').getValue()) || 0);
-  const onRotationChange = React.useCallback(
-    () => {
-      setRotationX(parseFloat(properties.get('rotationX').getValue()));
-      setRotationY(parseFloat(properties.get('rotationY').getValue()));
-      setRotationZ(parseFloat(properties.get('rotationZ').getValue()));
-    },
-    [properties]
+  const [rotationX, setRotationX] = React.useState<number>(
+    () => parseFloat(properties.get('rotationX').getValue()) || 0
   );
+  const [rotationY, setRotationY] = React.useState<number>(
+    () => parseFloat(properties.get('rotationY').getValue()) || 0
+  );
+  const [rotationZ, setRotationZ] = React.useState<number>(
+    () => parseFloat(properties.get('rotationZ').getValue()) || 0
+  );
+  const onRotationChange = React.useCallback(() => {
+    setRotationX(parseFloat(properties.get('rotationX').getValue()));
+    setRotationY(parseFloat(properties.get('rotationY').getValue()));
+    setRotationZ(parseFloat(properties.get('rotationZ').getValue()));
+  }, [properties]);
   const modelSize = React.useMemo<{
-    x: number,
-    y: number,
-    z: number
+    x: number;
+    y: number;
+    z: number;
   } | null>(() => {
     if (!model3D) {
       return null;
@@ -258,17 +254,20 @@ const Model3DEditor = ({
     };
   }, [model3D, originLocation, rotationX, rotationY, rotationZ]);
 
-  const [width, setWidth] = React.useState<number>(() => parseFloat(properties.get('width').getValue()) || 0);
-  const [height, setHeight] = React.useState<number>(() => parseFloat(properties.get('height').getValue()) || 0);
-  const [depth, setDepth] = React.useState<number>(() => parseFloat(properties.get('depth').getValue()) || 0);
-  const onDimensionChange = React.useCallback(
-    () => {
-      setWidth(parseFloat(properties.get('width').getValue()));
-      setHeight(parseFloat(properties.get('height').getValue()));
-      setDepth(parseFloat(properties.get('depth').getValue()));
-    },
-    [properties]
+  const [width, setWidth] = React.useState<number>(
+    () => parseFloat(properties.get('width').getValue()) || 0
   );
+  const [height, setHeight] = React.useState<number>(
+    () => parseFloat(properties.get('height').getValue()) || 0
+  );
+  const [depth, setDepth] = React.useState<number>(
+    () => parseFloat(properties.get('depth').getValue()) || 0
+  );
+  const onDimensionChange = React.useCallback(() => {
+    setWidth(parseFloat(properties.get('width').getValue()));
+    setHeight(parseFloat(properties.get('height').getValue()));
+    setDepth(parseFloat(properties.get('depth').getValue()));
+  }, [properties]);
   const scale = React.useMemo<number | null>(() => {
     if (!modelSize) {
       return null;
@@ -297,77 +296,39 @@ const Model3DEditor = ({
     [forceUpdate, modelSize, objectConfiguration, onDimensionChange]
   );
 
-  const scanNewAnimations = React.useCallback(
-    () => {
-      if (!gltf) {
-        return;
+  const scanNewAnimations = React.useCallback(() => {
+    if (!gltf) {
+      return;
+    }
+    setNameErrors({});
+
+    const animationSources = mapFor(
+      0,
+      model3DConfiguration.getAnimationsCount(),
+
+      (animationIndex) =>
+        model3DConfiguration.getAnimation(animationIndex).getSource()
+    );
+
+    let hasAddedAnimation = false;
+    for (const resourceAnimation of gltf.animations) {
+      if (animationSources.includes(resourceAnimation.name)) {
+        continue;
       }
-      setNameErrors({});
+      const newAnimationName = model3DConfiguration.hasAnimationNamed(
+        resourceAnimation.name
+      )
+        ? ''
+        : resourceAnimation.name;
 
-      const animationSources = mapFor(
-        0,
-        model3DConfiguration.getAnimationsCount(),
-// @ts-expect-error - TS7006 - Parameter 'animationIndex' implicitly has an 'any' type.
-        animationIndex =>
-          model3DConfiguration.getAnimation(animationIndex).getSource()
-      );
-
-      let hasAddedAnimation = false;
-      for (const resourceAnimation of gltf.animations) {
-        if (animationSources.includes(resourceAnimation.name)) {
-          continue;
-        }
-        const newAnimationName = model3DConfiguration.hasAnimationNamed(
-          resourceAnimation.name
-        )
-          ? ''
-          : resourceAnimation.name;
-
-        const newAnimation = new gd.Model3DAnimation();
-        newAnimation.setName(newAnimationName);
-        newAnimation.setSource(resourceAnimation.name);
-        model3DConfiguration.addAnimation(newAnimation);
-        newAnimation.delete();
-        hasAddedAnimation = true;
-      }
-      if (hasAddedAnimation) {
-        forceUpdate();
-        onSizeUpdated();
-        if (onObjectUpdated) onObjectUpdated();
-
-        // Scroll to the bottom of the list.
-        // Ideally, we'd wait for the list to be updated to scroll, but
-        // to simplify the code, we just wait a few ms for a new render
-        // to be done.
-        setTimeout(() => {
-          if (scrollView.current) {
-            scrollView.current.scrollToBottom();
-          }
-        }, 100); // A few ms is enough for a new render to be done.
-      } else {
-        showAlert({
-          title: t`No new animation`,
-          message: t`Every animation from the GLB file is already in the list.`,
-        });
-      }
-    },
-    [
-      forceUpdate,
-      gltf,
-      model3DConfiguration,
-      onObjectUpdated,
-      onSizeUpdated,
-      showAlert,
-    ]
-  );
-
-  const addAnimation = React.useCallback(
-    () => {
-      setNameErrors({});
-
-      const emptyAnimation = new gd.Model3DAnimation();
-      model3DConfiguration.addAnimation(emptyAnimation);
-      emptyAnimation.delete();
+      const newAnimation = new gd.Model3DAnimation();
+      newAnimation.setName(newAnimationName);
+      newAnimation.setSource(resourceAnimation.name);
+      model3DConfiguration.addAnimation(newAnimation);
+      newAnimation.delete();
+      hasAddedAnimation = true;
+    }
+    if (hasAddedAnimation) {
       forceUpdate();
       onSizeUpdated();
       if (onObjectUpdated) onObjectUpdated();
@@ -381,13 +342,44 @@ const Model3DEditor = ({
           scrollView.current.scrollToBottom();
         }
       }, 100); // A few ms is enough for a new render to be done.
-    },
-    [forceUpdate, onObjectUpdated, onSizeUpdated, model3DConfiguration]
-  );
+    } else {
+      showAlert({
+        title: t`No new animation`,
+        message: t`Every animation from the GLB file is already in the list.`,
+      });
+    }
+  }, [
+    forceUpdate,
+    gltf,
+    model3DConfiguration,
+    onObjectUpdated,
+    onSizeUpdated,
+    showAlert,
+  ]);
+
+  const addAnimation = React.useCallback(() => {
+    setNameErrors({});
+
+    const emptyAnimation = new gd.Model3DAnimation();
+    model3DConfiguration.addAnimation(emptyAnimation);
+    emptyAnimation.delete();
+    forceUpdate();
+    onSizeUpdated();
+    if (onObjectUpdated) onObjectUpdated();
+
+    // Scroll to the bottom of the list.
+    // Ideally, we'd wait for the list to be updated to scroll, but
+    // to simplify the code, we just wait a few ms for a new render
+    // to be done.
+    setTimeout(() => {
+      if (scrollView.current) {
+        scrollView.current.scrollToBottom();
+      }
+    }, 100); // A few ms is enough for a new render to be done.
+  }, [forceUpdate, onObjectUpdated, onSizeUpdated, model3DConfiguration]);
 
   const removeAnimation = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'animationIndex' implicitly has an 'any' type.
-    animationIndex => {
+    (animationIndex) => {
       setNameErrors({});
 
       model3DConfiguration.removeAnimation(animationIndex);
@@ -415,7 +407,6 @@ const Model3DEditor = ({
   );
 
   const changeAnimationName = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'animationIndex' implicitly has an 'any' type. | TS7006 - Parameter 'newName' implicitly has an 'any' type.
     (animationIndex, newName) => {
       const currentName = model3DConfiguration
         .getAnimation(animationIndex)
@@ -431,7 +422,6 @@ const Model3DEditor = ({
         setNameErrors({
           ...nameErrors,
           [animationIndex]: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>The animation name {newName} is already taken</Trans>
           ),
         });
@@ -464,10 +454,9 @@ const Model3DEditor = ({
   );
 
   const sourceSelectOptions = gltf
-// @ts-expect-error - TS7006 - Parameter 'animation' implicitly has an 'any' type.
-    ? gltf.animations.map(animation => {
+    ? // @ts-expect-error - TS7006 - Parameter 'animation' implicitly has an 'any' type.
+      gltf.animations.map((animation) => {
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SelectOption
             key={animation.name}
             value={animation.name}
@@ -479,47 +468,38 @@ const Model3DEditor = ({
     : [];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ScrollView ref={scrollView}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ColumnStackLayout noMargin>
           {renderObjectNameField && renderObjectNameField()}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <PropertyResourceSelector
             objectConfiguration={objectConfiguration}
             propertyName="modelResourceName"
             project={project}
             resourceManagementProps={resourceManagementProps}
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-            onChange={resourceName => {
+            onChange={(resourceName) => {
               loadGltf(resourceName);
             }}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectField
             value={properties.get('materialType').getValue()}
             floatingLabelText={properties.get('materialType').getLabel()}
             helperMarkdownText={properties.get('materialType').getDescription()}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type. | TS7006 - Parameter 'newValue' implicitly has an 'any' type.
             onChange={(event, index, newValue) => {
               onChangeProperty('materialType', newValue);
             }}
           >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SelectOption
               label={t`No lighting effect`}
               value="Basic"
               key="Basic"
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SelectOption
               label={t`Emit all ambient light`}
               value="StandardWithoutMetalness"
               key="StandardWithoutMetalness"
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SelectOption
               label={t`Keep model material`}
               value="KeepOriginal"
@@ -528,9 +508,7 @@ const Model3DEditor = ({
           </SelectField>
           {properties.get('materialType').getValue() !== 'Basic' &&
             !hasLight(layout) && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <AlertMessage kind="error">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>
                   Make sure to set up a light in the effects of the layer or
                   chose "No lighting effect" - otherwise the object will appear
@@ -538,85 +516,64 @@ const Model3DEditor = ({
                 </Trans>
               </AlertMessage>
             )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="block-title" noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>Default orientation</Trans>
           </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ResponsiveLineStackLayout expand noColumnMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="rotationX"
               onChange={onRotationChange}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="rotationY"
               onChange={onRotationChange}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="rotationZ"
               onChange={onRotationChange}
             />
           </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="block-title" noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>Default size</Trans>
           </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ResponsiveLineStackLayout expand noColumnMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="width"
               onChange={onDimensionChange}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="height"
               onChange={onDimensionChange}
             />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PropertyField
               objectConfiguration={objectConfiguration}
               propertyName="depth"
               onChange={onDimensionChange}
             />
           </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand key={'ScalingRatio'}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SemiControlledTextField
               floatingLabelFixed
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               floatingLabelText={<Trans>Scaling factor</Trans>}
-// @ts-expect-error - TS7006 - Parameter 'value' implicitly has an 'any' type.
-              onChange={value => setScale(parseFloat(value) || 0)}
+              onChange={(value) => setScale(parseFloat(value) || 0)}
               value={
                 scale === null ? '' : removeTrailingZeroes(scale.toPrecision(5))
               }
             />
           </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <PropertyCheckbox
             objectConfiguration={objectConfiguration}
             propertyName="keepAspectRatio"
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="block-title" noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Trans>Points</Trans>
           </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ResponsiveLineStackLayout expand noColumnMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SelectField
               value={originLocation}
               floatingLabelText={properties.get('originLocation').getLabel()}
@@ -626,69 +583,58 @@ const Model3DEditor = ({
               onChange={onOriginLocationChange}
               fullWidth
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Model origin`}
                 value="ModelOrigin"
                 key="ModelOrigin"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Top-left corner`}
                 value="TopLeft"
                 key="TopLeftCorner"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Object center`}
                 value="ObjectCenter"
                 key="ObjectCenter"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Bottom center (on Z axis)`}
                 value="BottomCenterZ"
                 key="BottomCenterZ"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Bottom center (on Y axis)`}
                 value="BottomCenterY"
                 key="BottomCenterY"
               />
             </SelectField>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <SelectField
               value={properties.get('centerLocation').getValue()}
               floatingLabelText={properties.get('centerLocation').getLabel()}
               helperMarkdownText={properties
                 .get('centerLocation')
                 .getDescription()}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type. | TS7006 - Parameter 'newValue' implicitly has an 'any' type.
               onChange={(event, index, newValue) => {
                 onChangeProperty('centerLocation', newValue);
               }}
               fullWidth
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Model origin`}
                 value="ModelOrigin"
                 key="ModelOrigin"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Object center`}
                 value="ObjectCenter"
                 key="ObjectCenter"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Bottom center (on Z axis)`}
                 value="BottomCenterZ"
                 key="BottomCenterZ"
               />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <SelectOption
                 label={t`Bottom center (on Y axis)`}
                 value="BottomCenterY"
@@ -696,22 +642,15 @@ const Model3DEditor = ({
               />
             </SelectField>
           </ResponsiveLineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="block-title">Animations</Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand useFullHeight>
             {model3DConfiguration.getAnimationsCount() === 0 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Column noMargin expand justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <EmptyPlaceholder
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   title={<Trans>Add your first animation</Trans>}
                   description={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Trans>Animations are a sequence of images.</Trans>
                   }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   actionLabel={<Trans>Add an animation</Trans>}
                   helpPagePath="/objects/sprite"
                   tutorialId="intermediate-changing-animations"
@@ -719,16 +658,14 @@ const Model3DEditor = ({
                 />
               </Column>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <React.Fragment>
                 {mapFor(
                   0,
                   model3DConfiguration.getAnimationsCount(),
-// @ts-expect-error - TS7006 - Parameter 'animationIndex' implicitly has an 'any' type.
-                  animationIndex => {
-                    const animation = model3DConfiguration.getAnimation(
-                      animationIndex
-                    );
+
+                  (animationIndex) => {
+                    const animation =
+                      model3DConfiguration.getAnimation(animationIndex);
 
                     const animationRef =
                       justAddedAnimationName === animation.getName()
@@ -736,7 +673,6 @@ const Model3DEditor = ({
                         : null;
 
                     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <DragSourceAndDropTarget
                         key={animationIndex}
                         beginDrag={() => {
@@ -750,24 +686,20 @@ const Model3DEditor = ({
                         }}
                       >
                         {({
-// @ts-expect-error - TS7031 - Binding element 'connectDragSource' implicitly has an 'any' type.
                           connectDragSource,
-// @ts-expect-error - TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type.
+
                           connectDropTarget,
-// @ts-expect-error - TS7031 - Binding element 'isOver' implicitly has an 'any' type.
+
                           isOver,
-// @ts-expect-error - TS7031 - Binding element 'canDrop' implicitly has an 'any' type.
+
                           canDrop,
                         }) =>
                           connectDropTarget(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                             <div
                               key={animationIndex}
                               style={styles.rowContainer}
                             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               {isOver && <DropIndicator canDrop={canDrop} />}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               <div
                                 ref={animationRef}
                                 style={{
@@ -776,61 +708,45 @@ const Model3DEditor = ({
                                     gdevelopTheme.list.itemsBackgroundColor,
                                 }}
                               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <Line noMargin expand alignItems="center">
                                   {connectDragSource(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                     <span>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                       <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                         <DragHandleIcon />
                                       </Column>
                                     </span>
                                   )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                   <Text noMargin noShrink>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                     <Trans>Animation #{animationIndex}</Trans>
                                   </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                   <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                   <SemiControlledTextField
                                     margin="none"
                                     commitOnBlur
                                     errorText={nameErrors[animationIndex]}
                                     translatableHintText={t`Optional animation name`}
                                     value={animation.getName()}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-                                    onChange={text =>
+                                    onChange={(text) =>
                                       changeAnimationName(animationIndex, text)
                                     }
                                     fullWidth
                                   />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                   <IconButton
                                     size="small"
                                     onClick={() =>
                                       removeAnimation(animationIndex)
                                     }
                                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                     <Trash />
                                   </IconButton>
                                 </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <Spacer />
                               </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               <ColumnStackLayout expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <SelectField
                                   id="animation-source-field"
                                   value={animation.getSource()}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
                                   onChange={(event, value) => {
                                     animation.setSource(event.target.value);
                                     forceUpdate();
@@ -838,19 +754,17 @@ const Model3DEditor = ({
                                   margin="dense"
                                   fullWidth
                                   floatingLabelText={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                     <Trans>GLB animation name</Trans>
                                   }
                                   translatableHintText={t`Choose an animation`}
                                 >
                                   {sourceSelectOptions}
                                 </SelectField>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+                                {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <Checkbox
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                   label={<Trans>Loop</Trans>}
                                   checked={animation.shouldLoop()}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
+                                  // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'checked' implicitly has an 'any' type.
                                   onCheck={(e, checked) => {
                                     animation.setShouldLoop(checked);
                                     forceUpdate();
@@ -869,26 +783,19 @@ const Model3DEditor = ({
           </Column>
         </ColumnStackLayout>
       </ScrollView>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ResponsiveLineStackLayout
           justifyContent="space-between"
           noColumnMargin
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Scan missing animations</Trans>}
             onClick={scanNewAnimations}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <RaisedButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Add an animation</Trans>}
             primary
             onClick={addAnimation}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             icon={<Add />}
           />
         </ResponsiveLineStackLayout>

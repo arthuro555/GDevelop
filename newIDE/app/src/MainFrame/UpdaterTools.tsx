@@ -1,12 +1,18 @@
 // See ElectronEventsBridge, AboutDialog and electron-app/main.js for handling the updates.
 
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import React from 'react';
 
 export type ElectronUpdateStatus = {
-  message: string,
-  status: 'checking-for-update' | 'update-available' | 'update-not-available' | 'error' | 'download-progress' | 'update-downloaded' | 'unknown'
+  message: string;
+  status:
+    | 'checking-for-update'
+    | 'update-available'
+    | 'update-not-available'
+    | 'error'
+    | 'download-progress'
+    | 'update-downloaded'
+    | 'unknown';
 };
 
 export const getElectronUpdateNotificationTitle = (
@@ -49,13 +55,16 @@ export const canDownloadElectronUpdate = (status: string) => {
   return status === 'update-available';
 };
 
-type ServiceWorkerUpdateStatus = 'unknown' | 'not-installed' | 'installed' | 'update-installing' | 'update-ready';
+type ServiceWorkerUpdateStatus =
+  | 'unknown'
+  | 'not-installed'
+  | 'installed'
+  | 'update-installing'
+  | 'update-ready';
 
 export const useServiceWorkerUpdateStatus = () => {
-  const [
-    serviceWorkerUpdateStatus,
-    setServiceWorkerUpdateStatus,
-  ] = React.useState<ServiceWorkerUpdateStatus>('unknown');
+  const [serviceWorkerUpdateStatus, setServiceWorkerUpdateStatus] =
+    React.useState<ServiceWorkerUpdateStatus>('unknown');
 
   React.useEffect(() => {
     (async () => {
@@ -88,17 +97,13 @@ export const getServiceWorkerStatusLabel = (
   status: ServiceWorkerUpdateStatus
 ) => {
   if (status === 'not-installed') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     return <Trans>Not installed as an app. No updates available.</Trans>;
   } else if (status === 'installed') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     return <Trans>Installed as an app. No updates available.</Trans>;
   } else if (status === 'update-installing') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     return <Trans>An update is installing.</Trans>;
   } else if (status === 'update-ready') {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Trans>
         An update is ready to be installed. Close ALL GDevelop apps or tabs in
         your browser, then open it again.
@@ -106,6 +111,5 @@ export const getServiceWorkerStatusLabel = (
     );
   }
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   return <Trans>Unknown status.</Trans>;
 };

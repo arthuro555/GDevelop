@@ -1,4 +1,4 @@
-import {AssetShortHeader} from '../Utils/GDevelopServices/Asset';
+import { AssetShortHeader } from '../Utils/GDevelopServices/Asset';
 
 const indexOfOccurrence = (
   haystack: Array<string>,
@@ -13,15 +13,13 @@ const indexOfOccurrence = (
   return index;
 };
 
-export const getFolderTagsFromAssetShortHeaders = (
-  {
-    assetShortHeaders,
-    selectedFolders,
-  }: {
-    assetShortHeaders: Array<AssetShortHeader>,
-    selectedFolders: Array<string>
-  },
-): Array<string> => {
+export const getFolderTagsFromAssetShortHeaders = ({
+  assetShortHeaders,
+  selectedFolders,
+}: {
+  assetShortHeaders: Array<AssetShortHeader>;
+  selectedFolders: Array<string>;
+}): Array<string> => {
   const assetTagsAfterPackTag: string[][] = [];
   const allTagsAfterPackTag = new Set();
   // We are in a pack, calculate first level folders based on asset tags.
@@ -29,12 +27,11 @@ export const getFolderTagsFromAssetShortHeaders = (
   // We first detect where the chosen category is, as this is the pack, and
   // remove this tags and the others before (that could be bundles).
 
-  assetShortHeaders.forEach(assetShortHeader => {
+  assetShortHeaders.forEach((assetShortHeader) => {
     const allAssetTags = assetShortHeader.tags;
     const lastSelectedFolder = selectedFolders[selectedFolders.length - 1];
-    const occurencesOfLastSelectedFolderInSelectedFolders = selectedFolders.filter(
-      folder => folder === lastSelectedFolder
-    ).length;
+    const occurencesOfLastSelectedFolderInSelectedFolders =
+      selectedFolders.filter((folder) => folder === lastSelectedFolder).length;
     const lastSelectedFolderIndex = indexOfOccurrence(
       allAssetTags,
       selectedFolders[selectedFolders.length - 1],
@@ -46,25 +43,25 @@ export const getFolderTagsFromAssetShortHeaders = (
     );
     if (tagsAfterPackTags.length > 0)
       assetTagsAfterPackTag.push(tagsAfterPackTags);
-    tagsAfterPackTags.forEach(tag => allTagsAfterPackTag.add(tag));
+    tagsAfterPackTags.forEach((tag) => allTagsAfterPackTag.add(tag));
   });
 
   // Then we remove the tags that are present in all assets, they're not useful, or not a folder.
   // (For example: "pixel art")
   const tagsPresentInAllAssets = Array.from(allTagsAfterPackTag).filter(
-    tag =>
-// @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'string'.
-      assetTagsAfterPackTag.filter(tags => tags.includes(tag)).length ===
+    (tag) =>
+      // @ts-expect-error - TS2345 - Argument of type 'unknown' is not assignable to parameter of type 'string'.
+      assetTagsAfterPackTag.filter((tags) => tags.includes(tag)).length ===
       assetTagsAfterPackTag.length
   );
   const assetTagsAfterPackTagWithoutNonFolderTags = assetTagsAfterPackTag.map(
-    tags => tags.filter(tag => !tagsPresentInAllAssets.includes(tag))
+    (tags) => tags.filter((tag) => !tagsPresentInAllAssets.includes(tag))
   );
 
   // Then we create the folders list, corresponding to the first level tags.
   const firstLevelTags = new Set();
   assetTagsAfterPackTagWithoutNonFolderTags.forEach(
-    tags => firstLevelTags.add(tags[0]) // Only add the top one, as this will be the first folder.
+    (tags) => firstLevelTags.add(tags[0]) // Only add the top one, as this will be the first folder.
   );
 
   return Array.from(firstLevelTags).filter(Boolean);

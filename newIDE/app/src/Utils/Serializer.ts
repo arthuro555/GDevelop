@@ -1,5 +1,3 @@
-const gd: libGDevelop = global.gd;
-
 /**
  * Tool function to save a serializable object to a JS object.
  * Most gd.* objects are "serializable", meaning they have a serializeTo
@@ -9,7 +7,7 @@ const gd: libGDevelop = global.gd;
  * @param {*} methodName The name of the serialization method. "unserializeFrom" by default
  */
 export function serializeToJSObject(
-  serializable: gdSerializable,
+  serializable: gd.Serializable,
   methodName: string = 'serializeTo'
 ) {
   const serializedElement = new gd.SerializerElement();
@@ -23,8 +21,8 @@ export function serializeToJSObject(
 }
 
 export function serializeToObjectAsset(
-  project: gdProject,
-  object: gdObject,
+  project: gd.Project,
+  object: gd.Object,
   objectFullName: string,
   usedResourceNames: Array<string>
 ) {
@@ -58,7 +56,10 @@ export function serializeToObjectAsset(
  * @param {*} serializable
  * @param {*} methodName The name of the serialization method. "unserializeFrom" by default
  */
-export function serializeToJSON(serializable: gdSerializable, methodName: string = 'serializeTo'): string {
+export function serializeToJSON(
+  serializable: gd.Serializable,
+  methodName: string = 'serializeTo'
+): string {
   const serializedElement = new gd.SerializerElement();
   serializable[methodName](serializedElement);
 
@@ -79,10 +80,10 @@ export function serializeToJSON(serializable: gdSerializable, methodName: string
  * @param {*} optionalProject The project to pass as argument for unserialization
  */
 export function unserializeFromJSObject(
-  serializable: gdSerializable,
+  serializable: gd.Serializable,
   object: any,
   methodName: string = 'unserializeFrom',
-  optionalProject: gdProject | null = undefined
+  optionalProject: gd.Project | null = undefined
 ) {
   const serializedElement = gd.Serializer.fromJSObject(object);
   if (!optionalProject) {

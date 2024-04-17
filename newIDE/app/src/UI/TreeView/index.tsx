@@ -4,12 +4,12 @@ import { FixedSizeList } from 'react-window';
 import memoizeOne from 'memoize-one';
 // @ts-expect-error - TS2307 - Cannot find module './TreeView.module.css' or its corresponding type declarations.
 import classes from './TreeView.module.css';
-// @ts-expect-error - TS6142 - Module '../Menu/ContextMenu' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Menu/ContextMenu.tsx', but '--jsx' is not set.
+
 import ContextMenu, { ContextMenuInterface } from '../Menu/ContextMenu';
 import { useResponsiveWindowSize } from '../Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS6142 - Module './TreeViewRow' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TreeView/TreeViewRow.tsx', but '--jsx' is not set.
+
 import TreeViewRow from './TreeViewRow';
-// @ts-expect-error - TS6142 - Module '../DragAndDrop/DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { makeDragSourceAndDropTarget } from '../DragAndDrop/DragSourceAndDropTarget';
 import { HTMLDataset } from '../../Utils/HTMLDataset';
 import useForceUpdate from '../../Utils/UseForceUpdate';
@@ -23,64 +23,60 @@ export const navigationKeys = [
 ] as const;
 
 export type ItemBaseAttributes = {
-  readonly isRoot?: boolean,
-  readonly isPlaceholder?: boolean
+  readonly isRoot?: boolean;
+  readonly isPlaceholder?: boolean;
 };
 
 export type MenuButton = {
-  id?: string,
-  icon: React.ReactNode,
-  label: string,
-  click: () => undefined | Promise<undefined> | null | undefined
+  id?: string;
+  icon: React.ReactNode;
+  label: string;
+  click: () => void;
 };
 
 type FlattenedNode<Item> = {
-  id: string,
-  name: string | React.ReactNode,
-  rightComponent: React.ReactNode | null | undefined,
-  rightButton: MenuButton | null | undefined,
-  shouldHideMenuIcon: boolean,
-  hasChildren: boolean,
-  canHaveChildren: boolean,
-  extraClass: string,
-  depth: number,
-  dataset?: HTMLDataset | null | undefined,
-  collapsed: boolean,
-  selected: boolean,
-  disableCollapse: boolean,
-  thumbnailSrc?: string | null | undefined,
-  item: Item
+  id: string;
+  name: string | React.ReactNode;
+  rightComponent: React.ReactNode | null | undefined;
+  rightButton: MenuButton | null | undefined;
+  shouldHideMenuIcon: boolean;
+  hasChildren: boolean;
+  canHaveChildren: boolean;
+  extraClass: string;
+  depth: number;
+  dataset?: HTMLDataset | null | undefined;
+  collapsed: boolean;
+  selected: boolean;
+  disableCollapse: boolean;
+  thumbnailSrc?: string | null | undefined;
+  item: Item;
 };
 
 export type ItemData<Item> = {
-  onOpen: (arg1: FlattenedNode<Item>) => void,
-  onClick: (arg1: FlattenedNode<Item>) => void,
-  onSelect: (
-    arg1: {
-      node: FlattenedNode<Item>,
-      exclusive?: boolean
-    },
-  ) => void,
-  onBlurField: () => void,
-  flattenedData: FlattenedNode<Item>[],
-  onEndRenaming: (item: Item, newName: string) => void,
-  onContextMenu: (
-    arg1: {
-      item: Item,
-      index: number,
-      x: number,
-      y: number
-    },
-  ) => void,
-  renamedItemId: string | null | undefined,
-  canDrop?: (arg1: Item, where: 'before' | 'inside' | 'after') => boolean | null | undefined,
-  onDrop: (arg1: Item, where: 'before' | 'inside' | 'after') => void,
-  onEditItem?: (arg1: Item) => void,
-  isMobile: boolean,
-  DragSourceAndDropTarget: (arg1?: any) => React.ReactElement,
-  getItemHtmlId?: (arg1: Item, index: number) => string | null | undefined,
-  forceDefaultDraggingPreview?: boolean,
-  shouldSelectUponContextMenuOpening?: boolean
+  onOpen: (arg1: FlattenedNode<Item>) => void;
+  onClick: (arg1: FlattenedNode<Item>) => void;
+  onSelect: (arg1: { node: FlattenedNode<Item>; exclusive?: boolean }) => void;
+  onBlurField: () => void;
+  flattenedData: FlattenedNode<Item>[];
+  onEndRenaming: (item: Item, newName: string) => void;
+  onContextMenu: (arg1: {
+    item: Item;
+    index: number;
+    x: number;
+    y: number;
+  }) => void;
+  renamedItemId: string | null | undefined;
+  canDrop?: (
+    arg1: Item,
+    where: 'before' | 'inside' | 'after'
+  ) => boolean | null | undefined;
+  onDrop: (arg1: Item, where: 'before' | 'inside' | 'after') => void;
+  onEditItem?: (arg1: Item) => void;
+  isMobile: boolean;
+  DragSourceAndDropTarget: (arg1?: any) => React.ReactElement;
+  getItemHtmlId?: (arg1: Item, index: number) => string | null | undefined;
+  forceDefaultDraggingPreview?: boolean;
+  shouldSelectUponContextMenuOpening?: boolean;
 };
 
 const getItemProps = memoizeOne(
@@ -88,31 +84,30 @@ const getItemProps = memoizeOne(
     flattenedData: FlattenedNode<Item>[],
     onOpen: (arg1: FlattenedNode<Item>) => void,
     onClick: (arg1: FlattenedNode<Item>) => void,
-    onSelect: (
-      arg1: {
-        node: FlattenedNode<Item>,
-        exclusive?: boolean
-      },
-    ) => void,
+    onSelect: (arg1: {
+      node: FlattenedNode<Item>;
+      exclusive?: boolean;
+    }) => void,
     onBlurField: () => void,
     onEndRenaming: (item: Item, newName: string) => void,
     renamedItemId: string | null | undefined,
-    onContextMenu: (
-      arg1: {
-        item: Item,
-        index: number,
-        x: number,
-        y: number
-      },
-    ) => void,
-    canDrop: ((arg1: Item, where: 'before' | 'inside' | 'after') => boolean) | null | undefined,
+    onContextMenu: (arg1: {
+      item: Item;
+      index: number;
+      x: number;
+      y: number;
+    }) => void,
+    canDrop:
+      | ((arg1: Item, where: 'before' | 'inside' | 'after') => boolean)
+      | null
+      | undefined,
     onDrop: (arg1: Item, where: 'before' | 'inside' | 'after') => void,
     onEditItem: ((arg1: Item) => void) | null | undefined,
     isMobile: boolean,
     DragSourceAndDropTarget: (arg1?: any) => React.ReactElement,
     getItemHtmlId?: (arg1: Item, index: number) => string | null | undefined,
     forceDefaultDraggingPreview?: boolean,
-    shouldSelectUponContextMenuOpening?: boolean,
+    shouldSelectUponContextMenuOpening?: boolean
   ): ItemData<Item> => ({
     onOpen,
     onClick,
@@ -122,10 +117,10 @@ const getItemProps = memoizeOne(
     onEndRenaming,
     renamedItemId,
     onContextMenu,
-// @ts-expect-error - TS2322 - Type '((arg1: Item, where: "inside" | "after" | "before") => boolean) | null | undefined' is not assignable to type '((arg1: Item, where: "inside" | "after" | "before") => boolean | null | undefined) | undefined'.
+    // @ts-expect-error - TS2322 - Type '((arg1: Item, where: "inside" | "after" | "before") => boolean) | null | undefined' is not assignable to type '((arg1: Item, where: "inside" | "after" | "before") => boolean | null | undefined) | undefined'.
     canDrop,
     onDrop,
-// @ts-expect-error - TS2322 - Type '((arg1: Item) => void) | null | undefined' is not assignable to type '((arg1: Item) => void) | undefined'.
+    // @ts-expect-error - TS2322 - Type '((arg1: Item) => void) | null | undefined' is not assignable to type '((arg1: Item) => void) | undefined'.
     onEditItem,
     isMobile,
     DragSourceAndDropTarget,
@@ -136,53 +131,59 @@ const getItemProps = memoizeOne(
 );
 
 export type TreeViewInterface<Item> = {
-  forceUpdateList: () => void,
-  scrollToItem: (arg1: Item, placement?: 'smart' | 'start') => void,
-  scrollToItemFromId: (itemId: string, placement?: 'smart' | 'start') => void,
-  renameItem: (arg1: Item) => void,
-  renameItemFromId: (itemId: string) => void,
-  openItems: (arg1: string[]) => void,
-  closeItems: (arg1: string[]) => void,
-  animateItem: (arg1: Item) => void,
-  areItemsOpen: (arg1: Array<Item>) => boolean[]
+  forceUpdateList: () => void;
+  scrollToItem: (arg1: Item, placement?: 'smart' | 'start') => void;
+  scrollToItemFromId: (itemId: string, placement?: 'smart' | 'start') => void;
+  renameItem: (arg1: Item) => void;
+  renameItemFromId: (itemId: string) => void;
+  openItems: (arg1: string[]) => void;
+  closeItems: (arg1: string[]) => void;
+  animateItem: (arg1: Item) => void;
+  areItemsOpen: (arg1: Array<Item>) => boolean[];
 };
 
 type Props<Item> = {
-  height: number,
-  width?: number,
-  items: Item[],
-  getItemName: (arg1: Item) => string | React.ReactNode,
-  getItemId: (arg1: Item) => string,
-  getItemHtmlId?: (arg1: Item, index: number) => string | null | undefined,
-  getItemChildren: (arg1: Item) => Item[] | null | undefined,
-  getItemThumbnail?: (arg1: Item) => string | null | undefined,
-  getItemDataset?: (arg1: Item) => HTMLDataset | null | undefined,
-  onEditItem?: (arg1: Item) => void,
-  buildMenuTemplate: (arg1: Item, index: number) => any,
-  getItemRightButton?: (arg1: Item) => MenuButton | null | undefined,
-  renderRightComponent?: (arg1: Item) => React.ReactNode | null | undefined,
+  height: number;
+  width?: number;
+  items: Item[];
+  getItemName: (arg1: Item) => string | React.ReactNode;
+  getItemId: (arg1: Item) => string;
+  getItemHtmlId?: (arg1: Item, index: number) => string | null | undefined;
+  getItemChildren: (arg1: Item) => Item[] | null | undefined;
+  getItemThumbnail?: (arg1: Item) => string | null | undefined;
+  getItemDataset?: (arg1: Item) => HTMLDataset | null | undefined;
+  onEditItem?: (arg1: Item) => void;
+  buildMenuTemplate: (arg1: Item, index: number) => any;
+  getItemRightButton?: (arg1: Item) => MenuButton | null | undefined;
+  renderRightComponent?: (arg1: Item) => React.ReactNode | null | undefined;
   /**
    * Callback called when a folder is collapsed (folded).
    */
-  onCollapseItem?: (Item: Item) => void,
-  searchText?: string,
-  selectedItems: ReadonlyArray<Item>,
-  onClickItem?: (arg1: Item) => void,
-  onSelectItems: (arg1: Item[]) => void,
-  multiSelect: boolean,
-  onRenameItem: (arg1: Item, newName: string) => void,
-  onMoveSelectionToItem: (destinationItem: Item, where: 'before' | 'inside' | 'after') => void,
-  canMoveSelectionToItem?: (destinationItem: Item, where: 'before' | 'inside' | 'after') => boolean | null | undefined,
-  reactDndType: string,
-  forceAllOpened?: boolean,
-  initiallyOpenedNodeIds?: string[],
+  onCollapseItem?: (Item: Item) => void;
+  searchText?: string;
+  selectedItems: ReadonlyArray<Item>;
+  onClickItem?: (arg1: Item) => void;
+  onSelectItems: (arg1: Item[]) => void;
+  multiSelect: boolean;
+  onRenameItem: (arg1: Item, newName: string) => void;
+  onMoveSelectionToItem: (
+    destinationItem: Item,
+    where: 'before' | 'inside' | 'after'
+  ) => void;
+  canMoveSelectionToItem?: (
+    destinationItem: Item,
+    where: 'before' | 'inside' | 'after'
+  ) => boolean | null | undefined;
+  reactDndType: string;
+  forceAllOpened?: boolean;
+  initiallyOpenedNodeIds?: string[];
   arrowKeyNavigationProps?: {
-    onGetItemInside: (item: Item) => Item | null | undefined,
-    onGetItemOutside: (item: Item) => Item | null | undefined
-  },
-  forceDefaultDraggingPreview?: boolean,
-  shouldSelectUponContextMenuOpening?: boolean,
-  shouldHideMenuIcon?: (item: Item) => boolean
+    onGetItemInside: (item: Item) => Item | null | undefined;
+    onGetItemOutside: (item: Item) => Item | null | undefined;
+  };
+  forceDefaultDraggingPreview?: boolean;
+  shouldSelectUponContextMenuOpening?: boolean;
+  shouldHideMenuIcon?: (item: Item) => boolean;
 };
 
 const TreeView = <Item extends ItemBaseAttributes>(
@@ -217,18 +218,22 @@ const TreeView = <Item extends ItemBaseAttributes>(
     shouldSelectUponContextMenuOpening,
     shouldHideMenuIcon,
   }: Props<Item>,
-  ref: TreeViewInterface<Item>,
+  ref: TreeViewInterface<Item>
 ) => {
   const selectedNodeIds = selectedItems.map(getItemId);
-  const [openedNodeIds, setOpenedNodeIds] = React.useState<string[]>(initiallyOpenedNodeIds || []);
-  const [renamedItemId, setRenamedItemId] = React.useState<string | null | undefined>(null);
-  const contextMenuRef = React.useRef<ContextMenuInterface | null | undefined>(null);
+  const [openedNodeIds, setOpenedNodeIds] = React.useState<string[]>(
+    initiallyOpenedNodeIds || []
+  );
+  const [renamedItemId, setRenamedItemId] = React.useState<
+    string | null | undefined
+  >(null);
+  const contextMenuRef = React.useRef<ContextMenuInterface | null | undefined>(
+    null
+  );
   const containerRef = React.useRef<HTMLDivElement | null | undefined>(null);
   const listRef = React.useRef<FixedSizeList | null | undefined>(null);
-  const [
-    openedDuringSearchNodeIds,
-    setOpenedDuringSearchNodeIds,
-  ] = React.useState<string[]>([]);
+  const [openedDuringSearchNodeIds, setOpenedDuringSearchNodeIds] =
+    React.useState<string[]>([]);
   const { isMobile } = useResponsiveWindowSize();
   const forceUpdate = useForceUpdate();
   const [animatedItemId, setAnimatedItemId] = React.useState<string>('');
@@ -239,14 +244,14 @@ const TreeView = <Item extends ItemBaseAttributes>(
       item: Item,
       depth: number,
       searchText: string | null | undefined,
-      forceOpen: boolean,
+      forceOpen: boolean
     ): FlattenedNode<Item>[] => {
       const id = getItemId(item);
       const children = getItemChildren(item);
       const canHaveChildren = Array.isArray(children);
       const collapsed = !forceAllOpened && !openedNodeIds.includes(id);
       const openedDuringSearch = openedDuringSearchNodeIds.includes(id);
-// @ts-expect-error - TS7034 - Variable 'flattenedChildren' implicitly has type 'any[]' in some locations where its type cannot be determined.
+      // @ts-expect-error - TS7034 - Variable 'flattenedChildren' implicitly has type 'any[]' in some locations where its type cannot be determined.
       let flattenedChildren = [];
       /*
        * Compute children nodes flattening if:
@@ -262,7 +267,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
         (forceAllOpened || !collapsed || !!searchText || openedDuringSearch)
       ) {
         flattenedChildren = children
-          .map(child =>
+          .map((child) =>
             flattenNode(child, depth + 1, searchText, openedDuringSearch)
           )
           .flat();
@@ -327,7 +332,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
               flattenedChildren.length > 0 &&
               !openedDuringSearch,
           },
-// @ts-expect-error - TS7005 - Variable 'flattenedChildren' implicitly has an 'any[]' type.
+          // @ts-expect-error - TS7005 - Variable 'flattenedChildren' implicitly has an 'any[]' type.
           ...flattenedChildren,
         ];
       }
@@ -352,7 +357,9 @@ const TreeView = <Item extends ItemBaseAttributes>(
 
   const flattenOpened = React.useCallback(
     (items: Item[], searchText?: string | null): FlattenedNode<Item>[] => {
-      return items.map(item => flattenNode(item, 0, searchText, false)).flat();
+      return items
+        .map((item) => flattenNode(item, 0, searchText, false))
+        .flat();
     },
     [flattenNode]
   );
@@ -365,7 +372,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
         } else {
           if (!forceAllOpened)
             setOpenedDuringSearchNodeIds(
-              openedDuringSearchNodeIds.filter(id => id !== node.id)
+              openedDuringSearchNodeIds.filter((id) => id !== node.id)
             );
         }
       } else {
@@ -374,7 +381,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
         } else {
           if (!forceAllOpened) {
             if (onCollapseItem) onCollapseItem(node.item);
-            setOpenedNodeIds(openedNodeIds.filter(id => id !== node.id));
+            setOpenedNodeIds(openedNodeIds.filter((id) => id !== node.id));
           }
         }
       }
@@ -393,8 +400,8 @@ const TreeView = <Item extends ItemBaseAttributes>(
       node,
       exclusive,
     }: {
-      node: FlattenedNode<Item>,
-      exclusive?: boolean
+      node: FlattenedNode<Item>;
+      exclusive?: boolean;
     }) => {
       if (multiSelect) {
         if (node.selected) {
@@ -402,7 +409,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
             if (selectedItems.length === 1) return;
             onSelectItems([node.item]);
           } else
-            onSelectItems(selectedItems.filter(item => item !== node.item));
+            onSelectItems(selectedItems.filter((item) => item !== node.item));
         } else {
           if (exclusive) onSelectItems([node.item]);
           else onSelectItems([...selectedItems, node.item]);
@@ -443,8 +450,8 @@ const TreeView = <Item extends ItemBaseAttributes>(
       if (list) {
         // Browse flattenedData in reverse order since scrollToItem is mainly used
         // to scroll to newly added object that is appended at the end of the list.
-// @ts-expect-error - TS2339 - Property 'findLastIndex' does not exist on type 'FlattenedNode<Item>[]'. | TS7006 - Parameter 'node' implicitly has an 'any' type.
-        const index = flattenedData.findLastIndex(node => node.id === itemId);
+        // @ts-expect-error - TS2339 - Property 'findLastIndex' does not exist on type 'FlattenedNode<Item>[]'. | TS7006 - Parameter 'node' implicitly has an 'any' type.
+        const index = flattenedData.findLastIndex((node) => node.id === itemId);
         if (index >= 0) {
           list.scrollToItem(index, placement);
         }
@@ -473,7 +480,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
   const openItems = React.useCallback(
     (itemIds: string[]) => {
       const notAlreadyOpenedNodeIds = itemIds.filter(
-        itemId => !openedNodeIds.includes(itemId)
+        (itemId) => !openedNodeIds.includes(itemId)
       );
       if (notAlreadyOpenedNodeIds.length > 0)
         setOpenedNodeIds([...openedNodeIds, ...notAlreadyOpenedNodeIds]);
@@ -484,7 +491,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
   const closeItems = React.useCallback(
     (itemIds: string[]) => {
       const newOpenedNodesIds = openedNodeIds.filter(
-        openedNodeId => !itemIds.includes(openedNodeId)
+        (openedNodeId) => !itemIds.includes(openedNodeId)
       );
       setOpenedNodeIds(newOpenedNodesIds);
     },
@@ -502,31 +509,28 @@ const TreeView = <Item extends ItemBaseAttributes>(
     (items: Item[]) => {
       const itemIds = items.map(getItemId);
       const openedNodeIdsSet = new Set(openedNodeIds);
-      return itemIds.map(id => openedNodeIdsSet.has(id));
+      return itemIds.map((id) => openedNodeIdsSet.has(id));
     },
     [openedNodeIds, getItemId]
   );
 
-  React.useEffect(
-    () => {
-      if (animatedItemId) {
-        const timeoutId = setTimeout(
-          // Animated item must be reset to remove the extra class to the node.
-          // Otherwise, if it has to be animated once again, the class is already here
-          // and the animation won't play.
-          () => setAnimatedItemId(''),
-          // Corresponds to the duration of the CSS animation.
-          400
-        );
-        return () => clearTimeout(timeoutId);
-      }
-    },
-    [animatedItemId]
-  );
+  React.useEffect(() => {
+    if (animatedItemId) {
+      const timeoutId = setTimeout(
+        // Animated item must be reset to remove the extra class to the node.
+        // Otherwise, if it has to be animated once again, the class is already here
+        // and the animation won't play.
+        () => setAnimatedItemId(''),
+        // Corresponds to the duration of the CSS animation.
+        400
+      );
+      return () => clearTimeout(timeoutId);
+    }
+  }, [animatedItemId]);
 
   React.useImperativeHandle(
     // $FlowFixMe
-// @ts-expect-error - TS2345 - Argument of type 'TreeViewInterface<Item>' is not assignable to parameter of type 'Ref<unknown> | undefined'.
+    // @ts-expect-error - TS2345 - Argument of type 'TreeViewInterface<Item>' is not assignable to parameter of type 'Ref<unknown> | undefined'.
     ref,
     () => ({
       forceUpdateList: forceUpdate,
@@ -556,10 +560,10 @@ const TreeView = <Item extends ItemBaseAttributes>(
       item,
       index,
     }: {
-      item: Item,
-      index: number,
-      x: number,
-      y: number
+      item: Item;
+      index: number;
+      x: number;
+      y: number;
     }) => {
       if (contextMenuRef.current) {
         contextMenuRef.current.open(x, y, { item, index });
@@ -583,7 +587,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
     onEndRenaming,
     renamedItemId,
     openContextMenu,
-// @ts-expect-error - TS2345 - Argument of type '((destinationItem: Item, where: "inside" | "after" | "before") => boolean | null | undefined) | undefined' is not assignable to parameter of type '((arg1: Item, where: "inside" | "after" | "before") => boolean) | null | undefined'.
+    // @ts-expect-error - TS2345 - Argument of type '((destinationItem: Item, where: "inside" | "after" | "before") => boolean | null | undefined) | undefined' is not assignable to parameter of type '((arg1: Item, where: "inside" | "after" | "before") => boolean) | null | undefined'.
     canMoveSelectionToItem,
     onMoveSelectionToItem,
     onEditItem,
@@ -591,30 +595,27 @@ const TreeView = <Item extends ItemBaseAttributes>(
     DragSourceAndDropTarget,
     getItemHtmlId,
     forceDefaultDraggingPreview,
-    shouldSelectUponContextMenuOpening,
+    shouldSelectUponContextMenuOpening
   );
 
   // Reset opened nodes during search when user stops searching
   // or when the search text changes.
-  React.useEffect(
-    () => {
-      if (!searchText || searchText.length > 0) {
-        setOpenedDuringSearchNodeIds([]);
-      }
-    },
-    [searchText]
-  );
+  React.useEffect(() => {
+    if (!searchText || searchText.length > 0) {
+      setOpenedDuringSearchNodeIds([]);
+    }
+  }, [searchText]);
 
   const onKeyDown = React.useCallback(
     (event: KeyboardEvent) => {
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type '"Enter" | "ArrowDown" | "ArrowUp" | "ArrowLeft" | "ArrowRight"'.
+      // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type '"Enter" | "ArrowDown" | "ArrowUp" | "ArrowLeft" | "ArrowRight"'.
       if (!navigationKeys.includes(event.key)) return;
       let newFocusedItem;
       const item = selectedItems[0];
       let itemIndexInFlattenedData = -1;
       if (item) {
         itemIndexInFlattenedData = flattenedData.findIndex(
-          node => node.id === getItemId(item)
+          (node) => node.id === getItemId(item)
         );
       }
 
@@ -628,7 +629,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
         ) {
           i += 1;
           if (i > flattenedData.length - 1) {
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
+            // @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
             newFocusedNode = null;
           }
           newFocusedNode = flattenedData[i];
@@ -646,7 +647,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
             (newFocusedNode.item.isRoot || newFocusedNode.item.isPlaceholder)
           ) {
             if (itemIndexInFlattenedData + delta > flattenedData.length - 1) {
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
+              // @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
               newFocusedNode = null;
             }
             delta += 1;
@@ -666,7 +667,7 @@ const TreeView = <Item extends ItemBaseAttributes>(
             (newFocusedNode.item.isRoot || newFocusedNode.item.isPlaceholder)
           ) {
             if (itemIndexInFlattenedData + delta < 0) {
-// @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
+              // @ts-expect-error - TS2322 - Type 'null' is not assignable to type 'FlattenedNode<Item>'.
               newFocusedNode = null;
             }
             delta -= 1;
@@ -718,25 +719,22 @@ const TreeView = <Item extends ItemBaseAttributes>(
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         tabIndex={0}
         className={classes.treeView}
-// @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
+        // @ts-expect-error - TS2322 - Type '(event: KeyboardEvent) => void' is not assignable to type 'KeyboardEventHandler<HTMLDivElement>'.
         onKeyDown={onKeyDown}
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
+        // @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLDivElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLDivElement> | undefined'.
         ref={containerRef}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <FixedSizeList
           height={height}
           itemCount={flattenedData.length}
           itemSize={32}
           width={typeof width === 'number' ? width : '100%'}
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-          itemKey={index => flattenedData[index].id}
+          // @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
+          itemKey={(index) => flattenedData[index].id}
           // Flow does not seem to accept the generic used in FixedSizeList
           // can itself use a generic.
           // $FlowFixMe
@@ -753,10 +751,8 @@ const TreeView = <Item extends ItemBaseAttributes>(
           {TreeViewRow}
         </FixedSizeList>
       </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <ContextMenu
         ref={contextMenuRef}
-// @ts-expect-error - TS7006 - Parameter 'i18n' implicitly has an 'any' type. | TS7006 - Parameter 'options' implicitly has an 'any' type.
         buildMenuTemplate={(i18n, options) =>
           buildMenuTemplate(options.item, options.index)
         }

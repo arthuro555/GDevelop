@@ -1,18 +1,17 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { I18n as I18nType } from '@lingui/core';
 
 import React from 'react';
-// @ts-expect-error - TS6142 - Module './PublicGameProperties' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/PublicGameProperties.tsx', but '--jsx' is not set.
+
 import { PublicGameProperties, cleanUpGameSlug } from './PublicGameProperties';
 import {
   displayProjectErrorsBox,
   getProjectPropertiesErrors,
 } from '../Utils/ProjectErrorsChecker';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../UI/Dialog';
 import { PublicGame } from '../Utils/GDevelopServices/Game';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
@@ -21,50 +20,45 @@ import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
  * Changes that are not stored in the Project.
  */
 export type PartialGameChange = {
-  ownerIds?: Array<string>,
-  userSlug?: string,
-  gameSlug?: string,
-  discoverable?: boolean
+  ownerIds?: Array<string>;
+  userSlug?: string;
+  gameSlug?: string;
+  discoverable?: boolean;
 };
 
 /**
  * Public game properties that are shared with the project file ones.
  */
 type PublicProjectProperties = {
-  name: string,
-  categories: string[],
-  description: string,
-  authorIds: string[],
-  authorUsernames: string[],
-  playWithKeyboard: boolean,
-  playWithGamepad: boolean,
-  playWithMobile: boolean,
-  orientation: string
+  name: string;
+  categories: string[];
+  description: string;
+  authorIds: string[];
+  authorUsernames: string[];
+  playWithKeyboard: boolean;
+  playWithGamepad: boolean;
+  playWithMobile: boolean;
+  orientation: string;
 };
 
 export const applyPublicPropertiesToProject = (
-  project: gdProject,
+  project: gd.Project,
   i18n: I18nType,
   newProperties: PublicProjectProperties
 ) => {
-  const {
-    name,
-    authorIds,
-    authorUsernames,
-    description,
-    categories,
-  } = newProperties;
+  const { name, authorIds, authorUsernames, description, categories } =
+    newProperties;
   project.setName(name);
   const projectCategories = project.getCategories();
   projectCategories.clear();
-  categories.forEach(category => projectCategories.push_back(category));
+  categories.forEach((category) => projectCategories.push_back(category));
   project.setDescription(description);
   const projectAuthorIds = project.getAuthorIds();
   projectAuthorIds.clear();
-  authorIds.forEach(authorId => projectAuthorIds.push_back(authorId));
+  authorIds.forEach((authorId) => projectAuthorIds.push_back(authorId));
   const projectAuthorUsernames = project.getAuthorUsernames();
   projectAuthorUsernames.clear();
-  authorUsernames.forEach(authorUsername =>
+  authorUsernames.forEach((authorUsername) =>
     projectAuthorUsernames.push_back(authorUsername)
   );
   project.setPlayableWithKeyboard(newProperties.playWithKeyboard);
@@ -79,12 +73,12 @@ export const applyPublicPropertiesToProject = (
 };
 
 type Props = {
-  project: gdProject,
-  publicGame: PublicGame,
-  onClose: () => void,
-  onApply: (partialGameChange: PartialGameChange) => Promise<void>,
-  isLoading: boolean,
-  i18n: I18nType
+  project: gd.Project;
+  publicGame: PublicGame;
+  onClose: () => void;
+  onApply: (partialGameChange: PartialGameChange) => Promise<void>;
+  isLoading: boolean;
+  i18n: I18nType;
 };
 
 export const PublicGamePropertiesDialog = ({
@@ -97,16 +91,19 @@ export const PublicGamePropertiesDialog = ({
 }: Props) => {
   const { profile } = React.useContext(AuthenticatedUserContext);
 
-  const publicGameAuthorIds = publicGame.authors.map(author => author.id);
+  const publicGameAuthorIds = publicGame.authors.map((author) => author.id);
   const publicGameAuthorUsernames = publicGame.authors
-    .map(author => author.username)
+    .map((author) => author.username)
     .filter(Boolean);
-  const publicGameOwnerIds = publicGame.owners.map(owner => owner.id);
+  const publicGameOwnerIds = publicGame.owners.map((owner) => owner.id);
   const [name, setName] = React.useState(publicGame.gameName);
   const [categories, setCategories] = React.useState(publicGame.categories);
   const [description, setDescription] = React.useState(publicGame.description);
-  const [authorIds, setAuthorIds] = React.useState<string[]>(publicGameAuthorIds);
-  const [authorUsernames, setAuthorUsernames] = React.useState<string[]>(publicGameAuthorUsernames);
+  const [authorIds, setAuthorIds] =
+    React.useState<string[]>(publicGameAuthorIds);
+  const [authorUsernames, setAuthorUsernames] = React.useState<string[]>(
+    publicGameAuthorUsernames
+  );
   const [ownerIds, setOwnerIds] = React.useState<string[]>(publicGameOwnerIds);
   const [playWithKeyboard, setPlayableWithKeyboard] = React.useState(
     publicGame.playWithKeyboard
@@ -147,18 +144,15 @@ export const PublicGamePropertiesDialog = ({
   };
 
   const actions = [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Back</Trans>}
       key="back"
       primary={false}
       onClick={onClose}
       disabled={isLoading}
     />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <DialogPrimaryButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       label={<Trans>Save</Trans>}
       primary
       onClick={onSave}
@@ -168,7 +162,6 @@ export const PublicGamePropertiesDialog = ({
   ];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Dialog
       title={publicGame.gameName}
       actions={actions}
@@ -177,7 +170,6 @@ export const PublicGamePropertiesDialog = ({
       onApply={onSave}
       open
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <PublicGameProperties
         name={name}
         setName={setName}

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import AlertContext from './AlertContext';
-// @ts-expect-error - TS6142 - Module './AlertDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/AlertDialog.tsx', but '--jsx' is not set.
+
 import AlertDialog from './AlertDialog';
-// @ts-expect-error - TS6142 - Module './ConfirmDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/ConfirmDialog.tsx', but '--jsx' is not set.
+
 import ConfirmDialog from './ConfirmDialog';
-// @ts-expect-error - TS6142 - Module './ConfirmDeleteDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/ConfirmDeleteDialog.tsx', but '--jsx' is not set.
+
 import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 import {
   ShowAlertDialogOptionsWithCallback,
@@ -12,22 +12,19 @@ import {
   ShowConfirmDialogOptionsWithCallback,
   ShowYesNoCancelDialogOptionsWithCallback,
 } from './AlertContext';
-// @ts-expect-error - TS6142 - Module './YesNoCancelDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Alert/YesNoCancelDialog.tsx', but '--jsx' is not set.
+
 import YesNoCancelDialog from './YesNoCancelDialog';
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
-function ConfirmProvider({
-  children,
-}: Props) {
+function ConfirmProvider({ children }: Props) {
   // Alert
   const [alertDialogOpen, setAlertDialogOpen] = React.useState<boolean>(false);
-  const [
-    alertDialogConfig,
-    setAlertDialogConfig,
-  ] = React.useState<ShowAlertDialogOptionsWithCallback | null | undefined>(null);
+  const [alertDialogConfig, setAlertDialogConfig] = React.useState<
+    ShowAlertDialogOptionsWithCallback | null | undefined
+  >(null);
   const openAlertDialog = React.useCallback(
     (options: ShowAlertDialogOptionsWithCallback) => {
       setAlertDialogOpen(true);
@@ -37,11 +34,11 @@ function ConfirmProvider({
   );
 
   // Confirm
-  const [confirmDialogOpen, setConfirmDialogOpen] = React.useState<boolean>(false);
-  const [
-    confirmDialogConfig,
-    setConfirmDialogConfig,
-  ] = React.useState<ShowConfirmDialogOptionsWithCallback | null | undefined>(null);
+  const [confirmDialogOpen, setConfirmDialogOpen] =
+    React.useState<boolean>(false);
+  const [confirmDialogConfig, setConfirmDialogConfig] = React.useState<
+    ShowConfirmDialogOptionsWithCallback | null | undefined
+  >(null);
   const openConfirmDialog = React.useCallback(
     (options: ShowConfirmDialogOptionsWithCallback) => {
       setConfirmDialogOpen(true);
@@ -51,14 +48,12 @@ function ConfirmProvider({
   );
 
   // Confirm Delete
-  const [
-    confirmDeleteDialogOpen,
-    setConfirmDeleteDialogOpen,
-  ] = React.useState<boolean>(false);
-  const [
-    confirmDeleteDialogConfig,
-    setConfirmDeleteDialogConfig,
-  ] = React.useState<ShowConfirmDeleteDialogOptionsWithCallback | null | undefined>(null);
+  const [confirmDeleteDialogOpen, setConfirmDeleteDialogOpen] =
+    React.useState<boolean>(false);
+  const [confirmDeleteDialogConfig, setConfirmDeleteDialogConfig] =
+    React.useState<
+      ShowConfirmDeleteDialogOptionsWithCallback | null | undefined
+    >(null);
   const openConfirmDeleteDialog = React.useCallback(
     (options: ShowConfirmDeleteDialogOptionsWithCallback) => {
       setConfirmDeleteDialogOpen(true);
@@ -68,14 +63,11 @@ function ConfirmProvider({
   );
 
   // Confirm
-  const [
-    yesNoCancelDialogOpen,
-    setYesNoCancelDialogOpen,
-  ] = React.useState<boolean>(false);
-  const [
-    yesNoCancelDialogConfig,
-    setYesNoCancelDialogConfig,
-  ] = React.useState<ShowYesNoCancelDialogOptionsWithCallback | null | undefined>(null);
+  const [yesNoCancelDialogOpen, setYesNoCancelDialogOpen] =
+    React.useState<boolean>(false);
+  const [yesNoCancelDialogConfig, setYesNoCancelDialogConfig] = React.useState<
+    ShowYesNoCancelDialogOptionsWithCallback | null | undefined
+  >(null);
   const openYesNoCancelDialog = React.useCallback(
     (options: ShowYesNoCancelDialogOptionsWithCallback) => {
       setYesNoCancelDialogOpen(true);
@@ -85,7 +77,6 @@ function ConfirmProvider({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AlertContext.Provider
       value={{
         showAlertDialog: openAlertDialog,
@@ -96,7 +87,6 @@ function ConfirmProvider({
     >
       {children}
       {alertDialogConfig && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <AlertDialog
           open={alertDialogOpen}
           onDismiss={() => {
@@ -109,7 +99,6 @@ function ConfirmProvider({
         />
       )}
       {confirmDialogConfig && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ConfirmDialog
           open={confirmDialogOpen}
           onConfirm={() => {
@@ -132,7 +121,6 @@ function ConfirmProvider({
         />
       )}
       {confirmDeleteDialogConfig && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ConfirmDeleteDialog
           open={confirmDeleteDialogOpen}
           onConfirm={() => {
@@ -152,7 +140,6 @@ function ConfirmProvider({
         />
       )}
       {yesNoCancelDialogConfig && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <YesNoCancelDialog
           open={yesNoCancelDialogOpen}
           onClickYes={() => {

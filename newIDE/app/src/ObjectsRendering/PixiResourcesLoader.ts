@@ -15,7 +15,6 @@ import ResourcesLoader from '../ResourcesLoader';
 import { loadFontFace } from '../Utils/FontFaceLoader';
 import { checkIfCredentialsRequired } from '../Utils/CrossOrigin';
 import { ResourceKind } from '../ResourcesList/ResourceSource';
-const gd: libGDevelop = global.gd;
 
 type SpineTextureAtlasOrLoadingError = {
   textureAtlas: TextureAtlas | null | undefined,
@@ -82,7 +81,7 @@ const getOrCreateGltfLoader = () => {
   return gltfLoader;
 };
 
-const load3DModel = (project: gdProject, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> => {
+const load3DModel = (project: gd.Project, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> => {
   if (!project.getResourcesManager().hasResource(resourceName))
     return Promise.resolve(invalidModel);
 
@@ -123,7 +122,7 @@ const determineCrossOrigin = (url: string) => {
   return 'anonymous';
 };
 
-const applyPixiTextureSettings = (resource: gdResource, texture: any) => {
+const applyPixiTextureSettings = (resource: gd.Resource, texture: any) => {
   if (resource.getKind() !== 'image') return;
 
   const imageResource = gd.asImageResource(resource);
@@ -133,7 +132,7 @@ const applyPixiTextureSettings = (resource: gdResource, texture: any) => {
 };
 
 const applyThreeTextureSettings = (
-  resource: gdResource,
+  resource: gd.Resource,
   threeTexture: THREE.Texture
 ) => {
   if (resource.getKind() !== 'image') return;
@@ -168,7 +167,7 @@ const removeMetalnessFromMesh = (node: THREE.Object3D): void => {
 const traverseToRemoveMetalnessFromMeshes = (node: THREE.Object3D) =>
   node.traverse(removeMetalnessFromMesh);
 
-export const readEmbeddedResourcesMapping = (resource: gdResource): Record<any, any> | null => {
+export const readEmbeddedResourcesMapping = (resource: gd.Resource): Record<any, any> | null => {
   const metadataString = resource.getMetadata();
   try {
     const metadata = JSON.parse(metadataString);
@@ -186,12 +185,12 @@ export const readEmbeddedResourcesMapping = (resource: gdResource): Record<any, 
 };
 
 const getEmbedderResources = (
-  project: gdProject,
+  project: gd.Project,
   embeddedResourceName: string,
   embedderResourceKind: ResourceKind,
-): Array<gdResource> => {
+): Array<gd.Resource> => {
   const resourcesManager = project.getResourcesManager();
-  const embedderResources: Array<gdResource> = [];
+  const embedderResources: Array<gd.Resource> = [];
 
   for (const resourceName of resourcesManager
     .getAllResourceNames()
@@ -240,7 +239,7 @@ export default class PixiResourcesLoader {
   }
 
   static async _reloadEmbedderResources(
-    project: gdProject,
+    project: gd.Project,
     embeddedResourceName: string,
     embedderResourceKind: ResourceKind
   ) {
@@ -256,7 +255,7 @@ export default class PixiResourcesLoader {
     );
   }
 
-  static async reloadResource(project: gdProject, resourceName: string) {
+  static async reloadResource(project: gd.Project, resourceName: string) {
     const loadedTexture = loadedTextures[resourceName];
     if (loadedTexture && loadedTexture.textureCacheIds) {
       // The property textureCacheIds indicates that the PIXI.Texture object has some
@@ -332,7 +331,7 @@ export default class PixiResourcesLoader {
   /**
    * (Re)load the PIXI texture represented by the given resources.
    */
-  static async loadTextures(project: gdProject, resourceNames: Array<string>): Promise<void> {
+  static async loadTextures(project: gd.Project, resourceNames: Array<string>): Promise<void> {
     const resourcesManager = project.getResourcesManager();
 
     const imageResources = resourceNames
@@ -444,7 +443,7 @@ export default class PixiResourcesLoader {
    * should listen to PIXI.Texture `update` event, and refresh your object
    * if this event is triggered.
    */
-  static getPIXITexture(project: gdProject, resourceName: string) {
+  static getPIXITexture(project: gd.Project, resourceName: string) {
     if (loadedTextures[resourceName]) {
       // TODO: we never consider textures as not valid anymore. When we
       // update the IDE to unload textures, we should handle loading them again
@@ -490,7 +489,7 @@ export default class PixiResourcesLoader {
    * @param resourceName The name of the resource
    * @returns The requested texture, or a placeholder if not found.
    */
-  static getThreeTexture(project: gdProject, resourceName: string): THREE.Texture {
+  static getThreeTexture(project: gd.Project, resourceName: string): THREE.Texture {
     const loadedThreeTexture = loadedThreeTextures[resourceName];
     if (loadedThreeTexture) return loadedThreeTexture;
 
@@ -534,7 +533,7 @@ export default class PixiResourcesLoader {
    * @returns The requested material.
    */
   static getThreeMaterial(
-    project: gdProject,
+    project: gd.Project,
     resourceName: string,
     {
       useTransparentTexture,
@@ -563,7 +562,7 @@ export default class PixiResourcesLoader {
    * @param options
    * @returns The requested material.
    */
-  static get3DModel(project: gdProject, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> {
+  static get3DModel(project: gd.Project, resourceName: string): Promise<THREE.THREE_ADDONS.GLTF> {
     const promise = loadedOrLoading3DModelPromises[resourceName];
     if (promise) return promise;
 
@@ -578,7 +577,7 @@ export default class PixiResourcesLoader {
    * @param spineTextureAtlasName The name of the atlas texture resource.
    * @returns The requested texture atlas, or null if it could not be loaded.
    */
-  static async _getSpineTextureAtlas(project: gdProject, spineTextureAtlasName: string): Promise<SpineTextureAtlasOrLoadingError> {
+  static async _getSpineTextureAtlas(project: gd.Project, spineTextureAtlasName: string): Promise<SpineTextureAtlasOrLoadingError> {
     const promise = spineAtlasPromises[spineTextureAtlasName];
     if (promise) return promise;
 
@@ -696,7 +695,7 @@ export default class PixiResourcesLoader {
    * @param spineName The name of the spine json resource
    * @returns The requested spine skeleton.
    */
-  static async getSpineData(project: gdProject, spineName: string): Promise<SpineDataOrLoadingError> {
+  static async getSpineData(project: gd.Project, spineName: string): Promise<SpineDataOrLoadingError> {
     const promise = spineDataPromises[spineName];
     if (promise) return promise;
 
@@ -797,7 +796,7 @@ export default class PixiResourcesLoader {
    * should listen to PIXI.Texture `update` event, and refresh your object
    * if this event is triggered.
    */
-  static getPIXIVideoTexture(project: gdProject, resourceName: string) {
+  static getPIXIVideoTexture(project: gd.Project, resourceName: string) {
     if (loadedTextures[resourceName]) {
       // TODO: we never consider textures as not valid anymore. When we
       // update the IDE to unload textures, we should handle loading them again
@@ -847,7 +846,7 @@ export default class PixiResourcesLoader {
    * @returns a Promise that resolves with the font-family to be used
    * to render a text with the font.
    */
-  static loadFontFamily(project: gdProject, resourceName: string): Promise<string> {
+  static loadFontFamily(project: gd.Project, resourceName: string): Promise<string> {
     // Avoid reloading a font if it's already cached
     if (loadedFontFamilies[resourceName]) {
       return Promise.resolve(loadedFontFamilies[resourceName]);
@@ -894,7 +893,7 @@ export default class PixiResourcesLoader {
    * The font won't be loaded.
    * @returns The font-family to be used to render a text with the font.
    */
-  static getFontFamily(project: gdProject, resourceName: string) {
+  static getFontFamily(project: gd.Project, resourceName: string) {
     if (loadedFontFamilies[resourceName]) {
       return loadedFontFamilies[resourceName];
     }
@@ -906,7 +905,7 @@ export default class PixiResourcesLoader {
   /**
    * Get the data from a bitmap font file (fnt/xml) resource in the IDE.
    */
-  static getBitmapFontData(project: gdProject, resourceName: string): Promise<any> {
+  static getBitmapFontData(project: gd.Project, resourceName: string): Promise<any> {
     if (loadedBitmapFonts[resourceName]) {
       return Promise.resolve(loadedBitmapFonts[resourceName].data);
     }
@@ -952,7 +951,7 @@ export default class PixiResourcesLoader {
   /**
    * Get the data from a json resource in the IDE.
    */
-  static getResourceJsonData(project: gdProject, resourceName: string): Promise<any> {
+  static getResourceJsonData(project: gd.Project, resourceName: string): Promise<any> {
     if (!project.getResourcesManager().hasResource(resourceName))
       return Promise.reject(
         new Error(`Can't find resource called ${resourceName}.`)

@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../UI/Slideshow/Slideshow' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Slideshow/Slideshow.tsx', but '--jsx' is not set.
 import Slideshow from '../../../UI/Slideshow/Slideshow';
 
 export default {
@@ -42,7 +40,6 @@ const items = [
 
 export const Loading = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Slideshow
       items={null}
       itemDesktopRatio={5038 / 459}
@@ -53,7 +50,6 @@ export const Loading = () => {
 
 export const Loaded = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Slideshow
       items={items}
       itemDesktopRatio={5038 / 459}
@@ -64,7 +60,6 @@ export const Loaded = () => {
 
 export const WithOnly1Item = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Slideshow
       items={[items[0]]}
       itemDesktopRatio={5038 / 459}

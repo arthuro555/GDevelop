@@ -1,23 +1,21 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 import Popper from '@material-ui/core/Popper';
 import muiZIndex from '@material-ui/core/styles/zIndex';
 import Functions from '@material-ui/icons/Functions';
-// @ts-expect-error - TS6142 - Module '../../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../../UI/RaisedButton';
 import SemiControlledTextField, {
   SemiControlledTextFieldInterface,
-// @ts-expect-error - TS6142 - Module '../../../UI/SemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledTextField.tsx', but '--jsx' is not set.
 } from '../../../UI/SemiControlledTextField';
 import { mapVector } from '../../../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module '../../InstructionEditor/InstructionOrExpressionSelector/ExpressionSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InstructionEditor/InstructionOrExpressionSelector/ExpressionSelector.tsx', but '--jsx' is not set.
+
 import ExpressionSelector from '../../InstructionEditor/InstructionOrExpressionSelector/ExpressionSelector';
 import ExpressionParametersEditorDialog, {
   ParameterValues,
-// @ts-expect-error - TS6142 - Module './ExpressionParametersEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/GenericExpressionField/ExpressionParametersEditorDialog.tsx', but '--jsx' is not set.
 } from './ExpressionParametersEditorDialog';
-// @ts-expect-error - TS6142 - Module './ExpressionParametersEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/GenericExpressionField/ExpressionParametersEditor.tsx', but '--jsx' is not set.
+
 import { hasNonCodeOnlyParameters } from './ExpressionParametersEditor';
 import { formatExpressionCall } from './FormatExpressionCall';
 import { EnumeratedExpressionMetadata } from '../../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
@@ -25,13 +23,10 @@ import {
   ParameterFieldProps,
   FieldFocusFunction,
 } from '../ParameterFieldCommons';
-import BackgroundHighlighting, {
-  Highlight,
-// @ts-expect-error - TS6142 - Module './BackgroundHighlighting' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/GenericExpressionField/BackgroundHighlighting.tsx', but '--jsx' is not set.
-} from './BackgroundHighlighting';
+import BackgroundHighlighting, { Highlight } from './BackgroundHighlighting';
 import debounce from 'lodash/debounce';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-// @ts-expect-error - TS6142 - Module '../../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { TextFieldWithButtonLayout } from '../../../UI/Layout';
 import {
   ExpressionAutocompletion,
@@ -47,7 +42,7 @@ import {
   getRenderedAutocompletions,
   getNonRenderedCount,
 } from './ExpressionAutocompletionsHandler';
-// @ts-expect-error - TS6142 - Module './ExpressionAutocompletionsDisplayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/GenericExpressionField/ExpressionAutocompletionsDisplayer.tsx', but '--jsx' is not set.
+
 import ExpressionAutocompletionsDisplayer from './ExpressionAutocompletionsDisplayer';
 import { ResponsiveWindowMeasurer } from '../../../UI/Responsive/ResponsiveWindowMeasurer';
 import {
@@ -55,10 +50,9 @@ import {
   shouldSubmit,
   shouldValidate,
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module '../../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../../UI/Paper';
 import { getProjectScopedContainersFromScope } from '../../../InstructionOrExpression/EventsScope.flow';
-const gd: libGDevelop = global.gd;
 
 const styles = {
   container: {
@@ -103,40 +97,43 @@ const styles = {
 } as const;
 
 type State = {
-  popoverOpen: boolean,
-  parametersDialogOpen: boolean,
-  selectedExpressionInfo: EnumeratedExpressionMetadata | null | undefined,
-  validatedValue: string,
-  errorText: string | null | undefined,
-  errorHighlights: Array<Highlight>,
-  autocompletions: AutocompletionsState
+  popoverOpen: boolean;
+  parametersDialogOpen: boolean;
+  selectedExpressionInfo: EnumeratedExpressionMetadata | null | undefined;
+  validatedValue: string;
+  errorText: string | null | undefined;
+  errorHighlights: Array<Highlight>;
+  autocompletions: AutocompletionsState;
 };
 
 type Props = {
-  expressionType: 'number' | 'string',
+  expressionType: 'number' | 'string';
   /** An optional callback that can be used to provide additional autocompletions. */
-  onGetAdditionalAutocompletions?: (currentExpression: string) => Array<ExpressionAutocompletion>,
+  onGetAdditionalAutocompletions?: (
+    currentExpression: string
+  ) => Array<ExpressionAutocompletion>;
   /** An optional callback that can be used to show a custom error message. */
-  onExtractAdditionalErrors?: (currentExpression: string, currentExpressionNode: gdExpressionNode) => string | null | undefined,
-  renderExtraButton?: (
-    arg1: {
-      style: any,
-      onChange: (newValue: string) => void
-    },
-  ) => React.ReactElement
-} & (ParameterFieldProps);
+  onExtractAdditionalErrors?: (
+    currentExpression: string,
+    currentExpressionNode: gd.ExpressionNode
+  ) => string | null | undefined;
+  renderExtraButton?: (arg1: {
+    style: any;
+    onChange: (newValue: string) => void;
+  }) => React.ReactElement;
+} & ParameterFieldProps;
 
 const MAX_ERRORS_COUNT = 10;
 
 const extractErrors = (
-  platform: gdPlatform,
-  project: gdProject,
-  projectScopedContainers: gdProjectScopedContainers,
+  platform: gd.Platform,
+  project: gd.Project,
+  projectScopedContainers: gd.ProjectScopedContainers,
   expressionType: string,
-  expressionNode: gdExpressionNode,
+  expressionNode: gd.ExpressionNode
 ): {
-  errorText: string | null | undefined,
-  errorHighlights: Array<Highlight>
+  errorText: string | null | undefined;
+  errorHighlights: Array<Highlight>;
 } => {
   const expressionValidator = new gd.ExpressionValidator(
     gd.JsPlatform.get(),
@@ -146,8 +143,7 @@ const extractErrors = (
   expressionNode.visit(expressionValidator);
   const errors = expressionValidator.getAllErrors();
 
-// @ts-expect-error - TS7006 - Parameter 'error' implicitly has an 'any' type.
-  const errorHighlights: Array<Highlight> = mapVector(errors, error => ({
+  const errorHighlights: Array<Highlight> = mapVector(errors, (error) => ({
     begin: error.getStartPosition(),
     end: error.getEndPosition() + 1,
     message: error.getMessage(),
@@ -203,7 +199,7 @@ export default class ExpressionField extends React.Component<Props, State> {
     this._enqueueValidation.cancel();
   }
 
-  focus: FieldFocusFunction = options => {
+  focus: FieldFocusFunction = (options) => {
     if (this._field) {
       this._field.focus(options);
       if (options && options.selectAll) {
@@ -224,9 +220,7 @@ export default class ExpressionField extends React.Component<Props, State> {
     });
   };
 
-  _handleFocus = (event: {
-    preventDefault: () => void
-  }) => {
+  _handleFocus = (event: { preventDefault: () => void }) => {
     // This prevents ghost click.
     event.preventDefault();
   };
@@ -259,13 +253,15 @@ export default class ExpressionField extends React.Component<Props, State> {
 
   _handleBlurEvent = (event: {
     currentTarget: {
-      value: string
-    }
+      value: string;
+    };
   }) => {
     this._handleBlur(event.currentTarget.value);
   };
 
-  _shouldOpenParametersDialog = (expressionInfo: EnumeratedExpressionMetadata): boolean => {
+  _shouldOpenParametersDialog = (
+    expressionInfo: EnumeratedExpressionMetadata
+  ): boolean => {
     // If there is no parameter to fill for the selected expression, no need to open the dialog.
     return hasNonCodeOnlyParameters(expressionInfo.metadata);
   };
@@ -275,7 +271,7 @@ export default class ExpressionField extends React.Component<Props, State> {
     if (this._shouldOpenParametersDialog(expressionInfo)) {
       newState = {
         ...newState,
-// @ts-expect-error - TS2322 - Type '{ parametersDialogOpen: boolean; selectedExpressionInfo: EnumeratedExpressionMetadata; popoverOpen: boolean; }' is not assignable to type '{ popoverOpen: boolean; }'.
+        // @ts-expect-error - TS2322 - Type '{ parametersDialogOpen: boolean; selectedExpressionInfo: EnumeratedExpressionMetadata; popoverOpen: boolean; }' is not assignable to type '{ popoverOpen: boolean; }'.
         parametersDialogOpen: true,
         selectedExpressionInfo: expressionInfo,
       };
@@ -308,16 +304,16 @@ export default class ExpressionField extends React.Component<Props, State> {
     // the type wanted by the parent instead.
     const expressionNode = parser
       .parseExpression(
-// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number | undefined'.
+        // @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number | undefined'.
         value.substr(0, cursorPosition) +
           'fakeIdentifier' +
-// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
+          // @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
           value.substr(cursorPosition)
       )
       .get();
     const currentNode = gd.ExpressionNodeLocationFinder.getNodeAtPosition(
       expressionNode,
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+      // @ts-expect-error - TS2531 - Object is possibly 'null'.
       cursorPosition + 'fakeIdentifier'.length - 1
     );
     const projectScopedContainers = getProjectScopedContainersFromScope(
@@ -343,10 +339,10 @@ export default class ExpressionField extends React.Component<Props, State> {
 
     // Generate the expression with the function call
     const newValue =
-// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number | undefined'.
+      // @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number | undefined'.
       value.substr(0, cursorPosition) +
       functionCall +
-// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
+      // @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
       value.substr(cursorPosition);
 
     // Apply changes
@@ -366,7 +362,7 @@ export default class ExpressionField extends React.Component<Props, State> {
         if (this._inputElement) {
           this._inputElement.setSelectionRange(
             cursorPosition,
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
+            // @ts-expect-error - TS2531 - Object is possibly 'null'.
             cursorPosition + functionCall.length
           );
         }
@@ -401,7 +397,7 @@ export default class ExpressionField extends React.Component<Props, State> {
             caretLocation: expressionAutocompletion.completion.length,
           }
         : insertAutocompletionInExpression(
-// @ts-expect-error - TS2322 - Type 'number | null' is not assignable to type 'number'.
+            // @ts-expect-error - TS2322 - Type 'number | null' is not assignable to type 'number'.
             { expression, caretLocation },
             {
               completion: expressionAutocompletion.completion,
@@ -491,7 +487,7 @@ export default class ExpressionField extends React.Component<Props, State> {
       expression.length > 0 &&
       expression.charAt(expression.length - 1) === ' '
     ) {
-      this.setState(state => ({
+      this.setState((state) => ({
         errorText: formattedErrorText,
         errorHighlights,
         autocompletions: getAutocompletionsInitialState(),
@@ -502,14 +498,15 @@ export default class ExpressionField extends React.Component<Props, State> {
     const cursorPosition = this._inputElement
       ? this._inputElement.selectionStart
       : 0;
-    const completionDescriptions = gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
-      gd.JsPlatform.get(),
-      projectScopedContainers,
-      expressionType,
-      expressionNode,
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
-      cursorPosition - 1
-    );
+    const completionDescriptions =
+      gd.ExpressionCompletionFinder.getCompletionDescriptionsFor(
+        gd.JsPlatform.get(),
+        projectScopedContainers,
+        expressionType,
+        expressionNode,
+        // @ts-expect-error - TS2531 - Object is possibly 'null'.
+        cursorPosition - 1
+      );
 
     const newAutocompletions = getAutocompletionsFromDescriptions(
       {
@@ -529,7 +526,7 @@ export default class ExpressionField extends React.Component<Props, State> {
 
     parser.delete();
 
-    this.setState(state => ({
+    this.setState((state) => ({
       errorText: formattedErrorText,
       errorHighlights,
       autocompletions: setNewAutocompletions(
@@ -553,8 +550,8 @@ export default class ExpressionField extends React.Component<Props, State> {
     const description = parameterMetadata
       ? parameterMetadata.getDescription()
       : this.props.isInline
-      ? undefined
-      : '-'; // We're using multiline TextField, which does not support having no label.
+        ? undefined
+        : '-'; // We're using multiline TextField, which does not support having no label.
     const longDescription = parameterMetadata
       ? parameterMetadata.getLongDescription()
       : undefined;
@@ -582,21 +579,14 @@ export default class ExpressionField extends React.Component<Props, State> {
         styles.backgroundHighlightingWithFloatingLabel;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
         {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <React.Fragment>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <TextFieldWithButtonLayout
               margin={this.props.isInline ? 'none' : 'dense'}
               renderTextField={() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <div style={styles.textFieldContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <div style={styles.textFieldAndHighlightContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <BackgroundHighlighting
                       value={this.state.validatedValue}
                       style={{
@@ -605,7 +595,6 @@ export default class ExpressionField extends React.Component<Props, State> {
                       }}
                       highlights={this.state.errorHighlights}
                     />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <SemiControlledTextField
                       id={this.props.id}
                       margin={this.props.isInline ? 'none' : 'dense'}
@@ -616,13 +605,11 @@ export default class ExpressionField extends React.Component<Props, State> {
                       inputStyle={styles.input}
                       onChange={this._handleChange}
                       onBlur={this._handleBlurEvent}
-// @ts-expect-error - TS7006 - Parameter 'field' implicitly has an 'any' type.
-                      ref={field => (this._field = field)}
+                      ref={(field) => (this._field = field)}
                       onFocus={this._handleFocus}
                       errorText={this.state.errorText}
                       onClick={() => this._enqueueValidation()}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-                      onKeyDown={event => {
+                      onKeyDown={(event) => {
                         const autocompletions = handleAutocompletionsKeyDown(
                           this.state.autocompletions,
                           {
@@ -653,9 +640,7 @@ export default class ExpressionField extends React.Component<Props, State> {
                     />
                   </div>
                   {this._inputElement && this.state.popoverOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <ClickAwayListener onClickAway={this._handleRequestClose}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <Popper
                         style={popoverStyle}
                         open={this.state.popoverOpen}
@@ -665,10 +650,8 @@ export default class ExpressionField extends React.Component<Props, State> {
                           true /* Can't use portals as this would put the Popper outside of the Modal, which is keeping the focus in the modal (so the search bar and keyboard browsing won't not work) */
                         }
                       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <ResponsiveWindowMeasurer>
                           {({ isMobile }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                             <Paper
                               style={
                                 isMobile
@@ -677,11 +660,9 @@ export default class ExpressionField extends React.Component<Props, State> {
                               }
                               background="light"
                             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               <ExpressionSelector
                                 i18n={i18n}
                                 selectedType=""
-// @ts-expect-error - TS7006 - Parameter 'type' implicitly has an 'any' type. | TS7006 - Parameter 'expression' implicitly has an 'any' type.
                                 onChoose={(type, expression) => {
                                   this._handleExpressionChosen(expression);
                                 }}
@@ -698,7 +679,6 @@ export default class ExpressionField extends React.Component<Props, State> {
                   {this._inputElement &&
                     !this.state.popoverOpen &&
                     parameterRenderingService && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <ExpressionAutocompletionsDisplayer
                         project={project}
                         anchorEl={this._inputElement}
@@ -712,8 +692,7 @@ export default class ExpressionField extends React.Component<Props, State> {
                           this.state.autocompletions.selectedCompletionIndex
                         }
                         onScroll={this._onExpressionAutocompletionsScroll}
-// @ts-expect-error - TS7006 - Parameter 'expressionAutocompletion' implicitly has an 'any' type.
-                        onChoose={expressionAutocompletion => {
+                        onChoose={(expressionAutocompletion) => {
                           this._insertAutocompletion(expressionAutocompletion);
 
                           setTimeout(
@@ -726,9 +705,7 @@ export default class ExpressionField extends React.Component<Props, State> {
                     )}
                 </div>
               )}
-// @ts-expect-error - TS7006 - Parameter 'style' implicitly has an 'any' type.
-              renderButton={style => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+              renderButton={(style) => (
                 <React.Fragment>
                   {!this.props.isInline &&
                     this.props.renderExtraButton &&
@@ -737,17 +714,15 @@ export default class ExpressionField extends React.Component<Props, State> {
                       onChange: this._handleBlur,
                     })}
                   {!this.props.isInline && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <RaisedButton
                       id={`open-${expressionType}-expression-popover-button`}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       icon={<Functions />}
                       label={
                         expressionType === 'string'
                           ? '"ABC"'
                           : expressionType === 'number'
-                          ? '123'
-                          : ''
+                            ? '123'
+                            : ''
                       }
                       primary
                       style={style}
@@ -760,18 +735,16 @@ export default class ExpressionField extends React.Component<Props, State> {
 
             {this.state.parametersDialogOpen &&
               this.state.selectedExpressionInfo && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <ExpressionParametersEditorDialog
                   project={project}
                   scope={scope}
                   globalObjectsContainer={globalObjectsContainer}
                   objectsContainer={objectsContainer}
                   expressionMetadata={
-// @ts-expect-error - TS2339 - Property 'metadata' does not exist on type 'never'.
+                    // @ts-expect-error - TS2339 - Property 'metadata' does not exist on type 'never'.
                     this.state.selectedExpressionInfo.metadata
                   }
-// @ts-expect-error - TS7006 - Parameter 'parameterValues' implicitly has an 'any' type.
-                  onDone={parameterValues => {
+                  onDone={(parameterValues) => {
                     if (!this.state.selectedExpressionInfo) return;
 
                     this.insertExpression(

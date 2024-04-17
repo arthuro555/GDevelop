@@ -1,6 +1,8 @@
-export default function memoize<Input, Output>(func: (arg1: Input) => Output): (arg1: Input) => Output {
+export default function memoize<Input, Output>(
+  func: (arg1: Input) => Output
+): (arg1: Input) => Output {
   const primitives = new Map<Input, Output>();
-// @ts-expect-error - TS2344 - Type 'Input' does not satisfy the constraint 'object'.
+  // @ts-expect-error - TS2344 - Type 'Input' does not satisfy the constraint 'object'.
   const objects = new WeakMap<Input, Output>();
 
   function cacheFor(input: Input) {

@@ -3,26 +3,26 @@ import newNameGenerator from './NewNameGenerator';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'slugs'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/slugs/slugs.js' implicitly has an 'any' type.
 import slugs from 'slugs';
 
-type PartialObjectDescription = {
-  reference: string,
-  object: any
+export type PartialObjectDescription = {
+  reference: string;
+  object: any;
 };
 
 type Reference = {
-  referenceTo: string
+  referenceTo: string;
 };
 
 type SplitConfiguration = {
-  pathSeparator: string,
-  getArrayItemReferenceName: (object: any, currentReference: string) => string,
-  shouldSplit: (path: string) => boolean,
-  isReferenceMagicPropertyName: string
+  pathSeparator: string;
+  getArrayItemReferenceName: (object: any, currentReference: string) => string;
+  shouldSplit: (path: string) => boolean;
+  isReferenceMagicPropertyName: string;
 };
 
 type UnsplitConfiguration = {
-  isReferenceMagicPropertyName: string,
-  getReferencePartialObject: (referencePath: string) => Promise<any>,
-  maxUnsplitDepth?: number
+  isReferenceMagicPropertyName: string;
+  getReferencePartialObject: (referencePath: string) => Promise<any>;
+  maxUnsplitDepth?: number;
 };
 
 /**
@@ -39,7 +39,7 @@ export const split = (
     getArrayItemReferenceName,
     shouldSplit,
     isReferenceMagicPropertyName,
-  }: SplitConfiguration,
+  }: SplitConfiguration
 ): Array<PartialObjectDescription> => {
   const partialObjects: Array<PartialObjectDescription> = [];
   const createReference = (reference: string, object: any): Reference => {
@@ -126,7 +126,7 @@ export const unsplit = (
     isReferenceMagicPropertyName,
     getReferencePartialObject,
     maxUnsplitDepth,
-  }: UnsplitConfiguration,
+  }: UnsplitConfiguration
 ): Promise<void> => {
   const isReference = (object: any): Reference | null | undefined => {
     if (object[isReferenceMagicPropertyName] === true) {
@@ -145,11 +145,11 @@ export const unsplit = (
       const keys = Object.keys(currentObject);
       if (keys) {
         return Promise.all(
-          keys.map(indexOrPropertyName => {
+          keys.map((indexOrPropertyName) => {
             const reference = isReference(currentObject[indexOrPropertyName]);
             if (reference) {
               return getReferencePartialObject(reference.referenceTo).then(
-                partialObject => {
+                (partialObject) => {
                   currentObject[indexOrPropertyName] = partialObject;
 
                   return unsplitObject(
@@ -209,7 +209,7 @@ export const getSlugifiedUniqueNameFromProperty = (propertyName: string) => {
       existingNamesForReference[currentReference] || {};
     const newName = newNameGenerator(
       slugs(property),
-      name => !!existingNamesForReference[currentReference][name]
+      (name) => !!existingNamesForReference[currentReference][name]
     );
     existingNamesForReference[currentReference][newName] = true;
     return newName;

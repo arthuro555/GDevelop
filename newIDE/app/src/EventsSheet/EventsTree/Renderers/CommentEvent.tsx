@@ -1,10 +1,9 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 
 import * as React from 'react';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
-// @ts-expect-error - TS6142 - Module '../../../UI/TextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextField.tsx', but '--jsx' is not set.
+
 import TextField, { TextFieldInterface } from '../../../UI/TextField';
 import { rgbToHex } from '../../../Utils/ColorTransformer';
 import {
@@ -20,7 +19,6 @@ import {
   shouldSubmit,
 } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 import { dataObjectToProps } from '../../../Utils/HTMLDataset';
-const gd: libGDevelop = global.gd;
 
 const commentTextStyle = {
   width: '100%',
@@ -44,11 +42,14 @@ const styles = {
 } as const;
 
 type State = {
-  editing: boolean,
-  editingPreviousValue: string | null | undefined
+  editing: boolean;
+  editingPreviousValue: string | null | undefined;
 };
 
-export default class CommentEvent extends React.Component<EventRendererProps, State> {
+export default class CommentEvent extends React.Component<
+  EventRendererProps,
+  State
+> {
   state = {
     editing: false,
     editingPreviousValue: null,
@@ -123,7 +124,6 @@ export default class CommentEvent extends React.Component<EventRendererProps, St
     )}`;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         className={classNames({
           [largeSelectableArea]: true,
@@ -134,7 +134,7 @@ export default class CommentEvent extends React.Component<EventRendererProps, St
           backgroundColor,
         }}
         onClick={this.edit}
-        onKeyUp={event => {
+        onKeyUp={(event) => {
           if (!this.state.editing && shouldActivate(event)) {
             this.edit();
           }
@@ -143,12 +143,10 @@ export default class CommentEvent extends React.Component<EventRendererProps, St
         id={`${this.props.idPrefix}-comment`}
       >
         {this.state.editing ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <TextField
             multiline
             margin="none"
-// @ts-expect-error - TS7006 - Parameter 'textField' implicitly has an 'any' type.
-            ref={textField => (this._textField = textField)}
+            ref={(textField) => (this._textField = textField)}
             value={commentEvent.getComment()}
             translatableHintText={t`<Enter comment>`}
             onBlur={this.endEditing}
@@ -160,8 +158,7 @@ export default class CommentEvent extends React.Component<EventRendererProps, St
             }}
             fullWidth
             id="comment-title"
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onKeyDown={event => {
+            onKeyDown={(event) => {
               if (shouldCloseOrCancel(event) || shouldSubmit(event)) {
                 this.endEditing();
               }
@@ -169,9 +166,8 @@ export default class CommentEvent extends React.Component<EventRendererProps, St
             underlineShow={false}
           />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <span
-            ref={selectable => (this._selectable = selectable)}
+            ref={(selectable) => (this._selectable = selectable)}
             className={classNames({
               [selectableArea]: true,
               [disabledText]: this.props.disabled,

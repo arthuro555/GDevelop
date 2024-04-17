@@ -1,4 +1,4 @@
-import {isNativeMobileApp} from './Platform';
+import { isNativeMobileApp } from './Platform';
 import { addGDevelopResourceJwtTokenToUrl } from './GDevelopServices/Project';
 
 export const checkIfIsGDevelopCloudBucketUrl = (url: string): boolean => {

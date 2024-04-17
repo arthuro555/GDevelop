@@ -1,9 +1,6 @@
-import {enumerateVariables} from './EnumerateVariables';
-const gd: libGDevelop = global.gd;
+import { enumerateVariables } from './EnumerateVariables';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('EnumerateVariables', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can enumerate variables, including children', () => {
     const container = new gd.VariablesContainer();
     container
@@ -44,7 +41,7 @@ describe('EnumerateVariables', () => {
     expect(allNames).toContain('Variable4[2][1]');
     expect(allNames).toContain('Variable4[2][2]');
   });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('can enumerate "invalid" variable names, including children', () => {
     const container = new gd.VariablesContainer();
     container.insert('ValidName', new gd.Variable(), 0);

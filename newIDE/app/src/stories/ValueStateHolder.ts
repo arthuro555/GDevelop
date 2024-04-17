@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 type Props = {
-  initialValue: any,
-  render: (value: any, onChange: (value?: any) => void) => React.ReactElement
+  initialValue: any;
+  render: (value: any, onChange: (value?: any) => void) => React.ReactElement;
 };
 
 type State = {
-  value: any
+  value: any;
 };
 
 export default class ValueStateHolder extends React.Component<Props, State> {

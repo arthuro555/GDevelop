@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../GameDashboard/GameAnalyticsPanel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/GameAnalyticsPanel.tsx', but '--jsx' is not set.
+
 import { GameAnalyticsPanel } from '../../../GameDashboard/GameAnalyticsPanel';
 import AuthenticatedUserContext from '../../../Profile/AuthenticatedUserContext';
 
@@ -32,15 +31,13 @@ export const ErrorLoadingAnalytics = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(500)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -52,15 +49,13 @@ export const MissingAnalytics = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(404)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -72,15 +67,13 @@ export const WithPartialAnalytics = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsWithoutPlayersAndRetention1)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -92,15 +85,13 @@ export const WithAnalytics = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsFor364Days)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -112,15 +103,13 @@ export const WithAnalyticsWithMissingNewMetrics = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsWithUndefinedDurationMetrics)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -132,15 +121,13 @@ export const WithAnalyticsOnlyFor19Days = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsWithOnly19Days)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -152,15 +139,13 @@ export const WithAnalyticsWithHoles = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsWithHoles)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -172,15 +157,13 @@ export const WithAnalyticsOnlyFor1Day = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsWithOnly1Day)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );
@@ -192,15 +175,13 @@ export const WithAnalyticsLongLoading = () => {
     .onGet(`${GDevelopAnalyticsApi.baseUrl}/game-metrics`)
     .reply(200, gameRollingMetricsFor364Days)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <GameAnalyticsPanel game={game1} />
     </AuthenticatedUserContext.Provider>
   );

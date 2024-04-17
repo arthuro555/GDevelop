@@ -1,15 +1,14 @@
 import ResourcesLoader from '../ResourcesLoader';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { toNewGdMapStringString } from '../Utils/MapStringString';
 const fs = optionalRequire('fs');
 const path = optionalRequire('path');
-const gd: libGDevelop = global.gd;
 
 export const createOrUpdateResource = (
-  project: gdProject,
-  newlyCreatedResource: gdResource,
+  project: gd.Project,
+  newlyCreatedResource: gd.Resource,
   resourceName: string
 ) => {
   const resourcesManager = project.getResourcesManager();
@@ -32,7 +31,7 @@ export const createOrUpdateResource = (
  * for the resource URL, then stripping anything that is specific to a URL.
  */
 export const getLocalResourceFullPath = (
-  project: gdProject,
+  project: gd.Project,
   resourceName: string
 ) => {
   let resourcePath = ResourcesLoader.getResourceFullUrl(
@@ -52,7 +51,7 @@ export const getLocalResourceFullPath = (
 };
 
 export const isPathInProjectFolder = (
-  project: gdProject,
+  project: gd.Project,
   resourcePath: string
 ) => {
   const projectPath = path.dirname(project.getProjectFile());
@@ -60,7 +59,7 @@ export const isPathInProjectFolder = (
 };
 
 export const copyAllToProjectFolder = (
-  project: gdProject,
+  project: gd.Project,
   resourcePaths: Array<string>,
   newToOldFilePaths: Map<string, string>,
 ): Promise<Array<string>> => {
@@ -112,17 +111,17 @@ export const copyAllToProjectFolder = (
 
           return resolve(resourceNewPath);
         });
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
       });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     })
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export const getResourceFilePathStatus = (
-  project: gdProject,
+  project: gd.Project,
   resourceName: string
 ) => {
   if (!project.getResourcesManager().hasResource(resourceName)) return '';
@@ -155,8 +154,8 @@ export const getResourceFilePathStatus = (
 };
 
 export const applyResourceDefaults = (
-  project: gdProject,
-  newResource: gdResource
+  project: gd.Project,
+  newResource: gd.Resource
 ) => {
   if (newResource instanceof gd.ImageResource) {
     newResource.setSmooth(project.getScaleMode() !== 'nearest');
@@ -169,7 +168,7 @@ export const applyResourceDefaults = (
  * @param resourceNewNames The map from old resource name to new resource name.
  */
 export const renameResourcesInProject = (
-  project: gdProject,
+  project: gd.Project,
   resourceNewNames: {
     [key: string]: string
   }
@@ -184,7 +183,7 @@ export const renameResourcesInProject = (
   resourcesRenamer.delete();
 };
 
-export const parseLocalFilePathOrExtensionFromMetadata = (resource: gdResource): {
+export const parseLocalFilePathOrExtensionFromMetadata = (resource: gd.Resource): {
   localFilePath: string | null | undefined,
   extension: string | null | undefined
 } => {
@@ -220,7 +219,7 @@ export const parseLocalFilePathOrExtensionFromMetadata = (resource: gdResource):
 };
 
 export const updateResourceJsonMetadata = (
-  resource: gdResource,
+  resource: gd.Resource,
   newMetadata: {
     [key: string]: any
   }

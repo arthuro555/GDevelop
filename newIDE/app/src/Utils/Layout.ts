@@ -1,11 +1,10 @@
-const gd: libGDevelop = global.gd;
 
-export const getInstancesInLayoutForObject = (initialInstancesContainer: gdInitialInstancesContainer, objectName: string): Array<gdInitialInstance> => {
+export const getInstancesInLayoutForObject = (initialInstancesContainer: gd.InitialInstancesContainer, objectName: string): Array<gd.InitialInstance> => {
   if (initialInstancesContainer.getInstancesCount() === 0) return [];
-  const objectInstances: Array<gdInitialInstance> = [];
+  const objectInstances: Array<gd.InitialInstance> = [];
   const instanceGetter = new gd.InitialInstanceJSFunctor();
   instanceGetter.invoke = instancePtr: any => {
-    const instance: gdInitialInstance = gd.wrapPointer(
+    const instance: gd.InitialInstance = gd.wrapPointer(
       instancePtr,
       gd.InitialInstance
     );
@@ -18,12 +17,12 @@ export const getInstancesInLayoutForObject = (initialInstancesContainer: gdIniti
   return objectInstances;
 };
 
-export const getInstancesInLayoutForLayer = (initialInstancesContainer: gdInitialInstancesContainer, layerName: string): Array<gdInitialInstance> => {
+export const getInstancesInLayoutForLayer = (initialInstancesContainer: gd.InitialInstancesContainer, layerName: string): Array<gd.InitialInstance> => {
   if (initialInstancesContainer.getInstancesCount() === 0) return [];
-  const objectInstances: Array<gdInitialInstance> = [];
+  const objectInstances: Array<gd.InitialInstance> = [];
   const instanceGetter = new gd.InitialInstanceJSFunctor();
   instanceGetter.invoke = instancePtr: any => {
-    const instance: gdInitialInstance = gd.wrapPointer(
+    const instance: gd.InitialInstance = gd.wrapPointer(
       instancePtr,
       gd.InitialInstance
     );
@@ -36,7 +35,7 @@ export const getInstancesInLayoutForLayer = (initialInstancesContainer: gdInitia
   return objectInstances;
 };
 
-export const getInstanceCountInLayoutForObject = (initialInstancesContainer: gdInitialInstancesContainer, objectName: string): number => {
+export const getInstanceCountInLayoutForObject = (initialInstancesContainer: gd.InitialInstancesContainer, objectName: string): number => {
   return getInstancesInLayoutForObject(initialInstancesContainer, objectName)
     .length;
 };

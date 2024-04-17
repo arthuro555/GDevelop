@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t, Trans} from '@lingui/macro';
+import { t, Trans } from '@lingui/macro';
 import * as React from 'react';
 import {
   ChooseResourceOptions,
@@ -8,10 +7,10 @@ import {
   ResourceSource,
   allResourceKindsAndMetadata,
 } from './ResourceSource';
-// @ts-expect-error - TS6142 - Module '../AssetStore/ResourceStore' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ResourceStore/index.tsx', but '--jsx' is not set.
+
 import { ResourceStore } from '../AssetStore/ResourceStore';
 import { isPathInProjectFolder, copyAllToProjectFolder } from './ResourceUtils';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../Utils/OptionalRequire';
 import Window from '../Utils/Window';
 import {
@@ -21,11 +20,11 @@ import {
   EmbeddedResources,
   MappedResources,
 } from './LocalEmbeddedResourceSources';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Line } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module './FileToCloudProjectResourceUploader' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/FileToCloudProjectResourceUploader.tsx', but '--jsx' is not set.
+
 import { FileToCloudProjectResourceUploader } from './FileToCloudProjectResourceUploader';
 
 const remote = optionalRequire('@electron/remote');
@@ -33,9 +32,9 @@ const dialog = remote ? remote.dialog : null;
 const path = optionalRequire('path');
 
 type ResourceStoreChooserProps = {
-  options: ChooseResourceOptions,
-  onChooseResources: (resources: Array<gdResource>) => void,
-  createNewResource: () => gdResource
+  options: ChooseResourceOptions;
+  onChooseResources: (resources: Array<gd.Resource>) => void;
+  createNewResource: () => gd.Resource;
 };
 
 const ResourceStoreChooser = ({
@@ -44,10 +43,8 @@ const ResourceStoreChooser = ({
   createNewResource,
 }: ResourceStoreChooserProps) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ResourceStore
-// @ts-expect-error - TS7006 - Parameter 'resource' implicitly has an 'any' type.
-      onChoose={resource => {
+      onChoose={(resource) => {
         const chosenResourceUrl = resource.url;
         const newResource = createNewResource();
         newResource.setFile(chosenResourceUrl);
@@ -99,8 +96,8 @@ const localResourceSources: Array<ResourceSource> = [
         setLastUsedPath(project, kind, lastUsedPath);
 
         let hasFilesOutsideProjectFolder = filePaths.some(
-// @ts-expect-error - TS7006 - Parameter 'path' implicitly has an 'any' type.
-          path => !isPathInProjectFolder(project, path)
+          // @ts-expect-error - TS7006 - Parameter 'path' implicitly has an 'any' type.
+          (path) => !isPathInProjectFolder(project, path)
         );
 
         // Some resources, like tilemaps, can have references to other files.
@@ -190,8 +187,8 @@ const localResourceSources: Array<ResourceSource> = [
           filesWithEmbeddedResources
         );
 
-// @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
-        return filePaths.map(filePath => {
+        // @ts-expect-error - TS7006 - Parameter 'filePath' implicitly has an 'any' type.
+        return filePaths.map((filePath) => {
           const newResource = createNewResource();
           newResource.setFile(path.relative(projectPath, filePath));
           newResource.setName(path.relative(projectPath, filePath));
@@ -200,9 +197,8 @@ const localResourceSources: Array<ResourceSource> = [
             ? newToOldFilePaths.get(filePath)
             : filePath;
           if (filePathWithMapping) {
-            const mappedResources = filesWithMappedResources.get(
-              filePathWithMapping
-            );
+            const mappedResources =
+              filesWithMappedResources.get(filePathWithMapping);
 
             if (mappedResources && mappedResources.mapping) {
               newResource.setMetadata(
@@ -225,17 +221,13 @@ const localResourceSources: Array<ResourceSource> = [
         kind,
         selectResourcesHeadless: selectLocalFileResources,
         renderComponent: (props: ResourceSourceComponentProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Line justifyContent="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <RaisedButton
               primary
               label={
                 props.options.multiSelection ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Trans>Choose one or more files</Trans>
                 ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <Trans>Choose a file</Trans>
                 )
               }
@@ -267,7 +259,6 @@ const localResourceSources: Array<ResourceSource> = [
     onlyForStorageProvider: 'Cloud',
     kind,
     renderComponent: (props: ResourceSourceComponentProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <FileToCloudProjectResourceUploader
         createNewResource={createNewResource}
         onChooseResources={props.onChooseResources}
@@ -285,7 +276,6 @@ const localResourceSources: Array<ResourceSource> = [
     displayTab: 'standalone',
     kind,
     renderComponent: (props: ResourceSourceComponentProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ResourceStoreChooser
         createNewResource={createNewResource}
         onChooseResources={props.onChooseResources}

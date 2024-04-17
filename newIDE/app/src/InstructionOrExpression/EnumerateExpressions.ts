@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import {
   EnumeratedExpressionMetadata,
   InstructionOrExpressionScope,
@@ -7,7 +6,6 @@ import {
 import { mapVector } from '../Utils/MapFor';
 import flatten from 'lodash/flatten';
 import { getExtensionPrefix } from './EnumerateInstructions';
-const gd: libGDevelop = global.gd;
 
 const GROUP_DELIMITER = '/';
 
@@ -15,17 +13,16 @@ const shouldOnlyBeNumberType = (type: string) => type === 'number';
 
 const enumerateExpressionMetadataMap = (
   prefix: string,
-  expressions: gdMapStringExpressionMetadata,
-  scope: InstructionOrExpressionScope,
+  expressions: gd.MapStringExpressionMetadata,
+  scope: InstructionOrExpressionScope
 ): Array<EnumeratedExpressionMetadata> => {
-// @ts-expect-error - TS7006 - Parameter 'expressionType' implicitly has an 'any' type.
-  return mapVector(expressions.keys(), expressionType => {
+  return mapVector(expressions.keys(), (expressionType) => {
     const exprMetadata = expressions.get(expressionType);
     if (!exprMetadata.isShown()) {
       return null; // Skip hidden expressions
     }
 
-    let parameters: Array<gdParameterMetadata> = [];
+    let parameters: Array<gd.ParameterMetadata> = [];
     for (let i = 0; i < exprMetadata.getParametersCount(); i++) {
       if (scope.objectMetadata && i === 0) continue;
       if (scope.behaviorMetadata && i <= 1) continue; //Skip object and behavior parameters
@@ -48,21 +45,25 @@ const enumerateExpressionMetadataMap = (
       isPrivate: exprMetadata.isPrivate(),
       isRelevantForLayoutEvents: exprMetadata.isRelevantForLayoutEvents(),
       isRelevantForFunctionEvents: exprMetadata.isRelevantForFunctionEvents(),
-      isRelevantForAsynchronousFunctionEvents: exprMetadata.isRelevantForAsynchronousFunctionEvents(),
-      isRelevantForCustomObjectEvents: exprMetadata.isRelevantForCustomObjectEvents(),
+      isRelevantForAsynchronousFunctionEvents:
+        exprMetadata.isRelevantForAsynchronousFunctionEvents(),
+      isRelevantForCustomObjectEvents:
+        exprMetadata.isRelevantForCustomObjectEvents(),
     };
   }).filter(Boolean);
 };
 
 /** Enumerate all the free expressions available. */
-export const enumerateFreeExpressions = (type: string, i18n: I18nType): Array<EnumeratedExpressionMetadata> => {
+export const enumerateFreeExpressions = (
+  type: string,
+  i18n: I18nType
+): Array<EnumeratedExpressionMetadata> => {
   const allExtensions = gd
     .asPlatform(gd.JsPlatform.get())
     .getAllPlatformExtensions();
 
   return flatten(
-// @ts-expect-error - TS7006 - Parameter 'extension' implicitly has an 'any' type.
-    mapVector(allExtensions, extension => {
+    mapVector(allExtensions, (extension) => {
       const prefix = getExtensionPrefix(extension, i18n);
       const scope = {
         extension,
@@ -89,11 +90,15 @@ export const enumerateFreeExpressions = (type: string, i18n: I18nType): Array<En
 };
 
 /** Enumerate the expressions available for the given object type. */
-export const enumerateObjectExpressions = (type: string, objectType: string): Array<EnumeratedExpressionMetadata> => {
-  const extensionAndObjectMetadata = gd.MetadataProvider.getExtensionAndObjectMetadata(
-    gd.JsPlatform.get(),
-    objectType
-  );
+export const enumerateObjectExpressions = (
+  type: string,
+  objectType: string
+): Array<EnumeratedExpressionMetadata> => {
+  const extensionAndObjectMetadata =
+    gd.MetadataProvider.getExtensionAndObjectMetadata(
+      gd.JsPlatform.get(),
+      objectType
+    );
   const extension = extensionAndObjectMetadata.getExtension();
   const objectMetadata = extensionAndObjectMetadata.getMetadata();
   const scope = { extension, objectMetadata } as const;
@@ -115,10 +120,11 @@ export const enumerateObjectExpressions = (type: string, objectType: string): Ar
 
   const baseObjectType = ''; /* An empty string means the base object */
   if (objectType !== baseObjectType) {
-    const extensionAndObjectMetadata = gd.MetadataProvider.getExtensionAndObjectMetadata(
-      gd.JsPlatform.get(),
-      baseObjectType
-    );
+    const extensionAndObjectMetadata =
+      gd.MetadataProvider.getExtensionAndObjectMetadata(
+        gd.JsPlatform.get(),
+        baseObjectType
+      );
     const extension = extensionAndObjectMetadata.getExtension();
 
     objectsExpressions = [
@@ -142,11 +148,15 @@ export const enumerateObjectExpressions = (type: string, objectType: string): Ar
 };
 
 /** Enumerate the expressions available for the given behavior type. */
-export const enumerateBehaviorExpressions = (type: string, behaviorType: string): Array<EnumeratedExpressionMetadata> => {
-  const extensionAndBehaviorMetadata = gd.MetadataProvider.getExtensionAndBehaviorMetadata(
-    gd.JsPlatform.get(),
-    behaviorType
-  );
+export const enumerateBehaviorExpressions = (
+  type: string,
+  behaviorType: string
+): Array<EnumeratedExpressionMetadata> => {
+  const extensionAndBehaviorMetadata =
+    gd.MetadataProvider.getExtensionAndBehaviorMetadata(
+      gd.JsPlatform.get(),
+      behaviorType
+    );
   const extension = extensionAndBehaviorMetadata.getExtension();
   const behaviorMetadata = extensionAndBehaviorMetadata.getMetadata();
   const scope = { extension, behaviorMetadata } as const;
@@ -168,7 +178,10 @@ export const enumerateBehaviorExpressions = (type: string, behaviorType: string)
 };
 
 /** Enumerate all the expressions available. */
-export const enumerateAllExpressions = (type: string, i18n: I18nType): Array<EnumeratedExpressionMetadata> => {
+export const enumerateAllExpressions = (
+  type: string,
+  i18n: I18nType
+): Array<EnumeratedExpressionMetadata> => {
   const objectsExpressions: Array<any> = [];
   const behaviorsExpressions: Array<any> = [];
   const freeExpressions = enumerateFreeExpressions(type, i18n);
@@ -176,13 +189,13 @@ export const enumerateAllExpressions = (type: string, i18n: I18nType): Array<Enu
   const allExtensions = gd
     .asPlatform(gd.JsPlatform.get())
     .getAllPlatformExtensions();
-// @ts-expect-error - TS7006 - Parameter 'extension' implicitly has an 'any' type.
-  mapVector(allExtensions, extension => {
+
+  mapVector(allExtensions, (extension) => {
     const prefix = getExtensionPrefix(extension, i18n);
 
     //Objects expressions:
-// @ts-expect-error - TS7006 - Parameter 'objectType' implicitly has an 'any' type.
-    mapVector(extension.getExtensionObjectsTypes(), objectType => {
+
+    mapVector(extension.getExtensionObjectsTypes(), (objectType) => {
       const objectMetadata = extension.getObjectMetadata(objectType);
       const scope = { extension, objectMetadata } as const;
 
@@ -206,8 +219,8 @@ export const enumerateAllExpressions = (type: string, i18n: I18nType): Array<Enu
     });
 
     //Behaviors expressions:
-// @ts-expect-error - TS7006 - Parameter 'behaviorType' implicitly has an 'any' type.
-    mapVector(extension.getBehaviorsTypes(), behaviorType => {
+
+    mapVector(extension.getBehaviorsTypes(), (behaviorType) => {
       const behaviorMetadata = extension.getBehaviorMetadata(behaviorType);
       const scope = { extension, behaviorMetadata } as const;
 
@@ -234,7 +247,10 @@ export const enumerateAllExpressions = (type: string, i18n: I18nType): Array<Enu
   return [...freeExpressions, ...objectsExpressions, ...behaviorsExpressions];
 };
 
-export const filterExpressions = (list: Array<EnumeratedExpressionMetadata>, searchText: string): Array<EnumeratedExpressionMetadata> => {
+export const filterExpressions = (
+  list: Array<EnumeratedExpressionMetadata>,
+  searchText: string
+): Array<EnumeratedExpressionMetadata> => {
   if (!searchText) return list;
 
   const lowercaseSearchText = searchText.toLowerCase();
@@ -246,7 +262,9 @@ export const filterExpressions = (list: Array<EnumeratedExpressionMetadata>, sea
     );
   };
 
-  const favorExactMatch = (list: Array<EnumeratedExpressionMetadata>): Array<EnumeratedExpressionMetadata> => {
+  const favorExactMatch = (
+    list: Array<EnumeratedExpressionMetadata>
+  ): Array<EnumeratedExpressionMetadata> => {
     if (!searchText) {
       return list;
     }

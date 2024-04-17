@@ -13,38 +13,34 @@ import {
 const gd = global.gd;
 
 type SelectedVertex = {
-  vertex: gdVector2f,
-  polygonIndex: number,
-  vertexIndex: number
+  vertex: gd.Vector2f;
+  polygonIndex: number;
+  vertexIndex: number;
 };
 
 type Props = {
-  polygons: gdVectorPolygon2d,
-  isDefaultBoundingBox: boolean,
-  imageWidth: number,
-  imageHeight: number,
-  imageOffsetTop: number,
-  imageOffsetLeft: number,
-  highlightedVerticePtr: number | null | undefined,
-  selectedVerticePtr: number | null | undefined,
-  onClickVertice: (ptr?: number | null | undefined) => void,
-  imageZoomFactor: number,
-  onPolygonsUpdated: () => void,
-  forcedCursor: string | null,
-  deactivateControls?: boolean,
-  hideControls?: boolean
+  polygons: gd.VectorPolygon2d;
+  isDefaultBoundingBox: boolean;
+  imageWidth: number;
+  imageHeight: number;
+  imageOffsetTop: number;
+  imageOffsetLeft: number;
+  highlightedVerticePtr: number | null | undefined;
+  selectedVerticePtr: number | null | undefined;
+  onClickVertice: (ptr?: number | null | undefined) => void;
+  imageZoomFactor: number;
+  onPolygonsUpdated: () => void;
+  forcedCursor: string | null;
+  deactivateControls?: boolean;
+  hideControls?: boolean;
 };
 
 const CollisionMasksPreview = (props: Props) => {
   const svgRef = React.useRef<React.ElementRef<'svg'> | null>(null);
-  const [
-    draggedVertex,
-    setDraggedVertex,
-  ] = React.useState<SelectedVertex | null>(null);
-  const [
-    newVertexHintPoint,
-    setNewVertexHintPoint,
-  ] = React.useState<NewVertexHintPoint | null>(null);
+  const [draggedVertex, setDraggedVertex] =
+    React.useState<SelectedVertex | null>(null);
+  const [newVertexHintPoint, setNewVertexHintPoint] =
+    React.useState<NewVertexHintPoint | null>(null);
 
   const {
     polygons,
@@ -73,7 +69,7 @@ const CollisionMasksPreview = (props: Props) => {
   const forceUpdate = useForceUpdate();
 
   const onStartDragVertex = React.useCallback(
-    (vertex: gdVector2f, polygonIndex: number, vertexIndex: number) => {
+    (vertex: gd.Vector2f, polygonIndex: number, vertexIndex: number) => {
       if (draggedVertex) return;
       setDraggedVertex({ vertex, polygonIndex, vertexIndex });
     },
@@ -129,18 +125,21 @@ const CollisionMasksPreview = (props: Props) => {
   /**
    * @returns The cursor position in the frame basis.
    */
-  const getCursorOnFrame = React.useCallback((event: any): [number, number] | null => {
-    if (!svgRef.current) return null;
+  const getCursorOnFrame = React.useCallback(
+    (event: any): [number, number] | null => {
+      if (!svgRef.current) return null;
 
-    const pointOnScreen = svgRef.current.createSVGPoint();
-    pointOnScreen.x = event.clientX;
-    pointOnScreen.y = event.clientY;
-// @ts-expect-error - TS2531 - Object is possibly 'null'.
-    const screenToSvgMatrix = svgRef.current.getScreenCTM().inverse();
-    const pointOnSvg = pointOnScreen.matrixTransform(screenToSvgMatrix);
+      const pointOnScreen = svgRef.current.createSVGPoint();
+      pointOnScreen.x = event.clientX;
+      pointOnScreen.y = event.clientY;
+      // @ts-expect-error - TS2531 - Object is possibly 'null'.
+      const screenToSvgMatrix = svgRef.current.getScreenCTM().inverse();
+      const pointOnSvg = pointOnScreen.matrixTransform(screenToSvgMatrix);
 
-    return [pointOnSvg.x, pointOnSvg.y];
-  }, []);
+      return [pointOnSvg.x, pointOnSvg.y];
+    },
+    []
+  );
 
   /**
    * Given a point's coordinates, returns new coordinates that
@@ -189,56 +188,48 @@ const CollisionMasksPreview = (props: Props) => {
   /**
    * @returns true if the vertex should be deleted.
    */
-  const magnetizeDraggedVertexForDeletion = React.useCallback(
-    (): boolean => {
-      if (!draggedVertex) {
-        return false;
-      }
-      const vertices = polygons.at(draggedVertex.polygonIndex).getVertices();
-      const vertexDistanceMax = 10 / imageZoomFactor;
-      const edgeDistanceMax = 5 / imageZoomFactor;
-      const magnetedPoint = getMagnetizedVertexForDeletion(
-        vertices,
-        draggedVertex.vertexIndex,
-        vertexDistanceMax,
-        edgeDistanceMax
-      );
-      if (magnetedPoint) {
-        draggedVertex.vertex.set_x(magnetedPoint[0]);
-        draggedVertex.vertex.set_y(magnetedPoint[1]);
-        return true;
-      }
+  const magnetizeDraggedVertexForDeletion = React.useCallback((): boolean => {
+    if (!draggedVertex) {
       return false;
-    },
-    [draggedVertex, imageZoomFactor, polygons]
-  );
+    }
+    const vertices = polygons.at(draggedVertex.polygonIndex).getVertices();
+    const vertexDistanceMax = 10 / imageZoomFactor;
+    const edgeDistanceMax = 5 / imageZoomFactor;
+    const magnetedPoint = getMagnetizedVertexForDeletion(
+      vertices,
+      draggedVertex.vertexIndex,
+      vertexDistanceMax,
+      edgeDistanceMax
+    );
+    if (magnetedPoint) {
+      draggedVertex.vertex.set_x(magnetedPoint[0]);
+      draggedVertex.vertex.set_y(magnetedPoint[1]);
+      return true;
+    }
+    return false;
+  }, [draggedVertex, imageZoomFactor, polygons]);
 
-  const onEndDragVertex = React.useCallback(
-    () => {
-      if (draggedVertex) {
-        if (magnetizeDraggedVertexForDeletion()) {
-          const vertices = polygons
-            .at(draggedVertex.polygonIndex)
-            .getVertices();
-          gd.removeFromVectorVector2f(vertices, draggedVertex.vertexIndex);
-          onPolygonsUpdated();
-          onClickVertice(null);
-        } else {
-          roundVertexToHalfPixel(draggedVertex.vertex);
-          onPolygonsUpdated();
-          onClickVertice(draggedVertex.vertex.ptr);
-        }
+  const onEndDragVertex = React.useCallback(() => {
+    if (draggedVertex) {
+      if (magnetizeDraggedVertexForDeletion()) {
+        const vertices = polygons.at(draggedVertex.polygonIndex).getVertices();
+        gd.removeFromVectorVector2f(vertices, draggedVertex.vertexIndex);
+        onPolygonsUpdated();
+        onClickVertice(null);
+      } else {
+        roundVertexToHalfPixel(draggedVertex.vertex);
+        onPolygonsUpdated();
+        onClickVertice(draggedVertex.vertex.ptr);
       }
-      setDraggedVertex(null);
-    },
-    [
-      polygons,
-      draggedVertex,
-      onPolygonsUpdated,
-      onClickVertice,
-      magnetizeDraggedVertexForDeletion,
-    ]
-  );
+    }
+    setDraggedVertex(null);
+  }, [
+    polygons,
+    draggedVertex,
+    onPolygonsUpdated,
+    onClickVertice,
+    magnetizeDraggedVertexForDeletion,
+  ]);
 
   const onPointerDown = React.useCallback(
     (event: any) => {
@@ -293,29 +284,25 @@ const CollisionMasksPreview = (props: Props) => {
 
   const renderBoundingBox = () => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <polygon
         style={forcedCursorStyle}
         fill="rgba(255,133,105,0.2)"
         stroke="rgba(255,133,105,0.5)"
         strokeWidth={1}
         fillRule="evenodd"
-        points={`0,0 ${imageWidth * imageZoomFactor},0 ${imageWidth *
-          imageZoomFactor},${imageHeight * imageZoomFactor} 0,${imageHeight *
-          imageZoomFactor}`}
+        points={`0,0 ${imageWidth * imageZoomFactor},0 ${
+          imageWidth * imageZoomFactor
+        },${imageHeight * imageZoomFactor} 0,${imageHeight * imageZoomFactor}`}
       />
     );
   };
 
   const renderPolygons = () => {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <React.Fragment>
-{ /* @ts-expect-error - TS7006 - Parameter 'polygon' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type. */}
         {mapVector(polygons, (polygon, i) => {
           const vertices = polygon.getVertices();
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <polygon
               key={`polygon-${i}`}
               fill="rgba(255,133,105,0.2)"
@@ -324,24 +311,23 @@ const CollisionMasksPreview = (props: Props) => {
               fillRule="evenodd"
               points={mapVector(
                 vertices,
-// @ts-expect-error - TS7006 - Parameter 'vertex' implicitly has an 'any' type. | TS7006 - Parameter 'j' implicitly has an 'any' type.
+
                 (vertex, j) =>
-                  `${vertex.get_x() * imageZoomFactor},${vertex.get_y() *
-                    imageZoomFactor}`
+                  `${vertex.get_x() * imageZoomFactor},${
+                    vertex.get_y() * imageZoomFactor
+                  }`
               ).join(' ')}
               style={polygonStyle}
             />
           );
         })}
         {!hideControls &&
-// @ts-expect-error - TS7006 - Parameter 'polygon' implicitly has an 'any' type. | TS7006 - Parameter 'polygonIndex' implicitly has an 'any' type.
           mapVector(polygons, (polygon, polygonIndex) => {
             const vertices = polygon.getVertices();
-// @ts-expect-error - TS7006 - Parameter 'vertex' implicitly has an 'any' type. | TS7006 - Parameter 'vertexIndex' implicitly has an 'any' type.
+
             return mapVector(vertices, (vertex, vertexIndex) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <circle
-// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<SVGCircleElement> | undefined'.
+                // @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<SVGCircleElement> | undefined'.
                 onPointerDown={
                   deactivateControls
                     ? null
@@ -353,8 +339,8 @@ const CollisionMasksPreview = (props: Props) => {
                   vertex.ptr === props.highlightedVerticePtr
                     ? 'rgba(0,0,0,0.75)'
                     : vertex.ptr === props.selectedVerticePtr
-                    ? 'rgba(107,175,255,0.75)'
-                    : 'rgba(255,133,105,0.75)'
+                      ? 'rgba(107,175,255,0.75)'
+                      : 'rgba(255,133,105,0.75)'
                 }
                 stroke={
                   vertex.ptr === props.highlightedVerticePtr
@@ -370,9 +356,8 @@ const CollisionMasksPreview = (props: Props) => {
             ));
           })}
         {!hideControls && newVertexHintPoint && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <circle
-// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<SVGCircleElement> | undefined'.
+            // @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<SVGCircleElement> | undefined'.
             onPointerDown={
               deactivateControls ? null : () => addVertex(newVertexHintPoint)
             }
@@ -408,17 +393,15 @@ const CollisionMasksPreview = (props: Props) => {
   } as const;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={containerStyle}
-// @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
       onPointerMove={deactivateControls ? null : onPointerMove}
-// @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type '(() => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
       onPointerUp={deactivateControls ? null : onEndDragVertex}
-// @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
+      // @ts-expect-error - TS2322 - Type '((event: any) => void) | null' is not assignable to type 'PointerEventHandler<HTMLDivElement> | undefined'.
       onPointerDown={deactivateControls ? null : onPointerDown}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <svg style={svgStyle} ref={svgRef}>
         {isDefaultBoundingBox && renderBoundingBox()}
         {!isDefaultBoundingBox && renderPolygons()}

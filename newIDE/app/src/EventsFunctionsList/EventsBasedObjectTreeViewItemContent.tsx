@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { I18n as I18nType } from '@lingui/core';
+
 import { t } from '@lingui/macro';
 
 import * as React from 'react';
@@ -15,68 +14,74 @@ import {
   TreeViewItemContent,
   TreeItemProps,
   extensionObjectsRootFolderId,
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsList/index.tsx', but '--jsx' is not set.
 } from '.';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Add'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Add.js' implicitly has an 'any' type.
+
 import Add from '../UI/CustomSvgIcons/Add';
 
 const EVENTS_BASED_OBJECT_CLIPBOARD_KIND = 'Events Based Object';
 
 export type EventsBasedObjectCallbacks = {
-  onSelectEventsBasedObject: (eventsBasedObject?: gdEventsBasedObject | null | undefined) => void,
-  onDeleteEventsBasedObject: (eventsBasedObject: gdEventsBasedObject, cb: (arg1: boolean) => void) => void,
+  onSelectEventsBasedObject: (
+    eventsBasedObject?: gd.EventsBasedObject | null | undefined
+  ) => void;
+  onDeleteEventsBasedObject: (
+    eventsBasedObject: gd.EventsBasedObject,
+    cb: (arg1: boolean) => void
+  ) => void;
   onRenameEventsBasedObject: (
-    eventsBasedObject: gdEventsBasedObject,
+    eventsBasedObject: gd.EventsBasedObject,
     newName: string,
-    cb: (arg1: boolean) => void,
-  ) => void,
-  onEventsBasedObjectRenamed: (eventsBasedObject: gdEventsBasedObject) => void
+    cb: (arg1: boolean) => void
+  ) => void;
+  onEventsBasedObjectRenamed: (eventsBasedObject: gd.EventsBasedObject) => void;
 };
 
-export type EventsBasedObjectProps = (TreeItemProps) & (EventsBasedObjectCallbacks) & {
-  addNewEventsFunction: (
-    arg1: {
-      itemContent: TreeViewItemContent | null | undefined,
-      eventsBasedBehavior: gdEventsBasedBehavior | null | undefined,
-      eventsBasedObject: gdEventsBasedObject | null | undefined,
-      index: number
-    },
-  ) => void,
-  eventsBasedObjectsList: gdEventsBasedObjectsList
-};
+export type EventsBasedObjectProps = TreeItemProps &
+  EventsBasedObjectCallbacks & {
+    addNewEventsFunction: (arg1: {
+      itemContent: TreeViewItemContent | null | undefined;
+      eventsBasedBehavior: gd.EventsBasedBehavior | null | undefined;
+      eventsBasedObject: gd.EventsBasedObject | null | undefined;
+      index: number;
+    }) => void;
+    eventsBasedObjectsList: gd.EventsBasedObjectsList;
+  };
 
-export const getObjectTreeViewItemId = (eventsBasedObject: gdEventsBasedObject): string => {
+export const getObjectTreeViewItemId = (
+  eventsBasedObject: gd.EventsBasedObject
+): string => {
   // Pointers are used because they stay the same even when the names are
   // changed.
   return 'object-' + eventsBasedObject.ptr;
 };
 
 export class EventsBasedObjectTreeViewItemContent
-  implements TreeViewItemContent {
-  eventsBasedObject: gdEventsBasedObject;
+  implements TreeViewItemContent
+{
+  eventsBasedObject: gd.EventsBasedObject;
   props: EventsBasedObjectProps;
 
   constructor(
-    eventsBasedObject: gdEventsBasedObject,
+    eventsBasedObject: gd.EventsBasedObject,
     props: EventsBasedObjectProps
   ) {
     this.eventsBasedObject = eventsBasedObject;
     this.props = props;
   }
 
-  getEventsFunctionsContainer(): gdEventsFunctionsContainer {
+  getEventsFunctionsContainer(): gd.EventsFunctionsContainer {
     return this.eventsBasedObject.getEventsFunctions();
   }
 
-  getEventsFunction(): gdEventsFunction | null | undefined {
+  getEventsFunction(): gd.EventsFunction | null | undefined {
     return null;
   }
 
-  getEventsBasedBehavior(): gdEventsBasedBehavior | null | undefined {
+  getEventsBasedBehavior(): gd.EventsBasedBehavior | null | undefined {
     return null;
   }
 
-  getEventsBasedObject(): gdEventsBasedObject | null | undefined {
+  getEventsBasedObject(): gd.EventsBasedObject | null | undefined {
     return this.eventsBasedObject;
   }
 
@@ -114,8 +119,8 @@ export class EventsBasedObjectTreeViewItemContent
     this.props.onRenameEventsBasedObject(
       this.eventsBasedObject,
       newName,
-// @ts-expect-error - TS7006 - Parameter 'doRename' implicitly has an 'any' type.
-      doRename => {
+
+      (doRename) => {
         if (!doRename) return;
 
         this._onEventsBasedObjectModified();
@@ -179,13 +184,11 @@ export class EventsBasedObjectTreeViewItemContent
     });
   }
 
-  async _deleteEventsBasedObject(
-    {
-      askForConfirmation,
-    }: {
-      askForConfirmation: boolean
-    },
-  ): Promise<void> {
+  async _deleteEventsBasedObject({
+    askForConfirmation,
+  }: {
+    askForConfirmation: boolean;
+  }): Promise<void> {
     const { eventsBasedObjectsList } = this.props;
 
     if (askForConfirmation) {
@@ -196,8 +199,7 @@ export class EventsBasedObjectTreeViewItemContent
       if (!answer) return;
     }
 
-// @ts-expect-error - TS7006 - Parameter 'doRemove' implicitly has an 'any' type.
-    this.props.onDeleteEventsBasedObject(this.eventsBasedObject, doRemove => {
+    this.props.onDeleteEventsBasedObject(this.eventsBasedObject, (doRemove) => {
       if (!doRemove) return;
 
       eventsBasedObjectsList.remove(this.eventsBasedObject.getName());
@@ -247,7 +249,7 @@ export class EventsBasedObjectTreeViewItemContent
 
     const { project, eventsBasedObjectsList } = this.props;
 
-    const newName = newNameGenerator(name, name =>
+    const newName = newNameGenerator(name, (name) =>
       eventsBasedObjectsList.has(name)
     );
 
@@ -272,7 +274,7 @@ export class EventsBasedObjectTreeViewItemContent
   _addNewEventsBasedObject(): void {
     const { eventsBasedObjectsList } = this.props;
 
-    const name = newNameGenerator('MyObject', name =>
+    const name = newNameGenerator('MyObject', (name) =>
       eventsBasedObjectsList.has(name)
     );
     const newEventsBasedObject = eventsBasedObjectsList.insertNew(
@@ -281,9 +283,8 @@ export class EventsBasedObjectTreeViewItemContent
     );
     this._onEventsBasedObjectModified();
 
-    const newEventsBasedObjectId = getObjectTreeViewItemId(
-      newEventsBasedObject
-    );
+    const newEventsBasedObjectId =
+      getObjectTreeViewItemId(newEventsBasedObject);
     // Scroll to the new function.
     // Ideally, we'd wait for the list to be updated to scroll, but
     // to simplify the code, we just wait a few ms for a new render
@@ -305,7 +306,6 @@ export class EventsBasedObjectTreeViewItemContent
 
   getRightButton(i18n: I18nType) {
     return {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       icon: <Add />,
       label: i18n._(t`Add a function`),
       click: () => this.addFunctionAtSelection(),
@@ -314,7 +314,8 @@ export class EventsBasedObjectTreeViewItemContent
 
   addFunctionAtSelection(): void {
     const { selectedEventsFunction, selectedEventsBasedObject } = this.props;
-    const eventsFunctionsContainer = this.eventsBasedObject.getEventsFunctions();
+    const eventsFunctionsContainer =
+      this.eventsBasedObject.getEventsFunctions();
     // When the selected item is inside the object, the new function is
     // added below it.
     const index =

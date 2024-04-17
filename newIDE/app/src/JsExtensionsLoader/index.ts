@@ -5,8 +5,8 @@ const some = require('lodash/some');
 export type TranslationFunction = (string) => string;
 
 export type JsExtensionModule = {
-  createExtension(_: TranslationFunction, gd: any): gdPlatformExtension,
-  runExtensionSanityTests(gd: any, extension: gdPlatformExtension): Array<string>,
+  createExtension(_: TranslationFunction, gd: any): gd.PlatformExtension,
+  runExtensionSanityTests(gd: any, extension: gd.PlatformExtension): Array<string>,
 };
 
 export type ExtensionLoadingResult = {
@@ -28,7 +28,7 @@ export interface JsExtensionsLoader {
  */
 const runExtensionSanityTests = (
   gd: any /*: any */,
-  extension: gdPlatformExtension /*: gdPlatformExtension*/,
+  extension: gd.PlatformExtension /*: gd.PlatformExtension*/,
   jsExtensionModule: JsExtensionModule /*: JsExtensionModule*/
 ) /*: ExtensionLoadingResult*/ => {
   if (!jsExtensionModule.runExtensionSanityTests) {
@@ -62,7 +62,7 @@ const runExtensionSanityTests = (
 const loadExtension = (
   _: TranslationFunction /*: TranslationFunction */,
   gd: any /*: any */,
-  platform: gdJsPlatform /*: gdJsPlatform*/,
+  platform: gd.JsPlatform /*: gd.JsPlatform*/,
   jsExtensionModule: JsExtensionModule /*: JsExtensionModule*/
 ) /*: ExtensionLoadingResult*/ => {
   if (!jsExtensionModule.createExtension) {
@@ -82,7 +82,7 @@ const loadExtension = (
         error: true,
       };
     }
-  } catch (ex: any) {
+  } catch (ex) {
     return {
       message: `🚨 Exception caught while running createExtension. 💣 Please fix this error as this will make GDevelop crash at some point.`,
       error: true,
@@ -101,7 +101,7 @@ const loadExtension = (
       extension.delete();
       return testsResult;
     }
-  } catch (ex: any) {
+  } catch (ex) {
     return {
       message: `🚨 Exception caught while running runExtensionSanityTests. 💣 Please fix this error as this will make GDevelop crash at some point.`,
       error: true,

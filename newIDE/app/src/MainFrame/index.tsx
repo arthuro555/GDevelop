@@ -1,29 +1,29 @@
 import * as React from 'react';
 import './MainFrame.css';
 import Snackbar from '@material-ui/core/Snackbar';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Home'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Home.js' implicitly has an 'any' type.
+
 import HomeIcon from '../UI/CustomSvgIcons/Home';
-// @ts-expect-error - TS6142 - Module './Toolbar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Toolbar/index.tsx', but '--jsx' is not set.
+
 import Toolbar, { ToolbarInterface } from './Toolbar';
 import ProjectTitlebar from './ProjectTitlebar';
-// @ts-expect-error - TS6142 - Module './Preferences/PreferencesDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesDialog.tsx', but '--jsx' is not set.
+
 import PreferencesDialog from './Preferences/PreferencesDialog';
-// @ts-expect-error - TS6142 - Module './AboutDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/AboutDialog.tsx', but '--jsx' is not set.
+
 import AboutDialog from './AboutDialog';
-// @ts-expect-error - TS6142 - Module '../ProjectManager' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/index.tsx', but '--jsx' is not set.
+
 import ProjectManager from '../ProjectManager';
-// @ts-expect-error - TS6142 - Module '../PlatformSpecificAssetsEditor/PlatformSpecificAssetsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PlatformSpecificAssetsEditor/PlatformSpecificAssetsDialog.tsx', but '--jsx' is not set.
+
 import PlatformSpecificAssetsDialog from '../PlatformSpecificAssetsEditor/PlatformSpecificAssetsDialog';
-// @ts-expect-error - TS6142 - Module '../UI/LoaderModal' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LoaderModal.tsx', but '--jsx' is not set.
+
 import LoaderModal from '../UI/LoaderModal';
 import CloseConfirmDialog from '../UI/CloseConfirmDialog';
-// @ts-expect-error - TS6142 - Module '../Profile/ProfileDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/ProfileDialog.tsx', but '--jsx' is not set.
+
 import ProfileDialog from '../Profile/ProfileDialog';
 import Window from '../Utils/Window';
 import { showErrorBox } from '../UI/Messages/MessageBox';
-// @ts-expect-error - TS6142 - Module '../UI/ClosableTabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ClosableTabs.tsx', but '--jsx' is not set.
+
 import { TabContentContainer } from '../UI/ClosableTabs';
-// @ts-expect-error - TS6142 - Module './EditorTabs/DraggableEditorTabs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorTabs/DraggableEditorTabs.tsx', but '--jsx' is not set.
+
 import { DraggableEditorTabs } from './EditorTabs/DraggableEditorTabs';
 import {
   getEditorTabsInitialState,
@@ -48,26 +48,26 @@ import {
   notifyPreviewOrExportWillStart,
   moveTabToTheRightOfHoveredTab,
 } from './EditorTabs/EditorTabsHandler';
-// @ts-expect-error - TS6142 - Module './EditorContainers/DebuggerEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/DebuggerEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderDebuggerEditorContainer } from './EditorContainers/DebuggerEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/EventsEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/EventsEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderEventsEditorContainer } from './EditorContainers/EventsEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/ExternalEventsEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/ExternalEventsEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderExternalEventsEditorContainer } from './EditorContainers/ExternalEventsEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/SceneEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/SceneEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderSceneEditorContainer } from './EditorContainers/SceneEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/ExternalLayoutEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/ExternalLayoutEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderExternalLayoutEditorContainer } from './EditorContainers/ExternalLayoutEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/EventsFunctionsExtensionEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/EventsFunctionsExtensionEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderEventsFunctionsExtensionEditorContainer } from './EditorContainers/EventsFunctionsExtensionEditorContainer';
-// @ts-expect-error - TS6142 - Module './EditorContainers/HomePage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/index.tsx', but '--jsx' is not set.
+
 import { renderHomePageContainer } from './EditorContainers/HomePage';
-// @ts-expect-error - TS6142 - Module './EditorContainers/ResourcesEditorContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/ResourcesEditorContainer.tsx', but '--jsx' is not set.
+
 import { renderResourcesEditorContainer } from './EditorContainers/ResourcesEditorContainer';
 import { RenderEditorContainerPropsWithRef } from './EditorContainers/BaseEditor';
 import ErrorBoundary, {
   getEditorErrorBoundaryProps,
-// @ts-expect-error - TS6142 - Module '../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 } from '../UI/ErrorBoundary';
 import ResourcesLoader from '../ResourcesLoader/index';
 import {
@@ -88,27 +88,27 @@ import {
   getElectronUpdateNotificationTitle,
   getElectronUpdateNotificationBody,
   ElectronUpdateStatus,
-// @ts-expect-error - TS6142 - Module './UpdaterTools' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UpdaterTools.tsx', but '--jsx' is not set.
+
 } from './UpdaterTools';
-// @ts-expect-error - TS6142 - Module './Changelog/ChangelogDialogContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Changelog/ChangelogDialogContainer.tsx', but '--jsx' is not set.
+
 import ChangelogDialogContainer from './Changelog/ChangelogDialogContainer';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
 import { getNotNullTranslationFunction } from '../Utils/i18n/getTranslationFunction';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/core';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module './Preferences/LanguageDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/LanguageDialog.tsx', but '--jsx' is not set.
+
 import LanguageDialog from './Preferences/LanguageDialog';
 import PreferencesContext, {
   InAppTutorialUserProgress,
-// @ts-expect-error - TS6142 - Module './Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 } from './Preferences/PreferencesContext';
 import { getFunctionNameFromType } from '../EventsFunctionsExtensionsLoader';
 import {
   ShareDialogWithoutExportsProps,
   ShareTab,
-// @ts-expect-error - TS6142 - Module '../ExportAndShare/ShareDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/ShareDialog/index.tsx', but '--jsx' is not set.
+
 } from '../ExportAndShare/ShareDialog';
 import { getStartupTimesSummary } from '../Utils/StartupTimes';
 import {
@@ -119,14 +119,14 @@ import {
   FileMetadataAndStorageProviderName,
   ResourcesActionsMenuBuilder,
 } from '../ProjectsStorage';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/OpenFromStorageProviderDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/OpenFromStorageProviderDialog.tsx', but '--jsx' is not set.
+
 import OpenFromStorageProviderDialog from '../ProjectsStorage/OpenFromStorageProviderDialog';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/SaveToStorageProviderDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/SaveToStorageProviderDialog.tsx', but '--jsx' is not set.
+
 import SaveToStorageProviderDialog from '../ProjectsStorage/SaveToStorageProviderDialog';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/OpenConfirmDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/OpenConfirmDialog.tsx', but '--jsx' is not set.
+
 import { useOpenConfirmDialog } from '../ProjectsStorage/OpenConfirmDialog';
 import verifyProjectContent from '../ProjectsStorage/ProjectContentChecker';
-// @ts-expect-error - TS6142 - Module './UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import UnsavedChangesContext from './UnsavedChangesContext';
 import {
   BuildMainMenuProps,
@@ -136,34 +136,34 @@ import {
   adaptFromDeclarativeTemplate,
 } from './MainMenu';
 import useForceUpdate from '../Utils/UseForceUpdate';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/UseSetStateWithCallback'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/UseSetStateWithCallback.js' implicitly has an 'any' type.
+
 import useStateWithCallback from '../Utils/UseSetStateWithCallback';
 import { useKeyboardShortcuts, useShortcutMap } from '../KeyboardShortcuts';
 import useMainFrameCommands from './MainFrameCommands';
 import {
   CommandPaletteWithAlgoliaSearch,
   CommandPaletteInterface,
-// @ts-expect-error - TS6142 - Module '../CommandPalette/CommandPalette' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandPalette/index.tsx', but '--jsx' is not set.
+
 } from '../CommandPalette/CommandPalette';
-// @ts-expect-error - TS6142 - Module '../CommandPalette/CommandsScopedContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandsScopedContext.tsx', but '--jsx' is not set.
+
 import CommandsContextScopedProvider from '../CommandPalette/CommandsScopedContext';
 import { isExtensionNameTaken } from '../ProjectManager/EventFunctionExtensionNameVerifier';
 import {
   PreviewState,
   usePreviewDebuggerServerWatcher,
 } from './PreviewState';
-// @ts-expect-error - TS6142 - Module '../HotReload/HotReloadPreviewButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadPreviewButton.tsx', but '--jsx' is not set.
+
 import { HotReloadPreviewButtonProps } from '../HotReload/HotReloadPreviewButton';
 // @ts-expect-error - TS6142 - Module '../HotReload/HotReloadLogsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/HotReload/HotReloadLogsDialog.tsx', but '--jsx' is not set.
 import HotReloadLogsDialog from '../HotReload/HotReloadLogsDialog';
 import { useDiscordRichPresence } from '../Utils/UpdateDiscordRichPresence';
 import { delay } from '../Utils/Delay';
 import { ExtensionShortHeader } from '../Utils/GDevelopServices/Extension';
-// @ts-expect-error - TS6142 - Module './UseExampleOrGameTemplateDialogs' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UseExampleOrGameTemplateDialogs.tsx', but '--jsx' is not set.
+
 import useExampleOrGameTemplateDialogs from './UseExampleOrGameTemplateDialogs';
 import { findAndLogProjectPreviewErrors } from '../Utils/ProjectErrorsChecker';
 import { renameResourcesInProject } from '../ResourcesList/ResourceUtils';
-// @ts-expect-error - TS6142 - Module '../ResourcesList/NewResourceDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/NewResourceDialog.tsx', but '--jsx' is not set.
+
 import { NewResourceDialog } from '../ResourcesList/NewResourceDialog';
 import {
   addCreateBadgePreHookIfNotClaimed,
@@ -171,18 +171,18 @@ import {
   TRIVIAL_FIRST_PREVIEW,
 } from '../Utils/GDevelopServices/Badge';
 import AuthenticatedUserContext from '../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module './EditorContainers/HomePage/InAppTutorials/StartInAppTutorialDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/InAppTutorials/StartInAppTutorialDialog.tsx', but '--jsx' is not set.
+
 import StartInAppTutorialDialog from './EditorContainers/HomePage/InAppTutorials/StartInAppTutorialDialog';
-// @ts-expect-error - TS6142 - Module '../Leaderboard/LeaderboardProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Leaderboard/LeaderboardProvider.tsx', but '--jsx' is not set.
+
 import LeaderboardProvider from '../Leaderboard/LeaderboardProvider';
 import {
   sendInAppTutorialStarted,
   sendEventsExtractedAsFunction,
 } from '../Utils/Analytics/EventSender';
-// @ts-expect-error - TS6142 - Module '../Leaderboard/useLeaderboardReplacer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Leaderboard/useLeaderboardReplacer.tsx', but '--jsx' is not set.
+
 import { useLeaderboardReplacer } from '../Leaderboard/useLeaderboardReplacer';
 import useAlertDialog from '../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS6142 - Module '../ProjectCreation/NewProjectSetupDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectCreation/NewProjectSetupDialog.tsx', but '--jsx' is not set.
+
 import NewProjectSetupDialog from '../ProjectCreation/NewProjectSetupDialog';
 import {
   useResourceMover,
@@ -192,30 +192,30 @@ import {
   useResourceFetcher,
   ResourceFetcher,
 } from '../ProjectsStorage/ResourceFetcher';
-// @ts-expect-error - TS6142 - Module '../InAppTutorial/QuitInAppTutorialDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/QuitInAppTutorialDialog.tsx', but '--jsx' is not set.
+
 import QuitInAppTutorialDialog from '../InAppTutorial/QuitInAppTutorialDialog';
 import InAppTutorialContext from '../InAppTutorial/InAppTutorialContext';
 import useOpenInitialDialog from '../Utils/UseOpenInitialDialog';
-// @ts-expect-error - TS6142 - Module '../InAppTutorial/InAppTutorialOrchestrator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialOrchestrator.tsx', but '--jsx' is not set.
+
 import { InAppTutorialOrchestratorInterface } from '../InAppTutorial/InAppTutorialOrchestrator';
 import useInAppTutorialOrchestrator from '../InAppTutorial/useInAppTutorialOrchestrator';
-// @ts-expect-error - TS6142 - Module './TabsTitlebar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/TabsTitlebar.tsx', but '--jsx' is not set.
+
 import TabsTitlebar from './TabsTitlebar';
 import {
   useStableUpToDateCallback,
   useStableUpToDateRef,
 } from '../Utils/UseStableUpToDateCallback';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/ProjectStorageProviders' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/ProjectStorageProviders.tsx', but '--jsx' is not set.
+
 import { emptyStorageProvider } from '../ProjectsStorage/ProjectStorageProviders';
 import {
   isMiniTutorial,
   allInAppTutorialIds,
 } from '../Utils/GDevelopServices/InAppTutorial';
-// @ts-expect-error - TS6142 - Module '../UI/DragAndDrop/CustomDragLayer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/CustomDragLayer.tsx', but '--jsx' is not set.
+
 import CustomDragLayer from '../UI/DragAndDrop/CustomDragLayer';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog.tsx', but '--jsx' is not set.
+
 import CloudProjectRecoveryDialog from '../ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog';
-// @ts-expect-error - TS6142 - Module '../ProjectsStorage/CloudStorageProvider/CloudProjectSaveChoiceDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudProjectSaveChoiceDialog.tsx', but '--jsx' is not set.
+
 import CloudProjectSaveChoiceDialog from '../ProjectsStorage/CloudStorageProvider/CloudProjectSaveChoiceDialog';
 import useCreateProject from '../Utils/UseCreateProject';
 import newNameGenerator from '../Utils/NewNameGenerator';
@@ -224,14 +224,13 @@ import useEditorTabsStateSaving from './EditorTabs/UseEditorTabsStateSaving';
 import PixiResourcesLoader from '../ObjectsRendering/PixiResourcesLoader';
 import useResourcesWatcher from './ResourcesWatcher';
 import { extractGDevelopApiErrorStatusAndCode } from '../Utils/GDevelopServices/Errors';
-// @ts-expect-error - TS6142 - Module '../VersionHistory/UseVersionHistory' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/VersionHistory/UseVersionHistory.tsx', but '--jsx' is not set.
+
 import useVersionHistory from '../VersionHistory/UseVersionHistory';
-// @ts-expect-error - TS6142 - Module '../ProjectManager/ProjectManagerDrawer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectManager/ProjectManagerDrawer.tsx', but '--jsx' is not set.
+
 import { ProjectManagerDrawer } from '../ProjectManager/ProjectManagerDrawer';
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+
 const GD_STARTUP_TIMES = global.GD_STARTUP_TIMES || [];
 
-const gd: libGDevelop = global.gd;
 
 const editorKindToRenderer: Partial<Record<EditorKind, (props: RenderEditorContainerPropsWithRef) => React.ReactElement>> = {
   debugger: renderDebuggerEditorContainer,
@@ -280,15 +279,15 @@ const findStorageProviderFor = (
  */
 const isCurrentProjectFresh = (
   currentProjectRef: {
-    current: gdProject | null | undefined
+    current: gd.Project | null | undefined
   },
-  currentProject: gdProject
+  currentProject: gd.Project
 ) =>
   currentProjectRef.current &&
   currentProject.ptr === currentProjectRef.current.ptr;
 
 export type State = {
-  currentProject: gdProject | null | undefined,
+  currentProject: gd.Project | null | undefined,
   currentFileMetadata: FileMetadata | null | undefined,
   editorTabs: EditorTabsState,
   snackMessage: string,
@@ -326,7 +325,7 @@ export type Props = {
     props: PreviewLauncherProps,
     ref: (previewLauncher?: PreviewLauncherInterface | null | undefined) => void,
   ) => React.ReactElement<React.ComponentProps<PreviewLauncherComponent>>,
-  onEditObject?: (arg1: gdObject) => void,
+  onEditObject?: (arg1: gd.Object) => void,
   storageProviders: Array<StorageProvider>,
   resourceMover: ResourceMover,
   resourceFetcher: ResourceFetcher,
@@ -377,7 +376,7 @@ const MainFrame = (props: Props) => {
     chooseResourceOptions,
     setChooseResourceOptions,
   ] = React.useState<ChooseResourceOptions | null | undefined>(null);
-  const [onResourceChosen, setOnResourceChosen] = React.useState<(arg1: Array<gdResource>) => void | null | undefined>(null);
+  const [onResourceChosen, setOnResourceChosen] = React.useState<(arg1: Array<gd.Resource>) => void | null | undefined>(null);
   const _previewLauncher = React.useRef((null as PreviewLauncherInterface | null | undefined));
   const forceUpdate = useForceUpdate();
   const [isLoadingProject, setIsLoadingProject] = React.useState<boolean>(false);
@@ -412,7 +411,7 @@ const MainFrame = (props: Props) => {
 // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showAlert' does not exist on type 'void'.
   const { showConfirmation, showAlert } = useAlertDialog();
   const preferences = React.useContext(PreferencesContext);
-// @ts-expect-error - TS2339 - Property 'setHasProjectOpened' does not exist on type 'unknown'.
+
   const { setHasProjectOpened } = preferences;
   const [previewLoading, setPreviewLoading] = React.useState<boolean>(false);
   const [previewState, setPreviewState] = React.useState(initialPreviewState);
@@ -573,11 +572,11 @@ const MainFrame = (props: Props) => {
           console.info('Startup times:', getStartupTimesSummary());
 
           const {
-// @ts-expect-error - TS2339 - Property 'getAutoOpenMostRecentProject' does not exist on type 'unknown'.
+
             getAutoOpenMostRecentProject,
-// @ts-expect-error - TS2339 - Property 'getRecentProjectFiles' does not exist on type 'unknown'.
+
             getRecentProjectFiles,
-// @ts-expect-error - TS2339 - Property 'hadProjectOpenedDuringLastSession' does not exist on type 'unknown'.
+
             hadProjectOpenedDuringLastSession,
           } = preferences;
 
@@ -663,7 +662,7 @@ const MainFrame = (props: Props) => {
         ? `${kind} ${name}`
         : kind;
       const icon =
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         kind === 'start page' ? <HomeIcon titleAccess="Home" /> : undefined;
       const closable = kind !== 'start page';
       const extraEditorProps =
@@ -686,7 +685,7 @@ const MainFrame = (props: Props) => {
   );
 
   const setEditorTabs = React.useCallback(
-// @ts-expect-error - TS7006 - Parameter 'newEditorTabs' implicitly has an 'any' type.
+
     newEditorTabs => {
       setState(state => ({
         ...state,
@@ -900,9 +899,9 @@ const MainFrame = (props: Props) => {
       );
       await eventsFunctionsExtensionsState.ensureLoadFinished();
       currentProject.delete();
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       if (unsavedChanges.hasUnsavedChanges) {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         unsavedChanges.sealUnsavedChanges();
       }
       console.info('Project closed.');
@@ -917,7 +916,7 @@ const MainFrame = (props: Props) => {
   );
 
   const loadFromProject = React.useCallback(
-    async (project: gdProject, fileMetadata?: FileMetadata | null): Promise<State> => {
+    async (project: gd.Project, fileMetadata?: FileMetadata | null): Promise<State> => {
       if (fileMetadata) {
         const storageProvider = getStorageProvider();
         const storageProviderOperations = getStorageProviderOperations(
@@ -930,7 +929,7 @@ const MainFrame = (props: Props) => {
         // a recent file: we must wait for the user to save in a "real" storage
         // (like locally or on Google Drive).
         if (onSaveProject) {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
           preferences.insertRecentProjectFile({
             fileMetadata: {
               ...fileMetadata,
@@ -1006,7 +1005,7 @@ const MainFrame = (props: Props) => {
   );
 
   const loadFromSerializedProject = React.useCallback(
-    (serializedProject: gdSerializerElement, fileMetadata?: FileMetadata | null): Promise<State> => {
+    (serializedProject: gd.SerializerElement, fileMetadata?: FileMetadata | null): Promise<State> => {
       const startTime = Date.now();
       const newProject = gd.ProjectHelper.createNewGDJSProject();
       newProject.unserializeFrom(serializedProject);
@@ -1259,7 +1258,7 @@ const MainFrame = (props: Props) => {
     }
   };
 
-  const deleteLayout = (layout: gdLayout) => {
+  const deleteLayout = (layout: gd.Layout) => {
     const { currentProject } = state;
     const { i18n } = props;
     if (!currentProject) return;
@@ -1282,7 +1281,7 @@ const MainFrame = (props: Props) => {
     });
   };
 
-  const deleteExternalLayout = (externalLayout: gdExternalLayout) => {
+  const deleteExternalLayout = (externalLayout: gd.ExternalLayout) => {
     const { currentProject } = state;
     const { i18n } = props;
     if (!currentProject) return;
@@ -1304,7 +1303,7 @@ const MainFrame = (props: Props) => {
     });
   };
 
-  const deleteExternalEvents = (externalEvents: gdExternalEvents) => {
+  const deleteExternalEvents = (externalEvents: gd.ExternalEvents) => {
     const { i18n } = props;
     if (!state.currentProject) return;
 
@@ -1326,7 +1325,7 @@ const MainFrame = (props: Props) => {
   };
 
   const deleteEventsFunctionsExtension = (
-    eventsFunctionsExtension: gdEventsFunctionsExtension
+    eventsFunctionsExtension: gd.EventsFunctionsExtension
   ) => {
     const { currentProject } = state;
     const { i18n } = props;
@@ -1542,11 +1541,11 @@ const MainFrame = (props: Props) => {
       if (!currentProject) return;
 
       const storageProviderOperations = getStorageProviderOperations();
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       const hasUnsavedChanges = unsavedChanges.hasUnsavedChanges;
       if (
         hasUnsavedChanges && // Only create an autosave if there are unsaved changes.
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         preferences.values.autosaveOnPreview &&
         storageProviderOperations.onAutoSaveProject &&
         currentFileMetadata
@@ -1572,9 +1571,9 @@ const MainFrame = (props: Props) => {
       currentProject,
       currentFileMetadata,
       getStorageProviderOperations,
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       preferences.values.autosaveOnPreview,
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       unsavedChanges.hasUnsavedChanges,
     ]
   );
@@ -1639,9 +1638,9 @@ const MainFrame = (props: Props) => {
             fullLoadingScreen: !!fullLoadingScreen,
             fallbackAuthor,
             getIsMenuBarHiddenInPreview:
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
               preferences.getIsMenuBarHiddenInPreview,
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
             getIsAlwaysOnTopInPreview: preferences.getIsAlwaysOnTopInPreview,
           })
         )
@@ -1664,9 +1663,9 @@ const MainFrame = (props: Props) => {
       eventsFunctionsExtensionsState,
       previewState,
       state.editorTabs,
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       preferences.getIsMenuBarHiddenInPreview,
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       preferences.getIsAlwaysOnTopInPreview,
       authenticatedUser.profile,
     ]
@@ -1875,7 +1874,7 @@ const MainFrame = (props: Props) => {
   );
 
   const openInstructionOrExpression = (
-    extension: gdPlatformExtension,
+    extension: gd.PlatformExtension,
     type: string
   ) => {
     const { currentProject, editorTabs } = state;
@@ -1953,14 +1952,14 @@ const MainFrame = (props: Props) => {
   };
 
   const _onProjectItemModified = () => {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
     if (unsavedChanges) unsavedChanges.triggerUnsavedChanges();
     forceUpdate();
   };
 
   const onCreateEventsFunction = (
     extensionName: string,
-    eventsFunction: gdEventsFunction,
+    eventsFunction: gd.EventsFunction,
     editorIdentifier: 'scene-events-editor' | 'extension-events-editor' | 'external-events-editor'
   ) => {
     const { currentProject } = state;
@@ -2008,7 +2007,7 @@ const MainFrame = (props: Props) => {
   // If it has more than one scene, we open the first one and we also open the project manager.
   const openSceneOrProjectManager = React.useCallback(
     (newState: {
-      currentProject: gdProject | null | undefined,
+      currentProject: gd.Project | null | undefined,
       editorTabs: EditorTabsState
     }) => {
       const { currentProject, editorTabs } = newState;
@@ -2043,7 +2042,7 @@ const MainFrame = (props: Props) => {
   const getEditorsTabStateWithAllScenes = React.useCallback(
     (
       newState: {
-        currentProject: gdProject | null | undefined,
+        currentProject: gd.Project | null | undefined,
         editorTabs: EditorTabsState
       },
     ): EditorTabsState => {
@@ -2070,7 +2069,7 @@ const MainFrame = (props: Props) => {
 
   const openAllScenes = React.useCallback(
     (newState: {
-      currentProject: gdProject | null | undefined,
+      currentProject: gd.Project | null | undefined,
       editorTabs: EditorTabsState
     }) => {
       const { currentProject } = newState;
@@ -2170,7 +2169,7 @@ const MainFrame = (props: Props) => {
       } | null,
     ): Promise<void> => {
       if (
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         unsavedChanges.hasUnsavedChanges &&
         !(options && options.ignoreUnsavedChanges)
       ) {
@@ -2180,7 +2179,7 @@ const MainFrame = (props: Props) => {
           )
         );
         if (!answer) return;
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         unsavedChanges.sealUnsavedChanges();
       }
 
@@ -2397,7 +2396,7 @@ const MainFrame = (props: Props) => {
 
         if (!wasSaved) return; // Save was cancelled, don't do anything.
 
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         unsavedChanges.sealUnsavedChanges();
         _replaceSnackMessage(i18n._(t`Project properly saved`));
         setCloudProjectSaveChoiceOpen(false);
@@ -2415,14 +2414,14 @@ const MainFrame = (props: Props) => {
           fileMetadata,
           storageProviderName: storageProviderInternalName,
         } as const;
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         preferences.insertRecentProjectFile(fileMetadataAndStorageProviderName);
         if (
           currentlyRunningInAppTutorial &&
           !isMiniTutorial(currentlyRunningInAppTutorial.id) && // Don't save the progress of mini-tutorials
           inAppTutorialOrchestratorRef.current
         ) {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
           preferences.saveTutorialProgress({
             tutorialId: currentlyRunningInAppTutorial.id,
             userId: authenticatedUser.profile
@@ -2607,7 +2606,7 @@ const MainFrame = (props: Props) => {
             fileMetadata: fileMetadata,
             storageProviderName: storageProviderInternalName,
           } as const;
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
           preferences.insertRecentProjectFile(
             fileMetadataAndStorageProviderName
           );
@@ -2616,7 +2615,7 @@ const MainFrame = (props: Props) => {
             !isMiniTutorial(currentlyRunningInAppTutorial.id) && // Don't save the progress of mini-tutorials
             inAppTutorialOrchestratorRef.current
           ) {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
             preferences.saveTutorialProgress({
               tutorialId: currentlyRunningInAppTutorial.id,
               userId: authenticatedUser.profile
@@ -2636,7 +2635,7 @@ const MainFrame = (props: Props) => {
             }));
           }
 
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
           unsavedChanges.sealUnsavedChanges();
           _replaceSnackMessage(i18n._(t`Project properly saved`));
         }
@@ -2690,7 +2689,7 @@ const MainFrame = (props: Props) => {
     async (): Promise<boolean> => {
       if (!currentProject) return true;
 
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       if (unsavedChanges.hasUnsavedChanges) {
         const answer = Window.showConfirmDialog(
           i18n._(
@@ -2777,7 +2776,7 @@ const MainFrame = (props: Props) => {
 
   const selectInAppTutorial = React.useCallback(
     (tutorialId: string) => {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
       const userProgress = preferences.getTutorialProgress({
         tutorialId,
         userId: authenticatedUser.profile
@@ -2800,7 +2799,7 @@ const MainFrame = (props: Props) => {
         { name: newName }
       );
       if (fileMetadataNewAttributes) {
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+
         unsavedChanges.sealUnsavedChanges();
         newFileMetadata = { ...newFileMetadata, ...fileMetadataNewAttributes };
       }
@@ -2857,16 +2856,16 @@ const MainFrame = (props: Props) => {
 
   const onChooseResource: ChooseResourceFunction = React.useCallback(
     (options: ChooseResourceOptions) => {
-      return new Promise(resolve: (result: Promise<Array<gdResource>> | Array<gdResource>) => void => {
+      return new Promise(resolve: (result: Promise<Array<gd.Resource>> | Array<gd.Resource>) => void => {
         setChooseResourceOptions(options);
-        const onResourceChosenSetter: () => (arg1: Promise<Array<gdResource>> | Array<gdResource>) => void = () => resolve;
+        const onResourceChosenSetter: () => (arg1: Promise<Array<gd.Resource>> | Array<gd.Resource>) => void = () => resolve;
         setOnResourceChosen(onResourceChosenSetter);
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
       });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     },
     [setOnResourceChosen, setChooseResourceOptions]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   const setElectronUpdateStatus = (updateStatus: ElectronUpdateStatus) => {
@@ -3363,14 +3362,14 @@ const MainFrame = (props: Props) => {
                       );
                     },
                     onDeleteResource: (
-                      resource: gdResource,
+                      resource: gd.Resource,
                       cb: (arg1: boolean) => void
                     ) => {
                       // TODO: Project wide refactoring of objects/events using the resource
                       cb(true);
                     },
                     onRenameResource: (
-                      resource: gdResource,
+                      resource: gd.Resource,
                       newName: string,
                       cb: (arg1: boolean) => void
                     ) => {
@@ -3636,7 +3635,7 @@ const MainFrame = (props: Props) => {
       <CustomDragLayer />
     </div>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default MainFrame;

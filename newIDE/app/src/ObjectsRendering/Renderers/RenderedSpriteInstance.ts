@@ -1,10 +1,9 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import * as PIXI from 'pixi.js-legacy';
-const gd: libGDevelop = global.gd;
 
 /**
  * Renderer for gd.SpriteObject
@@ -16,14 +15,14 @@ export default class RenderedSpriteInstance extends RenderedInstance {
   _centerY: number;
   _originX: number;
   _originY: number;
-  _sprite: gdSprite | null | undefined = null;
+  _sprite: gd.Sprite | null | undefined = null;
   _shouldNotRotate: boolean = false;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -61,9 +60,9 @@ export default class RenderedSpriteInstance extends RenderedInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration,
+    objectConfiguration: gd.ObjectConfiguration
   ): string {
     const spriteConfiguration = gd.asSpriteConfiguration(objectConfiguration);
     const animations = spriteConfiguration.getAnimations();
@@ -71,10 +70,7 @@ export default class RenderedSpriteInstance extends RenderedInstance {
     if (
       animations.getAnimationsCount() > 0 &&
       animations.getAnimation(0).getDirectionsCount() > 0 &&
-      animations
-        .getAnimation(0)
-        .getDirection(0)
-        .getSpritesCount() > 0
+      animations.getAnimation(0).getDirection(0).getSpritesCount() > 0
     ) {
       const imageName = animations
         .getAnimation(0)
@@ -88,14 +84,14 @@ export default class RenderedSpriteInstance extends RenderedInstance {
   }
 
   updatePIXISprite(): void {
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
     const objectTextureFrame = this._pixiObject.texture.frame;
     // In case the texture is not loaded yet, we don't want to crash.
     if (!objectTextureFrame) return;
 
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.x = this._centerX / objectTextureFrame.width;
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.y = this._centerY / objectTextureFrame.height;
     this._pixiObject.rotation = this._shouldNotRotate
       ? 0
@@ -163,7 +159,7 @@ export default class RenderedSpriteInstance extends RenderedInstance {
       this._project,
       sprite.getImageName()
     );
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
     this._pixiObject.texture = texture;
 
     if (!texture.baseTexture.valid) {
@@ -210,7 +206,7 @@ export default class RenderedSpriteInstance extends RenderedInstance {
   }
 
   getDefaultWidth(): number {
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
     const objectTextureFrame = this._pixiObject.texture.frame;
     // In case the texture is not loaded yet, we don't want to crash.
     if (!objectTextureFrame) return 32;
@@ -219,7 +215,7 @@ export default class RenderedSpriteInstance extends RenderedInstance {
   }
 
   getDefaultHeight(): number {
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
     const objectTextureFrame = this._pixiObject.texture.frame;
     // In case the texture is not loaded yet, we don't want to crash.
     if (!objectTextureFrame) return 32;

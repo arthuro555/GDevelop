@@ -1,10 +1,9 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import * as PIXI from 'pixi.js-legacy';
-const gd: libGDevelop = global.gd;
 
 /**
  * Renderer for gd.TiledSpriteObject
@@ -13,10 +12,10 @@ export default class RenderedTiledSpriteInstance extends RenderedInstance {
   _texture: PIXI.Texture;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -39,9 +38,9 @@ export default class RenderedTiledSpriteInstance extends RenderedInstance {
       tiledSprite.getWidth(),
       tiledSprite.getHeight()
     );
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.x = 0.5;
-// @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'anchor' does not exist on type 'DisplayObject'.
     this._pixiObject.anchor.y = 0.5;
     this._pixiContainer.addChild(this._pixiObject);
   }
@@ -56,9 +55,9 @@ export default class RenderedTiledSpriteInstance extends RenderedInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     const tiledSprite = gd.asTiledSpriteConfiguration(objectConfiguration);
 
@@ -74,29 +73,29 @@ export default class RenderedTiledSpriteInstance extends RenderedInstance {
       this._associatedObjectConfiguration
     );
     if (this._instance.hasCustomSize()) {
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
       this._pixiObject.width = this.getCustomWidth();
-// @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
       this._pixiObject.height = this.getCustomHeight();
     } else {
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
       this._pixiObject.width = tiledSprite.getWidth();
-// @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
       this._pixiObject.height = tiledSprite.getHeight();
     }
 
     if (this._texture !== tiledSprite.getTexture()) {
       this._texture = tiledSprite.getTexture();
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
       this._pixiObject.texture = PixiResourcesLoader.getPIXITexture(
         this._project,
         tiledSprite.getTexture()
       );
     }
 
-// @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'width' does not exist on type 'DisplayObject'.
     this._pixiObject.x = this._instance.getX() + this._pixiObject.width / 2;
-// @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'height' does not exist on type 'DisplayObject'.
     this._pixiObject.y = this._instance.getY() + this._pixiObject.height / 2;
     this._pixiObject.rotation = RenderedInstance.toRad(
       this._instance.getAngle()

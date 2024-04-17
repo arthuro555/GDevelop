@@ -1,50 +1,45 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './InAppTutorialOrchestrator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InAppTutorial/InAppTutorialOrchestrator.tsx', but '--jsx' is not set.
+
 import InAppTutorialOrchestrator from './InAppTutorialOrchestrator';
 import { EditorIdentifier } from '../Utils/GDevelopServices/InAppTutorial';
 import { EditorTabsState } from '../MainFrame/EditorTabs/EditorTabsHandler';
 import { getCurrentTab } from '../MainFrame/EditorTabs/EditorTabsHandler';
 
 type Props = {
-  editorTabs: EditorTabsState
+  editorTabs: EditorTabsState;
 };
 
-const useInAppTutorialOrchestrator = ({
-  editorTabs,
-}: Props) => {
-  const [
-    currentEditor,
-    setCurrentEditor,
-  ] = React.useState<EditorIdentifier | null>(null);
-  const [currentSceneName, setCurrentSceneName] = React.useState<string | null>(null);
+const useInAppTutorialOrchestrator = ({ editorTabs }: Props) => {
+  const [currentEditor, setCurrentEditor] =
+    React.useState<EditorIdentifier | null>(null);
+  const [currentSceneName, setCurrentSceneName] = React.useState<string | null>(
+    null
+  );
 
-  React.useEffect(
-    () => {
-      const currentTab = getCurrentTab(editorTabs);
-      if (!currentTab) {
-        setCurrentEditor(null);
-        return;
-      }
-      const editorIdentifier = currentTab.key.startsWith('start page')
-        ? 'Home'
-        : currentTab.key.startsWith('layout event')
+  React.useEffect(() => {
+    const currentTab = getCurrentTab(editorTabs);
+    if (!currentTab) {
+      setCurrentEditor(null);
+      return;
+    }
+    const editorIdentifier = currentTab.key.startsWith('start page')
+      ? 'Home'
+      : currentTab.key.startsWith('layout event')
         ? 'EventsSheet'
         : currentTab.key.startsWith('external events')
-        ? 'ExternalEvents'
-        : currentTab.key.startsWith('external layout')
-        ? 'ExternalLayout'
-        : currentTab.key.startsWith('events functions extension')
-        ? 'Extension'
-        : currentTab.key.startsWith('resources')
-        ? 'Resources'
-        : 'Scene';
-      setCurrentEditor(editorIdentifier);
-      if (currentTab.key.startsWith('layout') && currentTab.projectItemName) {
-        setCurrentSceneName(currentTab.projectItemName);
-      }
-    },
-    [editorTabs]
-  );
+          ? 'ExternalEvents'
+          : currentTab.key.startsWith('external layout')
+            ? 'ExternalLayout'
+            : currentTab.key.startsWith('events functions extension')
+              ? 'Extension'
+              : currentTab.key.startsWith('resources')
+                ? 'Resources'
+                : 'Scene';
+    setCurrentEditor(editorIdentifier);
+    if (currentTab.key.startsWith('layout') && currentTab.projectItemName) {
+      setCurrentSceneName(currentTab.projectItemName);
+    }
+  }, [editorTabs]);
 
   return {
     InAppTutorialOrchestrator,

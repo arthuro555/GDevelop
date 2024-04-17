@@ -7,36 +7,47 @@ import { rgbToHexNumber } from '../../Utils/ColorTransformer';
 import Rectangle from '../../Utils/Rectangle';
 
 export type InstanceMeasurer = {
-  getInstanceAABB: (arg1: gdInitialInstance, arg2: Rectangle) => Rectangle,
-  getUnrotatedInstanceAABB: (arg1: gdInitialInstance, arg2: Rectangle) => Rectangle,
-  getUnrotatedInstanceSize: (arg1: gdInitialInstance) => [number, number, number]
+  getInstanceAABB: (arg1: gd.InitialInstance, arg2: Rectangle) => Rectangle;
+  getUnrotatedInstanceAABB: (
+    arg1: gd.InitialInstance,
+    arg2: Rectangle
+  ) => Rectangle;
+  getUnrotatedInstanceSize: (
+    arg1: gd.InitialInstance
+  ) => [number, number, number];
 };
 
 export default class InstancesRenderer {
-  project: gdProject;
-  instances: gdInitialInstancesContainer;
-  layout: gdLayout;
+  project: gd.Project;
+  instances: gd.InitialInstancesContainer;
+  layout: gd.Layout;
   viewPosition: ViewPosition;
-  onInstanceClicked: (arg1: gdInitialInstance) => void;
-  onInstanceRightClicked: (
-    arg1: {
-      offsetX: number,
-      offsetY: number,
-      x: number,
-      y: number
-    },
-  ) => void;
+  onInstanceClicked: (arg1: gd.InitialInstance) => void;
+  onInstanceRightClicked: (arg1: {
+    offsetX: number;
+    offsetY: number;
+    x: number;
+    y: number;
+  }) => void;
   _showObjectInstancesIn3D: boolean;
-  onInstanceDoubleClicked: (arg1: gdInitialInstance) => void;
-  onOverInstance: (arg1: gdInitialInstance) => void;
-  onOutInstance: (arg1: gdInitialInstance) => void;
-  onMoveInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
+  onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void;
+  onOverInstance: (arg1: gd.InitialInstance) => void;
+  onOutInstance: (arg1: gd.InitialInstance) => void;
+  onMoveInstance: (
+    arg1: gd.InitialInstance,
+    arg2: number,
+    arg3: number
+  ) => void;
   onMoveInstanceEnd: (arg1: undefined) => void;
-  onDownInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
-  onUpInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void;
+  onDownInstance: (
+    arg1: gd.InitialInstance,
+    arg2: number,
+    arg3: number
+  ) => void;
+  onUpInstance: (arg1: gd.InitialInstance, arg2: number, arg3: number) => void;
 
   layersRenderers: {
-    [key: string]: LayerRenderer
+    [key: string]: LayerRenderer;
   };
 
   /**
@@ -66,27 +77,37 @@ export default class InstancesRenderer {
     onUpInstance,
     showObjectInstancesIn3D,
   }: {
-    project: gdProject,
-    instances: gdInitialInstancesContainer,
-    layout: gdLayout,
-    viewPosition: ViewPosition,
-    onInstanceClicked: (arg1: gdInitialInstance) => void,
-    onInstanceRightClicked: (
-      arg1: {
-        offsetX: number,
-        offsetY: number,
-        x: number,
-        y: number
-      },
-    ) => void,
-    onInstanceDoubleClicked: (arg1: gdInitialInstance) => void,
-    onOverInstance: (arg1: gdInitialInstance) => void,
-    onOutInstance: (arg1: gdInitialInstance) => void,
-    onMoveInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
-    onMoveInstanceEnd: (arg1: undefined) => void,
-    onDownInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
-    onUpInstance: (arg1: gdInitialInstance, arg2: number, arg3: number) => void,
-    showObjectInstancesIn3D: boolean
+    project: gd.Project;
+    instances: gd.InitialInstancesContainer;
+    layout: gd.Layout;
+    viewPosition: ViewPosition;
+    onInstanceClicked: (arg1: gd.InitialInstance) => void;
+    onInstanceRightClicked: (arg1: {
+      offsetX: number;
+      offsetY: number;
+      x: number;
+      y: number;
+    }) => void;
+    onInstanceDoubleClicked: (arg1: gd.InitialInstance) => void;
+    onOverInstance: (arg1: gd.InitialInstance) => void;
+    onOutInstance: (arg1: gd.InitialInstance) => void;
+    onMoveInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    onMoveInstanceEnd: (arg1: undefined) => void;
+    onDownInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    onUpInstance: (
+      arg1: gd.InitialInstance,
+      arg2: number,
+      arg3: number
+    ) => void;
+    showObjectInstancesIn3D: boolean;
   }) {
     this.project = project;
     this.instances = instances;
@@ -150,8 +171,8 @@ export default class InstancesRenderer {
 
         return layerRenderer.getUnrotatedInstanceAABB(instance, bounds);
       },
-// @ts-expect-error - TS2322 - Type '(instance: gdInitialInstance) => any[]' is not assignable to type '(arg1: gdInitialInstance) => [number, number, number]'.
-      getUnrotatedInstanceSize: instance => {
+      // @ts-expect-error - TS2322 - Type '(instance: gd.InitialInstance) => any[]' is not assignable to type '(arg1: gd.InitialInstance) => [number, number, number]'.
+      getUnrotatedInstanceSize: (instance) => {
         const layerName = instance.getLayer();
         const layerRenderer = this.layersRenderers[layerName];
         if (!layerRenderer) {
@@ -224,7 +245,7 @@ export default class InstancesRenderer {
       // a valid layer object that can be used.
       layerRenderer.layer = layer;
       layerRenderer.wasUsed = true;
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'Container<DisplayObject>'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'Container<DisplayObject>'.
       layerRenderer.getPixiContainer().zOrder = i;
       layerRenderer.render();
       const layerContainer = layerRenderer.getPixiContainer();
@@ -322,11 +343,11 @@ export default class InstancesRenderer {
 
   _updatePixiObjectsZOrder() {
     this.pixiContainer.children.sort((a, b) => {
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       a.zOrder = a.zOrder || 0;
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       b.zOrder = b.zOrder || 0;
-// @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'. | TS2339 - Property 'zOrder' does not exist on type 'DisplayObject'.
       return a.zOrder - b.zOrder;
     });
   }

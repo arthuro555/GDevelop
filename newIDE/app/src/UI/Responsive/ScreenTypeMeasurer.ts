@@ -39,15 +39,13 @@ if (typeof window !== 'undefined') {
 }
 
 type Props = {
-  children: (screenType: ScreenType) => React.ReactElement
+  children: (screenType: ScreenType) => React.ReactElement;
 };
 
 /**
  * Wraps useScreenType in a component.
  */
-export const ScreenTypeMeasurer = ({
-  children,
-}: Props) =>
+export const ScreenTypeMeasurer = ({ children }: Props) =>
   children(useScreenType());
 
 /**

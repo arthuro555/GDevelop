@@ -45,17 +45,17 @@ const stopPropagation = e: any => e.stopPropagation();
  */
 // @ts-expect-error - TS2558 - Expected 1 type arguments, but got 2.
 export const SimpleTextField = React.memo<SimpleTextFieldProps, SimpleTextFieldInterface>(
-  React.forwardRef<SimpleTextFieldProps, SimpleTextFieldInterface>((props, ref) => {
+  React.forwardRef<SimpleTextFieldInterface, SimpleTextFieldProps>((props, ref) => {
     const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
 
     React.useEffect(
       () => {
         // If the value passed changed, update the input. Otherwise,
         // keep the input uncontrolled.
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'SimpleTextFieldInterface'.
+
         if (inputRef.current) inputRef.current.value = props.value;
       },
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'SimpleTextFieldInterface'.
+
       [props.value]
     );
 
@@ -90,7 +90,7 @@ export const SimpleTextField = React.memo<SimpleTextFieldProps, SimpleTextFieldI
       return 0;
     }, []);
 
-// @ts-expect-error - TS2739 - Type '{ focus: (options?: FocusOptions | null | undefined) => void; forceSetSelection: (selectionStart: number, selectionEnd: number) => void; getCaretPosition: () => number | null; }' is missing the following properties from type 'SimpleTextFieldProps': disabled, type, onChange, value, id
+
     React.useImperativeHandle(ref, () => ({
       focus,
       forceSetSelection,
@@ -98,56 +98,53 @@ export const SimpleTextField = React.memo<SimpleTextFieldProps, SimpleTextFieldI
     }));
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2746 - This JSX tag's 'children' prop expects a single child of type 'ReactNode', but multiple children were provided.
+
       <div
         className={classNames({
           [classes.simpleTextField]: true,
-// @ts-expect-error - TS2339 - Property 'disabled' does not exist on type 'SimpleTextFieldInterface'.
+
           [classes.disabled]: props.disabled,
         })}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <input
-// @ts-expect-error - TS2339 - Property 'id' does not exist on type 'SimpleTextFieldInterface'.
+
           id={props.id}
-// @ts-expect-error - TS2339 - Property 'disabled' does not exist on type 'SimpleTextFieldInterface'.
+
           disabled={props.disabled}
-// @ts-expect-error - TS2322 - Type 'MutableRefObject<HTMLInputElement | null | undefined>' is not assignable to type 'LegacyRef<HTMLInputElement> | undefined'.
+
           ref={inputRef}
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'SimpleTextFieldInterface'.
+
           type={props.type}
-// @ts-expect-error - TS2339 - Property 'value' does not exist on type 'SimpleTextFieldInterface'.
+
           defaultValue={props.value}
           onClick={stopPropagation}
           onDoubleClick={stopPropagation}
           onBlur={e => {
-// @ts-expect-error - TS2339 - Property 'onChange' does not exist on type 'SimpleTextFieldInterface'. | TS2339 - Property 'additionalContext' does not exist on type 'SimpleTextFieldInterface'.
+
             props.onChange(e.currentTarget.value, props.additionalContext);
           }}
           onChange={
-// @ts-expect-error - TS2339 - Property 'directlyStoreValueChangesWhileEditing' does not exist on type 'SimpleTextFieldInterface'.
+
             props.directlyStoreValueChangesWhileEditing
               ? e: any => {
-// @ts-expect-error - TS2339 - Property 'onChange' does not exist on type 'SimpleTextFieldInterface'.
+
                   props.onChange(
                     e.currentTarget.value,
-// @ts-expect-error - TS2339 - Property 'additionalContext' does not exist on type 'SimpleTextFieldInterface'.
+
                     props.additionalContext
                   );
                 }
-{ /* @ts-expect-error - TS1005 - '}' expected. | TS1381 - Unexpected token. Did you mean `{'}'}` or `&rbrace;`? */}
+{ }
               : undefined
           }
 { /* @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. */}
           onKeyUp={e => {
             if (shouldValidate(e)) {
-// @ts-expect-error - TS2339 - Property 'onChange' does not exist on type 'SimpleTextFieldInterface'. | TS2339 - Property 'additionalContext' does not exist on type 'SimpleTextFieldInterface'.
+
               props.onChange(e.currentTarget.value, props.additionalContext);
             }
           }}
-{ /* @ts-expect-error - TS2339 - Property 'italic' does not exist on type 'SimpleTextFieldInterface'. */}
           style={props.italic ? styles.italic : undefined}
-{ /* @ts-expect-error - TS1382 - Unexpected token. Did you mean `{'>'}` or `&gt;`? */}
         />
       </div>
     );

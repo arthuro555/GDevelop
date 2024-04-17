@@ -1,20 +1,17 @@
-import {extractNextPageUriFromLinkHeader} from './Play';
+import { extractNextPageUriFromLinkHeader } from './Play';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('Play service', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('extractNextPageUriFromLinkHeader', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it returns null if input is empty', () => {
       expect(extractNextPageUriFromLinkHeader('')).toBeNull();
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it returns null if input is not compliant', () => {
       expect(
         extractNextPageUriFromLinkHeader('https://www.gd.games/ rel="next"')
       ).toBeNull();
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it returns null if next link is not present', () => {
       expect(
         extractNextPageUriFromLinkHeader(
@@ -22,7 +19,7 @@ describe('Play service', () => {
         )
       ).toBeNull();
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it returns URI if next link is present', () => {
       expect(
         extractNextPageUriFromLinkHeader(
@@ -30,7 +27,7 @@ describe('Play service', () => {
         )
       ).toEqual('https://www.gd.games/');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it returns URI with encoded query parameters', () => {
       expect(
         extractNextPageUriFromLinkHeader(

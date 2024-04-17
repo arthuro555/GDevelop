@@ -5,94 +5,121 @@ import { getSignedUrl } from './Usage';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'path-browserify'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/path-browserify/index.js' implicitly has an 'any' type.
 import { basename } from 'path-browserify';
 
-export type TargetName = 'winExe' | 'winZip' | 'macZip' | 'linuxAppImage' | 'androidApk' | 'androidAppBundle' | 'iosAppStore' | 'iosDevelopment' | 's3';
+export type TargetName =
+  | 'winExe'
+  | 'winZip'
+  | 'macZip'
+  | 'linuxAppImage'
+  | 'androidApk'
+  | 'androidAppBundle'
+  | 'iosAppStore'
+  | 'iosDevelopment'
+  | 's3';
 
-export type BuildType = 'cordova-build' | 'cordova-ios-build' | 'electron-build' | 'web-build';
+export type BuildType =
+  | 'cordova-build'
+  | 'cordova-ios-build'
+  | 'electron-build'
+  | 'web-build';
 
 export type Build = {
-  id: string,
-  gameId?: string // not defined for old builds.,
-  userId: string,
-  name?: string,
-  description?: string,
-  bucket?: string,
-  logsKey?: string,
-  apkKey?: string,
-  aabKey?: string,
-  windowsExeKey?: string,
-  windowsZipKey?: string,
-  macosZipKey?: string,
-  linuxAppImageKey?: string,
-  s3Key?: string,
-  iosAppStoreIpaKey?: string,
-  iosDevelopmentIpaKey?: string,
-  status: 'pending' | 'complete' | 'error',
-  type: BuildType,
-  targets?: Array<TargetName>,
-  createdAt?: number // Not defined for old builds.,
-  updatedAt: number
+  id: string;
+  gameId?: string; // not defined for old builds.,
+  userId: string;
+  name?: string;
+  description?: string;
+  bucket?: string;
+  logsKey?: string;
+  apkKey?: string;
+  aabKey?: string;
+  windowsExeKey?: string;
+  windowsZipKey?: string;
+  macosZipKey?: string;
+  linuxAppImageKey?: string;
+  s3Key?: string;
+  iosAppStoreIpaKey?: string;
+  iosDevelopmentIpaKey?: string;
+  status: 'pending' | 'complete' | 'error';
+  type: BuildType;
+  targets?: Array<TargetName>;
+  createdAt?: number; // Not defined for old builds.,
+  updatedAt: number;
 };
 
-export type BuildArtifactKeyName = 'apkKey' | 'aabKey' | 'windowsExeKey' | 'windowsZipKey' | 'macosZipKey' | 'linuxAppImageKey' | 's3Key' | 'iosAppStoreIpaKey' | 'iosDevelopmentIpaKey' | 'logsKey';
+export type BuildArtifactKeyName =
+  | 'apkKey'
+  | 'aabKey'
+  | 'windowsExeKey'
+  | 'windowsZipKey'
+  | 'macosZipKey'
+  | 'linuxAppImageKey'
+  | 's3Key'
+  | 'iosAppStoreIpaKey'
+  | 'iosDevelopmentIpaKey'
+  | 'logsKey';
 
 export type BuildSigningOptions = {
-  keystore?: string,
-  certificateSerial?: string,
-  mobileProvisionUuid?: string,
-  authKeyApiKey?: string
+  keystore?: string;
+  certificateSerial?: string;
+  mobileProvisionUuid?: string;
+  authKeyApiKey?: string;
 };
 
 export type AppleCertificateSigningCredential = {
-  type: 'apple-certificate',
-  name: string,
-  certificateSerial: string,
-  hasCertificateReady: boolean,
-  kind: 'development' | 'distribution' | 'unknown',
+  type: 'apple-certificate';
+  name: string;
+  certificateSerial: string;
+  hasCertificateReady: boolean;
+  kind: 'development' | 'distribution' | 'unknown';
   provisioningProfiles: Array<{
-    uuid: string,
-    name: string
-  }>
+    uuid: string;
+    name: string;
+  }>;
 };
 
 export type AppleAuthKeySigningCredential = {
-  type: 'apple-auth-key',
-  name: string,
-  apiKey: string,
-  apiIssuer: string,
-  hasAuthKeyReady: boolean
+  type: 'apple-auth-key';
+  name: string;
+  apiKey: string;
+  apiIssuer: string;
+  hasAuthKeyReady: boolean;
 };
 
-export type SigningCredential = AppleCertificateSigningCredential | AppleAuthKeySigningCredential;
+export type SigningCredential =
+  | AppleCertificateSigningCredential
+  | AppleAuthKeySigningCredential;
 
-export const filterAppleCertificateSigningCredentials = (signingCredentials: Array<SigningCredential> | null): Array<AppleCertificateSigningCredential> | null => {
-// @ts-expect-error - TS2322 - Type 'SigningCredential[] | null' is not assignable to type 'AppleCertificateSigningCredential[] | null'.
+export const filterAppleCertificateSigningCredentials = (
+  signingCredentials: Array<SigningCredential> | null
+): Array<AppleCertificateSigningCredential> | null => {
+  // @ts-expect-error - TS2322 - Type 'SigningCredential[] | null' is not assignable to type 'AppleCertificateSigningCredential[] | null'.
   return signingCredentials
     ? // $FlowFixMe - we're sure this should refine the type.
       signingCredentials.filter(
-        signingCredential => signingCredential.type === 'apple-certificate'
+        (signingCredential) => signingCredential.type === 'apple-certificate'
       )
     : null;
 };
 
-export const filterAppleAuthKeySigningCredentials = (signingCredentials: Array<SigningCredential> | null): Array<AppleAuthKeySigningCredential> | null => {
-// @ts-expect-error - TS2322 - Type 'SigningCredential[] | null' is not assignable to type 'AppleAuthKeySigningCredential[] | null'.
+export const filterAppleAuthKeySigningCredentials = (
+  signingCredentials: Array<SigningCredential> | null
+): Array<AppleAuthKeySigningCredential> | null => {
+  // @ts-expect-error - TS2322 - Type 'SigningCredential[] | null' is not assignable to type 'AppleAuthKeySigningCredential[] | null'.
   return signingCredentials
     ? // $FlowFixMe - we're sure this should refine the type.
       signingCredentials.filter(
-        signingCredential => signingCredential.type === 'apple-auth-key'
+        (signingCredential) => signingCredential.type === 'apple-auth-key'
       )
     : null;
 };
 
-export const getBuildExtensionlessFilename = (
-  {
-    gameName,
-    gameVersion,
-  }: {
-    gameName: string,
-    gameVersion: string
-  },
-): string => {
+export const getBuildExtensionlessFilename = ({
+  gameName,
+  gameVersion,
+}: {
+  gameName: string;
+  gameVersion: string;
+}): string => {
   try {
     const specialCharactersRemovalRegex = /[./\\[\]<>&$@=;:+,?^{}%#~|'"*]/g;
     return `${gameName
@@ -100,7 +127,7 @@ export const getBuildExtensionlessFilename = (
       .replace(specialCharactersRemovalRegex, '_')}-${gameVersion
       .slice(0, 15)
       .replace(specialCharactersRemovalRegex, '_')}`;
-  } catch (error: any) {
+  } catch (error) {
     // If an error occurs, we don't want to prevent the build.
     console.warn(
       'An error happened when computing game extensionless filename:',
@@ -110,7 +137,10 @@ export const getBuildExtensionlessFilename = (
   }
 };
 
-export const getBuildArtifactUrl = (build: Build | null | undefined, keyName: BuildArtifactKeyName): string | null | undefined => {
+export const getBuildArtifactUrl = (
+  build: Build | null | undefined,
+  keyName: BuildArtifactKeyName
+): string | null | undefined => {
   if (!build || !build[keyName]) {
     return null;
   }
@@ -125,7 +155,10 @@ export const getBuildArtifactUrl = (build: Build | null | undefined, keyName: Bu
   return `https://builds.gdevelop-app.com/${build[keyName]}`;
 };
 
-export const getWebBuildThumbnailUrl = (project: gdProject, buildId: string): string => {
+export const getWebBuildThumbnailUrl = (
+  project: gd.Project,
+  buildId: string
+): string => {
   const resourceManager = project.getResourcesManager();
   const resourceName = project
     .getPlatformSpecificAssets()
@@ -148,9 +181,9 @@ export const getWebBuildThumbnailUrl = (project: gdProject, buildId: string): st
 };
 
 type UploadOptions = {
-  signedUrl: string,
-  contentType: string,
-  key: string
+  signedUrl: string;
+  contentType: string;
+  key: string;
 };
 
 export const getBuildFileUploadOptions = (): Promise<UploadOptions> => {
@@ -177,13 +210,13 @@ export const buildElectron = (
   targets: Array<TargetName>,
   gameId: string,
   options: {
-    gameName: string,
-    gameVersion: string
+    gameName: string;
+    gameVersion: string;
   },
-  payWithCredits: boolean,
+  payWithCredits: boolean
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.post(`${GDevelopBuildApi.baseUrl}/build`, null, {
         params: {
           userId,
@@ -199,7 +232,7 @@ export const buildElectron = (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const buildWeb = (
@@ -208,13 +241,13 @@ export const buildWeb = (
   key: string,
   gameId: string,
   options: {
-    gameName: string,
-    gameVersion: string
+    gameName: string;
+    gameVersion: string;
   },
-  payWithCredits: boolean,
+  payWithCredits: boolean
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.post(`${GDevelopBuildApi.baseUrl}/build`, null, {
         params: {
           userId,
@@ -229,7 +262,7 @@ export const buildWeb = (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const buildCordovaAndroid = (
@@ -240,13 +273,13 @@ export const buildCordovaAndroid = (
   keystore: 'old' | 'new',
   gameId: string,
   options: {
-    gameName: string,
-    gameVersion: string
+    gameName: string;
+    gameVersion: string;
   },
-  payWithCredits: boolean,
+  payWithCredits: boolean
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.post(
         `${GDevelopBuildApi.baseUrl}/build`,
         JSON.stringify({
@@ -270,7 +303,7 @@ export const buildCordovaAndroid = (
         }
       )
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const buildCordovaIos = (
@@ -281,13 +314,13 @@ export const buildCordovaIos = (
   signing: BuildSigningOptions,
   gameId: string,
   options: {
-    gameName: string,
-    gameVersion: string
+    gameName: string;
+    gameVersion: string;
   },
-  payWithCredits: boolean,
+  payWithCredits: boolean
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.post(
         `${GDevelopBuildApi.baseUrl}/build`,
         {
@@ -309,16 +342,16 @@ export const buildCordovaIos = (
         }
       )
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const getBuild = (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  buildId: string,
+  buildId: string
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.get(`${GDevelopBuildApi.baseUrl}/build/${buildId}`, {
         params: {
           userId,
@@ -328,16 +361,16 @@ export const getBuild = (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const getBuilds = (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  gameId?: string,
+  gameId?: string
 ): Promise<Array<Build>> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.get(`${GDevelopBuildApi.baseUrl}/build`, {
         params: {
           userId,
@@ -348,7 +381,7 @@ export const getBuilds = (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const updateBuild = (
@@ -359,12 +392,12 @@ export const updateBuild = (
     name,
     description,
   }: {
-    name?: string,
-    description?: string
-  },
+    name?: string;
+    description?: string;
+  }
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.patch(
         `${GDevelopBuildApi.baseUrl}/build/${buildId}`,
         { name, description },
@@ -378,16 +411,16 @@ export const updateBuild = (
         }
       )
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export const deleteBuild = (
   getAuthorizationHeader: () => Promise<string>,
   userId: string,
-  buildId: string,
+  buildId: string
 ): Promise<Build> => {
   return getAuthorizationHeader()
-    .then(authorizationHeader =>
+    .then((authorizationHeader) =>
       axios.delete(`${GDevelopBuildApi.baseUrl}/build/${buildId}`, {
         params: {
           userId,
@@ -397,10 +430,13 @@ export const deleteBuild = (
         },
       })
     )
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
-export const getUserSigningCredentials = async (getAuthorizationHeader: () => Promise<string>, userId: string): Promise<Array<SigningCredential>> => {
+export const getUserSigningCredentials = async (
+  getAuthorizationHeader: () => Promise<string>,
+  userId: string
+): Promise<Array<SigningCredential>> => {
   const authorizationHeader = await getAuthorizationHeader();
 
   const response = await axios.get(
@@ -426,12 +462,12 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      commonName: string,
-      countryName: string
-    },
+      commonName: string;
+      countryName: string;
+    }
   ): Promise<{
-    certificateRequestUuid: string,
-    csrPem: string
+    certificateRequestUuid: string;
+    csrPem: string;
   }> => {
     const authorizationHeader = await getAuthorizationHeader();
 
@@ -456,18 +492,16 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      certificateAsBase64: string
-    },
+      certificateAsBase64: string;
+    }
   ): Promise<{
-    certificateSerial: string,
-    certificateKind: string
+    certificateSerial: string;
+    certificateKind: string;
   }> => {
     const authorizationHeader = await getAuthorizationHeader();
 
     const response = await axios.post(
-      `${
-        GDevelopBuildApi.baseUrl
-      }/signing-credential/action/upload-certificate`,
+      `${GDevelopBuildApi.baseUrl}/signing-credential/action/upload-certificate`,
       {
         ...options,
       },
@@ -487,19 +521,17 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      certificateKind: string,
-      certificateSerial: string,
-      certificateRequestUuid: string
-    },
+      certificateKind: string;
+      certificateSerial: string;
+      certificateRequestUuid: string;
+    }
   ): Promise<{
-    certificateSerial: string
+    certificateSerial: string;
   }> => {
     const authorizationHeader = await getAuthorizationHeader();
 
     const response = await axios.post(
-      `${
-        GDevelopBuildApi.baseUrl
-      }/signing-credential/action/create-certificate-p12`,
+      `${GDevelopBuildApi.baseUrl}/signing-credential/action/create-certificate-p12`,
       {
         ...options,
       },
@@ -519,19 +551,17 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      mobileProvisionAsBase64: string
-    },
+      mobileProvisionAsBase64: string;
+    }
   ): Promise<{
-    uuid: string,
-    name: string,
-    certificatesCount: number
+    uuid: string;
+    name: string;
+    certificatesCount: number;
   }> => {
     const authorizationHeader = await getAuthorizationHeader();
 
     const response = await axios.post(
-      `${
-        GDevelopBuildApi.baseUrl
-      }/signing-credential/action/upload-mobile-provision`,
+      `${GDevelopBuildApi.baseUrl}/signing-credential/action/upload-mobile-provision`,
       {
         ...options,
       },
@@ -551,11 +581,11 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      name: string,
-      appleApiKey: string,
-      appleApiIssuer: string,
-      appleAuthKeyP8AsBase64: string
-    },
+      name: string;
+      appleApiKey: string;
+      appleApiIssuer: string;
+      appleAuthKeyP8AsBase64: string;
+    }
   ): Promise<Record<any, any>> => {
     const authorizationHeader = await getAuthorizationHeader();
 
@@ -580,11 +610,11 @@ export const signingCredentialApi = {
     getAuthorizationHeader: () => Promise<string>,
     userId: string,
     options: {
-      type: string,
-      appleApiKey?: string,
-      certificateSerial?: string,
-      mobileProvisionUuid?: string
-    },
+      type: string;
+      appleApiKey?: string;
+      certificateSerial?: string;
+      mobileProvisionUuid?: string;
+    }
   ): Promise<void> => {
     const authorizationHeader = await getAuthorizationHeader();
 

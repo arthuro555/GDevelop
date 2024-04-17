@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 import { ParameterInlineRendererProps } from './ParameterInlineRenderer.flow';
 import * as React from 'react';
 import {
@@ -9,7 +8,6 @@ import {
 } from './ParameterFieldCommons';
 import SemiControlledAutoComplete, {
   SemiControlledAutoCompleteInterface,
-// @ts-expect-error - TS6142 - Module '../../UI/SemiControlledAutoComplete' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SemiControlledAutoComplete.tsx', but '--jsx' is not set.
 } from '../../UI/SemiControlledAutoComplete';
 
 const keyNames = [
@@ -125,61 +123,59 @@ const keyNames = [
 
 const isKeyValid = (key: string) => keyNames.indexOf(key) !== -1;
 
-// @ts-expect-error - TS2345 - Argument of type '(props: ParameterFieldProps, ref: ForwardedRef<ParameterFieldProps>) => Element' is not assignable to parameter of type 'ForwardRefRenderFunction<ParameterFieldProps, ParameterFieldInterface>'.
-export default React.forwardRef<ParameterFieldProps, ParameterFieldInterface>(function KeyField(props: ParameterFieldProps, ref) {
-  const field = React.useRef<SemiControlledAutoCompleteInterface | null | undefined>(null);
-  const focus: FieldFocusFunction = options => {
-    if (field.current) field.current.focus(options);
-  };
-// @ts-expect-error - TS2322 - Type '{ focus: FieldFocusFunction; }' is not assignable to type 'ParameterFieldProps'.
-  React.useImperativeHandle(ref, () => ({
-    focus,
-  }));
+export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
+  function KeyField(props: ParameterFieldProps, ref) {
+    const field = React.useRef<
+      SemiControlledAutoCompleteInterface | null | undefined
+    >(null);
+    const focus: FieldFocusFunction = (options) => {
+      if (field.current) field.current.focus(options);
+    };
 
-  const {
-    value,
-    onChange,
-    isInline,
-    parameterMetadata,
-    onRequestClose,
-    onApply,
-  } = props;
+    React.useImperativeHandle(ref, () => ({
+      focus,
+    }));
 
-  return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    <SemiControlledAutoComplete
-      margin={props.isInline ? 'none' : 'dense'}
-      floatingLabelText={
-        parameterMetadata ? parameterMetadata.getDescription() : undefined
-      }
-      helperMarkdownText={
-        parameterMetadata ? parameterMetadata.getLongDescription() : undefined
-      }
-      fullWidth
-      value={value}
-      onChange={onChange}
-      dataSource={keyNames.map(keyName => ({
-        text: keyName,
-        value: keyName,
-      }))}
-      openOnFocus={!isInline}
-      onRequestClose={onRequestClose}
-      onApply={onApply}
-      ref={field}
-      errorText={
-        !value ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Trans>You must select a key.</Trans>
-        ) : !isKeyValid(value) ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-          <Trans>You must select a valid key. "{value}" is not valid.</Trans>
-        ) : (
-          undefined
-        )
-      }
-    />
-  );
-});
+    const {
+      value,
+      onChange,
+      isInline,
+      parameterMetadata,
+      onRequestClose,
+      onApply,
+    } = props;
+
+    return (
+      <SemiControlledAutoComplete
+        margin={props.isInline ? 'none' : 'dense'}
+        floatingLabelText={
+          parameterMetadata ? parameterMetadata.getDescription() : undefined
+        }
+        helperMarkdownText={
+          parameterMetadata ? parameterMetadata.getLongDescription() : undefined
+        }
+        fullWidth
+        value={value}
+        onChange={onChange}
+        dataSource={keyNames.map((keyName) => ({
+          text: keyName,
+          value: keyName,
+        }))}
+        openOnFocus={!isInline}
+        onRequestClose={onRequestClose}
+        onApply={onApply}
+        ref={field}
+        errorText={
+          !value ? (
+            <Trans>You must select a key.</Trans>
+          ) : !isKeyValid(value) ? (
+            <Trans>You must select a valid key. "{value}" is not valid.</Trans>
+          ) : undefined
+        }
+      />
+    );
+  }
+);
 
 export const renderInlineKey = ({
   value,
@@ -187,9 +183,7 @@ export const renderInlineKey = ({
 }: ParameterInlineRendererProps) => {
   if (!value) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <InvalidParameterValue isEmpty>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Trans>Choose a key</Trans>
       </InvalidParameterValue>
     );
@@ -198,7 +192,6 @@ export const renderInlineKey = ({
   return isKeyValid(value) ? (
     value
   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <InvalidParameterValue>{value}</InvalidParameterValue>
   );
 };

@@ -1,20 +1,26 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from './OptionalRequire';
 const path = optionalRequire('path');
 const fs = optionalRequire('fs');
 
-const readLocalFileToArrayBuffer = async (filePath: string): Promise<ArrayBuffer> => {
-  const buffer: Buffer = await new Promise((resolve: (result: Promise<never>) => void, reject: (error?: any) => void) => {
-// @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'buffer' implicitly has an 'any' type.
-    fs.readFile(filePath, function(err, buffer) {
-      if (err) {
-        reject(err);
-        return;
-      }
+const readLocalFileToArrayBuffer = async (
+  filePath: string
+): Promise<ArrayBuffer> => {
+  const buffer: Buffer = await new Promise(
+    (
+      resolve: (result: Promise<never>) => void,
+      reject: (error?: any) => void
+    ) => {
+      // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type. | TS7006 - Parameter 'buffer' implicitly has an 'any' type.
+      fs.readFile(filePath, function (err, buffer) {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-      resolve(buffer);
-    });
-  });
+        resolve(buffer);
+      });
+    }
+  );
 
   // See https://stackoverflow.com/questions/8609289/convert-a-binary-nodejs-buffer-to-javascript-arraybuffer:
   // The slice and offset stuff is required because small Buffers (less than 4 kB by default, half the pool size)
@@ -60,7 +66,7 @@ export const readLocalFileToFile = async (filePath: string): Promise<File> => {
   const extensionWithoutLeadingDot = path.extname(filePath).replace(/^\./, '');
   return new File([arrayBuffer], path.basename(filePath), {
     type:
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly aac: "audio/aac"; readonly wav: "audio/wav"; readonly mp3: "audio/mp3"; readonly ogg: "audio/ogg"; readonly png: "image/png"; readonly jpg: "image/jpeg"; readonly jpeg: "image/jpeg"; ... 8 more ...; readonly js: "application/javascript"; }'.
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly aac: "audio/aac"; readonly wav: "audio/wav"; readonly mp3: "audio/mp3"; readonly ogg: "audio/ogg"; readonly png: "image/png"; readonly jpg: "image/jpeg"; readonly jpeg: "image/jpeg"; ... 8 more ...; readonly js: "application/javascript"; }'.
       extensionToMimeType[extensionWithoutLeadingDot] ||
       'application/octet-stream',
   });

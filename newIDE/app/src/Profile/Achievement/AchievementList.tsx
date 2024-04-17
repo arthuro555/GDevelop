@@ -1,14 +1,14 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 import { parseISO } from 'date-fns';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Lock'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Lock.js' implicitly has an 'any' type.
+
 import Lock from '../../UI/CustomSvgIcons/Lock';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../../UI/DotBadge' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DotBadge.tsx', but '--jsx' is not set.
+
 import DotBadge from '../../UI/DotBadge';
 
 import {
@@ -17,14 +17,14 @@ import {
   Achievement,
   AchievementWithBadgeData,
 } from '../../Utils/GDevelopServices/Badge';
-// @ts-expect-error - TS6142 - Module '../../UI/ScrollView' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ScrollView.tsx', but '--jsx' is not set.
+
 import ScrollView from '../../UI/ScrollView';
 
 type Props = {
-  badges: Array<BadgeType>,
-  achievements: Array<Achievement>,
-  displayUnclaimedAchievements: boolean,
-  displayNotifications: boolean
+  badges: Array<BadgeType>;
+  achievements: Array<Achievement>;
+  displayUnclaimedAchievements: boolean;
+  displayNotifications: boolean;
 };
 
 const styles = {
@@ -43,19 +43,20 @@ const AchievementList = ({
   displayUnclaimedAchievements,
   displayNotifications,
 }: Props) => {
-  const [
-    achievementsWithBadgeData,
-    setAchievementsWithBadgeData,
-  ] = React.useState<Array<AchievementWithBadgeData>>([]);
+  const [achievementsWithBadgeData, setAchievementsWithBadgeData] =
+    React.useState<Array<AchievementWithBadgeData>>([]);
 
-  React.useEffect(
-    () => {
-      const badgeByAchievementId = badges.reduce<Record<string, any>>((acc, badge) => {
+  React.useEffect(() => {
+    const badgeByAchievementId = badges.reduce<Record<string, any>>(
+      (acc, badge) => {
         acc[badge.achievementId] = badge;
         return acc;
-      }, {});
+      },
+      {}
+    );
 
-      const achievementsWithBadgeData = achievements.reduce<Array<any>>((acc, achievement) => {
+    const achievementsWithBadgeData = achievements.reduce<Array<any>>(
+      (acc, achievement) => {
         const badge = badgeByAchievementId[achievement.id];
         const hasBadge = !!badge;
         if (hasBadge || (!hasBadge && displayUnclaimedAchievements)) {
@@ -67,33 +68,26 @@ const AchievementList = ({
         }
 
         return acc;
-      }, []);
+      },
+      []
+    );
 
-      achievementsWithBadgeData.sort(compareAchievements);
+    achievementsWithBadgeData.sort(compareAchievements);
 
-      setAchievementsWithBadgeData(achievementsWithBadgeData);
-    },
-    [badges, achievements, displayUnclaimedAchievements]
-  );
+    setAchievementsWithBadgeData(achievementsWithBadgeData);
+  }, [badges, achievements, displayUnclaimedAchievements]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Column noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
         {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <ScrollView style={styles.achievementsContainer}>
-            {achievementsWithBadgeData.map(achievementWithBadgeData => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+            {achievementsWithBadgeData.map((achievementWithBadgeData) => (
               <Line
                 key={achievementWithBadgeData.id}
                 justifyContent="space-between"
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column justifyContent="center" alignItems="flex-start">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <DotBadge
                     invisible={
                       !(
@@ -102,7 +96,6 @@ const AchievementList = ({
                       )
                     }
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Text
                       noMargin
                       size="sub-title"
@@ -116,7 +109,6 @@ const AchievementList = ({
                     </Text>
                   </DotBadge>
                   {displayUnclaimedAchievements && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Text
                       noMargin
                       style={
@@ -130,15 +122,12 @@ const AchievementList = ({
                     </Text>
                   )}
                 </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Column>
                   {achievementWithBadgeData.unlockedAt ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Text>
                       {i18n.date(achievementWithBadgeData.unlockedAt)}
                     </Text>
                   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <Lock style={styles.lockedAchievement} />
                   )}
                 </Column>

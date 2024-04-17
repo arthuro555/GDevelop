@@ -1,14 +1,14 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 import IconButton from '@material-ui/core/IconButton';
 import MUITextField from '@material-ui/core/TextField';
 import { FieldFocusFunction } from '../EventsSheet/ParameterFields/ParameterFieldCommons';
 import InputAdornment from '@material-ui/core/InputAdornment';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './CustomSvgIcons/Visibility'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Visibility.js' implicitly has an 'any' type.
+
 import Visibility from './CustomSvgIcons/Visibility';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
-// @ts-expect-error - TS6142 - Module './MarkdownText' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/MarkdownText.tsx', but '--jsx' is not set.
+
 import { MarkdownText } from './MarkdownText';
 import { useShouldAutofocusInput } from './Responsive/ScreenTypeMeasurer';
 import { dataObjectToProps, HTMLDataset } from '../Utils/HTMLDataset';
@@ -182,7 +182,7 @@ export type TextFieldInterface = {
 /**
  * A text field based on Material-UI text field.
  */
-const TextField = React.forwardRef<Props, TextFieldInterface>((props, ref) => {
+const TextField = React.forwardRef<TextFieldInterface, Props>((props, ref) => {
   const inputRef = React.useRef<HTMLInputElement | null | undefined>(null);
 // @ts-expect-error - TS2749 - 'MUITextField' refers to a value, but is being used as a type here. Did you mean 'typeof MUITextField'?
   const muiTextFieldRef = React.useRef<MUITextField | null | undefined>(null);
@@ -242,7 +242,7 @@ const TextField = React.forwardRef<Props, TextFieldInterface>((props, ref) => {
     return null;
   };
 
-// @ts-expect-error - TS2322 - Type '{ focus: FieldFocusFunction; blur: () => void; getInputNode: () => HTMLInputElement | null | undefined; getFieldWidth: () => any; getCaretPosition: () => number | null; }' is not assignable to type '({ type?: "text" | "email" | "password" | undefined; value: string; onChange?: ((event: { target: { value: string; }; }, text: string) => void) | undefined; } & { onFocus?: ((arg1: { currentTarget: { ...; }; preventDefault: () => void; }) => void) | undefined; ... 33 more ...; underlineShow?: boolean | undefined; })...'.
+
   React.useImperativeHandle(ref, () => ({
     focus,
     blur,
@@ -254,27 +254,26 @@ const TextField = React.forwardRef<Props, TextFieldInterface>((props, ref) => {
 // @ts-expect-error - TS2339 - Property 'onChange' does not exist on type 'TextFieldInterface'.
   const onChange = props.onChange || undefined;
 
-// @ts-expect-error - TS2339 - Property 'helperMarkdownText' does not exist on type 'TextFieldInterface'.
+
   const helperText = props.helperMarkdownText ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'helperMarkdownText' does not exist on type 'TextFieldInterface'.
+
     <MarkdownText source={props.helperMarkdownText} />
   ) : null;
 
   const shouldAutofocusInput = useShouldAutofocusInput();
-// @ts-expect-error - TS2339 - Property 'autoFocus' does not exist on type 'TextFieldInterface'.
+
   const shouldAutoFocusTextField = !props.autoFocus
     ? false
-// @ts-expect-error - TS2339 - Property 'autoFocus' does not exist on type 'TextFieldInterface'.
+
     : props.autoFocus === 'desktopAndMobileDevices'
     ? true
     : shouldAutofocusInput;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <MUITextField
           ref={muiTextFieldRef}
           color="secondary"
@@ -303,128 +302,112 @@ const TextField = React.forwardRef<Props, TextFieldInterface>((props, ref) => {
             onChange ? event: any => onChange(event, event.target.value) : undefined
           }
           onContextMenu={
-// @ts-expect-error - TS2339 - Property 'stopContextMenuPropagation' does not exist on type 'TextFieldInterface'.
+
             props.stopContextMenuPropagation
               ? e: any => e.stopPropagation()
-{ /* @ts-expect-error - TS1005 - '}' expected. | TS1381 - Unexpected token. Did you mean `{'}'}` or `&rbrace;`? */}
               : undefined
           }
           // Error handling:
-{ /* @ts-expect-error - TS2339 - Property 'errorText' does not exist on type 'TextFieldInterface'. */}
           error={!!props.errorText}
-{ /* @ts-expect-error - TS2339 - Property 'errorText' does not exist on type 'TextFieldInterface'. */}
           helperText={props.errorText || helperText}
-{ /* @ts-expect-error - TS2339 - Property 'disabled' does not exist on type 'TextFieldInterface'. */}
           disabled={props.disabled}
-{ /* @ts-expect-error - TS2339 - Property 'required' does not exist on type 'TextFieldInterface'. */}
           required={props.required}
           InputLabelProps={{
-// @ts-expect-error - TS2339 - Property 'floatingLabelFixed' does not exist on type 'TextFieldInterface'.
+
             shrink: props.floatingLabelFixed ? true : undefined,
           }}
-{ /* @ts-expect-error - TS2339 - Property 'floatingLabelText' does not exist on type 'TextFieldInterface'. */}
           label={props.floatingLabelText}
-{ /* @ts-expect-error - TS2339 - Property 'name' does not exist on type 'TextFieldInterface'. */}
           name={props.name}
           placeholder={
-// @ts-expect-error - TS2339 - Property 'hintText' does not exist on type 'TextFieldInterface'.
+
             props.hintText
-// @ts-expect-error - TS2339 - Property 'hintText' does not exist on type 'TextFieldInterface'.
+
               ? props.hintText
-// @ts-expect-error - TS2339 - Property 'translatableHintText' does not exist on type 'TextFieldInterface'.
+
               : props.translatableHintText
               ? i18n._(props.translatableHintText)
               : undefined
           }
-{ /* @ts-expect-error - TS2339 - Property 'id' does not exist on type 'TextFieldInterface'. */}
           id={props.id}
           // Keyboard focus:
           autoFocus={shouldAutoFocusTextField}
           // Multiline:
-{ /* @ts-expect-error - TS2339 - Property 'multiline' does not exist on type 'TextFieldInterface'. */}
           multiline={props.multiline}
-{ /* @ts-expect-error - TS2339 - Property 'rows' does not exist on type 'TextFieldInterface'. */}
           rows={props.rows}
-{ /* @ts-expect-error - TS2339 - Property 'rowsMax' does not exist on type 'TextFieldInterface'. */}
           rowsMax={props.rowsMax}
           // Styling:
 { /* @ts-expect-error - TS2609 - JSX spread child must be an array type. | TS2559 - Type 'TextFieldInterface' has no properties in common with type '{ margin?: "none" | "dense" | undefined; floatingLabelText?: ReactNode; }'. */}
           {...computeTextFieldStyleProps(props)}
-{ /* @ts-expect-error - TS2339 - Property 'fullWidth' does not exist on type 'TextFieldInterface'. */}
           fullWidth={props.fullWidth}
           InputProps={{
             disableUnderline:
-// @ts-expect-error - TS2339 - Property 'underlineShow' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'underlineShow' does not exist on type 'TextFieldInterface'.
+
               props.underlineShow === undefined ? false : !props.underlineShow,
             style: {
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
               fontSize: props.style ? props.style.fontSize : undefined,
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
               fontStyle: props.style ? props.style.fontStyle : undefined,
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
               padding: props.style ? props.style.padding : undefined,
             },
-// @ts-expect-error - TS2339 - Property 'readOnly' does not exist on type 'TextFieldInterface'.
+
             readOnly: props.readOnly,
             inputProps: {
-// @ts-expect-error - TS2339 - Property 'onKeyPress' does not exist on type 'TextFieldInterface'.
+
               onKeyPress: props.onKeyPress,
-// @ts-expect-error - TS2339 - Property 'onKeyUp' does not exist on type 'TextFieldInterface'.
+
               onKeyUp: props.onKeyUp,
-// @ts-expect-error - TS2339 - Property 'onKeyDown' does not exist on type 'TextFieldInterface'.
+
               onKeyDown: props.onKeyDown,
-// @ts-expect-error - TS2339 - Property 'onClick' does not exist on type 'TextFieldInterface'.
+
               onClick: props.onClick,
               // String field props:
-// @ts-expect-error - TS2339 - Property 'maxLength' does not exist on type 'TextFieldInterface'.
+
               maxLength: props.maxLength,
               // Number field props:
-// @ts-expect-error - TS2339 - Property 'max' does not exist on type 'TextFieldInterface'.
+
               max: props.max,
-// @ts-expect-error - TS2339 - Property 'min' does not exist on type 'TextFieldInterface'.
+
               min: props.min,
-// @ts-expect-error - TS2339 - Property 'step' does not exist on type 'TextFieldInterface'.
+
               step: props.step,
               autoCapitalize: 'off', // For Safari iOS, avoid auto-capitalization
-// @ts-expect-error - TS2339 - Property 'inputStyle' does not exist on type 'TextFieldInterface'.
+
               style: props.inputStyle,
-// @ts-expect-error - TS2339 - Property 'dataset' does not exist on type 'TextFieldInterface'.
+
               ...dataObjectToProps(props.dataset),
             },
             // Input adornment:
             endAdornment:
 // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'TextFieldInterface'. | TS2339 - Property 'type' does not exist on type 'TextFieldInterface'.
               props.type !== undefined && props.type === 'password' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <InputAdornment position="end">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <IconButton
                     size="small"
                     onClick={() => setIsPasswordVisible(!isPasswordVisible)}
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Visibility />
                   </IconButton>
                 </InputAdornment>
-// @ts-expect-error - TS2339 - Property 'endAdornment' does not exist on type 'TextFieldInterface'.
+
               ) : props.endAdornment ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <InputAdornment
                   position="end"
-// @ts-expect-error - TS2339 - Property 'multiline' does not exist on type 'TextFieldInterface'.
+
                   style={props.multiline ? { marginTop: -17 } : undefined}
                 >
-{ /* @ts-expect-error - TS2339 - Property 'endAdornment' does not exist on type 'TextFieldInterface'. */}
                   {props.endAdornment}
                 </InputAdornment>
               ) : (
                 undefined
               ),
-// @ts-expect-error - TS2339 - Property 'startAdornment' does not exist on type 'TextFieldInterface'.
+
             startAdornment: props.startAdornment ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <InputAdornment position="start">
-{ /* @ts-expect-error - TS2339 - Property 'startAdornment' does not exist on type 'TextFieldInterface'. */}
                 {props.startAdornment}
               </InputAdornment>
             ) : (
@@ -432,24 +415,21 @@ const TextField = React.forwardRef<Props, TextFieldInterface>((props, ref) => {
             ),
           }}
           style={
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
             props.style
               ? {
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
                   width: props.style.width || undefined,
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
                   flex: props.style.flex || undefined,
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'TextFieldInterface'.
+
                   top: props.style.top || undefined,
                 }
               : undefined
           }
-{ /* @ts-expect-error - TS2551 - Property 'onFocus' does not exist on type 'TextFieldInterface'. Did you mean 'focus'? */}
           onFocus={props.onFocus}
-{ /* @ts-expect-error - TS2551 - Property 'onBlur' does not exist on type 'TextFieldInterface'. Did you mean 'blur'? */}
           onBlur={props.onBlur}
           inputRef={inputRef}
-{ /* @ts-expect-error - TS1382 - Unexpected token. Did you mean `{'>'}` or `&gt;`? | TS1381 - Unexpected token. Did you mean `{'}'}` or `&rbrace;`? */}
           spellCheck="false"
         />
       )}

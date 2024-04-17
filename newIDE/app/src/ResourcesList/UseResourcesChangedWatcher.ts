@@ -2,17 +2,19 @@ import * as React from 'react';
 import uniqueId from 'lodash/uniqueId';
 
 type ProjectCallbacks = {
-  [callbackId: string]: () => any
+  [callbackId: string]: () => any;
 };
 
 const callbacksPerProject: {
-  [projectPtr: string]: ProjectCallbacks
+  [projectPtr: string]: ProjectCallbacks;
 } = {};
 
-const getProjectCallbacks = (project: gdProject): ProjectCallbacks | null | undefined => {
+const getProjectCallbacks = (
+  project: gd.Project
+): ProjectCallbacks | null | undefined => {
   return callbacksPerProject[project.ptr.toString()];
 };
-const getOrCreateProjectCallbacks = (project: gdProject): ProjectCallbacks => {
+const getOrCreateProjectCallbacks = (project: gd.Project): ProjectCallbacks => {
   const projectPtrAsString = project.ptr.toString();
   if (callbacksPerProject.hasOwnProperty(projectPtrAsString)) {
     return callbacksPerProject[projectPtrAsString];
@@ -22,17 +24,14 @@ const getOrCreateProjectCallbacks = (project: gdProject): ProjectCallbacks => {
 };
 
 type Props = {
-  project: gdProject,
-  callback: () => any
+  project: gd.Project;
+  callback: () => any;
 };
 
 /**
  * Hook used to synchronize different components displaying a project's resources.
  */
-const useResourcesChangedWatcher = ({
-  project,
-  callback,
-}: Props) => {
+const useResourcesChangedWatcher = ({ project, callback }: Props) => {
   const registerOnResourcesChangedCallback = React.useCallback(
     (callback: () => any) => {
       const projectCallbacks = getOrCreateProjectCallbacks(project);
@@ -52,24 +51,20 @@ const useResourcesChangedWatcher = ({
     [project]
   );
 
-  const triggerResourcesHaveChanged = React.useCallback(
-    () => {
-      const projectCallbacks = getProjectCallbacks(project);
-      if (!projectCallbacks) return;
-      Object.keys(projectCallbacks).forEach(callbackId => {
-        try {
-          projectCallbacks[callbackId]();
-        } catch (error: any) {}
-      });
-    },
-    [project]
-  );
+  const triggerResourcesHaveChanged = React.useCallback(() => {
+    const projectCallbacks = getProjectCallbacks(project);
+    if (!projectCallbacks) return;
+    Object.keys(projectCallbacks).forEach((callbackId) => {
+      try {
+        projectCallbacks[callbackId]();
+      } catch (error) {}
+    });
+  }, [project]);
 
   React.useEffect(
     () => {
-      const resourcesChangedCallbackId = registerOnResourcesChangedCallback(
-        callback
-      );
+      const resourcesChangedCallbackId =
+        registerOnResourcesChangedCallback(callback);
       return () => {
         unregisterOnResourcesChangedCallback(resourcesChangedCallbackId);
       };

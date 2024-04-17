@@ -1,10 +1,7 @@
-import {extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl} from './Asset';
+import { extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl } from './Asset';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('Asset service', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     it('throws if not the right URL format', () => {
       expect(() =>
         extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl(
@@ -12,7 +9,7 @@ describe('Asset service', () => {
         )
       ).toThrow();
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if file has an extension', () => {
       expect(
         extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl(
@@ -20,7 +17,7 @@ describe('Asset service', () => {
         )
       ).toStrictEqual('file-to-download.png');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if file has no extension', () => {
       expect(
         extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl(
@@ -28,7 +25,7 @@ describe('Asset service', () => {
         )
       ).toStrictEqual('file-to-download');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if url is encoded', () => {
       expect(
         extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl(
@@ -36,7 +33,7 @@ describe('Asset service', () => {
         )
       ).toStrictEqual('file to download.png');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     it('works if url is not encoded', () => {
       expect(
         extractDecodedFilenameWithExtensionFromPublicAssetResourceUrl(

@@ -1,28 +1,26 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS6142 - Module '../../../MainFrame/EditorContainers/HomePage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/EditorContainers/HomePage/index.tsx', but '--jsx' is not set.
+
 import { HomePage } from '../../../MainFrame/EditorContainers/HomePage';
 import GDevelopJsInitializerDecorator, {
   testProject,
-// @ts-expect-error - TS6142 - Module '../../GDevelopJsInitializerDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/GDevelopJsInitializerDecorator.tsx', but '--jsx' is not set.
 } from '../../GDevelopJsInitializerDecorator';
-// @ts-expect-error - TS6142 - Module '../../../AssetStore/ExampleStore/ExampleStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ExampleStore/ExampleStoreContext.tsx', but '--jsx' is not set.
+
 import { ExampleStoreStateProvider } from '../../../AssetStore/ExampleStore/ExampleStoreContext';
-// @ts-expect-error - TS6142 - Module '../../../Tutorial/TutorialContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Tutorial/TutorialContext.tsx', but '--jsx' is not set.
+
 import { TutorialStateProvider } from '../../../Tutorial/TutorialContext';
 import PreferencesContext, {
   initialPreferences,
   InAppTutorialUserProgress,
-// @ts-expect-error - TS6142 - Module '../../../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
 } from '../../../MainFrame/Preferences/PreferencesContext';
 import { FileMetadataAndStorageProviderName } from '../../../ProjectsStorage';
-// @ts-expect-error - TS6142 - Module '../../FixedHeightFlexContainer' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/FixedHeightFlexContainer.tsx', but '--jsx' is not set.
+
 import FixedHeightFlexContainer from '../../FixedHeightFlexContainer';
 import AuthenticatedUserContext, {
   initialAuthenticatedUser,
   AuthenticatedUser,
 } from '../../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../../ProjectsStorage/CloudStorageProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/index.tsx', but '--jsx' is not set.
+
 import CloudStorageProvider from '../../../ProjectsStorage/CloudStorageProvider';
 import {
   fakeSilverAuthenticatedUser,
@@ -72,15 +70,13 @@ const WrappedHomePage = ({
   inAppTutorialsFetchingError = null,
   user,
 }: {
-  project: gdProject | null | undefined,
-  recentProjectFiles: FileMetadataAndStorageProviderName[],
-  tutorialProgress?: InAppTutorialUserProgress,
-  inAppTutorialsFetchingError?: string | null,
-  user: AuthenticatedUser
+  project: gd.Project | null | undefined;
+  recentProjectFiles: FileMetadataAndStorageProviderName[];
+  tutorialProgress?: InAppTutorialUserProgress;
+  inAppTutorialsFetchingError?: string | null;
+  user: AuthenticatedUser;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <FixedHeightFlexContainer height={1080}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <PreferencesContext.Provider
       value={{
         ...initialPreferences,
@@ -88,7 +84,6 @@ const WrappedHomePage = ({
         getTutorialProgress: () => tutorialProgress,
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <InAppTutorialContext.Provider
         value={{
           inAppTutorialShortHeaders: [
@@ -118,13 +113,9 @@ const WrappedHomePage = ({
           },
         }}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <AuthenticatedUserContext.Provider value={user}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ExampleStoreStateProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <TutorialStateProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <HomePage
                 project={project}
                 fileMetadata={null}
@@ -174,7 +165,6 @@ export default {
 };
 
 export const BuildSectionLoading = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={null}
     recentProjectFiles={getRecentProjectFiles(5)}
@@ -182,7 +172,6 @@ export const BuildSectionLoading = () => (
   />
 );
 export const NoProjectOpened = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={null}
     recentProjectFiles={getRecentProjectFiles(5)}
@@ -190,7 +179,6 @@ export const NoProjectOpened = () => (
   />
 );
 export const ProjectOpened = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(5)}
@@ -198,7 +186,6 @@ export const ProjectOpened = () => (
   />
 );
 export const NoRecentFiles = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={[]}
@@ -206,7 +193,6 @@ export const NoRecentFiles = () => (
   />
 );
 export const LotOfRecentFiles = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -214,7 +200,6 @@ export const LotOfRecentFiles = () => (
   />
 );
 export const SomeRecentFilesNotSavedYet = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getPartiallySavedRecentProjectFiles(20)}
@@ -223,7 +208,6 @@ export const SomeRecentFilesNotSavedYet = () => (
 );
 
 export const Connected = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -232,7 +216,6 @@ export const Connected = () => (
 );
 
 export const ConnectedWithLongName = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -247,7 +230,6 @@ export const ConnectedWithLongName = () => (
 );
 
 export const NotConnected = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -256,7 +238,6 @@ export const NotConnected = () => (
 );
 
 export const ConnectedWithInAppTutorialProgress = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -273,7 +254,6 @@ export const ConnectedWithInAppTutorialProgress = () => (
   />
 );
 export const ConnectedWithInAppTutorialLoadingError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -284,7 +264,6 @@ export const ConnectedWithInAppTutorialLoadingError = () => (
 );
 
 export const ConnectedWithInAppTutorialCompleted = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}
@@ -302,7 +281,6 @@ export const ConnectedWithInAppTutorialCompleted = () => (
 );
 
 export const NetworkError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <WrappedHomePage
     project={testProject.project}
     recentProjectFiles={getRecentProjectFiles(20)}

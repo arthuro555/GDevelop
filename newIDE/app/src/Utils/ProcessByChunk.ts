@@ -5,10 +5,10 @@ export const processByChunk = async <Item, MappedItem>(
     isChunkTooBig,
     processChunk,
   }: {
-    transformItem: (arg1: Item) => Promise<MappedItem>,
-    isChunkTooBig: (arg1: MappedItem[]) => boolean,
-    processChunk: (arg1: MappedItem[]) => Promise<void>
-  },
+    transformItem: (arg1: Item) => Promise<MappedItem>;
+    isChunkTooBig: (arg1: MappedItem[]) => boolean;
+    processChunk: (arg1: MappedItem[]) => Promise<void>;
+  }
 ): Promise<void> => {
   let currentItemIndex = 0;
   const nextChunk: Array<MappedItem> = [];

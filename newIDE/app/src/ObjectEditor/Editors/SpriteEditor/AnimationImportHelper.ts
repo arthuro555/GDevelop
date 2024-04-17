@@ -14,7 +14,7 @@ const findCommonPrefix = (values: Array<string>): string => {
   for (let index = 0; hasFoundBiggerPrefix; index++) {
     const character = values[0].charAt(index);
     hasFoundBiggerPrefix = values.every(
-      value => value.length > index && value.charAt(index) === character
+      (value) => value.length > index && value.charAt(index) === character
     );
     if (!hasFoundBiggerPrefix) {
       prefixLength = index;
@@ -43,15 +43,17 @@ const trimFromSeparators = (value: string) => {
   return value.substring(lowerIndex, upperIndex + 1);
 };
 
-export const groupResourcesByAnimations = (resources: Array<gdResource>): Map<string, Array<gdResource>> => {
-  const resourcesByAnimation = new Map<string, Array<gdResource>>();
+export const groupResourcesByAnimations = (
+  resources: Array<gd.Resource>
+): Map<string, Array<gd.Resource>> => {
+  const resourcesByAnimation = new Map<string, Array<gd.Resource>>();
 
   if (resources.length === 0) {
     return resourcesByAnimation;
   }
 
   // Extract the frame indexes from the file names.
-  const namedResources = resources.map(resource => {
+  const namedResources = resources.map((resource) => {
     // The resource name is used instead of the resource file path because
     // cloud projects are prefixing files names with a UID.
     const basename = path.basename(
@@ -67,19 +69,19 @@ export const groupResourcesByAnimations = (resources: Array<gdResource>): Map<st
         ? basename.substring(0, basename.length - indexMatches[0].length)
         : basename
     );
-    if (separators.some(separator => name.endsWith(separator))) {
+    if (separators.some((separator) => name.endsWith(separator))) {
       name = name.substring(0, name.length - 1);
     }
     return {
       resource,
       name,
-// @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
+      // @ts-expect-error - TS2345 - Argument of type 'number | null' is not assignable to parameter of type 'number'.
       index: isNaN(index) ? null : index,
     };
   });
 
   const commonPrefix = findCommonPrefix(
-    namedResources.map(resources => resources.name)
+    namedResources.map((resources) => resources.name)
   );
   // Remove the common prefix as it's probably the object name.
   for (const namedResource of namedResources) {
@@ -94,7 +96,7 @@ export const groupResourcesByAnimations = (resources: Array<gdResource>): Map<st
       name,
       enumeratedResources
         .sort((a, b) => (a.index || 0) - (b.index || 0))
-        .map(resource => resource.resource)
+        .map((resource) => resource.resource)
     );
   }
   return resourcesByAnimation;

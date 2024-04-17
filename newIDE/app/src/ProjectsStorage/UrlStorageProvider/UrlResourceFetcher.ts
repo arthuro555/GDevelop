@@ -4,9 +4,9 @@ import { isFetchableUrl, isURL } from '../../ResourcesList/ResourceUtils';
 import { FileMetadata } from '../index';
 
 type Options = {
-  project: gdProject,
-  fileMetadata: FileMetadata,
-  onProgress: (count: number, total: number) => void
+  project: gd.Project;
+  fileMetadata: FileMetadata;
+  onProgress: (count: number, total: number) => void;
 };
 
 /**
@@ -24,8 +24,8 @@ export const fetchRelativeResourcesToFullUrls = async ({
   const resourcesManager = project.getResourcesManager();
   const allResourceNames = resourcesManager.getAllResourceNames().toJSArray();
   const erroredResources: Array<{
-    error: never,
-    resourceName: any
+    error: never;
+    resourceName: any;
   }> = [];
 
   const projectFileUrl = fileMetadata.fileIdentifier;
@@ -42,8 +42,8 @@ export const fetchRelativeResourcesToFullUrls = async ({
   }
 
   let fetchedResourcesCount = 0;
-// @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
-  const resourcesToFetch = allResourceNames.filter(resourceName => {
+  // @ts-expect-error - TS7006 - Parameter 'resourceName' implicitly has an 'any' type.
+  const resourcesToFetch = allResourceNames.filter((resourceName) => {
     const resource = resourcesManager.getResource(resourceName);
     const isResourceAnUrl = isURL(resource.getFile());
 
@@ -53,7 +53,7 @@ export const fetchRelativeResourcesToFullUrls = async ({
 
   await PromisePool.withConcurrency(20)
     .for(resourcesToFetch)
-    .process(async resourceName => {
+    .process(async (resourceName) => {
       const resource = resourcesManager.getResource(resourceName);
 
       try {
@@ -64,8 +64,8 @@ export const fetchRelativeResourcesToFullUrls = async ({
         });
 
         resource.setFile(resourceFullUrl);
-      } catch (error: any) {
-// @ts-expect-error - TS2322 - Type 'any' is not assignable to type 'never'.
+      } catch (error) {
+        // @ts-expect-error - TS2322 - Type 'any' is not assignable to type 'never'.
         erroredResources.push({ resourceName, error });
       }
 

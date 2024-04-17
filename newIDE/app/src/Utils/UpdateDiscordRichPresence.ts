@@ -1,12 +1,12 @@
-import {useEffect} from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+import { useEffect } from 'react';
+
 import optionalRequire from './OptionalRequire';
 const electron = optionalRequire('electron');
 const ipc = electron ? electron.ipcRenderer : null;
 
 const richPresenceStartTimestamp = Date.now();
 
-const updateDiscordRichPresence = (project?: gdProject | null) => {
+const updateDiscordRichPresence = (project?: gd.Project | null) => {
   if (ipc === null) return;
 
   const config = {
@@ -20,11 +20,8 @@ const updateDiscordRichPresence = (project?: gdProject | null) => {
   ipc.send('update-discord-rich-presence', config);
 };
 
-export const useDiscordRichPresence = (project?: gdProject | null) => {
-  useEffect(
-    () => {
-      updateDiscordRichPresence(project);
-    },
-    [project]
-  );
+export const useDiscordRichPresence = (project?: gd.Project | null) => {
+  useEffect(() => {
+    updateDiscordRichPresence(project);
+  }, [project]);
 };

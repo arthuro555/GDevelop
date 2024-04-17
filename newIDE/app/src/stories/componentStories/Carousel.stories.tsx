@@ -1,14 +1,12 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../UI/Carousel' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Carousel.tsx', but '--jsx' is not set.
 import Carousel from '../../UI/Carousel';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/ChevronArrowRight'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowRight.js' implicitly has an 'any' type.
+
 import ChevronArrowRight from '../../UI/CustomSvgIcons/ChevronArrowRight';
 
 export default {
@@ -18,15 +16,11 @@ export default {
 };
 
 export const LoadingWithoutTitleSkeleton = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     title={<Trans>Learn game making</Trans>}
     items={null}
     displayItemTitles={false}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllLabel={<Trans>Browse all</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllIcon={<ChevronArrowRight fontSize="small" />}
     displayArrowsOnDesktop
   />
@@ -65,13 +59,9 @@ export const OnlyFewSquareImages = () => {
     },
   ];
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>Learn game making</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllLabel={<Trans>Browse all</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllIcon={<ChevronArrowRight fontSize="small" />}
       items={items}
       displayItemTitles={false}
@@ -82,14 +72,10 @@ export const OnlyFewSquareImages = () => {
 };
 
 export const LoadingWithTitleSkeleton = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     title={<Trans>Showcase</Trans>}
     items={null}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllLabel={<Trans>Browse all</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllIcon={<ChevronArrowRight fontSize="small" />}
   />
 );
@@ -180,15 +166,11 @@ const showcaseItems = [
 ];
 export const RoundedImagesWithOverlay = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>Showcase</Trans>}
       items={showcaseItems}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllLabel={<Trans>Browse all</Trans>}
       onBrowseAllClick={() => action('Browse all button clicked')}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllIcon={<ChevronArrowRight fontSize="small" />}
       roundedImages
       displayArrowsOnDesktop
@@ -198,15 +180,11 @@ export const RoundedImagesWithOverlay = () => {
 
 export const WithoutArrows = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       title={<Trans>Showcase</Trans>}
       items={showcaseItems}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllLabel={<Trans>Browse all</Trans>}
       onBrowseAllClick={() => action('Browse all button clicked')}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       browseAllIcon={<ChevronArrowRight fontSize="small" />}
       roundedImages
     />
@@ -214,16 +192,11 @@ export const WithoutArrows = () => {
 };
 
 export const WithError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Carousel
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     title={<Trans>Showcase</Trans>}
     items={null}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllLabel={<Trans>Browse all</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     error={<Trans>Unexpected error</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     browseAllIcon={<ChevronArrowRight fontSize="small" />}
     displayArrowsOnDesktop
   />

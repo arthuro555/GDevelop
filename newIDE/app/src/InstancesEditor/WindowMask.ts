@@ -5,23 +5,19 @@ import { InstancesEditorSettings } from './InstancesEditorSettings';
 import Rectangle from '../Utils/Rectangle';
 
 type Props = {
-  project: gdProject,
-  instancesEditorSettings: InstancesEditorSettings,
-  viewPosition: ViewPosition
+  project: gd.Project;
+  instancesEditorSettings: InstancesEditorSettings;
+  viewPosition: ViewPosition;
 };
 
 export default class WindowMask {
-  project: gdProject;
+  project: gd.Project;
   instancesEditorSettings: InstancesEditorSettings;
   viewPosition: ViewPosition;
   pixiRectangle = new PIXI.Graphics();
   windowRectangle: Rectangle = new Rectangle();
 
-  constructor({
-    project,
-    viewPosition,
-    instancesEditorSettings,
-  }: Props) {
+  constructor({ project, viewPosition, instancesEditorSettings }: Props) {
     this.project = project;
     this.viewPosition = viewPosition;
     this.instancesEditorSettings = instancesEditorSettings;

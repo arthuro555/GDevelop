@@ -1,8 +1,8 @@
 export default function getObjectByName(
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer | null | undefined,
-  objectName: string,
-): gdObject | null | undefined {
+  globalObjectsContainer: gd.ObjectsContainer,
+  objectsContainer: gd.ObjectsContainer | null | undefined,
+  objectName: string
+): gd.Object | null | undefined {
   if (objectsContainer && objectsContainer.hasObjectNamed(objectName))
     return objectsContainer.getObject(objectName);
   else if (globalObjectsContainer.hasObjectNamed(objectName))

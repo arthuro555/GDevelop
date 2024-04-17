@@ -1,26 +1,24 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
-export const getRelativeOrAbsoluteDisplayDate = (
-  {
-    i18n,
-    dateAsNumber,
-    relativeLimit,
-    sameDayFormat,
-    sameWeekFormat,
-    dayBeforeFormat,
-  }: {
-    i18n: I18nType,
-    dateAsNumber: number,
-    relativeLimit: 'currentWeek' | 'currentYear',
-    sameDayFormat: 'todayAndHour' | 'timeAgo' | 'today',
-    sameWeekFormat: 'timeAgo' | 'thisWeek',
-    dayBeforeFormat: 'yesterdayAndHour' | 'yesterday'
-  },
-): React.ReactElement => {
+export const getRelativeOrAbsoluteDisplayDate = ({
+  i18n,
+  dateAsNumber,
+  relativeLimit,
+  sameDayFormat,
+  sameWeekFormat,
+  dayBeforeFormat,
+}: {
+  i18n: I18nType;
+  dateAsNumber: number;
+  relativeLimit: 'currentWeek' | 'currentYear';
+  sameDayFormat: 'todayAndHour' | 'timeAgo' | 'today';
+  sameWeekFormat: 'timeAgo' | 'thisWeek';
+  dayBeforeFormat: 'yesterdayAndHour' | 'yesterday';
+}): React.ReactElement => {
   const nowAsNumber = Date.now();
   if (nowAsNumber - dateAsNumber < 60 * 1000) {
     return i18n._(t`Just now`);
@@ -34,7 +32,7 @@ export const getRelativeOrAbsoluteDisplayDate = (
     now.getDate() === date.getDate()
   ) {
     if (sameDayFormat === 'todayAndHour') {
-// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
+      // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return (
         i18n._(t`Today`) +
         ` ${i18n.date(date, {
@@ -66,7 +64,7 @@ export const getRelativeOrAbsoluteDisplayDate = (
     yesterdayAtSameTime.getDate() === date.getDate()
   ) {
     if (dayBeforeFormat === 'yesterdayAndHour') {
-// @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
+      // @ts-expect-error - TS2322 - Type 'string' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
       return (
         i18n._(t`Yesterday`) +
         ` ${i18n.date(date, {
@@ -110,7 +108,7 @@ export const getRelativeOrAbsoluteDisplayDate = (
   if (now.getFullYear() === date.getFullYear()) {
     return i18n._(t`This year`);
   }
-// @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
+  // @ts-expect-error - TS2322 - Type 'number' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
   return date.getFullYear();
 };
 

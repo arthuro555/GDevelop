@@ -1,9 +1,8 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import ResourceSelector, {
   ResourceSelectorInterface,
-// @ts-expect-error - TS6142 - Module '../../ResourcesList/ResourceSelector' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourceSelector.tsx', but '--jsx' is not set.
 } from '../../ResourcesList/ResourceSelector';
 import ResourcesLoader from '../../ResourcesLoader';
 import {
@@ -12,42 +11,43 @@ import {
   FieldFocusFunction,
 } from './ParameterFieldCommons';
 
-// @ts-expect-error - TS2345 - Argument of type '(props: ParameterFieldProps, ref: ForwardedRef<ParameterFieldProps>) => Element | null' is not assignable to parameter of type 'ForwardRefRenderFunction<ParameterFieldProps, ParameterFieldInterface>'.
-export default React.forwardRef<ParameterFieldProps, ParameterFieldInterface>(function BitmapFontResourceField(props: ParameterFieldProps, ref) {
-  const field = React.useRef<ResourceSelectorInterface | null | undefined>(null);
-  const focus: FieldFocusFunction = options => {
-    if (field.current) field.current.focus(options);
-  };
-// @ts-expect-error - TS2322 - Type '{ focus: FieldFocusFunction; }' is not assignable to type 'ParameterFieldProps'.
-  React.useImperativeHandle(ref, () => ({
-    focus,
-  }));
-
-  if (!props.resourceManagementProps || !props.project) {
-    console.error(
-      'Missing project or resourceManagementProps for BitmapFontResourceField'
+export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
+  function BitmapFontResourceField(props: ParameterFieldProps, ref) {
+    const field = React.useRef<ResourceSelectorInterface | null | undefined>(
+      null
     );
-    return null;
-  }
+    const focus: FieldFocusFunction = (options) => {
+      if (field.current) field.current.focus(options);
+    };
 
-  return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    <ResourceSelector
-      margin={props.isInline ? 'none' : 'dense'}
-      project={props.project}
-      resourceManagementProps={props.resourceManagementProps}
-      resourcesLoader={ResourcesLoader}
-      resourceKind="bitmapFont"
-      fullWidth
-      initialResourceName={props.value}
-      onChange={props.onChange}
-      floatingLabelText={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <Trans>Choose the bitmap font file (.fnt, .xml) to use</Trans>
-      }
-      onRequestClose={props.onRequestClose}
-      onApply={props.onApply}
-      ref={field}
-    />
-  );
-});
+    React.useImperativeHandle(ref, () => ({
+      focus,
+    }));
+
+    if (!props.resourceManagementProps || !props.project) {
+      console.error(
+        'Missing project or resourceManagementProps for BitmapFontResourceField'
+      );
+      return null;
+    }
+
+    return (
+      <ResourceSelector
+        margin={props.isInline ? 'none' : 'dense'}
+        project={props.project}
+        resourceManagementProps={props.resourceManagementProps}
+        resourcesLoader={ResourcesLoader}
+        resourceKind="bitmapFont"
+        fullWidth
+        initialResourceName={props.value}
+        onChange={props.onChange}
+        floatingLabelText={
+          <Trans>Choose the bitmap font file (.fnt, .xml) to use</Trans>
+        }
+        onRequestClose={props.onRequestClose}
+        onApply={props.onApply}
+        ref={field}
+      />
+    );
+  }
+);

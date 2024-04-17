@@ -1,4 +1,4 @@
-import {unserializeFromJSObject} from '../../Utils/Serializer';
+import { unserializeFromJSObject } from '../../Utils/Serializer';
 import { mapVector } from '../../Utils/MapFor';
 import { getFreeEventsFunctionType } from '../../EventsFunctionsExtensionsLoader';
 import getObjectGroupByName from '../../Utils/GetObjectGroupByName';
@@ -6,7 +6,6 @@ import {
   getProjectScopedContainersFromScope,
   EventsScope,
 } from '../../InstructionOrExpression/EventsScope.flow';
-const gd: libGDevelop = global.gd;
 
 /**
  * Set up an events function with the given serialized events,
@@ -21,12 +20,12 @@ export const setupFunctionFromEvents = ({
   project,
   eventsFunction,
 }: {
-  project: gdProject,
-  scope: EventsScope,
-  globalObjectsContainer: gdObjectsContainer,
-  objectsContainer: gdObjectsContainer,
-  serializedEvents: any,
-  eventsFunction: gdEventsFunction
+  project: gd.Project;
+  scope: EventsScope;
+  globalObjectsContainer: gd.ObjectsContainer;
+  objectsContainer: gd.ObjectsContainer;
+  serializedEvents: any;
+  eventsFunction: gd.EventsFunction;
 }) => {
   // Set up the function
   eventsFunction.setName('MyFunction');
@@ -62,37 +61,39 @@ export const setupFunctionFromEvents = ({
     .getObjectNames()
     .toNewVectorString()
     .toJSArray();
-  const groups: Array<gdObjectGroup> = objectOrGroupNames
+  const groups: Array<gd.ObjectGroup> = objectOrGroupNames
     // Filter to only keep groups
     .filter(
       (objectOrGroupName: string) =>
         objectNames.indexOf(objectOrGroupName) === -1
     )
-    .map(groupName =>
+    .map((groupName) =>
       getObjectGroupByName(globalObjectsContainer, objectsContainer, groupName)
     )
     .filter(Boolean);
 
   // Compute what the parameters should be:
   // 1) The groups, but only the ones that have no object directly referenced.
-  const parameterGroups: Array<gdObjectGroup> = groups.filter(group => {
-    return !objectOrGroupNames.some(referencedObjectOrGroupName =>
+  const parameterGroups: Array<gd.ObjectGroup> = groups.filter((group) => {
+    return !objectOrGroupNames.some((referencedObjectOrGroupName) =>
       group.find(referencedObjectOrGroupName)
     );
   });
-  const parameterGroupNames: Array<string> = parameterGroups.map(group =>
+  const parameterGroupNames: Array<string> = parameterGroups.map((group) =>
     group.getName()
   );
 
   // 2) The objects, but only the ones that are already in the groups in parameters
-  const parameterObjectNames: Array<string> = objectNames.filter(objectName => {
-    return !parameterGroups.some(group => group.find(objectName));
-  });
+  const parameterObjectNames: Array<string> = objectNames.filter(
+    (objectName) => {
+      return !parameterGroups.some((group) => group.find(objectName));
+    }
+  );
 
   // Create parameters for these objects (or these groups without any object directly referenced)
   const parameters = eventsFunction.getParameters();
   parameters.clear();
-  [...parameterGroupNames, ...parameterObjectNames].forEach(objectName => {
+  [...parameterGroupNames, ...parameterObjectNames].forEach((objectName) => {
     const newParameter = new gd.ParameterMetadata();
     newParameter.setType('objectList');
     newParameter.setName(objectName);
@@ -108,7 +109,7 @@ export const setupFunctionFromEvents = ({
       .toNewVectorString()
       .toJSArray();
 
-    behaviorNames.forEach(behaviorName => {
+    behaviorNames.forEach((behaviorName) => {
       const newParameter = new gd.ParameterMetadata();
       newParameter.setType('behavior');
       newParameter.setName(behaviorName);
@@ -124,8 +125,8 @@ export const setupFunctionFromEvents = ({
   // Import groups that are used in events, but are not in parameters,
   // inside the events function groups.
   groups
-    .filter(group => !parameterGroupNames.includes(group.getName()))
-    .forEach(group => {
+    .filter((group) => !parameterGroupNames.includes(group.getName()))
+    .forEach((group) => {
       if (group) {
         eventsFunction.getObjectGroups().insert(group, 0);
       }
@@ -137,7 +138,10 @@ export const setupFunctionFromEvents = ({
 /**
  * Create an instruction to call the given events function
  */
-export const createNewInstructionForEventsFunction = (extensionName: string, eventsFunction: gdEventsFunction): gdInstruction => {
+export const createNewInstructionForEventsFunction = (
+  extensionName: string,
+  eventsFunction: gd.EventsFunction
+): gd.Instruction => {
   const action = new gd.Instruction(); //Add a simple action
   const runtimeSceneParameterCount = 1; // By convention, first parameter is always the Runtime Scene.
   const contextParameterCount = 1; // By convention, latest parameter is always the eventsFunctionContext of the calling function (if any).
@@ -149,7 +153,6 @@ export const createNewInstructionForEventsFunction = (extensionName: string, eve
       contextParameterCount
   );
 
-// @ts-expect-error - TS7006 - Parameter 'parameterMetadata' implicitly has an 'any' type. | TS7006 - Parameter 'index' implicitly has an 'any' type.
   mapVector(eventsFunction.getParameters(), (parameterMetadata, index) => {
     action.setParameter(
       runtimeSceneParameterCount + index,
@@ -178,7 +181,7 @@ export const validateExtensionName = (extensionName: string) => {
  * Validate that an events functions extension name is unique in a project.
  */
 export const validateExtensionNameUniqueness = (
-  project: gdProject,
+  project: gd.Project,
   extensionName: string
 ) => {
   return !project.hasEventsFunctionsExtensionNamed(extensionName);
@@ -188,14 +191,13 @@ export const validateExtensionNameUniqueness = (
  * Validate that an events function name is unique in a project extension.
  */
 export const validateEventsFunctionNameUniqueness = (
-  project: gdProject,
+  project: gd.Project,
   extensionName: string,
-  eventsFunction: gdEventsFunction
+  eventsFunction: gd.EventsFunction
 ) => {
   if (project.hasEventsFunctionsExtensionNamed(extensionName)) {
-    const eventsFunctionsExtension = project.getEventsFunctionsExtension(
-      extensionName
-    );
+    const eventsFunctionsExtension =
+      project.getEventsFunctionsExtension(extensionName);
 
     return !eventsFunctionsExtension.hasEventsFunctionNamed(
       eventsFunction.getName()
@@ -210,9 +212,9 @@ export const validateEventsFunctionNameUniqueness = (
  * without any conflict/invalid name.
  */
 export const canCreateEventsFunction = (
-  project: gdProject,
+  project: gd.Project,
   extensionName: string,
-  eventsFunction: gdEventsFunction
+  eventsFunction: gd.EventsFunction
 ) => {
   return (
     extensionName !== '' &&
@@ -233,7 +235,7 @@ export const canCreateEventsFunction = (
  * Return true if the function is considered to have more parameters than usual.
  */
 export const functionHasLotsOfParameters = (
-  eventsFunction: gdEventsFunction
+  eventsFunction: gd.EventsFunction
 ) => {
   return eventsFunction.getParameters().size() > 7;
 };

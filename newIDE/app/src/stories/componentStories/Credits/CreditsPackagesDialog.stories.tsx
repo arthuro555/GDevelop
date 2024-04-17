@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../Credits/CreditsPackagesDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Credits/CreditsPackagesDialog.tsx', but '--jsx' is not set.
+
 import CreditsPackagesDialog from '../../../Credits/CreditsPackagesDialog';
-// @ts-expect-error - TS6142 - Module '../../../AssetStore/CreditsPackages/CreditsPackageStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/CreditsPackages/CreditsPackageStoreContext.tsx', but '--jsx' is not set.
+
 import { CreditsPackageStoreContext } from '../../../AssetStore/CreditsPackages/CreditsPackageStoreContext';
-// @ts-expect-error - TS6142 - Module '../../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { CreditsPackageListingData } from '../../../Utils/GDevelopServices/Shop';
 
 export default {
@@ -98,7 +97,6 @@ const creditsPackageListingDatas: CreditsPackageListingData[] = [
 
 export const Loading = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CreditsPackageStoreContext.Provider
       value={{
         fetchCreditsPackages: () => {},
@@ -109,7 +107,6 @@ export const Loading = () => {
         openCreditsUsageDialog: () => {},
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreditsPackagesDialog
         onClose={() => {}}
         suggestedPackage={null}
@@ -121,7 +118,6 @@ export const Loading = () => {
 
 export const Loaded = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CreditsPackageStoreContext.Provider
       value={{
         fetchCreditsPackages: () => {},
@@ -132,7 +128,6 @@ export const Loaded = () => {
         openCreditsUsageDialog: () => {},
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreditsPackagesDialog
         onClose={() => {}}
         suggestedPackage={null}
@@ -144,7 +139,6 @@ export const Loaded = () => {
 
 export const WithSuggestedPackageAndMissingCredits = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CreditsPackageStoreContext.Provider
       value={{
         fetchCreditsPackages: () => {},
@@ -155,7 +149,6 @@ export const WithSuggestedPackageAndMissingCredits = () => {
         openCreditsUsageDialog: () => {},
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreditsPackagesDialog
         onClose={() => {}}
         suggestedPackage={creditsPackageListingDatas[1]}

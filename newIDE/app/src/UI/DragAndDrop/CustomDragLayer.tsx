@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { DragLayer } from 'react-dnd';
 import { Identifier } from 'dnd-core';
-// @ts-expect-error - TS6142 - Module '../Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../Text';
-// @ts-expect-error - TS6142 - Module '../../InstancesEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/InstancesEditor/index.tsx', but '--jsx' is not set.
+
 import { instancesEditorId } from '../../InstancesEditor';
-import {
-  useScreenType,
-  ScreenType,
-} from '../Responsive/ScreenTypeMeasurer';
-// @ts-expect-error - TS6142 - Module '../CorsAwareImage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CorsAwareImage.tsx', but '--jsx' is not set.
+import { useScreenType, ScreenType } from '../Responsive/ScreenTypeMeasurer';
+
 import { CorsAwareImage } from '../CorsAwareImage';
-// @ts-expect-error - TS6142 - Module './DragSourceAndDropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DragSourceAndDropTarget.tsx', but '--jsx' is not set.
+
 import { DraggedItem } from './DragSourceAndDropTarget';
-// @ts-expect-error - TS6142 - Module '../../SceneEditor/SwipeableDrawerEditorsDisplay' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/SceneEditor/SwipeableDrawerEditorsDisplay/index.tsx', but '--jsx' is not set.
+
 import { swipeableDrawerContainerId } from '../../SceneEditor/SwipeableDrawerEditorsDisplay';
 
 const layerStyles = {
@@ -35,12 +32,15 @@ const getItemStyles = ({
   previewPosition,
   screenType,
 }: {
-  clientOffset: {
-    x: number,
-    y: number
-  } | null | undefined,
-  previewPosition: 'center' | 'aboveRight',
-  screenType: ScreenType
+  clientOffset:
+    | {
+        x: number;
+        y: number;
+      }
+    | null
+    | undefined;
+  previewPosition: 'center' | 'aboveRight';
+  screenType: ScreenType;
 }) => {
   if (!clientOffset) {
     return {
@@ -66,17 +66,17 @@ const getItemStyles = ({
 };
 
 type XYCoord = {
-  x: number,
-  y: number
+  x: number;
+  y: number;
 };
 
 type InternalCustomDragLayerProps = {
-  item?: DraggedItem,
-  itemType?: Identifier | null,
-  initialOffset?: XYCoord | null,
-  currentOffset?: XYCoord | null,
-  clientOffset?: XYCoord | null,
-  isDragging?: boolean
+  item?: DraggedItem;
+  itemType?: Identifier | null;
+  initialOffset?: XYCoord | null;
+  currentOffset?: XYCoord | null;
+  clientOffset?: XYCoord | null;
+  isDragging?: boolean;
 };
 
 const shouldHidePreviewBecauseDraggingOnSceneEditorCanvas = ({
@@ -130,43 +130,36 @@ const CustomDragLayer = ({
   clientOffset,
 }: InternalCustomDragLayerProps) => {
   const screenType = useScreenType();
-  const renderedItem = React.useMemo(
-    () => {
-      if (!item || !clientOffset) return null;
+  const renderedItem = React.useMemo(() => {
+    if (!item || !clientOffset) return null;
 
-      if (shouldHidePreviewBecauseDraggingOnSceneEditorCanvas(clientOffset)) {
-        return null;
-      }
+    if (shouldHidePreviewBecauseDraggingOnSceneEditorCanvas(clientOffset)) {
+      return null;
+    }
 
-      const thumbnailSize =
-        screenType === 'touch' ? THUMBNAIL_SIZE_TOUCHSCREEN : THUMBNAIL_SIZE;
+    const thumbnailSize =
+      screenType === 'touch' ? THUMBNAIL_SIZE_TOUCHSCREEN : THUMBNAIL_SIZE;
 
-      return item.thumbnail ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <CorsAwareImage
-          alt={item.name}
-          src={item.thumbnail}
-          style={{
-            maxWidth: thumbnailSize,
-            maxHeight: thumbnailSize,
-          }}
-        />
-      ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <Text>{item.name}</Text>
-      );
-    },
-    [item, clientOffset, screenType]
-  );
+    return item.thumbnail ? (
+      <CorsAwareImage
+        alt={item.name}
+        src={item.thumbnail}
+        style={{
+          maxWidth: thumbnailSize,
+          maxHeight: thumbnailSize,
+        }}
+      />
+    ) : (
+      <Text>{item.name}</Text>
+    );
+  }, [item, clientOffset, screenType]);
 
   if (!isDragging) {
     return null;
   }
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={layerStyles}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         style={getItemStyles({
           clientOffset,
@@ -195,8 +188,7 @@ const collect = (monitor: any): InternalCustomDragLayerProps => ({
 });
 
 // @ts-expect-error - TS2322 - Type 'DndComponentClass<({ item, itemType, isDragging, initialOffset, currentOffset, clientOffset, }: InternalCustomDragLayerProps) => Element | null, Omit<InternalCustomDragLayerProps, "item" | ... 4 more ... | "currentOffset">>' is not assignable to type '(arg1: Record<any, any>) => ReactElement<any, string | JSXElementConstructor<any>>'.
-const ExternalCustomDragLayer: (arg1: Record<any, any>) => React.ReactElement = DragLayer(collect)(
-  CustomDragLayer
-);
+const ExternalCustomDragLayer: (arg1: Record<any, any>) => React.ReactElement =
+  DragLayer(collect)(CustomDragLayer);
 
 export default ExternalCustomDragLayer;

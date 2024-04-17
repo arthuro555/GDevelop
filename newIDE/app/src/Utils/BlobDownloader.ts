@@ -62,7 +62,7 @@ export const downloadUrlsToBlobs = async <Item extends {
         // Search for "cors-cache-workaround" in the codebase for the same workarounds.
         const urlWithParameters = addSearchParameterToUrl(
           url,
-          'gdUsage',
+          'gd.Usage',
           'export'
         );
 
@@ -106,7 +106,7 @@ export const downloadUrlsToBlobs = async <Item extends {
 };
 
 export const convertBlobToFiles = <Item extends {
-  resource: gdResource,
+  resource: gd.Resource,
   filename: string
 }>(
   itemResults: Array<ItemResult<Item>>,

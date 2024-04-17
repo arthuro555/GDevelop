@@ -2,16 +2,14 @@ import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 import MockAdapter from 'axios-mock-adapter';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/PrivateGameTemplates/PrivateGameTemplateInformationPage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateInformationPage.tsx', but '--jsx' is not set.
+
 import PrivateGameTemplateInformationPage from '../../../../AssetStore/PrivateGameTemplates/PrivateGameTemplateInformationPage';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { client as userApiAxiosClient } from '../../../../Utils/GDevelopServices/User';
 import {
   client as shopApiAxiosClient,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../../../../Utils/GDevelopServices/Shop';
 import {
   client as assetApiAxiosClient,
@@ -27,11 +25,10 @@ import {
 import {
   PrivateGameTemplateStoreContext,
   initialPrivateGameTemplateStoreState,
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/PrivateGameTemplates/PrivateGameTemplateStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateGameTemplates/PrivateGameTemplateStoreContext.tsx', but '--jsx' is not set.
 } from '../../../../AssetStore/PrivateGameTemplates/PrivateGameTemplateStoreContext';
-// @ts-expect-error - TS6142 - Module '../../../../Profile/Subscription/SubscriptionSuggestionContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionSuggestionContext.tsx', but '--jsx' is not set.
+
 import { SubscriptionSuggestionProvider } from '../../../../Profile/Subscription/SubscriptionSuggestionContext';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/ProductLicense/ProductLicenseStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ProductLicense/ProductLicenseStoreContext.tsx', but '--jsx' is not set.
+
 import { ProductLicenseStoreStateProvider } from '../../../../AssetStore/ProductLicense/ProductLicenseStoreContext';
 
 export default {
@@ -224,12 +221,12 @@ const PrivateGameTemplateInformationPageStory = ({
   errorCode,
   errorMessage,
 }: {
-  privateGameTemplateListingData: PrivateGameTemplateListingData,
-  authenticatedUser?: AuthenticatedUser,
-  receivedGameTemplates?: Array<PrivateGameTemplate>,
-  delayResponse?: number,
-  errorCode?: number,
-  errorMessage?: string
+  privateGameTemplateListingData: PrivateGameTemplateListingData;
+  authenticatedUser?: AuthenticatedUser;
+  receivedGameTemplates?: Array<PrivateGameTemplate>;
+  delayResponse?: number;
+  errorCode?: number;
+  errorMessage?: string;
 }) => {
   const userServiceMock = new MockAdapter(userApiAxiosClient, {
     delayResponse,
@@ -251,11 +248,11 @@ const PrivateGameTemplateInformationPageStory = ({
       errorCode
         ? errorMessage || null
         : gameTemplates.find(
-            assetPack => assetPack.id === privateGameTemplateListingData.id
+            (assetPack) => assetPack.id === privateGameTemplateListingData.id
           )
     )
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
@@ -266,13 +263,12 @@ const PrivateGameTemplateInformationPageStory = ({
     .onGet('/product-license')
     .reply(200, fakeGameTemplateLicenses)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <PrivateGameTemplateStoreContext.Provider
       value={{
         ...initialPrivateGameTemplateStoreState,
@@ -283,13 +279,12 @@ const PrivateGameTemplateInformationPageStory = ({
         ],
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AuthenticatedUserContext.Provider
         value={{
           ...authenticatedUser,
           receivedGameTemplates,
           gameTemplatePurchases: receivedGameTemplates.map(
-            privateGameTemplate => ({
+            (privateGameTemplate) => ({
               id: 'purchase-id',
               productType: 'GAME_TEMPLATE',
               usageType: 'commercial',
@@ -305,11 +300,8 @@ const PrivateGameTemplateInformationPageStory = ({
           ),
         }}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SubscriptionSuggestionProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ProductLicenseStoreStateProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PrivateGameTemplateInformationPage
               privateGameTemplateListingData={privateGameTemplateListingData}
               onGameTemplateOpen={() => action('open game template')()}
@@ -317,7 +309,7 @@ const PrivateGameTemplateInformationPageStory = ({
                 action('create with game template')()
               }
               privateGameTemplateListingDatasFromSameCreator={allPrivateGameTemplateListingData.filter(
-                gameTemplateListingData =>
+                (gameTemplateListingData) =>
                   gameTemplateListingData.id !==
                   privateGameTemplateListingData.id
               )}
@@ -330,21 +322,18 @@ const PrivateGameTemplateInformationPageStory = ({
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplate1ListingData}
   />
 );
 
 export const ForABundle = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplateBundleListingData}
   />
 );
 
 export const ForAlreadyPurchasedGameTemplate = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplate1ListingData}
     receivedGameTemplates={[
@@ -363,7 +352,6 @@ export const ForAlreadyPurchasedGameTemplate = () => (
   />
 );
 export const ForAlreadyPurchasedBundle = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplateBundleListingData}
     receivedGameTemplates={[
@@ -383,7 +371,6 @@ export const ForAlreadyPurchasedBundle = () => (
 );
 
 export const Loading = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplate1ListingData}
     delayResponse={10000}
@@ -391,7 +378,6 @@ export const Loading = () => (
 );
 
 export const With404 = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplate1ListingData}
     errorCode={404}
@@ -399,7 +385,6 @@ export const With404 = () => (
 );
 
 export const WithUnknownError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateGameTemplateInformationPageStory
     privateGameTemplateListingData={privateGameTemplate1ListingData}
     errorCode={500}

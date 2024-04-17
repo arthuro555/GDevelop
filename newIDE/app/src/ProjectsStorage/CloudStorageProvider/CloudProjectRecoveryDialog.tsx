@@ -1,26 +1,26 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
 
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/CircularProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CircularProgress.tsx', but '--jsx' is not set.
+
 import CircularProgress from '../../UI/CircularProgress';
-// @ts-expect-error - TS6142 - Module '../../UI/Dialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Dialog.tsx', but '--jsx' is not set.
+
 import Dialog, { DialogPrimaryButton } from '../../UI/Dialog';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
 import {
   getLastVersionsOfProject,
   isCloudProjectVersionSane,
   ExpandedCloudProjectVersion,
 } from '../../Utils/GDevelopServices/Project';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
 import { sendCloudProjectCouldNotBeOpened } from '../../Utils/Analytics/EventSender';
 
@@ -98,7 +98,7 @@ const CloudProjectRecoveryDialog = ({
             resolve();
           }, delayInMs);
           return;
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
         });
 
       const getVersionsAndWait = async () => {
@@ -116,19 +116,19 @@ const CloudProjectRecoveryDialog = ({
       };
       getVersionsAndWait();
       return () => clearTimeout(timeoutId);
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
     },
     [cloudProjectId, authenticatedUser]
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
   );
 
   const actions =
     isErrored || saneVersionHasNotBeenFound
       ? [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <DialogPrimaryButton
             key="close"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             label={<Trans>Close</Trans>}
             onClick={onClose}
           />,
@@ -137,18 +137,18 @@ const CloudProjectRecoveryDialog = ({
       ? []
       : lastSaneVersion
       ? [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <FlatButton
             key="cancel"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             label={<Trans>Cancel</Trans>}
             onClick={onClose}
           />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           <DialogPrimaryButton
             primary
             key="restore"
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             label={<Trans>Accept</Trans>}
             onClick={() => onOpenPreviousVersion(lastSaneVersion.id)}
           />,
@@ -268,7 +268,7 @@ const CloudProjectRecoveryDialog = ({
       )}
     </I18n>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 export default CloudProjectRecoveryDialog;

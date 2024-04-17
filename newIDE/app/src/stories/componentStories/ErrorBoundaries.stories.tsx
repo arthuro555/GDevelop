@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-// @ts-expect-error - TS6142 - Module '../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../UI/ErrorBoundary' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/ErrorBoundary.tsx', but '--jsx' is not set.
+
 import { ErrorFallbackComponent } from '../../UI/ErrorBoundary';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three/src/math/MathUtils'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/src/math/MathUtils.js' implicitly has an 'any' type.
 import { generateUUID } from 'three/src/math/MathUtils';
@@ -74,7 +73,6 @@ TypeError: Cannot read properties of undefined (reading 'toString') at a.getProp
 fakeErrorWithCriticalStack.stack = fakeCriticalErrorStack;
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorFallbackComponent
     componentStack={fakeComponentStack}
     error={fakeError}
@@ -84,7 +82,6 @@ export const Default = () => (
 );
 
 export const Critical = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ErrorFallbackComponent
     componentStack={fakeComponentStack}
     error={fakeErrorWithCriticalStack}

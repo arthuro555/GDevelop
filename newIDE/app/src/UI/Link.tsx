@@ -5,10 +5,10 @@ import { GDevelopTheme } from './Theme';
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = {
-  children: React.ReactNode,
-  href: string,
-  onClick: () => undefined | Promise<undefined>,
-  disabled?: boolean
+  children: React.ReactNode;
+  href: string;
+  onClick: () => undefined | Promise<undefined>;
+  disabled?: boolean;
 };
 
 const useLinkStyles = (theme: GDevelopTheme, disabled: boolean) =>
@@ -36,11 +36,10 @@ const Link = (props: Props) => {
     }
   };
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <MuiLink
       color="secondary"
       href={props.href}
-// @ts-expect-error - TS2769 - No overload matches this call.
+      // @ts-expect-error - TS2769 - No overload matches this call.
       onClick={onClick}
       classes={linkStyles}
     >

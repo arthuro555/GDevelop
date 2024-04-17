@@ -1,15 +1,14 @@
-import {mapVector} from '../../Utils/MapFor';
-const gd: libGDevelop = global.gd;
+import { mapVector } from '../../Utils/MapFor';
 
 export const enumerateParametersUsableInExpressions = (
-  eventsFunctionsContainer: gdEventsFunctionsContainer,
-  eventsFunction: gdEventsFunction,
-  allowedParameterTypes: string[],
-): Array<gdParameterMetadata> => {
+  eventsFunctionsContainer: gd.EventsFunctionsContainer,
+  eventsFunction: gd.EventsFunction,
+  allowedParameterTypes: string[]
+): Array<gd.ParameterMetadata> => {
   return mapVector(
     eventsFunction.getParametersForEvents(eventsFunctionsContainer),
-// @ts-expect-error - TS7006 - Parameter 'parameterMetadata' implicitly has an 'any' type.
-    parameterMetadata =>
+
+    (parameterMetadata) =>
       !parameterMetadata.isCodeOnly() &&
       !gd.ParameterMetadata.isObject(parameterMetadata.getType()) &&
       !gd.ParameterMetadata.isBehavior(parameterMetadata.getType()) &&

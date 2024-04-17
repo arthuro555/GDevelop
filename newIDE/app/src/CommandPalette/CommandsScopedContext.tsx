@@ -5,7 +5,7 @@ import {
   NamedCommand,
 } from './CommandManager';
 import { CommandName } from './CommandsList';
-// @ts-expect-error - TS6142 - Module './CommandsContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandsContext.tsx', but '--jsx' is not set.
+
 import CommandsContext from './CommandsContext';
 import useValueWithInit from '../Utils/UseRefInitHook';
 
@@ -36,26 +36,26 @@ class ScopedCommandManager implements CommandManagerInterface {
   };
 
   registerAllCommandsToCentralManager = () => {
-    Object.keys(this._commands).forEach(commandName => {
+    Object.keys(this._commands).forEach((commandName) => {
       this._centralManager.registerCommand(
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
+        // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
         commandName,
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, Command>>'.
+        // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, Command>>'.
         this._commands[commandName]
       );
     });
   };
 
   deregisterAllCommandsFromCentralManager = () => {
-    Object.keys(this._commands).forEach(commandName => {
-// @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
+    Object.keys(this._commands).forEach((commandName) => {
+      // @ts-expect-error - TS2345 - Argument of type 'string' is not assignable to parameter of type 'CommandName'.
       this._centralManager.deregisterCommand(commandName);
     });
   };
 
   getAllNamedCommands = () => {
-    return Object.keys(this._commands).map<NamedCommand>(commandName => {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, Command>>'.
+    return Object.keys(this._commands).map<NamedCommand>((commandName) => {
+      // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type 'Partial<Record<CommandName, Command>>'.
       const cmd = this._commands[commandName];
       return { ...cmd, name: commandName };
     });
@@ -69,8 +69,8 @@ class ScopedCommandManager implements CommandManagerInterface {
 }
 
 type Props = {
-  children: React.ReactNode,
-  active: boolean
+  children: React.ReactNode;
+  active: boolean;
 };
 
 const CommandsContextScopedProvider = (props: Props) => {
@@ -79,21 +79,17 @@ const CommandsContextScopedProvider = (props: Props) => {
     () => new ScopedCommandManager(centralManager)
   );
 
-  React.useEffect(
-    () => {
-      if (!props.active) return;
-      scopedManager.setActive(true);
-      scopedManager.registerAllCommandsToCentralManager();
-      return () => {
-        scopedManager.setActive(false);
-        scopedManager.deregisterAllCommandsFromCentralManager();
-      };
-    },
-    [props.active, scopedManager]
-  );
+  React.useEffect(() => {
+    if (!props.active) return;
+    scopedManager.setActive(true);
+    scopedManager.registerAllCommandsToCentralManager();
+    return () => {
+      scopedManager.setActive(false);
+      scopedManager.deregisterAllCommandsFromCentralManager();
+    };
+  }, [props.active, scopedManager]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CommandsContext.Provider value={scopedManager}>
       {props.children}
     </CommandsContext.Provider>

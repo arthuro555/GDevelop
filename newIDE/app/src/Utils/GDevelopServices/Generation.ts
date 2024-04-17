@@ -4,18 +4,18 @@ import { GDevelopGenerationApi } from './ApiConfigs';
 export type GenerationStatus = 'working' | 'ready' | 'error';
 
 export type GeneratedProject = {
-  id: string,
-  createdAt: string,
-  updatedAt: string,
-  userId: string,
-  prompt: string,
-  status: GenerationStatus,
-  width: number,
-  height: number,
-  projectName: string,
-  fileUrl?: string,
-  synopsis?: string,
-  error?: string
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  prompt: string;
+  status: GenerationStatus;
+  width: number;
+  height: number;
+  projectName: string;
+  fileUrl?: string;
+  synopsis?: string;
+  error?: string;
 };
 
 export const getGeneratedProject = async (
@@ -24,9 +24,9 @@ export const getGeneratedProject = async (
     userId,
     generatedProjectId,
   }: {
-    userId: string,
-    generatedProjectId: string
-  },
+    userId: string;
+    generatedProjectId: string;
+  }
 ): Promise<GeneratedProject> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.get(
@@ -48,8 +48,8 @@ export const getGeneratedProjects = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<Array<GeneratedProject>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.get(
@@ -75,12 +75,12 @@ export const createGeneratedProject = async (
     height,
     projectName,
   }: {
-    userId: string,
-    prompt: string,
-    width: number,
-    height: number,
-    projectName: string
-  },
+    userId: string;
+    prompt: string;
+    width: number;
+    height: number;
+    projectName: string;
+  }
 ): Promise<GeneratedProject> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await axios.post(

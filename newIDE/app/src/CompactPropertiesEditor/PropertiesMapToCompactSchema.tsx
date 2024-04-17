@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { mapFor } from '../Utils/MapFor';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CompactPropertiesEditor/index.tsx', but '--jsx' is not set.
+
 import { Schema, Instance } from '.';
 import { ResourceKind } from '../ResourcesList/ResourceSource';
-// @ts-expect-error - TS6142 - Module '.' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CompactPropertiesEditor/index.tsx', but '--jsx' is not set.
+
 import { Field } from '.';
-// @ts-expect-error - TS6142 - Module '../PropertiesEditor/MeasurementUnitDocumentation' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/PropertiesEditor/MeasurementUnitDocumentation.tsx', but '--jsx' is not set.
+
 import MeasurementUnitDocumentation from '../PropertiesEditor/MeasurementUnitDocumentation';
 
 const createField = (
   name: string,
-  property: gdPropertyDescriptor,
+  property: gd.PropertyDescriptor,
   getProperties: (instance: Instance) => any,
   onUpdateProperty: (instance: Instance, propertyName: string, newValue: string) => void,
-  object?: gdObject | null,
+  object?: gd.Object | null,
 ): Field | null | undefined => {
   const propertyDescription = property.getDescription();
   const getLabel = (instance: Instance) => {
@@ -34,7 +34,7 @@ const createField = (
     return {
       label: getMeasurementUnitShortLabel(measurementUnit),
       tooltipContent: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
         <MeasurementUnitDocumentation
           label={measurementUnit.getLabel()}
           description={measurementUnit.getDescription()}
@@ -245,7 +245,7 @@ const uncapitalize = str: string => {
  * and `false` when only not deprecated ones must be displayed
  */
 const isPropertyVisible = (
-  properties: gdMapStringPropertyDescriptor,
+  properties: gd.MapStringPropertyDescriptor,
   name: string,
   visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated',
 ): boolean => {
@@ -282,17 +282,17 @@ const isPropertyVisible = (
  * @param onUpdateProperty The function called to update a property of an object
  */
 const propertiesMapToSchema = (
-  properties: gdMapStringPropertyDescriptor,
+  properties: gd.MapStringPropertyDescriptor,
   getProperties: (instance: Instance) => any,
   onUpdateProperty: (instance: Instance, propertyName: string, newValue: string) => void,
-  object?: gdObject | null,
+  object?: gd.Object | null,
   visibility: 'All' | 'Basic' | 'Advanced' | 'Deprecated' = 'All',
 ): Schema => {
   const propertyNames = properties.keys();
   // Aggregate field by groups to be able to build field groups with a title.
   const fieldsByGroups = new Map<string, Array<Field>>();
   const alreadyHandledProperties = new Set<string>();
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
+
   mapFor(0, propertyNames.size(), i => {
     const name = propertyNames.at(i);
     const property = properties.get(name);
@@ -416,8 +416,8 @@ const propertiesMapToSchema = (
 
 const exponents = ['⁰', '¹', '²', '³', '⁴', '⁵'];
 
-export const getMeasurementUnitShortLabel = (measurementUnit: gdMeasurementUnit): string => {
-// @ts-expect-error - TS7006 - Parameter 'i' implicitly has an 'any' type.
+export const getMeasurementUnitShortLabel = (measurementUnit: gd.MeasurementUnit): string => {
+
   return mapFor(0, measurementUnit.getElementsCount(), i => {
     const baseUnit = measurementUnit.getElementBaseUnit(i);
     const power = measurementUnit.getElementPower(i);

@@ -19,18 +19,16 @@ import { EventsFunctionsExtensionsState } from '../EventsFunctionsExtensionsLoad
 import { mapVector } from '../Utils/MapFor';
 import { toNewGdMapStringString } from '../Utils/MapStringString';
 
-const gd: libGDevelop = global.gd;
-
 const toPascalCase = (str: string) => {
   if (!str) return '';
   return str
     .replace(/^[^A-Za-z0-9]*|[^A-Za-z0-9]*$/g, '$')
     .replace(/[^A-Za-z0-9]+/g, '$')
-    .replace(/([a-z])([A-Z])/g, function(m, a, b) {
+    .replace(/([a-z])([A-Z])/g, function (m, a, b) {
       return a + '$' + b;
     })
     .toLowerCase()
-    .replace(/(\$)(\w?)/g, function(m, a, b) {
+    .replace(/(\$)(\w?)/g, function (m, a, b) {
       return b.toUpperCase();
     });
 };
@@ -54,11 +52,11 @@ export const sanitizeObjectName = (objectName: string) => {
  * if it was already added.
  */
 export const installResource = (
-  project: gdProject,
+  project: gd.Project,
   asset: Asset,
   serializedResource: any,
   resourceNewNames: {
-    [key: string]: string
+    [key: string]: string;
   }
 ) => {
   const originalResourceName: string = serializedResource.name;
@@ -69,7 +67,7 @@ export const installResource = (
     return;
   }
 
-  const resourcesManager: gdResourcesManager = project.getResourcesManager();
+  const resourcesManager: gd.ResourcesManager = project.getResourcesManager();
 
   // Check if the resource that must be installed is already present. Use the "origin"
   // of the resource (if present), otherwise for compatibility we use the URL.
@@ -96,9 +94,8 @@ export const installResource = (
           resourceOriginIdentifier
         )
       : '';
-  const existingResourceNameWithSameFile = resourcesManager.getResourceNameWithFile(
-    resourceFileUrl
-  );
+  const existingResourceNameWithSameFile =
+    resourcesManager.getResourceNameWithFile(resourceFileUrl);
 
   if (existingResourceNameFromSameOrigin) {
     // There is a resource with the same origin, use it.
@@ -142,7 +139,7 @@ export const installResource = (
     );
   }
 
-  const newName = newNameGenerator(originalResourceName, name =>
+  const newName = newNameGenerator(originalResourceName, (name) =>
     resourcesManager.hasResource(name)
   );
   newResource.setName(newName);
@@ -154,34 +151,32 @@ export const installResource = (
 };
 
 export type InstallAssetOutput = {
-  createdObjects: Array<gdObject>
+  createdObjects: Array<gd.Object>;
 };
 
 export type InstallAssetArgs = {
-  asset: Asset,
-  project: gdProject,
-  objectsContainer: gdObjectsContainer
+  asset: Asset;
+  project: gd.Project;
+  objectsContainer: gd.ObjectsContainer;
 };
 
-export const addAssetToProject = async (
-  {
-    asset,
-    project,
-    objectsContainer,
-  }: InstallAssetArgs,
-): Promise<InstallAssetOutput> => {
+export const addAssetToProject = async ({
+  asset,
+  project,
+  objectsContainer,
+}: InstallAssetArgs): Promise<InstallAssetOutput> => {
   const objectNewNames: Record<string, any> = {};
   const resourceNewNames: Record<string, any> = {};
-  const createdObjects: Array<gdObject> = [];
+  const createdObjects: Array<gd.Object> = [];
 
   // Create objects (and their behaviors)
-  asset.objectAssets.forEach(objectAsset => {
+  asset.objectAssets.forEach((objectAsset) => {
     const type: string | null | undefined = objectAsset.object.type;
     if (!type) throw new Error('An object has no type specified');
 
     // Insert the object
     const originalName = sanitizeObjectName(objectAsset.object.name);
-    const newName = newNameGenerator(originalName, name =>
+    const newName = newNameGenerator(originalName, (name) =>
       objectsContainer.hasObjectNamed(name)
     );
     const object = objectsContainer.insertNewObject(
@@ -204,7 +199,7 @@ export const addAssetToProject = async (
     object.setName(newName);
 
     // Add resources used by the object
-    objectAsset.resources.forEach(serializedResource => {
+    objectAsset.resources.forEach((serializedResource) => {
       installResource(project, asset, serializedResource, resourceNewNames);
     });
 
@@ -232,56 +227,59 @@ export const addAssetToProject = async (
 export const installPublicAsset = addAssetToProject;
 
 export type RequiredExtension = {
-  extensionName: string,
-  extensionVersion: string
+  extensionName: string;
+  extensionVersion: string;
 };
 
-export const getRequiredExtensionsFromAsset = (asset: Asset): Array<RequiredExtension> => {
+export const getRequiredExtensionsFromAsset = (
+  asset: Asset
+): Array<RequiredExtension> => {
   return uniqBy(
     flatten(
       asset.objectAssets.map(
-        objectAsset => objectAsset.requiredExtensions || []
+        (objectAsset) => objectAsset.requiredExtensions || []
       )
     ),
     ({ extensionName }) => extensionName
   );
 };
 
-const filterMissingExtensions = (gd: libGDevelop, requiredExtensions: Array<ExtensionShortHeader>): Array<ExtensionShortHeader> => {
+const filterMissingExtensions = (
+  gd: libGDevelop,
+  requiredExtensions: Array<ExtensionShortHeader>
+): Array<ExtensionShortHeader> => {
   const loadedExtensionNames = mapVector(
     gd.asPlatform(gd.JsPlatform.get()).getAllPlatformExtensions(),
-// @ts-expect-error - TS7006 - Parameter 'extension' implicitly has an 'any' type.
-    extension => {
+
+    (extension) => {
       return extension.getName();
     }
   );
 
-  return requiredExtensions.filter(extension => {
+  return requiredExtensions.filter((extension) => {
     return !loadedExtensionNames.includes(extension.name);
   });
 };
 
 export type RequiredExtensionInstallation = {
-  requiredExtensionShortHeaders: Array<ExtensionShortHeader>,
-  missingExtensionShortHeaders: Array<ExtensionShortHeader>,
-  outOfDateExtensionShortHeaders: Array<ExtensionShortHeader>
+  requiredExtensionShortHeaders: Array<ExtensionShortHeader>;
+  missingExtensionShortHeaders: Array<ExtensionShortHeader>;
+  outOfDateExtensionShortHeaders: Array<ExtensionShortHeader>;
 };
 
 export type InstallRequiredExtensionsArgs = {
-  requiredExtensionInstallation: RequiredExtensionInstallation,
-  shouldUpdateExtension: boolean,
-  eventsFunctionsExtensionsState: EventsFunctionsExtensionsState,
-  project: gdProject
+  requiredExtensionInstallation: RequiredExtensionInstallation;
+  shouldUpdateExtension: boolean;
+  eventsFunctionsExtensionsState: EventsFunctionsExtensionsState;
+  project: gd.Project;
 };
 
-export const installRequiredExtensions = async (
-  {
-    requiredExtensionInstallation,
-    shouldUpdateExtension,
-    eventsFunctionsExtensionsState,
-    project,
-  }: InstallRequiredExtensionsArgs,
-): Promise<void> => {
+export const installRequiredExtensions = async ({
+  requiredExtensionInstallation,
+  shouldUpdateExtension,
+  eventsFunctionsExtensionsState,
+  project,
+}: InstallRequiredExtensionsArgs): Promise<void> => {
   const {
     requiredExtensionShortHeaders,
     missingExtensionShortHeaders,
@@ -300,7 +298,7 @@ export const installRequiredExtensions = async (
     : missingExtensionShortHeaders;
 
   const serializedExtensions = await Promise.all(
-    uniq(neededExtensions).map(extensionShortHeader =>
+    uniq(neededExtensions).map((extensionShortHeader) =>
       getExtension(extensionShortHeader)
     )
   );
@@ -318,7 +316,9 @@ export const installRequiredExtensions = async (
   if (stillMissingExtensions.length) {
     throw new Error(
       'These extensions could not be installed: ' +
-        missingExtensionShortHeaders.map(extension => extension.name).join(', ')
+        missingExtensionShortHeaders
+          .map((extension) => extension.name)
+          .join(', ')
     );
   }
 };
@@ -329,20 +329,19 @@ export const installRequiredExtensions = async (
  */
 export const addSerializedExtensionsToProject = (
   eventsFunctionsExtensionsState: EventsFunctionsExtensionsState,
-  project: gdProject,
+  project: gd.Project,
   serializedExtensions: Array<SerializedExtension>,
-  fromExtensionStore: boolean = true,
+  fromExtensionStore: boolean = true
 ): Promise<void> => {
-  serializedExtensions.forEach(serializedExtension => {
+  serializedExtensions.forEach((serializedExtension) => {
     const { name } = serializedExtension;
     if (!name)
       return Promise.reject(new Error('Malformed extension (missing name).'));
 
-    const newEventsFunctionsExtension = project.hasEventsFunctionsExtensionNamed(
-      name
-    )
-      ? project.getEventsFunctionsExtension(name)
-      : project.insertNewEventsFunctionsExtension(name, 0);
+    const newEventsFunctionsExtension =
+      project.hasEventsFunctionsExtensionNamed(name)
+        ? project.getEventsFunctionsExtension(name)
+        : project.insertNewEventsFunctionsExtension(name, 0);
 
     unserializeFromJSObject(
       newEventsFunctionsExtension,
@@ -362,16 +361,14 @@ export const addSerializedExtensionsToProject = (
 };
 
 type CheckRequiredExtensionsArgs = {
-  requiredExtensions: RequiredExtension[],
-  project: gdProject
+  requiredExtensions: RequiredExtension[];
+  project: gd.Project;
 };
 
-export const checkRequiredExtensionsUpdate = async (
-  {
-    requiredExtensions,
-    project,
-  }: CheckRequiredExtensionsArgs,
-): Promise<RequiredExtensionInstallation> => {
+export const checkRequiredExtensionsUpdate = async ({
+  requiredExtensions,
+  project,
+}: CheckRequiredExtensionsArgs): Promise<RequiredExtensionInstallation> => {
   if (requiredExtensions.length === 0) {
     return {
       requiredExtensionShortHeaders: [],
@@ -383,9 +380,9 @@ export const checkRequiredExtensionsUpdate = async (
   const extensionsRegistry = await getExtensionsRegistry();
 
   const requiredExtensionShortHeaders = requiredExtensions.map(
-    requiredExtension => {
+    (requiredExtension) => {
       const extensionShortHeader = extensionsRegistry.headers.find(
-        extensionShortHeader => {
+        (extensionShortHeader) => {
           return extensionShortHeader.name === requiredExtension.extensionName;
         }
       );
@@ -402,7 +399,7 @@ export const checkRequiredExtensionsUpdate = async (
   );
 
   const outOfDateExtensionShortHeaders = requiredExtensionShortHeaders.filter(
-    requiredExtensionShortHeader =>
+    (requiredExtensionShortHeader) =>
       project.hasEventsFunctionsExtensionNamed(
         requiredExtensionShortHeader.name
       ) &&
@@ -424,29 +421,29 @@ export const checkRequiredExtensionsUpdate = async (
 };
 
 type CheckRequiredExtensionsForAssetsArgs = {
-  assets: Array<Asset>,
-  project: gdProject
+  assets: Array<Asset>;
+  project: gd.Project;
 };
 
-export const checkRequiredExtensionsUpdateForAssets = async (
-  {
-    assets,
-    project,
-  }: CheckRequiredExtensionsForAssetsArgs,
-): Promise<RequiredExtensionInstallation> => {
+export const checkRequiredExtensionsUpdateForAssets = async ({
+  assets,
+  project,
+}: CheckRequiredExtensionsForAssetsArgs): Promise<RequiredExtensionInstallation> => {
   const requiredExtensions: Array<RequiredExtension> = [];
-  assets.forEach(asset => {
-    getRequiredExtensionsFromAsset(asset).forEach(requiredExtensionForAsset => {
-      if (
-        !requiredExtensions.some(
-          requiredExtension =>
-            requiredExtension.extensionName ===
-            requiredExtensionForAsset.extensionName
-        )
-      ) {
-        requiredExtensions.push(requiredExtensionForAsset);
+  assets.forEach((asset) => {
+    getRequiredExtensionsFromAsset(asset).forEach(
+      (requiredExtensionForAsset) => {
+        if (
+          !requiredExtensions.some(
+            (requiredExtension) =>
+              requiredExtension.extensionName ===
+              requiredExtensionForAsset.extensionName
+          )
+        ) {
+          requiredExtensions.push(requiredExtensionForAsset);
+        }
       }
-    });
+    );
   });
 
   return checkRequiredExtensionsUpdate({ requiredExtensions, project });

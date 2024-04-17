@@ -1,5 +1,4 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'algoliasearch/lite'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/algoliasearch/lite.js' implicitly has an 'any' type.
 import algoliasearch from 'algoliasearch/lite';
 
 const algoliaClient = algoliasearch(
@@ -29,32 +28,35 @@ export const searchClient = {
 export const indexName = 'gdevelop';
 
 type AlgoliaSearchHitHierarchy = {
-  lvl0: string,
-  lvl1?: string,
-  lvl2?: string,
-  lvl3?: string,
-  lvl4?: string,
-  lvl5?: string,
-  lvl6?: string
+  lvl0: string;
+  lvl1?: string;
+  lvl2?: string;
+  lvl3?: string;
+  lvl4?: string;
+  lvl5?: string;
+  lvl6?: string;
 };
 
 export type AlgoliaSearchHit = {
-  content: string | React.ReactNode | null,
-  url: string,
-  hierarchy: AlgoliaSearchHitHierarchy,
-  objectID: string
+  content: string | React.ReactNode | null;
+  url: string;
+  hierarchy: AlgoliaSearchHitHierarchy;
+  objectID: string;
 };
 
-export const getHierarchyAsArray = (hierarchy: AlgoliaSearchHitHierarchy): Array<string> => Object.entries(hierarchy)
-  .reduce<Array<any>>((acc, [level, content]: [any, any]) => {
-    if (content) {
-      acc.push([Number(level.replace('lvl', '')), content]);
-    }
-    return acc;
-  }, [])
-  .sort((a, b) => a[0] - b[0])
-  // $FlowFixMe[incompatible-return] - Object.entries does not keep values types.
-  .map(item => item[1]);
+export const getHierarchyAsArray = (
+  hierarchy: AlgoliaSearchHitHierarchy
+): Array<string> =>
+  Object.entries(hierarchy)
+    .reduce<Array<any>>((acc, [level, content]: [any, any]) => {
+      if (content) {
+        acc.push([Number(level.replace('lvl', '')), content]);
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => a[0] - b[0])
+    // $FlowFixMe[incompatible-return] - Object.entries does not keep values types.
+    .map((item) => item[1]);
 
 export const getHitLastHierarchyLevel = (hit: AlgoliaSearchHit) => {
   const hierarchyArray = getHierarchyAsArray(hit.hierarchy);

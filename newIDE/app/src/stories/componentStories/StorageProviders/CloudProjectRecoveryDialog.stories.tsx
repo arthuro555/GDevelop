@@ -2,7 +2,7 @@ import * as React from 'react';
 import MockAdapter from 'axios-mock-adapter';
 
 import { action } from '@storybook/addon-actions';
-// @ts-expect-error - TS2732 - Cannot find module './fixtures/emptyGame.json'. Consider using '--resolveJsonModule' to import module with '.json' extension.
+
 import emptyGameContent from './fixtures/emptyGame.json';
 
 import {
@@ -10,7 +10,7 @@ import {
   ExpandedCloudProjectVersion,
   projectResourcesClient as resourcesAxiosClient,
 } from '../../../Utils/GDevelopServices/Project';
-// @ts-expect-error - TS6142 - Module '../../../ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog.tsx', but '--jsx' is not set.
+
 import CloudProjectRecoveryDialog from '../../../ProjectsStorage/CloudStorageProvider/CloudProjectRecoveryDialog';
 import AuthenticatedUserContext from '../../../Profile/AuthenticatedUserContext';
 import { fakeSilverAuthenticatedUserWithCloudProjects } from '../../../fixtures/GDevelopServicesTestData';
@@ -55,27 +55,25 @@ export const Default = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(200, versions)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   createZipWithSingleTextFile(JSON.stringify(emptyGameContent)).then(
-    zipFile => {
+    (zipFile) => {
       const resourcesMock = new MockAdapter(resourcesAxiosClient, {
         delayResponse: 500,
       });
       resourcesMock
         .onGet(
-          `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${
-            versions[1].id
-          }.zip`
+          `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${versions[1].id}.zip`
         )
         .reply(200, zipFile, {
           'content-type': 'application/zip',
         })
         .onAny()
-        .reply(config => {
+        .reply((config) => {
           console.error(`Unexpected call to ${config.url} (${config.method})`);
           return [504, null];
         });
@@ -83,11 +81,10 @@ export const Default = () => {
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}
@@ -127,7 +124,7 @@ export const NoFallbackVersion = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(200, versions)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
@@ -136,40 +133,35 @@ export const NoFallbackVersion = () => {
 
   createZipWithSingleTextFile(
     stringifiedEmptyGameJson.slice(0, stringifiedEmptyGameJson.length - 5)
-  ).then(zipFile => {
+  ).then((zipFile) => {
     const resourcesMock = new MockAdapter(resourcesAxiosClient, {
       delayResponse: 500,
     });
     resourcesMock
       .onGet(
-        `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${
-          versions[1].id
-        }.zip`
+        `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${versions[1].id}.zip`
       )
       .reply(200, zipFile, {
         'content-type': 'application/zip',
       })
       .onGet(
-        `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${
-          versions[2].id
-        }.zip`
+        `${GDevelopProjectResourcesStorage.baseUrl}/${projectId}/versions/${versions[2].id}.zip`
       )
       .reply(200, zipFile, {
         'content-type': 'application/zip',
       })
       .onAny()
-      .reply(config => {
+      .reply((config) => {
         console.error(`Unexpected call to ${config.url} (${config.method})`);
         return [504, null];
       });
   });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}
@@ -189,17 +181,16 @@ export const Errored = () => {
     .onGet(`${GDevelopProjectApi.baseUrl}/project/${projectId}/version`)
     .reply(500)
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider
       value={fakeSilverAuthenticatedUserWithCloudProjects}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+      {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CloudProjectRecoveryDialog
         cloudProjectId={projectId}
         onClose={() => action('onClose')()}

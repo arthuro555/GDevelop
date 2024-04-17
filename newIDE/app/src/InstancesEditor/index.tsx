@@ -20,14 +20,14 @@ import * as PIXI from 'pixi.js-legacy';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/build/three.js' implicitly has an 'any' type.
 import * as THREE from 'three';
 import FpsLimiter from './FpsLimiter';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/PIXITicker'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/PIXITicker.js' implicitly has an 'any' type.
+
 import { startPIXITicker, stopPIXITicker } from '../Utils/PIXITicker';
 import StatusBar from './StatusBar';
 import CanvasCursor from './CanvasCursor';
 import InstancesAdder from './InstancesAdder';
-// @ts-expect-error - TS6142 - Module '../UI/DragAndDrop/DropTarget' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/DragAndDrop/DropTarget.tsx', but '--jsx' is not set.
+
 import { makeDropTarget } from '../UI/DragAndDrop/DropTarget';
-// @ts-expect-error - TS6142 - Module '../ObjectsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ObjectsList/index.tsx', but '--jsx' is not set.
+
 import { objectWithContextReactDndType } from '../ObjectsList';
 import PinchHandler, { shouldBeHandledByPinch } from './PinchHandler';
 import { ScreenType } from '../UI/Responsive/ScreenTypeMeasurer';
@@ -43,7 +43,6 @@ import {
   clampInstancesEditorZoom,
   getWheelStepZoomFactor,
 } from '../Utils/ZoomUtils';
-const gd: libGDevelop = global.gd;
 
 export const instancesEditorId = 'instances-editor-canvas';
 const styles = {
@@ -69,20 +68,20 @@ export type InstancesEditorShortcutsCallbacks = {
 };
 
 export type InstancesEditorPropsWithoutSizeAndScroll = {
-  project: gdProject,
-  layout: gdLayout,
+  project: gd.Project,
+  layout: gd.Layout,
   selectedLayer: string,
-  initialInstances: gdInitialInstancesContainer,
+  initialInstances: gd.InitialInstancesContainer,
   instancesEditorSettings: InstancesEditorSettings,
-  isInstanceOf3DObject: (arg1: gdInitialInstance) => boolean,
+  isInstanceOf3DObject: (arg1: gd.InitialInstance) => boolean,
   onInstancesEditorSettingsMutated: (instancesEditorSettings: InstancesEditorSettings) => void,
   instancesSelection: InstancesSelection,
-  onInstancesAdded: (instances: Array<gdInitialInstance>) => void,
-  onInstancesSelected: (instances: Array<gdInitialInstance>) => void,
-  onInstanceDoubleClicked: (instance: gdInitialInstance) => void,
-  onInstancesMoved: (instances: Array<gdInitialInstance>) => void,
-  onInstancesResized: (instances: Array<gdInitialInstance>) => void,
-  onInstancesRotated: (instances: Array<gdInitialInstance>) => void,
+  onInstancesAdded: (instances: Array<gd.InitialInstance>) => void,
+  onInstancesSelected: (instances: Array<gd.InitialInstance>) => void,
+  onInstanceDoubleClicked: (instance: gd.InitialInstance) => void,
+  onInstancesMoved: (instances: Array<gd.InitialInstance>) => void,
+  onInstancesResized: (instances: Array<gd.InitialInstance>) => void,
+  onInstancesRotated: (instances: Array<gd.InitialInstance>) => void,
   selectedObjectNames: Array<string>,
   onContextMenu: (x: number, y: number, ignoreSelectedObjectNamesForContextMenu?: boolean) => void,
   pauseRendering: boolean,
@@ -687,7 +686,7 @@ export default class InstancesEditor extends Component<Props> {
       preventSnapToGrid?: boolean,
       addInstancesInTheForeground?: boolean
     },
-  ): Array<gdInitialInstance> => {
+  ): Array<gd.InitialInstance> => {
     return this._instancesAdder.addSerializedInstances(options);
   };
 
@@ -695,7 +694,7 @@ export default class InstancesEditor extends Component<Props> {
    * Immediately add instances for the specified objects at the given
    * position (in scene coordinates) given their names.
    */
-  addInstances = (pos: [number, number], objectNames: Array<string>, layer: string): Array<gdInitialInstance> => {
+  addInstances = (pos: [number, number], objectNames: Array<string>, layer: string): Array<gd.InitialInstance> => {
     return this._instancesAdder.addInstances(pos, objectNames, layer);
   };
 
@@ -790,7 +789,7 @@ export default class InstancesEditor extends Component<Props> {
     this.props.onInstancesSelected(instancesSelected);
   };
 
-  _onInstanceClicked = (instance: gdInitialInstance) => {
+  _onInstanceClicked = (instance: gd.InitialInstance) => {
     this.fpsLimiter.notifyInteractionHappened();
 // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'ICanvas'.
     this.pixiRenderer.view.focus();
@@ -828,19 +827,19 @@ export default class InstancesEditor extends Component<Props> {
     }
   };
 
-  _onInstanceDoubleClicked = (instance: gdInitialInstance) => {
+  _onInstanceDoubleClicked = (instance: gd.InitialInstance) => {
     if (!this.keyboardShortcuts.shouldIgnoreDoubleClick()) {
       this.props.onInstanceDoubleClicked(instance);
     }
   };
 
-  _onOverInstance = (instance: gdInitialInstance) => {
+  _onOverInstance = (instance: gd.InitialInstance) => {
     if (!this.instancesMover.isMoving())
       this.highlightedInstance.setInstance(instance);
   };
 
   _onDownInstance = (
-    instance: gdInitialInstance,
+    instance: gd.InitialInstance,
     sceneX: number,
     sceneY: number
   ) => {
@@ -885,13 +884,13 @@ export default class InstancesEditor extends Component<Props> {
     this.instancesMover.startMove(sceneX, sceneY);
   };
 
-  _onOutInstance = (instance: gdInitialInstance) => {
+  _onOutInstance = (instance: gd.InitialInstance) => {
     if (instance === this.highlightedInstance.getInstance())
       this.highlightedInstance.setInstance(null);
   };
 
   _onUpInstance = (
-    instance: gdInitialInstance,
+    instance: gd.InitialInstance,
     sceneX: number,
     sceneY: number
   ) => {
@@ -919,7 +918,7 @@ export default class InstancesEditor extends Component<Props> {
   };
 
   _onMoveInstance = (
-    instance: gdInitialInstance,
+    instance: gd.InitialInstance,
     deltaX: number,
     deltaY: number
   ) => {
@@ -1110,7 +1109,7 @@ export default class InstancesEditor extends Component<Props> {
     let contentAABB: Rectangle | null | undefined;
     const getInstanceRectangle = new gd.InitialInstanceJSFunctor();
     getInstanceRectangle.invoke = instancePtr: any => {
-      const instance: gdInitialInstance = gd.wrapPointer(
+      const instance: gd.InitialInstance = gd.wrapPointer(
         instancePtr,
         gd.InitialInstance
       );
@@ -1141,7 +1140,7 @@ export default class InstancesEditor extends Component<Props> {
     this.scrollTo(x, y);
   };
 
-  zoomToFitSelection = (instances: Array<gdInitialInstance>) => {
+  zoomToFitSelection = (instances: Array<gd.InitialInstance>) => {
     if (instances.length === 0) return;
     const [firstInstance, ...otherInstances] = instances;
     const instanceMeasurer = this.instancesRenderer.getInstanceMeasurer();
@@ -1158,7 +1157,7 @@ export default class InstancesEditor extends Component<Props> {
   };
 
   centerViewOnLastInstance = (
-    instances: Array<gdInitialInstance>,
+    instances: Array<gd.InitialInstance>,
     offset?: [number, number] | null
   ) => {
     if (instances.length === 0) return;
@@ -1240,7 +1239,7 @@ export default class InstancesEditor extends Component<Props> {
     startPIXITicker();
   };
 
-  getInstanceSize = (initialInstance: gdInitialInstance): [number, number, number] => {
+  getInstanceSize = (initialInstance: gd.InitialInstance): [number, number, number] => {
     return this.instancesRenderer
       .getInstanceMeasurer()
       .getUnrotatedInstanceSize(initialInstance);
@@ -1250,10 +1249,10 @@ export default class InstancesEditor extends Component<Props> {
     if (!this.props.project) return null;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <DropTarget
         canDrop={() => true}
-// @ts-expect-error - TS7006 - Parameter 'monitor' implicitly has an 'any' type.
+
         hover={monitor => {
           this.fpsLimiter.notifyInteractionHappened();
           const { _instancesAdder, viewPosition, canvasArea } = this;
@@ -1271,7 +1270,7 @@ export default class InstancesEditor extends Component<Props> {
             this.props.selectedLayer
           );
         }}
-// @ts-expect-error - TS7006 - Parameter 'monitor' implicitly has an 'any' type.
+
         drop={monitor => {
           this.fpsLimiter.notifyInteractionHappened();
 
@@ -1298,7 +1297,6 @@ export default class InstancesEditor extends Component<Props> {
           this.props.onInstancesAdded(instances);
         }}
       >
-{ /* @ts-expect-error - TS7031 - Binding element 'connectDropTarget' implicitly has an 'any' type. | TS7031 - Binding element 'isOver' implicitly has an 'any' type. */}
         {({ connectDropTarget, isOver }) => {
           // The children are re-rendered when isOver change:
           // take this opportunity to delete any temporary instances
@@ -1308,7 +1306,7 @@ export default class InstancesEditor extends Component<Props> {
           }
 
           return connectDropTarget(
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <div
               ref={canvasArea => (this.canvasArea = canvasArea)}
               style={styles.canvasArea}

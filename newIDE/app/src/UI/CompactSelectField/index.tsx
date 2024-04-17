@@ -6,15 +6,15 @@ import classNames from 'classnames';
 import classes from './CompactSelectField.module.css';
 import { tooltipEnterDelay } from '../Tooltip';
 type Props = {
-  onChange: (arg1: string) => void,
-  value: string,
-  id?: string,
-  disabled?: boolean,
-  errored?: boolean,
-  placeholder?: string,
-  children: React.ReactNode,
-  renderLeftIcon?: (className: string) => React.ReactElement,
-  leftIconTooltip?: React.ReactNode
+  onChange: (arg1: string) => void;
+  value: string;
+  id?: string;
+  disabled?: boolean;
+  errored?: boolean;
+  placeholder?: string;
+  children: React.ReactNode;
+  renderLeftIcon?: (className: string) => React.ReactElement;
+  leftIconTooltip?: React.ReactNode;
 };
 
 const CompactSelectField = ({
@@ -29,7 +29,6 @@ const CompactSelectField = ({
   leftIconTooltip,
 }: Props) => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       className={classNames({
         [classes.container]: true,
@@ -38,9 +37,8 @@ const CompactSelectField = ({
       })}
     >
       {renderLeftIcon && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
-// @ts-expect-error - TS2322 - Type 'ReactNode' is not assignable to type 'string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal'.
+          // @ts-expect-error - TS2322 - Type 'ReactNode' is not assignable to type 'string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal'.
           title={leftIconTooltip}
           enterDelay={tooltipEnterDelay}
           placement="bottom"
@@ -57,30 +55,25 @@ const CompactSelectField = ({
             },
           }}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <div className={classes.leftIconContainer}>
             {renderLeftIcon(classes.leftIcon)}
           </div>
         </Tooltip>
       )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div
         className={classNames({
           [classes.compactSelectField]: true,
         })}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <select
           id={id}
           disabled={disabled}
           value={value}
-          onChange={e => onChange(e.currentTarget.value)}
+          onChange={(e) => onChange(e.currentTarget.value)}
         >
           {children}
         </select>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div className={classNames({ [classes.arrowContainer]: true })}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <span className={classNames({ [classes.arrow]: true })} />
         </div>
       </div>

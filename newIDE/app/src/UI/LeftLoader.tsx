@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './CircularProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CircularProgress.tsx', but '--jsx' is not set.
+
 import CircularProgress from './CircularProgress';
 
 const styles = {
@@ -10,13 +10,11 @@ const LeftLoader = ({
   children,
   isLoading,
 }: {
-  children: React.ReactNode,
-  isLoading: boolean | null | undefined
+  children: React.ReactNode;
+  isLoading: boolean | null | undefined;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <span>
     {isLoading && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CircularProgress
         // From size 20, this component applied to a Dialog button triggers glitches
         // when rotating: the scrollbar appears and disappears each time the diagonal

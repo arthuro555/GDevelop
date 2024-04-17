@@ -1,15 +1,10 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
+import { t } from '@lingui/macro';
 import * as React from 'react';
-import {
-  StorageProvider,
-  FileMetadata,
-  SaveAsLocation,
-} from '../index';
+import { StorageProvider, FileMetadata, SaveAsLocation } from '../index';
 import { serializeToJSON } from '../../Utils/Serializer';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/GoogleDrive'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/GoogleDrive.js' implicitly has an 'any' type.
+
 import GoogleDrive from '../../UI/CustomSvgIcons/GoogleDrive';
-// @ts-expect-error - TS6142 - Module './GoogleDriveSaveAsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ProjectsStorage/GoogleDriveStorageProvider/GoogleDriveSaveAsDialog.tsx', but '--jsx' is not set.
+
 import GoogleDriveSaveAsDialog from './GoogleDriveSaveAsDialog';
 import { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow';
 import { AppArguments } from '../../Utils/Window';
@@ -41,16 +36,16 @@ const initializeApis = (): Promise<void> => {
     return Promise.resolve();
   }
 
-// @ts-expect-error - TS7005 - Variable 'apisLoadingPromise' implicitly has an 'any' type.
+  // @ts-expect-error - TS7005 - Variable 'apisLoadingPromise' implicitly has an 'any' type.
   if (apisLoadingPromise) {
     // Only do a single initialization attempt at a given time.
-// @ts-expect-error - TS7005 - Variable 'apisLoadingPromise' implicitly has an 'any' type.
+    // @ts-expect-error - TS7005 - Variable 'apisLoadingPromise' implicitly has an 'any' type.
     return apisLoadingPromise;
   }
 
   apisLoadingPromise = loadScript('https://apis.google.com/js/api:client.js')
     .then(() => {
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+      // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
       const gapi = global.gapi;
       if (!gapi) {
         throw new Error(
@@ -87,7 +82,7 @@ const initializeApis = (): Promise<void> => {
       apisLoaded = true;
       apisLoadingPromise = null;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error while loading Google Drive APIs:', error);
       apisLoadingPromise = null;
 
@@ -99,9 +94,9 @@ const initializeApis = (): Promise<void> => {
 
 type GoogleUser = {
   getAuthResponse: () => {
-    access_token: string,
-    error?: Error | null | undefined
-  }
+    access_token: string;
+    error?: Error | null | undefined;
+  };
 };
 
 let isAuthenticated = false;
@@ -112,7 +107,7 @@ let isAuthenticated = false;
  */
 export const authenticate = (): Promise<GoogleUser> => {
   return initializeApis().then(() => {
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+    // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
     const gapi = global.gapi;
     const googleAuth = gapi.auth2.getAuthInstance();
     if (isAuthenticated && googleAuth.isSignedIn.get()) {
@@ -120,8 +115,8 @@ export const authenticate = (): Promise<GoogleUser> => {
     }
 
     isAuthenticated = false;
-// @ts-expect-error - TS7006 - Parameter 'authenticated' implicitly has an 'any' type.
-    googleAuth.isSignedIn.listen(authenticated => {
+    // @ts-expect-error - TS7006 - Parameter 'authenticated' implicitly has an 'any' type.
+    googleAuth.isSignedIn.listen((authenticated) => {
       console.info('Authenticated with Google APIs: ', authenticated);
       isAuthenticated = authenticated;
     });
@@ -150,7 +145,11 @@ export const authenticate = (): Promise<GoogleUser> => {
 /**
  * Update a JSON file, given its file id.
  */
-export const patchJsonFile = (fileId: string, googleUser: GoogleUser, content: string): Promise<void> => {
+export const patchJsonFile = (
+  fileId: string,
+  googleUser: GoogleUser,
+  content: string
+): Promise<void> => {
   return fetch(`https://www.googleapis.com/upload/drive/v3/files/${fileId}`, {
     method: 'PATCH',
     headers: new Headers({
@@ -158,7 +157,7 @@ export const patchJsonFile = (fileId: string, googleUser: GoogleUser, content: s
       'Content-Type': 'application/json',
     }),
     body: content,
-  }).then(res => {
+  }).then((res) => {
     if (res.status !== 200) {
       if (res.status === 401) {
         isAuthenticated = false;
@@ -172,42 +171,49 @@ export const patchJsonFile = (fileId: string, googleUser: GoogleUser, content: s
 /**
  * Create a new empty JSON file, returning its fileid.
  */
-export const createNewJsonFile = (parentId: string, name: string): Promise<string> => {
-// @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+export const createNewJsonFile = (
+  parentId: string,
+  name: string
+): Promise<string> => {
+  // @ts-expect-error - TS7017 - Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
   const gapi = global.gapi;
 
-  return gapi.client.drive.files
-    .create({
-      'content-type': 'application/json',
-      uploadType: 'multipart',
-      name: name,
-      parents: [parentId],
-      mimeType: 'application/json',
-      fields: 'id, name, kind, size',
-    })
-// @ts-expect-error - TS7006 - Parameter 'apiResponse' implicitly has an 'any' type.
-    .then(apiResponse => {
-      return apiResponse.result.id;
-    });
+  return (
+    gapi.client.drive.files
+      .create({
+        'content-type': 'application/json',
+        uploadType: 'multipart',
+        name: name,
+        parents: [parentId],
+        mimeType: 'application/json',
+        fields: 'id, name, kind, size',
+      })
+      // @ts-expect-error - TS7006 - Parameter 'apiResponse' implicitly has an 'any' type.
+      .then((apiResponse) => {
+        return apiResponse.result.id;
+      })
+  );
 };
 
 /**
  * Information about a file or folder picked by the user.
  */
-export type GoogleDriveFileOrFolder = {
-  type: 'FOLDER',
-  id: string,
-  name: string
-} | {
-  type: 'FILE',
-  id: string,
-  name: string,
-  parentId: string
-};
+export type GoogleDriveFileOrFolder =
+  | {
+      type: 'FOLDER';
+      id: string;
+      name: string;
+    }
+  | {
+      type: 'FILE';
+      id: string;
+      name: string;
+      parentId: string;
+    };
 
 export type GoogleDriveFilePickerOptions = {
-  selectFolderEnabled: boolean,
-  showUploadView: boolean
+  selectFolderEnabled: boolean;
+  showUploadView: boolean;
 };
 
 /**
@@ -217,22 +223,21 @@ export type GoogleDriveFilePickerOptions = {
  * The picker dialog is not playing nice with material-ui dialogs or overlays. They should
  * not be displayed when the picker is on screen.
  */
-const showFilePicker = (
-  {
-    selectFolderEnabled,
-    showUploadView,
-  }: GoogleDriveFilePickerOptions,
-): Promise<GoogleDriveFileOrFolder | null | undefined> => {
-  return authenticate().then(googleUser => {
+const showFilePicker = ({
+  selectFolderEnabled,
+  showUploadView,
+}: GoogleDriveFilePickerOptions): Promise<
+  GoogleDriveFileOrFolder | null | undefined
+> => {
+  return authenticate().then((googleUser) => {
     const google = global.google;
 
-    return new Promise(resolve => {
-// @ts-expect-error - TS7034 - Variable 'picker' implicitly has type 'any' in some locations where its type cannot be determined.
+    return new Promise((resolve) => {
+      // @ts-expect-error - TS7034 - Variable 'picker' implicitly has type 'any' in some locations where its type cannot be determined.
       let picker = null;
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
+
       const pickerBuilder = new google.picker.PickerBuilder()
         .addView(
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
           new google.picker.DocsView()
             .setIncludeFolders(true)
             .setSelectFolderEnabled(selectFolderEnabled)
@@ -240,26 +245,21 @@ const showFilePicker = (
         .setOAuthToken(googleUser.getAuthResponse().access_token)
         .setDeveloperKey(DEVELOPER_KEY)
         .setAppId(APP_ID) // App ID is required to correctly identify files created with the app.
-// @ts-expect-error - TS7006 - Parameter 'data' implicitly has an 'any' type.
-        .setCallback(data => {
+        // @ts-expect-error - TS7006 - Parameter 'data' implicitly has an 'any' type.
+        .setCallback((data) => {
           if (
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'. | TS2339 - Property 'picker' does not exist on type 'typeof google'.
             data[google.picker.Response.ACTION] === google.picker.Action.PICKED
           ) {
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
             const doc = data[google.picker.Response.DOCUMENTS][0];
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
+
             const id: string = doc[google.picker.Document.ID];
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
+
             const name: string = doc[google.picker.Document.NAME];
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
+
             const parentId: string = doc[google.picker.Document.PARENT_ID];
             if (
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
               doc[google.picker.Document.TYPE] ===
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
                 google.picker.Type.LOCATION ||
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
               doc[google.picker.Document.MIME_TYPE] ===
                 'application/vnd.google-apps.folder'
             ) {
@@ -267,20 +267,18 @@ const showFilePicker = (
             } else {
               resolve({ id, name, type: 'FILE', parentId });
             }
-// @ts-expect-error - TS7005 - Variable 'picker' implicitly has an 'any' type. | TS7005 - Variable 'picker' implicitly has an 'any' type.
+            // @ts-expect-error - TS7005 - Variable 'picker' implicitly has an 'any' type. | TS7005 - Variable 'picker' implicitly has an 'any' type.
             if (picker) picker.dispose();
           } else if (
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'. | TS2339 - Property 'picker' does not exist on type 'typeof google'.
             data[google.picker.Response.ACTION] === google.picker.Action.CANCEL
           ) {
             resolve(null);
-// @ts-expect-error - TS7005 - Variable 'picker' implicitly has an 'any' type. | TS7005 - Variable 'picker' implicitly has an 'any' type.
+            // @ts-expect-error - TS7005 - Variable 'picker' implicitly has an 'any' type. | TS7005 - Variable 'picker' implicitly has an 'any' type.
             if (picker) picker.dispose();
           }
         });
       if (showUploadView) {
         pickerBuilder.addView(
-// @ts-expect-error - TS2339 - Property 'picker' does not exist on type 'typeof google'.
           new google.picker.DocsUploadView().setIncludeFolders(true)
         );
       }
@@ -290,7 +288,7 @@ const showFilePicker = (
       picker.setVisible(true);
       const pickerElements = document.getElementsByClassName('picker-dialog');
       for (var i = 0; i < pickerElements.length; ++i) {
-// @ts-expect-error - TS2339 - Property 'style' does not exist on type 'Element'.
+        // @ts-expect-error - TS2339 - Property 'style' does not exist on type 'Element'.
         pickerElements[i].style.zIndex = '5000'; // Higher than Material UI modals
       }
     });
@@ -303,8 +301,8 @@ const showFilePicker = (
 export default {
   internalName: 'GoogleDrive',
   name: t`Google Drive`,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-  renderIcon: props => <GoogleDrive fontSize={props.size} />,
+  // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  renderIcon: (props) => <GoogleDrive fontSize={props.size} />,
   getFileMetadataFromAppArguments: (appArguments: AppArguments) => {
     if (appArguments.state) {
       try {
@@ -316,7 +314,7 @@ export default {
             fileIdentifier: googleDriveState.ids[0],
           };
         }
-      } catch (e: any) {
+      } catch (e) {
         console.warn(
           "Error while trying to parse the Google Drive 'ids' in 'state' from the app arguments."
         );
@@ -332,13 +330,15 @@ export default {
 
     return {
       doesInitialOpenRequireUserInteraction: true, // Authentication will open a popup, requiring user interaction
-      onOpen: (fileMetadata: FileMetadata): Promise<{
-        content: any
+      onOpen: (
+        fileMetadata: FileMetadata
+      ): Promise<{
+        content: any;
       }> => {
         const fileId = fileMetadata.fileIdentifier;
 
         return authenticate()
-          .then(googleUser =>
+          .then((googleUser) =>
             fetch(
               `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
               {
@@ -352,27 +352,36 @@ export default {
             )
           )
           .then(
-            response => {
+            (response) => {
               return response.text().then(
-                fileContent => {
-                  return new Promise((resolve: (
-                    result: Promise<{
-                      content: any
-                    }> | {
-                      content: any
-                    },
-                  ) => void, reject: (error?: any) => void) => {
-                    try {
-                      const dataObject = JSON.parse(fileContent);
-                      return resolve({
-                        content: dataObject,
-                      });
-                    } catch (ex: any) {
-                      return reject(fileId + ' is a corrupted/malformed file.');
+                (fileContent) => {
+                  return new Promise(
+                    (
+                      resolve: (
+                        result:
+                          | Promise<{
+                              content: any;
+                            }>
+                          | {
+                              content: any;
+                            }
+                      ) => void,
+                      reject: (error?: any) => void
+                    ) => {
+                      try {
+                        const dataObject = JSON.parse(fileContent);
+                        return resolve({
+                          content: dataObject,
+                        });
+                      } catch (ex) {
+                        return reject(
+                          fileId + ' is a corrupted/malformed file.'
+                        );
+                      }
                     }
-                  });
+                  );
                 },
-                error => {
+                (error) => {
                   console.error(
                     'Error while reading the file from Google Drive API: ',
                     error
@@ -381,7 +390,7 @@ export default {
                 }
               );
             },
-            error => {
+            (error) => {
               console.error(
                 'Error while fetching the file from Google Drive API: ',
                 error
@@ -392,10 +401,10 @@ export default {
       },
       onOpenWithPicker: (): Promise<FileMetadata | null | undefined> => {
         return authenticate()
-          .then(googleUser =>
+          .then((googleUser) =>
             showFilePicker({ selectFolderEnabled: false, showUploadView: true })
           )
-          .then(googleDriveFileOrFolder => {
+          .then((googleDriveFileOrFolder) => {
             if (!googleDriveFileOrFolder) {
               return null;
             }
@@ -405,7 +414,7 @@ export default {
             };
           });
       },
-      onSaveProject: (project: gdProject, fileMetadata: FileMetadata) => {
+      onSaveProject: (project: gd.Project, fileMetadata: FileMetadata) => {
         const fileId = fileMetadata.fileIdentifier;
         const newFileMetadata = {
           ...fileMetadata,
@@ -414,7 +423,7 @@ export default {
 
         const content = serializeToJSON(project);
         return authenticate()
-          .then(googleUser => patchJsonFile(fileId, googleUser, content))
+          .then((googleUser) => patchJsonFile(fileId, googleUser, content))
           .then(() => ({
             wasSaved: true,
             fileMetadata: newFileMetadata,
@@ -424,19 +433,17 @@ export default {
         project,
         fileMetadata,
       }: {
-        project: gdProject,
-        fileMetadata: FileMetadata | null | undefined
+        project: gd.Project;
+        fileMetadata: FileMetadata | null | undefined;
       }) => {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           setDialog(() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <GoogleDriveSaveAsDialog
               onShowFilePicker={showFilePicker}
               onCancel={() => {
                 closeDialog();
                 resolve({ saveAsLocation: null });
               }}
-// @ts-expect-error - TS7031 - Binding element 'selectedFileOrFolder' implicitly has an 'any' type. | TS7031 - Binding element 'newFileName' implicitly has an 'any' type.
               onSave={async ({ selectedFileOrFolder, newFileName }) => {
                 await authenticate();
                 if (selectedFileOrFolder.type === 'FOLDER') {
@@ -462,7 +469,7 @@ export default {
         });
       },
       onSaveProjectAs: async (
-        project: gdProject,
+        project: gd.Project,
         saveAsLocation: SaveAsLocation | null | undefined,
         options
       ) => {

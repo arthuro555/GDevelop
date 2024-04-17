@@ -2,19 +2,18 @@ import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 import MockAdapter from 'axios-mock-adapter';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/PrivateAssets/PrivateAssetPackInformationPage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/PrivateAssets/PrivateAssetPackInformationPage.tsx', but '--jsx' is not set.
+
 import PrivateAssetPackInformationPage from '../../../../AssetStore/PrivateAssets/PrivateAssetPackInformationPage';
 import {
   client as assetApiAxiosClient,
   PrivateAssetPack,
 } from '../../../../Utils/GDevelopServices/Asset';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
+
 import { client as userApiAxiosClient } from '../../../../Utils/GDevelopServices/User';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { client as shopApiAxiosClient } from '../../../../Utils/GDevelopServices/Shop';
-// @ts-expect-error - TS6142 - Module '../../../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
+
 import { PrivateAssetPackListingData } from '../../../../Utils/GDevelopServices/Shop';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
 import {
@@ -27,11 +26,10 @@ import {
 import {
   AssetStoreContext,
   initialAssetStoreState,
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/AssetStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/AssetStoreContext.tsx', but '--jsx' is not set.
 } from '../../../../AssetStore/AssetStoreContext';
-// @ts-expect-error - TS6142 - Module '../../../../AssetStore/ProductLicense/ProductLicenseStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ProductLicense/ProductLicenseStoreContext.tsx', but '--jsx' is not set.
+
 import { ProductLicenseStoreStateProvider } from '../../../../AssetStore/ProductLicense/ProductLicenseStoreContext';
-// @ts-expect-error - TS6142 - Module '../../../../Profile/Subscription/SubscriptionSuggestionContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionSuggestionContext.tsx', but '--jsx' is not set.
+
 import { SubscriptionSuggestionProvider } from '../../../../Profile/Subscription/SubscriptionSuggestionContext';
 import { AuthenticatedUser } from '../../../../Profile/AuthenticatedUserContext';
 
@@ -222,12 +220,12 @@ const PrivateAssetPackInformationPageStory = ({
   errorCode,
   errorMessage,
 }: {
-  privateAssetPackListingData: PrivateAssetPackListingData,
-  authenticatedUser?: AuthenticatedUser,
-  receivedAssetPacks?: Array<PrivateAssetPack>,
-  delayResponse?: number,
-  errorCode?: number,
-  errorMessage?: string
+  privateAssetPackListingData: PrivateAssetPackListingData;
+  authenticatedUser?: AuthenticatedUser;
+  receivedAssetPacks?: Array<PrivateAssetPack>;
+  delayResponse?: number;
+  errorCode?: number;
+  errorMessage?: string;
 }) => {
   const userServiceMock = new MockAdapter(userApiAxiosClient, {
     delayResponse,
@@ -249,11 +247,11 @@ const PrivateAssetPackInformationPageStory = ({
       errorCode
         ? errorMessage || null
         : privateAssetPacks.find(
-            assetPack => assetPack.id === privateAssetPackListingData.id
+            (assetPack) => assetPack.id === privateAssetPackListingData.id
           )
     )
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
@@ -264,30 +262,28 @@ const PrivateAssetPackInformationPageStory = ({
     .onGet('/product-license')
     .reply(200, fakeAssetPackLicenses)
     .onPost(`/product/${privateAssetPackListingData.id}/action/redeem`)
-    .reply(config => {
+    .reply((config) => {
       action('Claim asset pack')();
       return [200, 'OK'];
     })
     .onAny()
-    .reply(config => {
+    .reply((config) => {
       console.error(`Unexpected call to ${config.url} (${config.method})`);
       return [504, null];
     });
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AssetStoreContext.Provider
       value={{
         ...initialAssetStoreState,
         privateAssetPackListingDatas: allPrivateAssetPackListingData,
       }}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <AuthenticatedUserContext.Provider
         value={{
           ...authenticatedUser,
           receivedAssetPacks,
-          assetPackPurchases: receivedAssetPacks.map(privateAssetPack => ({
+          assetPackPurchases: receivedAssetPacks.map((privateAssetPack) => ({
             id: 'purchase-id',
             productType: 'ASSET_PACK',
             usageType: 'commercial',
@@ -302,17 +298,14 @@ const PrivateAssetPackInformationPageStory = ({
           })),
         }}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SubscriptionSuggestionProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ProductLicenseStoreStateProvider>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <PrivateAssetPackInformationPage
               privateAssetPackListingData={privateAssetPackListingData}
               onAssetPackOpen={() => action('open asset pack')()}
               onGameTemplateOpen={() => action('open game template')()}
               privateAssetPackListingDatasFromSameCreator={allPrivateAssetPackListingData.filter(
-                assetPackListingData =>
+                (assetPackListingData) =>
                   assetPackListingData.id !== privateAssetPackListingData.id
               )}
             />
@@ -324,21 +317,18 @@ const PrivateAssetPackInformationPageStory = ({
 };
 
 export const Default = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPack1ListingData}
   />
 );
 
 export const ForABundle = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPackBundleListingData}
   />
 );
 
 export const ForAlreadyPurchasedAssetPack = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPack1ListingData}
     receivedAssetPacks={[
@@ -358,7 +348,6 @@ export const ForAlreadyPurchasedAssetPack = () => (
 );
 
 export const Loading = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPack1ListingData}
     delayResponse={10000}
@@ -366,7 +355,6 @@ export const Loading = () => (
 );
 
 export const WithRedeemableAssetPackWithoutSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     authenticatedUser={defaultAuthenticatedUserWithNoSubscription}
     privateAssetPackListingData={{
@@ -384,7 +372,6 @@ export const WithRedeemableAssetPackWithoutSubscription = () => (
 );
 
 export const WithRedeemableAssetPackWithSilverSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={{
       ...privateAssetPack1ListingData,
@@ -401,7 +388,6 @@ export const WithRedeemableAssetPackWithSilverSubscription = () => (
 );
 
 export const WithRedeemableAssetPackWithGoldSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     authenticatedUser={fakeGoldAuthenticatedUser}
     privateAssetPackListingData={{
@@ -419,7 +405,6 @@ export const WithRedeemableAssetPackWithGoldSubscription = () => (
 );
 
 export const WithRedeemableAssetPackWithEducationSubscription = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     authenticatedUser={fakeAuthenticatedUserWithEducationPlan}
     privateAssetPackListingData={{
@@ -437,7 +422,6 @@ export const WithRedeemableAssetPackWithEducationSubscription = () => (
 );
 
 export const With404 = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPack1ListingData}
     errorCode={404}
@@ -445,7 +429,6 @@ export const With404 = () => (
 );
 
 export const WithUnknownError = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <PrivateAssetPackInformationPageStory
     privateAssetPackListingData={privateAssetPack1ListingData}
     errorCode={500}

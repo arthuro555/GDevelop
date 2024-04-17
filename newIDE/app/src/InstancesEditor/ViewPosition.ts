@@ -6,19 +6,19 @@ import { InstancesEditorSettings } from './InstancesEditorSettings';
 import RenderedInstance from '../ObjectsRendering/Renderers/RenderedInstance';
 
 type Props = {
-  initialViewX: number,
-  initialViewY: number,
-  width: number,
-  height: number,
-  instancesEditorSettings: InstancesEditorSettings
+  initialViewX: number;
+  initialViewY: number;
+  width: number;
+  height: number;
+  instancesEditorSettings: InstancesEditorSettings;
 };
 
 export default class ViewPosition {
   viewX: number = 0;
   viewY: number = 0;
-// @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
   _width: number;
-// @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
   _height: number;
   instancesEditorSettings: InstancesEditorSettings;
   _pixiContainer = new PIXI.Container();
@@ -88,9 +88,10 @@ export default class ViewPosition {
   /**
    * Convert a length from canvas referential to scene referential.
    */
-  toSceneScale = (a: number): number => this.instancesEditorSettings.zoomFactor === 0
-    ? a
-    : a / Math.abs(this.instancesEditorSettings.zoomFactor);
+  toSceneScale = (a: number): number =>
+    this.instancesEditorSettings.zoomFactor === 0
+      ? a
+      : a / Math.abs(this.instancesEditorSettings.zoomFactor);
 
   /**
    * Convert a point from the "world" coordinates (for example, an object position) to the

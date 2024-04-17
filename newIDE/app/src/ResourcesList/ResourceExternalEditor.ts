@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import {
   createNewResource,
   ResourceKind,
@@ -22,94 +21,96 @@ export type ExternalEditorBase64Resource = {
    * Name of the resource in the project. If not specified, it means a new resource
    * must be created.
    */
-  name?: string | null | undefined,
+  name?: string | null | undefined;
   /**
    * The base64 encoded "data:" Url. Could maybe be replaced by Blobs in the future.
    */
-  dataUrl: string,
+  dataUrl: string;
   /**
    * The local file path, if applicable. Useful so that the editor replaces an existing file
    * (on the desktop app), rather than creating a new one.
    */
-  localFilePath?: string | null | undefined,
+  localFilePath?: string | null | undefined;
   /**
    * The extension of the file, if a file must be created for this resource.
    */
-  extension?: string | null | undefined,
+  extension?: string | null | undefined;
   /**
    * Original index of this resource in the animation, useful to reorder the animation if changed
    * in the external editor (for example, frames re-ordered in Piskel).
    */
-  originalIndex?: number | null | undefined
+  originalIndex?: number | null | undefined;
 };
 
 /**
  * The input sent to an external editor.
  */
 export type ExternalEditorInput = {
-  resources: Array<ExternalEditorBase64Resource>,
-  singleFrame: boolean | null | undefined,
-  name?: string,
-  isLooping?: boolean,
-  fps?: number,
-  externalEditorData?: any
+  resources: Array<ExternalEditorBase64Resource>;
+  singleFrame: boolean | null | undefined;
+  name?: string;
+  isLooping?: boolean;
+  fps?: number;
+  externalEditorData?: any;
 };
 
 /**
  * The output of an external editor.
  */
 export type ExternalEditorOutput = {
-  resources: Array<ExternalEditorBase64Resource>,
-  externalEditorData: any | null | undefined,
-  baseNameForNewResources: string
+  resources: Array<ExternalEditorBase64Resource>;
+  externalEditorData: any | null | undefined;
+  baseNameForNewResources: string;
 };
 
 /**
  * The result of the edition of one or more resources.
  */
 export type EditWithExternalEditorReturn = {
-  newMetadata: any | null | undefined,
-  newName: string | null | undefined,
+  newMetadata: any | null | undefined;
+  newName: string | null | undefined;
   resources: Array<{
-    name: string,
-    originalIndex?: number | null | undefined
-  }>
+    name: string;
+    originalIndex?: number | null | undefined;
+  }>;
 };
 
 /**
  * These are the options passed to an external editor to edit one or more resources.
  */
 export type EditWithExternalEditorOptions = {
-  project: gdProject,
-  i18n: I18nType,
-  getStorageProvider: () => StorageProvider,
-  resourceManagementProps: ResourceManagementProps,
-  signal: AbortSignal,
-  resourceNames: Array<string>,
+  project: gd.Project;
+  i18n: I18nType;
+  getStorageProvider: () => StorageProvider;
+  resourceManagementProps: ResourceManagementProps;
+  signal: AbortSignal;
+  resourceNames: Array<string>;
   extraOptions: {
-    singleFrame?: boolean // If set to true, edition should be limited to a single frame,
-    name?: string //Check what this is used for. Is this "animationName?",
-    isLooping?: boolean,
-    fps?: number,
-    existingMetadata: string
-  }
+    singleFrame?: boolean; // If set to true, edition should be limited to a single frame,
+    name?: string; //Check what this is used for. Is this "animationName?",
+    isLooping?: boolean;
+    fps?: number;
+    existingMetadata: string;
+  };
 };
 
 /**
  * Description of an external editor along with the method to open it to edit some resources.
  */
 export type ResourceExternalEditor = {
-  name: string,
-  createDisplayName: MessageDescriptor,
-  editDisplayName: MessageDescriptor,
-  kind: ResourceKind,
-  edit: (arg1: EditWithExternalEditorOptions) => Promise<EditWithExternalEditorReturn | null>
+  name: string;
+  createDisplayName: MessageDescriptor;
+  editDisplayName: MessageDescriptor;
+  kind: ResourceKind;
+  edit: (
+    arg1: EditWithExternalEditorOptions
+  ) => Promise<EditWithExternalEditorReturn | null>;
 };
 
 export type ResourceWithTemporaryBlobUrl = {
-  resource: gdResource,
-  blobUrl: string,
-  originalIndex?: number | null | undefined
+  resource: gd.Resource;
+  blobUrl: string;
+  originalIndex?: number | null | undefined;
 };
 
 /**
@@ -117,19 +118,17 @@ export type ResourceWithTemporaryBlobUrl = {
  * of the game (existing or new ones), with blob URLs - which should then be uploaded/stored
  * locally.
  */
-export const saveBlobUrlsFromExternalEditorBase64Resources = async (
-  {
-    project,
-    baseNameForNewResources,
-    resources,
-    resourceKind,
-  }: {
-    project: gdProject,
-    baseNameForNewResources: string,
-    resources: Array<ExternalEditorBase64Resource>,
-    resourceKind: ResourceKind
-  },
-): Promise<Array<ResourceWithTemporaryBlobUrl>> => {
+export const saveBlobUrlsFromExternalEditorBase64Resources = async ({
+  project,
+  baseNameForNewResources,
+  resources,
+  resourceKind,
+}: {
+  project: gd.Project;
+  baseNameForNewResources: string;
+  resources: Array<ExternalEditorBase64Resource>;
+  resourceKind: ResourceKind;
+}): Promise<Array<ResourceWithTemporaryBlobUrl>> => {
   const resourcesManager = project.getResourcesManager();
   const blobs: Array<ResourceWithTemporaryBlobUrl> = resources
     .map(({ name, dataUrl, localFilePath, extension, originalIndex }) => {
@@ -141,7 +140,7 @@ export const saveBlobUrlsFromExternalEditorBase64Resources = async (
         // Insert a new resource.
         // Store the blob url, as well as indication
         // about which extension (for a new file) or filename to use (to overwrite existing file).
-        const name = newNameGenerator(baseNameForNewResources, name =>
+        const name = newNameGenerator(baseNameForNewResources, (name) =>
           resourcesManager.hasResource(name)
         );
         console.info('Creating new resource ' + name + '...');
@@ -203,9 +202,9 @@ export const freeBlobsAndUpdateMetadata = ({
   metadataKey,
   metadata,
 }: {
-  modifiedResources: Array<ResourceWithTemporaryBlobUrl>,
-  metadataKey: string,
-  metadata: any | null | undefined
+  modifiedResources: Array<ResourceWithTemporaryBlobUrl>;
+  metadataKey: string;
+  metadata: any | null | undefined;
 }) => {
   modifiedResources.forEach(({ resource, blobUrl }) => {
     // Free the blob urls that were created just to allow the resources
@@ -247,7 +246,10 @@ export const patchExternalEditorMetadataWithResourcesNamesIfNecessary = (
  * Useful to safely read optional metadata stored by an external editor in a resource
  * or another object (like a `gd.Direction`).
  */
-export const readMetadata = (metadataKey: string, metadata?: any | null): any | null | undefined => {
+export const readMetadata = (
+  metadataKey: string,
+  metadata?: any | null
+): any | null | undefined => {
   if (!metadata) return null;
 
   try {
@@ -255,7 +257,7 @@ export const readMetadata = (metadataKey: string, metadata?: any | null): any | 
     if (parsedMetadata && typeof parsedMetadata === 'object') {
       if (parsedMetadata[metadataKey]) return parsedMetadata[metadataKey];
     }
-  } catch (error: any) {
+  } catch (error) {
     console.warn('Malformed metadata for a resource - ignoring it.', error);
   }
 

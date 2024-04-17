@@ -1,6 +1,13 @@
-import React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/Chip' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Chip.tsx', but '--jsx' is not set.
-import Chip from '../UI/Chip';
+import {
+  RefObject,
+  SyntheticEvent,
+  createRef,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
+
+import Chip, { ChipInterface } from '../UI/Chip';
 
 type Tags = Array<string>;
 
@@ -18,18 +25,15 @@ const styles = {
 } as const;
 
 type Props = {
-  tags: Tags,
-  onRemove: (arg1: string) => void
+  tags: Tags;
+  onRemove: (arg1: string) => void;
 };
 
-const TagChips = ({
-  tags,
-  onRemove,
-}: Props) => {
-  const [focusedTag, setFocusedTag] = React.useState<string | null | undefined>(null);
-  const tagsRefs = React.useRef([]);
+const TagChips = ({ tags, onRemove }: Props) => {
+  const [focusedTag, setFocusedTag] = useState<string | null | undefined>(null);
+  const tagsRefs = useRef<RefObject<ChipInterface>[]>([]);
 
-  const getChipStyle = React.useCallback(
+  const getChipStyle = useCallback(
     (tag: string) => {
       const isFocused = !!focusedTag && focusedTag === tag;
       return {
@@ -40,11 +44,9 @@ const TagChips = ({
     [focusedTag]
   );
 
-// @ts-expect-error - TS1005 - ',' expected. | TS7005 - Variable 'any' implicitly has an 'any' type. | TS1005 - ';' expected.
-  const handleDeleteTag = (tag: string) => event: any => {
+  const handleDeleteTag = (tag: string) => (event: SyntheticEvent) => {
     const deletedTagIndex = tags.indexOf(tag);
     tagsRefs.current.splice(deletedTagIndex, 1);
-// @ts-expect-error - TS2532 - Object is possibly 'undefined'. | TS2339 - Property 'nativeEvent' does not exist on type 'Event'.
     if (event.nativeEvent instanceof KeyboardEvent) {
       const newIndexToFocus = Math.min(
         tagsRefs.current.length - 1,
@@ -63,7 +65,7 @@ const TagChips = ({
   return (
     <div style={styles.chipContainer}>
       {tags.map((tag, index) => {
-        const newRef = React.createRef();
+        const newRef = createRef<ChipInterface>();
         tagsRefs.current[index] = newRef;
         return (
           <Chip
@@ -80,7 +82,6 @@ const TagChips = ({
       })}
     </div>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
 };
 
 export default TagChips;

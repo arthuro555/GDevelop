@@ -35,26 +35,26 @@ const projectResourcesCredentialsApiClient = axios.create({
 /**
  * The token returned by the server to access the project resources and files, if not using a cookie.
  */
-let gdResourceJwt: string | null = null;
+let gd.ResourceJwt: string | null = null;
 
 export const storeGDevelopResourceJwtToken = (token: string) => {
-  gdResourceJwt = token;
+  gd.ResourceJwt = token;
 };
 
 export const getGDevelopResourceJwtToken = (): string | null => {
-  return gdResourceJwt;
+  return gd.ResourceJwt;
 };
 
 export const cleanGDevelopResourceJwtToken = () => {
-  gdResourceJwt = null;
+  gd.ResourceJwt = null;
 };
 
 export const addGDevelopResourceJwtTokenToUrl = (url: string) => {
-  if (!gdResourceJwt) return url;
+  if (!gd.ResourceJwt) return url;
 
   const separator = url.indexOf('?') === -1 ? '?' : '&';
   return (
-    url + separator + 'gd_resource_token=' + encodeURIComponent(gdResourceJwt)
+    url + separator + 'gd_resource_token=' + encodeURIComponent(gd.ResourceJwt)
   );
 };
 

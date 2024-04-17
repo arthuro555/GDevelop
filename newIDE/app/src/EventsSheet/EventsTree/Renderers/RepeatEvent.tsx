@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../InstructionsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/InstructionsList.tsx', but '--jsx' is not set.
+
 import InstructionsList from '../InstructionsList';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'classnames'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/classnames/index.js' implicitly has an 'any' type.
 import classNames from 'classnames';
@@ -10,19 +10,18 @@ import {
   executableEventContainer,
   disabledText,
 } from '../ClassNames';
-// @ts-expect-error - TS6142 - Module '../../InlinePopover' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/InlinePopover.tsx', but '--jsx' is not set.
+
 import InlinePopover from '../../InlinePopover';
-// @ts-expect-error - TS6142 - Module '../../ParameterFields/ExpressionField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/ExpressionField.tsx', but '--jsx' is not set.
+
 import ExpressionField from '../../ParameterFields/ExpressionField';
 import { ParameterFieldInterface } from '../../ParameterFields/ParameterFieldCommons';
 import { EventRendererProps } from './EventRenderer';
-// @ts-expect-error - TS6142 - Module '../ConditionsActionsColumns' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/EventsTree/ConditionsActionsColumns.tsx', but '--jsx' is not set.
+
 import ConditionsActionsColumns from '../ConditionsActionsColumns';
 import { shouldActivate } from '../../../UI/KeyboardShortcuts/InteractionKeys';
 import ParameterRenderingService from '../../ParameterRenderingService';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
-const gd: libGDevelop = global.gd;
 
 const styles = {
   container: {
@@ -37,7 +36,10 @@ const styles = {
   },
 } as const;
 
-export default class RepeatEvent extends React.Component<EventRendererProps, any> {
+export default class RepeatEvent extends React.Component<
+  EventRendererProps,
+  any
+> {
   _field: ParameterFieldInterface | null | undefined = null;
   state = {
     editing: false,
@@ -89,7 +91,7 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
 
     // Put back the focus after closing the inline popover.
     if (anchorEl)
-// @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
+      // @ts-expect-error - TS2339 - Property 'focus' does not exist on type 'never'.
       anchorEl.focus();
 
     this.setState({
@@ -104,7 +106,6 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
     const expression = repeatEvent.getRepeatExpression();
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div
         style={styles.container}
         className={classNames({
@@ -113,16 +114,14 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
           [executableEventContainer]: true,
         })}
       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <span
             className={classNames({
               [selectableArea]: true,
               [disabledText]: this.props.disabled,
             })}
             onClick={this.edit}
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               if (shouldActivate(event)) {
                 this.edit(event);
               }
@@ -130,24 +129,18 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
             tabIndex={0}
           >
             {expression ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Repeat {expression} times:</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <i>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Trans>Click to choose how many times will be repeated</Trans>
               </i>
             )}
           </span>
         </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ConditionsActionsColumns
           leftIndentWidth={this.props.leftIndentWidth}
           windowSize={this.props.windowSize}
-// @ts-expect-error - TS7031 - Binding element 'style' implicitly has an 'any' type. | TS7031 - Binding element 'className' implicitly has an 'any' type.
           renderConditionsList={({ style, className }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <InstructionsList
               platform={this.props.project.getCurrentPlatform()}
               instrsList={repeatEvent.getConditions()}
@@ -177,9 +170,7 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
               idPrefix={this.props.idPrefix}
             />
           )}
-// @ts-expect-error - TS7031 - Binding element 'className' implicitly has an 'any' type.
           renderActionsList={({ className }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <InstructionsList
               platform={this.props.project.getCurrentPlatform()}
               instrsList={repeatEvent.getActions()}
@@ -214,29 +205,25 @@ export default class RepeatEvent extends React.Component<EventRendererProps, any
             />
           )}
         />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <InlinePopover
           open={this.state.editing}
           anchorEl={this.state.anchorEl}
           onRequestClose={this.cancelEditing}
           onApply={this.endEditing}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ExpressionField
             project={this.props.project}
             scope={this.props.scope}
             globalObjectsContainer={this.props.globalObjectsContainer}
             objectsContainer={this.props.objectsContainer}
             value={expression}
-// @ts-expect-error - TS7006 - Parameter 'text' implicitly has an 'any' type.
-            onChange={text => {
+            onChange={(text) => {
               repeatEvent.setRepeatExpression(text);
               this.props.onUpdate();
             }}
             parameterRenderingService={ParameterRenderingService}
             isInline
-// @ts-expect-error - TS7006 - Parameter 'field' implicitly has an 'any' type.
-            ref={field => (this._field = field)}
+            ref={(field) => (this._field = field)}
           />
         </InlinePopover>
       </div>

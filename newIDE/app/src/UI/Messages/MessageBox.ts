@@ -10,7 +10,7 @@ type WarningOptions = {
    * Delay the display of the warning to the next tick, not blocking the current function
    * execution. This can be useful to work around freezing issues on Linux.
    */
-  delayToNextTick: boolean
+  delayToNextTick: boolean;
 };
 
 export const showWarningBox = (message: string, options?: WarningOptions) => {
@@ -24,10 +24,10 @@ export const showWarningBox = (message: string, options?: WarningOptions) => {
 };
 
 type ErrorArgs = {
-  message: string,
-  rawError: Error | null | undefined | any,
-  errorId: string,
-  doNotReport?: boolean
+  message: string;
+  rawError: Error | null | undefined | any;
+  errorId: string;
+  doNotReport?: boolean;
 };
 
 export const showErrorBox = ({

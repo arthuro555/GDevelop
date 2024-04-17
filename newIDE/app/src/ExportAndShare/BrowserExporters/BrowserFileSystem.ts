@@ -1,24 +1,23 @@
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'path-browserify'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/path-browserify/index.js' implicitly has an 'any' type.
 import path from 'path-browserify';
-const gd: libGDevelop = global.gd;
 
 export type BlobFileDescriptor = {
-  filePath: string,
-  blob: Blob
+  filePath: string;
+  blob: Blob;
 };
 
 export type TextFileDescriptor = {
-  filePath: string,
-  text: string
+  filePath: string;
+  text: string;
 };
 
 export type UrlFileDescriptor = {
-  filePath: string,
-  url: string
+  filePath: string;
+  url: string;
 };
 
 type ConstructorArgs = {
-  textFiles: Array<TextFileDescriptor>
+  textFiles: Array<TextFileDescriptor>;
 };
 
 const isURL = (filename: string) => {
@@ -53,7 +52,7 @@ export default class BrowserFileSystem {
    * @private
    */
   _textFiles: {
-    [key: string]: string
+    [key: string]: string;
   } = {};
 
   /**
@@ -61,16 +60,14 @@ export default class BrowserFileSystem {
    * @private
    */
   _filesToDownload: {
-    [key: string]: string
+    [key: string]: string;
   } = {};
 
   /**
    * Create a new in-memory file system.
    */
-  constructor({
-    textFiles,
-  }: ConstructorArgs) {
-    textFiles.forEach(textFileDescriptor => {
+  constructor({ textFiles }: ConstructorArgs) {
+    textFiles.forEach((textFileDescriptor) => {
       this._textFiles[textFileDescriptor.filePath] = textFileDescriptor.text;
     });
   }
@@ -80,8 +77,8 @@ export default class BrowserFileSystem {
    */
   getAllTextFilesIn = (pathPrefix: string): Array<TextFileDescriptor> => {
     return Object.keys(this._textFiles)
-      .filter(filePath => filePath.indexOf(pathPrefix) === 0)
-      .map(filePath => ({
+      .filter((filePath) => filePath.indexOf(pathPrefix) === 0)
+      .map((filePath) => ({
         filePath,
         text: this._textFiles[filePath],
       }));
@@ -92,8 +89,8 @@ export default class BrowserFileSystem {
    */
   getAllUrlFilesIn = (pathPrefix: string): Array<UrlFileDescriptor> => {
     return Object.keys(this._filesToDownload)
-      .filter(filePath => filePath.indexOf(pathPrefix) === 0)
-      .map(filePath => ({
+      .filter((filePath) => filePath.indexOf(pathPrefix) === 0)
+      .map((filePath) => ({
         filePath,
         url: this._filesToDownload[filePath],
       }));
@@ -111,7 +108,7 @@ export default class BrowserFileSystem {
   clearDir = (path: string) => {
     // Clear the files to be written in the specified directory.
     const filePaths = Object.keys(this._textFiles);
-    filePaths.forEach(filePath => {
+    filePaths.forEach((filePath) => {
       if (filePath.indexOf(path) === 0) {
         delete this._textFiles[filePath];
       }
@@ -211,7 +208,7 @@ export default class BrowserFileSystem {
 
     // Simulate ReadDir by returning all external URLs
     // with the filename matching the extension.
-    Object.keys(this._filesToDownload).forEach(filePath => {
+    Object.keys(this._filesToDownload).forEach((filePath) => {
       const upperCaseFilePath = filePath.toUpperCase();
       if (
         upperCaseFilePath.indexOf(ext) ===

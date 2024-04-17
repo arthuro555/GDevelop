@@ -1,4 +1,4 @@
-import {darken, lighten} from '@material-ui/core/styles';
+import { darken, lighten } from '@material-ui/core/styles';
 
 const closeableTabSizeOverrides = {
   width: 200,
@@ -19,17 +19,17 @@ export function getMuiOverrides({
   alternateCanvasBackgroundColor,
   alternateCanvasLightBackgroundColor,
 }: {
-  tabTextColor: string,
-  tabSelectedTextColor: string,
-  tabBackgroundColor: string,
-  tabSelectedBackgroundColor: string,
-  inputBorderBottomColor: string,
-  appBarBackgroundColor: string,
-  appBarTextColor: string,
-  iconColor: string,
-  outlinedButtonBorderColor: string,
-  alternateCanvasBackgroundColor: string,
-  alternateCanvasLightBackgroundColor: string
+  tabTextColor: string;
+  tabSelectedTextColor: string;
+  tabBackgroundColor: string;
+  tabSelectedBackgroundColor: string;
+  inputBorderBottomColor: string;
+  appBarBackgroundColor: string;
+  appBarTextColor: string;
+  iconColor: string;
+  outlinedButtonBorderColor: string;
+  alternateCanvasBackgroundColor: string;
+  alternateCanvasLightBackgroundColor: string;
 }) {
   return {
     MuiTypography: {
@@ -436,10 +436,10 @@ export function createGdevelopTheme({
   paletteType,
   gdevelopIconsCSSFilter,
 }: {
-  styles: any,
-  rootClassNameIdentifier: string,
-  paletteType: string,
-  gdevelopIconsCSSFilter: string | null | undefined
+  styles: any;
+  rootClassNameIdentifier: string;
+  paletteType: string;
+  gdevelopIconsCSSFilter: string | null | undefined;
 }) {
   return {
     gdevelopTheme: {

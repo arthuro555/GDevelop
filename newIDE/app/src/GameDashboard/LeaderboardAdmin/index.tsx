@@ -1,9 +1,9 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans, t } from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
+
 import { I18n as I18nType } from '@lingui/core';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -15,63 +15,61 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Add'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Add.js' implicitly has an 'any' type.
 import Add from '../../UI/CustomSvgIcons/Add';
 import TextFormat from '@material-ui/icons/TextFormat';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Floppy'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Floppy.js' implicitly has an 'any' type.
+
 import Save from '../../UI/CustomSvgIcons/Floppy';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Cross'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Cross.js' implicitly has an 'any' type.
+
 import Cross from '../../UI/CustomSvgIcons/Cross';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Edit'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Edit.js' implicitly has an 'any' type.
+
 import Edit from '../../UI/CustomSvgIcons/Edit';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/EditFile'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/EditFile.js' implicitly has an 'any' type.
+
 import EditFile from '../../UI/CustomSvgIcons/EditFile';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Tag'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Tag.js' implicitly has an 'any' type.
+
 import Tag from '../../UI/CustomSvgIcons/Tag';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/AtSign'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/AtSign.js' implicitly has an 'any' type.
+
 import AtSign from '../../UI/CustomSvgIcons/AtSign';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Calendar'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Calendar.js' implicitly has an 'any' type.
+
 import Calendar from '../../UI/CustomSvgIcons/Calendar';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Sort'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Sort.js' implicitly has an 'any' type.
+
 import Sort from '../../UI/CustomSvgIcons/Sort';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Users'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Users.js' implicitly has an 'any' type.
+
 import Users from '../../UI/CustomSvgIcons/Users';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Refresh'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Refresh.js' implicitly has an 'any' type.
+
 import Refresh from '../../UI/CustomSvgIcons/Refresh';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Trash'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Trash.js' implicitly has an 'any' type.
+
 import Trash from '../../UI/CustomSvgIcons/Trash';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Visibility'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Visibility.js' implicitly has an 'any' type.
+
 import Visibility from '../../UI/CustomSvgIcons/Visibility';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/VisibilityOff'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/VisibilityOff.js' implicitly has an 'any' type.
+
 import VisibilityOff from '../../UI/CustomSvgIcons/VisibilityOff';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Lock'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Lock.js' implicitly has an 'any' type.
+
 import Lock from '../../UI/CustomSvgIcons/Lock';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/LockOpen'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/LockOpen.js' implicitly has an 'any' type.
+
 import LockOpen from '../../UI/CustomSvgIcons/LockOpen';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/Copy'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Copy.js' implicitly has an 'any' type.
+
 import Copy from '../../UI/CustomSvgIcons/Copy';
 
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
 import PlaceholderLoader from '../../UI/PlaceholderLoader';
-// @ts-expect-error - TS6142 - Module '../../UI/EmptyPlaceholder' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EmptyPlaceholder.tsx', but '--jsx' is not set.
+
 import { EmptyPlaceholder } from '../../UI/EmptyPlaceholder';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, LargeSpacer, Line, Spacer } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../../UI/IconButton';
-// @ts-expect-error - TS6142 - Module '../../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../../UI/PlaceholderError';
-// @ts-expect-error - TS6142 - Module '../../UI/AlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/AlertMessage.tsx', but '--jsx' is not set.
+
 import AlertMessage from '../../UI/AlertMessage';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../UI/TextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextField.tsx', but '--jsx' is not set.
+
 import TextField, { TextFieldInterface } from '../../UI/TextField';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField from '../../UI/SelectField';
-// @ts-expect-error - TS6142 - Module '../../UI/CircularProgress' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CircularProgress.tsx', but '--jsx' is not set.
+
 import CircularProgress from '../../UI/CircularProgress';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../../UI/SelectOption';
 import { useOnlineStatus } from '../../Utils/OnlineStatus';
 import {
@@ -82,66 +80,74 @@ import {
   shortenUuidForDisplay,
 } from '../../Utils/GDevelopServices/Play';
 import LeaderboardContext from '../../Leaderboard/LeaderboardContext';
-// @ts-expect-error - TS6142 - Module '../../Leaderboard/LeaderboardProvider' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Leaderboard/LeaderboardProvider.tsx', but '--jsx' is not set.
+
 import LeaderboardProvider from '../../Leaderboard/LeaderboardProvider';
-// @ts-expect-error - TS6142 - Module './LeaderboardEntriesTable' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/LeaderboardAdmin/LeaderboardEntriesTable.tsx', but '--jsx' is not set.
+
 import LeaderboardEntriesTable from './LeaderboardEntriesTable';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ResponsiveLineStackLayout } from '../../UI/Layout';
 import { useResponsiveWindowSize } from '../../UI/Responsive/ResponsiveWindowMeasurer';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/TextEllipsis'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextEllipsis.js' implicitly has an 'any' type.
+
 import { textEllipsisStyle } from '../../UI/TextEllipsis';
 import { shouldValidate } from '../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module '../GameRegistration' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/GameRegistration.tsx', but '--jsx' is not set.
+
 import { GameRegistration } from '../GameRegistration';
-// @ts-expect-error - TS6142 - Module './LeaderboardAppearanceDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/LeaderboardAdmin/LeaderboardAppearanceDialog.tsx', but '--jsx' is not set.
+
 import LeaderboardAppearanceDialog from './LeaderboardAppearanceDialog';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module './LeaderboardSortOptionsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/LeaderboardAdmin/LeaderboardSortOptionsDialog.tsx', but '--jsx' is not set.
+
 import LeaderboardSortOptionsDialog from './LeaderboardSortOptionsDialog';
 import { LeaderboardSortOption } from '../../Utils/GDevelopServices/Play';
 import { formatScore } from '../../Leaderboard/LeaderboardScoreFormatter';
-// @ts-expect-error - TS6142 - Module '../../UI/Toggle' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Toggle.tsx', but '--jsx' is not set.
+
 import Toggle from '../../UI/Toggle';
 import AuthenticatedUserContext from '../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../Profile/Subscription/SubscriptionSuggestionContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Profile/Subscription/SubscriptionSuggestionContext.tsx', but '--jsx' is not set.
+
 import { SubscriptionSuggestionContext } from '../../Profile/Subscription/SubscriptionSuggestionContext';
-// @ts-expect-error - TS6142 - Module './MaxLeaderboardCountAlertMessage' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/GameDashboard/LeaderboardAdmin/MaxLeaderboardCountAlertMessage.tsx', but '--jsx' is not set.
+
 import MaxLeaderboardCountAlertMessage from './MaxLeaderboardCountAlertMessage';
 import useAlertDialog from '../../UI/Alert/useAlertDialog';
-// @ts-expect-error - TS6142 - Module '../../UI/Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from '../../UI/Paper';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/SwitchHorizontal'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/SwitchHorizontal.js' implicitly has an 'any' type.
+
 import SwitchHorizontal from '../../UI/CustomSvgIcons/SwitchHorizontal';
 import { extractGDevelopApiErrorStatusAndCode } from '../../Utils/GDevelopServices/Errors';
 
 type Props = {
-  onLoading: (arg1: boolean) => void,
-  project?: gdProject,
-  leaderboardIdToSelectAtOpening?: string
+  onLoading: (arg1: boolean) => void;
+  project?: gd.Project;
+  leaderboardIdToSelectAtOpening?: string;
 };
 
-type ContainerProps = (Props) & {
-  gameId: string
+type ContainerProps = Props & {
+  gameId: string;
 };
 
 type ApiError = {
-  action: 'entriesFetching' | 'entryDeletion' | 'leaderboardsFetching' | 'leaderboardNameUpdate' | 'leaderboardSortUpdate' | 'leaderboardVisibilityUpdate' | 'leaderboardAutoPlayerNamePrefixUpdate' | 'leaderboardIgnoreCustomPlayerNamesUpdate' | 'leaderboardPrimaryUpdate' | 'leaderboardAppearanceUpdate' | 'leaderboardPlayerUnicityDisplayChoiceUpdate' | 'leaderboardCreation' | 'leaderboardReset' | 'leaderboardDeletion',
-  message: React.ReactNode,
-  itemId?: string
+  action:
+    | 'entriesFetching'
+    | 'entryDeletion'
+    | 'leaderboardsFetching'
+    | 'leaderboardNameUpdate'
+    | 'leaderboardSortUpdate'
+    | 'leaderboardVisibilityUpdate'
+    | 'leaderboardAutoPlayerNamePrefixUpdate'
+    | 'leaderboardIgnoreCustomPlayerNamesUpdate'
+    | 'leaderboardPrimaryUpdate'
+    | 'leaderboardAppearanceUpdate'
+    | 'leaderboardPlayerUnicityDisplayChoiceUpdate'
+    | 'leaderboardCreation'
+    | 'leaderboardReset'
+    | 'leaderboardDeletion';
+  message: React.ReactNode;
+  itemId?: string;
 };
 
-const CenteredError = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+const CenteredError = ({ children }: { children: React.ReactNode }) => (
   <Column expand justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Line>{children}</Line>
   </Column>
 );
@@ -167,62 +173,54 @@ const getApiError = (payload: LeaderboardUpdatePayload): ApiError => ({
   action: payload.name
     ? 'leaderboardNameUpdate'
     : payload.sort
-    ? 'leaderboardSortUpdate'
-    : payload.visibility
-    ? 'leaderboardVisibilityUpdate'
-    : payload.ignoreCustomPlayerNames !== undefined
-    ? 'leaderboardIgnoreCustomPlayerNamesUpdate'
-    : payload.autoPlayerNamePrefix !== undefined
-    ? 'leaderboardAutoPlayerNamePrefixUpdate'
-    : payload.primary
-    ? 'leaderboardPrimaryUpdate'
-    : payload.customizationSettings
-    ? 'leaderboardAppearanceUpdate'
-    : 'leaderboardPlayerUnicityDisplayChoiceUpdate',
+      ? 'leaderboardSortUpdate'
+      : payload.visibility
+        ? 'leaderboardVisibilityUpdate'
+        : payload.ignoreCustomPlayerNames !== undefined
+          ? 'leaderboardIgnoreCustomPlayerNamesUpdate'
+          : payload.autoPlayerNamePrefix !== undefined
+            ? 'leaderboardAutoPlayerNamePrefixUpdate'
+            : payload.primary
+              ? 'leaderboardPrimaryUpdate'
+              : payload.customizationSettings
+                ? 'leaderboardAppearanceUpdate'
+                : 'leaderboardPlayerUnicityDisplayChoiceUpdate',
   message: payload.name ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the name of the leaderboard, please close
       the dialog, come back and try again.
     </Trans>
   ) : payload.sort ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the sort direction of the leaderboard,
       please close the dialog, come back and try again.
     </Trans>
   ) : payload.visibility ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the visibility of the leaderboard, please
       close the dialog, come back and try again.
     </Trans>
   ) : payload.ignoreCustomPlayerNames !== undefined ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the handling of player names of the
       leaderboard, please close the dialog, come back and try again.
     </Trans>
   ) : payload.autoPlayerNamePrefix !== undefined ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the handling of player names of the
       leaderboard, please close the dialog, come back and try again.
     </Trans>
   ) : payload.primary ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when setting the leaderboard as default, please close
       the dialog, come back and try again.
     </Trans>
   ) : payload.customizationSettings ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the appearance of the leaderboard, please
       close the dialog, come back and try again.
     </Trans>
   ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>
       An error occurred when updating the display choice of the leaderboard,
       please close the dialog, come back and try again.
@@ -239,18 +237,16 @@ const getSortOrderText = (currentLeaderboard: Leaderboard) => {
         )
       : currentLeaderboard.extremeAllowedScore;
     if (currentLeaderboard.sort === 'ASC') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       return <Trans>Lower is better (min: {formattedScore})</Trans>;
     }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     return <Trans>Higher is better (max: {formattedScore})</Trans>;
   }
 
   if (currentLeaderboard.sort === 'ASC') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     return <Trans>Lower is better</Trans>;
   }
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   return <Trans>Higher is better</Trans>;
 };
 
@@ -261,8 +257,9 @@ export const LeaderboardAdmin = ({
 }: Props) => {
   const isOnline = useOnlineStatus();
   const { isMobile } = useResponsiveWindowSize();
-  const [isEditingAppearance, setIsEditingAppearance] = React.useState<boolean>(false);
-// @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
+  const [isEditingAppearance, setIsEditingAppearance] =
+    React.useState<boolean>(false);
+  // @ts-expect-error - TS2339 - Property 'showConfirmation' does not exist on type 'void'. | TS2339 - Property 'showDeleteConfirmation' does not exist on type 'void'.
   const { showConfirmation, showDeleteConfirmation } = useAlertDialog();
   const [
     displayMaxLeaderboardCountReachedWarning,
@@ -271,29 +268,30 @@ export const LeaderboardAdmin = ({
   const authenticatedUser = React.useContext(AuthenticatedUserContext);
   const { limits } = authenticatedUser;
 
-  const [
-    isEditingSortOptions,
-    setIsEditingSortOptions,
-  ] = React.useState<boolean>(false);
+  const [isEditingSortOptions, setIsEditingSortOptions] =
+    React.useState<boolean>(false);
   const [isEditingName, setIsEditingName] = React.useState<boolean>(false);
-  const [
-    isEditingAutoPlayerNamePrefix,
-    setIsEditingAutoPlayerNamePrefix,
-  ] = React.useState<boolean>(false);
-  const [isRequestPending, setIsRequestPending] = React.useState<boolean>(false);
+  const [isEditingAutoPlayerNamePrefix, setIsEditingAutoPlayerNamePrefix] =
+    React.useState<boolean>(false);
+  const [isRequestPending, setIsRequestPending] =
+    React.useState<boolean>(false);
   const [newName, setNewName] = React.useState<string>('');
-  const [newNameError, setNewNameError] = React.useState<string | null | undefined>(null);
-  const [
-    newAutoPlayerNamePrefix,
-    setNewAutoPlayerNamePrefix,
-  ] = React.useState<string>('');
-  const newNameTextFieldRef = React.useRef<TextFieldInterface | null | undefined>(null);
-  const newAutoPlayerNamePrefixTextFieldRef = React.useRef<TextFieldInterface | null | undefined>(null);
-  const [apiError, setApiError] = React.useState<ApiError | null | undefined>(null);
-  const [
-    displayGameRegistration,
-    setDisplayGameRegistration,
-  ] = React.useState<boolean>(false);
+  const [newNameError, setNewNameError] = React.useState<
+    string | null | undefined
+  >(null);
+  const [newAutoPlayerNamePrefix, setNewAutoPlayerNamePrefix] =
+    React.useState<string>('');
+  const newNameTextFieldRef = React.useRef<
+    TextFieldInterface | null | undefined
+  >(null);
+  const newAutoPlayerNamePrefixTextFieldRef = React.useRef<
+    TextFieldInterface | null | undefined
+  >(null);
+  const [apiError, setApiError] = React.useState<ApiError | null | undefined>(
+    null
+  );
+  const [displayGameRegistration, setDisplayGameRegistration] =
+    React.useState<boolean>(false);
 
   const {
     leaderboards,
@@ -342,7 +340,7 @@ export const LeaderboardAdmin = ({
       if (payload.name) setIsEditingName(false);
       if (payload.autoPlayerNamePrefix !== undefined)
         setIsEditingAutoPlayerNamePrefix(false);
-    } catch (err: any) {
+    } catch (err) {
       console.error('An error occurred when updating leaderboard', err);
       setApiError(getApiError(payload));
     } finally {
@@ -350,52 +348,46 @@ export const LeaderboardAdmin = ({
     }
   };
 
-  const onListLeaderboards = React.useCallback(
-    () => {
-      const fetchAndHandleError = async () => {
-        setIsRequestPending(true); // We only set the local loading state here to avoid blocking the dialog buttons on first load.
-        setApiError(null);
-        try {
-          await listLeaderboards();
-        } catch (error: any) {
-          const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-            error
-          );
-          if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
-            setDisplayGameRegistration(true);
-            return;
-          }
-          console.error('An error occurred when fetching leaderboards', error);
-          setApiError({
-            action: 'leaderboardsFetching',
-            message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-              <Trans>
-                An error occurred when fetching the leaderboards, please close
-                the dialog and reopen it.
-              </Trans>
-            ),
-          });
-        } finally {
-          setIsRequestPending(false);
+  const onListLeaderboards = React.useCallback(() => {
+    const fetchAndHandleError = async () => {
+      setIsRequestPending(true); // We only set the local loading state here to avoid blocking the dialog buttons on first load.
+      setApiError(null);
+      try {
+        await listLeaderboards();
+      } catch (error) {
+        const extractedStatusAndCode =
+          extractGDevelopApiErrorStatusAndCode(error);
+        if (extractedStatusAndCode && extractedStatusAndCode.status === 404) {
+          setDisplayGameRegistration(true);
+          return;
         }
-      };
-      fetchAndHandleError();
-    },
-    [listLeaderboards]
-  );
+        console.error('An error occurred when fetching leaderboards', error);
+        setApiError({
+          action: 'leaderboardsFetching',
+          message: (
+            <Trans>
+              An error occurred when fetching the leaderboards, please close the
+              dialog and reopen it.
+            </Trans>
+          ),
+        });
+      } finally {
+        setIsRequestPending(false);
+      }
+    };
+    fetchAndHandleError();
+  }, [listLeaderboards]);
 
   const onFetchLeaderboardEntries = async () => {
     setIsLoading(true);
     setApiError(null);
     try {
       await fetchLeaderboardEntries();
-    } catch (err: any) {
+    } catch (err) {
       console.error('An error occurred when fetching leaderboard entries', err);
       setApiError({
         action: 'entriesFetching',
         message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>
             An error occurred when fetching the entries of the leaderboard,
             please try again.
@@ -427,12 +419,11 @@ export const LeaderboardAdmin = ({
         name: 'New leaderboard',
         sort: 'ASC',
       });
-    } catch (err: any) {
+    } catch (err) {
       console.error('An error occurred when creating leaderboard', err);
       setApiError({
         action: 'leaderboardCreation',
         message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>
             An error occurred when creating a new leaderboard, please close the
             dialog, come back and try again.
@@ -457,22 +448,19 @@ export const LeaderboardAdmin = ({
     setApiError(null);
     try {
       await resetLeaderboard();
-    } catch (error: any) {
+    } catch (error) {
       console.error('An error occurred when resetting leaderboard', error);
-      const extractedStatusAndCode = extractGDevelopApiErrorStatusAndCode(
-        error
-      );
+      const extractedStatusAndCode =
+        extractGDevelopApiErrorStatusAndCode(error);
       setApiError({
         action: 'leaderboardReset',
         message:
           extractedStatusAndCode && extractedStatusAndCode.status === 409 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>
               This leaderboard is already resetting, please wait a bit, close
               the dialog, come back and try again.
             </Trans>
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>
               An error occurred when resetting the leaderboard, please close the
               dialog, come back and try again.
@@ -490,9 +478,7 @@ export const LeaderboardAdmin = ({
     const translatedConfirmText = i18n._(t`delete`);
 
     const deleteAnswer = await showDeleteConfirmation({
-      title: t`Do you really want to permanently delete the leaderboard ${
-        currentLeaderboard.name
-      }?`,
+      title: t`Do you really want to permanently delete the leaderboard ${currentLeaderboard.name}?`,
       message: t`You’re about to permanently delete this leaderboard and all of its entries. This can't be undone.`,
       fieldMessage: t`To confirm, type "${translatedConfirmText}"`,
       confirmText: translatedConfirmText,
@@ -504,12 +490,11 @@ export const LeaderboardAdmin = ({
     setApiError(null);
     try {
       await deleteLeaderboard();
-    } catch (err: any) {
+    } catch (err) {
       console.error('An error occurred when deleting leaderboard', err);
       setApiError({
         action: 'leaderboardDeletion',
         message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>
             An error occurred when deleting the leaderboard, please close the
             dialog, come back and try again.
@@ -534,12 +519,11 @@ export const LeaderboardAdmin = ({
     setApiError(null);
     try {
       await deleteLeaderboardEntry(entry.id);
-    } catch (err: any) {
+    } catch (err) {
       console.error('An error occurred when deleting entry', err);
       setApiError({
         action: 'entryDeletion',
         message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Trans>
             An error occurred when deleting the entry, please try again.
           </Trans>
@@ -551,23 +535,17 @@ export const LeaderboardAdmin = ({
     }
   };
 
-  React.useEffect(
-    () => {
-      if (isEditingName && newNameTextFieldRef.current) {
-        newNameTextFieldRef.current.focus();
-      }
-    },
-    [isEditingName]
-  );
+  React.useEffect(() => {
+    if (isEditingName && newNameTextFieldRef.current) {
+      newNameTextFieldRef.current.focus();
+    }
+  }, [isEditingName]);
 
-  React.useEffect(
-    () => {
-      if (leaderboards === null) {
-        onListLeaderboards();
-      }
-    },
-    [leaderboards, onListLeaderboards]
-  );
+  React.useEffect(() => {
+    if (leaderboards === null) {
+      onListLeaderboards();
+    }
+  }, [leaderboards, onListLeaderboards]);
 
   React.useEffect(() => {
     if (currentLeaderboard) onFetchLeaderboardEntries();
@@ -575,29 +553,20 @@ export const LeaderboardAdmin = ({
     // eslint-disable-next-line
   }, []);
 
-  React.useEffect(
-    () => {
-      if (!!leaderboardIdToSelectAtOpening)
-        selectLeaderboard(leaderboardIdToSelectAtOpening);
-    },
-    [leaderboardIdToSelectAtOpening, selectLeaderboard]
-  );
+  React.useEffect(() => {
+    if (!!leaderboardIdToSelectAtOpening)
+      selectLeaderboard(leaderboardIdToSelectAtOpening);
+  }, [leaderboardIdToSelectAtOpening, selectLeaderboard]);
 
-  const onCopy = React.useCallback(
-    () => {
-      if (!currentLeaderboard) return;
-      // TODO: use Clipboard.js, after it's been reworked to use this API and handle text.
-      navigator.clipboard.writeText(currentLeaderboard.id);
-    },
-    [currentLeaderboard]
-  );
+  const onCopy = React.useCallback(() => {
+    if (!currentLeaderboard) return;
+    // TODO: use Clipboard.js, after it's been reworked to use this API and handle text.
+    navigator.clipboard.writeText(currentLeaderboard.id);
+  }, [currentLeaderboard]);
   if (!isOnline) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             An internet connection is required to administrate your game's
             leaderboards.
@@ -608,9 +577,7 @@ export const LeaderboardAdmin = ({
   }
   if (!!displayGameRegistration) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <GameRegistration
           project={project}
           onGameRegistered={() => {
@@ -623,18 +590,15 @@ export const LeaderboardAdmin = ({
   }
   if (apiError && apiError.action === 'leaderboardCreation') {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <AlertMessage kind="error">{apiError.message}</AlertMessage>
       </CenteredError>
     );
   }
   if (apiError && apiError.action === 'leaderboardsFetching') {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError onRetry={onListLeaderboards}>
           {apiError.message}
         </PlaceholderError>
@@ -642,15 +606,12 @@ export const LeaderboardAdmin = ({
     );
   }
   if (leaderboards === null) {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     if (isRequestPending) return <PlaceholderLoader />;
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+        {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <PlaceholderError onRetry={onListLeaderboards}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             An error occurred when retrieving leaderboards, please try again
             later.
@@ -662,15 +623,10 @@ export const LeaderboardAdmin = ({
 
   if (!!leaderboards && leaderboards.length === 0)
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Line noMargin expand justifyContent="center" alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EmptyPlaceholder
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           title={<Trans>Create your game's first leaderboard</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           description={<Trans>Leaderboards help retain your players</Trans>}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           actionLabel={<Trans>Create a leaderboard</Trans>}
           onAction={() => {
             onCreateLeaderboard();
@@ -687,12 +643,10 @@ export const LeaderboardAdmin = ({
   ) => [
     {
       key: 'name',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <Tag />,
       text: isEditingName ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line alignItems="center" expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <TextField
             id="edit-name-field"
             ref={newNameTextFieldRef}
@@ -701,10 +655,9 @@ export const LeaderboardAdmin = ({
             maxLength={50}
             value={newName}
             errorText={newNameError}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
+            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
             onChange={(e, text) => setNewName(text)}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               if (shouldValidate(event) && !isRequestPending) {
                 onUpdateLeaderboard(i18n, { name: newName });
               }
@@ -712,11 +665,8 @@ export const LeaderboardAdmin = ({
             disabled={isRequestPending}
           />
           {!isRequestPending && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <IconButton
                 tooltip={t`Cancel`}
                 style={{ padding: 0 }}
@@ -724,16 +674,13 @@ export const LeaderboardAdmin = ({
                   setIsEditingName(false);
                 }}
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Cross />
               </IconButton>
             </>
           )}
         </Line>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip title={currentLeaderboard.name}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2" style={styles.leaderboardNameText}>
             {currentLeaderboard.name}
           </Text>
@@ -741,13 +688,11 @@ export const LeaderboardAdmin = ({
       ),
       secondaryText:
         apiError && apiError.action === 'leaderboardNameUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={() => {
             if (isEditingName) {
@@ -764,14 +709,11 @@ export const LeaderboardAdmin = ({
         >
           {isEditingName ? (
             isRequestPending ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <CircularProgress size={20} />
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Save />
             )
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Edit />
           )}
         </IconButton>
@@ -779,12 +721,10 @@ export const LeaderboardAdmin = ({
     },
     {
       key: 'id',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <AtSign />,
       text: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip title={currentLeaderboard.id}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2">
             {shortenUuidForDisplay(currentLeaderboard.id)}
           </Text>
@@ -792,21 +732,17 @@ export const LeaderboardAdmin = ({
       ),
       secondaryText: null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton onClick={onCopy} tooltip={t`Copy`} edge="end">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Copy />
         </IconButton>
       ),
     },
     {
       key: 'startDatetime',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <Calendar />,
       text: currentLeaderboard.resetLaunchedAt ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Text size="body2">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>
             Reset requested the{' '}
             {i18n.date(currentLeaderboard.resetLaunchedAt, {
@@ -817,7 +753,6 @@ export const LeaderboardAdmin = ({
           </Trans>
         </Text>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           title={i18n._(
             t`Date from which entries are taken into account: ${i18n.date(
@@ -829,7 +764,6 @@ export const LeaderboardAdmin = ({
             )}`
           )}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2">
             {i18n.date(currentLeaderboard.startDatetime)}
           </Text>
@@ -837,13 +771,11 @@ export const LeaderboardAdmin = ({
       ),
       secondaryText:
         apiError && apiError.action === 'leaderboardReset' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={() => onResetLeaderboard(i18n)}
           tooltip={t`Reset leaderboard`}
@@ -854,33 +786,29 @@ export const LeaderboardAdmin = ({
             !!currentLeaderboard.resetLaunchedAt
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Refresh />
         </IconButton>
       ),
     },
     {
       key: 'sort',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <Sort />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       text: <Text size="body2">{getSortOrderText(currentLeaderboard)}</Text>,
       secondaryText:
         apiError && apiError.action === 'leaderboardSortUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={() => setIsEditingSortOptions(true)}
           tooltip={t`Edit`}
           edge="end"
           disabled={isRequestPending || isEditingName}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Edit />
         </IconButton>
       ),
@@ -889,14 +817,11 @@ export const LeaderboardAdmin = ({
       key: 'visibility',
       avatar:
         currentLeaderboard.visibility === 'HIDDEN' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <VisibilityOff />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Visibility />
         ),
       text: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           title={i18n._(
             currentLeaderboard.visibility === 'HIDDEN'
@@ -904,13 +829,10 @@ export const LeaderboardAdmin = ({
               : t`Anyone can access it.`
           )}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2">
             {currentLeaderboard.visibility === 'HIDDEN' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Not visible</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Public</Trans>
             )}
           </Text>
@@ -918,13 +840,11 @@ export const LeaderboardAdmin = ({
       ),
       secondaryText:
         apiError && apiError.action === 'leaderboardVisibilityUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={async () => {
             await onUpdateLeaderboard(i18n, {
@@ -942,7 +862,6 @@ export const LeaderboardAdmin = ({
           edge="end"
           disabled={isRequestPending || isEditingName}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SwitchHorizontal />
         </IconButton>
       ),
@@ -950,14 +869,11 @@ export const LeaderboardAdmin = ({
     {
       key: 'ignoreCustomPlayerNames',
       avatar: currentLeaderboard.ignoreCustomPlayerNames ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Lock />
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LockOpen />
       ),
       text: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           title={i18n._(
             currentLeaderboard.ignoreCustomPlayerNames
@@ -965,13 +881,10 @@ export const LeaderboardAdmin = ({
               : t`The player name sent in the action to send a score will be used.`
           )}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2">
             {currentLeaderboard.ignoreCustomPlayerNames ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Ignore unauthenticated player usernames</Trans>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Allow unauthenticated player usernames</Trans>
             )}
           </Text>
@@ -980,17 +893,16 @@ export const LeaderboardAdmin = ({
       secondaryText:
         apiError &&
         apiError.action === 'leaderboardIgnoreCustomPlayerNamesUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={async () => {
             await onUpdateLeaderboard(i18n, {
-              ignoreCustomPlayerNames: !currentLeaderboard.ignoreCustomPlayerNames,
+              ignoreCustomPlayerNames:
+                !currentLeaderboard.ignoreCustomPlayerNames,
             });
           }}
           tooltip={
@@ -1001,19 +913,16 @@ export const LeaderboardAdmin = ({
           edge="end"
           disabled={isRequestPending || isEditingName}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SwitchHorizontal />
         </IconButton>
       ),
     },
     {
       key: 'autoPlayerNamePrefix',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <Tag />,
       text: isEditingAutoPlayerNamePrefix ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Line alignItems="center" expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <TextField
             id="edit-autoPlayerNamePrefix-field"
             ref={newAutoPlayerNamePrefixTextFieldRef}
@@ -1021,10 +930,9 @@ export const LeaderboardAdmin = ({
             style={styles.leaderboardNameTextField}
             maxLength={40}
             value={newAutoPlayerNamePrefix}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
+            // @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'text' implicitly has an 'any' type.
             onChange={(e, text) => setNewAutoPlayerNamePrefix(text)}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               if (shouldValidate(event) && !isRequestPending) {
                 onUpdateLeaderboard(i18n, {
                   autoPlayerNamePrefix: newAutoPlayerNamePrefix,
@@ -1034,11 +942,8 @@ export const LeaderboardAdmin = ({
             disabled={isRequestPending}
           />
           {!isRequestPending && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <IconButton
                 tooltip={t`Cancel`}
                 style={{ padding: 0 }}
@@ -1046,21 +951,18 @@ export const LeaderboardAdmin = ({
                   setIsEditingAutoPlayerNamePrefix(false);
                 }}
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Cross />
               </IconButton>
             </>
           )}
         </Line>
       ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Tooltip
           title={
             currentLeaderboard.autoPlayerNamePrefix ||
             i18n._('No custom prefix for auto-generated player names')
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text size="body2" style={styles.leaderboardNameText}>
             {currentLeaderboard.autoPlayerNamePrefix ||
               i18n._('No custom prefix for auto-generated player names')}
@@ -1070,13 +972,11 @@ export const LeaderboardAdmin = ({
       secondaryText:
         apiError &&
         apiError.action === 'leaderboardAutoPlayerNamePrefixUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={() => {
             if (isEditingAutoPlayerNamePrefix) {
@@ -1105,14 +1005,11 @@ export const LeaderboardAdmin = ({
         >
           {isEditingAutoPlayerNamePrefix ? (
             isRequestPending ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <CircularProgress size={20} />
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Save />
             )
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Edit />
           )}
         </IconButton>
@@ -1120,46 +1017,39 @@ export const LeaderboardAdmin = ({
     },
     {
       key: 'appearance',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <TextFormat />,
       text: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Text size="body2">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Trans>Leaderboard appearance</Trans>
         </Text>
       ),
       secondaryText:
         apiError && apiError.action === 'leaderboardAppearanceUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
         ) : null,
       secondaryAction: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <IconButton
           onClick={() => setIsEditingAppearance(true)}
           tooltip={t`Edit`}
           edge="end"
           disabled={isRequestPending || isEditingName}
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <EditFile />
         </IconButton>
       ),
     },
     {
       key: 'playerUnicityDisplayChoice',
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       avatar: <Users />,
       text: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <SelectField
           fullWidth
           margin="none"
           value={currentLeaderboard.playerUnicityDisplayChoice}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type. | TS7006 - Parameter 'value' implicitly has an 'any' type.
           onChange={(e, i, value) => {
             onUpdateLeaderboard(i18n, {
               // $FlowFixMe
@@ -1174,24 +1064,21 @@ export const LeaderboardAdmin = ({
                   t`Users can chose to see only players' best entries or not.`
                 )
               : currentLeaderboard.playerUnicityDisplayChoice ===
-                'PREFER_UNIQUE'
-              ? i18n._(t`Only player's best entries are displayed.`)
-              : i18n._(t`All entries are displayed.`)
+                  'PREFER_UNIQUE'
+                ? i18n._(t`Only player's best entries are displayed.`)
+                : i18n._(t`All entries are displayed.`)
           }
         >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption
             key={'free'}
             value={'FREE'}
             label={t`Let the user select`}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption
             key={'prefer-unique'}
             value={'PREFER_UNIQUE'}
             label={t`Only best entry`}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectOption
             key={'prefer-non-unique'}
             value={'PREFER_NON_UNIQUE'}
@@ -1202,7 +1089,6 @@ export const LeaderboardAdmin = ({
       secondaryText:
         apiError &&
         apiError.action === 'leaderboardPlayerUnicityDisplayChoiceUpdate' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Text color="error" size="body2">
             {apiError.message}
           </Text>
@@ -1212,16 +1098,11 @@ export const LeaderboardAdmin = ({
   ];
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Column noMargin expand>
             {displayMaxLeaderboardCountReachedWarning && limits && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <MaxLeaderboardCountAlertMessage
                 onUpgrade={() =>
                   openSubscriptionDialog({
@@ -1236,39 +1117,30 @@ export const LeaderboardAdmin = ({
                 limits={limits}
               />
             )}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <ResponsiveLineStackLayout
               noMargin
               expand
               noColumnMargin
               id="leaderboard-administration-panel"
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div style={styles.leftColumn}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Paper
                   elevation={3}
                   style={styles.leaderboardConfigurationPaper}
                   background="light"
                 >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Line noMargin>
                       {currentLeaderboard && leaderboards ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                         <SelectField
                           fullWidth
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                           floatingLabelText={<Trans>Leaderboard name</Trans>}
                           value={currentLeaderboard.id}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type. | TS7006 - Parameter 'leaderboardId' implicitly has an 'any' type.
                           onChange={(e, i, leaderboardId) => {
                             selectLeaderboard(leaderboardId);
                           }}
                         >
-                          {leaderboards.map(leaderboard => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+                          {leaderboards.map((leaderboard) => (
                             <SelectOption
                               key={leaderboard.id}
                               value={leaderboard.id}
@@ -1282,41 +1154,31 @@ export const LeaderboardAdmin = ({
                           ))}
                         </SelectField>
                       ) : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                       <IconButton
                         onClick={onCreateLeaderboard}
                         disabled={isEditingName || isRequestPending}
                       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <Add />
                       </IconButton>
                     </Line>
                     {currentLeaderboard ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <List>
                           {getLeaderboardDescription(
                             i18n,
                             currentLeaderboard
                           ).map((item, index) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                             <React.Fragment key={`fragment-${item.key}`}>
                               {index > 0 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                 <Divider
                                   key={`divider-${item.key}`}
                                   component="li"
                                 />
                               ) : null}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                               <ListItem key={item.key} disableGutters>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <ListItemAvatar>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                   <Avatar>{item.avatar}</Avatar>
                                 </ListItemAvatar>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                                 <ListItemText
                                   disableTypography
                                   secondary={item.secondaryText}
@@ -1324,7 +1186,6 @@ export const LeaderboardAdmin = ({
                                   {item.text}
                                 </ListItemText>
                                 {item.secondaryAction ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                   <ListItemSecondaryAction>
                                     {item.secondaryAction}
                                   </ListItemSecondaryAction>
@@ -1333,25 +1194,18 @@ export const LeaderboardAdmin = ({
                             </React.Fragment>
                           ))}
                         </List>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <Line justifyContent="space-between">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                           <FlatButton
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                             leftIcon={<Trash />}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                             label={<Trans>Delete</Trans>}
                             disabled={isRequestPending || isEditingName}
                             onClick={() => onDeleteLeaderboard(i18n)}
                           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                           <RaisedButton
                             label={
                               currentLeaderboard.primary ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                 <Trans>Default</Trans>
                               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                                 <Trans>Set as default</Trans>
                               )
                             }
@@ -1368,7 +1222,6 @@ export const LeaderboardAdmin = ({
                         {apiError &&
                         (apiError.action === 'leaderboardDeletion' ||
                           apiError.action === 'leaderboardPrimaryUpdate') ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                           <PlaceholderError>
                             {apiError.message}
                           </PlaceholderError>
@@ -1378,67 +1231,52 @@ export const LeaderboardAdmin = ({
                   </Column>
                 </Paper>
               </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <div
                 style={{
                   ...styles.rightColumn,
                   paddingLeft: isMobile ? 0 : 20,
                 }}
               >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                 <Line alignItems="center" justifyContent="flex-end">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Toggle
                     labelPosition="left"
                     toggled={displayOnlyBestEntry}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'newValue' implicitly has an 'any' type.
                     onToggle={(e, newValue) =>
                       setDisplayOnlyBestEntry(newValue)
                     }
                     label={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                       <Tooltip
                         title={i18n._(
                           t`When checked, will only display the best score of each player (only for the display below).`
                         )}
                       >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                         <Text size="body2">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                           <Trans>Player best entry</Trans>
                         </Text>
                       </Tooltip>
                     }
                   />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <LargeSpacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Divider orientation="vertical" />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Spacer />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <IconButton
                     onClick={onFetchLeaderboardEntries}
                     disabled={isRequestPending || isEditingName}
                     tooltip={t`Refresh`}
                     size="small"
                   >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <Refresh />
                   </IconButton>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <Spacer />
                 </Line>
                 {apiError && apiError.action === 'entriesFetching' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <CenteredError>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
+                    {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                     <PlaceholderError onRetry={onFetchLeaderboardEntries}>
                       {apiError.message}
                     </PlaceholderError>
                   </CenteredError>
                 ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <LeaderboardEntriesTable
                     entries={entries}
                     customizationSettings={
@@ -1446,8 +1284,7 @@ export const LeaderboardAdmin = ({
                         ? currentLeaderboard.customizationSettings
                         : null
                     }
-// @ts-expect-error - TS7006 - Parameter 'entry' implicitly has an 'any' type.
-                    onDeleteEntry={entry => onDeleteEntry(i18n, entry)}
+                    onDeleteEntry={(entry) => onDeleteEntry(i18n, entry)}
                     isLoading={isRequestPending || isEditingName}
                     navigation={{
                       goToNextPage,
@@ -1470,7 +1307,6 @@ export const LeaderboardAdmin = ({
             </ResponsiveLineStackLayout>
           </Column>
           {isEditingAppearance ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <LeaderboardAppearanceDialog
               open
               leaderboardCustomizationSettings={
@@ -1493,13 +1329,12 @@ export const LeaderboardAdmin = ({
             />
           ) : null}
           {isEditingSortOptions && currentLeaderboard ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <LeaderboardSortOptionsDialog
               open
               onClose={() => setIsEditingSortOptions(false)}
               onSave={async (sortOptions: {
-                sort: LeaderboardSortOption,
-                extremeAllowedScore: number | null | undefined
+                sort: LeaderboardSortOption;
+                extremeAllowedScore: number | null | undefined;
               }) => {
                 try {
                   await onUpdateLeaderboard(i18n, {
@@ -1523,9 +1358,7 @@ const LeaderboardAdminContainer = ({
   gameId,
   ...otherProps
 }: ContainerProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <LeaderboardProvider gameId={gameId}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <LeaderboardAdmin {...otherProps} />
   </LeaderboardProvider>
 );

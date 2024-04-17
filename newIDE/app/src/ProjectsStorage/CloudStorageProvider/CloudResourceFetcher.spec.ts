@@ -1,4 +1,7 @@
-import {getCredentialsForCloudProject, uploadProjectResourceFiles} from '../../Utils/GDevelopServices/Project';
+import {
+  getCredentialsForCloudProject,
+  uploadProjectResourceFiles,
+} from '../../Utils/GDevelopServices/Project';
 import {
   downloadUrlsToBlobs,
   convertBlobToFiles,
@@ -6,7 +9,6 @@ import {
 import { makeTestProject } from '../../fixtures/TestProject';
 import { moveUrlResourcesToCloudFilesIfPrivate } from './CloudResourceFetcher';
 import { fakeSilverAuthenticatedUser } from '../../fixtures/GDevelopServicesTestData';
-const gd: libGDevelop = global.gd;
 
 jest.mock('../../Utils/GDevelopServices/Project');
 jest.mock('../../Utils/BlobDownloader');
@@ -17,7 +19,7 @@ const blobResourceName =
   'My Blob Resource To Download with 汉字 and funk¥/\\character$*\'"';
 
 const makeTestProjectWithResourcesToDownload = () => {
-// @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
+  // @ts-expect-error - TS2339 - Property 'project' does not exist on type 'void'.
   const { project } = makeTestProject(gd);
 
   // Resource with a private URL
@@ -54,7 +56,7 @@ const makeTestProjectWithResourcesToDownload = () => {
 };
 
 const makeMoveUrlResourcesToCloudFilesIfPrivateOptions = (
-  project: gdProject
+  project: gd.Project
 ) => ({
   project,
   fileMetadata: { fileIdentifier: 'fake-cloud-project-id' },
@@ -62,7 +64,6 @@ const makeMoveUrlResourcesToCloudFilesIfPrivateOptions = (
   onProgress: jest.fn(),
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('CloudResourceFetcher', () => {
   beforeEach(() => {
     mockFn(getCredentialsForCloudProject).mockReset();
@@ -71,7 +72,6 @@ describe('CloudResourceFetcher', () => {
     mockFn(convertBlobToFiles).mockReset();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('fetches resources and can download them', async () => {
     const project = makeTestProjectWithResourcesToDownload();
     const resourceToDownloadAndReupload = project
@@ -84,8 +84,7 @@ describe('CloudResourceFetcher', () => {
     mockFn(downloadUrlsToBlobs).mockImplementationOnce(() => [
       {
         item: {
-          url:
-            'https://private-assets.gdevelop.io/file-to-download.png?token=123',
+          url: 'https://private-assets.gdevelop.io/file-to-download.png?token=123',
           resource: resourceToDownloadAndReupload,
           filename: 'file-to-download.png',
         },
@@ -116,13 +115,11 @@ describe('CloudResourceFetcher', () => {
     mockFn(getCredentialsForCloudProject).mockImplementation(async () => {});
     mockFn(uploadProjectResourceFiles).mockImplementation(() => [
       {
-        url:
-          'https://project-resources.gdevelop.io/fake-cloud-project-id/file-to-download.png',
+        url: 'https://project-resources.gdevelop.io/fake-cloud-project-id/file-to-download.png',
         error: null,
       },
       {
-        url:
-          "https://project-resources.gdevelop.io/fake-cloud-project-id/My Blob Resource To Download with 汉字 and funk¥__character__'_.png",
+        url: "https://project-resources.gdevelop.io/fake-cloud-project-id/My Blob Resource To Download with 汉字 and funk¥__character__'_.png",
         error: null,
       },
     ]);
@@ -133,8 +130,7 @@ describe('CloudResourceFetcher', () => {
     expect(downloadUrlsToBlobs).toHaveBeenCalledWith({
       urlContainers: [
         {
-          url:
-            'https://private-assets.gdevelop.io/file-to-download.png?token=123',
+          url: 'https://private-assets.gdevelop.io/file-to-download.png?token=123',
           resource: expect.any(gd.Resource),
           filename: 'file-to-download.png',
         },
@@ -151,8 +147,7 @@ describe('CloudResourceFetcher', () => {
       [
         {
           item: {
-            url:
-              'https://private-assets.gdevelop.io/file-to-download.png?token=123',
+            url: 'https://private-assets.gdevelop.io/file-to-download.png?token=123',
             resource: expect.any(gd.Resource),
             filename: 'file-to-download.png',
           },

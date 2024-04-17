@@ -1,9 +1,6 @@
 import InstancesSelection from './InstancesSelection';
-const gd: libGDevelop = global.gd;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('InstancesSelection', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('does not select a sealed instance', () => {
     const instancesSelection = new InstancesSelection();
     const instance1OfObject1 = new gd.InitialInstance();
@@ -33,7 +30,6 @@ describe('InstancesSelection', () => {
     expect(instancesSelection.getSelectedInstances()).toHaveLength(1);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('handles multiselection of instances', () => {
     const instancesSelection = new InstancesSelection();
     const instance1OfObject1 = new gd.InitialInstance();
@@ -125,7 +121,6 @@ describe('InstancesSelection', () => {
     instance3OfObject2.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('handles simple selection of instances', () => {
     const instancesSelection = new InstancesSelection();
     const instance1OfObject1 = new gd.InitialInstance();
@@ -208,7 +203,6 @@ describe('InstancesSelection', () => {
     instance3OfObject2.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('handles deselecting instances explicitly', () => {
     const instancesSelection = new InstancesSelection();
     const instance1OfObject1 = new gd.InitialInstance();
@@ -293,7 +287,6 @@ describe('InstancesSelection', () => {
     instance3OfObject2.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('handles deselecting instances of a layer', () => {
     const instancesSelection = new InstancesSelection();
     const instance1OfObject1 = new gd.InitialInstance();
@@ -359,7 +352,6 @@ describe('InstancesSelection', () => {
     instance3OfObject2.delete();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can clean non existing instances', () => {
     const initialInstancesContainer = new gd.InitialInstancesContainer();
     const instance1 = initialInstancesContainer.insertNewInitialInstance();

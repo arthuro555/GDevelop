@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   getUserCommentQualityRatingsLeaderboards,
   UserLeaderboard,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../Utils/GDevelopServices/User';
 import {
   getGameCommentQualityRatingsLeaderboards,
@@ -10,28 +9,33 @@ import {
 } from '../Utils/GDevelopServices/Game';
 
 type CommunityLeaderboardsState = {
-  userLeaderboards: Array<UserLeaderboard> | null,
-  gameLeaderboards: Array<GameLeaderboard> | null,
-  error: Error | null | undefined,
-  fetchCommunityLeaderboards: () => Promise<void>
+  userLeaderboards: Array<UserLeaderboard> | null;
+  gameLeaderboards: Array<GameLeaderboard> | null;
+  error: Error | null | undefined;
+  fetchCommunityLeaderboards: () => Promise<void>;
 };
 
-export const CommunityLeaderboardsContext = React.createContext<CommunityLeaderboardsState>({
-  userLeaderboards: null,
-  gameLeaderboards: null,
-  error: null,
-  fetchCommunityLeaderboards: async () => {},
-});
+export const CommunityLeaderboardsContext =
+  React.createContext<CommunityLeaderboardsState>({
+    userLeaderboards: null,
+    gameLeaderboards: null,
+    error: null,
+    fetchCommunityLeaderboards: async () => {},
+  });
 
 type CommunityLeaderboardsStateProviderProps = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 export const CommunityLeaderboardsStateProvider = ({
   children,
 }: CommunityLeaderboardsStateProviderProps) => {
-  const [userLeaderboards, setUserLeaderboards] = React.useState<Array<UserLeaderboard>>([]);
-  const [gameLeaderboards, setGameLeaderboards] = React.useState<Array<GameLeaderboard>>([]);
+  const [userLeaderboards, setUserLeaderboards] = React.useState<
+    Array<UserLeaderboard>
+  >([]);
+  const [gameLeaderboards, setGameLeaderboards] = React.useState<
+    Array<GameLeaderboard>
+  >([]);
 
   const [error, setError] = React.useState<Error | null | undefined>(null);
   const isLoading = React.useRef<boolean>(false);
@@ -49,7 +53,7 @@ export const CommunityLeaderboardsStateProvider = ({
       ]);
       setUserLeaderboards(userLeaderboards);
       setGameLeaderboards(gameLeaderboards);
-    } catch (error: any) {
+    } catch (error) {
       console.error(
         `Unable to load the community leaderboards from the api:`,
         error
@@ -71,7 +75,6 @@ export const CommunityLeaderboardsStateProvider = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <CommunityLeaderboardsContext.Provider value={communityLeaderboardsState}>
       {children}
     </CommunityLeaderboardsContext.Provider>

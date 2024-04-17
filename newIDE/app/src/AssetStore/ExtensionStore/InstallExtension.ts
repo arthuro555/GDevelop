@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import { showErrorBox } from '../../UI/Messages/MessageBox';
 import {
   getExtension,
@@ -8,7 +7,7 @@ import {
 } from '../../Utils/GDevelopServices/Extension';
 import { addSerializedExtensionsToProject } from '../InstallAsset';
 import { EventsFunctionsExtensionsState } from '../../EventsFunctionsExtensionsLoader/EventsFunctionsExtensionsContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { t } from '@lingui/macro';
 import Window from '../../Utils/Window';
 
@@ -17,9 +16,9 @@ import Window from '../../Utils/Window';
  */
 export const installExtension = async (
   i18n: I18nType,
-  project: gdProject,
+  project: gd.Project,
   eventsFunctionsExtensionsState: EventsFunctionsExtensionsState,
-  extensionShortHeader: ExtensionShortHeader | BehaviorShortHeader,
+  extensionShortHeader: ExtensionShortHeader | BehaviorShortHeader
 ): Promise<boolean> => {
   try {
     const serializedExtension = await getExtension(extensionShortHeader);
@@ -30,7 +29,7 @@ export const installExtension = async (
     );
 
     return true;
-  } catch (rawError: any) {
+  } catch (rawError) {
     showErrorBox({
       message: i18n._(
         t`Unable to download and install the extension. Verify that your internet connection is working or try again later.`
@@ -48,18 +47,21 @@ export const installExtension = async (
 export const importExtension = async (
   i18n: I18nType,
   eventsFunctionsExtensionsState: EventsFunctionsExtensionsState,
-  project: gdProject,
+  project: gd.Project
 ): Promise<boolean> => {
-  const eventsFunctionsExtensionOpener = eventsFunctionsExtensionsState.getEventsFunctionsExtensionOpener();
+  const eventsFunctionsExtensionOpener =
+    eventsFunctionsExtensionsState.getEventsFunctionsExtensionOpener();
   if (!eventsFunctionsExtensionOpener) return false;
 
   try {
-    const pathOrUrl = await eventsFunctionsExtensionOpener.chooseEventsFunctionExtensionFile();
+    const pathOrUrl =
+      await eventsFunctionsExtensionOpener.chooseEventsFunctionExtensionFile();
     if (!pathOrUrl) return false;
 
-    const serializedExtension = await eventsFunctionsExtensionOpener.readEventsFunctionExtensionFile(
-      pathOrUrl
-    );
+    const serializedExtension =
+      await eventsFunctionsExtensionOpener.readEventsFunctionExtensionFile(
+        pathOrUrl
+      );
 
     if (project.hasEventsFunctionsExtensionNamed(serializedExtension.name)) {
       const answer = Window.showConfirmDialog(
@@ -77,7 +79,7 @@ export const importExtension = async (
       false
     );
     return true;
-  } catch (rawError: any) {
+  } catch (rawError) {
     showErrorBox({
       message: i18n._(
         t`An error happened while loading this extension. Please check that it is a proper extension file and compatible with this version of GDevelop`

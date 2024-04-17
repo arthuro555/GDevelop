@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+import { Trans } from '@lingui/macro';
+
 import { t } from '@lingui/macro';
 import * as React from 'react';
 import { ParameterInlineRendererProps } from './ParameterInlineRenderer.flow';
@@ -9,9 +8,9 @@ import {
   ParameterFieldInterface,
   FieldFocusFunction,
 } from './ParameterFieldCommons';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField, { SelectFieldInterface } from '../../UI/SelectField';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../../UI/SelectOption';
 
 const operatorLabels = {
@@ -27,7 +26,7 @@ const operatorLabels = {
 } as const;
 
 const mapTypeToOperators: {
-  [key: string]: Array<string>
+  [key: string]: Array<string>;
 } = {
   unknown: Object.keys(operatorLabels),
   number: ['=', '<', '>', '<=', '>=', '!='],
@@ -37,7 +36,7 @@ const mapTypeToOperators: {
 };
 
 const defaultOperators: {
-  [key: string]: string
+  [key: string]: string;
 } = {
   number: '=',
   time: '>=',
@@ -45,62 +44,60 @@ const defaultOperators: {
   color: '=',
 };
 
-// @ts-expect-error - TS2345 - Argument of type '(props: ParameterFieldProps, ref: ForwardedRef<ParameterFieldProps>) => Element' is not assignable to parameter of type 'ForwardRefRenderFunction<ParameterFieldProps, ParameterFieldInterface>'.
-export default React.forwardRef<ParameterFieldProps, ParameterFieldInterface>(function RelationalOperatorField(props: ParameterFieldProps, ref) {
-  const field = React.useRef<SelectFieldInterface | null | undefined>(null);
-  const focus: FieldFocusFunction = options => {
-    if (field.current) field.current.focus(options);
-  };
-// @ts-expect-error - TS2322 - Type '{ focus: FieldFocusFunction; }' is not assignable to type 'ParameterFieldProps'.
-  React.useImperativeHandle(ref, () => ({
-    focus,
-  }));
+export default React.forwardRef<ParameterFieldInterface, ParameterFieldProps>(
+  function RelationalOperatorField(props: ParameterFieldProps, ref) {
+    const field = React.useRef<SelectFieldInterface | null | undefined>(null);
+    const focus: FieldFocusFunction = (options) => {
+      if (field.current) field.current.focus(options);
+    };
 
-  const { parameterMetadata } = props;
-  const description = parameterMetadata
-    ? parameterMetadata.getDescription()
-    : undefined;
+    React.useImperativeHandle(ref, () => ({
+      focus,
+    }));
 
-  const comparedValueType = parameterMetadata
-    ? parameterMetadata.getExtraInfo()
-    : 'unknown';
-  const operators =
-    mapTypeToOperators[comparedValueType] || mapTypeToOperators.unknown;
+    const { parameterMetadata } = props;
+    const description = parameterMetadata
+      ? parameterMetadata.getDescription()
+      : undefined;
 
-  if (!props.value) {
-    const defaultOperator = defaultOperators[comparedValueType];
-    if (defaultOperator) {
-      props.onChange(defaultOperator);
-    }
-  }
+    const comparedValueType = parameterMetadata
+      ? parameterMetadata.getExtraInfo()
+      : 'unknown';
+    const operators =
+      mapTypeToOperators[comparedValueType] || mapTypeToOperators.unknown;
 
-  return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-    <SelectField
-      margin={props.isInline ? 'none' : 'dense'}
-      fullWidth
-      floatingLabelText={description}
-      helperMarkdownText={
-        parameterMetadata ? parameterMetadata.getLongDescription() : undefined
+    if (!props.value) {
+      const defaultOperator = defaultOperators[comparedValueType];
+      if (defaultOperator) {
+        props.onChange(defaultOperator);
       }
-      value={props.value}
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
-      onChange={(e, i, value: string) => props.onChange(value)}
-      ref={field}
-      translatableHintText={t`Choose an operator`}
-    >
-      {operators.map(operator => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
-        <SelectOption
-          key={operator}
-          value={operator}
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '=': any; readonly '<': any; readonly '>': any; readonly '<=': any; readonly '>=': any; readonly '!=': any; readonly startsWith: any; readonly endsWith: any; readonly contains: any; }'.
-          label={operatorLabels[operator]}
-        />
-      ))}
-    </SelectField>
-  );
-});
+    }
+
+    return (
+      <SelectField
+        margin={props.isInline ? 'none' : 'dense'}
+        fullWidth
+        floatingLabelText={description}
+        helperMarkdownText={
+          parameterMetadata ? parameterMetadata.getLongDescription() : undefined
+        }
+        value={props.value}
+        onChange={(e, i, value: string) => props.onChange(value)}
+        ref={field}
+        translatableHintText={t`Choose an operator`}
+      >
+        {operators.map((operator) => (
+          <SelectOption
+            key={operator}
+            value={operator}
+            // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ readonly '=': any; readonly '<': any; readonly '>': any; readonly '<=': any; readonly '>=': any; readonly '!=': any; readonly startsWith: any; readonly endsWith: any; readonly contains: any; }'.
+            label={operatorLabels[operator]}
+          />
+        ))}
+      </SelectField>
+    );
+  }
+);
 
 export const renderInlineRelationalOperator = ({
   value,
@@ -108,9 +105,7 @@ export const renderInlineRelationalOperator = ({
 }: ParameterInlineRendererProps) => {
   if (!value) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <InvalidParameterValue isEmpty>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Trans>Choose an operator</Trans>
       </InvalidParameterValue>
     );
@@ -127,18 +122,17 @@ export const renderInlineRelationalOperator = ({
     value !== 'endsWith' &&
     value !== 'contains'
   ) {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     return <InvalidParameterValue>{value}</InvalidParameterValue>;
   }
 
   if (value === '<=') return '\u2264';
   if (value === '>=') return '\u2265';
   if (value === '!=') return '\u2260';
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   if (value === 'startsWith') return <Trans>starts with</Trans>;
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   if (value === 'endsWith') return <Trans>ends with</Trans>;
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   if (value === 'contains') return <Trans>contains</Trans>;
 
   return value;

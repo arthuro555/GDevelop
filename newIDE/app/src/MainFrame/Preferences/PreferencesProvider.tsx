@@ -3,21 +3,21 @@ import PreferencesContext, {
   initialPreferences,
   Preferences,
   AlertMessageIdentifier,
-// @ts-expect-error - TS6142 - Module './PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 } from './PreferencesContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../Utils/OptionalRequire';
 import { getIDEVersion } from '../../Version';
 import {
   PreferencesValues,
   EditorMosaicName,
-// @ts-expect-error - TS6142 - Module './PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+
 } from './PreferencesContext';
 import type {
   ResourceKind,
   ResourceImportationBehavior,
 } from '../../ResourcesList/ResourceSource';
-// @ts-expect-error - TS6142 - Module '../../UI/EditorMosaic' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/index.tsx', but '--jsx' is not set.
+
 import { EditorMosaicNode } from '../../UI/EditorMosaic';
 import { FileMetadataAndStorageProviderName } from '../../ProjectsStorage';
 import defaultShortcuts from '../../KeyboardShortcuts/DefaultShortcuts';
@@ -194,7 +194,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
   _setLanguage(language: string) {
     setLanguageInDOM(language);
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -209,7 +209,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     eventsSheetShowObjectThumbnails: boolean
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -222,7 +222,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setAutosaveOnPreview(autosaveOnPreview: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -285,7 +285,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setUseGDJSDevelopmentWatcher(useGDJSDevelopmentWatcher: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -300,7 +300,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     eventsSheetUseAssignmentOperators: boolean
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -313,7 +313,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setEventsSheetZoomLevel(eventsSheetZoomLevel: number) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -326,7 +326,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setShowEffectParameterNames(showEffectParameterNames: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -339,7 +339,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setShowGetStartedSection(showGetStartedSectionByDefault: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -352,7 +352,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setThemeName(themeName: string) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -365,7 +365,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setCodeEditorThemeName(codeEditorThemeName: string) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -378,7 +378,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setAutoDownloadUpdates(autoDownloadUpdates: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -391,7 +391,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setAutoDisplayChangelog(autoDisplayChangelog: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -406,7 +406,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     eventsSheetCancelInlineParameter: 'apply' | 'cancel'
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -421,7 +421,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     useShortcutToClosePreviewWindow: boolean
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -434,7 +434,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setShowCommunityExtensions(showCommunityExtensions: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -447,7 +447,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setShowEventBasedObjectsEditor(showEventBasedObjectsEditor: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -466,7 +466,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     showDeprecatedInstructionWarning: boolean
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -483,7 +483,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setUse3DEditor(use3DEditor: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -522,7 +522,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
     // This is a new version: store the version number
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -543,7 +543,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showAlertMessage(identifier: AlertMessageIdentifier, show: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -560,7 +560,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showAllAlertMessages() {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -573,7 +573,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showTutorialHint(identifier: string, show: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -589,7 +589,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showAllTutorialHints() {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -602,7 +602,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showAnnouncement(identifier: string, show: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -618,7 +618,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _showAllAnnouncements() {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -642,7 +642,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     return preferences;
   }
 
-  _getLastUsedPath(project: gdProject, kind: ResourceKind) {
+  _getLastUsedPath(project: gd.Project, kind: ResourceKind) {
     const projectPath = project.getProjectFile();
 // @ts-expect-error - TS7022 - 'values' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
     const { values } = this.state;
@@ -654,7 +654,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     if (!projectPath) return null;
   }
 
-  _setLastUsedPath(project: gdProject, kind: ResourceKind, latestPath: string) {
+  _setLastUsedPath(project: gd.Project, kind: ResourceKind, latestPath: string) {
     const projectPath = project.getProjectFile();
 
     const { values } = this.state;
@@ -682,7 +682,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setDefaultEditorMosaicNode(name: EditorMosaicName, node?: EditorMosaicNode | null) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -703,7 +703,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setRecentProjectFiles(recents: Array<FileMetadataAndStorageProviderName>) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -748,7 +748,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setAutoOpenMostRecentProject(enabled: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -765,7 +765,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setHasProjectOpened(enabled: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -778,7 +778,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _resetShortcutsToDefault() {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, userShortcutMap: {} },
       }),
@@ -795,7 +795,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     else updatedShortcutMap[commandName] = shortcutString;
 
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, userShortcutMap: updatedShortcutMap },
       }),
@@ -811,7 +811,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     newObjectDialogDefaultTab: 'asset-store' | 'new-object'
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, newObjectDialogDefaultTab },
       }),
@@ -825,7 +825,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setShareDialogDefaultTab(shareDialogDefaultTab: 'invite' | 'publish') {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, shareDialogDefaultTab },
       }),
@@ -839,7 +839,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setIsMenuBarHiddenInPreview(enabled: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -854,7 +854,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     backdropClickBehavior: 'nothing' | 'apply' | 'cancel'
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, backdropClickBehavior },
       }),
@@ -866,7 +866,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     resourcesImporationBehavior: ResourceImportationBehavior
   ) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: { ...state.values, resourcesImporationBehavior },
       }),
@@ -880,7 +880,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setIsAlwaysOnTopInPreview(enabled: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -893,7 +893,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setNewProjectsDefaultFolder(newProjectsDefaultFolder: string) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -906,7 +906,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setNewProjectsDefaultStorageProviderName(newStorageProviderName: string) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -919,7 +919,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   _setWatchProjectFolderFilesForLocalProjects(enable: boolean) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -936,7 +936,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
     }
   }) {
     this.setState(
-// @ts-expect-error - TS7006 - Parameter 'state' implicitly has an 'any' type.
+
       state => ({
         values: {
           ...state.values,
@@ -974,7 +974,7 @@ export default class PreferencesProvider extends React.Component<Props, State> {
 
   render() {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <PreferencesContext.Provider value={this.state}>
         {this.props.children}
       </PreferencesContext.Provider>

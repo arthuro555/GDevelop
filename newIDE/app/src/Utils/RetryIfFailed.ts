@@ -1,12 +1,10 @@
 type Configuration = {
-  times: number
+  times: number;
 };
 
 export const retryIfFailed = async <T>(
-  {
-    times,
-  }: Configuration,
-  fn: () => Promise<T>,
+  { times }: Configuration,
+  fn: () => Promise<T>
 ): Promise<T> => {
   let tries = 0;
   let latestError = null;
@@ -16,7 +14,7 @@ export const retryIfFailed = async <T>(
     try {
       const latestReturnValue = await fn();
       return latestReturnValue;
-    } catch (error: any) {
+    } catch (error) {
       latestError = error;
     }
   }

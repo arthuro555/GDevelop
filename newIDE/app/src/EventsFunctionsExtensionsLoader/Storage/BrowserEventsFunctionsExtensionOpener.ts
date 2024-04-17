@@ -24,7 +24,7 @@ export default class BrowserEventsFunctionsExtensionOpener {
           .catch(() => {
             resolve(null);
           });
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
       } else {
         const adhocInput = document.createElement('input');
         adhocInput.type = 'file';
@@ -68,7 +68,7 @@ export default class BrowserEventsFunctionsExtensionOpener {
         window.addEventListener('focus', onFocusBackWindow);
         adhocInput.click();
       }
-// @ts-expect-error - TS1068 - Unexpected token. A constructor, method, accessor, or property was expected.
+
     });
   };
 
@@ -90,5 +90,5 @@ export default class BrowserEventsFunctionsExtensionOpener {
       throw error;
     }
   };
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 }

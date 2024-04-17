@@ -1,4 +1,3 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module './OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
 import optionalRequire from './OptionalRequire';
 const electron = optionalRequire('electron');
 const electronClipboard = electron ? electron.clipboard : null;
@@ -23,7 +22,10 @@ const mangleClipboardKind = (kind: ClipboardKind): string => {
  * Useful to deal with arbitrary content coming from the Clipboard.
  */
 export class SafeExtractor {
-  static extractNumberProperty(anything: any, propertyName: string): number | null {
+  static extractNumberProperty(
+    anything: any,
+    propertyName: string
+  ): number | null {
     const object = this.extractObject(anything);
     if (!object) return null;
 
@@ -34,7 +36,10 @@ export class SafeExtractor {
     return property;
   }
 
-  static extractStringProperty(anything: any, propertyName: string): string | null {
+  static extractStringProperty(
+    anything: any,
+    propertyName: string
+  ): string | null {
     const object = this.extractObject(anything);
     if (!object) return null;
 
@@ -45,7 +50,10 @@ export class SafeExtractor {
     return property;
   }
 
-  static extractBooleanProperty(anything: any, propertyName: string): boolean | null {
+  static extractBooleanProperty(
+    anything: any,
+    propertyName: string
+  ): boolean | null {
     const object = this.extractObject(anything);
     if (!object) return null;
 
@@ -56,7 +64,10 @@ export class SafeExtractor {
     return property;
   }
 
-  static extractObjectProperty(anything: any, propertyName: string): any | null {
+  static extractObjectProperty(
+    anything: any,
+    propertyName: string
+  ): any | null {
     const object = this.extractObject(anything);
     if (!object) return null;
 
@@ -65,7 +76,10 @@ export class SafeExtractor {
     return this.extractObject(property);
   }
 
-  static extractArrayProperty(anything: any, propertyName: string): Array<any> | null {
+  static extractArrayProperty(
+    anything: any,
+    propertyName: string
+  ): Array<any> | null {
     const object = this.extractObject(anything);
     if (!object) return null;
 
@@ -150,7 +164,7 @@ export default class Clipboard {
     try {
       const parsedText = JSON.parse(text);
       return parsedText.content;
-    } catch (e: any) {
+    } catch (e) {
       console.warn('The clipboard content is not valid JSON');
       return null;
     }

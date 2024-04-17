@@ -1,4 +1,7 @@
-import {formatExpressionCall, getVisibleParameterTypes} from './FormatExpressionCall';
+import {
+  formatExpressionCall,
+  getVisibleParameterTypes,
+} from './FormatExpressionCall';
 import {
   filterExpressions,
   enumerateFreeExpressions,
@@ -7,19 +10,17 @@ import {
 } from '../../../InstructionOrExpression/EnumerateExpressions';
 
 const makeFakeI18n = (fakeI18n: undefined): I18nType => ({
-// @ts-expect-error - TS2698 - Spread types may only be created from object types.
+  // @ts-expect-error - TS2698 - Spread types may only be created from object types.
   ...fakeI18n,
-// @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
-  _: message => message.id,
+  // @ts-expect-error - TS7006 - Parameter 'message' implicitly has an 'any' type.
+  _: (message) => message.id,
 });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('FormatExpressionCall', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats a free function, with one or more arguments', () => {
     const freeExpressions = enumerateFreeExpressions(
       'number|string',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const countExpression = filterExpressions(
@@ -40,11 +41,10 @@ describe('FormatExpressionCall', () => {
     ).toBe('atan2(1, 2)');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats a free function, with "code-only" parameters', () => {
     const freeExpressions = enumerateFreeExpressions(
       'number|string',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const cameraHeightExpression = filterExpressions(
@@ -58,11 +58,10 @@ describe('FormatExpressionCall', () => {
     ).toBe('CameraHeight("My layer", 0)');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats a free function, with "code-only" and optional parameters', () => {
     const freeExpressions = enumerateFreeExpressions(
       'number|string',
-// @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
+      // @ts-expect-error - TS2554 - Expected 1 arguments, but got 0.
       makeFakeI18n()
     );
     const touchExpression = filterExpressions(freeExpressions, 'TouchX')[0];
@@ -88,7 +87,6 @@ describe('FormatExpressionCall', () => {
     ).toBe('TouchX(1, "", 2)');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats an object function', () => {
     const objectsExpressions = enumerateObjectExpressions(
       'number|string',
@@ -108,7 +106,6 @@ describe('FormatExpressionCall', () => {
     ).toBe('MyObject.Variable(Variable1)');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats an object function with an argument', () => {
     const objectsExpressions = enumerateObjectExpressions(
       'number|string',
@@ -123,7 +120,6 @@ describe('FormatExpressionCall', () => {
     ).toBe('MyObject.PointX("MyPoint")');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats an object behavior function', () => {
     const behaviorsExpressions = enumerateBehaviorExpressions(
       'number|string',
@@ -143,7 +139,6 @@ describe('FormatExpressionCall', () => {
     ).toBe('MyObject.PlatformerObject::JumpSpeed()');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('properly formats an object behavior function and converts to string', () => {
     const behaviorsExpressions = enumerateBehaviorExpressions(
       'number|string',
@@ -163,7 +158,6 @@ describe('FormatExpressionCall', () => {
     ).toBe('ToString(MyObject.PlatformerObject::JumpSpeed())');
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('can return the visible parameters of a function', () => {
     const objectsExpressions = enumerateObjectExpressions(
       'number|string',

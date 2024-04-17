@@ -16,7 +16,7 @@ export const loadFontFace = (fontFamily: string, src: string) => {
         : // For other resources, use "same-origin" as done by default by fetch.
           'same-origin',
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           const errorMessage =
             'Unable to fetch ' +
@@ -30,7 +30,7 @@ export const loadFontFace = (fontFamily: string, src: string) => {
 
         return response.arrayBuffer();
       })
-      .then(arrayBuffer => {
+      .then((arrayBuffer) => {
         const fontFace = new FontFace(fontFamily, arrayBuffer, {});
 
         document.fonts.add(fontFace);
@@ -53,8 +53,8 @@ export const loadFontFace = (fontFamily: string, src: string) => {
     );
 
     document.head.appendChild(newStyle);
-// @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
-    return new FontFaceObserver(fontFamily, {}).load().catch(err => {
+    // @ts-expect-error - TS7006 - Parameter 'err' implicitly has an 'any' type.
+    return new FontFaceObserver(fontFamily, {}).load().catch((err) => {
       console.warn(`Error while loading font ${fontFamily}`, err);
 
       throw err;

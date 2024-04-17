@@ -1,19 +1,20 @@
 import * as React from 'react';
 
 type Props = {
-  onChange: (arg1: number) => void,
-  onGetInitialValue: () => number
+  onChange: (arg1: number) => void;
+  onGetInitialValue: () => number;
 };
 
-const useClickDragAsControl = ({
-  onChange,
-  onGetInitialValue,
-}: Props) => {
-  const clickDragOrigin = React.useRef<{
-    initialValue: number,
-    accumulatedValue: number,
-    previouslyChangedValue: number | null | undefined
-  } | null | undefined>(null);
+const useClickDragAsControl = ({ onChange, onGetInitialValue }: Props) => {
+  const clickDragOrigin = React.useRef<
+    | {
+        initialValue: number;
+        accumulatedValue: number;
+        previouslyChangedValue: number | null | undefined;
+      }
+    | null
+    | undefined
+  >(null);
 
   const start = React.useCallback(
     (e: MouseEvent) => {

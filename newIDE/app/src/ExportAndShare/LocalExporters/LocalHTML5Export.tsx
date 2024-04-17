@@ -1,14 +1,13 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {Trans} from '@lingui/macro';
+import { Trans } from '@lingui/macro';
 
 import React from 'react';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
 import { findGDJS } from '../../GameEngineFinder/LocalGDJSFinder';
 import LocalFileSystem, { UrlFileDescriptor } from './LocalFileSystem';
-// @ts-expect-error - TS6142 - Module '../../UI/LocalFolderPicker' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/LocalFolderPicker/index.tsx', but '--jsx' is not set.
+
 import LocalFolderPicker from '../../UI/LocalFolderPicker';
 import assignIn from 'lodash/assignIn';
 import {
@@ -16,13 +15,12 @@ import {
   ExportPipeline,
   ExportPipelineContext,
 } from '../ExportPipeline.flow';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+
 import optionalRequire from '../../Utils/OptionalRequire';
 import {
   ExplanationHeader,
   DoneFooter,
   ExportFlow,
-// @ts-expect-error - TS6142 - Module '../GenericExporters/HTML5Export' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/GenericExporters/HTML5Export.tsx', but '--jsx' is not set.
 } from '../GenericExporters/HTML5Export';
 import { downloadUrlsToLocalFiles } from '../../Utils/LocalFileDownloader';
 import DismissableTutorialMessage from '../../Hints/DismissableTutorialMessage';
@@ -30,19 +28,17 @@ import DismissableTutorialMessage from '../../Hints/DismissableTutorialMessage';
 const electron = optionalRequire('electron');
 const shell = electron ? electron.shell : null;
 
-const gd: libGDevelop = global.gd;
-
 type ExportState = {
-  outputDir: string
+  outputDir: string;
 };
 
 type PreparedExporter = {
-  exporter: gdjsExporter,
-  localFileSystem: LocalFileSystem
+  exporter: gdjsExporter;
+  localFileSystem: LocalFileSystem;
 };
 
 type ExportOutput = {
-  urlFiles: Array<UrlFileDescriptor>
+  urlFiles: Array<UrlFileDescriptor>;
 };
 
 type ResourcesDownloadOutput = null;
@@ -51,41 +47,40 @@ type CompressionOutput = null;
 
 const exportPipelineName = 'local-html5';
 
-export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExporter, ExportOutput, ResourcesDownloadOutput, CompressionOutput> = {
+export const localHTML5ExportPipeline: ExportPipeline<
+  ExportState,
+  PreparedExporter,
+  ExportOutput,
+  ResourcesDownloadOutput,
+  CompressionOutput
+> = {
   name: exportPipelineName,
 
-  getInitialExportState: (project: gdProject) => ({
+  getInitialExportState: (project: gd.Project) => ({
     outputDir: project.getLastCompilationDirectory(),
   }),
 
-  canLaunchBuild: exportState => !!exportState.outputDir,
+  canLaunchBuild: (exportState) => !!exportState.outputDir,
 
   isNavigationDisabled: () => false,
 
   renderTutorial: () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <DismissableTutorialMessage tutorialId="export-to-itch" />
   ),
 
   renderHeader: ({ project, exportState, updateExportState, exportStep }) =>
-// @ts-expect-error - TS2322 - Type 'Element | null' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
+    // @ts-expect-error - TS2322 - Type 'Element | null' is not assignable to type 'ReactElement<any, string | JSXElementConstructor<any>>'.
     exportStep !== 'done' ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Column noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <ExplanationHeader />
         </Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Line>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <LocalFolderPicker
             type="export"
             value={exportState.outputDir}
             defaultPath={project.getLastCompilationDirectory()}
-// @ts-expect-error - TS7006 - Parameter 'outputDir' implicitly has an 'any' type.
-            onChange={outputDir => {
+            onChange={(outputDir) => {
               updateExportState(() => ({ outputDir }));
               project.setLastCompilationDirectory(outputDir);
             }}
@@ -96,12 +91,13 @@ export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExpor
     ) : null,
 
   renderExportFlow: (props: ExportFlowProps) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ExportFlow {...props} exportPipelineName={exportPipelineName} />
   ),
 
-  prepareExporter: (context: ExportPipelineContext<ExportState>): Promise<PreparedExporter> => {
-// @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
+  prepareExporter: (
+    context: ExportPipelineContext<ExportState>
+  ): Promise<PreparedExporter> => {
+    // @ts-expect-error - TS7031 - Binding element 'gdjsRoot' implicitly has an 'any' type.
     return findGDJS().then(({ gdjsRoot }) => {
       console.info('GDJS found in ', gdjsRoot);
 
@@ -124,14 +120,11 @@ export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExpor
 
   launchExport: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      exporter,
-      localFileSystem,
-    }: PreparedExporter,
+    { exporter, localFileSystem }: PreparedExporter,
     fallbackAuthor?: {
-      id: string,
-      username: string
-    } | null,
+      id: string;
+      username: string;
+    } | null
   ): Promise<ExportOutput> => {
     const exportOptions = new gd.ExportOptions(
       context.project,
@@ -154,9 +147,7 @@ export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExpor
 
   launchResourcesDownload: async (
     context: ExportPipelineContext<ExportState>,
-    {
-      urlFiles,
-    }: ExportOutput,
+    { urlFiles }: ExportOutput
   ): Promise<ResourcesDownloadOutput> => {
     await downloadUrlsToLocalFiles({
       urlContainers: urlFiles,
@@ -169,7 +160,7 @@ export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExpor
 
   launchCompression: (
     context: ExportPipelineContext<ExportState>,
-    exportOutput: ResourcesDownloadOutput,
+    exportOutput: ResourcesDownloadOutput
   ): Promise<CompressionOutput> => {
     return Promise.resolve(null);
   },
@@ -180,14 +171,11 @@ export const localHTML5ExportPipeline: ExportPipeline<ExportState, PreparedExpor
     };
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <DoneFooter
         renderGameButton={() => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <RaisedButton
             primary
             onClick={() => openExportFolder()}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Open the exported game folder</Trans>}
           />
         )}

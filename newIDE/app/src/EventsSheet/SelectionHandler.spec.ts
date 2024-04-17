@@ -16,11 +16,8 @@ import {
   getLastSelectedEventContextWhichCanHaveSubEvents,
   getLastSelectedInstructionContext,
 } from './SelectionHandler';
-const gd: libGDevelop = global.gd;
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('SelectionHandler', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   it('handles the selected events', () => {
     const topEventsList = new gd.EventsList();
     const emptyStandardEvent = new gd.StandardEvent();
@@ -50,7 +47,7 @@ describe('SelectionHandler', () => {
     );
 
     // Select a top-level event.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(currentSelection, {
       eventsList: topEventsList,
       event: standardEvent1,
@@ -94,7 +91,7 @@ describe('SelectionHandler', () => {
     });
 
     // Select a child event, but without multiselection (so the parent is removed).
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(currentSelection, {
       eventsList: standardEvent1.getSubEvents(),
       event: standardEvent1_1,
@@ -139,7 +136,7 @@ describe('SelectionHandler', () => {
 
     // Add an unrelated grand-child event to the selection, with multiselection (so the previous child
     // stays in the selection).
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       currentSelection,
       {
@@ -198,7 +195,7 @@ describe('SelectionHandler', () => {
     });
 
     // Restart from a empty selection, and select a parent and its child.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       getInitialSelection(),
       {
@@ -208,7 +205,7 @@ describe('SelectionHandler', () => {
       },
       /*multiSelection=*/ true
     );
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       currentSelection,
       {
@@ -262,7 +259,7 @@ describe('SelectionHandler', () => {
     });
 
     // Restart from a empty selection, and select a grand-parent and its grand-child.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       getInitialSelection(),
       {
@@ -272,7 +269,7 @@ describe('SelectionHandler', () => {
       },
       /*multiSelection=*/ true
     );
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       currentSelection,
       {
@@ -326,7 +323,7 @@ describe('SelectionHandler', () => {
     });
 
     // Restart from a empty selection, and select an event and a unrelated grand-child.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       getInitialSelection(),
       {
@@ -336,7 +333,7 @@ describe('SelectionHandler', () => {
       },
       /*multiSelection=*/ true
     );
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(
       currentSelection,
       {
@@ -396,7 +393,7 @@ describe('SelectionHandler', () => {
 
     topEventsList.delete();
   });
-// @ts-expect-error - TS2582 - Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   it('handles the selected events and selected instructions', () => {
     const topEventsList = new gd.EventsList();
     const emptyStandardEvent = new gd.StandardEvent();
@@ -432,7 +429,7 @@ describe('SelectionHandler', () => {
     );
 
     // Select a top-level event.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectEvent(currentSelection, {
       eventsList: topEventsList,
       event: standardEvent1,
@@ -467,7 +464,7 @@ describe('SelectionHandler', () => {
     });
 
     // Select a condition of a child event.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectInstruction(
       {
         event: standardEvent1_2,
@@ -518,26 +515,17 @@ describe('SelectionHandler', () => {
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2)
-          .getConditions()
-          .get(0)
+        gd.asStandardEvent(standardEvent1_2).getConditions().get(0)
       )
     ).toBe(false);
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2)
-          .getConditions()
-          .get(1)
+        gd.asStandardEvent(standardEvent1_2).getConditions().get(1)
       )
     ).toBe(true);
     expect(getSelectedInstructions(currentSelection)).toEqual([
-      gd
-        .asStandardEvent(standardEvent1_2)
-        .getConditions()
-        .get(1),
+      gd.asStandardEvent(standardEvent1_2).getConditions().get(1),
     ]);
     expect(getSelectedInstructionsLocatingEvents(currentSelection)).toEqual([
       standardEvent1_2,
@@ -545,10 +533,7 @@ describe('SelectionHandler', () => {
     expect(getLastSelectedInstructionContext(currentSelection)).toEqual({
       isCondition: true,
       instrsList: gd.asStandardEvent(standardEvent1_2).getConditions(),
-      instruction: gd
-        .asStandardEvent(standardEvent1_2)
-        .getConditions()
-        .get(1),
+      instruction: gd.asStandardEvent(standardEvent1_2).getConditions().get(1),
       indexInList: 1,
       eventContext: {
         event: standardEvent1_2,
@@ -558,7 +543,7 @@ describe('SelectionHandler', () => {
     });
 
     // Select an action of another event.
-// @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
+    // @ts-expect-error - TS2322 - Type 'SelectionState' is not assignable to type '{ selectedInstructions: never[]; selectedEvents: never[]; selectedInstructionsLists: never[]; }'.
     currentSelection = selectInstruction(
       {
         event: standardEvent1_2_1,
@@ -569,10 +554,7 @@ describe('SelectionHandler', () => {
       {
         isCondition: false,
         instrsList: gd.asStandardEvent(standardEvent1_2_1).getActions(),
-        instruction: gd
-          .asStandardEvent(standardEvent1_2_1)
-          .getActions()
-          .get(0),
+        instruction: gd.asStandardEvent(standardEvent1_2_1).getActions().get(0),
         indexInList: 0,
       },
       true
@@ -609,48 +591,30 @@ describe('SelectionHandler', () => {
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2)
-          .getConditions()
-          .get(0)
+        gd.asStandardEvent(standardEvent1_2).getConditions().get(0)
       )
     ).toBe(false);
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2)
-          .getConditions()
-          .get(1)
+        gd.asStandardEvent(standardEvent1_2).getConditions().get(1)
       )
     ).toBe(true);
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2_1)
-          .getActions()
-          .get(0)
+        gd.asStandardEvent(standardEvent1_2_1).getActions().get(0)
       )
     ).toBe(true);
     expect(
       isInstructionSelected(
         currentSelection,
-        gd
-          .asStandardEvent(standardEvent1_2_1)
-          .getActions()
-          .get(1)
+        gd.asStandardEvent(standardEvent1_2_1).getActions().get(1)
       )
     ).toBe(false);
     expect(getSelectedInstructions(currentSelection)).toEqual([
-      gd
-        .asStandardEvent(standardEvent1_2)
-        .getConditions()
-        .get(1),
-      gd
-        .asStandardEvent(standardEvent1_2_1)
-        .getActions()
-        .get(0),
+      gd.asStandardEvent(standardEvent1_2).getConditions().get(1),
+      gd.asStandardEvent(standardEvent1_2_1).getActions().get(0),
     ]);
     expect(getSelectedInstructionsLocatingEvents(currentSelection)).toEqual([
       standardEvent1_2,
@@ -659,10 +623,7 @@ describe('SelectionHandler', () => {
     expect(getLastSelectedInstructionContext(currentSelection)).toEqual({
       isCondition: false,
       instrsList: gd.asStandardEvent(standardEvent1_2_1).getActions(),
-      instruction: gd
-        .asStandardEvent(standardEvent1_2_1)
-        .getActions()
-        .get(0),
+      instruction: gd.asStandardEvent(standardEvent1_2_1).getActions().get(0),
       indexInList: 0,
       eventContext: {
         event: standardEvent1_2_1,

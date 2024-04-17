@@ -1,6 +1,9 @@
-import {serializeToJSObject} from '../../Utils/Serializer';
+import { serializeToJSObject } from '../../Utils/Serializer';
 
-const downloadStringContentAsFile = async (filename: string, content: string): Promise<void> => {
+const downloadStringContentAsFile = async (
+  filename: string,
+  content: string
+): Promise<void> => {
   const blob = new Blob([content], { type: 'application/json' });
   const blobUrl = URL.createObjectURL(blob);
 
@@ -18,18 +21,23 @@ const downloadStringContentAsFile = async (filename: string, content: string): P
 };
 
 export default class BrowserEventsFunctionsExtensionWriter {
-  static chooseEventsFunctionExtensionFile = async (extensionName?: string): Promise<string | null | undefined> => {
+  static chooseEventsFunctionExtensionFile = async (
+    extensionName?: string
+  ): Promise<string | null | undefined> => {
     return extensionName;
   };
 
-  static writeEventsFunctionsExtension = async (extension: gdEventsFunctionsExtension, filename: string): Promise<void> => {
+  static writeEventsFunctionsExtension = async (
+    extension: gd.EventsFunctionsExtension,
+    filename: string
+  ): Promise<void> => {
     const serializedObject = serializeToJSObject(extension);
     try {
       await downloadStringContentAsFile(
         filename,
         JSON.stringify(serializedObject, null, 2)
       );
-    } catch (error: any) {
+    } catch (error) {
       console.error('Unable to write the events function extension:', error);
       throw error;
     }

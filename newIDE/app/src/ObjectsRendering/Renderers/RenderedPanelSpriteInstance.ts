@@ -1,10 +1,9 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import * as PIXI from 'pixi.js-legacy';
-const gd: libGDevelop = global.gd;
 
 type StretchedSprite = PIXI.Sprite | PIXI.TilingSprite;
 
@@ -15,26 +14,26 @@ type StretchedSprite = PIXI.Sprite | PIXI.TilingSprite;
  * TODO: Find a way to factor GDJS objects and IDE instances renderers.
  */
 export default class RenderedPanelSpriteInstance extends RenderedInstance {
-// @ts-expect-error - TS2564 - Property '_centerSprite' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_centerSprite' has no initializer and is not definitely assigned in the constructor.
   _centerSprite: StretchedSprite;
-// @ts-expect-error - TS2564 - Property '_borderSprites' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_borderSprites' has no initializer and is not definitely assigned in the constructor.
   _borderSprites: StretchedSprite[];
-// @ts-expect-error - TS2564 - Property '_textureName' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_textureName' has no initializer and is not definitely assigned in the constructor.
   _textureName: string;
-// @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_width' has no initializer and is not definitely assigned in the constructor.
   _width: number;
-// @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_height' has no initializer and is not definitely assigned in the constructor.
   _height: number;
-// @ts-expect-error - TS2564 - Property '_tiled' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_tiled' has no initializer and is not definitely assigned in the constructor.
   _tiled: boolean;
-// @ts-expect-error - TS2564 - Property '_wasRendered' has no initializer and is not definitely assigned in the constructor.
+  // @ts-expect-error - TS2564 - Property '_wasRendered' has no initializer and is not definitely assigned in the constructor.
   _wasRendered: boolean;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
   ) {
@@ -118,12 +117,12 @@ export default class RenderedPanelSpriteInstance extends RenderedInstance {
       new PIXI.Sprite(texture), //Bottom-Right
     ];
 
-// @ts-expect-error - TS2339 - Property 'removeChildren' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'removeChildren' does not exist on type 'DisplayObject'.
     this._pixiObject.removeChildren();
-// @ts-expect-error - TS2339 - Property 'addChild' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'addChild' does not exist on type 'DisplayObject'.
     this._pixiObject.addChild(this._centerSprite);
     for (var i = 0; i < this._borderSprites.length; ++i) {
-// @ts-expect-error - TS2339 - Property 'addChild' does not exist on type 'DisplayObject'.
+      // @ts-expect-error - TS2339 - Property 'addChild' does not exist on type 'DisplayObject'.
       this._pixiObject.addChild(this._borderSprites[i]);
     }
   }
@@ -433,9 +432,9 @@ export default class RenderedPanelSpriteInstance extends RenderedInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration
+    objectConfiguration: gd.ObjectConfiguration
   ) {
     const panelSprite = gd.asPanelSpriteConfiguration(objectConfiguration);
 

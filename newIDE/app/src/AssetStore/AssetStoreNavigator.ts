@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../UI/Search/FiltersChooser' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Search/FiltersChooser.tsx', but '--jsx' is not set.
+
 import { FiltersState } from '../UI/Search/FiltersChooser';
 import {
   AssetShortHeader,
@@ -9,58 +9,55 @@ import {
 import {
   PrivateAssetPackListingData,
   PrivateGameTemplateListingData,
-// @ts-expect-error - TS6142 - Module '../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../Utils/GDevelopServices/Shop';
 
 export type AssetStorePageState = {
-  openedAssetPack: PublicAssetPack | PrivateAssetPack | null,
-  openedShopCategory: string | null,
-  openedAssetShortHeader: AssetShortHeader | null | undefined,
-  openedPrivateAssetPackListingData: PrivateAssetPackListingData | null | undefined,
-  openedPrivateGameTemplateListingData: PrivateGameTemplateListingData | null | undefined,
-  selectedFolders: Array<string>,
-  filtersState: FiltersState,
-  pageBreakIndex?: number | null | undefined,
-  scrollPosition?: number | null | undefined,
-  displayAssets: boolean,
-  searchText?: string
+  openedAssetPack: PublicAssetPack | PrivateAssetPack | null;
+  openedShopCategory: string | null;
+  openedAssetShortHeader: AssetShortHeader | null | undefined;
+  openedPrivateAssetPackListingData:
+    | PrivateAssetPackListingData
+    | null
+    | undefined;
+  openedPrivateGameTemplateListingData:
+    | PrivateGameTemplateListingData
+    | null
+    | undefined;
+  selectedFolders: Array<string>;
+  filtersState: FiltersState;
+  pageBreakIndex?: number | null | undefined;
+  scrollPosition?: number | null | undefined;
+  displayAssets: boolean;
+  searchText?: string;
 };
 
 export type NavigationState = {
-  getCurrentPage: () => AssetStorePageState,
-  backToPreviousPage: () => AssetStorePageState,
-  openHome: () => AssetStorePageState,
-  clearHistory: () => void,
-  clearPreviousPageFromHistory: () => void,
-  openSearchResultPage: () => void,
-  openTagPage: (arg1: string) => void,
-  openShopCategoryPage: (arg1: string) => void,
-  openPackPage: (
-    arg1: {
-      assetPack: PublicAssetPack | PrivateAssetPack,
-      previousSearchText: string
-    },
-  ) => void,
-  openPrivateAssetPackInformationPage: (
-    arg1: {
-      privateAssetPackListingData: PrivateAssetPackListingData,
-      previousSearchText: string
-    },
-  ) => void,
-  openPrivateGameTemplateInformationPage: (
-    arg1: {
-      privateGameTemplateListingData: PrivateGameTemplateListingData,
-      previousSearchText: string
-    },
-  ) => void,
-  openAssetDetailPage: (
-    arg1: {
-      assetShortHeader: AssetShortHeader,
-      previousSearchText: string
-    },
-  ) => void,
-  navigateInsideFolder: (arg1: string) => void,
-  goBackToFolderIndex: (arg1: number) => void
+  getCurrentPage: () => AssetStorePageState;
+  backToPreviousPage: () => AssetStorePageState;
+  openHome: () => AssetStorePageState;
+  clearHistory: () => void;
+  clearPreviousPageFromHistory: () => void;
+  openSearchResultPage: () => void;
+  openTagPage: (arg1: string) => void;
+  openShopCategoryPage: (arg1: string) => void;
+  openPackPage: (arg1: {
+    assetPack: PublicAssetPack | PrivateAssetPack;
+    previousSearchText: string;
+  }) => void;
+  openPrivateAssetPackInformationPage: (arg1: {
+    privateAssetPackListingData: PrivateAssetPackListingData;
+    previousSearchText: string;
+  }) => void;
+  openPrivateGameTemplateInformationPage: (arg1: {
+    privateGameTemplateListingData: PrivateGameTemplateListingData;
+    previousSearchText: string;
+  }) => void;
+  openAssetDetailPage: (arg1: {
+    assetShortHeader: AssetShortHeader;
+    previousSearchText: string;
+  }) => void;
+  navigateInsideFolder: (arg1: string) => void;
+  goBackToFolderIndex: (arg1: number) => void;
 };
 
 const noFilter: FiltersState = {
@@ -115,7 +112,7 @@ export const isSearchResultPage = (pageState: AssetStorePageState) => {
 };
 
 type AssetStorePageHistory = {
-  previousPages: Array<AssetStorePageState>
+  previousPages: Array<AssetStorePageState>;
 };
 
 export const useShopNavigation = (): NavigationState => {
@@ -146,7 +143,7 @@ export const useShopNavigation = (): NavigationState => {
         return assetStoreHomePageState;
       },
       clearHistory: () => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           if (previousHistory.previousPages.length <= 1) return previousHistory;
 
           const currentPage =
@@ -157,7 +154,7 @@ export const useShopNavigation = (): NavigationState => {
         });
       },
       clearPreviousPageFromHistory: () => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           if (previousHistory.previousPages.length <= 1) return previousHistory;
 
           const newPreviousPages = previousHistory.previousPages.slice(
@@ -168,7 +165,7 @@ export const useShopNavigation = (): NavigationState => {
         });
       },
       openSearchResultPage: () => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -187,7 +184,7 @@ export const useShopNavigation = (): NavigationState => {
         });
       },
       openTagPage: (tag: string) => {
-        setHistory(previousHistory => ({
+        setHistory((previousHistory) => ({
           ...previousHistory,
           previousPages: [
             ...previousHistory.previousPages,
@@ -214,7 +211,7 @@ export const useShopNavigation = (): NavigationState => {
         }));
       },
       openShopCategoryPage: (category: string) => {
-        setHistory(previousHistory => ({
+        setHistory((previousHistory) => ({
           ...previousHistory,
           previousPages: [
             ...previousHistory.previousPages,
@@ -235,10 +232,10 @@ export const useShopNavigation = (): NavigationState => {
         assetPack,
         previousSearchText,
       }: {
-        assetPack: PublicAssetPack | PrivateAssetPack,
-        previousSearchText: string
+        assetPack: PublicAssetPack | PrivateAssetPack;
+        previousSearchText: string;
       }) => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -247,10 +244,11 @@ export const useShopNavigation = (): NavigationState => {
             ...currentPage,
             searchText: previousSearchText,
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSearchText,
@@ -291,10 +289,10 @@ export const useShopNavigation = (): NavigationState => {
         privateAssetPackListingData,
         previousSearchText,
       }: {
-        privateAssetPackListingData: PrivateAssetPackListingData,
-        previousSearchText: string
+        privateAssetPackListingData: PrivateAssetPackListingData;
+        previousSearchText: string;
       }) => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -303,10 +301,11 @@ export const useShopNavigation = (): NavigationState => {
             ...currentPage,
             searchText: previousSearchText,
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSearchText,
@@ -333,10 +332,10 @@ export const useShopNavigation = (): NavigationState => {
         assetShortHeader,
         previousSearchText,
       }: {
-        assetShortHeader: AssetShortHeader,
-        previousSearchText: string
+        assetShortHeader: AssetShortHeader;
+        previousSearchText: string;
       }) => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -345,10 +344,11 @@ export const useShopNavigation = (): NavigationState => {
             ...currentPage,
             searchText: previousSearchText,
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSearchText,
@@ -375,10 +375,10 @@ export const useShopNavigation = (): NavigationState => {
         privateGameTemplateListingData,
         previousSearchText,
       }: {
-        privateGameTemplateListingData: PrivateGameTemplateListingData,
-        previousSearchText: string
+        privateGameTemplateListingData: PrivateGameTemplateListingData;
+        previousSearchText: string;
       }) => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -387,10 +387,11 @@ export const useShopNavigation = (): NavigationState => {
             ...currentPage,
             searchText: previousSearchText,
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSearchText,
@@ -404,7 +405,8 @@ export const useShopNavigation = (): NavigationState => {
                 openedShopCategory: null,
                 openedAssetPack: null,
                 openedPrivateAssetPackListingData: null,
-                openedPrivateGameTemplateListingData: privateGameTemplateListingData,
+                openedPrivateGameTemplateListingData:
+                  privateGameTemplateListingData,
                 filtersState: noFilter,
                 displayAssets: false,
                 selectedFolders: [],
@@ -414,8 +416,8 @@ export const useShopNavigation = (): NavigationState => {
         });
       },
       navigateInsideFolder: (folderTag: string) => {
-// @ts-expect-error - TS2345 - Argument of type '(previousHistory: AssetStorePageHistory) => { previousPages: (AssetStorePageState | { readonly selectedFolders: readonly [...string[], string]; ... 9 more ...; readonly searchText?: string | undefined; })[]; }' is not assignable to parameter of type 'SetStateAction<AssetStorePageHistory>'.
-        setHistory(previousHistory => {
+        // @ts-expect-error - TS2345 - Argument of type '(previousHistory: AssetStorePageHistory) => { previousPages: (AssetStorePageState | { readonly selectedFolders: readonly [...string[], string]; ... 9 more ...; readonly searchText?: string | undefined; })[]; }' is not assignable to parameter of type 'SetStateAction<AssetStorePageHistory>'.
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -424,10 +426,11 @@ export const useShopNavigation = (): NavigationState => {
             ...currentPage,
             selectedFolders: [...currentPage.selectedFolders, folderTag],
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSelectedFolder,
@@ -439,7 +442,7 @@ export const useShopNavigation = (): NavigationState => {
         });
       },
       goBackToFolderIndex: (folderIndex: number) => {
-        setHistory(previousHistory => {
+        setHistory((previousHistory) => {
           const currentPage =
             previousHistory.previousPages[
               previousHistory.previousPages.length - 1
@@ -451,10 +454,11 @@ export const useShopNavigation = (): NavigationState => {
               folderIndex + 1
             ),
           } as const;
-          const previousPagesWithoutCurrentPage = previousHistory.previousPages.slice(
-            0,
-            previousHistory.previousPages.length - 1
-          );
+          const previousPagesWithoutCurrentPage =
+            previousHistory.previousPages.slice(
+              0,
+              previousHistory.previousPages.length - 1
+            );
           const previousPages = [
             ...previousPagesWithoutCurrentPage,
             currentPageWithSelectedFolder,

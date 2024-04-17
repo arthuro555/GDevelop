@@ -1,8 +1,8 @@
 import {processByChunk} from './ProcessByChunk';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
 describe('ProcessByChunk', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   test('empty array', async () => {
     const processChunk = jest.fn().mockImplementation(async () => {});
     await processByChunk([], {
@@ -14,7 +14,7 @@ describe('ProcessByChunk', () => {
     expect(processChunk).not.toHaveBeenCalled();
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   test('chunk never too big', async () => {
     let results: Array<any> | Array<string> = [];
     const processChunk = async chunk: Array<string> => {
@@ -39,7 +39,7 @@ describe('ProcessByChunk', () => {
     expect(results).toEqual(['fake-item-1', 'fake-item-2', 'fake-item-3']);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   test('chunks of 2', async () => {
     let results: Array<any> | Array<string> = [];
     const processChunk = async chunk: Array<string> => {
@@ -64,7 +64,7 @@ describe('ProcessByChunk', () => {
     expect(results).toEqual(['fake-item-1', 'fake-item-2', 'fake-item-3']);
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
   test('chunks of 2, transformed items', async () => {
     let results: Array<any> | Array<string> = [];
     const processChunk = async chunk: Array<string> => {

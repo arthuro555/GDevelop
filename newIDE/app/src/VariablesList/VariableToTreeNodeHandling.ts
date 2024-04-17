@@ -1,26 +1,37 @@
-import {mapFor} from '../Utils/MapFor';
+import { mapFor } from '../Utils/MapFor';
 import { normalizeString } from '../Utils/Search';
-const gd: libGDevelop = global.gd;
 
-type MovementType = 'ArrayToTopLevel' | 'FromArrayToAnotherArray' | 'FromArrayToStructure' | 'FromStructureToAnotherStructure' | 'FromStructureToArray' | 'InsideSameArray' | 'InsideSameStructure' | 'InsideTopLevel' | 'StructureToTopLevel' | 'TopLevelToStructure' | 'TopLevelToArray';
+type MovementType =
+  | 'ArrayToTopLevel'
+  | 'FromArrayToAnotherArray'
+  | 'FromArrayToStructure'
+  | 'FromStructureToAnotherStructure'
+  | 'FromStructureToArray'
+  | 'InsideSameArray'
+  | 'InsideSameStructure'
+  | 'InsideTopLevel'
+  | 'StructureToTopLevel'
+  | 'TopLevelToStructure'
+  | 'TopLevelToArray';
 
 type VariableLineage = Array<{
-  nodeId: string,
-  name: string,
-  variable: gdVariable
+  nodeId: string;
+  name: string;
+  variable: gd.Variable;
 }>;
 
 type VariableContext = {
-  variable: gdVariable | null,
-  lineage: VariableLineage,
-  depth: number,
-  name: string | null
+  variable: gd.Variable | null;
+  lineage: VariableLineage;
+  depth: number;
+  name: string | null;
 };
 
 export const inheritedPrefix = '$!';
 export const separator = '$.$';
 
-export const removeInheritedPrefix = (str: string): string => str.slice(inheritedPrefix.length, str.length);
+export const removeInheritedPrefix = (str: string): string =>
+  str.slice(inheritedPrefix.length, str.length);
 
 export const getDirectParentVariable = (lineage: VariableLineage) =>
   lineage[lineage.length - 1] ? lineage[lineage.length - 1].variable : null;
@@ -29,20 +40,26 @@ export const getDirectParentNodeId = (lineage: VariableLineage) =>
 export const getOldestAncestryVariable = (lineage: VariableLineage) =>
   lineage.length ? lineage[0] : null;
 
-export const isAnAncestryOf = (variable: gdVariable, lineage: VariableLineage): boolean => {
-  const lineageVariables = lineage.map(context => context.variable);
+export const isAnAncestryOf = (
+  variable: gd.Variable,
+  lineage: VariableLineage
+): boolean => {
+  const lineageVariables = lineage.map((context) => context.variable);
   return lineageVariables.includes(variable);
 };
 
-export const getVariableContextFromNodeId = (nodeId: string, variablesContainer: gdVariablesContainer): VariableContext => {
+export const getVariableContextFromNodeId = (
+  nodeId: string,
+  variablesContainer: gd.VariablesContainer
+): VariableContext => {
   const bits = nodeId.split(separator);
   let parentVariable = null;
   let currentVariable = null;
   let currentVariableName = null;
   let lineage: Array<{
-    name: string,
-    nodeId: string,
-    variable: gdVariable
+    name: string;
+    nodeId: string;
+    variable: gd.Variable;
   }> = [];
   let name = null;
   let depth = -1;
@@ -101,7 +118,7 @@ export const updateListOfNodesFollowingChangeName = (
   });
   const originalNodeIdBits = oldNodeId.split(separator);
   const variableName = originalNodeIdBits[originalNodeIdBits.length - 1];
-  [indexOfRenamedNode, ...indicesOfChildrenOfRenamedNode].forEach(index => {
+  [indexOfRenamedNode, ...indicesOfChildrenOfRenamedNode].forEach((index) => {
     if (index === null || index < 0) return;
     const nodeIdToChange = newList[index];
     const bitsToChange = nodeIdToChange.split(separator);
@@ -113,7 +130,7 @@ export const updateListOfNodesFollowingChangeName = (
 
 export const getMovementTypeWithinVariablesContainer = (
   draggedVariableContext: VariableContext,
-  targetVariableContext: VariableContext,
+  targetVariableContext: VariableContext
 ): MovementType | null | undefined => {
   const { lineage: targetVariableLineage } = targetVariableContext;
   const targetVariableParentVariable = getDirectParentVariable(
@@ -190,22 +207,20 @@ export const getMovementTypeWithinVariablesContainer = (
   return null;
 };
 
-export const generateListOfNodesMatchingSearchInVariable = (
-  {
-    variable,
-    variableName,
-    nodeId,
-    searchText,
-    acc,
-  }: {
-    variable: gdVariable,
-    variableName: string,
-    nodeId: string,
-    searchText: string,
-    acc: Array<string>
-  },
-): Array<string> => {
-// @ts-expect-error - TS7034 - Variable 'newAcc' implicitly has type 'any' in some locations where its type cannot be determined.
+export const generateListOfNodesMatchingSearchInVariable = ({
+  variable,
+  variableName,
+  nodeId,
+  searchText,
+  acc,
+}: {
+  variable: gd.Variable;
+  variableName: string;
+  nodeId: string;
+  searchText: string;
+  acc: Array<string>;
+}): Array<string> => {
+  // @ts-expect-error - TS7034 - Variable 'newAcc' implicitly has type 'any' in some locations where its type cannot be determined.
   let newAcc;
   let childrenNodes;
   switch (variable.getType()) {
@@ -225,10 +240,7 @@ export const generateListOfNodesMatchingSearchInVariable = (
     case gd.Variable.Number:
       if (
         normalizeString(variableName).includes(searchText) ||
-        variable
-          .getValue()
-          .toString()
-          .includes(searchText)
+        variable.getValue().toString().includes(searchText)
       ) {
         return [nodeId];
       }
@@ -238,15 +250,15 @@ export const generateListOfNodesMatchingSearchInVariable = (
       if (normalizeString(variableName).includes(searchText)) {
         newAcc.push(nodeId);
       }
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-      childrenNodes = mapFor(0, variable.getChildrenCount(), index => {
+
+      childrenNodes = mapFor(0, variable.getChildrenCount(), (index) => {
         const childVariable = variable.getAtIndex(index);
         return generateListOfNodesMatchingSearchInVariable({
           variable: childVariable,
           variableName: '',
           nodeId: `${nodeId}${separator}${index}`,
           searchText: searchText,
-// @ts-expect-error - TS7005 - Variable 'newAcc' implicitly has an 'any' type.
+          // @ts-expect-error - TS7005 - Variable 'newAcc' implicitly has an 'any' type.
           acc: newAcc,
         });
       }).flat();
@@ -259,8 +271,8 @@ export const generateListOfNodesMatchingSearchInVariable = (
       childrenNodes = variable
         .getAllChildrenNames()
         .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'childName' implicitly has an 'any' type.
-        .map(childName => {
+        // @ts-expect-error - TS7006 - Parameter 'childName' implicitly has an 'any' type.
+        .map((childName) => {
           const childVariable = variable.getChild(childName);
 
           return Array.from(
@@ -284,12 +296,11 @@ export const generateListOfNodesMatchingSearchInVariable = (
 };
 
 export const generateListOfNodesMatchingSearchInVariablesContainer = (
-  variablesContainer: gdVariablesContainer,
+  variablesContainer: gd.VariablesContainer,
   searchText: string,
-  prefix?: string,
+  prefix?: string
 ): Array<string> => {
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-  return mapFor(0, variablesContainer.count(), index => {
+  return mapFor(0, variablesContainer.count(), (index) => {
     const variable = variablesContainer.getAt(index);
     const name = variablesContainer.getNameAt(index);
     return generateListOfNodesMatchingSearchInVariable({

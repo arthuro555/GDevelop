@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
-// @ts-expect-error - TS6142 - Module '../../../UI/Notification/NotificationList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Notification/NotificationList.tsx', but '--jsx' is not set.
+
 import NotificationList from '../../../UI/Notification/NotificationList';
 import { Notification } from '../../../Utils/GDevelopServices/Notification';
 
@@ -81,10 +80,10 @@ const notifications: Notification[] = [
     userId,
     createdAt: now - 9 * ONE_HOUR,
     seenAt: now - 7 * ONE_HOUR,
-// @ts-expect-error - TS2322 - Type '"unknown-type"' is not assignable to type '"credits-drop" | "one-game-feedback-received" | "multiple-game-feedback-received" | "claimable-asset-pack" | "game-sessions-achievement"'.
+    // @ts-expect-error - TS2322 - Type '"unknown-type"' is not assignable to type '"credits-drop" | "one-game-feedback-received" | "multiple-game-feedback-received" | "claimable-asset-pack" | "game-sessions-achievement"'.
     type: 'unknown-type',
     data: {
-// @ts-expect-error - TS2322 - Type '{ what: string; }' is not assignable to type '{ creditsAmount: number; reason: "subscription-monthly-drop" | "subscription-creation"; } | { gameId: string; gameName: string; playerName?: string | undefined; comment: string; } | ... 4 more ... | { ...; }'.
+      // @ts-expect-error - TS2322 - Type '{ what: string; }' is not assignable to type '{ creditsAmount: number; reason: "subscription-monthly-drop" | "subscription-creation"; } | { gameId: string; gameName: string; playerName?: string | undefined; comment: string; } | ... 4 more ... | { ...; }'.
       what: 'ever',
     },
   },
@@ -145,9 +144,7 @@ const notifications: Notification[] = [
 
 export const Default = () => {
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div style={{ maxWidth: 300 }}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <NotificationList
         notifications={notifications}
         canMarkAllAsRead={true}

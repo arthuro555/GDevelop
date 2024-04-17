@@ -1,5 +1,5 @@
-import {addGDevelopResourceTokenIfRequired} from '../Utils/CrossOrigin';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../Utils/OptionalRequire'. '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/OptionalRequire.js' implicitly has an 'any' type.
+import { addGDevelopResourceTokenIfRequired } from '../Utils/CrossOrigin';
+
 import optionalRequire from '../Utils/OptionalRequire';
 const electron = optionalRequire('electron');
 const path = optionalRequire('path');
@@ -7,11 +7,11 @@ const path = optionalRequire('path');
 class UrlsCache {
   projectCache: {
     [key: number]: {
-      [key: string]: string
-    }
+      [key: string]: string;
+    };
   } = {};
 
-  _getProjectCache(project: gdProject) {
+  _getProjectCache(project: gd.Project) {
     const cache = this.projectCache[project.ptr];
     if (!cache) {
       return (this.projectCache[project.ptr] = {});
@@ -20,26 +20,26 @@ class UrlsCache {
     return cache;
   }
 
-  getCachedUrl(project: gdProject, url: string): string | null | undefined {
+  getCachedUrl(project: gd.Project, url: string): string | null | undefined {
     const cache = this._getProjectCache(project);
     return cache[url];
   }
 
-  cacheUrl(project: gdProject, url: string): string {
+  cacheUrl(project: gd.Project, url: string): string {
     const cache = this._getProjectCache(project);
     return (cache[url] = url);
   }
 
-  burstUrl(project: gdProject, url: string) {
+  burstUrl(project: gd.Project, url: string) {
     const cache = this._getProjectCache(project);
     delete cache[url];
   }
 
   cacheLocalFileUrl(
-    project: gdProject,
+    project: gd.Project,
     filename: string,
     systemFilename: string,
-    disableCacheBurst: boolean,
+    disableCacheBurst: boolean
   ): string {
     const cache = this._getProjectCache(project);
 
@@ -55,8 +55,8 @@ class UrlsCache {
 }
 
 type LoadingOptions = {
-  disableCacheBurst?: boolean,
-  isResourceForPixi?: boolean
+  disableCacheBurst?: boolean;
+  isResourceForPixi?: boolean;
 };
 
 const addSearchParameterToUrl = (
@@ -95,11 +95,11 @@ export default class ResourcesLoader {
    * file represented by these resources has changed. This force these local files to be loaded again.
    */
   static burstUrlsCacheForResources(
-    project: gdProject,
+    project: gd.Project,
     resourcesNames: Array<string>
   ) {
     const resourcesManager = project.getResourcesManager();
-    resourcesNames.forEach(resourceName => {
+    resourcesNames.forEach((resourceName) => {
       if (resourcesManager.hasResource(resourceName)) {
         ResourcesLoader._cache.burstUrl(
           project,
@@ -121,12 +121,9 @@ export default class ResourcesLoader {
    * Get the fully qualified URL/filename for a URL/filename relative to the project.
    */
   static getFullUrl(
-    project: gdProject,
+    project: gd.Project,
     urlOrFilename: string,
-    {
-      isResourceForPixi,
-      disableCacheBurst,
-    }: LoadingOptions,
+    { isResourceForPixi, disableCacheBurst }: LoadingOptions
   ): string {
     if (!!electron && isLocalFile(urlOrFilename)) {
       const cachedUrl = ResourcesLoader._cache.getCachedUrl(
@@ -173,7 +170,7 @@ export default class ResourcesLoader {
       // Search for "cors-cache-workaround" in the codebase for the same workarounds.
       urlWithParameters = addSearchParameterToUrl(
         urlWithParameters,
-        'gdUsage', // Arbitrary parameter name to designate that this is being used for Pixi.js
+        'gd.Usage', // Arbitrary parameter name to designate that this is being used for Pixi.js
         'pixi'
       );
     }
@@ -193,7 +190,7 @@ export default class ResourcesLoader {
    * changes to accommodate browsers CORS/cache.
    */
   static getResourceFullUrl(
-    project: gdProject,
+    project: gd.Project,
     resourceName: string,
     options: LoadingOptions
   ) {

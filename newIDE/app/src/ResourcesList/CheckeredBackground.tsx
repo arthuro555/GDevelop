@@ -31,7 +31,6 @@ const CheckeredBackground = () => {
     filter: theme.imagePreview.backgroundFilter || 'none',
   } as const;
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   return <div style={backgroundStyle} />;
 };
 

@@ -1,6 +1,5 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
-import {t} from '@lingui/macro';
-// @ts-expect-error - TS6142 - Module '../MainFrame/Preferences/PreferencesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/Preferences/PreferencesContext.tsx', but '--jsx' is not set.
+import { t } from '@lingui/macro';
+
 import { AlertMessageIdentifier } from '../MainFrame/Preferences/PreferencesContext';
 import newNameGenerator from '../Utils/NewNameGenerator';
 import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
@@ -13,15 +12,19 @@ import { MessageDescriptor } from '../Utils/i18n/MessageDescriptor.flow';
  */
 
 export type InfoBarDetails = {
-  identifier: AlertMessageIdentifier,
-  message: MessageDescriptor,
-  touchScreenMessage: MessageDescriptor
+  identifier: AlertMessageIdentifier;
+  message: MessageDescriptor;
+  touchScreenMessage: MessageDescriptor;
 };
 
 type InfoBarEvent = 'onObjectAdded' | 'onInstanceAdded';
 
-export const onObjectAdded = (object: gdObject, layout: gdLayout, project: gdProject): InfoBarDetails | null | undefined => {
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gdObject, layout: gdLayout, project: gdProject) => void; readonly onInstanceAdded: (instance: gdInitialInstance, layout: gdLayout, project: gdProject) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
+export const onObjectAdded = (
+  object: gd.Object,
+  layout: gd.Layout,
+  project: gd.Project
+): InfoBarDetails | null | undefined => {
+  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.Object, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
   const additionalWork = objectType[object.getType()];
   if (additionalWork) {
     additionalWork.onObjectAdded(object, layout, project);
@@ -31,14 +34,18 @@ export const onObjectAdded = (object: gdObject, layout: gdLayout, project: gdPro
   return null;
 };
 
-export const onInstanceAdded = (instance: gdInitialInstance, layout: gdLayout, project: gdProject): InfoBarDetails | null | undefined => {
+export const onInstanceAdded = (
+  instance: gd.InitialInstance,
+  layout: gd.Layout,
+  project: gd.Project
+): InfoBarDetails | null | undefined => {
   const objectName = instance.getObjectName();
-  let object: gdObject | null | undefined = null;
+  let object: gd.Object | null | undefined = null;
   if (layout.hasObjectNamed(objectName)) object = layout.getObject(objectName);
   else if (project.hasObjectNamed(objectName))
     object = project.getObject(objectName);
 
-// @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gdObject, layout: gdLayout, project: gdProject) => void; readonly onInstanceAdded: (instance: gdInitialInstance, layout: gdLayout, project: gdProject) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
+  // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ readonly 'Lighting::LightObject': { readonly onObjectAdded: (object: gd.Object, layout: gd.Layout, project: gd.Project) => void; readonly onInstanceAdded: (instance: gd.InitialInstance, layout: gd.Layout, project: gd.Project) => void; readonly getInfoBarDetails: (infoBarEvent: InfoBarEvent) => InfoBarDetails | ... 1 mor...'.
   const additionalWork = object ? objectType[object.getType()] : null;
   if (additionalWork) {
     additionalWork.onInstanceAdded(instance, layout, project);
@@ -48,7 +55,7 @@ export const onInstanceAdded = (instance: gdInitialInstance, layout: gdLayout, p
   return null;
 };
 
-const getLightingLayer = (layout: gdLayout): gdLayer | null | undefined => {
+const getLightingLayer = (layout: gd.Layout): gd.Layer | null | undefined => {
   for (let i = 0; i < layout.getLayersCount(); i++) {
     const layer = layout.getLayerAt(i);
     if (layer.isLightingLayer()) return layer;
@@ -59,14 +66,18 @@ const getLightingLayer = (layout: gdLayout): gdLayer | null | undefined => {
 
 const objectType = {
   'Lighting::LightObject': {
-    onObjectAdded: (object: gdObject, layout: gdLayout, project: gdProject) => {
+    onObjectAdded: (
+      object: gd.Object,
+      layout: gd.Layout,
+      project: gd.Project
+    ) => {
       const lightingLayer = getLightingLayer(layout);
       if (lightingLayer === null) {
-        const name = newNameGenerator('Lighting', name =>
+        const name = newNameGenerator('Lighting', (name) =>
           layout.hasLayerNamed(name)
         );
         layout.insertNewLayer(name, layout.getLayersCount());
-        const layer: gdLayer = layout.getLayer('Lighting');
+        const layer: gd.Layer = layout.getLayer('Lighting');
         layer.setLightingLayer(true);
         layer.setFollowBaseLayerCamera(true);
         layer.setAmbientLightColor(128, 128, 128);
@@ -74,9 +85,9 @@ const objectType = {
     },
 
     onInstanceAdded: (
-      instance: gdInitialInstance,
-      layout: gdLayout,
-      project: gdProject
+      instance: gd.InitialInstance,
+      layout: gd.Layout,
+      project: gd.Project
     ) => {
       const lightingLayer = getLightingLayer(layout);
       if (lightingLayer) {
@@ -84,7 +95,9 @@ const objectType = {
       }
     },
 
-    getInfoBarDetails: (infoBarEvent: InfoBarEvent): InfoBarDetails | null | undefined => {
+    getInfoBarDetails: (
+      infoBarEvent: InfoBarEvent
+    ): InfoBarDetails | null | undefined => {
       if (infoBarEvent === 'onObjectAdded') {
         return {
           identifier: 'automatic-lighting-layer',

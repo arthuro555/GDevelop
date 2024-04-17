@@ -9,10 +9,10 @@ import {
 
 const mergeSubscriptionPlansWithPrices = (
   subscriptionPlans: SubscriptionPlan[],
-  subscriptionPlanPricingSystems: SubscriptionPlanPricingSystem[],
+  subscriptionPlanPricingSystems: SubscriptionPlanPricingSystem[]
 ): SubscriptionPlanWithPricingSystems[] => {
   return subscriptionPlans
-    .map(subscriptionPlan => {
+    .map((subscriptionPlan) => {
       if (subscriptionPlan.id === 'free') {
         return {
           ...subscriptionPlan,
@@ -21,7 +21,7 @@ const mergeSubscriptionPlansWithPrices = (
       }
       // Filter operation here keeps the order of the prices sent by the server.
       const matchingPricingSystems = subscriptionPlanPricingSystems.filter(
-        pricingSystem => pricingSystem.planId === subscriptionPlan.id
+        (pricingSystem) => pricingSystem.planId === subscriptionPlan.id
       );
       if (matchingPricingSystems.length === 0) return null;
       return {
@@ -32,46 +32,40 @@ const mergeSubscriptionPlansWithPrices = (
     .filter(Boolean);
 };
 
-export const getAvailableSubscriptionPlansWithPrices = (subscriptionPlansWithPricingSystems: SubscriptionPlanWithPricingSystems[]): SubscriptionPlanWithPricingSystems[] => {
+export const getAvailableSubscriptionPlansWithPrices = (
+  subscriptionPlansWithPricingSystems: SubscriptionPlanWithPricingSystems[]
+): SubscriptionPlanWithPricingSystems[] => {
   return subscriptionPlansWithPricingSystems.filter(
-    subscriptionPlanWithPrices => !subscriptionPlanWithPrices.isLegacy
+    (subscriptionPlanWithPrices) => !subscriptionPlanWithPrices.isLegacy
   );
 };
 
 type Props = {
-  includeLegacy: boolean
+  includeLegacy: boolean;
 };
 
 /**
  * Hook to access subscription plans across the app.
  */
-const useSubscriptionPlans = ({
-  includeLegacy,
-}: Props) => {
-  const [
-    subscriptionPlansWithPricingSystems,
-    setSubscriptionPlansWithPrices,
-  ] = React.useState<SubscriptionPlanWithPricingSystems[] | null | undefined>(null);
+const useSubscriptionPlans = ({ includeLegacy }: Props) => {
+  const [subscriptionPlansWithPricingSystems, setSubscriptionPlansWithPrices] =
+    React.useState<SubscriptionPlanWithPricingSystems[] | null | undefined>(
+      null
+    );
 
-  const fetchSubscriptionPlansAndPrices = React.useCallback(
-    async () => {
-      const results = await Promise.all([
-        listSubscriptionPlans({ includeLegacy }),
-        listSubscriptionPlanPricingSystems({ includeLegacy }),
-      ]);
-      setSubscriptionPlansWithPrices(
-        mergeSubscriptionPlansWithPrices(results[0], results[1])
-      );
-    },
-    [includeLegacy]
-  );
+  const fetchSubscriptionPlansAndPrices = React.useCallback(async () => {
+    const results = await Promise.all([
+      listSubscriptionPlans({ includeLegacy }),
+      listSubscriptionPlanPricingSystems({ includeLegacy }),
+    ]);
+    setSubscriptionPlansWithPrices(
+      mergeSubscriptionPlansWithPrices(results[0], results[1])
+    );
+  }, [includeLegacy]);
 
-  React.useEffect(
-    () => {
-      fetchSubscriptionPlansAndPrices();
-    },
-    [fetchSubscriptionPlansAndPrices]
-  );
+  React.useEffect(() => {
+    fetchSubscriptionPlansAndPrices();
+  }, [fetchSubscriptionPlansAndPrices]);
 
   return { subscriptionPlansWithPricingSystems };
 };

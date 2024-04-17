@@ -1,20 +1,22 @@
-import {checkIfCredentialsRequired} from '../../../../Utils/CrossOrigin';
-
-const gd: libGDevelop = global.gd;
+import { checkIfCredentialsRequired } from '../../../../Utils/CrossOrigin';
 
 // 25% of 255 to accept pixels that are not fully transparent (like effects)
 const PIXEL_TRANSPARENCY_THRESHOLD = 64;
 
 // @ts-expect-error - TS2749 - 'Image' refers to a value, but is being used as a type here. Did you mean 'typeof Image'?
 const loadImage = (img: Image, pathToFile: string) => {
-// @ts-expect-error - TS2749 - 'Image' refers to a value, but is being used as a type here. Did you mean 'typeof Image'? | TS2749 - 'Image' refers to a value, but is being used as a type here. Did you mean 'typeof Image'?
-  return new Promise((resolve: (result: Promise<Image> | Image) => void, reject: (error?: any) => void) => {
-    img.addEventListener('load', () => resolve(img));
-    img.addEventListener('error', () =>
-      reject(new Error('Failed to load image'))
-    );
-    img.src = pathToFile;
-  });
+  return new Promise(
+    (
+      resolve: (result: Promise<Image> | Image) => void,
+      reject: (error?: any) => void
+    ) => {
+      img.addEventListener('load', () => resolve(img));
+      img.addEventListener('error', () =>
+        reject(new Error('Failed to load image'))
+      );
+      img.src = pathToFile;
+    }
+  );
 };
 
 const isPixelAboveTransparencyThreshold = (
@@ -28,7 +30,9 @@ const isPixelAboveTransparencyThreshold = (
   return alpha >= PIXEL_TRANSPARENCY_THRESHOLD;
 };
 
-export const getMatchingCollisionMask = async (pathToFile: string): Promise<gdVectorPolygon2d> => {
+export const getMatchingCollisionMask = async (
+  pathToFile: string
+): Promise<gd.VectorPolygon2d> => {
   // First detect, the most left, right, top and bottom pixels that are not transparent.
   // This will be used to crop the image.
   // To do so, we scan the image starting from the borders and going to the center,
@@ -153,7 +157,7 @@ export const getMatchingCollisionMask = async (pathToFile: string): Promise<gdVe
     polygons.push_back(newPolygon);
 
     return polygons;
-  } catch (e: any) {
+  } catch (e) {
     throw new Error('Unable to load image: ' + e);
   }
 };

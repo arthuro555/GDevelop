@@ -1,13 +1,13 @@
 export type AppStoreProduct = {
-  type: 'RENEWING_SUBSCRIPTION' | 'NON_CONSUMABLE',
-  name: string,
-  productId: string,
-  vendorId: string,
-  price: string,
-  hasIntroductoryPrice: boolean,
-  introPrice: string,
-  introPeriod: string,
-  introDuration: string
+  type: 'RENEWING_SUBSCRIPTION' | 'NON_CONSUMABLE';
+  name: string;
+  productId: string;
+  vendorId: string;
+  price: string;
+  hasIntroductoryPrice: boolean;
+  introPrice: string;
+  introPeriod: string;
+  introDuration: string;
 };
 
 // Subscriptions:
@@ -22,8 +22,12 @@ export const hasAppStoreUserSubscription = () => {
 
 export const shouldUseAppStoreProduct = () => false;
 
-export const getAppStoreProduct = (productId: string | null): AppStoreProduct | null | undefined => {
+export const getAppStoreProduct = (
+  productId: string | null
+): AppStoreProduct | null | undefined => {
   return null;
 };
 
-export const purchaseAppStoreProduct = async (productId: string | null): Promise<void> => {};
+export const purchaseAppStoreProduct = async (
+  productId: string | null
+): Promise<void> => {};

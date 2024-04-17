@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CommandWithOptions, SimpleCommand } from './CommandManager';
-// @ts-expect-error - TS6142 - Module './CommandsContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CommandPalette/CommandsContext.tsx', but '--jsx' is not set.
+
 import CommandsContext from './CommandsContext';
 import { CommandName } from './CommandsList';
 
@@ -14,16 +14,13 @@ export const useCommand = (
 ) => {
   const commandManager = React.useContext(CommandsContext);
   const { handler } = command;
-  React.useEffect(
-    () => {
-      if (!enabled) return;
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
-      commandManager.registerCommand(commandName, { handler });
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
-      return () => commandManager.deregisterCommand(commandName);
-    },
-    [commandManager, commandName, enabled, handler]
-  );
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    commandManager.registerCommand(commandName, { handler });
+
+    return () => commandManager.deregisterCommand(commandName);
+  }, [commandManager, commandName, enabled, handler]);
 };
 
 /**
@@ -36,16 +33,13 @@ export const useCommandWithOptions = (
 ) => {
   const commandManager = React.useContext(CommandsContext);
   const { generateOptions } = command;
-  React.useEffect(
-    () => {
-      if (!enabled) return;
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
-      commandManager.registerCommand(commandName, { generateOptions });
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
-      return () => commandManager.deregisterCommand(commandName);
-    },
-    [commandManager, commandName, enabled, generateOptions]
-  );
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    commandManager.registerCommand(commandName, { generateOptions });
+
+    return () => commandManager.deregisterCommand(commandName);
+  }, [commandManager, commandName, enabled, generateOptions]);
 };
 
 /**
@@ -53,9 +47,9 @@ export const useCommandWithOptions = (
  * class components
  */
 export const UseCommandHook = (props: {
-  name: CommandName,
-  enabled: boolean,
-  command: SimpleCommand
+  name: CommandName;
+  enabled: boolean;
+  command: SimpleCommand;
 }) => {
   useCommand(props.name, props.enabled, props.command);
   return null;
@@ -66,9 +60,9 @@ export const UseCommandHook = (props: {
  * hook in class components
  */
 export const UseCommandWithOptionsHook = (props: {
-  name: CommandName,
-  enabled: boolean,
-  command: CommandWithOptions
+  name: CommandName;
+  enabled: boolean;
+  command: CommandWithOptions;
 }) => {
   useCommandWithOptions(props.name, props.enabled, props.command);
   return null;

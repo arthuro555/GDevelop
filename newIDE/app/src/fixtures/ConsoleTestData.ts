@@ -1,5 +1,4 @@
-// @ts-expect-error - TS6142 - Module '../Debugger/DebuggerConsole' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Debugger/DebuggerConsole.tsx', but '--jsx' is not set.
-import {Log, LogsManager} from '../Debugger/DebuggerConsole';
+import { Log, LogsManager } from '../Debugger/DebuggerConsole';
 
 class MockLogsManager extends LogsManager {
   logs: Array<Log> = [

@@ -1,11 +1,11 @@
-import {EnumeratedInstructionOrExpressionMetadata} from '../../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
-// @ts-expect-error - TS6142 - Module './ExpressionParametersEditorDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsSheet/ParameterFields/GenericExpressionField/ExpressionParametersEditorDialog.tsx', but '--jsx' is not set.
+import { EnumeratedInstructionOrExpressionMetadata } from '../../../InstructionOrExpression/EnumeratedInstructionOrExpressionMetadata';
+
 import { ParameterValues } from './ExpressionParametersEditorDialog';
 import { mapVector } from '../../../Utils/MapFor';
 
 const filterOutCodeOnlyParameters = (
   array: Array<string>,
-  expressionMetadata: gdExpressionMetadata | gdInstructionMetadata,
+  expressionMetadata: gd.ExpressionMetadata | gd.InstructionMetadata,
   firstParameterIndex: number
 ) => {
   const parametersCount = expressionMetadata.getParametersCount();
@@ -22,7 +22,7 @@ const filterOutCodeOnlyParameters = (
 
 const filterVisibleParameters = (
   array: Array<string>,
-  expressionMetadata: gdExpressionMetadata | gdInstructionMetadata,
+  expressionMetadata: gd.ExpressionMetadata | gd.InstructionMetadata,
   firstParameterIndex: number
 ) => {
   let lastRequiredIndex = -1;
@@ -54,11 +54,13 @@ const filterVisibleParameters = (
   );
 };
 
-export const getVisibleParameterTypes = (expressionMetadata: EnumeratedInstructionOrExpressionMetadata): Array<string> => {
+export const getVisibleParameterTypes = (
+  expressionMetadata: EnumeratedInstructionOrExpressionMetadata
+): Array<string> => {
   const parameterTypes: Array<string> = mapVector(
     expressionMetadata.metadata.getParameters(),
-// @ts-expect-error - TS7006 - Parameter 'parameterMetadata' implicitly has an 'any' type.
-    parameterMetadata => parameterMetadata.getType()
+
+    (parameterMetadata) => parameterMetadata.getType()
   );
 
   if (expressionMetadata.scope.objectMetadata) {
@@ -86,10 +88,10 @@ export const formatExpressionCall = (
   expressionInfo: EnumeratedInstructionOrExpressionMetadata,
   parameterValues: ParameterValues,
   options: {
-    shouldConvertToString: boolean
-  },
+    shouldConvertToString: boolean;
+  }
 ): string => {
-// @ts-expect-error - TS2339 - Property 'name' does not exist on type 'EnumeratedInstructionOrExpressionMetadata'.
+  // @ts-expect-error - TS2339 - Property 'name' does not exist on type 'EnumeratedInstructionOrExpressionMetadata'.
   const functionName = expressionInfo.name || '';
   let functionCall = '';
 

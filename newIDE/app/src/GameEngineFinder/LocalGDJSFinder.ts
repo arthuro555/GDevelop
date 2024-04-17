@@ -4,9 +4,9 @@
 const optionalRequire = require('../Utils/OptionalRequire');
 const remote = optionalRequire('@electron/remote');
 const app = remote ? remote.app : null;
-// @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'fs'.
+
 const fs = optionalRequire('fs');
-// @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'path'.
+
 const path = optionalRequire('path');
 // @ts-expect-error - TS2451 - Cannot redeclare block-scoped variable 'process'.
 const process = optionalRequire('process');
@@ -59,9 +59,9 @@ const findGDJS = () /*: Promise<{|gdjsRoot: string|}> */ => {
         tryPath(devPath, onFound, onNotFound);
       });
     });
-// @ts-expect-error - TS1128 - Declaration or statement expected. | TS1128 - Declaration or statement expected.
+
   });
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 module.exports = {

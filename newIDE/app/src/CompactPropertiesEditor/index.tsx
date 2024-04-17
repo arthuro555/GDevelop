@@ -1,11 +1,10 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../ResourcesList/ResourceSelectorWithThumbnail' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ResourcesList/ResourceSelectorWithThumbnail.tsx', but '--jsx' is not set.
+
 import ResourceSelectorWithThumbnail from '../ResourcesList/ResourceSelectorWithThumbnail';
-// @ts-expect-error - TS6142 - Module '../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../UI/SelectOption';
-import { MenuItemTemplate } from '../UI/Menu/Menu.flow';
+import { MenuItemTemplate } from '../UI/Menu/Menu';
 import {
   ResourceKind,
   ResourceManagementProps,
@@ -14,33 +13,32 @@ import {
   ResponsiveLineStackLayout,
   ColumnStackLayout,
   LineStackLayout,
-// @ts-expect-error - TS6142 - Module '../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
 } from '../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../UI/CompactSelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CompactSelectField/index.tsx', but '--jsx' is not set.
+
 import CompactSelectField from '../UI/CompactSelectField';
-// @ts-expect-error - TS6142 - Module '../UI/CompactSemiControlledTextField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CompactSemiControlledTextField/index.tsx', but '--jsx' is not set.
+
 import CompactSemiControlledTextField from '../UI/CompactSemiControlledTextField';
-// @ts-expect-error - TS6142 - Module '../UI/CompactSemiControlledNumberField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CompactSemiControlledNumberField/index.tsx', but '--jsx' is not set.
+
 import CompactSemiControlledNumberField from '../UI/CompactSemiControlledNumberField';
-// @ts-expect-error - TS6142 - Module '../MainFrame/UnsavedChangesContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/MainFrame/UnsavedChangesContext.tsx', but '--jsx' is not set.
+
 import { UnsavedChanges } from '../MainFrame/UnsavedChangesContext';
-// @ts-expect-error - TS6142 - Module '../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line, Spacer, marginsSize } from '../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../UI/Text';
 import useForceUpdate from '../Utils/UseForceUpdate';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/CustomSvgIcons/Edit'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/Edit.js' implicitly has an 'any' type.
+
 import Edit from '../UI/CustomSvgIcons/Edit';
-// @ts-expect-error - TS6142 - Module '../UI/IconButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/IconButton.tsx', but '--jsx' is not set.
+
 import IconButton from '../UI/IconButton';
-// @ts-expect-error - TS6142 - Module '../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../UI/VerticallyCenterWithBar' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/VerticallyCenterWithBar.tsx', but '--jsx' is not set.
+
 import VerticallyCenterWithBar from '../UI/VerticallyCenterWithBar';
 import GDevelopThemeContext from '../UI/Theme/GDevelopThemeContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../UI/TextEllipsis'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/TextEllipsis.js' implicitly has an 'any' type.
+
 import { textEllipsisStyle } from '../UI/TextEllipsis';
-// @ts-expect-error - TS6142 - Module './CompactPropertiesEditorRowField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/CompactPropertiesEditor/CompactPropertiesEditorRowField.tsx', but '--jsx' is not set.
+
 import CompactPropertiesEditorRowField from './CompactPropertiesEditorRowField';
 
 // An "instance" here is the objects for which properties are shown
@@ -49,136 +47,148 @@ export type Instances = Array<Instance>;
 
 // "Value" fields are fields displayed in the properties.
 export type ValueFieldCommonProperties = {
-  name: string,
-  getLabel?: (arg1: Instance) => string,
-  getDescription?: (arg1: Instance) => string,
-  hideLabel?: boolean,
-  getExtraDescription?: (arg1: Instance) => string,
-  disabled?: (instances: Array<gdInitialInstance>) => boolean,
-  onEditButtonBuildMenuTemplate?: (i18n: I18nType) => Array<MenuItemTemplate>,
-  onEditButtonClick?: () => void
+  name: string;
+  getLabel?: (arg1: Instance) => string;
+  getDescription?: (arg1: Instance) => string;
+  hideLabel?: boolean;
+  getExtraDescription?: (arg1: Instance) => string;
+  disabled?: (instances: Array<gd.InitialInstance>) => boolean;
+  onEditButtonBuildMenuTemplate?: (i18n: I18nType) => Array<MenuItemTemplate>;
+  onEditButtonClick?: () => void;
 };
 
 // "Primitive" value fields are "simple" fields.
-export type PrimitiveValueField = {
-  valueType: 'number',
-  getValue: (arg1: Instance) => number,
-  setValue: (instance: Instance, newValue: number) => void,
-  // TODO: support this attribute.
-  getEndAdornment?: (arg1: Instance) => {
-    label: string,
-    tooltipContent: React.ReactNode
-  },
-  getEndAdornmentIcon?: () => React.ReactElement,
-  onClickEndAdornment?: (arg1: Instance) => void,
-  renderLeftIcon?: (className?: string) => React.ReactElement
-} & (ValueFieldCommonProperties) | {
-  valueType: 'string',
-  getValue: (arg1: Instance) => string,
-  setValue: (instance: Instance, newValue: string) => void,
-  getChoices?: () => Array<{
-    value: string,
-    label: string,
-    labelIsUserDefined?: boolean
-  }> | null | undefined,
-  getEndAdornmentIcon?: () => React.ReactElement,
-  onClickEndAdornment?: (arg1: Instance) => void,
-  renderLeftIcon?: (className?: string) => React.ReactElement
-} & (ValueFieldCommonProperties) | {
-  valueType: 'boolean',
-  getValue: (arg1: Instance) => boolean,
-  setValue: (instance: Instance, newValue: boolean) => void
-} & (ValueFieldCommonProperties) | {
-  valueType: 'enumIcon',
-  renderIcon: (value?: any) => React.ReactElement,
-  getValue: (arg1: Instance) => any,
-  isHighlighted: (value?: any) => boolean,
-  setValue: (instance: Instance, newValue?: any) => void
-} & (ValueFieldCommonProperties) | {
-  valueType: 'color',
-  getValue: (arg1: Instance) => string,
-  setValue: (instance: Instance, newValue: string) => void
-} & (ValueFieldCommonProperties) | {
-  valueType: 'textarea',
-  getValue: (arg1: Instance) => string,
-  setValue: (instance: Instance, newValue: string) => void
-} & (ValueFieldCommonProperties);
+export type PrimitiveValueField =
+  | ({
+      valueType: 'number';
+      getValue: (arg1: Instance) => number;
+      setValue: (instance: Instance, newValue: number) => void;
+      // TODO: support this attribute.
+      getEndAdornment?: (arg1: Instance) => {
+        label: string;
+        tooltipContent: React.ReactNode;
+      };
+      getEndAdornmentIcon?: () => React.ReactElement;
+      onClickEndAdornment?: (arg1: Instance) => void;
+      renderLeftIcon?: (className?: string) => React.ReactElement;
+    } & ValueFieldCommonProperties)
+  | ({
+      valueType: 'string';
+      getValue: (arg1: Instance) => string;
+      setValue: (instance: Instance, newValue: string) => void;
+      getChoices?: () =>
+        | Array<{
+            value: string;
+            label: string;
+            labelIsUserDefined?: boolean;
+          }>
+        | null
+        | undefined;
+      getEndAdornmentIcon?: () => React.ReactElement;
+      onClickEndAdornment?: (arg1: Instance) => void;
+      renderLeftIcon?: (className?: string) => React.ReactElement;
+    } & ValueFieldCommonProperties)
+  | ({
+      valueType: 'boolean';
+      getValue: (arg1: Instance) => boolean;
+      setValue: (instance: Instance, newValue: boolean) => void;
+    } & ValueFieldCommonProperties)
+  | ({
+      valueType: 'enumIcon';
+      renderIcon: (value?: any) => React.ReactElement;
+      getValue: (arg1: Instance) => any;
+      isHighlighted: (value?: any) => boolean;
+      setValue: (instance: Instance, newValue?: any) => void;
+    } & ValueFieldCommonProperties)
+  | ({
+      valueType: 'color';
+      getValue: (arg1: Instance) => string;
+      setValue: (instance: Instance, newValue: string) => void;
+    } & ValueFieldCommonProperties)
+  | ({
+      valueType: 'textarea';
+      getValue: (arg1: Instance) => string;
+      setValue: (instance: Instance, newValue: string) => void;
+    } & ValueFieldCommonProperties);
 
 // "Resource" fields are showing a resource selector.
 type ResourceField = {
-  valueType: 'resource',
-  resourceKind: ResourceKind,
-  fallbackResourceKind?: ResourceKind,
-  getValue: (arg1: Instance) => string,
-  setValue: (instance: Instance, newValue: string) => void,
-  renderLeftIcon?: (className?: string) => React.ReactElement
-} & (ValueFieldCommonProperties);
+  valueType: 'resource';
+  resourceKind: ResourceKind;
+  fallbackResourceKind?: ResourceKind;
+  getValue: (arg1: Instance) => string;
+  setValue: (instance: Instance, newValue: string) => void;
+  renderLeftIcon?: (className?: string) => React.ReactElement;
+} & ValueFieldCommonProperties;
 
 type Title = {
-  name: string,
-  title: string,
-  renderLeftIcon: (className?: string) => React.ReactElement,
-  getValue?: (arg1: Instance) => string,
-  nonFieldType: 'title',
-  defaultValue?: string
+  name: string;
+  title: string;
+  renderLeftIcon: (className?: string) => React.ReactElement;
+  getValue?: (arg1: Instance) => string;
+  nonFieldType: 'title';
+  defaultValue?: string;
 };
 
 export type SectionTitle = {
-  name: string,
-  title: string,
-  nonFieldType: 'sectionTitle',
-  getValue: typeof undefined
+  name: string;
+  title: string;
+  nonFieldType: 'sectionTitle';
+  getValue: typeof undefined;
 };
 
 type VerticalCenterWithBar = {
-  name: string,
-  nonFieldType: 'verticalCenterWithBar',
-  child: PrimitiveValueField
+  name: string;
+  nonFieldType: 'verticalCenterWithBar';
+  child: PrimitiveValueField;
 };
 
 type ActionButton = {
-  label: string,
-  disabled: 'onValuesDifferent',
-  getValue: (arg1: Instance) => string,
-  nonFieldType: 'button',
-  getIcon?: (
-    arg1: {
-      fontSize: string
-    },
-  ) => React.ReactElement,
-  onClick: (instance: Instance) => void
+  label: string;
+  disabled: 'onValuesDifferent';
+  getValue: (arg1: Instance) => string;
+  nonFieldType: 'button';
+  getIcon?: (arg1: { fontSize: string }) => React.ReactElement;
+  onClick: (instance: Instance) => void;
 };
 
 // A value field is a primitive or a resource.
 export type ValueField = PrimitiveValueField | ResourceField;
 
 // A field can be a primitive, a resource or a list of fields
-export type Field = PrimitiveValueField | ResourceField | SectionTitle | Title | ActionButton | VerticalCenterWithBar | {
-  name: string,
-  type: 'row' | 'column',
-  preventWrap?: boolean,
-  removeSpacers?: boolean,
-  title?: string | null | undefined,
-  children: Array<Field>
-};
+export type Field =
+  | PrimitiveValueField
+  | ResourceField
+  | SectionTitle
+  | Title
+  | ActionButton
+  | VerticalCenterWithBar
+  | {
+      name: string;
+      type: 'row' | 'column';
+      preventWrap?: boolean;
+      removeSpacers?: boolean;
+      title?: string | null | undefined;
+      children: Array<Field>;
+    };
 
 // The schema is the tree of all fields.
 export type Schema = Array<Field>;
 
 type Props = {
-  onInstancesModified?: (arg1: Instances) => void,
-  instances: Instances,
-  schema: Schema,
-  mode?: 'column' | 'row',
-  preventWrap?: boolean,
-  removeSpacers?: boolean,
+  onInstancesModified?: (arg1: Instances) => void;
+  instances: Instances;
+  schema: Schema;
+  mode?: 'column' | 'row';
+  preventWrap?: boolean;
+  removeSpacers?: boolean;
   // If set, render the "extra" description content from fields
   // (see getExtraDescription).
-  renderExtraDescriptionText?: (extraDescription: string) => string,
-  unsavedChanges?: UnsavedChanges | null | undefined,
+  renderExtraDescriptionText?: (extraDescription: string) => string;
+  unsavedChanges?: UnsavedChanges | null | undefined;
   // Optional context:
-  project?: gdProject | null | undefined,
-  resourceManagementProps?: ResourceManagementProps | null | undefined
+  project?: gd.Project | null | undefined;
+  resourceManagementProps?: ResourceManagementProps | null | undefined;
 };
 
 const styles = {
@@ -211,7 +221,6 @@ const styles = {
 export const Separator = () => {
   const gdevelopTheme = React.useContext(GDevelopThemeContext);
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <div
       style={{
         ...styles.separator,
@@ -221,15 +230,13 @@ export const Separator = () => {
   );
 };
 
-const getDisabled = (
-  {
-    instances,
-    field,
-  }: {
-    instances: Instances,
-    field: ValueField
-  },
-): boolean => field.disabled ? field.disabled(instances) : false;
+const getDisabled = ({
+  instances,
+  field,
+}: {
+  instances: Instances;
+  field: ValueField;
+}): boolean => (field.disabled ? field.disabled(instances) : false);
 
 /**
  * Get the value for the given field across all instances.
@@ -237,17 +244,15 @@ const getDisabled = (
  * If there is no instances, returns the default value.
  * If the field does not have a `getValue` method, returns `null`.
  */
-const getFieldValue = (
-  {
-    instances,
-    field,
-    defaultValue,
-  }: {
-    instances: Instances,
-    field: ValueField | ActionButton | SectionTitle | Title,
-    defaultValue?: any
-  },
-): any => {
+const getFieldValue = ({
+  instances,
+  field,
+  defaultValue,
+}: {
+  instances: Instances;
+  field: ValueField | ActionButton | SectionTitle | Title;
+  defaultValue?: any;
+}): any => {
   if (!instances[0]) {
     console.warn(
       'getFieldValue was called with an empty list of instances (or containing undefined). This is a bug that should be fixed.'
@@ -269,15 +274,13 @@ const getFieldValue = (
   return value;
 };
 
-const getFieldLabel = (
-  {
-    instances,
-    field,
-  }: {
-    instances: Instances,
-    field: ValueField
-  },
-): any => {
+const getFieldLabel = ({
+  instances,
+  field,
+}: {
+  instances: Instances;
+  field: ValueField;
+}): any => {
   if (!instances[0]) {
     console.warn(
       'getFieldLabel was called with an empty list of instances (or containing undefined). This is a bug that should be fixed.'
@@ -382,25 +385,24 @@ const CompactPropertiesEditor = ({
             instances,
             field,
           }),
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
-          onChange: newValue => {
+          // @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
+          onChange: (newValue) => {
             // If the value is not a number, the user is probably still typing, adding a dot or a comma.
             // So don't update the value, it will be reverted if they leave the field.
             if (isNaN(newValue)) return;
-            instances.forEach(i => setValue(i, newValue));
+            instances.forEach((i) => setValue(i, newValue));
             _onInstancesModified(instances);
           },
           disabled: getDisabled({ instances, field }),
           renderEndAdornmentOnHover: field.getEndAdornmentIcon || undefined,
           onClickEndAdornment: () => {
             if (!onClickEndAdornment) return;
-            instances.forEach(i => onClickEndAdornment(i));
+            instances.forEach((i) => onClickEndAdornment(i));
             _onInstancesModified(instances);
           },
         } as const;
         if (field.renderLeftIcon || field.hideLabel) {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <CompactSemiControlledNumberField
               {...commonProps}
               useLeftIconAsNumberControl
@@ -420,13 +422,11 @@ const CompactPropertiesEditor = ({
         } else {
           const { key, ...otherCommonProps } = commonProps;
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <CompactPropertiesEditorRowField
               key={key}
               label={getFieldLabel({ instances, field })}
               markdownDescription={getFieldDescription(field)}
               field={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <CompactSemiControlledNumberField
                   {...otherCommonProps}
                   // endAdornment={
@@ -467,16 +467,15 @@ const CompactPropertiesEditor = ({
       } else if (field.valueType === 'enumIcon') {
         const value = getFieldValue({ instances, field });
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <IconButton
             key={field.name}
             id={field.name}
             size="small"
             tooltip={getFieldLabel({ instances, field })}
             selected={field.isHighlighted(value)}
-// @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
-            onClick={event => {
-              instances.forEach(i => field.setValue(i, !value));
+            // @ts-expect-error - TS7006 - Parameter 'event' implicitly has an 'any' type.
+            onClick={(event) => {
+              instances.forEach((i) => field.setValue(i, !value));
               _onInstancesModified(instances);
             }}
           >
@@ -520,22 +519,21 @@ const CompactPropertiesEditor = ({
             field,
             defaultValue: '(Multiple values)',
           }),
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
-          onChange: newValue => {
-            instances.forEach(i => setValue(i, newValue || ''));
+          // @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
+          onChange: (newValue) => {
+            instances.forEach((i) => setValue(i, newValue || ''));
             _onInstancesModified(instances);
           },
           disabled: getDisabled({ instances, field }),
           renderEndAdornmentOnHover: field.getEndAdornmentIcon || undefined,
           onClickEndAdornment: () => {
             if (!onClickEndAdornment) return;
-            instances.forEach(i => onClickEndAdornment(i));
+            instances.forEach((i) => onClickEndAdornment(i));
             _onInstancesModified(instances);
           },
         } as const;
         if (field.renderLeftIcon || field.hideLabel) {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <CompactSemiControlledTextField
               {...commonProps}
               renderLeftIcon={field.renderLeftIcon}
@@ -546,12 +544,10 @@ const CompactPropertiesEditor = ({
           const { key, ...otherCommonProps } = commonProps;
 
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <CompactPropertiesEditorRowField
               key={key}
               label={getFieldLabel({ instances, field })}
               markdownDescription={getFieldDescription(field)}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               field={<CompactSemiControlledTextField {...otherCommonProps} />}
             />
           );
@@ -563,15 +559,14 @@ const CompactPropertiesEditor = ({
 
   const renderSelectField = React.useCallback(
     (field: ValueField) => {
-// @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'ValueField'.
+      // @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'ValueField'.
       if (!field.getChoices || !field.getValue) return;
 
       const children = field
-// @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'ValueField'.
+        // @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'ValueField'.
         .getChoices()
-// @ts-expect-error - TS7031 - Binding element 'value' implicitly has an 'any' type. | TS7031 - Binding element 'label' implicitly has an 'any' type. | TS7031 - Binding element 'labelIsUserDefined' implicitly has an 'any' type.
+        // @ts-expect-error - TS7031 - Binding element 'value' implicitly has an 'any' type. | TS7031 - Binding element 'label' implicitly has an 'any' type. | TS7031 - Binding element 'labelIsUserDefined' implicitly has an 'any' type.
         .map(({ value, label, labelIsUserDefined }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SelectOption
             key={value}
             value={value}
@@ -583,7 +578,6 @@ const CompactPropertiesEditor = ({
       if (field.valueType === 'number') {
         const { setValue } = field;
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <CompactSelectField
             value={getFieldValue({ instances, field })}
             key={field.name}
@@ -591,7 +585,7 @@ const CompactPropertiesEditor = ({
             // floatingLabelText={getFieldLabel({ instances, field })}
             // helperMarkdownText={getFieldDescription(field)}
             onChange={(newValue: string) => {
-              instances.forEach(i => setValue(i, parseFloat(newValue) || 0));
+              instances.forEach((i) => setValue(i, parseFloat(newValue) || 0));
               _onInstancesModified(instances);
             }}
             disabled={field.disabled}
@@ -602,7 +596,6 @@ const CompactPropertiesEditor = ({
       } else if (field.valueType === 'string') {
         const { setValue } = field;
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <CompactSelectField
             value={getFieldValue({
               instances,
@@ -614,7 +607,7 @@ const CompactPropertiesEditor = ({
             // floatingLabelText={getFieldLabel({ instances, field })}
             // helperMarkdownText={getFieldDescription(field)}
             onChange={(newValue: string) => {
-              instances.forEach(i => setValue(i, newValue || ''));
+              instances.forEach((i) => setValue(i, newValue || ''));
               _onInstancesModified(instances);
             }}
             disabled={getDisabled({ instances, field })}
@@ -642,9 +635,7 @@ const CompactPropertiesEditor = ({
           }) === DIFFERENT_VALUES;
       }
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <React.Fragment key={`button-${field.label}`}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <FlatButton
             fullWidth
             primary
@@ -652,7 +643,6 @@ const CompactPropertiesEditor = ({
               field.getIcon ? (
                 field.getIcon({ fontSize: 'small' })
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                 <Edit fontSize="small" />
               )
             }
@@ -663,7 +653,6 @@ const CompactPropertiesEditor = ({
               field.onClick(instances[0]);
             }}
           />
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Spacer />
         </React.Fragment>
       );
@@ -681,7 +670,6 @@ const CompactPropertiesEditor = ({
 
     const { setValue } = field;
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <ResourceSelectorWithThumbnail
         key={field.name}
         project={project}
@@ -693,9 +681,8 @@ const CompactPropertiesEditor = ({
           field,
           defaultValue: '(Multiple values)',
         })}
-// @ts-expect-error - TS7006 - Parameter 'newValue' implicitly has an 'any' type.
-        onChange={newValue => {
-          instances.forEach(i => setValue(i, newValue));
+        onChange={(newValue) => {
+          instances.forEach((i) => setValue(i, newValue));
           _onInstancesModified(instances);
         }}
         floatingLabelText={getFieldLabel({ instances, field })}
@@ -705,11 +692,11 @@ const CompactPropertiesEditor = ({
   };
 
   const renderVerticalCenterWithBar = (field: Field) =>
-// @ts-expect-error - TS2339 - Property 'child' does not exist on type 'Field'. | TS2339 - Property 'child' does not exist on type 'Field'.
+    // @ts-expect-error - TS2339 - Property 'child' does not exist on type 'Field'. | TS2339 - Property 'child' does not exist on type 'Field'.
     field.child && field.child.getValue ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
+      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
       <VerticallyCenterWithBar key={field.name}>
-{ /* @ts-expect-error - TS2339 - Property 'child' does not exist on type 'Field'. */}
+        {/* @ts-expect-error - TS2339 - Property 'child' does not exist on type 'Field'. */}
         {renderInputField(field.child)}
       </VerticallyCenterWithBar>
     ) : (
@@ -721,30 +708,25 @@ const CompactPropertiesEditor = ({
       ? (fields: React.ReactNode) =>
           preventWrap ? (
             removeSpacers ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Line noMargin alignItems="center" expand>
                 {fields}
               </Line>
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <LineStackLayout noMargin alignItems="center" expand>
                 {fields}
               </LineStackLayout>
             )
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ResponsiveLineStackLayout noMargin alignItems="center" expand>
               {fields}
             </ResponsiveLineStackLayout>
           )
       : (fields: React.ReactNode) =>
           removeSpacers ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Column noMargin expand>
               {fields}
             </Column>
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <ColumnStackLayout noMargin expand>
               {fields}
             </ColumnStackLayout>
@@ -767,7 +749,6 @@ const CompactPropertiesEditor = ({
 
       if (!!additionalText) {
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <LineStackLayout
             alignItems="center"
             key={`section-title-${field.name}`}
@@ -775,15 +756,12 @@ const CompactPropertiesEditor = ({
             noMargin
           >
             {renderLeftIcon()}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text displayInlineAsSpan noMargin>
               {field.title}
             </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text displayInlineAsSpan noMargin>
               -
             </Text>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
             <Text
               allowSelection
               displayInlineAsSpan
@@ -797,7 +775,6 @@ const CompactPropertiesEditor = ({
       }
 
       return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LineStackLayout
           key={`title-${field.name}`}
           expand
@@ -805,7 +782,6 @@ const CompactPropertiesEditor = ({
           alignItems="center"
         >
           {renderLeftIcon()}
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <Text displayInlineAsSpan size="sub-title" noMargin>
             {field.title}
           </Text>
@@ -816,11 +792,9 @@ const CompactPropertiesEditor = ({
   );
   const renderSectionTitle = React.useCallback((field: SectionTitle) => {
     return [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <Separator key={field.name + '-separator'} />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       <Line key={`section-title-${field.name}`} noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text displayInlineAsSpan size="sub-title" noMargin>
           {field.title}
         </Text>
@@ -829,58 +803,57 @@ const CompactPropertiesEditor = ({
   }, []);
 
   return renderContainer(
-    schema.map(field => {
-// @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
+    schema.map((field) => {
+      // @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
       if (!!field.nonFieldType) {
-// @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
+        // @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
         if (field.nonFieldType === 'title') {
-// @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'Title'.
+          // @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'Title'.
           return renderTitle(field);
-// @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
+          // @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
         } else if (field.nonFieldType === 'sectionTitle') {
-// @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'SectionTitle'.
+          // @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'SectionTitle'.
           return renderSectionTitle(field);
-// @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
+          // @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
         } else if (field.nonFieldType === 'button') {
-// @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ActionButton'.
+          // @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ActionButton'.
           return renderButton(field);
-// @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
+          // @ts-expect-error - TS2339 - Property 'nonFieldType' does not exist on type 'Field'.
         } else if (field.nonFieldType === 'verticalCenterWithBar') {
           return renderVerticalCenterWithBar(field);
         }
         return null;
-// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
+        // @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
       } else if (field.children) {
-// @ts-expect-error - TS2339 - Property 'type' does not exist on type 'Field'.
+        // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'Field'.
         if (field.type === 'row') {
           const contentView = (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
+            // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
             <React.Fragment key={field.name}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CompactPropertiesEditor
                 project={project}
                 resourceManagementProps={resourceManagementProps}
-// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
                 schema={field.children}
                 instances={instances}
                 mode="row"
                 unsavedChanges={unsavedChanges}
                 onInstancesModified={onInstancesModified}
-// @ts-expect-error - TS2339 - Property 'preventWrap' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'preventWrap' does not exist on type 'Field'.
                 preventWrap={field.preventWrap}
-// @ts-expect-error - TS2339 - Property 'removeSpacers' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'removeSpacers' does not exist on type 'Field'.
                 removeSpacers={field.removeSpacers}
               />
             </React.Fragment>
           );
-// @ts-expect-error - TS2339 - Property 'title' does not exist on type 'Field'.
+          // @ts-expect-error - TS2339 - Property 'title' does not exist on type 'Field'.
           if (field.title) {
             return [
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
+              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
               <Separator key={field.name + '-separator'} />,
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
+              // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
               <Text key={field.name + '-title'} size="sub-title" noMargin>
-{ /* @ts-expect-error - TS2339 - Property 'title' does not exist on type 'Field'. */}
+                {/* @ts-expect-error - TS2339 - Property 'title' does not exist on type 'Field'. */}
                 {field.title}
               </Text>,
               contentView,
@@ -890,36 +863,35 @@ const CompactPropertiesEditor = ({
         }
 
         return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
+          // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'.
           <div key={field.name} style={styles.container}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'. */}
+            {/* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'name' does not exist on type 'Field'. */}
             <React.Fragment key={field.name}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <CompactPropertiesEditor
                 project={project}
                 resourceManagementProps={resourceManagementProps}
-// @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'children' does not exist on type 'Field'.
                 schema={field.children}
                 instances={instances}
                 mode="column"
                 unsavedChanges={unsavedChanges}
                 onInstancesModified={onInstancesModified}
-// @ts-expect-error - TS2339 - Property 'preventWrap' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'preventWrap' does not exist on type 'Field'.
                 preventWrap={field.preventWrap}
-// @ts-expect-error - TS2339 - Property 'removeSpacers' does not exist on type 'Field'.
+                // @ts-expect-error - TS2339 - Property 'removeSpacers' does not exist on type 'Field'.
                 removeSpacers={field.removeSpacers}
               />
             </React.Fragment>
           </div>
         );
-// @ts-expect-error - TS2339 - Property 'valueType' does not exist on type 'Field'.
+        // @ts-expect-error - TS2339 - Property 'valueType' does not exist on type 'Field'.
       } else if (field.valueType === 'resource') {
-// @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ResourceField'.
+        // @ts-expect-error - TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ResourceField'.
         return renderResourceField(field);
       } else {
-// @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'Field'. | TS2339 - Property 'getValue' does not exist on type 'Field'. | TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ValueField'.
+        // @ts-expect-error - TS2339 - Property 'getChoices' does not exist on type 'Field'. | TS2339 - Property 'getValue' does not exist on type 'Field'. | TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ValueField'.
         if (field.getChoices && field.getValue) return renderSelectField(field);
-// @ts-expect-error - TS2339 - Property 'getValue' does not exist on type 'Field'. | TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ValueField'.
+        // @ts-expect-error - TS2339 - Property 'getValue' does not exist on type 'Field'. | TS2345 - Argument of type 'Field' is not assignable to parameter of type 'ValueField'.
         if (field.getValue) return renderInputField(field);
       }
       return null;

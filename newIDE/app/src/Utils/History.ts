@@ -1,4 +1,4 @@
-import {serializeToJSObject, unserializeFromJSObject} from './Serializer';
+import { serializeToJSObject, unserializeFromJSObject } from './Serializer';
 
 // Tools function to keep track of the history of changes made
 // on a serializable object from libGD.js
@@ -10,22 +10,22 @@ import {serializeToJSObject, unserializeFromJSObject} from './Serializer';
 export type RevertableActionType = 'ADD' | 'DELETE' | 'EDIT';
 
 export type UndoAction = {
-  type?: RevertableActionType,
-  valueBeforeChange: any,
-  changeContext: any
+  type?: RevertableActionType;
+  valueBeforeChange: any;
+  changeContext: any;
 };
 
 export type RedoAction = {
-  type?: RevertableActionType,
-  valueAfterChange: any,
-  changeContext: any
+  type?: RevertableActionType;
+  valueAfterChange: any;
+  changeContext: any;
 };
 
 export type HistoryState = {
-  previousActions: Array<UndoAction>,
-  currentValue: any,
-  futureActions: Array<RedoAction>,
-  maxSize: number
+  previousActions: Array<UndoAction>;
+  currentValue: any;
+  futureActions: Array<RedoAction>;
+  maxSize: number;
 };
 
 /**
@@ -34,12 +34,12 @@ export type HistoryState = {
  * without sending the previous value.
  */
 export const getHistoryInitialState = (
-  serializableObject: gdSerializable,
+  serializableObject: gd.Serializable,
   {
     historyMaxSize,
   }: {
-    historyMaxSize: number
-  },
+    historyMaxSize: number;
+  }
 ): HistoryState => {
   return {
     previousActions: [],
@@ -68,9 +68,9 @@ export const canUndo = (history: HistoryState): boolean => {
  */
 export const saveToHistory = (
   history: HistoryState,
-  newCurrentSerializableValue: gdSerializable,
+  newCurrentSerializableValue: gd.Serializable,
   actionType?: RevertableActionType,
-  changeContext?: any,
+  changeContext?: any
 ): HistoryState => {
   const newCurrentValue = serializeToJSObject(newCurrentSerializableValue);
   // Add the current state to the previous actions.
@@ -103,8 +103,8 @@ export const saveToHistory = (
  */
 export const undo = (
   history: HistoryState,
-  serializableObject: gdSerializable,
-  project: gdProject | null = undefined,
+  serializableObject: gd.Serializable,
+  project: gd.Project | null = undefined
 ): HistoryState => {
   if (!history.previousActions.length) {
     return history;
@@ -147,8 +147,8 @@ export const undo = (
  */
 export const redo = (
   history: HistoryState,
-  serializableObject: gdSerializable,
-  project: gdProject | null = undefined,
+  serializableObject: gd.Serializable,
+  project: gd.Project | null = undefined
 ): HistoryState => {
   if (!history.futureActions.length) {
     return history;

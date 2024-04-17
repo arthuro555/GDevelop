@@ -1,33 +1,32 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import { I18n } from '@lingui/react';
-// @ts-expect-error - TS6142 - Module '../../UI/Text' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Text.tsx', but '--jsx' is not set.
+
 import Text from '../../UI/Text';
-// @ts-expect-error - TS6142 - Module './ProductLicenseStoreContext' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ProductLicense/ProductLicenseStoreContext.tsx', but '--jsx' is not set.
+
 import { ProductLicenseStoreContext } from './ProductLicenseStoreContext';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/PlaceholderLoader'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderLoader.js' implicitly has an 'any' type.
+
 import PlaceholderLoader from '../../UI/PlaceholderLoader';
 import { selectMessageByLocale } from '../../Utils/i18n/MessageByLocale';
-// @ts-expect-error - TS6142 - Module '../../UI/PlaceholderError' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/PlaceholderError.tsx', but '--jsx' is not set.
+
 import PlaceholderError from '../../UI/PlaceholderError';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 import {
   PrivateGameTemplateListingData,
   PrivateAssetPackListingData,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/Shop' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/Shop.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/Shop';
 import { createStyles, makeStyles } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { shouldValidate } from '../../UI/KeyboardShortcuts/InteractionKeys';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout, LineStackLayout } from '../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../UI/Grid' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Grid.tsx', but '--jsx' is not set.
+
 import { Column, Line } from '../../UI/Grid';
-// @ts-expect-error - TS6142 - Module '../ProductPriceTag' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/AssetStore/ProductPriceTag.tsx', but '--jsx' is not set.
+
 import { renderProductPrice } from '../ProductPriceTag';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../../UI/CustomSvgIcons/CheckCircle'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/CheckCircle.js' implicitly has an 'any' type.
+
 import CheckCircle from '../../UI/CustomSvgIcons/CheckCircle';
 
 const styles = {
@@ -61,24 +60,19 @@ const ProductLicenseOptionContent = ({
   formattedPrice,
   isLicenseOwned,
 }: {
-  selected: boolean,
-  onClick?: () => void,
-  name: string,
-  description: string,
-  formattedPrice?: React.ReactNode,
-  isLicenseOwned: boolean
+  selected: boolean;
+  onClick?: () => void;
+  name: string;
+  description: string;
+  formattedPrice?: React.ReactNode;
+  isLicenseOwned: boolean;
 }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <LineStackLayout noMargin alignItems="center">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <Column noMargin>
         {isLicenseOwned ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <CheckCircle />
         ) : onClick ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <Radio
             color="secondary"
             checked={selected}
@@ -87,20 +81,15 @@ const ProductLicenseOptionContent = ({
           />
         ) : null}
       </Column>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LineStackLayout justifyContent="space-between" noMargin expand>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text noMargin size="sub-title">
           {name}
         </Text>
         {!isLicenseOwned && formattedPrice}
       </LineStackLayout>
     </LineStackLayout>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <Line expand noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.descriptionContainer}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Text noMargin align="left">
           {description}
         </Text>
@@ -111,7 +100,7 @@ const ProductLicenseOptionContent = ({
 
 // Styles to give the impression of pressing an element.
 const useStylesForButtonBase = (selected: boolean) =>
-  makeStyles(theme =>
+  makeStyles((theme) =>
     createStyles({
       root: {
         outline: selected
@@ -138,14 +127,14 @@ const ProductLicenseOptionButton = ({
   ownedLicense,
   disabled,
 }: {
-  id: string,
-  onClick: () => void,
-  selected: boolean,
-  name: string,
-  description: string,
-  formattedPrice: React.ReactNode,
-  ownedLicense: string | null | undefined,
-  disabled?: boolean
+  id: string;
+  onClick: () => void;
+  selected: boolean;
+  name: string;
+  description: string;
+  formattedPrice: React.ReactNode;
+  ownedLicense: string | null | undefined;
+  disabled?: boolean;
 }) => {
   const classes = useStylesForButtonBase(selected);
 
@@ -157,7 +146,7 @@ const ProductLicenseOptionButton = ({
   const isLicenseOwned = ownedLicense === id;
 
   return (
-// @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+    // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ButtonBase
       onClick={onClick}
       elevation={2}
@@ -172,9 +161,7 @@ const ProductLicenseOptionButton = ({
       disableTouchRipple={selected} // Avoid ripple effect even if already selected.
       disabled={disabled || isLicenseOwned}
     >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <div style={styles.contentWrapper}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <ProductLicenseOptionContent
           description={description}
           formattedPrice={formattedPrice}
@@ -189,11 +176,11 @@ const ProductLicenseOptionButton = ({
 };
 
 type Props = {
-  value: string,
-  onChange: (arg1: string) => void,
-  product: PrivateGameTemplateListingData | PrivateAssetPackListingData,
-  ownedLicense: string | null | undefined,
-  disabled?: boolean
+  value: string;
+  onChange: (arg1: string) => void;
+  product: PrivateGameTemplateListingData | PrivateAssetPackListingData;
+  ownedLicense: string | null | undefined;
+  disabled?: boolean;
 };
 
 const ProductLicenseOptions = ({
@@ -215,18 +202,14 @@ const ProductLicenseOptions = ({
   const productLicenses =
     productType === 'game-template' ? gameTemplateLicenses : assetPackLicenses;
 
-  React.useEffect(
-    () => {
-      fetchProductLicenses({ productType });
-    },
-    [fetchProductLicenses, productType]
-  );
+  React.useEffect(() => {
+    fetchProductLicenses({ productType });
+  }, [fetchProductLicenses, productType]);
 
   if (error) {
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+      // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <PlaceholderError onRetry={() => fetchProductLicenses({ productType })}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <Trans>
           Can't load the licenses. Verify your internet connection or try again
           later.
@@ -235,25 +218,18 @@ const ProductLicenseOptions = ({
     );
   }
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   if (!productLicenses) return <PlaceholderLoader />;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS7006 - Parameter 'license' implicitly has an 'any' type. */}
-          {productLicenses.map(license => {
+          {productLicenses.map((license) => {
             const productPriceForLicense = product.prices.find(
-// @ts-expect-error - TS7006 - Parameter 'price' implicitly has an 'any' type.
-              price => price.usageType === license.id
+              (price) => price.usageType === license.id
             );
             if (!productPriceForLicense) return null;
             return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <ProductLicenseOptionButton
                 key={license.id}
                 id={license.id}
@@ -284,8 +260,8 @@ export const OwnedProductLicense = ({
   ownedLicense,
   productType,
 }: {
-  ownedLicense: string | null | undefined,
-  productType: 'game-template' | 'asset-pack'
+  ownedLicense: string | null | undefined;
+  productType: 'game-template' | 'asset-pack';
 }) => {
   const { gameTemplateLicenses, assetPackLicenses, error } = React.useContext(
     ProductLicenseStoreContext
@@ -298,16 +274,14 @@ export const OwnedProductLicense = ({
     return null;
   }
 
-// @ts-expect-error - TS7006 - Parameter 'license' implicitly has an 'any' type.
-  const license = productLicenses.find(license => license.id === ownedLicense);
+  const license = productLicenses.find(
+    (license) => license.id === ownedLicense
+  );
   if (!license) return null;
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <ProductLicenseOptionContent
           selected
           name={license.nameByLocale.en}

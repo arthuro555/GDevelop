@@ -13,51 +13,53 @@ import {
 import { hapticFeedback } from '../../Utils/Haptic';
 
 type Props<DraggedItemType> = {
-  children: (
-    arg1: {
-      connectDragSource: ConnectDragSource,
-      connectDropTarget: ConnectDropTarget,
-      connectDragPreview: ConnectDragPreview,
-      isOver: boolean,
-      isOverLazy: boolean,
-      canDrop: boolean
-    },
-  ) => React.ReactNode | null | undefined,
-  beginDrag: () => DraggedItemType,
-  canDrag?: (item: DraggedItemType) => boolean,
-  canDrop: (item: DraggedItemType) => boolean,
-  drop: () => void,
-  endDrag?: () => void,
-  hover?: (monitor: DropTargetMonitor) => void
+  children: (arg1: {
+    connectDragSource: ConnectDragSource;
+    connectDropTarget: ConnectDropTarget;
+    connectDragPreview: ConnectDragPreview;
+    isOver: boolean;
+    isOverLazy: boolean;
+    canDrop: boolean;
+  }) => React.ReactNode | null | undefined;
+  beginDrag: () => DraggedItemType;
+  canDrag?: (item: DraggedItemType) => boolean;
+  canDrop: (item: DraggedItemType) => boolean;
+  drop: () => void;
+  endDrag?: () => void;
+  hover?: (monitor: DropTargetMonitor) => void;
 };
 
 type DragSourceProps = {
-  connectDragSource: ConnectDragSource,
-  connectDragPreview: ConnectDragPreview,
-  isDragging: boolean
+  connectDragSource: ConnectDragSource;
+  connectDragPreview: ConnectDragPreview;
+  isDragging: boolean;
 };
 
 type DropTargetProps = {
-  connectDropTarget: ConnectDropTarget,
-  isOver: boolean,
-  isOverLazy: boolean,
-  canDrop: boolean
+  connectDropTarget: ConnectDropTarget;
+  isOver: boolean;
+  isOverLazy: boolean;
+  canDrop: boolean;
 };
 
-type InnerDragSourceAndDropTargetProps<DraggedItemType> = (Props<DraggedItemType>) & (DragSourceProps) & (DropTargetProps);
+type InnerDragSourceAndDropTargetProps<DraggedItemType> =
+  Props<DraggedItemType> & DragSourceProps & DropTargetProps;
 
 // For some reason, defining this type in the `CustomDragLayer` component
 // creates a circular dependency, so we define it here instead.
 export type DraggedItem = {
-  name: string,
-  thumbnail?: string
+  name: string;
+  thumbnail?: string;
 };
 
 type Options = {
-  vibrate?: number
+  vibrate?: number;
 };
 
-export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(reactDndType: string, options?: Options | null): (arg1: Props<DraggedItemType>) => React.ReactElement => {
+export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(
+  reactDndType: string,
+  options?: Options | null
+): ((arg1: Props<DraggedItemType>) => React.ReactElement) => {
   const sourceSpec = {
     canDrag(props: Props<DraggedItemType>, monitor: DragSourceMonitor) {
       const item = monitor.getItem();
@@ -66,7 +68,7 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
       return true;
     },
     beginDrag(props: InnerDragSourceAndDropTargetProps<DraggedItemType>) {
-// @ts-expect-error - TS2774 - This condition will always return true since this function is always defined. Did you mean to call it instead?
+      // @ts-expect-error - TS2774 - This condition will always return true since this function is always defined. Did you mean to call it instead?
       if (hapticFeedback && options && options.vibrate) {
         hapticFeedback({ durationInMs: options.vibrate });
       }
@@ -77,7 +79,10 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
     },
   } as const;
 
-  function sourceCollect(connect: DragSourceConnector, monitor: DragSourceMonitor): DragSourceProps {
+  function sourceCollect(
+    connect: DragSourceConnector,
+    monitor: DragSourceMonitor
+  ): DragSourceProps {
     return {
       connectDragSource: connect.dragSource(),
       connectDragPreview: connect.dragPreview(),
@@ -101,7 +106,10 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
     },
   } as const;
 
-  function targetCollect(connect: DropTargetConnector, monitor: DropTargetMonitor): DropTargetProps {
+  function targetCollect(
+    connect: DropTargetConnector,
+    monitor: DropTargetMonitor
+  ): DropTargetProps {
     return {
       connectDropTarget: connect.dropTarget(),
       isOver: monitor.isOver({ shallow: true }),
@@ -115,7 +123,11 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
     sourceSpec,
     sourceCollect
   )(
-    DropTarget(reactDndType, targetSpec, targetCollect)(
+    DropTarget(
+      reactDndType,
+      targetSpec,
+      targetCollect
+    )(
       ({
         children,
         connectDragSource,
@@ -126,7 +138,7 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
         isOverLazy,
         canDrop,
       }) => {
-// @ts-expect-error - TS2349 - This expression is not callable.
+        // @ts-expect-error - TS2349 - This expression is not callable.
         return children({
           connectDragSource,
           connectDropTarget,
@@ -141,7 +153,7 @@ export const makeDragSourceAndDropTarget = <DraggedItemType extends unknown>(rea
   );
 
   return (props: Props<DraggedItemType>) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: (arg1: { connectDragSource: ConnectDragSource; connectDropTarget: ConnectDropTarget; connectDragPreview: ConnectDragPreview; isOver: boolean; isOverLazy: boolean; canDrop: boolean; }) => ReactNode; ... 5 more ...; hover?: ((monitor: DropTargetMonitor) => void) | undefined; }' is not assignable to type 'Readonly<Omit<Omit<never, "canDrop" | "connectDropTarget" | "isOver" | "isOverLazy">, "connectDragSource" | "connectDragPreview" | "isDragging">>'.
+    // @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2322 - Type '{ children: (arg1: { connectDragSource: ConnectDragSource; connectDropTarget: ConnectDropTarget; connectDragPreview: ConnectDragPreview; isOver: boolean; isOverLazy: boolean; canDrop: boolean; }) => ReactNode; ... 5 more ...; hover?: ((monitor: DropTargetMonitor) => void) | undefined; }' is not assignable to type 'Readonly<Omit<Omit<never, "canDrop" | "connectDropTarget" | "isOver" | "isOverLazy">, "connectDragSource" | "connectDragPreview" | "isDragging">>'.
     <InnerDragSourceAndDropTarget {...props} />
   );
 };

@@ -1,9 +1,9 @@
 // @ts-expect-error - TS2724 - '"axios"' has no exported member named '$AxiosError'. Did you mean 'AxiosError'?
-import {$AxiosError} from 'axios';
+import { $AxiosError } from 'axios';
 
 export type ExtractedErrorStatusAndCode = {
-  status: number,
-  code: string | null | undefined
+  status: number;
+  code: string | null | undefined;
 };
 
 /**
@@ -11,7 +11,9 @@ export type ExtractedErrorStatusAndCode = {
  * and if so, try to get the HTTP status and the code returned by the GDevelop API.
  * If the error is not an axios error or does not contain a response, `null` is returned.
  */
-export const extractGDevelopApiErrorStatusAndCode = (error: Error | $AxiosError<any> | null): ExtractedErrorStatusAndCode | null | undefined => {
+export const extractGDevelopApiErrorStatusAndCode = (
+  error: Error | $AxiosError<any> | null
+): ExtractedErrorStatusAndCode | null | undefined => {
   if (!error) return null;
   if (typeof error != 'object') return null;
 

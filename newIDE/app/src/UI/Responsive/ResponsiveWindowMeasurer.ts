@@ -14,22 +14,18 @@ const sizeThresholds = {
 } as const;
 
 type Props = {
-  children: (
-    arg1: {
-      windowSize: WindowSizeType,
-      isMobile: boolean,
-      isMediumScreen: boolean,
-      isLandscape: boolean
-    },
-  ) => React.ReactElement
+  children: (arg1: {
+    windowSize: WindowSizeType;
+    isMobile: boolean;
+    isMediumScreen: boolean;
+    isLandscape: boolean;
+  }) => React.ReactElement;
 };
 
 /**
  * Wraps useResponsiveWindowSize in a component.
  */
-export const ResponsiveWindowMeasurer = ({
-  children,
-}: Props) =>
+export const ResponsiveWindowMeasurer = ({ children }: Props) =>
   children(useResponsiveWindowSize());
 
 /**
@@ -38,10 +34,10 @@ export const ResponsiveWindowMeasurer = ({
  * are small.
  */
 export const useResponsiveWindowSize = (): {
-  windowSize: WindowSizeType,
-  isMobile: boolean,
-  isMediumScreen: boolean,
-  isLandscape: boolean
+  windowSize: WindowSizeType;
+  isMobile: boolean;
+  isMediumScreen: boolean;
+  isLandscape: boolean;
 } => {
   useOnResize(useForceUpdate());
 
@@ -65,23 +61,23 @@ export const useResponsiveWindowSize = (): {
         isLandscape,
       }
     : window.innerWidth < sizeThresholds.medium
-    ? {
-        windowSize: 'medium',
-        isMobile: false,
-        isMediumScreen: true,
-        isLandscape,
-      }
-    : window.innerWidth < sizeThresholds.large
-    ? {
-        windowSize: 'large',
-        isMobile: false,
-        isMediumScreen: false,
-        isLandscape,
-      }
-    : {
-        windowSize: 'xlarge',
-        isMobile: false,
-        isMediumScreen: false,
-        isLandscape,
-      };
+      ? {
+          windowSize: 'medium',
+          isMobile: false,
+          isMediumScreen: true,
+          isLandscape,
+        }
+      : window.innerWidth < sizeThresholds.large
+        ? {
+            windowSize: 'large',
+            isMobile: false,
+            isMediumScreen: false,
+            isLandscape,
+          }
+        : {
+            windowSize: 'xlarge',
+            isMobile: false,
+            isMediumScreen: false,
+            isLandscape,
+          };
 };

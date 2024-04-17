@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 
-// @ts-expect-error - TS6142 - Module '../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../PaperDecorator';
 
-// @ts-expect-error - TS6142 - Module '../../../ExportAndShare/Builds/BuildsList' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/Builds/BuildsList.tsx', but '--jsx' is not set.
 import BuildsList from '../../../ExportAndShare/Builds/BuildsList';
 
 import {
@@ -35,7 +33,6 @@ const buildArray = [
 ];
 
 export const DefaultBuildsList = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <BuildsList
     builds={buildArray}
     authenticatedUser={fakeSilverAuthenticatedUser}
@@ -48,7 +45,6 @@ export const DefaultBuildsList = () => (
 );
 
 export const ErroredBuildsList = () => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <BuildsList
     builds={null}
     authenticatedUser={fakeSilverAuthenticatedUser}

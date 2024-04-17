@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module '../../EventsFunctionsExtensionEditor' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/EventsFunctionsExtensionEditor/index.tsx', but '--jsx' is not set.
+
 import EventsFunctionsExtensionEditor from '../../EventsFunctionsExtensionEditor';
 import {
   RenderEditorContainerProps,
@@ -21,11 +21,11 @@ const styles = {
 export class EventsFunctionsExtensionEditorContainer extends React.Component<RenderEditorContainerProps> {
   editor: EventsFunctionsExtensionEditor | null | undefined;
 
-  getProject(): gdProject | null | undefined {
+  getProject(): gd.Project | null | undefined {
     return this.props.project;
   }
 
-  getLayout(): gdLayout | null | undefined {
+  getLayout(): gd.Layout | null | undefined {
     return null;
   }
 
@@ -71,7 +71,7 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
       if (extension) {
         this.props.onReloadEventsFunctionsExtensionMetadata(extension);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.warn(
         'Error while loading events functions extensions - ignoring this in the context of the EventsFunctionsExtensionEditorContainer.',
         error
@@ -89,7 +89,10 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
     }
   };
 
-  getEventsFunctionsExtension(): gdEventsFunctionsExtension | null | undefined {
+  getEventsFunctionsExtension():
+    | gd.EventsFunctionsExtension
+    | null
+    | undefined {
     const { project, projectItemName } = this.props;
     if (!project || !projectItemName) return null;
 
@@ -124,7 +127,7 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
 
     if (!eventsFunctionsExtension || !project) {
       //TODO: Error component
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
       return <div>No extension called {projectItemName} found!</div>;
     }
 
@@ -132,9 +135,7 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
       this.props.extraEditorProps || {};
 
     return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
       <div style={styles.container}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <EventsFunctionsExtensionEditor
           key={eventsFunctionsExtension.ptr}
           project={project}
@@ -148,8 +149,7 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
           onBehaviorEdited={this._reloadExtensionMetadata}
           onObjectEdited={this._reloadExtensionMetadata}
           onFunctionEdited={this._reloadExtensionMetadata}
-// @ts-expect-error - TS7006 - Parameter 'editor' implicitly has an 'any' type.
-          ref={editor => (this.editor = editor)}
+          ref={(editor) => (this.editor = editor)}
           unsavedChanges={this.props.unsavedChanges}
         />
       </div>
@@ -159,5 +159,4 @@ export class EventsFunctionsExtensionEditorContainer extends React.Component<Ren
 
 export const renderEventsFunctionsExtensionEditorContainer = (
   props: RenderEditorContainerPropsWithRef
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
 ) => <EventsFunctionsExtensionEditorContainer {...props} />;

@@ -1,5 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/core'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/core/index.js' implicitly has an 'any' type.
-import {I18n as I18nType} from '@lingui/core';
+import { I18n as I18nType } from '@lingui/core';
 import { mapFor, mapVector } from '../Utils/MapFor';
 import flatten from 'lodash/flatten';
 import { EventsScope } from '../InstructionOrExpression/EventsScope.flow';
@@ -20,50 +19,56 @@ import { getAllPointNames } from '../ObjectEditor/Editors/SpriteEditor/Utils/Spr
 import { enumerateParametersUsableInExpressions } from '../EventsSheet/ParameterFields/EnumerateFunctionParameters';
 import { filterStringListWithPrefix } from '../Utils/ListFiltering';
 
-const gd: libGDevelop = global.gd;
-
 type BaseExpressionAutocompletion = {
-  completion: string,
-  replacementStartPosition?: number,
-  replacementEndPosition?: number,
-  addParenthesis?: boolean,
-  addDot?: boolean,
-  addParameterSeparator?: boolean,
-  addNamespaceSeparator?: boolean,
-  hasVisibleParameters?: boolean,
-  isExact?: boolean
+  completion: string;
+  replacementStartPosition?: number;
+  replacementEndPosition?: number;
+  addParenthesis?: boolean;
+  addDot?: boolean;
+  addParameterSeparator?: boolean;
+  addNamespaceSeparator?: boolean;
+  hasVisibleParameters?: boolean;
+  isExact?: boolean;
 };
 
-export type ExpressionAutocompletion = (BaseExpressionAutocompletion) & {
-  kind: 'Expression',
-  enumeratedExpressionMetadata: EnumeratedExpressionMetadata,
-  shouldConvertToString: boolean
-} | (BaseExpressionAutocompletion) & {
-  kind: 'Text'
-} | (BaseExpressionAutocompletion) & {
-  kind: 'Variable',
-  variableType: Variable_Type
-} | (BaseExpressionAutocompletion) & {
-  kind: 'Property',
-  propertyType: string
-} | (BaseExpressionAutocompletion) & {
-  kind: 'Parameter',
-  parameterType: string
-} | (BaseExpressionAutocompletion) & {
-  objectConfiguration: gdObjectConfiguration | null | undefined,
-  kind: 'Object'
-} | (BaseExpressionAutocompletion) & {
-  kind: 'Behavior',
-  behaviorType: string
-} | (BaseExpressionAutocompletion) & {
-  kind: 'FullExpression'
-};
+export type ExpressionAutocompletion =
+  | (BaseExpressionAutocompletion & {
+      kind: 'Expression';
+      enumeratedExpressionMetadata: EnumeratedExpressionMetadata;
+      shouldConvertToString: boolean;
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'Text';
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'Variable';
+      variableType: Variable_Type;
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'Property';
+      propertyType: string;
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'Parameter';
+      parameterType: string;
+    })
+  | (BaseExpressionAutocompletion & {
+      objectConfiguration: gd.ObjectConfiguration | null | undefined;
+      kind: 'Object';
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'Behavior';
+      behaviorType: string;
+    })
+  | (BaseExpressionAutocompletion & {
+      kind: 'FullExpression';
+    });
 
 type ExpressionAutocompletionContext = {
-  gd: libGDevelop,
-  project: gdProject,
-  projectScopedContainers: gdProjectScopedContainers,
-  scope: EventsScope // TODO: Should be replaced by usage of projectScopedContainers everywhere.
+  gd: libGDevelop;
+  project: gd.Project;
+  projectScopedContainers: gd.ProjectScopedContainers;
+  scope: EventsScope; // TODO: Should be replaced by usage of projectScopedContainers everywhere.
 };
 
 const getAutocompletionsForExpressions = (
@@ -72,15 +77,15 @@ const getAutocompletionsForExpressions = (
   replacementStartPosition: number,
   replacementEndPosition: number,
   isExact: boolean,
-  completionType: string,
+  completionType: string
 ): Array<ExpressionAutocompletion> => {
-// @ts-expect-error - TS2322 - Type '{ kind: string; completion: string; replacementStartPosition: number; replacementEndPosition: number; enumeratedExpressionMetadata: EnumeratedExpressionMetadata; addParenthesis: boolean; hasVisibleParameters: boolean; isExact: boolean; shouldConvertToString: boolean; }[]' is not assignable to type 'ExpressionAutocompletion[]'.
+  // @ts-expect-error - TS2322 - Type '{ kind: string; completion: string; replacementStartPosition: number; replacementEndPosition: number; enumeratedExpressionMetadata: EnumeratedExpressionMetadata; addParenthesis: boolean; hasVisibleParameters: boolean; isExact: boolean; shouldConvertToString: boolean; }[]' is not assignable to type 'ExpressionAutocompletion[]'.
   return expressionMetadatas
     .filter(
-      enumeratedExpressionMetadata =>
+      (enumeratedExpressionMetadata) =>
         !isExact || enumeratedExpressionMetadata.type === prefix
     )
-    .map(enumeratedExpressionMetadata => {
+    .map((enumeratedExpressionMetadata) => {
       // All enumeratedExpressionMetadata should have a name.
       if (
         !enumeratedExpressionMetadata.name ||
@@ -106,10 +111,10 @@ const getAutocompletionsForExpressions = (
     .filter(Boolean);
 };
 
-const getAutocompletionsForFreeExpressions = function(
+const getAutocompletionsForFreeExpressions = function (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  completionDescription: gdExpressionCompletionDescription,
-  i18n: I18nType,
+  completionDescription: gd.ExpressionCompletionDescription,
+  i18n: I18nType
 ): Array<ExpressionAutocompletion> {
   const prefix: string = completionDescription.getPrefix();
   const type: string = completionDescription.getType();
@@ -117,10 +122,11 @@ const getAutocompletionsForFreeExpressions = function(
 
   const freeExpressions = enumerateFreeExpressions(type, i18n);
 
-  const filteredFreeExpressions = filterEnumeratedInstructionOrExpressionMetadataByScope(
-    filterExpressions(freeExpressions, prefix),
-    expressionAutocompletionContext.scope
-  );
+  const filteredFreeExpressions =
+    filterEnumeratedInstructionOrExpressionMetadataByScope(
+      filterExpressions(freeExpressions, prefix),
+      expressionAutocompletionContext.scope
+    );
   return getAutocompletionsForExpressions(
     filteredFreeExpressions,
     prefix,
@@ -131,9 +137,9 @@ const getAutocompletionsForFreeExpressions = function(
   );
 };
 
-const getAutocompletionsForObjectExpressions = function(
+const getAutocompletionsForObjectExpressions = function (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  completionDescription: gdExpressionCompletionDescription,
+  completionDescription: gd.ExpressionCompletionDescription
 ): Array<ExpressionAutocompletion> {
   const prefix: string = completionDescription.getPrefix();
   const type: string = completionDescription.getType();
@@ -145,10 +151,11 @@ const getAutocompletionsForObjectExpressions = function(
     .getObjectsContainersList()
     .getTypeOfObject(objectName);
   const objectExpressions = enumerateObjectExpressions(type, objectType);
-  const filteredObjectExpressions = filterEnumeratedInstructionOrExpressionMetadataByScope(
-    filterExpressions(objectExpressions, prefix),
-    expressionAutocompletionContext.scope
-  );
+  const filteredObjectExpressions =
+    filterEnumeratedInstructionOrExpressionMetadataByScope(
+      filterExpressions(objectExpressions, prefix),
+      expressionAutocompletionContext.scope
+    );
   const autocompletions = getAutocompletionsForExpressions(
     filteredObjectExpressions,
     prefix,
@@ -161,8 +168,8 @@ const getAutocompletionsForObjectExpressions = function(
   const behaviorNames = projectScopedContainers
     .getObjectsContainersList()
     .getBehaviorsOfObject(objectName, true);
-// @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
-  mapVector(behaviorNames, behaviorName => {
+
+  mapVector(behaviorNames, (behaviorName) => {
     const behaviorType = projectScopedContainers
       .getObjectsContainersList()
       .getTypeOfBehaviorInObjectOrGroup(objectName, behaviorName, true);
@@ -173,10 +180,11 @@ const getAutocompletionsForObjectExpressions = function(
       type,
       behaviorType
     );
-    const filteredBehaviorExpressions = filterEnumeratedInstructionOrExpressionMetadataByScope(
-      filterExpressions(behaviorExpressions, prefix),
-      expressionAutocompletionContext.scope
-    );
+    const filteredBehaviorExpressions =
+      filterEnumeratedInstructionOrExpressionMetadataByScope(
+        filterExpressions(behaviorExpressions, prefix),
+        expressionAutocompletionContext.scope
+      );
     const behaviorExpressionAutocompletions = getAutocompletionsForExpressions(
       filteredBehaviorExpressions,
       prefix,
@@ -185,7 +193,7 @@ const getAutocompletionsForObjectExpressions = function(
       isExact,
       type
     );
-    behaviorExpressionAutocompletions.forEach(autocompletion => {
+    behaviorExpressionAutocompletions.forEach((autocompletion) => {
       autocompletion.completion =
         behaviorName +
         gd.PlatformExtension.getNamespaceSeparator() +
@@ -200,9 +208,9 @@ const getAutocompletionsForObjectExpressions = function(
   return autocompletions;
 };
 
-const getAutocompletionsForBehaviorExpressions = function(
+const getAutocompletionsForBehaviorExpressions = function (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  completionDescription: gdExpressionCompletionDescription,
+  completionDescription: gd.ExpressionCompletionDescription
 ): Array<ExpressionAutocompletion> {
   const prefix: string = completionDescription.getPrefix();
   const type: string = completionDescription.getType();
@@ -217,10 +225,11 @@ const getAutocompletionsForBehaviorExpressions = function(
 
   const behaviorExpressions = enumerateBehaviorExpressions(type, behaviorType);
 
-  const filteredBehaviorExpressions = filterEnumeratedInstructionOrExpressionMetadataByScope(
-    filterExpressions(behaviorExpressions, prefix),
-    expressionAutocompletionContext.scope
-  );
+  const filteredBehaviorExpressions =
+    filterEnumeratedInstructionOrExpressionMetadataByScope(
+      filterExpressions(behaviorExpressions, prefix),
+      expressionAutocompletionContext.scope
+    );
 
   return getAutocompletionsForExpressions(
     filteredBehaviorExpressions,
@@ -232,9 +241,9 @@ const getAutocompletionsForBehaviorExpressions = function(
   );
 };
 
-const getAutocompletionsForText = function(
+const getAutocompletionsForText = function (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  completionDescription: gdExpressionCompletionDescription,
+  completionDescription: gd.ExpressionCompletionDescription
 ): Array<ExpressionAutocompletion> {
   const prefix: string = completionDescription.getPrefix();
   const type: string = completionDescription.getType();
@@ -257,7 +266,7 @@ const getAutocompletionsForText = function(
   } else if (type === 'stringWithSelector') {
     autocompletionTexts = getParameterChoiceAutocompletions(
       completionDescription.getParameterMetadata()
-    ).map(autocompletion => autocompletion.completion);
+    ).map((autocompletion) => autocompletion.completion);
   } else if (type === 'objectPointName') {
     const objectName: string = completionDescription.getObjectName();
     if (!objectName) {
@@ -276,8 +285,7 @@ const getAutocompletionsForText = function(
       const animations = spriteConfiguration.getAnimations();
 
       autocompletionTexts = getAllPointNames(animations)
-        .map(spriteObjectName =>
-// @ts-expect-error - TS2571 - Object is of type 'unknown'.
+        .map((spriteObjectName) =>
           spriteObjectName.length > 0 ? `"${spriteObjectName}"` : null
         )
         .filter(Boolean);
@@ -304,8 +312,8 @@ const getAutocompletionsForText = function(
       autocompletionTexts = mapFor(
         0,
         animations.getAnimationsCount(),
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-        index => {
+
+        (index) => {
           const animationName = animations.getAnimation(index).getName();
           return animationName.length > 0 ? `"${animationName}"` : null;
         }
@@ -329,7 +337,7 @@ const getAutocompletionsForText = function(
         functionsContainer,
         eventsFunction,
         allowedParameterTypes
-      ).map(parameterMetadata => `"${parameterMetadata.getName()}"`);
+      ).map((parameterMetadata) => `"${parameterMetadata.getName()}"`);
     }
   }
   // To add missing string types see Core\GDCore\Extensions\Metadata\ParameterMetadata.h
@@ -340,57 +348,61 @@ const getAutocompletionsForText = function(
   ).sort();
 
   const isLastParameter = completionDescription.isLastParameter();
-  return filteredTextList.map(text => ({
+  return filteredTextList.map((text) => ({
     kind: 'Text',
     completion: text,
-    replacementStartPosition: completionDescription.getReplacementStartPosition(),
+    replacementStartPosition:
+      completionDescription.getReplacementStartPosition(),
     replacementEndPosition: completionDescription.getReplacementEndPosition(),
     addParameterSeparator: !isLastParameter,
   }));
 };
 
-const getAutocompletionsForBehavior = function(
+const getAutocompletionsForBehavior = function (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  completionDescription: gdExpressionCompletionDescription,
+  completionDescription: gd.ExpressionCompletionDescription
 ): Array<ExpressionAutocompletion> {
   const prefix: string = completionDescription.getPrefix();
   const isExact: boolean = completionDescription.isExact();
   const objectName: string = completionDescription.getObjectName();
 
   const { projectScopedContainers } = expressionAutocompletionContext;
-  return projectScopedContainers
-    .getObjectsContainersList()
-    .getBehaviorsOfObject(objectName, true)
-    .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
-    .filter(behaviorName => behaviorName.indexOf(prefix) !== -1)
-// @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
-    .map(behaviorName => {
-      const behaviorType = projectScopedContainers
-        .getObjectsContainersList()
-        .getTypeOfBehaviorInObjectOrGroup(objectName, behaviorName, true);
-      return {
-        kind: 'Behavior',
-        completion: behaviorName,
-        replacementStartPosition: completionDescription.getReplacementStartPosition(),
-        replacementEndPosition: completionDescription.getReplacementEndPosition(),
-        addNamespaceSeparator: true,
-        isExact,
-        behaviorType,
-      };
-    });
+  return (
+    projectScopedContainers
+      .getObjectsContainersList()
+      .getBehaviorsOfObject(objectName, true)
+      .toJSArray()
+      // @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
+      .filter((behaviorName) => behaviorName.indexOf(prefix) !== -1)
+      // @ts-expect-error - TS7006 - Parameter 'behaviorName' implicitly has an 'any' type.
+      .map((behaviorName) => {
+        const behaviorType = projectScopedContainers
+          .getObjectsContainersList()
+          .getTypeOfBehaviorInObjectOrGroup(objectName, behaviorName, true);
+        return {
+          kind: 'Behavior',
+          completion: behaviorName,
+          replacementStartPosition:
+            completionDescription.getReplacementStartPosition(),
+          replacementEndPosition:
+            completionDescription.getReplacementEndPosition(),
+          addNamespaceSeparator: true,
+          isExact,
+          behaviorType,
+        };
+      })
+  );
 };
 
 export const getAutocompletionsFromDescriptions = (
   expressionAutocompletionContext: ExpressionAutocompletionContext,
-  expressionCompletionDescriptions: gdVectorExpressionCompletionDescription,
-  i18n: I18nType,
+  expressionCompletionDescriptions: gd.VectorExpressionCompletionDescription,
+  i18n: I18nType
 ): Array<ExpressionAutocompletion> => {
   const { gd } = expressionAutocompletionContext;
 
   return flatten(
-// @ts-expect-error - TS7006 - Parameter 'completionDescription' implicitly has an 'any' type.
-    mapVector(expressionCompletionDescriptions, completionDescription => {
+    mapVector(expressionCompletionDescriptions, (completionDescription) => {
       const completionKind = completionDescription.getCompletionKind();
 
       if (
@@ -422,8 +434,10 @@ export const getAutocompletionsFromDescriptions = (
           {
             kind: 'Object',
             completion: completionDescription.getCompletion(),
-            replacementStartPosition: completionDescription.getReplacementStartPosition(),
-            replacementEndPosition: completionDescription.getReplacementEndPosition(),
+            replacementStartPosition:
+              completionDescription.getReplacementStartPosition(),
+            replacementEndPosition:
+              completionDescription.getReplacementEndPosition(),
             objectConfiguration: completionDescription.hasObjectConfiguration()
               ? completionDescription.getObjectConfiguration()
               : null,
@@ -453,8 +467,10 @@ export const getAutocompletionsFromDescriptions = (
           {
             kind: 'Variable',
             completion: completionDescription.getCompletion(),
-            replacementStartPosition: completionDescription.getReplacementStartPosition(),
-            replacementEndPosition: completionDescription.getReplacementEndPosition(),
+            replacementStartPosition:
+              completionDescription.getReplacementStartPosition(),
+            replacementEndPosition:
+              completionDescription.getReplacementEndPosition(),
             variableType: completionDescription.getVariableType(),
           },
         ];
@@ -465,8 +481,10 @@ export const getAutocompletionsFromDescriptions = (
           {
             kind: 'Property',
             completion: completionDescription.getCompletion(),
-            replacementStartPosition: completionDescription.getReplacementStartPosition(),
-            replacementEndPosition: completionDescription.getReplacementEndPosition(),
+            replacementStartPosition:
+              completionDescription.getReplacementStartPosition(),
+            replacementEndPosition:
+              completionDescription.getReplacementEndPosition(),
             propertyType: completionDescription.getType(),
           },
         ];
@@ -477,8 +495,10 @@ export const getAutocompletionsFromDescriptions = (
           {
             kind: 'Parameter',
             completion: completionDescription.getCompletion(),
-            replacementStartPosition: completionDescription.getReplacementStartPosition(),
-            replacementEndPosition: completionDescription.getReplacementEndPosition(),
+            replacementStartPosition:
+              completionDescription.getReplacementStartPosition(),
+            replacementEndPosition:
+              completionDescription.getReplacementEndPosition(),
             parameterType: completionDescription.getType(),
           },
         ];
@@ -490,20 +510,20 @@ export const getAutocompletionsFromDescriptions = (
 };
 
 type InsertedAutocompletion = {
-  completion: string,
-  replacementStartPosition?: number,
-  replacementEndPosition?: number,
-  addParenthesis?: boolean | null | undefined,
-  hasVisibleParameters?: boolean | null | undefined,
-  addDot?: boolean | null | undefined,
-  addParameterSeparator?: boolean | null | undefined,
-  addNamespaceSeparator?: boolean | null | undefined,
-  shouldConvertToString?: boolean | null | undefined
+  completion: string;
+  replacementStartPosition?: number;
+  replacementEndPosition?: number;
+  addParenthesis?: boolean | null | undefined;
+  hasVisibleParameters?: boolean | null | undefined;
+  addDot?: boolean | null | undefined;
+  addParameterSeparator?: boolean | null | undefined;
+  addNamespaceSeparator?: boolean | null | undefined;
+  shouldConvertToString?: boolean | null | undefined;
 };
 
 type ExpressionAndCaretLocation = {
-  expression: string,
-  caretLocation: number
+  expression: string;
+  caretLocation: number;
 };
 
 /**
@@ -529,18 +549,17 @@ const insertWordInExpressionWithToString = ({
   wordEndPosition,
   insertedWord,
 }: {
-  expression: string,
-  wordStartPosition: number,
-  wordEndPosition: number,
-  insertedWord: string
+  expression: string;
+  wordStartPosition: number;
+  wordEndPosition: number;
+  insertedWord: string;
 }) => {
   const expressionStart = expression.substring(0, wordStartPosition);
   // If the grammar is becoming more complex, you'll need to implement a
   // NodeParenthesesBoundsFinder worker to specify the proper bounds for each node
   // or give this responsibility to `ExpressionCompletionDescription`/`ExpressionCompletionFinder`.
-  const completedNodeStartPosition: number = findLastNodeStartPosition(
-    expressionStart
-  );
+  const completedNodeStartPosition: number =
+    findLastNodeStartPosition(expressionStart);
 
   const newExpressionStart = expression.substring(
     0,
@@ -576,10 +595,10 @@ const insertWordInExpression = ({
   wordEndPosition,
   insertedWord,
 }: {
-  expression: string,
-  wordStartPosition: number,
-  wordEndPosition: number,
-  insertedWord: string
+  expression: string;
+  wordStartPosition: number;
+  wordEndPosition: number;
+  insertedWord: string;
 }) => {
   const newExpressionStart = expression.substring(0, wordStartPosition);
   const newExpressionEnd = expression.substring(wordEndPosition);
@@ -590,11 +609,8 @@ const insertWordInExpression = ({
 };
 
 export const insertAutocompletionInExpression = (
-  {
-    expression,
-    caretLocation,
-  }: ExpressionAndCaretLocation,
-  insertedAutocompletion: InsertedAutocompletion,
+  { expression, caretLocation }: ExpressionAndCaretLocation,
+  insertedAutocompletion: InsertedAutocompletion
 ): ExpressionAndCaretLocation => {
   const {
     addDot,
@@ -611,12 +627,12 @@ export const insertAutocompletionInExpression = (
     const suffix = addDot
       ? '.'
       : addParameterSeparator
-      ? ', '
-      : addNamespaceSeparator
-      ? '::'
-      : addParenthesis
-      ? '()'
-      : '';
+        ? ', '
+        : addNamespaceSeparator
+          ? '::'
+          : addParenthesis
+            ? '()'
+            : '';
 
     const addSuffix =
       !nextCharacter || !suffix || nextCharacter[0] !== suffix[0];
@@ -647,7 +663,8 @@ export const insertAutocompletionInExpression = (
 
   // The next character, if any, will be useful to format the completion
   // (to avoid repeating an existing character).
-  const maybeNextCharacter: string | null | undefined = expression[wordEndPosition];
+  const maybeNextCharacter: string | null | undefined =
+    expression[wordEndPosition];
   const insertedWord = formatCompletion(maybeNextCharacter);
 
   const newAutocompletedExpression = shouldConvertToString

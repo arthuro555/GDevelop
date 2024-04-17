@@ -1,10 +1,7 @@
 import BrowserFileSystem from './BrowserFileSystem';
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
 describe('BrowserFileSystem', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('file content storing and reading', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can read text files originally passed as argument', () => {
       const browserFileSystem = new BrowserFileSystem({
         textFiles: [
@@ -18,7 +15,6 @@ describe('BrowserFileSystem', () => {
       expect(browserFileSystem.readFile('/file1')).toBe('content1');
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can write files in memory and read them', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -28,7 +24,6 @@ describe('BrowserFileSystem', () => {
       expect(browserFileSystem.readFile('/folder/file2')).toBe('content2');
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can store text files and retrieve them', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -51,7 +46,6 @@ describe('BrowserFileSystem', () => {
       );
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can write files in memory and clear them', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -72,7 +66,6 @@ describe('BrowserFileSystem', () => {
       expect(browserFileSystem.getAllTextFilesIn('/folder/')).toEqual([]);
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can copy files previously wrote in memory', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -82,7 +75,6 @@ describe('BrowserFileSystem', () => {
       expect(browserFileSystem.readFile('/copied-file1')).toBe('content1');
     });
 
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can mark files to be copied from an URL as to be downloaded', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -106,7 +98,7 @@ describe('BrowserFileSystem', () => {
         []
       );
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it can tell if a file exists', () => {
       const browserFileSystem = new BrowserFileSystem({
         textFiles: [
@@ -148,9 +140,7 @@ describe('BrowserFileSystem', () => {
     });
   });
 
-// @ts-expect-error - TS2582 - Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
   describe('file path manipulation', () => {
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
     test('it can make a path relative to another', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -161,7 +151,7 @@ describe('BrowserFileSystem', () => {
         'folder/file1'
       );
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it can make URL relative to another one if on the same domain', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -172,7 +162,7 @@ describe('BrowserFileSystem', () => {
         )
       ).toBe('to/file1');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it does not make URL relative to another one if not on the same domain', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 
@@ -183,7 +173,7 @@ describe('BrowserFileSystem', () => {
         )
       ).toBe('http://test.com/url1');
     });
-// @ts-expect-error - TS2582 - Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha`.
+
     test('it can make a path absolute', () => {
       const browserFileSystem = new BrowserFileSystem({ textFiles: [] });
 

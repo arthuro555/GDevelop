@@ -1,21 +1,19 @@
-import {mapFor} from './MapFor';
+import { mapFor } from './MapFor';
 import newNameGenerator from './NewNameGenerator';
 import { normalizeString } from './Search';
 import { unserializeFromJSObject } from './Serializer';
-const gd: libGDevelop = global.gd;
 
-export const hasChildThatContainsStringInNameOrValue = (variable: gdVariable, searchText: string): boolean => {
+export const hasChildThatContainsStringInNameOrValue = (
+  variable: gd.Variable,
+  searchText: string
+): boolean => {
   switch (variable.getType()) {
     case gd.Variable.String:
       return normalizeString(variable.getString()).includes(searchText);
     case gd.Variable.Number:
-      return variable
-        .getValue()
-        .toString()
-        .includes(searchText);
+      return variable.getValue().toString().includes(searchText);
     case gd.Variable.Array:
-// @ts-expect-error - TS7006 - Parameter 'index' implicitly has an 'any' type.
-      return mapFor(0, variable.getChildrenCount(), index => {
+      return mapFor(0, variable.getChildrenCount(), (index) => {
         const childVariable = variable.getAtIndex(index);
         return hasChildThatContainsStringInNameOrValue(
           childVariable,
@@ -23,36 +21,38 @@ export const hasChildThatContainsStringInNameOrValue = (variable: gdVariable, se
         );
       }).some(Boolean);
     case gd.Variable.Structure:
-      return variable
-        .getAllChildrenNames()
-        .toJSArray()
-// @ts-expect-error - TS7006 - Parameter 'childName' implicitly has an 'any' type.
-        .map(childName => {
-          const childVariable = variable.getChild(childName);
-          return (
-            normalizeString(childName).includes(searchText) ||
-            hasChildThatContainsStringInNameOrValue(childVariable, searchText)
-          );
-        })
-        .some(Boolean);
+      return (
+        variable
+          .getAllChildrenNames()
+          .toJSArray()
+          // @ts-expect-error - TS7006 - Parameter 'childName' implicitly has an 'any' type.
+          .map((childName) => {
+            const childVariable = variable.getChild(childName);
+            return (
+              normalizeString(childName).includes(searchText) ||
+              hasChildThatContainsStringInNameOrValue(childVariable, searchText)
+            );
+          })
+          .some(Boolean)
+      );
     default:
       return false;
   }
 };
 
 export const insertInVariablesContainer = (
-  variablesContainer: gdVariablesContainer,
+  variablesContainer: gd.VariablesContainer,
   name: string,
   serializedVariable: any | null,
   index: number,
-  inheritedVariablesContainer?: gdVariablesContainer | null,
+  inheritedVariablesContainer?: gd.VariablesContainer | null
 ): {
-  name: string,
-  variable: gdVariable
+  name: string;
+  variable: gd.Variable;
 } => {
   const newName = newNameGenerator(
     name,
-    name => {
+    (name) => {
       return (
         variablesContainer.has(name) ||
         (!!inheritedVariablesContainer && inheritedVariablesContainer.has(name))
@@ -73,7 +73,7 @@ export const insertInVariablesContainer = (
 };
 
 export const insertInVariableChildrenArray = (
-  targetParentVariable: gdVariable,
+  targetParentVariable: gd.Variable,
   serializedVariable: any,
   index: number
 ) => {
@@ -84,10 +84,14 @@ export const insertInVariableChildrenArray = (
   newVariable.delete();
 };
 
-export const insertInVariableChildren = (targetParentVariable: gdVariable, name: string, serializedVariable: any): string => {
+export const insertInVariableChildren = (
+  targetParentVariable: gd.Variable,
+  name: string,
+  serializedVariable: any
+): string => {
   const newName = newNameGenerator(
     name,
-    _name => targetParentVariable.hasChild(_name),
+    (_name) => targetParentVariable.hasChild(_name),
     'CopyOf'
   );
   const newVariable = new gd.Variable();
@@ -98,10 +102,14 @@ export const insertInVariableChildren = (targetParentVariable: gdVariable, name:
   return newName;
 };
 
-export const hasVariablesContainerSubChildren = (variablesContainer: gdVariablesContainer): boolean => mapFor(0, variablesContainer.count(), index => {
-  const variable = variablesContainer.getAt(index);
+export const hasVariablesContainerSubChildren = (
+  variablesContainer: gd.VariablesContainer
+): boolean =>
+  mapFor(0, variablesContainer.count(), (index) => {
+    const variable = variablesContainer.getAt(index);
 
-  return isCollectionVariable(variable) && variable.getChildrenCount() > 0;
-}).some(Boolean);
+    return isCollectionVariable(variable) && variable.getChildrenCount() > 0;
+  }).some(Boolean);
 
-export const isCollectionVariable = (variable: gdVariable): boolean => !gd.Variable.isPrimitive(variable.getType());
+export const isCollectionVariable = (variable: gd.Variable): boolean =>
+  !gd.Variable.isPrimitive(variable.getType());

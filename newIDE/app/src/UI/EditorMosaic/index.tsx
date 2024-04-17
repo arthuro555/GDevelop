@@ -1,4 +1,4 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/react'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/react/index.js' implicitly has an 'any' type.
+
 import {I18n} from '@lingui/react';
 import * as React from 'react';
 import {
@@ -6,7 +6,7 @@ import {
   MosaicWithoutDragDropContext,
   getLeaves,
 } from 'react-mosaic-component';
-// @ts-expect-error - TS6142 - Module './CloseButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/EditorMosaic/CloseButton.tsx', but '--jsx' is not set.
+
 import CloseButton from './CloseButton';
 import { MessageDescriptor } from '../../Utils/i18n/MessageDescriptor.flow';
 import { useDebounce } from '../../Utils/UseDebounce';
@@ -206,17 +206,15 @@ const getNodeSize = (
   );
 };
 
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
 const defaultToolbarControls = [<CloseButton key="close" />];
 
 const renderMosaicWindowPreview = props: any => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   <div className="mosaic-preview">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="mosaic-window-toolbar">
       <div className="mosaic-window-title">{props.title}</div>
     </div>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
     <div className="mosaic-window-body" />
   </div>
 );
@@ -227,7 +225,7 @@ const renderMosaicWindowPreview = props: any => (
  * dragged.
  */
 const MosaicWindow = (props: any) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
   <RMMosaicWindow
     {...props}
     toolbarControls={props.toolbarControls || defaultToolbarControls}
@@ -263,17 +261,17 @@ type Props = {
  * Can be used to create a mosaic of resizable editors.
  * Must be used inside a component wrapped in a DragDropContext.
  */
-const EditorMosaic = React.forwardRef<Props, EditorMosaicInterface>((
+const EditorMosaic = React.forwardRef<EditorMosaicInterface, Props>((
   {
-// @ts-expect-error - TS2339 - Property 'initialNodes' does not exist on type 'EditorMosaicInterface'.
+
     initialNodes,
-// @ts-expect-error - TS2339 - Property 'editors' does not exist on type 'EditorMosaicInterface'.
+
     editors,
-// @ts-expect-error - TS2339 - Property 'limitToOneSecondaryEditor' does not exist on type 'EditorMosaicInterface'.
+
     limitToOneSecondaryEditor,
-// @ts-expect-error - TS2339 - Property 'onOpenedEditorsChanged' does not exist on type 'EditorMosaicInterface'.
+
     onOpenedEditorsChanged,
-// @ts-expect-error - TS2339 - Property 'onPersistNodes' does not exist on type 'EditorMosaicInterface'.
+
     onPersistNodes,
   },
   ref
@@ -323,7 +321,7 @@ const EditorMosaic = React.forwardRef<Props, EditorMosaicInterface>((
     [mosaicNode, editors, limitToOneSecondaryEditor]
   );
 
-// @ts-expect-error - TS2739 - Type '{ getOpenedEditorNames: () => string[]; toggleEditor: (editorName: string, position: "end" | "start", splitPercentage: number, direction: "column" | "row") => boolean; collapseEditor: (editorName: string) => boolean; uncollapseEditor: (editorName: string, defaultSplitPercentage: number) => boolean; }' is missing the following properties from type 'Props': initialNodes, editors
+
   React.useImperativeHandle(ref, () => ({
     getOpenedEditorNames: (): Array<string> => {
 // @ts-expect-error - TS2322 - Type 'MosaicKey[]' is not assignable to type 'string[]'. | TS2345 - Argument of type 'EditorMosaicNode | null | undefined' is not assignable to parameter of type 'MosaicNode<MosaicKey> | null'.
@@ -404,9 +402,8 @@ const EditorMosaic = React.forwardRef<Props, EditorMosaicInterface>((
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
     <I18n>
-{ /* @ts-expect-error - TS7031 - Binding element 'i18n' implicitly has an 'any' type. */}
       {({ i18n }) => (
 // @ts-expect-error - TS2769 - No overload matches this call. | TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <MosaicWithoutDragDropContext
@@ -430,7 +427,7 @@ const EditorMosaic = React.forwardRef<Props, EditorMosaicInterface>((
             }
 
             return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
               <MosaicWindow
                 path={path}
                 title={i18n._(editor.title)}

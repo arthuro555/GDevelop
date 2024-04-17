@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS6142 - Module './Paper' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Paper.tsx', but '--jsx' is not set.
+
 import Paper from './Paper';
 
 const styles = {
@@ -13,12 +13,12 @@ const styles = {
 } as const;
 
 type Props = {
-  children: React.ReactNode,
-  maxWidth?: boolean,
-  width?: number | string,
+  children: React.ReactNode;
+  maxWidth?: boolean;
+  width?: number | string;
   /** Sometimes required on Safari */
-  noFullHeight?: boolean,
-  noExpand?: boolean
+  noFullHeight?: boolean;
+  noExpand?: boolean;
 };
 
 /**
@@ -26,7 +26,6 @@ type Props = {
  * background of editor/windows/dialogs.
  */
 const Background = (props: Props) => (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
   <Paper
     square
     style={{

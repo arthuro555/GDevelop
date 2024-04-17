@@ -14,29 +14,34 @@ import { ANNOUNCEMENTS_FETCH_TIMEOUT } from '../Utils/GlobalFetchTimeouts';
 // we can split them into 2 contexts.
 
 type AnnouncementsFeedState = {
-  announcements: Announcement[] | null | undefined,
-  promotions: Promotion[] | null | undefined,
-  error: Error | null | undefined,
-  fetchAnnouncementsAndPromotions: () => Promise<void>
+  announcements: Announcement[] | null | undefined;
+  promotions: Promotion[] | null | undefined;
+  error: Error | null | undefined;
+  fetchAnnouncementsAndPromotions: () => Promise<void>;
 };
 
-export const AnnouncementsFeedContext = React.createContext<AnnouncementsFeedState>({
-  announcements: null,
-  promotions: null,
-  error: null,
-  fetchAnnouncementsAndPromotions: async () => {},
-});
+export const AnnouncementsFeedContext =
+  React.createContext<AnnouncementsFeedState>({
+    announcements: null,
+    promotions: null,
+    error: null,
+    fetchAnnouncementsAndPromotions: async () => {},
+  });
 
 type AnnouncementsFeedStateProviderProps = {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 export const AnnouncementsFeedStateProvider = ({
   children,
 }: AnnouncementsFeedStateProviderProps) => {
-  const [announcements, setAnnouncements] = React.useState<Announcement[] | null | undefined>(null);
+  const [announcements, setAnnouncements] = React.useState<
+    Announcement[] | null | undefined
+  >(null);
   const [error, setError] = React.useState<Error | null | undefined>(null);
-  const [promotions, setPromotions] = React.useState<Promotion[] | null | undefined>(null);
+  const [promotions, setPromotions] = React.useState<
+    Promotion[] | null | undefined
+  >(null);
   const isLoading = React.useRef<boolean>(false);
 
   const fetchAnnouncementsAndPromotions = React.useCallback(async () => {
@@ -54,13 +59,15 @@ export const AnnouncementsFeedStateProvider = ({
       // Logic to remove once promotions are displayed to enough users.
       // For now, we filter out promotions from the announcements.
       const filteredAnnouncements = fetchedAnnouncements.filter(
-        announcement =>
-          !fetchedPromotions.find(promotion => promotion.id === announcement.id)
+        (announcement) =>
+          !fetchedPromotions.find(
+            (promotion) => promotion.id === announcement.id
+          )
       );
 
       setAnnouncements(filteredAnnouncements);
       setPromotions(fetchedPromotions);
-    } catch (error: any) {
+    } catch (error) {
       console.error(`Unable to load the announcements from the api:`, error);
       setError(error);
     }
@@ -69,20 +76,17 @@ export const AnnouncementsFeedStateProvider = ({
   }, []);
 
   // Preload the announcements and promotions when the app loads.
-  React.useEffect(
-    () => {
-      // Don't attempt to load again announcements if they
-      // were loaded already.
-      if (announcements || isLoading.current) return;
+  React.useEffect(() => {
+    // Don't attempt to load again announcements if they
+    // were loaded already.
+    if (announcements || isLoading.current) return;
 
-      const timeoutId = setTimeout(() => {
-        console.info('Pre-fetching announcements from the api...');
-        fetchAnnouncementsAndPromotions();
-      }, ANNOUNCEMENTS_FETCH_TIMEOUT);
-      return () => clearTimeout(timeoutId);
-    },
-    [fetchAnnouncementsAndPromotions, announcements, isLoading]
-  );
+    const timeoutId = setTimeout(() => {
+      console.info('Pre-fetching announcements from the api...');
+      fetchAnnouncementsAndPromotions();
+    }, ANNOUNCEMENTS_FETCH_TIMEOUT);
+    return () => clearTimeout(timeoutId);
+  }, [fetchAnnouncementsAndPromotions, announcements, isLoading]);
 
   const announcementsFeedState = React.useMemo(
     () => ({
@@ -95,7 +99,6 @@ export const AnnouncementsFeedStateProvider = ({
   );
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AnnouncementsFeedContext.Provider value={announcementsFeedState}>
       {children}
     </AnnouncementsFeedContext.Provider>

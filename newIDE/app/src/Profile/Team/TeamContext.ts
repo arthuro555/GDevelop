@@ -4,25 +4,22 @@ import {
   TeamGroup,
   User,
   TeamMembership,
-// @ts-expect-error - TS6142 - Module '../../Utils/GDevelopServices/User' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/Utils/GDevelopServices/User.tsx', but '--jsx' is not set.
 } from '../../Utils/GDevelopServices/User';
 import { CloudProjectWithUserAccessInfo } from '../../Utils/GDevelopServices/Project';
 
 export type TeamState = {
-  team: Team | null | undefined,
-  groups: Array<TeamGroup> | null | undefined,
-  members: Array<User> | null | undefined,
-  memberships: Array<TeamMembership> | null | undefined,
-  onChangeGroupName: (group: TeamGroup, newName: string) => Promise<void>,
-  onChangeUserGroup: (user: User, group: TeamGroup) => Promise<void>,
-  onListUserProjects: (user: User) => Promise<Array<CloudProjectWithUserAccessInfo>>,
-  onDeleteGroup: (group: TeamGroup) => Promise<void>,
-  onCreateGroup: (
-    attributes: {
-      name: string
-    },
-  ) => Promise<void>,
-  onRefreshMembers: () => Promise<void>
+  team: Team | null | undefined;
+  groups: Array<TeamGroup> | null | undefined;
+  members: Array<User> | null | undefined;
+  memberships: Array<TeamMembership> | null | undefined;
+  onChangeGroupName: (group: TeamGroup, newName: string) => Promise<void>;
+  onChangeUserGroup: (user: User, group: TeamGroup) => Promise<void>;
+  onListUserProjects: (
+    user: User
+  ) => Promise<Array<CloudProjectWithUserAccessInfo>>;
+  onDeleteGroup: (group: TeamGroup) => Promise<void>;
+  onCreateGroup: (attributes: { name: string }) => Promise<void>;
+  onRefreshMembers: () => Promise<void>;
 };
 
 export const initialTeamState = {

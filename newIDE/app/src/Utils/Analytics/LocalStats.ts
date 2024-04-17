@@ -6,7 +6,7 @@ export const getProgramOpeningCount = (): number => {
       `${localStorageLocalStatsPrefix}-program-opening`
     );
     if (count !== null) return parseInt(count, 10);
-  } catch (e: any) {
+  } catch (e) {
     console.warn('Unable to load stored program opening count', e);
   }
 
@@ -21,7 +21,7 @@ export const incrementProgramOpeningCount = () => {
       `${localStorageLocalStatsPrefix}-program-opening`,
       '' + count
     );
-  } catch (e: any) {
+  } catch (e) {
     console.warn('Unable to store program opening count', e);
   }
 };
@@ -32,7 +32,7 @@ export const getGetStartedSectionViewCount = (): number => {
       `${localStorageLocalStatsPrefix}-get-started-section-view-count`
     );
     if (count !== null) return parseInt(count, 10);
-  } catch (e: any) {
+  } catch (e) {
     console.warn('Unable to load stored get started section view count', e);
   }
 
@@ -47,7 +47,7 @@ export const incrementGetStartedSectionViewCount = () => {
       `${localStorageLocalStatsPrefix}-get-started-section-view-count`,
       '' + count
     );
-  } catch (e: any) {
+  } catch (e) {
     console.warn('Unable to store get started section view count', e);
   }
 };

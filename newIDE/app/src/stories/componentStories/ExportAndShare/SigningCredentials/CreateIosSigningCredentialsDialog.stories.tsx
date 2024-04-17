@@ -3,15 +3,14 @@ import { action } from '@storybook/addon-actions';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
-// @ts-expect-error - TS6142 - Module '../../../PaperDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/PaperDecorator.tsx', but '--jsx' is not set.
 import paperDecorator from '../../../PaperDecorator';
 
 import { fakeSilverAuthenticatedUser } from '../../../../fixtures/GDevelopServicesTestData';
 import AuthenticatedUserContext from '../../../../Profile/AuthenticatedUserContext';
-// @ts-expect-error - TS6142 - Module '../../../../ExportAndShare/SigningCredentials/CreateIosSigningCredentialsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/SigningCredentials/CreateIosSigningCredentialsDialog/index.tsx', but '--jsx' is not set.
+
 import { CreateIosSigningCredentialsDialog } from '../../../../ExportAndShare/SigningCredentials/CreateIosSigningCredentialsDialog';
 import { GDevelopBuildApi } from '../../../../Utils/GDevelopServices/ApiConfigs';
-// @ts-expect-error - TS6142 - Module '../../../AlertDecorator' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/stories/AlertDecorator.tsx', but '--jsx' is not set.
+
 import alertDecorator from '../../../AlertDecorator';
 
 export default {
@@ -25,9 +24,7 @@ export const AlwaysError = () => {
   axiosMock.onAny().reply(500);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
@@ -52,9 +49,7 @@ export const WorkingCertificateRequestButCertificateError = () => {
     .reply(500);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
@@ -86,9 +81,7 @@ export const WorkingCertificateRequestButCertificateUnknownKind = () => {
     .reply(500);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}
@@ -117,15 +110,11 @@ export const AllWorking = () => {
       certificateKind: 'distribution',
     })
     .onPost(
-      `${
-        GDevelopBuildApi.baseUrl
-      }/signing-credential/action/create-certificate-p12`
+      `${GDevelopBuildApi.baseUrl}/signing-credential/action/create-certificate-p12`
     )
     .reply(200, 'Ok')
     .onPost(
-      `${
-        GDevelopBuildApi.baseUrl
-      }/signing-credential/action/upload-mobile-provision`
+      `${GDevelopBuildApi.baseUrl}/signing-credential/action/upload-mobile-provision`
     )
     .reply(200, {
       uuid: 'fake-mobile-provision-uuid',
@@ -136,9 +125,7 @@ export const AllWorking = () => {
     .reply(500);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <AuthenticatedUserContext.Provider value={fakeSilverAuthenticatedUser}>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <CreateIosSigningCredentialsDialog
         initialTab={'apple-certificate'}
         authenticatedUser={fakeSilverAuthenticatedUser}

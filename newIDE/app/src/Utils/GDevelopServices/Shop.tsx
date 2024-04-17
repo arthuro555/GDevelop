@@ -7,7 +7,7 @@ import { isURL } from '../../ResourcesList/ResourceUtils';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
 import { MessageByLocale } from '../i18n/MessageByLocale';
 import { Subscription } from './Usage';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans } from '@lingui/macro';
 
 export const client = axios.create({
@@ -15,100 +15,111 @@ export const client = axios.create({
 });
 
 type StripeAndPaypalPrice = {
-  value: number,
-  name: string,
-  usageType: string,
-  stripePriceId: string,
-  currency: 'USD' | 'EUR'
+  value: number;
+  name: string;
+  usageType: string;
+  stripePriceId: string;
+  currency: 'USD' | 'EUR';
 };
 
 type CreditPrice = {
-  amount: number,
-  usageType: string
+  amount: number;
+  usageType: string;
 };
 
 type ProductListingData = {
-  id: string,
-  sellerId: string,
-  isSellerGDevelop: boolean,
-  productType: 'ASSET_PACK' | 'GAME_TEMPLATE',
-  listing: 'ASSET_PACK' | 'GAME_TEMPLATE',
-  name: string,
-  description: string,
-  categories: Array<string>,
-  updatedAt: string,
-  createdAt: string,
-  thumbnailUrls: string[],
-  includedListableProductIds?: string[]
+  id: string;
+  sellerId: string;
+  isSellerGDevelop: boolean;
+  productType: 'ASSET_PACK' | 'GAME_TEMPLATE';
+  listing: 'ASSET_PACK' | 'GAME_TEMPLATE';
+  name: string;
+  description: string;
+  categories: Array<string>;
+  updatedAt: string;
+  createdAt: string;
+  thumbnailUrls: string[];
+  includedListableProductIds?: string[];
 };
 
 type RedeemCondition = {
-  reason: 'subscription',
-  condition: string,
-  usageType: string
+  reason: 'subscription';
+  condition: string;
+  usageType: string;
 };
 
 type RedeemableAttributes = {
-  redeemConditions?: RedeemCondition[]
+  redeemConditions?: RedeemCondition[];
 };
 
 type StripeAndPaypalSellableAttributes = {
-  prices: StripeAndPaypalPrice[],
-  sellerStripeAccountId: string,
-  stripeProductId: string
+  prices: StripeAndPaypalPrice[];
+  sellerStripeAccountId: string;
+  stripeProductId: string;
 };
 
 type CreditsClaimableAttributes = {
-  creditPrices: Array<CreditPrice>
+  creditPrices: Array<CreditPrice>;
 };
 
 type AppStoreProductAttributes = {
-  appStoreProductId: string | null,
+  appStoreProductId: string | null;
   /** The thumbnails to use when on the app store - otherwise, use thumbnailUrls as usual. */
-  appStoreThumbnailUrls?: string[] | null
+  appStoreThumbnailUrls?: string[] | null;
 };
 
-export type PrivateAssetPackListingData = (ProductListingData) & (StripeAndPaypalSellableAttributes) & (AppStoreProductAttributes) & (CreditsClaimableAttributes) & (RedeemableAttributes) & {
-  productType: 'ASSET_PACK',
-  listing: 'ASSET_PACK'
-};
+export type PrivateAssetPackListingData = ProductListingData &
+  StripeAndPaypalSellableAttributes &
+  AppStoreProductAttributes &
+  CreditsClaimableAttributes &
+  RedeemableAttributes & {
+    productType: 'ASSET_PACK';
+    listing: 'ASSET_PACK';
+  };
 
-export type PrivateGameTemplateListingData = (ProductListingData) & (StripeAndPaypalSellableAttributes) & (AppStoreProductAttributes) & (CreditsClaimableAttributes) & {
-  productType: 'GAME_TEMPLATE',
-  listing: 'GAME_TEMPLATE'
-};
+export type PrivateGameTemplateListingData = ProductListingData &
+  StripeAndPaypalSellableAttributes &
+  AppStoreProductAttributes &
+  CreditsClaimableAttributes & {
+    productType: 'GAME_TEMPLATE';
+    listing: 'GAME_TEMPLATE';
+  };
 
-export type CreditsPackageListingData = (ProductListingData) & (StripeAndPaypalSellableAttributes) & (AppStoreProductAttributes) & {
-  productType: 'CREDITS_PACKAGE',
-  listing: 'CREDITS_PACKAGE'
-};
+export type CreditsPackageListingData = ProductListingData &
+  StripeAndPaypalSellableAttributes &
+  AppStoreProductAttributes & {
+    productType: 'CREDITS_PACKAGE';
+    listing: 'CREDITS_PACKAGE';
+  };
 
 export type Purchase = {
-  id: string,
-  usageType: string,
-  productId: string,
-  buyerId: string,
-  receiverId: string,
-  createdAt: string,
-  cancelledAt?: string,
-  stripeCheckoutSessionId?: string,
-  stripeCustomerId?: string,
-  appStoreTransactionId?: string,
-  paypalPayerId?: string,
-  paypalOrderId?: string,
-  manualGiftReason?: string,
-  creditsAmount?: number,
-  productType: 'ASSET_PACK' | 'GAME_TEMPLATE' | 'CREDITS_PACKAGE'
+  id: string;
+  usageType: string;
+  productId: string;
+  buyerId: string;
+  receiverId: string;
+  createdAt: string;
+  cancelledAt?: string;
+  stripeCheckoutSessionId?: string;
+  stripeCustomerId?: string;
+  appStoreTransactionId?: string;
+  paypalPayerId?: string;
+  paypalOrderId?: string;
+  manualGiftReason?: string;
+  creditsAmount?: number;
+  productType: 'ASSET_PACK' | 'GAME_TEMPLATE' | 'CREDITS_PACKAGE';
 };
 
 type ProductLicenseType = 'personal' | 'commercial' | 'unlimited';
 export type ProductLicense = {
-  id: ProductLicenseType,
-  nameByLocale: MessageByLocale,
-  descriptionByLocale: MessageByLocale
+  id: ProductLicenseType;
+  nameByLocale: MessageByLocale;
+  descriptionByLocale: MessageByLocale;
 };
 
-export const listListedPrivateAssetPacks = async (): Promise<Array<PrivateAssetPackListingData>> => {
+export const listListedPrivateAssetPacks = async (): Promise<
+  Array<PrivateAssetPackListingData>
+> => {
   const response = await client.get('/asset-pack');
   const assetPacks = response.data;
   if (!Array.isArray(assetPacks)) {
@@ -118,7 +129,9 @@ export const listListedPrivateAssetPacks = async (): Promise<Array<PrivateAssetP
   return assetPacks;
 };
 
-export const listListedPrivateGameTemplates = async (): Promise<Array<PrivateGameTemplateListingData>> => {
+export const listListedPrivateGameTemplates = async (): Promise<
+  Array<PrivateGameTemplateListingData>
+> => {
   const response = await client.get('/game-template');
   const gameTemplates = response.data;
   if (!Array.isArray(gameTemplates)) {
@@ -128,24 +141,24 @@ export const listListedPrivateGameTemplates = async (): Promise<Array<PrivateGam
   return gameTemplates;
 };
 
-export const listListedCreditsPackages = async (): Promise<Array<CreditsPackageListingData>> => {
+export const listListedCreditsPackages = async (): Promise<
+  Array<CreditsPackageListingData>
+> => {
   const response = await client.get('/credits-package');
   const creditsPackages = response.data;
   if (!Array.isArray(creditsPackages)) {
     throw new Error('Invalid response from the credits packages API');
   }
 
-// @ts-expect-error - TS2322 - Type 'any[]' is not assignable to type 'never[]'.
+  // @ts-expect-error - TS2322 - Type 'any[]' is not assignable to type 'never[]'.
   return creditsPackages;
 };
 
-export const listSellerAssetPacks = async (
-  {
-    sellerId,
-  }: {
-    sellerId: string
-  },
-): Promise<Array<PrivateAssetPackListingData>> => {
+export const listSellerAssetPacks = async ({
+  sellerId,
+}: {
+  sellerId: string;
+}): Promise<Array<PrivateAssetPackListingData>> => {
   const response = await client.get(`/user/${sellerId}/product`, {
     params: {
       productType: 'asset-pack',
@@ -154,13 +167,11 @@ export const listSellerAssetPacks = async (
   return response.data;
 };
 
-export const listSellerGameTemplates = async (
-  {
-    sellerId,
-  }: {
-    sellerId: string
-  },
-): Promise<Array<PrivateGameTemplateListingData>> => {
+export const listSellerGameTemplates = async ({
+  sellerId,
+}: {
+  sellerId: string;
+}): Promise<Array<PrivateGameTemplateListingData>> => {
   const response = await client.get(`/user/${sellerId}/product`, {
     params: {
       productType: 'game-template',
@@ -176,10 +187,10 @@ export const listUserPurchases = async (
     productType,
     role,
   }: {
-    userId: string,
-    productType: 'asset-pack' | 'game-template' | 'credits-package',
-    role: 'receiver' | 'buyer'
-  },
+    userId: string;
+    productType: 'asset-pack' | 'game-template' | 'credits-package';
+    role: 'receiver' | 'buyer';
+  }
 ): Promise<Array<Purchase>> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.get('/purchase', {
@@ -200,8 +211,8 @@ export const getAuthorizationTokenForPrivateAssets = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<string> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.post(
@@ -220,8 +231,8 @@ export const getAuthorizationTokenForPrivateGameTemplates = async (
   {
     userId,
   }: {
-    userId: string
-  },
+    userId: string;
+  }
 ): Promise<string> => {
   const authorizationHeader = await getAuthorizationHeader();
   const response = await client.post(
@@ -235,22 +246,32 @@ export const getAuthorizationTokenForPrivateGameTemplates = async (
   return response.data;
 };
 
-export const createProductAuthorizedUrl = (url: string, token: string): string => {
+export const createProductAuthorizedUrl = (
+  url: string,
+  token: string
+): string => {
   return url.indexOf('?') !== -1
     ? `${url}&token=${encodeURIComponent(token)}`
     : `${url}?token=${encodeURIComponent(token)}`;
 };
 
-export const isPrivateAssetResourceAuthorizedUrl = (url: string): boolean => url.startsWith('https://private-assets.gdevelop.io/') ||
-url.startsWith('https://private-assets-dev.gdevelop.io/');
+export const isPrivateAssetResourceAuthorizedUrl = (url: string): boolean =>
+  url.startsWith('https://private-assets.gdevelop.io/') ||
+  url.startsWith('https://private-assets-dev.gdevelop.io/');
 
-export const isPrivateGameTemplateResourceAuthorizedUrl = (url: string): boolean => url.startsWith('https://private-game-templates.gdevelop.io/') ||
-url.startsWith('https://private-game-templates-dev.gdevelop.io/');
+export const isPrivateGameTemplateResourceAuthorizedUrl = (
+  url: string
+): boolean =>
+  url.startsWith('https://private-game-templates.gdevelop.io/') ||
+  url.startsWith('https://private-game-templates-dev.gdevelop.io/');
 
-export const isProductAuthorizedResourceUrl = (url: string): boolean => isPrivateAssetResourceAuthorizedUrl(url) ||
-isPrivateGameTemplateResourceAuthorizedUrl(url);
+export const isProductAuthorizedResourceUrl = (url: string): boolean =>
+  isPrivateAssetResourceAuthorizedUrl(url) ||
+  isPrivateGameTemplateResourceAuthorizedUrl(url);
 
-export const extractDecodedFilenameWithExtensionFromProductAuthorizedUrl = (productAuthorizedUrl: string): string => {
+export const extractDecodedFilenameWithExtensionFromProductAuthorizedUrl = (
+  productAuthorizedUrl: string
+): string => {
   const urlWithoutQueryParams = productAuthorizedUrl.split('?')[0];
   const decodedFilenameWithExtension = decodeURIComponent(
     path.basename(urlWithoutQueryParams)
@@ -258,21 +279,19 @@ export const extractDecodedFilenameWithExtensionFromProductAuthorizedUrl = (prod
   return decodedFilenameWithExtension;
 };
 
-export const getPurchaseCheckoutUrl = (
-  {
-    productId,
-    priceName,
-    userId,
-    userEmail,
-    password,
-  }: {
-    productId: string,
-    priceName: string,
-    userId: string,
-    userEmail: string,
-    password?: string
-  },
-): string => {
+export const getPurchaseCheckoutUrl = ({
+  productId,
+  priceName,
+  userId,
+  userEmail,
+  password,
+}: {
+  productId: string;
+  priceName: string;
+  userId: string;
+  userEmail: string;
+  password?: string;
+}): string => {
   const url = new URL(
     `${GDevelopShopApi.baseUrl}/purchase/action/redirect-to-checkout`
   );
@@ -287,17 +306,15 @@ export const getPurchaseCheckoutUrl = (
 };
 
 // Helper to fetch a token for private game templates if needed, when moving or fetching resources.
-export const fetchTokenForPrivateGameTemplateAuthorizationIfNeeded = async (
-  {
-    authenticatedUser,
-    allResourcePaths,
-  }: {
-    authenticatedUser: AuthenticatedUser,
-    allResourcePaths: Array<string>
-  },
-): Promise<string | null | undefined> => {
+export const fetchTokenForPrivateGameTemplateAuthorizationIfNeeded = async ({
+  authenticatedUser,
+  allResourcePaths,
+}: {
+  authenticatedUser: AuthenticatedUser;
+  allResourcePaths: Array<string>;
+}): Promise<string | null | undefined> => {
   const isFetchingGameTemplateAuthorizedResources = allResourcePaths.some(
-    resourcePath =>
+    (resourcePath) =>
       isURL(resourcePath) &&
       isPrivateGameTemplateResourceAuthorizedUrl(resourcePath)
   );
@@ -309,22 +326,21 @@ export const fetchTokenForPrivateGameTemplateAuthorizationIfNeeded = async (
         'Can not fetch resources from a private game template without being authenticated.'
       );
     }
-    const tokenForPrivateGameTemplateAuthorization = await getAuthorizationTokenForPrivateGameTemplates(
-      authenticatedUser.getAuthorizationHeader,
-      { userId }
-    );
+    const tokenForPrivateGameTemplateAuthorization =
+      await getAuthorizationTokenForPrivateGameTemplates(
+        authenticatedUser.getAuthorizationHeader,
+        { userId }
+      );
     return tokenForPrivateGameTemplateAuthorization;
   }
   return null;
 };
 
-export const listProductLicenses = async (
-  {
-    productType,
-  }: {
-    productType: 'asset-pack' | 'game-template'
-  },
-): Promise<ProductLicense[]> => {
+export const listProductLicenses = async ({
+  productType,
+}: {
+  productType: 'asset-pack' | 'game-template';
+}): Promise<ProductLicense[]> => {
   const response = await client.get('/product-license', {
     params: {
       productType,
@@ -346,10 +362,10 @@ export const buyProductWithCredits = async (
     usageType,
     userId,
   }: {
-    productId: string,
-    usageType: string,
-    userId: string
-  },
+    productId: string;
+    usageType: string;
+    userId: string;
+  }
 ): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   await client.post(
@@ -369,28 +385,29 @@ export const buyProductWithCredits = async (
   );
 };
 
-export const canRedeemProduct = (
-  {
-    redeemCondition,
-    subscription,
-  }: {
-    redeemCondition: RedeemCondition,
-    subscription?: Subscription | null | undefined
-  },
-): {
-  canRedeem: true
-} | {
-  canRedeem: false
-} | {
-  canRedeem: false,
-  reason?: 'subscription',
-  canUpgrade?: boolean
-} => {
+export const canRedeemProduct = ({
+  redeemCondition,
+  subscription,
+}: {
+  redeemCondition: RedeemCondition;
+  subscription?: Subscription | null | undefined;
+}):
+  | {
+      canRedeem: true;
+    }
+  | {
+      canRedeem: false;
+    }
+  | {
+      canRedeem: false;
+      reason?: 'subscription';
+      canUpgrade?: boolean;
+    } => {
   if (redeemCondition.reason === 'subscription') {
     // Condition should look like `gdevelop_gold,gdevelop_startup`.
     const requiredPlanIds = redeemCondition.condition.split(',');
     if (subscription && !subscription.benefitsFromEducationPlan) {
-// @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      // @ts-expect-error - TS2345 - Argument of type 'string | null' is not assignable to parameter of type 'string'.
       if (requiredPlanIds.includes(subscription.planId)) {
         return { canRedeem: true };
       } else {
@@ -402,7 +419,7 @@ export const canRedeemProduct = (
             'gdevelop_silver',
             'gdevelop_gold',
           ].some(
-            planId =>
+            (planId) =>
               subscription.planId === planId &&
               !requiredPlanIds.includes(planId)
           ),
@@ -414,34 +431,34 @@ export const canRedeemProduct = (
   return { canRedeem: false };
 };
 
-export const getCalloutToGetSubscriptionOrClaimAssetPack = (
-  {
-    subscription,
-    privateAssetPackListingData,
-    isAlreadyReceived,
-  }: {
-    subscription: Subscription | null | undefined,
-    privateAssetPackListingData: PrivateAssetPackListingData,
-    isAlreadyReceived: boolean
-  },
-): {
-  message: React.ReactNode,
-  actionLabel: React.ReactNode | null | undefined,
-  canRedeemAssetPack: boolean
-} | null | undefined => {
+export const getCalloutToGetSubscriptionOrClaimAssetPack = ({
+  subscription,
+  privateAssetPackListingData,
+  isAlreadyReceived,
+}: {
+  subscription: Subscription | null | undefined;
+  privateAssetPackListingData: PrivateAssetPackListingData;
+  isAlreadyReceived: boolean;
+}):
+  | {
+      message: React.ReactNode;
+      actionLabel: React.ReactNode | null | undefined;
+      canRedeemAssetPack: boolean;
+    }
+  | null
+  | undefined => {
   if (isAlreadyReceived || !privateAssetPackListingData.redeemConditions)
     return null;
   if (subscription && subscription.benefitsFromEducationPlan) return null;
 
-  const applicableRedeemConditions = privateAssetPackListingData.redeemConditions.filter(
-    redeemCondition => {
+  const applicableRedeemConditions =
+    privateAssetPackListingData.redeemConditions.filter((redeemCondition) => {
       return privateAssetPackListingData.prices.some(
-        price =>
+        (price) =>
           price.usageType === redeemCondition.usageType &&
           redeemCondition.reason === 'subscription'
       );
-    }
-  );
+    });
 
   // The first redeem condition is the priority one.
   const firstApplicableRedeemCondition = applicableRedeemConditions[0];
@@ -453,14 +470,11 @@ export const getCalloutToGetSubscriptionOrClaimAssetPack = (
   });
 
   const actionLabel = redemptionCheck.canRedeem ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>Claim this pack</Trans>
   ) : !subscription || !subscription.planId ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <Trans>Get a Sub</Trans>
-// @ts-expect-error - TS2339 - Property 'canUpgrade' does not exist on type '{ canRedeem: false; } | { canRedeem: false; reason?: "subscription" | undefined; canUpgrade?: boolean | undefined; }'.
-  ) : redemptionCheck.canUpgrade ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+  ) : // @ts-expect-error - TS2339 - Property 'canUpgrade' does not exist on type '{ canRedeem: false; } | { canRedeem: false; reason?: "subscription" | undefined; canUpgrade?: boolean | undefined; }'.
+  redemptionCheck.canUpgrade ? (
     <Trans>Upgrade</Trans>
   ) : null;
 
@@ -470,7 +484,6 @@ export const getCalloutToGetSubscriptionOrClaimAssetPack = (
       canRedeemAssetPack: redemptionCheck.canRedeem,
       // TODO: Adapt message to redeem condition
       message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Trans>
           Single commercial use license for claim with Gold or Pro subscription
         </Trans>
@@ -483,7 +496,6 @@ export const getCalloutToGetSubscriptionOrClaimAssetPack = (
       canRedeemAssetPack: redemptionCheck.canRedeem,
       // TODO: Adapt message to redeem condition
       message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Trans>Personal license for claim with Gold or Pro subscription</Trans>
       ),
     };
@@ -494,7 +506,6 @@ export const getCalloutToGetSubscriptionOrClaimAssetPack = (
       canRedeemAssetPack: redemptionCheck.canRedeem,
       // TODO: Adapt message to redeem condition
       message: (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <Trans>
           Unlimited commercial use license for claim with Gold or Pro
           subscription
@@ -504,23 +515,21 @@ export const getCalloutToGetSubscriptionOrClaimAssetPack = (
   }
 };
 
-export const redeemPrivateAssetPack = async (
-  {
-    privateAssetPackListingData,
-    getAuthorizationHeader,
-    userId,
-    password,
-  }: {
-    privateAssetPackListingData: PrivateAssetPackListingData,
-    getAuthorizationHeader: () => Promise<string>,
-    userId: string,
-    password: string
-  },
-): Promise<void> => {
+export const redeemPrivateAssetPack = async ({
+  privateAssetPackListingData,
+  getAuthorizationHeader,
+  userId,
+  password,
+}: {
+  privateAssetPackListingData: PrivateAssetPackListingData;
+  getAuthorizationHeader: () => Promise<string>;
+  userId: string;
+  password: string;
+}): Promise<void> => {
   const authorizationHeader = await getAuthorizationHeader();
   const payload: {
-    priceUsageType: string,
-    password?: string
+    priceUsageType: string;
+    password?: string;
   } = {
     priceUsageType: 'commercial',
   };

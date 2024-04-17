@@ -13,7 +13,7 @@ export const makeDoubleClickable = (pixiDisplayObject: PIXI.DisplayObject) => {
   let lastClickGlobalX = 0;
   let lastClickGlobalY = 0;
 
-// @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
+  // @ts-expect-error - TS2694 - Namespace '"/home/arthuro555/code/GDevelop/newIDE/app/node_modules/pixi.js-legacy/lib/index"' has no exported member 'InteractionEvent'.
   const handleTap = (event: PIXI.InteractionEvent) => {
     const { x, y } = event.data.global;
     const currentTime = Date.now();

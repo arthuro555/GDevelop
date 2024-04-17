@@ -1,5 +1,5 @@
 import * as React from 'react';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '@lingui/macro'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/@lingui/macro/index.js' implicitly has an 'any' type.
+
 import { Trans, t } from '@lingui/macro';
 import { AuthenticatedUser } from '../../Profile/AuthenticatedUserContext';
 import {
@@ -11,20 +11,19 @@ import {
   filterAppleCertificateSigningCredentials,
   filterAppleAuthKeySigningCredentials,
 } from '../../Utils/GDevelopServices/Build';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectField' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectField.tsx', but '--jsx' is not set.
+
 import SelectField from '../../UI/SelectField';
 import {
   SigningCredentialsDialog,
   useGetUserSigningCredentials,
-// @ts-expect-error - TS6142 - Module './SigningCredentialsDialog' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/ExportAndShare/SigningCredentials/SigningCredentialsDialog/index.tsx', but '--jsx' is not set.
 } from './SigningCredentialsDialog';
-// @ts-expect-error - TS6142 - Module '../../UI/SelectOption' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/SelectOption.tsx', but '--jsx' is not set.
+
 import SelectOption from '../../UI/SelectOption';
-// @ts-expect-error - TS6142 - Module '../../UI/Layout' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/Layout.tsx', but '--jsx' is not set.
+
 import { ColumnStackLayout, LineStackLayout } from '../../UI/Layout';
-// @ts-expect-error - TS6142 - Module '../../UI/FlatButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/FlatButton.tsx', but '--jsx' is not set.
+
 import FlatButton from '../../UI/FlatButton';
-// @ts-expect-error - TS6142 - Module '../../UI/RaisedButton' was resolved to '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/RaisedButton.tsx', but '--jsx' is not set.
+
 import RaisedButton from '../../UI/RaisedButton';
 
 const styles = {
@@ -42,7 +41,7 @@ const filterSigningCredentialsForTarget = (
 ) => {
   if (!signingCredentials) return null;
 
-  return signingCredentials.filter(signingCredential => {
+  return signingCredentials.filter((signingCredential) => {
     if (signingCredential.type === 'apple-certificate') {
       if (
         !targets.includes('iosAppStore') &&
@@ -82,11 +81,10 @@ const filterSigningCredentialsForTarget = (
 const formatBuildSigningOptionsForMobileProvision = (
   buildSigningOptions: BuildSigningOptions | null,
   signingCredentials: Array<SigningCredential> | null,
-  value: string,
+  value: string
 ): BuildSigningOptions | null => {
-  const appleCertificateSigningCredentials = filterAppleCertificateSigningCredentials(
-    signingCredentials
-  );
+  const appleCertificateSigningCredentials =
+    filterAppleCertificateSigningCredentials(signingCredentials);
   if (!appleCertificateSigningCredentials) return buildSigningOptions;
 
   for (const signingCredential of appleCertificateSigningCredentials) {
@@ -117,7 +115,7 @@ const isEquivalentBuildSigningOptions = (
 const formatBuildSigningOptionsForAuthKey = (
   buildSigningOptions: BuildSigningOptions | null,
   targets: Array<TargetName>,
-  apiKey: string | null,
+  apiKey: string | null
 ): BuildSigningOptions | null => {
   if (!buildSigningOptions) return buildSigningOptions;
 
@@ -127,10 +125,8 @@ const formatBuildSigningOptionsForAuthKey = (
     // Not signing for the app store, so no deployment of App Store Connect (no Auth Key).
     (!targets.includes('iosAppStore') && buildSigningOptions.authKeyApiKey)
   ) {
-    const {
-      authKeyApiKey,
-      ...buildSigningOptionsWithoutApiKey
-    } = buildSigningOptions;
+    const { authKeyApiKey, ...buildSigningOptionsWithoutApiKey } =
+      buildSigningOptions;
     return buildSigningOptionsWithoutApiKey;
   }
 
@@ -184,14 +180,12 @@ const isBuildSigningOptionsAuthKeyValid = (
 const getDefaultOrValidBuildSigningOptionsFor = (
   buildSigningOptions: BuildSigningOptions | null,
   signingCredentials: Array<SigningCredential> | null,
-  targets: Array<TargetName>,
+  targets: Array<TargetName>
 ): BuildSigningOptions | null => {
-  const appleCertificateSigningCredentials = filterAppleCertificateSigningCredentials(
-    signingCredentials
-  );
-  const appleAuthKeySigningCredentials = filterAppleAuthKeySigningCredentials(
-    signingCredentials
-  );
+  const appleCertificateSigningCredentials =
+    filterAppleCertificateSigningCredentials(signingCredentials);
+  const appleAuthKeySigningCredentials =
+    filterAppleAuthKeySigningCredentials(signingCredentials);
   if (!appleCertificateSigningCredentials) {
     // No signing credentials yet (which means they can be loading),
     // don't touch the current build signing options.
@@ -246,11 +240,11 @@ const getDefaultOrValidBuildSigningOptionsFor = (
 };
 
 type Props = {
-  targets: Array<TargetName>,
-  authenticatedUser: AuthenticatedUser,
-  buildSigningOptions: BuildSigningOptions | null,
-  onSelectBuildSigningOptions: (arg1: BuildSigningOptions | null) => void,
-  disabled?: boolean
+  targets: Array<TargetName>;
+  authenticatedUser: AuthenticatedUser;
+  buildSigningOptions: BuildSigningOptions | null;
+  onSelectBuildSigningOptions: (arg1: BuildSigningOptions | null) => void;
+  disabled?: boolean;
 };
 
 export const IosSigningCredentialsSelector = ({
@@ -260,61 +254,48 @@ export const IosSigningCredentialsSelector = ({
   onSelectBuildSigningOptions,
   disabled,
 }: Props) => {
-  const {
-    signingCredentials,
-    error,
-    onRefreshSigningCredentials,
-  } = useGetUserSigningCredentials(authenticatedUser);
+  const { signingCredentials, error, onRefreshSigningCredentials } =
+    useGetUserSigningCredentials(authenticatedUser);
   const allSigningCredentialsForTarget = filterSigningCredentialsForTarget(
     signingCredentials,
     targets
   );
-  const appleCertificateSigningCredentials = filterAppleCertificateSigningCredentials(
-    allSigningCredentialsForTarget
-  );
+  const appleCertificateSigningCredentials =
+    filterAppleCertificateSigningCredentials(allSigningCredentialsForTarget);
   const appleAuthKeySigningCredentials = filterAppleAuthKeySigningCredentials(
     allSigningCredentialsForTarget
   );
-  const [
-    isSigningCredentialsDialogOpen,
-    setIsSigningCredentialsDialogOpen,
-  ] = React.useState(false);
+  const [isSigningCredentialsDialogOpen, setIsSigningCredentialsDialogOpen] =
+    React.useState(false);
 
-  React.useEffect(
-    () => {
-      // Override the selection if it's not valid or if none was made.
-      const newBuildSigningOptions = getDefaultOrValidBuildSigningOptionsFor(
-        buildSigningOptions,
-        allSigningCredentialsForTarget,
-        targets
-      );
-      if (
-        !isEquivalentBuildSigningOptions(
-          newBuildSigningOptions,
-          buildSigningOptions
-        )
-      ) {
-        onSelectBuildSigningOptions(newBuildSigningOptions);
-      }
-    },
-    [
+  React.useEffect(() => {
+    // Override the selection if it's not valid or if none was made.
+    const newBuildSigningOptions = getDefaultOrValidBuildSigningOptionsFor(
       buildSigningOptions,
-      onSelectBuildSigningOptions,
       allSigningCredentialsForTarget,
-      targets,
-    ]
-  );
+      targets
+    );
+    if (
+      !isEquivalentBuildSigningOptions(
+        newBuildSigningOptions,
+        buildSigningOptions
+      )
+    ) {
+      onSelectBuildSigningOptions(newBuildSigningOptions);
+    }
+  }, [
+    buildSigningOptions,
+    onSelectBuildSigningOptions,
+    allSigningCredentialsForTarget,
+    targets,
+  ]);
 
   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
     <ColumnStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
       <LineStackLayout noMargin expand alignItems="end">
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
         <SelectField
           fullWidth
           floatingLabelText={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <Trans>Certificate and provisioning profile</Trans>
           }
           value={
@@ -322,13 +303,13 @@ export const IosSigningCredentialsSelector = ({
               ? buildSigningOptions.mobileProvisionUuid || ''
               : ''
           }
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
           onChange={(e, i, value: string) => {
-            const newBuildSigningOptions = formatBuildSigningOptionsForMobileProvision(
-              buildSigningOptions,
-              allSigningCredentialsForTarget,
-              value
-            );
+            const newBuildSigningOptions =
+              formatBuildSigningOptionsForMobileProvision(
+                buildSigningOptions,
+                allSigningCredentialsForTarget,
+                value
+              );
             if (newBuildSigningOptions)
               onSelectBuildSigningOptions(newBuildSigningOptions);
           }}
@@ -342,17 +323,14 @@ export const IosSigningCredentialsSelector = ({
           disabled={disabled}
         >
           {appleCertificateSigningCredentials ? (
-            appleCertificateSigningCredentials.flatMap(signingCredential => {
+            appleCertificateSigningCredentials.flatMap((signingCredential) => {
               return signingCredential.provisioningProfiles.map(
-                provisioningProfile => {
+                (provisioningProfile) => {
                   return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                     <SelectOption
                       key={provisioningProfile.uuid}
                       disabled={!signingCredential.hasCertificateReady}
-                      label={`${provisioningProfile.name} (${
-                        signingCredential.name
-                      })`}
+                      label={`${provisioningProfile.name} (${signingCredential.name})`}
                       value={provisioningProfile.uuid}
                     />
                   );
@@ -360,7 +338,6 @@ export const IosSigningCredentialsSelector = ({
               );
             })
           ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             <SelectOption
               disabled={true}
               label={error ? t`Error loading certificates.` : t`Loading...`}
@@ -370,27 +347,22 @@ export const IosSigningCredentialsSelector = ({
         </SelectField>
         {appleCertificateSigningCredentials &&
         appleCertificateSigningCredentials.length > 0 ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <FlatButton
             style={styles.button}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Add or edit</Trans>}
             onClick={() => setIsSigningCredentialsDialogOpen(true)}
             disabled={disabled}
           />
         ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <RaisedButton
             primary
             style={styles.raisedButton}
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
             label={<Trans>Add new</Trans>}
             onClick={() => setIsSigningCredentialsDialogOpen(true)}
             disabled={disabled}
           />
         )}
         {isSigningCredentialsDialogOpen && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
           <SigningCredentialsDialog
             signingCredentials={signingCredentials}
             error={error}
@@ -404,25 +376,22 @@ export const IosSigningCredentialsSelector = ({
         )}
       </LineStackLayout>
       {targets.includes('iosAppStore') && (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
         <LineStackLayout noMargin>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
           <SelectField
             fullWidth
             floatingLabelText={
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <Trans>Auth Key for upload to App Store Connect</Trans>
             }
             value={
               buildSigningOptions ? buildSigningOptions.authKeyApiKey || '' : ''
             }
-// @ts-expect-error - TS7006 - Parameter 'e' implicitly has an 'any' type. | TS7006 - Parameter 'i' implicitly has an 'any' type.
             onChange={(e, i, value: string) => {
-              const newBuildSigningOptions = formatBuildSigningOptionsForAuthKey(
-                buildSigningOptions,
-                targets,
-                value
-              );
+              const newBuildSigningOptions =
+                formatBuildSigningOptionsForAuthKey(
+                  buildSigningOptions,
+                  targets,
+                  value
+                );
               if (newBuildSigningOptions)
                 onSelectBuildSigningOptions(newBuildSigningOptions);
             }}
@@ -436,21 +405,17 @@ export const IosSigningCredentialsSelector = ({
             disabled={disabled}
           >
             {appleAuthKeySigningCredentials ? (
-              appleAuthKeySigningCredentials.flatMap(signingCredential => {
+              appleAuthKeySigningCredentials.flatMap((signingCredential) => {
                 return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
                   <SelectOption
                     key={signingCredential.apiKey}
                     disabled={!signingCredential.hasAuthKeyReady}
-                    label={`${signingCredential.name} (${
-                      signingCredential.apiKey
-                    })`}
+                    label={`${signingCredential.name} (${signingCredential.apiKey})`}
                     value={signingCredential.apiKey}
                   />
                 );
               })
             ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
               <SelectOption
                 disabled={true}
                 label={error ? t`Error loading Auth Keys.` : t`Loading...`}

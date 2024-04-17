@@ -12,8 +12,8 @@ import { adaptAcceleratorString } from '../AcceleratorString';
 import {
   MenuItemTemplate,
   ContextMenuImplementation,
-} from './Menu.flow';
-// @ts-expect-error - TS7016 - Could not find a declaration file for module '../CustomSvgIcons/ChevronArrowRight'. '/home/arthuro555/code/GDevelop/newIDE/app/src/UI/CustomSvgIcons/ChevronArrowRight.js' implicitly has an 'any' type.
+} from './Menu';
+
 import ChevronArrowRight from '../CustomSvgIcons/ChevronArrowRight';
 
 const useStyles = makeStyles({
@@ -172,7 +172,7 @@ const SubMenuItem = ({ item, buildFromTemplate }) => {
       </Menu>
     </React.Fragment>
   );
-// @ts-expect-error - TS1128 - Declaration or statement expected.
+
 };
 
 /**
@@ -217,12 +217,12 @@ export default class MaterialUIMenuImplementation
 
 // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
         if (item.type === 'separator') {
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
           return <Divider key={'separator' + id} style={styles.divider} />;
 // @ts-expect-error - TS2339 - Property 'type' does not exist on type 'MenuItemTemplate'.
         } else if (item.type === 'checkbox') {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <MenuItem
               dense
 // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
@@ -262,14 +262,13 @@ export default class MaterialUIMenuImplementation
               }}
               style={styles.menuItem}
             >
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
               <ListItemIcon>
 { /* @ts-expect-error - TS2339 - Property 'checked' does not exist on type 'MenuItemTemplate'. */}
                 {item.checked ? (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <CheckBoxIcon fontSize="small" />
                 ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                   <CheckBoxOutlineBlankIcon fontSize="small" />
                 )}
               </ListItemIcon>
@@ -293,7 +292,7 @@ export default class MaterialUIMenuImplementation
           );
         } else {
           return (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
             <MenuItem
               dense
 // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
@@ -320,11 +319,10 @@ export default class MaterialUIMenuImplementation
 // @ts-expect-error - TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'.
                 item.label
               ) : (
-// @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided.
+
                 <div style={styles.labelWithAccelerator}>
 { /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. | TS2339 - Property 'label' does not exist on type 'MenuItemTemplate'. */}
                   <span>{item.label}</span>
-{ /* @ts-expect-error - TS17004 - Cannot use JSX unless the '--jsx' flag is provided. */}
                   <span style={styles.accelerator}>{accelerator}</span>
                 </div>
               )}

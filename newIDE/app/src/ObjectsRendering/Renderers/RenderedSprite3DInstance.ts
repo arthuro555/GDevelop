@@ -1,13 +1,11 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import Rendered3DInstance from './Rendered3DInstance';
 import PixiResourcesLoader from '../PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
 import * as PIXI from 'pixi.js-legacy';
 // @ts-expect-error - TS7016 - Could not find a declaration file for module 'three'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/three/build/three.js' implicitly has an 'any' type.
 import * as THREE from 'three';
-
-const gd: libGDevelop = global.gd;
 
 /**
  * Renderer for gd.SpriteObject
@@ -19,16 +17,16 @@ export default class RenderedSprite3DInstance extends Rendered3DInstance {
   _centerY: number;
   _originX: number;
   _originY: number;
-  _sprite: gdSprite | null | undefined = null;
+  _sprite: gd.Sprite | null | undefined = null;
   _shouldNotRotate: boolean = false;
   _textureWidth = 32;
   _textureHeight = 32;
 
   constructor(
-    project: gdProject,
-    layout: gdLayout,
-    instance: gdInitialInstance,
-    associatedObjectConfiguration: gdObjectConfiguration,
+    project: gd.Project,
+    layout: gd.Layout,
+    instance: gd.InitialInstance,
+    associatedObjectConfiguration: gd.ObjectConfiguration,
     pixiContainer: PIXI.Container,
     threeGroup: THREE.Group,
     pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
@@ -80,22 +78,18 @@ export default class RenderedSprite3DInstance extends Rendered3DInstance {
    * Return a URL for thumbnail of the specified object.
    */
   static getThumbnail(
-    project: gdProject,
+    project: gd.Project,
     resourcesLoader: Flow.Class<ResourcesLoader>,
-    objectConfiguration: gdObjectConfiguration,
+    objectConfiguration: gd.ObjectConfiguration
   ): string {
-    const customObjectConfiguration = gd.asCustomObjectConfiguration(
-      objectConfiguration
-    );
+    const customObjectConfiguration =
+      gd.asCustomObjectConfiguration(objectConfiguration);
     const animations = customObjectConfiguration.getAnimations();
 
     if (
       animations.getAnimationsCount() > 0 &&
       animations.getAnimation(0).getDirectionsCount() > 0 &&
-      animations
-        .getAnimation(0)
-        .getDirection(0)
-        .getSpritesCount() > 0
+      animations.getAnimation(0).getDirection(0).getSpritesCount() > 0
     ) {
       const imageName = animations
         .getAnimation(0)
@@ -186,7 +180,7 @@ export default class RenderedSprite3DInstance extends Rendered3DInstance {
       this._project,
       sprite.getImageName()
     );
-// @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'texture' does not exist on type 'DisplayObject'.
     this._pixiObject.texture = texture;
 
     if (!texture.baseTexture.valid) {
@@ -243,21 +237,21 @@ export default class RenderedSprite3DInstance extends Rendered3DInstance {
     const maxX = minX + width;
     const maxY = minY + height;
 
-// @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'clear' does not exist on type 'DisplayObject'.
     this._pixiObject.clear();
-// @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'beginFill' does not exist on type 'DisplayObject'.
     this._pixiObject.beginFill(0x999999, 0.2);
-// @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineStyle' does not exist on type 'DisplayObject'.
     this._pixiObject.lineStyle(1, 0xffd900, 0);
-// @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'moveTo' does not exist on type 'DisplayObject'.
     this._pixiObject.moveTo(minX, minY);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(maxX, minY);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(maxX, maxY);
-// @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'lineTo' does not exist on type 'DisplayObject'.
     this._pixiObject.lineTo(minX, maxY);
-// @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
+    // @ts-expect-error - TS2339 - Property 'endFill' does not exist on type 'DisplayObject'.
     this._pixiObject.endFill();
 
     this._pixiObject.pivot.x = this._centerX - this._originX;

@@ -1,5 +1,5 @@
 // @ts-expect-error - TS2307 - Cannot find module 'flow-to-typescript-codemod' or its corresponding type declarations.
-import {Flow} from 'flow-to-typescript-codemod';
+import { Flow } from 'flow-to-typescript-codemod';
 import RenderedInstance from './RenderedInstance';
 import PixiResourcesLoader from '../../ObjectsRendering/PixiResourcesLoader';
 import ResourcesLoader from '../../ResourcesLoader';
@@ -11,10 +11,10 @@ import * as PIXI from 'pixi.js-legacy';
 export default function makeRenderer(iconPath: string) {
   class RenderedIconInstance extends RenderedInstance {
     constructor(
-      project: gdProject,
-      layout: gdLayout,
-      instance: gdInitialInstance,
-      associatedObjectConfiguration: gdObjectConfiguration,
+      project: gd.Project,
+      layout: gd.Layout,
+      instance: gd.InitialInstance,
+      associatedObjectConfiguration: gd.ObjectConfiguration,
       pixiContainer: PIXI.Container,
       pixiResourcesLoader: Flow.Class<PixiResourcesLoader>
     ) {
@@ -43,9 +43,9 @@ export default function makeRenderer(iconPath: string) {
     }
 
     static getThumbnail(
-      project: gdProject,
+      project: gd.Project,
       resourcesLoader: Flow.Class<ResourcesLoader>,
-      objectConfiguration: gdObjectConfiguration
+      objectConfiguration: gd.ObjectConfiguration
     ) {
       return iconPath;
     }

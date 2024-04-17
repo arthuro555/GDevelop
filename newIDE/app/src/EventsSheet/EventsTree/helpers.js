@@ -11,9 +11,9 @@ export const moveEventToEventsList = ({
   initialEventsList,
   toIndex,
 }: {
-  targetEventsList: gdEventsList,
-  movingEvent: gdBaseEvent,
-  initialEventsList: gdEventsList,
+  targetEventsList: gd.EventsList,
+  movingEvent: gd.BaseEvent,
+  initialEventsList: gd.EventsList,
   toIndex: number,
 }) => {
   initialEventsList.moveEventToAnotherEventsList(

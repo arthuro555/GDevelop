@@ -1,10 +1,9 @@
 import * as PIXI from 'pixi.js-legacy';
 import Rectangle from '../Utils/Rectangle';
 import { InstanceMeasurer } from './InstancesRenderer';
-const gd: libGDevelop = global.gd;
 
 export default class SelectionRectangle {
-  instances: gdInitialInstancesContainer;
+  instances: gd.InitialInstancesContainer;
   instanceMeasurer: InstanceMeasurer;
   toSceneCoordinates: (x: number, y: number) => [number, number];
 
@@ -17,9 +16,9 @@ export default class SelectionRectangle {
     x: number,
     y: number
   } | null;
-  _instancesInSelectionRectangle: gdInitialInstance[];
+  _instancesInSelectionRectangle: gd.InitialInstance[];
 
-  selector: gdInitialInstanceJSFunctor;
+  selector: gd.InitialInstanceJSFunctor;
   /**
    * Used to check if an instance is in the selection rectangle
    */
@@ -30,7 +29,7 @@ export default class SelectionRectangle {
     instanceMeasurer,
     toSceneCoordinates,
   }: {
-    instances: gdInitialInstancesContainer,
+    instances: gd.InitialInstancesContainer,
     instanceMeasurer: InstanceMeasurer,
     toSceneCoordinates: (x: number, y: number) => [number, number]
   }) {

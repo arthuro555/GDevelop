@@ -1,11 +1,10 @@
-// @ts-expect-error - TS7016 - Could not find a declaration file for module 'react-dom'. '/home/arthuro555/code/GDevelop/newIDE/app/node_modules/react-dom/index.js' implicitly has an 'any' type.
 import ReactDOM from 'react-dom';
 
 // If you're searching for button components,
 // take a look at FlatButton or RaisedButton.
 
 export type ButtonInterface = {
-  focus: () => void
+  focus: () => void;
 };
 
 /**
