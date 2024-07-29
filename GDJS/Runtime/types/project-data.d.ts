@@ -104,7 +104,8 @@ declare type VariableType =
   | 'number'
   | 'boolean'
   | 'structure'
-  | 'array';
+  | 'array'
+  | 'file';
 
 /** Data representation of a GDevelop variable */
 declare type VariableData = Readonly<{
