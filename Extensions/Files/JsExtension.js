@@ -154,7 +154,7 @@ module.exports = {
       )
       .getCodeExtraInformation()
       .setIncludeFile('Extensions/Files/filestools.js')
-      .setFunctionName('gdjs.evtTools.files.loadUrl');
+      .setAsyncFunctionName('gdjs.evtTools.files.loadUrl');
 
     return extension;
   },

@@ -22,7 +22,7 @@ namespace gdjs {
     _bool: boolean = false;
     _children: Children = {};
     _childrenArray: gdjs.Variable[] = [];
-    _file: FileDescriptor | null = null;
+    _file: File | null = null;
     _undefinedInContainer: boolean = false;
 
     // When synchronised over the network, this defines which player is the owner of the variable.
@@ -149,10 +149,10 @@ namespace gdjs {
       } else if (typeof obj === 'object') {
         if (obj instanceof File) {
           this._type = 'file';
-          this._file = new FileDescriptor.WebFileFD(obj);
+          this._file = obj;
         } else if (obj instanceof Blob) {
           this._type = 'file';
-          this._file = new FileDescriptor.BlobFD(obj);
+          this._file = new File([obj], 'unknown', { type: obj.type });
         } else {
           this.castTo('structure');
           this.clearChildren();
@@ -439,7 +439,7 @@ namespace gdjs {
         else if (this._type === 'structure') return '[Structure]';
         else if (this._type === 'array') return '[Array]';
         else if (this._type === 'file')
-          return `[File ${this._file!.name} (${this._file!.mimeType})]`;
+          return `[File ${this._file?.name} (${this._file?.type})]`;
         else return '';
       }
 
@@ -505,8 +505,8 @@ namespace gdjs {
      * Sets the primitive value using the setter of the current type.
      * @param newValue The primitive value of the variable.
      */
-    setValue(newValue: string | float | boolean | FileDescriptor) {
-      if (newValue instanceof gdjs.FileDescriptor) {
+    setValue(newValue: string | float | boolean | File) {
+      if (newValue instanceof File) {
         this._type = 'file';
         this._file = newValue;
         return;
@@ -520,13 +520,13 @@ namespace gdjs {
     /**
      * Gets the primitive value using the getter of the current type.
      */
-    getValue(): string | float | boolean | FileDescriptor {
+    getValue(): string | float | boolean | File {
       return this._type === 'number'
         ? this.getAsNumber()
         : this._type === 'boolean'
         ? this.getAsBoolean()
-        : this._type === 'file'
-        ? this._file!
+        : this._type === 'file' && this._file
+        ? this._file
         : this.getAsString();
     }
 
@@ -693,29 +693,29 @@ namespace gdjs {
     }
 
     /**
-     * Makes the variable a "File" variable, which holds a reference to a
-     * (not necessarily readily avvailable) file, similarly to JavaScript's "{@link Blob}"
+     * Makes the variable a "File" variable, which holds a file's binary data & metadata.
      *
-     * @param fileDescriptor The FileDescriptor for accessing the file contents and metadata.
+     * @param file The {@link File}.
      */
-    storeFileReference(fileDescriptor: FileDescriptor): void {
+    storeFileReference(file: File): void {
       this._type = 'file';
-      this._file = fileDescriptor;
+      this._file = file;
     }
 
     /**
-     * Returns the {@link FileDescriptor} stored by the variable.
-     * @returns The {@link FileDescriptor}, or null if the variable is not a file variable.
+     * Returns the {@link File} stored by the variable.
+     * @returns The {@link File}, or null if the variable is not a file variable.
      */
-    getFileDescriptor(): FileDescriptor | null {
+    getFile(): File | null {
       if (this._type !== 'file') {
         logger.error(
           'Tried to get a file from a non-file variable! Something might go wrong...'
         );
+        return null;
       }
 
       // this._file should always be null when the type is not 'file', but better safe than sorry.
-      return this._type === 'file' ? this._file : null;
+      return this._file;
     }
 
     getPlayerOwnership(): number | null {
@@ -728,170 +728,6 @@ namespace gdjs {
 
     disableSynchronization() {
       this._playerNumber = null;
-    }
-  }
-
-  /**
-   * A GDevelop generic 'File' variable internal representation.
-   * There are multiple implementations to support different common JavaScript backing stores.
-   */
-  export abstract class FileDescriptor {
-    /**
-     * The file's name.
-     * Must be set by the constructor.
-     * If provided by the backing store, should be set automatically.
-     * Otherwise, should be left to the user to optionally decide, with 'unknown' as a default.
-     */
-    public readonly name: string;
-    /**
-     * The file's MIME type.
-     * Must be set by the constructor.
-     * If provided by the backing store, should be set automatically.
-     * Otherwise, should be left to the user to optionally decide, with 'application/octet-stream'
-     * as a default, unless the provider allows infering a more fitting one.
-     */
-    public readonly mimeType: string;
-
-    /** To be overridden and called by the Provider to set the name and MIME type. */
-    constructor(name: string, mimeType: string) {
-      this.name = name;
-      this.mimeType = mimeType;
-    }
-
-    /**
-     * Get the file's contents interpreted as an array of bytes.
-     */
-    abstract getBinaryContents(): Promise<ArrayBuffer>;
-    /**
-     * Get the file's contents interpreted as UTF-8 text.
-     */
-    abstract getAsText(): Promise<string>;
-  }
-
-  export namespace FileDescriptor {
-    /**
-     * A FileDescriptor for JavaScript {@link Blob}s.
-     */
-    export class BlobFD extends FileDescriptor {
-      constructor(private readonly blob: Blob, name: string = 'unknown') {
-        super('unknown', blob.type);
-      }
-      getBinaryContents(): Promise<ArrayBuffer> {
-        return this.blob.arrayBuffer();
-        //.then((ab) => new Uint8Array(ab));
-      }
-      getAsText(): Promise<string> {
-        return this.blob.text();
-      }
-    }
-
-    /**
-     * A FileDescriptor for JavaScript {@link File}s.
-     */
-    export class WebFileFD extends FileDescriptor {
-      constructor(private readonly file: File) {
-        super(file.name, file.type);
-      }
-      getBinaryContents(): Promise<ArrayBuffer> {
-        return this.file.arrayBuffer();
-        //.then((ab) => new Uint8Array(ab));
-      }
-      getAsText(): Promise<string> {
-        return this.file.text();
-      }
-    }
-
-    const textEncoder = new TextEncoder();
-    /**
-     * A FileDescriptor for text files backed by an in-memory string.
-     */
-    export class TextFD extends FileDescriptor {
-      constructor(private readonly contents: string, name: string = 'unknown') {
-        super(name, 'text/plain');
-      }
-      getBinaryContents(): Promise<ArrayBuffer> {
-        return Promise.resolve(textEncoder.encode(this.contents));
-      }
-      getAsText(): Promise<string> {
-        return Promise.resolve(this.contents);
-      }
-    }
-
-    const textDecoder = new TextDecoder();
-    /**
-     * A FileDescriptor for text files backed by an in-memory ArrayBuffer.
-     */
-    export class ArrayFD extends FileDescriptor {
-      constructor(
-        private readonly contents: ArrayBuffer,
-        name: string = 'unknown',
-        mimeType: string = 'application/octet-stream'
-      ) {
-        super(name, mimeType);
-      }
-      getBinaryContents(): Promise<ArrayBuffer> {
-        return Promise.resolve(this.contents);
-      }
-      getAsText(): Promise<string> {
-        return Promise.resolve(textDecoder.decode(this.contents));
-      }
-    }
-
-    /**
-     * A FileDescriptor for text files backed by an in-memory ArrayBuffer.
-     *
-     * This is voluntarily kept simple, mirroring the "HTTP Request"
-     * action, but for binary content instead of text content.
-     *
-     * The Advanced HTTP action can be used for making more complex HTTP
-     * requests.
-     */
-    export class UrlFD extends FileDescriptor {
-      private state: 'waiting' | 'fetching' | 'ready' = 'waiting';
-      private blob: Blob | null = null;
-      private fetching: Promise<void> | null = null;
-
-      /**
-       * @param url The URL to the file to fetch.
-       * @param lazy If true, the file will not be fetched until its data is accessed.
-       */
-      constructor(private readonly url: string, lazy: boolean) {
-        super(
-          new URL(url).pathname?.split('/').pop() ?? 'unknown',
-          'application/octet-stream'
-        );
-        if (!lazy) this.fetching = this.fetch();
-      }
-
-      private async fetch() {
-        this.state = 'fetching';
-        try {
-          const request = await fetch(this.url);
-          this.blob = await request.blob();
-        } catch (e) {
-          logger.error("Couldn't load ");
-        }
-        this.state = 'ready';
-      }
-      private async ensureFetched() {
-        if (this.state === 'waiting') {
-          await (this.fetching = this.fetch());
-        }
-        if (this.state === 'fetching') await this.fetching;
-        this.fetching = null;
-      }
-
-      async getBinaryContents(): Promise<ArrayBuffer> {
-        await this.ensureFetched();
-        if (!this.blob) return new Uint8Array(0);
-        return this.blob.arrayBuffer();
-        //.then((ab) => new Uint8Array(ab));
-      }
-      async getAsText(): Promise<string> {
-        await this.ensureFetched();
-        if (!this.blob) return '';
-        return this.blob.text();
-      }
     }
   }
 }

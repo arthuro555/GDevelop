@@ -4,26 +4,26 @@ namespace gdjs {
       const logger = new gdjs.Logger('File Variables');
 
       export function getFileName(file: gdjs.Variable): string {
-        return file.getFileDescriptor()?.name || '';
+        return file.getFile()?.name ?? '';
       }
 
       export function getFileType(file: gdjs.Variable): string {
-        return file.getFileDescriptor()?.mimeType || '';
+        return file.getFile()?.type ?? '';
       }
 
       export function readAsText(
         file: gdjs.Variable,
         output: gdjs.Variable
       ): gdjs.AsyncTask {
-        const fd = file.getFileDescriptor();
-        if (!fd) {
+        const blob = file.getFile();
+        if (!blob) {
           logger.error('Cannot read a non-file variable as a file!');
           return new gdjs.ResolveTask();
         }
 
         return new gdjs.PromiseTask(
-          fd
-            .getAsText()
+          blob
+            .text()
             .then((text) => {
               output.setString(text);
             })
@@ -37,15 +37,15 @@ namespace gdjs {
         file: gdjs.Variable,
         output: gdjs.Variable
       ): gdjs.AsyncTask {
-        const fd = file.getFileDescriptor();
-        if (!fd) {
+        const blob = file.getFile();
+        if (!blob) {
           logger.error('Cannot read a non-file variable as a file!');
           return new gdjs.ResolveTask();
         }
 
         return new gdjs.PromiseTask(
-          fd
-            .getBinaryContents()
+          blob
+            .arrayBuffer()
             .then((arrayBuffer) => {
               output.fromJSObject(new Uint8Array(arrayBuffer));
             })
@@ -86,14 +86,10 @@ namespace gdjs {
                 const fileCount = input.files.length;
                 for (let i = 0; i < fileCount; i++) {
                   const child = file.getChildAt(i);
-                  child.storeFileReference(
-                    new gdjs.FileDescriptor.WebFileFD(input.files[i])
-                  );
+                  child.storeFileReference(input.files[i]);
                 }
               } else {
-                file.storeFileReference(
-                  new gdjs.FileDescriptor.WebFileFD(input.files[0])
-                );
+                file.storeFileReference(input.files[0]);
               }
 
               resolve();
@@ -110,12 +106,22 @@ namespace gdjs {
         );
       }
 
-      export function loadUrl(
-        file: gdjs.Variable,
-        url: string,
-        lazy: boolean = true
-      ) {
-        file.storeFileReference(new gdjs.FileDescriptor.UrlFD(url, lazy));
+      export async function _loadUrl(file: gdjs.Variable, url: string) {
+        const request = await fetch(url);
+        file.storeFileReference(
+          new File(
+            [await request.blob()],
+            new URL(url).pathname?.split('/').pop() ?? 'unknown'
+          )
+        );
+      }
+
+      export function loadUrl(file: gdjs.Variable, url: string) {
+        return new gdjs.PromiseTask(
+          _loadUrl(file, url).catch((e) => {
+            logger.error(e.message);
+          })
+        );
       }
     }
   }
