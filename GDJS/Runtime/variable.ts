@@ -229,11 +229,8 @@ namespace gdjs {
           }
           return arr;
         case 'file':
-          // Since this method is used mostly i.a. for toJSON, we cannot just use the
-          // opaque, not readily accessible, huge File here. A text representation
-          // (e.g. "[File hello.png (image/png)]") should be good enough here.
-          // The real "JSObject" can ge obtained with {@link getFileDescriptor}.
-          return this.getAsString();
+          // We can safely return the internal value, since `Blob`s are immutable.
+          return this._file;
       }
     }
 

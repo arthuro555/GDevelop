@@ -151,6 +151,7 @@ namespace gdjs {
         instanceContainer.getGame().enableMetrics(enable);
       };
 
+      const jsonLogger = new gdjs.Logger('JSON');
       /**
        * Convert a variable to JSON.
        * @param variable The variable to convert to JSON
@@ -161,7 +162,21 @@ namespace gdjs {
       export const variableStructureToJSON = function (
         variable: gdjs.Variable
       ): string {
-        return JSON.stringify(variable.toJSObject());
+        if (variable.getType() === 'file') {
+          jsonLogger.error('A File variables cannot be turned to JSON!');
+          return '';
+        }
+
+        return JSON.stringify(variable.toJSObject(), (key, value) => {
+          if (value instanceof Blob) {
+            jsonLogger.warn(
+              'File variables cannot be turned to JSON, File children variables will not be included in the JSON.'
+            );
+            return undefined;
+          }
+
+          return value;
+        });
       };
 
       /**
@@ -171,7 +186,7 @@ namespace gdjs {
         object: gdjs.RuntimeObject | null,
         variable: gdjs.Variable
       ): string {
-        return JSON.stringify(variable.toJSObject());
+        return variableStructureToJSON(variable);
       };
 
       /**
