@@ -1,5 +1,4 @@
 namespace gdjs {
-  declare var admob: any;
   declare var cordova: any;
 
   export namespace adMob {
@@ -108,7 +107,7 @@ namespace gdjs {
     let rewardedVideoRewardReceived = false; // Becomes true when the video is closed and the reward is received.
     let rewardedVideoErrored = false; // Becomes true when the video fails to load.
 
-    let npaValue = '0'; // TODO: expose an API to change this and also an automatic way using the consent SDK.
+    let npaValue: '1' | '0' = '0'; // TODO: expose an API to change this and also an automatic way using the consent SDK.
 
     // Admob initialization listener
     document.addEventListener(
@@ -119,11 +118,43 @@ namespace gdjs {
         logger.info('Starting AdMob.');
         isStarting = true;
 
-        await admob.start();
+        if (cordova.platformId === 'ios') {
+          /*
+            trackingAuthorizationStatus:
+            0 = notDetermined
+            1 = restricted
+            2 = denied
+            3 = authorized
+          */
+          let status = await consent.trackingAuthorizationStatus();
+          if (status === 0) {
+            status = await consent.requestTrackingAuthorization();
+          }
+          // Not authorized - abort initialisation
+          if (status === 0 || status === 2) return;
+          // Authorized, but must set no personalized adds bit
+          if (status === 1) npaValue = '1';
+        }
 
-        logger.info('AdMob successfully started.');
+        const consentStatus = await consent.getConsentStatus();
+        if (consentStatus === consent.ConsentStatus.Required) {
+          await consent.requestInfoUpdate();
+        }
+
+        await consent.loadAndShowIfRequired();
+
+        // If proper consent has been given, start admob
+        if (await consent.canRequestAds()) {
+          await admob.start();
+          admobStarted = true;
+          logger.info('AdMob successfully started.');
+        } else {
+          logger.info(
+            'Could not start AdMob - Missing required user consent to load ads!'
+          );
+        }
+
         isStarting = false;
-        admobStarted = true;
       },
       false
     );
@@ -224,6 +255,7 @@ namespace gdjs {
 
       appOpen = new admob.AppOpenAd({
         adUnitId,
+        //@ts-ignore TODO: This property doesn't exist?
         orientation: displayLandscape
           ? AppOpenAdOrientation.LandscapeLeft
           : AppOpenAdOrientation.Portrait,
