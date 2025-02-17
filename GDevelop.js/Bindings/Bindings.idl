@@ -1316,6 +1316,11 @@ interface SpineResource {
 };
 SpineResource implements JsonResource;
 
+interface RiveResource {
+    void RiveResource();
+};
+RiveResource implements JsonResource;
+
 interface TilemapResource {
     void TilemapResource();
 };

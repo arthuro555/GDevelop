@@ -120,6 +120,7 @@ declare class libGDevelop {
   VideoResource: Class<gdVideoResource>;
   JsonResource: Class<gdJsonResource>;
   SpineResource: Class<gdSpineResource>;
+  RiveResource: Class<gdRiveResource>;
   TilemapResource: Class<gdTilemapResource>;
   TilesetResource: Class<gdTilesetResource>;
   Model3DResource: Class<gdModel3DResource>;

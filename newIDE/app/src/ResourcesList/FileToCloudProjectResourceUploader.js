@@ -48,6 +48,7 @@ const resourceKindToInputAcceptedMimes = {
   ],
   atlas: [],
   spine: ['application/json'],
+  rive: ['application/octet-stream'],
   javascript: ['text/javascript'],
 };
 

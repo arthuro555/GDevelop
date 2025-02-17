@@ -57,6 +57,7 @@ import AudioResourceField from './ParameterFields/AudioResourceField';
 import VideoResourceField from './ParameterFields/VideoResourceField';
 import JsonResourceField from './ParameterFields/JsonResourceField';
 import SpineResourceField from './ParameterFields/SpineResourceField';
+import RiveResourceField from './ParameterFields/RiveResourceField';
 import BitmapFontResourceField from './ParameterFields/BitmapFontResourceField';
 import FontResourceField from './ParameterFields/FontResourceField';
 import ColorExpressionField from './ParameterFields/ColorExpressionField';
@@ -119,6 +120,7 @@ const components = {
   model3DResource: Model3DResourceField,
   atlasResource: AtlasResourceField,
   spineResource: SpineResourceField,
+  riveResource: RiveResourceField,
   color: ColorExpressionField,
   forceMultiplier: ForceMultiplierField,
   sceneName: SceneNameField,
@@ -186,6 +188,7 @@ const userFriendlyTypeName: { [string]: MessageDescriptor } = {
   tilemapResource: t`Tile map resource`,
   atlasResource: t`Atlas resource`,
   spineResource: t`Spine json resource`,
+  riveResource: t`Rive canvas resource`,
   color: t`Color`,
   forceMultiplier: t`Instant or permanent force`,
   sceneName: t`Scene name`,

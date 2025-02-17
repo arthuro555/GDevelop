@@ -251,6 +251,7 @@ class GD_CORE_API ValueTypeMetadata {
              parameterType == "model3DResource" ||
              parameterType == "atlasResource" ||
              parameterType == "spineResource" ||
+             parameterType == "riveResource" ||
              // Deprecated, old parameter types:
              parameterType == "soundfile" ||
              parameterType == "musicfile";

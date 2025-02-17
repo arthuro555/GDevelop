@@ -97,6 +97,8 @@ std::shared_ptr<Resource> ResourcesManager::CreateResource(
     return std::make_shared<AtlasResource>();
   else if (kind == "spine")
     return std::make_shared<SpineResource>();
+  else if (kind == "rive")
+    return std::make_shared<RiveResource>();
   else if (kind == "javascript")
     return std::make_shared<JavaScriptResource>();
 

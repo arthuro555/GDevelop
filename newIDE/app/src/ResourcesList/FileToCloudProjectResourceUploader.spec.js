@@ -37,5 +37,8 @@ describe('FileToCloudProjectResourceUploader', () => {
     expect(getInputAcceptedMimesAndExtensions('spine')).toMatchInlineSnapshot(
       `"application/json,.json"`
     );
+    expect(getInputAcceptedMimesAndExtensions('rive')).toMatchInlineSnapshot(
+      `"application/octet-stream,.riv"`
+    );
   });
 });

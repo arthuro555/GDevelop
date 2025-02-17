@@ -163,6 +163,21 @@ const ObjectsEditorService = {
         gd.asObjectJsImplementation(objectConfiguration),
       helpPagePath: '/objects/spine',
     },
+    'Rive::RiveCanvas': {
+      component: EmptyEditor,
+      createNewObject: (
+        objectConfiguration: gdObjectConfiguration
+      ): gdObjectConfiguration =>
+        gd
+          .asObjectJsImplementation(objectConfiguration)
+          .clone()
+          .release(),
+      castToObjectType: (
+        objectConfiguration: gdObjectConfiguration
+      ): gdObjectJsImplementation =>
+        gd.asObjectJsImplementation(objectConfiguration),
+      helpPagePath: '/objects/rive',
+    },
     'TileMap::SimpleTileMap': {
       component: SimpleTileMapEditor,
       createNewObject: (

@@ -1093,6 +1093,10 @@ export class SpineResource extends JsonResource {
   constructor();
 }
 
+export class RiveResource extends JsonResource {
+  constructor();
+}
+
 export class TilemapResource extends Resource {
   constructor();
 }

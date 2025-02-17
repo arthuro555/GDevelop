@@ -388,6 +388,21 @@ class GD_CORE_API SpineResource : public JsonResource {
 };
 
 /**
+ * \brief Describe a Rive canvas file used by a project.
+ *
+ * \see Resource
+ * \ingroup ResourcesManagement
+ */
+class GD_CORE_API RiveResource : public JsonResource {
+ public:
+  RiveResource() : JsonResource() { SetKind("rive"); };
+  virtual ~RiveResource(){};
+  virtual RiveResource* Clone() const override {
+    return new RiveResource(*this);
+  }
+};
+
+/**
  * \brief Describe a tilemap file used by a project.
  *
  * \see Resource

@@ -89,6 +89,9 @@ private:
   void ExposeSpine(gd::String &resourceName) override {
     AddUsedResource(resourceName);
   };
+  void ExposeRive(gd::String &resourceName) override {
+    AddUsedResource(resourceName);
+  };
 
   std::set<gd::String> resourceNames;
 };

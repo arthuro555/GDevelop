@@ -108,6 +108,11 @@ public:
   virtual void ExposeSpine(gd::String &resourceName);
 
   /**
+   * \brief Expose a Rive canvas file, which is always a reference to a "rive" resource.
+   */
+  virtual void ExposeRive(gd::String &resourceName);
+
+  /**
    * \brief Expose a video, which is always a reference to a "video" resource.
    */
   virtual void ExposeVideo(gd::String &videoName);

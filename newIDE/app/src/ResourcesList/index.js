@@ -119,7 +119,8 @@ export default class ResourcesList extends React.Component<Props, State> {
       case 'tilemap':
       case 'tileset':
       case 'spine':
-        return 'res/actions/fichier24.png';
+      case 'rive':
+          return 'res/actions/fichier24.png';
       case 'video':
         return 'JsPlatform/Extensions/videoicon24.png';
       case 'font':

@@ -62,6 +62,11 @@ void ArbitraryResourceWorker::ExposeSpine(gd::String& resourceName){
     // do.
 };
 
+void ArbitraryResourceWorker::ExposeRive(gd::String& resourceName){
+    // Nothing to do by default - each child class can define here the action to
+    // do.
+};
+
 void ArbitraryResourceWorker::ExposeJavaScript(gd::String& resourceName){
     // Nothing to do by default - each child class can define here the action to
     // do.
@@ -200,6 +205,10 @@ void ArbitraryResourceWorker::ExposeResourceWithType(
     ExposeSpine(resourceName);
     return;
   }
+  if (resourceType == "rive") {
+    ExposeRive(resourceName);
+    return;
+  }
   if (resourceType == "javascript") {
     ExposeJavaScript(resourceName);
     return;
@@ -277,6 +286,10 @@ bool ResourceWorkerInEventsWorker::DoVisitInstruction(gd::Instruction& instructi
         } else if (parameterMetadata.GetType() == "spineResource") {
           gd::String updatedParameterValue = parameterValue;
           worker.ExposeSpine(updatedParameterValue);
+          instruction.SetParameter(parameterIndex, updatedParameterValue);
+        } else if (parameterMetadata.GetType() == "riveResource") {
+          gd::String updatedParameterValue = parameterValue;
+          worker.ExposeRive(updatedParameterValue);
           instruction.SetParameter(parameterIndex, updatedParameterValue);
         }
       });
