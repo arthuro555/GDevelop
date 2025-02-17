@@ -61,9 +61,12 @@ namespace gdjs {
   /**
    * A 3D object which displays a 3D model.
    */
-  export class Model3DRuntimeObject
-    extends gdjs.RuntimeObject3D
-    implements gdjs.Animatable {
+  export class Model3DRuntimeObject<
+      IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+    >
+    extends gdjs.RuntimeObject3D<IdeObjectDeclaration>
+    implements gdjs.Animatable
+  {
     _renderer: gdjs.Model3DRuntimeObjectRenderer;
 
     _modelResourceName: string;
@@ -425,5 +428,11 @@ namespace gdjs {
       KeepOriginal,
     }
   }
-  gdjs.registerObject('Scene3D::Model3DObject', gdjs.Model3DRuntimeObject);
+}
+
+gdjs.registerObject('Scene3D::Model3DObject', gdjs.Model3DRuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'Scene3D::Model3DObject': gdjs.Model3DRuntimeObject<T>;
+  }
 }

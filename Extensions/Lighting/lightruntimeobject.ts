@@ -26,7 +26,9 @@ namespace gdjs {
   /**
    * Displays a Light object.
    */
-  export class LightRuntimeObject extends gdjs.RuntimeObject {
+  export class LightRuntimeObject<
+    IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+  > extends gdjs.RuntimeObject<IdeObjectDeclaration> {
     _radius: number;
 
     /** color in format [r, g, b], where each component is in the range [0, 255] */
@@ -47,9 +49,8 @@ namespace gdjs {
       this._color = gdjs.rgbOrHexToRGBColor(lightObjectData.content.color);
       this._debugMode = lightObjectData.content.debugMode;
       this._texture = lightObjectData.content.texture;
-      this._obstaclesManager = gdjs.LightObstaclesManager.getManager(
-        runtimeScene
-      );
+      this._obstaclesManager =
+        gdjs.LightObstaclesManager.getManager(runtimeScene);
       this._renderer = new gdjs.LightRuntimeObjectRenderer(this, runtimeScene);
       this._instanceContainer = runtimeScene;
 
@@ -199,5 +200,11 @@ namespace gdjs {
       return this._texture;
     }
   }
-  gdjs.registerObject('Lighting::LightObject', gdjs.LightRuntimeObject);
+}
+
+gdjs.registerObject('Lighting::LightObject', gdjs.LightRuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'Lighting::LightObject': gdjs.LightRuntimeObject<T>;
+  }
 }

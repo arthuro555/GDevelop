@@ -94,9 +94,14 @@ namespace gdjs {
       return this.object.getHeight();
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'ResizableCapability::ResizableBehavior',
-    gdjs.ResizableBehavior
-  );
+gdjs.registerBehavior(
+  'ResizableCapability::ResizableBehavior',
+  gdjs.ResizableBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'ResizableCapability::ResizableBehavior': gdjs.ResizableBehavior;
+  }
 }

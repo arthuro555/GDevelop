@@ -33,13 +33,16 @@ namespace gdjs {
   /**
    * Base class for 3D objects.
    */
-  export abstract class RuntimeObject3D
-    extends gdjs.RuntimeObject
+  export abstract class RuntimeObject3D<
+      IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+    >
+    extends gdjs.RuntimeObject<IdeObjectDeclaration>
     implements
       gdjs.Resizable,
       gdjs.Scalable,
       gdjs.Flippable,
-      gdjs.Base3DHandler {
+      gdjs.Base3DHandler
+  {
     /**
      * Position on the Z axis.
      */

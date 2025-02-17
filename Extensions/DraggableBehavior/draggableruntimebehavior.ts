@@ -157,9 +157,8 @@ namespace gdjs {
       if (!instanceContainer.touchDraggableManagers[touchId]) {
         //Create the shared manager if necessary.
         // @ts-ignore
-        instanceContainer.touchDraggableManagers[
-          touchId
-        ] = new DraggableManager(instanceContainer, touchId);
+        instanceContainer.touchDraggableManagers[touchId] =
+          new DraggableManager(instanceContainer, touchId);
       }
       // @ts-ignore
       return instanceContainer.touchDraggableManagers[touchId];
@@ -256,9 +255,14 @@ namespace gdjs {
       return inputManager.hasTouchEnded(this._touchId);
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'DraggableBehavior::Draggable',
-    gdjs.DraggableRuntimeBehavior
-  );
+gdjs.registerBehavior(
+  'DraggableBehavior::Draggable',
+  gdjs.DraggableRuntimeBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'DraggableBehavior::Draggable': gdjs.DraggableRuntimeBehavior;
+  }
 }

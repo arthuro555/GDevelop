@@ -131,7 +131,8 @@ namespace gdjs {
    */
   export class Base3DBehavior
     extends gdjs.RuntimeBehavior
-    implements Base3DHandler {
+    implements Base3DHandler
+  {
     private object: gdjs.RuntimeObject & Base3DHandler;
 
     constructor(
@@ -232,6 +233,11 @@ namespace gdjs {
       return this.object.getUnrotatedAABBMaxZ();
     }
   }
+}
 
-  gdjs.registerBehavior('Scene3D::Base3DBehavior', gdjs.Base3DBehavior);
+gdjs.registerBehavior('Scene3D::Base3DBehavior', gdjs.Base3DBehavior);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'Scene3D::Base3DBehavior': gdjs.Base3DBehavior;
+  }
 }

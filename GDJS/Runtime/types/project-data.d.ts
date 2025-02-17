@@ -28,9 +28,9 @@ declare interface EventsFunctionsVariablesData {
 /** Object containing initial properties for all objects extending {@link gdjs.RuntimeObject}. */
 declare type ObjectData = {
   /** The name of the object. During the game, objects can be queried by their name (see {@link gdjs.RuntimeScene.prototype.getObjects} for example). */
-  name: string;
+  name: import('gd-ide-context').GetObjectNamesInScope;
   /** The object type. */
-  type: string;
+  type: import('gd-ide-context').GetRegisteredObjectTypes;
   /** The list of default variables. */
   variables: Array<RootVariableData>;
   /** The list of default behaviors. */
@@ -137,7 +137,7 @@ declare type BehaviorData = {
   /** The name of the behavior (for getting from an object (object.getBehavior) for example) */
   name: string;
   /** The behavior type. Used by GDJS to find the proper behavior to construct. */
-  type: string;
+  type: import('gd-ide-context').GetRegisteredBehaviorTypes;
 };
 
 declare type BehaviorNetworkSyncData = {
@@ -243,7 +243,7 @@ declare interface InstanceData {
 
   layer: string;
   locked: boolean;
-  name: string;
+  name: import('gd-ide-context').GetObjectNamesInScope;
 
   x: number;
   y: number;

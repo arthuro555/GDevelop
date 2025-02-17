@@ -151,9 +151,14 @@ namespace gdjs {
       return this.object.getAnimationDuration();
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'AnimatableCapability::AnimatableBehavior',
-    gdjs.AnimatableBehavior
-  );
+gdjs.registerBehavior(
+  'AnimatableCapability::AnimatableBehavior',
+  gdjs.AnimatableBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'AnimatableCapability::AnimatableBehavior': gdjs.AnimatableBehavior;
+  }
 }

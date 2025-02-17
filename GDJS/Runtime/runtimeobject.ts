@@ -153,7 +153,9 @@ namespace gdjs {
    * A `gdjs.RuntimeObject` should not be instantiated directly, always a child class
    * (because gdjs.RuntimeObject don't call onCreated at the end of its constructor).
    */
-  export class RuntimeObject implements EffectsTarget, gdjs.EffectHandler {
+  export class RuntimeObject<
+    IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+  > implements EffectsTarget, gdjs.EffectHandler {
     name: string;
     type: string;
     x: float = 0;
@@ -563,7 +565,11 @@ namespace gdjs {
       // Loop through all behaviors and update them.
       for (const behaviorName in networkSyncData.beh) {
         const behaviorNetworkSyncData = networkSyncData.beh[behaviorName];
-        const behavior = this.getBehavior(behaviorName);
+        const behavior = this.getBehavior(
+          behaviorName as import('gd-ide-context').GetBehaviorNamesOf<
+            IdeObjectDeclaration
+          >
+        ) as gdjs.RuntimeBehavior;
         if (behavior) {
           behavior.updateFromNetworkSyncData(behaviorNetworkSyncData);
         }
@@ -1980,8 +1986,16 @@ namespace gdjs {
      * @param name {String} The behavior name.
      * @return The behavior with the given name, or undefined.
      */
-    getBehavior(name: string): gdjs.RuntimeBehavior | null {
-      return this._behaviorsTable.get(name);
+    getBehavior<
+      Name extends import('gd-ide-context').GetBehaviorNamesOf<
+        IdeObjectDeclaration
+      >
+    >(
+      name: Name
+    ): import('gd-ide-context').GetBehaviorType<IdeObjectDeclaration, Name> {
+      return this._behaviorsTable.get(
+        name
+      ) as import('gd-ide-context').GetBehaviorType<IdeObjectDeclaration, Name>;
     }
 
     /**
@@ -1989,7 +2003,9 @@ namespace gdjs {
      *
      * @param name {String} The behavior name.
      */
-    hasBehavior(name: string): boolean {
+    hasBehavior(
+      name: import('gd-ide-context').GetBehaviorNamesOf<IdeObjectDeclaration>
+    ): boolean {
       return this._behaviorsTable.containsKey(name);
     }
 
@@ -1999,7 +2015,10 @@ namespace gdjs {
      * @param name {String} The behavior name.
      * @param enable {boolean} true to activate the behavior
      */
-    activateBehavior(name: string, enable: boolean): void {
+    activateBehavior(
+      name: import('gd-ide-context').GetBehaviorNamesOf<IdeObjectDeclaration>,
+      enable: boolean
+    ): void {
       if (this._behaviorsTable.containsKey(name)) {
         this._behaviorsTable.get(name).activate(enable);
       }
@@ -2011,7 +2030,9 @@ namespace gdjs {
      * @param name The behavior name.
      * @return true if the behavior is activated.
      */
-    behaviorActivated(name: string): boolean {
+    behaviorActivated(
+      name: import('gd-ide-context').GetBehaviorNamesOf<IdeObjectDeclaration>
+    ): boolean {
       if (this._behaviorsTable.containsKey(name)) {
         return this._behaviorsTable.get(name).activated();
       }
@@ -2027,7 +2048,9 @@ namespace gdjs {
      * @param name The name of the behavior to remove.
      * @returns true if the behavior was properly removed, false otherwise.
      */
-    removeBehavior(name: string): boolean {
+    removeBehavior(
+      name: import('gd-ide-context').GetBehaviorNamesOf<IdeObjectDeclaration>
+    ): boolean {
       const behavior = this._behaviorsTable.get(name);
       if (!behavior) {
         return false;
@@ -2846,5 +2869,11 @@ namespace gdjs {
      */
     getSqDistanceTo = RuntimeObject.prototype.getSqDistanceToPosition;
   }
-  gdjs.registerObject('', gdjs.RuntimeObject);
+}
+
+gdjs.registerObject('', gdjs.RuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    '': gdjs.RuntimeObject<T>;
+  }
 }

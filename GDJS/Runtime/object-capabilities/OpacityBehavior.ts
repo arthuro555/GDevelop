@@ -60,9 +60,14 @@ namespace gdjs {
       return this.object.getOpacity();
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'OpacityCapability::OpacityBehavior',
-    gdjs.OpacityBehavior
-  );
+gdjs.registerBehavior(
+  'OpacityCapability::OpacityBehavior',
+  gdjs.OpacityBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'OpacityCapability::OpacityBehavior': gdjs.OpacityBehavior;
+  }
 }

@@ -243,5 +243,11 @@ namespace gdjs {
       return this._syncOverNetwork;
     }
   }
-  gdjs.registerBehavior('', gdjs.RuntimeBehavior);
+}
+
+gdjs.registerBehavior('', gdjs.RuntimeBehavior);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    '': gdjs.RuntimeBehavior;
+  }
 }

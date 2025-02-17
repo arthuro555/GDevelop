@@ -64,9 +64,14 @@ namespace gdjs {
       return this.object.isFlippedY();
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'FlippableCapability::FlippableBehavior',
-    gdjs.FlippableBehavior
-  );
+gdjs.registerBehavior(
+  'FlippableCapability::FlippableBehavior',
+  gdjs.FlippableBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'FlippableCapability::FlippableBehavior': gdjs.FlippableBehavior;
+  }
 }

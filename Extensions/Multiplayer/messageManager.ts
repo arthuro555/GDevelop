@@ -1091,7 +1091,7 @@ namespace gdjs {
                       ];
                       return;
                     }
-                    const objectName = matches[2];
+                    const objectName = matches[2] as import("gd-ide-context").GetObjectNamesInScope;
                     const instanceNetworkId = matches[3];
                     const instances = runtimeScene.getInstancesOf(objectName);
                     if (!instances) {
@@ -1114,6 +1114,7 @@ namespace gdjs {
                     }
 
                     const behavior = instance.getBehavior(
+                      //@ts-ignore The behavior is not guaranteed to be there
                       'MultiplayerObject'
                     ) as MultiplayerObjectRuntimeBehavior | null;
                     if (!behavior) {

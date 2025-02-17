@@ -229,7 +229,9 @@ namespace gdjs {
      * created and lives in the container.
      * @see gdjs.RuntimeInstanceContainer#registerObject
      */
-    isObjectRegistered(objectName: string): boolean {
+    isObjectRegistered(
+      objectName: import('gd-ide-context').GetObjectNamesInScope
+    ): boolean {
       return (
         this._objects.containsKey(objectName) &&
         this._instances.containsKey(objectName) &&
@@ -242,7 +244,7 @@ namespace gdjs {
      * used in the container.
      * @param objectData The data for the object to register.
      */
-    registerObject(objectData: ObjectData) {
+    registerObject(objectData: ObjectData): void {
       this._objects.put(objectData.name, objectData);
       this._instances.put(objectData.name, []);
 
@@ -277,7 +279,9 @@ namespace gdjs {
      * Unregister a {@link gdjs.RuntimeObject}. Instances will be destroyed.
      * @param objectName The name of the object to unregister.
      */
-    unregisterObject(objectName: string) {
+    unregisterObject(
+      objectName: import('gd-ide-context').GetObjectNamesInScope
+    ): void {
       const instances = this._instances.get(objectName);
       if (instances) {
         // This is sub-optimal: markObjectForDeletion will search the instance to
@@ -365,7 +369,10 @@ namespace gdjs {
      * @param name The name of the behavior
      * @returns The shared data for the behavior, if any.
      */
-    getInitialSharedDataForBehavior(name: string): BehaviorSharedData | null {
+    getInitialSharedDataForBehavior(
+      //TODO: Check what the name of the behavior is exactly (=> Behavior Kind?) and make the type definition more precise
+      name: string
+    ): BehaviorSharedData | null {
       return this._initialBehaviorSharedData.get(name);
     }
 
@@ -375,6 +382,7 @@ namespace gdjs {
      * @param sharedData The shared data for the behavior, or null to remove it.
      */
     setInitialSharedDataForBehavior(
+      //TODO: Check what the name of the behavior is exactly (=> Behavior Kind?) and make the type definition more precise
       name: string,
       sharedData: BehaviorSharedData | null
     ): void {
@@ -386,7 +394,7 @@ namespace gdjs {
      * Useful as it ensures that instances created from events are, by default, shown in front
      * of other instances.
      */
-    _setLayerDefaultZOrders() {
+    _setLayerDefaultZOrders(): void {
       if (
         this.getGame().getGameData().properties.useDeprecatedZeroAsDefaultZOrder
       ) {
@@ -414,7 +422,7 @@ namespace gdjs {
       }
     }
 
-    _updateLayersCameraCoordinates(scale: float) {
+    _updateLayersCameraCoordinates(scale: float): void {
       this._layersCameraCoordinates = this._layersCameraCoordinates || {};
       for (const name in this._layers.items) {
         if (this._layers.items.hasOwnProperty(name)) {
@@ -437,7 +445,7 @@ namespace gdjs {
     /**
      * Called to update effects of layers before rendering.
      */
-    _updateLayersPreRender() {
+    _updateLayersPreRender(): void {
       for (const layer of this._orderedLayers) {
         layer.updatePreRender(this);
       }
@@ -451,7 +459,7 @@ namespace gdjs {
      * Visibility is set to false if object is hidden, or if
      * object is too far from the camera of its layer ("culling").
      */
-    _updateObjectsPreRender() {
+    _updateObjectsPreRender(): void {
       const allInstancesList = this.getAdhocListOfAllInstances();
       // TODO (3D) culling - add support for 3D object culling?
       for (let i = 0, len = allInstancesList.length; i < len; ++i) {
@@ -471,7 +479,6 @@ namespace gdjs {
         // Perform pre-render update.
         object.updatePreRender(this);
       }
-      return;
     }
 
     /**
@@ -486,7 +493,7 @@ namespace gdjs {
      * The removed objects could not be sent directly to the cache, as events may still be using them after
      * removing them from the scene for example.
      */
-    _cacheOrClearRemovedInstances() {
+    _cacheOrClearRemovedInstances(): void {
       for (let k = 0, lenk = this._instancesRemoved.length; k < lenk; ++k) {
         const instance = this._instancesRemoved[k];
         // Cache the instance to recycle it into a new instance later.
@@ -505,7 +512,7 @@ namespace gdjs {
     /**
      * Tool function filling _allInstancesList member with all the living object instances.
      */
-    private _constructListOfAllInstances() {
+    private _constructListOfAllInstances(): void {
       let currentListSize = 0;
       for (const name in this._instances.items) {
         if (this._instances.items.hasOwnProperty(name)) {
@@ -529,7 +536,10 @@ namespace gdjs {
      * @param objectName The name of the object
      * @returns the instances of a given object in the container.
      */
-    getInstancesOf(objectName: string): gdjs.RuntimeObject[] {
+    getInstancesOf<Name extends import('gd-ide-context').GetObjectNamesInScope>(
+      objectName: Name
+    ): Array<import('gd-ide-context').GetObjectType<Name>> {
+      //@ts-ignore Hashtable is not properly typed, but this should hold true.
       return this._instances.items[objectName];
     }
 
@@ -551,7 +561,7 @@ namespace gdjs {
     /**
      * Update the objects before launching the events.
      */
-    _updateObjectsPreEvents() {
+    _updateObjectsPreEvents(): void {
       // It is *mandatory* to create and iterate on a external list of all objects, as the behaviors
       // may delete the objects.
       const allInstancesList = this.getAdhocListOfAllInstances();
@@ -579,7 +589,7 @@ namespace gdjs {
     /**
      * Update the objects (update positions, time management...)
      */
-    _updateObjectsPostEvents() {
+    _updateObjectsPostEvents(): void {
       this._cacheOrClearRemovedInstances();
 
       // It is *mandatory* to create and iterate on a external list of all objects, as the behaviors
@@ -610,7 +620,9 @@ namespace gdjs {
      * @param name Name of the object for which the instances must be returned.
      * @return The list of objects with the given name
      */
-    getObjects(name: string): gdjs.RuntimeObject[] | undefined {
+    getObjects<Name extends import('gd-ide-context').GetObjectNamesInScope>(
+      name: Name
+    ): Array<import('gd-ide-context').GetObjectType<Name>> {
       if (!this._instances.containsKey(name)) {
         logger.info(
           'RuntimeScene.getObjects: No instances called "' +
@@ -619,6 +631,8 @@ namespace gdjs {
         );
         this._instances.put(name, []);
       }
+
+      //@ts-ignore Hashtable is not properly typed, but this should hold true.
       return this._instances.get(name);
     }
 
@@ -628,22 +642,25 @@ namespace gdjs {
      * @param objectName The name of the object to be created
      * @return The created object
      */
-    createObject(objectName: string): gdjs.RuntimeObject | null {
+    createObject<Name extends import('gd-ide-context').GetObjectNamesInScope>(
+      objectName: Name
+    ): import('gd-ide-context').GetObjectType<Name> {
       if (
         !this._objectsCtor.containsKey(objectName) ||
         !this._objects.containsKey(objectName)
       ) {
         // There is no such object in this container.
+        // @ts-ignore This check assumes typescript types were not respected
         return null;
       }
 
       // Create a new object using the object constructor (cached during loading)
       // and the stored object's data:
       const cache = this._instancesCache.get(objectName);
-      const ctor = this._objectsCtor.get(objectName);
+      const Ctor = this._objectsCtor.get(objectName);
       let obj;
       if (!cache || cache.length === 0) {
-        obj = new ctor(this, this._objects.get(objectName));
+        obj = new Ctor(this, this._objects.get(objectName));
       } else {
         // Reuse an objet destroyed before. If there is an object in the cache,
         // then it means it does support reinitialization.
@@ -658,7 +675,7 @@ namespace gdjs {
      * Must be called whenever an object must be removed from the container.
      * @param obj The object to be removed.
      */
-    markObjectForDeletion(obj: gdjs.RuntimeObject) {
+    markObjectForDeletion(obj: gdjs.RuntimeObject): void {
       // Add to the objects removed list.
       // The objects will be sent to the instances cache or really deleted from memory later.
       if (this._instancesRemoved.indexOf(obj) === -1) {
@@ -685,7 +702,6 @@ namespace gdjs {
       for (let j = 0; j < gdjs.callbacksObjectDeletedFromScene.length; ++j) {
         gdjs.callbacksObjectDeletedFromScene[j](this, obj);
       }
-      return;
     }
 
     /**
@@ -693,7 +709,9 @@ namespace gdjs {
      * @param name The name of the layer
      * @returns The layer, or the base layer if not found
      */
-    getLayer(name: string): gdjs.RuntimeLayer {
+    getLayer(
+      name: import('gd-ide-context').GetLayerNamesInScope
+    ): gdjs.RuntimeLayer {
       if (this._layers.containsKey(name)) {
         return this._layers.get(name);
       }
@@ -704,7 +722,7 @@ namespace gdjs {
      * Check if a layer exists
      * @param name The name of the layer
      */
-    hasLayer(name: string): boolean {
+    hasLayer(name: import('gd-ide-context').GetLayerNamesInScope): boolean {
       return this._layers.containsKey(name);
     }
 
@@ -719,7 +737,7 @@ namespace gdjs {
      * be moved back to the base layer.
      * @param layerName The name of the layer to remove
      */
-    removeLayer(layerName: string) {
+    removeLayer(layerName: import('gd-ide-context').GetLayerNamesInScope) {
       const existingLayer = this._layers.get(layerName);
       if (!existingLayer) return;
 
@@ -741,7 +759,10 @@ namespace gdjs {
      * @param layerName The name of the layer to reorder
      * @param index The new position in the list of layers
      */
-    setLayerIndex(layerName: string, newIndex: integer): void {
+    setLayerIndex(
+      layerName: import('gd-ide-context').GetLayerNamesInScope,
+      newIndex: integer
+    ): void {
       const layer: gdjs.RuntimeLayer = this._layers.get(layerName);
       if (!layer) {
         return;
@@ -759,7 +780,7 @@ namespace gdjs {
      * Fill the array passed as argument with the names of all layers
      * @param result The array where to put the layer names
      */
-    getAllLayerNames(result: string[]) {
+    getAllLayerNames(result: string[]): void {
       this._layers.keys(result);
     }
 
@@ -767,7 +788,9 @@ namespace gdjs {
      * Return the number of instances of the specified object living in the container.
      * @param objectName The object name for which instances must be counted.
      */
-    getInstancesCountOnScene(objectName: string): integer {
+    getInstancesCountOnScene(
+      objectName: import('gd-ide-context').GetObjectNamesInScope
+    ): integer {
       const instances = this._instances.get(objectName);
       if (instances) {
         return instances.length;
@@ -801,7 +824,7 @@ namespace gdjs {
      * Clear any data structures to make sure memory is freed as soon as
      * possible.
      */
-    _destroy() {
+    _destroy(): void {
       // It should not be necessary to reset these variables, but this help
       // ensuring that all memory related to the container is released immediately.
       this._layers = new Hashtable();

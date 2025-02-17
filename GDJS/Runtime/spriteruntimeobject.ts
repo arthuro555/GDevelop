@@ -32,8 +32,10 @@ namespace gdjs {
   /**
    * The SpriteRuntimeObject represents an object that can display images.
    */
-  export class SpriteRuntimeObject
-    extends gdjs.RuntimeObject
+  export class SpriteRuntimeObject<
+      IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+    >
+    extends gdjs.RuntimeObject<IdeObjectDeclaration>
     implements
       gdjs.Resizable,
       gdjs.Scalable,
@@ -962,12 +964,14 @@ namespace gdjs {
       );
     }
   }
-  gdjs.registerObject(
-    'Sprite',
-    //Notify gdjs of the object existence.
-    gdjs.SpriteRuntimeObject
-  );
 
   //Others initialization and internal state management :
   SpriteRuntimeObject.supportsReinitialization = true;
+}
+
+gdjs.registerObject('Sprite', gdjs.SpriteRuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    Sprite: gdjs.SpriteRuntimeObject<T>;
+  }
 }

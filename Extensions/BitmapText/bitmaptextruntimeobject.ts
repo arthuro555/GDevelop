@@ -50,9 +50,12 @@ namespace gdjs {
    * * Glyph Designer (OS X, commercial): http://www.71squared.com/en/glyphdesigner|http://www.71squared.com/en/glyphdesigner
    * * Littera (Web-based, free): http://kvazars.com/littera/|http://kvazars.com/littera/
    */
-  export class BitmapTextRuntimeObject
-    extends gdjs.RuntimeObject
-    implements gdjs.TextContainer, gdjs.OpacityHandler, gdjs.Scalable {
+  export class BitmapTextRuntimeObject<
+      IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+    >
+    extends gdjs.RuntimeObject<IdeObjectDeclaration>
+    implements gdjs.TextContainer, gdjs.OpacityHandler, gdjs.Scalable
+  {
     _opacity: float;
     _text: string;
     /** color in format [r, g, b], where each component is in the range [0, 255] */
@@ -103,10 +106,9 @@ namespace gdjs {
       return this._renderer.getRendererObject();
     }
 
-    // @ts-ignore
     updateFromObjectData(
-      oldObjectData: BitmapTextObjectDataType,
-      newObjectData: BitmapTextObjectDataType
+      oldObjectData: BitmapTextObjectData,
+      newObjectData: BitmapTextObjectData
     ): boolean {
       if (oldObjectData.content.opacity !== newObjectData.content.opacity) {
         this.setOpacity(newObjectData.content.opacity);
@@ -412,9 +414,14 @@ namespace gdjs {
       return this._renderer.getHeight();
     }
   }
-  gdjs.registerObject(
-    'BitmapText::BitmapTextObject',
-    // @ts-ignore
-    gdjs.BitmapTextRuntimeObject
-  );
+}
+
+gdjs.registerObject(
+  'BitmapText::BitmapTextObject',
+  gdjs.BitmapTextRuntimeObject
+);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'BitmapText::BitmapTextObject': gdjs.BitmapTextRuntimeObject<T>;
+  }
 }

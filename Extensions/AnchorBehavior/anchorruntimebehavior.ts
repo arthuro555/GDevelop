@@ -38,7 +38,8 @@ namespace gdjs {
       owner: gdjs.RuntimeObject
     ) {
       super(instanceContainer, behaviorData, owner);
-      this._relativeToOriginalWindowSize = !!behaviorData.relativeToOriginalWindowSize;
+      this._relativeToOriginalWindowSize =
+        !!behaviorData.relativeToOriginalWindowSize;
       this._leftEdgeAnchor = behaviorData.leftEdgeAnchor;
       this._rightEdgeAnchor = behaviorData.rightEdgeAnchor;
       this._topEdgeAnchor = behaviorData.topEdgeAnchor;
@@ -378,8 +379,14 @@ namespace gdjs {
       return layer.convertInverseCoords(x, y, 0, result);
     }
   }
-  gdjs.registerBehavior(
-    'AnchorBehavior::AnchorBehavior',
-    gdjs.AnchorRuntimeBehavior
-  );
+}
+
+gdjs.registerBehavior(
+  'AnchorBehavior::AnchorBehavior',
+  gdjs.AnchorRuntimeBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'AnchorBehavior::AnchorBehavior': gdjs.AnchorRuntimeBehavior;
+  }
 }

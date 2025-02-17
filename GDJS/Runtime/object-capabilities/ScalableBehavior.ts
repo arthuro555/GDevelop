@@ -108,9 +108,14 @@ namespace gdjs {
       return this.object.getScaleX();
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'ScalableCapability::ScalableBehavior',
-    gdjs.ScalableBehavior
-  );
+gdjs.registerBehavior(
+  'ScalableCapability::ScalableBehavior',
+  gdjs.ScalableBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'ScalableCapability::ScalableBehavior': gdjs.ScalableBehavior;
+  }
 }

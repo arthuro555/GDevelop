@@ -5,7 +5,9 @@ namespace gdjs {
    * A dummy object doing showing a text on screen.
    * @ignore
    */
-  export class DummyRuntimeObject extends gdjs.RuntimeObject {
+  export class DummyRuntimeObject<
+    IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+  > extends gdjs.RuntimeObject<IdeObjectDeclaration> {
     // Load any required data from the object properties.
     _property1: string;
 
@@ -136,9 +138,15 @@ namespace gdjs {
       logger.log('Here are the arguments passed from events:', number1, text1);
     }
   }
-  gdjs.registerObject(
-    //Replace by your extension + object name.
-    'MyDummyExtension::DummyObject',
-    gdjs.DummyRuntimeObject
-  );
+}
+
+gdjs.registerObject(
+  //Replace by your extension + object name.
+  'MyDummyExtension::DummyObject',
+  gdjs.DummyRuntimeObject
+);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'MyDummyExtension::DummyObject': gdjs.DummyRuntimeObject<T>;
+  }
 }

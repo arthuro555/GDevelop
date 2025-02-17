@@ -122,9 +122,11 @@ namespace gdjs {
       return this.object.isEffectEnabled(name);
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'EffectCapability::EffectBehavior',
-    gdjs.EffectBehavior
-  );
+gdjs.registerBehavior('EffectCapability::EffectBehavior', gdjs.EffectBehavior);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'EffectCapability::EffectBehavior': gdjs.EffectBehavior;
+  }
 }

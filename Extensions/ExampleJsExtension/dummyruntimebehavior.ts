@@ -49,9 +49,14 @@ namespace gdjs {
       // This is run at every frame, after events are launched.
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'MyDummyExtension::DummyBehavior',
-    gdjs.DummyRuntimeBehavior
-  );
+gdjs.registerBehavior(
+  'MyDummyExtension::DummyBehavior',
+  gdjs.DummyRuntimeBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'MyDummyExtension::DummyBehavior': gdjs.DummyRuntimeBehavior;
+  }
 }

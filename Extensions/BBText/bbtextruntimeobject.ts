@@ -41,9 +41,12 @@ namespace gdjs {
   /**
    * Displays a rich text using BBCode markup (allowing to set parts of the text as bold, italic, use different colors and shadows).
    */
-  export class BBTextRuntimeObject
-    extends gdjs.RuntimeObject
-    implements gdjs.OpacityHandler {
+  export class BBTextRuntimeObject<
+      IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+    >
+    extends gdjs.RuntimeObject<IdeObjectDeclaration>
+    implements gdjs.OpacityHandler
+  {
     _opacity: float;
 
     _text: string;
@@ -96,10 +99,9 @@ namespace gdjs {
       return this._renderer.getRendererObject();
     }
 
-    // @ts-ignore
     updateFromObjectData(
-      oldObjectData: BBTextObjectDataType,
-      newObjectData: BBTextObjectDataType
+      oldObjectData: BBTextObjectData,
+      newObjectData: BBTextObjectData
     ): boolean {
       if (oldObjectData.content.opacity !== newObjectData.content.opacity) {
         this.setOpacity(newObjectData.content.opacity);
@@ -352,6 +354,11 @@ namespace gdjs {
       return this._renderer.getHeight();
     }
   }
-  // @ts-ignore
-  gdjs.registerObject('BBText::BBText', gdjs.BBTextRuntimeObject);
+}
+
+gdjs.registerObject('BBText::BBText', gdjs.BBTextRuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'BBText::BBText': gdjs.BBTextRuntimeObject<T>;
+  }
 }

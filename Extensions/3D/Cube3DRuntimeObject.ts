@@ -53,7 +53,9 @@ namespace gdjs {
   /**
    * Shows a 3D box object.
    */
-  export class Cube3DRuntimeObject extends gdjs.RuntimeObject3D {
+  export class Cube3DRuntimeObject<
+    IdeObjectDeclaration extends import('gd-ide-context').AnyObjectDeclaration = import('gd-ide-context').AnyObjectDeclaration
+  > extends gdjs.RuntimeObject3D<IdeObjectDeclaration> {
     private _renderer: Cube3DRuntimeObjectRenderer;
     private _facesOrientation: 'Y' | 'Z';
     private _backFaceUpThroughWhichAxisRotation: 'X' | 'Y';
@@ -512,5 +514,11 @@ namespace gdjs {
       StandardWithoutMetalness,
     }
   }
-  gdjs.registerObject('Scene3D::Cube3DObject', gdjs.Cube3DRuntimeObject);
+}
+
+gdjs.registerObject('Scene3D::Cube3DObject', gdjs.Cube3DRuntimeObject);
+declare module 'gd-ide-context' {
+  interface ObjectTypes<T> {
+    'Scene3D::Cube3DObject': gdjs.Cube3DRuntimeObject<T>;
+  }
 }

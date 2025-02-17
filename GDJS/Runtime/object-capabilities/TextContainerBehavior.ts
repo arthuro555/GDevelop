@@ -59,9 +59,14 @@ namespace gdjs {
       this.object.setText(text);
     }
   }
+}
 
-  gdjs.registerBehavior(
-    'TextContainerCapability::TextContainerBehavior',
-    gdjs.TextContainerBehavior
-  );
+gdjs.registerBehavior(
+  'TextContainerCapability::TextContainerBehavior',
+  gdjs.TextContainerBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'TextContainerCapability::TextContainerBehavior': gdjs.TextContainerBehavior;
+  }
 }

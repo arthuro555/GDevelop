@@ -64,7 +64,7 @@ namespace gdjs {
      */
     getObjectsLinkedWithAndNamed(
       objA: gdjs.RuntimeObject,
-      objectName: string
+      objectName: import("gd-ide-context").GetObjectNamesInScope
     ): Iterable<gdjs.RuntimeObject> {
       let objects = this._getMapOfObjectsLinkedWith(objA).get(objectName);
       if (!objects) {

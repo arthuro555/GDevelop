@@ -66,8 +66,14 @@ namespace gdjs {
       return this._extraBorder;
     }
   }
-  gdjs.registerBehavior(
-    'DestroyOutsideBehavior::DestroyOutside',
-    gdjs.DestroyOutsideRuntimeBehavior
-  );
+}
+
+gdjs.registerBehavior(
+  'DestroyOutsideBehavior::DestroyOutside',
+  gdjs.DestroyOutsideRuntimeBehavior
+);
+declare module 'gd-ide-context' {
+  interface BehaviorTypes {
+    'DestroyOutsideBehavior::DestroyOutside': gdjs.DestroyOutsideRuntimeBehavior;
+  }
 }

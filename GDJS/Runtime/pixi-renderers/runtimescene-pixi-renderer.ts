@@ -128,8 +128,7 @@ namespace gdjs {
 
             if (isFirstRender) {
               // Render the background color.
-              pixiRenderer.background.color = this._runtimeScene.getBackgroundColor();
-              pixiRenderer.background.alpha = 1;
+              pixiRenderer.background.alpha = 0;
               if (this._runtimeScene.getClearCanvas()) pixiRenderer.clear();
 
               isFirstRender = false;
@@ -200,9 +199,7 @@ namespace gdjs {
 
               if (isFirstRender) {
                 // Render the background color.
-                threeRenderer.setClearColor(
-                  this._runtimeScene.getBackgroundColor()
-                );
+                threeRenderer.setClearAlpha(0);
                 threeRenderer.resetState();
                 if (this._runtimeScene.getClearCanvas()) threeRenderer.clear();
                 threeScene.background = new THREE.Color(
@@ -267,9 +264,9 @@ namespace gdjs {
 
         // Render all the layers then.
         // TODO: replace by a loop like in 3D?
-        pixiRenderer.background.color = this._runtimeScene.getBackgroundColor();
+        pixiRenderer.background.alpha = 0;
         pixiRenderer.render(this._pixiContainer, {
-          clear: this._runtimeScene.getClearCanvas(),
+          clear: true,
         });
         this._layerRenderingMetrics.rendered2DLayersCount++;
       }

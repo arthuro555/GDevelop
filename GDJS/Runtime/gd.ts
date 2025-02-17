@@ -275,9 +275,11 @@ namespace gdjs {
    * @param objectTypeName The name of the type of the Object.
    * @param Ctor The constructor of the Object.
    */
-  export const registerObject = function (
-    objectTypeName: string,
-    Ctor: typeof gdjs.RuntimeObject
+  export const registerObject = function <
+    Name extends import('gd-ide-context').GetRegisteredObjectTypes
+  >(
+    objectTypeName: Name,
+    Ctor: import('gd-ide-context').GetRegisteredObjectCtor<Name>
   ): void {
     gdjs.objectsTypes.put(objectTypeName, Ctor);
   };
@@ -293,9 +295,11 @@ namespace gdjs {
    * @param behaviorTypeName The name of the type of the behavior.
    * @param Ctor The constructor of the Object.
    */
-  export const registerBehavior = function (
-    behaviorTypeName: string,
-    Ctor: typeof gdjs.RuntimeBehavior
+  export const registerBehavior = function <
+    Name extends import('gd-ide-context').GetRegisteredBehaviorTypes
+  >(
+    behaviorTypeName: Name,
+    Ctor: import('gd-ide-context').GetRegisteredBehaviorCtor<Name>
   ): void {
     gdjs.behaviorsTypes.put(behaviorTypeName, Ctor);
   };
@@ -447,13 +451,15 @@ namespace gdjs {
    *
    * @param name The name of the type of the object.
    */
-  export const getObjectConstructor = function (
-    name: string
-  ): typeof gdjs.RuntimeObject {
+  export const getObjectConstructor = function <
+    Name extends import('gd-ide-context').GetRegisteredObjectTypes
+  >(name: Name): import('gd-ide-context').GetRegisteredObjectCtor<Name> {
     if (name !== undefined && gdjs.objectsTypes.containsKey(name))
+      //@ts-ignore Hashtable is not properly typed, but this should hold true.
       return gdjs.objectsTypes.get(name);
 
     logger.warn('Object type "' + name + '" was not found.');
+    //@ts-ignore Hashtable is not properly typed, but this should hold true.
     return gdjs.objectsTypes.get(''); //Create a base empty runtime object.
   };
 
@@ -462,13 +468,15 @@ namespace gdjs {
    *
    * @param name The name of the type of the behavior.
    */
-  export const getBehaviorConstructor = function (
-    name: string
-  ): typeof gdjs.RuntimeBehavior {
+  export const getBehaviorConstructor = function <
+    Name extends import('gd-ide-context').GetRegisteredBehaviorTypes
+  >(name: Name): import('gd-ide-context').GetRegisteredBehaviorCtor<Name> {
     if (name !== undefined && gdjs.behaviorsTypes.containsKey(name))
+      //@ts-ignore Hashtable is not properly typed, but this should hold true.
       return gdjs.behaviorsTypes.get(name);
 
     logger.warn('Behavior type "' + name + '" was not found.');
+    //@ts-ignore Hashtable is not properly typed, but this should hold true.
     return gdjs.behaviorsTypes.get(''); //Create a base empty runtime behavior.
   };
 
@@ -505,9 +513,9 @@ namespace gdjs {
    * @param objectsLists
    * @returns {Array}
    */
-  export const objectsListsToArray = function (
-    objectsLists: Hashtable<RuntimeObject>
-  ): Array<RuntimeObject> {
+  export const objectsListsToArray = function <
+    T extends import('gd-ide-context').AnyObjectDeclaration
+  >(objectsLists: Hashtable<RuntimeObject<T>>): Array<RuntimeObject<T>> {
     var lists = gdjs.staticArray(gdjs.objectsListsToArray);
     objectsLists.values(lists);
 
